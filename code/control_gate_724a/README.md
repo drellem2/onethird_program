@@ -79,6 +79,36 @@ The addressee is named, because mg-be37's finding was that a detector firing int
 - **A blocked merge cannot be silent anyway.** The branch does not land. Whatever else fails
   to be read, the change does not reach `main`, which is the property being bought.
 
+### It was demonstrated firing, end to end, on a real merge request
+
+Not "the suite exits 1". A throwaway branch carrying one planted defect was submitted to the
+refinery and **blocked** (`out_exhibit_refinery.txt`):
+
+```
+$ pogo refinery submit exhibit-724a-knownbad --author=mg-724a --target=main
+Submitted exhibit-724a-knownbad to merge queue (id=mr-d9soikitjv1sgaptnam0)
+
+status            : failed
+error             : quality gate: ./build.sh failed: exit status 1
+failure_class     : defect
+not_retried_reason: the build gate ran on this tree and returned a verdict —
+                    re-running establishes the same fact
+submit -> done    : 19 s
+
+    twin.worklist   gated   DIVERGED   baseline=["8"]  observed=["7","8"]
+    GATE VERDICT: RED — 1 gated field(s) differ from BASELINE.json: twin.worklist
+
+$ git merge-base --is-ancestor origin/exhibit-724a-knownbad origin/main
+NOT an ancestor — the change did not land.
+```
+
+`failure_class: defect` matters: the refinery did not retry it as infrastructure noise, so
+the verdict reached the author instead of being absorbed by a retry loop.
+
+The exhibit branch has since been deleted from `origin`. The MR id above is a **record, not a
+dependence** — nothing here resolves it, and this directory declares no dependence on its
+reachability (mg-223d's convention).
+
 ## 4. Why the gate is a comparison and not `sh run_all.sh`
 
 Wiring the suites directly is the obvious answer and it is wrong twice.
@@ -225,6 +255,15 @@ here for a structural reason and not a promise: `gate.py` never passes it, and `
 refuses outright when the observed field set and the baseline's disagree in either direction,
 so a partial extraction can only reach a refusal, never a verdict. Worlds S6 and S7 are that
 refusal, in both directions.
+
+**D6 — on the exhibit's own tree, probe T1 could not fail, and saying so is the difference
+between this instrument and the ones it gates.** T1 plants a grown drift worklist; on the
+known-bad branch the worklist was *already* grown, so T1's expectation was satisfied by the
+input rather than caused by the mutation. It reports `UNFALSIFIABLE (explained)` — not
+`CAUGHT`, which would be mg-9876's generalised defect committed live, and not counted as a
+hole, because the divergence blinding it is the very finding being reported. The distinction
+between an *explained* and an *unexplained* UNFALSIFIABLE is load-bearing and only exists
+because the exhibit was actually run.
 
 **D5 — the gate leaves four tracked files modified in two directories that are not mine.**
 Both subject suites redirect into their own directories, by design, and this ticket does not

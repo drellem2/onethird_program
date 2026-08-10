@@ -1,0 +1,170 @@
+mg-724a — THE END-TO-END EXHIBIT: the gate FIRING RED on a real merge request
+============================================================================================
+
+This is not a suite exiting 1.  This is the trigger surfacing a known-bad input to
+somebody: a branch was submitted to the refinery, the gate ran, the merge request
+FAILED, and the branch did not reach main.
+
+THE KNOWN-BAD INPUT.  Branch exhibit-724a-knownbad = polecat-c724a + one commit narrowing
+ledger row 7 of STATE.md from `any` to `n <= 6` — a published applicability claim moving
+away from its rendered twin.  The twin suite's OWN runner exits 0 on this change
+(out_x1_exhibit.txt); the gate reads the worklist and goes red.
+
+--------------------------------------------------------------------------------------------
+$ pogo refinery submit exhibit-724a-knownbad --repo=/Users/daniel/research/onethird_program \
+      --author=mg-724a --target=main
+Submitted exhibit-724a-knownbad to merge queue (id=mr-d9soikitjv1sgaptnam0)
+
+$ pogo refinery show mr-d9soikitjv1sgaptnam0 --json
+{
+  "id": "mr-d9soikitjv1sgaptnam0",
+  "branch": "exhibit-724a-knownbad",
+  "author": "mg-724a",
+  "status": "failed",
+  "error": "quality gate: ./build.sh failed: exit status 1",
+  "failure_class": "defect",
+  "not_retried_reason": "the build gate ran on this tree and returned a verdict — re-running establishes the same fact",
+  "attempt_count": 1,
+  "submit_time": "2026-08-10T09:18:26.427045+01:00",
+  "done_time": "2026-08-10T09:18:45.415388+01:00"
+}
+
+$ git merge-base --is-ancestor origin/exhibit-724a-knownbad origin/main
+NOT an ancestor — the change did not land.
+
+$ git show origin/main:STATE.md | grep -c '| 7 | ... | any |'
+1   — row 7 on main still reads `any`.  The planted narrowing is not there.
+
+--------------------------------------------------------------------------------------------
+THE GATE OUTPUT THE REFINERY CAPTURED AND CARRIES ON THE FAILURE RECORD
+--------------------------------------------------------------------------------------------
+=== Running: ./build.sh ===
+============================================================================================
+mg-724a — MERGE GATE over the two control suites mg-9876 audited
+============================================================================================
+
+§1  THE SUITES, RUN — and what each one costs on the merge critical path
+--------------------------------------------------------------------------------------------
+  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      1.1s  8395 bytes
+  audit  code/control_audit_9876/run_all.sh         exit 1     14.6s  40176 bytes
+         (both suites)                                     15.7s total
+
+§2  OBSERVED vs BASELINE.json
+--------------------------------------------------------------------------------------------
+audit.arms                         gated     MATCH                       baseline=50  observed=50
+audit.arms_discriminating          gated     MATCH                       baseline=49  observed=49
+audit.arms_not_shown               gated     MATCH                       baseline=1  observed=1
+audit.arms_probed                  gated     MATCH                       baseline=50  observed=50
+audit.aux_holes                    gated     MATCH                       baseline=0  observed=0
+audit.broken_producers             gated     MATCH                       baseline=0  observed=0
+audit.census_grade                 gated     MATCH                       baseline="COMPLETE"  observed="COMPLETE"
+audit.producers_with_findings      gated     MATCH                       baseline=1  observed=1
+audit.runner_exit                  gated     MATCH                       baseline=1  observed=1
+audit.selftest_scored              gated     MATCH                       baseline=6  observed=6
+audit.selftest_total               gated     MATCH                       baseline=6  observed=6
+audit.sites                        gated     MATCH                       baseline=59  observed=59
+audit.sweep_dirs_without_evidence  recorded  MATCH                       baseline=25  observed=25
+audit.sweep_grade                  gated     MATCH                       baseline="OK"  observed="OK"
+audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseline=206  observed=207
+audit.sweep_tee_sites              recorded  MATCH                       baseline=19  observed=19
+twin.control_exit                  gated     MATCH                       baseline=1  observed=1
+twin.holes                         gated     MATCH                       baseline=0  observed=0
+twin.mutations_caught              gated     MATCH                       baseline=16  observed=16
+twin.mutations_total               gated     MATCH                       baseline=16  observed=16
+twin.negative_exit                 gated     MATCH                       baseline=0  observed=0
+twin.runner_exit                   gated     MATCH                       baseline=0  observed=0
+twin.unfalsifiable_rows            gated     MATCH                       baseline=0  observed=0
+twin.verdict_grade                 gated     MATCH                       baseline="DRIFT"  observed="DRIFT"
+twin.worklist                      gated     DIVERGED                    baseline=["8"]  observed=["7", "8"]
+
+  Why each field that moved is declared the way it is:
+    audit.sweep_membership_candidates (recorded):
+      RECORDED, NOT GATED, and this is a deliberate blind spot rather than an omission. a4
+      sweeps EVERY directory under code/, so this count moves when any ticket adds code.
+      Gating it would make every unrelated branch red, and a gate that fails for reasons
+      the author cannot act on is a gate that gets removed six weeks later. Probe T10
+      demonstrates that it really is silent, so the blind spot is exhibited rather than
+      asserted. The value is unchanged at 206 across mg-724a: this directory adds ZERO
+      whole-output membership tests, which is mg-9876's own detector reporting on the
+      instrument written to gate it.
+    twin.worklist (gated):
+      THE FIELD THIS GATE EXISTS FOR. Ledger row 8 is the second drifted row, which no
+      ticket names. The suite's exit code is 0 whether this list is [8] or [7, 8] or [1,
+      2, 7, 8], so a gate reading the exit code cannot see a published ledger row moving
+      away from its rendered twin — the exact event of mg-64cb's concern. Read as a SET so
+      that ordering is not a verdict.
+
+§3  WHAT THIS GATE DELIBERATELY DOES NOT GATE — named, not omitted
+--------------------------------------------------------------------------------------------
+  3 of 25 fields are RECORDED rather than gated:
+      audit.sweep_dirs_without_evidence
+      audit.sweep_membership_candidates
+      audit.sweep_tee_sites
+  They are population counts over EVERY directory under code/, so they move when
+  any ticket adds code — including this one.  Gating them would turn unrelated work
+  red, and a gate that fails for reasons its author cannot act on is a gate that
+  gets removed six weeks later.  Both values are printed in §2 so the drift stays
+  visible, and probe T10 below demonstrates the silence rather than promising it.
+
+§4  CAN THIS GATE FAIL?  Mutations of the bytes THIS run captured
+--------------------------------------------------------------------------------------------
+  T1   the twin's drift worklist gains a row (a published ledger row moved)                UNFALSIFIABLE (explained)   this field is LIVE-DIVERGED on the unmutated input, so the probe cannot fail on this run; that divergence is itself the gate's finding
+  T2   the twin control's exit code changes                                                CAUGHT                      twin.control_exit reads DIVERGED and is gated
+  T3   the twin control's VERDICT grade flips                                              CAUGHT                      twin.verdict_grade reads DIVERGED and is gated
+  T4   the twin's negative control catches one fewer mutation                              CAUGHT                      twin.mutations_caught reads DIVERGED and is gated
+  T5   a row of the twin's negative control becomes UNFALSIFIABLE                          CAUGHT                      twin.unfalsifiable_rows reads DIVERGED and is gated
+  T6   the audit's one non-discriminating arm SILENTLY BECOMES GREEN (1 not -> 0 not)      CAUGHT                      audit.arms_not_shown reads DIVERGED and is gated
+  T7   the audited directory grows an arm the census did not have                          CAUGHT                      audit.arms reads DIVERGED and is gated
+  T8   the auditor's selftest stops returning the known answer in one planted world        CAUGHT                      audit.selftest_scored reads DIVERGED and is gated
+  T9   the audit runner reports NO producer with findings (the laundered-green direction)  CAUGHT                      audit.producers_with_findings reads DIVERGED and is gated
+  T10  the corpus-wide smell counts move (RECORDED, not gated — the declared blind spot)   CAUGHT (silent, as declared)  audit.sweep_membership_candidates moved and the gate stayed at 1 gated divergence(s) — the blind spot BASELINE.json declares, shown rather than asserted
+  T11  the twin runner never prints its worklist line (it died before deciding)            CAUGHT                      REFUSED, naming twin.worklist
+  T12  the audit's VERDICT line appears twice and the two readings could disagree          CAUGHT                      REFUSED, naming audit.arms_probed
+  E1   the twin runner's own exit status changes                                           CAUGHT                      twin.runner_exit reads DIVERGED and is gated
+  E2   the audit runner exits 0 where the baseline says 1                                  CAUGHT                      audit.runner_exit reads DIVERGED and is gated
+
+  14 of 14 probes CAUGHT; 0 hole(s)/setup failure(s); 0 unexplained UNFALSIFIABLE.  0.05s.
+
+§5  CAN THIS GATE REFUSE?  Self-contained worlds, nothing borrowed from the estate
+--------------------------------------------------------------------------------------------
+  S1   BASELINE.json does not exist                                              CAUGHT   /Users/daniel/.pogo/refinery/worktrees/onethird_program/code/control_gate_724a/BASELINE.json.no-such-fil
+  S2   the baseline declares a schema this gate cannot read                      CAUGHT   baseline schema is not 1; this gate cannot read it
+  S3   a baseline field carries no `why`                                         CAUGHT   baseline field x carries no `why`.  A number in a baseline with no reason beside it is an assertion nobo
+  S4   a baseline field is neither gated nor recorded                            CAUGHT   baseline field x declares class 'informational'; every field must be `gated` (a change is RED) or `recor
+  S5   the baseline carries no `fields` object at all                            CAUGHT   baseline has no `fields` object
+  S6   the extractor produces a field the baseline never declared (audit.arms)   CAUGHT   the baseline and the extractor disagree about WHICH fields exist.
+  S7   the baseline declares an expectation the extractor can no longer produce  CAUGHT   the baseline and the extractor disagree about WHICH fields exist.
+  S8   a suite this gate is wired to has been deleted                            CAUGHT   code/control_gate_724a/no_such_runner.sh does not exist.  The gate is wired to a suite that is not there
+
+  8 of 8 worlds refused as required; 0 hole(s).  0.00s.
+
+============================================================================================
+GATE VERDICT: RED — 1 gated field(s) differ from BASELINE.json: twin.worklist
+============================================================================================
+
+WHAT TO DO.  Either this branch changed what a control can see — fix the branch —
+or it changed the estate on purpose, in which case move the value in
+BASELINE.json IN THIS COMMIT and write the reason into that field's `why`.
+Both are one-line diffs.  What is not available is landing the change and
+leaving the declared state behind it, which is the whole of what this gate buys.
+
+================================================================================
+gate exit    : 1   (0 baseline matched · 1 gated field diverged · 2 refused/broken)
+gate verdict : GATE VERDICT: RED — 1 gated field(s) differ from BASELINE.json: twin.worklist
+
+FAILED: exit status 1
+
+
+--------------------------------------------------------------------------------------------
+WHAT THIS EXHIBIT ALSO SHOWS ABOUT THE GATE'S OWN FALSIFICATION
+--------------------------------------------------------------------------------------------
+Probe T1 reads UNFALSIFIABLE (explained) on this run, and that is correct rather than a
+hole: T1 plants a grown worklist, and on THIS tree the worklist is ALREADY grown, so the
+probe cannot fail here.  Crediting it CAUGHT would be exactly the defect mg-9876
+generalised — a predicate satisfied by the input scored as if the mutation caused it.
+The gate says so, distinguishes it from an unexplained UNFALSIFIABLE, and does not count
+it as a hole, because the divergence it is blinded by IS the finding being reported.
+
+EXHIBIT VERDICT: the trigger fired, it blocked, and the addressee is on the record —
+failure_class=defect, so the refinery did not retry it as infrastructure noise, and the
+submitting agent's poll loop sees status=failed with the diverged field named.
