@@ -76,6 +76,15 @@ _NAMES_SOURCE = re.compile(r"STATE\.md")
 # The visible twin of the pin — see section 6 for why a second copy is allowed to exist.
 _PROVENANCE = re.compile(r'<span id="provenance">(.*?)</span>\s*$', re.M | re.S)
 
+# Section 6 compares PARSED FIELDS, so it needs to know what a commit looks like in the
+# visible line.  `@ <hash>` is the shape `reconcile()` writes; anything hex-and-long in that
+# line is treated as a commit reference, because a SECOND revision named there is exactly the
+# ambiguity the arm exists to forbid.
+_VISIBLE_COMMIT = re.compile(r"\b[0-9a-f]{7,40}\b")
+
+# Section 3 requires the pin to CARRY a whole-file digest, not merely to disagree with one.
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
+
 BANNED = [
     (re.compile(r"\bGenerated\b\s*20\d\d-\d\d-\d\d"),
      "a generation date on a file that is NOT generated — the false claim this ticket "
@@ -140,6 +149,26 @@ def check(state_text, twin_text, state_sha):
         emit(f"        in STATE.md not twin : {sort_labels(s_labels - t_labels) or '—'}")
         emit(f"        in twin not STATE.md : {sort_labels(t_labels - s_labels) or '—'}")
         emit(f"        in STATE.md not pin  : {sort_labels(s_labels - p_labels) or '—'}")
+    # THE COLUMN LIST IS PART OF THE PIN (mg-9876).  `row_digests` joins FOUR NAMED CELLS,
+    # so every column the ledger grows is outside the pin from the day it is added.  A sixth
+    # column was demonstrated being added to the header and to all twelve rows with section 2
+    # byte-identical and nothing raising — `parse_state_ledger` refuses FEWER than five cells
+    # and has no opinion about more.  The pin now records the columns its digests were taken
+    # over, so the answer comes from the pin and is not a list typed here.
+    pinned_cols = pin.get("columns", "")
+    actual_cols = " | ".join(L.ledger_columns(state_text))
+    emit(f"  pinned columns  : {pinned_cols or '(absent)'}")
+    emit(f"  actual columns  : {actual_cols}")
+    if not pinned_cols:
+        worst = 2
+        emit("  FAIL  the pin does not record the ledger columns its digests were taken over,")
+        emit("        so a column added to the ledger would sit outside every digest silently.")
+    elif pinned_cols == actual_cols:
+        emit("  PASS  the ledger's columns are the ones the pinned digests were taken over.")
+    else:
+        worst = 2
+        emit("  FAIL  the ledger's column set has changed since the pin.  Every per-row digest")
+        emit("        below is taken over a DIFFERENT set of cells than the ledger now has.")
         emit(f"        in pin not STATE.md  : {sort_labels(p_labels - s_labels) or '—'}")
     emit()
 
@@ -172,9 +201,21 @@ def check(state_text, twin_text, state_sha):
     emit("SECTION 3 — whole-file digest (the coarse signal)")
     emit("-" * 86)
     pinned_sha = pin.get("state-sha256", "")
-    emit(f"  pinned STATE.md sha256 : {pinned_sha}")
+    emit(f"  pinned STATE.md sha256 : {pinned_sha or '(absent)'}")
     emit(f"  actual STATE.md sha256 : {state_sha}")
-    if pinned_sha == state_sha:
+    # THE FIELD MUST BE PRESENT AND WELL-FORMED, AND THAT IS A SEPARATE ARM (mg-9876).
+    # Without this, deleting `state-sha256` from the pin entirely made section 3 compare the
+    # real digest against the empty string and print `DIFFERS` — the same words it prints on
+    # every ordinary run, under a heading that says in terms that DIFFERS `is NOT a defect
+    # and must not be read as one`.  A broken pin was therefore indistinguishable from the
+    # normal condition, and read as it.  COVERAGE.md already records the ancestor of this:
+    # the field-name pattern was `[a-z-]+`, `state-sha256` has digits, and section 3 printed
+    # the right answer for the wrong reason.  The PATTERN was repaired; the ABSENCE never was.
+    if not _SHA256.match(pinned_sha):
+        worst = 2
+        emit("  FAIL  the pin carries no well-formed `state-sha256` field.  This is a broken")
+        emit("        pin, NOT a moved STATE.md, and the two must not print the same word.")
+    elif pinned_sha == state_sha:
         emit("  PASS  STATE.md is byte-identical to the revision the twin was pinned against.")
     else:
         worst = max(worst, 1)
@@ -231,9 +272,18 @@ def check(state_text, twin_text, state_sha):
     # the same discipline STATE.md already uses with ~~…~~, which lib9bc2.md_kinds honours.
     # This IS a bypass: wrapping a live claim in <i> hides it from section 5.  It is a
     # declared one, it costs the writer visible italics, and COVERAGE.md records it.
+    # THE SKIP IS A LINE RANGE, NOT A TOKEN MATCH, AND THAT IS A REPAIR (mg-9876).  It read
+    # `if L.PIN_START.split()[0] in line: continue` — which is the token `<!--`, so EVERY
+    # line carrying an HTML comment opener was exempt from the whole guard, and a live
+    # `<!----><span><b>Generated</b> 2026-08-10</span>` was demonstrated walking straight
+    # past section 5.  It also failed at its stated job in the other direction: only the pin
+    # block's FIRST line contains `<!--`, so the rest of the block was scanned anyway.  An
+    # exemption wider than the thing it names, and narrower, at once.
+    pin_lo = twin_text[:twin_text.find(L.PIN_START)].count("\n") + 1
+    pin_hi = twin_text[:twin_text.find(L.PIN_END)].count("\n") + 1
     hits = []
     for line_no, line in enumerate(twin_text.split("\n"), 1):
-        if L.PIN_START.split()[0] in line:
+        if pin_lo <= line_no <= pin_hi:
             continue
         quoted = re.sub(r"<(i|s)>.*?</\1>", " ", line, flags=re.S)
         flat = L.normalise(L.strip_tags(quoted))
@@ -267,13 +317,25 @@ def check(state_text, twin_text, state_sha):
     else:
         shown = L.normalise(L.strip_tags(m.group(1)))
         pinned_commit = pin.get("commit", "")
+        # THE COMMIT IS PARSED OUT OF THE LINE AND COMPARED EXACTLY (mg-9876).  This read
+        # `pinned_commit in shown` — a membership test against the whole visible line, which
+        # is ticket smell #1 sitting inside the arm added to check a duplicated provenance
+        # string.  Truncating the pin's commit to a four-character prefix was demonstrated to
+        # PASS, and so would a line that names the pinned commit alongside another one.  What
+        # the arm is for is that the two copies name THE SAME revision, and that is an
+        # equality between two parsed fields, not a substring relation.
+        shown_commits = _VISIBLE_COMMIT.findall(shown)
         emit(f"  visible : {shown}")
         emit(f"  pinned  : {pinned_commit}")
-        if pinned_commit and pinned_commit in shown:
-            emit("  PASS  the visible line quotes the pinned commit.")
+        emit(f"  commits parsed out of the visible line: {shown_commits or '—'}")
+        if not pinned_commit:
+            worst = 2
+            emit("  FAIL  the pin carries no `commit:` field, so there is nothing to quote.")
+        elif shown_commits == [pinned_commit]:
+            emit("  PASS  the visible line names exactly the pinned commit and no other.")
         else:
             worst = 2
-            emit("  FAIL  the visible provenance line does not quote the pinned commit.")
+            emit("  FAIL  the visible provenance line does not name exactly the pinned commit.")
             emit("        A reader and the control would be told two different revisions.")
     emit()
 
@@ -332,7 +394,8 @@ def reconcile(rows_arg, note):
                             capture_output=True, text=True).stdout.strip()
     date = subprocess.run(["git", "-C", ROOT, "log", "-1", "--format=%cs", "HEAD"],
                           capture_output=True, text=True).stdout.strip()
-    block = L.render_pin(commit, date, sha256_file(STATE), merged, note)
+    block = L.render_pin(commit, date, sha256_file(STATE), merged, note,
+                         " | ".join(L.ledger_columns(state_text)))
 
     if pin is None:
         twin_text = block + "\n" + twin_text

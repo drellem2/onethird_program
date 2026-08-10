@@ -45,7 +45,30 @@ echo
 echo "================================================================================"
 echo "control exit  : $CONTROL   (0 clean · 1 drift · 2 structural failure)"
 echo "negative exit : $NEGATIVE   (0 = every mutation caught)"
+
+# THE EXIT CODE IS NOT THE CLASSIFIER, AND THE `tee` REPAIR DID NOT GO FAR ENOUGH (mg-9876).
+# Removing the pipe fixed WHOSE status was read.  It left standing the deeper error: a python
+# process exits 1 when twin_pin.py finds drift AND when twin_pin.py dies in a traceback, so
+# `1` meant both "the instrument worked" and "the instrument never reached a decision".
+# mg-9876 demonstrated it — renaming STATE.md's ledger header makes `parse_state_ledger`
+# raise, and this script reported `DRIFT, and the instrument demonstrably fails when it
+# should` and exited 0 over a traceback.  Exit 127 fell through to `CLEAN`.
+#
+# So the control must first be shown to have REACHED ITS VERDICT.  mg-f8e5 arrived at the
+# same rule from the other side: in this arc a non-zero exit is the normal state of an
+# instrument that found what it was sent to find, so the question is never the code, it is
+# whether the run got to its own decision.
+VERDICT_LINE=$(grep -m1 '^VERDICT: ' code/rendered_twin_pin_9bc2/out_control.txt || true)
+if [ -z "$VERDICT_LINE" ]; then
+    echo
+    echo "BROKEN — twin_pin.py exited $CONTROL WITHOUT printing a VERDICT line.  It did not"
+    echo "reach a decision, so there is no verdict to report and this is NOT drift and NOT"
+    echo "clean.  Read out_control.txt: a traceback and a finding are the same exit code."
+    exit 2
+fi
+echo "control verdict: $VERDICT_LINE"
 echo
+
 if [ "$CONTROL" -eq 2 ]; then
     echo "STRUCTURAL FAILURE — the pin mechanism is broken.  Read out_control.txt."
     exit 2
@@ -56,10 +79,28 @@ if [ "$NEGATIVE" -ne 0 ]; then
     exit 2
 fi
 if [ "$CONTROL" -eq 1 ]; then
-    echo "DRIFT, and the instrument demonstrably fails when it should.  The drifted rows in"
-    echo "out_control.txt section 2 are the worklist.  Row 9 was mg-2f44's and is RECONCILED;"
-    echo "row 8 is the one no ticket names yet."
+    # THE ROWS ARE READ OUT OF SECTION 2, NEVER TYPED.  This branch used to end with the
+    # sentence "Row 9 was mg-2f44's and is RECONCILED; row 8 is the one no ticket names yet"
+    # — an expected value typed by the author, in the runner, one file away from
+    # negative_control.py's own rule that nothing may name a drifted row as a literal.  It
+    # was already half wrong, and nothing would ever have said so.
+    WORKLIST=$(sed -n 's/^.*since the twin was last reconciled: //p' \
+                   code/rendered_twin_pin_9bc2/out_control.txt)
+    echo "DRIFT, and the instrument demonstrably fails when it should."
+    echo "The worklist, READ OUT OF SECTION 2 rather than typed here: ${WORKLIST:-(none)}"
+    if [ -z "$WORKLIST" ]; then
+        echo
+        echo "BROKEN — the control exited 1 but section 2 named no drifted row, so the drift"
+        echo "grade came from somewhere else (section 3) and this branch's message would be"
+        echo "a worklist of nothing presented as a worklist."
+        exit 2
+    fi
     exit 0
+fi
+if [ "$CONTROL" -ne 0 ]; then
+    echo "BROKEN — twin_pin.py exited $CONTROL, which is not one of its three verdicts."
+    echo "A runner that maps an unknown exit onto CLEAN is instance 1 of this ticket."
+    exit 2
 fi
 echo "CLEAN — the twin's pinned ledger rows all still match STATE.md."
 exit 0

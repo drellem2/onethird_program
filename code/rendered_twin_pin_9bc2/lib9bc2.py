@@ -95,6 +95,23 @@ def split_md_cells(line):
     return [c.strip() for c in cells]
 
 
+def ledger_columns(text):
+    """The ledger's header cells, exactly as STATE.md spells them.
+
+    THE PIN RECORDS THESE (mg-9876).  `row_digests` joins FOUR NAMED CELLS — result, kind,
+    status, width — so anything the ledger grows beyond them is outside the pin from the day
+    it is added.  A sixth column was demonstrated being added to the header AND to every row
+    with section 2 byte-identical and nothing raising: `parse_state_ledger` only refuses
+    FEWER than five cells.  Digesting the whole raw row instead would move every pinned
+    digest and force a re-pin nobody reconciled, which is the one move this instrument
+    forbids; recording the column list and comparing it does not.
+    """
+    for line in text.split("\n"):
+        if _MD_HEADER.match(line):
+            return split_md_cells(line)
+    raise ValueError("no ledger header `| # | Result | Kind | Status | Width |` in STATE.md")
+
+
 def parse_state_ledger(text):
     """Return [(label, {'result','kind','status','width'}, raw_line)] for the STATE.md ledger.
 
@@ -264,7 +281,7 @@ def row_digests(state_text):
     return out
 
 
-def render_pin(commit, commit_date, state_sha, digests, note):
+def render_pin(commit, commit_date, state_sha, digests, note, columns=""):
     """Render the pin block that goes at the top of the twin."""
     lines = [PIN_START,
              "     THIS IS THE ONLY THING IN THIS FILE THAT SAYS WHICH `STATE.md` IT IS A",
@@ -276,6 +293,7 @@ def render_pin(commit, commit_date, state_sha, digests, note):
              f"  commit: {commit}",
              f"  commit-date: {commit_date}",
              f"  state-sha256: {state_sha}",
+             f"  columns: {columns}",
              f"  note: {note}",
              "",
              "  Per-row digests of the STATE.md ledger AS OF THAT COMMIT.  A row whose digest",

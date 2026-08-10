@@ -110,7 +110,7 @@ def m_reclaim_canon(text):
 
 # ---------------------------------------------------------------------- section 6
 @mutation("visible provenance line points at a DIFFERENT commit than the pin", "6",
-          "the visible provenance line does not quote the pinned commit", "twin")
+          "the visible provenance line does not name exactly the pinned commit", "twin")
 def m_desync_visible(text):
     """Repoint the VISIBLE provenance line at a commit the pin does not name.
 
@@ -129,6 +129,51 @@ def m_desync_visible(text):
           "no <span id=\"provenance\">", "twin")
 def m_drop_visible(text):
     return re.sub(r'<span id="provenance">.*?</span>\s*$', "", text, count=1, flags=re.M | re.S)
+
+
+# ------------------------------------------------- arms added by mg-9876's audit
+# Each of these is a known-bad input that the section it names USED TO PASS.  They are here
+# rather than in the auditing directory because a demonstration that lives somewhere else is
+# a demonstration this file's own runner will never make again.
+
+@mutation("the ledger GAINS A COLUMN (header and every row)", "1",
+          "the ledger's column set has changed since the pin", "state")
+def m_sixth_column(text):
+    out = text.replace("| # | Result | Kind | Status | Width |",
+                       "| # | Result | Kind | Status | Width | Owner |", 1)
+    for line in text.split("\n"):
+        if re.match(r"^\|\s*[0-9]+[a-z]?\s*\|", line):
+            out = out.replace(line + "\n", line + " pm-onethird |\n", 1)
+    return out
+
+
+@mutation("the pin's `state-sha256` field is deleted outright", "3",
+          "the pin carries no well-formed `state-sha256` field", "twin")
+def m_drop_state_sha(text):
+    return re.sub(r"\n\s*state-sha256: [0-9a-f]+", "", text, count=1)
+
+
+@mutation("the pin's `columns` field is deleted outright", "1",
+          "the pin does not record the ledger columns", "twin")
+def m_drop_columns(text):
+    return re.sub(r"\n\s*columns: [^\n]+", "", text, count=1)
+
+
+@mutation("`Generated <date>` re-introduced BEHIND an HTML comment opener", "5",
+          r"matches /\bGenerated\b", "twin")
+def m_regenerate_behind_comment(text):
+    """The bypass mg-9876 demonstrated: section 5 skipped every line containing `<!--`."""
+    return text.replace("<span><b>Maintained by</b> pm-onethird</span>",
+                        "<span><b>Maintained by</b> pm-onethird</span>\n"
+                        "      <!----><span><b>Generated</b> 2026-08-10</span>", 1)
+
+
+@mutation("visible provenance names the pinned commit AND a second one", "6",
+          "does not name exactly the pinned commit", "twin")
+def m_two_commits(text):
+    """`pinned_commit in shown` was satisfied by any line CONTAINING the commit."""
+    return re.sub(r'(<span id="provenance">.*?@ [0-9a-f]{7,40})',
+                  r"\g<1> (was deadbeefcafe)", text, count=1, flags=re.S)
 
 
 # ---------------------------------------------------------------------- positive control
@@ -221,6 +266,21 @@ def main():
     print("top of this file for the two fixtures that rotted when it was (mg-2f44).")
     print()
 
+    # ------------------------------------------------------------------ mg-9876
+    # THE BASELINE-ABSENCE GUARD, WHICH IS mg-2f44's REPAIR GENERALISED TO EVERY ARM.
+    # Each mutation below scores CAUGHT when its `expect` string appears in the mutated
+    # report.  The question this file never asked is whether that string was ALREADY THERE
+    # before the mutation — and for the positive control it was, for its whole life:
+    # `"8 9" in out` matched section 1's row-set listing on every healthy run.  A one-sided
+    # membership test cannot tell a string the mutation caused from a string the report
+    # prints unconditionally, so the test is now run against the UNMUTATED report first.
+    # An expect string present in the baseline is scored UNFALSIFIABLE and counted as a hole:
+    # not because the twin is wrong, but because that row of the table is not evidence.
+    _base_code, base_report = run(STATE, TWIN)
+    unfalsifiable = [(name, section, expect)
+                     for name, section, expect, _t, _f in MUTATIONS
+                     if expect is not None and expect in base_report]
+
     tmp = tempfile.mkdtemp(prefix="twinpin9bc2-")
     rows, holes = [], 0
     try:
@@ -246,10 +306,14 @@ def main():
             if expect is None:
                 ok, detail = score_baseline(code, out, want_drift)
                 verdict = "CAUGHT" if ok else "HOLE"
+            elif expect in base_report:
+                ok, verdict = False, "UNFALSIFIABLE"
+                detail = (f"exit {code}; {expect!r} is in the UNMUTATED report too, so this "
+                          f"row could not have failed")
             else:
                 ok = expect in out
                 verdict = "CAUGHT" if ok else "HOLE"
-                detail = f"exit {code}; looked for {expect!r}"
+                detail = f"exit {code}; looked for {expect!r} (absent from the baseline)"
             if not ok:
                 holes += 1
             rows.append((name, section, verdict, detail))
@@ -263,6 +327,8 @@ def main():
         print(f"{name.ljust(width)}  {section:<3}  {verdict:<7}  {detail}")
     print()
     print(f"{len(rows) - holes} of {len(rows)} caught; {holes} hole(s).")
+    print(f"{len(unfalsifiable)} row(s) UNFALSIFIABLE — expect string present in the "
+          f"unmutated report (mg-9876's guard).")
     print()
     if holes:
         print("A HOLE IS A FINDING, NOT A TEST FAILURE TO SUPPRESS — it is a way the twin can")

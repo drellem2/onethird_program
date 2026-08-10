@@ -1,0 +1,27 @@
+============================================================================================
+mg-9876 — AUDITOR SELFTEST: six planted worlds whose verdicts are known in advance
+============================================================================================
+
+The instrument that audits the controls is a control.  This file is how it was
+established that it can FAIL, rather than asserted that it would.
+
+id   planted world                                                               must score       scored           ok
+--------------------------------------------------------------------------------------------
+P1   a predicate that is already satisfied by the GOOD input                     UNFALSIFIABLE    UNFALSIFIABLE    yes
+P2   an arm whose report does not move when its subject stops                    LAUNDERED        LAUNDERED        yes
+P3   an arm that does report its subject stopping                                DISCRIMINATES    DISCRIMINATES    yes
+P4   a known-bad input that is not actually bad (rotted fixture)                 SETUP FAILED     SETUP FAILED     yes
+P5   an unregistered arm-shaped site added to a source copy                      CENSUS REFUSES   CENSUS REFUSES   yes
+P6   an auxiliary probe must say CONFIRMED on the hole and CLOSED on the repair  CONFIRMED->CLOSED CONFIRMED->CLOSED yes
+
+6 of 6 planted worlds scored as required.
+
+The scoring rule returns the known answer in all six worlds, including the two
+worlds where the required answer is that a check is WORTHLESS.  That is the whole
+of the claim: it is not a claim that a2's findings are correct, only that a2 is
+capable of returning each of its verdicts and is not wired to one of them.
+
+STILL UNFALSIFIED — the arm registry's SUBJECT sentences.  A probe is written from
+the subject, so a subject that misdescribes its arm yields a probe that agrees with
+it, and no machinery here would notice.  That is a human reading and it is the
+standing exposure of this audit.

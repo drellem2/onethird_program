@@ -1,0 +1,132 @@
+============================================================================================
+mg-9876 — SMELL INDEX over code/ (candidates, NOT adjudications)
+============================================================================================
+
+population: 178 directories under code/
+
+§1  MEMBERSHIP TESTS AGAINST A WHOLE CAPTURED OUTPUT
+--------------------------------------------------------------------------------------------
+The shape of instance 3: `"8 9" in out` where `out` is the entire report, so a
+line printed unconditionally elsewhere satisfies it forever.  A candidate is not a
+defect — only running it two ways decides that.
+
+  202 candidate site(s) in 66 of 178 directories
+
+    species_gate_audit_d53d  (20)
+        code/species_gate_audit_d53d/g1_population.py:116  clean[rn] = (rc, E2_SAYS in out)
+        code/species_gate_audit_d53d/g1_population.py:118  % (rn, rc, E2_SAYS, "yes" if E2_SAYS in out else "no"))
+        code/species_gate_audit_d53d/g1_population.py:140  red[rn] = (rc, E2_SAYS in out, others)
+    summary_guard_cf83  (15)
+        code/summary_guard_cf83/c1_summary_guard.py:193  red += check("no crash", "Traceback" not in out)
+        code/summary_guard_cf83/c1_summary_guard.py:200  "all 4 are now checked against the tree" in out)
+        code/summary_guard_cf83/c1_summary_guard.py:202  "The census was WRONG on 2 of its 4 rows and RIGHT on 2." in out,
+    species_depth_audit_4700  (12)
+        code/species_depth_audit_4700/q2_wiring.py:124  print("  0 of these 3 runners.  The difference is visible in stdout, which is")
+        code/species_depth_audit_4700/q2_wiring.py:158  named = "STANDING UN-STRUCK" in out
+        code/species_depth_audit_4700/q2_wiring.py:159  msg = "E2 CROSS-SECTION FAILED" in out
+    species_sites_821e  (11)
+        code/species_sites_821e/kern821e.py:100  if WIRE_MARK not in text:
+        code/species_sites_821e/kern821e.py:320  if needle not in body:
+        code/species_sites_821e/p3_wiring.py:111  ctl_a = "(a) B1 restored" in out and "fires, 1 finding -- ok" in out
+    control_audit_9876  (10)
+        code/control_audit_9876/a2_discriminate.py:74  return lambda rc, text: needle in text
+        code/control_audit_9876/a2_discriminate.py:624  return good, bad, lambda rc, text: rc == 2 and "STRUCTURAL FAILURE" in text
+        code/control_audit_9876/a2_discriminate.py:631  return good, bad, lambda rc, text: rc == 2 and "FOUND A HOLE" in text
+    species_bound_repair_5040  (10)
+        code/species_bound_repair_5040/r1_bound.py:77  names = name in out
+        code/species_bound_repair_5040/r2_wiring.py:88  has = "E2 TOTAL BAD:" in out
+        code/species_bound_repair_5040/r2_wiring.py:118  named = "STANDING UN-STRUCK" in out
+    census_audit_4d3b  (7)
+        code/census_audit_4d3b/a3_fetchfail.py:188  "? successor commit(s)" in out and
+        code/census_audit_4d3b/a3_fetchfail.py:191  "onethird_program=UNKNOWN" in out)
+        code/census_audit_4d3b/a3_fetchfail.py:193  "CHAIN: UNKNOWN" in out and
+    census_remainder_f8e5  (6)
+        code/census_remainder_f8e5/d4_movingref.py:62  if full and full not in out:
+        code/census_remainder_f8e5/d4_movingref.py:89  has_note = "MOVES BETWEEN THEM" in text.upper() or "eacc5e1" in text
+        code/census_remainder_f8e5/d5_timeout.py:87  'subprocess.Popen(["sh", "run_all.sh"]' in text),
+    species_rung_repair_4adb  (6)
+        code/species_rung_repair_4adb/v1_population.py:127  CLEAN[rn] = (rc, E2_SAYS in out)
+        code/species_rung_repair_4adb/v1_population.py:139  BASE[rn] = (rc, E2_SAYS in out)
+        code/species_rung_repair_4adb/v1_population.py:174  names = E2_SAYS in out
+    verdict_path_repair_1d26  (6)
+        code/verdict_path_repair_1d26/kern1d26.py:252  if needle in out:
+        code/verdict_path_repair_1d26/p2_widened.py:104  runners_red.append((rn, rc, E2_SAYS in out))
+        code/verdict_path_repair_1d26/p2_widened.py:106  % (rn, rc, E2_SAYS, "yes" if E2_SAYS in out else "no"))
+    branching_audit_19ec  (5)
+        code/branching_audit_19ec/e1_f1_cells.py:169  "lattice-iso bad" in body)
+        code/branching_audit_19ec/e3_f4_brown.py:151  PATHS in body)
+        code/branching_audit_19ec/e3_f4_brown.py:217  a + body.index(PATHS) if PATHS in body else -1, "strictly between"),
+    face_geometry_instr_5f9a  (5)
+        code/face_geometry_instr_5f9a/d3_reintroduction.py:144  code == 0 and "had to decide on the off-diagonal signs" in out
+        code/face_geometry_instr_5f9a/d3_reintroduction.py:145  and "Ignore what follows" in out)
+        code/face_geometry_instr_5f9a/d3_reintroduction.py:176  "0 entries differ in SIGN ALONE" in out)
+    … and 54 more directories, listed in full below
+
+  FULL LIST (directory: count)
+    audit_c067:1  branching_audit_19ec:5  branching_audit_321d:1  branching_audit_58da:2  branching_audit_957f:2  branching_bound_audit_aaf4:1  branching_locate_db09:1  branching_repair_7e58:1  branching_warrant_dffa:3  census_audit_4d3b:7  census_remainder_f8e5:6  census_repair_f3ff:2  control_audit_9876:10  counterexample_audit_0a11:2  counterexample_audit_c6bc:1  counterexample_probe_24a3:1  face_geometry_audit_0b07:2  face_geometry_audit_fcb2:1  face_geometry_instr_5f9a:5  face_geometry_landing_7d5a:1  face_geometry_landing_da45:2  face_geometry_repair_e35b:2  grain_axis_audit_03d1:2  hash_population_6e58:2  hodge_leverage_audit_7e39:4  hodge_leverage_audit_835f:2  hodge_leverage_audit_8aae:1  hodge_leverage_audit_9207:1  hodge_leverage_audit_97fb:2  hodge_leverage_repair_8916:1  hodge_leverage_repair_ff3e:1  landscape_repair_audit_3b51:2  pairbias_indep_audit_6bd1:1  rendered_twin_pin_9bc2:4  repair_69d1:1  repair_8d5e:1  repair_b2af:2  runner_exit_audit_05eb:3  runner_exit_repair_70c7:2  runner_exit_repair_7522:1  sibling_sweep_7085:1  species_audit_73df:1  species_bound_audit_6ef4:5  species_bound_repair_5040:10  species_depth_audit_4700:12  species_extent_audit_6cb9:2  species_gate_audit_d53d:20  species_rung_repair_4adb:6  species_sites_821e:11  state_claims_repair_0120:1  state_control_audit_2216:1  state_control_audit_babf:1  state_delegation_audit_16eb:1  state_delegation_repair_a74f:1  state_delegation_repair_bee1:1  state_landing_control_2da3:1  state_layer_audit_218d:4  state_ordering_audit_1df8:1  state_restructure_34bf:1  state_restructure_ea0e:1  summary_guard_audit_407f:1  summary_guard_cf83:15  transcript_census_1abe:2  truncate_sweep_ec63:3  unified_gate_audit_446b:1  verdict_path_repair_1d26:6
+
+§2  AN EXIT CODE READ DOWNSTREAM OF A PIPE
+--------------------------------------------------------------------------------------------
+Instance 1 exactly: `cmd | tee f` makes `$?` TEE's status, and tee succeeds
+whatever it is fed.  POSIX sh has no PIPESTATUS to reach for.
+
+  `| tee` : 18 site(s) in 4 directories
+      code/eps_spec_sweep_372e/run_all.sh:5  python3 "$here/s1_census.py"    | tee "$here/out_s1_census.txt"
+      code/eps_spec_sweep_372e/run_all.sh:6  python3 "$here/s2_classify.py"  | tee "$here/out_s2_classify.txt"
+      code/eps_spec_sweep_372e/run_all.sh:7  cd "$here" && python3 s3_control.py | tee out_s3_control.txt
+      code/l2_conditionality_28ff/run_all.sh:6  python3 -u selftest28ff.py  | tee out_selftest28ff.txt
+      code/l2_conditionality_28ff/run_all.sh:7  python3 -u b1_footrule.py   | tee out_b1_footrule.txt
+      code/l2_conditionality_28ff/run_all.sh:8  python3 -u b2_census.py     | tee out_b2_census.txt
+      code/l2_conditionality_28ff/run_all.sh:9  python3 -u b3_routes.py     | tee out_b3_routes.txt
+      code/l2_conditionality_28ff/run_all.sh:10  python3 -u b4_ruled_out.py  | tee out_b4_ruled_out.txt
+      code/l2_conditionality_28ff/run_all.sh:11  python3 -u b5_trend.py      | tee out_b5_trend.txt
+      code/lstar_789d/run_all.sh:5  python3 s0_selftest.py   | tee out_s0_selftest.txt
+      code/lstar_789d/run_all.sh:6  python3 s1_hunt.py       | tee out_s1_hunt.txt
+      code/lstar_789d/run_all.sh:7  python3 s2_reduce.py     | tee out_s2_reduce.txt
+      code/lstar_789d/run_all.sh:8  python3 s3_depth.py      | tee out_s3_depth.txt
+      code/lstar_789d/run_all.sh:9  python3 s4_theoremA.py   | tee out_s4_theoremA.txt
+      code/lstar_789d/run_all.sh:10  python3 s5_certify.py    | tee out_s5_certify.txt
+      code/lstar_789d/run_all.sh:11  python3 s6_aftermath.py  | tee out_s6_aftermath.txt
+      code/state_restructure_ea0e/run_all.sh:19  python3 code/state_restructure_ea0e/verify_relocation_ea0e.py "${BASE}" 2>&1 | tee "${OU
+      code/state_restructure_ea0e/run_all.sh:21  echo "exit ${rc}" | tee -a "${OUT}"
+  `$?` immediately after a pipeline : 0 site(s) in 0 directories
+
+§3  DOES THE DIRECTORY SHIP ANYTHING THAT TRIES TO MAKE ITS OWN CONTROL FAIL?
+--------------------------------------------------------------------------------------------
+The ticket's fourth smell — `positive controls never demonstrated to fail` — is not
+decidable from source.  What IS decidable is whether the directory ships a negative
+control at all, and whether any committed transcript records a demonstrated
+failure.  A directory with neither has no evidence its instrument can fail; that is
+weaker than saying it cannot.
+
+  ships a file named for negative/self/positive-control : 107 of 178
+  a committed transcript records a demonstrated failure  : 110 of 178
+  NEITHER, though the directory ships code               : 24 of 178
+
+  directories with code and no evidence of a falsification attempt:
+      counterexample_audit_0a11           counterexample_audit_a7b4           eps0_threshold_3969               
+      face_geometry_audit_5630            face_geometry_audit_d0e2            face_geometry_audit_e0ce          
+      face_geometry_audit_f7bc            hodge_leverage_audit_3c24           hodge_leverage_audit_d39d         
+      hodge_leverage_join                 l2_underclaim_audit_3bb9            landscape_audit_d673              
+      landscape_ebd8                      semigroup_note                      semigroup_note_audit_66a6         
+      sibling_sweep_7085                  state_audit_2eed                    state_delegation_audit_16eb       
+      state_delegation_audit_5644         state_delegation_repair_0049        state_restructure_34bf            
+      unified_gate_8fd1                   unified_gate_audit_446b             unitmap_audit_9f91                
+
+§4  THE SWEEP'S OWN TWO-SIDED CONTROL
+--------------------------------------------------------------------------------------------
+A detector that only ever finds things has not been shown to discriminate.  The tee
+detector is required to answer BOTH ways at two directories whose answer is known
+in advance, and to be exercised against a constructed negative.
+
+    [PASS]  tee: must NOT fire on rendered_twin_pin_9bc2/run_all.sh, whose tee was removed (instance 1)
+    [PASS]  tee: must fire on a constructed `python3 x.py | tee out.txt`
+    [PASS]  tee: must fire somewhere in the arc, or it is not looking at anything
+    [PASS]  membership: must fire on `if "8 9" in out:` — instance 3 itself
+    [PASS]  membership: must NOT fire on `for line in out.splitlines():` — iteration, which the first version of this detector counted 597 times
+    [PASS]  membership: must NOT fire on a test against a PARSED FIELD, `if row in worklist:`
+    [PASS]  pipe-status: must fire on a constructed `cmd | tee f` followed by `rc=$?`, which is why a 0 count below is a measurement and not a dead detector
+
+============================================================================================
+SWEEP OK — 202 membership candidates, 18 tee sites, 24 directories with no falsification evidence.  All CANDIDATES.
+============================================================================================
