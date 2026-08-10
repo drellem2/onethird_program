@@ -1,0 +1,63 @@
+g1  THE AGREEMENT CHECK — mg-0d1b's 12 measured groups, compared
+
+  population POP-PRIM   306 posets of 404   (tolerances are stated over this set)
+  pinned      12 groups   71 names   12 trees
+
+==============================================================================
+G1a  RECOMPUTE — every scalar by the tree that owns it, through its own entry point
+==============================================================================
+
+  80 columns from 12 trees in 30.6s
+  spread self-check against lib0d1b.spread on every pinned pair: 0 mismatches
+
+==============================================================================
+G1b  THE COMPARISON — pinned membership, mg-0d1b's tolerances, unmodified
+==============================================================================
+
+  agree  leak(A_1)                13 names   spread 0.000e+00   tol 0.000e+00
+  agree  gamma                     9 names   spread 4.666e-10   tol 4.666e-10
+  agree  Delta_P                   7 names   spread 0.000e+00   tol 0.000e+00
+  agree  Phi*_pref                 7 names   spread 0.000e+00   tol 0.000e+00
+  agree  mu_pref                   7 names   spread 9.097e-13   tol 9.097e-13
+  agree  rho*Delta_P               6 names   spread 7.310e-12   tol 7.310e-12
+  agree  Phi*_all                  6 names   spread 0.000e+00   tol 0.000e+00
+  agree  E_footrule                4 names   spread 0.000e+00   tol 0.000e+00
+  agree  M                         4 names   spread 0.000e+00   tol 0.000e+00
+  agree  rho                       3 names   spread 4.441e-15   tol 4.441e-15
+  agree  1 - rho(A_1)              3 names   spread 0.000e+00   tol 0.000e+00
+  agree  mu_pref (upper bound)     2 names   spread 1.108e-07   tol 1.108e-07
+
+  bit-reproducibility: 12 of 12 groups reproduce the baseline's observed spread exactly (7 of them are exact-equality rows)
+
+==============================================================================
+G1c  POSITIVE CONTROL — eight planted worlds, and the good input scored first
+==============================================================================
+
+  THIS ROW OF THE CORPUS HAS ONLY EVER SEEN AGREEMENT.  mg-0d1b found 0 disagreements in
+  12 groups, which is the condition mg-9876 was filed about: a control that has never
+  fired is indistinguishable from one that cannot.  So the check is falsified here, on
+  every run, against mutations derived from the columns the trees just produced.
+
+    CAUGHT            W1 one ULP (1.110e-16) on anticorrelation_c50b:leak(1), exact group `leak(A_1)`
+                      names anticorrelation_c50b:leak(1) vs audit_5cba:LK[1]/LE
+    CAUGHT            W2 2x tolerance (9.331e-10) on chain_iv_c_81ff:lambda2_bracket, group `gamma`
+                      names chain_iv_c_81ff:lambda2_bracket vs l2_conditionality_28ff:gap_exact_bounds
+    REFUSED-CORRECTLY W3 sub-tolerance (2.328e-10 < 4.666e-10) on the same column must stay GREEN
+    CAUGHT            W4 column DRIFTS OUT of `gamma` entirely (+1.0 at every poset)
+                      value-blind clustering on the SAME input: gamma cluster 9 -> 8 names, drifted column alone in its own cluster: True, NO error raised — that rule exits 0 here
+    CAUGHT            W5 the name chain_iv_c_81ff:lambda2_bracket stops being produced
+                      reported as MEMBERSHIP-LOST
+    CAUGHT            W6 anticorrelation_c50b:leak(1) becomes uncomputable at one poset (exact group)
+                      reported as COMPARABILITY
+    CAUGHT            W7 the tree chain_iv_c_81ff fails to load
+                      reported as TREE-BROKEN
+    REFUSED-CORRECTLY W8 the SAME mutation as W2, checked at a typed 1e-6 instead of the carried 4.666e-10, must go GREEN — the decorative tolerance, demonstrated
+                      a gate written from the ticket's own rounded quote would be this one
+
+    6 CAUGHT · 2 REFUSED-CORRECTLY · 0 unsatisfactory, of 8 arms
+
+==============================================================================
+g1 RESULT
+==============================================================================
+  12 groups agree at mg-0d1b's measured tolerances; 0 falsification arms unsatisfactory.
+  recompute 30.6s · falsification 0.55s · total 31.2s
