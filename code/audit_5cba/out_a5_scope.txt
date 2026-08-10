@@ -1,0 +1,85 @@
+==============================================================================
+a5  SCOPE -- the LSTAR(n) rows for n >= 8, recomputed with LOWER bounds
+==============================================================================
+a5 -- SCOPE: the LSTAR(n) table's n >= 8 rows, and the n = 12 claim.
+
+WHY THIS SECTION EXISTS.  mg-789d's LSTAR table reads
+
+     8 |  >= 0.968818 | SEARCH ONLY
+     9 |  >= 1.013539 | SEARCH ONLY -- (L*) FALSE
+    10 |  >= 1.020310 | SEARCH ONLY -- (L*) FALSE
+    11 |  >= 1.025044 | SEARCH ONLY -- (L*) FALSE
+    12 |  >= 1.057643 | SEARCH ONLY -- (L*) FALSE
+
+but every one of those five numbers is produced by `s1_hunt.py:50` /
+`s6_aftermath.py:71`, which score the hill climb with `mu_ub_float` -- an UPPER bound
+on mu_pref, correctly so, because a screen may only over-state the hunted quantity.
+
+An UPPER bound on mu_pref gives an UPPER bound on v_L = mu_pref*Delta/gamma, hence an
+UPPER bound on min(v_F, v_L), hence an UPPER bound on LSTAR(n).  It cannot certify
+"LSTAR(n) >= x".  The direction is wrong for four of the five rows as written.
+
+For n = 9, 10, 11 that is harmless in substance -- s5 re-does those three posets in
+exact rationals and the certified values are what this file recomputes.  For n = 12
+it is NOT harmless: s1 handed a candidate to the exact stage and s5 never certified
+it (s5.4 lists FOUR counterexamples, at n = 9, 9, 10, 11 -- no n = 12).  So the
+table's "12 | (L*) FALSE" rests on a float upper bound alone.
+
+This file settles n = 12 exactly and re-states each n >= 8 row at its certified value.
+
+row                                           published    certified    direction
+------------------------------------------------------------------------------
+n=8  search argmax                             0.968818     0.968818        under   (0s)
+     LE=130  Delta=62/65  M=733/2080  gamma in [0.049599862,0.049599864]  mu_pref >= 0.050378411
+     (F) fails: True     mu_pref*Delta > gamma CERTIFIED: False     (L*) refuted: False
+  [ok ]   the published search figure is an UPPER bound: published >= certified 0.968818 vs 0.96881826
+n=9  search argmax (= counterexample C2)       1.013539     1.013486         over   (0s)
+     LE=5670  Delta=311/315  M=373/756  gamma in [0.118609371,0.118609373]  mu_pref >= 0.121755075
+     (F) fails: True     mu_pref*Delta > gamma CERTIFIED: True     (L*) refuted: True
+  [ok ]   (L*) IS refuted at this poset, in exact rationals            
+  [ok ]   the published search figure is an UPPER bound: published >= certified 1.013539 vs 1.01348634
+n=10 search argmax (= counterexample C3)       1.020310     1.020310         over   (2s)
+     LE=1148  Delta=565/574  M=557/1435  gamma in [0.070325341,0.070325343]  mu_pref >= 0.072896623
+     (F) fails: True     mu_pref*Delta > gamma CERTIFIED: True     (L*) refuted: True
+  [ok ]   (L*) IS refuted at this poset, in exact rationals            
+  [ok ]   the published search figure is an UPPER bound: published >= certified 1.020310 vs 1.02030991
+n=11 search argmax (= counterexample C4)       1.025044     1.025041         over   (5s)
+     LE=57120  Delta=135/136  M=7141/14280  gamma in [0.119915746,0.119915748]  mu_pref >= 0.123829049
+     (F) fails: True     mu_pref*Delta > gamma CERTIFIED: True     (L*) refuted: True
+  [ok ]   (L*) IS refuted at this poset, in exact rationals            
+  [ok ]   the published search figure is an UPPER bound: published >= certified 1.025044 vs 1.02504086
+n=12 search argmax -- NEVER CERTIFIED BY mg-789d   1.057643     1.057468         over   (10s)
+     LE=10584  Delta=195/196  M=7717/21168  gamma in [0.061699260,0.061699262]  mu_pref >= 0.065579592
+     (F) fails: True     mu_pref*Delta > gamma CERTIFIED: True     (L*) refuted: True
+  [ok ]   the published search figure is an UPPER bound: published >= certified 1.057643 vs 1.05746812
+
+------------------------------------------------------------------------------
+5.0  THE n = 8 RELABELLING CLAIM -- 'exactly mg-c50b's published maximum,
+     at a relabelling of their argmax'.  A relabelling moves gamma and M, so
+     this only holds if the maximum is attained at the OTHER labelling.
+------------------------------------------------------------------------------
+     (0, 0, 2, 0, 8, 24, 62, 63)  Delta=62/65  M=723/2080  gamma=0.047583  rho*Delta=0.968159
+     (0, 0, 2, 0, 8, 24, 63, 62)  Delta=62/65  M=733/2080  gamma=0.049600  rho*Delta=0.968818
+  [ok ] the two labellings give DIFFERENT rho*Delta (so 'relabelling' is not a no-op) 0.968159 vs 0.968818
+  [ok ] 0.968818 is the one mg-789d reached, and it IS mg-c50b's published maximum 0.968818
+
+------------------------------------------------------------------------------
+5.1  THE n = 12 ROW
+------------------------------------------------------------------------------
+  [ok ] n=12: the poset the table points at IS a genuine counterexample after all refuted=True (F)fails=True
+     Whether or not it is genuine, mg-789d never certified it: out_s5_certify.txt
+     S5.4 lists FOUR counterexamples at n = 9, 9, 10, 11.  The table's n=12
+     '(L*) FALSE' was carried by a float UPPER bound on v_L.
+
+------------------------------------------------------------------------------
+5.2  THE n = 8 ROW -- the one the document says is OPEN
+------------------------------------------------------------------------------
+     published 0.968818, certified 0.968818 -- the published figure is the larger,
+     as an upper bound must be.  Both are far below 1, so (L*) holds at this
+     poset either way, and n = 8 remains a SEARCH over 2600369 primitive posets.
+  [ok ] (L*) HOLDS at the n=8 search argmax (certified value < 1)      0.968818
+  [ok ] n=8 is not settled by this: 0.968818 is one poset, not a census 
+
+==============================================================================
+a5 RESULT: ALL ARMS PASS   (0 failing arms)
+==============================================================================

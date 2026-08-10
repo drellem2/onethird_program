@@ -1,0 +1,59 @@
+==============================================================================
+a7  THE ONSET OF rho*Delta > 1, AND LSTAR(6) -- both settled on integers
+==============================================================================
+a7 -- TWO DISAGREEMENTS WITH mg-789d, settled in exact rationals.
+
+a3 (exhaustive, float mu path) disagrees with the landing at two places.  Neither is
+allowed to be reported off a float, so both are re-decided here on integers.
+
+  D-A.  ONSET OF rho*Delta > 1.  mg-789d corrects the corpus from "from n = 10" to
+        "FROM n = 6, max 1.15672 over all 4070".  a3's exhaustive pass finds
+        max v_L = 1.027118 at n = 5, over 6 of the 275 primitive posets.  If that
+        survives exact certification the onset is n = 5, one value EARLIER again, and
+        the corrected corollary is itself off by one.
+
+  D-B.  LSTAR(6).  The landing prints 0.794253; a3 gets 0.794235 -- the same six
+        digits with two transposed.  Settled by certifying the maximum exactly and by
+        asking whether ANY primitive n = 6 poset attains 0.794253.
+
+METHOD.  For "v_L > 1 at P" the hard direction needs mu_pref from BELOW and gamma from
+ABOVE: certified as  mu_lo * Delta > gamma_hi  with mu_lo from exact copositivity and
+gamma_hi from an integer PSD refusal.  For "v_L <= 1 at every P" the directions swap:
+mu_hi * Delta <= gamma_lo, with mu_hi from a copositivity refusal and gamma_lo from an
+integer PSD acceptance.  Both are decided with no float on the verdict path.
+
+------------------------------------------------------------------------------
+D-A.1  n = 3, 4: EXACT proof that v_L <= 1 at EVERY primitive poset
+------------------------------------------------------------------------------
+  [ok ] n=3: mu_pref*Delta <= gamma CERTIFIED at all 4 primitive posets []
+  [ok ] n=4: mu_pref*Delta <= gamma CERTIFIED at all 27 primitive posets []
+
+------------------------------------------------------------------------------
+D-A.2  n = 5: the posets a3 says exceed 1 -- certified in the HARD direction
+------------------------------------------------------------------------------
+     275 primitive posets at n = 5;  v_L > 1 CERTIFIED at 6 of them
+       dn=(0, 0, 3, 0, 8)    LE=20   Delta=9/10     mu*Delta >= 0.481218018 > 0.468512845 >= gamma  v_L >= 1.027118  (F) fails: False
+       dn=(0, 1, 0, 4, 4)    LE=20   Delta=9/10     mu*Delta >= 0.481218018 > 0.468512845 >= gamma  v_L >= 1.027118  (F) fails: False
+       dn=(0, 1, 0, 4, 12)   LE=10   Delta=9/10     mu*Delta >= 0.396103915 > 0.392849650 >= gamma  v_L >= 1.008284  (F) fails: False
+       dn=(0, 1, 0, 4, 13)   LE=9    Delta=8/9      mu*Delta >= 0.311148301 > 0.311075755 >= gamma  v_L >= 1.000233  (F) fails: False
+       dn=(0, 1, 3, 0, 8)    LE=10   Delta=9/10     mu*Delta >= 0.396103915 > 0.392849650 >= gamma  v_L >= 1.008284  (F) fails: False
+       dn=(0, 1, 3, 0, 9)    LE=9    Delta=8/9      mu*Delta >= 0.311148301 > 0.311075755 >= gamma  v_L >= 1.000233  (F) fails: False
+  [ok ] rho*Delta > 1 OCCURS AT n = 5 -- certified, exact rationals    6 posets
+  [ok ]   the corrected onset 'from n = 6' is itself ONE VALUE OF n LATE 
+     max certified v_L at n = 5 : >= 1.027118
+  [ok ]   and (F) HOLDS at all of them, so none is a counterexample to (L*) 0 with (F) failing
+
+------------------------------------------------------------------------------
+D-B  LSTAR(6): 0.794253 (landing) vs 0.794235 (this audit)
+------------------------------------------------------------------------------
+     max min(v_F,v_L) over all 4070 = 0.794234564 at (0, 0, 0, 0, 15, 14)
+     primitive n=6 posets attaining 0.794253 (to 6 dp): 0
+     EXACT bracket on LSTAR(6): [0.794234562, 0.794234567]
+  [ok ] LSTAR(6) rounds to 0.794235 at 6 dp, NOT to 0.794253           [0.794234562, 0.794234567]
+  [ok ]   0.794253 is OUTSIDE the exact bracket on LSTAR(6)            
+  [ok ]   0.794253 is attained at NO primitive n=6 poset               0
+  [ok ]   the two differ by a digit transposition, 53 <-> 35           
+
+==============================================================================
+a7 RESULT: ALL ARMS PASS   (0 failing arms)
+==============================================================================

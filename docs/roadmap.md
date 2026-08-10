@@ -10,13 +10,21 @@
 > exhaustive check to a SINGLE INEQUALITY, uniform in `n`". `(L*)` was **sufficient, not
 > equivalent** — so its refutation kills the ROUTE, not the disjunction.
 >
-> **What SURVIVES:** the disjunction itself. `(M♯)` still holds at all three tested
-> counterexamples (`u_M = 0.943 / 0.982 / 0.958`). What is lost is the uniform-in-`n` proof:
+> **What SURVIVES:** the disjunction itself. `(M♯)` still holds at all ~~three~~ **four**
+> counterexamples (`u_M = 0.943 / 0.948 / 0.982 / 0.958`) — the second `n = 9` witness added
+> by the audit, mg-5cba R4. What is lost is the uniform-in-`n` proof:
 > we are back to the `n ≤ 8` enumerations, which are untouched and still stand.
 >
-> **Also corrected below:** `ρ·Δ > 1` occurs from **`n = 6`** (max **1.15672** over all 4070),
-> **not** from `n = 10` at 1.078 as the `(L*)` section states. The `(F)` hypothesis bites four
-> values of `n` earlier than the corpus had it.
+> **AUDITED 2026-08-10, mg-5cba — CONFIRMED-WITH-REPAIRS.** All four certificates re-derived
+> in exact rationals on an instrument that never opened `lib789d.py`; a **FIFTH**
+> counterexample at `n = 12` certified (mg-789d's own `LSTAR` table claims it and `s5` never
+> certified it). See [`OneThird-LStar-mg-5cba-IndependentAudit.md`](OneThird-LStar-mg-5cba-IndependentAudit.md).
+>
+> **Also corrected below:** `ρ·Δ > 1` occurs from ~~**`n = 6`**~~ **`n = 5`** (6 of the 275
+> primitive posets, max **1.027118**, exact — mg-5cba R1; `n = 3, 4` certified clean), **not**
+> from `n = 10` at 1.078 as the `(L*)` section states, and **not** from `n = 6` as the 03:35Z
+> correction had it. The `(F)` hypothesis bites **five** values of `n` earlier than the corpus
+> had it. The `n = 6` maximum **1.15672** reproduces exactly; it was the *onset* that was late.
 >
 > **Still open:** whether `(L*)` already fails at `n = 8`. 60 restarts topped out at 0.968818
 > (a SEARCH, not a census, over 2600369 primitive posets).
@@ -64,8 +72,12 @@ SUFFICIENT, not equivalent; the disjunction survives, the uniform-in-`n` route d
 - **Certified on integers** at **168/168** (`n = 7`), **3589/3589** (`n = 8`), and every
   member of `(F)`'s own family out to **`n = 18`**.
 - **NOT vacuous:** `ρ·Δ > 1` does occur ~~(chain+point family, from `n = 10`, reaching
-  1.078)~~ **[CORRECTED 03:35Z: from `n = 6`, max 1.15672 over all 4070 — four values of `n`
-  earlier than stated]** — just never where `(F)` fails.
+  1.078)~~ ~~**[CORRECTED 03:35Z: from `n = 6`, max 1.15672 over all 4070 — four values of `n`
+  earlier than stated]**~~ **[RE-CORRECTED 2026-08-10 by mg-5cba: from `n = 5` — 6 of the 275
+  primitive posets, max 1.027118, certified in exact rationals, with `n = 3, 4` certified
+  clean, so `n = 5` is exactly the onset. FIVE values of `n` earlier than stated. The
+  `n = 6` maximum 1.15672 is reproduced exactly and is not what moved.]** — just never
+  where `(F)` fails.
 - **Cheap to extend:** it needs an UPPER bound on `μ_pref`, which is the cheap direction,
   so it is checkable past `n = 15`.
 

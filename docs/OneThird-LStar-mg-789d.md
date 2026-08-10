@@ -35,10 +35,26 @@ certified this way in total — two at n = 9, one at n = 10, one at n = 11 — a
 climb at n = 9 reached **6 distinct local optima above 1** from 40 restarts, so this is a
 region and not a fluke. This is the ticket's **outcome (b)**.
 
+> ⚠️ **FIVE, NOT FOUR (mg-5cba R5).** The `LSTAR(n)` table in §4 marks **n = 12** `(L*)
+> FALSE` as well, and `s1_hunt.py` did hand an n = 12 candidate to the exact stage — but
+> `s5` never certified it (`out_s5_certify.txt` S5.3/S5.4 treat four candidates, at
+> n = 9, 9, 10, 11), so as landed that row rested on a **float upper bound**.
+> **mg-5cba certifies it exactly**: `dn = (0,0,3,7,15,7,63,2,135,391,7,1159)`, LE = 10584,
+> `Delta = 195/196`, `M = 7717/21168`, `(F)` fails on the integer PSD test,
+> `gamma < 0.061699262`, `mu_pref >= 0.065579592` by 11×11 integer copositivity, so
+> `mu_pref*Delta > gamma`. The row's claim is **true** and the count is **five**.
+
 **What it does not cost.** (L\*) was *sufficient* for the disjunction, not equivalent to
 it. At all three counterexamples **(M#) still HOLDS** — `u_M = mu_pref/t*` is
 0.943, 0.982, 0.958 — so the disjunction survives. What died is the *route*: the
 disjunction again has no uniform-in-n proof, only the n ≤ 8 enumerations.
+
+> ⚠️ **THREE OF FOUR, AND THE MISSING ONE IS THE STRONGEST (mg-5cba R4).** `S6.1`'s
+> survival table has rows for n = 9, 10, 11 and omits the **second** n = 9 counterexample
+> `(0,0,0,0,0,16,48,16,247)` — which `S6.2` itself records as the n = 9 **argmax**.
+> Measured by mg-5cba: `u_M = 0.947534 < 1`, so **(M#) HOLDS there too and the survival
+> claim is 4 of 4** (5 of 5 with the n = 12 poset above, where (M#) is not computed).
+> A coverage gap closed; no number moves.
 
 ---
 
@@ -167,8 +183,14 @@ centred representative: `A'f = ((1+lambda_2)/2) f + c*1`, and pairing with `1` f
 `c = 0`, so `Af = lambda_2 f`. (7) `f` is nonincreasing, centred, nonzero, with Rayleigh
 quotient `1 - lambda_2 = gamma`; since `mu_pref >= gamma` always, `mu_pref = gamma`. ∎
 
-Machine-checked at **every one of the 90655 primitive posets of n ≤ 7** (`s4`): 338 of
-them satisfy (SO) and `rho = 1` at all 338, with no exception at any n. The converse is
+Machine-checked at **every one of the 90655 primitive posets of n ≤ 7** (`s4`): ~~338~~
+**2500** of them satisfy (SO) and `rho = 1` at all ~~338~~ **2500**, with no exception at
+any n. *(⚠️ **mg-5cba R3.** `338 = 1+2+9+45+281` is the **n ≤ 6** subtotal, paired here
+with the n ≤ 7 population. `s4`'s own output — `out_s4_theoremA.txt`, the row `7 | 86278
+| 2162` and the line "THEOREM A holds at every one of the **2500** primitive posets with
+(SO), out of 90655" — is right; only this sentence was wrong, and it under-stated the
+check by a factor of 7.4. Independently re-derived by mg-5cba at
+1/2/9/45/281/2162.)* The converse is
 false at every n ≥ 3 (e.g. 906 posets have `rho = 1` at n = 6 but only 281 satisfy (SO)),
 so (SO) is a criterion and not a restatement. The negative control runs too:
 chain(n-1)+point violates (SO) by 0.375…0.4375 at n = 8…16, exactly where `rho > 1`.
@@ -197,23 +219,59 @@ never been computed.
  3 |         4 |   0.250000  | exhaustive
  4 |        27 |   0.306250  | exhaustive
  5 |       275 |   0.550747  | exhaustive
- 6 |      4070 |   0.794253  | exhaustive
+ 6 |      4070 |   0.794235  | exhaustive          <- was 0.794253 (mg-5cba R2)
  7 |     86278 |   0.923894  | exhaustive
- 8 |   2600369 |  >= 0.968818 | SEARCH ONLY -- see the scope note below
- 9 |         - |  >= 1.013539 | SEARCH ONLY -- (L*) FALSE
+ 8 |   2600369 |  <= 0.968818 | SEARCH ONLY -- see the scope note below
+ 9 |         - |  >= 1.013486 | SEARCH ONLY -- (L*) FALSE   (was >= 1.013539)
 10 |         - |  >= 1.020310 | SEARCH ONLY -- (L*) FALSE
-11 |         - |  >= 1.025044 | SEARCH ONLY -- (L*) FALSE
-12 |         - |  >= 1.057643 | SEARCH ONLY -- (L*) FALSE
+11 |         - |  >= 1.025041 | SEARCH ONLY -- (L*) FALSE   (was >= 1.025044)
+12 |         - |  >= 1.057468 | SEARCH ONLY -- (L*) FALSE   (was >= 1.057643)
 ```
+
+> ⚠️ **TWO REPAIRS IN THIS TABLE (mg-5cba R2, R6).**
+> **R2 — `LSTAR(6)` was `0.794253` and is `0.794235`,** a transposition of two digits.
+> mg-5cba's exact bracket is `[0.794234562, 0.794234567]` at `(0,0,0,0,15,14)`, and
+> **no** primitive n = 6 poset attains `0.794253`. `LSTAR(3,4,5,7)` all reproduce.
+> **R6 — the n ≥ 8 rows were computed from `mu_ub_float`, an UPPER bound on `mu_pref`.**
+> That is the right choice for a screen (an upper bound can only over-select, so no
+> counterexample hides), but an upper bound on `mu_pref` is an upper bound on `v_L`,
+> hence on `min(v_F,v_L)`, hence on `LSTAR(n)` — it cannot certify `LSTAR(n) >= x`. The
+> values above are mg-5cba's certified ones, from `mu_pref` bounded **below** by exact
+> copositivity and `gamma` bounded **above** by an integer PSD refusal. n = 8 and n = 10
+> agree with the search figures to 6 dp; n = 9, 11, 12 were each printed high, which is
+> the direction an upper bound must err in. **The n = 8 row now reads `<=`**, because a
+> search scored with an upper bound bounds `LSTAR(8)` from neither side on its own — what
+> it does establish is that (L\*) HOLDS at every poset the search visited.
 
 `LSTAR(7) = 0.923894` at `(0,0,3,3,15,2,3)`, and it equals mg-c50b's `max rho*Delta` over
 its (F)-failing set — as it must, since at n = 7 the maximiser has `v_F > 1`. The rows
-from n = 8 down are **lower bounds from search, never maxima over their n**.
+from n = 9 down are **lower bounds, certified in exact rationals by mg-5cba, never
+maxima over their n**.
 
 **Non-vacuity, sharper than the corpus had it.** mg-c50b established that `rho*Delta > 1`
-does occur, citing chain+point from n = 10. It occurs **from n = 6**: over all 4070
-primitive posets at n = 6, `max rho*Delta = 1.15672` (`s2` §2.4). So the (F) hypothesis in
-(L\*) is load-bearing four values of n earlier than the corpus knew.
+does occur, citing chain+point from n = 10. It occurs **from ~~n = 6~~ n = 5**: over all
+4070 primitive posets at n = 6, `max rho*Delta = 1.15672` (`s2` §2.4) — but the onset is
+one value earlier still. So the (F) hypothesis in (L\*) is load-bearing **five** values
+of n earlier than the corpus knew.
+
+> ⚠️ **THE ONSET IS n = 5, NOT n = 6 (mg-5cba R1).** Exhaustively over the 275 primitive
+> posets at n = 5, **6 of them have `rho*Delta > 1`**, max `1.027118`, each certified in
+> exact rationals (`mu_pref` from below by copositivity, `gamma` from above by an integer
+> PSD refusal):
+> ```
+>  (0,0,3,0,8)   LE=20  Delta=9/10  mu*Delta >= 0.481218018 > 0.468512845 >= gamma
+>  (0,1,0,4,4)   LE=20  Delta=9/10  mu*Delta >= 0.481218018 > 0.468512845 >= gamma
+>  (0,1,0,4,12)  LE=10  Delta=9/10  mu*Delta >= 0.396103915 > 0.392849650 >= gamma
+>  (0,1,3,0,8)   LE=10  Delta=9/10  mu*Delta >= 0.396103915 > 0.392849650 >= gamma
+>  (0,1,0,4,13)  LE= 9  Delta=8/9   mu*Delta >= 0.311148301 > 0.311075755 >= gamma
+>  (0,1,3,0,9)   LE= 9  Delta=8/9   mu*Delta >= 0.311148301 > 0.311075755 >= gamma
+> ```
+> and `mu_pref*Delta <= gamma` is certified at **every** primitive poset of n = 3 and
+> n = 4, so n = 5 is exactly the onset. `(F)` HOLDS at all six, so none is a
+> counterexample to (L\*) and the corollary's point is unchanged — only its `n`.
+> The n = 6 figure `1.15672` reproduces exactly (`1.156724`); it is the *onset*, not the
+> maximum, that was one value late. **This correction is in `docs/roadmap.md` twice and
+> needs the same sweep.**
 
 ### Scope note on n = 8 — the one place this document declines to close
 
@@ -276,15 +334,17 @@ D1 is the one that matters: had it not been caught, this document would have rep
 |---|---|
 | (L\*) is false, first exhibited at n = 9 | **CERTIFIED** — 4 posets (2 at n=9, 1 each at n=10,11), exact rationals, integer PSD + exact copositivity |
 | the n = 9 failure is a region, not a point | **MEASURED** — 6 distinct local optima above 1 from 40 restarts |
-| the disjunction survives at all three counterexamples ((M#) holds) | **MEASURED**, `u_M` = 0.943 / 0.982 / 0.958 |
-| (R1) single-prefix route to (L\*) | **REFUTED** at n = 7, 2 of 168 |
-| (R2) rearrangement route to (L\*) | **REFUTED** at n = 7, 133 of 168 |
-| Theorem A: stochastically ordered ⟹ `rho = 1` | **PROVED**; machine-checked at every primitive poset n ≤ 7; covers 4/168 |
+| the disjunction survives at ~~all three~~ **all four** counterexamples ((M#) holds) | **MEASURED**, `u_M` = 0.943 / **0.948** / 0.982 / 0.958 — the second n = 9 witness added by mg-5cba (R4) |
+| a **fifth** counterexample at n = 12 | **CERTIFIED by mg-5cba (R5)** — claimed by §4's table, never certified here |
+| (R1) single-prefix route to (L\*) | **REFUTED** at n = 7, 2 of 168 *(failures; §3's table counts the 166 that hold)* |
+| (R2) rearrangement route to (L\*) | **REFUTED** at n = 7, 133 of 168 *(failures; §3's table counts the 35 that hold)* |
+| Theorem A: stochastically ordered ⟹ `rho = 1` | **PROVED**; machine-checked at every primitive poset n ≤ 7 (**2500** satisfy (SO), not 338 — R3); covers 4/168 |
 | (L\*) needs ≥ 2 cuts and ≤ 4 cuts at n = 7 | **MEASURED**, exhaustive over the 168 |
-| `max rho*Delta` over all primitive n = 6 posets = 1.15672 | **MEASURED** — the (F) hypothesis bites from n = 6 |
-| `LSTAR(n)` at n ≤ 7 | **EXHAUSTIVE** |
-| `LSTAR(n)` at n ≥ 8 | **SEARCH ONLY** — lower bounds, never maxima |
+| `max rho*Delta` over all primitive n = 6 posets = 1.15672 | **MEASURED** — but the (F) hypothesis bites **from n = 5**, not n = 6 (mg-5cba R1) |
+| `LSTAR(n)` at n ≤ 7 | **EXHAUSTIVE** — `LSTAR(6) = 0.794235`, not 0.794253 (mg-5cba R2) |
+| `LSTAR(n)` at n ≥ 8 | **SEARCH ONLY** — and as landed they were **upper** bounds, not lower; recertified by mg-5cba (R6) |
 | whether (L\*) already fails at n = 8 | **OPEN** — 60 restarts reached 0.968818, not a census |
+| INDEPENDENT AUDIT | [`OneThird-LStar-mg-5cba-IndependentAudit.md`](OneThird-LStar-mg-5cba-IndependentAudit.md) — **CONFIRMED-WITH-REPAIRS**: all four certificates re-derived in exact rationals on an instrument that never opened `lib789d.py`; six repairs, none touching the headline |
 
 ## 7. What the successor should do
 
