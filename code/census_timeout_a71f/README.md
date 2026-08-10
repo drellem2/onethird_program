@@ -120,6 +120,23 @@ timeouts and differences; the evidence that would have sized the bucket was
 never written down, because the bucket could not fire. The only instrument that
 can answer is the repaired census, re-run.
 
+### The cost the ticket sized, paid in full
+
+Editing that suite **displaces all 8 of its transcripts**, and the ticket said
+so before authorising it. The mechanism is R1: a transcript declares a
+`code-digest` over the directory's **committed** code, so changing a script
+after the transcripts were written makes every one of them declare a digest of
+code that did not produce it. The only honest response is to freeze the code,
+commit, and re-run the whole suite — which is what R1 is shaped to force, and it
+forced it twice here (see D7).
+
+And **all 8 of them declare `reads-outside-tree: yes`** in their own headers —
+measured, not assumed: 8 of 8 committed transcripts on `main` carry that line.
+Every one of them reads refs, `main`'s history, or the file list of `main`, so
+every one was already displaced by `main` moving, with or without this edit.
+That is the census's own T2e finding — *a producer that reads repository-global
+state is displaced by the next commit anyone makes* — arriving at the census.
+
 ### What the re-run is NOT
 
 - **NOT a correction applied to the old census's numbers.** It is a different
