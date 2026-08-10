@@ -3,10 +3,12 @@
 a4's entire result is a comparison of two census transcripts read back as text.
 A parser that quietly returned `{}` would make a4 print `0 rows moved` -- a
 green, produced by a broken instrument, that reads exactly like the answer
-`nothing needed repairing`.  This arc has been burned by that shape four times
-(mg-9bc2's `CLEAN` over a control that never ran; mg-2f44's `"8 9" in out`
-matching a section listing forever), so the parsers are exercised against
-worlds built to break them BEFORE they are pointed at the real thing.
+`nothing needed repairing`.  Two instances of that shape are on record in this
+arc and they are CITED rather than counted: mg-9bc2's `run_all.sh` printing
+`CLEAN` over a control that never ran, and mg-2f44's positive control, whose
+predicate `"8 9" in out` was matching a section listing for its whole life.  So
+the parsers are exercised against worlds built to break them BEFORE they are
+pointed at the real thing.
 
 EVERY WORLD BELOW IS PLANTED, and each says what a passing parser must NOT do:
 

@@ -33,8 +33,9 @@ census.
                     not finish measuring" and "it does not reproduce" are
                     different claims and only one of them is about the subject.
 
-                    mg-a71f: for eight weeks this bucket COULD NOT FIRE, for
-                    any suite, on any machine.  It was guarded by `got[p] is
+                    mg-a71f: from this census's first commit (`e2b08cf`) until
+                    that repair, THIS BUCKET COULD NOT FIRE -- for any suite,
+                    on any machine.  It was guarded by `got[p] is
                     None` -- file absent -- and `sh run_all.sh` redirects, so
                     the shell CREATES `out_x.txt` before the producer starts.
                     A killed run therefore left a file that existed, held zero

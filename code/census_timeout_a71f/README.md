@@ -213,6 +213,18 @@ row[0]`, which passes when the explanation is absent. Caught by reading it, not
 by running it — it would have gone green either way while the repair was
 working, which is the worse half of the finding.
 
+**D7 — I wrote a duration I had never measured into the docstring of the repair
+itself, and it cost the re-run a restart.** The repaired `t2_census.py` said
+*"for eight weeks this bucket COULD NOT FIRE"*. The census's `t2_census.py` was
+first committed at `e2b08cf` on **2026-08-06**, four days before this ticket,
+and the entire repository is 22 days old. Eight weeks was a number that felt
+like the right size for the finding, which is the whole failure. Caught by
+re-reading my own diff about twenty minutes into the ~4-hour re-run — so the run
+was **killed, the sentence corrected, the code re-committed and the run
+restarted**, because the alternative was to publish transcripts whose declared
+`code-digest` was of code I intended to change. That is R1 doing exactly what it
+is shaped to do, to its author.
+
 **D6 — the reach figure in the ticket is not the reach figure here, and neither
 is wrong.** cf8e5 measured 99 of 166; `a1e` measures **111 of 174** at
 `cdec2e8`. Same rule, later as-of, bigger arc. Quoting cf8e5's number as a
