@@ -1,0 +1,94 @@
+==============================================================================
+a6  PROVENANCE -- READ FROM main AT 5e31a1313b16
+==============================================================================
+
+P1  THE TWO HALVES, ON MAIN, NAMING THIS EXACT POSET
+------------------------------------------------------------------------------
+  code/audit_5cba/out_a5_scope.txt:52
+    LE=10584  Delta=195/196  M=7717/21168  gamma in [0.061699260,0.061699262]  mu_pref >= 0.065579592
+  [ok ] out_a5_scope.txt on main carries BOTH halves on one line       got=1 want=1
+  the line above it (which is what names the poset as the n=12 one):
+    n=12 search argmax -- NEVER CERTIFIED BY mg-789d   1.057643     1.057468         over   (10s)
+  [ok ]   ... and that context line says n = 12                        got=True want=True
+  [ok ]   ... gamma upper bound present                                got=True want=True
+  [ok ]   ... mu_pref lower bound present                              got=True want=True
+  [ok ]   ... Delta present                                            got=True want=True
+  [ok ]   ... LE present                                               got=True want=True
+
+  and the SAME two numbers, again, in the audit table itself:
+  docs/OneThird-LStar-mg-5cba-IndependentAudit.md:63
+    | **C5 `n=12`** | `195/196` | `0.061699262` | `0.065579592` | `1.057468` | `1.077029` | — |
+  [ok ] the C5 table row exists on main                                got=1 want=1
+
+  SO THE WORK ITEM'S 'two published halves nobody multiplied' IS CONFIRMED IN
+  SUBSTANCE and refined in form: they are not two halves in two places.  They are on
+  ONE LINE of out_a5_scope.txt and again on ONE LINE of the audit table -- the same
+  poset, the same Delta, both bounds, printed twice on main.  Multiplying them is
+  four lines of arithmetic (a4.4 does it and gets +0.0027907976).  This counterexample
+  has been on main since mg-5cba landed.
+
+P2  THE MECHANISM: THE DASH
+------------------------------------------------------------------------------
+  :59   C1 `n=9`         u_M = `0.943486`
+  :60   C2 `n=9`         u_M = **`0.947534`**
+  :61   C3 `n=10`        u_M = `0.981830`
+  :62   C4 `n=11`        u_M = `0.958326`
+  :63   **C5 `n=12`**    u_M = —
+  [ok ] the audit table has five counterexample rows                   got=5 want=5
+  [ok ] the C5 row's u_M cell is a dash                                got='—' want='—'
+  [ok ] C1-C4 u_M cells all carry values                               got=True want=True
+  [ok ] STATE.md on main contains '(M#) HOLDS at 4 of 4'               got=True want=True
+  [ok ] STATE.md on main lists exactly four u_M figures                got=True want=True
+
+  THE MECHANISM IS CONFIRMED, AND IT IS EXACTLY AS THE WORK ITEM DESCRIBES IT.
+  mg-5cba certified FIVE counterexamples and computed u_M at FOUR of them.  The fifth
+  cell is a dash -- an HONEST dash: the audit did not compute it and did not say it
+  had.  STATE.md then wrote '(M#) HOLDS at 4 of 4' with four figures.  That sentence
+  is TRUE OF THE FOUR IT NAMES.  What it does not carry is that there is a fifth
+  certified counterexample at which (M#) was never evaluated -- and the reader of
+  'at 4 of 4' beside 'FIVE counterexamples certified' has to notice the arithmetic
+  themselves.  mg-b417 then inherited it: 'u_M = 0.981830 is the closest any (M#)
+  witness has come to failing' is the closest of the four that were COMPUTED.
+
+  A BLANK CELL BECAME A PUBLISHED BOUND, and no step in that chain stated a falsehood.
+
+P3  THE FOURTH SITE -- WHICH NORMALISATION IS THE mu_pref^2 CLAUSE IN?
+------------------------------------------------------------------------------
+  [ok ] STATE.md on main contains the mu_pref^2 clause                 got=True want=True
+  [ok ] the SAME row states (L*) as mu_pref*Delta <= gamma (UNDOUBLED) got=True want=True
+
+  SETTLED, AND NOT TOUCHED.
+
+    doubled form   (L*) conclusion :  2*Delta*mu             <= 2*gamma
+                   (M#)            :  2*Delta*mu - mu^2      <= 2*gamma   gap = mu^2
+    undoubled form (L*) conclusion :    Delta*mu             <=   gamma
+                   (M#)            :    Delta*mu - mu^2/2    <=   gamma   gap = mu^2/2
+
+  mg-5cba's §2 displays the pair in the DOUBLED form and the clause is EXACTLY RIGHT
+  there.  STATE.md's row writes (L*) in the UNDOUBLED form -- `M² > 2γ ⟹ μ_pref·Δ_P
+  ≤ γ` -- and then quotes the doubled form's gap.  So in the normalisation the row
+  itself uses, the gap is mu_pref^2/2, and the clause has travelled from a display
+  block into a sentence with a different normalisation without its factor of 2.
+
+  IT CHANGES NO VERDICT HERE and this audit does NOT edit it.  a4 evaluates (M#) from
+  its own definition, `2*Delta*mu_pref - mu_pref^2 <= 2*gamma`, and never uses the gap
+  clause for anything.  Recording it because it is the mg-0d1b hazard in the form the
+  alias-agreement check CANNOT see: a factor of 2 between two conventions is
+  indistinguishable, to a value comparison, from two implementations disagreeing.
+
+P4  THE THREE CLAUSES THAT MOVE IF THIS CONFIRMS
+------------------------------------------------------------------------------
+  [ok ] (a) the row's headline is present on main                      got=True want=True
+  [ok ] (b) the 4-of-4 sentence is present on main                     got=True want=True
+  [ok ] (c) what is lost is present on main                            got=True want=True
+  [ok ] n=7 enumeration is present on main (and is NOT moved by this)  got=True want=True
+  [ok ] n=8 enumeration is present on main (and is NOT moved by this)  got=True want=True
+  [ok ] c_or(8) is present on main (and is NOT moved by this)          got=True want=True
+
+  This audit changes NO document.  It records that (a), (b) and (c) are the
+  clauses a confirming verdict reaches, and that the n <= 8 enumerations,
+  Theorem A, the onset correction and the depth table are not among them.
+
+==============================================================================
+a6 VERDICT: ALL ARMS SATISFACTORY
+==============================================================================

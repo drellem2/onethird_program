@@ -1,0 +1,66 @@
+==============================================================================
+S0  INDEPENDENCE OF THE INSTRUMENT
+==============================================================================
+  [ok ] no import of the audited libraries in a0_selftest.py             got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in a0_selftest.py        got=[] want=[]
+  [ok ] no import of the audited libraries in a1_witness.py              got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in a1_witness.py         got=[] want=[]
+  [ok ] no import of the audited libraries in a2_gamma.py                got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in a2_gamma.py           got=[] want=[]
+  [ok ] no import of the audited libraries in a3_mu.py                   got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in a3_mu.py              got=[] want=[]
+  [ok ] no import of the audited libraries in a4_routes.py               got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in a4_routes.py          got=[] want=[]
+  [ok ] no import of the audited libraries in a5_scope.py                got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in a5_scope.py           got=[] want=[]
+  [ok ] no import of the audited libraries in a6_provenance.py           got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in a6_provenance.py      got=[] want=[]
+  [ok ] no import of the audited libraries in a7_frontier.py             got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in a7_frontier.py        got=[] want=[]
+  [ok ] no import of the audited libraries in common5e82.py              got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in common5e82.py         got=[] want=[]
+  [ok ] no import of the audited libraries in lib5e82.py                 got=[] want=[]
+  [ok ]   ... and no dynamic import to hide one in lib5e82.py            got=[] want=[]
+  sys.modules carrying a forbidden name: []
+  [ok ] sys.modules clean                                                got=[] want=[]
+
+==============================================================================
+S1  THE DEVICES, ON MATRICES WHOSE ANSWER IS KNOWN OUTSIDE THIS ARC
+==============================================================================
+  [ok ] I is PSD                                                         got=True want=True
+  [ok ] I is copositive                                                  got=True want=True
+  [ok ] diag(1,-1) is NOT PSD                                            got=False want=False
+  [ok ] diag(1,-1) is NOT copositive                                     got=False want=False
+  [ok ] [[0,1],[1,0]] copositive (entrywise >= 0)                        got=True want=True
+  [ok ] [[0,1],[1,0]] NOT PSD                                            got=False want=False
+  [ok ] [[1,-1],[-1,1]] PSD (singular)                                   got=True want=True
+  [ok ] [[1,-1],[-1,1]] copositive                                       got=True want=True
+  [ok ] [[1,-2],[-2,1]] NOT copositive                                   got=False want=False
+  [ok ]   ... and the witness is >= 0                                    got=True want=True
+  [ok ]   ... and c'Rc < 0                                               got=True want=True
+  [ok ] Horn matrix IS copositive                                        got=True want=True
+  [ok ] Horn matrix is NOT PSD                                           got=False want=False
+  [ok ] Horn has negative entries (so not the trivial nonneg case)       got=True want=True
+  [ok ] Horn with R[0][0]=9/10 is NOT copositive                         got=False want=False
+
+==============================================================================
+S2  THE FOURIER-MOTZKIN ENGINE, DIRECTLY
+==============================================================================
+  [ok ] y0=(-1,-1), no free vars -> feasible                             got=True want=True
+  [ok ] y0=(-1, 1), no free vars -> infeasible                           got=False want=False
+  [ok ] y=(-1+t, -1-t) -> feasible                                       got=True want=True
+  [ok ] y=(1+t, 1-t) -> infeasible                                       got=False want=False
+  [ok ] y=(t,-t) -> infeasible (strictness)                              got=False want=False
+  [ok ] [[1,1,0],[1,1,0],[0,0,1]] copositive                             got=True want=True
+  [ok ]   ... and singular faces were SEEN                               got=True want=True
+  [ok ]   ... and every one was DECIDED                                  got=2 want=2
+
+==============================================================================
+S3  THE LINEAR-EXTENSION GENERATOR IS COMPLETE, BY BRUTE FORCE AT n <= 7
+==============================================================================
+  [ok ] generator == brute force at every naturally labelled poset, n <= 6 (5231 posets) got=0 want=0
+  [ok ] generator == brute force at 259 of 96428 posets at n = 7 (stride 373) got=0 want=0
+
+==============================================================================
+VERDICT: ALL ARMS SATISFACTORY
+==============================================================================

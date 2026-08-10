@@ -1,0 +1,48 @@
+==============================================================================
+a1  STEP A -- THE POSET, RE-DERIVED BY EXPLICIT ENUMERATION
+==============================================================================
+  dn = (0, 0, 3, 7, 15, 7, 63, 2, 135, 391, 7, 1159)
+  strict lower sets:
+     down( 0) = []
+     down( 1) = []
+     down( 2) = [0, 1]
+     down( 3) = [0, 1, 2]
+     down( 4) = [0, 1, 2, 3]
+     down( 5) = [0, 1, 2]
+     down( 6) = [0, 1, 2, 3, 4, 5]
+     down( 7) = [1]
+     down( 8) = [0, 1, 2, 7]
+     down( 9) = [0, 1, 2, 7, 8]
+     down(10) = [0, 1, 2]
+     down(11) = [0, 1, 2, 7, 10]
+
+  [ok ] n                                                          got=12 want=12
+  [ok ] naturally labelled                                         got=True want=True
+  [ok ] transitively closed                                        got=True want=True
+  [ok ] LE (counted, one per enumerated extension)                 got=10584 want=10584
+  [ok ] Delta = max_i (1 - (S_P)_ii)                               got=195/196 want=195/196
+  [ok ] M = sum_k leak(A_k) / floor(n^2/4)                         got=7717/21168 want=7717/21168
+  [ok ] primitive (leak(A_k) > 0 for every k)                      got=True want=True
+
+  argmax of d_i (the near-free element): [6]  at d = 195/196
+  leaks: ['47/84', '5/42', '5/14', '17/21', '3/2', '25/14', '65/28', '1097/588', '1823/1176', '379/252', '379/504']
+  min leak: 5/42 = 0.11904761904761904 > 0
+
+  CROSS-CHECKS THAT THE ENUMERATION IS INTERNALLY CONSISTENT
+  [ok ] every row of PI sums to LE                                 got=True want=True
+  [ok ] every column of PI sums to LE                              got=True want=True
+  [ok ] S_P is doubly stochastic                                   got=True want=True
+  [ok ] the enumeration produced exactly LE sequences              got=10584 want=10584
+  [ok ] all sequences distinct                                     got=10584 want=10584
+  [ok ] every sequence is a permutation of [0,n)                   got=True want=True
+  [ok ] every sequence respects every relation of P                got=True want=True
+
+  THE CORPUS'S CLOSED FORMS FOR Q AND N, CHECKED AGAINST THE DEFINITION
+  [ok ] Q_kl == sum_{i<min(k,l)} sum_{j>=max(k,l)} a_ij            got=True want=True
+  [ok ] N_kl == min(k,l) - kl/n                                    got=True want=True
+  [ok ] Q symmetric                                                got=True want=True
+  [ok ] N positive definite (Gram matrix of the psi_k)             got=True want=True
+
+==============================================================================
+a1 VERDICT: ALL ARMS SATISFACTORY
+==============================================================================

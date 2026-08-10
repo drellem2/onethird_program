@@ -1,0 +1,69 @@
+==============================================================================
+a7  THE FRONTIER ROWS, RE-CERTIFIED ON THIS INSTRUMENT
+==============================================================================
+
+------------------------------------------------------------------------------
+  n = 9   dn = (0, 1, 0, 0, 8, 8, 56, 125, 127)
+  LE = 480   Delta = 39/40   M = 59/160   primitive = True   naturally labelled = True
+  [ok ]   transitively closed                                      got=True want=True
+  [ok ]   primitive                                                got=True want=True
+  gamma   < 0.069435446896   [PSD device REFUSES here]
+  mu_pref >= 0.071666737697   [copositivity device ACCEPTS here]
+  [ok ]   the two brackets are consistent (gamma <= mu_pref)       got=True want=True
+  M^2/2 = 0.067988281250     f* > 0.979158114
+  sweep(m_lo,Delta) - 2*gamma_ub = -0.004256876575    c# > 0.969346517
+  mu_pref <= 0.080357143 (exhibited c = e_k) <= Delta = 0.975000000 : True
+  [ok ]   mu_pref <= Delta, so the sweep is monotone across the bracket got=True want=True
+  (F) FAILS : False      (M#) FAILS : False      refutes the disjunction : False
+  [ok ]   agrees with cb417's out_b4_certify.txt on this row       got=False want=False
+  [1.0s]
+
+------------------------------------------------------------------------------
+  n = 10   dn = (0, 0, 0, 7, 15, 31, 15, 6, 135, 135)
+  LE = 1440   Delta = 39/40   M = 499/1500   primitive = True   naturally labelled = True
+  [ok ]   transitively closed                                      got=True want=True
+  [ok ]   primitive                                                got=True want=True
+  gamma   < 0.053360119539   [PSD device REFUSES here]
+  mu_pref >= 0.056388851821   [copositivity device ACCEPTS here]
+  [ok ]   the two brackets are consistent (gamma <= mu_pref)       got=True want=True
+  M^2/2 = 0.055333555556     f* > 1.036983351
+  sweep(m_lo,Delta) - 2*gamma_ub = +0.000058319362    c# > 1.000546470
+  mu_pref <= 0.059523810 (exhibited c = e_k) <= Delta = 0.975000000 : True
+  [ok ]   mu_pref <= Delta, so the sweep is monotone across the bracket got=True want=True
+  (F) FAILS : True      (M#) FAILS : True      refutes the disjunction : True
+  [ok ]   agrees with cb417's out_b4_certify.txt on this row       got=True want=True
+  [3.0s]
+
+------------------------------------------------------------------------------
+  n = 11   dn = (0, 0, 0, 7, 15, 15, 63, 6, 135, 135, 647)
+  LE = 2940   Delta = 242/245   M = 341/980   primitive = True   naturally labelled = True
+  [ok ]   transitively closed                                      got=True want=True
+  [ok ]   primitive                                                got=True want=True
+  gamma   < 0.057190345058   [PSD device REFUSES here]
+  mu_pref >= 0.061408626697   [copositivity device ACCEPTS here]
+  [ok ]   the two brackets are consistent (gamma <= mu_pref)       got=True want=True
+  M^2/2 = 0.060537796751     f* > 1.058531762
+  sweep(m_lo,Delta) - 2*gamma_ub = +0.003161659110    c# > 1.027641546
+  mu_pref <= 0.065476190 (exhibited c = e_k) <= Delta = 0.987755102 : True
+  [ok ]   mu_pref <= Delta, so the sweep is monotone across the bracket got=True want=True
+  (F) FAILS : True      (M#) FAILS : True      refutes the disjunction : True
+  [ok ]   agrees with cb417's out_b4_certify.txt on this row       got=True want=True
+  [9.3s]
+
+
+  WHAT THIS ARM DOES AND DOES NOT SETTLE.
+
+  SETTLED: the ONSET row.  Both routes fail at a primitive, naturally labelled,
+  transitively closed poset on TEN elements, re-derived here with no rational read
+  from cb417 -- so 'the disjunction is false' does not depend on n = 12 and does not
+  depend on lib5cba.  The n = 9 row comes back NOT refuting, on the same devices, so
+  the instrument is not answering YES by habit.
+
+  NOT SETTLED: the other 23 certified posets, the W(n) rows at n = 13 and n = 14, the
+  0-of-36 refusal count, the 93.8%/6.2% decomposition, and the u_M = v_L*D identity.
+  None of those was re-run here.  A marker on cb417's tree can be narrowed to them;
+  it cannot simply be deleted on the strength of this audit.
+
+==============================================================================
+a7 VERDICT: ALL ARMS SATISFACTORY
+==============================================================================
