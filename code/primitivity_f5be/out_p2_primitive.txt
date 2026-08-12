@@ -1,0 +1,165 @@
+
+========================================================================================
+p2.0  THE OBJECTION'S PREMISE -- Z_n really is decomposable, on all three notions
+========================================================================================
+  PASS  Z_4: prime=False ordinal-indecomposable=False connected=True
+  PASS  Z_6: prime=False ordinal-indecomposable=False connected=True
+  PASS  Z_8: prime=False ordinal-indecomposable=False connected=True
+
+      So Daniel is right about the witness: mg-409a's attainment example is outside the
+      class counterexamples live in, on every reading of "primitive".  Everything below is
+      about whether that matters.
+
+========================================================================================
+p2.1  THE CENSUS -- every iso class to n = 6, plus every PRIMITIVE class at n = 7
+========================================================================================
+   n  population                    posets  PRIMITIVE  prime-lit  ord-ind   conn
+   2  ALL iso classes                    1          0          1        1      0
+   3  ALL iso classes                    4          0          0        2      2
+   4  ALL iso classes                   15          1          1        7      9
+   5  ALL iso classes                   62          4          4       31     43
+   6  ALL iso classes                  317         28         28      184    237
+   7  PRIMITIVE iso classes only       234        234        234      234    234
+      (posets with |L(P)| = 1 -- the chains -- are excluded throughout: mg-409a's
+       theorem is stated for |L(P)| >= 2 and a chain has no incomparable pair at all.
+       PRIMITIVE = prime AND n >= 4; prime-lit = the literal no-nontrivial-module test,
+       which n <= 2 passes vacuously.  The two columns differ in exactly one place and
+       p2.2 is about that place.)
+
+========================================================================================
+p2.2  IS alpha = 1 ATTAINED BY ANY PRIMITIVE POSET?  (ticket step 4) -- EXACT
+========================================================================================
+   n  attain alpha=1   of which PRIMITIVE   prime-lit   ord-indec   connected
+   2               1                    0           1           1           0
+   3               2                    0           0           0           2
+   4               4                    0           0           0           4
+   5               7                    0           0           0           7
+   6              12                    0           0           0          12
+   7               0                    0           0           0           0
+  PASS  NO PRIMITIVE POSET ATTAINS alpha = 1, at any n in range   (0 found)
+
+      KEPT, BECAUSE IT IS THE ONE PLACE THE TWO DEFINITIONS DISAGREE AND MY FIRST RUN
+      REPORTED IT AS A REFUTATION.  Under the LITERAL no-nontrivial-module test there is
+      exactly 1 attaining poset, and it is
+          n = 2:  {} (antichain)   |L| = 2
+      -- the 2-element ANTICHAIN, prime only because a module of size 2..n-1 cannot
+      exist when n = 2.  It is not primitive in any sense the objection is about, and it is
+      not an independent witness either: it is precisely the BLOCK that Z_n is the ordinal
+      sum OF.  So the literal reading's single attainer is the atom of the decomposable
+      attainer, which is the opposite of a counterexample to the finding.
+  PASS  every literal-prime attainer has n <= 2, i.e. is vacuously prime   max n = 2
+
+========================================================================================
+p2.2b  WHAT ATTAINS alpha = 1 -- the shape of the whole attaining set
+========================================================================================
+  n = 2:
+      {} (antichain)                                       |L|=   2  ord-ind=True  conn=False
+  n = 3:
+      {0<2, 1<2}                                           |L|=   2  ord-ind=False  conn=True
+      {0<1, 0<2}                                           |L|=   2  ord-ind=False  conn=True
+  n = 4:
+      {0<2, 0<3, 1<2, 1<3}                                 |L|=   4  ord-ind=False  conn=True
+      {0<2, 1<2, 2<3}                                      |L|=   2  ord-ind=False  conn=True
+      {0<1, 0<2, 1<3, 2<3}                                 |L|=   2  ord-ind=False  conn=True
+      {0<1, 1<2, 1<3}                                      |L|=   2  ord-ind=False  conn=True
+  n = 5:
+      {0<2, 0<3, 1<2, 1<3, 2<4, 3<4}                       |L|=   4  ord-ind=False  conn=True
+      {0<2, 1<2, 2<3, 2<4}                                 |L|=   4  ord-ind=False  conn=True
+      {0<2, 1<2, 2<3, 3<4}                                 |L|=   2  ord-ind=False  conn=True
+      {0<1, 0<2, 1<3, 1<4, 2<3, 2<4}                       |L|=   4  ord-ind=False  conn=True
+      {0<1, 0<2, 1<3, 2<3, 3<4}                            |L|=   2  ord-ind=False  conn=True
+      {0<1, 1<2, 1<3, 2<4, 3<4}                            |L|=   2  ord-ind=False  conn=True
+      {0<1, 1<2, 2<3, 2<4}                                 |L|=   2  ord-ind=False  conn=True
+  n = 6:
+      {0<2, 0<3, 1<2, 1<3, 2<4, 2<5, 3<4, 3<5}             |L|=   8  ord-ind=False  conn=True
+      {0<2, 0<3, 1<2, 1<3, 2<4, 3<4, 4<5}                  |L|=   4  ord-ind=False  conn=True
+      {0<2, 1<2, 2<3, 2<4, 3<5, 4<5}                       |L|=   4  ord-ind=False  conn=True
+      {0<2, 1<2, 2<3, 3<4, 3<5}                            |L|=   4  ord-ind=False  conn=True
+      {0<2, 1<2, 2<3, 3<4, 4<5}                            |L|=   2  ord-ind=False  conn=True
+      {0<1, 0<2, 1<3, 1<4, 2<3, 2<4, 3<5, 4<5}             |L|=   4  ord-ind=False  conn=True
+      {0<1, 0<2, 1<3, 2<3, 3<4, 3<5}                       |L|=   4  ord-ind=False  conn=True
+      {0<1, 0<2, 1<3, 2<3, 3<4, 4<5}                       |L|=   2  ord-ind=False  conn=True
+      {0<1, 1<2, 1<3, 2<4, 2<5, 3<4, 3<5}                  |L|=   4  ord-ind=False  conn=True
+      {0<1, 1<2, 1<3, 2<4, 3<4, 4<5}                       |L|=   2  ord-ind=False  conn=True
+      {0<1, 1<2, 2<3, 2<4, 3<5, 4<5}                       |L|=   2  ord-ind=False  conn=True
+      {0<1, 1<2, 2<3, 3<4, 3<5}                            |L|=   2  ord-ind=False  conn=True
+
+========================================================================================
+p2.2c  THE ATTAINING SET IS EXACTLY THE ORDINAL SUMS OF 1- AND 2-ELEMENT BLOCKS
+========================================================================================
+   n  attain alpha=1   Fib(n+1)-1    all are 1/2-block ordinal sums
+  PASS  n=2: 1 attainers, predicted 1, family-membership True
+  PASS  n=3: 2 attainers, predicted 2, family-membership True
+  PASS  n=4: 4 attainers, predicted 4, family-membership True
+  PASS  n=5: 7 attainers, predicted 7, family-membership True
+  PASS  n=6: 12 attainers, predicted 12, family-membership True
+  PASS  and every 1/2-block ordinal sum with |L|>=2 DOES attain   0 exceptions
+
+      So Daniel's read of the witness is exactly right, and stronger than he put it: it is
+      not merely that mg-409a CHOSE a decomposable witness, it is that in range EVERY
+      witness is decomposable, and decomposable in the same narrow way -- an ordinal sum
+      of blocks of size at most 2.  Z_n is the all-blocks-size-2 member of that family and
+      nothing outside it attains.  P9 is REFUTED: there is no attainer that is not an
+      ordinal sum.
+
+========================================================================================
+p2.3  THE MAXIMA, CLASS BY CLASS -- the number the ticket asks for
+========================================================================================
+   n   max alpha ALL   max alpha PRIMITIVE   max NON-primitive   max ORD-INDEC
+   2     1.000000000            -- (empty)         1.000000000     1.000000000
+   3     1.000000000            -- (empty)         1.000000000     0.500000000
+   4     1.000000000           0.387627564         1.000000000     0.387627564
+   5     1.000000000           0.359611797         1.000000000     0.359611797
+   6     1.000000000           0.334349276         1.000000000     0.334349276
+   7     0.321946387           0.321946387          -- (empty)     0.321946387  [PRIMITIVE-ONLY POPULATION]
+
+      THE PRIMITIVE MAXIMUM over every population above is
+
+          alpha = 0.387627564304   at n = 4,  {0<2, 0<3, 1<3}
+          |L(P)| = 5,  delta = 2/5,  mu = 1/5
+
+  PASS  EXACT witness at the primitive argmax: alpha <= 5/8 = 0.625000000   witness = pair
+  PASS  EVERY prime poset in range has an EXACT witness with R_M < 1   worst = 525/832 = 0.631009615 at n=7 {0<2, 0<3, 1<3, 1<4, 2<4, 2<5, 3<5, 3<6, 4<6}
+
+========================================================================================
+p2.4  DOES THE PRIMITIVE CEILING FALL BELOW 3/4?  (P5)
+========================================================================================
+  n = 2: no prime poset with |L| >= 2
+  n = 3: no prime poset with |L| >= 2
+  n = 4: max alpha over primes = 0.387627564   below 3/4
+  n = 5: max alpha over primes = 0.359611797   below 3/4
+  n = 6: max alpha over primes = 0.334349276   below 3/4
+  n = 7: max alpha over primes = 0.321946387   below 3/4
+  PASS  NO primitive poset in range reaches 3/4 -- the primitive ceiling is FAR below pm-onethird's frozen bound   max over all primitives = 0.387627564
+
+      P5 LOSES, and it loses in the direction that helps the closure.  I predicted the
+      primitive maximum would exceed 3/4 on the reasoning that PRIMITIVE and FROZEN are
+      logically independent restrictions -- a primitive poset may have every pair
+      perfectly balanced, and nothing about having no nontrivial module forces any pair to
+      be unbalanced.  That reasoning is sound and the conclusion is still false: the
+      measured primitive maximum is about 0.39 at n = 4 and DECREASING in n.  Primitivity
+      does not IMPLY the frozen bound, but it delivers a stronger one anyway, empirically.
+
+========================================================================================
+p2.4b  THE TREND -- the primitive maximum as a function of n
+========================================================================================
+  n = 4:  max alpha PRIMITIVE = 0.387627564   (max over ALL posets = 1.000000000)
+  n = 5:  max alpha PRIMITIVE = 0.359611797   (max over ALL posets = 1.000000000)  DOWN
+  n = 6:  max alpha PRIMITIVE = 0.334349276   (max over ALL posets = 1.000000000)  DOWN
+  n = 7:  max alpha PRIMITIVE = 0.321946387   (max over ALL posets = 0.321946387)  DOWN
+  PASS  the primitive maximum is strictly DECREASING in n over n = 4..7   measured, not proved -- see the deliverable's 'what would make this wrong'
+
+========================================================================================
+p2.5  WHY THE RESTRICTION CANNOT RAISE THE CEILING -- the structural point
+========================================================================================
+  mg-409a section 3 is a PROOF that alpha(P) <= 1 for EVERY poset with |L(P)| >= 2.
+  It is not a maximum over a witness set.  Z_n is cited there only to show the bound is
+  ATTAINED, i.e. TIGHT -- and tightness is the half of the statement the closure does not
+  use.  Restricting the quantifier of a universally quantified upper bound to a subclass
+  can only leave it or lower it; it can never raise it.  That is the whole answer to the
+  objection, and p2.3 measures how much lower it in fact goes.
+  PASS  mg-409a's OWN witness families certify alpha <= 1 at all 267 prime posets   the proof is class-blind, as claimed
+
+========================================================================================
+p2 OVERALL: PASS
+========================================================================================

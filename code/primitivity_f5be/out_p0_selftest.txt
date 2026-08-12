@@ -1,0 +1,75 @@
+
+========================================================================================
+p0.1  POSITIVE CONTROL ON THE ENUMERATION -- the iso-class count sequence (E5)
+========================================================================================
+  PASS  n=0: 1 iso classes   (expected 1)
+  PASS  n=1: 1 iso classes   (expected 1)
+  PASS  n=2: 2 iso classes   (expected 2)
+  PASS  n=3: 5 iso classes   (expected 5)
+  PASS  n=4: 16 iso classes   (expected 16)
+  PASS  n=5: 63 iso classes   (expected 63)
+  PASS  n=6: 318 iso classes   (expected 318)
+  PASS  n=1: 1 LABELED posets (lib409a generator)   (expected 1)
+  PASS  n=2: 3 LABELED posets (lib409a generator)   (expected 3)
+  PASS  n=3: 19 LABELED posets (lib409a generator)   (expected 19)
+  PASS  n=4: 219 LABELED posets (lib409a generator)   (expected 219)
+  PASS  n=5: 4231 LABELED posets (lib409a generator)   (expected 4231)
+
+  Both sequences are the standard ones and neither generator has seen the other: mine
+  augments by a maximal element and dedups by brute-force canonical form; lib409a's filters
+  3^C(n,2) relation-assignments.  Agreement at n <= 5 on the labeled count and the known
+  unlabeled sequence to n = 6 is the warrant for calling n <= 6 EXHAUSTIVE below.
+
+========================================================================================
+p0.2  NEGATIVE CONTROL ON THE ENUMERATION -- a broken augmentation must be caught
+========================================================================================
+  PASS  planted defect UNDERCOUNTS at n=4: 9 != 16   control FIRES
+
+========================================================================================
+p0.3  PRIMITIVITY -- named posets, checked against what the literature says
+========================================================================================
+  PASS  A_2  (2-antichain)           prime=True   (expected True)
+  PASS  C_2  (2-chain)               prime=True   (expected True)
+  PASS  A_3  (3-antichain)           prime=False   (expected False)
+  PASS  V    (0<1, 0<2)              prime=False   (expected False)
+  PASS  N    (0<2, 1<2, 1<3)         prime=True   (expected True)
+  PASS  A_4                          prime=False   (expected False)
+  PASS  Z_4  (ordinal sum 2+2)       prime=False   (expected False)
+  PASS  C_4  (4-chain)               prime=False   (expected False)
+
+  The N-poset is THE standard smallest primitive poset and it is the reason primitivity is
+  only interesting from n = 4: on n = 3 every poset has a nontrivial module (p0.3 checks
+  A_3 and V explicitly).  n <= 2 is vacuously prime by the definition's own range and is
+  reported as such rather than special-cased away.
+  PASS  no prime poset on n=3: 0 found
+
+========================================================================================
+p0.4  alpha -- the EXACT `==1` test and the float power iteration, cross-checked
+========================================================================================
+  PASS  power iteration vs lib409a Jacobi at 82 posets   worst |diff| = 1.368e-14
+  PASS  EXACT alpha==1 test agrees with the float at every n<=5 poset   0 mismatches
+
+========================================================================================
+p0.5  NEGATIVE CONTROL on the exact test -- it must be able to say NO
+========================================================================================
+  PASS  Z_4: exact test says alpha == 1   (mg-409a r1.3 agrees)
+  PASS  A_4: exact test says alpha != 1   witness 1/12 != 0
+      measured: alpha(Z_4) = 1.000000000   alpha(A_4) = 0.292893219   (mg-409a section 4: 6/(n(n+1)) = 0.3)
+
+========================================================================================
+p0.6  delta / mu -- E1 and E6, both planted
+========================================================================================
+  PASS  delta on a 3-chain RAISES rather than returning 0   (E6 control)
+  PASS  delta and mu are DIFFERENT functions   e.g. delta=1/2 mu=1/3
+  PASS  mu <= delta at every n<=5 poset (exact)   0 violations
+
+========================================================================================
+p0.7  pair statistics -- p_xy and P(adjacent) against hand values
+========================================================================================
+  PASS  A_2: p=1/2 P_adj=1
+  PASS  A_3: p=1/2 P_adj=2/3
+  PASS  V, pair (1,2): p=1/2 P_adj=1
+
+========================================================================================
+p0 OVERALL: PASS
+========================================================================================
