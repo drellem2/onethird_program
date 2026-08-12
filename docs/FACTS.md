@@ -700,6 +700,82 @@ field says for its own slice.
 
 ---
 
+## F21 · `E[inv_e] = Σ_{x∥y} min(p_xy, 1−p_xy)`, and the EXACT scope on which that is true
+
+**STATEMENT.** Let `P` be a finite poset and let `e` be the **weak-majority order** — every
+incomparable pair oriented toward its `≥ 2/3` side, every comparable pair by `P`. **If every
+incomparable pair of `P` is `≥ 2/3`-decided** (equivalently `δ(P) ≤ 1/3`, so the orientation is
+defined at every pair), then
+
+> **`E[inv_e] = Σ_{x∥y} min(p_xy, 1−p_xy) = m · q̄`**,
+
+`m` the number of incomparable pairs and `q̄` the mean of `min(p, 1−p)` over them; and therefore
+`ε_spec = 6E[inv_e]/(n²−1) = 3·d·q̄·n/(n+1)` with `d = m/C(n,2)`. **`E[inv_e]` is computable from the
+pair marginals alone — `L(P)` never has to be enumerated.**
+
+**KIND.** `U-id` — an exact identity, by linearity of expectation plus the observation that under
+the hypothesis `e` disagrees with `σ` on `{x,y}` with probability exactly `min(p_xy, 1−p_xy)`. The
+out-of-scope failure count in **SCOPE** is `FP`.
+
+**SCOPE.** Proved for every finite poset satisfying the hypothesis. Machine-verified against
+brute-force enumeration of `L(P)` at **every isomorphism class with an incomparable pair,
+`n = 2…6`** — 399 posets — **0 mismatches** inside the hypothesis (11 posets) and **0 mismatches**
+for the underlying linearity form at all 399. ⚠️ **APPLIED OUTSIDE THE HYPOTHESIS THE SAME
+EXPRESSION IS WRONG AT 192 OF THE REMAINING 388 POSETS**, and it errs by **understating**
+`E[inv_e]`: off the boundary `e` is not the majority order and the per-pair disagreement is not
+`min(p, 1−p)`. The identity is co-extensive with the boundary/frozen condition itself
+(`mg-6ff4` `c0` T3).
+
+**FROM.** `mg-6ff4` §1, [`code/boundary_epsilon_6ff4/`](../code/boundary_epsilon_6ff4/) `c0` T3 and
+`lib6ff4.py`'s module docstring. The `ε_spec = 3·d·q̄·n/(n+1)` half is `mg-6bc2` §3.1's identity,
+**cited not re-derived**; what is registered here is the `E[inv_e]` form, its proof, and its scope.
+
+**NOT.** ⚠️ **It is not a statement about frozen posets.** Its hypothesis `δ ≤ 1/3` is satisfied by
+the boundary class `δ = 1/3`, which is **outside** the strict frozen hypothesis, and by the frozen
+class, which is **empty at every `n` any enumerator reaches**. ⚠️ It is **not** a bound: it is an
+equality, so it buys no inequality anyone did not already have — what it buys is that `E[inv_e]`
+becomes a first-moment computation. ⚠️ And it is **not** `E_BK(inv_e) ≤ 1/2` (F4), which is a
+Dirichlet form and not a mean.
+
+---
+
+## F22 · No 3-element antichain ⟹ the weak-majority order `e` EXISTS AND IS UNIQUE — and the argument usually quoted gives nothing at `δ = 1/3`
+
+**STATEMENT.** Let `P` be a finite poset in which **every incomparable pair is `≥ 2/3`-decided**
+(`δ(P) ≤ 1/3`). If `P` contains **no 3-element antichain**, then the weak-majority tournament —
+`P`'s own relations together with the `≥ 2/3` orientation of every incomparable pair — is **total
+and acyclic**, hence determines a **unique** linear order `e`, with no tie-break anywhere.
+
+*Proof.* A cycle can be taken to be a 3-cycle `x→y→z→x`. Its three cyclic events have probabilities
+summing to `≤ 2` (of any three elements at most two of `x<y`, `y<z`, `z<x` hold in a given order),
+and each is `≥ 2/3`, so **all three are exactly `2/3`**. A pair comparable in `P` has probability
+`1`, and `1 + 2/3 + 2/3 = 7/3 > 2`, so no comparable pair can lie on the cycle: all three pairs are
+incomparable, i.e. `{x,y,z}` is a 3-element antichain. □
+
+**KIND.** `U` — proved for every finite poset satisfying the hypothesis. The measurements in
+**SCOPE** are `FP`.
+
+**SCOPE.** The implication is proved. Its hypothesis holds on the **boundary class** `δ = 1/3`:
+**0 three-element antichains at 31 of 31 members, `n = 3…8` exhaustive** (F19's width-2 finding,
+independently re-measured), and `e` is verified **unique at all 31**, is a **linear extension of `P`
+at all 31**, and no tie-break is exercised. The configuration that would break it — a 3-antichain
+with all three cyclic probabilities `≥ 2/3` — was searched for over **every isomorphism class,
+`n = 3…8`, exhaustive** and found at **0 posets** (`mg-6ff4` `c4` `m2`, `m3`, `m5`).
+
+**FROM.** `mg-6ff4` §6, [`docs/OneThird-BoundaryEpsilon-mg-6ff4.md`](OneThird-BoundaryEpsilon-mg-6ff4.md).
+
+**NOT.** ⚠️ **THIS IS NOT THE ARGUMENT THE CORPUS USUALLY QUOTES, AND THAT ONE IS VACUOUS HERE.**
+The standard route (`CONCEPTS.md` §1, `STATE.md` *Why 1/3*) needs the **strict** `> 2/3` majority to
+forbid 3-cycles. At `δ = 1/3` **exactly**, every incomparable pair of the boundary class sits at
+**exactly `2/3`**, so the strict tournament orients **0 of 82 pairs at 0 of 31 posets** — it
+determines no order at all. This entry is what rescues `e` there, and it is a **weaker** argument
+resting on an extra hypothesis. ⚠️ The hypothesis *"no 3-element antichain"* is a **measured**
+property of the boundary class, not a theorem about it, and the implication must never be quoted
+without it. ⚠️ It says nothing about the frozen class, which is empty at every `n` reached; under
+the strict hypothesis `δ < 1/3` the standard argument works and this entry is not needed.
+
+---
+
 # Housekeeping
 
 **Adding an entry.** Append it with all five fields. If you cannot write the **SCOPE** line —

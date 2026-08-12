@@ -1,0 +1,15 @@
+====================================================================================================
+mg-6ff4  c2  reach beyond the exhaustive range, and the restriction it is bought with
+====================================================================================================
+
+m1  WIDTH <= 3, EXHAUSTIVE, n = 2..10
+----------------------------------------------------------------------------------------------------
+    generating width <= 3 classes to n = 10 ...
+    ... w<=3 n = 2: 2 classes, 1 with an incomparable pair, 0 at the boundary
+    ... w<=3 n = 3: 5 classes, 4 with an incomparable pair, 1 at the boundary
+    ... w<=3 n = 4: 15 classes, 14 with an incomparable pair, 2 at the boundary
+    ... w<=3 n = 5: 55 classes, 54 with an incomparable pair, 3 at the boundary
+    ... w<=3 n = 6: 245 classes, 244 with an incomparable pair, 5 at the boundary
+    ... w<=3 n = 7: 1285 classes, 1284 with an incomparable pair, 8 at the boundary
+    ... w<=3 n = 8: 7790 classes, 7789 with an incomparable pair, 12 at the boundary
+    ... w<=3 n = 9: 53108 classes, 53107 with an incomparable pair, 18 at the boundary
