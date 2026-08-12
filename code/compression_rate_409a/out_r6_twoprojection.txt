@@ -1,0 +1,45 @@
+
+========================================================================================
+r6.1  alpha(P) = 1 - cos(theta_min)  --  Halmos, verified on this instrument
+========================================================================================
+   n |  population        |  posets |  max |alpha - (1 - cos theta_min)|
+    3 |  exhaustive         |      13 |  2.220e-16
+  PASS    n=3: the two-projection identification is exact
+    4 |  exhaustive         |     195 |  1.221e-15
+  PASS    n=4: the two-projection identification is exact
+    5 |  sampled(25,seed=6409), |L|<=60 |      25 |  7.827e-15
+  PASS    n=5: the two-projection identification is exact
+
+========================================================================================
+r6.2  the principal angles at the two extremal families
+========================================================================================
+  A_4    cos theta_min = 0.707107   theta_min =  45.00 deg   alpha = 0.292893
+  A_5    cos theta_min = 0.809017   theta_min =  36.00 deg   alpha = 0.190983
+  Z_4    cos theta_min = 0.000000   theta_min =  90.00 deg   alpha = 1.000000
+  Z_6    cos theta_min = 0.000000   theta_min =  90.00 deg   alpha = 1.000000
+  Z_8    cos theta_min = 0.000000   theta_min =  90.00 deg   alpha = 1.000000
+
+  Z_n is the DEGENERATE case of the theory: Ran Q_o = {0}, there is no generic part,
+  every angle is pi/2, and alpha = 1 -- the largest a principal-angle bound can ever
+  return.  A_n is the generic case and its angle closes as n grows.
+
+========================================================================================
+r6 VERDICT -- what the literature settles, and what it cannot
+========================================================================================
+  SETTLES (and W3 was right that it is off-the-shelf):
+    * the FORM.  alpha = 1 - cos theta_min, exactly, by Halmos 1969; Qian
+      (arXiv:2201.12500) applies precisely this to two-component Gibbs samplers and,
+      per its abstract, reduces the intractable questions to matrix algebra.
+    * POSITIVITY.  arXiv:2304.02109 (AAP 2025) proves solidarity: if one scan order
+      has a gap, all do, and polynomial scaling is preserved.  For us that is already
+      free -- r1.1 gets alpha > 0 from connectivity of the fiber graph in one line.
+  CANNOT SETTLE:
+    * ANY VALUE ABOVE 1.  1 - cos theta <= 1 is an identity, so no theorem about
+      principal angles, published or future, can put alpha over r2's bar of >= 2.
+    * A CONSTANT.  Solidarity transfers positivity and polynomial scaling, not
+      constants; and Wilson (arXiv:math/0102193 S7, quoted by W3) already priced the
+      sweep decomposition at a factor of about two on the UPPER bound only.
+
+  CAVEAT, STATED: the two arXiv items were read at ABSTRACT level only (WebFetch,
+  2026-08-12).  Nothing above depends on their contents -- the ceiling is proved in
+  r1 and the bar in r2, both on this machine.

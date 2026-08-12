@@ -1,0 +1,69 @@
+
+========================================================================================
+r2.1  (L1)  R_M(f_xy) = ((n-1)/2) * R_BK(f_xy) at every incomparable pair -- EXACT
+========================================================================================
+  PASS  exact at all 19328 (poset, incomparable pair) instances
+
+========================================================================================
+r2.2  (L3)  sum over incomparable pairs of E_BK(f_xy) <= 1/2 -- EXACT
+========================================================================================
+  step8.tex Step 1, re-derived here on an implementation that has never seen it.
+  PASS  n=3 exhaustive: max sum = 1/2 <= 1/2
+  PASS  n=4 exhaustive: max sum = 1/2 <= 1/2
+  PASS  n=5 exhaustive: max sum = 1/2 <= 1/2
+  PASS  n=6 sampled(120,seed=409): max sum = 1/2 <= 1/2
+  PASS  n=7 sampled(40,seed=1409): max sum = 3/7 <= 1/2
+  (4449 posets; the sup 1/2 is approached when almost every adjacent pair is incomparable -- largest seen 1/2 at n=3)
+
+========================================================================================
+r2.3  (L2)  the measured alpha never exceeds the pair-witness bound
+========================================================================================
+  PASS  alpha <= min_pair R_M(f_xy) at all 253 posets
+  (the pair witness is TIGHT -- equal to alpha -- at 51 of 253)
+
+========================================================================================
+r2.4  THE BAR against THE CEILING
+========================================================================================
+  Theorem E (step8.tex Lemma frozen-pair-existence + Theorem G1):
+      a gamma-counterexample on n elements has an incomparable pair with
+      E_BK(f_xy)/Var(f_xy) <= lambda(gamma,n) = 2/(gamma n),   gamma in (0, 1/3].
+
+  Through (L1)+(L2) that is a CAP on alpha:   alpha(P) <= (n-1)/(gamma n).
+  W2's repair gives  gap_BK >= (2/(n-1)) alpha, so a contradiction needs the cap
+  VIOLATED:          alpha_n > (n-1)/(gamma n)  =  THE BAR.
+
+     n  |  BAR at gamma=1/3  |  BAR at gamma=1/4  |  BAR at gamma=1/6  |  CEILING
+  -------+--------------------+--------------------+--------------------+---------
+       3 |           2.000000 |           2.666667 |           4.000000 |     1
+       4 |           2.250000 |           3.000000 |           4.500000 |     1
+       5 |           2.400000 |           3.200000 |           4.800000 |     1
+       6 |           2.500000 |           3.333333 |           5.000000 |     1
+       8 |           2.625000 |           3.500000 |           5.250000 |     1
+      12 |           2.750000 |           3.666667 |           5.500000 |     1
+      20 |           2.850000 |           3.800000 |           5.700000 |     1
+     100 |           2.970000 |           3.960000 |           5.940000 |     1
+    1000 |           2.997000 |           3.996000 |           5.994000 |     1
+
+  sup_n sup_{gamma<=1/3} of the bar is 3;  inf over n>=3 at gamma=1/3 is 2.
+  PASS  the bar is >= 2 for every n >= 3 even at the most generous gamma = 1/3   min = 2
+  PASS  THE CEILING (1) IS BELOW THE BAR (>= 2)   shortfall factor >= 2, rising to 3
+
+========================================================================================
+r2.5  the same statement without Theorem E's hypotheses, measured directly
+========================================================================================
+  For EVERY poset (no counterexample hypothesis at all), the ratio-of-sums bound
+  alpha <= ((n-1)/2) * sum E / sum Var holds; here is how much slack there is.
+     n |  posets |  max alpha  |  max ((n-1)/2)*sumE/sumVar  | violations
+     3 |      13 |   1.000000  |                   1.000000  | 0
+  PASS    n=3: no violation of the ratio-of-sums cap
+     4 |     195 |   1.000000  |                   1.000000  | 0
+  PASS    n=4: no violation of the ratio-of-sums cap
+     5 |      54 |   1.000000  |                   1.000000  | 0
+  PASS    n=5: no violation of the ratio-of-sums cap
+
+========================================================================================
+r2 VERDICT
+========================================================================================
+  THE REQUIRED RATE IS NOT A RATE.  alpha_n must EXCEED (n-1)/(gamma n), a CONSTANT
+  between 2 and 3 -- it does not decay with n at all.  The ceiling from r1 is 1.
+  The compression route is short by a factor of at least 2, and asymptotically 3.

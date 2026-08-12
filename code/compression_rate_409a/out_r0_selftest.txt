@@ -1,0 +1,66 @@
+
+========================================================================================
+r0.1  hand-known linear-extension counts
+========================================================================================
+  PASS  |L(A_2)| = n!   2 == 2
+  PASS  |L(A_3)| = n!   6 == 6
+  PASS  |L(A_4)| = n!   24 == 24
+  PASS  |L(A_5)| = n!   120 == 120
+  PASS  |L(A_6)| = n!   720 == 720
+  PASS  |L(chain_5)| = 1
+  PASS  |L(Z_4)| = 2^(n/2)   4
+  PASS  |L(Z_6)| = 2^(n/2)   8
+
+========================================================================================
+r0.2  the two compressions agree with W2's independently-written groups
+========================================================================================
+  PASS  blocks_o(2) == lib8bc7.groups_o
+  PASS  blocks_e(2) == lib8bc7.groups_e
+  PASS  blocks_o(3) == lib8bc7.groups_o
+  PASS  blocks_e(3) == lib8bc7.groups_e
+  PASS  blocks_o(4) == lib8bc7.groups_o
+  PASS  blocks_e(4) == lib8bc7.groups_e
+  PASS  blocks_o(5) == lib8bc7.groups_o
+  PASS  blocks_e(5) == lib8bc7.groups_e
+  PASS  blocks_o(6) == lib8bc7.groups_o
+  PASS  blocks_e(6) == lib8bc7.groups_e
+  PASS  blocks_o(7) == lib8bc7.groups_o
+  PASS  blocks_e(7) == lib8bc7.groups_e
+
+========================================================================================
+r0.3  E Var(f|C), Var(f), E_BK(f) agree with W2's implementations
+========================================================================================
+  (186 exact agreements on conditional variances, 0 disagreements)
+  PASS  cross-check population is not empty   186 comparisons
+
+========================================================================================
+r0.4  M = 2I - Pi_o - Pi_e is what the note says it is
+========================================================================================
+  PASS  M is PSD (exact Schur reduction)
+  PASS  M kills the constants
+  PASS  <f,Mf> = N * (E Var(f|C_o) + E Var(f|C_e))  -- the note's :234
+
+========================================================================================
+r0.5  the note's (*) at :149 and W2's repair, re-derived on this instrument
+========================================================================================
+  PASS  (*) is an EQUALITY on linear statistics   73 tested
+  PASS  W2's repair: E_BK(f) >= (2/(n-1))<f,Mf> for ARBITRARY f   73 tested
+
+========================================================================================
+r0.6  hand-known alpha, and the float eigensolver against an exact witness
+========================================================================================
+  PASS  alpha(Z_4) = 1 (Jacobi)   1.000000000
+  PASS  alpha(A_3) = 1/2 (Jacobi)   0.500000000
+  PASS  R_M at the exhibited vector = 1/2 EXACTLY   1/2
+
+========================================================================================
+r0.7  two controls that MUST go red on a planted defect
+========================================================================================
+  PASS  C1: blocks_o := blocks_e BREAKS (*)  [control fires]   1/2 vs 1/3
+  PASS  C2: `legal` := False BREAKS (*)  [control fires]   0 vs 5/12
+  PASS  D1: dropping C_e's trailing singleton induces the SAME partition   (that is why my first control could not fire)
+
+========================================================================================
+r0 GATE
+========================================================================================
+  ALL PASS

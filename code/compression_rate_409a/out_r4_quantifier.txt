@@ -1,0 +1,27 @@
+
+========================================================================================
+r4.1  alpha_full vs alpha_lin -- the quantifier the repair moves
+========================================================================================
+   n |  posets |  alpha_full < alpha_lin |  worst ratio alpha_full/alpha_lin
+    3 |      13 |                       0 |  1.000000
+  PASS    n=3: alpha_full <= alpha_lin everywhere
+    4 |     195 |                      61 |  0.893957
+  PASS    n=4: alpha_full <= alpha_lin everywhere
+    5 |      44 |                      30 |  0.893957
+  PASS    n=5: alpha_full <= alpha_lin everywhere
+
+  worst case seen: [(0, 1), (0, 2), (1, 2), (3, 2), (4, 1), (4, 2), (4, 3)]
+
+========================================================================================
+r4.2  what that costs, stated as the answer to the mayor's first question
+========================================================================================
+  1. THE OPERATOR IS THE SAME.  W2's repair bounds gap_BK below by (2/(n-1)) times
+     the SAME 2I - Pi_o - Pi_e that section 5 reduces to.  Section 4's object is
+     delivered, and unconditionally -- :217 is not needed for that direction.
+  2. THE QUANTIFIER MOVES, AND AGAINST YOU.  The repair consumes alpha_full; section
+     5 states alpha_lin.  A proof of section 5 exactly as written does NOT feed the
+     repair whenever the two differ, and the table above says they differ often.
+  3. NEITHER IS THE WALL'S OBJECT.  Both bound lambda_2^BK.  STATE.md:78 records that
+     lambda_std and lambda_2^BK are INCOMPARABLE -- no universal inequality in either
+     direction (mg-d1be, exact rationals) -- so nothing here reaches lambda_std, and
+     the repair does not change that.  See README S1.

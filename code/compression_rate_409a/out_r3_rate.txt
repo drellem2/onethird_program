@@ -1,0 +1,58 @@
+
+========================================================================================
+r3.1  the antichain closed form, EXACT, and independent of the test weights
+========================================================================================
+    n |  R_BK(f_w)  =  12/(n^3-n)  |  R_M(f_w)  =  6/(n(n+1))  | weight vectors agreeing
+    3 |                       1/2  |                      1/2  | 4
+  PASS  n=3: >=3 independent weight vectors give the same value
+    4 |                       1/5  |                     3/10  | 3
+  PASS  n=4: >=3 independent weight vectors give the same value
+    5 |                      1/10  |                      1/5  | 3
+  PASS  n=5: >=3 independent weight vectors give the same value
+    6 |                      2/35  |                      1/7  | 3
+  PASS  n=6: >=3 independent weight vectors give the same value
+    7 |                      1/28  |                     3/28  | 3
+  PASS  n=7: >=3 independent weight vectors give the same value
+
+========================================================================================
+r3.2  and the true alpha(A_n) is no larger -- Jacobi, measurement only
+========================================================================================
+    n |  measured alpha(A_n)  |  closed-form bound 6/(n(n+1))  |  1 - cos(pi/n)
+    3 |          0.500000000  |                   0.500000000  |  0.500000000
+  PASS    alpha(A_3) <= 6/(n(n+1))
+    4 |          0.292893219  |                   0.300000000  |  0.292893219
+  PASS    alpha(A_4) <= 6/(n(n+1))
+    5 |          0.190983006  |                   0.200000000  |  0.190983006
+  PASS    alpha(A_5) <= 6/(n(n+1))
+
+  The third column is what Aldous' spectral gap theorem (Caputo-Liggett-Richthammer)
+  predicts for this chain on the antichain: gap = (2-2cos(pi/n))/(n-1), so
+  ((n-1)/2)*gap = 1-cos(pi/n).  IT IS READ FROM THE LITERATURE, NOT PROVED HERE, and
+  no verdict in this directory depends on it; the closed-form bound above is self-
+  contained and is what carries the Theta(n^-2) claim.
+
+========================================================================================
+r3.3  is the antichain the minimiser?  min alpha over posets, per n
+========================================================================================
+    n |  population           |  min alpha  |  alpha(A_n)  |  posets within 1e-9 of min
+    3 |  exhaustive           |   0.500000  |    0.500000  |  7 of 13
+  PASS    n=3: the population minimum equals alpha(A_3)
+    4 |  exhaustive           |   0.292893  |    0.292893  |  73 of 195
+  PASS    n=4: the population minimum equals alpha(A_4)
+    5 |  sampled(60,seed=909) |   0.190983  |    0.190983  |  34 of 54
+  PASS    n=5: the population minimum equals alpha(A_5)
+
+  THE ANTICHAIN IS NOT THE UNIQUE MINIMISER -- the value 6/(n(n+1)) is shared by a
+  large tie class (at n=4, the argmin by raw float is the single-relation poset
+  {(1,3)}, differing from A_4 in the 16th digit).  That makes the closed form more
+  useful, not less: it is not a property of one exotic poset.
+  n=5 is a SAMPLE, not a sweep, and the antichain is NOT in it -- the row says the
+  sampled minimum coincides with alpha(A_5), not that nothing smaller exists.
+
+========================================================================================
+r3 VERDICT
+========================================================================================
+  Under the uniform-in-poset reading, alpha_n <= 6/(n(n+1)) = Theta(n^-2), by a hand
+  computation on the antichain.  Through W2's repair that yields gap_BK = Omega(n^-3),
+  which is the order this chain is ALREADY known to have at every poset (Bubley-Dyer,
+  n^3 log n mixing).  TRUE, AND USELESS: it is Theta(n^2) below the bar of r2.

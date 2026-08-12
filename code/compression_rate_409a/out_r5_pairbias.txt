@@ -1,0 +1,65 @@
+
+========================================================================================
+r5.1  A_n and Z_n: identical pair-bias data, alpha a factor Theta(n^2) apart
+========================================================================================
+   n |  poset |  #incomparable pairs |  all p_xy = 1/2 |  delta  |  alpha
+    4 |  A_4   |                    6 |             yes |    1/2  |  0.292893
+  PASS      A_4: every incomparable pair has p_xy = 1/2 exactly
+  PASS      A_4: delta = 1/2 (maximally balanced)
+    4 |  Z_4   |                    2 |             yes |    1/2  |  1 (exact, r1.3)
+  PASS      Z_4: every incomparable pair has p_xy = 1/2 exactly
+  PASS      Z_4: delta = 1/2 (maximally balanced)
+    6 |  A_6   |                   15 |             yes |    1/2  |  <= 1/7 (r3.1)
+  PASS      A_6: every incomparable pair has p_xy = 1/2 exactly
+  PASS      A_6: delta = 1/2 (maximally balanced)
+    6 |  Z_6   |                    3 |             yes |    1/2  |  1 (exact, r1.3)
+  PASS      Z_6: every incomparable pair has p_xy = 1/2 exactly
+  PASS      Z_6: delta = 1/2 (maximally balanced)
+    8 |  A_8   |                   28 |             yes |    1/2  |  <= 1/12 (r3.1)
+  PASS      A_8: every incomparable pair has p_xy = 1/2 exactly
+  PASS      A_8: delta = 1/2 (maximally balanced)
+    8 |  Z_8   |                    4 |             yes |    1/2  |  1 (exact, r1.3)
+  PASS      Z_8: every incomparable pair has p_xy = 1/2 exactly
+  PASS      Z_8: delta = 1/2 (maximally balanced)
+
+  Both families are as far from the (1/3)-(2/3) counterexample condition as a poset
+  can get -- delta = 1/2 at every n -- and their alpha values do not merely differ,
+  they separate by a growing factor.  So a bound on alpha 'expressed purely in terms
+  of a pair bias' cannot exist above 0.
+
+========================================================================================
+r5.2  THE OTHER HALF, AND IT GOES THE NOTE'S WAY.  Does the FULL bias multiset determine alpha?
+========================================================================================
+  r5.1 refutes the SCALAR delta.  The note's phrase is looser than that, so the
+  stronger reading is tested too: the whole multiset {min(p_xy, 1-p_xy)} -- an
+  isomorphism invariant.  A collision with different alpha would refute that reading.
+  VACUITY CONTROL: a bucket holding one isomorphism class proves nothing, so the
+  number of buckets that genuinely MERGE distinct classes is reported beside it.
+
+   n |  population            |  buckets |  merging >1 iso class |  buckets w/ alpha spread
+    4 |  exhaustive            |       10 |                     4 |  0
+  PASS    n=4: the test is NOT vacuous -- buckets do merge non-isomorphic posets   4 such buckets
+    5 |  exhaustive            |       33 |                    22 |  0
+  PASS    n=5: the test is NOT vacuous -- buckets do merge non-isomorphic posets   22 such buckets
+    6 |  sampled(60,seed=4409) |       39 |                     5 |  0
+  PASS    n=6: the test is NOT vacuous -- buckets do merge non-isomorphic posets   5 such buckets
+
+  RESULT: 0 collisions anywhere.  On every population tested, the multiset of pair
+  biases DETERMINES alpha.  THE NOTE'S SUGGESTION IS NOT REFUTED IN THIS FORM -- it
+  is the one place in this ticket where the note's instinct is supported by data.
+  It is an n <= 5 exhaustive + n = 6 sampled observation, not a theorem, and it says
+  nothing about whether the determining function is USABLE: r2's bar is a statement
+  about alpha's VALUE, and no representation of alpha can raise its value.
+
+========================================================================================
+r5 VERDICT -- SPLIT, and the split is the finding
+========================================================================================
+  (a) THE SCALAR delta DOES NOT CONTROL alpha.  A_n and Z_n both have delta = 1/2 --
+      maximal balance, every incomparable pair at exactly 1/2 -- and their alpha
+      separate by Theta(n^2).  Since delta < 1/3 IS the (1/3)-(2/3) counterexample
+      condition, the connection the note hoped for cannot run through it.  This is
+      the direction the corpus already predicted: docs/audit-stage-process.md:211
+      records that the delta obstruction is PROVABLY NOT A MIXING OBSTRUCTION.
+  (b) THE FULL BIAS MULTISET IS NOT REFUTED, and on n <= 5 exhaustive it determines
+      alpha outright, across buckets that merge non-isomorphic posets.  Reported
+      because it goes against this ticket's own direction of travel.

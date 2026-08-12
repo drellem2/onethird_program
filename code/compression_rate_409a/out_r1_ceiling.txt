@@ -1,0 +1,45 @@
+
+========================================================================================
+r1.1  (C0)  alpha(P) > 0 for every poset  --  exact, combinatorial
+========================================================================================
+  PASS  n=2 exhaustive: fiber graph connected at all 1 posets
+  PASS  n=3 exhaustive: fiber graph connected at all 13 posets
+  PASS  n=4 exhaustive: fiber graph connected at all 195 posets
+  PASS  n=5 exhaustive: fiber graph connected at all 4111 posets
+  PASS  n=6 sampled(150,seed=409): fiber graph connected at all 148 posets
+  (4468 posets with |L(P)| >= 2; 154 chains skipped -- Var(f) = 0 there)
+
+========================================================================================
+r1.2  (C1)  alpha(P) <= 1 for every poset  --  exhibited rational witness
+========================================================================================
+  PASS  n=2 exhaustive: max exhibited R_M = 1 <= 1
+  PASS  n=3 exhaustive: max exhibited R_M = 1 <= 1
+  PASS  n=4 exhaustive: max exhibited R_M = 1 <= 1
+  PASS  n=5 exhaustive: max exhibited R_M = 1 <= 1
+  PASS  n=6 sampled(150,seed=409): max exhibited R_M = 1 <= 1
+  PASS  every poset is covered by one of the two witness kinds
+  witness kinds: {'C_o-trivial': 191, 'odd-fiber': 4277}
+  largest exhibited bound anywhere: 1  at n=2
+
+========================================================================================
+r1.3  the ceiling is ATTAINED, and not only at small n
+========================================================================================
+  PASS  Z_4: C_o constant AND C_e separates  =>  alpha(Z_4) = 1 EXACTLY   |L|=4, odd fibers=1, even fibers=4
+  PASS  Z_6: C_o constant AND C_e separates  =>  alpha(Z_6) = 1 EXACTLY   |L|=8, odd fibers=1, even fibers=8
+  PASS  Z_8: C_o constant AND C_e separates  =>  alpha(Z_8) = 1 EXACTLY   |L|=16, odd fibers=1, even fibers=16
+  PASS  Z_10: C_o constant AND C_e separates  =>  alpha(Z_10) = 1 EXACTLY   |L|=32, odd fibers=1, even fibers=32
+  PASS  Z_12: C_o constant AND C_e separates  =>  alpha(Z_12) = 1 EXACTLY   |L|=64, odd fibers=1, even fibers=64
+  PASS    ... and Jacobi agrees at Z_4   1.000000000
+  PASS    ... and Jacobi agrees at Z_6   1.000000000
+  PASS    ... and Jacobi agrees at Z_8   1.000000000
+
+========================================================================================
+r1.4  the measured alpha never exceeds the exhibited witness
+========================================================================================
+  PASS  measured alpha <= exhibited bound at all 208 posets (n<=4)
+
+========================================================================================
+r1 VERDICT
+========================================================================================
+  alpha(P) is in (0, 1] for EVERY poset, and 1 is attained at every even n tested.
+  THE NOTE'S alpha_n CAN NEVER EXCEED 1.  Remember that number.
