@@ -1,0 +1,64 @@
+============================================================================================
+mg-7c78  b1  three CONSECUTIVE linear extensions in an ordering of L(P)
+============================================================================================
+
+POPULATION.  Every isomorphism class n = 2..6 with a well-defined `e` and
+  |L(P)| <= 200, PLUS the delta = 1/3 boundary class at n = 7, 8 (20 more).
+  128 posets.  SKIPPED for |L(P)| > 200: 4.  NO well-defined `e` (a pair at exactly
+  1/2, or a majority cycle): 287 -- excluded because `good` NAMES `e`.
+
+m1  Q2 (UNIVERSAL over orderings) -- is `> 2/3` alone enough?
+--------------------------------------------------------------------------------------------
+    delta band                      edges g > ceil(2N/3)          3 | N      match
+    delta = 1/3   (boundary)           82              0             82      82/82
+    1/3 < delta <= 2/5                126             25              8    105/126
+    2/5 < delta < 1/2                 497            209            288    408/497
+
+    ON THE BOUNDARY CLASS Q2 FAILS AT EVERY EDGE, and for a reason that is not a near
+    miss: delta = 1/3 means the most-balanced pair sits at EXACTLY p = 2/3, so its
+    g = 2N/3 is not even > 2N/3, let alone > ceil(2N/3).  The universal reading needs
+    the STRICT frozen hypothesis, whose population is empty (a5 m1).
+
+m2  Q1 (EXISTENTIAL over orderings, ALL edges at once)
+--------------------------------------------------------------------------------------------
+    delta band        posets Q1 FALSE (some g<3)  Q1 TRUE (flow cert.)   undecided     greedy
+    delta = 1/3           31                  21                     0          10          0
+    delta > 1/3           97                   0                    40          57          7
+
+    TOTAL: Q1 FALSE at 21 posets, TRUE at 40, UNDECIDED at 67 (greedy certificate at
+    7).
+
+    ⚠️  READ THE 21 BOUNDARY FAILURES CORRECTLY -- THEY ARE AN ARTEFACT OF THE PROXY,
+    NOT A REFUTATION OF DANIEL'S CLAIM.  On the boundary class the most-balanced pair
+    sits at EXACTLY p = 2/3, so at N = 3 it has g = 2 and no good run of 3 exists in
+    ANY ordering.  Under the STRICT hypothesis p_xy > 2/3 that cannot happen:
+      g > 2N/3 with g an integer forces g >= 3 as soon as N >= 3, and a poset with an
+      incomparable pair and N = 2 has that pair at exactly 1/2, so is not frozen.
+    SO THE NECESSARY CONDITION FOR Q1 IS A THEOREM UNDER THE STRICT HYPOTHESIS, and the
+    boundary class -- which is the right proxy for the a-arm statements -- is the WRONG
+    proxy for this one, because this claim is sensitive to the strictness that the
+    boundary gives up.  That is a scope fact about the instrument and it is stated here
+    rather than discovered by whoever re-reads the 21.
+
+    AND THE SUFFICIENT SIDE HAS A HAND PROOF TOO, quantified: assign triples one edge
+    at a time; at most 3(m-1) extensions are already used, so a system exists whenever
+      min_xy g_xy > 3(m-1),  which under frozen holds whenever  2N/3 >= 3m - 2.
+    The `greedy` column counts where that certificate fires.  Between the two
+    certificates Q1 is DECIDED-TRUE at 40 posets; the 67 undecided ones have neither
+    certificate and are NOT counterexamples -- disjointness is sufficient, not
+    necessary, and overlapping runs are allowed by the statement.
+
+m3  Q3 (the GRAY-CODE restriction) -- and why the run condition is nearly free there
+--------------------------------------------------------------------------------------------
+    population: the above, restricted to |L(P)| <= 60.  2 SKIPPED (counted).
+    Hamiltonian path in the BK graph: EXISTS at 111, DOES NOT EXIST at 6,
+    search budget exhausted (no decision reached) at 9.
+
+    THE STRUCTURAL FACT, measured over 1378 runs of three consecutive path vertices:
+      the maximum number of incomparable edges whose orientation is NOT shared by all
+      three is 2.  Two steps flip at most two pairs, so a run of 3 in ANY Gray code
+      is UNANIMOUS on every incomparable edge but at most 2 -- the run condition is
+      nearly free once a Gray code exists, and what is NOT free is that the shared
+      orientation be the GOOD one.
+
+VERDICT: GREEN

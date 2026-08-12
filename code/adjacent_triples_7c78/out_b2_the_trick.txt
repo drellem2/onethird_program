@@ -1,0 +1,47 @@
+============================================================================================
+mg-7c78  b2  THE TRICK -- its repaired form, and what crafting the ordering buys
+============================================================================================
+
+t1  THE TRICK, REPAIRED so it needs no divisibility side condition
+--------------------------------------------------------------------------------------------
+    SHARP (b0 b3):   every ordering has a good run of 3   iff   g > ceil(2N/3).
+    DANIEL's form:   p_xy > 2/3, i.e. g > 2N/3 -- enough iff 3 | N (b0 b4).
+    REPAIR:          p_xy > 2/3 + 2/N   is sufficient at EVERY N and every residue.
+      derivation: g > 2N/3 + 2 forces g >= floor(2N/3) + 3 >= ceil(2N/3) + 1, since
+      ceil(2N/3) <= floor(2N/3) + 1.
+
+    checked at every (N, g) with 3 <= N < 200: 0 failures   [PASS]
+    AND IT IS NOT VACUOUS AT SMALL N: at N = 4 the repair demands p > 7/6 > 1, i.e. it
+    is UNSATISFIABLE there -- correctly, because N = 4, g = 3 IS the counterexample.
+    The trick simply has no content at N = 4, and the repair says so instead of
+    quietly failing.
+
+t2  DOES CRAFTING THE ORDERING CHANGE THE GUARANTEE?  Bruhat vs adversary
+--------------------------------------------------------------------------------------------
+    population: isomorphism classes n = 2..6 with |L(P)| <= 200 and a well-defined e.
+      108 posets (4 skipped for |L(P)|, 287 with no e), 647 incomparable edges.
+
+    edges with a good run of 3 in the BRUHAT-REFINING ordering:  608 of 647
+    edges with a good run of 3 in the ADVERSARIAL ordering:      234 of 647
+    edges meeting the criterion  g > ceil(2N/3):                 234 of 647
+    adversary disagrees with the criterion at 0 edges   [PASS -- the criterion IS the adversarial answer]
+
+    ⚠️  SO CRAFTING BUYS NOTHING FOR THE GUARANTEE.  The criterion is UNIVERSAL over
+    orderings, so a Bruhat-refining ordering is guaranteed a good run of 3 on exactly
+    the edges an adversary is -- and it HAPPENS to get one on 374 further edges, which
+    is luck at that ordering and not a guarantee.  `Perhaps it's an extension of the
+    weak bruhat order` therefore does not strengthen the trick; what it can do is make
+    the triple MEAN something to whatever consumes it.
+
+t3  WHAT THE BRUHAT STRUCTURE DOES BUY, measured
+--------------------------------------------------------------------------------------------
+    the ordering's BOTTOM element is `e` itself at 108 of 108 posets   -- so the run at
+    the very bottom is good for EVERY incomparable edge at once, for free, and the
+    content of the trick lies entirely in the runs further up.
+    across 1820 runs of three consecutive extensions, the largest inv_e spread within a
+    run is 1 -- so three consecutive extensions of a Bruhat-refining ordering are
+    close in inversion count, which is the currency STATE.md:29 says a proof would be
+    delivered in.  THAT is the reason to keep the trick in mind, and it is a reason
+    about the CONSUMER, not about the guarantee.
+
+VERDICT: GREEN

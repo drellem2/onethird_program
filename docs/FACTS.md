@@ -543,6 +543,163 @@ registered as a `FP` curiosity, not a theorem.
 
 ---
 
+# FROM `mg-7c78` — DANIEL'S ADJACENT-TRIPLES OBSERVATION
+
+Four entries from `mg-7c78`, [`OneThird-AdjacentTriples-mg-7c78.md`](OneThird-AdjacentTriples-mg-7c78.md),
+instrument [`code/adjacent_triples_7c78/`](../code/adjacent_triples_7c78/). **Source: Daniel,
+2026-08-12**, filed by `pm-onethird` and then **re-filed by him with the premise corrected** — his
+first reading had *"adjacent triples"* as three ELEMENTS at consecutive positions inside one linear
+extension; Daniel meant three LINEAR EXTENSIONS adjacent to one another. **F17 and F18 are about
+Daniel's object; F19 and F20 are about the misfiled one** and are registered because they are true,
+not because they are his. Notation as §0 above, plus `N = |L(P)|` and, for an incomparable pair
+`{x,y}`, *good* = orienting the pair the way `e` does, `g_xy = p_xy·N` counting the good extensions.
+
+## F17 · Three mutually adjacent linear extensions do not exist
+
+**STATEMENT.** For every finite poset `P`, no three linear extensions are **pairwise adjacent** in
+the BK graph — `L(P)` with an edge between extensions differing by one adjacent transposition.
+Equivalently the BK graph is triangle-free, at every `P` and every `n`. **And the same holds under
+ANY transposition-based adjacency**, including swaps of two values at arbitrary positions.
+
+**KIND.** `U` — proved in one line. A transposition is an odd permutation, so both graphs are
+subgraphs of a bipartite graph (even permutations against odd), and a bipartite graph has no
+triangle.
+
+**SCOPE.** Proved for every finite poset. Corroborated at **403 posets** — every isomorphism class
+at `n = 2…6` with `|L(P)| ≤ 400`, **1 skipped and counted** — 21 941 graph edges, **0 triangles, 0
+non-bipartite**; and **0 triangles over 84 posets** under the arbitrary-value-swap graph
+(`mg-7c78` `b0` `b1`, `b2`).
+
+**FROM.** `mg-7c78` §3.1, [`OneThird-AdjacentTriples-mg-7c78.md`](OneThird-AdjacentTriples-mg-7c78.md).
+**Daniel, 2026-08-12** — this is the reading of his *"3 adjacent linear extensions"* under which
+the claim is refuted, and it is refuted with **no hypothesis on `δ`**.
+
+**NOT.** ⚠️ **Not a statement that three linear extensions are never close together.** Take
+*adjacent* to mean *related by rotating three consecutive positions* — a 3-cycle, which is **even**
+— and triangles do exist: **430** of them over the same 84 posets. Such a triangle needs a free
+3-block, i.e. a 3-element antichain, and F19 records that the `δ = 1/3` boundary class has **none**.
+So the two readings die for two different reasons and only the second one uses the hypothesis.
+
+---
+
+## F18 · `2/3` IS THE RUN-DENSITY THRESHOLD, AND IT IS A DIFFERENT `2/3` FROM THE PROGRAMME'S
+
+**STATEMENT.** **This is the entry for DANIEL'S TRICK, in the form he asked for it to be kept.**
+(i) The largest number of good items an ordering of `N` items can carry with **no** 3 consecutive
+good ones is `N − ⌊N/3⌋`. Hence **every** ordering of `L(P)` — however crafted, however adversarial
+— contains 3 consecutive extensions good for `{x,y}` **iff `g_xy > N − ⌊N/3⌋ = ⌈2N/3⌉`**.
+(ii) The hypothesis `p_xy > 2/3` gives `g_xy > 2N/3`, which implies `g_xy > ⌈2N/3⌉` **iff `3`
+divides `N`** — and fails for both other residues, the smallest counterexample being `N = 4`,
+`g = 3` (so `p = 3/4`) with the avoiding ordering `G G B G`. (iii) **THE REPAIR, needing no side
+condition: `p_xy > 2/3 + 2/N` is sufficient at every `N` and every residue**, because
+`g > 2N/3 + 2` forces `g ≥ ⌊2N/3⌋ + 3 ≥ ⌈2N/3⌉ + 1`.
+
+**KIND.** `U-id` for (i) — the extremal ordering is the periodic `G G B` and the bound is exact.
+`U` for (ii), which is integer arithmetic on (i).
+
+**SCOPE.** Proved. (i) brute-forced against **all `2^N` orderings for `N ≤ 16`**, 16 of 16 agreeing
+with the closed form. (ii) checked at every `N ≤ 21`. On real posets, the criterion `g > ⌈2N/3⌉` is
+met at **0 of 82** boundary-class edges, 25 of 126 at `1/3 < δ ≤ 2/5`, and 209 of 497 at
+`2/5 < δ < 1/2` (`mg-7c78` `b0` `b3`, `b4`, `b1` `m1`).
+
+**FROM.** `mg-7c78` §§0, 3.2, 3.5. **Source: Daniel, 2026-08-12**, and this entry exists because
+he asked for it in these words when the readings were put to him: *"the bigger idea is just to use
+this combinatorial trick with `> 2/3`, or keep it in mind for later"*. (iii) checked at **every
+`(N, g)` with `3 ≤ N < 200`, 0 failures** (`b2` `t1`).
+
+**WHAT CRAFTING THE ORDERING BUYS, since Daniel's example named one — *"perhaps it's an extension
+of the weak bruhat order"*.** For the GUARANTEE, **nothing**: the criterion is universal over
+orderings, so a weak-Bruhat-refining ordering is guaranteed a run on exactly the edges an adversary
+is. Measured at **647 of 647** incomparable edges over 108 posets, the adversarial `G G B` ordering
+agrees with the criterion exactly; the Bruhat-refining one *happens* to get a run at 608, which is
+luck at that ordering. What it buys is for the **consumer**: the bottom element of such an ordering
+is `e` itself at **108 of 108** posets, and across **1 820** runs of three the largest `inv_e`
+spread inside a run is **1** — and `inv_e` is the currency `STATE.md:29` says a proof would be
+delivered in (`b2` `t2`, `t3`).
+
+**NOT.** ⚠️ **THE `2/3` HERE IS NOT THE PROGRAMME'S `2/3`, AND CONFLATING THEM IS THE ENTIRE RISK
+THIS ENTRY EXISTS TO PRICE.** The programme's `2/3` is the **pair-bias** threshold: of any three
+elements at most two of the cyclic events can hold, so strong majorities cannot cycle and cohere
+into `e` (`mg-61bb`). This `2/3` is the **run-density** threshold for forbidding 3 consecutive terms
+in a sequence. Two different facts producing the same constant because `1 − 1/3` appears in both.
+⚠️ And **this is NOT a realizability fact**: its whole input is one pair marginal plus
+`|L(P)| mod 3`, so it constrains no *combination* of biases and adds nothing `Op-Form` Claim 6.1
+has not already spent at equality (`STATE.md:21`). ⚠️ The `0 of 82` on the boundary class is **the
+proxy failing, not a refutation**: `δ = 1/3` puts the most-balanced pair at exactly `2/3`, and this
+statement is sensitive to the strictness the boundary gives up.
+
+---
+
+## F19 · At `δ(P) = 1/3` every incomparable pair is ADJACENT in `e`, and the class has width 2
+
+**STATEMENT.** Over the **boundary class** `δ(P) = 1/3` — every incomparable pair `≥ 2/3`-decided —
+every incomparable pair of `P` occupies a position in the distinguished order `e` at **distance
+exactly 1** from its partner; the class has **width 2** at every member and contains **no 3-element
+antichain at all**; and the `E_xy` cap of F20 is **attained** there at `2/3`.
+
+**KIND.** `FP` — an exhaustive check over a finite set of small posets, saying **nothing** above the
+largest `n` checked.
+
+**SCOPE.** **31 posets: every isomorphism class at `n = 3…8`, EXHAUSTIVE** (82 incomparable pairs).
+Maximum position distance in `e` is **1**, not 2. Width **2** at all 31; **0** three-element
+antichains in the whole class. ⚠️ **THE FROZEN CLASS `δ < 1/3` IS EMPTY AT EVERY `n` REACHED and
+that `0` carries no information** — `δ < 1/3` *is* the counterexample condition and the conjecture
+is verified to `n = 14` (`mg-33f5`), the same vacuity F1's corollary already carries.
+⚠️ **30 OF THE 31 ARE ORDINAL SUMS**; exactly **one** is primitive, and a minimal counterexample is
+primitive (`STATE.md:55`). That is the scope limit and it travels with the figures.
+The supporting `δ`-sweep for the weaker distance-`≤ 2` form is monotone: **100 % → 47.3 % → 15.3 %
+→ 2.3 %** across `δ = 1/3`, `≤ 2/5`, `≤ 9/20`, `< 1/2` (`mg-7c78` `a5`, `a6`).
+
+**FROM.** `mg-7c78` §5.3. Measured under `pm-onethird`'s **misfiled** premise, so **this is not
+Daniel's observation** and must not be cited as such.
+
+**NOT.** ⚠️ **Weaker in kind than `STATE.md:154`'s low-`δ` ⟺ bounded-width equivalence**, which is
+**PROVEN** (`mg-c47a` Obs 3.1(a)/(b)); this is `FP` at `n ≤ 8`. What is new is the sharper
+*adjacent-in-`e`* form, not the width bound, which follows from that row. ⚠️ And it is **not** a
+statement about frozen posets — it is a statement about the boundary, which is a different class
+with a different strictness.
+
+---
+
+## F20 · The reversibility bound, of which F1 is the `k = 2` slice
+
+**STATEMENT.** For every finite poset and every incomparable pair, let
+`E_xy = { σ ∈ L(P) : σ∘(x y) ∈ L(P) }` — the event that exchanging the **values** `x` and `y` in
+`σ` leaves a linear extension. Then
+
+> **`min(p_xy, 1−p_xy) ≥ (1/2)·Pr[E_xy]`.**
+
+`F1`'s event (`x, y` adjacent) and the free-consecutive-triple event are both **subsets** of
+`E_xy`, so F1 is this statement's `k = 2` slice.
+
+**KIND.** `U` — proved. On `E_xy` the value-exchange is a measure-preserving involution carrying
+`{x before y}` bijectively onto `{y before x}`, so each half has probability `Pr[E_xy]/2`, and each
+is at most its own unconditional side.
+
+**SCOPE.** Proved for every finite poset and every incomparable pair. Verified at **33 290
+incomparable pairs** over 3 243 posets — `n = 2…7` exhaustive over isomorphism classes, `n = 8`
+sampled 800 of 16 999 (seed 20260812) — **0 failures**, exact rationals, maximum `Pr[E_xy]`
+observed `1` and **attained**. **STRICTLY STRONGER THAN BOTH ITS SLICES**, measured: `Pr[E_xy]`
+exceeds `Pr[adjacent]` at 26 206 pairs, exceeds `Pr[in a free triple]` at 31 988, and exceeds both
+at once at **24 904** (`mg-7c78` `a4` `m4`).
+
+**FROM.** `mg-7c78` §5.2. Also measured under the misfiled premise; **not** Daniel's observation.
+Companion figures from the same arm, registered here rather than separately: the `S₃` symmetry of a
+free consecutive triple — all 6 orders **exactly** equinumerous, 0 failures over 16 672 triples —
+and the consecutive-triple budget `Σ_{triples} Pr[consecutive] = n − 2` **exactly**, 0 violations
+over 3 243 posets, `≤ n − 2` over pairwise-incomparable triples only and **strict at 3 237** of
+them.
+
+**NOT.** ⚠️ **The `S₃` symmetry is IMPLIED BY `mg-92e6` and is not independent of it** — the two
+adjacent swaps inside a free 3-block generate `S₃` and each is a swap of an incomparable adjacent
+pair, which is exactly `mg-92e6`'s involution. Registering it as a new symmetry would be the error.
+⚠️ The budget's `= n − 2` is over **ALL** triples; over pairwise-incomparable triples only it is
+`≤ n − 2`, and quoting the equality with the population dropped is F2's error class in a new index.
+⚠️ And the implication runs bias ⟹ reversibility and **not** the reverse, exactly as F1's `NOT`
+field says for its own slice.
+
+---
+
 # Housekeeping
 
 **Adding an entry.** Append it with all five fields. If you cannot write the **SCOPE** line —

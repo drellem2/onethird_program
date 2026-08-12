@@ -1,0 +1,38 @@
+============================================================================================
+mg-7c78  a2  READINGS R2 and R3 -- one extension for every edge, and every extension
+============================================================================================
+
+m1  THE COUNTING OBSTRUCTION, stated exactly
+--------------------------------------------------------------------------------------------
+    n=3   3-blocks 1   pairs they cover 3 = (n-1)+(n-2)   [3(n-2) = 3 is the OVER-count: the blocks overlap]
+    n=4   3-blocks 2   pairs they cover 5 = (n-1)+(n-2)   [3(n-2) = 6 is the OVER-count: the blocks overlap]
+    n=5   3-blocks 3   pairs they cover 7 = (n-1)+(n-2)   [3(n-2) = 9 is the OVER-count: the blocks overlap]
+    n=6   3-blocks 4   pairs they cover 9 = (n-1)+(n-2)   [3(n-2) = 12 is the OVER-count: the blocks overlap]
+    n=7   3-blocks 5   pairs they cover 11 = (n-1)+(n-2)   [3(n-2) = 15 is the OVER-count: the blocks overlap]
+    n=8   3-blocks 6   pairs they cover 13 = (n-1)+(n-2)   [3(n-2) = 18 is the OVER-count: the blocks overlap]
+
+m2  THE SMALLEST POSET THE OBSTRUCTION REACHES
+--------------------------------------------------------------------------------------------
+    n=4  down-masks [0, 0, 0, 0]  incomparable edges 6 > 5 = 2n-3
+    R2 IS IMPOSSIBLE AT THIS POSET BY COUNTING ALONE -- no choice of sigma can
+    cover 6 pairs with 5 slots.
+
+m3/m4  THE DIRECT CHECK, per n (posets with >= 1 incomparable pair, n >= 3)
+--------------------------------------------------------------------------------------------
+      n    posets   R2 FAILS (min uncov > 0)   R3 FAILS (max uncov > 0)
+      3         4              0 (  0.0%)                   0 (  0.0%)
+      4        15              1 (  6.7%)                   7 ( 46.7%)
+      5        62             13 ( 21.0%)                  45 ( 72.6%)
+      6       317            154 ( 48.6%)                 281 ( 88.6%)
+      7      2044           1505 ( 73.6%)                1972 ( 96.5%)
+      8       800            711 ( 88.9%)                 788 ( 98.5%)
+
+    TOTAL: R2 fails at 2384 of 3242 posets; R3 fails at 3093 of 3242.
+    worst uncovered count under the BEST sigma: 10, at n=7 with 21 incomparable edges
+
+    R2 IS FALSE and R3 IS FALSE.  R3 fails at essentially every poset with an
+    incomparable pair and three or more elements -- put x first and y last.  R2 fails
+    for a counting reason that has nothing to do with delta: a single extension has
+    2n-3 covered pairs against up to n(n-1)/2 incomparable edges.
+
+VERDICT: GREEN   (the instrument's own consistency; R2/R3 being FALSE is the FINDING)

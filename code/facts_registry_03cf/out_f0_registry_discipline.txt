@@ -20,6 +20,10 @@ mg-03cf  docs/FACTS.md asked its own question
   F14   The two projections are not interchangeable                PASS
   F15   The equality set of F5 is strictly larger than the linear- PASS
   F16   `alpha` has a two-projection closed form, and `θ_min(A_n)  PASS
+  F17   Three mutually adjacent linear extensions do not exist     PASS
+  F18   `2/3` IS THE RUN-DENSITY THRESHOLD, AND IT IS A DIFFERENT  PASS
+  F19   At `δ(P) = 1/3` every incomparable pair is ADJACENT in `e` PASS
+  F20   The reversibility bound, of which F1 is the `k = 2` slice  PASS
 
 §2  VOCABULARY -- every KIND names a STATE.md:99 mark, or says WEAKER in words
 ----------------------------------------------------------------------------------------
@@ -39,18 +43,22 @@ mg-03cf  docs/FACTS.md asked its own question
   F14   `FP`   PASS
   F15   `U-id`+`FP`   PASS
   F16   `U-id`+`FP`   PASS
+  F17   `U`   PASS
+  F18   `U-id`+`U`   PASS
+  F19   `FP`   PASS
+  F20   `U`   PASS
 
 §3  COUNT -- STATE.md's pointer must not drift from the registry
 ----------------------------------------------------------------------------------------
-  STATE.md claims 16 entries; docs/FACTS.md has 16   [PASS]
+  STATE.md claims 20 entries; docs/FACTS.md has 20   [PASS]
 
 §4  LINKS -- every relative link in the registry resolves on disk
 ----------------------------------------------------------------------------------------
-  15 relative links checked, 0 broken   [PASS]
+  18 relative links checked, 0 broken   [PASS]
 
 §5  THE POSITIVE CONTROL -- this arm is shown able to fail
 ----------------------------------------------------------------------------------------
   an entry with its SCOPE field renamed is [CAUGHT]
   an entry graded with an invented mark is [CAUGHT]
 
-VERDICT: GREEN — 16 entries
+VERDICT: GREEN — 20 entries
