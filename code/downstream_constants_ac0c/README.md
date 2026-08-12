@@ -38,10 +38,10 @@ Three things nevertheless had to be **run** rather than read:
 |---|---|
 | `PREDICTIONS.md` | committed at `6a6232d`, before one line of this directory existed — **with the exposure disclosed**: `R1`–`R5` are REPORTS at zero credit because the ticket instructed me to read `mg-7564` first and I read seven more documents with it |
 | `libac0c.py` | the enumeration as 25 `Const` objects that cannot exist without their scope; the four chains as four functions; the cap; the supply; the closure test |
-| `a0_selftest.py` | seven controls, **three of them wrong-direction worlds**; a red here aborts `run_all.sh` |
+| `a0_selftest.py` | **eight** controls, **four of them wrong-direction worlds**; a red here aborts `run_all.sh` |
 | `a1_enumeration.py` | **the deliverable even if nothing else got done** — the table, the census, the holes, the weakest kind |
-| `a2_closure.py` | the ladder over every admissible `ε₀`; the closure verdicts; the coarse pin on L2's second disjunct; the requirement solved for `ε₀`; the dial |
-| `a3_novelty.py` | six **decisive** patterns with every raw hit printed, three **non-decisive** ones reported as establishing nothing |
+| `a2_closure.py` | the ladder over every admissible `ε₀`; the closure verdicts; the coarse pin on L2's second disjunct; the requirement solved for `ε₀`; **§D2, the same question in `mg-0e8c`'s density currency — a correction to §B's scope, landed rather than rewritten**; the dial |
+| `a3_novelty.py` | six **decisive** patterns with every raw hit printed, three **non-decisive** ones reported as establishing nothing. **This ticket's own deliverable is excluded from the sweep** — it states the claims being tested, so leaving it in would return them to their own author as prior art |
 | `out_*.txt` | the transcripts, committed |
 
 ## 3. The controls, and what each would have caught
@@ -55,6 +55,7 @@ Three things nevertheless had to be **run** rather than read:
 | C5 | **WRONG-DIRECTION**: the cap **refuses** a hypothetical `ε_dem = 3ε_leak` | a cap that admits everything |
 | C6 | **WRONG-DIRECTION**: `closes()` says **YES** when fed a supply that does meet the demand | an instrument that says *does not close* whatever it is fed — which is exactly what `a2` reports, so this control is the one that makes `a2` readable at all |
 | C7 | `mg-d3c7`'s family reproduced from its closed form at the four `n` `mg-9461` §4.3 prints | a mistyped family |
+| C8 | **WRONG-DIRECTION**: the density form of the supply (`mg-0e8c`) — a demand that fails at `d = 1` **passes** at `d = 1/100` | §D2's density thresholds being an artefact of an instrument that always says *no* |
 
 ⚠️ **C7 REPRODUCES ARITHMETIC, NOT A POSET PROPERTY.** That every balanced-in-side pair is
 evicted at every `k ≥ 3` is `mg-d3c7`'s measurement and is **not** re-verified here. If that

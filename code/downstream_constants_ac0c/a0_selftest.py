@@ -140,6 +140,22 @@ check("  strictly decreasing on k = 3..200", mono, True)
 
 print()
 print("=" * 78)
+print("a0 §H — CONTROL 8: the DENSITY form of the supply (mg-0e8c), and its wrong-direction")
+print("        world. At d = 1 the supply is n/(n+1); at small d it FALLS, and a demand that")
+print("        fails at d = 1 must PASS at a small enough d, or §D2 proves nothing.")
+print("=" * 78)
+check("  eps_sup(6, d=1) is the old value", L.eps_sup(6), F(6, 7))
+check("  eps_sup(6, d=1/2) halves it", L.eps_sup(6, F(1, 2)), F(3, 7))
+check("  demand 1/50 does NOT close at d = 1, n = 10^6",
+      L.closes(L.eps_sup(10**6), F(1, 50)), False)
+check("  demand 1/50 DOES close at d = 1/100, n = 10^6  (wrong-direction world)",
+      L.closes(L.eps_sup(10**6, F(1, 100)), F(1, 50)), True)
+check("  d_threshold(1/50, n=10^6) is just above 1/50",
+      L.d_threshold(F(1, 50), 10**6) > F(1, 50), True)
+check("  d_threshold refuses a zero demand", L.d_threshold(F(0), 10), None)
+
+print()
+print("=" * 78)
 print(f"a0 VERDICT: {'GREEN — all controls pass' if FAIL == 0 else f'RED — {FAIL} control(s) fired'}")
 print("=" * 78)
 raise SystemExit(1 if FAIL else 0)

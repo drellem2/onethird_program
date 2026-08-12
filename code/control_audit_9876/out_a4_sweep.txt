@@ -2,7 +2,7 @@
 mg-9876 — SMELL INDEX over code/ (candidates, NOT adjudications)
 ============================================================================================
 
-population: 210 directories under code/
+population: 211 directories under code/
 
 §1  MEMBERSHIP TESTS AGAINST A WHOLE CAPTURED OUTPUT
 --------------------------------------------------------------------------------------------
@@ -10,7 +10,7 @@ The shape of instance 3: `"8 9" in out` where `out` is the entire report, so a
 line printed unconditionally elsewhere satisfies it forever.  A candidate is not a
 defect — only running it two ways decides that.
 
-  214 candidate site(s) in 72 of 210 directories
+  214 candidate site(s) in 72 of 211 directories
 
     species_gate_audit_d53d  (20)
         code/species_gate_audit_d53d/g1_population.py:116  clean[rn] = (rc, E2_SAYS in out)
@@ -109,9 +109,9 @@ control at all, and whether any committed transcript records a demonstrated
 failure.  A directory with neither has no evidence its instrument can fail; that is
 weaker than saying it cannot.
 
-  ships a file named for negative/self/positive-control : 133 of 210
-  a committed transcript records a demonstrated failure  : 135 of 210
-  NEITHER, though the directory ships code               : 27 of 210
+  ships a file named for negative/self/positive-control : 134 of 211
+  a committed transcript records a demonstrated failure  : 136 of 211
+  NEITHER, though the directory ships code               : 27 of 211
 
   directories with code and no evidence of a falsification attempt:
       audit_successor_consolidation_9134  compression_novelty_623a            counterexample_audit_0a11         

@@ -67,5 +67,17 @@ a0 §G — CONTROL 7: mg-d3c7's family, REPRODUCED from its closed form against 
   [OK ]   strictly decreasing on k = 3..200: got True  want True   
 
 ==============================================================================
+a0 §H — CONTROL 8: the DENSITY form of the supply (mg-0e8c), and its wrong-direction
+        world. At d = 1 the supply is n/(n+1); at small d it FALLS, and a demand that
+        fails at d = 1 must PASS at a small enough d, or §D2 proves nothing.
+==============================================================================
+  [OK ]   eps_sup(6, d=1) is the old value: got 6/7  want 6/7   
+  [OK ]   eps_sup(6, d=1/2) halves it: got 3/7  want 3/7   
+  [OK ]   demand 1/50 does NOT close at d = 1, n = 10^6: got False  want False   
+  [OK ]   demand 1/50 DOES close at d = 1/100, n = 10^6  (wrong-direction world): got True  want True   
+  [OK ]   d_threshold(1/50, n=10^6) is just above 1/50: got True  want True   
+  [OK ]   d_threshold refuses a zero demand: got None  want None   
+
+==============================================================================
 a0 VERDICT: GREEN — all controls pass
 ==============================================================================

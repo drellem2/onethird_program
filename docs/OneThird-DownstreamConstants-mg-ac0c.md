@@ -8,7 +8,7 @@ Daniel's direct instruction:
 > rather close it off with real but coarse constants now than waste more time circling"*
 
 **Instrument.** [`code/downstream_constants_ac0c/`](../code/downstream_constants_ac0c/) —
-predictions committed at `6a6232d` before one line of it existed, **with the exposure
+predictions committed at `7c3395b` before one line of it existed, **with the exposure
 disclosed**: the ticket instructs *read `mg-7564` first*, and I read seven more documents with
 it, so `R1`–`R5` of `PREDICTIONS.md` are REPORTS at zero credit. Only the closure arithmetic,
 the novelty greps and the census counts were live. Scorecard at §7 — **one prediction survives
@@ -134,7 +134,7 @@ scope; the `SOURCE` column is where it can be re-read rather than trusted here.
 | # | step | quantity | status | value / bound | scope, in one line | source |
 |---|---|---|---|---|---|---|
 | **00** | L1b out | `1 − λ_std ≤ ε_spec`, i.e. `E[inv_e] ≤ (ε_spec/6)(n²−1)` — **the chain's INPUT** | **ABSENT** | — | row 8 is `OPEN`; `ε_spec` is whatever a proof would deliver | `STATE.md` row 8 |
-| **01** | supply | `ε_sup` — the best `ε_spec` **proved today** | **PROVED** | `sup = 1`; `n/(n+1)` at each `n` | supremum over the frozen class, **approached not attained**; an **equality** for the information pair bias consumes | `mg-6bc2` Cl. 3.1, scope `mg-832f` C2 |
+| **01** | supply | `ε_sup` — the best `ε_spec` **proved today**; `= d·n/(n+1)`, **LINEAR in the incomparability density** | **PROVED** | `d·n/(n+1)`; `→ 1` at `d = 1` | **approached not attained**; an **equality** for the information pair bias consumes. **THE DENSITY IS LOAD-BEARING** — the wall is already down at small `d`, and the largest `d` a **frozen** poset can have is residual **(R)** and is **UNKNOWN** | `mg-6bc2` Cl. 3.1, scope `mg-832f` C2; density form **`mg-0e8c`**, `STATE.md` row 8 |
 | **02** | Step 3 | **L2** as a disjunction | **ASSUMED** | — | `OPEN`; no constant of its own | `STATE.md` row 9 |
 | **03** | Step 3 | L2's **first** disjunct — the eigenvector clause | **REFUTED** | `2/126` fail | `n = 6` data; refutes the **first disjunct only**, not L2 | `STATE.md` row 9, scope `mg-3329` |
 | **04** | Step 4 | the **Cheeger square** `(Φ*)²/2 ≤ 1 − λ_std` | **PROVED** | `2` | the hard half of the sandwich, every poset | Op-Form §4.2; source `:318–324` |
@@ -245,6 +245,46 @@ write — does not close at ANY `ε₀ ∈ (0,1]`.** `ε₀²/2 ≤ 1/2` for eve
 > — by `50 %` at `n = 2` (`2` against `4/3`) and by `6.7 %` at the smallest `n` a
 > counterexample can have (`2` against `1.875`).
 
+### 3.1 ⚠️ A CORRECTION TO §3's SCOPE, MADE AGAINST MYSELF WHILE THIS BRANCH WAS OPEN
+
+`mg-0e8c` landed on `main` between this branch's base and its rebase, and it restates row 8:
+**`ε_sup = d·n/(n+1)`, LINEAR in the incomparability density `d = m/C(n,2)`** — so *"the wall
+is already DOWN, proven, all `n`, L4-free, at `d ≲ 2×10⁻²`, and what is open is the DENSE
+regime."*
+
+**§3 quotes the supply at `d = 1`, which is the worst case, and the table above is therefore a
+statement about the DENSE regime and must be read as one.** That is a real narrowing of what
+§3 claimed before this section existed, and it is landed here rather than by rewriting §3,
+so that what the sweep actually computed stays readable.
+
+**What survives, and it is sharper than what it replaces.** Each demand becomes meetable by
+pair bias exactly at `d ≤ ε_dem·(n+1)/n` (`a2` §D2):
+
+| `ε₀` | chain (I)≡(III) demand | closes only at density `d ≤` (at `n → ∞`) |
+|---|---|---|
+| `1` — the vacuous end | `1/2` | **`1/2`** |
+| `17/78` | `0.023751` | `0.023751` |
+| `1/5` — live calibration | `1/50` | **`2×10⁻²`** — `mg-0e8c`'s own dense-regime figure |
+| `1/7` | `1/98` | `0.010204` |
+| `0` | `0` | **never** |
+
+> ⭐ **EVEN AT THE VACUOUS `ε₀ = 1`, THE ARCHITECTURE'S OWN CHAIN CLOSES ONLY AT `d ≲ 1/2`.**
+> So for chain (I)≡(III) to close on pair bias at **any** `ε₀`, residual **(R)** — `STATE.md`'s
+> own *"do frozen posets have a density ceiling `d(P) ≤ D < 1`?"* — must be answered at
+> **`D ≲ 1/2`**, and at the live calibration at **`D ≲ 2×10⁻²`**.
+
+**That is a new consumer for (R), and it prices it.** `STATE.md` lists (R) as elementary and
+open and as one of the three live residuals; what §3.1 adds is *how good an answer would have
+to be* to close the architecture's own chain, and the answer is `D ≲ 1/2` at the most generous
+`ε₀` conceivable. **It reproduces `mg-0e8c`'s `2×10⁻²` from the demand side**, which is the
+check that the two documents are describing one object and not two.
+
+**And it does not disturb §4.** The `ε₀ ≥ n/(2(n+1))` requirement is derived at `d = 1` too,
+and inherits the same scope: it is what closure needs **in the dense regime**. In the sparse
+regime nothing is needed, because the wall is already proved there.
+
+---
+
 **What that does NOT say, stated because it is the misreading to expect.** It does not say L1b
 is impossible. `ε_sup` is what pair bias proves, and pair bias is **closed at an equality**
 (`mg-6bc2` Cl. 3.1) — so `ε_sup` is a floor on what *this route's information* can deliver,
@@ -332,7 +372,7 @@ is absent; it cannot establish a **statement** is absent — the limit `STATE.md
 | R1–R5 | the five REPORTS | **zero credit by construction**, as filed |
 | **P1** | 18–26 rows, at most 9 `PROVED`-unconditional | **HELD** — 25 rows, 8 `PROVED` (32 %) |
 | **P2** | **exactly 2** `ABSENT` entries, named in advance as `ε₀` and L2's second-disjunct constant | ⚠️ **LOST ON THE RAW COUNT — 4 rows are `ABSENT`.** The two I named are right and are the two that **gate**; the other two are L1b's own conclusion (the input) and `F` (unconsumed). **I am scoring this a loss rather than re-reading my own prediction into agreement**, because "on the critical path" was doing work in that sentence that I had not defined before the run. |
-| **P3** | chain (I)/(III) never closes on pair bias for any `ε₀ ∈ (0,1]`, minimum wall `2×` | **HELD on the closure half, exactly.** ⚠️ **The `2×` is CORRECTED against myself:** the wall is `2n/(n+1)`, so `2×` is the **limit** and the prediction overstated it at every finite `n` — `4/3` at `n = 2`, `1.875` at `n = 15`. The corrected figure is carried everywhere in this document and the bare `2×` is not. |
+| **P3** | chain (I)/(III) never closes on pair bias for any `ε₀ ∈ (0,1]`, minimum wall `2×` | **HELD on the closure half at the worst-case density `d = 1`** — ⚠️ **and SCOPED against myself by `mg-0e8c`, which landed on `main` mid-branch: the supply is linear in `d`, so the statement is about the DENSE regime and §3.1 is the correction.** ⚠️ **The `2×` is CORRECTED against myself:** the wall is `2n/(n+1)`, so `2×` is the **limit** and the prediction overstated it at every finite `n` — `4/3` at `n = 2`, `1.875` at `n = 15`. The corrected figure is carried everywhere in this document and the bare `2×` is not. |
 | **P4** | the requirement is `ε₀ ≥ n/(2(n+1))`, above every proved ceiling | **HELD**; `17/78` short by `2.294×`, `1/7` by `3.5×` |
 | **P5** | `0` hits for both closure statements | **HELD** on both, with the two `3n/(2(n+1))` near-misses adjudicated by reading. **Partial disclosure against myself:** `Δ₁ ≤ 1` and `ε₀ = 1` are both already in the corpus (7 and 2 real hits), so §2.1's two pins **reuse** corpus bounds rather than deriving them. |
 | **P6** | the verdict is `undetermined-because-step-X-is-ABSENT`, not `chain-does-not-close` | **HELD** — and it was a bet against the more dramatic reading of my own P3/P4 |
@@ -373,7 +413,12 @@ attempt-index row, in the form the surrounding rows use:
 > `2n/(n+1)`, attained at the vacuous end — **carry the `n`: `4/3` at `n = 2`, `1.875` at the
 > `n ≥ 15` a minimal counterexample must have, `2×` only in the limit** — so a factor
 > approaching `2×` of the published `50×` survives every possible value of `ε₀` and every
-> `C₃ ≥ 1`.** **(b) ANY chain, including one nobody has
+> `C₃ ≥ 1`.** ⚠️ **SCOPED BY mg-0e8c, WHICH LANDED MID-BRANCH AND IS CARRIED RATHER THAN
+> IGNORED: `ε_sup = d·n/(n+1)` is LINEAR in the incomparability density, so (a) is a statement
+> about the DENSE regime. Priced in that currency it is a NEW CONSUMER FOR RESIDUAL (R):
+> chain (I)=(III) closes on pair bias only at `d ≲ 1/2` — at the VACUOUS `ε₀ = 1` — and at
+> `d ≲ 2×10⁻²` at the live calibration, reproducing mg-0e8c's own dense-regime figure from
+> the demand side.** **(b) ANY chain, including one nobody has
 > written, needs `ε₀ ≥ n/(2(n+1)) → 1/2` to close on that supply** (from mg-7564 §4's
 > chain-free cap `ε_dem ≤ 2ε₀`), which is `2.294×` above `17/78`, `3.5×` above `1/7` and
 > infinitely above `0`. ⚠️ **THE SCOPE TRAVELS OR THE ROW IS AN OVERCLAIM:** those ceilings
@@ -442,8 +487,12 @@ attempt-index row, in the form the surrounding rows use:
 
 ## 10. Sources
 
-- [`STATE.md`](../STATE.md) at `87c12d1` — rows 8, 9, 10, 11; the diagram; the standing rule
-  at `:107`; § *The single lemma to prove*.
+- [`STATE.md`](../STATE.md) at `b364767` — rows 8, 9, 10, 11; the diagram; the standing rule
+  at `:107`; § *The single lemma to prove*. ⚠️ **Row 8 was RESTATED by `mg-0e8c` while this
+  branch was open**, and §3.1 is this document's correction to itself on that finding.
+- [`docs/OneThird-L1b-Restatement-mg-0e8c.md`](OneThird-L1b-Restatement-mg-0e8c.md) —
+  `ε_sup = d·n/(n+1)`, linear in the incomparability density; *"what is open is the DENSE
+  regime"*. Landed on `main` mid-branch; **§3.1 carries it.**
 - [`docs/OneThird-DemandRelaxation-mg-7564.md`](OneThird-DemandRelaxation-mg-7564.md) — the
   chain-free cap `ε_dem ≤ 2ε_leak` (§4), the three `C₃`s reconciled (§0.2), `ε_leak` as L4's
   threshold (§0.3). **The template this ticket was told to follow and not to redo.**

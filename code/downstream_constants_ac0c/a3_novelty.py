@@ -42,6 +42,11 @@ NON_DECISIVE = [
 
 SKIP_DIRS = {".git", "__pycache__"}
 SKIP_SELF = os.path.join("code", "downstream_constants_ac0c")
+# THIS TICKET'S OWN DELIVERABLE IS EXCLUDED TOO, and the exclusion is load-bearing rather than
+# tidy: it states the claims this sweep is testing for novelty, so leaving it in would return
+# the claims to their own author as prior art.  It went in on the first re-run after the
+# rebase, when the sweep started finding `n/(2(n+1))` in the document that introduces it.
+SKIP_FILES = {os.path.join("docs", "OneThird-DownstreamConstants-mg-ac0c.md")}
 
 
 def files():
@@ -51,8 +56,12 @@ def files():
         if rel_dir.startswith(SKIP_SELF):
             continue
         for fn in filenames:
-            if fn.endswith((".md", ".tex", ".html")):
-                yield os.path.join(dirpath, fn)
+            if not fn.endswith((".md", ".tex", ".html")):
+                continue
+            full = os.path.join(dirpath, fn)
+            if os.path.relpath(full, ROOT) in SKIP_FILES:
+                continue
+            yield full
 
 
 def sweep(rx):
@@ -74,7 +83,9 @@ ALL = sorted(files())
 
 print("=" * 100)
 print(f"a3 — NOVELTY SWEEP. Corpus at {rev}; {len(ALL)} .md/.tex/.html files searched.")
-print("     This instrument's own directory is EXCLUDED (it would match everything).")
+print("     This instrument's own directory AND this ticket's deliverable are EXCLUDED — the")
+print("     deliverable states the very claims being tested, so leaving it in would return")
+print("     them to their own author as prior art.")
 print("=" * 100)
 print()
 print("#" * 100)

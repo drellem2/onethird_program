@@ -9,11 +9,11 @@ a1 §A — THE ENUMERATION: L1b's conclusion → the contradiction
       SOURCE : STATE.md row 8; Op-Form §6.2
       PIN/HOLE: HOLE — but it is the WALL itself, not a downstream hole. Everything below prices it.
 
-[01] supply             `ε_sup` — the best ε_spec PROVED today, from pair bias alone
+[01] supply             `ε_sup` — the best ε_spec PROVED today, from pair bias alone; `= d·n/(n+1)`, LINEAR IN THE INCOMPARABILITY DENSITY `d`
       STATUS : PROVED
       VALUE  : 1
-      SCOPE  : sup over the frozen class; at each n the value is n/(n+1) < 1, APPROACHED not attained
-      SOURCE : mg-6bc2 Claim 3.1; scope mg-832f Correction 2; STATE.md:21
+      SCOPE  : sup over the frozen class at d = 1; at each n and each poset the value is d·n/(n+1) < 1, APPROACHED not attained. THE DENSITY IS LOAD-BEARING: the wall is already DOWN at small d, and the largest d a FROZEN poset can have is residual (R) and is UNKNOWN
+      SOURCE : mg-6bc2 Claim 3.1; scope mg-832f Corr. 2; density form mg-0e8c, STATE.md row 8
 
 [02] Step 3 / L2        L2 as a DISJUNCTION — eigenvector monotone in `e`, OR directly produce a low-conductance prefix
       STATUS : ASSUMED

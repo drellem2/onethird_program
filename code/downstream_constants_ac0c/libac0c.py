@@ -81,10 +81,14 @@ ROWS = [
           "STATE.md row 8; Op-Form §6.2",
           hole="HOLE — but it is the WALL itself, not a downstream hole. Everything below prices it."),
 
-    Const("01", "supply", "`ε_sup` — the best ε_spec PROVED today, from pair bias alone",
+    Const("01", "supply", "`ε_sup` — the best ε_spec PROVED today, from pair bias alone; "
+                          "`= d·n/(n+1)`, LINEAR IN THE INCOMPARABILITY DENSITY `d`",
           PROVED, F(1),
-          "sup over the frozen class; at each n the value is n/(n+1) < 1, APPROACHED not attained",
-          "mg-6bc2 Claim 3.1; scope mg-832f Correction 2; STATE.md:21",
+          "sup over the frozen class at d = 1; at each n and each poset the value is "
+          "d·n/(n+1) < 1, APPROACHED not attained. THE DENSITY IS LOAD-BEARING: the wall is "
+          "already DOWN at small d, and the largest d a FROZEN poset can have is residual (R) "
+          "and is UNKNOWN",
+          "mg-6bc2 Claim 3.1; scope mg-832f Corr. 2; density form mg-0e8c, STATE.md row 8",
           hole=None),
 
     Const("02", "Step 3 / L2", "L2 as a DISJUNCTION — eigenvector monotone in `e`, OR directly produce a low-conductance prefix",
@@ -294,10 +298,27 @@ def cap(eps_leak):
     return 2 * eps_leak
 
 
-def eps_sup(n):
-    """The PROVED pair-bias supply at n:  ε_spec < n/(n+1), an EQUALITY for the information
-    pair bias consumes (mg-6bc2 Claim 3.1)."""
-    return F(n, n + 1)
+def eps_sup(n, d=F(1)):
+    """The PROVED pair-bias supply:  ε_spec < d·n/(n+1), an EQUALITY for the information pair
+    bias consumes (mg-6bc2 Claim 3.1; the density form is mg-0e8c, landed at STATE.md row 8).
+
+    ⚠️ **THE DEFAULT `d = 1` IS THE WORST CASE AND IS DELIBERATE.** `d = m/C(n,2)` is the
+    incomparability density, so the supply is LINEAR IN `d` and the wall is already down at
+    small `d`. L1b is a statement about EVERY frozen poset, so the binding case is the largest
+    `d` a frozen poset can have — which is residual **(R)**, `STATE.md`'s own open question
+    *"do frozen posets have a density ceiling `d(P) ≤ D < 1`?"*, and is UNKNOWN. Every closure
+    verdict in `a2` is therefore stated at `d = 1` AND solved for the `d` at which it flips."""
+    _check_exact(d, "eps_sup d")
+    return d * F(n, n + 1)
+
+
+def d_threshold(eps_dem, n):
+    """The incomparability density at which a given demand becomes meetable by pair bias:
+    `d·n/(n+1) ≤ ε_dem`  ⟺  `d ≤ ε_dem·(n+1)/n`.  Returns None if the demand is 0."""
+    if eps_dem is None or eps_dem == 0:
+        return None
+    _check_exact(eps_dem, "d_threshold eps_dem")
+    return eps_dem * F(n + 1, n)
 
 
 def closes(supply, demand):
