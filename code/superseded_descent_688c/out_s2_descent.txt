@@ -1,0 +1,330 @@
+==============================================================================
+mg-688c s2 -- DID ANYTHING DESCEND FROM THE SUPERSEDED READINGS?
+==============================================================================
+
+  repair at 2026-08-12T21:07:16Z -- every hazard window closes here
+  fingerprints: 15, over 8 withdrawn claims
+  self-exclusion: code/superseded_descent_688c (contains synthetic fingerprints)
+
+  PER-CLAIM HAZARD WINDOWS (from s0):
+    RC1  2026-08-07T23:27:31Z -> repair   (4d 21h 39m 45s)
+    RC2  2026-08-07T23:27:31Z -> repair   (4d 21h 39m 45s)
+    KS1  2026-08-07T23:16:33Z -> repair   (4d 21h 50m 43s)
+    KS2  2026-08-07T23:16:33Z -> repair   (4d 21h 50m 43s)
+    KS3  2026-08-07T23:16:33Z -> repair   (4d 21h 50m 43s)
+    CR1  2026-08-09T18:06:45Z -> repair   (3d 03h 00m 31s)
+    CR2  2026-08-07T23:16:33Z -> repair   (4d 21h 50m 43s)
+    BK1  2026-07-29T18:02:52Z -> repair   (14d 03h 04m 24s)
+
+------------------------------------------------------------------------------
+POP-A -- onethird_program commits (ADDED lines only)
+------------------------------------------------------------------------------
+  commits in population (all time)           573
+  commits inside a hazard window             544
+  fingerprint occurrences                    65
+  of which CARRIES-WITHDRAWAL                57
+  of which BARE (hand-adjudicated below)     8
+  by claim:  BK1 1(1 bare)   CR1 2(0 bare)   CR2 26(3 bare)   KS3 26(3 bare)   RC1 4(1 bare)   RC2 6(0 bare)
+
+------------------------------------------------------------------------------
+POP-B -- macguffin work items
+------------------------------------------------------------------------------
+  work items in population (all time)        5108
+  work items inside a hazard window          1469
+  fingerprint occurrences                    33
+  of which CARRIES-WITHDRAWAL                28
+  of which BARE (hand-adjudicated below)     5
+  by claim:  CR1 2(0 bare)   CR2 11(1 bare)   KS3 11(1 bare)   RC1 2(0 bare)   RC2 7(3 bare)
+
+------------------------------------------------------------------------------
+POP-C -- macguffin mail
+------------------------------------------------------------------------------
+  messages in population (all time)          30383
+  messages inside a hazard window            11573
+  fingerprint occurrences                    26
+  of which CARRIES-WITHDRAWAL                24
+  of which BARE (hand-adjudicated below)     2
+  by claim:  BK1 2(2 bare)   CR2 7(0 bare)   KS3 7(0 bare)   RC1 4(0 bare)   RC2 6(0 bare)
+
+------------------------------------------------------------------------------
+POP-D -- LINE ANCHORS INTO THE AFFECTED DOCUMENTS  (the ACT OF READING)
+------------------------------------------------------------------------------
+  files at HEAD: 2756  (excluded: code/superseded_descent_688c, code/mirror_staleness_cdd5)
+  anchors found: 16 raw, 13 unique (file, doc, line)
+  anchors whose line differs between the two revisions: 9
+    [EXPLICIT] code/row3b_audit_eba7/OUTCOMES.md -> OneThird-StandardDominance-ComparisonRoute.md:104
+       at 912f1b1: | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | Empirically supported, **0/132** (`mgb0a6`).
+       at 949c439: | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | ~~Empirically supported, **0/132** (`mgb0a6`
+    [EXPLICIT] docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md -> OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:127
+       at 912f1b1: **(a) Soft claim — "expected rank largely determines the eigenvector ordering"
+       at 949c439: total order `e` agreeing with all >2/3 majority orientations. Linear-extension
+    [EXPLICIT] docs/state-history/audit-mg-eba7-of-mg-55f2.md -> OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310
+       at 912f1b1: So **L1b ⟺ "all-pairs-frozen ⇒ standard dominance,"** and LIB (§4) is its quantitative
+       at 949c439: | witness | `n` | width | `\|L(P)\|` | `λ_std` | `λ₂^{BK}` | excess |
+    [EXPLICIT] docs/state-history/audit-mg-eba7-of-mg-55f2.md -> OneThird-StandardDominance-ComparisonRoute.md:104
+       at 912f1b1: | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | Empirically supported, **0/132** (`mgb0a6`).
+       at 949c439: | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | ~~Empirically supported, **0/132** (`mgb0a6`
+    [EXPLICIT] docs/state-history/audit-mg-eba7-of-mg-55f2.md -> OneThird-L1b-BK-Transport-Transfer-Probe.md:112
+       at 912f1b1: **Every one of the 166 refuters has δ(P) ∈ {0.473, 0.474, 0.500}** — i.e. it possesses
+       at 949c439: the 25th percentile) yet transport gap `≥ median` — e.g.
+    [BARE] docs/state-history/audit-mg-eba7-of-mg-55f2.md -> OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:198
+       at 912f1b1: | standard dominance | **holds** |
+       at 949c439: direct low-conductance prefix, and the prefix conclusion survives regardless (see
+    [BARE] docs/state-history/audit-mg-eba7-of-mg-55f2.md -> OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:20
+       at 912f1b1: | **2. Standard dominance** | the full symmetrized Cayley-walk's 2nd eigenvalue = λ_std (g
+       at 949c439: > place the figure survived without its condition. The condition:
+    [BARE] docs/state-history/audit-mg-eba7-of-mg-55f2.md -> OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:103
+       at 912f1b1: ## Kill-shot 2 — Standard dominance — **GREEN**
+       at 949c439:   `feedback_n_poset_is_not_ordinal_sum`).
+    [BARE] docs/state-history/audit-mg-eba7-of-mg-55f2.md -> OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:286
+       at 912f1b1: | standard-dominance failures (n≤6 exhaustive + n=7 top-λ spot) | 0 / 132 |
+       at 949c439:    reduce the hard input, it re-consumes it. **Deciding whether "BK bad-mixing
+
+  DATING EACH BROKEN ANCHOR -- authored before or after the shift?
+    code/row3b_audit_eba7/OUTCOMES.md                        :104  correct-when-written
+        anchor written 2026-08-07T22:36:18Z   lines shifted 2026-08-07T23:16:33Z (a8688f2)
+        by e9ae5e0  audit: mg-eba7's INDEPENDENT AUDIT of mg-55f2's row 3b r
+    Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md :127  PROVES-STALE-READ
+        anchor written 2026-08-12T12:44:57Z   lines shifted 2026-08-07T23:16:33Z (a8688f2)
+        by 7058fbd  audit: THE CLAIM SECTION 5 RESTS ON IS NOT IN THE CORPUS
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md           :310  correct-when-written
+        anchor written 2026-08-07T22:36:18Z   lines shifted 2026-08-07T23:27:31Z (bde9610)
+        by e9ae5e0  audit: mg-eba7's INDEPENDENT AUDIT of mg-55f2's row 3b r
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md           :104  correct-when-written
+        anchor written 2026-08-07T22:36:18Z   lines shifted 2026-08-07T23:16:33Z (a8688f2)
+        by e9ae5e0  audit: mg-eba7's INDEPENDENT AUDIT of mg-55f2's row 3b r
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md           :112  PROVES-STALE-READ
+        anchor written 2026-08-07T22:36:18Z   lines shifted 2026-07-29T18:02:52Z (af7fc2d)
+        by e9ae5e0  audit: mg-eba7's INDEPENDENT AUDIT of mg-55f2's row 3b r
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md           :198  correct-when-written
+        anchor written 2026-08-07T22:36:18Z   lines shifted 2026-08-07T23:16:33Z (a8688f2)
+        by e9ae5e0  audit: mg-eba7's INDEPENDENT AUDIT of mg-55f2's row 3b r
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md           :20   correct-when-written
+        anchor written 2026-08-07T22:36:18Z   lines shifted 2026-08-07T23:16:33Z (a8688f2)
+        by e9ae5e0  audit: mg-eba7's INDEPENDENT AUDIT of mg-55f2's row 3b r
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md           :103  correct-when-written
+        anchor written 2026-08-07T22:36:18Z   lines shifted 2026-08-07T23:16:33Z (a8688f2)
+        by e9ae5e0  audit: mg-eba7's INDEPENDENT AUDIT of mg-55f2's row 3b r
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md           :286  correct-when-written
+        anchor written 2026-08-07T22:36:18Z   lines shifted 2026-08-07T23:16:33Z (a8688f2)
+        by e9ae5e0  audit: mg-eba7's INDEPENDENT AUDIT of mg-55f2's row 3b r
+
+    ANCHORS THAT PROVE A STALE READ: 2 of 9
+
+  WHERE THE CITED TEXT MOVED TO AT 949c439 (repair table, NOT applied)
+  -- reported so a successor's repair is a lookup, not a re-derivation.
+  -- mg-cdd5 scoped its anchor repair to STATE.md; editing three other
+  -- documents is a different job from answering what descended.
+    code/row3b_audit_eba7/OUTCOMES.md                  OneThird-StandardDominance-ComparisonRoute.md:104 -> (text no longer present verbatim)
+    ssion-W1-LinearEigenfunction-Provenance-mg-bb60.md OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:127 -> :180
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md     OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310 -> :449
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md     OneThird-StandardDominance-ComparisonRoute.md:104 -> (text no longer present verbatim)
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md     OneThird-L1b-BK-Transport-Transfer-Probe.md:112 -> :121
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md     OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:198 -> :251
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md     OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:20 -> (text no longer present verbatim)
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md     OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:103 -> (text no longer present verbatim)
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md     OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:286 -> (text no longer present verbatim)
+
+  AND AGAINST WHAT THE WINDOW AUTHORED (not just what survives at HEAD):
+    anchors written by in-window commits: 8
+    of which resolve at 912f1b1 but not at 949c439: 8
+      7058fbd 2026-08-12T12:44:57Z  ->  OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:127
+        `one_third_width_three/docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:127–142`:
+      e9ae5e0 2026-08-07T22:36:18Z  ->  OneThird-StandardDominance-ComparisonRoute.md:104
+        `one_third_width_three/docs/OneThird-StandardDominance-ComparisonRoute.md:104`
+      e9ae5e0 2026-08-07T22:36:18Z  ->  OneThird-StandardDominance-ComparisonRoute.md:104
+        `docs/OneThird-StandardDominance-ComparisonRoute.md:104`, where `0/132` is quoted
+      e9ae5e0 2026-08-07T22:36:18Z  ->  OneThird-StandardDominance-ComparisonRoute.md:104
+        **`one_third_width_three/docs/OneThird-StandardDominance-ComparisonRoute.md:104`:**
+      e9ae5e0 2026-08-07T22:36:18Z  ->  OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310
+        - `OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310` states `L1b ⟺ "all-pairs-frozen
+      e9ae5e0 2026-08-07T22:36:18Z  ->  OneThird-L1b-BK-Transport-Transfer-Probe.md:112
+        mark. I verified it rather than scoring it: `OneThird-L1b-BK-Transport-Transfer-Probe.md:112`
+      276aead 2026-08-07T17:09:24Z  ->  OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310
+        | 3b | standard **dominance** (that block carries the 2nd eigenvalue). ⚠️ **RESTATED CONDITIONALLY — mg-55f2, landing mg-65f5's §1.5 finding on pm-one
+      276aead 2026-08-07T17:09:24Z  ->  OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:286
+        | 3b | standard **dominance** (that block carries the 2nd eigenvalue). ⚠️ **RESTATED CONDITIONALLY — mg-55f2, landing mg-65f5's §1.5 finding on pm-one
+
+==============================================================================
+THE BARE HITS, IN FULL -- these are the candidate descendants
+==============================================================================
+
+  [1] POP-A  claim KS3  fp '0\\s*/\\s*132'
+      d19d127 2026-08-12T20:54:45Z registry: THE FACTS REGISTRY EXISTS AND IT IS GATED — docs/F
+      WHAT IT BUYS IS THE ONLY THING THAT MAKES A REGISTRY WORTH HAVING: #
+      every entry carries its KIND and its exact SCOPE, so that no figure
+      in it can be quoted # away from the population that makes it true.
+      That discipline is a convention, and a # convention with no gate is
+      one hurried entry away from being over — an entry with the # number
+      and without the population is exactly STATE.md row 3b's `0/132` in a
+      new file. # The gate is on STRUCTURE, not on truth: it cannot check
+      that a SCOPE line is correct, only # that
+
+  [2] POP-A  claim KS3  fp '0\\s*/\\s*132'
+      d19d127 2026-08-12T20:54:45Z registry: THE FACTS REGISTRY EXISTS AND IT IS GATED — docs/F
+      onjecture is verified to n = 14 (mg-33f5, STATE.md). So NO frozen
+      poset exists in reach, this arm reports `0 frozen posets` by
+      construction, and that zero is NOT evidence for the corollary. The
+      corollary's entire warrant is the one-line derivation. This file
+      exists to say so at the site, rather than let a future reader
+      mistake an empty population for a clean sweep -- which is STATE.md
+      row 3b's `0/132` defect in a new costume. Imports nothing from this
+      repository: agreement with the arc's instruments would otherwise
+
+  [3] POP-A  claim CR2  fp '0\\s*/\\s*132'
+      d19d127 2026-08-12T20:54:45Z registry: THE FACTS REGISTRY EXISTS AND IT IS GATED — docs/F
+      WHAT IT BUYS IS THE ONLY THING THAT MAKES A REGISTRY WORTH HAVING: #
+      every entry carries its KIND and its exact SCOPE, so that no figure
+      in it can be quoted # away from the population that makes it true.
+      That discipline is a convention, and a # convention with no gate is
+      one hurried entry away from being over — an entry with the # number
+      and without the population is exactly STATE.md row 3b's `0/132` in a
+      new file. # The gate is on STRUCTURE, not on truth: it cannot check
+      that a SCOPE line is correct, only # that
+
+  [4] POP-A  claim CR2  fp '0\\s*/\\s*132'
+      d19d127 2026-08-12T20:54:45Z registry: THE FACTS REGISTRY EXISTS AND IT IS GATED — docs/F
+      onjecture is verified to n = 14 (mg-33f5, STATE.md). So NO frozen
+      poset exists in reach, this arm reports `0 frozen posets` by
+      construction, and that zero is NOT evidence for the corollary. The
+      corollary's entire warrant is the one-line derivation. This file
+      exists to say so at the site, rather than let a future reader
+      mistake an empty population for a clean sweep -- which is STATE.md
+      row 3b's `0/132` defect in a new costume. Imports nothing from this
+      repository: agreement with the arc's instruments would otherwise
+
+  [5] POP-A  claim RC1  fp 'standard sector is a subspace'
+      0a8415b 2026-08-12T20:46:49Z stock-take: THE SPECTRAL ROUTE IS NOT *THE* BRIDGE, AND THE 
+      5792… > 0.943488101… = λ₂^BK`, certified by the **separating
+      rational > `9437/10000`**: a *proved strict* separation at margin
+      `4.4e-4`, not a numerical one. > Indecomposability does not rescue
+      the claim either. `ComparisonRoute` §1.2 and §2.4 predate this > and
+      are superseded by it. **Why the inequality was believed, and why the
+      reason was never a reason.** The justification on record was *"the
+      standard sector is a subspace"* — restricting a max to a subspace
+      lowers it, which is a **valid schema with a false hypot
+
+  [6] POP-A  claim KS3  fp '0\\s*/\\s*132'
+      7058fbd 2026-08-12T12:44:57Z audit: THE CLAIM SECTION 5 RESTS ON IS NOT IN THE CORPUS AND
+      Nothing here is a ledger movement: no row changes kind, and the
+      finding is about a document that is not on the ledger. If W2/W3/W4
+      conclude the note belongs on the board, that edit is theirs and it
+      goes through the `mg-e331` ratchet. - **No mathematics was checked
+      and nothing was computed.** Every claim above is of the form *"file
+      F, line L, says S"*, and the figures quoted (166 refuters, `0/132`,
+      τ = 0.857, 2/126, 85/126) are **read from the documents that publish
+      them and are not re-measured here** — the same ev
+
+  [7] POP-A  claim CR2  fp '0\\s*/\\s*132'
+      7058fbd 2026-08-12T12:44:57Z audit: THE CLAIM SECTION 5 RESTS ON IS NOT IN THE CORPUS AND
+      Nothing here is a ledger movement: no row changes kind, and the
+      finding is about a document that is not on the ledger. If W2/W3/W4
+      conclude the note belongs on the board, that edit is theirs and it
+      goes through the `mg-e331` ratchet. - **No mathematics was checked
+      and nothing was computed.** Every claim above is of the form *"file
+      F, line L, says S"*, and the figures quoted (166 refuters, `0/132`,
+      τ = 0.857, 2/126, 85/126) are **read from the documents that publish
+      them and are not re-measured here** — the same ev
+
+  [8] POP-A  claim BK1  fp '\\b946\\b'
+      c8c60a8 2026-07-30T14:18:41Z docs+audit: independent audit of mg-24a3 / f5d3485 (how a co
+      t deletion: n=10 covers: 0<2 0<6 0<8 1<3 1<8 2<9 3<6 3<7 4<5 4<6 6<9
+      tie-free=True acyclic=False e(P)=7134 the three cycle edges and
+      their margins: 5 -> 8 p = 597/1189 = 0.50210 8 -> 6 p = 599/1189 =
+      0.50378 6 -> 5 p = 1784/3567 = 0.50014 random search at n = 8 and n
+      = 9, larger budget than the document's 4200 n=8: 0 cycles in 4000
+      random posets n=9: CYCLE FOUND after 946 tries: 0<5 0<8 1<4 1<6 2<3
+      2<7 3<6 4<8 5<7 n=9: 2 cycles in 4000 random posets
+      ==================================================================
+
+  [9] POP-B  claim KS3  fp '0\\s*/\\s*132'
+      work/archive/2026-08/mg-bb60.result.json  created 2026-08-12T12:45:51Z  written 2026-08-12T12:45:51Z
+      d not edited); gate-run transcript churn under code/ reverted, so
+      the commit is one file."],"unverified":["A conversation that left no
+      artifact on this machine (a web chat, another model's UI, an unsaved
+      session) could carry the claim. A1-A8 cannot rule that out and are
+      not offered as ruling it out; what they establish is that nothing
+      citable today carries it.","Every figure quoted (166 refuters,
+      0/132, tau 0.857, 2/126, 85/126, the incomparability rationals) is
+      READ from the document that publishes it and NOT re-m
+
+  [10] POP-B  claim CR2  fp '0\\s*/\\s*132'
+      work/archive/2026-08/mg-bb60.result.json  created 2026-08-12T12:45:51Z  written 2026-08-12T12:45:51Z
+      d not edited); gate-run transcript churn under code/ reverted, so
+      the commit is one file."],"unverified":["A conversation that left no
+      artifact on this machine (a web chat, another model's UI, an unsaved
+      session) could carry the claim. A1-A8 cannot rule that out and are
+      not offered as ruling it out; what they establish is that nothing
+      citable today carries it.","Every figure quoted (166 refuters,
+      0/132, tau 0.857, 2/126, 85/126, the incomparability rationals) is
+      READ from the document that publishes it and NOT re-m
+
+  [11] POP-B  claim RC2  fp "5\\.0['′]"
+      work/archive/2026-08/mg-cdd5.md  created 2026-08-12T20:51:26Z  written 2026-08-12T20:51:26Z
+      that the working copy being stale is INVISIBLE from inside it.
+      Nothing in the file says "you are looking at a superseded revision".
+      == WHAT TO DO == 1. **Establish the actual state, from the remote
+      and not from the working copy.** Confirm bde9610 is on
+      `one_third_width_three` origin/main, confirm 912f1b1 is what the
+      mirror has, and confirm the diff between them contains the strike
+      and the 5.0' rewrite. Quote the commands. 2. **Bring the mirror
+      current**, or if that is not the right remedy, say what is. Do not
+      assum
+
+  [12] POP-B  claim RC2  fp "§\\s*5\\.0['′]"
+      work/done/mg-a1db.result.json  created 2026-08-09T23:30:15Z  written 2026-08-09T23:30:15Z
+      pied from the patch: `git show
+      main:docs/probe-lambda-constant-bound.md | sed -n 60,70p` puts the
+      T/S/lambda_std display block exactly at :65; §5 and §5.0' both exist
+      in OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md (:277, :300) and §5
+      carries the `L1b \u003c=\u003e all-pairs-frozen =\u003e standard
+      dominance` line at :449; the A2(+)A2 (1 \u003e 2/3) and A3(+)A3 (1
+      \u003e 9/10) witnesses read off §5.0''s own exact-rational table.
+      Drifted hard refs :288/:310 deliberately not reused — section
+      anchors used instead.","
+
+  [13] POP-B  claim RC2  fp "5\\.0['′]"
+      work/done/mg-a1db.result.json  created 2026-08-09T23:30:15Z  written 2026-08-09T23:30:15Z
+      ied from the patch: `git show
+      main:docs/probe-lambda-constant-bound.md | sed -n 60,70p` puts the
+      T/S/lambda_std display block exactly at :65; §5 and §5.0' both exist
+      in OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md (:277, :300) and §5
+      carries the `L1b \u003c=\u003e all-pairs-frozen =\u003e standard
+      dominance` line at :449; the A2(+)A2 (1 \u003e 2/3) and A3(+)A3 (1
+      \u003e 9/10) witnesses read off §5.0''s own exact-rational table.
+      Drifted hard refs :288/:310 deliberately not reused — section
+      anchors used instead.","d
+
+  [14] POP-C  claim BK1  fp '\\b946\\b'
+      mail/7db4/cur/1785383832999381000.97206.1000  2026-07-30T03:57:12Z
+      u go with option (a), the paths-filtered job, note there is now a
+      THIRD expensive demonstration to consider triggering:
+      scripts/onethird_mg75f0_gate_class_closure_demo.py (~25 min, twelve
+      gate runs, five mutations incl. three the gate had never seen),
+      which mg-75f0 adds. * I also raised the job's timeout-minutes from
+      10 to 20, since the gate plus the probe both enumerate the 946 n=7
+      posets. If you have already edited script-controls.yml, we will
+      conflict on that file -- tell me and I will rebase onto yours rather
+      t
+
+  [15] POP-C  claim BK1  fp '\\b946\\b'
+      mail/7db4/cur/1785384315196327000.47547.7000  2026-07-30T04:05:15Z
+      mutate an EXCLUSION rather than a conjunct. 4. THE DUPLICATE CI
+      STEP. We both add `python3
+      scripts/onethird_mg5ad1_gate_blindspot_probe.py` to
+      script-controls.yml. It must collapse to one step, and yours has the
+      better surrounding comment because it explains the
+      ownership/coverage split. I also raised timeout-minutes 10 -> 20
+      (the widened gate plus the probe both enumerate the 946 posets, and
+      a hosted runner is slower than this host) -- please keep that, or
+      raise it further, since your gate-mutation-demo.yml job i
+
+==============================================================================
+TALLY
+==============================================================================
+  fingerprint occurrences, all populations: 124
+  CARRIES-WITHDRAWAL:                       109
+  BARE (candidate descendants):             15
+  stale-only line anchors at HEAD:          9
+  stale-only line anchors authored in-window: 8
+== s2 exit: 0 ==

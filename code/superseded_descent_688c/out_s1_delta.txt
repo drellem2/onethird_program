@@ -1,0 +1,222 @@
+==============================================================================
+mg-688c s1 -- WHAT THE STALE TEXT SAID, AND WHAT THE CURRENT TEXT SAYS
+==============================================================================
+
+  stale   = 912f1b1   (what the checkout held for the whole window)
+  current = 949c439   (origin/main at the repair)
+  read by   git show <rev>:<path>   -- no working copy is opened
+
+==============================================================================
+A. THE CITING SITES -- mg-cdd5's NOT-CLEAN ROWS, RESTATED
+==============================================================================
+
+  Taken from mg-cdd5's s2 sweep, which named them.  This step does not re-run
+  the citation extraction; it takes that population as given and asks what the
+  text at each end of it actually says.
+
+  tier 1  CHANGED-WITH-STRIKE    STATE.md:78
+          -> docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md
+  tier 1  CHANGED-WITH-STRIKE    STATE.md:112
+          -> docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md
+  tier 1  CHANGED-WITH-STRIKE    STATE.md:112
+          -> docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md
+  tier 1  CHANGED                STATE.md:112
+          -> docs/OneThird-L1b-BK-Transport-Transfer-Probe.md
+  tier 2  CHANGED-WITH-STRIKE    code/row3b_audit_eba7/OUTCOMES.md:72
+          -> docs/OneThird-StandardDominance-ComparisonRoute.md
+  tier 2  CHANGED-WITH-STRIKE    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126
+          -> docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md
+  tier 2  CHANGED-WITH-STRIKE    docs/state-history/audit-mg-eba7-of-mg-55f2.md:112
+          -> docs/OneThird-StandardDominance-ComparisonRoute.md
+
+  7 citing sites, 4 distinct cited documents, 4 distinct citing files.
+  The ticket's "4 of 6 STATE.md citations" are the four tier-1 rows; its
+  "3 more in 3 more files" are the three tier-2 rows.
+
+==============================================================================
+B. THE CLAIMS, STALE SIDE AND CURRENT SIDE, READ FROM BOTH REVISIONS
+==============================================================================
+
+------------------------------------------------------------------------------
+RC1  [STRUCK]  `lambda_std <= lambda_2^BK` (the standard sector is a subspace)
+  in docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md
+  withdrawn by bde9610, on origin/main
+------------------------------------------------------------------------------
+  STALE   (912f1b1) -- locator 'standard sector is a subspace' matches 1 line(s)
+      :286  - **But `λ_std ≤ λ₂^{BK}`** (the standard sector is a subspace): Theorem E bounds the gap
+  CURRENT (949c439) -- locator 'standard sector is a subspace' matches 2 line(s)
+      :286  - > ~~**But `λ_std ≤ λ₂^{BK}`** (the standard sector is a subspace): Theorem E bounds the
+      :320  **(b) Why the parenthetical is not a proof.** *"The standard sector is a subspace"* is a
+
+  WHAT A READER OF THE STALE TREE SAW:
+    The Reverse-Cheeger bullet at line 286 asserts, unstruck: **But `λ_std
+    ≤ λ₂^{BK}`** (the standard sector is a subspace): Theorem E bounds the
+    gap in the *wrong direction* for the transport quotient.
+  WHAT THE CURRENT TEXT SAYS:
+    The same bullet, struck, plus a STRUCK 2026-08-07 (mg-d1be) note: the
+    inequality is FALSE with exact counterexamples (A2+A2: 1 > 2/3; A3+A3:
+    1 > 9/10), and the parenthetical is not a proof of it. The bullet's
+    CONCLUSION survives on stronger ground (no universal inequality in
+    either direction).
+
+------------------------------------------------------------------------------
+RC2  [ABSENT-IN-MIRROR]  section 5.0' -- the correction section itself
+  in docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md
+  withdrawn by bde9610, on origin/main
+------------------------------------------------------------------------------
+  STALE   (912f1b1) -- locator "^#+ *5\\.0['′]" matches 0 line(s)
+      (no match -- for RC2 that IS the finding)
+  CURRENT (949c439) -- locator "^#+ *5\\.0['′]" matches 1 line(s)
+      :300  ### 5.0′ Correction to the bullet above (mg-d1be)
+
+  WHAT A READER OF THE STALE TREE SAW:
+    Section 5.0' does not occur in the mirror's copy at all.
+  WHAT THE CURRENT TEXT SAYS:
+    2,700 words of correction: (a) exact witnesses, (b) why the
+    parenthetical is not a proof, (c) the two spectra are INCOMPARABLE,
+    (d) the conclusion survives and is strengthened, (e) do NOT reach for
+    the 'off the ordinal sums' rescue.
+
+------------------------------------------------------------------------------
+KS1  [STRUCK]  Kill-shot 2 verdict word GREEN
+  in docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md
+  withdrawn by a8688f2, on origin/main
+------------------------------------------------------------------------------
+  STALE   (912f1b1) -- locator '^#+ *Kill-shot 2' matches 1 line(s)
+      :103  ## Kill-shot 2 — Standard dominance — **GREEN**
+  CURRENT (949c439) -- locator '^#+ *Kill-shot 2' matches 1 line(s)
+      :151  ## Kill-shot 2 — Standard dominance — ~~**GREEN**~~ **GREEN-IN-FRAME ONLY**
+
+  WHAT A READER OF THE STALE TREE SAW:
+    ## Kill-shot 2 -- Standard dominance -- **GREEN**
+  WHAT THE CURRENT TEXT SAYS:
+    ~~**GREEN**~~ **GREEN-IN-FRAME ONLY**, under a scope-correction
+    banner: the measurements stand, the VERDICT WORD is withdrawn.
+
+------------------------------------------------------------------------------
+KS2  [WITHDRAWN]  the word "universal" applied to standard dominance
+  in docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md
+  withdrawn by a8688f2, on origin/main
+------------------------------------------------------------------------------
+  STALE   (912f1b1) -- locator 'universal, the eigenvector order|universal~~' matches 1 line(s)
+      :250  universal, the eigenvector order tracks expected rank (τ≈0.85), the best cut is
+  CURRENT (949c439) -- locator 'universal, the eigenvector order|universal~~' matches 1 line(s)
+      :308  universal~~ ⚠️ **"UNIVERSAL" IS WITHDRAWN AND WAS THE WORST SENTENCE IN THIS DOCUMENT
+
+  WHAT A READER OF THE STALE TREE SAW:
+    "...standard dominance is universal, the eigenvector order tracks
+    expected rank..." -- stated as a property of posets.
+  WHAT THE CURRENT TEXT SAYS:
+    "UNIVERSAL" IS WITHDRAWN AND WAS THE WORST SENTENCE IN THIS DOCUMENT:
+    the unconditional form is REFUTED by 166 moderate-λ n=7 refuters
+    outside the frame; what stays open is the all-pairs-frozen
+    conditional, which IS L1b.
+
+------------------------------------------------------------------------------
+KS3  [WITHDRAWN]  `0 / 132` quoted bare
+  in docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md
+  withdrawn by a8688f2, on origin/main
+------------------------------------------------------------------------------
+  STALE   (912f1b1) -- locator 'standard-dominance failures' matches 1 line(s)
+      :286  | standard-dominance failures (n≤6 exhaustive + n=7 top-λ spot) | 0 / 132 |
+  CURRENT (949c439) -- locator 'standard-dominance failures' matches 2 line(s)
+      :17   > **`0 / 132` — the *Data appendix* row *"standard-dominance failures"* — IS A SAMPLING ARTIFACT,
+      :350  | standard-dominance failures (n≤6 exhaustive + n=7 top-λ spot) | 0 / 132 — ⚠️ **SAMPLING ARTIFACT, NEVER QUOTABLE BARE.** The frame in this row's own label **excludes the known refuters** (166 at moderate-λ `n = 7`, mg-8b64). The measurement is correct; the *sweep reading* of it is not. **And `132 
+            ...[292 more chars]
+
+  WHAT A READER OF THE STALE TREE SAW:
+    Data-appendix row: | standard-dominance failures (n<=6 exhaustive +
+    n=7 top-λ spot) | 0 / 132 | -- no consequence of the frame recorded
+    anywhere in the document.
+  WHAT THE CURRENT TEXT SAYS:
+    SAMPLING ARTIFACT, NEVER QUOTABLE BARE. The frame excludes the known
+    refuters; and 132 = 126 + 6, of which only the 126 ship in the JSON,
+    so a third-party check bottoms out at 0/126.
+
+------------------------------------------------------------------------------
+CR1  [STRUCK]  row C3: "fails exactly on the ordinal sums, holds elsewhere" [proven]
+  in docs/OneThird-StandardDominance-ComparisonRoute.md
+  withdrawn by 949c439, on origin/main
+------------------------------------------------------------------------------
+  STALE   (912f1b1) -- locator '^\\| C3 \\|' matches 1 line(s)
+      :75   | C3 | `λ_std ≤ λ₂^BK` fails **exactly on the ordinal sums**, holds elsewhere | **[proven]** at `n=4,5` (exact set equality); `⟸` proven ∀`n` (§2.4) |
+  CURRENT (949c439) -- locator '^\\| C3 \\|' matches 1 line(s)
+      :75   | C3 | `λ_std ≤ λ₂^BK` fails on **every** ordinal sum. ~~and **exactly** there~~ — **the "exactly" is FALSE for `n ≥ 7`** | `⟸` (all ordinal sums fail) **[proven]** ∀`n`. `⟹` (nothing else fails) **[REFUTED]** by `mg-d1be`: true `n ≤ 6` exhaustively, indecomposable violator at `n = 7`, **19 at `n = 
+            ...[107 more chars]
+
+  WHAT A READER OF THE STALE TREE SAW:
+    | C3 | `λ_std ≤ λ₂^BK` fails **exactly on the ordinal sums**, holds
+    elsewhere | **[proven]** at n=4,5 (exact set equality) | -- and §2.4's
+    prose: 'it is true generically and fails on a thin, exactly-identified
+    set'.
+  WHAT THE CURRENT TEXT SAYS:
+    The "exactly" is FALSE for n >= 7 and breaks wholesale at n = 8 (19
+    indecomposable violators, 16 of width exactly 3). A small-n
+    coincidence, not a theorem with exceptions.
+
+------------------------------------------------------------------------------
+CR2  [WITHDRAWN]  SD-Cayley row: `Empirically supported, 0/132`
+  in docs/OneThird-StandardDominance-ComparisonRoute.md
+  withdrawn by a8688f2, on origin/main
+------------------------------------------------------------------------------
+  STALE   (912f1b1) -- locator '^\\| \\*\\*SD-Cayley\\*\\*' matches 1 line(s)
+      :104  | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | Empirically supported, **0/132** (`mgb0a6`). Coherent and nontrivial. |
+  CURRENT (949c439) -- locator '^\\| \\*\\*SD-Cayley\\*\\*' matches 1 line(s)
+      :104  | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | ~~Empirically supported, **0/132** (`mgb0a6`).~~ ⚠️ **THE BARE FIGURE IS WITHDRAWN (mg-e2a0, landing mg-55f2 / mg-65f5 §1.5): `0/132` IS A SAMPLING ARTIFACT AND CARRIES ITS FRAME OR IT IS NOT QUOTED.** Read: **`0` failures in `mgb0a6`'s own frame — `n ≤ 
+            ...[491 more chars]
+
+  WHAT A READER OF THE STALE TREE SAW:
+    | **SD-Cayley** | ... | Empirically supported, **0/132** (`mgb0a6`). |
+  WHAT THE CURRENT TEXT SAYS:
+    ~~Empirically supported, 0/132~~ THE BARE FIGURE IS WITHDRAWN.
+
+------------------------------------------------------------------------------
+BK1  [CORRECTED-NO-STRIKE]  946 both-connected n=7 isomorphism classes
+  in docs/OneThird-L1b-BK-Transport-Transfer-Probe.md
+  withdrawn by af7fc2d, on origin/main
+------------------------------------------------------------------------------
+  STALE   (912f1b1) -- locator 'Exhaustive both-connected posets' matches 1 line(s)
+      :86   Exhaustive both-connected posets **n = 3..7** (3, 9, 12, 104, 946 posets), plus a
+  CURRENT (949c439) -- locator 'the `n = 7` count is wrong|\\b956\\b' matches 2 line(s)
+      :87   > **[CORRECTED — the `n = 7` count is wrong. mg-2c34 §5.1, located by mg-09ea §6, landed by
+      :88   > mg-60d3 2026-07-29.]** There are **956** both-connected `n = 7` isomorphism classes, not 946:
+
+  WHAT A READER OF THE STALE TREE SAW:
+    Exhaustive both-connected posets n = 3..7 (3, 9, 12, 104, **946**
+    posets) -- no correction present.
+  WHAT THE CURRENT TEXT SAYS:
+    A CORRECTED banner: there are **956**, not 946; `iso_signature` is not
+    a perfect canonical form and collapses 10 classes at n=7. n = 3..6
+    unaffected. No conclusion in the document turns on the 10.
+
+==============================================================================
+C. THE ONE THAT IS NOT A TEXT DIFFERENCE AT ALL
+==============================================================================
+
+  RC2 is the sharpest of the seven and it is not a changed sentence: the
+  section STATE.md:78 cites BY NAME does not exist in the stale copy.
+
+    "5.0'" occurs in the stale copy:    0 time(s)
+    "5.0'" occurs in the current copy:  3 time(s)
+
+  A reader following that citation into the stale tree does not land on
+  withdrawn text -- they land on NOTHING, in a file that otherwise reads
+  normally, with the refuted bullet standing three lines from where the
+  correction should have been.
+
+==============================================================================
+D. TALLY
+==============================================================================
+  ABSENT-IN-MIRROR       1
+  CORRECTED-NO-STRIKE    1
+  STRUCK                 3
+  WITHDRAWN              3
+  claims total           8
+
+  4 distinct cited documents.  3 carry withdrawals; the fourth (BK-Transport)
+  carries a CORRECTION with no strike -- a count changed from 946 to 956 --
+  which is why mg-cdd5 classed it CHANGED and not CHANGED-WITH-STRIKE.  It is
+  swept here anyway: a reader of the stale copy read a wrong number with no
+  indication it was wrong, which is the same shape even without the strike.
+
+== s1 exit: 0 ==
