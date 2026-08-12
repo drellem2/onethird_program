@@ -48,11 +48,28 @@
 # THE EDIT IS HERE, AGAIN, for the reason the header above already gives: refinery.toml
 # alone would put this on route 1 and leave default discovery — the route that survives
 # that file being deleted — reaching a gate list one suite short.
+#
+# --- mg-03cf -------------------------------------------------------------------------------
+# A FOURTH SUITE JOINS THE GATE AND IT IS THE CHEAP ONE — 1.2 s measured, against the ~44 s
+# above.  THE WHOLE GATE IS MEASURED AT 47.5 s ON THIS HOST WITH IT IN, and that is the
+# number stated rather than the 45 s the addition arithmetic predicts: a runtime quoted
+# without being run is mg-17aa's D4, and this one is run.
+# It gates docs/FACTS.md, the facts registry (STATE.md's own pointer paragraph explains why
+# that file exists).  WHAT IT BUYS IS THE ONLY THING THAT MAKES A REGISTRY WORTH HAVING:
+# every entry carries its KIND and its exact SCOPE, so that no figure in it can be quoted
+# away from the population that makes it true.  That discipline is a convention, and a
+# convention with no gate is one hurried entry away from being over — an entry with the
+# number and without the population is exactly STATE.md row 3b's `0/132` in a new file.
+# The gate is on STRUCTURE, not on truth: it cannot check that a SCOPE line is correct, only
+# that no entry is missing one, which is the failure mode that scales.  It fired on its own
+# author's first draft (F8's SCOPE field renamed in passing) and that is recorded in
+# code/facts_registry_03cf/README.md rather than quietly fixed.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \
     code/state_ratchet_e331/run_all.sh \
-    code/alias_agreement_06d1/run_all.sh
+    code/alias_agreement_06d1/run_all.sh \
+    code/facts_registry_03cf/run_all.sh
 do
     echo
     echo "############################################################ $suite"
