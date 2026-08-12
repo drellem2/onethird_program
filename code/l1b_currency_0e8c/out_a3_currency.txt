@@ -1,0 +1,148 @@
+==============================================================================
+mg-0e8c a3 -- THE CURRENCY, AND WHETHER ROW 8'S TWO HALVES ARE ONE STATEMENT
+==============================================================================
+
+C1  THE UNIT MAP.  One theorem, two divisions.  Exact rationals, no floating point.
+    KIND: ALGEBRA -- true for every n, not a population.
+
+   n    m=C(n,2)   eps_spec bound   eps_c3ca bound   ratio 6n^2/(n^2-1)   d*n/(n+1) ?
+   3    3          3/4              1/9              27/4                 OK
+   4    6          4/5              1/8              32/5                 OK
+   5    10         5/6              2/15             25/4                 OK
+   6    15         6/7              5/36             216/35               OK
+   7    21         7/8              1/7              49/8                 OK
+   8    28         8/9              7/48             128/21               OK
+   9    36         9/10             4/27             243/40               OK
+  10    45         10/11            3/20             200/33               OK
+  11    55         11/12            5/33             121/20               OK
+  12    66         12/13            11/72            864/143              OK
+
+  mismatches over the grid: 0
+
+  READING.  `eps_sup < 1` is `eps_spec < n/(n+1)`, i.e. it is quoted in ROW 8'S OWN units -- the
+  units in which row 8 writes `E[inv_e] <= (eps_spec/6)(n^2-1)`.  The `1/6` figure lives in
+  mg-c3ca's `E[inv_e] <= eps*n^2` units and is the SAME theorem.  So the ledger's two-currency
+  warning is real and it does NOT apply here: there is no unit mismatch standing between
+  `eps_sup < 1` and row 8's stated conclusion.  The currency question is settled, and settling it
+  REMOVES the only defence the row had.
+
+------------------------------------------------------------------------------
+
+C2  CLAIM 6.1's INEQUALITY `E[inv_e] < m/3` on the frozen population (INHERITED, tested).
+
+  n=2  posets=2       frozen (delta<1/3)=1       of which with >=1 incomparable pair=0     Claim 6.1 violations=0
+  n=3  posets=7       frozen (delta<1/3)=1       of which with >=1 incomparable pair=0     Claim 6.1 violations=0
+  n=4  posets=40      frozen (delta<1/3)=1       of which with >=1 incomparable pair=0     Claim 6.1 violations=0
+  n=5  posets=357     frozen (delta<1/3)=1       of which with >=1 incomparable pair=0     Claim 6.1 violations=0
+  n=6  posets=4824    frozen (delta<1/3)=1       of which with >=1 incomparable pair=0     Claim 6.1 violations=0
+
+  READING.  Claim 6.1 holds on every frozen poset tested.  Note the third column: at these n the
+  frozen class is EXACTLY the chains -- posets with no incomparable pair -- so `frozen` is
+  vacuously satisfied there and carries no information.  That is a4's subject and it does NOT
+  weaken the verdict: Claim 6.1 is proven for all n and its bound `2m/(n^2-1) <= n/(n+1) < 1`
+  is arithmetic on m, so the discharge of row 8 does not depend on this population being rich.
+
+------------------------------------------------------------------------------
+
+C3  DO ROW 8'S TWO HALVES AGREE AT eps = 1?
+      SPECTRAL   form at eps=1:  1 - lambda_std <= 1
+      INVERSION  form at eps=1:  E[inv_e] <= (1/6)(n^2 - 1)
+    Counted over EVERY poset, since `equivalently` (docs/CONCEPTS.md §4) is a claim about the two
+    QUANTITIES and is read that way by a reader holding one poset.
+
+   n   posets   spec only   inv only   both   neither   |   spec holds   inv holds
+   2   2        0           0          2      0         |   2           2
+   3   7        1           0          6      0         |   7           6
+   4   40       1           0          39     0         |   40          39
+   5   357      8           0          349    0         |   357         349
+   6   4824     82          0          4742   0         |   4824        4742
+
+  READING.  The `spec only` column is non-empty from n = 3 on: those posets satisfy row 8's
+  SPECTRAL conclusion at eps = 1 and FAIL its INVERSION conclusion at the same eps.  So the two
+  halves are NOT equivalent as statements about a poset, and the master bound
+  `1 - lambda_std <= 6E[inv_e]/(n^2-1)` is ONE-WAY -- inversions to spectrum, never back.
+
+  WHAT THIS DOES AND DOES NOT LICENCE.  It refutes `equivalently` as a claim about the two
+  QUANTITIES, which is how docs/CONCEPTS.md §4 reads.  It does NOT by itself refute the weaker
+  reading `frozen => A  iff  frozen => B`, because the separating posets are not frozen; that
+  reading is unrefuted here and is also unproven, and the honest word for the join is the
+  implication that IS proven -- inversion form => spectral form -- with its direction named.
+
+------------------------------------------------------------------------------
+
+C4  THE GAP, in one currency (eps_spec units).  Both numbers are READ from the corpus, not
+    derived here: eps_sup < 1 is Op-Form Claim 6.1 via mg-345e; eps_dem ~ 2e-2 is STATE.md:21's
+    repaired calibration.  What is computed here is the ratio.
+
+      eps_sup  (PROVEN, all n, L4-independent)   <  1
+      eps_dem  (what Step 6 consumes)            ~  1/50   = 0.020
+      ratio    eps_sup / eps_dem                 =  50   = 50x
+
+  READING.  The distance between what is proven and what is needed is a factor of ~50 IN A
+  SINGLE CURRENCY.  It is not an existence question and it is not a quantifier question: both
+  ends are explicit absolute constants uniform in n, and the whole remaining content of row 8 is
+  the interval between them.
+
+------------------------------------------------------------------------------
+
+C5  A THIRD NORMALISATION, AND THE DENSITY IT TURNS THE WALL INTO.
+
+    Op-Form §6.3 states Claim 6.1's consequence in units the ledger does NOT carry -- as a
+    fraction of the uniform baseline:
+
+        E_unif[inv] = C(n,2)/2, and m <= C(n,2), so Claim 6.1 gives
+        E[inv_e] < (2/3) E_unif[inv]                             <- Op-Form's own words:
+        "(LIB-const) ALREADY HOLDS, WITH CONSTANT 2/3"
+
+    So THREE numbers name one theorem: 1 (eps_spec units, row 8's), 1/6 (eps_c3ca units), and
+    2/3 (fraction-of-uniform).  The ledger warns about the first two and does not mention the
+    third.  Checked below that all three are the same theorem.
+
+    AND THE USEFUL COROLLARY.  Claim 6.1's bound is eps_sup = d * n/(n+1) with d = m/C(n,2) the
+    INCOMPARABILITY DENSITY -- it is not a flat 1, it is proportional to d.  So the proven
+    constant already clears the demand whenever d is small enough, and the wall is open only in
+    the DENSE regime.  The threshold is computed here rather than asserted.
+
+   n    E_unif[inv] in eps_spec units   (2/3) of it   Claim 6.1's eps_sup at d=1   equal?
+   3    9/8                             3/4           3/4                          OK
+   4    6/5                             4/5           4/5                          OK
+   5    5/4                             5/6           5/6                          OK
+   6    9/7                             6/7           6/7                          OK
+   7    21/16                           7/8           7/8                          OK
+   8    4/3                             8/9           8/9                          OK
+   9    27/20                           9/10          9/10                         OK
+  10    15/11                           10/11         10/11                        OK
+  11    11/8                            11/12         11/12                        OK
+  12    18/13                           12/13         12/13                        OK
+
+  mismatches: 0  -- the 2/3, the 1 and the 1/6 are one theorem in three normalisations.
+
+    THE DENSITY THRESHOLD.  eps_sup(d) = d * n/(n+1) <= eps_dem = 1/50 requires
+    d <= (1/50)(n+1)/n, i.e. d <~ 2e-2.  Tabulated:
+
+   n      max density d      largest m clearing eps_dem   m forced by primitivity (>= n-1)
+  10     0.022000           0  (of C(n,2)=45)           9        *** NO PRIMITIVE POSET CLEARS IT ***
+  50     0.020400           24  (of C(n,2)=1225)        49       *** NO PRIMITIVE POSET CLEARS IT ***
+  99     0.020202           98  (of C(n,2)=4851)        98       CLEARS
+  100    0.020200           99  (of C(n,2)=4950)        99       CLEARS
+  101    0.020198           102  (of C(n,2)=5050)       100      CLEARS
+  1000   0.020020           9999  (of C(n,2)=499500)    999      CLEARS
+  10000  0.020002           999999  (of C(n,2)=49995000) 9999     CLEARS
+
+    THE CROSS-CHECK THAT MAKES THIS NOT A NEW NUMBER.  Primitivity forces m >= n-1 (STATE.md's
+    own density facts, mg-6bc2 §7), i.e. d >= 2/n.  So a PRIMITIVE poset can satisfy
+    d <= eps_dem(n+1)/n only when 2/n <~ 2e-2, i.e. n >~ 100 -- which is EXACTLY the `n >= 100
+    (primitive)` threshold STATE.md row 8 already carries from mg-e35c A1.  The density reading
+    and the ledger's own threshold are the same fact, reached from opposite ends.
+
+  READING, AND IT IS THE SHARPEST RESTATEMENT AVAILABLE.  The pair-bias supply is NOT a flat
+  constant that happens to be too big; it is `d * n/(n+1)`, LINEAR IN THE INCOMPARABILITY
+  DENSITY.  At d <~ 2e-2 it already clears the demand and the wall is DOWN for those posets --
+  proven, all n, L4-independent.  What is open is the dense regime: a frozen poset with
+  incomparability density above ~2%.  Op-Form §6.3 records this threshold at the SUPERSEDED
+  eps_spec = 2e-4 (it prints `d <~ 2e-4`); at the repaired 2e-2 it is 100x looser, and the
+  100x is mg-e35c's repair, not a new result.
+
+  So "how small a constant" and "how dense a poset" are the same open question, and the second
+  is the one you can point an instrument at.
+

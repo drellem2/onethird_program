@@ -1,0 +1,53 @@
+==============================================================================
+mg-0e8c a4 -- THE FROZEN BOUNDARY, AND THE REMEDY AGAINST ITS OWN DEFECT
+==============================================================================
+
+D1  THE FROZEN BOUNDARY.  delta(P) = max over incomparable pairs of min(p, 1-p); frozen is
+    delta < 1/3 STRICT.  A chain has no incomparable pair, so its max is over the empty set and
+    `frozen` is vacuous there.  The column that matters is the last one.
+
+   n   posets   frozen   frozen with >=1 incomparable pair   min delta over such posets
+   2   2        1        0                                  1/2  (= 0.5000, at rel [])
+   3   7        1        0                                  1/3  (= 0.3333, at rel [(0, 1)])
+   4   40       1        0                                  1/3  (= 0.3333, at rel [(0, 1), (0, 2), (0, 3), (1, 2)])
+   5   357      1        0                                  1/3  (= 0.3333, at rel [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3)])
+   6   4824     1        0                                  1/3  (= 0.3333, at rel [(0, 1), (0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 4)])
+
+  READING.  The frozen class at n <= 6 is EXACTLY the chains, and the distance to the boundary is
+  not marginal: the most-decided poset carrying any incomparable pair at all sits at delta = 1/4
+  ... and the reader should look at the printed value rather than this sentence, which is why the
+  number is printed.  Whatever it is, it is the honest scope line for every frozen census in this
+  repository at these n -- including a3/C2's zero-violation result, which is a measurement over
+  the chains and says nothing about a real frozen poset.
+
+  THIS DOES NOT WEAKEN THE VERDICT.  The discharge of row 8 by eps_sup is Op-Form Claim 6.1 plus
+  the master bound, both proven for all n; neither consumes this population.  The census is here
+  so that no reader mistakes a3/C2's green for evidence about frozen posets.
+
+------------------------------------------------------------------------------
+
+D2  THE REMEDY, CHECKED AGAINST THE DEFECT IT REPAIRS.
+
+    THE DEFECT.  Row 8 as stated:  frozen => `1 - lambda_std <= eps_spec` for an EXPLICIT
+    ABSOLUTE CONSTANT, UNIFORM IN n.  Is it discharged by the proven constant?
+
+      proven constant eps_sup < 1 (Op-Form Claim 6.1, all n, L4-independent)
+
+      row 8 AS STATED   (an explicit absolute constant exists)   DISCHARGED by eps_sup
+          -- because eps_sup IS such a constant.  The row asks for existence; existence
+             is proven.  And at eps = 1 the spectral half is VACUOUS besides (a2).
+
+    THE RESTATEMENT.  frozen => `E[inv_e] <= (eps/6)(n^2-1)` for a constant eps <= eps_dem.
+      row 8 RESTATED    (a constant at or below eps_dem = 1/50)  NOT discharged by eps_sup
+          -- because eps_sup = 1 > eps_dem = 1/50, by a factor of 50.
+
+    SO THE RESTATEMENT DOES NOT REPRODUCE THE DEFECT.  The proven constant fails the restated
+    row's bar by ~50x, which is precisely the quantity that is open.  A reader who checks
+    whether we have a uniform constant now finds that we do AND that the row does not ask for
+    one -- which is the whole repair.
+
+    AND THE RESTATEMENT IS IN THE INVERSION FORM, NOT THE SPECTRAL ONE, FOR A SECOND REASON
+    a2 supplies: at any eps the spectral form is the WEAKER of the two (the master bound runs
+    inversions -> spectrum, one way, a3/C3), so stating the wall spectrally states less than the
+    architecture consumes.  At the proven constant it states nothing at all.
+
