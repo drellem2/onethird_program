@@ -1,0 +1,24 @@
+
+==============================================================================
+e0.1  poset enumeration agrees with lib409a
+==============================================================================
+  PASS  n = 3: labelled posets   19
+  PASS  n = 4: labelled posets   219
+
+==============================================================================
+e0.2  block systems, fibers, E Var(f|C) and E_BK agree with lib409a
+==============================================================================
+  PASS  E Var(f|C_o), E Var(f|C_e), E_BK over 702 (poset, f) pairs   max |difference| = 0 (exact)
+
+==============================================================================
+e0.3  POSITIVE CONTROLS -- all four must FIRE
+==============================================================================
+  PASS  C1  perturbed A_o breaks the identity   0.500000000 vs 0.535714286
+  PASS  C2  A_e in A_o's slot breaks the identity   0.500000000 vs 0.250000000
+  PASS  C3  a degree-two statistic is NOT computed by the identity   3.250000000 vs 0.250000000
+  PASS  C4  mg-409a's D1 reproduced: dropping the trailing singleton leaves the PARTITION identical   so the block LIST is what must be compared
+
+==============================================================================
+e0  RESULT
+==============================================================================
+  ok

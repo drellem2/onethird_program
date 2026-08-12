@@ -1,0 +1,47 @@
+
+==============================================================================
+e1.1  THE OUTPUT MAP: E Var(f|C_o) = (1/4) sum c^2 A^o,  and E_BK from it
+==============================================================================
+  population: 328 posets, 1475 (poset, coefficient-vector) instances
+  by n: n=3: 65, n=4: 975, n=5: 285, n=6: 150
+  PASS  E Var(f|C_o) = (1/4) sum c^2 A^o   0 failures / 1475
+  PASS  E Var(f|C_e) = (1/4) sum c^2 A^e   0 failures / 1475
+  PASS  E_BK(f) = (2/(n-1)) (EVar|C_o + EVar|C_e)  -- (*) at :145   0 failures / 1475
+
+==============================================================================
+e1.2  SIGN-BLINDNESS: the identity cannot see the signs of c
+==============================================================================
+  For each poset, flip the sign of ONE coefficient.  The identity's output is
+  unchanged BY CONSTRUCTION (c^2); the question is whether Var(f) moves -- if it
+  never did, sign-blindness would cost nothing.
+  PASS  a one-coefficient sign flip leaves the identity's output EXACTLY fixed while Var(f) moves   201 posets move, 49 do not; worst relative move 4
+
+==============================================================================
+e1.3  LEVEL-BLINDNESS: the identity emits no first moment
+==============================================================================
+  f -> f + a leaves every conditional variance and the Dirichlet form fixed, so no
+  quantity of the form E[f] is recoverable from the identity's output.  Checked
+  against the programme's own first-moment targets: E[inv_e] (row 8 / LIB) and
+  E[pos_x] (the (EQ) residual and lambda_std's position matrix).
+  PASS  the identity is invariant under f -> f + a while E[f] is not   74 posets checked, 0 output changes, 74 mean changes
+
+==============================================================================
+e1.4  THE FILTER, stated as it is used in the README
+==============================================================================
+  A target Q is REACHABLE BY THE MACHINERY (ticket test 1) only if the way Q depends on
+  the linear-extension measure factors through the pair-adjacency probabilities (A^o, A^e).
+  By e1.2 and e1.3 that excludes, at minimum:
+
+    * every FIRST MOMENT of a pair-orientation statistic -- E[inv_e], E[pos_x], p_xy,
+      the position matrix T[x,i], delta(P), Delta_1;
+    * every quantity sensitive to the SIGNS of pair coefficients -- covariances between
+      pair indicators, i.e. the (B-cov) residual;
+    * every DEGREE-TWO statistic -- E[sum disp^2], i.e. (B).
+
+  It admits: the BK Dirichlet form of a degree-one statistic, and functionals of the
+  adjacency probabilities themselves.
+
+==============================================================================
+e1  RESULT
+==============================================================================
+  ok

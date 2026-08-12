@@ -1,0 +1,50 @@
+
+==============================================================================
+e4.1  per-slot adjacency symmetry J_k(x,y) = J_k(y,x) for incomparable x, y
+==============================================================================
+  PASS  J_k(x,y) = J_k(y,x) at every (poset, incomparable pair, slot)   0 failures / 3284
+
+==============================================================================
+e4.2  it needs ONE INVOLUTION, not a foliation
+==============================================================================
+  tau_k is a fixed-point-free involution on {L : {L_k, L_k+1} = {x,y}} and it carries
+  the event {x at k, y at k+1} bijectively onto {y at k, x at k+1}.  Verified as a
+  BIJECTION rather than inferred from the equal counts, so this is not e4.1 twice.
+  PASS  tau_k is a bijection between the two events   0 / 843
+  No block system, fiber, projection or cube appears anywhere in this check.
+
+==============================================================================
+e4.3  what the identity emits is STRICTLY COARSER than the per-slot data
+==============================================================================
+  A^o_xy = sum over ODD-parity slots k of (J_k(x,y) + J_k(y,x)), and likewise A^e.
+  So the identity's output is the per-slot data aggregated into two parity buckets.
+  PASS  A^o and A^e ARE the parity-aggregated per-slot adjacencies   0 mismatches
+
+  STRICTNESS, demonstrated directly rather than by a collision search.  A^o_xy is a
+  SUM of the symmetrized per-slot adjacencies S_k(x,y) = J_k(x,y) + J_k(y,x) over the
+  odd-parity slots.  Wherever two or more of those summands are nonzero, A^o_xy does
+  not determine them, so the aggregation is a genuine loss and not a relabelling.
+
+    n    pairs with >=2 nonzero summands in ONE parity class     of
+  PASS  the parity aggregation collapses >= 2 nonzero per-slot summands   70 of 921 incomparable pairs in the population
+
+==============================================================================
+e4.4  the consumer, read from the ledger and NOT re-measured
+==============================================================================
+  STATE.md:169 (mg-200d -> mg-131e -> mg-00a1), verbatim in substance:
+
+    * mg-200d's headline -- per-slot adjacency symmetry takes the relaxation value from
+      Theta(n^2) down to Theta(n) -- is REFUTED (mg-00a1).  The disjunctive per-slot value
+      is Theta(n^2), SUPERLINEAR, pinned n(n+5)/36 <= max <= n(n-1)/6.
+    * "PER-SLOT ADJACENCY SYMMETRY BUYS A CONSTANT FACTOR OF AT MOST 6, NOT AN ORDER."
+    * "THE ROUTE IS DEAD, NOT RE-BASED -- there is NO c to substitute for 1/3."
+    * and the branch-free form J_k(y,x) <= J_k(x,y) "buys exactly NOTHING": value C(n,2)/3
+      unchanged at n = 3,4,5,6.
+
+  So the one adjacency-shaped consumer in the programme is refuted, and it was refuted
+  against a STRONGER input than this identity emits (per-slot, not parity-aggregated).
+
+==============================================================================
+e4  RESULT
+==============================================================================
+  ok

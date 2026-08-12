@@ -1,0 +1,50 @@
+
+==============================================================================
+e2.1  the covariance the identity kills is identically ZERO, at every fiber
+==============================================================================
+  For every poset, every odd fiber, and every pair of DISTINCT incomparable pairs,
+  the within-fiber covariance of the two pair indicators.  If this is ever nonzero
+  the note's :102 claim is false; if it is always zero the claim is true and says
+  nothing about (B-cov), whose covariance is between fibers.
+  PASS  within-fiber Cov(s_xy, s_uv) over every (fiber, pair, pair)   0 nonzero / 1326
+
+==============================================================================
+e2.2  and the (B-cov) covariance is NONZERO and WRONG-SIGNED, between fibers
+==============================================================================
+  C_x := sum_{y != z, both || x} Cov(s_xy, s_xz).  FKG/XYZ force it >= 0; STATE.md
+  calls beating that 'the sharp edge'.  Reported beside the identity's within-fiber
+  term for the same statistic.
+
+   n  poset  x   Var(pos_x)  EVar(pos_x|C_o)     share          C_x
+  (555 (poset, element) rows; per-row printing suppressed, summary follows)
+  same-side covariance C_x:  > 0 at 555,  = 0 at 0,  < 0 at 0
+  PASS  C_x >= 0 everywhere -- the FKG/XYZ wrong sign, reproduced   555 strictly positive
+  smallest observed share EVar(pos_x|C_o)/Var(pos_x) = 0.085714286
+
+==============================================================================
+e2.3  THE UNIFORM CAP: E Var(pos_x | C_o) <= 1/4 at EVERY poset and every x
+==============================================================================
+  Because E Var(pos_x|C_o) = (1/4) sum_{y||x} A^o_xy and sum_y A^o_xy = Pr[x lies in
+  a free odd 2-block] <= 1.  Checked directly against the fiber computation.
+  PASS  E Var(pos_x|C) equals the adjacency formula   0 / 2666
+  PASS  and never exceeds 1/4   max observed = 1/4 = 0.250000000
+
+==============================================================================
+e2.4  against the antichain, where Var(pos_x) = (n^2 - 1)/12 exactly
+==============================================================================
+    n   Var(pos_x)  EVar(pos_x|C_o)          share
+    3          2/3              1/6    0.250000000
+    4          5/4              1/4    0.200000000
+    5            2              1/5    0.100000000
+    6        35/12              1/4    0.085714286
+    7            4             3/14    0.053571429
+
+  The share falls like Theta(n^-2).  This is mg-409a section 4's alpha(A_n) <= 6/(n(n+1))
+  seen from the (B) side rather than the spectral side, and it is the same mechanism: a
+  degree-one statistic's within-fiber variance is a bounded local quantity, while the (B)
+  quantity it would have to control is global.
+
+==============================================================================
+e2  RESULT
+==============================================================================
+  ok

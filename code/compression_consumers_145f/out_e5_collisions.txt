@@ -1,0 +1,38 @@
+
+==============================================================================
+e5.0  the key is an isomorphism invariant -- checked, not assumed
+==============================================================================
+  PASS  the (A^o, A^e) multiset is invariant under relabelling   0 violations
+  PASS  C  and the ORDERED-pair key my D1 used is NOT invariant   359 relabellings move it
+
+==============================================================================
+e5.1  do the programme's targets vary inside an (A^o, A^e) bucket?
+==============================================================================
+
+  n = 4 (exhaustive, 219 labelled posets): 11 buckets, 4 merging >1 isomorphism class
+    POWER: the test compares 4 distinct-class pairs in total.  A 'constant' row below
+           is a null over THOSE pairs and nothing wider.
+    delta(P)            (Axis 2, the counterexample condition)  constant  (0 buckets)
+    E[inv_e]            (row 8 / LIB / LIB-const)             constant  (0 buckets)
+    max_x Var(pos_x)    (the (B) variance diagonal)           constant  (0 buckets)
+    max_x |E pos_x - rank_e x|   (the (EQ) residual)          constant  (0 buckets)
+    max_{x||y} p_xy     (the pair-bias marginals)               SPLITS  (2 buckets)
+
+  n = 5 (exhaustive, 4231 labelled posets): 54 buckets, 6 merging >1 isomorphism class
+    POWER: the test compares 10 distinct-class pairs in total.  A 'constant' row below
+           is a null over THOSE pairs and nothing wider.
+    delta(P)            (Axis 2, the counterexample condition)  constant  (0 buckets)
+    E[inv_e]            (row 8 / LIB / LIB-const)             constant  (0 buckets)
+    max_x Var(pos_x)    (the (B) variance diagonal)           constant  (0 buckets)
+    max_x |E pos_x - rank_e x|   (the (EQ) residual)          constant  (0 buckets)
+    max_{x||y} p_xy     (the pair-bias marginals)               SPLITS  (3 buckets)
+
+  READING.  A "SPLITS" row is a HARD negative for that target: two posets the identity cannot
+  tell apart carry different values of it, so no argument whatever can compute it from the
+  identity's output.  A "constant" row is NOT a positive -- it is an n <= 5 observation and
+  says only that this population did not separate them.
+
+==============================================================================
+e5  RESULT
+==============================================================================
+  ok
