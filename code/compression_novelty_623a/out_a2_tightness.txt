@@ -1,0 +1,18 @@
+a2 -- what (**) buys WITHOUT the note's section-5 assumption
+     gap_lin >= gap_BK always.  Where it is STRICT, the BK bottom
+     eigenfunction is not a pair-orientation statistic and (**) is an
+     UPPER bound on the gap only.
+
+     [FLOAT] -- gap_BK and gap_lin are eigenvalues, computed by cyclic
+     Jacobi; the worst off-diagonal residual over the whole run is printed.
+     POPULATION CAP: posets with |L(P)| > 24 are SKIPPED and counted.
+
+  n   posets  in-pop  skipped(|L|>24)  B2: gap_lin > gap_BK   B1 viol   worst ratio    argmax
+  3   19      13      0                0 of 13                0         1.000000       -
+  4   219     195     0                61 of 195              0         1.044950       [(0, 3), (2, 1), (2, 3)]
+  5   4231    3810    301              2260 of 3810           0         1.063001       [(1, 2), (1, 4), (3, 0), (3, 4)]
+
+  B1  gap_lin >= gap_BK violations: see column above (must be 0)
+  B3  SELF-CHECK max |chain-energy - note-energy| over all posets, all
+      basis pairs: 7.772e-16   (a1's A3 on a second instrument, in float)
+      worst Jacobi off-diagonal residual: 9.783e-13

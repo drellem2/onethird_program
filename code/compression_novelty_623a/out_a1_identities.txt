@@ -1,0 +1,41 @@
+a1 -- the note's four structural claims, re-derived exactly
+     source: docs/imports/compression.tex (44d08ea)
+     ALL ARITHMETIC EXACT (Fraction).  No float on any line below.
+
+  A1  fibers are cubes with the stated edges          [must be 0 failures]
+  A2  Var(f|C) = (1/4) sum c^2, no covariances        [must be 0 failures]
+  A3  identity (*)  E_BK = (2/(n-1))(EVar_o + EVar_e) [must be 0 failures]
+  A4  identity (***) (I-P)f = (2/(n-1))(2I-Pi_o-Pi_e)f[must be 0 failures]
+  A5a CONTROL (*)  on a NON-linear statistic          [MUST FAIL]
+  A5b CONTROL (***) on a NON-linear statistic         [MUST FAIL]
+  A6  CONTROL: is P_BK f again a pair-orientation f?  [MUST FAIL]
+
+  n   posets    A1 f/c        A2 f/c        A3 f/c    A4 f/c    A5a f/c   A5b f/c   A6 f/c
+  ----------------------------------------------------------------------------------------
+  2   3         0/7           0/21          0/9       0/9       0/9       0/9       0/9      
+  3   19        0/60          0/180         0/57      0/57      0/57      0/57      0/57     
+  4   219       0/1116        0/3348        0/657     0/657     237/657   237/657   219/657  
+  5   4231      0/38220       0/114660      0/12693   0/12693   9183/12693 9183/12693 8577/12693
+
+  POOLED, n = 2..5, all labelled posets, 3 coefficient vectors each:
+    A1    39403 checked,      0 FAILED   OK
+    A2   118209 checked,      0 FAILED   OK
+    A3    13416 checked,      0 FAILED   OK
+    A4    13416 checked,      0 FAILED   OK
+    A5a   13416 checked,   9420 failed   FIRES   [control: failure is the pass]
+    A5b   13416 checked,   9420 failed   FIRES   [control: failure is the pass]
+    A6    13416 checked,   8796 failed   FIRES   [control: failure is the pass]
+
+  A7 -- NAMED CONTROL on V_k, the family docs/OneThird-Hodge-Side-Leverage.md
+        :132 records as having AT graph = the hypercube Q_k.  The note's odd
+        compression must collapse V_k to ONE fiber (the whole space, a cube)
+        and its even compression to singletons.
+
+    k   n   |L(P)|   C_o fibers   max |fiber|   C_e fibers   max |fiber|   verdict
+    1   2   2        1             2             2             1             as predicted
+    2   4   4        1             4             4             1             as predicted
+    3   6   8        1             8             8             1             as predicted
+    4   8   16       1             16            16            1             as predicted
+
+    A7: OK -- on V_k the odd compression IS the whole cube, so the note's foliation
+        degenerates to the single already-known cube there and adds nothing on that family.

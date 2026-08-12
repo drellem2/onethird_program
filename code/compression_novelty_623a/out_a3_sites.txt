@@ -1,0 +1,109 @@
+a3 -- the three named sites, read for their CLAIM rather than their phrase
+
+C1a -- the three sites the ticket names
+
+  docs/OneThird-L2-Conditionality-mg-28ff.md:319
+         315  > >
+         316  > > | route | what it decides | `n = 4,5,6` | pooled |
+         317  > > |---|---|---|---|
+         318  > > | **this document's own `b2` census** (`out_b2_census.txt:44,67,90,116`) | `μ_pref = 1−λ_std` on `lib28ff` — a *different instrument and a differe ...
+    >>   319  > > | **`mg-3bb9`'s third instrument** (`code/l2_underclaim_audit_3bb9/out_a1_reversal.txt`, `L2 by eigsp`) | **`μ_pref` is never mentioned**: does th ...
+         320  > >
+         321  > > The eigenspace census agrees with the `V00` column at **every `n` and at every one of the
+         322  > > 4377 posets** (`disagree` column `0` throughout) — and it is a check that **did** fail
+         323  > > once, against its own author's first version, at the `n = 5` antichain (`mg-3bb9`
+
+  docs/OneThird-L2-Conditionality-mg-3bb9-RepairAudit.md:105
+         101  
+         102  This audit adds a third, and the only one that never mentions `μ_pref` at all: take the
+         103  **eigenspace of the pencil's smallest eigenvalue** and ask whether it contains a nonzero
+         104  vector with all `ψ`-coefficients `≥ 0` — L2's first disjunct as L2 words it, decided by
+    >>   105  alternating projection with a **constructive witness**. It returns `0/0/10/166/3164 = 3340`
+         106  and agrees with the `V00` column at **every `n` and at every poset** (`disagree` column, 0
+         107  throughout). *That* is a check that could have failed; it did fail, once, against my own code
+         108  (see the instrument README, D1).
+         109  
+
+  code/l2_underclaim_audit_3bb9/README.md:49
+          45    `rlo > 1`, which is *the same predicate as* `V00 > 1`, so its agreement is a tautology. My
+          46    replacement disagreed with the `μ_pref` test at **1 poset of 275** at `n = 5` and I nearly
+          47    published that as a crack in the identity. It was the **antichain**, where the whole space
+          48    is the eigenspace: my search sampled directions in only 3 of the `d` dimensions and missed
+    >>    49    `e₁`. Rebuilt as alternating projection with a **constructive witness** (a "yes" exhibits a
+          50    nonnegative vector and checks it; only a "no" rests on the search), after which the two
+          51    censuses agree at all 4377.
+          52  * **D2 — `simplex_min` skipped singular faces**, including a vertex with `M_ii = 0`, which
+          53    would have let a *non*-strictly-copositive matrix pass and inflated `μ_pref`'s lower
+
+C1b -- the implementation all three sites route to
+
+  code/l2_underclaim_audit_3bb9/lib3bb9.py:230
+         218      makes "V00 fails iff L2 fails" TRUE BY CONSTRUCTION; this test does not.
+         219      """
+         220      m = len(Q)
+         221      Qf = [[float(x) for x in row] for row in Q]
+         222      Nf = [[float(x) for x in row] for row in N]
+         223      eigs = gen_eigs(Qf, Nf)
+         224      lam0 = eigs[0][0]
+         225      basis = [v for (lam, v) in eigs if lam <= lam0 + tol * max(1.0, abs(lam0))]
+         226      d = len(basis)
+         227      if d == 1:
+         228          v = basis[0]
+         229          return (all(x >= -1e-9 for x in v) or all(x <= 1e-9 for x in v)), 1
+    >>   230      # d >= 2: is there a nonzero v in span(basis) with v >= 0?  Decided by alternating
+         231      # projection between the subspace and the nonnegative orthant (POCS), from several
+         232      # starts, plus the basis vectors themselves.  A "yes" is CONSTRUCTIVE (a witness is
+         233      # exhibited and checked); only a "no" rests on the search.
+         234      import math as _m
+         235      # Euclidean-orthonormal basis of the span
+         236      onb = []
+         237      for b in basis:
+         238          w = b[:]
+         239          for u in onb:
+         240              d0 = sum(w[i] * u[i] for i in range(m))
+         241              w = [w[i] - d0 * u[i] for i in range(m)]
+         242          nr = _m.sqrt(sum(x * x for x in w))
+
+C1c -- mechanical read of that implementation's own text
+       mentions a CONE or ORTHANT             YES
+       mentions TWO subspaces                 no
+       mentions conditional expectation       no
+       mentions principal angles              no
+       projects onto ONE span (proj())        YES
+
+       compression.tex section 4 needs: TWO subspaces (Ran Pi_o, Ran Pi_e),
+       both ranges of CONDITIONAL EXPECTATIONS, compared by PRINCIPAL ANGLES.
+
+C2 -- term census.  Extensions searched: *.tex *.md *.py *.txt *.json *.lean *.html *.sh
+      Dirs skipped: .git .lake node_modules __pycache__  (one_third_width_three is 8.1 GB, almost all of it
+      a Lean build tree; a term living only in a compiled artifact would
+      not be found here.)
+      'ctrl' rows are POSITIVE CONTROLS and must be nonzero;
+      if they were zero the census would be looking at the wrong files and
+      the 'note' rows' zeros would mean nothing.
+
+  term                     kind   onethird_program       one_third              one_third_width_three 
+  ----------------------------------------------------------------------------------------------------
+  alternating projection   note   8 hits / 4 files       0 hits / 0 files       0 hits / 0 files      
+  principal angle          note   4 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  canonical correlation    note   2 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  maximal correlation      note   2 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  two projections          note   3 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  checkerboard             note   3 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  foliation                note   3 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  partial cube             note   2 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  even sweep               note   3 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  odd sweep                note   5 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  conditional variance     note   3 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  conditional expectation  note   4 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  block dynamics           note   2 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  Efron                    note   2 hits / 1 files       0 hits / 0 files       0 hits / 0 files      
+  pair-orientation         note   11 hits / 1 files      0 hits / 0 files       14 hits / 6 files     
+  linear extension         ctrl   612 hits / 248 files   126 hits / 31 files    611 hits / 193 files  
+  adjacent transposition   ctrl   36 hits / 24 files     16 hits / 8 files      39 hits / 21 files    
+  hypercube                ctrl   30 hits / 11 files     1 hits / 1 files       1 hits / 1 files      
+  spectral gap             ctrl   22 hits / 17 files     6 hits / 3 files       75 hits / 24 files    
+  Dirichlet                ctrl   7 hits / 5 files       96 hits / 15 files     134 hits / 26 files   
+
+  POSITIVE CONTROLS: nonzero, so the census reaches the corpus
+  'note' vocabulary present anywhere in the three trees: alternating projection (8), principal angle (4), canonical correlation (2), maximal correlation (2), two projections (3), checkerboard (3), foliation (3), partial cube (2), even sweep (3), odd sweep (5), conditional variance (3), conditional expectation (4), block dynamics (2), Efron (2), pair-orientation (25)
