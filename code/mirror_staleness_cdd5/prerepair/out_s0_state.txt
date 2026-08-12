@@ -15,15 +15,15 @@ COMMANDS AND THEIR ANSWERS  (mirror repo = one_third_width_three)
   git rev-parse --abbrev-ref HEAD
       main-mirror
   git rev-parse HEAD
-      949c43926b6eab9dfbd606b063992e2d7d2ea0ae
+      912f1b1498f251d3f55be69c48c32aa766868544
   git rev-list --left-right --count HEAD...origin/main
-      0 ahead, 0 behind
+      0 ahead, 76 behind
   git status --porcelain
       clean (no output)
 
   git merge-base --is-ancestor bde9610 origin/main   -> YES
   git merge-base --is-ancestor 912f1b1 origin/main   -> YES
-  HEAD starts with 912f1b1                            -> NO
+  HEAD starts with 912f1b1                            -> YES
 
   the strike   bde9610 2026-08-07  docs+scripts: strike `lambda_std <= lambda_2^BK` at Reverse-Cheeger §5 — FALSE, exact witnesses; and the 'exactly the ordinal sums
   the mirror   912f1b1 2026-07-19  docs: annotate mg-0ed7 Finding 7.5 as REFUTED by mg-8f56 (mg-d710)
@@ -46,8 +46,8 @@ THE CONSEQUENCE, READ AT BOTH REVISIONS AND NEVER OFF DISK
     stale text, HALF OF IT DOES NOT RESOLVE.
 
 THIS REPOSITORY (onethird_program) -- stated so the pin is checkable
-  HEAD            f635af66cb0d  (branch polecat-pcdd5)
-  origin/main     54038e726eb6
+  HEAD            cac9de0fc87d  (branch polecat-pcdd5)
+  origin/main     d19d12787557
 
 PIN.  Every figure in this instrument is measured against
   one_third_width_three origin/main = 949c43926b6e

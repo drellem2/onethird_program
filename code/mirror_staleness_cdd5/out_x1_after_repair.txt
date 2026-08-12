@@ -1,0 +1,41 @@
+==============================================================================
+mg-cdd5 x1 -- THE REMEDY, READ BACK OFF THE REPAIRED WORKING COPY
+==============================================================================
+(1) THE CHECKOUT NOW
+    branch            main-mirror
+    HEAD              949c43926b6e
+    origin/main       949c43926b6e
+    ls-remote main    949c43926b6e
+    ahead / behind    0 / 0
+    working tree      clean
+
+    was, before the repair: HEAD 912f1b1, 0 ahead / 76 behind
+    UNDO, exactly:  git -C /Users/daniel/research/one_third_width_three reset --hard 912f1b1
+    The fast-forward moved a branch pointer.  It created no commit,
+    rewrote no history, and touched nothing on any other branch --
+    a pre-existing stash on `mayor-a5-g2-status` is untouched.
+
+(2) AND (3) WHAT A READER NOW SEES.  Read OFF DISK -- the one place
+    in this instrument where that is the measurement and not the
+    defect, because the disk is what the repair was for.
+
+    docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md
+      cited from: STATE.md:78, STATE.md:112
+      strike markup the reader gains vs 912f1b1: STRUCK x1, ~~ x2
+      line 286 struck on disk: True   - > ~~**But `λ_std ≤ λ₂^{BK}`** (the standard sector is a subspace): Theorem E b
+      §5.0' resolves on disk: True
+
+    docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md
+      cited from: STATE.md:112, docs/...mg-bb60.md:126
+      strike markup the reader gains vs 912f1b1: REFUTED x2, WITHDRAWN x1, ~~ x6
+
+    docs/OneThird-StandardDominance-ComparisonRoute.md
+      cited from: code/row3b_audit_eba7/OUTCOMES.md:72, docs/state-history/...:112
+      strike markup the reader gains vs 912f1b1: REFUTED x2, WITHDRAWN x1, ~~ x8
+
+    NOT FIXED BY THIS, AND SAID PLAINLY: nothing advances
+    `main-mirror`.  It was created once from origin/main and never
+    moved; this is a one-shot and it will go stale again.  README §4
+    names the structural options and why none of them is landed from
+    a branch that targets a different repository.
+== x1 exit: 0 ==

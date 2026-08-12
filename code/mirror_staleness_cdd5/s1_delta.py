@@ -43,16 +43,27 @@ def main():
         L.is_ancestor(mirror, st.head, "origin/main")
     print("    => `git merge --ff-only origin/main` can lose nothing: %s"
           % ("YES" if ff_ok else "NO -- STOP"))
+    if st.behind == 0:
+        print("    ALREADY APPLIED: the checkout is level with origin/main, so")
+        print("    the fast-forward this section costed has been done (x1).")
     print()
     print("    Note what this does NOT say.  It says the fast-forward destroys")
     print("    no work.  It does not say the 133 files it rewrites are ones a")
     print("    reader wanted rewritten; that is (c), and it is a judgement.")
     print()
 
-    print("(b) THE COMMITS.  %d of them, %s..origin/main."
-          % (st.behind, MIRROR_PIN))
     log = L.git(["log", "--reverse", "--format=%h|%ad|%s", "--date=short",
                  "%s..origin/main" % MIRROR_PIN], cwd=mirror).splitlines()
+    # The count comes from the LIST, not from `behind`.  Those are different
+    # quantities the moment the repair lands -- `behind` is a fact about the
+    # checkout NOW, the list is a fact about the pinned range -- and the
+    # header once read `0 of them` above 76 printed rows because it took the
+    # number from one source and the rows from the other (README §6, D3).
+    print("(b) THE COMMITS.  %d of them, %s..origin/main."
+          % (len(log), MIRROR_PIN))
+    print("    (the checkout is %d behind origin/main right now; before the"
+          % st.behind)
+    print("     repair those two numbers coincided, and they no longer must.)")
     print("    oldest first; the strike is marked.")
     print()
     for i, ln in enumerate(log, 1):

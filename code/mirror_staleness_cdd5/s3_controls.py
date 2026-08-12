@@ -9,11 +9,15 @@ REFUSING to fire, not firing.
 Exit 1 if any arm is unsatisfactory.  That IS a fact about this instrument, so
 unlike s0-s2 it is allowed to set the status.
 """
+import os
 import sys
 
 import lib_cdd5 as L
 
 MIRROR_PIN = "912f1b1"
+#: onethird_program commit immediately before this ticket repaired the two
+#: line anchors at STATE.md:112.  Named so the erased finding stays replayable.
+PRE_REPAIR_REV = "0a8415b"
 CHEEGER = "docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md"
 
 RESULTS = []
@@ -48,7 +52,6 @@ def main():
     # (a property of this reader), and the two pinned revisions differ (a
     # property of history that no repair can undo).  The checkout's current
     # staleness is REPORTED, not scored.
-    import os
     disk = None
     p = os.path.join(mirror, CHEEGER)
     if os.path.isfile(p):
@@ -216,6 +219,50 @@ def main():
         "worse than the real finding.\n"
         "this parser gives path=%r line=%s -> %s."
         % (rng, old_style, k_bad, p_rng, l_rng, k_rng))
+
+    # ---- PRE-REPAIR-ANCHORS: the finding the repair made invisible --------
+    # s4 now reports STATE.md:112's two anchors as TIP-AUTHORED, because this
+    # ticket repaired them.  The FINDING was that they were PIN-AUTHORED --
+    # written against the stale tree, which is the evidence that authors here
+    # read the mirror checkout.  A repair that erases its own evidence leaves
+    # nothing for the next reader to check, so the pre-repair STATE.md is
+    # replayed OUT OF GIT and the verdict re-derived on it.
+    import s4_anchors as S4  # noqa: E402  (arm-local by design)
+
+    class _Cit(object):
+        def __init__(self, src, srcline, path, line):
+            self.src, self.srcline, self.path, self.line = src, srcline, path, line
+
+    pre = L.git(["show", "%s:STATE.md" % PRE_REPAIR_REV], cwd=L.program_root())
+    pre_lines = pre.split("\n")
+    rows, verdicts = [], []
+    for path, anchor in ((CHEEGER, 310),
+                         ("docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md",
+                          286)):
+        # find the citing line in the PRE-REPAIR file, by the anchor as written
+        needle = "%s:%d" % (os.path.basename(path), anchor)
+        srcline = next((n for n, ln in enumerate(pre_lines, 1)
+                        if needle in ln), None)
+        if srcline is None:
+            verdicts.append(None)
+            rows.append("%s:%d NOT FOUND in STATE.md@%s"
+                        % (path, anchor, PRE_REPAIR_REV))
+            continue
+        lo = S4.line_at(L.blob_at(mirror, MIRROR_PIN, path), anchor)
+        ln_ = S4.line_at(L.blob_at(mirror, "origin/main", path), anchor)
+        v = S4.decide_by_quote_text(pre_lines[srcline - 1], lo, ln_)
+        verdicts.append(v)
+        rows.append("STATE.md@%s:%d -> %s:%d  verdict=%s"
+                    % (PRE_REPAIR_REV, srcline, os.path.basename(path),
+                       anchor, v))
+    arm("PRE-REPAIR-ANCHORS the erased finding is replayed out of git",
+        verdicts == ["pin", "pin"],
+        "replayed STATE.md at %s (the commit before this ticket's anchor\n"
+        "repair) and re-ran s4's quote decision on it:\n  %s\n"
+        "both come back PIN-AUTHORED, which is the finding.  Today's STATE.md\n"
+        "gives TIP-AUTHORED for the same two rows -- that is the repair, not a\n"
+        "retraction, and this arm is what makes the difference checkable."
+        % (PRE_REPAIR_REV, "\n  ".join(rows)))
 
     # ---- E2: the pin is printed, so this transcript is checkable ----------
     st = L.read_state(mirror, do_ls_remote=False)

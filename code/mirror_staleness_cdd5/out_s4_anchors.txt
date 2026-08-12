@@ -1,0 +1,94 @@
+==============================================================================
+mg-cdd5 s4 -- LINE ANCHORS: the second question, and the repair's cost
+==============================================================================
+POPULATION
+  every citation to one_third_width_three in 1451 scanned files that
+  carries an explicit `:LINE` (a range counts as its first line).
+  citations swept  24
+  of which anchored 8
+  tier-1 anchored   3  (STATE.md and the twin)
+
+  STATE.md:78  ->  docs/probe-lambda-constant-bound.md:65
+      SAME at both revisions: T[x,i] = Pr[ sigma(x) = i ],     S = (T + T^T)/2,     lambda_std = max spec( S |_{1-perp
+
+  STATE.md:112  ->  docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:449
+      at 912f1b1 : <past end of file>
+      at tip     : So **L1b ⟺ "all-pairs-frozen ⇒ standard dominance,"** and LIB (§4) is its quantitative
+      TIP-AUTHORED (decided by the citing quote): the text
+                   STATE.md quotes is at tip line 449, not at 912f1b1
+                   line 449.  CORRECT AS WRITTEN today.
+
+  STATE.md:112  ->  docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:350
+      at 912f1b1 : <past end of file>
+      at tip     : | standard-dominance failures (n≤6 exhaustive + n=7 top-λ spot) | 0 / 132 — ⚠️ **SAMPLIN
+      TIP-AUTHORED (decided by the citing quote): the text
+                   STATE.md quotes is at tip line 350, not at 912f1b1
+                   line 350.  CORRECT AS WRITTEN today.
+
+  code/row3b_audit_eba7/OUTCOMES.md:72  ->  docs/OneThird-StandardDominance-ComparisonRoute.md:104
+      at 912f1b1 : | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | Empirically supported, **0/132** (`mgb0a6`
+      at tip     : | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | ~~Empirically supported, **0/132** (`mgb0a
+      EDITED IN PLACE: the anchored line is still line 104;
+                   it gained text (typically the strike
+                   markup).  THE ANCHOR REMAINS CORRECT.
+
+  docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:83  ->  step8.tex:389
+      SAME at both revisions: of $G_{\mathrm{BK}}(P)$. Lemma~\ref{lem:dirichlet-conductance} is what
+
+  docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126  ->  docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:127
+      at 912f1b1 : **(a) Soft claim — "expected rank largely determines the eigenvector ordering"
+      at tip     : total order `e` agreeing with all >2/3 majority orientations. Linear-extension
+      UNDECIDED: the line SHIFTED, and both directions
+                   relocate, so shifting alone cannot say
+                   which revision the author read.
+                   if PIN-authored, the tip equivalent is :180  (exact text match)
+                   if TIP-authored, the 912f1b1 equivalent is :79  (exact text match)
+                   No quote in the citing line settles it;
+                   REFUSED rather than guessed.
+
+  docs/OneThird-lambda-std-Operative-Form.md:400  ->  step8.tex:57
+      SAME at both revisions: \begin{theorem}[Counterexample $\Rightarrow$ low BK expansion]
+
+  docs/state-history/audit-mg-eba7-of-mg-55f2.md:112  ->  docs/OneThird-StandardDominance-ComparisonRoute.md:104
+      at 912f1b1 : | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | Empirically supported, **0/132** (`mgb0a6`
+      at tip     : | **SD-Cayley** | `λ₂(Cayley walk) = λ_std` | ~~Empirically supported, **0/132** (`mgb0a
+      EDITED IN PLACE: the anchored line is still line 104;
+                   it gained text (typically the strike
+                   markup).  THE ANCHOR REMAINS CORRECT.
+
+TALLY
+  anchors whose line is IDENTICAL at both revisions  3
+  anchors whose line DIFFERS                        5
+    EDITED IN PLACE (same line number; anchor stands)  2
+    PIN-AUTHORED    (stale-tree anchor; needs repair)  0
+    TIP-AUTHORED    (correct as written today)         2
+    UNDECIDED       (shifted, no quote settles it)     1
+  anchors resolving at neither revision              0
+
+  Authorship is decided ONLY by a quoted span of >= 25 characters in
+  the citing line, compared modulo whitespace and inline markup.
+  Shifting alone decides nothing and is not used as evidence.
+
+WHAT THE REPAIR COST, STATED PLAINLY
+  The fast-forward is right for the PROSE -- a reader stops being
+  shown a withdrawn claim as live.  It is NOT free for ANCHORS.
+  Two citations at STATE.md:112 were PIN-AUTHORED: both QUOTE the
+  line they point at, and both quotes matched at 912f1b1 and
+  nothing at origin/main, because bde9610 inserted 5.0' above them.
+  That is direct evidence that this programme's authors have been
+  reading the mirror checkout and not origin/main -- the ticket's
+  hazard, caught in the act rather than argued.
+
+  THOSE TWO ARE REPAIRED (:310 -> :449, :286 -> :350), each to a
+  number DERIVED above and never typed, which is why they now read
+  TIP-AUTHORED.  s3's arm PRE-REPAIR-ANCHORS keeps the finding
+  checkable after the repair made it invisible: it replays the
+  pre-repair STATE.md out of git and requires PIN-AUTHORED.
+
+  ANCHORS IN FROZEN AUDIT RECORDS ARE LEFT.  A record of what was
+  read at the time is not improved by being re-pointed at what is
+  true now; that would erase the very provenance it exists to keep.
+
+  A line anchor into another repository is fragile by construction:
+  it is a reference to a POSITION in a file anyone may edit.  This
+== s4 exit: 0 ==

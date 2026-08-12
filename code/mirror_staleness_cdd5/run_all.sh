@@ -2,7 +2,7 @@
 # mg-cdd5: THE STALE MAIN-MIRROR, and the sweep for other citations landing on
 # superseded text.
 #
-#     sh run_all.sh          # ~7.5 s MEASURED on this host; pure Python 3 + git, no third-party packages
+#     sh run_all.sh          # ~9.7 s MEASURED on this host; pure Python 3 + git, no third-party packages
 #
 # ⚠️ THIS RUNNER DOES NOT FETCH, DOES NOT CHECK OUT, AND DOES NOT PULL.  It
 # reads `git ls-remote` (which asks the remote and moves nothing) to confirm
@@ -26,7 +26,7 @@ cd "$(dirname "$0")"
 
 echo "== mg-cdd5: the stale main-mirror and the citation sweep =="
 status=0
-for s in selftest_cdd5 s0_state s1_delta s2_sweep s3_controls; do
+for s in selftest_cdd5 s0_state s1_delta s2_sweep s3_controls s4_anchors x1_after_repair; do
     # stderr goes INTO the transcript: a crash and a fired check are both
     # exit 1, and a transcript keeping only stdout ends mid-section with no
     # reason given.

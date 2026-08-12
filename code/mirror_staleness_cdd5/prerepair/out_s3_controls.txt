@@ -2,12 +2,12 @@
 mg-cdd5 s3 -- CONTROLS: can this instrument exhibit its own subject?
 ==============================================================================
   [OK  ] E1 the working-copy read answers HEAD, not the truth -- DEMONSTRATED
-        disk content == blob@HEAD(949c43926b6e): True -- a disk-reading sweep can only
+        disk content == blob@HEAD(912f1b1498f2): True -- a disk-reading sweep can only
         ever report what the checkout has.
         blob@912f1b1 vs blob@origin/main: CHANGED-WITH-STRIKE -- a fact about history, and no
         repair to the checkout can make it UNCHANGED.
-        REPORTED, NOT SCORED: the checkout is 0 commit(s) behind right now,
-        so a disk-reading sweep would not miss the strike today.
+        REPORTED, NOT SCORED: the checkout is 76 commit(s) behind right now,
+        so a disk-reading sweep WOULD miss the strike today.
 
   [OK  ] E3 absent-at-both is NOT scored as unchanged
         a naive differ compares the two absences equal (`old is new` -> True)
@@ -42,7 +42,7 @@ mg-cdd5 s3 -- CONTROLS: can this instrument exhibit its own subject?
         classifier says UNCHANGED.
 
   [OK  ] D1 this instrument's own directory would contaminate the sweep
-        sweeping only this instrument's own 24 files yields 15 citations,
+        sweeping only this instrument's own 13 files yields 12 citations,
         every one of them synthetic.  s2 EXCLUDES this directory and prints
         the excluded count; the arm fails if that exclusion ever stops
         mattering, because then it has silently become decorative.
@@ -53,15 +53,6 @@ mg-cdd5 s3 -- CONTROLS: can this instrument exhibit its own subject?
         BROKEN CITATION where there is none -- a parser defect that sounds
         worse than the real finding.
         this parser gives path='step8.tex' line=389 -> UNCHANGED.
-
-  [OK  ] PRE-REPAIR-ANCHORS the erased finding is replayed out of git
-        replayed STATE.md at 0a8415b (the commit before this ticket's anchor
-        repair) and re-ran s4's quote decision on it:
-          STATE.md@0a8415b:112 -> OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310  verdict=pin
-          STATE.md@0a8415b:112 -> OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:286  verdict=pin
-        both come back PIN-AUTHORED, which is the finding.  Today's STATE.md
-        gives TIP-AUTHORED for the same two rows -- that is the repair, not a
-        retraction, and this arm is what makes the difference checkable.
 
   [OK  ] E2 this instrument names the revision every figure is measured at
         one_third_width_three origin/main = 949c43926b6e at run time.
@@ -76,5 +67,5 @@ mg-cdd5 s3 -- CONTROLS: can this instrument exhibit its own subject?
         them apart -- s2 prints it as `!! source not found` and calls the
         tier INCOMPLETE rather than reporting a clean zero.
 
-  12 arms, 12 satisfactory, 0 unsatisfactory
+  11 arms, 11 satisfactory, 0 unsatisfactory
 == s3 exit: 0 ==

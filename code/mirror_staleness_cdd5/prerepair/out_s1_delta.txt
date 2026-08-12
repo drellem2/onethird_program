@@ -6,16 +6,12 @@ mg-cdd5 s1 -- WHAT THE MIRROR UPDATE BRINGS IN BESIDES THE STRIKE
     uncommitted state in the working tree: none
     HEAD is an ancestor of origin/main   : YES
     => `git merge --ff-only origin/main` can lose nothing: YES
-    ALREADY APPLIED: the checkout is level with origin/main, so
-    the fast-forward this section costed has been done (x1).
 
     Note what this does NOT say.  It says the fast-forward destroys
     no work.  It does not say the 133 files it rewrites are ones a
     reader wanted rewritten; that is (c), and it is a judgement.
 
 (b) THE COMMITS.  76 of them, 912f1b1..origin/main.
-    (the checkout is 0 behind origin/main right now; before the
-     repair those two numbers coincided, and they no longer must.)
     oldest first; the strike is marked.
 
       1  3b1f63b  2026-07-21  wip: recover mg-0eac prior attempt (c583212 + uncommitted worktree state) (mg-0eac)

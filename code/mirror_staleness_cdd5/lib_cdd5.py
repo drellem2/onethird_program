@@ -147,8 +147,14 @@ def blob_at(repo, rev, path):
 # Citation extraction
 # ---------------------------------------------------------------------------
 
-#: A markdown link whose target lands in the mirror repo.
-_MD = re.compile(r"\]\(([^)\s]*" + MIRROR_NAME + r"/[^)\s#]+)")
+#: A markdown link whose target lands in the mirror repo, WITH ITS LABEL.
+#: The label is captured because this corpus writes the line anchor in the
+#: DISPLAY TEXT and not in the target:
+#:     [`OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310`](../one_third_width_three/docs/....md)
+#: A reader follows the label's `:310`; a link-target-only extractor sees no
+#: anchor at all and reports `0 anchored citations in STATE.md`, which is how
+#: this instrument first missed its own sharpest finding (README §6, D4).
+_MD = re.compile(r"\[([^\]]*)\]\(([^)\s]*" + MIRROR_NAME + r"/[^)\s#]+)")
 #: An HTML href doing the same (E6 -- the twin is HTML, not markdown).
 _HREF = re.compile(r"""href=["']([^"'>\s]*""" + MIRROR_NAME + r"""/[^"'>\s#]+)""")
 #: A bare path in backticks, e.g. `one_third_width_three/docs/foo.md:65`.
@@ -203,6 +209,20 @@ class Citation(object):
 _SEC = re.compile(r"(?:§|&sect;|\bsec(?:tion)?\.?\s*)\s*([0-9]+(?:\.[0-9]+)*[′'′]?)")
 
 
+def line_from_label(label, path):
+    """A `:N` carried by a markdown link's DISPLAY TEXT rather than its target.
+
+    Only accepted when the label names the same file as the target, so that
+    `[see §5 of foo.md](.../bar.md)` never donates foo.md's line number to
+    bar.md.  A range counts as its first line, as elsewhere.
+    """
+    if not label or not path:
+        return None
+    base = re.escape(os.path.basename(path))
+    m = re.search(base + r":(\d+)(?:\s*[-–—]\s*\d+)?", label)
+    return int(m.group(1)) if m else None
+
+
 def extract_citations(text, src):
     """All citations to the mirror repo in `text`, with their source lines."""
     out = []
@@ -210,13 +230,17 @@ def extract_citations(text, src):
         seen_on_line = set()
         for rx, kind in ((_MD, "md"), (_HREF, "href"), (_TICK, "tick")):
             for m in rx.finditer(ln):
-                path, cited_line = _normalise(m.group(1))
+                label = m.group(1) if kind == "md" else None
+                target = m.group(2) if kind == "md" else m.group(1)
+                path, cited_line = _normalise(target)
                 if not path:
                     continue
+                if cited_line is None:
+                    cited_line = line_from_label(label, path)
                 if (path, kind) in seen_on_line:
                     continue
                 seen_on_line.add((path, kind))
-                c = Citation(src, n, m.group(1), path, cited_line, kind)
+                c = Citation(src, n, target, path, cited_line, kind)
                 c.sections = sorted(set(_SEC.findall(ln)))
                 out.append(c)
     return out
