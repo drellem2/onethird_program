@@ -1,0 +1,67 @@
+
+==============================================================================
+e3.1  sum of A_xy over ALL pairs is exactly n - 1, at every poset
+==============================================================================
+  PASS  sum_{all pairs} A_xy = n - 1   0 failures / 328
+
+==============================================================================
+e3.2  and A^o + A^e reproduces it on the incomparable pairs
+==============================================================================
+  The identity emits A^o and A^e separately; their sum over incomparable pairs is the
+  incomparable share of the n-1 budget.  Checked against a direct adjacency count.
+  PASS  A^o + A^e = Pr[adjacent] on incomparable pairs, and sums to <= n-1   0 failures / 328
+
+==============================================================================
+e3.3  THE SATURATION: the antichain has d = 1 and sits ON the bound
+==============================================================================
+    n     d(P)    sum_{x||y} A_xy    n-1    slack
+    3        1                  2      2        0
+    4        1                  3      3        0
+    5        1                  4      4        0
+    6        1                  5      5        0
+    7        1                  6      6        0
+  PASS  at d = 1 the identity's density-facing relation holds with EQUALITY   so no D < 1 follows from it
+
+==============================================================================
+e3.4  and the relation is FOLIATION-FREE -- pure slot counting
+==============================================================================
+  Each linear extension has exactly n-1 adjacent position slots and each slot holds
+  exactly one pair, so sum_{all pairs} A_xy = n-1 by counting alone.  Confirmed by
+  computing the same number without touching a fiber, a projection or a block system.
+  PASS  a pair-indexed second route reproduces n-1 with no foliation anywhere in either path   0 failures / 80
+  PASS  C  distance-2 in place of distance-1 does NOT give n-1   2 vs 3
+
+==============================================================================
+e3.5  WHAT THE RELATION DOES SAY -- and it is step8.tex Step 1, re-derived
+==============================================================================
+  inv_e is itself a pair-orientation linear statistic (all c = 1), so the identity
+  DOES compute E_BK(inv_e) = (1/(2(n-1))) sum_{x||y} A_xy <= 1/2.  That is exactly
+  mg-409a's L3 / step8.tex Step 1, 'sum_{x||y} E_BK(f_xy) <= 1/2', reached here by a
+  different route on an implementation that has never seen it.
+  PASS  E_BK(inv_e) = sum_{x||y} E_BK(f_xy) = (1/(2(n-1))) sum A_xy   0 failures / 295 posets
+  PASS  and its maximum is exactly 1/2 -- mg-409a's L3 value   max = 1/2
+
+  AND THAT IS THE POINT.  The identity computes E_BK(inv_e) exactly and the number it gets
+  is bounded by 1/2 at EVERY poset -- the same 1/2 whatever E[inv_e] is.  So the quantity
+  the identity CAN compute about inv_e carries ZERO information about the quantity row 8
+  needs, which is E[inv_e] itself.  A Dirichlet form is not a mean.
+
+==============================================================================
+e3.6  SCOPE, stated because it limits every arm in this directory
+==============================================================================
+  (R) is a FROZEN-conditional statement and the frozen class is EMPTY at every n this
+  corpus can enumerate -- the 1/3-2/3 conjecture is verified to n = 14 (mg-33f5), and the
+  literature lower bound on a minimal counterexample is n >= 12 refereed / n >= 15 preprint
+  (STATE.md:213).  So no measurement here, or anywhere in this repository, samples the class
+  (R) quantifies over.  mg-345e and mg-6bc2 declared and refused the same sweep for the same
+  reason and that refusal is kept here.
+
+  What this arm therefore establishes is NOT "d is large on frozen posets".  It is that the
+  identity's ONLY relation touching d is an equality at d = 1, so the identity cannot be the
+  source of an upper bound on d at any poset, frozen or not.  That is a statement about the
+  relation, and it does not need the class to be nonempty.
+
+==============================================================================
+e3  RESULT
+==============================================================================
+  ok
