@@ -4,9 +4,9 @@ mg-724a — MERGE GATE over the two control suites mg-9876 audited
 
 §1  THE SUITES, RUN — and what each one costs on the merge critical path
 --------------------------------------------------------------------------------------------
-  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      1.0s  7696 bytes
-  audit  code/control_audit_9876/run_all.sh         exit 0     14.5s  40034 bytes
-         (both suites)                                     15.5s total
+  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      1.0s  8056 bytes
+  audit  code/control_audit_9876/run_all.sh         exit 0     11.9s  40360 bytes
+         (both suites)                                     12.9s total
 
 §2  OBSERVED vs BASELINE.json
 --------------------------------------------------------------------------------------------
@@ -22,10 +22,10 @@ audit.runner_exit                  gated     MATCH                       baselin
 audit.selftest_scored              gated     MATCH                       baseline=6  observed=6
 audit.selftest_total               gated     MATCH                       baseline=6  observed=6
 audit.sites                        gated     MATCH                       baseline=59  observed=59
-audit.sweep_dirs_without_evidence  recorded  MATCH                       baseline=25  observed=25
+audit.sweep_dirs_without_evidence  recorded  MOVED (recorded, not gated)  baseline=25  observed=27
 audit.sweep_grade                  gated     MATCH                       baseline="OK"  observed="OK"
-audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseline=207  observed=208
-audit.sweep_tee_sites              recorded  MATCH                       baseline=19  observed=19
+audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseline=207  observed=211
+audit.sweep_tee_sites              recorded  MOVED (recorded, not gated)  baseline=19  observed=21
 twin.control_exit                  gated     MATCH                       baseline=0  observed=0
 twin.holes                         gated     MATCH                       baseline=0  observed=0
 twin.mutations_caught              gated     MATCH                       baseline=16  observed=16
@@ -37,6 +37,17 @@ twin.verdict_grade                 gated     MATCH                       baselin
 twin.worklist                      gated     MATCH                       baseline=[]  observed=[]
 
   Why each field that moved is declared the way it is:
+    audit.sweep_dirs_without_evidence (recorded):
+      Directories under code/ shipping code with no evidence of any falsification attempt.
+      Same population and same reasoning; this is the number that should go DOWN as the
+      estate is widened past these two directories, and watching it is the point of
+      recording it. IT WENT UP TO 26 DURING mg-724a AND THE 26TH WAS THIS DIRECTORY — a4
+      looks for a SOURCE FILE named for a negative/self/positive control, and this gate's
+      falsification originally lived inside gate.py where no filename said so. The
+      transcript that does carry the red tokens is the one the run is still writing when
+      a4 reads it, which is mg-f8e5's d5 defect committed by the instrument reporting it.
+      Repaired by moving the probes into negative_control.py — a rename that follows the
+      estate's convention instead of arguing with the detector.
     audit.sweep_membership_candidates (recorded):
       RECORDED, NOT GATED, and this is a deliberate blind spot rather than an omission. A
       RECORDED VALUE IS A DATED READING AND IS EXPECTED TO GO STALE; a GATED value is an
@@ -50,6 +61,10 @@ twin.worklist                      gated     MATCH                       baselin
       on` failure mode, arriving on the first run rather than in six weeks. This directory
       itself adds ZERO whole-output membership tests, which is mg-9876's own detector
       reporting on the instrument written to gate it.
+    audit.sweep_tee_sites (recorded):
+      Same population and same reasoning as audit.sweep_membership_candidates. 18 of these
+      were live when mg-9876 measured; the count is a candidate index, not an
+      adjudication.
 
 §3  WHAT THIS GATE DELIBERATELY DOES NOT GATE — named, not omitted
 --------------------------------------------------------------------------------------------
@@ -84,7 +99,7 @@ twin.worklist                      gated     MATCH                       baselin
 
 §5  CAN THIS GATE REFUSE?  Self-contained worlds, nothing borrowed from the estate
 --------------------------------------------------------------------------------------------
-  S1   BASELINE.json does not exist                                              CAUGHT   /Users/daniel/.pogo/polecats/c188d/code/control_gate_724a/BASELINE.json.no-such-file is missing.  A gate
+  S1   BASELINE.json does not exist                                              CAUGHT   /Users/daniel/.pogo/polecats/p602d/code/control_gate_724a/BASELINE.json.no-such-file is missing.  A gate
   S2   the baseline declares a schema this gate cannot read                      CAUGHT   baseline schema is not 1; this gate cannot read it
   S3   a baseline field carries no `why`                                         CAUGHT   baseline field x carries no `why`.  A number in a baseline with no reason beside it is an assertion nobo
   S4   a baseline field is neither gated nor recorded                            CAUGHT   baseline field x declares class 'informational'; every field must be `gated` (a change is RED) or `recor
@@ -98,5 +113,5 @@ twin.worklist                      gated     MATCH                       baselin
 ============================================================================================
 GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
 shown able to fail on 14 probes and to refuse in 8 worlds, on this run, against
-these bytes.  Total 15.5s.
+these bytes.  Total 13.0s.
 ============================================================================================

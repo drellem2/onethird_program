@@ -1,0 +1,25 @@
+========================================================================================
+mg-602d  can the concepts gate fire?  planted worlds, both directions
+========================================================================================
+
+  [ok ] REAL FILE (positive control)       want exit 0, got 0
+        the document as it stands must be green, or every red below means nothing
+  [ok ] pointer cell blanked in S5         want exit 1, got 1
+        a killed intuition with no artifact behind it
+  [ok ] BELIEF marker removed in S6        want exit 1, got 1
+        an unearned claim reading exactly like an earned one
+  [ok ] word ceiling blown                 want exit 1, got 1
+        silent growth into a second STATE.md
+  [ok ] dead relative link                 want exit 1, got 1
+        a pointer that points nowhere on disk
+  [ok ] STATE.md pointer removed           want exit 1, got 1
+        a document nobody can reach from the canonical file
+  [ok ] S6 heading reworded                want exit 2, got 2
+        an anchor that no longer matches MUST refuse, never pass
+  [ok ] pointer swapped for a WRONG one    want exit 0, got 0
+        WRONG-DIRECTION: c0 checks presence, not correctness -- green here is the LIMIT
+
+----------------------------------------------------------------------------------------
+VERDICT: green.  Every must-fire world fires, the anchor world REFUSES rather than
+         passing, and the wrong-pointer world stays green -- which is c0's stated
+         limit measured rather than asserted.
