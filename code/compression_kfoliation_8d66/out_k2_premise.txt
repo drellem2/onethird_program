@@ -1,0 +1,58 @@
+
+==========================================================================================
+k2.1  THE ANCHOR: Q_finest IS the BK generator rescaled, as an EXACT MATRIX IDENTITY
+==========================================================================================
+
+      Q_finest  =  (n-1) I - sum_{p=0}^{n-2} Pi_p  =  ((n-1)/2) (I - P_BK)
+
+  Pi_p = (I + T_p)/2 on the legal swaps and I on the illegal ones, so sum_p Pi_p =
+  ((n-1)/2) I + (1/2) sum_p T_p and (n-1) P_BK = sum_p T_p.  Checked ENTRYWISE in exact
+  rationals -- not as an eigenvalue statement, and with no test function involved.
+
+  PASS  Q_finest == ((n-1)/2)(I - P_BK) entrywise at 373 posets (n=3:13, n=4:195, n=5:115, n=6:50)   0 failures; 8 posets skipped for |L(P)| > 130
+
+==========================================================================================
+k2.2  HIS PREMISE, TESTED: the SAME constant 2/(n-1) at EVERY admissible partition
+==========================================================================================
+
+  If the constant carried a class size, the operator inequality below would hold at some
+  partitions and fail at others.  EXACT PSD of  Q_finest - Q_S  at every admissible S.
+
+  PASS  ((n-1)/2)(I - P_BK) - Q_S is PSD at 1728 (poset, partition) pairs, EXACTLY   0 failures
+
+      => E_BK(f) >= (2/(n-1)) <f, Q_S f>   for EVERY f and EVERY admissible partition S,
+         with ONE constant 2/(n-1) that does not depend on k or on any class's size.
+
+      => THE BAR IS k-INDEPENDENT.  alpha_k must exceed (n-1)/(gamma n), which contains no k.
+         pm-onethird's premise is CONFIRMED and it is confirmed in the strong form: it is not
+         that the constant happens not to move, it is that the identity is a PER-POSITION sum.
+
+
+==========================================================================================
+k2.3  BUT HIS SECOND `=` IS A `>=`, AND THE SLACK IS REAL
+==========================================================================================
+  PASS  the inequality is STRICT at 2789 of 5184 (f, S) instances   equality at 2395
+  first strict instance: n=4  S=02|1   <f,Q_S f> = 6757/96 < 1413/16 = ((n-1)/2)E_BK(f)
+
+  WHY.  Within one class the swaps act on DISJOINT pairs, so the fiber is a CUBE of dimension
+  d = #free positions -- not a single coordinate.  On that cube
+
+      sum_{p in S} E Var_p(f)  =  sum_{B} |B| fhat(B)^2   >=   sum_{B != 0} fhat(B)^2
+                                                          =    E Var(f | C_S)
+
+  with equality iff f has no Fourier weight above degree 1 on the fiber.  That is exactly
+  mg-8bc7's equality case ("(*) is an equality on linear statistics and an inequality in
+  general"), read one class at a time.  pm-onethird's derivation writes `=` where the
+  per-class step is `>=`.
+
+
+==========================================================================================
+k2.4  the equality case, exhibited both ways
+==========================================================================================
+  PASS  [EQUALITY] pair indicator f_01 sits in the equality case at k=2
+  PASS  a fiber of dimension 2 >= 2 exists to plant in
+  PASS  [STRICT] the degree-2 parity on that fiber loses   7/60 < 1/5   ratio 0.583333333
+
+==========================================================================================
+k2 VERDICT: THE BAR IS k-INDEPENDENT (premise CONFIRMED); the `=` is a `>=`
+==========================================================================================

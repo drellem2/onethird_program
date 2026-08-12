@@ -1,0 +1,61 @@
+
+==========================================================================================
+k0.1  hand-known linear-extension counts
+==========================================================================================
+  PASS  |L(antichain(3))| = 6   expected 6
+  PASS  |L(chain(3))| = 1   expected 1
+  PASS  |L(antichain(4))| = 24   expected 24
+  PASS  |L(chain(4))| = 1   expected 1
+  PASS  |L(antichain(5))| = 120   expected 120
+  PASS  |L(chain(5))| = 1   expected 1
+  PASS  |L(antichain(6))| = 720   expected 720
+  PASS  |L(chain(6))| = 1   expected 1
+  PASS  |L(Z_4)| = 4   expected 4
+  PASS  |L(Z_6)| = 8   expected 8
+  PASS  |L(Z_8)| = 16   expected 16
+
+==========================================================================================
+k0.2  my BACKWARDS enumeration == lib409a's and lib8bc7's FORWARDS ones
+==========================================================================================
+  PASS  vs lib409a at 274 posets   0 disagreements
+  PASS  vs lib8bc7 at 274 posets   0 disagreements
+
+==========================================================================================
+k0.3  my ORBIT fibers == the priors' CONTENT-KEY fibers, and every fiber is a CUBE
+==========================================================================================
+  PASS  orbit fibers == content-key fibers at 548 (poset, class)   0 disagreements
+  PASS  every fiber has size 2^(#free positions)  [THE CUBE CLAIM]   0 violations
+  PASS  the free-position set is CONSTANT on every fiber   0 violations
+
+==========================================================================================
+k0.4  my BK Dirichlet form == lib409a's == lib8bc7's
+==========================================================================================
+  PASS  E_BK agrees across three implementations   0 disagreements
+
+==========================================================================================
+k0.5  my Q at the unique k=2 partition IS lib409a's M = 2I - Pi_o - Pi_e
+==========================================================================================
+  PASS  Q_(k=2) == M entrywise at 274 posets   0 entries differ
+
+==========================================================================================
+k0.6  my exact PSD test == lib8bc7's, and refuses a planted indefinite matrix
+==========================================================================================
+  PASS  PSD verdicts agree at 60 matrices   0 disagreements
+  PASS  every Q_(k=2) is PSD (it must be: it is a sum of E Var)
+  PASS  planted -10 on the diagonal is REFUSED   negative pivot at 0: -35/4
+  PASS  planted [[0,1],[1,0]] is REFUSED  (zero pivot, nonzero off-diagonal)
+
+==========================================================================================
+k0.7  FOUR PLANTED DEFECTS THAT MUST GO RED
+==========================================================================================
+  PASS  [BASELINE] the honest finest partition MATCHES
+  PASS  [C1] {0,1} is correctly REJECTED as a class
+  PASS  [C1] planted adjacent-position class goes RED against the identity
+  PASS  [C2] planted dropped position (3 of 4 covered) goes RED
+  PASS  [C3] planted repeated position goes RED
+  PASS  [C4a] the PER-POSITION constant reproduces E_BK exactly
+  PASS  [C4b] a CLASS-SIZE-weighted sum is a DIFFERENT number  (the premise bites)
+
+==========================================================================================
+GATE: PASS -- k1..k5 may run
+==========================================================================================

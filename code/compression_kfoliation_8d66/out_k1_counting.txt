@@ -1,0 +1,48 @@
+
+==========================================================================================
+k1.1  the admissible partitions, enumerated
+==========================================================================================
+  An admissible partition of the n-1 swap positions {0..n-2}: every block is a set of
+  PAIRWISE NON-ADJACENT positions.  Enumerated exhaustively, not counted by formula.
+
+   n | m=n-1 | #admissible | k_min | k_max | #partitions at k=2 | #at k=k_max
+  ---+-------+-------------+-------+-------+--------------------+------------
+   3 |     2 |           1 |     2 |     2 |                  1 |           1
+   4 |     3 |           2 |     2 |     3 |                  1 |           1
+   5 |     4 |           5 |     2 |     4 |                  1 |           1
+   6 |     5 |          15 |     2 |     5 |                  1 |           1
+   7 |     6 |          52 |     2 |     6 |                  1 |           1
+   8 |     7 |         203 |     2 |     7 |                  1 |           1
+   9 |     8 |         877 |     2 |     8 |                  1 |           1
+  10 |     9 |        4140 |     2 |     9 |                  1 |           1
+  11 |    10 |       21147 |     2 |    10 |                  1 |           1
+  12 |    11 |      115975 |     2 |    11 |                  1 |           1
+  PASS  k_min = 2 at every n = 3..12
+  PASS  k_max = n-1 at every n = 3..12
+  PASS  THE k = 2 PARTITION IS UNIQUE at every n = 3..12   so mg-409a's odd/even was not a choice
+  PASS  the k = n-1 partition is unique (all singletons)
+
+==========================================================================================
+k1.2  both extremes are the objects they are supposed to be
+==========================================================================================
+  PASS  every enumerated partition is admissible AND covers every position   0 violations
+  PASS  the unique k=2 partition IS even-positions / odd-positions   = lib409a's blocks_o / blocks_e  (checked entrywise in k0.5)
+
+==========================================================================================
+k1.3  THE VERDICT ON COUNTING
+==========================================================================================
+
+  k reaches n-1.  The bar is (n-1)/(gamma n), a CONSTANT in [2,3).  A ceiling of the naive
+  form `alpha_k <= k-1` (what mg-409a's own proof generalises to -- see k4.4) would clear a
+  bar of 3 from k = 4, i.e. from n = 5.  So:
+
+      THE CLASS IS NOT CLOSED BY COUNTING.
+
+  This is the cheap answer the ticket hoped for and it is NOT AVAILABLE.  Whatever closes the
+  class has to be a statement about the OPERATOR, at every k, and that is k2-k4.
+
+  PASS  reported as a NEGATIVE result: counting does not close the class
+
+==========================================================================================
+k1: PASS
+==========================================================================================
