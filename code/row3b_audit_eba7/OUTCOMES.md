@@ -75,3 +75,35 @@ quotes `0/132` **bare**, in a live status table, with the status cell reading
 because row 3b links into it. It is **not** mg-55f2's to fix — different repo,
 outside its ticket — and it is **not** a claim that SD-Cayley is refuted. It is the
 part of the finding that still has no carrier. See §1.4.
+
+---
+
+## DRIFT NOTE — the one anchor above, and the finding it reports (mg-96df, 2026-08-12)
+
+**Appended, never inserted: every line number above is exactly where it was.**
+This file is itself cited at `:72` by `docs/OneThird-SupersededDescent-mg-688c.md`
+and by `code/mirror_staleness_cdd5/README.md`, so a banner at the top would have
+broken two live anchors in the course of reporting broken anchors.
+
+`ComparisonRoute.md:104` **still resolves.** At `949c439` — the cited repo's
+`origin/main` when this note was written — line 104 is the same `SD-Cayley` table
+row it was at `912f1b1`, the revision the mirror checkout stood at when this file
+was written: 78 identical leading characters, then rewritten. Durable form:
+`## §1 Three inequivalent statements called "standard dominance"`. Nothing is
+renumbered here and nothing needed to be.
+
+**WHAT IS STALE IS THE SENTENCE, NOT THE NUMBER.** *"The part of the finding that
+still has no carrier"* was true for under an hour. `a8688f2` (mg-e2a0,
+2026-08-07T22:20:29Z) struck the bare figure at that exact line — its subject is
+*"land mg-55f2's 0/132 ruling AT ITS DESTINATION"* — and the cell now reads
+*"~~Empirically supported, 0/132~~ ⚠️ **THE BARE FIGURE IS WITHDRAWN**"*. The
+finding was right and it was picked up; the criterion this file bound in advance
+(§ *"a site counts only if the figure is used as evidence and the frame is absent
+nearby"*) would no longer score it. **The verdict above is untouched.** What is
+recorded here is that its one open item is closed — and that an anchor pointing
+at perfectly current text can still carry a claim that has expired, which is a
+staleness no renumbering reaches.
+
+Re-derive with `code/anchor_drift_96df/run_all.sh`. Full adjudication, including
+why none of the originating ticket's *"no verbatim target"* rows lacks one:
+`docs/state-history/audit-mg-eba7-of-mg-55f2.md`, DRIFT NOTE.
