@@ -1,0 +1,158 @@
+==============================================================================
+mg-96df a1 -- WHERE THE CITED TEXT IS NOW, re-derived
+==============================================================================
+
+  citing repo (this worktree) : /Users/daniel/.pogo/polecats/p96df
+  cited repo                  : /Users/daniel/research/one_third_width_three
+  its HEAD                    : 949c43926b6e [main-mirror]
+  its origin/main             : 949c43926b6e
+  the TRUE remote main        : 949c43926b6e   <- everything below is measured here
+
+  the revision the citing authors READ : 912f1b1
+      (mg-cdd5 caught this in the act: STATE.md's quoted anchors
+       matched exactly at that revision and nothing at origin/main.
+       mg-cdd5 then fast-forwarded that branch, so it is reachable
+       by name only -- never off disk.)
+
+  mg-688c pinned its table to  : 949c439
+  is that still the remote main: YES -- the pinned table has not yet gone stale
+
+  excluded from the repo-wide count (D1): code/anchor_drift_96df, code/superseded_descent_688c, code/mirror_staleness_cdd5
+
+------------------------------------------------------------------------------
+THE THREE CITING DOCUMENTS -- every anchor, adjudicated
+------------------------------------------------------------------------------
+  anchors found: 65 raw, 55 unique (citing file, cited doc, span)
+  bare-anchor attribution window: 12 lines
+
+  anchors INTO THE CITED REPO      : 11
+  bare refs to other files, skipped: 44  (this repo's own STATE.md, roadmap.md,
+                                      the HTML twin, compression.tex)
+
+  of the 11:
+    the cited NUMBER still lands on the cited row : 3
+    the number MOVED, new number determinate      : 8
+    NO DETERMINATE TARGET                         : 0   <-- the only rows needing a human
+    the cited TEXT was CHANGED (quotation stale)  : 5
+
+  [EXPLICIT] docs/state-history/audit-mg-eba7-of-mg-55f2.md:5
+      OneThird-StandardDominance-ComparisonRoute.md:104   [CITED TEXT CHANGED -- a quotation of it is stale]
+      tier: SAME-LINE-REWRITTEN  same number, 78 identical leading chars, then rewritten (104 -> 732 chars); strike added
+      durable form at the new revision: ## §1 Three inequivalent statements called "standard domina  [DURABLE]
+
+  [BARE    ] docs/state-history/audit-mg-eba7-of-mg-55f2.md:145
+      OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:198  ->  :251
+      tier: EXACT                
+      durable form at the new revision: ### The N-poset: the skeptical-bar centrepiece  [DURABLE]
+
+  [BARE    ] docs/state-history/audit-mg-eba7-of-mg-55f2.md:145
+      OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:20  ->  :68   [CITED TEXT CHANGED -- a quotation of it is stale]
+      tier: PREFIX               old text kept as a 125-char prefix; 360 chars appended; strike added; trailing table delimiter ignored
+      durable form at the new revision: ## Executive verdict  [DURABLE]
+
+  [BARE    ] docs/state-history/audit-mg-eba7-of-mg-55f2.md:145
+      OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:103  ->  :151   [CITED TEXT CHANGED -- a quotation of it is stale]
+      tier: PREFIX               old text kept as a 43-char prefix; 20 chars appended; strike added
+      durable form at the new revision: ## Kill-shot 2 — Standard dominance — GREEN GREEN-IN-FRAME   [DURABLE]
+
+  [BARE    ] docs/state-history/audit-mg-eba7-of-mg-55f2.md:146
+      OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:286  ->  :350   [CITED TEXT CHANGED -- a quotation of it is stale]
+      tier: PREFIX               old text kept as a 73-char prefix; 487 chars appended; trailing table delimiter ignored
+      durable form at the new revision: ## Data appendix  [DURABLE]
+
+  [EXPLICIT] docs/state-history/audit-mg-eba7-of-mg-55f2.md:170
+      OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310  ->  :449
+      tier: EXACT                
+      durable form at the new revision: ### 5.0′ Correction to the bullet above (mg-d1be)  [DURABLE]
+
+  [BARE    ] docs/state-history/audit-mg-eba7-of-mg-55f2.md:172
+      OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md:310-313  ->  :449
+      tier: BLOCK-EXACT          all 4 lines land contiguously at offset +139 (4 could be placed alone, and they agree)
+      durable form at the new revision: ### 5.0′ Correction to the bullet above (mg-d1be)  [DURABLE]
+
+  [EXPLICIT] docs/state-history/audit-mg-eba7-of-mg-55f2.md:225
+      OneThird-L1b-BK-Transport-Transfer-Probe.md:112  ->  :121
+      tier: EXACT                
+      durable form at the new revision: ### 2.1 The naive single-cut reading is FALSE (the 166 refut  [DURABLE]
+
+  [EXPLICIT] code/row3b_audit_eba7/OUTCOMES.md:72
+      OneThird-StandardDominance-ComparisonRoute.md:104   [CITED TEXT CHANGED -- a quotation of it is stale]
+      tier: SAME-LINE-REWRITTEN  same number, 78 identical leading chars, then rewritten (104 -> 732 chars); strike added
+      durable form at the new revision: ## §1 Three inequivalent statements called "standard domina  [DURABLE]
+
+  [EXPLICIT] docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126
+      OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md:127-142  ->  :180
+      tier: BLOCK-EXACT          all 16 lines land contiguously at offset +53 (14 could be placed alone, and they agree)
+      durable form at the new revision: ## Kill-shot 3 — Monotonicity (L2) — AMBER  [DURABLE]
+
+  [EXPLICIT] docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:150
+      OneThird-L1b-ExpectedRank-Certificate.md:84-90
+      tier: BLOCK-SAME-LINE-EXACT all 7 lines land contiguously at offset +0 (5 could be placed alone, and they agree)
+      durable form at the new revision: ## 1. The certificate  [DURABLE]
+
+  REFERENCES NOT ADJUDICATED, WITH THE REASON (44):
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:71 -> roadmap.md:662                     AMBIGUOUS -- that name exists in BOTH repos; not guessed
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:72 -> roadmap.md:669                     AMBIGUOUS -- that name exists in BOTH repos; not guessed
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:78 -> audit-mg-2eed-of-mg-b488.md:110    this repo's own file
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:206 -> state-of-the-wall.html:364         this repo's own file
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:206 -> state-of-the-wall.html:374         this repo's own file
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:258 -> (UNATTRIBUTED):5                   no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:258 -> (UNATTRIBUTED):13                  no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:258 -> (UNATTRIBUTED):76                  no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:258 -> (UNATTRIBUTED):95                  no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:297 -> STATE.md:207                       this repo's own file
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:372 -> README.md:112                      this repo's own file
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:404 -> ComparisonRoute.md:104             no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:405 -> ComparisonRoute.md:20              no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:405 -> ComparisonRoute.md:68              no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:406 -> ComparisonRoute.md:103             no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:406 -> ComparisonRoute.md:151             no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:407 -> ComparisonRoute.md:198             no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:407 -> ComparisonRoute.md:251             no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:408 -> KillShot-Probe.md:350              no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:409 -> Reverse-Cheeger-Proof-Attempt.md:449 no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:410 -> Reverse-Cheeger-Proof-Attempt.md:310-313 no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:410 -> Reverse-Cheeger-Proof-Attempt.md:449-452 no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:411 -> BK-Transport-Transfer-Probe.md:121 no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:451 -> (UNATTRIBUTED):20                  no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:451 -> (UNATTRIBUTED):103                 no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:451 -> (UNATTRIBUTED):198                 no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:454 -> (UNATTRIBUTED):68                  no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:454 -> (UNATTRIBUTED):151                 no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:456 -> (UNATTRIBUTED):251                 no filename within 12 lines above
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:466 -> STATE.md:286                       this repo's own file
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:467 -> STATE.md:345                       this repo's own file
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md:468 -> STATE.md:350                       this repo's own file
+    code/row3b_audit_eba7/OUTCOMES.md:29           -> STATE.md:5                         this repo's own file
+    code/row3b_audit_eba7/OUTCOMES.md:29           -> STATE.md:13                        this repo's own file
+    code/row3b_audit_eba7/OUTCOMES.md:29           -> STATE.md:76                        this repo's own file
+    code/row3b_audit_eba7/OUTCOMES.md:84           -> OneThird-SupersededDescent-mg-688c.md:72 this repo's own file
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:78 -> compression.tex:68-72              this repo's own file
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:92 -> step8.tex:397-406                  no filename within 12 lines above
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:92 -> step8.tex:403-405                  no filename within 12 lines above
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:106 -> width3.tex:674-677                 no filename within 12 lines above
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:217 -> (UNATTRIBUTED):217                 no filename within 12 lines above
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:260 -> STATE.md:126                       this repo's own file
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:260 -> STATE.md:83                        this repo's own file
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:264 -> KillShot-Probe.md:180-195          no filename within 12 lines above
+
+------------------------------------------------------------------------------
+REPO-WIDE CHECK ON THE TICKET'S POPULATION -- explicit anchors only
+------------------------------------------------------------------------------
+  explicit anchors into the cited repo, whole tree: 365 unique
+    the cited path is not a doc of that repo : 357
+    line UNCHANGED between the two revisions : 1
+    line absent at the read rev (authored later, incl. mg-cdd5's
+      already-repaired STATE.md anchors)     : 2
+    DRIFTED                                  : 5
+
+  DRIFTED OUTSIDE THE THREE NAMED DOCUMENTS: 0
+    (none.  For EXPLICIT anchors the ticket's three documents are
+     the whole surface -- the population is confirmed, not taken
+     on trust.  Bare anchors are swept only inside the three,
+     because attributing one needs a filename nearby.)
+
+==============================================================================
+a1: 11 anchors into the cited repo across the three documents -- 8 MOVED, 3 still
+    land on their row, 0 WITHOUT A DETERMINATE TARGET, 5 quoting text that changed.
+==============================================================================

@@ -1,0 +1,89 @@
+
+1. THE CASE THAT PRODUCED THE WRONG REPORT -- a line that gained a strike
+   and a warning suffix.  Exact matching calls this GONE.
+------------------------------------------------------------------------------
+  ok   heading :3 tier                                got PREFIX             want PREFIX
+  ok   heading :3 lands at                            got 6                  want 6
+  ok   exact-only reports no target for :3            got None               want None
+  ok   data row :6 tier                               got PREFIX             want PREFIX
+  ok   data row :6 lands at                           got 9                  want 9
+  ok   exact-only reports no target for :6            got None               want None
+  ok   exact-only agrees where nothing was appended   got 8                  want 8
+
+2. AN UNCHANGED LINE PUSHED DOWN BY THE BANNER -- exact and unique.
+------------------------------------------------------------------------------
+  ok   unchanged :5 tier                              got EXACT              want EXACT
+  ok   unchanged :5 lands at                          got 8                  want 8
+  ok   unchanged :9 tier                              got EXACT              want EXACT
+  ok   unchanged :9 lands at                          got 12                 want 12
+
+3. AMBIGUITY IS NOT A GUESS.  Two identical short lines exist at
+   both revisions; the ladder must refuse rather than pick one.
+------------------------------------------------------------------------------
+  ok   duplicated line tier                           got AMBIGUOUS          want AMBIGUOUS
+  ok   duplicated line has no answer                  got None               want None
+
+4. GENUINE ABSENCE IS DISTINCT FROM AMBIGUITY AND FROM DRIFT.
+------------------------------------------------------------------------------
+  ok   deleted line tier                              got GONE               want GONE
+  ok   deleted line has no answer                     got None               want None
+
+5. EDITED IN PLACE -- the number still resolves.  This is the
+   ComparisonRoute:104 shape, and calling it a BROKEN ANCHOR is wrong.
+------------------------------------------------------------------------------
+  ok   edited-in-place tier                           got SAME-LINE-AMENDED  want SAME-LINE-AMENDED
+  ok   edited-in-place lands at                       got 2                  want 2
+  ok   edited-in-place RESOLVES                       got True               want True
+  ok   edited-in-place is determinate                 got True               want True
+  ok   untouched line tier                            got SAME-LINE-EXACT    want SAME-LINE-EXACT
+  ok   untouched line RESOLVES                        got True               want True
+
+6. THE >= 25-CHAR EVIDENCE FLOOR.  A prefix shorter than the floor
+   must not be allowed to relocate anything (mg-cdd5's rule).
+------------------------------------------------------------------------------
+  ok   9-char prefix refused                          got GONE               want GONE
+  ok   42-char prefix accepted                        got PREFIX             want PREFIX
+
+6b. THE TRAILING-DELIMITER CONCESSION, and its guard.  Dropping a
+    table row's closing `|` is the whole concession -- it must not
+    let a key below the floor through.
+------------------------------------------------------------------------------
+  ok   key drops a closing pipe                       got | a | b            want | a | b
+  ok   key leaves prose alone                         got a sentence.        want a sentence.
+  ok   short key still refused after strip            got GONE               want GONE
+
+7. RANGES.  Consensus first, then verify the WHOLE range -- because
+   a quoted paragraph contains blank and one-word lines that match
+   everywhere or nowhere, and those must not veto it.
+------------------------------------------------------------------------------
+  ok   contiguous range tier                          got BLOCK-PREFIX       want BLOCK-PREFIX
+  ok   contiguous range lands at                      got 8                  want 8
+  ok   blank/duplicate lines do not veto              got BLOCK-PREFIX       want BLOCK-PREFIX
+  ok   range with unplaceable lines lands at          got 8                  want 8
+  ok   partially-landing range refused                got BLOCK-PREFIX-PARTIAL want BLOCK-PREFIX-PARTIAL
+  ok   a PARTIAL block is not determinate             got False              want False
+  ok   split range refused                            got BLOCK-SPLIT        want BLOCK-SPLIT
+  ok   range whose tail was deleted refused           got BLOCK-EXACT-PARTIAL want BLOCK-EXACT-PARTIAL
+  ok   ...and is not determinate                      got False              want False
+  ok   range with no placeable line at all            got BLOCK-BROKEN       want BLOCK-BROKEN
+
+8. SECTION ANCHORS -- the durable form, and its own failure mode.
+------------------------------------------------------------------------------
+  ok   enclosing heading level                        got 2                  want 2
+  ok   enclosing heading found at                     got 6                  want 6
+  ok   unique heading is unique                       got True               want True
+  ok   repeated heading is NOT durable                got False              want False
+
+9. NORMALISATION MUST NOT ERASE CONTENT -- only markup.
+------------------------------------------------------------------------------
+  ok   markup stripped                                got a b c              want a b c
+  ok   strike detected                                got True               want True
+  ok   strike not invented                            got False              want False
+
+10. MISSING IS NOT EMPTY.
+------------------------------------------------------------------------------
+  ok   line_at on MISSING                             got None               want None
+  ok   MISSING is not ''                              got False              want False
+
+==============================================================================
+a0 SELFTEST: 45 checks, 0 FAIL

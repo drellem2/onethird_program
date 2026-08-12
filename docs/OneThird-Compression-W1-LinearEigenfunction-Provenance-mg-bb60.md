@@ -251,3 +251,34 @@ about a claim nobody had looked for.**
   *"file F, line L, says S"*, and the figures quoted (166 refuters, `0/132`, τ = 0.857, 2/126,
   85/126) are **read from the documents that publish them and are not re-measured here** — the
   same evidence bound `STATE.md` row 3b puts on its own.
+
+---
+
+## DRIFT NOTE — the two cross-repo anchors in §3, and why neither is edited (mg-96df, 2026-08-12)
+
+**Appended, never inserted: every line number above is exactly where it was.**
+This file is itself cited at `:126` and `:83` by
+`code/mirror_staleness_cdd5/README.md` and its transcripts, so a banner at the
+top would have broken live anchors while repairing a report about broken anchors.
+
+**`KillShot-Probe.md:127–142` (§3) is at `:180–195` at `949c439`.** All sixteen
+lines land contiguously at one offset and are **byte-identical** — the quotation
+in §3 is faithful, character for character, and only its coordinates moved.
+Durable form: `## Kill-shot 3 — Monotonicity (L2) — AMBER`. **`ExpectedRank-Certificate.md:84–90`
+did not move at all** and is correct as written; durable form `## 1. The certificate`.
+
+**This anchor is not in the "correct when written" class, and saying so is the
+point of dating it.** `7058fbd` wrote it on **2026-08-12T12:44:17Z**; the lines
+had moved on **2026-08-07T22:20:29Z** (`a8688f2`), five days earlier. It resolved
+at `912f1b1` because the mirror checkout it was read from stood at 2026-07-19 and
+had not moved for twenty-four days. **This is a stale read, caught in the act** —
+the same evidence mg-cdd5 used to establish that authors here were reading the
+mirror checkout and not `origin/main`. It changes nothing in §3: the quoted text
+is verbatim and the reasoning that rests on it stands.
+
+**The number is left, deliberately.** mg-cdd5's standing rule is that a record of
+what was read at the time is not improved by being re-pointed at what is true now
+(`code/mirror_staleness_cdd5/README.md`, §5), and the coordinates above are part
+of this document's evidence that the read was stale. Re-derive with
+`code/anchor_drift_96df/run_all.sh`; the numbers here are true at `949c439` and
+at no other revision, which is why the section name is given beside each one.

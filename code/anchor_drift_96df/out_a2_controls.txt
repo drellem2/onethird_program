@@ -1,0 +1,97 @@
+==============================================================================
+mg-96df a2 -- CONTROLS ON THE REPAIR
+==============================================================================
+
+X1  APPEND-ONLY -- no existing line number in the three edited
+    documents moved, so no anchor INTO them can have broken.
+------------------------------------------------------------------------------
+  ok   X1 audit-mg-eba7-of-mg-55          363 lines unchanged, 115 appended
+  ok   X1 OUTCOMES.md                     77 lines unchanged, 33 appended
+  ok   X1 OneThird-Compression-W          253 lines unchanged, 32 appended
+  ok   X1 incoming anchors exist          20 line anchors point INTO the three edited documents -- this is why the notes are appended
+        code/mirror_staleness_cdd5/README.md  ->  OUTCOMES.md:72
+        code/mirror_staleness_cdd5/README.md  ->  OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126
+        code/mirror_staleness_cdd5/README.md  ->  audit-mg-eba7-of-mg-55f2.md:112
+        code/mirror_staleness_cdd5/out_s2_sweep.txt  ->  OUTCOMES.md:72
+        code/mirror_staleness_cdd5/out_s2_sweep.txt  ->  OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126
+        code/mirror_staleness_cdd5/out_s2_sweep.txt  ->  audit-mg-eba7-of-mg-55f2.md:112
+        code/mirror_staleness_cdd5/out_s4_anchors.txt  ->  OUTCOMES.md:72
+        code/mirror_staleness_cdd5/out_s4_anchors.txt  ->  OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:83
+        code/mirror_staleness_cdd5/out_s4_anchors.txt  ->  OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126
+        code/mirror_staleness_cdd5/out_s4_anchors.txt  ->  audit-mg-eba7-of-mg-55f2.md:112
+        code/mirror_staleness_cdd5/out_x1_after_repair.txt  ->  OUTCOMES.md:72
+        code/mirror_staleness_cdd5/prerepair/out_s2_sweep.txt  ->  OUTCOMES.md:72
+        code/mirror_staleness_cdd5/prerepair/out_s2_sweep.txt  ->  OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126
+        code/mirror_staleness_cdd5/prerepair/out_s2_sweep.txt  ->  audit-mg-eba7-of-mg-55f2.md:112
+        code/mirror_staleness_cdd5/x1_after_repair.py  ->  OUTCOMES.md:72
+        code/superseded_descent_688c/out_s1_delta.txt  ->  OUTCOMES.md:72
+        code/superseded_descent_688c/out_s1_delta.txt  ->  OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126
+        code/superseded_descent_688c/out_s1_delta.txt  ->  audit-mg-eba7-of-mg-55f2.md:112
+        docs/OneThird-SupersededDescent-mg-688c.md  ->  OUTCOMES.md:72
+        docs/OneThird-SupersededDescent-mg-688c.md  ->  audit-mg-eba7-of-mg-55f2.md:112
+
+X2  NOT ONE NUMBER IN THE NOTES WAS TYPED -- every relocation is
+    re-derived from the two revisions, then required to appear.
+------------------------------------------------------------------------------
+  ok   X2 ComparisonRout:104              derived :104 (SAME-LINE-REWRITTEN), note says :104
+  ok   X2 Probe.md:20                     derived :68 (PREFIX), note says :68
+  ok   X2 Probe.md:103                    derived :151 (PREFIX), note says :151
+  ok   X2 Probe.md:198                    derived :251 (EXACT), note says :251
+  ok   X2 Probe.md:286                    derived :350 (PREFIX), note says :350
+  ok   X2 Attempt.md:310                  derived :449 (EXACT), note says :449
+  ok   X2 Attempt.md:310-313              derived :449 (BLOCK-EXACT), note says :449
+  ok   X2 Probe.md:112                    derived :121 (EXACT), note says :121
+  ok   X2 ComparisonRout:104              derived :104 (SAME-LINE-REWRITTEN), note says :104
+  ok   X2 Probe.md:127-142                derived :180 (BLOCK-EXACT), note says :180
+  ok   X2 Certificate.md:84-90            derived :84 (BLOCK-SAME-LINE-EXACT), note says :84
+
+X3  THE DURABLE FORM IS DURABLE -- every section a note names must
+    exist at the cited revision AND be unique there.
+------------------------------------------------------------------------------
+  ok   X3 §1 Three inequivalent           encloses :104, unique, quoted in the note
+  ok   X3 Executive verdict               encloses :68, unique, quoted in the note
+  ok   X3 Kill-shot 2 — Standard          encloses :151, unique, quoted in the note
+  ok   X3 The N-poset: the skept          encloses :251, unique, quoted in the note
+  ok   X3 Data appendix                   encloses :350, unique, quoted in the note
+  ok   X3 5.0′ Correction to the          encloses :449, unique, quoted in the note
+  ok   X3 5.0′ Correction to the          encloses :449, unique, quoted in the note
+  ok   X3 2.1 The naive single-c          encloses :121, unique, quoted in the note
+  ok   X3 §1 Three inequivalent           encloses :104, unique, quoted in the note
+  ok   X3 Kill-shot 3 — Monotoni          encloses :180, unique, quoted in the note
+  ok   X3 1. The certificate              encloses :84, unique, quoted in the note
+
+X4  THE PIN.  Numbers in a note are true at ONE revision, so the
+    revision must be NAMED.  Currency is REPORTED, never scored.
+------------------------------------------------------------------------------
+  ok   X4 audit-mg-eba7-of-mg-55          names the revision its numbers are true at
+  ok   X4 OUTCOMES.md                     names the revision its numbers are true at
+  ok   X4 OneThird-Compression-W          names the revision its numbers are true at
+      REPORTED, NOT SCORED: the cited repo's remote main is 949c43926b6e, and the notes'
+      revision is 949c439 -- still current
+
+X5  D1 -- the sweep must exclude the directories that DISCUSS
+    anchors, and the exclusion must MATTER.
+------------------------------------------------------------------------------
+  ok   X5 self-exclusion matters          483 anchor-shaped strings repo-wide, 410 after excluding the three instrument directories (22 of the difference are this instrument's own)
+
+X6  THE CITED REPO'S OWN HAND-WRITTEN RENUMBERING, re-derived.
+    This is the evidence for 'do not renumber by hand', so it is
+    measured here and not quoted from the note that states it.
+------------------------------------------------------------------------------
+  ok   X6 the row is at :350              content match says :350
+  ok   X6 :345 is NOT the row             the banner's own number lands on: Full 126-poset table + aggregates: `data/oneth
+  ok   X6 the banner says :345            quoted verbatim from OneThird-Spectral-NearOrdi lines 21-24
+  ok   X6 no single offset exists         the five anchors move by +48, +48, +53, +53, +64 -- '+59 from here down' cannot be right for all of them
+  ok   X6 one commit did it all           1 commit touched that file in the window, so this is NOT later drift -- the figure was wrong when written
+
+X7  THE ADJUDICATION OF §1.4 -- which halves of its closing
+    observation survive at the new revision.
+------------------------------------------------------------------------------
+  ok   X7 :20 -> :68 qualifier            gained a scope qualifier at the new revision
+  ok   X7 :103 -> :151 qualifier          gained a scope qualifier at the new revision
+  ok   X7 :198 -> :251 qualifier          still carries NO scope qualifier at the new revision
+  ok   X7 :198 is byte-identical          so '*a reader who stops at :198 gets an unqualified holds*' still stands
+
+==============================================================================
+a2: 39 arms, 39 satisfactory, 0 FAIL
+==============================================================================

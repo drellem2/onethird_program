@@ -361,3 +361,117 @@ rather than a pile of false positives.
 - **I did not read mg-55f2's verdict mail or its predictions**, by design, so §1's
   site list is derived from `276aead^` and not from anything the parent said about
   itself.
+
+---
+
+## DRIFT NOTE — this document's cross-repo line anchors, and why none of them is edited (mg-96df, 2026-08-12)
+
+**Appended, never inserted.** Every line number above is exactly where it was;
+`code/anchor_drift_96df/a2_controls.py` fails if that stops being true. This
+document is itself cited by line — `docs/OneThird-SupersededDescent-mg-688c.md`
+and `code/mirror_staleness_cdd5/README.md` both anchor at `:112` — so a banner
+at the top of this file would have broken two live anchors while repairing a
+report about broken anchors. That is why this is at the bottom.
+
+**WHAT MOVED.** §1.4, §2 and §3 anchor into `one_third_width_three` by line
+number. Those numbers resolve against **`912f1b1`** (2026-07-19) — the revision
+this repository's *mirror checkout* stood at, and had stood at for nineteen days,
+when this audit was written. That branch was never advanced until mg-cdd5
+fast-forwarded it to **`949c439`** on 2026-08-12 (`4ce7da3`). So the anchors were
+correct against the bytes on disk and were **never** checked against the cited
+repo's `origin/main`; `af7fc2d` had already moved one of them nine days earlier.
+*"Nobody made a mistake, the target moved"* is the right conclusion for the wrong
+reason: what these authors read was a stale checkout, not a moving target.
+
+**THE NUMBERS ARE NOT CHANGED, AND THAT IS THE RULING, NOT AN OMISSION.**
+mg-cdd5 settled this class in writing, naming this file, when it repaired
+`STATE.md` and stopped: *"Anchors in frozen audit records are LEFT … the standing
+rule here is that a record of what was read at the time is not improved by being
+re-pointed at what is true now"* (`code/mirror_staleness_cdd5/README.md`, §5).
+Renumbering would make this document assert a reading that did not happen, and
+would erase the evidence that the drift occurred at all. What is owed is this
+note, at the site.
+
+**WHERE THE CITED TEXT IS AT `949c439`.** Machine-derived by content match, never
+typed and never by offset arithmetic; re-derive with
+`code/anchor_drift_96df/run_all.sh`. **The `at 949c439` in this heading is
+load-bearing** — these numbers are true at that revision and nowhere else, which
+is the whole defect this note is about, so the section names in the last column
+are the half that keeps working.
+
+| cited above as | at `949c439` | how it was matched | durable form — the section it is in |
+|---|---|---|---|
+| `ComparisonRoute.md:104` (top verdict block, and §1.4) | **`:104` — it did not move** | same number, 78 identical leading characters, then rewritten | `## §1 Three inequivalent statements called "standard dominance"` |
+| `:20` (§1.4) | `:68` | 125-char prefix; 360 chars appended, strike added | `## Executive verdict` |
+| `:103` (§1.4) | `:151` | 43-char prefix; 20 chars appended, strike added | `## Kill-shot 2 — Standard dominance` |
+| `:198` (§1.4) | `:251` | **exact** | `### The N-poset: the skeptical-bar centrepiece` |
+| `KillShot-Probe.md:286` (§1.4, §2, §8) | `:350` | 73-char prefix; 487 chars appended | `## Data appendix` |
+| `Reverse-Cheeger-Proof-Attempt.md:310` (§2) | `:449` | **exact** | `### 5.0′ Correction to the bullet above (mg-d1be)` |
+| `:310–313` (§2) | `:449–452` | **exact**, all four lines, one offset | same section |
+| `BK-Transport-Transfer-Probe.md:112` (§3) | `:121` | **exact** | `### 2.1 The naive single-cut reading is FALSE (the 166 refuters)` |
+
+**NONE OF THE EIGHT LACKS A TARGET.** mg-96df's originating ticket reports four
+of nine as *"text rewritten, no verbatim target … they need a human to decide"*.
+That is an artefact of exact matching meeting this corpus's repair idiom, which
+is to **append** a strike and a warning to a line rather than replace it: a row
+that gained `~~…~~ ⚠️ **WITHDRAWN**` is byte-different and is the same row. Every
+one of them relocates on a prefix of 43 characters or more. `:286 → :350` is not
+even a new derivation — mg-cdd5 derived it from a *"unique 74-character prefix"*
+and applied it to `STATE.md` at `4ce7da3`, so the *unrepairable* row and its
+completed repair have been sitting in this repository together.
+
+### The two things renumbering would not have fixed, which are the reason this note is prose
+
+**1. §1.4's finding HAS BEEN ACTED ON, and §1.4 does not know it.** The escaped
+bare `0/132` was struck at its destination by **`a8688f2`** (mg-e2a0,
+2026-08-07T22:20:29Z), in a commit whose subject is *"land mg-55f2's 0/132 ruling AT ITS
+DESTINATION — the figure was still quotable bare in the one document `STATE.md`
+row 3b points at."* At `949c439` that cell reads
+*"~~Empirically supported, 0/132~~ ⚠️ **THE BARE FIGURE IS WITHDRAWN**"*.
+
+*The timing is given both ways because the two clocks disagree in direction and
+one of them would flatter this note.* `e9ae5e0`, which committed this document,
+carries **author** date `21:33:04Z` and **commit** date `22:36:18Z`: the strike
+landed **47 minutes after this audit was written and 16 minutes before it was
+committed**. Neither figure decides anything, and that is the point — the author
+could not have seen the strike on either reading, because the checkout they were
+reading stood at `912f1b1`, nineteen days behind. (The originating ticket gives
+`23:16:33Z` for this commit, a *push* time; it is not the author or commit date
+in either repository, and on push time the strike lands 40 minutes after the
+audit's commit rather than 16 before it.)
+
+So the present tense of §1.4 — *"This **is** a live status table, the figure
+**is** quoted bare"*, *"nobody owns it"*, *"the part of the finding that still
+has no carrier"* — was true for about three quarters of an hour and is false now.
+**The finding was correct and it was picked up.** Nothing about the audit's
+verdict changes; what changes is that its open item is closed, and the anchor
+that would have shown you so still resolves perfectly. **This is a staleness no
+renumbering could have reached**, because the line never moved.
+
+**2. The `:20`/`:103`/`:198` observation is now HALF true, and the surviving half
+is the sharp one.** §1.4 closes by observing that the probe carries `standard
+dominance | **holds**` at `:198` and **GREEN** at `:20`/`:103` *"with no scope
+qualifier"*. At `949c439`: `:20` (now `:68`) and `:103` (now `:151`) **both
+gained the qualifier** — `~~**GREEN**~~ ⚠️ **GREEN ONLY INSIDE THIS PROBE'S
+FRAME**` and `~~**GREEN**~~ **GREEN-IN-FRAME ONLY**`. `:198` (now `:251`) is
+**byte-identical and still unqualified**; what it gained is a parenthesis five
+lines below it explaining that the row is a per-poset readout on the N-poset and
+is *"flagged and deliberately left, mg-e2a0."* So the sentence *"a reader who
+stops at `:198` gets an unqualified 'holds'"* **still stands**, and it is now the
+only part of that observation that does — deliberately, and on the record.
+
+### And the argument against renumbering is measured, not preferred
+
+The cited document's own banner tries the renumbering, by hand, at `949c439`
+lines 22–24: *"`STATE.md` row 3b cites this document at `:286`, which … is
+`:345` after it. Line refs into this file made before 2026-08-07 are off by +59
+from here down."* **Both figures are wrong by five.** The row is at `:350`, not
+`:345`; the offset for it is `+64`, not `+59`; and there is no single offset to
+quote — the five anchors above move by `+48`, `+48`, `+53`, `+53` and `+64`. The
+file has been byte-identical since `a8688f2`, the one commit that moved anything
+in it, so this is not drift: **the hand-written renumbering was wrong the day it
+was written and has been wrong ever since.** The same banner's first instinct is
+the right one and it is two lines earlier — *"Sites are named by section, not by
+line."* That is a defect in `one_third_width_three` and is reported, not fixed
+here; this repository does not own that file.
+
