@@ -123,9 +123,12 @@ sector" inside it, and therefore **no guarantee that `λ_std` is anywhere in the
 ## 4. The bridge
 
 **There is exactly one bridge between the two axes, it is real, it is `OPEN`, and it is the whole
-remaining gap: L1b** — *frozen ⟹ `1 − λ_std ≤ ε_spec`*, a constant uniform in `n`, equivalently
-`E[inv_e] ≤ (ε_spec/6)(n²−1)` (row 8). Picture it as a **rigidity** statement: *if every question
-about `P` is nearly settled, then `P` is nearly a stack of blocks.*
+remaining gap: L1b** — *frozen ⟹ `E[inv_e] ≤ (ε/6)(n²−1)` for a constant `ε ≤ ε_dem ≈ 2×10⁻²`*
+(row 8). Picture it as a **rigidity** statement: *if every question about `P` is nearly settled,
+then `P` is nearly a stack of blocks.* **What is open is the SIZE of that constant, not its
+existence** — `ε_sup < 1` is proven, and at it the spectral rendering `1 − λ_std ≤ ε` is
+**vacuous** (`mg-0e8c`). The two renderings are **not equivalent**: the master bound runs
+inversions ⟹ spectrum one way only, and 82 posets at `n = 6` separate them (`mg-0e8c` a3/C3).
 
 **It is not spectral in any load-bearing sense** (`mg-05ec` §5, landed at
 [`STATE.md:25`](../STATE.md)). `λ_std` is one unit among five on Axis 1; `mg-210d`'s master bound
