@@ -1,0 +1,102 @@
+==============================================================================
+mg-688c s3 -- CONTROLS
+==============================================================================
+
+------------------------------------------------------------------------------
+X1 -- PLANTED CLAIM: can the detector fire at all?
+------------------------------------------------------------------------------
+
+  Five synthetic artifacts, one per struck claim, each asserting the withdrawn
+  reading the way a descendant would: flatly, as support, with no strike.
+  These are what a real descendant would look like and the sweep MUST see them.
+
+  [PASS] X1.RC1 planted claim detected BARE                   got True want True
+  [PASS] X1.KS2 planted claim detected BARE                   got True want True
+  [PASS] X1.KS3 planted claim detected BARE                   got True want True
+  [PASS] X1.CR1 planted claim detected BARE                   got True want True
+  [PASS] X1.BK1 planted claim detected BARE                   got True want True
+
+------------------------------------------------------------------------------
+X2 -- PLANTED WITHDRAWAL: does the classifier tell the two apart?
+------------------------------------------------------------------------------
+
+  The same five sentences, each with the withdrawal attached the way the real
+  corpus attaches it.  These must classify CARRIES-WITHDRAWAL -- otherwise the
+  BARE pile is just "every mention", the hand-adjudication is unbounded, and
+  the classifier is not doing anything.
+
+  [PASS] X2.RC1 withdrawal-marked NOT bare                    got 0 want 0
+  [PASS] X2.KS2 withdrawal-marked NOT bare                    got 0 want 0
+  [PASS] X2.KS3 withdrawal-marked NOT bare                    got 0 want 0
+  [PASS] X2.CR1 withdrawal-marked NOT bare                    got 0 want 0
+  [PASS] X2.BK1 withdrawal-marked NOT bare                    got 0 want 0
+
+------------------------------------------------------------------------------
+X3 -- PLANTED ANCHOR: does the line-anchor test fire?
+------------------------------------------------------------------------------
+
+  Two synthetic anchors into the Reverse-Cheeger document: one at a line that
+  moved (mirror-era, must fire) and one at a line that did not (must not).
+  Both are resolved the same way s2 resolves the real ones.
+
+  [PASS] X3.a anchor at a MOVED line flagged stale            got True want True
+        line 286: mirror '- **But `λ_std ≤ λ₂^{BK}`** (the standard sector
+        is a subspa'
+  [PASS] X3.b anchor at an UNMOVED line not flagged           got True want True
+        line 1: identical at both revisions
+
+------------------------------------------------------------------------------
+X4 -- ONE OF MY OWN FINGERPRINTS IS BLIND, AND IT IS BK1
+------------------------------------------------------------------------------
+
+  The 946 -> 956 correction was landed as a BANNER INSERTED ABOVE the sentence.
+  The sentence itself was never edited.  So "946" is still in the current
+  document, and a reader of the CURRENT text writes 946 too.
+
+    occurrences of `946` at 912f1b1 : 1
+    occurrences of `946` at 949c439 : 2
+
+  [PASS] X4 the superseded figure survives verbatim at the tip got True want True
+        Therefore a bare `946` ANYWHERE is not evidence of a stale read,
+        and the two 2026-07-30 mails s2 lists as BARE under BK1 are not
+        evidence of anything. This control exists because without it those
+        two mails would sit in the report looking like the closest thing
+        to a finding.
+
+------------------------------------------------------------------------------
+X5 -- THE PER-CLAIM WINDOW IS DOING WORK, MEASURED
+------------------------------------------------------------------------------
+
+  Design rule 2 says a claim quoted before its withdrawal did not descend from
+  a superseded reading.  This control prices that rule: how many occurrences
+  does it exclude, and what would the naive method -- one global window from
+  the mirror falling behind to the repair -- have reported instead?
+
+  onethird_program commits in the GLOBAL window:      559
+  occurrences under the NAIVE global window:          242
+  occurrences under the PER-CLAIM hazard windows:     65
+  excluded as pre-withdrawal (correct when written):  177
+  [PASS] X5 the window rule excludes a non-zero number of occurrences got True want True
+        Those 177 are artifacts that quote the claim before it was
+        withdrawn. Counting them would have turned a zero into a large
+        false count, and every one of them would have had to be argued
+        away by hand.
+
+------------------------------------------------------------------------------
+X6 -- SELF-EXCLUSION IS DOING WORK, MEASURED
+------------------------------------------------------------------------------
+
+  This instrument states every struck claim in full, twice -- once as the
+  stale reading and once as the current one -- and plants five more in X1.
+  Swept as corpus it is the single largest cluster of "bare" assertions of
+  withdrawn text in this repository.
+
+  [PASS] X6 self-exclusion removes a non-zero number of hits  got True want True
+        57 fingerprint occurrences live in this directory. mg-cdd5 hit the
+        same trap and excluded its own 24 files; not excluding them would
+        make the instrument its own top finding.
+
+==============================================================================
+CONTROLS: 15 checks, 0 FAILED
+==============================================================================
+== s3 exit: 0 ==
