@@ -1,0 +1,29 @@
+========================================================================================
+mg-602d  docs/CONCEPTS.md asked its own two rules
+========================================================================================
+
+ANCHORS  -- a reworded heading REFUSES rather than passing
+    S2 quantities          found
+    S5 killed intuitions   found
+    S6 beliefs             found
+
+POINTERS -- every claim row carries the artifact that earns it
+    S2 quantities          6 rows, 0 without a pointer
+    S5 killed intuitions   14 rows, 0 without a pointer
+
+MARKERS  -- every unearned claim says BELIEF in the item, not in a footnote
+    S6 beliefs             6 items, 0 unmarked
+
+LENGTH   -- succinct is a requirement, not a style note
+    docs/CONCEPTS.md       3025 words against a ceiling of 3200
+
+LINKS    -- every relative link resolves on disk
+    docs/CONCEPTS.md       3 relative links, 0 dead
+
+FINDABLE -- STATE.md links to it, or nobody arrives
+    STATE.md pointer       present
+
+----------------------------------------------------------------------------------------
+VERDICT: green.  Every claim row points somewhere, every belief is marked as one,
+         the file is inside its ceiling, and it is reachable from STATE.md.
+         THIS SAYS NOTHING ABOUT WHETHER ANY POINTER IS CORRECT.

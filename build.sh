@@ -64,12 +64,36 @@
 # that no entry is missing one, which is the failure mode that scales.  It fired on its own
 # author's first draft (F8's SCOPE field renamed in passing) and that is recorded in
 # code/facts_registry_03cf/README.md rather than quietly fixed.
+#
+# --- mg-602d -------------------------------------------------------------------------------
+# A FIFTH SUITE JOINS THE GATE AND IT IS THE CHEAPEST YET — 0.2 s measured.  THE WHOLE GATE IS
+# MEASURED AT 44.8 s ON THIS HOST WITH IT IN.  That is BELOW the 47.5 s mg-03cf recorded for the
+# four-suite gate, so the fifth suite is not what moved it and the two numbers are two hosts (or
+# two load conditions), not a speed-up: read either as a measurement of its own run and neither
+# as a property of the gate.  ⚠️ THIS COMMENT FIRST SAID 48.9 s, WHICH WAS THE ADDITION
+# ARITHMETIC AND NOT A RUN — mg-17aa's D4, committed inside the very comment that names it,
+# and corrected here by running the thing.
+#
+# It gates docs/CONCEPTS.md, the conceptual document (STATE.md's own pointer paragraph explains
+# why that file exists).  WHAT IT BUYS IS THE ONLY THING THAT MAKES A CONCEPTUAL DOCUMENT SAFE
+# TO KEEP: prose about MEANING has no population attached and no arithmetic to check, so a
+# sentence stays readable forever after the row that earned it has moved.  Every claim row
+# therefore carries a pointer and every unearned claim carries the word BELIEF, and the gate
+# refuses a merge that drops either.  It also gates LENGTH, which is not decoration — the
+# ticket's own words are "succinct is a requirement, not a style note", and the failure mode is
+# that the file grows into a second STATE.md and stops being re-read.
+#
+# The gate is on STRUCTURE, not on truth: it cannot check that a pointer is CORRECT, only that
+# one is THERE — the same split as mg-03cf's, and c1 measures it rather than asserting it, with
+# a wrong-direction world in which a pointer is swapped for a different well-formed item id and
+# the gate stays green ON PURPOSE.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \
     code/state_ratchet_e331/run_all.sh \
     code/alias_agreement_06d1/run_all.sh \
-    code/facts_registry_03cf/run_all.sh
+    code/facts_registry_03cf/run_all.sh \
+    code/concepts_gate_602d/run_all.sh
 do
     echo
     echo "############################################################ $suite"
