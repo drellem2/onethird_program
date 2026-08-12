@@ -1,0 +1,59 @@
+==============================================================================
+mg-0e8c a2 -- IS ROW 8'S SPECTRAL FORM VACUOUS AT eps_spec = 1?
+==============================================================================
+
+EXACT VERDICT COLUMN is `lambda_std >= 0`, i.e. `1 - lambda_std <= 1`, decided over rationals.
+The PSD column is the WRONG oracle, kept as the evidence that it is wrong (see the docstring).
+
+ n   posets   lambda_std < 0   [wrong oracle: S_P not PSD]   max(1-lambda_std)   min trace T_P
+ 2   2        0                0 of 2                        1.000000000000      1
+     argmax(1-lambda_std) = [] [ANTICHAIN] ;  argmin(trace T_P) = [] [ANTICHAIN]
+ 3   7        0                2 of 7                        1.000000000000      1
+     argmax(1-lambda_std) = [] [ANTICHAIN] ;  argmin(trace T_P) = [] [ANTICHAIN]
+ 4   40       0                28 of 40                      1.000000000000      1
+     argmax(1-lambda_std) = [] [ANTICHAIN] ;  argmin(trace T_P) = [] [ANTICHAIN]
+ 5   357      0                329 of 357                    1.000000000000      1
+     argmax(1-lambda_std) = [] [ANTICHAIN] ;  argmin(trace T_P) = [] [ANTICHAIN]
+ 6   4824     0                4759 of 4824                  1.000000000000      1
+     argmax(1-lambda_std) = [] [ANTICHAIN] ;  argmin(trace T_P) = [] [ANTICHAIN]
+
+-------------------------------------------------------------------------------
+READING.
+
+  * `lambda_std >= 0` at EVERY poset tested -- 0 exceptions, exact arithmetic.  So
+    `1 - lambda_std <= 1` holds with NO HYPOTHESIS AT ALL.  Row 8's SPECTRAL form, read at the
+    constant that is already proven, asserts nothing whatever about frozenness.
+
+  * The maximum of `1 - lambda_std` is EXACTLY 1 and it IS attained -- at the antichain, at
+    every n, where T = J/n and spec(I - J/n) = {0} u {1}^(n-1) (hand-checked in a1/T3).  So the
+    vacuity is SHARP: `1` is precisely the smallest constant at which the spectral form becomes
+    a universal truth, and any eps < 1 would have left it a real statement.
+
+  * `min trace T_P = 1` at every n tested, also attained at the antichain (where a uniform
+    random permutation has exactly 1 expected fixed point).  With the ALGEBRA above that gives
+    `1 - lambda_std <= (n-1)/(n-1) = 1` on the whole tested population by a second, independent
+    route -- and names precisely what a general-n proof would still need: `trace T_P >= 1`.
+
+  * KIND, stated so the green is not over-read.  The reduction `mu_2 <= (n - trace T_P)/(n-1)`
+    is ALGEBRA, all n.  `trace T_P >= 1` and `lambda_std >= 0` are both FINITE POPULATION,
+    n <= 6, exhaustive.  "The spectral form is vacuous at every n" is therefore NOT proven here.
+    IT DOES NOT NEED TO BE for the verdict: on the FROZEN class the same inequality is a THEOREM
+    at every n via Op-Form Claim 6.1 and the master bound, which is a3's subject.  Vacuity is the
+    SHARPER reading of Daniel's point; it is not the load-bearing one.
+-------------------------------------------------------------------------------
+
+THE ANTICHAIN AT EVERY n, so a reader can redo the arithmetic on paper:
+
+   n   E[inv_e]=C(n,2)/2   6E[inv]/(n^2-1)   1-lambda_std   inversion form at eps=1
+   2   1/2                 1                 1.0000000000   HOLDS
+   3   3/2                 9/8               1.0000000000   FAILS
+   4   3                   6/5               1.0000000000   FAILS
+   5   5                   5/4               1.0000000000   FAILS
+   6   15/2                9/7               1.0000000000   FAILS
+   7   21/2                21/16             1.0000000000   FAILS
+   8   14                  4/3               1.0000000000   FAILS
+
+That last column is the finding a3 makes precise.  At the SAME constant eps = 1, row 8's
+spectral form is universally TRUE and row 8's inversion form is FALSE from n = 3 on.  The two
+halves of the row are not the same statement, and `equivalently` is not the word for them.
+

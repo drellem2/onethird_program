@@ -1,0 +1,87 @@
+==============================================================================
+mg-0e8c a1 -- SELF-TEST
+==============================================================================
+
+T1  poset enumeration vs the corpus's independent enumerator
+  PASS  n=1  counts and sets agree   1 posets
+  PASS  n=2  counts and sets agree   2 posets
+  PASS  n=3  counts and sets agree   7 posets
+  PASS  n=4  counts and sets agree   40 posets
+  PASS  n=5  counts and sets agree   357 posets
+  PASS  n=6  counts and sets agree   4824 posets
+
+T2  cross-implementation agreement on 1 - lambda_std (no shared code)
+  PASS  n=2  max |mine - libA94|   0.00e+00
+  PASS  n=3  max |mine - libA94|   2.78e-16
+  PASS  n=4  max |mine - libA94|   3.89e-16
+  PASS  n=5  max |mine - libA94|   7.77e-16
+
+T3  the ANTICHAIN, against hand arithmetic
+  PASS  n=2  1 - lambda_std == 1 exactly (hand: spec(I - J/n) = {0, 1^(n-1)})   1.000000000000
+  PASS  n=2  E[inv_e] == C(n,2)/2 (hand: each pair flipped w.p. 1/2)   1/2 vs 1/2
+  PASS  n=3  1 - lambda_std == 1 exactly (hand: spec(I - J/n) = {0, 1^(n-1)})   1.000000000000
+  PASS  n=3  E[inv_e] == C(n,2)/2 (hand: each pair flipped w.p. 1/2)   3/2 vs 3/2
+  PASS  n=4  1 - lambda_std == 1 exactly (hand: spec(I - J/n) = {0, 1^(n-1)})   1.000000000000
+  PASS  n=4  E[inv_e] == C(n,2)/2 (hand: each pair flipped w.p. 1/2)   3 vs 3
+  PASS  n=5  1 - lambda_std == 1 exactly (hand: spec(I - J/n) = {0, 1^(n-1)})   1.000000000000
+  PASS  n=5  E[inv_e] == C(n,2)/2 (hand: each pair flipped w.p. 1/2)   5 vs 5
+  PASS  n=6  1 - lambda_std == 1 exactly (hand: spec(I - J/n) = {0, 1^(n-1)})   1.000000000000
+  PASS  n=6  E[inv_e] == C(n,2)/2 (hand: each pair flipped w.p. 1/2)   15/2 vs 15/2
+  PASS  n=7  1 - lambda_std == 1 exactly (hand: spec(I - J/n) = {0, 1^(n-1)})   1.000000000000
+  PASS  n=7  E[inv_e] == C(n,2)/2 (hand: each pair flipped w.p. 1/2)   21/2 vs 21/2
+
+T4  the CHAIN
+  PASS  n=2  exactly one linear extension   1
+  PASS  n=2  1 - lambda_std == 0   0.000000000000
+  PASS  n=2  E[inv_e] == 0
+  PASS  n=3  exactly one linear extension   1
+  PASS  n=3  1 - lambda_std == 0   0.000000000000
+  PASS  n=3  E[inv_e] == 0
+  PASS  n=4  exactly one linear extension   1
+  PASS  n=4  1 - lambda_std == 0   0.000000000000
+  PASS  n=4  E[inv_e] == 0
+  PASS  n=5  exactly one linear extension   1
+  PASS  n=5  1 - lambda_std == 0   0.000000000000
+  PASS  n=5  E[inv_e] == 0
+  PASS  n=6  exactly one linear extension   1
+  PASS  n=6  1 - lambda_std == 0   0.000000000000
+  PASS  n=6  E[inv_e] == 0
+  PASS  n=7  exactly one linear extension   1
+  PASS  n=7  1 - lambda_std == 0   0.000000000000
+  PASS  n=7  E[inv_e] == 0
+
+T5  master bound 1 - lambda_std <= 6 E[inv_e]/(n^2-1), inherited from mg-210d
+  PASS  n=2  violations   0 violations, 2 tight
+  PASS  n=3  violations   0 violations, 1 tight
+  PASS  n=4  violations   0 violations, 1 tight
+  PASS  n=5  violations   0 violations, 1 tight
+  PASS  n=6  violations   0 violations, 1 tight
+
+T6  is_psd_exact on hand-built matrices with known verdicts
+  PASS  PSD(identity 2x2) == True
+  PASS  PSD(negative diagonal) == False
+  PASS  PSD(PSD singular  [[1,1],[1,1]]) == True
+  PASS  PSD(indefinite    [[1,2],[2,1]]) == False
+  PASS  PSD(zero pivot with off-diag [[0,1],[1,1]]) == False
+  PASS  PSD(zero pivot clean [[0,0],[0,1]]) == True
+  PASS  PSD(Laplacian of an edge [[1,-1],[-1,1]]) == True
+  PASS  PSD(3x3 borderline det 0) == True
+  PASS  PSD(3x3 negative minor) == False
+
+T6b  is_pd_exact (STRICT) on hand-built matrices
+  PASS  PD(identity 2x2) == True
+  PASS  PD(PSD but SINGULAR [[1,1],[1,1]]) == False
+  PASS  PD(negative definite [[-1,0],[0,-2]]) == False
+  PASS  PD([[2,1],[1,2]]) == True
+
+T6c  exact `lambda_std >= 0` oracle agrees with the float value of 1 - lambda_2(M)
+  PASS  n=2  disagreements   0
+  PASS  n=3  disagreements   0
+  PASS  n=4  disagreements   0
+  PASS  n=5  disagreements   0
+
+T6d  the two oracles are DIFFERENT statements (this is the recorded defect)
+  PASS  n=5  posets with lambda_std >= 0 but S_P NOT PSD   329 such posets -- the wrong oracle would have called every one of them a vacuity failure
+
+==============================================================================
+GREEN -- every check passed.
