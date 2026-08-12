@@ -1,0 +1,69 @@
+==============================================================================
+mg-7564 d0 — SELFTEST
+==============================================================================
+
+A. PLUG-BACK — eps_dem solved from a chain must saturate that chain's own bound.
+   Phi(eps_dem) must equal eps_leak EXACTLY, and must EXCEED it above.
+   The bump is (101/100)^2 and not (101/100), for a stated reason: on the
+   square-root chains the smaller bump lands on an IRRATIONAL root, and
+   `_sqrt` refuses rather than floating it — the refusal is the C control
+   below working, so the bump is chosen to keep every arm exact.
+  [PASS] (I) saturates: got 1/5, want 1/5
+  [PASS] (I) strictly worse above: got True, want True
+  [PASS] (III) C=1 saturates: got 1/5, want 1/5
+  [PASS] (III) C=1 strictly worse above: got True, want True
+  [PASS] (III) C=2 saturates: got 1/5, want 1/5
+  [PASS] (III) C=2 strictly worse above: got True, want True
+  [PASS] (II)  g=3/2 saturates: got 1/5, want 1/5
+  [PASS] (II)  g=3/2 strictly worse above: got True, want True
+  [PASS] (II)  g=10 saturates: got 1/5, want 1/5
+  [PASS] (II)  g=10 strictly worse above: got True, want True
+  [PASS] (IV)  c=1 saturates: got 1/5, want 1/5
+  [PASS] (IV)  c=1 strictly worse above: got True, want True
+  [PASS] (IV)  c=40/49 saturates: got 1/5, want 1/5
+  [PASS] (IV)  c=40/49 strictly worse above: got True, want True
+  [PASS] (IV)  c=9/10 saturates: got 1/5, want 1/5
+  [PASS] (IV)  c=9/10 strictly worse above: got True, want True
+
+   NEGATIVE ARM — a chain (IV) mis-derived to pay a Cheeger square must NOT saturate.
+  [PASS] mis-derived (IV) fails plug-back: got False, want False
+
+B. TYPE GUARD — a Spec where a Leak belongs must RAISE.
+  [PASS] dem_I(Spec): raised as designed — expected Leak, got Spec — E2 guard (leak/spec conflation)
+  [PASS] phi_II(Leak): raised as designed — expected Spec, got Leak — E2 guard (leak/spec conflation)
+   NEGATIVE ARM — the correctly typed call must NOT raise:
+  [PASS] dem_I(Leak) works: got 1/50, want 1/50
+
+C. NO FLOAT ON A DECISION PATH — an irrational root must REFUSE, not round.
+  [PASS] sqrt(3) refuses: raised as designed — sqrt(3) is irrational — refusing to float it
+  [PASS] sqrt(4/25) is exact: got 2/5, want 2/5
+
+D. CURRENCY JOIN — dq_from_spec and spec_from_dq must invert, at every n.
+  [PASS] round-trip at n=None: got 1/50, want 1/50
+  [PASS] round-trip at n=3: got 1/50, want 1/50
+  [PASS] round-trip at n=6: got 1/50, want 1/50
+  [PASS] round-trip at n=12: got 1/50, want 1/50
+  [PASS] round-trip at n=25: got 1/50, want 1/50
+  [PASS] round-trip at n=400: got 1/50, want 1/50
+   NEGATIVE ARM — dropping the n/(n+1) factor must BREAK the round trip at finite n:
+  [PASS] wrong join fails at n=6: got False, want False
+  [PASS] wrong join HAPPENS to pass in the limit: got 1/50, want 1/50
+
+E. THE 10x IS EXACTLY 2/eps_leak, AT EVERY C3 — C3 cancels.
+   (II)/(III) = (L/C) / (L^2/(2C)) = 2/L.  A ratio that MOVES with C3 is a bug.
+  [PASS] ratio at C3=1: got 10, want 10
+  [PASS] ratio at C3=3/2: got 10, want 10
+  [PASS] ratio at C3=7/3: got 10, want 10
+  [PASS] ratio at C3=10: got 10, want 10
+  [PASS] ratio at C3=1000: got 10, want 10
+
+F. THE WALL — eps_sup/eps_dem, and chain (II)'s closed form 5*C3^gap.
+  [PASS] wall(II) at C3^gap=1: got 5, want 5
+  [PASS] wall(II) at C3^gap=2: got 10, want 10
+  [PASS] wall(II) at C3^gap=5: got 25, want 25
+  [PASS] wall(II) at C3^gap=10: got 50, want 50
+  [PASS] chain (II) meets chain (III) at C3^gap = 10: got 1/50, want 1/50
+
+==============================================================================
+d0 GREEN — every control passed and every negative arm fired.
+==============================================================================

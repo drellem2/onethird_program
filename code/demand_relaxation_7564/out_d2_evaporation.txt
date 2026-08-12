@@ -1,0 +1,84 @@
+==============================================================================
+mg-7564 d2 — DOES THE RELAXATION SURVIVE n?
+==============================================================================
+Baseline: the architecture as written demands eps_spec <= 1/50 (0.020000), wall 50.00x.
+A RELAXATION IS A ROW WITH eps_dem > 1/50.  A row at or below 1/50 is not a
+relaxation at all — it is the same demand or a tighter one.
+
+------------------------------------------------------------------------------
+A. CHAIN (II), THE GAP-FORM — eps_dem = eps_leak / C_3^gap
+------------------------------------------------------------------------------
+   Chain (II) needs a UNIVERSAL C_3^gap over the class {gap <= eps_spec}
+   (mg-00b3 §0.5: its bound is RELATIVE).  So the worst row governs.
+
+source                         n in regime   C_3^gap    eps_dem   d*qbar <=    wall  vs 1/50
+mg-94c3 §3 (L2 1st disj)       3        no    1.5000   0.133333  0.04444444    7.50  RELAXES
+mg-94c3 §3 (L2 1st disj)       4        no    1.4730   0.135777  0.04525911    7.37  RELAXES
+mg-94c3 §3 (L2 1st disj)       5        no    1.9900   0.100503  0.03350084    9.95  RELAXES
+mg-94c3 §3 (L2 1st disj)       6        no    2.3860   0.083822  0.02794077   11.93  RELAXES
+
+mg-00b3 §0.4 staircase S_n     7        no    3.0753   0.065034  0.02167810   15.38  RELAXES
+mg-00b3 §0.4 staircase S_n    12       YES    4.8758   0.041019  0.01367297   24.38  RELAXES
+mg-00b3 §0.4 staircase S_n    16       YES    6.5084   0.030730  0.01024317   32.54  RELAXES
+mg-00b3 §0.4 staircase S_n    20       YES    8.1271   0.024609  0.00820301   40.64  RELAXES
+mg-00b3 §0.4 staircase S_n    25       YES   10.1654   0.019675  0.00655819   50.83  **NO GAIN — WORSE THAN THE BASELINE**
+mg-00b3 §0.4 staircase S_n    28       YES   11.3629   0.017601  0.00586705   56.81  **NO GAIN — WORSE THAN THE BASELINE**
+
+   CHAIN (II) MEETS THE BASELINE AT C_3^gap = 10 EXACTLY (eps_dem = 1/50), and
+   `S_25` is PRIMITIVE, has gap 300/6773 = 0.0043572625 <= 1/50 — INSIDE the
+   budget — and forces C_3^gap >= 10.1654.  So on the class chain (II) is
+   invoked over, the universal g it needs is ALREADY above the crossing point,
+   by one exact in-regime witness (mg-00b3 §0.4 item 4, §0.5).
+
+   ==> CHAIN (II) IS NOT A DEMAND RELAXATION.  Its 10x is the C_3^gap = 1
+       extreme point, which mg-94c3 measured FALSE at 1023 of 1032.
+
+------------------------------------------------------------------------------
+B. CHAIN (IV), LITERAL PREFIX CAPTURE — eps_dem = 1 - (1-eps_leak)/c
+------------------------------------------------------------------------------
+   Chain (IV)'s condition is ABSOLUTE and per-poset (mg-00b3 §0.5), so `S_25`
+   does NOT kill it: there c = 0.9598890 > 40/49 and min_k Q_k = 300/6773 <=
+   1/5 with 4.5x to spare.  The governing number is instead the WORST c over
+   the class — and the worst c MEASURED IN REGIME is the staircase's at n=12.
+
+source                         n in regime          c    eps_dem   d*qbar <=    wall  vs 1/50
+mg-81ff §5 N-family           16       YES  0.9999000   0.199920  0.06664000    5.00  RELAXES
+mg-00b3 §0.4 staircase S_n     7        no  0.8810844   0.092028  0.03067599   10.87  RELAXES
+mg-00b3 §0.4 staircase S_n    12       YES  0.9258259   0.135907  0.04530222    7.36  RELAXES
+mg-00b3 §0.4 staircase S_n    16       YES  0.9409451   0.149791  0.04993033    6.68  RELAXES
+mg-00b3 §0.4 staircase S_n    20       YES  0.9511976   0.158955  0.05298499    6.29  RELAXES
+mg-00b3 §0.4 staircase S_n    25       YES  0.9598890   0.166570  0.05552343    6.00  RELAXES
+mg-00b3 §0.4 staircase S_n    28       YES  0.9638647   0.170008  0.05666933    5.88  RELAXES
+
+   WORST c MEASURED IN REGIME: 0.9258259 (S_12).
+     eps_dem = 0.135907   d*qbar <= 0.04530222 = 1 in 22.07
+     wall 7.36x, against the baseline's 50.00x — a relaxation of 6.80x, not 10x.
+   CEILING, c -> 1: eps_dem = 1/5 = 0.200000, d*qbar <= 1/15 = 1 in 15, wall 5.00x.
+
+   ⚠️ THE WORST-c ROW IS A MEASUREMENT OVER A POPULATION OF THREE FAMILIES, NOT
+      A BOUND.  The class {gap <= 1/50} is NON-EMPTY BUT UNENUMERABLE — 0 of
+      86277 at n = 7, first reached at n = 10 (mg-81ff §6) — so c over the class
+      is UNMEASURED, not unmeasurable.  On the FULL population min c FALLS
+      (0.750, 0.618, 0.536, 0.453, 0.413 at n = 3..7) and is BELOW 4/5 at every
+      one, where chain (IV) does not close at all; those posets are 23x-33x
+      outside the regime and the refutation does not transfer (mg-81ff §3).
+
+------------------------------------------------------------------------------
+C. THE LADDER, AS ONE PICTURE
+------------------------------------------------------------------------------
+row                                              eps_dem   d*qbar <=           as    wall  status
+frozen product today (the two-atom law)          1.00000  0.33333333       1 in 3    1.00  SUPPLY side
+chain (IV), c -> 1 — the ENUMERATION's ceiling   0.20000  0.06666667      1 in 15    5.00  CONJECTURE-gated
+chain (IV), worst c measured IN REGIME (S_12)    0.13591  0.04530222   1 in 22.07    7.36  3 families, not a bound
+chain (II), C_3^gap = 1 — the extreme point      0.20000  0.06666667      1 in 15    5.00  MEASURED FALSE 1023/1032
+chain (II), C_3^gap = 10.1654 IN REGIME (S_25)   0.01967  0.00655819   1 in 152.5   50.83  worse than baseline
+chain (I) = (III) at C_3 = 1 — AS WRITTEN        0.02000  0.00666667     1 in 150   50.00  PROVEN on L2 1st disj
+
+   EVERY ROW ABOVE THE BASELINE IS GATED ON THE PREFIX-CAPTURE CONJECTURE,
+   WHICH IS NOT ONE OF THE SOURCE'S FOUR MAIN OPEN LEMMAS (mg-9461 §0.2).
+   And the largest wall any of them reaches is 5x, so:
+   NO ROW ON THIS LADDER CLOSES THE WALL.
+
+==============================================================================
+d2 COMPLETE
+==============================================================================
