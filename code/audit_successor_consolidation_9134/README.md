@@ -26,8 +26,10 @@ mg-7ff8, mg-a882 and mg-a518 used, so these rows are comparable to theirs and no
 whole subject of this ticket** — it is `mg-a0d6`, answered under the surviving name. The detector
 counts the two kinds separately on purpose; the split is carried here for the same reason.
 
-**VERDICT: consolidated-and-confirmed-by-hand-run. NOT confirmed unattended — see Part 2, which
-is not a footnote.**
+**VERDICT: consolidated-and-confirmed-unattended.** The first unattended `pogo doctor --check`
+after the config landed printed that row character for character — see Part 2, which is not a
+footnote, and which also records why that run had to be *procured* and what nothing on this host
+does on its own.
 
 ### What changed, in the order it was changed, and the order IS the safety argument
 
@@ -188,8 +190,45 @@ mayor's call, not a polecat's. **It was requested** — mayor was mailed at 13:3
 above and an explicit request *not* to run the command and paste the output, since that is a
 hand-run with extra steps and fails the condition in exactly the way the ticket warns about.
 
-**STATUS OF STEP 6: see the dated section at the end of this file.** It records what the first
-unattended run printed, verbatim, or records that none occurred and why.
+### STEP 6 — THE FIRST UNATTENDED RUN, AND IT AGREES CHARACTER FOR CHARACTER
+
+The doctor crew agent was brought up at **14:02:46.525138Z** (pogod `agent_spawned`, pid 96791)
+after I mailed mayor at 13:36Z and human at 13:47Z asking for exactly that, and asking explicitly
+**not** to be sent a pasted hand-run. Seventy-one seconds later, off its own startup checklist and
+with no instruction from me, it ran:
+
+```
+cd /Users/daniel && timeout 90 pogo doctor --check 2>&1 | head -40; echo "EXIT=$?"
+```
+
+and received, **verbatim**:
+
+```
+  ✓  audit successors      no merged audit has gone unanswered past 4h — 9 merged audit(s) examined: 8 answered by a successor, 1 by a recorded clean verdict, 0 still inside the 4h window, 0 with no recorded completion time
+```
+
+**Step 4 landed at 13:35:53Z; this is the first unattended run after it.** Against my hand-run of
+13:35:56Z the difference is **none** — character for character past the `✓ audit successors` column
+that only the human renderer prints. Same window, same population, same 8/1 split.
+`out_p2_unattended.txt` carries the capture and its provenance.
+
+**What it confirms.** The detector is reached, from a process that is not mine, **with this
+config**: `9 merged audit(s) examined` is printable only by a run that found `[audit_successor]`
+populated — an unconfigured one prints *"not configured"* instead. mg-7ff8 placed the section in
+the XDG layer (read unconditionally) rather than the `$POGO_HOME` layer (read **only** when
+`POGO_HOME` is set) precisely so this would hold across contexts, and **this is the first evidence
+that it does.** And `audit-clean` was in the tag list that run actually used: `mg-a0d6` is ~50h past
+the window and carries only that name, so `1 by a recorded clean verdict` is unreachable without
+it — N1 shows the same store printing `0` and naming `mg-a0d6` when the name is absent.
+
+**What it cannot confirm, and no observable could.** That the retired name was dropped. See the
+limit below: a green line prints no tag list, and nothing carries `audit-verdict-pass` anyway.
+
+**What is disclosed rather than glossed.** This run was **procured, not performed**. I asked for the
+agent to be started; I did not run the command, choose its arguments, its environment or its timing.
+Two hours earlier the path had **no runner at all**, so the honest reading is *"the path works when
+the path is running"* — which is the strongest claim available on this host, and which is a
+different sentence from *"the path runs"*. The finding above stands: **nothing schedules it.**
 
 ### A limit on what step 6 could ever have confirmed, found while measuring for it
 
@@ -227,6 +266,8 @@ p2_who_runs_it.sh         PART 2 — every unattended path that could run the ch
 run_all.sh                the runner, NOT wired into ./build.sh (reason inside)
 out_consolidate.txt       transcript, 2026-08-12
 out_p2_who_runs_it.txt    transcript, 2026-08-12
+out_p2_unattended.txt     the first unattended run's `audit successors` row, verbatim, with its
+                          provenance and what it does and does not confirm
 ```
 
 Nothing here is imported by any other suite, and `./build.sh` is unchanged. The only files this

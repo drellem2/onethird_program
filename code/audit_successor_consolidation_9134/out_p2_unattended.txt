@@ -1,0 +1,58 @@
+mg-9134 PART 2 — THE FIRST UNATTENDED RUN AFTER THE CONSOLIDATION LANDED
+================================================================================
+Captured by reading the doctor crew agent's own session transcript at
+~/.claude/projects/-Users-daniel--pogo-agents-doctor/5647271a-1192-46fa-9dc2-a43ef768f7a5.jsonl
+The command below was NOT issued by me.  It is doctor's own first-line health
+check, run off its startup checklist (crew/doctor.md:69), in doctor's own process,
+environment and working directory (`cd /Users/daniel`).
+
+  step 4 (clean_verdict_tags = ["audit-clean"]) landed  2026-08-12T13:35:53Z
+  doctor agent spawned  (pogod event agent_spawned, pid 96791)   2026-08-12T14:02:46.525138Z
+  doctor ran the checklist                                       2026-08-12T14:03:57.589Z
+
+COMMAND, verbatim, as doctor issued it:
+
+  cd /Users/daniel && timeout 90 pogo doctor --check 2>&1 | head -40; echo "EXIT=$?"
+
+THE `audit successors` ROW, verbatim, as doctor received it:
+
+  ✓  audit successors      no merged audit has gone unanswered past 4h — 9 merged audit(s) examined: 8 answered by a successor, 1 by a recorded clean verdict, 0 still inside the 4h window, 0 with no recorded completion time
+
+THE HAND-RUN IT IS BEING COMPARED AGAINST (mine, 13:35:56Z, `pogo doctor --check --json`):
+
+  status : pass
+  detail : no merged audit has gone unanswered past 4h — 9 merged audit(s) examined: 8 answered by a successor, 1 by a recorded clean verdict, 0 still inside the 4h window, 0 with no recorded completion time
+
+DIFFERENCE: none.  Character for character, after the `✓  audit successors` column
+that only the human renderer prints.  Same window, same population, same split.
+
+WHAT THIS DOES AND DOES NOT CONFIRM.
+
+  CONFIRMED — the detector is reached, and reached WITH THIS CONFIG, from a process
+  that is not mine.  `9 merged audit(s) examined` can only be printed by a run that
+  found [audit_successor] populated; an unconfigured run prints "not configured"
+  instead.  mg-7ff8 put the section in ~/.config/pogo/config.toml (the XDG layer,
+  read unconditionally) rather than ~/.pogo/config.toml (read ONLY when POGO_HOME is
+  set) precisely so this would hold across contexts.  This run is the first evidence
+  that it does, from a context nobody typed the command into.
+
+  CONFIRMED — `audit-clean` was in the tag list that run actually used.  mg-a0d6 is
+  the store's only clean-verdict-tagged item, it is ~50h past the 4h window, and it
+  carries ONLY `audit-clean`.  `1 by a recorded clean verdict` is unreachable unless
+  the list in force contained that name; arm N1 shows the identical store printing
+  `0 by a recorded clean verdict` and naming mg-a0d6 when it does not.
+
+  NOT CONFIRMABLE, BY CONSTRUCTION — that `audit-verdict-pass` was dropped.  The tag
+  names are rendered by cleanVerdictAdvice, called from the WARN branch of
+  auditSuccessorLine and nowhere else, so a green line prints no tag list at all.
+  And no observable could show it: nothing carries the retired name, which is the
+  condition that made dropping it safe.
+
+  DISCLOSED — the doctor crew agent had been stopped since 2026-08-10T17:14:23Z and
+  was brought up at 14:02:46Z after I mailed mayor (13:36Z) and human (13:47Z)
+  asking for it, explicitly asking NOT to be sent a pasted hand-run.  So this run was
+  PROCURED but not PERFORMED: the command, its arguments, its environment and its
+  timing are doctor's, off its own checklist, and no part of it is mine.  A reader
+  who thinks that gap matters should read this as "the path works when the path is
+  running", which is the strongest claim available on a host where the path had no
+  runner at all two hours ago.
