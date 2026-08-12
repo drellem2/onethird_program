@@ -1,0 +1,211 @@
+============================================================================================
+mg-d2c2 §3 — REAL GAP, OR DETECTOR ARTEFACT?
+============================================================================================
+
+PART A1 — THE TWO DIRECTORIES ADDED TODAY, ADJUDICATED
+
+--------------------------------------------------------------------------------------------
+  code/audit_successor_consolidation_9134
+--------------------------------------------------------------------------------------------
+    the sweep's §3 probe says : BARE
+      sources it looked at    : consolidate_9134.py, p2_who_runs_it.sh, run_all.sh
+      filename probe matched  : (nothing — no filename contains negative/selftest/self_test/positive/control/falsif)
+      token probe matched     : (nothing — no transcript contains HOLE/CAUGHT/MISMATCH/REFUTED/FAILED TO/SETUP FAILED/NEGATIVE CONTROL)
+
+    WHAT THE DIRECTORY ACTUALLY SHIPS, located at run time:
+      code/audit_successor_consolidation_9134/consolidate_9134.py:68
+          """Raised when the control cannot reach a verdict at all."""
+          -> a refusal path: the control distinguishes `did not fire` from `did not run`
+      code/audit_successor_consolidation_9134/out_consolidate.txt:64
+          [N1] THE TRAP THE ORDER AVOIDS — config consolidated onto `audit-clean` while the item s
+          -> the first of four planted worlds, each mutating the store and requiring a warn
+      code/audit_successor_consolidation_9134/out_consolidate.txt:86
+          [N3] THE SURVIVING NAME IS LOAD-BEARING — strip `audit-clean` and mg-a0d6 must become vi
+          -> N3: strip the tag and the detector must go red, or its green means nothing
+      code/audit_successor_consolidation_9134/out_consolidate.txt:109
+          ARM D — MY OWN CONTROL'S FAILURE MODE, REPRODUCED ON PURPOSE.
+          -> ARM D: the control's own blindness reproduced deliberately and measured
+      code/audit_successor_consolidation_9134/out_consolidate.txt:118
+          VERDICT    : REPRODUCED — the identical mutation that fires in N3 is
+          -> the recorded outcome of ARM D — the mutation goes SILENT, as predicted
+
+    VERDICT: DETECTOR ARTEFACT — the directory ships 5 committed exhibits of a
+    falsification attempt and the probe scored it BARE.
+
+--------------------------------------------------------------------------------------------
+  code/compression_novelty_623a
+--------------------------------------------------------------------------------------------
+    the sweep's §3 probe says : BARE
+      sources it looked at    : a1_identities.py, a2_tightness.py, a3_sites.py, lib623a.py, run_all.sh
+      filename probe matched  : (nothing — no filename contains negative/selftest/self_test/positive/control/falsif)
+      token probe matched     : (nothing — no transcript contains HOLE/CAUGHT/MISMATCH/REFUTED/FAILED TO/SETUP FAILED/NEGATIVE CONTROL)
+
+    WHAT THE DIRECTORY ACTUALLY SHIPS, located at run time:
+      code/compression_novelty_623a/a1_identities.py:13
+          A5  CONTROL, MUST GO RED: A3 and A4 on a function that is NOT a pair-orientation
+          -> an arm declared in the module docstring as required to go red
+      code/compression_novelty_623a/a1_identities.py:121
+          # scored INVERTED: a "failure" here is the control working.
+          -> the scoring rule stated in source: a failure here is the control working
+      code/compression_novelty_623a/a1_identities.py:240
+          "FIRES" if v[1] > 0 else "*** CONTROL DID NOT FIRE ***"))
+          -> the branch that prints when the control FAILS to fail — the arm can go wrong
+      code/compression_novelty_623a/out_a1_identities.txt:25
+          A5a   13416 checked,   9420 failed   FIRES   [control: failure is the pass]
+          -> the committed transcript recording three such arms actually firing
+      code/compression_novelty_623a/out_a1_identities.txt:29
+          A7 -- NAMED CONTROL on V_k, the family docs/OneThird-Hodge-Side-Leverage.md
+          -> a fourth arm: a named control on a family whose answer is known in advance
+      code/compression_novelty_623a/out_a3_sites.txt:108
+          POSITIVE CONTROLS: nonzero, so the census reaches the corpus
+          -> a second, independent set of positive controls, scored in a second transcript
+
+    VERDICT: DETECTOR ARTEFACT — the directory ships 6 committed exhibits of a
+    falsification attempt and the probe scored it BARE.
+
+============================================================================================
+PART A2 — WAS THE BASELINE 25 EVER A COUNT OF REAL GAPS?
+============================================================================================
+  If the answer is no, then today's 25 -> 27 is not two new hygiene gaps against
+  a clean baseline; it is two more misreadings on top of an unknown number of
+  them.  Two of the ORIGINAL 25 are adjudicated by the same method.
+
+--------------------------------------------------------------------------------------------
+  code/counterexample_audit_a7b4
+--------------------------------------------------------------------------------------------
+    the sweep's §3 probe says : BARE
+      sources it looked at    : check_bridge.py, check_egroups.py, check_leftovers.py, check_main.py, check_prop5.py, check_sections.py, check_spectral.py, kernel.py, records.py, run_all.sh, selfcheck.py, shrink_witness.py, witness9.py
+      filename probe matched  : (nothing — no filename contains negative/selftest/self_test/positive/control/falsif)
+      token probe matched     : (nothing — no transcript contains HOLE/CAUGHT/MISMATCH/REFUTED/FAILED TO/SETUP FAILED/NEGATIVE CONTROL)
+
+    WHAT THE DIRECTORY ACTUALLY SHIPS, located at run time:
+      code/counterexample_audit_a7b4/selfcheck.py:2
+          these pass.  Run:  python3 selfcheck.py
+          -> a file literally named for a self-check — missed because the probe's regex spells it `selftest|self_test` and this is `selfcheck`, one character out
+
+    VERDICT: DETECTOR ARTEFACT — the directory ships 1 committed exhibit of a
+    falsification attempt and the probe scored it BARE.
+
+--------------------------------------------------------------------------------------------
+  code/sibling_sweep_7085
+--------------------------------------------------------------------------------------------
+    the sweep's §3 probe says : BARE
+      sources it looked at    : r1_sweep.py, run_all.sh
+      filename probe matched  : (nothing — no filename contains negative/selftest/self_test/positive/control/falsif)
+      token probe matched     : (nothing — no transcript contains HOLE/CAUGHT/MISMATCH/REFUTED/FAILED TO/SETUP FAILED/NEGATIVE CONTROL)
+
+    WHAT THE DIRECTORY ACTUALLY SHIPS, located at run time:
+      code/sibling_sweep_7085/out_r1_sweep_FIRSTRUN_2FAIL.txt:9
+          ANTI-VACUITY -- the broken arms must be broken FOR THE RIGHT REASON
+          -> a whole section requiring the broken arms to be broken for the right reason
+      code/sibling_sweep_7085/out_r1_sweep_FIRSTRUN_2FAIL.txt:40
+          [PASS] before/ARM B/s0_freshness.py: and it ACTUALLY FAILED at least once
+          -> a recorded firing — missed because RED_TOKENS wants `FAILED TO`, not `FAILED`
+
+    VERDICT: DETECTOR ARTEFACT — the directory ships 2 committed exhibits of a
+    falsification attempt and the probe scored it BARE.
+
+============================================================================================
+PART B — HOW MUCH OF THE 27 IS THE SAME ARTEFACT?  A LOWER BOUND.
+============================================================================================
+
+  The screen below is a WIDER VOCABULARY TEST and is not proposed as the repair.
+  It excludes bare `control`, bare `mutation`, bare `fail` — the words that occur
+  in prose ABOUT controls — so it under-counts on purpose.  Markers:
+      MUST FAIL               MUST GO RED             must go red             must fail             
+      \[MUST\b                failure is the pass     scored INVERTED         must be nonzero       
+      must NOT fire           must fire               planted                 known[- ]bad          
+      ACTUALLY FAILED         ANTI-VACUITY            REPRODUCED              self[- ]?check        
+      negative control        mutation arm            mutated                 wrong[- ]way          
+      demonstrated to fail    expected to fail      
+
+  THE SCREEN'S OWN TWO-SIDED CHECK — it must answer both ways or it is not a
+  screen.  DISCLOSED: these five worlds are p2's, and this screen was written
+  after they existed, so 5 of 5 is a floor and NOT a validation.
+    [PASS]  W0: correct=BARE, screen says BARE
+    [PASS]  W1: correct=EVIDENCE, screen says EVIDENCE
+    [PASS]  W2: correct=EVIDENCE, screen says EVIDENCE
+    [PASS]  W3: correct=BARE, screen says BARE
+    [FAIL]  W4: correct=BARE, screen says EVIDENCE
+    screen: 4 of 5   (a4_sweep's §3 probe, same worlds: 2 of 5)
+
+    D1 — THE SCREEN'S OWN FALSE POSITIVE, KEPT.  It scores W4 wrong, and W4 is
+    the world whose README says a control is ABSENT: `Wiring up a negative
+    control is left for a successor ticket.`  The marker `negative control`
+    matches the sentence that denies one exists.  This is the SAME defect the
+    whole file is about, committed by the instrument written to measure it, and
+    it is left in rather than tuned out: deleting the marker would make the
+    screen score 5 of 5 and would delete the demonstration that a wider
+    vocabulary is still a vocabulary.  It also means Part B's `EVIDENCE` column
+    is itself a candidate list — which is why every row prints its exhibit.
+
+  THE 27 NAMES THE SWEEP CALLS BARE, SCREENED (population 202):
+
+    [EVIDENCE]  audit_successor_consolidation_9134
+                code/audit_successor_consolidation_9134/README.md:101
+                **all four mutation arms came back PASS** — a control that could not fire, reporting green, insi
+    [EVIDENCE]  compression_novelty_623a
+                code/compression_novelty_623a/a1_identities.py:13
+                A5  CONTROL, MUST GO RED: A3 and A4 on a function that is NOT a pair-orientation
+    [EVIDENCE]  counterexample_audit_0a11
+                code/counterexample_audit_0a11/check_locator.py:81
+                # ---------------------------------------------------------------- must fail
+    [EVIDENCE]  counterexample_audit_a7b4
+                code/counterexample_audit_a7b4/README.md:20
+                Run `./run_all.sh` (about 15 minutes, pure Python 3, no dependencies). `selfcheck.py` must end
+    [EVIDENCE]  eps0_threshold_3969
+                code/eps0_threshold_3969/a1_vacuity.py:49
+                # ---------------------------------------------------------- negative controls
+    [EVIDENCE]  face_geometry_audit_d0e2
+                code/face_geometry_audit_d0e2/README.md:29
+                otherwise have run nine "deletion tests" on unmutated source.)
+    [EVIDENCE]  face_geometry_audit_e0ce
+                code/face_geometry_audit_e0ce/audit_extra.py:14
+                X3  Construction-side negative control the deliverable lacks: perturb the
+    [EVIDENCE]  sibling_sweep_7085
+                code/sibling_sweep_7085/out_r1_sweep.txt:9
+                ANTI-VACUITY -- the broken arms must be broken FOR THE RIGHT REASON
+    [EVIDENCE]  state_delegation_audit_16eb
+                code/state_delegation_audit_16eb/README.md:159
+                instrument's own `--emit-baseline` against the mutated tree and splices **both** regenerated
+    [EVIDENCE]  state_delegation_audit_5644
+                code/state_delegation_audit_5644/README.md:97
+                | `render5644.py` | **B1 measured, not argued.** The mutated target handed to `marked` and `mark
+    [EVIDENCE]  state_delegation_repair_0049
+                code/state_delegation_repair_0049/out_5644_rerun.txt:111
+                Q0  unmutated — the positive control
+
+  THE SWEEP CALLS BARE AND THE SCREEN DOES NOT: 16
+    [quiet]     face_geometry_audit_5630
+    [quiet]     face_geometry_audit_f7bc
+    [quiet]     hodge_leverage_audit_3c24
+    [quiet]     hodge_leverage_audit_d39d
+    [quiet]     hodge_leverage_join
+    [quiet]     l2_underclaim_audit_3bb9
+    [quiet]     landscape_audit_d673
+    [quiet]     landscape_ebd8
+    [quiet]     lstar_landing_8d63
+    [quiet]     semigroup_note
+    [quiet]     semigroup_note_audit_66a6
+    [quiet]     state_audit_2eed
+    [quiet]     state_restructure_34bf
+    [quiet]     unified_gate_8fd1
+    [quiet]     unified_gate_audit_446b
+    [quiet]     unitmap_audit_9f91
+
+--------------------------------------------------------------------------------------------
+  READING THESE TWO NUMBERS HONESTLY
+--------------------------------------------------------------------------------------------
+    the sweep's field, live, this tree     : 27 of 202
+    of those, carrying an inverted arm     : 11  (each with an exhibit line above)
+    remaining, on this wider reading       : 16 of 202
+
+    The third number is a CANDIDATE count in mg-9876's own sense and is a LOWER
+    BOUND on the real gaps — the screen under-counts by construction, and a
+    directory it leaves quiet may still ship evidence it has no words for.  What
+    it is NOT is 27: the field cannot be read as a count of directories that
+    ship code nothing has ever tried to break.
+
+============================================================================================
+P3 ADJUDICATION — 4 of 4 adjudicated directories are DETECTOR ARTEFACTS, including both added today; the field reads 27 of 202 and bounds at 16.
+============================================================================================

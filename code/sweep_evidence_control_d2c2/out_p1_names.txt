@@ -1,0 +1,72 @@
+============================================================================================
+mg-d2c2 §1 — THE TWO NAMES, READ OUT OF THE SWEEP
+============================================================================================
+
+  control_gate_724a BASELINE.json declares audit.sweep_dirs_without_evidence
+    baseline = 25   class = recorded
+
+  baseline reading     :  25 bare of 188 directories
+    read from          : git HEAD:code/control_audit_9876/out_a4_sweep.txt
+  live run, this tree  :  27 bare of 202 directories
+
+--------------------------------------------------------------------------------------------
+  DIRECTORIES THAT ARE BARE NOW AND WERE NOT BARE IN THE COMMITTED READING: 2
+--------------------------------------------------------------------------------------------
+      code/audit_successor_consolidation_9134
+          first commit adding it: 2026-08-12
+      code/compression_novelty_623a
+          first commit adding it: 2026-08-12
+
+--------------------------------------------------------------------------------------------
+  IS THIS INSTRUMENT READING THE SAME PROBE THE SWEEP RAN?
+--------------------------------------------------------------------------------------------
+  lib_d2c2.probe() imports a4_sweep's own regexes and re-combines them in three
+  lines.  A reimplementation that agrees on 200 directories and differs on one is
+  the failure this arrangement is exposed to, so it is checked against the list
+  the sweep itself printed rather than trusted.
+    sweep printed : 27 names
+    this file computes : 27 names
+    [PASS]  the two lists are identical
+
+--------------------------------------------------------------------------------------------
+  THE TICKET NAMED CANDIDATES IN ITS BODY.  DID THE SWEEP AGREE?
+--------------------------------------------------------------------------------------------
+    ticket body expects : ['audit_successor_consolidation_9134', 'compression_novelty_623a']
+    sweep names, minus this directory : ['audit_successor_consolidation_9134', 'compression_novelty_623a']
+    CONFIRMED — the two sets are identical, and the ticket's guess is
+    therefore a reading of the sweep and not an independent one.
+
+--------------------------------------------------------------------------------------------
+  THIS DIRECTORY, MEASURED BY THE PROBE IT IS ABOUT
+--------------------------------------------------------------------------------------------
+  The first run of this file, before p2 existed, put code/sweep_evidence_control_d2c2 in
+  the bare list as the 28th name: an instrument whose entire subject is
+  falsification evidence, reported as shipping none.  What changed that is not
+  a control.  It is a FILENAME.
+
+    bare : False
+    filename probe fires on : ['p2_two_sided_control.py']
+    token probe fires on    : [('README.md', 'CAUGHT'), ('out_p2_control.txt', 'CAUGHT'), ('out_p3_adjudicate.txt', 'HOLE')]
+
+    THE PROBE HAS NOT RUN THAT FILE, READ IT, OR ASKED WHETHER IT ANSWERS
+    BOTH WAYS.  It matched the substring `control` in the name.  p2 supplies
+    the same credit to a constructed directory whose control does nothing.
+
+    AND THE TOKEN PROBE CREDITS THIS DIRECTORY TOO — on prose that is ABOUT
+    the probe's false positives.  Each hit, with the line it was found on:
+      `CAUGHT` in README.md:46
+          | W1 | ships `negative_control.py` and a transcript saying `CAUGHT` | EVIDENCE | EVIDE
+      `CAUGHT` in out_p2_control.txt:37
+          token probe fired on    : ['out_negative_control.txt: CAUGHT']
+      `HOLE` in out_p3_adjudicate.txt:13
+          token probe matched     : (nothing — no transcript contains HOLE/CAUGHT/MISMATCH/REFUT
+
+    Read the last of those. The sentence in which p3 REPORTS that a
+    directory's transcripts contain no red token is itself a transcript
+    containing red tokens, and it credits this directory with evidence of a
+    falsification attempt on that basis.  A detector that scores its own
+    negative report as a positive finding is not measuring the estate.
+
+============================================================================================
+P1 NAMES — 2 newly bare: audit_successor_consolidation_9134, compression_novelty_623a   (population 188 -> 202, bare 25 -> 27)
+============================================================================================
