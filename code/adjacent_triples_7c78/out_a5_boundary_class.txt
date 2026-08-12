@@ -1,0 +1,45 @@
+============================================================================================
+mg-7c78  a5  the boundary class delta = 1/3, and the empty population it replaces
+============================================================================================
+
+m1  CENSUS -- n = 2..8 EXHAUSTIVE over every isomorphism class
+--------------------------------------------------------------------------------------------
+      n     posets      min delta      delta = 1/3 delta < 1/3 (FROZEN)
+      2          1            1/2                0                    0
+      3          4            1/3                1                    0
+      4         15            1/3                2                    0
+      5         62            1/3                3                    0
+      6        317            1/3                5                    0
+      7       2044            1/3                8                    0
+      8      16998            1/3               12                    0
+
+    FROZEN POSETS FOUND: 0.
+    ⚠️  THAT ZERO CARRIES NO INFORMATION AND IS NOT A CLEAN SWEEP.  delta < 1/3 IS the
+    counterexample condition; the conjecture is verified to n = 14, so the population
+    of frozen posets any enumerator can reach is EMPTY BY CONSTRUCTION.  Any statement
+    of the form `0 failures over frozen posets` is zero failures in an empty set.
+
+    BOUNDARY POSETS FOUND: 31, at every n from 3 to 8.  THIS is the population every
+    figure below is measured on, and it is EXHAUSTIVE.
+
+m2  COHERENCE on the boundary class -- the majority relation extends to a linear e
+--------------------------------------------------------------------------------------------
+    31 boundary posets · failures 0   [PASS]
+    Every boundary poset has every incomparable pair >= 2/3-decided, the majority
+    relation is ACYCLIC, and the order e it extends to IS a linear extension of P.
+
+m3  EVERY STATEMENT OF THIS TICKET, ON THE BOUNDARY CLASS, EXHAUSTIVELY
+--------------------------------------------------------------------------------------------
+    R1 (pair inside an e-aligned 3-block, some extension):
+        82 pairs · failures 0   [PASS]
+    R2 (one extension covering every incomparable edge):
+        31 posets (n>=3) · R2 FAILS at 0
+        ⚠️  R2 IS FALSE IN GENERAL (a2: 2384 of 3242 posets) AND TRUE HERE.  That is the
+        one place in this instrument where the hypothesis DOES work -- followed up in a6.
+    THE CAP  Pr[E_xy] <= 2*delta = 2/3:
+        82 pairs · violations 0   [PASS]   MAXIMUM ATTAINED = 2/3
+        ATTAINED WITH ZERO SLACK -- the bound is tight on this class.
+    FREE CONSECUTIVE TRIPLES (`adjacent triples` in the strongest sense):
+        0 of 31 boundary posets have one in some linear extension.
+
+VERDICT: GREEN

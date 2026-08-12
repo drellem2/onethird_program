@@ -1,0 +1,33 @@
+============================================================================================
+mg-7c78  a3  READING R4 -- bias != 1/2 forces a distinguishing third element
+============================================================================================
+
+POPULATION.  n = 2..7 EXHAUSTIVE over isomorphism classes, plus n = 8 SAMPLED 800 of
+  16999 (seed 20260812).  3243 posets · 33290 incomparable pairs · 16672 pairwise-incomparable triples.
+
+m1  p_xy != 1/2  ==>  a distinguishing z EXISTS
+--------------------------------------------------------------------------------------------
+    biased pairs 28719 of 33290   failures 0   [PASS]
+    NON-VACUITY: 28719 of the 33290 pairs are biased, so the hypothesis is not empty.
+
+m2  where NO distinguishing z exists, (x y) is verified to be an automorphism of L(P)
+--------------------------------------------------------------------------------------------
+    pairs with no distinguisher 3469   L(P) not preserved at 0   [PASS]
+
+m3  THE CONVERSE FAILS -- a distinguishing z does NOT force bias
+--------------------------------------------------------------------------------------------
+    pairs at p = 1/2 EXACTLY that nevertheless HAVE a distinguishing z: 1102   [PASS (converse refuted)]
+    smallest witness: n=4 down-masks [0, 0, 1, 2], pair (0,1), distinguishers [2, 3], p = 1/2
+    So R4 is a ONE-WAY implication: the third element is FORCED by bias, but its
+    presence does NOT produce bias -- a larger symmetry can cancel it.
+
+m4  THE NO-3-CYCLE ANCHOR, re-derived on this instrument
+--------------------------------------------------------------------------------------------
+    triples with cyclic sum > 2: 0 of 16672   [PASS]
+    how many of the three cyclic events exceed 2/3:
+       0 of 3 :     7817 triples
+       1 of 3 :     8638 triples
+       2 of 3 :      217 triples
+       3 of 3 :        0 triples   <-- MUST BE 0
+
+VERDICT: GREEN

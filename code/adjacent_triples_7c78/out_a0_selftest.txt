@@ -1,0 +1,32 @@
+============================================================================================
+mg-7c78  a0  the instrument is shown able to fail
+============================================================================================
+
+c1  POPULATION SIZE -- isomorphism classes against OEIS A000112
+--------------------------------------------------------------------------------------------
+    n=1  classes      1   A000112      1   [PASS]
+    n=2  classes      2   A000112      2   [PASS]
+    n=3  classes      5   A000112      5   [PASS]
+    n=4  classes     16   A000112     16   [PASS]
+    n=5  classes     63   A000112     63   [PASS]
+    n=6  classes    318   A000112    318   [PASS]
+    n=7  classes   2045   A000112   2045   [PASS]
+    n=8  classes  16999   A000112  16999   [PASS]
+
+c2  E4 -- a CONSECUTIVE block is fully reorderable iff pairwise incomparable
+--------------------------------------------------------------------------------------------
+    k=2 blocks 3899 · k=3 blocks 2891   disagreements 0   [PASS]
+    (n = 2..5 exhaustive over isomorphism classes)
+
+c3  `value_transposition_legal` against BRUTE FORCE membership in L(P)
+--------------------------------------------------------------------------------------------
+    6231 (poset, pair, extension) instances · 4866 legal · 0 disagreements   [PASS]
+    NON-VACUITY: the event is neither always nor never legal (4866 of 6231)
+
+c4  WRONG-DIRECTION WORLDS -- each planted defect must be CAUGHT
+--------------------------------------------------------------------------------------------
+    w1  a down-degree-only canonical form at n=5 collapses 63 classes to 42  [CAUGHT by c1]
+    w2  chain-only incomparability vs pairwise, on a 3-block               [CAUGHT]
+    w3  E_xy strictly contains the adjacency event somewhere at n=4,5      [CAUGHT]
+
+VERDICT: GREEN

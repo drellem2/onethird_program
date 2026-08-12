@@ -1,0 +1,79 @@
+============================================================================================
+mg-7c78  a6  R2e -- how far apart in `e` an incomparable pair can be
+============================================================================================
+
+m1  R2e ON THE BOUNDARY CLASS delta = 1/3 -- n = 3..8 EXHAUSTIVE, d = 2 AND d = 1
+--------------------------------------------------------------------------------------------
+      n    posets   inc. edges    max dist in e      R2e(d<=2)      R2e(d<=1)
+      3         1            2                1            1/1            1/1
+      4         2            4                1            2/2            2/2
+      5         3            6                1            3/3            3/3
+      6         5           12                1            5/5            5/5
+      7         8           22                1            8/8            8/8
+      8        12           36                1          12/12          12/12
+
+    boundary posets 31 · R2e(2) failures 0 · R2e(1) failures 0
+    MAXIMUM POSITION DISTANCE ATTAINED OVER THE WHOLE BOUNDARY CLASS: 1
+
+    ⚠️  THE `3` IN `ADJACENT TRIPLE` IS NOT LOAD-BEARING.  The measured statement is
+    the d = 1 one -- every incomparable pair of a boundary poset is ADJACENT in `e`,
+    not merely inside a common 3-block.  Daniel's form is TRUE and is IMPLIED BY a
+    strictly stronger measured statement, so logging his form as the fact would
+    under-record what the population actually shows.
+
+m2  WHY THE FREE-TRIPLE READING CANNOT BE WHAT WAS MEANT
+--------------------------------------------------------------------------------------------
+      n    posets      max width   3-element antichains
+      3         1              2                      0
+      4         2              2                      0
+      5         3              2                      0
+      6         5              2                      0
+      7         8              2                      0
+      8        12              2                      0
+
+    THE BOUNDARY CLASS HAS WIDTH 2 AT EVERY MEMBER AND CONTAINS 0 THREE-ELEMENT
+    ANTICHAINS IN TOTAL.  So `adjacent triple` read as a FREE 3-block -- three
+    pairwise-incomparable elements at consecutive positions, the reading under which
+    the S_3 symmetry of a4 m1 would apply -- is not merely rare on this class, it is
+    IMPOSSIBLE: there is no 3-element antichain to make one from.  That reading is
+    therefore REFUTED on the only non-empty approximation to the hypothesis, and it is
+    refuted for a structural reason and not by a close call.
+    (Consistent with `STATE.md`'s attempt-index row: low-delta <=> bounded width,
+    mg-c47a Obs 3.1(a)/(b), PROVEN.  This is that row's shadow at the boundary.)
+
+m3  IS R2e MERELY AN EDGE COUNT?  sparse posets that still FAIL R2e(2)
+--------------------------------------------------------------------------------------------
+    posets with #inc edges <= 2n-3 and a well-defined e: 3905
+    of those, FAILING R2e(2): 3429 (87.8%)
+    smallest witness: n=5 down-masks [0, 0, 1, 2, 10], delta=2/5, 6 edges <= 7, max dist 3
+    SPARSITY IS NECESSARY AND NOT SUFFICIENT: R2e is about WHERE the incomparable
+    pairs sit in `e`, not how many there are.
+
+m4  THE delta-SWEEP -- where the `> 2/3` hypothesis starts doing the work
+--------------------------------------------------------------------------------------------
+    delta band                                                  with e      R2e(2)      R2e(1)
+    delta = 1/3          (boundary, every pair >= 2/3-decided)      31    31 (100.0%)    31 (100.0%)
+    1/3 < delta <= 2/5                                             222   105 (47.3%)    46 (20.7%)
+    2/5 < delta <= 9/20                                           1396   214 (15.3%)     0 ( 0.0%)
+    9/20 < delta < 1/2                                            5550   126 ( 2.3%)     0 ( 0.0%)
+    delta = 1/2          (some pair exactly balanced -- no `e`)       0         n/a         n/a
+
+    MONOTONE IN delta, AT BOTH d.  100%% at the boundary, falling to a few per cent as
+    the most-balanced pair moves toward 1/2.  That is the evidence that `> 2/3` is what
+    buys R2e, rather than smallness of n -- the bands share the same n range.
+
+    posets with NO well-defined `e` (a pair at exactly 1/2, or a majority cycle): 12242
+    -- excluded from the R2e columns because R2e NAMES `e`, and off the frozen class
+    `e` is a CHOICE, not a canonical object (PREDICTIONS.md E3).
+
+m5  PRIMITIVITY -- does the fact reach objects a minimal counterexample could be?
+--------------------------------------------------------------------------------------------
+    boundary posets that are PRIMITIVE (incomparability graph connected): 1 of 31
+    ⚠️  30 of the 31 ARE ORDINAL SUMS, so the class is ALMOST ENTIRELY non-primitive.
+    A minimal counterexample is PRIMITIVE (STATE.md glossary), so a fact measured on
+    this class reaches the objects that matter through 1 witness and not through the
+    other 30.  THAT IS THE SCOPE LIMIT OF EVERY FIGURE IN THIS ARM and it must travel
+    with them.
+
+VERDICT: GREEN   (instrument consistency; the d = 1 sharpening and the width-2 collapse
+          are FINDINGS, not instrument failures)

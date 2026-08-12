@@ -1,0 +1,44 @@
+============================================================================================
+mg-7c78  a4  the bound family: S_3 symmetry, the triple budget, and E_xy
+============================================================================================
+
+POPULATION.  n = 2..7 EXHAUSTIVE over isomorphism classes, plus n = 8 SAMPLED 800 of
+  16999 (seed 20260812).  3243 posets · 33290 incomparable pairs.  EXACT RATIONALS THROUGHOUT.
+
+m1  the 6 orders of a FREE CONSECUTIVE TRIPLE are equinumerous (exactly)
+--------------------------------------------------------------------------------------------
+    16672 free triples examined, 16672 with POSITIVE consecutive probability, 0 failures  [PASS]
+    IMPLIED BY mg-92e6: the two adjacent swaps inside the block generate S_3 and each
+    is a swap of an incomparable adjacent pair.  NOT an independent fact.
+
+m2  THE TRIPLE BUDGET -- sum over ALL triples of Pr[consecutive] = n-2 exactly
+--------------------------------------------------------------------------------------------
+    3243 posets, 0 violations of the identity   [PASS]
+    over PAIRWISE-INCOMPARABLE triples only it is <= n-2, STRICT at 3237 of 3243 posets
+    -- so quoting `= n-2` with the population dropped is the F2 error class again.
+
+m3  THE JOINT THREE-PAIR CONSTRAINT  min(p,1-p) >= (1/2)Pr[triple consecutive]
+--------------------------------------------------------------------------------------------
+    50016 (triple, pair) instances, 0 failures   [PASS]
+
+m4  THE SHARPEST MEMBER  min(p_xy,1-p_xy) >= (1/2)Pr[E_xy]
+--------------------------------------------------------------------------------------------
+    33290 pairs, 0 failures   [PASS]   max Pr[E_xy] observed = 1
+    STRICTLY STRONGER THAN ITS SLICES, measured:
+      Pr[E_xy] > Pr[adjacent]        (i.e. beats F1's event)        at 26206 of 33290 pairs
+      Pr[E_xy] > Pr[in a free triple] (i.e. beats Daniel's event)   at 31988 of 33290 pairs
+      Pr[E_xy] > BOTH at once                                       at 24904 of 33290 pairs
+    So the triple is one rung of a ladder, not the top of it: the k=2 rung is F1, the
+    k=3 rung is Daniel's, and E_xy is the union of every rung.
+
+m5  THE STRONG `"ALL ALIGNED WITH e"` READING IS REFUTED, AND mg-92e6 IS THE REFUTER
+--------------------------------------------------------------------------------------------
+    pairs whose ADJACENT occurrences split unevenly between the two orders: 0 of 33290
+    pairs whose E_xy occurrences split unevenly between the two orders:     0 of 33290
+    BOTH ZERO, at every poset in the population -- INCLUDING every biased pair.
+    A configuration on which the x/y order can be reversed carries NO bias at all, so
+    no hypothesis on p_xy, `> 2/3` or otherwise, can make these configurations prefer
+    e.  THE HYPOTHESIS ACTS WITH THE OPPOSITE SIGN: it CAPS Pr[E_xy] at 2*delta, it
+    does not produce e-aligned occurrences.
+
+VERDICT: GREEN

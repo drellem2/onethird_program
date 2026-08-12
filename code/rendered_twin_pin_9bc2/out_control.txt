@@ -6,8 +6,8 @@ mg-9bc2 — rendered-twin pin control
 
 SECTION 1 — the pin is present and its row set matches both documents
 --------------------------------------------------------------------------------------
-  pin commit      : 9dc53a6
-  pin commit-date : 2026-08-10
+  pin commit      : 4ce7da3
+  pin commit-date : 2026-08-12
   pinned rows     : 12   STATE.md rows: 12   twin rows: 12
   PASS  all three row sets agree: 1 2 3a 3b 4 5 6 7 8 9 10 11
   pinned columns  : # | Result | Kind | Status | Width
@@ -19,7 +19,7 @@ SECTION 2 — per-row digests: which STATE.md rows have MOVED since the twin was
   row 1    ok       00b859c798d24100
   row 2    ok       04ce132c5aaec328
   row 3a   ok       5ae168422c866c68
-  row 3b   ok       ba52188106c0481d
+  row 3b   ok       f38bfefb2b7792cd
   row 4    ok       b76085d6a817c517
   row 5    ok       0b2a6e8c9266172f
   row 6    ok       5b904a7a29c45746
@@ -33,8 +33,8 @@ SECTION 2 — per-row digests: which STATE.md rows have MOVED since the twin was
 
 SECTION 3 — whole-file digest (the coarse signal)
 --------------------------------------------------------------------------------------
-  pinned STATE.md sha256 : ccde5301853ea326503e43e9f0f67627fc3110dee97dfbe0a6871fdfe1217a3a
-  actual STATE.md sha256 : fe589d92b9f5c1f371f573778013c7157be789ed808862cf980fa3d1e31cc6be
+  pinned STATE.md sha256 : 7ca8f2767f9d2e4c94e5b4c04edd43f2d833cc25475ff33ecdf7427c925d5456
+  actual STATE.md sha256 : 3d8d56d0d04a75209a3b8666ba76834a73a20526902a5613b4000a684d4c9ba5
   DIFFERS  STATE.md has changed since the pin.
            This alone is NOT a defect and must not be read as one, and it no
            longer grades: STATE.md changes constantly outside the ledger, and
@@ -71,9 +71,9 @@ SECTION 6 — the VISIBLE provenance line quotes the pin (the duplicate is check
   exactly the kind of thing this whole ticket is about going stale.  It is only
   safe because it is checked here.
 
-  visible : Reconciled against STATE.md @ 9dc53a6 (2026-08-10) — a pin, not a date
-  pinned  : 9dc53a6
-  commits parsed out of the visible line: ['9dc53a6']
+  visible : Reconciled against STATE.md @ 4ce7da3 (2026-08-12) — a pin, not a date
+  pinned  : 4ce7da3
+  commits parsed out of the visible line: ['4ce7da3']
   PASS  the visible line names exactly the pinned commit and no other.
 
 ======================================================================================

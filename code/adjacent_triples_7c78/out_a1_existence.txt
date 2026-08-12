@@ -1,0 +1,36 @@
+============================================================================================
+mg-7c78  a1  READING R1 -- the per-edge existential, and what `> 2/3` contributes
+============================================================================================
+
+POPULATION.  Every isomorphism class of poset with at least one incomparable pair:
+  n = 2..7 EXHAUSTIVE, plus n = 8 SAMPLED 800 classes of 16999 (seed 20260812).
+  3243 posets · 33290 incomparable pairs.
+
+m1  some extension places the pair at CONSECUTIVE positions
+      failures: 0 of 33290   [PASS]
+m1  and in EACH of the two orders
+      one-order-only: 0 of 33290   [PASS]
+m2  that adjacency sits inside a 3-block whenever n >= 3
+      failures: 0   [PASS]
+m4  the two adjacent orientation counts are EQUAL (mg-92e6, re-checked here)
+      unequal: 0 of 33290   [PASS]
+
+m3  THE VERDICT-DECIDING TABLE -- R1 by delta band
+--------------------------------------------------------------------------------------------
+    delta band                            pairs   failures
+    1/3 < delta < 1/2                     11074          0
+    delta = 1/2 (maximally balanced)      22162          0
+    delta = 1/3 (boundary)                   54          0
+
+    R1 holds with 0 failures in EVERY band, INCLUDING delta = 1/2 -- the maximally
+    balanced posets, which are as far from the `> 2/3` hypothesis as a poset gets.
+    SO THE `> 2/3` HYPOTHESIS DOES NO WORK IN R1.  R1 is TRUE and it is
+    HYPOTHESIS-FREE; `"> 2/3 property yields"` mis-attributes it.
+
+    AND e-ALIGNMENT IS FREE: by m4 the two orientations of an adjacent occurrence are
+    equinumerous, so a witness exists in EITHER order.  R1 therefore holds for EVERY
+    reference linear order at once, and no bias hypothesis can be what supplies the
+    alignment.  That is also why the strong `"all aligned with e"` reading cannot
+    hold -- see a4 m5.
+
+VERDICT: GREEN

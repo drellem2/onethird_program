@@ -1,0 +1,97 @@
+============================================================================================
+mg-7c78  b0  mutual adjacency is impossible, and the run lemma is exact
+============================================================================================
+
+b1  THREE MUTUALLY ADJACENT LINEAR EXTENSIONS -- adjacent-transposition graph
+--------------------------------------------------------------------------------------------
+    population: every isomorphism class n = 2..6 with |L(P)| <= 400.
+      403 posets examined, 1 SKIPPED for |L(P)| > 400 (counted, not silent).
+      total graph edges 21941 · TRIANGLES 0 · non-bipartite 0
+      [PASS -- 0 triangles, bipartite everywhere]
+
+    ⚠️  THIS IS A PROOF, NOT A SAMPLE.  One adjacent transposition changes the parity
+    of the permutation, so the linear-extension graph is a subgraph of a bipartite
+    graph at EVERY poset and every n -- there is nothing to check above n = 6.
+    SO IF `3 ADJACENT` MEANS THREE MUTUALLY ADJACENT IN THE BK GRAPH, THE CLAIM IS
+    FALSE FOR EVERY POSET, AND `> 2/3` NEVER ENTERS.
+
+b2  HOW FAR THE KILL REACHES, and the ONE adjacency notion that escapes it
+--------------------------------------------------------------------------------------------
+    swaps of two values at ARBITRARY positions: 84 posets, 0 triangles
+    ⚠️  STILL ZERO, AND FOR THE SAME REASON -- EVERY transposition is an ODD
+    permutation, adjacent or not.  So the kill does NOT depend on the generators being
+    adjacent: under ANY transposition-based notion of `adjacent linear extension` the
+    graph is bipartite and three mutually adjacent extensions do not exist, at any
+    poset, at any n, with no hypothesis.  b1's statement is stronger than b1 claimed.
+
+    THE ONE ESCAPE, and it lands exactly where a6 already is.  Take `adjacent` to mean
+    `related by rotating three consecutive positions` -- a 3-cycle, which is EVEN.
+    Then sigma, sigma·c, sigma·c^2 IS a triangle, and it exists iff those three
+    positions hold a FREE 3-BLOCK, i.e. a 3-element antichain.
+    3-cycle adjacency: 84 posets, 430 triangles   [CONTROL FIRED]
+    first witness: n=3 down-masks [0, 0, 0], |L(P)|=6, 2 triangles
+    AND THAT ESCAPE IS SHUT ON THE HYPOTHESIS CLASS.  a6 m2 measured the delta = 1/3
+    boundary class exhaustively to n = 8: width 2 at every member, ZERO 3-element
+    antichains.  No free 3-block exists there, so no such triangle exists there.
+    BOTH mutual-adjacency readings therefore die, and the second one dies BECAUSE of
+    the hypothesis rather than in spite of it.
+
+b3  THE RUN LEMMA, closed form against brute force
+--------------------------------------------------------------------------------------------
+       N      brute force max goods       N - floor(N/3)    match
+       1                          1                    1      yes
+       2                          2                    2      yes
+       3                          2                    2      yes
+       4                          3                    3      yes
+       5                          4                    4      yes
+       6                          4                    4      yes
+       7                          5                    5      yes
+       8                          6                    6      yes
+       9                          6                    6      yes
+      10                          7                    7      yes
+      11                          8                    8      yes
+      12                          8                    8      yes
+      13                          9                    9      yes
+      14                         10                   10      yes
+      15                         10                   10      yes
+      16                         11                   11      yes
+    [PASS]  exhaustive over all 2^N orderings for N <= 16.
+
+    SO: EVERY ordering of L(P) contains 3 consecutive extensions good for {x,y}
+        IF AND ONLY IF   g > N - floor(N/3) = ceil(2N/3),
+    where g = #good = p_xy * N and N = |L(P)|.
+
+b4  WHERE THE `2/3` COMES FROM -- and the divisibility catch
+--------------------------------------------------------------------------------------------
+    `p_xy > 2/3` gives `g > 2N/3`.  Is that enough for `g > ceil(2N/3)`?
+    N mod 3 smallest g > 2N/3         ceil(2N/3)        enough?
+    N=3                 3                  2            yes
+    N=4                 3                  3             NO
+    N=5                 4                  4             NO
+    N=6                 5                  4            yes
+    N=7                 5                  5             NO
+    N=8                 6                  6             NO
+    N=9                 7                  6            yes
+    N=10                7                  7             NO
+    N=11                8                  8             NO
+    N=12                9                  8            yes
+    N=13                9                  9             NO
+    N=14               10                 10             NO
+    N=15               11                 10            yes
+    N=16               11                 11             NO
+    N=17               12                 12             NO
+    N=18               13                 12            yes
+    N=19               13                 13             NO
+    N=20               14                 14             NO
+    N=21               15                 14            yes
+
+    SMALLEST COUNTEREXAMPLE TO THE UNIVERSAL FORM UNDER `> 2/3` ALONE:
+      N = 4, g = 3, so p = 3/4 > 2/3, and an avoiding ordering exists:
+      G G B G  --  no three consecutive goods.   [CONTROL FIRED]
+
+    THE PATTERN IS EXACTLY `3 divides N`.  `> 2/3` suffices for the universal form iff
+    3 divides |L(P)|, and fails for every other residue.  A theorem whose truth turns
+    on |L(P)| mod 3 is not the shape a real lemma takes -- which is evidence that the
+    intended reading is the EXISTENTIAL one over orderings (Q-D, now with Daniel).
+
+VERDICT: GREEN

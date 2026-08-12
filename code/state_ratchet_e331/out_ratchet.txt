@@ -5,8 +5,8 @@ mg-e331 — STATE.md SIZE RATCHET
 §1  THE SUBJECT, MEASURED — the WORKING TREE, not a commit
 --------------------------------------------------------------------------------------------
   path              STATE.md
-  words             20784      <- THE GATED QUANTITY (len(text.split()))
-  bytes             134851
+  words             20783      <- THE GATED QUANTITY (len(text.split()))
+  bytes             134874
   lines             222
   longest line      15417 chars
   lines over 2000   15
@@ -24,7 +24,7 @@ mg-e331 — STATE.md SIZE RATCHET
   words_ceiling     20784
   tighten_below     20284
   set_by            mg-e331   at 20784 words
-  observed          20784  (+0 against the ceiling)
+  observed          20783  (-1 against the ceiling)
 
   THE CEILING IS WHERE THE FILE STANDS, NOT WHERE mg-ea0e AIMED, AND THE DIFFERENCE IS
   DELIBERATE. mg-ea0e's target was under 6,000 words and it landed at 4,658 on
@@ -153,7 +153,7 @@ mg-e331 — STATE.md SIZE RATCHET
 §3  CAN THIS RATCHET FAIL, AND CAN IT REFUSE?  Probes against THIS run's values
 --------------------------------------------------------------------------------------------
   N1   one word past the ceiling                   CAUGHT          20785 words is +1 past the declared ceiling 
-  N2   the ceiling plus another whole file         CAUGHT          41568 words is +20784 past the declared ceil
+  N2   the ceiling plus another whole file         CAUGHT          41567 words is +20783 past the declared ceil
   N3   one word under the tighten point            CAUGHT          20283 words is 501 below the declared ceilin
   N4   half the tighten point                      CAUGHT          10142 words is 10642 below the declared ceil
   N5   the ceiling edge is exactly where declared  BOUNDARY        20784 -> GREEN, 20785 -> ABOVE-CEILING
@@ -165,14 +165,14 @@ mg-e331 — STATE.md SIZE RATCHET
   N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '20784', not a
   N12  a negative word count                       CAUGHT          verdict() was handed words=-1
   N13  every mutation above actually mutates       CAUGHT          4 of 4 planted values differ from the observ
-  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/p60
+  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/p7c
 
   12 of 14 probes CAUGHT; 2 BOUNDARY (a transition, checked but NOT counted as a
   falsification); 0 explained-unfalsifiable; 0 hole(s)/setup failure(s); 0
   UNEXPLAINED unfalsifiable.  0.000s.
 
 ============================================================================================
-RATCHET VERDICT: GREEN — 20784 words, ceiling 20784, tighten below 20284.
+RATCHET VERDICT: GREEN — 20783 words, ceiling 20784, tighten below 20284.
 This ratchet was shown able to fire in both directions and to refuse in 7 worlds,
 on this run, against these values.  0.00s total.
 ============================================================================================
