@@ -42,8 +42,11 @@ structural one; each cites the other and neither restates it.
 > word makes a two-hole chain read as a one-hole chain.
 >
 > **3. L1b without the word *spectrum*.** *If every question about `P` is nearly settled one pair at
-> a time, then `P` is nearly settled all at once.* Formally: **frozen ⟹ `E[inv_e] ≤ (ε_spec/6)(n²−1)`
-> for an explicit absolute constant, uniform in `n`.** It is a **rigidity** statement — what is
+> a time, then `P` is nearly settled all at once.* Formally: **frozen ⟹ `E[inv_e] ≤ (ε/6)(n²−1)`
+> for a constant `ε ≤ ε_dem ≈ 2×10⁻²`, uniform in `n`.** ⚠️ **NOT *"an explicit absolute constant,
+> uniform in `n`"*, which is what this line said until `mg-0e8c` and which the line SEVEN LINES
+> ABOVE already refutes:** `ε_sup < 1` is exactly such a constant and is **proven**, so the
+> existence form is discharged and only the **bar** is open. It is a **rigidity** statement — what is
 > asserted to be rigid is the assignment of elements to positions — and its whole difficulty is that
 > the local-to-global upgrade it asserts is **false for abstract measures** (a two-atom law is frozen
 > and has `Θ(n²)` inversions). So L1b is the claim that *being a real poset's linear-extension
@@ -270,11 +273,19 @@ that.**
 > `e`**: the expected number of incomparable pairs it inverts satisfies
 >
 > ```
->     E[ inv_e(σ) ]  ≤  (ε_spec / 6) · (n² − 1)
+>     E[ inv_e(σ) ]  ≤  (ε / 6) · (n² − 1)      for a constant  ε ≤ ε_dem ≈ 2×10⁻²
 > ```
 >
-> for an **explicit absolute constant `ε_spec`, uniform in `n`**. The constant, not a limit, is what
-> the architecture consumes (`mg-88bd`, audited `mg-e35c`).
+> uniform in `n`. The constant, not a limit, is what the architecture consumes (`mg-88bd`, audited
+> `mg-e35c`), and **its SIZE is the open content**.
+>
+> ⚠️ **THIS BLOCKQUOTE SAID *"for an explicit absolute constant `ε_spec`, uniform in `n`"* UNTIL
+> `mg-0e8c`, AND ITS OWN REASON 1 BELOW REFUTES THAT — NINETEEN LINES DOWN.** `ε_sup < 1` is such
+> a constant and is **proven** (`Op-Form` Claim 6.1, all `n`, L4-independent; §6.3 there:
+> *"(LIB-const) already holds, with constant 2/3"*). The existence form is **discharged**; only the
+> bar is open. And the **spectral** rendering `1 − λ_std ≤ ε` at that proven constant is **vacuous**
+> — `1 − λ_std ≤ 1` at every poset with no hypothesis, sharply, equality at the antichain
+> ([`OneThird-L1b-Restatement-mg-0e8c.md`](OneThird-L1b-Restatement-mg-0e8c.md)).
 
 **What is asserted to be rigid.** The assignment of elements to positions. The hypothesis is a
 statement about pairs **one at a time**: each incomparable pair, considered alone, is nearly decided.

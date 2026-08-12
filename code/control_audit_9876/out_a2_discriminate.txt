@@ -137,7 +137,7 @@ A hole is not a laundering and is scored separately so neither flatters the othe
   [CLOSED]  section 6 is a SUBSTRING test — a truncated pin commit passes
       arm  : C6b
       smell: substring/membership test rather than a parsed field
-      OBSERVED NOW: with the pin's commit truncated to '4ce7', section 6 says FAIL. WHAT
+      OBSERVED NOW: with the pin's commit truncated to 'c308', section 6 says FAIL. WHAT
       WAS FOUND: the test was `pinned_commit in shown` — a membership test against the
       whole visible line — so any prefix of the displayed hash satisfied it, and so did a
       line naming the pinned commit ALONGSIDE another revision. Ticket smell #1, in the
