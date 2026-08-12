@@ -1,0 +1,270 @@
+Yes. There is a particularly clean compression which gives much more than I expected.
+
+Let a linear extension be
+[
+L=(x_1,\ldots,x_n),\qquad I_k(L)={x_1,\ldots,x_k}.
+]
+
+The adjacent-swap operators (\tau_i), swapping positions (i,i+1) exactly when those elements are incomparable, are standard; the literature also explicitly groups them into odd and even operators. 
+
+### 1. Compress by forgetting alternate prefixes
+
+Define
+[
+C_o(L)=(I_2,I_4,I_6,\ldots).
+]
+
+Equivalently, remember the unordered blocks
+[
+B_j={x_{2j-1},x_{2j}}
+]
+but forget their internal order.
+
+For a fixed compressed state (F=C_o(L)):
+
+* each (B_j) is fixed;
+* if its two elements are comparable, its order is forced;
+* if they are incomparable, either order is legal;
+* choices for distinct (B_j)'s are independent.
+
+Therefore
+
+[
+\boxed{C_o^{-1}(F)\cong Q^{d(F)}}
+]
+
+**exactly**, where (d(F)) is the number of incomparable 2-blocks.
+
+So the compression decomposes the entire LE space into actual hypercubes.
+
+Moreover, the edges inside these cubes are exactly
+[
+\tau_1,\tau_3,\tau_5,\ldots.
+]
+
+Do the shifted compression
+[
+C_e(L)=(I_1,I_3,I_5,\ldots)
+]
+and its fibers are cubes whose edges are exactly
+[
+\tau_2,\tau_4,\tau_6,\ldots.
+]
+
+Hence
+
+[
+\boxed{
+G_{BK}=\text{odd cubical foliation}+\text{even cubical foliation}.
+}
+]
+
+This follows directly from the standard (\tau_i) action; non-neighbouring swaps act on disjoint position pairs. 
+
+---
+
+### 2. Linear statistics behave perfectly under this compression
+
+Write a pair-orientation linear statistic as
+[
+f(L)=a+\sum_{{x,y}\in I(P)}
+c_{xy},1_{{x<_L y}}.
+]
+
+Inside one odd fiber (F), every orientation between different blocks is fixed. The only variables are the incomparable pairs (B_j).
+
+Thus
+[
+f|_F
+====
+
+a_F+\sum_{j\in D(F)}c_{B_j}Z_j,
+\qquad
+Z_j\sim\operatorname{Bernoulli}(1/2)
+]
+with the (Z_j)'s independent.
+
+So
+
+[
+\boxed{
+\operatorname{Var}(f\mid C_o)
+=============================
+
+\frac14\sum_{j\in D(C_o)}c_{B_j}^2.
+}
+]
+
+There are **no covariance terms whatsoever inside a compressed fiber**.
+
+This is exactly what we wanted compression to accomplish: the ugly correlated linear-extension measure has become a product measure on every fiber.
+
+---
+
+### 3. Even better: it computes BK energy exactly
+
+Normalize the BK chain by choosing one of the (n-1) adjacent positions uniformly.
+
+Let (\mathcal E_o) denote energy from odd-position swaps. Because (f) is degree one on every cube,
+
+[
+\boxed{
+\mathcal E_o(f)
+===============
+
+\frac{2}{n-1}
+\mathbb E!\left[
+\operatorname{Var}(f\mid C_o)
+\right].
+}
+]
+
+Similarly,
+[
+\boxed{
+\mathcal E_e(f)
+===============
+
+\frac{2}{n-1}
+\mathbb E!\left[
+\operatorname{Var}(f\mid C_e)
+\right].
+}
+]
+
+Consequently,
+
+[
+\boxed{
+\mathcal E_{BK}(f)
+==================
+
+\frac{2}{n-1}
+\left(
+\mathbb E\operatorname{Var}(f\mid C_o)
++
+\mathbb E\operatorname{Var}(f\mid C_e)
+\right).
+}
+\tag{*}
+]
+
+That identity is exact for every pair-orientation linear statistic.
+
+Therefore its Rayleigh quotient is
+
+[
+\boxed{
+R_{BK}(f)
+=========
+
+\frac{2}{n-1}
+\frac{
+\mathbb E\operatorname{Var}(f\mid C_o)
++
+\mathbb E\operatorname{Var}(f\mid C_e)
+}{
+\operatorname{Var}(f)
+}.
+}
+\tag{**}
+]
+
+This is, I think, the real result of the compression.
+
+---
+
+### 4. Operator formulation
+
+Let
+[
+\Pi_o f=\mathbb E[f\mid C_o],
+\qquad
+\Pi_e f=\mathbb E[f\mid C_e].
+]
+
+These are orthogonal projections onto functions determined by the respective compressed prefix flags.
+
+For a linear statistic,
+
+[
+\boxed{
+(I-P_{BK})f
+===========
+
+\frac{2}{n-1}
+(2I-\Pi_o-\Pi_e)f.
+}
+\tag{***}
+]
+
+So the allegedly important standard-representation eigenvalue has been converted from a complicated BK graph problem into a problem about **two conditional-expectation projections**.
+
+Geometrically, this is an alternating-projections/principal-angle problem:
+
+[
+\operatorname{Ran}\Pi_o
+\quad\text{vs.}\quad
+\operatorname{Ran}\Pi_e.
+]
+
+The small eigenvalues of
+[
+2I-\Pi_o-\Pi_e
+]
+measure how close a nonconstant function can be to being simultaneously determined by both the even-prefix and odd-prefix compressions. In the usual two-projection decomposition, these are governed by principal angles.
+
+So, assuming your agents' claim that the relevant standard eigenfunction is linear is correct, the spectral question is essentially transformed into
+
+[
+\boxed{
+\text{How correlated can the odd-prefix and even-prefix compressed information be?}
+}
+]
+
+rather than a generic expansion question.
+
+---
+
+### 5. Why this seems highly relevant to (1/3)-(2/3)
+
+Equation ((**)) says the desired lower bound on the linear-statistic spectral gap is equivalent to showing
+
+[
+\mathbb E\Var(f\mid C_o)
++
+\mathbb E\Var(f\mid C_e)
+\gtrsim
+\alpha_n\Var(f)
+]
+
+for the relevant (f).
+
+That has a compelling combinatorial meaning:
+
+> **Some substantial fraction of the variance of (f) must be visible by locally reversing one of the disjoint adjacent incomparable pairs in one of the two checkerboard decompositions.**
+
+A hypothetical obstruction must therefore be a statistic that is nearly determined by **both**
+[
+(I_2,I_4,\ldots)
+\quad\text{and}\quad
+(I_1,I_3,\ldots).
+]
+
+But those two prefix systems interlace. Intuitively, simultaneous predictability from both is a very rigid condition.
+
+So I would actually **stop looking for a more elaborate compression for the moment**. This simple checkerboard compression already gives:
+
+[
+\boxed{
+\text{BK graph}
+\longrightarrow
+\text{two exact cube foliations}
+\longrightarrow
+\text{conditional variances}
+\longrightarrow
+\text{angle between two prefix-information spaces}.
+}
+]
+
+That is a much sharper bridge between **prefix statistics, BK geometry, and cubes** than the generic partial-cube observation. The next thing I would try to prove is an inequality controlling the overlap/canonical correlation of (\operatorname{Ran}\Pi_o) and (\operatorname{Ran}\Pi_e), specifically on the standard representation. If that can be expressed purely in terms of a pair bias, it may connect directly to the (1/3)-(2/3) condition.
