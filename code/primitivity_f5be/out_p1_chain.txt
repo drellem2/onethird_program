@@ -1,0 +1,64 @@
+
+========================================================================================
+p1.0  IS THE CHAIN IN THE DELIVERABLE AT ALL?  (ticket step 1)
+========================================================================================
+      grep '4 p (1-p)'      in mg-409a deliverable: ABSENT
+      grep '4p(1-p)'        in mg-409a deliverable: ABSENT
+      grep 'P(adjacent)'    in mg-409a deliverable: ABSENT
+      grep 'adjacent'       in mg-409a deliverable: ABSENT
+      grep 'max(p'          in mg-409a deliverable: ABSENT
+  PASS  the chain as written is NOT in mg-409a's deliverable   -> it is a re-derivation, and must be earned here
+  PASS  but L1 and L2, which the chain needs, ARE in it (section 2)
+
+========================================================================================
+p1.1  LINK A + B -> TERM 1.  R_M(f_xy) = P(adj)/(4 p (1-p)) -- EXACT, EVERY PAIR
+========================================================================================
+  PASS  TERM 1 exact at 2532 incomparable pairs, n<=6 EXHAUSTIVE   0 failures
+
+========================================================================================
+p1.2  LINK C -> TERM 2.  P(adj) <= 2 min(p,1-p), and it is an EQUALITY of halves
+========================================================================================
+  PASS  P(adj)=2*P(adj & x<y) AND P(adj)<=2min(p,1-p) at 2532 pairs, n<=6 EXHAUSTIVE   0 failures
+      TIGHT (P(adj) = 2 min(p,1-p)) at 566 / 2532 pairs; worst slack 2/3 (0.666666667)
+
+      The involution half is the load-bearing one and it is an EQUALITY, not an
+      inequality: swapping an adjacent incomparable pair maps linear extensions to linear
+      extensions bijectively.  The <= then comes for free from
+      {adj & x before y} being a SUBSET of {x before y}.
+
+========================================================================================
+p1.3  THE WHOLE CHAIN, all four terms, at every pair -- EXACT
+========================================================================================
+  PASS  TERM1 <= TERM2 <= 1 at 2532 pairs, n<=6 EXHAUSTIVE   0 failures
+
+========================================================================================
+p1.4  L2 IS AVAILABLE AT EVERY PAIR -- the chain may choose the most extreme (ticket step 2)
+========================================================================================
+  PASS  alpha <= min-over-pairs of TERM1 and of TERM2 at 81 posets (n<=5 exhaustive)   0 violations
+      the pair witness is TIGHT (alpha = min TERM1) at 13 / 81 posets
+
+========================================================================================
+p1.5  NEGATIVE CONTROL -- the arms above must be able to go red
+========================================================================================
+  PASS  dropping P(adj) breaks the identity at 272/286 pairs   control FIRES
+  PASS  link C is a STRICT inequality at 202 pairs   so it is not an identity in disguise
+
+========================================================================================
+p1.6  THE FROZEN CONSEQUENCE, as pure arithmetic (no poset needed)
+========================================================================================
+      p = 1/3        max(p,1-p) = 2/3        TERM2 = 1/(2max) = 0.750000000
+      p = 3/10       max(p,1-p) = 7/10       TERM2 = 1/(2max) = 0.714285714
+      p = 1/4        max(p,1-p) = 3/4        TERM2 = 1/(2max) = 0.666666667
+      p = 1/5        max(p,1-p) = 4/5        TERM2 = 1/(2max) = 0.625000000
+      p = 69/250     max(p,1-p) = 181/250    TERM2 = 1/(2max) = 0.690607735
+      p = 1/2        max(p,1-p) = 1/2        TERM2 = 1/(2max) = 1.000000000
+  PASS  at p = 1/3 exactly, TERM 2 = 3/4   pm-onethird's number is right
+  PASS  for every p < 1/3, TERM 2 < 3/4 STRICTLY
+
+      So the arithmetic of the ticket's frozen step is correct: delta(P) < 1/3 forces
+      EVERY incomparable pair outside [1/3,2/3], hence mu(P) < 1/3, hence
+      alpha(P) <= 1/(2(1-mu)) < 3/4.  Whether any such poset EXISTS is p3's question.
+
+========================================================================================
+p1 OVERALL: PASS
+========================================================================================

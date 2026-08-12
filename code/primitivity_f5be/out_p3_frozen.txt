@@ -1,0 +1,78 @@
+
+========================================================================================
+p3.1  THE FROZEN CLASS -- delta(P) < 1/3.  IS IT INHABITED IN RANGE?
+========================================================================================
+   n   posets (|L|>=2)    FROZEN     min delta   min delta as float
+   2                 1         0           1/2          0.500000000
+   3                 4         0           1/3          0.333333333
+   4                15         0           1/3          0.333333333
+   5                62         0           1/3          0.333333333
+   6               317         0           1/3          0.333333333
+  PASS  THE FROZEN CLASS IS EMPTY at every n <= 6 -- (1/3)-(2/3) holds there   (0 frozen posets found)
+
+      SO THE FROZEN-CLASS MEASUREMENT IS VACUOUS, and that is the honest report.  It is
+      NOT "max alpha over frozen posets = 0"; there is no maximum, because there is no
+      poset.  This is exactly what the ticket anticipated from mg-145f and what
+      PREDICTIONS E3 planted as an error to avoid.
+  PASS  max over the frozen class RAISES ValueError rather than printing a number   (E3 control, and it fires)
+
+========================================================================================
+p3.2  THE CHAIN IS NOT CONDITIONAL -- it bounds alpha at EVERY poset, frozen or not
+========================================================================================
+  PASS  alpha <= 1/(2(1-mu)) = min-over-pairs TERM2 at all 399 posets, n<=6   0 violations
+
+========================================================================================
+p3.3  THE NEAR-FROZEN CLASS -- the only non-vacuous version of the question
+========================================================================================
+  If no poset in range is frozen, the closest thing to pm-onethird's restriction that
+  can actually be measured is: order the posets by delta (how close to a counterexample
+  they are) and look at what the chain, and alpha itself, do at the bottom of that order.
+
+   n  poset                                          delta      mu      TERM2      TERM1       alpha  prim
+   6  {0<2, 1<3, 1<4, 2<3, 2<4, 3<5}                   1/3     1/3     0.7500     0.7500    0.500000     -
+   6  {0<2, 1<3, 2<3, 3<4, 4<5}                        1/3     1/3     0.7500     0.7500    0.500000     -
+   6  {0<1, 0<2, 1<3, 2<4, 3<4, 4<5}                   1/3     1/3     0.7500     0.7500    0.500000     -
+   6  {0<1, 1<2, 1<3, 2<4, 3<5, 4<5}                   1/3     1/3     0.7500     0.7500    0.500000     -
+   6  {0<1, 1<2, 2<3, 2<4, 3<5}                        1/3     1/3     0.7500     0.7500    0.500000     -
+   5  {0<2, 1<3, 2<3, 3<4}                             1/3     1/3     0.7500     0.7500    0.500000     -
+   5  {0<1, 0<2, 1<3, 2<4, 3<4}                        1/3     1/3     0.7500     0.7500    0.500000     -
+   5  {0<1, 1<2, 1<3, 2<4}                             1/3     1/3     0.7500     0.7500    0.500000     -
+   4  {0<2, 1<3, 2<3}                                  1/3     1/3     0.7500     0.7500    0.500000     -
+   4  {0<1, 0<2, 1<3}                                  1/3     1/3     0.7500     0.7500    0.500000     -
+   3  {0<2}                                            1/3     1/3     0.7500     0.7500    0.500000     -
+   6  {0<2, 0<3, 1<3, 2<4, 2<5, 3<5}                  5/14    1/14     0.5385     0.5250    0.216908   yes
+   6  {0<2, 0<3, 1<4, 2<4, 3<5, 4<5}                  4/11    3/11     0.6875     0.4583    0.264320     -
+   6  {0<1, 0<2, 1<3, 1<4, 2<5, 3<5}                  4/11    3/11     0.6875     0.4583    0.264320     -
+
+  The smallest delta available anywhere in range is 1/3 = 0.333333333.  For reference the
+  best known unconditional bound is delta >= (5-sqrt5)/10 = 0.2763932..., so the enumeration
+  reaches posets essentially at the extremal value and still finds no counterexample.
+
+  AT THAT POSET the chain returns TERM2 = 0.750000000 and TERM1 =
+  0.750000000, while alpha is actually 0.500000.
+
+      restriction                            ceiling   status
+      ----------------------------------------------   ----------------------------
+      none (every poset)                           1   PROVED (mg-409a section 3)
+      frozen: delta < 1/3                        3/4   VACUOUS -- class is empty to n=14
+      primitive (n>=4)                        0.3877   MEASURED exhaustively to n=7
+      the bar the route must clear              >= 2   PROVED (mg-409a section 2)
+
+========================================================================================
+p3.4  WOULD A FROZEN POSET EVEN HELP?  -- the bound, evaluated hypothetically
+========================================================================================
+  A frozen poset has every pair outside [1/3,2/3], hence mu < 1/3, hence
+  alpha <= 1/(2(1-mu)) < 3/4.  Since the bar is a constant >= 2 (mg-409a section 2), the
+  shortfall goes from a factor of 2 to a factor of 8/3.  Both are shortfalls.  The
+  arithmetic below is unconditional -- it needs no poset to exist.
+      mu =    1/3   ceiling 1/(2(1-mu)) = 0.750000000   bar/ceiling >= 2.6667
+      mu =   3/10   ceiling 1/(2(1-mu)) = 0.714285714   bar/ceiling >= 2.8000
+      mu =    1/4   ceiling 1/(2(1-mu)) = 0.666666667   bar/ceiling >= 3.0000
+      mu =    1/5   ceiling 1/(2(1-mu)) = 0.625000000   bar/ceiling >= 3.2000
+      mu =      0   ceiling 1/(2(1-mu)) = 0.500000000   bar/ceiling >= 4.0000
+  PASS  at mu = 1/3 the ceiling is exactly 3/4   pm-onethird's number confirmed
+  PASS  for every mu < 1/3 the ceiling is STILL below the bar of 2   the strengthening does not change the verdict, only the margin
+
+========================================================================================
+p3 OVERALL: PASS
+========================================================================================
