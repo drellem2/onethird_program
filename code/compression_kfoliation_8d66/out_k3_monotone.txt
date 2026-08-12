@@ -1,0 +1,60 @@
+
+==========================================================================================
+k3.1  REFINEMENT MONOTONICITY, as an EXACT operator statement
+==========================================================================================
+
+  For every ORDERED pair (S coarse, S' fine) of admissible partitions with S' refining S:
+  is  Q_{S'} - Q_S  PSD?  Exact rational elimination, no eigensolver, no float.
+
+  PASS  Q_fine - Q_coarse is PSD at 2032 (poset, refinement) instances   0 failures; n=4:195, n=5:690, n=6:1147
+
+==========================================================================================
+k3.2  the CONTROL: is the PSD direction actually informative, or does everything pass?
+==========================================================================================
+
+  A monotonicity arm that would also pass on the reversed comparison has measured nothing.
+  The same pairs, compared the WRONG WAY ROUND.  These MUST fail.
+
+  PASS  the REVERSED comparison is refused at 38 of 61 instances   a two-sided check, not a one-sided one (cf. mg-b417's D1)
+
+==========================================================================================
+k3.3  THE TOP OF THE ORDER: alpha_finest = ((n-1)/2) * gap_BK
+==========================================================================================
+
+  k2.1 gives this EXACTLY as a matrix identity.  Here it is read back as numbers, so a reader
+  can see the two quantities are the same object.  Jacobi -- FLOAT, MEASUREMENT ONLY.
+
+   n | poset                     | |L(P)| | gap_BK    | ((n-1)/2)gap | alpha_finest | alpha_(k=2)
+  ---+---------------------------+--------+-----------+--------------+--------------+------------
+   3 | antichain                 |      6 |  0.500000 |     0.500000 |     0.500000 |   0.500000
+   4 | antichain                 |     24 |  0.195262 |     0.292893 |     0.292893 |   0.292893
+   5 | antichain                 |    120 |  0.095492 |     0.190983 |     0.190983 |   0.190983
+   4 | Z_4                       |      4 |  0.666667 |     1.000000 |     1.000000 |   1.000000
+   6 | Z_6                       |      8 |  0.400000 |     1.000000 |     1.000000 |   1.000000
+   8 | Z_8                       |     16 |  0.285714 |     1.000000 |     1.000000 |   1.000000
+   5 | 0<4                       |     60 |  0.095492 |     0.190983 |     0.190983 |   0.190983
+   6 | 0<3,1<4                   |    180 |  0.053590 |     0.133975 |     0.133975 |   0.133975
+   6 | three 2-chains            |     90 |  0.053590 |     0.133975 |     0.133975 |   0.133975
+  PASS  alpha_finest agrees with ((n-1)/2) gap_BK   worst |difference| = 1.19e-13   [FLOAT, measurement]
+
+==========================================================================================
+k3.4  WHAT THE TOP OF THE ORDER MEANS
+==========================================================================================
+
+  Substituting k3.3 into the route's own bound  gap_BK >= (2/(n-1)) alpha_S  at S = finest:
+
+      gap_BK  >=  (2/(n-1)) * ((n-1)/2) * gap_BK  =  gap_BK.
+
+  The inequality is an EQUALITY at the top of the refinement order, so the family of bounds
+  indexed by k is squeezed between "strictly weaker than the truth" (every k < n-1, by the
+  strict slack measured in k2.3) and "exactly the truth" (k = n-1).
+
+  RAISING k CANNOT OVERSHOOT THE SPECTRAL GAP.  It can only walk back toward it.  So a bar
+  the true gap does not clear is a bar NO k clears -- and the ceiling on alpha_k is therefore
+  not a k=2 artefact but a restatement of what gap_BK is.  k4 turns that into a NUMBER.
+
+  PASS  recorded: sup_k alpha_k = ((n-1)/2) gap_BK, attained at k = n-1
+
+==========================================================================================
+k3: PASS
+==========================================================================================

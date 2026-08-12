@@ -1,0 +1,93 @@
+
+==========================================================================================
+k5.1  alpha_k over the poset population, by k
+==========================================================================================
+  population: n=3,4 EXHAUSTIVE; n=5 sample(200,seed=3); n=6 sample(120,seed=5);
+  n=7 sample(60,seed=11).  All restricted to |L(P)| <= 34 (Jacobi is O(N^3)).
+
+   n | k | posets | max alpha_k | mean alpha_k | min alpha_k | bar(1/3) | max/bar
+  ---+---+--------+-------------+--------------+-------------+----------+--------
+   3 | 2 |     13 |    1.000000 |     0.730769 |    0.500000 | 2.000000 |  0.5000
+   4 | 2 |    195 |    1.000000 |     0.516330 |    0.292893 | 2.250000 |  0.4444
+   4 | 3 |    195 |    1.000000 |     0.519693 |    0.292893 | 2.250000 |  0.4444
+   5 | 2 |    168 |    1.000000 |     0.342548 |    0.190983 | 2.400000 |  0.4167
+   5 | 3 |    504 |    1.000000 |     0.344184 |    0.190983 | 2.400000 |  0.4167
+   5 | 4 |    168 |    1.000000 |     0.345079 |    0.190983 | 2.400000 |  0.4167
+   6 | 2 |     71 |    1.000000 |     0.302549 |    0.133975 | 2.500000 |  0.4000
+   6 | 3 |    497 |    1.000000 |     0.303707 |    0.133975 | 2.500000 |  0.4000
+   6 | 4 |    426 |    1.000000 |     0.304301 |    0.133975 | 2.500000 |  0.4000
+   6 | 5 |     71 |    1.000000 |     0.304703 |    0.133975 | 2.500000 |  0.4000
+   7 | 2 |     23 |    1.000000 |     0.364018 |    0.133975 | 2.571429 |  0.3889
+   7 | 3 |    345 |    1.000000 |     0.366117 |    0.133975 | 2.571429 |  0.3889
+   7 | 4 |    575 |    1.000000 |     0.367046 |    0.133975 | 2.571429 |  0.3889
+   7 | 5 |    230 |    1.000000 |     0.367632 |    0.133975 | 2.571429 |  0.3889
+   7 | 6 |     23 |    1.000000 |     0.368059 |    0.133975 | 2.571429 |  0.3889
+  PASS  max alpha_k over the whole measured population = 1.000000000   3504 (poset, partition) measurements; the exact ceiling is k4
+
+==========================================================================================
+k5.2  DOES alpha RISE WITH k AT A FIXED POSET?  (P8 of PREDICTIONS.md)
+==========================================================================================
+
+  k3 proves alpha_S <= alpha_{S'} whenever S' refines S.  Whether it rises STRICTLY is a
+  measurement, and it is the measurement pm-onethird's derivation actually predicts.
+
+  alpha_finest > alpha_(k=2):  92 of 434 posets     (flat at 342)
+    n=4 lt=[(0, 3), (1, 2), (1, 3)]:  alpha_2 = 0.387628  ->  alpha_finest = 0.414957
+    n=4 lt=[(0, 3), (2, 1), (2, 3)]:  alpha_2 = 0.387628  ->  alpha_finest = 0.414957
+    n=4 lt=[(1, 2), (3, 0), (3, 2)]:  alpha_2 = 0.387628  ->  alpha_finest = 0.414957
+    n=4 lt=[(2, 1), (3, 0), (3, 1)]:  alpha_2 = 0.387628  ->  alpha_finest = 0.414957
+
+  READ THIS THE RIGHT WAY ROUND.  92 of 434 is the effect pm-onethird predicts and it
+  is real.  It is also bounded: every one of those climbs terminates at ((n-1)/2) gap_BK
+  (k3.3) and therefore at or below 1 (k4).  ALPHA_k RISING AT A FIXED POSET AND THE CEILING
+  RISING ARE TWO DIFFERENT STATEMENTS, and only the first is true.  That is E1 of
+  PREDICTIONS.md, and it is the step where the derivation slips.
+
+  PASS  measured: rises at 92/434, ceiling unmoved at 1
+
+==========================================================================================
+k5.3  THE CONSTRAINT CARRIED FORWARD FROM mg-8bc7: the foliations are NOT symmetric
+==========================================================================================
+
+  mg-8bc7 measured rank Pi_o < rank Pi_e at 127 of 219 posets at n = 4.  The ticket requires
+  that no step treat the k foliations symmetrically without proof.  Measured at k = 3 and
+  above: the per-class fiber counts (= rank Pi_i) spread WIDELY within a single partition.
+
+   n | k | partition | poset               | rank Pi_i per class      | max/min
+  ---+---+-----------+---------------------+--------------------------+--------
+   5 | 3 | 0|13|2    | [(2, 0), (2, 1), (3 | [6, 4, 7]                |   1.750
+   5 | 3 | 03|1|2    | [(2, 0), (2, 1), (3 | [4, 6, 7]                |   1.750
+   5 | 3 | 02|1|3    | [(0, 3), (1, 0), (1 | [4, 7, 6]                |   1.750
+   5 | 3 | 03|1|2    | [(0, 3), (1, 0), (1 | [4, 7, 6]                |   1.750
+   5 | 4 | 0|1|2|3   | [(0, 1), (0, 2), (1 | [5, 7, 8, 8]             |   1.600
+   5 | 3 | 0|13|2    | [(0, 1), (0, 2), (1 | [5, 5, 8]                |   1.600
+   5 | 3 | 02|1|3    | [(0, 1), (0, 2), (1 | [4, 7, 8]                |   2.000
+   5 | 3 | 03|1|2    | [(0, 1), (0, 2), (1 | [4, 7, 8]                |   2.000
+  PASS  worst within-partition rank ratio measured = 5.333   the classes are NOT interchangeable at k > 2 either
+
+  NOTHING IN k2-k4 AVERAGES OVER THE CLASSES.  k2's identity is a per-position sum; k2's
+  inequality is Efron-Stein applied INSIDE each class separately and then added; k4's witness
+  is checked against each class's own fiber.  The asymmetry is priced by never being used.
+
+
+==========================================================================================
+k5.4  THE HEADLINE NUMBER: how far is alpha_k from the bar, at the best k?
+==========================================================================================
+
+   n | best measured alpha_k (any k) | bar at gamma=1/3 | shortfall factor
+  ---+-------------------------------+------------------+------------------
+   3 |                      1.000000 |         2.000000 |            2.000x
+   4 |                      1.000000 |         2.250000 |            2.250x
+   5 |                      1.000000 |         2.400000 |            2.400x
+   6 |                      1.000000 |         2.500000 |            2.500x
+   7 |                      1.000000 |         2.571429 |            2.571x
+
+  And the shortfall is NOT a sampling artefact: the exhibited-witness ceiling of k4 is 1 at
+  EVERY poset and EVERY admissible k, so no unmeasured poset and no unmeasured k can do
+  better than a factor of 2 short at n = 3, rising to 3.
+
+  PASS  measurement agrees with the exact ceiling
+
+==========================================================================================
+k5: PASS
+==========================================================================================
