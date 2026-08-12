@@ -1,0 +1,56 @@
+========================================================================================
+mg-03cf  docs/FACTS.md asked its own question
+========================================================================================
+
+§1  STRUCTURE -- every entry carries every declared field
+----------------------------------------------------------------------------------------
+  F1    Bias controls adjacency                                    PASS
+  F2    The adjacency budget is exactly `n − 1`                    PASS
+  F3    The within-fiber share of an element's position variance i PASS
+  F4    `E_BK(inv_e) ≤ 1/2`, by a second route                     PASS
+  F5    The full-space operator inequality                         PASS
+  F6    The refinement family's ceiling IS the spectral gap        PASS
+  F7    `alpha > 0` is free                                        PASS
+  F8    The full pair-bias multiset determines `alpha` — UNEXPLAIN PASS
+  F9    The bottom BK eigenfunction is usually not a pair-orientat PASS
+  F10   The energy identity is sign-blind and level-blind          PASS
+  F11   The covariance the compression kills is not the covariance PASS
+  F12   The parity aggregation is a genuine loss                   PASS
+  F13   Order reversal exchanges the two foliations iff `n` is odd PASS
+  F14   The two projections are not interchangeable                PASS
+  F15   The equality set of F5 is strictly larger than the linear- PASS
+  F16   `alpha` has a two-projection closed form, and `θ_min(A_n)  PASS
+
+§2  VOCABULARY -- every KIND names a STATE.md:99 mark, or says WEAKER in words
+----------------------------------------------------------------------------------------
+  F1    `U`   PASS
+  F2    `U-id`   PASS
+  F3    `U`   PASS
+  F4    `U`   PASS
+  F5    `U`+`FP`   PASS
+  F6    `U-id`+`FP`   PASS
+  F7    `U`   PASS
+  F8    `FP✗`+`FP`   PASS
+  F9    `U`+`FP`   PASS
+  F10   `U-id`+`FP`   PASS
+  F11   `FP`   PASS
+  F12   `FP`   PASS
+  F13   `U-id`+`FP`   PASS
+  F14   `FP`   PASS
+  F15   `U-id`+`FP`   PASS
+  F16   `U-id`+`FP`   PASS
+
+§3  COUNT -- STATE.md's pointer must not drift from the registry
+----------------------------------------------------------------------------------------
+  STATE.md claims 16 entries; docs/FACTS.md has 16   [PASS]
+
+§4  LINKS -- every relative link in the registry resolves on disk
+----------------------------------------------------------------------------------------
+  15 relative links checked, 0 broken   [PASS]
+
+§5  THE POSITIVE CONTROL -- this arm is shown able to fail
+----------------------------------------------------------------------------------------
+  an entry with its SCOPE field renamed is [CAUGHT]
+  an entry graded with an invented mark is [CAUGHT]
+
+VERDICT: GREEN — 16 entries
