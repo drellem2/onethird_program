@@ -1,0 +1,208 @@
+====================================================================================================
+a1 §A — THE ENUMERATION: L1b's conclusion → the contradiction
+====================================================================================================
+
+[00] L1b out            `1 − λ_std ≤ ε_spec`, equivalently `E[inv_e] ≤ (ε_spec/6)(n²−1)` — the chain's INPUT
+      STATUS : ABSENT
+      VALUE  : —
+      SCOPE  : row 8 is OPEN; ε_spec is whatever a proof of L1b would deliver, and no proof exists
+      SOURCE : STATE.md row 8; Op-Form §6.2
+      PIN/HOLE: HOLE — but it is the WALL itself, not a downstream hole. Everything below prices it.
+
+[01] supply             `ε_sup` — the best ε_spec PROVED today, from pair bias alone
+      STATUS : PROVED
+      VALUE  : 1
+      SCOPE  : sup over the frozen class; at each n the value is n/(n+1) < 1, APPROACHED not attained
+      SOURCE : mg-6bc2 Claim 3.1; scope mg-832f Correction 2; STATE.md:21
+
+[02] Step 3 / L2        L2 as a DISJUNCTION — eigenvector monotone in `e`, OR directly produce a low-conductance prefix
+      STATUS : ASSUMED
+      VALUE  : -
+      SCOPE  : OPEN as a disjunction; no constant of its own
+      SOURCE : STATE.md row 9; source `:560–566` read at second hand via mg-76b2 §2
+      PIN/HOLE: HOLE — an open lemma, not a constant. It gates rows 03 and 05.
+
+[03] Step 3 / L2(a)     L2's FIRST disjunct — the eigenvector clause
+      STATUS : REFUTED
+      VALUE  : 2/126 fail
+      SCOPE  : n = 6 data; refutes the FIRST disjunct only, NOT L2
+      SOURCE : STATE.md row 9, scope repaired mg-3329
+      PIN/HOLE: PINNED at REFUTED-as-stated. The route that survives is the second disjunct, row 05.
+
+[04] Step 4             the Cheeger square — `(Φ*)²/2 ≤ 1 − λ_std`, giving `Φ* ≤ √(2 ε_spec)`
+      STATUS : PROVED
+      VALUE  : 2
+      SCOPE  : the hard half of the Cheeger sandwich, at every poset; PROVEN in the source `:318–324`
+      SOURCE : Op-Form §4.2; source read at second hand via mg-9461 §5.2
+
+[05] Step 3 / L2(b)     `K` — the prefix's own conductance constant on L2's SECOND disjunct; effective `C₃ = K²/2`
+      STATUS : ABSENT
+      VALUE  : —
+      SCOPE  : L2's second disjunct; *low-conductance* occurs 5× in the 603-line source and is UNQUANTIFIED at every one (`:40`, `:325`, `:500`, `:525`, `:562`)
+      SOURCE : mg-fa70 §12 (at source); carried mg-3329, STATE.md:179
+      PIN/HOLE: PINNED COARSELY at its only PROVED universal value — see `a2` §C. The pin is Δ₁ ≤ 1, i.e. K ≤ 1/√ε_spec, i.e. C₃ ≤ 1/(2ε_spec), at which the chain is VACUOUS.
+
+[06] L3 / Step 4        `C₃^(III)` — the prefix-restriction loss in `Φ_pref ≤ √(2 C₃ ε_spec)`
+      STATUS : PROVED*
+      VALUE  : 1
+      SCOPE  : CONDITIONAL ON L2's FIRST DISJUNCT — which row 03 records REFUTED as stated. Uniform in n within that condition; confirmed 1032/1032
+      SOURCE : mg-76b2 §3, audited mg-94c3; STATE.md:179
+      PIN/HOLE: PINNED at 1 on a condition that is FP✗-false as stated. On the live branch (L2's second disjunct) it is row 05 and is ABSENT.
+
+[07] L3                 `C₃^gap` — `1 − ρ_pref ≤ C₃(1 − λ_std)`, chain (II)'s constant
+      STATUS : EMPIRICAL
+      VALUE  : 50827/5000 = 10.1654
+      SCOPE  : MEASURED; `1.500, 1.473, 1.990, 2.386` at n = 3..6 (out of regime) and `10.1654` at n = 25 on the staircase S_25, which IS in regime; `≥ 1` unconditionally
+      SOURCE : mg-94c3 §3; mg-00b3 §0.4; joined mg-7564 §2
+      PIN/HOLE: PINNED at ≥ 10.1654 in regime by an exact witness — which is where chain (II) STOPS BEING A RELAXATION. Rising in n; no upper bound proved.
+
+[08] L3                 `C₃^cut` — `Φ*_pref/Φ*`, L3's own wording
+      STATUS : EMPIRICAL
+      VALUE  : 15/8 = 1.875
+      SCOPE  : MEASURED, n ≤ 6, up to 15/8; must be SQUARED to meet chain (III)'s C₃
+      SOURCE : mg-9461 §2.3 (read from mg-76b2 §7); within L2's population up to 10/9, mg-94c3 §3
+      PIN/HOLE: PINNED at its largest measured value 15/8 at n ≤ 6. FP: says nothing above n = 6.
+
+[09] L3 (row 10)        best-cut-is-a-prefix
+      STATUS : EMPIRICAL
+      VALUE  : 125/126
+      SCOPE  : n ≤ 6 data, and the population is NOT unanimous — one instance already fails
+      SOURCE : STATE.md row 10
+      PIN/HOLE: PINNED at 125/126, n ≤ 6. FP — not usable against a minimal counterexample at all.
+
+[10] chain IV           `c` — the literal capture fraction of the Prefix-capture conjecture
+      STATUS : EMPIRICAL
+      VALUE  : 9258259/10000000 = 0.925826
+      SCOPE  : MEASURED on three families; worst IN-REGIME value 0.9258259 at S_12. On the FULL population min c falls: 0.750, 0.618, 0.536, 0.453, 0.413 at n = 3..7 — below the threshold 1 − ε_leak = 4/5 at every one
+      SOURCE : mg-00b3 §0.4; mg-81ff §5; joined mg-7564 §3
+      PIN/HOLE: PINNED at 0.9258259 in regime — but the class is NON-EMPTY AND UNENUMERABLE, so `c` over the class is UNMEASURED. And chain (IV) is gated on a conjecture that is NOT on the source's list of four main open lemmas.
+
+[11] Step 5             `Φ_P(A) = Δ₁(A,B)` — the Step-4 → Step-5 conversion
+      STATUS : PROVED
+      VALUE  : 1
+      SCOPE  : an IDENTITY for 0 < |A| ≤ n/2, not a bound; no loss at all
+      SOURCE : Op-Form Lemma 2.1 / Corollary 2.2
+
+[12] Step 5 out         `ε_leak` — Step 5's conclusion `Δ₁(A_k, A_kᶜ) ≤ ε_leak`
+      STATUS : EMPIRICAL
+      VALUE  : 1/5 = 0.2
+      SCOPE  : an FP non-refutation: the largest ε at which mg-3ce3's `survives` predicate produced 0 RED over 6681 posets. In STATE.md's own taxonomy it says NOTHING above the largest n checked, and it ERRS OPTIMISTIC in the required scope
+      SOURCE : mg-e35c F5; mg-3ce3 envelope; identified as ε₀ at mg-9461 §4.1
+      PIN/HOLE: PINNED at 1/5 — and this IS row 13 wearing a decimal point. See row 13.
+
+[13] Step 6 / L4        `ε₀^cons` — L4's threshold AS STEP 6 CONSUMES IT
+      STATUS : ABSENT
+      VALUE  : —
+      SCOPE  : the class where it is consumed is minimal counterexamples, where disjunct (i) is FALSE BY HYPOTHESIS; on every poset anyone can exhibit (i) is TRUE at ε = 1, so the statement is satisfied vacuously — (i) fired at all 604 230 swept prefix cuts
+      SOURCE : mg-3969 Claims 5.1 and 5.2; mg-9461 §4.2
+      PIN/HOLE: ⭐ THE HOLE. No positive value can be bounded above without refuting the conjecture, and none below without proving it. NOT a constant awaiting measurement — the last lemma of the programme wearing a number's clothes.
+
+[14] Step 6 / L4        `ε₀^unif(U_either)` — the refutable (i)-free surrogate, RESTRICTED scope
+      STATUS : PROVED
+      VALUE  : 17/78 = 0.217949
+      SCOPE  : an UPPER bound, over cuts at which BOTH sides are non-chain (335 496 cuts, n ≤ 7) — which is NOT the population Step 6 must survive
+      SOURCE : mg-3969 §6, reproduced exactly by mg-d3c7 on a disjoint code path
+
+[15] Step 6 / L4        `ε₀^unif(U_either)` — the same surrogate, ARCHITECTURALLY REQUIRED scope
+      STATUS : REFUTED
+      VALUE  : 0
+      SCOPE  : AT LEAST ONE side non-chain — the population Step 6 must survive. REFUTED at every positive ε by an explicit n-free family, not merely capped
+      SOURCE : mg-d3c7 §4 (chain c₁<…<c_{n−1} plus one isolated z; Δ₁ = (k+1)/((2k+1)k) → 0)
+      PIN/HOLE: PINNED at 0. This is the coarse, real, PROVED value the ticket asks for — and it is the value at which no positive ε_dem exists on any chain.
+
+[16] Step 6 / L4        `F` — L4's modulus
+      STATUS : ABSENT
+      VALUE  : —
+      SCOPE  : UNCONSUMED: Step 6 consumes no branch in which F appears, so F's VALUE does not gate the chain. mg-3ce3's fitted envelope F(ε) ≈ 0.32·ε^0.55 is EMPIRICAL and is a fit
+      SOURCE : mg-345e; mg-3969 Claim 4.1; Op-Form §3.3
+      PIN/HOLE: HOLE, AND IT DOES NOT GATE. Recorded so nobody prices it: the split buys the demand side independence from F's value and does NOT buy it a number.
+
+[17] Step 6 / L4(i)     branch (i) — `P` contains a 1/3-balanced pair
+      STATUS : PROVED
+      VALUE  : -
+      SCOPE  : TRUE at ε = 1 on every poset satisfying the conjecture; FALSE BY HYPOTHESIS at a minimal counterexample
+      SOURCE : mg-3969 §5.1
+
+[18] Step 6 / L4(ii)    branch (ii) — remove/modify ≤ F(ε)n interface elements
+      STATUS : REFUTED
+      VALUE  : 0
+      SCOPE  : UNCONSUMABLE by Step 6's stated transfer for EVERY strictly positive modulus, unconditional, via the witness W*; the only escape F ≡ 0 makes L4 STRICTLY STRONGER
+      SOURCE : mg-3af9, audited mg-c8c6; STATE.md row 11
+      PIN/HOLE: PINNED at 0 — no modulus rescues it. THIS IS THE STEP-6 HOLE, and it is INDEPENDENT of L1b.
+
+[19] Step 6 / L4(iii)   branch (iii) AS LITERALLY STATED — balanced up to error F(ε)
+      STATUS : REFUTED
+      VALUE  : 0
+      SCOPE  : cannot produce the Step-6 contradiction for ANY F(ε) > 0, under either reading of *up to error F*; and minimality cannot be strengthened to supply interior slack — P₀ = {a<b} ⊔ {c} attains δ = 1/3 exactly, with ZERO slack
+      SOURCE : Op-Form Claims 3.2 and 3.3; STATE.md row 11 (standalone universal refuted at every ε)
+      PIN/HOLE: PINNED at 0. The live reading is the F-FREE repaired (iii), which is rows 13–15.
+
+[20] minimality         `δ(P[A]), δ(P[B]) ≥ 1/3` — each side is a proper induced subposet
+      STATUS : PROVED
+      VALUE  : 1/3 = 0.333333
+      SCOPE  : by minimality, at every n — UNLESS a side is a chain
+      SOURCE : mg-3969 §5.1; STATE.md diagram E→F
+
+[21] minimality         the both-sides-chain escape
+      STATUS : PROVED
+      VALUE  : 2
+      SCOPE  : both sides chains ⟹ width(P) ≤ 2, where 1/3–2/3 is a THEOREM (Linial) — literature, not this corpus
+      SOURCE : mg-3969 Remark 5.0
+
+[22] contradiction      a balanced pair in `P` contradicts `δ(P) < 1/3`
+      STATUS : PROVED
+      VALUE  : 1/3 = 0.333333
+      SCOPE  : the window [1/3, 2/3] has width 1/3 at EVERY n; the whole downstream of Step 5 is dimensionless
+      SOURCE : Op-Form §3.2 support 2; STATE.md diagram E→F
+
+[23] demand             `ε_dem` on chain (I) ≡ (III) — `ε_leak²/(2C₃)`
+      STATUS : PROVED*
+      VALUE  : 1/50 = 0.02
+      SCOPE  : the relation is PROVEN; the NUMBER is C₃ = 1 (row 06, conditional) times ε_leak = 1/5 (row 12, EMPIRICAL) — so the number inherits the weakest of its inputs
+      SOURCE : mg-9461 §5.1; Op-Form §4.3
+      PIN/HOLE: The RELATION is proved; the VALUE is EMPIRICAL-squared. Pinned across row 12's whole range in `a2` §A.
+
+[24] demand             `ε_dem ≤ 2·ε_leak` — the CHAIN-FREE cap
+      STATUS : PROVED*
+      VALUE  : 2/5 = 0.4
+      SCOPE  : caps EVERY derivation of Step 5's conclusion, including one nobody has written. CONDITIONAL ON NON-VACUITY — the alternative branch is L1b at 2/5, i.e. the open lemma. Quoted at ε_leak = 1/5, which errs optimistic, so the cap is itself optimistic
+      SOURCE : mg-7564 §4 and §4.1
+      PIN/HOLE: The cap is PROVED; its VALUE moves with row 12. 2/7 at the n ≤ 7 required-scope ceiling, and 0 at the required-scope uniform value.
+
+====================================================================================================
+a1 §B — CENSUS by status
+====================================================================================================
+  rows: 25
+    PROVED      8   rows 01 04 11 14 17 20 21 22
+    PROVED*     3   rows 06 23 24
+    EMPIRICAL   5   rows 07 08 09 10 12
+    ASSUMED     1   rows 02
+    REFUTED     4   rows 03 15 18 19
+    ABSENT      4   rows 00 05 13 16
+
+  PROVED UNCONDITIONALLY: 8 of 25 = 32%
+  NOT proved unconditionally: 17 of 25
+
+====================================================================================================
+a1 §C — THE HOLES: every row whose status is ABSENT, and whether it GATES the chain
+====================================================================================================
+  [00] `1 − λ_std ≤ ε_spec`, equivalently `E[inv_e] ≤ (ε_spec/6)(n²−1)` — the chain's INPUT
+        HOLE — but it is the WALL itself, not a downstream hole. Everything below prices it.
+
+  [05] `K` — the prefix's own conductance constant on L2's SECOND disjunct; effective `C₃ = K²/2`
+        PINNED COARSELY at its only PROVED universal value — see `a2` §C. The pin is Δ₁ ≤ 1, i.e. K ≤ 1/√ε_spec, i.e. C₃ ≤ 1/(2ε_spec), at which the chain is VACUOUS.
+
+  [13] `ε₀^cons` — L4's threshold AS STEP 6 CONSUMES IT
+        ⭐ THE HOLE. No positive value can be bounded above without refuting the conjecture, and none below without proving it. NOT a constant awaiting measurement — the last lemma of the programme wearing a number's clothes.
+
+  [16] `F` — L4's modulus
+        HOLE, AND IT DOES NOT GATE. Recorded so nobody prices it: the split buys the demand side independence from F's value and does NOT buy it a number.
+
+====================================================================================================
+a1 §D — WEAKEST KIND IN THE SET (STATE.md's standing rule, :107)
+====================================================================================================
+  statuses present, strongest first: PROVED ≻ PROVED* ≻ EMPIRICAL ≻ ASSUMED ≻ REFUTED ≻ ABSENT
+  WEAKEST KIND IN THIS ENUMERATION: ABSENT
+  Any prose aggregating these rows must state that kind. A sentence saying the
+  downstream of L1b is 'proved' over this set is FALSE however true each row is
+  individually.

@@ -1,0 +1,126 @@
+====================================================================================================
+a2 §A — THE LADDER: ε_dem at every value ε₀ can take, on every enumerated chain
+====================================================================================================
+
+            ε₀ |   (I)≡(III) C₃=1 | (II) C₃ᵍᵃᵖ=10.1654 |   (IV) c→1 |    CAP 2ε₀
+  ------------------------------------------------------------------------------
+             1 |              0.5 |          0.0983729 |          1 |          2
+      0.217949 |        0.0237508 |          0.0214403 |   0.217949 |   0.435897
+           0.2 |             0.02 |          0.0196746 |        0.2 |        0.4
+      0.142857 |        0.0102041 |          0.0140533 |   0.142857 |   0.285714
+      0.010099 |       5.0995e-05 |        0.000993469 |   0.010099 |   0.020198
+             0 |                0 |                  0 |          — |          0
+
+  ε₀ = 1: ε₀ = 1 — the LARGEST admissible value: above it Step 5's conclusion is
+                vacuous. And it is the value at which mg-3969 Claim 5.1 finds the
+                consumable statement trivially TRUE on every exhibitable poset.
+  ε₀ = 17/78: 17/78 — PROVED ceiling on the (i)-free surrogate, RESTRICTED scope
+                (both sides non-chain), which is NOT the scope Step 6 must survive.
+  ε₀ = 1/5: 1/5 — the corpus's EMPIRICAL calibration. FP; says nothing above n = 7.
+  ε₀ = 1/7: 1/7 — PROVED ceiling on the surrogate in the REQUIRED scope at n ≤ 7.
+  ε₀ = 51/5050: 51/5050 — mg-d3c7's family at k = 50, i.e. n = 101. PROVED, required scope.
+  ε₀ = 0: 0 — the surrogate's UNIFORM value in the required scope. PROVED (refuted,
+                not capped): mg-d3c7's family drives Δ₁ → 0 with every pair evicted.
+
+====================================================================================================
+a2 §B — DOES IT CLOSE?  Each ε_dem above, against the PROVED supply ε_sup(n) = n/(n+1)
+====================================================================================================
+
+  The chain closes at n iff  ε_sup(n) ≤ ε_dem.  ε_sup rises with n toward 1, so if it
+  fails at large n it fails where a minimal counterexample would live.
+
+  ── ε₀ = 1 ─────────────────────────────────────────────────────────
+     (I)≡(III) C₃=1         ε_dem=0.5              n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 2×
+     (IV) at c→1            ε_dem=1                n=[2, 7, 15, 100, 900, 1000000]: ['CLOSES', 'CLOSES', 'CLOSES', 'CLOSES', 'CLOSES', 'CLOSES']   wall at large n: 1×
+     CAP  2ε₀ (any chain)   ε_dem=2                n=[2, 7, 15, 100, 900, 1000000]: ['CLOSES', 'CLOSES', 'CLOSES', 'CLOSES', 'CLOSES', 'CLOSES']   wall at large n: 0.5×
+
+  ── ε₀ = 17/78 ─────────────────────────────────────────────────────────
+     (I)≡(III) C₃=1         ε_dem=0.0237508        n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 42.1×
+     (IV) at c→1            ε_dem=0.217949         n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 4.588×
+     CAP  2ε₀ (any chain)   ε_dem=0.435897         n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 2.294×
+
+  ── ε₀ = 1/5 ─────────────────────────────────────────────────────────
+     (I)≡(III) C₃=1         ε_dem=0.02             n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 50×
+     (IV) at c→1            ε_dem=0.2              n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 5×
+     CAP  2ε₀ (any chain)   ε_dem=0.4              n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 2.5×
+
+  ── ε₀ = 1/7 ─────────────────────────────────────────────────────────
+     (I)≡(III) C₃=1         ε_dem=0.0102041        n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 98×
+     (IV) at c→1            ε_dem=0.142857         n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 7×
+     CAP  2ε₀ (any chain)   ε_dem=0.285714         n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 3.5×
+
+  ── ε₀ = 51/5050 ─────────────────────────────────────────────────────────
+     (I)≡(III) C₃=1         ε_dem=5.0995e-05       n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 1.961e+04×
+     (IV) at c→1            ε_dem=0.010099         n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 99.02×
+     CAP  2ε₀ (any chain)   ε_dem=0.020198         n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: 49.51×
+
+  ── ε₀ = 0 ─────────────────────────────────────────────────────────
+     (I)≡(III) C₃=1         ε_dem=0                n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: ∞
+     (IV) at c→1            ε_dem=— (chain absent) n=[2, 7, 15, 100, 900, 1000000]: ['—', '—', '—', '—', '—', '—']   wall at large n: ∞
+     CAP  2ε₀ (any chain)   ε_dem=0                n=[2, 7, 15, 100, 900, 1000000]: ['no', 'no', 'no', 'no', 'no', 'no']   wall at large n: ∞
+
+====================================================================================================
+a2 §C — THE COARSE PIN ON ROW 05 (L2's second disjunct), taken at its only PROVED value
+====================================================================================================
+
+  The source never names the constant in `low-conductance` (mg-fa70 §12: 5 occurrences,
+  0 quantified).  The ONLY universal statement available about the delivered prefix is
+  the trivial one:  Δ₁(A,B) ≤ 1  for 0 < |A| ≤ n/2, since |A ∖ σ(A)| ≤ |A| = min(|A|,|B|).
+
+  Pinned there, the second disjunct delivers Φ_pref ≤ 1, and Step 5's conclusion needs
+  Φ_pref ≤ ε₀.  So the pin licenses the chain only when ε₀ ≥ 1 — the vacuous end.
+
+     ε₀ = 1/5: trivial pin Δ₁ ≤ 1 meets Δ₁ ≤ ε₀ ?  NO
+     ε₀ = 1/7: trivial pin Δ₁ ≤ 1 meets Δ₁ ≤ ε₀ ?  NO
+     ε₀ = 1/2: trivial pin Δ₁ ≤ 1 meets Δ₁ ≤ ε₀ ?  NO
+     ε₀ = 1: trivial pin Δ₁ ≤ 1 meets Δ₁ ≤ ε₀ ?  YES
+
+  ⭐ SO THE PIN IS REAL, COARSE, AND IT MAKES THE CHAIN VACUOUS — which is the ticket's
+     own third option: *a value that makes the chain absurd. Take it anyway.*
+     In C₃ units the pin is C₃ ≤ 1/(2 ε_spec), i.e. ε_dem = ε_leak²·ε_spec, i.e. the
+     demand becomes ε_spec ≤ ε_leak²·ε_spec, i.e. ε_leak ≥ 1.  Same conclusion.
+
+====================================================================================================
+a2 §D — THE CLOSURE REQUIREMENT, SOLVED FOR ε₀ RATHER THAN CHECKED AT PINS
+====================================================================================================
+
+  mg-7564's cap is chain-free: ε_dem ≤ 2ε₀ for ANY derivation of Step 5's conclusion,
+  including a chain nobody has written.  So the pair-bias supply suffices only if
+
+        n/(n+1)  ≤  ε_dem  ≤  2 ε₀        i.e.        ε₀  ≥  n/(2(n+1)).
+
+     n =        2:  ε₀ must be ≥ 1/3 = 0.333333
+     n =        7:  ε₀ must be ≥ 7/16 = 0.437500
+     n =       15:  ε₀ must be ≥ 15/32 = 0.468750
+     n =      100:  ε₀ must be ≥ 50/101 = 0.495050
+     n =      900:  ε₀ must be ≥ 450/901 = 0.499445
+     n =  1000000:  ε₀ must be ≥ 500000/1000001 = 0.500000
+     n → ∞    :  ε₀ must be ≥ 1/2
+
+  AND EVERY PROVED CEILING ON THE (i)-FREE SURROGATE IS BELOW THAT:
+     17/78 (restricted scope, n ≤ 7)        0.217949   short of 1/2 by 2.294×
+     1/7   (required scope, n ≤ 7)          0.142857   short of 1/2 by 3.5×
+     51/5050 (required scope, n = 101)      0.010099   short of 1/2 by 49.51×
+     0     (required scope, uniform)        0.000000   short of 1/2 by ∞
+
+  ⚠️ THOSE CEILINGS ARE ON THE SURROGATE `U_either`, NOT ON `ε₀^cons`.  They do not say
+     ε₀^cons is small — ε₀^cons is UNMEASURABLE (row 13).  What they say is that no
+     (i)-free UNIVERSAL argument can ever deliver the ε₀ ≥ 1/2 the closure needs.
+
+====================================================================================================
+a2 §E — THE DIAL: the two open lemmas pull OPPOSITE WAYS in ε₀
+====================================================================================================
+
+          ε₀ |  L1b must deliver ε_spec ≤ (chain I/III) | what L4 must then be
+  ------------------------------------------------------------------------------------------------
+        1/50 | ε_spec ≤ 0.0002       (    5000× better than pair bias) | the superseded 2×10⁻⁴ calibration
+         1/7 | ε_spec ≤ 0.0102041    (      98× better than pair bias) | already ABOVE the required-scope n ≤ 7 ceiling
+         1/5 | ε_spec ≤ 0.02         (      50× better than pair bias) | the live calibration — 40% above that ceiling
+       17/78 | ε_spec ≤ 0.0237508    (    42.1× better than pair bias) | above the restricted-scope ceiling too
+         1/2 | ε_spec ≤ 0.125        (       8× better than pair bias) | the value the CAP needs for closure at pair bias
+           1 | ε_spec ≤ 0.5          (       2× better than pair bias) | L4 at Δ₁ ≤ 1 — i.e. EVERY cut — i.e. the conjecture
+
+  ⭐ THERE IS NO SETTING OF ε₀ AT WHICH BOTH HALVES ARE CHEAP. Raising ε₀ relaxes L1b
+     and strengthens L4 — and L4 passes the point where its own (i)-free surrogate is
+     already refuted (1/7 in the required scope at n ≤ 7) BEFORE L1b's demand becomes
+     anything pair bias can meet (ε₀ ≥ 1/2 at the cap; ε₀ > 1 on chain (I)/(III)).

@@ -1,0 +1,71 @@
+==============================================================================
+a0 §A — CONTROL 1: the instrument REFUSES a float on a decision path
+==============================================================================
+  [OK ] refused, with the reason printed: chain_I_III eps_leak: 0.2 is float, not an exact rational. This instrument refuses floats on a decision path.
+
+==============================================================================
+a0 §B — CONTROL 2: a Const CANNOT be built without status / scope / source / pin
+==============================================================================
+  [OK ] no scope: refused — X: a constant with no SCOPE is the defect this ticket exists to close (STATE.md:107)
+  [OK ] no source: refused — X: a constant with no SOURCE cannot be checked
+  [OK ] non-PROVED with no pin-or-hole: refused — X: status EMPIRICAL requires an explicit PIN-or-HOLE clause (the ticket's step 2)
+  [OK ] unknown status: refused — X: unknown status 'PROBABLY'
+
+==============================================================================
+a0 §C — CONTROL 3: PLUG-BACK. The chains, re-solved here, must reproduce the corpus's
+        own published ε_dem values.  A mis-transcription of a chain fails HERE.
+==============================================================================
+  [OK ] chain (I)≡(III), ε_leak=1/5, C₃=1  [mg-9461 §5.1: 1/50]: got 1/50  want 1/50   
+  [OK ] chain (III) at C₃=2                [mg-9461 §5.3: 1/100]: got 1/100  want 1/100   
+  [OK ] chain (I)/(III) at ε_leak=1/7      [mg-9461 §5.3: 1/98]: got 1/98  want 1/98   
+  [OK ] chain (I)/(III) at ε_leak=17/78    [mg-9461 §5.3: 289/12168]: got 289/12168  want 289/12168   
+  [OK ] chain (II) at C₃^gap=3/2           [mg-9461 §5.4: 2/15]: got 2/15  want 2/15   
+  [OK ] chain (IV) at c=40/49              [mg-9461 §5.4: 1/50]: got 1/50  want 1/50   
+  [OK ] chain (IV) at c=9/10               [mg-9461 §5.4: 1/9]: got 1/9  want 1/9   
+  [OK ] chain (IV) at c=1                  [mg-9461 §5.4: 1/5]: got 1/5  want 1/5   
+  [OK ] cap at ε_leak=1/5                  [mg-7564 §4: 2/5]: got 2/5  want 2/5   
+  [OK ] cap at ε_leak=1/7                  [mg-7564 §4.1: 2/7]: got 2/7  want 2/7   
+
+  the chain question is worth exactly 2/ε_leak, at EVERY C₃ (mg-9461 §5.3, C₃ cancels):
+  [OK ]     ratio (II)/(III) at C₃=1: got 10  want 10   
+  [OK ]     ratio (II)/(III) at C₃=3/2: got 10  want 10   
+  [OK ]     ratio (II)/(III) at C₃=7/3: got 10  want 10   
+  [OK ]     ratio (II)/(III) at C₃=10: got 10  want 10   
+
+==============================================================================
+a0 §D — CONTROL 4: NEGATIVE. A DELIBERATELY WRONG chain must NOT reproduce the ladder.
+==============================================================================
+  [OK ] mutated chain gives 1/10 ≠ 1/50, so §C's agreement is not automatic
+
+==============================================================================
+a0 §E — CONTROL 5: WRONG-DIRECTION WORLD for the cap. The cap test must REFUSE a
+        hypothetical ε_dem = 3·ε_leak rather than accepting everything.
+==============================================================================
+  [OK ]   hypothetical ε_dem = 1·ε_leak admitted by the cap: got True  want True   
+  [OK ]   hypothetical ε_dem = 2·ε_leak admitted by the cap: got True  want True   
+  [OK ]   hypothetical ε_dem = 3·ε_leak admitted by the cap: got False  want False   
+  [OK ]   hypothetical ε_dem = 5/2·ε_leak admitted by the cap: got False  want False   
+
+==============================================================================
+a0 §F — CONTROL 6: WRONG-DIRECTION WORLD for the closure test. Fed a supply that DOES
+        meet the demand, `closes()` must say YES — otherwise `a2`'s NOs are vacuous.
+==============================================================================
+  [OK ]   supply 1/100 against demand 1/50 (should close): got True  want True   
+  [OK ]   supply 1/50 against demand 1/50 (should close, boundary): got True  want True   
+  [OK ]   supply 1/25 against demand 1/50 (should NOT close): got False  want False   
+  [OK ]   supply n/(n+1) at n=6 against demand 1/50 (should NOT close): got False  want False   
+
+==============================================================================
+a0 §G — CONTROL 7: mg-d3c7's family, REPRODUCED from its closed form against the four
+        values mg-9461 §4.3 tabulates.  ⚠️ THIS IS ARITHMETIC, NOT A POSET CHECK.
+==============================================================================
+  [OK ]   n=9 (k=4) Δ₁: got 5/36  want 5/36   
+  [OK ]   n=21 (k=10) Δ₁: got 11/210  want 11/210   
+  [OK ]   n=101 (k=50) Δ₁: got 51/5050  want 51/5050   
+  [OK ]   n=401 (k=200) Δ₁: got 201/80200  want 201/80200   
+  monotone decreasing to 0: ['4/21', '5/36', '11/210', '51/5050', '201/80200']
+  [OK ]   strictly decreasing on k = 3..200: got True  want True   
+
+==============================================================================
+a0 VERDICT: GREEN — all controls pass
+==============================================================================

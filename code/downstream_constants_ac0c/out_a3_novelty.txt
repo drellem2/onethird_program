@@ -1,0 +1,101 @@
+====================================================================================================
+a3 — NOVELTY SWEEP. Corpus at 6a6232d; 502 .md/.tex/.html files searched.
+     This instrument's own directory is EXCLUDED (it would match everything).
+====================================================================================================
+
+####################################################################################################
+# DECISIVE PATTERNS — every raw hit printed, no truncation
+####################################################################################################
+
+----------------------------------------------------------------------------------------------------
+PATTERN: the closure requirement as a formula: n/(2(n+1))
+  regex : n\s*/\s*\(\s*2\s*\(\s*n\s*\+\s*1\s*\)|2\s*\(\s*n\s*\+\s*1\s*\)
+  RAW HITS: 2
+    docs/OneThird-PairBias-Independence-mg-6bd1-IndependentAudit.md:127
+      `(n/(n+1)) / (2/3) = 3n/(2(n+1))`. **`mg-345e`'s citation is correct and is not a
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:331
+      `6E[inv]/(n²−1) = 3n/(2(n+1)) → 3/2` against a truth of `1` ✓. The document's "factor `3/2` lossy
+
+----------------------------------------------------------------------------------------------------
+PATTERN: a threshold on ε₀ / ε_leak at one half
+  regex : (ε₀|ε_leak|eps_leak|varepsilon_0|varepsilon_\{\\mathrm\{leak\}\})[^.\n]{0,60}(1/2\b|0\.5\b|one half)
+  RAW HITS: 0
+
+----------------------------------------------------------------------------------------------------
+PATTERN: ε₀ pinned at 1 — the vacuous/largest-admissible end
+  regex : (ε₀|ε_leak)\s*=\s*1\b
+  RAW HITS: 14
+    docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md:224
+      At `ε_leak = 1/5, C₃ = 1`: **`n ≥ 99`**, window owed **`n ≤ 98`**.
+    docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md:228
+      | arm | supply | demand | `n` at `ε_leak=1/5, C₃=1` |
+    docs/OneThird-ChainIV-CaptureFraction-mg-81ff.md:289
+      > **Chain (IV) closes on a poset ⟺ `min_k Q_k ≤ ε_leak = 1/5`**,
+    docs/OneThird-ChainSelection-mg-9461.md:606
+      chain does not close **at all**, and that threshold **moves with `ε_leak`**: at `ε_leak = 1/7`
+    docs/OneThird-ChainSelection-mg-9461.md:607
+      it becomes `6/7 = 0.857`, at `ε_leak = 1/50` it becomes `49/50 = 0.98`. So an error in `ε_leak`
+    docs/OneThird-ChainSelection-mg-9461.md:613
+      Chain (IV) at `c → 1` reaches the same `ε_leak = 1/5`, for the same reason: neither spends the
+    docs/OneThird-DemandRelaxation-mg-7564.md:1
+      # OneThird — THE DEMAND SIDE HAS BEEN ATTACKED, IT IS PRICED, AND THE PRICE IS `10×` AT ITS CEILING AND `6.8×` AT THE ONLY IN-REGIME MEASUREMENT — SO "1 IN 150" BECOMES "1 IN 15" AT BEST AND "1 IN 22" AT MEASURED, AND **NEITHER CLOSES THE W
+    docs/OneThird-DemandRelaxation-mg-7564.md:129
+      > | `1/ε_leak²` | 25 | `ε_leak = 1/5`, **squared by the Cheeger square** | **EMPIRICAL — L4's threshold** |
+    docs/OneThird-DemandRelaxation-mg-7564.md:152
+      > At `ε_leak = 1/5` that is **`ε_dem ≤ 2/5`**, i.e. **`d·q̄ ≤ 2/15` = 1 in 7.5**, i.e. **at
+    docs/OneThird-DemandRelaxation-mg-7564.md:294
+      | | value at `ε_leak = 1/5` |
+    docs/OneThird-DemandRelaxation-mg-7564.md:468
+      independent of `C₃` because `C₃` cancels; at `ε_leak = 1/5` the factor is `10`.
+    docs/OneThird-DemandRelaxation-mg-7564.md:474
+      `ε_leak = 1/5` the cap is `2/5`; **it moves with `ε_leak`, which errs optimistic**, so the
+    docs/OneThird-L4-Threshold-eps0-mg-3969.md:59
+      > | `S` — what **Step 6** actually consumes | all prefix cuts of the 101,651 **non-chain** posets, `n ≤ 7` (604,230 cuts) | **`ε₀ = 1` on every poset that can be exhibited** | exhaustive | **PROVEN, AND VACUOUS** |
+    docs/OneThird-L4-Threshold-eps0-mg-3969.md:157
+      So *"L4 as literally stated has threshold `ε₀ = 1`, `n`-free"* is a true sentence, and a useless
+
+----------------------------------------------------------------------------------------------------
+PATTERN: chain (I)/(III)'s demand at ε₀ = 1, i.e. ε_dem = 1/2
+  regex : ε_dem[^.\n]{0,30}(1/2\b|0\.5\b)|(1/2|0\.5)[^.\n]{0,30}ε_dem
+  RAW HITS: 0
+
+----------------------------------------------------------------------------------------------------
+PATTERN: the dial: raising ε₀ relaxes L1b and strengthens L4
+  regex : (ε₀|ε_leak)[^.\n]{0,80}(relax|loosen)[^.\n]{0,80}(strengthen|tighten|harder)
+  RAW HITS: 0
+
+----------------------------------------------------------------------------------------------------
+PATTERN: Δ₁ ≤ 1 used as the trivial universal pin on the prefix constant
+  regex : Δ₁\s*≤\s*1\b|Delta_1\s*\\le\s*1\b
+  RAW HITS: 7
+    code/eps0_audit_d3c7/README.md:61
+      predicted set of 698 cuts · C8 `Δ₁ ≤ 1`, attained at `(n−1)/n`.
+    code/eps0_threshold_3969/README.md:68
+      | **NC3** | `Δ₁ ≤ 1`, approached: `2/3, 3/4, 4/5, 5/6, 6/7` | the hand bound `\|A∖σ(A)\| = \|σ(A)∖A\| ≤ min(\|A\|,\|B\|)` |
+    docs/OneThird-L4-Threshold-eps0-mg-3969.md:154
+      `|A \ σ(A)| ≤ |A|`, so `E|A\σ(A)| ≤ min(|A|,|B|)` and hence **`Δ₁ ≤ 1` always**, attained iff
+    docs/OneThird-L4-Threshold-eps0-mg-3969.md:213
+      > `n` to attach to.* **[PROVEN — reading of the definition, plus the `Δ₁ ≤ 1` bound]**
+    docs/OneThird-L4-Threshold-eps0-mg-3969.md:730
+      Lemma 2.1's `Φ = Δ₁` identity, independently, at `n = 4,5,6`; **NC3** `Δ₁ ≤ 1` respected and
+    docs/OneThird-L4-Threshold-eps0-mg-d3c7-IndependentAudit.md:106
+      `:464–474`; the definition of `Δ₁` at `:270–278`; and the `Δ₁ ≤ 1` bound. No
+    docs/OneThird-L4-Threshold-eps0-mg-d3c7-IndependentAudit.md:277
+      * **C8** `Δ₁ ≤ 1` everywhere, attained at `(n−1)/n` by the antichain at `n = 3..7`.
+
+####################################################################################################
+# NON-DECISIVE PATTERNS — counts only, and they establish NOTHING
+####################################################################################################
+# These match ordinary English. They are run and reported so that a reader cannot
+# mistake a large count for a refutation of novelty or a small one for support.
+    does not close (ordinary English)        raw hits:    76   ← NOT EVIDENCE, either way
+    a residual wall of 2×                    raw hits:   195   ← NOT EVIDENCE, either way
+    opposite directions                      raw hits:    29   ← NOT EVIDENCE, either way
+
+====================================================================================================
+a3 — WHAT THIS SECTION CAN AND CANNOT ESTABLISH
+====================================================================================================
+  It CAN establish that a PHRASE is absent. It CANNOT establish that a STATEMENT is
+  absent — the same limit STATE.md:29 puts on mg-145f's corpus search, which it marks
+  'NOT A LEDGER KIND AT ALL'. Every count above is DOCUMENTARY, at this commit, over
+  this file set. The adjudication of the raw hits is in the deliverable, by reading.
