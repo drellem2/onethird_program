@@ -1,0 +1,126 @@
+==============================================================================
+mg-cdd5 s2 -- THE SWEEP: do other citations land on superseded text?
+==============================================================================
+POPULATION, NAMED BEFORE ANY COUNT
+  tier 1  citations to one_third_width_three in: STATE.md, docs/state-of-the-wall.html
+  tier 2  the same, anywhere under docs/ or code/ in this repo
+  a citation is a markdown link, an HTML href, or a backticked path
+  whose target contains `one_third_width_three/`; rows are unique on
+  (citing file, citing line, cited path).
+
+  read at:   mirror   912f1b1   (what the checked-out tree has)
+             tip      origin/main
+  by:        git show <rev>:<path>   -- the working copy is never opened
+
+------------------------------------------------------------------------------
+TIER 1 -- STATE.md AND THE TWIN.  This is the ticket's question.
+------------------------------------------------------------------------------
+  citations swept: 6
+    STATE.md                         6
+    docs/state-of-the-wall.html      0
+    distinct cited paths: 5
+
+    ATTRIBUTION of docs/state-of-the-wall.html's zero: the document contains 0 `href=`
+      and 0 markdown link(s) IN TOTAL, cross-repo or not.  So it links to nothing at all and the zero is the
+      document's property, not the extractor's.
+
+    UNCHANGED            STATE.md:78
+      -> docs/probe-lambda-constant-bound.md
+         section §1.6    mirror=False tip=False
+         section §5      mirror=True  tip=True 
+         section §5.0′   mirror=False tip=False
+    CHANGED-WITH-STRIKE  STATE.md:78
+      -> docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md  [+STRUCK x1, ~~ x2]
+         section §1.6    mirror=False tip=False
+         section §5      mirror=True  tip=True 
+         section §5.0′   mirror=False tip=True    <-- CITED SECTION DOES NOT EXIST IN THE MIRROR
+    CHANGED              STATE.md:112
+      -> docs/OneThird-L1b-BK-Transport-Transfer-Probe.md
+         section §1.5    mirror=False tip=False
+         section §2.1    mirror=True  tip=True 
+    CHANGED-WITH-STRIKE  STATE.md:112
+      -> docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md  [+STRUCK x1, ~~ x2]
+         section §1.5    mirror=False tip=False
+         section §2.1    mirror=False tip=True    <-- CITED SECTION DOES NOT EXIST IN THE MIRROR
+    CHANGED-WITH-STRIKE  STATE.md:112
+      -> docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md  [+REFUTED x2, WITHDRAWN x1, ~~ x6]
+         section §1.5    mirror=False tip=True    <-- CITED SECTION DOES NOT EXIST IN THE MIRROR
+         section §2.1    mirror=False tip=True    <-- CITED SECTION DOES NOT EXIST IN THE MIRROR
+    UNCHANGED            STATE.md:115
+      -> step8.tex
+
+  TIER 1 TALLY
+    CHANGED                1
+    CHANGED-WITH-STRIKE    3
+    UNCHANGED              2
+    ------------------------------
+    citations swept        6
+    NOT clean              4
+    of which struck        3
+
+------------------------------------------------------------------------------
+TIER 2 -- WIDENED.  Reported separately; NOT added to tier 1.
+------------------------------------------------------------------------------
+  files scanned: 2699   (excluded: 13, this instrument's own directory
+                        -- it contains SYNTHETIC citations)
+  citations swept: 18 over 7 distinct cited paths in 12 citing files
+
+  TIER 2 TALLY
+    CHANGED-WITH-STRIKE    3
+    DIRECTORY-REF          2
+    UNCHANGED              13
+
+  THE NOT-CLEAN ROWS, NAMED (3):
+    CHANGED-WITH-STRIKE  code/row3b_audit_eba7/OUTCOMES.md:72
+      -> docs/OneThird-StandardDominance-ComparisonRoute.md  [+REFUTED x2, WITHDRAWN x1, ~~ x8]
+    CHANGED-WITH-STRIKE  docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md:126
+      -> docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md  [+REFUTED x2, WITHDRAWN x1, ~~ x6]
+    CHANGED-WITH-STRIKE  docs/state-history/audit-mg-eba7-of-mg-55f2.md:112
+      -> docs/OneThird-StandardDominance-ComparisonRoute.md  [+REFUTED x2, WITHDRAWN x1, ~~ x8]
+
+  DISTINCT CITING FILES AFFECTED IN TIER 2: 3
+    code/row3b_audit_eba7/OUTCOMES.md
+    docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md
+    docs/state-history/audit-mg-eba7-of-mg-55f2.md
+
+------------------------------------------------------------------------------
+STEP 4 -- DID THE SECTION NUMBERING CHANGE?
+------------------------------------------------------------------------------
+  The ticket forbids editing STATE.md:78's citation UNLESS the
+  numbering itself moved.  Scored per cited document that carries a
+  section reference, by comparing the HEADING SETS at the two revs.
+
+    STATE.md:78  §1.6     stable at both revisions
+    STATE.md:78  §5       stable at both revisions
+    STATE.md:78  §5.0′    stable at both revisions
+    STATE.md:78  §1.6     stable at both revisions
+    STATE.md:78  §5       stable at both revisions
+    STATE.md:78  §5.0′    insertion, numbering intact
+    STATE.md:112  §1.5     stable at both revisions
+    STATE.md:112  §2.1     stable at both revisions
+    STATE.md:112  §1.5     stable at both revisions
+    STATE.md:112  §2.1     insertion, numbering intact
+    STATE.md:112  §1.5     insertion, numbering intact
+    STATE.md:112  §2.1     insertion, numbering intact
+    code/libweak_audit_c4f5/PREDICTIONS.md:17  §1       stable at both revisions
+    docs/OneThird-Compression-Consumers-mg-145f.md:157  §5       stable at both revisions
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:64  §1       stable at both revisions
+
+  ANY CITED SECTION RENUMBERED: NO
+  => no citation is edited by this ticket.  The citations are
+     right; the tree they land in is stale.
+
+------------------------------------------------------------------------------
+THE NUMBERS THE VERDICT NEEDS
+------------------------------------------------------------------------------
+  tier 1: 6 citations swept, 4 not clean (3 struck), over 5
+          distinct cited paths in 2 source documents.
+  tier 2: 18 citations swept, 3 not clean (3 struck), in 3
+          distinct citing files.
+  directory references, counted and kept OUT of both hazard tallies:
+          tier 1 0, tier 2 2
+
+  A zero in either tier is a MEASURED zero: the population is named
+  above, the resolution method is `git show`, and unresolvable rows
+  are reported as their own class rather than counted clean.
+== s2 exit: 0 ==

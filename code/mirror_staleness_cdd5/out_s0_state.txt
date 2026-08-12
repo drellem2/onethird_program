@@ -1,0 +1,56 @@
+==============================================================================
+mg-cdd5 s0 -- THE COMMIT STATE, ESTABLISHED FROM THE REMOTE
+==============================================================================
+REPOS
+  onethird_program       /Users/daniel/.pogo/polecats/pcdd5
+  one_third_width_three  /Users/daniel/research/one_third_width_three
+
+COMMANDS AND THEIR ANSWERS  (mirror repo = one_third_width_three)
+  git ls-remote origin refs/heads/main
+      949c43926b6eab9dfbd606b063992e2d7d2ea0ae      <-- THE REMOTE'S OWN ANSWER
+  git rev-parse origin/main
+      949c43926b6eab9dfbd606b063992e2d7d2ea0ae      <-- the local tracking ref
+  agree: YES
+
+  git rev-parse --abbrev-ref HEAD
+      main-mirror
+  git rev-parse HEAD
+      912f1b1498f251d3f55be69c48c32aa766868544
+  git rev-list --left-right --count HEAD...origin/main
+      0 ahead, 76 behind
+  git status --porcelain
+      clean (no output)
+
+  git merge-base --is-ancestor bde9610 origin/main   -> YES
+  git merge-base --is-ancestor 912f1b1 origin/main   -> YES
+  HEAD starts with 912f1b1                            -> YES
+
+  the strike   bde9610 2026-08-07  docs+scripts: strike `lambda_std <= lambda_2^BK` at Reverse-Cheeger §5 — FALSE, exact witnesses; and the 'exactly the ordinal sums
+  the mirror   912f1b1 2026-07-19  docs: annotate mg-0ed7 Finding 7.5 as REFUTED by mg-8f56 (mg-d710)
+  the tip      949c439 2026-08-09  docs: re-scope C3 — "exactly the ordinal sums" is a small-n coincidence, FALSE from n=7 (mg-24eb)
+
+THE CONSEQUENCE, READ AT BOTH REVISIONS AND NEVER OFF DISK
+  file: docs/OneThird-L1b-Reverse-Cheeger-Proof-Attempt.md
+    at 912f1b1 (WHAT A READER OF THE CHECKED-OUT TREE SEES):
+      line 286: - **But `λ_std ≤ λ₂^{BK}`** (the standard sector is a subspace): Theorem E bounds the gap
+      struck? NO  <-- THE CLAIM STANDS UNSTRUCK
+    at origin/main:
+      line 286: - > ~~**But `λ_std ≤ λ₂^{BK}`** (the standard sector is a subspace): Theorem E bounds the
+      struck? YES
+
+    section §5    present at 912f1b1: True    at origin/main: True
+    section §5.0' present at 912f1b1: False   at origin/main: True
+
+    §5.0' IS THE SECTION STATE.md:78 CITES.  It does not occur in the
+    mirror's copy at all -- so the citation does not merely land on
+    stale text, HALF OF IT DOES NOT RESOLVE.
+
+THIS REPOSITORY (onethird_program) -- stated so the pin is checkable
+  HEAD            cac9de0fc87d  (branch polecat-pcdd5)
+  origin/main     d19d12787557
+
+PIN.  Every figure in this instrument is measured against
+  one_third_width_three origin/main = 949c43926b6e
+  If that ref moves, THIS TRANSCRIPT GOES STALE -- which is the defect
+  it is about (PREDICTIONS.md E2).  Re-run rather than quote.
+== s0 exit: 0 ==

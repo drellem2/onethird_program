@@ -1,0 +1,69 @@
+==============================================================================
+mg-cdd5 selftest -- library behaviour on synthetic inputs
+==============================================================================
+_normalise -- the link target reduced to a mirror-relative path
+  [PASS] plain ../ link                                             got=('docs/a.md', None)
+  [PASS] deeper ../../ link                                         got=('step8.tex', None)
+  [PASS] bare backticked path                                       got=('docs/a.md', None)
+  [PASS] with a cited line number                                   got=('docs/a.md', 65)
+  [PASS] EN-DASH line range (the corpus's own spelling)             got=('step8.tex', 389)
+  [PASS] hyphen line range                                          got=('step8.tex', 57)
+  [PASS] em-dash line range                                         got=('step8.tex', 57)
+  [PASS] directory target keeps its trailing slash                  got=('docs/', None)
+  [PASS] not the mirror at all                                      got=(None, None)
+  [PASS] trailing punctuation stripped                              got=('docs/a.md', None)
+
+extract_citations -- md, href and backtick channels
+  [PASS] markdown link found                                        got=1
+  [PASS]   path                                                     got='docs/a.md'
+  [PASS]   kind                                                     got='md'
+  [PASS]   sections on the same line                                got=['5', "5.0'"]
+  [PASS]   source line                                              got=1
+  [PASS] html href found                                            got=1
+  [PASS]   kind                                                     got='href'
+  [PASS]   section from `sec 2.3`                                   got=['2.3']
+  [PASS] backticked path found                                      got=1
+  [PASS]   path                                                     got='scripts/c.py'
+  [PASS] non-mirror path not picked up                              got=0
+  [PASS] two lines -> two citations                                 got=2
+  [PASS]   line numbers                                             got=[1, 2]
+
+dedupe -- unique on (citing file, citing line, cited path)
+  [PASS] same path twice on one line, two channels                  got=2
+  [PASS]   deduped to one row                                       got=1
+
+classify -- and in particular that MISSING is not a value
+  [PASS] identical                                                  got='UNCHANGED'
+  [PASS] edited without markers                                     got='CHANGED'
+  [PASS] edited WITH a strike marker                                got='CHANGED-WITH-STRIKE'
+  [PASS] absent at both                                             got='ABSENT-AT-BOTH'
+  [PASS] absent in mirror only                                      got='ABSENT-IN-MIRROR'
+  [PASS] deleted by tip                                             got='DELETED-BY-TIP'
+  [PASS] empty string is NOT missing                                got='UNCHANGED'
+  [PASS] empty vs missing                                           got='DELETED-BY-TIP'
+  [PASS] marker REMOVED is not a strike                             got='CHANGED'
+  [PASS] a directory target is its own class, not CHANGED           got='DIRECTORY-REF'
+  [PASS] DIRECTORY is not a hazard class                            got=False
+  [PASS] every absence class IS a hazard class                      got=True
+
+added_markers -- counts only markers the tip GAINED
+  [PASS] two tildes added                                           got={'~~': 2}
+  [PASS] word marker added                                          got={'REFUTED': 1}
+  [PASS] none added                                                 got={}
+  [PASS] missing side yields nothing                                got={}
+
+section_present -- heading, §-mention and bold forms
+  [PASS] markdown heading                                           got=True
+  [PASS] prime character variant                                    got=True
+  [PASS] ascii label finds prime heading                            got=True
+  [PASS] section mention                                            got=True
+  [PASS] absent                                                     got=False
+  [PASS] MISSING is not present                                     got=False
+  [PASS] 5 does not match 5.0'                                      got=False
+
+section_heading_set -- for the renumbering question
+  [PASS] headings collected                                         got={"5.0'", '2.3', '1'}
+  [PASS] MISSING gives the empty set                                got=set()
+
+  50 PASS, 0 FAIL
+== selftest exit: 0 ==
