@@ -1,0 +1,93 @@
+============================================================================================
+mg-d2c2 §2 — THE CONTROL a4_sweep.py §4 DOES NOT HAVE
+============================================================================================
+
+  a4_sweep.py §4 runs 7 checks with known answers:
+      3 on the `tee` detector, 3 on `membership`, 1 on `pipe-status`.
+      0 on the §3 evidence probe.
+
+  The §3 evidence probe is the one that produces
+  `audit.sweep_dirs_without_evidence`, which BASELINE.json calls "the number
+  that should go DOWN ... and watching it is the point of recording it".
+  The one number declared to be watched comes from the one detector never
+  shown to answer a question whose answer was known.
+
+--------------------------------------------------------------------------------------------
+  W0  a directory that genuinely has no falsification evidence
+     It computes a number and prints it.  Nothing in it is ever required to fail, no arm
+     is scored inverted, and no transcript records anything going red.  The correct
+     answer is BARE and a probe that cannot say BARE is not a detector.
+
+     ships          : README.md, compute.py, out_compute.txt
+     correct answer : BARE
+     probe answers  : BARE
+       neither probe fired
+     [PASS]
+
+--------------------------------------------------------------------------------------------
+  W1  real evidence, written in the vocabulary the probe was built around
+     It ships a file named `negative_control.py` and a transcript carrying a token from
+     RED_TOKENS.  This is the shape the probe was written for; the correct answer is
+     EVIDENCE and getting it right is what makes W2 and W3 below meaningful.
+
+     ships          : instrument.py, negative_control.py, out_negative_control.txt
+     correct answer : EVIDENCE
+     probe answers  : EVIDENCE
+       filename probe fired on : ['negative_control.py']
+       token probe fired on    : ['out_negative_control.txt: CAUGHT']
+     [PASS]
+
+--------------------------------------------------------------------------------------------
+  W2  real evidence, written in the vocabulary THIS ESTATE ACTUALLY USES NOW
+     An arm declared [MUST FAIL], scored inverted, with a committed transcript recording
+     it firing on 9420 of 13416 inputs.  This is code/compression_novelty_623a's own
+     shape, reduced.  The correct answer is EVIDENCE.
+
+     ships          : a1_arms.py, out_a1_arms.txt
+     correct answer : EVIDENCE
+     probe answers  : BARE
+       neither probe fired
+     [FAIL] — FALSE NEGATIVE
+
+--------------------------------------------------------------------------------------------
+  W3  NO evidence at all, but one file is named for a control
+     `controls.py` prints a greeting.  There is no arm, nothing is required to fail, and
+     no transcript records anything.  The correct answer is BARE.  The probe credits
+     the directory on the SUBSTRING in the filename, having never read the file.
+
+     ships          : controls.py, out_controls.txt
+     correct answer : BARE
+     probe answers  : EVIDENCE
+       filename probe fired on : ['controls.py']
+     [FAIL] — FALSE POSITIVE
+
+--------------------------------------------------------------------------------------------
+  W4  NO evidence at all, but a README uses one of the red words in prose
+     The prose says no mutation was CAUGHT BECAUSE NONE WAS ATTEMPTED — a sentence that
+     states the absence of evidence and is scored as its presence.  The correct answer
+     is BARE.  The probe reads the token, not the sentence.
+
+     ships          : README.md, compute.py
+     correct answer : BARE
+     probe answers  : EVIDENCE
+       token probe fired on    : ['README.md: CAUGHT']
+     [FAIL] — FALSE POSITIVE
+
+--------------------------------------------------------------------------------------------
+  WHAT THIS CONTROL ESTABLISHES
+--------------------------------------------------------------------------------------------
+    the probe answered both ways at all           : True
+    correct answers                               : 2 of 5
+    wrong answers                                 : 3 of 5
+      false NEGATIVE (real evidence, called bare) : W2
+      false POSITIVE (no evidence, credited)      : W3, W4
+
+    Answering both ways is what §4 demands of the other three detectors, and
+    this one does answer both ways.  It is still wrong three times out of five,
+    because BOTH of its halves test VOCABULARY: one matches substrings in
+    filenames, the other matches six words in prose.  Neither has read an arm,
+    run one, or asked whether anything in the directory is required to fail.
+
+============================================================================================
+P2 CONTROL — AS RECORDED: the evidence probe answers both ways and is wrong 3 of 5 times (false negative W2; false positive W3, W4).
+============================================================================================
