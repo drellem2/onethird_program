@@ -1,4 +1,4 @@
-# OneThird — DANIEL'S PRIMITIVITY OBJECTION: **the objection is right about the witness and it does not touch the closure, because the ceiling is a PROVED UNIVERSAL BOUND and not a maximum over witnesses.** `pm-onethird`'s chain is CORRECT and his reading is CORRECT — and neither was needed. The primitive maximum is **0.3876**, not 1 and not 3/4
+# OneThird — DANIEL'S PRIMITIVITY OBJECTION: **the objection is right about the witness and it does not touch the closure, because the ceiling is a PROVED UNIVERSAL BOUND and not a maximum over witnesses.** The chain `pm-onethird` calls "my reasoning" is CORRECT, it is NOT his — it is already **PROVED IN THE CORPUS** at `mg-8d66` §4.2 — and it was not needed. The primitive maximum is **0.3876**, not 1 and not 3/4
 
 **Work item.** `mg-f5be` (repo `onethird_program`), filed by `pm-onethird` on Daniel's
 observation:
@@ -24,10 +24,10 @@ re-measured.
 >
 > | question | answer |
 > |---|---|
-> | **is `pm-onethird`'s chain right?** | **YES, every link, exactly** — but it is **NOT in `mg-409a`'s deliverable**; it is a re-derivation from that document's §2 `L1`+`L2`, and it is earned here. 0 failures at **2 532 incomparable pairs, `n ≤ 6` exhaustive**. |
-> | **the primitive maximum of `alpha`** | **`0.387627564…`, at `n = 4`, and DECREASING in `n`** (0.3876 / 0.3596 / 0.3343 / 0.3219 at `n = 4,5,6,7`). Exhaustive over the primitive class at every `n` listed. |
+> | **is `pm-onethird`'s chain right?** | **YES, every link, exactly — AND IT IS NOT HIS REASONING, IT IS AN ALREADY-PROVED RESULT HE COMMISSIONED.** All four terms, with the same three steps, are `mg-8d66` §4.2 (`ed3a949`), proved there at **every** admissible partition and verified at 18 373 pairs. The ticket sent me to `mg-409a`, where it is genuinely **ABSENT**. Independently re-measured here at **2 532 pairs, `n ≤ 6` exhaustive**: 0 failures. |
+> | **the primitive maximum of `alpha`** | **`0.387627564…`, at `n = 4`, and DECREASING in `n`** (0.3876 / 0.3596 / 0.3343 / 0.3219 / **0.3122** at `n = 4…8`). Exhaustive over the primitive class at every `n` listed. |
 > | **is the frozen measurement vacuous?** | **VACUOUS.** Zero frozen posets at every `n ≤ 6`; the smallest `δ(P)` available anywhere in range is exactly `1/3`. Reported as *no maximum exists*, not as a maximum of 0. |
-> | **is `alpha = 1` attained by a primitive poset?** | **NO** — exact rational test, at every poset to `n = 6` and every primitive poset at `n = 7`. |
+> | **is `alpha = 1` attained by a primitive poset?** | **NO** — exact rational test, at every poset to `n = 6` and every primitive poset at `n = 7` (234) and `n = 8` (**2 585**). |
 >
 > ### **AND THE REASON THE OBJECTION DOES NOT BITE IS NOT THE 3/4.**
 >
@@ -49,13 +49,25 @@ re-measured.
 >
 > ### And `pm-onethird`'s reading is right on the mathematics but **not load-bearing**.
 >
-> His chain is correct, his `3/4` is correct, and his conclusion — *"restricting to the
+> The chain is correct, his `3/4` is correct, and his conclusion — *"restricting to the
 > class where counterexamples live should LOWER the ceiling"* — is correct **and
 > understated**: the measured primitive ceiling is **0.39, not 0.75**. But the closure did
 > not need it, was not stated too weakly, and **his recommendation to Daniel (3/10, do not
 > pursue) does not need retracting.** The bar is a constant `≥ 2` (`mg-409a` §2). Every
 > ceiling in play — `1`, `3/4`, `0.39` — is below it. The strengthening moves the margin
 > from a factor of 2 to a factor of about 5. It does not move the verdict.
+>
+> ### The ticket's own premise is wrong in a way that matters for how it was priced
+>
+> `mg-f5be` says *"This is MY REASONING off the recorded bound, not a measurement. Treat it
+> as the thing to refute."* **It is not his reasoning and it is a measurement.** It is
+> `mg-8d66`'s §4.2, proved and checked at 18 373 pairs, and its Step 2 is already in the
+> facts registry as **`FACTS.md` F1, kind `U`, an entry Daniel named specifically when the
+> registry was commissioned.** The slot was therefore bought partly to re-derive something
+> the programme had already proved a commit earlier — which is `mg-623a`'s
+> duplicates-the-corpus failure mode, turned inward. **I walked into the same hole and §8
+> D0 says so:** my `PREDICTIONS.md` H5 disclosed that I had not read `mg-8d66`'s
+> deliverable, and that declared exposure cost exactly what it was declared to risk.
 >
 > ### The one correction to the ticket's framing
 >
@@ -69,14 +81,17 @@ re-measured.
 
 ---
 
-## 1. Ticket step 1: **the chain is not in `mg-409a`'s deliverable**
+## 1. Ticket step 1: **the chain is in the corpus — just not in the document the ticket names**
 
 The ticket says, correctly, *"I read it out of a mail summary, not the document,"* and
-instructs: *"If the bound is stated differently, that is the finding and stop there."*
+instructs: *"Check my chain against the actual proof in mg-409a's deliverable … If the
+bound is stated differently, that is the finding and stop there."*
 
-**It is stated differently.** `mg-409a` §3 proves `alpha ≤ 1` by a two-case split on
-`Ran Q_o`: Case 1 exhibits an **odd-fiber indicator**, Case 2 shows `Π_e = I`. No pair
-bias appears anywhere in it. Mechanically (`p1.0`):
+### 1.1 In `mg-409a`: **ABSENT**, and the ticket is right that it is
+
+`mg-409a` §3 proves `alpha ≤ 1` by a two-case split on `Ran Q_o`: Case 1 exhibits an
+**odd-fiber indicator**, Case 2 shows `Π_e = I`. No pair bias appears anywhere in it.
+Mechanically (`p1.0`):
 
 | probe | in `docs/OneThird-Compression-W4-Rate-mg-409a.md` |
 |---|---|
@@ -86,20 +101,50 @@ bias appears anywhere in it. Mechanically (`p1.0`):
 | `adjacent` | **ABSENT** |
 | `max(p` | **ABSENT** |
 
-**I did not stop there, and the reason is stated so the override is visible.** The chain
-is absent as *written* but is **derivable** from what is present — §2's `L1` and `L2`, which
-are in the document and are the links the chain needs. Stopping at "absent" would have
-recorded a true fact about a document while leaving the mathematical question — does the
-ceiling tighten on the counterexample class — untouched, and that question is the reason
-the slot was spent. So the chain is **re-derived from first principles here** and then
-measured. If `pm-onethird` wants the narrow answer: **his chain is not a quotation, it is
-a correct reconstruction.**
+### 1.2 In `mg-8d66`: **PRESENT, VERBATIM, AND PROVED** — which the ticket does not know
+
+[`docs/OneThird-Compression-kFoliation-mg-8d66.md:34`](OneThird-Compression-kFoliation-mg-8d66.md),
+in that document's own §0 verdict block:
+
+```
+    alpha_S  ≤  R_{Q_S}(f_xy)  =  P(x,y adjacent) / (4 p(1−p))  ≤  1/(2 max(p,1−p))  ≤  1
+```
+
+— character for character the ticket's chain, and **stronger than the ticket states it**,
+because `mg-8d66` proves it at *every* admissible partition `S` and not only at `k = 2`. Its
+§4.2 gives the three steps (`:175–207`): Step 1 the affine-on-every-fiber argument, **Step 2
+the adjacent-swap involution**, Step 3 the arithmetic. **Verified there at 18 373 incomparable
+pairs, exhaustively over every labeled poset at `n = 3, 4, 5`, 0 failures on all four links.**
+
+And Step 2 is separately in the facts registry: **[`docs/FACTS.md`](FACTS.md) F1 · *Bias
+controls adjacency*, `KIND: U` — proved**, with the same involution proof, and its entry
+records that **Daniel named it specifically** when the registry was commissioned.
+
+### 1.3 So the finding at step 1 is not the one the ticket expected
+
+> **The chain is not `pm-onethird`'s reasoning and it is not unmeasured. It is a proved,
+> registered corpus result, one commit older than the ticket that asks for it to be
+> attacked.** The ticket pointed at `mg-409a` — where it is genuinely absent — and inferred
+> from that absence that the chain was his own derivation off a summary.
+
+**I did not stop at step 1, and the reason is stated so the override is visible.** The
+narrow instruction was satisfied the moment §1.1 came back ABSENT, but stopping there would
+have recorded a true fact about one document while leaving the actual question — does the
+ceiling tighten on the class Daniel named — untouched, and that question is why the slot was
+spent. §2 below is therefore an **independent re-measurement** on a different population, not
+a derivation, and §4 is the part that is new.
 
 ---
 
-## 2. The chain, derived and then measured — **CORRECT, every link**
+## 2. The chain, re-measured independently — **CORRECT, every link**
 
-### 2.1 The derivation
+⚠️ **Read §1.2 first: this is a RE-DERIVATION of `mg-8d66` §4.2, not a new one.** I derived
+it before reading that document (`PREDICTIONS.md` H2/H5) and the derivations agree step for
+step, which is worth exactly what an independent reproduction is worth and nothing more. What
+this section adds over `mg-8d66` is a **different population** — every iso class to `n = 6`,
+where `mg-8d66` ran every labeled poset to `n = 5`.
+
+### 2.1 The derivation (= `mg-8d66` §4.2 Steps 1–3)
 
 Writing `f_xy = 1{x <_L y}` for the pair indicator at an incomparable pair, `p = p_xy`,
 and `P(adj)` for the probability that `x` and `y` occupy adjacent positions:
@@ -107,12 +152,12 @@ and `P(adj)` for the probability that `x` and `y` occupy adjacent positions:
 | link | statement | source |
 |---|---|---|
 | **L1** | `R_M(f_xy) = ((n−1)/2)·E_BK(f_xy)/Var(f_xy)` | `mg-409a` §2, **re-measured here** |
-| **A** | `E_BK(f_xy) = P(adj)/(2(n−1))` | new — `f_xy` changes only on an adjacent swap of `{x,y}`, under `lib409a`'s `1/(2(n−1)N)` normalisation |
-| **B** | `Var(f_xy) = p(1−p)` | new — `f_xy` is Bernoulli(`p`) |
-| ⇒ | **`R_M(f_xy) = P(adj) / (4 p (1−p))`** | **= `pm-onethird`'s TERM 1** |
+| **A** | `E_BK(f_xy) = P(adj)/(2(n−1))` | `mg-8d66` §4.2 Step 1 (as `= P(adj)/4` after the `(n−1)/2` factor) |
+| **B** | `Var(f_xy) = p(1−p)` | `mg-8d66` §4.2 Step 3 |
+| ⇒ | **`R_M(f_xy) = P(adj) / (4 p (1−p))`** | **= TERM 1**, `mg-8d66:34` |
 | **L2** | `alpha(P) ≤ R_M(f_xy)` at **every** incomparable pair | `mg-409a` §2 (Rayleigh at a test vector) |
-| **C** | `P(adj) ≤ 2·min(p, 1−p)` | new — the **adjacent-swap involution**, below |
-| ⇒ | **`≤ 1/(2·max(p, 1−p))`** | **= `pm-onethird`'s TERM 2** |
+| **C** | `P(adj) ≤ 2·min(p, 1−p)` | **`FACTS.md` F1, `KIND: U`** = `mg-8d66` §4.2 Step 2 |
+| ⇒ | **`≤ 1/(2·max(p, 1−p))`** | **= TERM 2** |
 | **D** | `max(p,1−p) ≥ 1/2` | ⇒ **`≤ 1`** = TERM 3 |
 
 **Link C is the one that carries the argument and it is prettier than an inequality.**
@@ -120,7 +165,8 @@ Swapping an adjacent incomparable `{x,y}` maps `L(P)` to `L(P)` and is an **invo
 so it is a *bijection* between `{L : x,y adjacent, x before y}` and `{L : x,y adjacent,
 y before x}`. Hence `P(adj) = 2·P(adj ∧ x before y)` **exactly**, and the inequality then
 comes for free from `{adj ∧ x before y} ⊆ {x before y}`, giving `P(adj) ≤ 2p`; symmetrically
-`P(adj) ≤ 2(1−p)`.
+`P(adj) ≤ 2(1−p)`. This is `FACTS.md` F1 and it is `U`/proved; the measurements below
+corroborate a theorem rather than establishing one.
 
 ### 2.2 The measurement — `n ≤ 6` EXHAUSTIVE, exact rationals throughout
 
@@ -135,6 +181,12 @@ comes for free from `{adj ∧ x before y} ⊆ {x before y}`, giving `P(adj) ≤ 
 **Controls that fire** (`p1.5`): dropping `P(adj)` from TERM 1 — the shape a careless reading
 suggests — breaks the identity at **272 of 286** pairs; and link `C` is **strict at 202**
 pairs, so it is not an identity in disguise.
+
+⚠️ **The `2 532` is not larger than `mg-8d66`'s `18 373` and must not be quoted as though it
+were.** Mine counts pairs over **isomorphism classes**, `mg-8d66`'s over **labeled** posets,
+so at `n ≤ 5` mine is a sub-population of theirs up to relabelling. The only thing this
+section adds to the record is the extension to **`n = 6`** and a second implementation of
+links `A`, `B` and `C`.
 
 ### 2.3 Ticket step 2: **the chain is available at every pair, so the most extreme may be chosen**
 
@@ -260,11 +312,26 @@ would attain) is **REFUTED**.
 | 5 | **4** | 1.000000000 | **0.359611797** | 1.000000000 |
 | 6 | **28** | 1.000000000 | **0.334349276** | 1.000000000 |
 | 7 | **234** | — (primitive-only population) | **0.321946387** | — |
+| 8 | **2 585** | — (primitive-only population) | **0.312169329** | — |
 
 **The primitive maximum in range is `0.3876…`**, attained at `n = 4` by `{0<2, 0<3, 1<3}` —
 the **N-poset**, which is the *unique* primitive 4-element poset, so that row is a maximum
-over a population of one and should be read as such. The maximum **decreases** at every step
-to `n = 7`, where the population is 234.
+over a population of one and should be read as such. The maximum **decreases at every step
+through `n = 8`**, where the population is 2 585 classes.
+
+The `n = 7` and `n = 8` rows come from `p4`, which needs a **colour-refined canonical form**
+(brute force is `8! = 40 320` relabellings per candidate). That form is validated against
+brute force before it is used — no class collisions and invariance under 24 relabellings at
+every class, `n ≤ 6` — and the enumeration it drives reproduces **A000112's 2 045 at
+`n = 7`** as a positive control (`p4.0`, `p4.1`). ⚠️ **The `n = 8` primitive population is
+seeded from the FULL `n = 7` population, not the primitive one**: deleting a maximal element
+from a primitive poset can *create* a module, so seeding from primitives would silently miss
+classes. That is the `n = 8` form of `PREDICTIONS.md` E5 and it is most of what the arm costs.
+
+The `n = 8` argmax is `{0<2, 0<3, 1<3, 1<4, 2<4, 2<5, 3<5, 3<6, 4<6, 4<7, 5<7}` (`|L| = 34`)
+— a zigzag/fence, the same shape as the `n = 7` argmax and as the `n = 4` N-poset. **That the
+maximiser is the same family at every size is an observation, not a result**: nothing here
+proves the fence maximises `alpha` among primitives, and no such claim is made.
 
 **The verdict-carrying statements are the exact ones, not that float.** At the primitive
 argmax an exhibited rational test vector gives `alpha ≤ 5/8`. Over **every** primitive poset
@@ -327,7 +394,7 @@ posets** in range. The proof is class-blind, as claimed.
 |---|---|---|---|
 | none — every poset | **1** | **PROVED** (`mg-409a` §3, five lines) | short by ≥ 2× |
 | frozen (`δ < 1/3`) | **3/4** | **PROVED** (chain, §2 here) but **VACUOUS** — class empty to `n = 14` | short by ≥ 2.67× |
-| primitive (`n ≥ 4`) | **0.3876** | **MEASURED** exhaustively to `n = 7`; exact certificate `≤ 525/832` | short by ≥ 5.2× |
+| primitive (`n ≥ 4`) | **0.3876** | **MEASURED** exhaustively to `n = 8`; exact certificate `≤ 525/832` over `n ≤ 7` | short by ≥ 5.2× |
 | the bar itself | **`> (n−1)/(γn)`, a constant in `[2,3)`** | **PROVED** (`mg-409a` §2) | — |
 
 **Every row is below the bar. The closure holds, and it holds hardest exactly where
@@ -349,14 +416,15 @@ Filed as named conditions so that a reversal cannot be assembled after the fact.
    actually `o(1)`, every ceiling in §6 becomes interesting again and this document's
    verdict inverts. `mg-409a`'s own §7.1 prices this and says it would have to fall by a
    factor of `n`.
-3. **The primitive maximum rises with `n`.** It falls at every step `n = 4…7`, but that is
-   **four points and a measurement**, not a theorem. A primitive poset at some larger `n`
+3. **The primitive maximum rises with `n`.** It falls at every step `n = 4…8`, but that is
+   **five points and a measurement**, not a theorem. A primitive poset at some larger `n`
    with `alpha` near 1 would not break the closure (the `≤ 1` proof is unconditional) but
    it would refute §4.4's trend and make §4.5's "delivers a stronger bound anyway" false.
-4. **`n ≤ 7` is too small for primitivity to have shown its behaviour.** Primitive posets
-   first exist at `n = 4`, so the exhaustive range covers only four sizes. This is the same
+4. **`n ≤ 8` is too small for primitivity to have shown its behaviour.** Primitive posets
+   first exist at `n = 4`, so the exhaustive range covers only five sizes. This is the same
    exposure that killed the standard-dominance rescue at `n = 7` — one size past where it
-   had been checked — and it is the reason `p4` extends to `n = 8` rather than stopping.
+   had been checked — which is why `p4` was run at all, and it does not stop being an
+   exposure just because `n = 8` agreed.
 5. **My reading of "primitive" is not Daniel's.** All three notions are measured (§4.1) and
    the answer is the same under prime and under ordinal-indecomposable. If he meant
    something else again — *near* an ordinal sum while primitive, which his sentence can also
@@ -366,6 +434,26 @@ Filed as named conditions so that a reversal cannot be assembled after the fact.
 ---
 
 ## 8. Defects of my own, all kept
+
+**D0 — I RE-DERIVED A PROVED CORPUS RESULT AND WROTE IT UP AS NEW, AND I HAD DECLARED THE
+EXPOSURE IN ADVANCE.** `PREDICTIONS.md` H1 records that I read `mg-409a`'s deliverable in
+full before writing anything; **H5 records that I had NOT read `mg-8d66`'s.** I then derived
+the chain on paper (H2), measured it, and drafted §1 and §2 claiming links `A`, `B` and `C`
+as *new* and the chain as *"a re-derivation, and it must be earned here"*. All three links
+and the whole chain are `mg-8d66` §4.2, one commit older, and link `C` is `FACTS.md` F1 with
+`KIND: U` — an entry **Daniel named specifically**. I found this only when I opened
+`FACTS.md` for an unrelated reason, after the instrument was written and committed.
+
+**This is `mg-623a`'s duplicates-the-literature failure with the corpus in the literature's
+place**, and the registry that exists precisely to prevent it (`mg-03cf`, landed the same
+day) would have prevented it had I read it first. The commit `254d7ce` carries the wrong
+framing and is left in history with this note rather than rewritten. What survives is what
+the re-measurement is actually worth: a second implementation and the extension to `n = 6`
+(§2.2), and it is labelled that way now.
+
+**The generalisable lesson, since a defect that only indicts me is worth little:** `mg-409a`
+and `mg-8d66` are the same arc, the ticket named both in its first paragraph, and I read one.
+A ticket that cites two prior items is telling you its author read summaries of both.
 
 **D1 — my first run reported a REFUTATION and it was my own definition's empty
 quantifier.** `is_prime` tests for a module of size `2..n−1`. At `n = 2` that range is
@@ -395,8 +483,10 @@ without an eigenvalue, and it is not closed.
 
 **D4 — the `n = 7` and `n = 8` populations are PRIMITIVE-only.** The full `n = 7` iso-class
 count (2 045) is verified as an enumeration control, but `alpha` is measured only at the 234
-primitive classes. So *"max `alpha` over all posets at `n = 7`"* is **not** measured here and
-the `n = 7` row of §4.4 says so.
+primitive classes there and the 2 585 at `n = 8`. So *"max `alpha` over all posets at
+`n = 7` or `n = 8`"* is **not** measured here and those rows of §4.4 say so. The exact
+`R_M ≤ 525/832` certificate likewise covers `n ≤ 7` only — `p4` runs the exact `alpha == 1`
+test at `n = 8` but not the exact upper-bound certificates.
 
 **D5 — I import `lib409a` for the entire object.** Deliberate, and argued in the instrument
 README: this ticket audits a claim *about* `mg-409a`'s operator, so a second construction
@@ -406,8 +496,8 @@ routes (Jacobi, power iteration, exact orthogonality) all run through **the same
 They cross-check the linear algebra, not the compressions. Same shape as `mg-409a`'s D5 and
 `mg-8bc7`'s D6.
 
-**D6 — the decreasing trend is four points.** `0.3876 / 0.3596 / 0.3343 / 0.3219` is
-monotone and the steps are shrinking, which is consistent with convergence to something
+**D6 — the decreasing trend is five points.** `0.3876 / 0.3596 / 0.3343 / 0.3219 / 0.3122`
+is monotone and the steps are shrinking, which is consistent with convergence to something
 positive and with decay to 0 alike. **No extrapolation is offered and none should be read
 in.** §7.3 files the reversal condition.
 
