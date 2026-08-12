@@ -1,0 +1,82 @@
+mg-a518 — CONTROLS FOR THE WIDE ARMING OF THE AUDIT-SUCCESSOR DETECTOR
+==============================================================================
+
+[A] THE LIVE ARMING — does this host's config name the wide tag?
+    status : pass
+    detail : no merged audit has gone unanswered past 4h — 9 merged audit(s) examined: 8 answered by a successor, 1 by a recorded clean verdict, 0 still inside the 4h window, 0 with no recorded completion time
+    parsed : examined=9 answered=8 clean=1 waiting=0 undated=0
+    VERDICT: live config is WIDE (9 examined, > 4)
+
+    store copied with mtimes intact -> /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/a518-controls-_qfwogo2/store
+
+[C0] BASELINE — the store as mg-a518 leaves it must report nothing silent
+    mutated: nothing
+    status : pass
+    silent : (none)
+    expect : (none)
+    parsed : examined=9 answered=8 clean=1 waiting=0 undated=0
+    VERDICT: as expected
+
+[C1] mg-2f44 loses its retro-link — mg-07fd must become visible again
+    mutated: mg-2f44 -mg-07fd-followup
+    status : warn
+    silent : ['mg-07fd']
+    expect : ['mg-07fd']
+    parsed : examined=9 answered=7 clean=1 waiting=0 undated=0
+    VERDICT: as expected
+
+[C2] BOTH of mg-5cba's repairs lose theirs — mg-5cba must become visible
+    mutated: mg-8d63 -mg-5cba-followup, mg-b417 -mg-5cba-followup
+    status : warn
+    silent : ['mg-5cba']
+    expect : ['mg-5cba']
+    parsed : examined=9 answered=7 clean=1 waiting=0 undated=0
+    VERDICT: as expected
+
+[C2b] only ONE of mg-5cba's two repairs loses its link — either alone must still answer, so this must stay GREEN.  Without this arm C2 would be satisfied by a detector that needs every successor rather than any
+    mutated: mg-8d63 -mg-5cba-followup
+    status : pass
+    silent : (none)
+    expect : (none)
+    parsed : examined=9 answered=8 clean=1 waiting=0 undated=0
+    VERDICT: as expected
+
+[C3] mg-a0d6 loses its verdict tag — a PASSING audit with no successor must become visible, which is the false report FIX 2 exists to remove
+    mutated: mg-a0d6 -audit-verdict-pass
+    status : warn
+    silent : ['mg-a0d6']
+    expect : ['mg-a0d6']
+    parsed : examined=9 answered=8 clean=0 waiting=0 undated=0
+    VERDICT: as expected
+
+[C4] EVERY fix reverted — this must reproduce mg-a882's pre-fix row: the SAME THREE audits it measured as false reports on 2026-08-12
+    mutated: mg-2f44 -mg-07fd-followup, mg-8d63 -mg-5cba-followup, mg-b417 -mg-5cba-followup, mg-a0d6 -audit-verdict-pass
+    status : warn
+    silent : ['mg-07fd', 'mg-5cba', 'mg-a0d6']
+    expect : ['mg-07fd', 'mg-5cba', 'mg-a0d6']
+    parsed : examined=9 answered=6 clean=0 waiting=0 undated=0
+    VERDICT: as expected
+
+[C5] RESTORED — the mutations must leave nothing behind, so this must be byte-identical to C0
+    mutated: nothing
+    status : pass
+    silent : (none)
+    expect : (none)
+    parsed : examined=9 answered=8 clean=1 waiting=0 undated=0
+    VERDICT: as expected
+
+==============================================================================
+WHAT C4 SHOWS, and it is the load-bearing arm.  mg-a882 measured 3 false
+reports on 2026-08-12 and named them: mg-07fd, mg-5cba, mg-a0d6.  With
+mg-a518's four tags removed the detector names exactly those three again,
+so the green in C0 is the fixes doing work and NOT the detector going blind
+a second time.  The counts printed above are the 2026-08-12 population and
+are deliberately NOT asserted — the store grows, and a control pinned to a
+population count goes red for a non-reason on the next audit that lands.
+
+  RECORDED, not asserted — C0 population: examined=9 answered=8 clean_verdict=1 silent=0
+  RECORDED, not asserted — C4 population: examined=9 answered=6 clean_verdict=0 silent=3
+
+==============================================================================
+CONTROLS VERDICT: CLEAN — every arm behaved, and every arm that was
+supposed to make the detector speak did make it speak.

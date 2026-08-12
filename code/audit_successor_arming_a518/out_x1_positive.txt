@@ -1,0 +1,43 @@
+mg-a518 — POSITIVE CONTROL ON THE CONTROLS
+==============================================================================
+
+[P1] a store copied WITHOUT mtime preservation must REFUSE, not pass.
+     This is D1 — the defect this control actually shipped with.
+     CAUGHT: mtimes were NOT preserved by the copy, so silence cannot age on it and every arm below would report `pass` for the wrong reason
+
+[P2] the same copy done correctly must NOT refuse — a guard that refuses
+     everything is not a guard, it is an outage.
+     CAUGHT: copy_store accepted a correctly-preserved copy
+
+[P3] strip_tag must report FALSE when the tag it was told to remove is
+     absent.  An arm whose mutation silently did nothing observes the
+     UNMUTATED store and reports `as expected` — green for no reason.
+     absent tag -> False (want False); present tag -> True (want True)
+     line after removal: 'tags: [alpha]' (want 'tags: [alpha]')
+     CAUGHT
+
+[P4] removing `mg-5cba-followup` must NOT damage a tag that CONTAINS it.
+     A string-replace implementation passes every arm above and corrupts
+     the store — and the detector matches successors by SUBSTRING, so a
+     mangled neighbour changes the answer without changing the arm.
+     line after removal: 'tags: [mg-5cba-followup-x]' (want 'tags: [mg-5cba-followup-x]')
+     CAUGHT
+
+[P5] population() must return None on a detail it cannot parse, and
+     silent_ids() must return the empty set on a `pass`.  A parser that
+     guesses turns 'I could not read the report' into 'the report was clean'.
+     unparseable detail -> None (want None)
+     pass row -> set() (want empty)
+     warn row -> ['mg-07fd', 'mg-5cba'] (want ['mg-07fd', 'mg-5cba'] — and NOT the
+       mg-9999 in the remedy sentence, which is an example and not a finding)
+     CAUGHT
+
+==============================================================================
+  P1: satisfactory
+  P2: satisfactory
+  P3: satisfactory
+  P4: satisfactory
+  P5: satisfactory
+
+POSITIVE CONTROL VERDICT: CLEAN — 5 of 5 planted
+worlds caught, including the one this control actually shipped with.
