@@ -1,0 +1,139 @@
+mg-9134 — THE CLEAN-VERDICT TAG IS CONSOLIDATED ONTO `audit-clean`
+==============================================================================
+
+[S] THE STORE, READ RATHER THAN ASSUMED — mg-9134 steps 1..3
+    mg-a0d6 tags : ['onethird', 'audit', 'mg-d19f-followup', 'audit-clean']
+    item files scanned : 2781 (every status, every repo, incl. archive/ and shelved/)
+    carry `audit-clean`      : ['done/mg-a0d6.md']
+    carry `audit-verdict-pass` : (none)
+    MENTION `audit-verdict-pass` anywhere in their text, tag or prose:
+      archive/2026-08/mg-a882.md  [prose only — the detector matches tags, not bodies]
+      archive/2026-08/mg-a518.md  [prose only — the detector matches tags, not bodies]
+      done/mg-a0d6.md  [prose only — the detector matches tags, not bodies]
+      claimed/mg-9134.md.16007  [prose only — the detector matches tags, not bodies]
+    declare no `tags:` key at all : 289 (older archived items and .bodybak/ body backups; an item with no tags cannot carry the retired one)
+    have a `tags:` key that could NOT be read : 0
+
+    store copied with mtimes intact (drift 0.000s) -> /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg9134-k_lmmgn8/store
+
+------------------------------------------------------------------------------
+mg-a518's THREE-ROW TABLE, RE-RUN AFTER THE CONSOLIDATION (ticket step 5).
+Only [audit_successor] varies; the store is the live one, copied with mtimes.
+------------------------------------------------------------------------------
+
+[R1] ROW 1 — `["independent-audit"]`, the arming mg-7ff8 shipped
+    audit_tags        : ['independent-audit']
+    clean_verdict_tags: ['audit-clean']
+    mutated           : nothing
+    status            : pass
+    silent            : (none)
+    expect            : (none)
+    population        : examined=4 answered_by_successor=4 clean_verdict=0 waiting=0 undated=0
+    tags in the remedy: (none printed — this run is GREEN)
+    VERDICT           : as expected
+
+[R2] ROW 2 — `["audit"]` BEFORE mg-a518's four tags: the pre-fix store
+    audit_tags        : ['audit']
+    clean_verdict_tags: ['audit-clean']
+    mutated           : mg-2f44 -mg-07fd-followup, mg-8d63 -mg-5cba-followup, mg-b417 -mg-5cba-followup, mg-a0d6 -audit-clean
+    status            : warn
+    silent            : ['mg-07fd', 'mg-5cba', 'mg-a0d6']
+    expect            : ['mg-07fd', 'mg-5cba', 'mg-a0d6']
+    population        : examined=9 answered_by_successor=6 clean_verdict=0 waiting=0 undated=0
+    tags in the remedy: ['audit-clean']
+    VERDICT           : as expected
+
+[R3] ROW 3 — `["audit"]` AS ARMED NOW, with the consolidated tag list
+    audit_tags        : ['audit']
+    clean_verdict_tags: ['audit-clean']
+    mutated           : nothing
+    status            : pass
+    silent            : (none)
+    expect            : (none)
+    population        : examined=9 answered_by_successor=8 clean_verdict=1 waiting=0 undated=0
+    tags in the remedy: (none printed — this run is GREEN)
+    VERDICT           : as expected
+
+------------------------------------------------------------------------------
+THE RENAME HAZARD, RUN AS TWO EXPERIMENTS RATHER THAN ARGUED IN PROSE.
+Both halves of a tag rename break the same string match, in opposite
+directions, and BOTH surface as one number moving in a line people read
+as green.  This is why the ticket fixed an ORDER and not just an outcome.
+------------------------------------------------------------------------------
+
+[N1] THE TRAP THE ORDER AVOIDS — config consolidated onto `audit-clean` while the item still carries only the RETIRED name.  This is the state that would exist if step 4 had run before step 2, and `answered` would have dropped from 9 to 8 exactly as the ticket predicts
+    audit_tags        : ['audit']
+    clean_verdict_tags: ['audit-clean']
+    mutated           : mg-a0d6 -audit-clean, mg-a0d6 +audit-verdict-pass
+    status            : warn
+    silent            : ['mg-a0d6']
+    expect            : ['mg-a0d6']
+    population        : examined=9 answered_by_successor=8 clean_verdict=0 waiting=0 undated=0
+    tags in the remedy: ['audit-clean']
+    VERDICT           : as expected
+
+[N2] THE SAME BREAK IN THE OTHER DIRECTION — item on the surviving name, config still on the retired one.  Proves the two names are NOT interchangeable to the detector: the collision mg-a518 found was a live hazard, not cosmetics
+    audit_tags        : ['audit']
+    clean_verdict_tags: ['audit-verdict-pass']
+    mutated           : nothing
+    status            : warn
+    silent            : ['mg-a0d6']
+    expect            : ['mg-a0d6']
+    population        : examined=9 answered_by_successor=8 clean_verdict=0 waiting=0 undated=0
+    tags in the remedy: ['audit-verdict-pass']
+    VERDICT           : as expected
+
+[N3] THE SURVIVING NAME IS LOAD-BEARING — strip `audit-clean` and mg-a0d6 must become visible again.  Without this, R3's green is equally explained by a detector that has stopped looking at mg-a0d6 altogether
+    audit_tags        : ['audit']
+    clean_verdict_tags: ['audit-clean']
+    mutated           : mg-a0d6 -audit-clean
+    status            : warn
+    silent            : ['mg-a0d6']
+    expect            : ['mg-a0d6']
+    population        : examined=9 answered_by_successor=8 clean_verdict=0 waiting=0 undated=0
+    tags in the remedy: ['audit-clean']
+    VERDICT           : as expected
+
+[N4] NO CLEAN TAGS CONFIGURED AT ALL — the remedy must offer no tag rather than name one that would do nothing, and mg-a0d6 must be reported
+    audit_tags        : ['audit']
+    clean_verdict_tags: []
+    mutated           : nothing
+    status            : warn
+    silent            : ['mg-a0d6']
+    expect            : ['mg-a0d6']
+    population        : examined=9 answered_by_successor=8 clean_verdict=0 waiting=0 undated=0
+    tags in the remedy: []
+    VERDICT           : as expected
+
+------------------------------------------------------------------------------
+ARM D — MY OWN CONTROL'S FAILURE MODE, REPRODUCED ON PURPOSE.
+------------------------------------------------------------------------------
+
+    store copied WITHOUT preserving mtimes — result.json drift 182690s
+
+[D] the N3 mutation, run on a store whose mtimes were destroyed by the copy
+    status     : pass
+    silent     : (none)
+    population : examined=9 answered_by_successor=8 clean_verdict=0 waiting=1 undated=0
+    VERDICT    : REPRODUCED — the identical mutation that fires in N3 is
+                 SILENT here.  Every audit reads as 0s silent and lands in
+                 `waiting`, so a control built on this copy reports a clean
+                 store while being unable to fire at all.  copy_store()'s
+                 refusal is what stands between this file and that result,
+                 and it is now MEASURED rather than remembered.
+
+==============================================================================
+THE TABLE (ticket step 5).  Counts are RECORDED; what is ASSERTED is which
+items are named, because the store grows and a control pinned to a population
+goes red for a non-reason on the next audit that lands.
+
+  audit_tags                          examined  answered  reported  false
+  ["independent-audit"]  (mg-7ff8)       4         4         0        —     (successor 4 + clean verdict 0)
+  ["audit"]  before mg-a518's fixes       9         6         3   2 of 3     (successor 6 + clean verdict 0)
+  ["audit"]  AS ARMED NOW (mg-9134)       9         9         0        0     (successor 8 + clean verdict 1)
+
+==============================================================================
+CONSOLIDATION VERDICT: CLEAN — `audit-clean` is the only configured name, it is
+the only name any item carries, it is load-bearing (N3), the retired name is
+recognised by nothing (N2), and the ordering the ticket fixed is the difference
+between this and N1.

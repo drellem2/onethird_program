@@ -7,7 +7,7 @@ mg-a518 — CONTROLS FOR THE WIDE ARMING OF THE AUDIT-SUCCESSOR DETECTOR
     parsed : examined=9 answered=8 clean=1 waiting=0 undated=0
     VERDICT: live config is WIDE (9 examined, > 4)
 
-    store copied with mtimes intact -> /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/a518-controls-_qfwogo2/store
+    store copied with mtimes intact -> /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/a518-controls-dc3yhtgh/store
 
 [C0] BASELINE — the store as mg-a518 leaves it must report nothing silent
     mutated: nothing
@@ -42,7 +42,7 @@ mg-a518 — CONTROLS FOR THE WIDE ARMING OF THE AUDIT-SUCCESSOR DETECTOR
     VERDICT: as expected
 
 [C3] mg-a0d6 loses its verdict tag — a PASSING audit with no successor must become visible, which is the false report FIX 2 exists to remove
-    mutated: mg-a0d6 -audit-verdict-pass
+    mutated: mg-a0d6 -audit-clean
     status : warn
     silent : ['mg-a0d6']
     expect : ['mg-a0d6']
@@ -50,7 +50,7 @@ mg-a518 — CONTROLS FOR THE WIDE ARMING OF THE AUDIT-SUCCESSOR DETECTOR
     VERDICT: as expected
 
 [C4] EVERY fix reverted — this must reproduce mg-a882's pre-fix row: the SAME THREE audits it measured as false reports on 2026-08-12
-    mutated: mg-2f44 -mg-07fd-followup, mg-8d63 -mg-5cba-followup, mg-b417 -mg-5cba-followup, mg-a0d6 -audit-verdict-pass
+    mutated: mg-2f44 -mg-07fd-followup, mg-8d63 -mg-5cba-followup, mg-b417 -mg-5cba-followup, mg-a0d6 -audit-clean
     status : warn
     silent : ['mg-07fd', 'mg-5cba', 'mg-a0d6']
     expect : ['mg-07fd', 'mg-5cba', 'mg-a0d6']

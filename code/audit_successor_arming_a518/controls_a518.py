@@ -48,7 +48,16 @@ FIX1 = [
     ("mg-8d63", "mg-5cba-followup", "mg-5cba"),
     ("mg-b417", "mg-5cba-followup", "mg-5cba"),
 ]
-FIX2 = ("mg-a0d6", "audit-verdict-pass", "mg-a0d6")
+# RENAMED 2026-08-12 by mg-9134, and this line is the reason that ticket had to
+# touch this file at all.  pm-onethird consolidated the two clean-verdict names
+# onto `audit-clean` (mg-7ff8's, the published one); `audit-verdict-pass` is
+# retired and is now carried by no item and named by no config.  Left as it was,
+# C3 would strip a tag that is not there, `strip_tag` would return False, and the
+# arm would report "the fix this arm mutates is NOT IN THE STORE" — a red control
+# that is right about the store and wrong about the world.  The arm's SUBJECT is
+# unchanged: a passing audit with no successor must become visible when its
+# clean-verdict tag goes away.  Only the tag's spelling moved.
+FIX2 = ("mg-a0d6", "audit-clean", "mg-a0d6")
 
 CHECK = "audit successors"
 
@@ -185,7 +194,11 @@ def overlay(dirpath, audit_tags):
             "[audit_successor]\n"
             f'repos = ["{os.path.expanduser("~")}/research/onethird_program"]\n'
             f"audit_tags = {json.dumps(audit_tags)}\n"
-            'clean_verdict_tags = ["audit-clean", "audit-verdict-pass"]\n'
+            # One name since mg-9134 consolidated them.  Pinned here rather than
+            # read from the host config so these arms test the STORE; if the
+            # consolidation is ever reversed this literal must move with it, and
+            # code/audit_successor_consolidation_9134 is what checks the pair.
+            'clean_verdict_tags = ["audit-clean"]\n'
             'window = "4h"\n'
         )
     return dirpath

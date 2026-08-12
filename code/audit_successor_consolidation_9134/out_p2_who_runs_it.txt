@@ -1,0 +1,55 @@
+mg-9134 PART 2 — every unattended path that could run `pogo doctor --check`
+==============================================================================
+host date: 2026-08-12T13:41:52Z
+
+--- 1. THE ONLY CALLER IN THE POGO SOURCE ------------------------------------
+If pogod ran this check itself, there would be an unattended path by
+construction.  Every reference to the check's renderer, tests excluded:
+~/dev/pogo/cmd/pogo/auditsuccessors.go:71:func auditSuccessorLine(rep auditwatch.Report, scanErr error, cfg config.AuditSuccessorConfig, now time.Time) (status, detail string) {
+~/dev/pogo/cmd/pogo/main.go:3472:				asStatus, asDetail := auditSuccessorLine(asRep, asErr, asCfg, time.Now())
+  => the definition, and one call site inside `pogo doctor --check`.
+
+--- 2. launchd -------------------------------------------------------------
+  13 com.pogo.* launch agents scanned; matches printed above (none = none).
+
+--- 3. cron ----------------------------------------------------------------
+  crontab: no crontab for daniel
+
+--- 4. pogo's own scheduler -------------------------------------------------
+  entries mentioning doctor: 0
+  total schedule rows (incl. header):       25
+
+--- 5. host scripts --------------------------------------------------------
+  lines matching 'doctor --check' in ~/.pogo shell scripts:
+  (nothing listed = no host script invokes it)
+
+--- 6. THE ONE ROUTINE READER, AND WHETHER IT IS ALIVE ----------------------
+  crew/doctor.md makes it the first-line health check:
+    69:pogo doctor --check              # Quick deterministic health checks
+  is the doctor agent running?
+    (nothing listed = not running, not even parked)
+  last agent_stopped event for crew-doctor:
+    stopped 2026-08-10T17:14:23.34726Z (reason: requested)
+
+--- 7. WHEN DID ANY PROCESS LAST ACTUALLY RUN IT? ---------------------------
+  Tool calls containing 'doctor --check' in agent transcripts, by agent,
+  most recent first.  A polecat or a crew agent typing the command at a
+  human's or a ticket's request is a HAND-RUN however automated it looks;
+  what would count is doctor's own startup checklist.
+    2026-08-12T13:36:21.694Z     7 run(s)  -Users-daniel--pogo-polecats-p9134
+    2026-08-12T13:12:03.284Z     8 run(s)  -Users-daniel--pogo-agents-pm-onethird
+    2026-08-12T13:04:28.797Z    10 run(s)  -Users-daniel--pogo-polecats-pa518
+    2026-08-12T12:17:51.693Z    19 run(s)  -Users-daniel--pogo-polecats-p7ff8
+    2026-08-10T12:28:43.159Z     2 run(s)  -Users-daniel--pogo-polecats-c7a20
+    2026-08-10T07:34:47.928Z     1 run(s)  -Users-daniel--pogo-agents-pa
+    2026-08-10T06:49:59.371Z    20 run(s)  -Users-daniel--pogo-agents-mayor
+    2026-08-10T04:42:30.381Z    16 run(s)  -Users-daniel--pogo-agents-pm-pogo
+    2026-08-10T04:35:57.033Z   185 run(s)  -Users-daniel--pogo-agents-doctor
+    2026-08-10T03:55:10.641Z     3 run(s)  -Users-daniel--pogo-polecats-caab5
+    2026-08-09T18:57:55.588Z     4 run(s)  -Users-daniel--pogo-polecats-qc2f5
+    2026-08-09T12:52:29.524Z     3 run(s)  -Users-daniel--pogo-polecats-t3164
+    (379 invocations across 35 agents, last 30 days of transcripts)
+
+==============================================================================
+READ THE ABOVE, NOT A CONCLUSION FROM ME.  What it printed on 2026-08-12 is
+recorded in this directory's README under PART 2.

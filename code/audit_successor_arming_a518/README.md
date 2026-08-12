@@ -175,3 +175,31 @@ out_x1_positive.txt     transcript, 2026-08-12
 ```
 
 Nothing in this directory is imported by any other suite, and `./build.sh` is unchanged.
+
+---
+
+## 2026-08-12, LATER THE SAME DAY — SUPERSEDED IN EXACTLY ONE RESPECT BY mg-9134
+
+**Nothing above is retracted. One name changed, and this note exists so a reader of the
+COLLISION section does not act on a config that no longer exists.**
+
+pm-onethird decided the collision this ticket declined to resolve: **`audit-clean` survives and
+`audit-verdict-pass` is retired.** `clean_verdict_tags` is now `["audit-clean"]`, `mg-a0d6`
+carries `audit-clean` and not `audit-verdict-pass`, and no item in any repo carries the retired
+name (2780 item files scanned, every status including `archive/` and `shelved/`).
+
+The one edit to this directory is `controls_a518.py`'s `FIX2`, whose tag text moved
+`audit-verdict-pass` → `audit-clean`. **The arm's subject is unchanged** — a passing audit with
+no successor must become visible when its clean-verdict tag goes away — and left alone it would
+have gone red for the right reason and the wrong world: `strip_tag` would have found no such tag
+and reported "the fix this arm mutates is NOT IN THE STORE". Re-run after the edit: **all seven
+arms behave, C0 9/8/1/silent-0, C4 names the same three.**
+
+This README's table, its C3 row and its COLLISION section are left as written. They are the
+record of what was true when this landed, and the collision *was* real — mg-9134's arm N2 shows
+the two names are not interchangeable to the detector, so configuring both was the right call to
+make while a decider was still deciding.
+
+`code/audit_successor_consolidation_9134/` carries the consolidation's own controls, including
+the two halves of the rename hazard run as experiments and a deliberate reproduction of this
+directory's D1 (the `cp -R` copy that could not fire).
