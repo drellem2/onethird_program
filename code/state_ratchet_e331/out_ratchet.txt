@@ -5,11 +5,11 @@ mg-e331 — STATE.md SIZE RATCHET
 §1  THE SUBJECT, MEASURED — the WORKING TREE, not a commit
 --------------------------------------------------------------------------------------------
   path              STATE.md
-  words             19907      <- THE GATED QUANTITY (len(text.split()))
-  bytes             129447
-  lines             216
+  words             20583      <- THE GATED QUANTITY (len(text.split()))
+  bytes             133618
+  lines             220
   longest line      15417 chars
-  lines over 2000   14
+  lines over 2000   15
 
   The gated quantity is WORDS because mg-ea0e's target was in words.  It is a
   PROXY for what a reader must read and not the thing itself: a future editor who
@@ -21,10 +21,10 @@ mg-e331 — STATE.md SIZE RATCHET
 §2  THE DECLARED CEILING
 --------------------------------------------------------------------------------------------
   file              code/state_ratchet_e331/CEILING.json
-  words_ceiling     19907
-  tighten_below     19407
-  set_by            mg-e331   at 19907 words
-  observed          19907  (+0 against the ceiling)
+  words_ceiling     20583
+  tighten_below     20083
+  set_by            mg-e331   at 20583 words
+  observed          20583  (+0 against the ceiling)
 
   THE CEILING IS WHERE THE FILE STANDS, NOT WHERE mg-ea0e AIMED, AND THE DIFFERENCE IS
   DELIBERATE. mg-ea0e's target was under 6,000 words and it landed at 4,658 on
@@ -95,31 +95,59 @@ mg-e331 — STATE.md SIZE RATCHET
   against mg-ea0e's 6,000-word target is not paid and is now 13,907. What this raise
   buys is that the growth is 157 words, it is declared, and the reason is written down.
   tighten_below MOVED 19,250 -> 19,407 WITH THE CEILING, preserving this file's stated
-  500-word invariant.
+  500-word invariant. RAISED AGAIN FROM 19,907 TO 20,583 BY mg-c59e, IN THE COMMIT THAT
+  CAUSED IT, against a file standing at EXACTLY the ceiling for the third landing
+  running, so any addition at all tripped it. THE WORDS ARE 676 AND THEY ARE TWO RIDERS
+  LANDING mg-05ec'S STOCK-TAKE VERDICT, both approved by pm-onethird and both named in
+  mg-05ec's own section 7.5 as edits it deliberately did NOT make: (a) the 'Two axes,
+  one bridge' heading at :25 now reads '... and the bridge is a RIGIDITY statement whose
+  live currency is E[inv_e], not a spectrum', with a rider stating that the one bridge
+  is L1b, is real and OPEN and is the whole remaining gap, and is NOT spectral in any
+  load-bearing sense, on three independent legs (lambda_std is one unit among five;
+  Theorem E caps the BK gap and hands over a cut while no consumer of a BK-gap LOWER
+  bound exists and Wilson 2004 already proves one sharply; standard dominance is
+  FP-refuted unconditionally and its conditional form IS L1b); and (b) a rider under the
+  mermaid at :61-76 recording that NODE B IS UNCONSUMED BY ANY LIVE ROUTE, marked
+  DOCUMENTARY and not mathematical, because the diagram routes A -> B -> C while row 8
+  and the machinery paragraph route A -> C directly on rows 5 and 7 only and not one of
+  the three live residuals is an attack on a spectrum. NEITHER COULD LIVE IN
+  docs/state-history/, FOR THE STRIKE CONVENTION'S OWN REASON RESTATED AT A THIRD SITE:
+  a heading that misleads a reader and a diagram that misleads a DISPATCHER are read
+  HERE, and filing the correction in a per-attempt file would leave 'Two axes, one
+  bridge' and an A -> B -> C route through an unconsumed node standing unqualified in
+  the canonical document, discoverable only by a reader who already doubted them --
+  which is precisely how work gets aimed at a node nothing consumes. The stock-take
+  document itself is NOT copied here and is cited
+  (docs/OneThird-Spectra-StockTake-mg-05ec.md, 580 lines, landed 0a8415b); what lands is
+  the two riders and nothing else. THE COST IS REAL AND IS NOT LAUNDERED: the debt
+  against mg-ea0e's 6,000-word target is not paid and is now 14,583, and the growth here
+  is the largest single raise this file has taken. What the raise buys is that it is
+  declared and the reason is written down. tighten_below MOVED 19,407 -> 20,083 WITH THE
+  CEILING, preserving the stated 500-word invariant.
 
 §3  CAN THIS RATCHET FAIL, AND CAN IT REFUSE?  Probes against THIS run's values
 --------------------------------------------------------------------------------------------
-  N1   one word past the ceiling                   CAUGHT          19908 words is +1 past the declared ceiling 
-  N2   the ceiling plus another whole file         CAUGHT          39814 words is +19907 past the declared ceil
-  N3   one word under the tighten point            CAUGHT          19406 words is 501 below the declared ceilin
-  N4   half the tighten point                      CAUGHT          9703 words is 10204 below the declared ceili
-  N5   the ceiling edge is exactly where declared  BOUNDARY        19907 -> GREEN, 19908 -> ABOVE-CEILING
-  N6   the tighten edge is exactly where declared  BOUNDARY        19407 -> GREEN, 19406 -> SLACK-UNRATCHETED
+  N1   one word past the ceiling                   CAUGHT          20584 words is +1 past the declared ceiling 
+  N2   the ceiling plus another whole file         CAUGHT          41166 words is +20583 past the declared ceil
+  N3   one word under the tighten point            CAUGHT          20082 words is 501 below the declared ceilin
+  N4   half the tighten point                      CAUGHT          10041 words is 10542 below the declared ceil
+  N5   the ceiling edge is exactly where declared  BOUNDARY        20583 -> GREEN, 20584 -> ABOVE-CEILING
+  N6   the tighten edge is exactly where declared  BOUNDARY        20083 -> GREEN, 20082 -> SLACK-UNRATCHETED
   N7   a ceiling with an empty `why`               CAUGHT          <probe N7>: `why` is empty.  See REQUIRED in
   N8   a ceiling missing words_ceiling             CAUGHT          <probe N8> is missing required field(s): wor
   N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 10 
-  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (19908) is above 
-  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '19907', not a
+  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (20584) is above 
+  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '20583', not a
   N12  a negative word count                       CAUGHT          verdict() was handed words=-1
   N13  every mutation above actually mutates       CAUGHT          4 of 4 planted values differ from the observ
-  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/p03
+  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/pc5
 
   12 of 14 probes CAUGHT; 2 BOUNDARY (a transition, checked but NOT counted as a
   falsification); 0 explained-unfalsifiable; 0 hole(s)/setup failure(s); 0
   UNEXPLAINED unfalsifiable.  0.000s.
 
 ============================================================================================
-RATCHET VERDICT: GREEN — 19907 words, ceiling 19907, tighten below 19407.
+RATCHET VERDICT: GREEN — 20583 words, ceiling 20583, tighten below 20083.
 This ratchet was shown able to fire in both directions and to refuse in 7 worlds,
 on this run, against these values.  0.00s total.
 ============================================================================================
