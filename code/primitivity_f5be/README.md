@@ -17,7 +17,7 @@ substantially longer; it is run separately and its transcript is committed.
 | `p1_chain.py` | **`pm-onethird`'s chain**, link by link, exactly, at every incomparable pair of every poset to `n = 6` | 4 s |
 | `p2_primitive.py` | **alpha restricted to the primitive class**; whether `alpha = 1` is attained by any primitive poset; what the attaining set actually is | 46 s |
 | `p3_frozen.py` | the **frozen** class — empty, and reported as empty; the near-frozen measurement | 4 s |
-| `p4_n8.py` | the primitive census extended to `n = 8`, with a colour-refined canonical form validated against brute force first | ~20 min |
+| `p4_n8.py` | the primitive census extended to `n = 8` (2 585 classes, max `alpha` = 0.3122, none attaining 1), with a colour-refined canonical form validated against brute force first | ~35 min |
 
 ## Populations, and what "exhaustive" means in each row
 
@@ -27,7 +27,10 @@ substantially longer; it is run separately and its transcript is committed.
 - `n = 7`: **every isomorphism class** (2 045, checked) for the enumeration itself, and
   **every primitive class** (234) for the alpha measurement. The *full* `n = 7` population
   is **not** measured for alpha.
-- `n = 8`: **every primitive class** (`p4`). The full population is not enumerated.
+- `n = 8`: **every primitive class** (2 585, `p4`). The full population is not enumerated,
+  but the `n = 8` primitive enumeration is seeded from the **full** `n = 7` population and
+  not the primitive one — deleting a maximal element from a primitive poset can *create* a
+  module, so seeding from primitives would silently miss classes.
 
 Posets with `|L(P)| = 1` — the chains — are excluded throughout: `mg-409a`'s theorem is
 stated for `|L(P)| ≥ 2`, and a chain has no incomparable pair, so `delta` and `mu` are
