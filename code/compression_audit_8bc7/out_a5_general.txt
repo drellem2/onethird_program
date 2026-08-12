@@ -1,0 +1,46 @@
+======================================================================================
+a5.1  is (I - P_BK) - (2/(n-1))(2I - Pi_o - Pi_e) positive semidefinite?
+======================================================================================
+  EXACT rational Schur reduction on the full |L(P)| x |L(P)| matrix.
+  population: 599 posets (n=2: 1, n=3: 13, n=4: 195, n=5: 390), |L(P)| capped at 48 for the exact PSD test
+  [PASS] (I - P_BK) >= (2/(n-1)) M  as an operator, on the FULL space -- 0/599 violations
+======================================================================================
+a5.2  the equality case: which f attain it?
+======================================================================================
+  [PASS] every linear statistic attains equality -- (*) is the equality case -- 0 violations
+  [PASS] ker D = {f affine on every fiber of BOTH foliations}, EXACTLY -- 0/112 posets where the two dimensions differ
+  dim ker D > dim V at 37/112 posets: being affine on every fiber
+  is WEAKER than being a pair-orientation linear statistic, so the equality case of
+  the inequality is a strictly larger space than the note's scope line names.
+    n  |L(P)|   dim V  dim ker D  dim affine
+    2       2       2          2           2
+    3       6       4          6           6
+    3       3       3          3           3
+    3       3       3          3           3
+    3       3       3          3           3
+    3       2       2          2           2
+    3       3       3          3           3
+    3       2       2          2           2
+======================================================================================
+a5.3  controls
+======================================================================================
+  [PASS] C1  the REVERSE inequality fails -- the two operators are not equal -- 75/180 posets
+  [PASS] C2  constant 2/(n-1) -> (5/2)/(n-1) breaks PSD: 2 is optimal -- 180/180 posets
+  [PASS] C3  a SMALLER constant stays PSD [REFUSES CORRECTLY] -- 0/180 posets
+======================================================================================
+a5.4  how lossy is the full-space bound?  (floats: MEASUREMENT, not verdict)
+======================================================================================
+    n  |L(P)|   lam2(I-P_BK)  (2/(n-1))lam2(M)    ratio
+    4       5       0.276638          0.258418   1.0705
+    4       5       0.276638          0.258418   1.0705
+    4       5       0.276638          0.258418   1.0705
+    4       5       0.276638          0.258418   1.0705
+    4       5       0.276638          0.258418   1.0705
+    5       5       0.207478          0.193814   1.0705
+    4       5       0.276638          0.258418   1.0705
+    4       5       0.276638          0.258418   1.0705
+  514 posets measured; worst overstatement of the loss = 1.0705x
+  i.e. on this population section 4's full-space quantity is never more than
+  1.071x below the true BK gap -- the route is valid and mildly lossy here.
+
+a5 VERDICT: operator inequality CONFIRMED

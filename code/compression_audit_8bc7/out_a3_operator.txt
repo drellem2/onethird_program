@@ -1,0 +1,55 @@
+======================================================================================
+a3.1  is (***) a POINTWISE identity on V, or only a quadratic form?
+======================================================================================
+  [PASS] (***) holds POINTWISE as an equality of functions, for every linear f -- 0/8720 violations
+  [PASS] (***) therefore also holds as a quadratic form on V -- 0/8720 violations
+======================================================================================
+a3.2  is V invariant?  Pi_o V, Pi_e V, M V, (I-P_BK) V  vs  V
+======================================================================================
+  Pi_o    : image lands back in V at 1689/4320 (poset, f) pairs  -> NOT INVARIANT
+  Pi_e    : image lands back in V at 1647/4320 (poset, f) pairs  -> NOT INVARIANT
+  M       : image lands back in V at 1441/4320 (poset, f) pairs  -> NOT INVARIANT
+  I-P_BK  : image lands back in V at 1441/4320 (poset, f) pairs  -> NOT INVARIANT
+  [PASS] V is NOT invariant under ANY of the four -- pm-onethird's (B) premise CONFIRMED
+======================================================================================
+a3.3  the smallest certificate of non-invariance, exhibited in full
+======================================================================================
+  P = antichain on {0,1,2};  f(L) = 1{0 <_L 1};  C_o blocks = [(0, 1), (2,)]
+  L                f   Pi_o f    1{0<1}  1{0<2}  1{1<2}
+  012              1      1/2         1       1       1
+  021              1        1         1       1       0
+  102              0      1/2         0       1       1
+  120              0        0         0       0       1
+  201              1        1         1       0       0
+  210              0        0         0       0       0
+  [PASS] f itself IS in V [REFUSES CORRECTLY]
+  [PASS] Pi_o f is NOT in V -- exact Gaussian elimination
+  by hand: alpha=0 (from 210), beta=1 (201), delta=0 (120), gamma=1/2 (102)
+           forces Pi_o f(012) = 3/2, but the table says 1/2.  No solution.
+======================================================================================
+a3.4  the spectral consequence -- three Rayleigh minima, MEASURED (floats)
+======================================================================================
+  Predicted ordering, from (***) plus Cauchy interlacing:
+    (2/(n-1)) lam_2(M)   <=   lam_2(I - P_BK)   <=   min over V_0  =  (2/(n-1)) lam_2^V(M)
+
+  poset                       (2/(n-1))lam2(M)   lam2(I-P_BK)   min over V_0   lossy?
+  n=3 (sampled)                       0.500000       0.500000       0.500000         
+  n=3 (sampled)                       0.500000       0.500000       0.500000         
+  n=3 (sampled)                       0.500000       0.500000       0.500000         
+  n=3 (sampled)                       0.500000       0.500000       0.500000         
+  n=3 (sampled)                       0.500000       0.500000       0.500000         
+  n=3 (sampled)                       0.500000       0.500000       0.500000         
+  n=3 (sampled)                       0.500000       0.500000       0.500000         
+  n=4 (sampled)                       0.195262       0.195262       0.200000         
+  n=4 (sampled)                       0.195262       0.195262       0.200000         
+  n=4 (sampled)                       0.195262       0.195262       0.200000         
+  n=4 (sampled)                       0.195262       0.195262       0.200000         
+  n=4 (sampled)                       0.195262       0.195262       0.198643         
+  n=4 (sampled)                       0.195262       0.195262       0.200000         
+  n=4 (sampled)                       0.195262       0.195262       0.198643         
+  ... 186 posets measured in total
+  [PASS] the predicted ordering holds at every measured poset -- 0/186 violations
+  section 4's full-space quantity is STRICTLY below the BK gap at 27/186 posets; worst ratio lam_2(I-P_BK) / ((2/(n-1))lam_2(M)) = 1.0705
+  the BK gap is attained by a LINEAR statistic (min over V_0 = lam_2(I-P_BK)) at 109/186 posets
+
+a3 VERDICT: section 4 read settled

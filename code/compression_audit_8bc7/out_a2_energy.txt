@@ -1,0 +1,20 @@
+======================================================================================
+a2.1-a2.5  sections 2 and 3, exact rational equality on both sides
+======================================================================================
+  4400 posets with at least one incomparable pair, 8800 statistics tested
+  [PASS] 2.1  f|_F = a_F + sum_j c_{B_j} Z_j  on every fiber of both foliations -- 0 violations
+  [PASS] 2.2  Var(f|C=F) = (1/4) sum c^2 exactly -- no covariance terms -- 0 violations
+  [PASS] 3.1  E_o(f) = (2/(n-1)) E Var(f|C_o)  EXACTLY -- 0 violations
+  [PASS] 3.2  E_e(f) = (2/(n-1)) E Var(f|C_e)  EXACTLY -- 0 violations
+  [PASS] 3.3  (*)  E_BK = (2/(n-1))(EVar_o + EVar_e)  EXACTLY -- 0 violations
+  [PASS] 3.4  (**) the Rayleigh quotient follows -- 0 violations
+======================================================================================
+a2.C  controls
+======================================================================================
+  [PASS] N1  constant 2/(n-1) -> 1/(n-1) breaks (*) -- 366/368 posets
+  [PASS] N2  (1/4) sum c^2 -> (1/2) sum c^2 breaks section 2 -- 350/368 posets
+  [PASS] N3  a DEGREE-2 statistic breaks (*) -- the scope line at :152 is real -- 111 broke, 414 still exact, and 111/111 broke with E_BK > RHS
+  [PASS] N4  coefficients on COMPARABLE pairs do not disturb (*) [REFUSES CORRECTLY] -- 0/264 posets broke
+  [PASS] N5  under the LAZY normalization the constant is 1/(n-1), not 2/(n-1) -- 0/268 posets disagree -- the constant is normalization-dependent
+
+a2 VERDICT: sections 2 and 3 CONFIRMED

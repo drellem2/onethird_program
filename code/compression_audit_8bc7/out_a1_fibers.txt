@@ -1,0 +1,23 @@
+======================================================================================
+a1.1-1.4  section 1, on every labeled poset to n=5 and samples at n=6,7
+======================================================================================
+  population: 4592 posets  (exhaustive n=2: 3, exhaustive n=3: 19, exhaustive n=4: 219, exhaustive n=5: 4231, sampled n=6: 60, sampled n=7: 60)
+  52643 fibers examined, 154737 BK edges examined
+  [PASS] 1.1  every fiber is EXACTLY the product set of per-block orientations -- 0 violations
+  [PASS] 1.1  |fiber| = 2^d(F), d = # incomparable 2-blocks -- 0 violations
+  [PASS] 1.2  induced BK subgraph on a fiber = the cube graph, d*2^(d-1) edges -- 0 violations
+  [PASS] 1.4  uniform-on-L(P) restricted to a fiber is uniform
+  [PASS] 1.3  G_BK = odd cube edges UNION even cube edges -- 0 violations
+  [PASS] 1.3  ... and the union is edge-DISJOINT -- 0 violations
+======================================================================================
+a1.C  controls: planted defects each check must catch
+======================================================================================
+  [PASS] M1  C_e's fibers paired with the ODD swap positions (wrong parity, right blocks)
+         -> row 1.2_edges goes RED -- 215/278 posets
+  [PASS] M2  one linear extension deleted from each fiber (fiber is not the full cube)
+         -> row 1.1_product_set goes RED -- 248/278 posets
+  [PASS] M3  d(F) counted over ALL 2-blocks, not only the incomparable ones
+         -> row 1.1_size_2^d goes RED -- 273/278 posets
+  [PASS] M4  even foliation dropped from the union -> 1.3 goes RED -- 215/278 posets
+
+a1 VERDICT: section 1 CONFIRMED

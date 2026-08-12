@@ -1,0 +1,59 @@
+======================================================================================
+a4.1  the asymmetry, measured
+======================================================================================
+    n  odd swap posns  even swap posns  C_o blocks  C_e blocks  C_o singletons  C_e singletons
+    2               1                0           1           0               0               2
+    3               1                1           1           1               1               1
+    4               2                1           2           1               0               2
+    5               2                2           2           2               1               1
+    6               3                2           3           2               0               2
+    7               3                3           3           3               1               1
+    8               4                3           4           3               0               2
+    9               4                4           4           4               1               1
+   10               5                4           5           4               0               2
+  [PASS] position counts differ by exactly 1 at n even and by 0 at n odd
+  pm-onethird's count is confirmed: n/2 vs n/2-1 at n even.  The note never uses it.
+
+  edge counts are not determined by the position counts; measured over posets:
+    odd-edges / even-edges over 4196 posets: min 0.0000, max 4.0000, and 184 posets have ZERO even edges (165 have zero odd edges)
+
+  n=2 antichain, f = 1{0<1}:  E Var(f|C_o) = 1/4,  E Var(f|C_e) = 0,  E_BK = 1/2,  (2/(n-1))(Vo+Ve) = 1/2
+  [PASS] one term of (*) is IDENTICALLY ZERO and (*) is still exact
+======================================================================================
+a4.2  does the asymmetry perturb (*), (**), (***)?  -- split by parity of n
+======================================================================================
+    n  parity   tested   (*) bad  (**) bad  (***) bad
+    2    even        1         0         0          0
+    3     odd       13         0         0          0
+    4    even      195         0         0          0
+    5     odd     4111         0         0          0
+    6    even       50         0         0          0
+    7     odd       50         0         0          0
+  [PASS] (*), (**) and (***) are unperturbed at BOTH parities -- 4420 statistics
+  reason: the derivation is a per-position sum and 2/(n-1) is the CHAIN's
+  normalization (compression.tex:106), not a count of odd vs even positions.
+  The two sides of (*) are free to be lopsided; the identity never compares them.
+======================================================================================
+a4.3  n odd vs n even: reversal maps position p to n-1-p
+======================================================================================
+  prediction: reversal (L(P) -> L(P^op)) preserves position parity iff n is even.
+    n odd  -> fiber-size multiset of C_e on P equals that of C_o on P^op
+    n even -> fiber-size multiset of C_o on P equals that of C_o on P^op
+  [PASS] n ODD: reversal+duality EXCHANGES the two foliations -- 0/479 violations
+  [PASS] n EVEN: reversal+duality preserves EACH foliation -- 0/282 violations
+  [PASS] n EVEN: the exchange FAILS -- the parity distinction is not vacuous -- 197/279 posets where C_e(P) and C_o(P^op) differ
+======================================================================================
+a4.4  what the asymmetry costs: rank Pi_o vs rank Pi_e
+======================================================================================
+  rank Pi = number of fibers.  2I - Pi_o - Pi_e is symmetric in FORM; the two
+  projections it subtracts are not interchangeable objects.
+    n   posets   rank Pi_o > rank Pi_e   equal     <
+    2        3                       0       2     1
+    3       19                       3      13     3
+    4      219                      12      80   127
+    5     4231                    1355    1521  1355
+    6       80                       2       3    75
+  (rank Pi_o <= rank Pi_e is the typical direction at n even: C_o has more blocks,
+   so its fibers are bigger and there are fewer of them.)
+
+a4 VERDICT: (A) answered

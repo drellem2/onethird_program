@@ -1,0 +1,76 @@
+======================================================================================
+a0.1  linear-extension counts against closed forms
+======================================================================================
+  [PASS] antichain n=1: |L(P)| = 1 = 1!
+  [PASS] chain    n=1: |L(P)| = 1 = 1
+  [PASS] antichain n=2: |L(P)| = 2 = 2!
+  [PASS] chain    n=2: |L(P)| = 1 = 1
+  [PASS] antichain n=3: |L(P)| = 6 = 3!
+  [PASS] chain    n=3: |L(P)| = 1 = 1
+  [PASS] antichain n=4: |L(P)| = 24 = 4!
+  [PASS] chain    n=4: |L(P)| = 1 = 1
+  [PASS] antichain n=5: |L(P)| = 120 = 5!
+  [PASS] chain    n=5: |L(P)| = 1 = 1
+  [PASS] antichain n=6: |L(P)| = 720 = 6!
+  [PASS] chain    n=6: |L(P)| = 1 = 1
+  [PASS] antichain n=7: |L(P)| = 5040 = 7!
+  [PASS] chain    n=7: |L(P)| = 1 = 1
+  [PASS] N-poset: |L(P)| = 5 = 5 (hand count)
+======================================================================================
+a0.2  the two position groupings, against the note's own prose
+======================================================================================
+  [PASS] n=2: both groupings partition all 2 positions
+  [PASS] n=2: odd swaps [1], even swaps []
+  [PASS] n=2: the two swap sets are disjoint and cover 1..1
+  [PASS] n=3: both groupings partition all 3 positions
+  [PASS] n=3: odd swaps [1], even swaps [2]
+  [PASS] n=3: the two swap sets are disjoint and cover 1..2
+  [PASS] n=4: both groupings partition all 4 positions
+  [PASS] n=4: odd swaps [1, 3], even swaps [2]
+  [PASS] n=4: the two swap sets are disjoint and cover 1..3
+  [PASS] n=5: both groupings partition all 5 positions
+  [PASS] n=5: odd swaps [1, 3], even swaps [2, 4]
+  [PASS] n=5: the two swap sets are disjoint and cover 1..4
+  [PASS] n=6: both groupings partition all 6 positions
+  [PASS] n=6: odd swaps [1, 3, 5], even swaps [2, 4]
+  [PASS] n=6: the two swap sets are disjoint and cover 1..5
+  [PASS] n=7: both groupings partition all 7 positions
+  [PASS] n=7: odd swaps [1, 3, 5], even swaps [2, 4, 6]
+  [PASS] n=7: the two swap sets are disjoint and cover 1..6
+  [PASS] n=8: both groupings partition all 8 positions
+  [PASS] n=8: odd swaps [1, 3, 5, 7], even swaps [2, 4, 6]
+  [PASS] n=8: the two swap sets are disjoint and cover 1..7
+======================================================================================
+a0.3  exact PSD test on matrices whose definiteness is known by hand
+======================================================================================
+  [PASS] psd_exact(2x2 diagonally dominant) = True, want True
+  [PASS] psd_exact(rank-1 PSD) = True, want True
+  [PASS] psd_exact(det = -3) = False, want False
+  [PASS] psd_exact(zero pivot with nonzero row) = False, want False
+  [PASS] psd_exact(zero pivot with zero row) = True, want True
+  [PASS] psd_exact(negative last pivot) = False, want False
+  [PASS] psd_exact(PSD with a null direction) = True, want True
+======================================================================================
+a0.4  exact span test
+======================================================================================
+  [PASS] in-span case
+  [PASS] out-of-span case
+======================================================================================
+a0.5  Jacobi eigenvalues against a hand-computable matrix
+======================================================================================
+  [PASS] eigs = [0.9999999999999998, 2.9999999999999996], want [1, 3]
+======================================================================================
+a0.6  BK Dirichlet form on a case small enough to do on paper
+======================================================================================
+  [PASS] E_BK = 1/2, want 1/2
+  [PASS] Var = 1/4, want 1/4
+======================================================================================
+a0.7  law of total variance: E Var(f|C) <= Var(f), on every poset to n = 4
+======================================================================================
+  [PASS] 0 violations over 209 posets x 2 compressions
+======================================================================================
+a0.8  fibers partition L(P)
+======================================================================================
+  [PASS] every fiber decomposition is a partition
+
+a0 SELFTEST: ALL PASS
