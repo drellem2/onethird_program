@@ -146,6 +146,11 @@ pair-marginal argument reaches is an equality, not a bound awaiting sharpening (
 must reach into the **joint law** of a real poset's linear extensions, and that obstruction has no
 eigenvalue anywhere in it.
 
+**This file describes the space; the ARGUMENT is described once, elsewhere.** Where L1b enters the
+chain, what the other links are, and why the chain is a closed loop on the frozen hypothesis rather
+than a line: [`OneThird-ProofShape-mg-3af8.md`](OneThird-ProofShape-mg-3af8.md) — **cited, not
+restated** (`mg-3af8`, on Daniel's question).
+
 ---
 
 ## 5. Intuitions that have been killed, and by what
