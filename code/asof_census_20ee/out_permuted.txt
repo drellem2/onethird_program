@@ -115,47 +115,106 @@ mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
   transcripts carry a repeated address line at this commit.
 
 ------------------------------------------------------------------------------
-4  AN OVER-COUNT IN R3, MEASURED -- PROSE THAT NAMES THE
-   INVOCATION FIRES IT, AND N11 PLANTS ONLY THE BARE WORD
+4  R3's PROSE OVER-COUNT, REPAIRED -- AND ALL THREE RULES
+   COUNTED SIDE BY SIDE, THE WAY SET IS COUNTED BESIDE BAG
 ------------------------------------------------------------------------------
 
-  R3 matches the invocation plus a following short-flag cluster, and
-  N11 -- mg-0e77's negative control for `the word in prose` -- plants
-  the BARE word.  So a SENTENCE OF COMMENTARY NAMING THE INVOCATION
-  fires R3, and in an estate where every docstring names its own
-  method that is a shape worth counting rather than supposing.
+  mg-885d reported this and did not repair it: R3 matched the
+  invocation WHEREVER IT APPEARED, so a sentence NAMING the
+  invocation fired it, and N11 -- mg-0e77's control for `the word in
+  prose` -- plants only the BARE word.  mg-e5f3 repairs it, and the
+  repair is counted here rather than asserted, because the figure
+  mg-885d published (`3 hits on a comment line`) was itself an
+  UNDER-COUNT OF THE OVER-COUNT: it tested `startswith('#')`, which
+  cannot see a TRAILING comment or a DOCSTRING, and 6 of the 9 are
+  docstrings.  A rule measured by a one-line test in the transcript
+  reporting it is the `18 of 129` shape, one section up.
+
+  THE BOUNDARY IS `TEXT THE INTERPRETER NEVER EXECUTES` -- comments
+  and docstrings.  A string passed to a CALL is not prose to R3,
+  because nothing here can tell print(...) from run([...]) without
+  knowing which callee executes; that residue is counted below
+  rather than assumed away.
 
       1384  .py/.sh tracked at 12aa5f8
-        92  R3 hits across them
-         3  of those hits sit on a COMMENT line, in 2 file(s) --
-            prose, not an invocation, and R3 cannot tell them apart
+         0  files this Python could NOT separate from their prose
 
+      mg-0e77's rule -- prose read as code           92 hits,  71 file(s),  47 dir(s)
+      comments blanked ONLY -- THE HALF-REPAIR       90 hits,  69 file(s),  46 dir(s)
+      comments AND docstrings -- THE RULE            83 hits,  63 file(s),  45 dir(s)
+
+  BOTH DIRECTIONS, AND THE SECOND IS THE ONE THAT DECIDED THE
+  DESIGN.  Blanking comments ALONE removes 3 and ADDS 1:
+
+      ADDED  code/asof_census_20ee/pinnable.py
+             So pinning a `grep -r` corpus necessarily permutes the transcrip
+
+  -- and the file it adds one to is pinnable.py ITSELF, whose walk
+  line was suppressed by a `sorted(` living in a BLOCK COMMENT.
+  Removing comments removes the SUPPRESSOR: a repair introducing the
+  defect it repairs, in the half nobody would have looked at.  So
+  the two prose surfaces move together, and the rule blanks both.
+  Asserted as P21 in selftest_20ee.py, PLANTED and not found --
+  because with both surfaces blanked the estate gains 0 hits.
+
+  THE 9 HITS THE REPAIR REMOVES, EVERY ONE PRINTED, because a
+  repair that removes hits without showing which ones is
+  indistinguishable from one that broke the rule:
+
+      code/anchor_population_audit_0ba7/lib_0ba7.py
+          with no `--format=%H`, so a grep-based re-derivation would reproduce
+      code/audit_330a/lib330a.py
+          `ast`, not by grepping lines: a grep for `--format=%H` finds the str
+      code/corpus_universe_1d6c/lib1d6c.py
+          G_IMPL   `os.listdir(docs)` filtered on `.endswith('.md')` -- mg-d07
+      code/corpus_universe_1d6c/p1_glob.py
+          G_IMPL   os.listdir(docs) filtered .md      -- the universe AS IMPLE
+      code/corpus_universe_1d6c/p2_population.py
+          and never from `os.listdir(docs)`.
       code/landscape_repair_audit_3b51/audit_scope_text.py
           # `grep -rn` over it, so D1, D2, D5, D6 and D7 measured whatever doc
       code/landscape_repair_audit_3b51/audit_scope_text.py
           #   2. its output is SORTED.  `grep -rn` emits directory-enumeration
       code/runner_exit_c2b3/run_all.sh
           #       63/23/1 becomes 64 / 23-by-bare-grep / 17-by-parse / 1.
+      code/runner_exit_repair_7522/lib7522.py
+          ticket's bare grep, re-derived here from this file's own rule.
 
-  AND THE FILE THIS LANDS HARDEST ON IS THE ONE TRANCHE 4 PINNED.
-  audit_scope_text.py's ONLY R3 hits are two comments EXPLAINING THE
-  DEFECT IT ALREADY REPAIRED -- its corpus read is `git grep <rev>`
-  now, and R3 reads the sentences describing what it used to be.  So
-  condition 0 run on it today still prints `+R3: expect a permuted
-  transcript`, which is exactly the failure N9's rationale exists to
-  prevent -- `every repaired instrument in the estate is told it is
-  still defective` -- arriving by PROSE instead of by the git form.
+  2 DIRECTORIES GO SILENT, AND ONE OF THEM IS THE HEADLINE:
+      code/corpus_universe_1d6c
+      code/landscape_repair_audit_3b51
 
-  FOUND WHILE WRITING THIS FILE, WHICH IS RECORDED BECAUSE IT IS THE
-  HALF THAT WOULD OTHERWISE LOOK LIKE A CLEAN RESULT: an early draft
-  of permuted.py carried a sentence naming the invocation, R3 fired
-  on it, and REWORDING THE SENTENCE MADE THE HIT GO AWAY.  That is
-  not a repair of anything -- it removes one file from a rule that is
-  still wrong for the other 2 -- and this file scores 0 today.
-  So the shape is asserted as N18 in selftest_20ee.py, a KNOWN-DEFECT
-  control in the form N4, N5 and C3 already take: teach R3 to see
-  prose and N18 goes RED, which is the signal to update its declared
-  self-hit count.  R3 is mg-0e77's rule and this is not its repair.
+  audit_scope_text.py IS THE INSTRUMENT TRANCHE 4 REPAIRED AND
+  PINNED.  Its only two R3 hits were comments EXPLAINING THE DEFECT
+  IT NO LONGER HAS -- its corpus read is `git grep <rev>` now -- so
+  condition 0 run on it printed `+R3: expect a permuted transcript`
+  for sentences describing what it used to be.  That is exactly the
+  failure N9's rationale exists to prevent, `every repaired
+  instrument in the estate is told it is still defective`, arriving
+  by PROSE instead of by the git form.  It does not print it now.
+
+  AND THE OTHER DIRECTION WAS CHECKED RATHER THAN ASSUMED: every
+  newly-silent file was READ, and every real walk in them is already
+  `sorted(...)` -- corpus_universe_1d6c's p1_glob.py globs and sorts
+  the result, which is why only its DOCSTRING was ever firing.  A
+  repair that silenced a true hit would look exactly like this one
+  from the counts alone.
+
+  WHAT IS LEFT, REPORTED AT THE LOW WATER MARK.  2 of the 83
+  surviving hits are still prose -- sentences inside a print(...):
+
+      code/runner_exit_c2b3/k3_retro.py
+          print("          echo \"$E2OUT\" | grep 'STANDING UN-STRUCK' || true
+      code/species_extent_audit_6cb9/a1_bothways.py
+          print("  `os.listdir(root)` and `continue` past anything that is not
+
+  They stay because the boundary above is a fact about the
+  language rather than a judgement about a callee.  One of them
+  shows a SECOND over-count in R3 that this branch does not touch:
+  the short-flag cluster fires on a HYPHENATED WORD, so
+  `grep 'STANDING UN-STRUCK'` matches on `-STR`.  Reported, not
+  repaired; R3's flag half is mg-0e77's rule and one rule change
+  measured in both directions is this tranche's whole claim.
 
 ==============================================================================
 CONDITION 2: instrument GREEN -- 2 of 2 tranche-4 pins survive the stricter test; 1010 of 1061 transcripts are ones on which SET and BAG can disagree

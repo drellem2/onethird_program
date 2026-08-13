@@ -91,20 +91,26 @@ FINDING and this file says so.
     this file INVOKES no filesystem enumeration at all.  So out_permuted.txt
     satisfies condition 2 AS ORIGINALLY WRITTEN.
 
+    IT DID NOT QUITE, AND THE HOLE WAS ONE LINE (mg-e5f3).  Section 4 printed
+    a count taken by running R3 over THIS FILE IN THE LIVE WORKTREE -- the
+    only read here that was not of a commit, in the file arguing that a
+    transcript must be a function of repo state.  It read `0` and would have
+    gone on reading `0` until somebody edited the prose above it, which is
+    mg-30bd's defect exactly: a report reading the live tree for its own
+    figure.  The line is gone, and every number in section 4 now comes from
+    AS_OF.
+
   * AND POINTING R3 AT SUBJECTS IT HAD NOT SEEN FOUND AN OVER-COUNT IN IT,
-    WHICH IS REPORTED AND NOT REPAIRED HERE.  R3 matches the invocation plus a
-    following short-flag cluster; mg-0e77's N11 controls "the word in prose"
-    but plants the BARE word.  So a SENTENCE OF COMMENTARY naming the
-    invocation fires it.  MEASURED across the estate at AS_OF rather than
-    supposed: 3 of R3's 92 hits sit on comment lines, in 2 files -- and BOTH
-    hits in one of them are in audit_scope_text.py, THE INSTRUMENT TRANCHE 4
-    PINNED, whose only R3 hits are two comments explaining the defect it
-    already repaired.  Condition 0 still tells it to expect a permuted
-    transcript, which is the failure N9's rationale exists to prevent arriving
-    by prose instead of by the git form.  An early draft of THIS file carried
-    the same shape and rewording removed it -- which repairs nothing, and is
-    recorded in section 4 because a clean self-score would otherwise read as
-    evidence.  Asserted as N18, a known-defect control; R3 is mg-0e77's rule.
+    REPORTED HERE BY mg-885d AND REPAIRED BY mg-e5f3 IN SECTION 4.  R3 matched
+    the invocation WHEREVER IT APPEARED, so a SENTENCE OF COMMENTARY naming it
+    fired the rule; mg-0e77's N11 controls "the word in prose" but plants the
+    BARE word.  THE FIGURE THIS FILE FIRST PUBLISHED WAS ITSELF SHORT: `3 of
+    92 hits sit on comment lines` was measured with `startswith("#")`, which
+    sees neither a TRAILING comment nor a DOCSTRING, and 6 of the 9 real hits
+    are docstrings.  A rule measured by a one-line test, in the transcript
+    reporting it, is section 1's own `18 of 129` shape one section along.
+    Section 4 now counts all three rules side by side, prints every hit the
+    repair removes, and names the residue it does not reach.
 
     sh code/asof_census_20ee/run_all.sh        # section 3 only: the estate scan
     python3 code/asof_census_20ee/permuted.py <path> [<old-rev>] [<new-rev>]
@@ -581,55 +587,131 @@ def estate_mode():
         print("  transcripts carry a repeated address line at this commit.")
     print()
 
-    banner("4  AN OVER-COUNT IN R3, MEASURED -- PROSE THAT NAMES THE\n   INVOCATION FIRES IT, AND N11 PLANTS ONLY THE BARE WORD")
-    print("  R3 matches the invocation plus a following short-flag cluster, and")
-    print("  N11 -- mg-0e77's negative control for `the word in prose` -- plants")
-    print("  the BARE word.  So a SENTENCE OF COMMENTARY NAMING THE INVOCATION")
-    print("  fires R3, and in an estate where every docstring names its own")
-    print("  method that is a shape worth counting rather than supposing.")
+    banner("4  R3's PROSE OVER-COUNT, REPAIRED -- AND ALL THREE RULES\n   COUNTED SIDE BY SIDE, THE WAY SET IS COUNTED BESIDE BAG")
+    print("  mg-885d reported this and did not repair it: R3 matched the")
+    print("  invocation WHEREVER IT APPEARED, so a sentence NAMING the")
+    print("  invocation fired it, and N11 -- mg-0e77's control for `the word in")
+    print("  prose` -- plants only the BARE word.  mg-e5f3 repairs it, and the")
+    print("  repair is counted here rather than asserted, because the figure")
+    print("  mg-885d published (`3 hits on a comment line`) was itself an")
+    print("  UNDER-COUNT OF THE OVER-COUNT: it tested `startswith('#')`, which")
+    print("  cannot see a TRAILING comment or a DOCSTRING, and 6 of the 9 are")
+    print("  docstrings.  A rule measured by a one-line test in the transcript")
+    print("  reporting it is the `18 of 129` shape, one section up.")
+    print()
+    print("  THE BOUNDARY IS `TEXT THE INTERPRETER NEVER EXECUTES` -- comments")
+    print("  and docstrings.  A string passed to a CALL is not prose to R3,")
+    print("  because nothing here can tell print(...) from run([...]) without")
+    print("  knowing which callee executes; that residue is counted below")
+    print("  rather than assumed away.")
     print()
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import pinnable
     srcs = [p for p in text(git("ls-tree", "-r", "--name-only", AS_OF)).splitlines()
             if p.endswith(".py") or p.endswith(".sh")]
-    total_hits, comment_hits, in_files = 0, [], set()
+    old, half, new, unsep = {}, {}, {}, []
     for p, blob in batch(AS_OF, srcs):
         if blob is None:
             continue
-        for h in pinnable.unordered_walks(text(blob)):
-            total_hits += 1
-            if h.startswith("#"):
-                comment_hits.append((p, h))
-                in_files.add(p)
+        s = text(blob)
+        if not pinnable.code_only(s, p)[1]:
+            unsep.append(p)
+        for store, mode in ((old, "read"), (half, "comments"), (new, "none")):
+            h = pinnable.unordered_walks(s, p, prose=mode)
+            if h:
+                store[p] = h
+
+    def n(d):
+        return sum(len(v) for v in d.values())
+
+    def dirs(d):
+        return {p.rsplit("/", 1)[0] for p in d}
+
     print("      %4d  .py/.sh tracked at %s" % (len(srcs), AS_OF))
-    print("      %4d  R3 hits across them" % total_hits)
-    print("      %4d  of those hits sit on a COMMENT line, in %d file(s) --"
-          % (len(comment_hits), len(in_files)))
-    print("            prose, not an invocation, and R3 cannot tell them apart")
+    print("      %4d  files this Python could NOT separate from their prose"
+          % len(unsep))
     print()
-    for p, h in comment_hits:
+    print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
+          % ("mg-0e77's rule -- prose read as code", n(old), len(old),
+             len(dirs(old))))
+    print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
+          % ("comments blanked ONLY -- THE HALF-REPAIR", n(half), len(half),
+             len(dirs(half))))
+    print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
+          % ("comments AND docstrings -- THE RULE", n(new), len(new),
+             len(dirs(new))))
+    print()
+
+    def delta(a, b):
+        gone = [(p, h) for p, v in sorted(a.items()) for h in v
+                if h not in b.get(p, [])]
+        add = [(p, h) for p, v in sorted(b.items()) for h in v
+               if h not in a.get(p, [])]
+        return gone, add
+
+    gone, added = delta(old, new)
+    hgone, hadded = delta(old, half)
+    print("  BOTH DIRECTIONS, AND THE SECOND IS THE ONE THAT DECIDED THE")
+    print("  DESIGN.  Blanking comments ALONE removes %d and ADDS %d:"
+          % (len(hgone), len(hadded)))
+    print()
+    for p, h in hadded:
+        print("      ADDED  %s\n             %s" % (p, h[:64]))
+    print()
+    print("  -- and the file it adds one to is pinnable.py ITSELF, whose walk")
+    print("  line was suppressed by a `sorted(` living in a BLOCK COMMENT.")
+    print("  Removing comments removes the SUPPRESSOR: a repair introducing the")
+    print("  defect it repairs, in the half nobody would have looked at.  So")
+    print("  the two prose surfaces move together, and the rule blanks both.")
+    print("  Asserted as P21 in selftest_20ee.py, PLANTED and not found --")
+    print("  because with both surfaces blanked the estate gains %d hits."
+          % len(added))
+    print()
+    print("  THE %d HITS THE REPAIR REMOVES, EVERY ONE PRINTED, because a" % len(gone))
+    print("  repair that removes hits without showing which ones is")
+    print("  indistinguishable from one that broke the rule:")
+    print()
+    for p, h in gone:
         print("      %s\n          %s" % (p, h[:68]))
     print()
-    print("  AND THE FILE THIS LANDS HARDEST ON IS THE ONE TRANCHE 4 PINNED.")
-    print("  audit_scope_text.py's ONLY R3 hits are two comments EXPLAINING THE")
-    print("  DEFECT IT ALREADY REPAIRED -- its corpus read is `git grep <rev>`")
-    print("  now, and R3 reads the sentences describing what it used to be.  So")
-    print("  condition 0 run on it today still prints `+R3: expect a permuted")
-    print("  transcript`, which is exactly the failure N9's rationale exists to")
-    print("  prevent -- `every repaired instrument in the estate is told it is")
-    print("  still defective` -- arriving by PROSE instead of by the git form.")
+    silent = sorted(dirs(old) - dirs(new))
+    print("  %d DIRECTORIES GO SILENT, AND ONE OF THEM IS THE HEADLINE:"
+          % len(silent))
+    for d in silent:
+        print("      %s" % d)
     print()
-    print("  FOUND WHILE WRITING THIS FILE, WHICH IS RECORDED BECAUSE IT IS THE")
-    print("  HALF THAT WOULD OTHERWISE LOOK LIKE A CLEAN RESULT: an early draft")
-    print("  of permuted.py carried a sentence naming the invocation, R3 fired")
-    print("  on it, and REWORDING THE SENTENCE MADE THE HIT GO AWAY.  That is")
-    print("  not a repair of anything -- it removes one file from a rule that is")
-    print("  still wrong for the other %d -- and this file scores %d today."
-          % (len(in_files), len(pinnable.unordered_walks(open(os.path.abspath(__file__)).read()))))
-    print("  So the shape is asserted as N18 in selftest_20ee.py, a KNOWN-DEFECT")
-    print("  control in the form N4, N5 and C3 already take: teach R3 to see")
-    print("  prose and N18 goes RED, which is the signal to update its declared")
-    print("  self-hit count.  R3 is mg-0e77's rule and this is not its repair.")
+    print("  audit_scope_text.py IS THE INSTRUMENT TRANCHE 4 REPAIRED AND")
+    print("  PINNED.  Its only two R3 hits were comments EXPLAINING THE DEFECT")
+    print("  IT NO LONGER HAS -- its corpus read is `git grep <rev>` now -- so")
+    print("  condition 0 run on it printed `+R3: expect a permuted transcript`")
+    print("  for sentences describing what it used to be.  That is exactly the")
+    print("  failure N9's rationale exists to prevent, `every repaired")
+    print("  instrument in the estate is told it is still defective`, arriving")
+    print("  by PROSE instead of by the git form.  It does not print it now.")
+    print()
+    print("  AND THE OTHER DIRECTION WAS CHECKED RATHER THAN ASSUMED: every")
+    print("  newly-silent file was READ, and every real walk in them is already")
+    print("  `sorted(...)` -- corpus_universe_1d6c's p1_glob.py globs and sorts")
+    print("  the result, which is why only its DOCSTRING was ever firing.  A")
+    print("  repair that silenced a true hit would look exactly like this one")
+    print("  from the counts alone.")
+    print()
+    narrated = [(p, h) for p, v in sorted(new.items()) for h in v
+                if "print(" in h]
+    print("  WHAT IS LEFT, REPORTED AT THE LOW WATER MARK.  %d of the %d"
+          % (len(narrated), n(new)))
+    print("  surviving hits are still prose -- sentences inside a print(...):")
+    print()
+    for p, h in narrated:
+        print("      %s\n          %s" % (p, h[:68]))
+    print()
+    print("  They stay because the boundary above is a fact about the")
+    print("  language rather than a judgement about a callee.  One of them")
+    print("  shows a SECOND over-count in R3 that this branch does not touch:")
+    print("  the short-flag cluster fires on a HYPHENATED WORD, so")
+    print("  `grep 'STANDING UN-STRUCK'` matches on `-STR`.  Reported, not")
+    print("  repaired; R3's flag half is mg-0e77's rule and one rule change")
+    print("  measured in both directions is this tranche's whole claim.")
     print()
 
     print("=" * 78)

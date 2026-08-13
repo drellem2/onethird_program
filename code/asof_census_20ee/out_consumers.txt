@@ -27,9 +27,9 @@ mg-6e4f -- CONSUMERS OF code/species_remainder_f8fa
       w3_scope.py
 
   matched by basename: 5 script(s); by FULL PATH: 1, because the
-  basename is shared -- run_all.sh (193 files)
+  basename is shared -- run_all.sh (194 files)
   documentation mentions in *.md / *.txt, counted and NOT listed
-  because prose cannot execute anything: 145 file(s)
+  because prose cannot execute anything: 146 file(s)
 
   subject scripts NAMED IN NO TRACKED *.py / *.sh OUTSIDE their
   own directory: 0 of 6
@@ -115,6 +115,7 @@ B  EXECUTIONS THAT PASS A PATH, and mentions with no exec token
   mention        code/species_sites_821e/kern821e.py            w3_scope.py
   mention        code/species_sites_821e/p1_depth.py            w3_scope.py
   mention        code/species_sites_821e/selftest821e.py        w3_scope.py
+  mention        code/verdict_staleness_30bd/selftest_30bd.py   w3_scope.py
 
 ------------------------------------------------------------------------------
 C  THE INSTRUMENTS TO RE-MEASURE, and their runners
@@ -152,6 +153,7 @@ C  THE INSTRUMENTS TO RE-MEASURE, and their runners
       code/species_gate_audit_d53d               sh code/species_gate_audit_d53d/run_all.sh
       code/species_repair_a4ef                   sh code/species_repair_a4ef/run_all.sh
       code/species_sites_821e                    sh code/species_sites_821e/run_all.sh
+      code/verdict_staleness_30bd                sh code/verdict_staleness_30bd/run_all.sh
 
 ------------------------------------------------------------------------------
 D  THE BACKSTOP, WHICH IS NOT THIS CENSUS
@@ -192,5 +194,5 @@ D  THE BACKSTOP, WHICH IS NOT THIS CENSUS
 
 ==============================================================================
 CONSUMERS: 10 no-arg execution(s) CONFIRMED across 6 instrument(s);
-           9 further instrument(s) UNCONFIRMED.  WORK-LIST: 15.
+           10 further instrument(s) UNCONFIRMED.  WORK-LIST: 16.
 ==============================================================================

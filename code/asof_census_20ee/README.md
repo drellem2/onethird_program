@@ -636,3 +636,119 @@ every later operator.
 `n0_strike_audit_dd8b` reports `REPRODUCES` only because this branch had already pinned it when
 the sweep reached it, and `census_remainder_f8e5` reports `rc=143` because its worker was killed
 after 37 minutes to unblock the sweep — that line is unreliable and must be re-measured.
+
+---
+
+# Tranche 6 (`mg-e5f3`) — R3 reads **code**, not prose; and the half-repair adds a hit
+
+Tranche 5 reported an over-count in R3 and did not repair it, in as many words: *"R3 is mg-0e77's
+rule and this is not its repair."* It left the signal for whoever did — `N18`, a known-defect
+control whose own text says *"teach R3 to see prose and this control goes RED, which is the signal
+to update its declared self-hit count."* This tranche is that update.
+
+## 1. The reported figure was itself short — `3 on a comment line` was **9**
+
+Tranche 5 counted the over-count with `h.startswith("#")`. That test sees a whole-line comment and
+nothing else: not a **trailing** comment on a line of code, and not a **docstring** — which is where
+6 of the 9 real hits are, in an estate whose every instrument explains its own method at the top of
+its own file. **A rule measured by a one-line test, inside the transcript reporting it, is §3's own
+`18 of 129` shape one section along.**
+
+Counted at `12aa5f8`, all three rules side by side (`out_permuted.txt` §4):
+
+    mg-0e77's rule — prose read as code          92 hits, 71 files, 47 dirs
+    comments blanked ONLY — the half-repair      90 hits, 69 files, 46 dirs
+    comments AND docstrings — the rule           83 hits, 63 files, 45 dirs
+
+## 2. **The half-repair adds a hit, and it adds it to `pinnable.py` itself**
+
+This is the measurement that decided the design, and it was taken rather than reasoned about.
+Blanking **comments alone** removes 3 hits and **adds one** — to R3's own file. Its docstring line
+*"So pinning a grep -r corpus necessarily permutes the transcript"* was being suppressed by a
+`sorted(` that lives in the **block comment twenty lines below**. Remove the comments and you remove
+the *suppressor*: a repair introducing the defect it repairs, in the half nobody would have looked
+at, because the half everybody looks at demonstrably worked.
+
+R3's negative half reads the whole enclosing block, so **prose could silence a real walk**. The two
+surfaces are therefore blanked together. Planted as `P21`; at `12aa5f8` the full repair adds **zero**
+hits, so no instrument in the estate was ordered only in prose — the control says what *would*
+happen, and the estate scan says it does not.
+
+## 3. The headline — condition 0 stops telling a repaired instrument it is defective
+
+**Two directories go silent, and one of them is `landscape_repair_audit_3b51` — the instrument
+tranche 4 repaired and pinned.** Its *only* two R3 hits were comments explaining the defect it no
+longer has; its corpus read has been `git grep <rev>` since `de4ec4b`. Condition 0 run on it printed
+`+R3: expect a permuted transcript` for sentences describing what it *used to be*. That is precisely
+the failure `N9`'s rationale exists to prevent — *"every repaired instrument in the estate is told it
+is still defective"* — arriving **by prose** instead of by the git form. It does not print it now:
+run today, R3 on `audit_scope_text.py` is **0 code hits and 2 prose-only**, and the verdict carries no
+`+R3`.
+
+**`out_pinnable_3b51.txt` still carries that line and CANNOT be re-taken, which is a fact about the
+pin rather than a stale transcript to refresh.** Condition 0 reads `git diff -- <subject>` and refuses
+an empty one. Re-run end to end today (3m 44s), `code/landscape_repair_audit_3b51` **reproduces
+byte-identically** — tranche 4's pin still holds, confirmed rather than assumed — so there is no
+drift to classify and the instrument correctly refuses. That transcript is a dated record of a
+pre-pin tree, its `+R3` line is a statement about a rule as it stood at tranche 3, and hand-editing it
+would be fabricating a run. **The mechanical evidence for this section is `out_permuted.txt` §4**,
+which takes the measurement at a commit and needs no dirty tree at all.
+
+## 4. The other direction, checked rather than assumed
+
+An under-count is the worse failure — nothing in the output says so — and this repair only ever
+*removes* hits, so it is the failure this branch had to rule out.
+
+- **All 9 removed hits are printed** in `out_permuted.txt` §4. Every one is a sentence.
+- **No code line changed status**: the removed set is exactly those 9 prose lines.
+- **Every newly-silent file was read.** `corpus_universe_1d6c/p1_glob.py` globs and `sorted()`s the
+  result; the same for the other seven. Only their prose was ever firing.
+- **`P19` plants the shape that would go silent if the boundary were wrong**: the only subject R3 has
+  ever had spells its corpus read as *string literals in a list*, `["grep", "-rn", ...]`. So the rule
+  blanks **docstrings** — a string standing alone as a statement — and no other string.
+- **The boundary is "text the interpreter never executes"**, which is a fact about the language and
+  not a judgement about intent. `tokenize` is asked rather than a regex written, which is `R2`'s own
+  shape: `git cat-file -e` is git's answer to *"is this a revision"*. A scanner cutting at the first
+  `#` would blank a real walk sitting after one inside a string — **and this file's own `WALK`
+  pattern contains a `#`** (`P20`).
+
+## 5. What this tranche leaves — reported at the low water mark
+
+**No pin landed, and 25 instruments remain — unchanged.** R3 fires on 45 directories rather than 47.
+
+- **2 of the 83 surviving hits are still prose**, both sentences inside a `print(...)`, both printed
+  by name in §4. They stay because nothing here can tell `print("grep -rn …")` from
+  `run(["grep","-rn",…])` without knowing which callee executes, and a rule special-casing `print`
+  would go silently incomplete the moment a subject narrates through `banner()`.
+- **A second over-count in R3, reported and not repaired**: the short-flag cluster fires on a
+  **hyphenated word** — `grep 'STANDING UN-STRUCK'` matches on `-STR`. One rule change measured in
+  both directions is this tranche's whole claim.
+- **A fragment is not a file** (`N21`, a declared-limit control in the form `N18` used to take).
+  Separating code from prose needs syntax; `tokenize` refuses a fragment and the fallback removes
+  comments only. `main()` passes whole files, and **the count of files that fail to tokenize is
+  printed** rather than swallowed — 0 at `12aa5f8` — because a repair that quietly stops applying is
+  worse than one that never did.
+
+### Three figures that were stale in this directory, and are not now
+
+- **`pinnable.py` was still printing tranche 4's superseded wording.** Its R3 section said *"read
+  condition 2 as SET-IDENTITY plus a declared permutation"* — the wording tranche 5's own instrument
+  amended to **bag**, one file away, because a set forgets multiplicity. It also still quoted
+  `18 of 129` and `30 of 149`, the hand counts §3 established reproduce as nothing. Both corrected,
+  and the file now points at `permuted.py` rather than restating a number.
+- **`permuted.py` §4 read the live worktree for one of its own figures** — R3 run over `permuted.py`
+  as it sits on disk, the only read in that file that was not of a commit, in the file arguing that a
+  transcript must be a function of repo state. It printed `0` and would have gone on printing `0`
+  until somebody edited the prose above it. That is `mg-30bd`'s defect exactly; the line is gone and
+  every number in §4 now comes from `AS_OF`.
+- **`pinnable.py`'s `R3 FIRES ON THIS DIRECTORY SIX TIMES` is now counted, not asserted** — and it
+  was already wrong by the time the sentence was written down here: run against a real subject on
+  this branch it prints **7**, because the controls added above each plant a needle in the corpus R3
+  searches. A self-hit count written as prose goes stale the next time somebody adds a control, which
+  is the class `mg-30bd`'s census exists to count.
+- **`selftest_20ee.py`'s closing tally is counted too**, for the same reason and in the same commit:
+  it spelled out *"4 positive, 6 negative and 1 known-defect control on the pinnable pre-condition"*,
+  and this branch adds seven to that one section. The controls that confirm a **known defect or a
+  declared limit** are now **named** rather than counted — which they are is the load-bearing fact,
+  and a number cannot carry it. `N18` leaves that list for the first time: it asked to be told when
+  the thing it asserted got repaired, and this is that.
