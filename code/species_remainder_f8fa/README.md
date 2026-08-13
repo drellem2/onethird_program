@@ -101,6 +101,35 @@ the as-of line and three addresses** (`t4_one_operation.py` 210→201,
 `t6_fock_and_record.py` 75→66 and 85→76) — and **every verdict is identical**,
 every `marked`, every `ok`, and `W3 SCOPE: PASS (0 problem(s))`.
 
+### This file is a SHARED CHECKER, and that is mg-20ee's third condition
+
+`w3_scope.py` is not only a transcript producer. **Nine instruments execute it**, and pinning its
+default reading changes what they measure. Six of nine were affected, and the census that finds
+them — with its method and its blind spot stated — is:
+
+    python3 code/asof_census_20ee/consumers.py code/species_remainder_f8fa
+
+| consumer | shape | what the pin did to it | answer |
+|---|---|---|---|
+| `species_extent_audit_6cb9` | plants in the worktree | `Q6`/`Q7` `1 1 as predicted` → `1 0 *** MISSED ***`; `A1 TOTAL BAD` 0 → 2 | one line at `kern6cb9.run_checker` |
+| `species_extent_d633/e1_extents.py` | `open()` tracer | `18 file(s)` → `0`; three rows `*** FALSE ***`; `E1 TOTAL BAD` 0 → 3 | one line at `trace()` |
+| `species_rung_repair_4adb/v2_layer2.py` | plants 3 files, one `chmod 000` | 52 lines; 12 rows `ok` → `*** FINDING ***` | one line at `kern4adb.sh` |
+| `species_depth_audit_4700/q1_depth.py` | plants in the worktree | 65 lines | one line at `kern4700.sh` |
+| `species_sites_821e/p1_depth.py` | plants in the worktree | 10 lines | one line at `kern821e.run_checker` |
+| `species_audit_7dd3/d2_extent.py` | `open()` tracer | `opens 18 file(s)` → `opens 0` | one line beside its `opened_by` calls |
+| `species_audit_7dd3/d5_mutations.py` | **scratch copy, no `.git`** | control `M0d` `no mutation` → `exit 1, predicted 0 *** PREDICTION MISSED ***` | **no consumer edit** — the pin detects a detached tree |
+| `d633/e3`, `6cb9/a3`, `6cb9/selftest`, `73df/c5`, `73df/c4` | — | nothing | nothing. Measured, not assumed |
+
+**All six are byte-identical to their pre-pin runs with the answers above in place.**
+
+**Take the baseline against a CLEAN tree, and this is not a style note.** Three of these instruments
+read `git status`. The first baseline here was taken with the pre-pin checker *copied over* the
+tracked file, so `4700` listed ` M code/species_remainder_f8fa/w3_scope.py` in its own output and
+`4adb`'s restore contract reported `restored: False` about a file no probe had touched — three
+consumers looked unrepaired when they were repaired. Both arms were re-run as **real commits with a
+clean worktree**, and all four came back byte-identical. A dirty worktree is a corpus, and measuring
+against one is the same mistake as reading the corpus from the working tree.
+
 **The pinned reader keeps both residue layers.** A `ls-tree | cat-file` loop
 that merged them would have deleted the finding channel four tickets built
 here. A symlink and a gitlink are declined **NOT STATED** — no sentence in this
