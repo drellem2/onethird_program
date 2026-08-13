@@ -1,0 +1,235 @@
+==============================================================================
+mg-0bf1 -- HAS THE RECORD NAMED IT SINCE?  Read at AS_OF = 0cb0fa4
+==============================================================================
+
+  mg-e8b0 declared N28: `named in this record` is a SUBSTRING COUNT
+  and cannot tell a sentence ACCOUNTING for a pin from one OFFERING
+  the same instrument as remaining work.  It said closing that would
+  take a rule about English.  IT TAKES A DATE.  A sentence
+  accounting for a pin is younger than the pin and one offering the
+  instrument is older, so the newest mention of an instrument in a
+  record is the record's LAST WORD about it, and a pin landing after
+  that is a change the record has not met.  METHOD AND BLIND SPOTS
+  are in this file's docstring and are not repeated here; the
+  sentence that matters is section 2's: OVERTAKEN is one-directional.
+
+------------------------------------------------------------------------------
+1  THE POPULATION, AND THE 52 LINES A WHOLE-TOKEN GUARD REMOVES
+------------------------------------------------------------------------------
+
+      work-list rows (parsed, not re-typed)                44
+      markdown records in the tree at AS_OF                572
+      mention lines, basename ANYWHERE                     651
+      mention lines, basename a WHOLE TOKEN                599
+        removed by the guard                               52
+        and every one is this row's basename               prerepair
+
+  mg-23af's rule, one file along: A NAME IS A WHOLE TOKEN.  One
+  work-list row is a SUBDIRECTORY and its basename is an ordinary
+  English word, so the loose spelling matches inside every
+  `k1_prerepair.py` in the estate.  The guard is a fact about
+  tokenising and not a judgement about the word, and it is not free:
+  it would also silence a real mention spelled inside an identifier.
+  P31 runs both directions rather than asserting either.
+      code/anchor_population_audit_0ba7/PREDICTIONS.md:172  `k1_prerepair.py:107`** (M-6). The self-error is rig
+      code/anchor_population_audit_0ba7/README.md:186  code/audit_2c77/q4_prerepair.py      spends PRE_REV,
+      code/audit_2c77/PREDICTIONS.md:34  | `q4_prerepair.py` | 0 | **1 — MISS, and it is the 
+      ... 49 more
+
+------------------------------------------------------------------------------
+2  THE RECORD'S LAST WORD, AND WHETHER A PIN LANDED AFTER IT
+------------------------------------------------------------------------------
+
+      (record, name) pairs                                 352
+        OVERTAKEN -- a pin landed after the newest         140
+          in the named instrument's OWN record             22
+          in a FOREIGN record -- the verdict               118
+        OVERTAKEN and beside a count (section 3)           0
+
+  SELF AND FOREIGN ARE KEPT APART BECAUSE THEY ARE NOT THE SAME
+  CLAIM.  A directory's own README pre-dating a pin on that
+  directory is ordinary -- the README is written once and the pins
+  come later.  A FOREIGN record is a reader somewhere else in the
+  estate whose last word about this instrument is older than a
+  change to it, and that is the shape mg-e8b0 was bitten by.
+
+------------------------------------------------------------------------------
+3  THE TICKET'S CLAIM: A COUNT AND A NAME PUBLISHED TOGETHER
+------------------------------------------------------------------------------
+
+  mg-0bf1 carries one transferable claim forward: WHEREVER A
+  REMAINING-COUNT AND A NAMED EXEMPLAR ARE PUBLISHED TOGETHER, THE
+  COUNT WILL STAY RIGHT AND THE NAME WILL ROT, and only the name is
+  load-bearing for the next reader.  `Together` is read as THE SAME
+  MARKDOWN SECTION -- document structure, not prose -- so that this
+  half does not smuggle in the rule about English section 2 avoids.
+
+      pairs published beside a count                       11 of 352
+        the COUNT is the younger of the two                2
+        the NAME is the younger of the two                 2
+        written in the SAME commit                         7
+        and OVERTAKEN by a pin                             0
+
+  BOTH DATES ARE MEASURED AND NOT ONE.  The claim has two halves --
+  the count stays right, the name rots -- and a file measuring the
+  name's age while asserting the count's would be the defect this
+  arc reports.  `Younger` is in commits of this repository, which is
+  the unit the record moves in.
+
+  code/asof_census_20ee/README.md:112   landing_audit_sweep_64cb
+      commits to this record       14
+      section                      ## What remains
+      the record's last word       (`runner_exit_audit_dee4` at `774+/91-`, `landing_au
+          written at               f26d5be
+      the count beside it          > **not pinnable at all**. The count knew about the 
+          written at               0cb0fa4   YOUNGER
+  code/asof_census_20ee/README.md:112   runner_exit_audit_dee4
+      commits to this record       14
+      section                      ## What remains
+      the record's last word       (`runner_exit_audit_dee4` at `774+/91-`, `landing_au
+          written at               f26d5be
+      the count beside it          > **not pinnable at all**. The count knew about the 
+          written at               0cb0fa4   YOUNGER
+  code/asof_census_20ee/README.md:117   species_remainder_f8fa
+      commits to this record       14
+      section                      ## What remains
+      the record's last word       > `species_remainder_f8fa` was **pinned at `e29ba2a`
+          written at               0cb0fa4
+      the count beside it          > **not pinnable at all**. The count knew about the 
+          written at               0cb0fa4   same commit
+  code/asof_census_20ee/README.md:118   species_repair_a4ef
+      commits to this record       14
+      section                      ## What remains
+      the record's last word       > reproduces byte-identically at `07a2fd0`; `species
+          written at               0cb0fa4
+      the count beside it          > **not pinnable at all**. The count knew about the 
+          written at               0cb0fa4   same commit
+  code/state_landing_control_2da3/COVERAGE.md:496   state_audit_6a2f
+      commits to this record       4
+      section                      ## Evidence
+      the record's last word       | the revision-pinned mg-6a2f battery | `code/state_
+          written at               e4426c9
+      the count beside it          | the same, as mg-7870 ran it — **left frozen, no lo
+          written at               e4426c9   same commit
+  docs/OneThird-RunnerExit-PopulationRepair.md:64   branching_audit_a218
+      commits to this record       4
+      section                      ## 1 — a naming convention is not a property
+      the record's last word       they come apart: `code/branching_audit_a218/c0_repro
+          written at               d456f58
+      the count beside it          **8 `| tee` pipelines** between them, unrepaired at 
+          written at               1ee1f1b   older
+  docs/OneThird-Species-Hopf-Monoids-Where-This-Lives.md:974   species_audit_73df
+      commits to this record       5
+      section                      ## 12. REPRODUCE
+      the record's last word       `code/species_audit_73df` is the one tree here that 
+          written at               106e121
+      the count beside it          cd code/species_remainder_f8fa && ./run_all.sh # ~15
+          written at               a13b4a9   older
+  docs/OneThird-SweepLoss-mg-51f4.md:81   landing_audit_sweep_64cb
+      commits to this record       2
+      section                      ## §0.0 REPAIR LANDED BY `mg-d19f` — THREE SENTENCES
+      the record's last word       (`code/landing_audit_sweep_64cb/REPORT.md` §3.2), wh
+          written at               095260c
+      the count beside it          *"**100 % at every enumerated `n`**, with no eigenve
+          written at               095260c   same commit
+  docs/audit-stage-process.md:203   state_landing_control_2da3
+      commits to this record       4
+      section                      ## Appendix A — Audit-stage process (durable home fo
+      the record's last word       **Re-running a REVISION-PINNED instrument certifies 
+          written at               cc4c663
+      the count beside it          **A SELF-AUDIT CANNOT SEE THE SENTENCE IT IS AUDITIN
+          written at               cc4c663   same commit
+  docs/repair-mg-d075-the-figure-and-its-scope.md:178   audit_2c77
+      commits to this record       1
+      section                      ## 5. INSTANCE OR CLASS — the honest answer
+      the record's last word       mg-2c77 (4 commits, `code/audit_2c77`), mg-7e39 (6 c
+          written at               4203bc8
+      the count beside it          document under G4. After this repair **12 sites rema
+          written at               4203bc8   same commit
+  docs/repair-mg-d075-the-figure-and-its-scope.md:179   hodge_leverage_audit_7e39
+      commits to this record       1
+      section                      ## 5. INSTANCE OR CLASS — the honest answer
+      the record's last word       `code/hodge_leverage_audit_7e39`), mg-19ec (10 commi
+          written at               4203bc8
+      the count beside it          document under G4. After this repair **12 sites rema
+          written at               4203bc8   same commit
+
+  CO-PUBLICATION IS RARE AND THE POPULATION IS PRINTED RATHER THAN
+  SUMMARISED, because 11 rows is a number a reader can check and a
+  percentage is not.  0 of 11 are OVERTAKEN at AS_OF -- and the
+  instance mg-0bf1 was filed about IS OF THIS SHAPE and is not in
+  the list, because the commit before this one closed it.  Section 4
+  runs the rule at AS_OF^ so that zero is falsifiable rather than
+  merely empty.
+
+  AND THE CLAIM AS FILED IS TOO WIDE, WHICH THE COMMITS COLUMN IS
+  WHAT SAYS.  `The count will stay right and the name will rot` is
+  not a property of COUNTS AND NAMES.  7 of the 11 pairs have both
+  fields written in ONE COMMIT and never touched again -- the count
+  in those records did not stay right by being maintained, it stayed
+  right because NOTHING IN THE RECORD IS MAINTAINED, and a name
+  beside it would rot exactly as fast.  Where the two dates DO come
+  apart it goes both ways: 2 have the younger count and 2 the
+  younger name.  The narrowed claim the corpus does support:
+
+      IN A RECORD THAT IS APPENDED TO, THE SUMMARY LINE IS
+      RESTATED EVERY TRANCHE AND THE OFFER LIST IS NOT.
+
+  That is a property of a RUNNING LOG and not of a document, and the
+  commits column is where a reader can see which is which -- the
+  extremes here are 14 and 1 commits.  This directory's own README
+  is the log, and mg-e8b0's instance is what a log does to a name.
+
+------------------------------------------------------------------------------
+4  THE INSTANCE THIS RULE WAS BUILT FROM, BEFORE AND AFTER
+------------------------------------------------------------------------------
+
+  A rule that reports nothing is indistinguishable from a rule that
+  SEES nothing, and this rule's own instance was closed in the
+  commit before this one.  So it is run at BOTH revisions:
+
+      at 0cb0fa4^     1 mention(s), newest f26d5be -> OVERTAKEN by e29ba2a
+          (`species_remainder_f8fa` at `2+/2-`, `species_repair_a4ef` at
+      at 0cb0fa4      7 mention(s), newest 0cb0fa4 -> NOT OVERTAKEN
+          > `species_remainder_f8fa` was **pinned at `e29ba2a`** — this 
+
+  AT AS_OF^ THE ONLY SENTENCE NAMING IT WAS TRANCHE 1's OFFER, four
+  tranches older than e29ba2a, which is this arc's own tranche 2.
+  AT AS_OF tranche 9's annotation is the newest mention and it is
+  younger than the pin, so the pair is accounted for.  THE RULE
+  MOVED BECAUSE THE RECORD DID, and P30 asserts exactly that.
+
+  AND IT DOES NOT FIRE ON THE CASE THAT LOOKS THE SAME AND IS NOT:
+      landscape_repair_audit_3b51 in this record           NOT OVERTAKEN
+  Tranche 3 headed a section `the next candidate, diagnosed but NOT
+  pinned` and tranche 4 landed that pin.  Tranche 3's section still
+  says it and always will -- THE CORRECTION IN THIS ESTATE IS A
+  YOUNGER SENTENCE, NOT AN EDIT TO AN OLDER ONE -- which is why the
+  rule is per (record, name) and not per line.  Per line this record
+  has 2 overtaken mention(s) of it and none of them is a defect.
+
+------------------------------------------------------------------------------
+5  WHAT THIS FILE CANNOT SAY, RESTATED WHERE IT IS READ
+------------------------------------------------------------------------------
+
+  * OVERTAKEN IS NOT STALE.  A pin is not a repair, and a reference
+    may be to something the pin did not touch.  It says the record
+    has not spoken since; it does not say what changed.
+  * NOT OVERTAKEN IS NOT CURRENT.  212 pairs are not flagged, and
+    that is a statement about the REPOSITORY.  An instrument goes
+    stale when its CORPUS moves and no pin lands on it at all.
+  * BLAME IS THE LAST TOUCH, NOT THE ORIGIN.  A reflow re-dates a
+    sentence it did not change, so the OVERTAKEN count is a LOW
+    WATER MARK.  N29 asserts that on the rule.
+  * ZERO MENTIONS IS ZERO PAIRS.  1 work-list row(s) are named by
+    no record in the tree -- code/summary_guard_audit_407f -- and this rule
+    is blind to them BY CONSTRUCTION: a record that should name an
+    instrument and never does cannot have a last word about it.
+    N30 counts them, and the count is the one figure here that
+    GROWS when the corpus gets worse.
+  * THE ORDER INDEX ASSUMES A LINEAR HISTORY.  There are 0 merge
+    commits at AS_OF, because the refinery REBASES -- so the
+    comparison is exact HERE by a property of the repository and not
+    by anything this file does.  Counted rather than assumed.
+
+CONDITION 0 (exemplars): 140 of 352 pairs OVERTAKEN, 118 in a foreign record, 0 beside a count, at 0cb0fa4
