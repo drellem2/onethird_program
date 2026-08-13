@@ -34,8 +34,13 @@ SECTION 2 — per-row digests: which STATE.md rows have MOVED since the twin was
 SECTION 3 — whole-file digest (the coarse signal)
 --------------------------------------------------------------------------------------
   pinned STATE.md sha256 : 118158cb98ac41a2a6a097e1b833390413653c9d172df84aab59bd0e5bae17b6
-  actual STATE.md sha256 : 118158cb98ac41a2a6a097e1b833390413653c9d172df84aab59bd0e5bae17b6
-  PASS  STATE.md is byte-identical to the revision the twin was pinned against.
+  actual STATE.md sha256 : f85e96666a93c714df9c1c24083e540e21c161a7f3bd6c45fae17341255a9fab
+  DIFFERS  STATE.md has changed since the pin.
+           This alone is NOT a defect and must not be read as one, and it no
+           longer grades: STATE.md changes constantly outside the ledger, and
+           section 2 is the check that carries the verdict.  This line exists so
+           that 'the ledger is unmoved' cannot be mistaken for 'the file is
+           unmoved'.  A MISSING or MALFORMED digest is still structural (above).
 
 SECTION 4 — KIND MARKS agree between the two documents (live, does not use the pin)
 --------------------------------------------------------------------------------------

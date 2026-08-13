@@ -4,9 +4,9 @@ mg-724a — MERGE GATE over the two control suites mg-9876 audited
 
 §1  THE SUITES, RUN — and what each one costs on the merge critical path
 --------------------------------------------------------------------------------------------
-  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      1.1s  7696 bytes
-  audit  code/control_audit_9876/run_all.sh         exit 0     12.4s  41047 bytes
-         (both suites)                                     13.5s total
+  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      1.0s  8056 bytes
+  audit  code/control_audit_9876/run_all.sh         exit 0     11.6s  41047 bytes
+         (both suites)                                     12.6s total
 
 §2  OBSERVED vs BASELINE.json
 --------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ twin.worklist                      gated     MATCH                       baselin
 
 §5  CAN THIS GATE REFUSE?  Self-contained worlds, nothing borrowed from the estate
 --------------------------------------------------------------------------------------------
-  S1   BASELINE.json does not exist                                              CAUGHT   /Users/daniel/.pogo/polecats/p28b6/code/control_gate_724a/BASELINE.json.no-such-file is missing.  A gate
+  S1   BASELINE.json does not exist                                              CAUGHT   /Users/daniel/.pogo/polecats/pf771/code/control_gate_724a/BASELINE.json.no-such-file is missing.  A gate
   S2   the baseline declares a schema this gate cannot read                      CAUGHT   baseline schema is not 1; this gate cannot read it
   S3   a baseline field carries no `why`                                         CAUGHT   baseline field x carries no `why`.  A number in a baseline with no reason beside it is an assertion nobo
   S4   a baseline field is neither gated nor recorded                            CAUGHT   baseline field x declares class 'informational'; every field must be `gated` (a change is RED) or `recor
@@ -113,5 +113,5 @@ twin.worklist                      gated     MATCH                       baselin
 ============================================================================================
 GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
 shown able to fail on 14 probes and to refuse in 8 worlds, on this run, against
-these bytes.  Total 13.5s.
+these bytes.  Total 12.6s.
 ============================================================================================
