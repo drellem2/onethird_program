@@ -5,11 +5,11 @@ mg-e331 — STATE.md SIZE RATCHET
 §1  THE SUBJECT, MEASURED — the WORKING TREE, not a commit
 --------------------------------------------------------------------------------------------
   path              STATE.md
-  words             14337      <- THE GATED QUANTITY (len(text.split()))
-  bytes             96573
-  lines             222
-  longest line      10416 chars
-  lines over 2000   11
+  words             5987      <- THE GATED QUANTITY (len(text.split()))
+  bytes             40258
+  lines             191
+  longest line      8192 chars
+  lines over 2000   3
 
   The gated quantity is WORDS because mg-ea0e's target was in words.  It is a
   PROXY for what a reader must read and not the thing itself: a future editor who
@@ -21,10 +21,10 @@ mg-e331 — STATE.md SIZE RATCHET
 §2  THE DECLARED CEILING
 --------------------------------------------------------------------------------------------
   file              code/state_ratchet_e331/CEILING.json
-  words_ceiling     14337
-  tighten_below     13837
-  set_by            mg-14ad   at 14337 words
-  observed          14337  (+0 against the ceiling)
+  words_ceiling     5987
+  tighten_below     5487
+  set_by            mg-927a   at 5987 words
+  observed          5987  (+0 against the ceiling)
 
   BANKED DOWN 21328 -> 14337 BY mg-14ad, 2026-08-13, AND THE CUT IS THE REMEDY THIS FILE
   ALREADY NAMED RATHER THAN A FRESH JUDGEMENT. out_p1_growth.txt §3 recorded the gap to
@@ -201,31 +201,76 @@ mg-e331 — STATE.md SIZE RATCHET
   IS NOT LAUNDERED: the debt against mg-ea0e's 6,000-word target is not paid and is now
   15328. What the raise buys is that the growth is declared and the reason is written
   down. tighten_below MOVED 20,284 -> 20828 WITH THE CEILING, preserving this file's
-  stated 500-word invariant.
+  stated 500-word invariant. BANKED DOWN AGAIN, 14337 -> 5987 BY mg-927a, 2026-08-13,
+  AND THIS IS THE FIRST TIME THE FILE HAS BEEN INSIDE mg-ea0e's 6,000-WORD TARGET SINCE
+  THAT TARGET WAS SET. The DEBT this file has carried and re-stated at every raise --
+  13,077 words, then 13,750, 13,907, 14,583, 14,784, 15,328, and 8,337 after mg-14ad's
+  cut -- IS PAID. It is recorded as paid here rather than merely being absent, because a
+  debt that stops being mentioned is indistinguishable from a debt that was forgotten.
+  WHAT CAME OUT: 8,350 words, landing docs/STATE-SPLIT-PROPOSAL-mg-14ad.md section 4
+  MINUS ITS LEDGER ROW. The whole Attempt index (3,784 w) to
+  docs/state-history/attempt-index.md; "Why 1/3 -- the elementary anchor" (689 w) to
+  docs/why-one-third-elementary-anchor.md; the five preamble riders, the 1,634-word L1b
+  blockquote body, the mg-05ec three-leg rider, the node-B rider, the machinery strike
+  history and the mg-65f5 fork resolution to three files under docs/state-history/.
+  Every block moved VERBATIM and every site that lost text points at the file that has
+  it. THE PROPOSAL'S ~2,935 IS NOT ADOPTED AND 6,000 IS NOT SUPERSEDED, AND THE REASON
+  IS MEASURED RATHER THAN PREFERRED. mg-14ad says its budgets are estimates; two of them
+  are unreachable under conventions this same estate enforces. (a) Attempt index,
+  budgeted 300 from 3,784 with the rows STAYING: mg-14ad's own relocation convention
+  keeps each row's Status-label and Attempt columns VERBATIM in the row, and those two
+  columns alone are ~2,200 words before a single Result cell is counted. The section
+  could only reach 300 by leaving, which is what it did. (b) Kinds, budgeted 250 from
+  492: the same document's section 5.2 calls those "the most valuable 500 words in the
+  file" and says they should be PROMOTED, not compressed. Section 5.2 was taken over
+  section 4 and the section is UNCHANGED at 492. The remaining distance from 5,987 to
+  ~2,935 is essentially the Full ledger (2,814 w), and that is the part that cannot land
+  -- see below. THE CEILING IS 5,987 AND NOT 6,000 AND NOT 2,935, FOR THIS FILE'S OWN
+  STANDING REASON. A ceiling is a monotone floor under a regression and it binds from
+  where it is set; 2,935 today would be red on arrival by 3,052 words and block every
+  merge in this repository for a reason no author of an unrelated branch could act on,
+  which is the construction this file has refused twice and which is how a control gets
+  deleted within a week (mg-d91f). 6,000 remains the TARGET and is now MET; the ceiling
+  is set at the achieved measurement, which is what SHRINKING in how_to_change_this
+  says. AND THE LEDGER DID NOT MOVE, WHICH IS A FINDING AND NOT A DEFERRAL. Section 4
+  also budgets the Full ledger 2,887 -> 600 by relocating row essays. Those 12 rows are
+  digested per-row by code/rendered_twin_pin_9bc2 and the twin's drift worklist is a
+  GATED FIELD in code/control_gate_724a/BASELINE.json, so a branch that moves one MUST
+  re-pin -- and it CANNOT: twin_pin.py's reconcile() refuses while STATE.md on disk
+  differs from STATE.md at HEAD, and pin_target() then finds no integration-reachable
+  commit carrying those bytes, falls back to HEAD, and prints its own warning that the
+  refinery's rebase turns that hash into an ORPHAN, which section 7 grades RED. This
+  repository has the receipt: `7e7bfb7 twin: point the pin at the commit that survives
+  the rebase -- 2fbd5ce did not exist after it (mg-cdd5)`. So a ledger-row relocation
+  needs TWO landings and nothing in the estate sequences that today. mg-30bd and the
+  twin-pin lineage were told before this branch moved a paragraph, and told that the
+  ledger was NOT in it. The ratchet is NOT being asked to hold 2,814 words of ledger
+  forever -- it is being told what today's measurement is, which is the only thing it
+  was ever built to record.
 
 §3  CAN THIS RATCHET FAIL, AND CAN IT REFUSE?  Probes against THIS run's values
 --------------------------------------------------------------------------------------------
-  N1   one word past the ceiling                   CAUGHT          14338 words is +1 past the declared ceiling 
-  N2   the ceiling plus another whole file         CAUGHT          28674 words is +14337 past the declared ceil
-  N3   one word under the tighten point            CAUGHT          13836 words is 501 below the declared ceilin
-  N4   half the tighten point                      CAUGHT          6918 words is 7419 below the declared ceilin
-  N5   the ceiling edge is exactly where declared  BOUNDARY        14337 -> GREEN, 14338 -> ABOVE-CEILING
-  N6   the tighten edge is exactly where declared  BOUNDARY        13837 -> GREEN, 13836 -> SLACK-UNRATCHETED
+  N1   one word past the ceiling                   CAUGHT          5988 words is +1 past the declared ceiling o
+  N2   the ceiling plus another whole file         CAUGHT          11974 words is +5987 past the declared ceili
+  N3   one word under the tighten point            CAUGHT          5486 words is 501 below the declared ceiling
+  N4   half the tighten point                      CAUGHT          2743 words is 3244 below the declared ceilin
+  N5   the ceiling edge is exactly where declared  BOUNDARY        5987 -> GREEN, 5988 -> ABOVE-CEILING
+  N6   the tighten edge is exactly where declared  BOUNDARY        5487 -> GREEN, 5486 -> SLACK-UNRATCHETED
   N7   a ceiling with an empty `why`               CAUGHT          <probe N7>: `why` is empty.  See REQUIRED in
   N8   a ceiling missing words_ceiling             CAUGHT          <probe N8> is missing required field(s): wor
   N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 10 
-  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (14338) is above 
-  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '14337', not a
+  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (5988) is above w
+  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '5987', not a 
   N12  a negative word count                       CAUGHT          verdict() was handed words=-1
   N13  every mutation above actually mutates       CAUGHT          4 of 4 planted values differ from the observ
-  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/p14
+  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/p92
 
   12 of 14 probes CAUGHT; 2 BOUNDARY (a transition, checked but NOT counted as a
   falsification); 0 explained-unfalsifiable; 0 hole(s)/setup failure(s); 0
   UNEXPLAINED unfalsifiable.  0.000s.
 
 ============================================================================================
-RATCHET VERDICT: GREEN — 14337 words, ceiling 14337, tighten below 13837.
+RATCHET VERDICT: GREEN — 5987 words, ceiling 5987, tighten below 5487.
 This ratchet was shown able to fire in both directions and to refuse in 7 worlds,
 on this run, against these values.  0.00s total.
 ============================================================================================
