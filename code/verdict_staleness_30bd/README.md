@@ -600,3 +600,89 @@ all of them, which is that not one is about the 900 s cap.
 - **The bare-subject residue.** Two rows, closed to any rule over the line's own text. It
   wants a producer-side repair — bound the walk — not a better detector.
 - **§2's derivation** and **§6.6**. Still unchanged and still owed, now by three tickets.
+
+## 13  Is the out-of-family column sensitive enough? — mg-cda7
+
+`mg-aff1`'s own carry-forward asks the one question its landing could not answer about
+itself: **a control that has never fired is a claim.** §12's whole defence of the widening is
+*the out-of-family column did not move*, and that is a defence only if the pair *gained lines,
+OUT unmoved* is **hard to produce**. Nobody had measured whether it is. `owners_937c.py` §6b
+is that measurement, and it comes back in two halves that point opposite ways.
+
+### The column has power, and it is a number now
+
+§6b runs a battery of thirteen rules over the same lines §6a reads — the versions of the
+detector that have been written, widenings a successor would plausibly reach for, and five
+that are bad on purpose. Of the **7** that gain any line at all, **5** move the out-of-family
+column. mg-aff1's refutation of `anywhere` was not luck: the out-of-family population is
+**816** lines over **179** paths, so a rule reaching past the walk shape almost cannot avoid
+it. Worth reading beside that: **6** of the **13** gain *nothing at all* — the shipped rule
+already takes everything they would — so *hits did not move* is the ordinary answer here and a
+rule that gains is the unusual one.
+
+### And it is not sufficient, which is refuted the same way it was claimed
+
+The other **2** pass. `a FINDING: <sha> sentence` gains **3** lines and `a P<n> predicted /
+got row` gains **2**, both gain them **all in-family**, and both leave the out column exactly
+where it was — mg-aff1's signature letter for letter, on rules that are not walk detectors at
+all. The failure is structural rather than a tuning: **the in/out split is a proxy over
+paths.** A line counts in-family because the *row* it sits in was read and filed
+`HISTORY-WALK`, not because anybody looked at the *line*, so a widening confined to those rows
+moves the column by zero however wrong it is.
+
+The room that leaves is computed rather than estimated. **22** in-family lines the shipped
+rule does not take; **14** of them reachable with the out column provably still, because their
+exact text occurs nowhere outside a `HISTORY-WALK` row and so `match this literal` gains them
+and moves nothing; and **10** of those 14 read by hand as **not** walk lines. A literal is the
+crudest rule there is, which is what makes it the safest witness — it needs no argument to be
+possible.
+
+### The third column, which is a reading and says so
+
+`OWNERS.json` gains `walk_lines`: one entry per quoted line inside a `HISTORY-WALK` row, with
+a hand verdict on whether that line is a row of a git-log walk. **38** lines, **15** read as
+`WALK` and **16** distinct texts as `NOT-WALK`. This is mg-937c's remedy for the 150 one level
+in — read them one at a time and put the reading in a file the arm grades against the record —
+at the **line** instead of the row.
+
+Two directions are checkable and are checked, for the reason `cause: RECORD-DISAGREES` is
+checked in both: an in-family line with no entry is **UNREAD** and a finding, so a new
+`HISTORY-WALK` row cannot arrive quietly and leave the list complete against a corpus that
+moved; an entry naming a line the record no longer holds is **STALE** and a finding. The third
+check is the gate the out column could not provide — **the shipped rule taking a line somebody
+read as `NOT-WALK` is a finding and exits 1.** All three are repairable in the commit that
+raises them, which is why this arm may exit 1 where `report.py` may not (§10).
+
+What is *not* checkable is whether a reading is **right**. Nothing here checks that, which is
+word for word what `OWNERS.json` already declares about `cause`, and pretending otherwise
+would be the laundering that file exists to avoid. What stops the list being tuned to flatter
+the shipped rule is that §6b grades **every** rule against the same list and prints them side
+by side, including rules written after it.
+
+### The shipped rule's own row, graded by the column mg-aff1 did not have
+
+**8** gained, **8** in-family, out unmoved, and **0** of the 8 read `NOT-WALK`. The two numbers
+mg-aff1 published still stand; this is the third, and it is the one the two witnesses would
+have failed. So §12's claim is not withdrawn — it is **completed**. `OUT unmoved` was
+necessary and was never sufficient, and that correction is made on the record rather than on
+taste, because the witnesses are rules that pass the control and are wrong.
+
+### What this leaves
+
+- **The other 816 lines, and the direction this section did not measure** — filed as
+  `mg-0d02` rather than left as a sentence. The third column sees only lines inside
+  `HISTORY-WALK` rows, because that is the only population anybody has read line by line. A
+  widening's damage outside them is what the out column is for, and neither column subsumes
+  the other. A rule bad in both places is caught twice; a rule bad in neither is not bad
+  *here*. What is worse than that symmetry, and already has two instances on the record: §6a
+  prints the shipped rule's out hits with the cause on file beside them and says it is the
+  **proxy** that disagrees, not the detector — so the column is known to over-count, twice,
+  and nobody has looked for the rest. If the 816 hold more, a *good* widening can be refused
+  because the column moved for a reason that is not the widening's fault. That is this
+  section's own defect run backwards, and it costs a repair rather than a wrong `NOTE`.
+- **The bare-subject residue** is unchanged at **2** rows. §6b measures the room around it and
+  does not close it: the three bare subjects in `walk_lines` read as `WALK`, so a rule that
+  took them would gain **0** `NOT-WALK` lines — the third column would not object, and the
+  reason that shape stays open is still §12's, that no rule over the line's own text tells a
+  commit subject from a `word: text` line.
+- **§2's derivation** and **§6.6**. Still unchanged and still owed.

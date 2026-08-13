@@ -99,6 +99,13 @@ mg-30bd selftest -- the worlds the classifier must catch, and the five it must n
   `anywhere` gains V5/V6 and LOSES V4 — the two rules are not nested ok
   a bare subject is NOT a walk line under the shipped rule           ok
 
+  mg-cda7 — THE CANDIDATE BATTERY, AND THE TWO THE OUT COLUMN CANNOT SEE
+  --------------------------------------------------------------------------
+  every candidate is a SUPERSET of the shipped rule — `gain` cannot be a swap ok
+  B1 admits a FINDING sentence the shipped rule REFUSES — it is bad, not different ok
+  B2 admits a predicted/got table row the shipped rule REFUSES       ok
+  `line_key` is stable under surrounding whitespace and separates two lines ok
+
 ==============================================================================
-mg-30bd selftest: 34 world(s) + 13 assertion(s), 0 failed
+mg-30bd selftest: 34 world(s) + 17 assertion(s), 0 failed
 ==============================================================================

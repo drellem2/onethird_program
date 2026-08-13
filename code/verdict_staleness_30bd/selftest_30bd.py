@@ -302,11 +302,46 @@ def main():
             fails += 1
         out.append("  %-66s %s" % (label, "ok" if ok else "*** FAILED ***"))
 
+    # mg-cda7 — THE BATTERY THAT MEASURES THE CONTROL.  §6b's whole argument is that the
+    # OUT column is powerful and not sufficient, and both halves rest on the candidate rules
+    # behaving as the section says they do.  Two properties are checkable here and neither
+    # is a count: a candidate never LOSES a shipped hit (so §6b's `gain` is subtraction and
+    # not a swap), and the two witnesses really do admit lines the shipped rule refuses —
+    # which is what makes them BAD rather than merely different.  The counts stay in
+    # out_owners_937c.txt §6b, where the record is, so nothing here rests on these strings.
+    out.append("")
+    out.append("  mg-cda7 — THE CANDIDATE BATTERY, AND THE TWO THE OUT COLUMN CANNOT SEE")
+    out.append("  " + "-" * 74)
+    v_texts = [t for _i, _w, _wh, t in walk_worlds]
+    superset = all(L.candidate(pat)(t)
+                   for _cid, _lab, _bad, pat in L.CANDIDATE_WIDENINGS
+                   for t in v_texts if L.is_walk_line(t))
+    b1 = dict((c[0], c[3]) for c in L.CANDIDATE_WIDENINGS)["B1"]
+    b2 = dict((c[0], c[3]) for c in L.CANDIDATE_WIDENINGS)["B2"]
+    finding = "*** FINDING: <sha>'s summary says `20 sites remain unqualified`"
+    predrow = "P3f    predicted 3                        got 6    *** MISSED ***"
+    cda7_checks = [
+        ("every candidate is a SUPERSET of the shipped rule — `gain` cannot be a swap",
+         superset),
+        ("B1 admits a FINDING sentence the shipped rule REFUSES — it is bad, not different",
+         L.candidate(b1)(finding) and not L.is_walk_line(finding)),
+        ("B2 admits a predicted/got table row the shipped rule REFUSES",
+         L.candidate(b2)(predrow) and not L.is_walk_line(predrow)),
+        ("`line_key` is stable under surrounding whitespace and separates two lines",
+         L.line_key("  " + finding + "  ") == L.line_key(finding)
+         and L.line_key(finding) != L.line_key(predrow)),
+    ]
+    for label, ok in cda7_checks:
+        if not ok:
+            fails += 1
+        out.append("  %-66s %s" % (label, "ok" if ok else "*** FAILED ***"))
+
     out.append("")
     out.append("=" * 78)
     out.append("mg-30bd selftest: %d world(s) + %d assertion(s), %d failed"
                % (len(WORLDS) + len(decl_worlds) + len(walk_worlds),
-                  len(checks) + len(naive_checks) + len(walk_checks), fails))
+                  len(checks) + len(naive_checks) + len(walk_checks)
+                  + len(cda7_checks), fails))
     out.append("=" * 78)
     print("\n".join(out))
     return 1 if fails else 0
