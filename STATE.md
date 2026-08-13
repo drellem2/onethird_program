@@ -167,6 +167,21 @@ the BK gap (dead *"for method reasons, not because the conjecture is false"*, mg
 **Also open, beside the three:** **(RD)** — which reading branch (ii) carries (mg-3af9) —
 and the hole mg-3af9 opened at **Step 6** of the architecture, *"independent of L1b"*.
 
+⚠️ **AND THE ROUTE ROW 8's OWN SENTENCE POINTS AT IS DEAD — READ THIS BEFORE ACTING ON *"every
+route below `1` must add a realizability fact"*.** That fact **cannot be a restriction on `π`**.
+For **any** class of measures containing the point masses, its marginal image `S` satisfies
+`conv(S) = M_n`, because `π(δ_σ) = δ_σ` is a **vertex** — so **realizability is vacuous at the
+vertices** and no such restriction lowers a linear ceiling. No cut, hence **no LP, SDP or
+lift-and-project route** (mg-c776 `T2` for `Unif(L(P))`; generalised to every realizability
+restriction and re-measured on independent code, mg-3da1 `T-3da1`,
+[`OneThird-ImageClosure-mg-3da1.md`](docs/OneThird-ImageClosure-mg-3da1.md)). ⚠️ **BUT "the image
+cannot tighten anything" is FALSE and is not what closed:** inside the convex cell of hypothesis
+(1) read on the **measure** the image ceiling is exactly a **`d`-fraction** of the body's —
+ratios `2/3, 1/3, 1/5, 4/15` at `n = 3…6`, an identity and not a fit — because *that* reading
+excludes `n!−1` of the `n!` vertices where realizability and the **poset**-level reading exclude
+none. **Vertex exclusion is the whole dividing line.** So the image **reduces row 8 to `d`**, i.e.
+to residual **(R)** above — which is where this line ends, not in a new one.
+
 *Every paragraph of the chronology this replaces, verbatim and in order — mg-a1ec, mg-48ab,
 mg-dcae, mg-210d, mg-0ed7, mg-4a86, mg-8f56, mg-a58f, mg-88bd, mg-63e3, mg-3af9:*
 [`docs/state-history/threads-chronology.md`](docs/state-history/threads-chronology.md).
