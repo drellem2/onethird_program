@@ -114,16 +114,32 @@ The counts here were already classed `recorded, not gated` in `code/control_gate
 `BASELINE.json` for exactly this reason. Byte-comparing the whole transcript gated them
 through the back door.
 
-So `a4_sweep.py` now prints a **corpus pin** — a sha256 over exactly the bytes it reads,
-minus this directory's own, with the directory and file counts beside it — as its first
-figure, and `lib_f771.CORPUS_SCOPED` names this path. **Pin moved ⇒ the corpus moved and the
+So `a4_sweep.py` now prints a **corpus pin** — a sha256 over the corpus's *structure*
+(directory names and every `.py`/`.sh`/`.txt`/`.md` path) and the *content of its source*
+(`.py` and `.sh`), minus this directory's own, with the directory and file counts beside it —
+as its first figure, and `lib_f771.CORPUS_SCOPED` names this path. **Pin moved ⇒ the corpus moved and the
 disagreement is not the reading branch's; a branch restores this file rather than committing
 it.** Pin *unchanged* beside a moved text ⇒ the instrument changed its answer on an unchanged
-corpus, which stays RED — and since the pin excludes this directory, a change made **here**
-never buys the exemption and the owner still refreshes its own file. Population drift past 10
+corpus, which stays RED. A **second pin** covers this directory's own `.py`/`.sh`, and a moved
+producer pin is RED however far the corpus moved — so a change made **here** never buys the
+exemption and the owner still refreshes its own file. That second pin exists because the first
+one alone did not deliver it: a branch editing the instrument *and* something else under
+`code/` moved the corpus pin for the unrelated half, and mg-05c6's own branch is that shape
+and was graded `CORPUS` when it should have been asked to refresh. Population drift past 10
 directories is `STALE`, also red, so the report cannot rot indefinitely.
 
-**Nothing about a4's own control changed.** §4's two-sided detector check and
+**Transcript and prose *content* are outside the pin, and the first draft got that wrong.**
+It hashed the content of every file the sweep reads; `./build.sh` **rewrites transcripts**,
+so the pin moved on every gate run of an unchanged corpus and the same-pin clause — the whole
+fence — was unreachable. Measured with a directory added and removed again, leaving the tree
+byte-identical to `HEAD`, and found by running the remedy rather than reading it. §5 now
+plants six sandboxed worlds over the pin, three it must be blind to and three it must see,
+folded into the same `ok` flag as §4 — so `audit.sweep_grade`, gated in `BASELINE.json`,
+gates the pin control too. The one dependency left outside the pin is §3's `has_red`, which
+reads `.txt`/`.md` content; that direction is loud (`DISAGREES`) rather than silent, and is
+named in `a4_sweep.py` rather than discovered later.
+
+**Nothing else about a4's own control changed.** §4's two-sided detector check and
 `audit.sweep_grade` are what gate whether these counts are citable; the pin governs only
 whose branch owes the refresh. The reasoning, the eight planted worlds that bound the
 exemption and the three costs it carries are in `code/gate_fixed_point_f771/README.md` §8.

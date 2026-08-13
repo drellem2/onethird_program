@@ -23,7 +23,7 @@ the worlds below are split into two groups that are BOTH required:
 
   CORPUS (§1b)   mg-05c6's corpus-scoped exemption, which forgives a difference that IS a
                  function of repo state — just not of THIS BRANCH's — and therefore needs a
-                 sharper fence than the normaliser's.  Eight worlds, three of them green on
+                 sharper fence than the normaliser's.  Ten worlds, three of them green on
                  purpose.  C2 is the one to read: same pin, moved text, still RED, which is
                  "the instrument changed its answer on an unchanged corpus".
 
@@ -132,9 +132,11 @@ DECLARED = sorted(L.CORPUS_SCOPED)[0]
 UNDECLARED = "code/control_audit_9876/out_a2_discriminate.txt"
 
 
-def _census(pin, population, body):
+def _census(pin, population, body, producer="dddddddddddd"):
     return ("corpus pin: %s  (%d directories, 2896 files, excluding code/x/)\n"
-            "population: %d directories under code/\n%s" % (pin, population, population, body))
+            "producer pin: %s  (the .py and .sh of code/x/)\n"
+            "population: %d directories under code/\n%s"
+            % (pin, population, producer, population, body))
 
 
 CORPUS_WORLDS = [
@@ -185,6 +187,19 @@ CORPUS_WORLDS = [
      "the exemption by accident, which is why `relpath` defaults to None",
      _census("aaaaaaaaaaaa", 231, "  151 of 231\n"),
      _census("bbbbbbbbbbbb", 232, "  152 of 232\n")),
+    ("C9", DECLARED, "DISAGREES",
+     "the CORPUS pin moved AND the PRODUCER pin moved with it — a branch that edits the "
+     "instrument and something else under code/ in one go.  Measured on mg-05c6's own branch, "
+     "which is that shape, and which C1 alone forgave",
+     _census("aaaaaaaaaaaa", 231, "  151 of 231\n", producer="1111aaaa1111"),
+     _census("bbbbbbbbbbbb", 232, "  152 of 232\n", producer="2222bbbb2222")),
+
+    ("C10", DECLARED, "DISAGREES",
+     "the producer pin went MISSING — the same silence C5 forbids for the corpus pin, and "
+     "forbidden here for the same reason",
+     _census("aaaaaaaaaaaa", 231, "  151 of 231\n"),
+     ("corpus pin: bbbbbbbbbbbb  (232 directories, 2896 files, excluding code/x/)\n"
+      "population: 232 directories under code/\n  152 of 232\n")),
 ]
 
 CORPUS_GREEN_ON_PURPOSE = {"C1", "C6", "C7"}

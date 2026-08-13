@@ -285,8 +285,10 @@ section is mg-724a's recorded/gated split applied to the transcript class, not a
 
 ### The mechanism
 
-A corpus-scoped producer prints a **corpus pin**: a digest of exactly the bytes it read, less
-its own directory, with the population beside it. `verdict_for` gains two verdicts:
+A corpus-scoped producer prints a **corpus pin**: a digest of the corpus's *structure*
+(directory names, and every `.py`/`.sh`/`.txt`/`.md` path) and the *content of its source*
+(`.py` and `.sh`), less its own directory, with the population beside it. `verdict_for` gains
+two verdicts:
 
 * **`CORPUS`** — declared path, pin moved. The corpus moved; the difference is not the reading
   branch's. Not red. The branch **restores** the file rather than committing it (mg-4020).
@@ -294,16 +296,37 @@ its own directory, with the population beside it. `verdict_for` gains two verdic
   directories). **Red.** A pinned report nobody refreshes is the defect this whole control
   exists to find.
 
+A **second pin** carries the corpus pin's missing half: the producer's own `.py`/`.sh`. A
+moved producer pin is `DISAGREES` however far the corpus moved — an instrument's owner
+refreshes the instrument's own transcript. Source only, because the transcripts in that
+directory are rewritten by every run of that suite and pinning them would put the fixed-point
+defect back one file over.
+
 and **`DISAGREES` is unchanged in the two cases that matter**: same pin beside a moved text
 (the instrument changed its answer on an unchanged corpus), and a declared transcript that
 stopped printing a pin. The pin **excludes the producer's own directory** — §3 of the sweep
 reads every `.txt`/`.md` including its own transcript, so a pin over the file containing it has
 no fixed point, and the exclusion is also what stops a change made *there* buying the grade.
 
+**Transcript and prose *content* are deliberately outside the pin, and the first draft got
+that wrong.** It hashed the content of every file the sweep reads — the obvious spelling —
+and `./build.sh` **rewrites transcripts**, `out_g0_fixed_point.txt` among them and *after* a4
+has run. So the pin moved on every gate run of an unchanged corpus, and a pin that always
+moves makes the same-pin clause — the entire fence — unreachable. Measured: a directory added
+and then removed again, leaving the tree byte-identical to `HEAD`, still moved it. **The
+remedy exhibiting the defect it remedies, caught by running it end to end rather than by
+reading it**, and now planted as `P1` in `a4_sweep.py` §5 so it cannot come back quietly.
+
+One dependency is left outside the pin and is named rather than discovered: §3's `has_red`
+reads `.txt`/`.md` **content**, so a transcript whose red-token status flips, or a README that
+gains the word `REFUTED`, moves the census with the pin standing still and is graded
+`DISAGREES`. That is the loud direction rather than the silent one, and it is attributable —
+a suite's output changes because of the branch running it.
+
 ### Section 4 applied to this remedy
 
 The remedy is an exemption, and an exemption is the artifact most likely to exhibit the defect
-it repairs — a silent hole. Eight planted worlds `C1`–`C8` in `g1_controls.py`, three green on
+it repairs — a silent hole. Ten planted worlds `C1`–`C10` in `g1_controls.py`, three green on
 purpose, fed the same `verdict_for` `g0` calls:
 
 * `C2` — **same pin, moved text, still RED.** The fence. If this goes quiet the exemption has
@@ -314,9 +337,25 @@ purpose, fed the same `verdict_for` `g0` calls:
   would go silent.
 * `C8` — the same pair with **no path given**, red. `relpath` defaults to `None` so a caller
   that does not name the file cannot be handed the exemption by accident.
-* Four registry rows carry the exclusions, each with the measurement that decided it — most
-  usefully `out_gate.txt`, the near miss: 20 real moves, but only **4** of them are the §1 byte
-  counts that follow the census, and 16 are its own gated fields moving.
+* `C9` — **the corpus pin moved *and* the producer pin moved with it**, red. This one was
+  found by this branch failing it: the corpus pin excludes the producer's directory, so a
+  branch that edits the instrument **and** something else under `code/` moves the corpus pin
+  for the unrelated half and the instrument change rides along forgiven. mg-05c6's own branch
+  is exactly that shape and was graded `CORPUS` when it should have been asked to refresh. So
+  the producer's own **source** is pinned separately and a moved producer pin is `DISAGREES`:
+  an instrument's owner refreshes the instrument's own transcript.
+* `C10` — the **producer pin went missing**, red, for the same reason `C5` forbids losing the
+  corpus pin.
+* Five registry rows carry the exclusions, each with the measurement that decided it — most
+  usefully `out_gate.txt`, the near miss (20 real moves, but only **4** of them the §1 byte
+  counts that follow the census, and 16 its own gated fields moving), and
+  `code/grain_axis_audit_03d1/out_a4_sweep.txt`, the sharp case: **the same basename with a
+  different instrument behind it**, so the obvious basename spelling would have exempted a
+  file nobody looked at.
+* And the pin is not taken on trust either: `a4_sweep.py` §5 plants **six sandboxed worlds**
+  over the pin itself, three it must be blind to and three it must see, folded into the same
+  `ok` flag that drives `SWEEP OK` / `SWEEP BROKEN` — so `audit.sweep_grade`, **gated** in
+  `BASELINE.json`, gates the pin control too.
 
 `g0`'s own transcript stays stable: the registry is printed (static, from code) and **the drift
 figures go to stderr**, for the same reason `README` D4 put the changed set there.

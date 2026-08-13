@@ -21,7 +21,7 @@ mg-f771  PLANTED WORLDS — what this control catches, and what it is declared b
 
   14 of 14 worlds landed where they must.
 
-§1b  THE CORPUS-SCOPED EXEMPTION, AND THE 8 WORLDS THAT BOUND IT (mg-05c6)
+§1b  THE CORPUS-SCOPED EXEMPTION, AND THE 10 WORLDS THAT BOUND IT (mg-05c6)
 --------------------------------------------------------------------------------------------
   An exemption forgiving a difference that IS repo state needs a sharper fence
   than the normaliser's.  C2 is the fence: same pin, moved text, still RED.
@@ -42,8 +42,12 @@ mg-f771  PLANTED WORLDS — what this control catches, and what it is declared b
        at code/control_audit_9876/out_a4_sweep.txt
   C8   expect DISAGREES got DISAGREES ok        C1's pair with NO path at all — a caller that does not name the file cannot be handed the exemption by accident, which is why `relpath` defaults to None
        at <no path given to verdict_for>
+  C9   expect DISAGREES got DISAGREES ok        the CORPUS pin moved AND the PRODUCER pin moved with it — a branch that edits the instrument and something else under code/ in one go.  Measured on mg-05c6's own branch, which is that shape, and which C1 alone forgave
+       at code/control_audit_9876/out_a4_sweep.txt
+  C10  expect DISAGREES got DISAGREES ok        the producer pin went MISSING — the same silence C5 forbids for the corpus pin, and forbidden here for the same reason
+       at code/control_audit_9876/out_a4_sweep.txt
 
-  8 of 8 corpus worlds landed where they must.
+  10 of 10 corpus worlds landed where they must.
 
   THE REGISTRY IS A LIST OF 1 PATH(S) AND WHAT IS NOT IN IT IS THE OTHER HALF:
       declared  ok        code/control_audit_9876/out_a4_sweep.txt
@@ -93,4 +97,4 @@ mg-f771  PLANTED WORLDS — what this control catches, and what it is declared b
   world above, and nothing in this directory would notice.  Named rather than
   discovered: no such suite exists today, and that is a fact about today.
 
-VERDICT: GREEN — 14 planted worlds, 8 corpus worlds, 7 membership rows, 5 registry rows and 2 refusals all land where they must; the normaliser's blindness, the corpus-scoped exemption and the one self-exclusion are all the declared ones.  0.04s
+VERDICT: GREEN — 14 planted worlds, 10 corpus worlds, 7 membership rows, 5 registry rows and 2 refusals all land where they must; the normaliser's blindness, the corpus-scoped exemption and the one self-exclusion are all the declared ones.  0.06s

@@ -7,11 +7,15 @@ of code/, so it moves when anybody's branch lands.  mg-f771's g0 grades this fil
 against the CORPUS PIN and not against the tree the reader is standing in: a pin that
 moved says the corpus moved, and the disagreement is not the reading branch's.  A pin
 that did NOT move beside a text that did says this INSTRUMENT changed its answer on an
-unchanged corpus, and that stays RED.  The pin covers exactly the bytes this sweep
-reads, less this directory's own — §3 reads this very file, so a pin including it
-would have no fixed point, and a change made here must never buy the exemption.
+unchanged corpus, and that stays RED.  The pin covers the corpus STRUCTURE (directory
+names and every .py/.sh/.txt/.md path) and the CONTENT OF SOURCE (.py and .sh) — not
+the content of transcripts, which a gate run rewrites, and not this directory's own,
+which §3 reads including this very file.  Both exclusions are fixed points: a pin that
+moved on every gate run would make the same-pin clause unreachable, and a change made
+here must never buy the exemption.  a4_sweep.py names the one dependency left out.
 
-corpus pin: ede1a149a827  (232 directories, 2911 files, excluding code/control_audit_9876/)
+corpus pin: dca19cc6a31f  (232 directories, 2911 files, excluding code/control_audit_9876/)
+producer pin: 2b1b86a662fc  (the .py and .sh of code/control_audit_9876/, which the corpus pin excludes — a moved one is this instrument's owner's to refresh)
 
 population: 232 directories under code/
 
@@ -125,7 +129,7 @@ failure.  A directory with neither has no evidence its instrument can fail; that
 weaker than saying it cannot.
 
   ships a file named for negative/self/positive-control : 153 of 232
-  a committed transcript records a demonstrated failure  : 152 of 232
+  a committed transcript records a demonstrated failure  : 153 of 232
   NEITHER, though the directory ships code               : 27 of 232
 
   directories with code and no evidence of a falsification attempt:
@@ -152,6 +156,23 @@ in advance, and to be exercised against a constructed negative.
     [PASS]  membership: must NOT fire on `for line in out.splitlines():` — iteration, which the first version of this detector counted 597 times
     [PASS]  membership: must NOT fire on a test against a PARSED FIELD, `if row in worklist:`
     [PASS]  pipe-status: must fire on a constructed `cmd | tee f` followed by `rc=$?`, which is why a 0 count below is a measurement and not a dead detector
+
+§5  THE CORPUS PIN'S OWN TWO-SIDED CONTROL (mg-05c6)
+--------------------------------------------------------------------------------------------
+The pin is what lets mg-f771's g0 tell `the corpus moved` from `this instrument
+changed its answer`, so a pin that moves for the wrong reason — or sits still for
+the wrong reason — turns that verdict into a coin toss.  P1 is the one that
+matters and it was found by RUNNING the remedy, not by reading it: the first draft
+hashed transcript CONTENT, `./build.sh` rewrites transcripts, and the pin therefore
+moved on every gate run of an unchanged corpus, which makes the same-pin clause
+unreachable.  Planted here so it cannot come back quietly.
+
+    [PASS]  pin: must NOT move when a TRANSCRIPT is rewritten — `./build.sh` does that on every run, and a pin that moves there makes g0's same-pin clause unreachable (the defect this control was written for)
+    [PASS]  pin: must NOT move when THIS DIRECTORY changes — the exclusion that stops a change made here buying the exemption
+    [PASS]  pin: MUST move when a .md APPEARS — the path list carries structure even where content is not hashed
+    [PASS]  pin: must NOT move when .md CONTENT changes — the one dependency declared outside the pin (§3's has_red), stated rather than hidden
+    [PASS]  pin: MUST move when a .py is EDITED — §1's own subject
+    [PASS]  pin: MUST move when a DIRECTORY is added — the ticket's own case
 
 ============================================================================================
 SWEEP OK — 220 membership candidates, 30 tee sites, 27 directories with no falsification evidence.  All CANDIDATES.

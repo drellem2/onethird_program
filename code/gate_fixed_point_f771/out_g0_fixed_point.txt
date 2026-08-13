@@ -22,10 +22,39 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  NO DISAGREEMENTS
---------------------------------------------------------------------------------------------
-  Every watched transcript that moved during this gate run moved only in the two
-  declared families that are not a function of repo state.  No committed
-  transcript asserts anything this tree contradicts.
+  AND 1 TRANSCRIPT(S) ARE GRADED AGAINST A CORPUS PIN RATHER THAN AGAINST THIS
+  TREE, because their subject IS the tree and so they have no per-branch fixed
+  point.  The list is declared, not a shape a transcript can grow into:
+      code/control_audit_9876/out_a4_sweep.txt
+  A pin that moved says the corpus moved and the difference is not this branch's.
+  The SAME pin beside a moved text says the instrument changed its answer on an
+  unchanged corpus, and is RED.  Drift past 10 directories is STALE, also red.
+  HOW FAR EACH HAS DRIFTED IS ON STDERR, for the reason the paragraph above gives:
+  it moves with every landing and this file must not.  lib_f771.CORPUS_SCOPED.
 
-VERDICT: GREEN — 0 disagreements.  0.10s
+§2  THE DISAGREEMENTS, SHOWN
+--------------------------------------------------------------------------------------------
+  Lines quoted after normalisation, so that this transcript cannot itself
+  smuggle a worktree path into the corpus.
+  `-` is the committed copy, `+` is this tree.
+
+  DISAGREES code/control_audit_9876/out_a4_sweep.txt
+    @@ -10,3 +10,6 @@
+    - unchanged corpus, and that stays RED.  The pin covers exactly the bytes this swe
+    - reads, less this directory's own — §3 reads this very file, so a pin including i
+    - would have no fixed point, and a change made here must never buy the exemption.
+    + unchanged corpus, and that stays RED.  The pin covers the corpus STRUCTURE (dire
+    + names and every .py/.sh/.txt/.md path) and the CONTENT OF SOURCE (.py and .sh) —
+    + the content of transcripts, which a gate run rewrites, and not this directory's 
+    + which §3 reads including this very file.  Both exclusions are fixed points: a pi
+    ... 27 further hunk line(s) not shown
+
+  DISAGREES code/control_gate_724a/out_gate.txt
+    @@ -8 +8 @@
+    - audit  code/control_audit_9876/run_all.sh         exit 0   <t>s  53195 bytes
+    + audit  code/control_audit_9876/run_all.sh         exit 0   <t>s  55049 bytes
+
+  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
+  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
+
+VERDICT: RED — 2 committed transcript(s) disagree with this tree.  0.21s

@@ -163,6 +163,12 @@ def texts_equivalent(a, b):
 #       undeclared path and requires DISAGREES.
 #   (b) THE PRODUCER MUST PIN WHAT IT READ.  Both copies must carry a `corpus pin` line.  A
 #       transcript that stops declaring itself is graded DISAGREES, not forgiven (C5).
+#       WHAT THE PIN COVERS IS THE PRODUCER'S DECLARATION AND ITS OWN CONTROL'S SUBJECT, not
+#       this file's: a4_sweep.py §5 plants six sandboxed worlds over it, three the pin must
+#       be blind to and three it must see.  The first draft hashed transcript CONTENT and
+#       was WRONG — `./build.sh` rewrites transcripts, so the pin moved on every gate run of
+#       an unchanged corpus and clause (c) below was unreachable.  Found by running the
+#       remedy end to end rather than by reading it, and planted as world P1 there.
 #   (c) SAME PIN + DIFFERENT TEXT IS STILL RED.  That is the load-bearing clause (C2): it is
 #       exactly the case "the instrument changed its answer on an unchanged corpus", and the
 #       producer's pin deliberately EXCLUDES its own directory, so a change made where the
@@ -204,6 +210,14 @@ CORPUS_DRIFT_LIMIT = 10
 # requires the corpus access that would let you edit the transcript directly.
 CORPUS_PIN = re.compile(r"^corpus pin: ([0-9a-f]{12})\s+\((\d+) directories", re.M)
 
+# THE SECOND PIN IS THE FIRST ONE'S MISSING HALF.  The corpus pin excludes the producer's own
+# directory, so a branch that edits the instrument AND something else under code/ moves the
+# corpus pin for the unrelated half and the instrument change rides along forgiven.  MEASURED
+# ON mg-05c6's OWN BRANCH, which is that shape exactly and was graded CORPUS when it should
+# have been asked to refresh.  A moved producer pin is DISAGREES: an instrument's owner
+# refreshes the instrument's own transcript.  World C9.
+PRODUCER_PIN = re.compile(r"^producer pin: ([0-9a-f]{12})", re.M)
+
 
 def corpus_pin(text):
     """(digest, population) as the producer printed it, or None if it printed no pin."""
@@ -213,13 +227,19 @@ def corpus_pin(text):
     return m.group(1), int(m.group(2))
 
 
+def producer_pin(text):
+    m = PRODUCER_PIN.search(text)
+    return m.group(1) if m else None
+
+
 def verdict_for(committed, worktree, relpath=None):
     """The decision, isolated so that `g1_controls.py` tests THIS and not a re-spelling.
 
     AGREES     the bytes are identical.
     NOISE      they differ only in the declared non-repo-state families (N1-N3).
-    CORPUS     `relpath` is a DECLARED corpus-scoped transcript and its pin moved, so the
-               difference is the corpus's and not this branch's.  Not red.
+    CORPUS     `relpath` is a DECLARED corpus-scoped transcript, its corpus pin moved and its
+               PRODUCER pin did not, so the difference is the corpus's and not this branch's.
+               Not red.
     STALE      the same, but the corpus has moved further than CORPUS_DRIFT_LIMIT.  RED.
     DISAGREES  the committed copy asserts something this tree contradicts.  RED.
 
@@ -241,6 +261,11 @@ def verdict_for(committed, worktree, relpath=None):
         if pin_a[0] == pin_b[0]:
             # Same corpus, different answer: the INSTRUMENT moved.  This is the clause the
             # whole exemption rests on and it is the one world C2 plants.
+            return "DISAGREES"
+        prod_a, prod_b = producer_pin(committed), producer_pin(worktree)
+        if prod_a is None or prod_b is None or prod_a != prod_b:
+            # The producing directory's own source moved — or stopped saying so.  Its owner
+            # refreshes its own transcript; a moved corpus pin does not buy that (C9, C10).
             return "DISAGREES"
         if abs(pin_b[1] - pin_a[1]) > CORPUS_DRIFT_LIMIT:
             return "STALE"
