@@ -275,9 +275,25 @@ I not read the file by hand first, this sweep would have shipped GREEN with the 
 **D2 — my first version of §3's honesty was a grep, and the grep finds nothing.** See §3B.
 The instrument is built around this miss.
 
-**D3 — this instrument refused itself twice before it ran clean,** and both refusals were
-about §0's route rule being too wide (markdown; the control's own directory). Written into
-`handshake_setters`.
+**D3 — this instrument refused itself three times before it ran clean, and the third one is
+the interesting one.** The first two were §0's route rule counting a README sentence, and
+then `lib_f771.py`'s own `FRESH_ENV = "BUILD_SH_RAN_THE_SUITES"`, as second routes to f771.
+The third arrived **only after the suite was committed**: until then its own files were
+untracked, `git ls-files` did not show them to it, and it could not see that
+`lib_502f.py:40` and `s0_controls.py`'s planted world both name the handshake in code.
+
+> **It passed while uncommitted and refused the moment it was committed.** An instrument
+> that reads `git ls-files` is blind to itself for exactly as long as it is new, which is
+> exactly the period during which its author is deciding whether it works.
+
+The resolution is a **declared, named exemption of two directories** — `ROUTE_EXEMPT`, the
+callee and this instrument, each with its reason — modelled on `lib_f771.SELF_EXCLUDED`,
+which is one *file* and is held to one file by worlds E1–E7. Same discipline here: §0
+**prints the exemption and the number of mentions it did not ask about**, so it is a stated
+number rather than a silence, and D16–D18 hold the list to exactly those two and check that
+a route planted outside them is still caught. The exemption suppresses §0's route question
+only; **§1 scans both directories for exec edges by the same rule it applies everywhere
+else**, so a self-red script placed inside either one is found.
 
 **D4 — the `EXPOSED`/`INSTANCE` split did not exist in the first draft,** which called
 mg-479c's repaired script an `INSTANCE` outright. That overstates a real repair. The split
@@ -337,7 +353,7 @@ Nothing in this estate arranged that.
 |---|---|
 | `lib_502f.py` | the detector rules, isolated so `s0_controls.py` tests these and not a re-spelling |
 | `guard_502f.py` | the runtime refusal; imports `lib_f771.is_transcript` so there is one definition of the watched class |
-| `s0_controls.py` → `out_s0_controls.txt` | 27 planted worlds: the mechanism (§M), the detector (§D), the guard (§G) |
+| `s0_controls.py` → `out_s0_controls.txt` | 30 planted worlds: the mechanism (§M), the detector (§D), the guard (§G) |
 | `s1_sweep.py` → `out_s1_sweep.txt` | the estate, swept |
 | `run_all.sh` | the runner. `.tmp` + `mv`, stdout only, no pipe — for this suite's own subject |
 

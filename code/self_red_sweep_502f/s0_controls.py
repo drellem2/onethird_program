@@ -128,8 +128,12 @@ def main():
     # which is why f771 declines to exempt it from its own watched class.  That is exactly
     # the stability §M needs, borrowed from the file that argues for it.
     victim = "code/gate_fixed_point_f771/out_g1_controls.txt"
-    with open(os.path.join(L.ROOT, victim), encoding="utf-8") as fh:
-        committed = fh.read()
+    # THE COMMITTED BYTES, VIA f771's OWN READER, AND NOT THE WORKTREE COPY.  The worktree
+    # copy is rewritten by every gate run and moves in the timing family f771 declares
+    # NOISE, so a byte count taken from it moves with a rounded decimal and drags this
+    # arm's own transcript with it.  The committed copy is also the correct half of the
+    # comparison on its own terms: it is exactly the side `verdict_for` grades against.
+    committed = F.committed_text(victim)
     partial = "".join(committed.splitlines(keepends=True)[:len(committed.splitlines()) // 3])
     print("  victim: %s  (%d lines, %d bytes)"
           % (victim, len(committed.splitlines()), len(committed.encode("utf-8"))))
@@ -202,6 +206,23 @@ def main():
     except SyntaxError:
         broke = True
     score("D13", "an unparseable source raises rather than returning 'no edge'", broke, True)
+    print()
+    print("  D16-D18  THE ROUTE EXEMPTION, HELD TO ITS DECLARED SIZE.  §0 does not ask two")
+    print("  directories whether they are a second route to f771, and an exemption that can")
+    print("  widen silently is the unfalsifiable escape hatch lib_f771's own docstring names")
+    print("  about its normaliser.  These three rows are what stops it widening.")
+    exempt_route = {"code/self_red_sweep_502f/z.py":
+                    'import os\nH = "BUILD_SH_RAN_THE_SUITES"\n'}
+    outside_route = {"code/somewhere_else_9999/z.py":
+                     'import os\nH = "BUILD_SH_RAN_THE_SUITES"\n'}
+    score("D16", "the exemption is EXACTLY the two declared directories",
+          L.ROUTE_EXEMPT,
+          ("code/gate_fixed_point_f771/", "code/self_red_sweep_502f/"))
+    score("D17", "a route planted OUTSIDE them is still caught",
+          [r for r, _, _ in L.handshake_setters(outside_route)],
+          ["code/somewhere_else_9999/z.py"])
+    score("D18", "a route planted INSIDE one of them is suppressed",
+          L.handshake_setters(exempt_route), [])
     print()
     print("  D14  THE PREFILTER CANNOT CHANGE A VERDICT — it is strictly weaker than both")
     print("  rules, so anything it drops could not have been an edge or a route.")

@@ -46,6 +46,14 @@ mg-502f  PLANTED WORLDS — the mechanism, the detector, the guard
   D13  A FILE THIS INSTRUMENT CANNOT PARSE MUST BE REPORTED, NOT SKIPPED.
   D13   an unparseable source raises rather than returning 'no edg True        AS REQUIRED
 
+  D16-D18  THE ROUTE EXEMPTION, HELD TO ITS DECLARED SIZE.  §0 does not ask two
+  directories whether they are a second route to f771, and an exemption that can
+  widen silently is the unfalsifiable escape hatch lib_f771's own docstring names
+  about its normaliser.  These three rows are what stops it widening.
+  D16   the exemption is EXACTLY the two declared directories      ('code/gate AS REQUIRED
+  D17   a route planted OUTSIDE them is still caught               ['code/some AS REQUIRED
+  D18   a route planted INSIDE one of them is suppressed           []          AS REQUIRED
+
   D14  THE PREFILTER CANNOT CHANGE A VERDICT — it is strictly weaker than both
   rules, so anything it drops could not have been an edge or a route.
   D14   a source with no gate literal anywhere is dropped          False       AS REQUIRED
@@ -73,7 +81,7 @@ mg-502f  PLANTED WORLDS — the mechanism, the detector, the guard
 
 §V  VERDICT
 --------------------------------------------------------------------------------------------
-  27 of 27 worlds scored as required.
+  30 of 30 worlds scored as required.
 
 VERDICT: GREEN — the mechanism is real, the detector detects, the guard refuses.
-  0.12s
+  0.14s

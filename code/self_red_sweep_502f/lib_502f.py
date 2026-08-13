@@ -230,32 +230,57 @@ def self_writes(source, transcript_rel):
     return named and writes
 
 
-CONTROL_DIR = "code/gate_fixed_point_f771/"
+# THE ROUTE EXEMPTION.  TWO DIRECTORIES, NAMED, EACH WITH ITS REASON — f771's own
+# `SELF_EXCLUDED` shape, which is one file rather than one directory and is held to one
+# file by worlds E1-E7.  Same discipline, and `s0_controls.py` D16-D18 hold this list to
+# exactly these two and check that a planted route outside them is still caught.
+#
+#   code/gate_fixed_point_f771/   THE CALLEE.  `lib_f771.py:73` is
+#                                 `FRESH_ENV = "BUILD_SH_RAN_THE_SUITES"` — the control
+#                                 naming the variable it refuses without.  Naming is not
+#                                 setting, and the thing guarded against is a SECOND
+#                                 CALLER, which by construction is not the callee.
+#   code/self_red_sweep_502f/     THIS INSTRUMENT.  It cannot look for a string without
+#                                 containing it, and `s0_controls.py` cannot plant a world
+#                                 shaped like a route without the world being shaped like
+#                                 a route.  THIS EXEMPTION WAS ADDED AFTER THE SWEEP
+#                                 REFUSED ITSELF — and only after it was COMMITTED, because
+#                                 until then its own files were untracked and `git ls-files`
+#                                 did not show them to it.  An instrument that passes while
+#                                 uncommitted and refuses once committed is worth the line
+#                                 it takes to write down.
+#
+# WHAT THE EXEMPTION DOES NOT COVER, and this is why it is narrow enough to keep: it
+# suppresses only §0's ROUTE question.  §1 scans both directories for exec edges to
+# `./build.sh` exactly as it scans every other, so a self-red script placed inside either
+# one is found by the same rule that found the two real instances.
+ROUTE_EXEMPT = ("code/gate_fixed_point_f771/", "code/self_red_sweep_502f/")
 
 
-def handshake_setters(texts):
+def handshake_setters(texts, exempt=ROUTE_EXEMPT):
     """Tracked lines that could open a route to f771 other than `build.sh`.  Executable
     positions only, and the two file kinds need different rules:
 
       .sh   a non-comment line containing `HANDSHAKE=1` — the shell form of SETTING it.
       .py   a string literal in CODE, not in a docstring, containing the handshake name,
-            OUTSIDE the control's own directory.
+            outside the two declared directories in `ROUTE_EXEMPT`.
 
     TWO EXCLUSIONS, BOTH LEARNED BY BEING REFUSED BY THIS OWN INSTRUMENT ON ITS FIRST TWO
     RUNS AGAINST A CLEAN TREE, and both kept here rather than quietly folded in:
 
       MARKDOWN.  Run 1 found three "routes": build.sh, a README sentence, and a module
       docstring.  A document cannot execute anything.
-      THE CONTROL'S OWN DIRECTORY.  Run 2 found two: build.sh, and
-      `lib_f771.py:73  FRESH_ENV = "BUILD_SH_RAN_THE_SUITES"` — the control naming the
-      variable it refuses without.  Naming is not setting, and the thing being guarded
-      against is a SECOND caller, which by construction is not the callee.
+      THE CALLEE AND THIS INSTRUMENT — `ROUTE_EXEMPT`, two directories, reasons above.
+      Run 2 found `lib_f771.py`'s own `FRESH_ENV` constant; run 3 found THIS FILE and
+      `s0_controls.py`, and found them only after the suite was COMMITTED, because until
+      then `git ls-files` did not show this instrument to itself.
 
-    Both refusals were the right BEHAVIOUR on a wrong rule, which is the order this estate
-    prefers: the instrument declined to under-report rather than guessing, twice, and the
-    rule was narrowed each time with the miss written down.  The exclusion is narrow enough
-    to keep its teeth — a NEW file anywhere else that names the handshake in code takes
-    this sweep to REFUSED, which is the right direction for a rule about second routes.
+    All three refusals were the right BEHAVIOUR on a wrong rule, which is the order this
+    estate prefers: the instrument declined to under-report rather than guessing, three
+    times, and the rule was narrowed each time with the miss written down.  The exclusion
+    is narrow enough to keep its teeth — a NEW file in any other directory that names the
+    handshake in code takes this sweep to REFUSED, which is the right direction for a rule
+    about second routes, and §1 still scans the exempt directories for exec edges.
     """
     out = []
     for rel, text in sorted(texts.items()):
@@ -264,7 +289,7 @@ def handshake_setters(texts):
                 st = line.strip()
                 if st and not st.startswith("#") and HANDSHAKE + "=1" in st:
                     out.append((rel, i, st))
-        elif rel.endswith(".py") and not rel.startswith(CONTROL_DIR):
+        elif rel.endswith(".py") and not rel.startswith(tuple(exempt)):
             try:
                 tree = ast.parse(text)
             except SyntaxError:

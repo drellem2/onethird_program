@@ -92,6 +92,19 @@ def main(root=L.ROOT):
         print("  for `build.sh` and would miss the others.  REFUSED rather than under-report.")
         return 2
     print()
+    print("  TWO DIRECTORIES ARE EXEMPT FROM THIS QUESTION AND FROM THIS QUESTION ONLY.")
+    print("  Each is shown with how many handshake mentions in CODE it was not asked about,")
+    print("  so the exemption is a stated number rather than a silence.  lib_502f")
+    print("  ROUTE_EXEMPT carries the reason for each; s0_controls D16-D18 hold the list to")
+    print("  these two and check that a route planted outside them is still caught.")
+    for d in L.ROUTE_EXEMPT:
+        inside = {k: v for k, v in hot.items() if k.startswith(d)}
+        n = len(L.handshake_setters(inside, exempt=()))
+        print("      %-34s %d mention(s) in code, not asked about" % (d, n))
+    print()
+    print("  §1 STILL SCANS BOTH OF THEM for exec edges to `./build.sh`, by the same rule it")
+    print("  applies everywhere else — the exemption suppresses §0's question, not §1's.")
+    print()
     print("  ONE ROUTE, AND IT IS build.sh.  §1 may therefore look for `build.sh` alone.")
     print()
 
