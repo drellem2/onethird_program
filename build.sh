@@ -232,6 +232,25 @@
 # ALREADY RED before anything was planted" -- correctly, about a redness it had caused
 # itself.  The script now writes its own transcript after the last run instead.  Anything
 # else that shells `./build.sh` while writing into `code/**/out_*.txt` has this bug.
+# THE EIGHTH LOOPED SUITE IS code/twin_disposition_audit_3902 (mg-3902), AND IT IS HERE FOR
+# THE REASON THIS FILE EXISTS AT ALL.  It asks the one question mg-9bc2's six sections never
+# ask: does the rendered twin's pin RESOLVE against git?  Section 3 compares the pinned digest
+# against the live working tree and section 6 compares the pinned commit against a VISIBLE COPY
+# OF ITSELF, so the field whose own header calls itself "the only thing in this file that says
+# which STATE.md it is a rendering of" was checked only against its own duplicate.  Setting both
+# copies to a commit that does not exist was demonstrated leaving that control at CLEAN, exit 0.
+#
+# IT WAS RED AGAINST origin/main ON THE DAY IT LANDED, which is the argument for adding it
+# rather than a hope about the future: the pin named `c308368`, a commit unreachable from
+# origin/main whose STATE.md is not the one the pin digests.  That is a check earning its slot
+# on the merge critical path by failing, not by passing.
+#
+# WHY IT IS A SEPARATE SUITE AND NOT `twin_pin.py`'s SECTION 7, which is where it belongs:
+# mg-9876's arm census REFUSES an arm-shaped site no registered arm claims, so adding the
+# section took `GATE VERDICT: REFUSED`, exit 2 — measured, and it would have blocked every
+# merge request in this repository.  Registering it properly needs 5 new probes in
+# `a2_discriminate.py`, and those cannot run: `make_sandbox()` builds a tree with no `.git`,
+# so the question has no answer inside it.  Folding this into section 7 is the filed successor.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \
@@ -240,7 +259,8 @@ for suite in \
     code/facts_registry_03cf/run_all.sh \
     code/concepts_gate_602d/run_all.sh \
     code/l1b_application_28b6/run_all.sh \
-    code/face_geometry_repair_e35b/run_all.sh
+    code/face_geometry_repair_e35b/run_all.sh \
+    code/twin_disposition_audit_3902/run_all.sh
 do
     echo
     echo "############################################################ $suite"

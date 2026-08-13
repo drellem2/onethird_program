@@ -1,0 +1,20 @@
+======================================================================================
+mg-3902 a1 — what the EXISTING control says about a provably false pin
+======================================================================================
+  OLD : code/rendered_twin_pin_9bc2/twin_pin.py (verified identical to origin/main)
+  NEW : code/twin_disposition_audit_3902/a2_pin_resolves.py
+
+  A `CLEAN` in the OLD column is the finding: the input is false, consistently
+  false in BOTH copies of the provenance string, and the instrument built to
+  remove unfalsifiable provenance claims says nothing.
+
+  CONTROL (no mutation)   old exit 0   new exit 0
+
+  input                                                         OLD (as shipped)      NEW
+  ----------------------------------------------------------------------------------------------------
+  pin repointed at a REAL commit carrying a DIFFERENT STATE.md  CLEAN — MISSED IT     caught (exit 2)
+  pin AND visible line both name a commit THAT DOES NOT EXIST   CLEAN — MISSED IT     caught (exit 2)
+
+  VERDICT: the shipped control is CLEAN on 2 of 2 inputs that
+           state a falsehood about which STATE.md this page renders;
+           a2_pin_resolves.py catches 2 of 2.

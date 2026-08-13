@@ -1,0 +1,25 @@
+======================================================================================
+mg-3902 — does the rendered twin's pin RESOLVE against git?
+  twin : docs/state-of-the-wall.html
+======================================================================================
+
+  pin commit    : b364767
+  pin sha256    : 118158cb98ac41a2a6a097e1b833390413653c9d172df84aab59bd0e5bae17b6
+
+  resolves to   : b3647677d511f4b7ea9c1a2709fa9fa5e912a3d9
+  STATE.md@commit sha256 : 118158cb98ac41a2a6a097e1b833390413653c9d172df84aab59bd0e5bae17b6
+  sha256 recorded in pin : 118158cb98ac41a2a6a097e1b833390413653c9d172df84aab59bd0e5bae17b6
+  PASS  the commit the page NAMES carries the STATE.md the page was
+        DIGESTED against — the two provenance fields agree with git,
+        not merely with each other.
+
+  reachable from origin/main : yes
+  reachable from main        : yes
+  Reachability is REPORTED, NEVER GRADED.  A `NO` means either an in-flight
+  reconciliation on a branch — fine, and the hash will be REWRITTEN by the
+  refinery's rebase before it lands — or a pin that has already outlived the
+  commit it names.  Those are different, and only a human can tell which.
+
+======================================================================================
+VERDICT: CLEAN — the pin resolves, and names the revision it digests.
+======================================================================================

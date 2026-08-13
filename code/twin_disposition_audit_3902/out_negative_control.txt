@@ -1,0 +1,15 @@
+============================================================================================
+mg-3902 — NEGATIVE CONTROL for a2_pin_resolves.py
+============================================================================================
+
+mutation                                                             verdict        detail
+--------------------------------------------------------------------------------------------
+pin repointed at a REAL commit carrying a DIFFERENT STATE.md         CAUGHT         exit 2; looked for 'THE PIN NAMES ONE REVISION AND DIGESTS ANOTHER' (absent from the baseline)
+pin names a commit THAT DOES NOT EXIST, consistently in both copies  CAUGHT         exit 2; looked for 'that commit DOES NOT EXIST in this repository' (absent from the baseline)
+the pin's `commit:` field is deleted outright                        CAUGHT         exit 2; looked for 'the pin carries no `commit:` field' (absent from the baseline)
+the pin's `state-sha256` is deleted, leaving the commit unchecked    CAUGHT         exit 2; looked for 'the pin records no digest' (absent from the baseline)
+the whole STATE-PIN block is removed                                 CAUGHT         exit 2; looked for 'there is no provenance claim to resolve' (absent from the baseline)
+
+5 of 5 caught; 0 hole(s).
+
+Every mutation was caught, and the unmutated twin is clean.

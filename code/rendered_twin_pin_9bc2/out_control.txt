@@ -6,7 +6,7 @@ mg-9bc2 — rendered-twin pin control
 
 SECTION 1 — the pin is present and its row set matches both documents
 --------------------------------------------------------------------------------------
-  pin commit      : c308368
+  pin commit      : b364767
   pin commit-date : 2026-08-13
   pinned rows     : 12   STATE.md rows: 12   twin rows: 12
   PASS  all three row sets agree: 1 2 3a 3b 4 5 6 7 8 9 10 11
@@ -71,9 +71,9 @@ SECTION 6 — the VISIBLE provenance line quotes the pin (the duplicate is check
   exactly the kind of thing this whole ticket is about going stale.  It is only
   safe because it is checked here.
 
-  visible : Reconciled against STATE.md @ c308368 (2026-08-13) — a pin, not a date
-  pinned  : c308368
-  commits parsed out of the visible line: ['c308368']
+  visible : Reconciled against STATE.md @ b364767 (2026-08-13) — a pin, not a date
+  pinned  : b364767
+  commits parsed out of the visible line: ['b364767']
   PASS  the visible line names exactly the pinned commit and no other.
 
 ======================================================================================
