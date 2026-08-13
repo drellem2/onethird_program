@@ -64,6 +64,41 @@ mg-30bd selftest -- the worlds the classifier must catch, and the five it must n
   D4   ok                   BOUNDARY: prose that means it but is not the literal  <- None ON PURPOSE
   D5   ok                   BOUNDARY: the marker mid-sentence is a mention, not a declaration
 
+  mg-aff1 — WHAT IS AND IS NOT A HISTORY-WALK LINE
+  --------------------------------------------------------------------------
+  V0   ok                   a bare masked sha at line start — the shape that always worked
+  V1   ok                   a LABELLED sha — `by <sha>  <subject>`, mg-aff1's subject
+  V2   ok                   a labelled sha with a COLON behind it, not a space
+  V3   ok                   the widest true label on the record, 13 characters
+  V4   ok                   `HEAD's subject :` — the shape mg-937c §6.4 named
+  V5   ok                   BOUNDARY: a FINDING sentence quoting a sha  <- NOT A WALK ON PURPOSE
+  V6   ok                   BOUNDARY: a sha behind a punctuated label  <- NOT A WALK ON PURPOSE
+  V7   ok                   BOUNDARY: a BARE COMMIT SUBJECT — the shape still open, §6.4
+  V8   ok                   BOUNDARY: a verdict line with no sha at all
+
+  AND THE TWO WIDENINGS THAT LOOK RIGHT UNTIL THEY ARE RUN, ON THE SAME STRINGS
+  --------------------------------------------------------------------------
+  id   shipped   anywhere  subject   the string
+  V0   True      True      False     <sha> apply: THE FINDING WAS ALREADY APPLIED
+  V1   True      True      False     by <sha>  repair: THE VERDICT IS LEAVE-AND-R
+  V2   True      True      False     at <sha>: ## Kill-shot 2 — Standard dominanc
+  V3   True      True      False     the tip      <sha> <date>  docs: re-scope C3
+  V4   True      False     False     HEAD's subject    : instrument: THE CLASSIFI
+  V5   False     True      False     FINDING: a passage deleted by <sha> survives
+  V6   False     True      False     N20 H8: the <sha> table's two ROW LABELS exc
+  V7   False     False     True      instrument: THE CLASSIFIER FOR VERDICT-STALE
+  V8   False     False     False       Q2  check_doc.py  delete C4's anchor   1  
+
+  `anywhere` DROPS THE WINDOW and takes V5 with it — a FINDING that quotes a sha
+  is not a walk, and annotating it would put mg-e720's cause on somebody else's
+  finding.  `subject` takes V7 and it is the reason V7 is still open: it also
+  takes any `word: text` line, and no rule over the line's own text tells the
+  two apart.  Both are re-measured over the whole record in out_owners_937c.txt
+  §6.4, where the counts are, so neither refutation rests on these 9 strings.
+  the window is a PLATEAU: widths 13..24 give the shipped answer, all 12 of them ok
+  `anywhere` gains V5/V6 and LOSES V4 — the two rules are not nested ok
+  a bare subject is NOT a walk line under the shipped rule           ok
+
 ==============================================================================
-mg-30bd selftest: 25 world(s) + 10 assertion(s), 0 failed
+mg-30bd selftest: 34 world(s) + 13 assertion(s), 0 failed
 ==============================================================================

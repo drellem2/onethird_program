@@ -253,13 +253,18 @@ def main():
     # exactly that (mg-2959).
     walk_rows = sum(1 for r in rows.values() if r["cause"] == "HISTORY-WALK")
     unflagged_walks = 0
-    for pth, row in rows.items():
+    narrow_unflagged = 0
+    walk_residue = []
+    for pth, row in sorted(rows.items()):
         if row["cause"] != "HISTORY-WALK":
             continue
         runner = pth in buckets and buckets[pth][0] in L.VERDICT_STALE
         hunk = (buckets[pth][2] if runner else pass2[pth][0].get("hunk")) or []
+        if not any(L.walk_line_start(t) for _m, t in hunk):
+            narrow_unflagged += 1
         if not R.walk_note(hunk):
             unflagged_walks += 1
+            walk_residue.append((pth, hunk))
     in_gate = sorted(p for p in stale if os.path.dirname(p) in gated)
     e("")
     e("  ./build.sh runs %d suite(s).  The record ran %d.  Of the %d verdict-stale"
@@ -454,13 +459,16 @@ def main():
     e("     they cannot be in the baseline.  Nothing in this estate regenerates or compares")
     e("     them and no baseline can make that untrue.")
     e("")
-    e("  4  THE `<sha> <subject>` DETECTOR IS NARROWER THAN THE FAMILY IT NAMES.  It needs")
-    e("     a masked sha at the start of the line, so a walk that prints `HEAD's subject :")
-    e("     <subject>` or a bare commit subject is missed.  FOUND BY READING, NOT BY THE")
-    e("     DETECTOR: %d of the %d rows this baseline calls HISTORY-WALK carry no NOTE in §4"
+    e("  4  THE HISTORY-WALK DETECTOR IS STILL NARROWER THAN THE FAMILY IT NAMES, BUT BY")
+    e("     ONE SHAPE RATHER THAN THREE, AND THE RESIDUE IS NOW A CLASS WITH A REASON")
+    e("     (mg-aff1).  %d of the %d rows this baseline calls HISTORY-WALK carry no NOTE in"
       % (unflagged_walks, walk_rows))
-    e("     of out_verdict_staleness.txt.  Reported, not repaired — widening the detector")
-    e("     moves report.py's annotations and that is a change to the corpus's record.")
+    e("     §4 of out_verdict_staleness.txt; under the rule mg-937c measured, %d did."
+      % narrow_unflagged)
+    e("     THE BEFORE IS PRINTED BESIDE THE AFTER — see §6a, which re-measures both rules")
+    e("     and the two refuted widenings over every quoted line in the record.")
+    e("     WHAT IS LEFT IS ONE SHAPE: a BARE COMMIT SUBJECT, no sha and no label.  It is")
+    e("     not repaired because it CANNOT be from the line alone, which §6a measures.")
     e("")
     e("  5  AND THE ONE THAT OUTRANKS THEM.  A successor working only these %d is working"
       % len(stale))
@@ -469,6 +477,121 @@ def main():
     e("     by accident, and not by any enumeration including this one.  What §1 above adds")
     e("     is WHERE to point that diff — the %d suites ./build.sh does not run."
       % (len(ran) - len(gated)))
+    e("")
+
+    # ---- §6a ---------------------------------------------------------------------------
+    # THE FOUR RULES ON THE WHOLE RECORD (mg-aff1).  §6.4 above is a claim about a detector,
+    # and every version of it that has ever been written is run here over every quoted line
+    # the record holds — the one that shipped before, the one that ships now, and the two
+    # that look right until they are run.  A widening argued for in prose is a widening
+    # nobody measured, which is this directory's own subject applied to its own repair.
+    e(rule("="))
+    e("§6a  THE HISTORY-WALK DETECTOR, ALL FOUR RULES, OVER EVERY QUOTED LINE — mg-aff1")
+    e(rule("="))
+    e("")
+    mark = len(out)
+    lines = []
+    for pth, tup in sorted(buckets.items()):
+        for _m, t in (tup[2] or []):
+            lines.append((pth, t))
+    for pth, (row2, _d) in sorted(pass2.items()):
+        for _m, t in (row2.get("hunk") or []):
+            lines.append((pth, t))
+    hw_paths = {p for p, r in rows.items() if r["cause"] == "HISTORY-WALK"}
+    rules = [("line-start  (mg-937c, replaced)", L.walk_line_start),
+             ("SHIPPED     (mg-aff1)", L.is_walk_line),
+             ("anywhere    (REFUTED)", L.walk_anywhere),
+             ("bare subject(REFUTED)", L.walk_bare_subject)]
+    e("  %d quoted line(s) in the record, over %d path(s).  A line in a row this baseline"
+      % (len(lines), len({p for p, _t in lines})))
+    e("  calls HISTORY-WALK is counted IN-FAMILY and any other line OUT.  That is a PROXY")
+    e("  and it is named as one: the cause was assigned by reading, so it is the best")
+    e("  ground truth here and it is not a proof.  An OUT hit is the expensive kind —")
+    e("  a NOTE saying `this moves when main moves` on somebody else's finding.")
+    e("")
+    e("  %-32s %8s %8s %8s" % ("rule", "hits", "in-fam", "OUT"))
+    e("  " + rule("-")[:60])
+    for label, fn in rules:
+        hit = [(p, t) for p, t in lines if fn(t)]
+        infam = sum(1 for p, _t in hit if p in hw_paths)
+        e("  %-32s %8d %8d %8d" % (label, len(hit), infam, len(hit) - infam))
+    e("")
+    e("  SO THE OBVIOUS WIDENING IS REFUTED ON THE RECORD AND NOT ON TASTE.  Dropping the")
+    e("  %d-character label window annotates every FINDING sentence that quotes a sha, and"
+      % L.WALK_LABEL_WINDOW)
+    e("  the OUT column is how much.")
+    e("")
+    added = [(p, t) for p, t in lines if L.is_walk_line(t) and not L.walk_line_start(t)]
+    e("  WHAT THE WIDENING BOUGHT AND WHAT IT COST, WHICH IS THE ROW THIS SECTION IS FOR:")
+    e("  %d line(s) gained, %d of them IN-FAMILY, and the OUT column DID NOT MOVE."
+      % (len(added), sum(1 for p, _t in added if p in hw_paths)))
+    e("  THE TWO OUT HITS ARE PRINTED, BECAUSE A NUMBER IS NOT A DEFENCE — and both were")
+    e("  already hit by the rule mg-937c measured, so neither is this repair's doing:")
+    e("")
+    for pth, t in [(p, t) for p, t in lines if L.is_walk_line(t) and p not in hw_paths]:
+        e("    %s" % pth)
+        e("        cause on file: %s" % rows.get(pth, {}).get("cause", "not in the baseline"))
+        e("        %s" % t[:74])
+    e("")
+    e("  THEY ARE WALK LINES BY SHAPE AND THE PROXY IS WHAT DISAGREES, NOT THE DETECTOR: a")
+    e("  transcript may carry one walk line and still be filed under the cause that")
+    e("  dominates it.  Said here rather than smoothed into the OUT column, because the")
+    e("  same two would be the whole warrant for calling this rule clean.")
+    e("")
+    e("  THE WINDOW IS A PLATEAU, RE-DERIVED ON THE RECORD RATHER THAN ON 9 STRINGS:")
+    plateau = {}
+    for k in range(1, 41):
+        alt = __import__("re").compile(
+            r"^(?:HEAD:\s*)?[A-Za-z ]{0,%d}<sha>[:,]?\s+\S" % k)
+        n = sum(1 for _p, t in lines if alt.match(t) or L.HEAD_SUBJECT.match(t))
+        plateau.setdefault(n, []).append(k)
+    for n in sorted(plateau):
+        ks = plateau[n]
+        e("      width %2d-%2d -> %d hit(s)" % (ks[0], ks[-1], n))
+    e("  The shipped width is %d.  It is inside the widest plateau and not at its edge,"
+      % L.WALK_LABEL_WINDOW)
+    e("  which is what stops it being a number fitted to this corpus.")
+    e("")
+    e("  AND WHAT IS LEFT, LISTED RATHER THAN COUNTED — the %d HISTORY-WALK row(s) with no"
+      % len(walk_residue))
+    e("  NOTE, with the lines that made somebody call them a walk:")
+    e("")
+    for pth, hunk in walk_residue:
+        e("    %s" % pth)
+        for _m, t in hunk[:3]:
+            e("        %s" % t[:76])
+    e("")
+    e("  EVERY ONE IS A BARE COMMIT SUBJECT, and the row above says why that stays open:")
+    e("  the `bare subject` rule takes them and takes %d line(s) that are not walks at all."
+      % sum(1 for p, t in lines if L.walk_bare_subject(t) and p not in hw_paths))
+    e("  A CLOSED VOCABULARY OF COMMIT TYPES WOULD SEPARATE THEM AND ROT: this estate's log")
+    e("  carries `refresh`, `measure`, `declare`, `amend`, `land`, `discharge`, `owners`,")
+    e("  `scope` and `census+repair`, and nothing closes that set.  THE ONE RULE THAT WOULD")
+    e("  WORK IS REFUSED ON THIS DIRECTORY'S OWN GROUNDS: matching the line against `git")
+    e("  log` answers differently on different days, so the transcript carrying the answer")
+    e("  stops being a function of repo state — mg-e720's family, which is the very cause")
+    e("  this NOTE names.  A history-walk detector that walked history would be a member of")
+    e("  the population it counts.")
+    e("")
+    # THE REMEDY PUT TO ITS OWN DEFECT, AND IT DOES NOT COME BACK CLEAN.  DECLARATION has a
+    # WINDOW, which is what stops a transcript quoting the marker from exempting itself.
+    # This detector has no such defence and cannot have one: it reads a hunk, so its input is
+    # already a quotation, and a quoted walk line is letter-for-letter a walk line.  This
+    # section is now the densest concentration of quoted walk lines in the corpus, so the
+    # count is taken over the lines it has just printed rather than asserted to be zero.
+    self_hits = sum(1 for ln in out[mark:] if L.is_walk_line(ln))
+    e("  AND THE RULE APPLIED TO THIS SECTION'S OWN TEXT, WHICH IS NOT ZERO: %d of the %d"
+      % (self_hits, len(out) - mark))
+    e("  line(s) printed above are walk lines under the rule they are printed to justify.")
+    e("  mg-5491's DECLARATION has a WINDOW for exactly this and THIS DETECTOR CANNOT: its")
+    e("  input is a hunk, so what it reads is ALREADY a quotation, and a quoted walk line is")
+    e("  letter-for-letter a walk line.  What keeps the number small is an ACCIDENT and it")
+    e("  is named as one — the 8-space evidence indent pushes some of them past the label")
+    e("  window — so nobody should read it as a defence.  IT COSTS NOTHING TODAY: report.py")
+    e("  annotates §4 and §5, this transcript is in neither, and README §8 item 4 already")
+    e("  records that this directory is outside the population it counts.  It is here so")
+    e("  that the sweep which finally includes this directory finds the reason written down")
+    e("  rather than discovering it.")
     e("")
 
     findings = len(f["grown"]) + len(f["strengthened"]) + len(bad)

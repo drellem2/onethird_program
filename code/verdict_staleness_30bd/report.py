@@ -678,20 +678,17 @@ def main():
     return 0
 
 
-WALK = None
-
-
-def _walk_re():
-    global WALK
-    if WALK is None:
-        import re
-        # A `<sha> <subject>` line: what a `git log` walk prints once the sha has been
-        # masked by A2.  Named, not repaired: a transcript that QUOTES COMMIT SUBJECTS moves
-        # whenever history moves, which is mg-e720's family ("unbounded history walks scored
-        # as verdicts"), and adjudicating each instance is the successor's job, not this
-        # instrument's.  Counted so a reader can see the cause without re-deriving it.
-        WALK = re.compile(r"^\s*(?:HEAD:\s*)?<sha>\s+\S")
-    return WALK
+# THE DETECTOR MOVED TO `lib30bd` (mg-aff1) AND THAT IS WHERE THE ARGUMENT FOR IT LIVES.
+# It was a private regex here, narrower than the family it named, and a detector nothing
+# could plant a world against is a detector nobody can bound — so it now sits beside
+# DECLARATION and TOKENS, where `selftest_30bd.py` runs it on literal strings.  What stayed
+# here is the NOTE's PROSE, which is a rendering decision and belongs with the renderer.
+#
+# The line it marks is one row of a `git log` walk: a transcript that quotes commit subjects
+# moves whenever history moves, which is mg-e720's family ("unbounded history walks scored
+# as verdicts").  Still named and still not repaired — adjudicating each instance is the
+# successor's job, not this instrument's.  Counted so a reader can see the cause without
+# re-deriving it.
 
 
 def show(rows):
@@ -735,11 +732,12 @@ def short_detail(detail, limit=108):
 
 
 def walk_note(rows):
-    n = sum(1 for _m, t in rows if _walk_re().match(t))
+    n = sum(1 for _m, t in rows if L.is_walk_line(t))
     if not n:
         return None
-    return ("%d of %d quoted line(s) are `<sha> <subject>` — a history walk, so this moves "
-            "when main moves (mg-e720's family)" % (n, len(rows)))
+    return ("%d of %d quoted line(s) are a history walk — `<sha> <subject>`, a labelled sha, "
+            "or `HEAD's subject:` — so this moves when main moves (mg-e720's family)"
+            % (n, len(rows)))
 
 
 def _rank(bucket):
