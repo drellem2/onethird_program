@@ -115,7 +115,7 @@ mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
   transcripts carry a repeated address line at this commit.
 
 ------------------------------------------------------------------------------
-4  R3's PROSE OVER-COUNT, REPAIRED -- AND ALL THREE RULES
+4  R3's PROSE OVER-COUNT, REPAIRED -- AND ALL FIVE RULES
    COUNTED SIDE BY SIDE, THE WAY SET IS COUNTED BESIDE BAG
 ------------------------------------------------------------------------------
 
@@ -139,10 +139,11 @@ mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
       1384  .py/.sh tracked at 12aa5f8
          0  files this Python could NOT separate from their prose
 
-      mg-0e77's rule -- prose read as code           92 hits,  71 file(s),  47 dir(s)
-      comments blanked ONLY -- THE HALF-REPAIR       90 hits,  69 file(s),  46 dir(s)
-      comments AND docstrings -- tranche 7           83 hits,  63 file(s),  45 dir(s)
-      ...AND a flag's dash starts a word -- THE RULE   80 hits,  60 file(s),  43 dir(s)
+      mg-0e77's rule -- prose read as code             92 hits,  71 file(s),  47 dir(s)
+      comments blanked ONLY -- THE HALF-REPAIR         90 hits,  69 file(s),  46 dir(s)
+      comments AND docstrings -- tranche 7             83 hits,  63 file(s),  45 dir(s)
+      ...AND a flag's dash starts a word -- tranche 8   80 hits,  60 file(s),  43 dir(s)
+      ...AND a command name is a token -- THE RULE     80 hits,  60 file(s),  43 dir(s)
 
   BOTH DIRECTIONS, AND THE SECOND IS THE ONE THAT DECIDED THE
   DESIGN.  Blanking comments ALONE removes 3 and ADDS 1:
@@ -181,11 +182,9 @@ mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
       code/runner_exit_repair_7522/lib7522.py
           ticket's bare grep, re-derived here from this file's own rule.
 
-  4 DIRECTORIES GO SILENT, AND ONE OF THEM IS THE HEADLINE:
+  2 DIRECTORIES GO SILENT, AND ONE OF THEM IS THE HEADLINE:
       code/corpus_universe_1d6c
       code/landscape_repair_audit_3b51
-      code/runner_exit_c2b3
-      code/runner_exit_repair_7522
 
   audit_scope_text.py IS THE INSTRUMENT TRANCHE 4 REPAIRED AND
   PINNED.  Its only two R3 hits were comments EXPLAINING THE DEFECT
@@ -297,13 +296,120 @@ mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
   hits at 12aa5f8, measured separately and declared rather than left to
   look like it contributed to the 3.  N24 is that measurement; N25
   is what writing N24 turned up, an UNDER-count in the same half:
-  R3's `find` requires a following SPACE, so the LIST spelling that
-  P5 exists for is invisible to it.  Reported, NOT repaired, for the
-  reason tranche 7 gave for declining this tranche's own subject --
-  `find` is an ordinary English verb where `grep` is not, so
-  widening it is a second change whose false-positive direction
-  nobody has measured.  Two tranches running, the residue named at
-  the low water mark is where the next subject came from.
+  R3's `find` required a following SPACE, so the LIST spelling that
+  P5 exists for was invisible to it.  Tranche 8 reported it and did
+  NOT repair it, because `find` is an ordinary English verb where
+  `grep` is not, and widening it is a change whose false-positive
+  direction nobody had measured.  THIS TRANCHE MEASURED IT.
+
+------------------------------------------------------------------------------
+5  A COMMAND NAME IS A WHOLE TOKEN (mg-23af) -- THE THIRD TRANCHE
+   RUNNING WHOSE SUBJECT CAME OUT OF ITS PREDECESSOR'S PRINTED
+   RESIDUE, AND THE FIRST WHOSE COUNTS CANNOT DECIDE IT
+------------------------------------------------------------------------------
+
+  The spelling `["find", root, "-type", "f"]` is the one the grep
+  half's 24-character window exists to buy, and R3's find half could
+  not see it: a command name ends a TOKEN, and in that spelling the
+  character after it is the closing quote of its own string literal
+  rather than a space.  A fact about tokenising, not a judgement
+  about the word -- mg-44da's guard one half along.
+
+  BOTH DIRECTIONS, AND BOTH ARE ZERO.  The repair removes 0 and
+  ADDS 0, because the estate at 12aa5f8 contains no find(1) in the list
+  spelling AT ALL.  So this tranche's whole rule change is invisible
+  to the estate scan in EVERY direction, and the honest reading is
+  that the counts here decide NOTHING -- an over-count repair that
+  removes nothing and an under-count repair that adds nothing look
+  identical from the delta, and only one of them is this one.
+
+  WHAT EACH SHAPE IS EXPOSED TO, AND WHAT EACH ONE ACTUALLY FIRES ON:
+
+                                                                exposed on  fires on
+      `find` + WHITESPACE           tranche 8, and mg-0e77's      90 line(s)   1 hit(s)
+      `find` + ANY 24 CHARS         the grep half's own shape    328 line(s)   1 hit(s)
+      `find` + WHITESPACE or QUOTE  THE RULE                     115 line(s)   1 hit(s)
+
+  ALL THREE FIRE ON THE SAME 1 HIT, AND THEY AGREE -- so the counts
+  cannot tell the three designs apart, and the choice is made on
+  the exposure column rather than on any delta.
+
+  THE GREP HALF'S OWN SHAPE IS REJECTED and the reason is 238 lines:
+  that is what it newly admits, and they are PYTHON -- `doc.find(x)`,
+  `def find(a)`, `pred["find"]` -- in a corpus where the word is a
+  method far more often than a command.  `find(` is a call in
+  Python's grammar and there is no spelling of find(1) whose next
+  character is `(`, so the rule admits the closing quote and stops.
+
+  THE 25 LINES THE RULE DOES NEWLY ADMIT, EVERY ONE PRINTED, because
+  a widening that does not show what it let in is an assertion --
+  and NONE of them carries a `-type`/`-name` in the window:
+
+      code/audit_330a/s3_kernel_half.py
+          % ("column", "revision", "exit", "self", "find", "listed"))
+      code/audit_330a/s5_preserve.py
+          "is never scored as holding on a row this script could not find")
+      code/branching_audit_58da/g4_fleet.py
+          % (name[:51], pred["exit"], pred["self"], pred["find"],
+      code/branching_audit_58da/g4_fleet.py
+          if pred["find"] == 0 and f:
+      code/branching_audit_957f/j2_silencing.py
+          print("   clone                                   pred  exit  self
+      code/branching_audit_957f/j2_silencing.py
+          print("   deletion                                       exit  sel
+      code/branching_audit_957f/j3_setlevel.py
+          print("   member                 exit   self/find")
+      code/branching_audit_957f/j4_reproduce.py
+          WANTED = [("self-errors", "self"), ("findings count", "find"),
+      code/branching_bound_audit_aaf4/a1_population.py
+          print("      on %d of %d sites for reasons that are correct, and w
+      code/branching_repair_76cc/r1_kernel.py
+          print("   clone                                    predicted  actu
+      code/face_geometry_audit_c4c8/h1_per_return.py
+          PREDICATE_LAYER = ("absorb_trace", "absorb_trace.find", "gate_viol
+      code/face_geometry_audit_c4c8/h1_per_return.py
+          at = [r for r in results if r[1] in ("absorb_trace", "absorb_trace
+      code/face_geometry_audit_c4c8/h1_per_return.py
+          ("absorb_trace", "absorb_trace.find")]
+      code/face_geometry_audit_f1b2/audit_injections.py
+          ("instrument check: the union-find", "instrument 3 (vs brute force
+      code/hodge_leverage_audit_7e39/audit_7e39.py
+          and node.func.attr in ("startswith", "endswith", "find",
+      code/hodge_leverage_audit_835f/audit_a318_repair.py
+          "declared at every site rather than left for the next editor to fi
+      code/repair_b2af/t4_preserve.py
+          % ("column", "revision", "exit/self/find", "provenance"))
+      code/runner_exit_repair_bf79/p2_population.py
+          print("  the `1` P2e predicted; P2e predicted the widened rule wou
+      code/species_audit_7dd3/kern7dd3.py
+          __all__ = ["hdr", "tokens", "stream", "find", "reasons", "REASON_N
+      code/suppression_polarity_audit_40e4/q2_offsets_40e4.py
+          "h": h, "started": started, "true": true, "repaired": repaired, "f
+      code/suppression_polarity_audit_40e4/q2_offsets_40e4.py
+          if r["find"] != r["true"]:
+      code/suppression_polarity_audit_40e4/q2_offsets_40e4.py
+          if r["find"] < 0:
+      code/suppression_polarity_audit_40e4/q2_offsets_40e4.py
+          undef = [(c, e, r["h"]) for c, e, rows in total_pop for r in rows 
+      code/suppression_polarity_audit_40e4/q2_offsets_40e4.py
+          disagree = [(c, e, r["h"], r["find"], r["true"])
+      code/suppression_polarity_audit_40e4/q2_offsets_40e4.py
+          if r["find"] >= 0 and r["find"] != r["true"]]
+
+  AND THE REJECTED SHAPE'S FALSE POSITIVES ARE MEASURED, NOT
+  PREDICTED: 0 line(s) at 12aa5f8 would fire under it and do not under
+  the rule.  IT IS ZERO, and that is the honest number -- the
+  separating shape is PLANTED as N26 precisely because the estate
+  has no instance of it, so the counts could not have said so.
+
+  REPORTED AT THE LOW WATER MARK -- THIS REPAIR LEAVES AN UNDER-COUNT
+  OF ITS OWN, WHICH IS THE DEFECT CLASS IT IS REPAIRING: a list
+  spelling whose argument runs past the 24-character window is still
+  invisible, `["find", os.path.join(root, sub), "-type", "f"]`.
+  That is P5's declared limit reaching the half nobody had measured
+  it on.  N27 asserts it and takes N25's place in KNOWN_DEFECT --
+  the residue named at the low water mark is where three tranches
+  running have found their subject.
 
 ==============================================================================
 CONDITION 2: instrument GREEN -- 2 of 2 tranche-4 pins survive the stricter test; 1010 of 1061 transcripts are ones on which SET and BAG can disagree

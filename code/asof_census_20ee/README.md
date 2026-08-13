@@ -910,3 +910,122 @@ tranche 6 applied that discipline to `out_a4_sweep.txt` while missing it on `out
 `consumers.py` computes from the **live index** rather than from a commit. **This branch adds zero
 files** (`git diff --name-only --diff-filter=A origin/main...HEAD` is empty), which is what makes the
 split a measurement rather than an inference. Regenerating it here is the repair.
+
+---
+
+# Tranche 8 (`mg-23af`) — a command name is a **whole token**, and two pointers that said *"this is controlled"* named controls that do not exist
+
+Tranche 7 printed `N25` at its low water mark — R3's `find` half requires a following *space*, so
+`["find", root, "-type", "f"]` is invisible to it — and **declined** the repair, in as many words:
+*"`find` is an ordinary English verb where `grep` is not, so widening it is a second change whose
+false-positive direction nobody has measured."* This tranche measured it. That makes **three
+consecutive tranches whose subject came out of the predecessor's printed remainder** rather than out
+of a person, and the practice is now worth naming as one: decline the repair, but leave the evidence
+in the instrument's own output.
+
+## 1. The repair, and why it is not simply the `grep` half's shape
+
+A command name **ends a token**. In the shell spelling the next character is whitespace; in the list
+spelling it is the closing quote of its own string literal. That is a fact about tokenising rather
+than a judgement about the word — `mg-44da`'s guard, one half along — and it is the whole rule:
+
+```
+_FIND_SPACE = r"\bfind\s+[^\n|]*"                    # tranche 7, and mg-0e77's
+_FIND_TOKEN = r"\bfind\b(?=[\s\"'])[^\n|]{0,24}?"    # the rule
+```
+
+The obvious repair — give `find` the `grep` half's own shape, `find` then any 24 characters — is
+**rejected, and the measurement is why**, printed in `out_permuted.txt` section 5:
+
+| shape | exposed on | fires on |
+|---|---|---|
+| `find` + whitespace *(tranche 7, and mg-0e77's)* | 90 lines | 1 hit |
+| `find` + any 24 chars *(the grep half's own shape)* | 328 lines | 1 hit |
+| `find` + whitespace or quote **(the rule)** | 115 lines | 1 hit |
+
+**All three fire on the same single hit**, so the estate's counts cannot tell the three designs apart
+at all. The choice is made on the *exposure* column and not on any delta. The rejected shape newly
+admits 238 lines and they are **Python** — `doc.find(x)`, `def find(a)`, `pred["find"]` — in a corpus
+where the word is a method far more often than a command; `find(` is a call in Python's grammar and
+there is no spelling of `find(1)` whose next character is `(`.
+
+## 2. Both directions, and both are zero — said plainly rather than dressed up
+
+The repair removes **0** hits and adds **0**: `80 → 80`, because the estate at `12aa5f8` contains no
+`find(1)` in the list spelling *at all*. An over-count repair that removes nothing and an under-count
+repair that adds nothing **look identical from the delta**, and only one of them is this one. What
+carries this tranche is the exposure table, the 25 newly-admitted lines (every one printed, none
+carrying a `-type`/`-name` in the window), and two controls:
+
+- **`N25` leaves `KNOWN_DEFECT`** the way `N18` did — in the tranche that did the thing its own text
+  asked to be told about. It is now `(False, False, True)` across mg-0e77's rule, tranche 7's, and
+  the rule.
+- **`N26` is planted**, because the estate has no instance: `line.find(sep, line.index("-name"))`
+  fires under the rejected shape and not under the rule. `0` lines at `12aa5f8` separate them, which
+  is exactly why asserting the difference from the pattern rather than running it would have been
+  reading a regex.
+
+**Every axis pins the axes it is not measuring.** Section 4 now counts **five** rules side by side,
+and tranche 7's row pins `finds="space"` for the reason tranche 7 pinned `flags="loose"` on the three
+before it: letting this tranche's find repair into that row would republish `80` as a number
+measuring two changes. `pinnable.WALK_BOUNDARY` exists for the same reason — the account of *which
+directories `mg-44da` silenced* must be read at `mg-44da`'s rule.
+
+## 3. The correction: two sentences whose entire content was *"go and check"*
+
+Found by **cross-referencing, not by reading** — the same way the last two tranches found their
+corrections:
+
+- `pinnable.py` said `--recursive` staying lit was *"a control (`P24`) rather than a claim"*. **No
+  `P24` has ever existed.** It is now `P22`, and **`P24` is burned**: issuing it to a new control
+  would make that dead pointer *resolve*, to a control about something else, which is strictly worse
+  than leaving it dangling.
+- `permuted.py`'s section 2 credited its literal-matching half to a control this suite has never
+  issued. It is `P14`. **This one was the worse of the two**, because the number it named *is* a real
+  control — of `state_ratchet_e331` — so a reader who went looking found something, and it was about
+  something else. `P25` therefore resolves per **site**, not per name.
+
+**The repair is an instrument and not a rewording** (`mg-937c`'s rule), because a hand-fixed pointer
+is exactly as unbacked as the one it replaces. `P25` cross-references every `[NPC]<n>` in this
+directory's `.py`/`.sh`/`.md` against the controls `selftest_20ee.py` defines. Foreign references are
+legal, **declared**, and *measured* — the owning directory must really run a control by that name, or
+the escape hatch would excuse any pointer at all, which is `P15`'s shape one file over.
+
+**`P25` fired on itself the first time it ran**, on the `FOREIGN` literal in its own source — a
+declaration, not a pointer. That is this directory's own rule (*a remedy is an artifact of the same
+kind as the defect it remedies*) arriving live rather than as a paragraph, and the exemption written
+for it is the narrowest one that is true: the register may name its own entries and nothing else.
+
+## 4. What this tranche leaves — reported at the low water mark
+
+- **`N27` takes `N25`'s place in `KNOWN_DEFECT`, so the tuple turns over rather than shrinking.** A
+  list spelling whose argument runs past the 24-character window is still invisible —
+  `["find", os.path.join(root, sub), "-type", "f"]`. That is `P5`'s declared limit reaching the half
+  nobody had measured it on: **the repair for an under-count leaves an under-count**, which is the
+  defect class arriving inside its own remedy. A tranche that let the count fall from 5 to 4 would be
+  publishing a smaller number for a defect that only moved.
+- **Widening the window is the next change, and its own false-positive direction is unmeasured** —
+  which is, word for word, the sentence tranche 7 wrote about *this* tranche's subject.
+- **`out_pinnable_3b51.txt` is still a dated hand-run that no suite re-takes.** Unchanged in kind
+  from tranche 7, and not re-taken here for the same reason: it needs a dirty tree and a subject
+  suite run.
+- **The four figures tranche 7 published were recomputed and they stand** — `92/71/47`, `90/69/46`,
+  `83/63/45`, `80/60/43`. The work item filed for this tranche carried the observation that *a
+  published figure in this estate has roughly a one-tranche half-life unless somebody recomputes it*;
+  recomputing these four is the test, and on these four it did not bite.
+
+### It bit somewhere else: `out_consumers.txt` moves `196 → 198`, and **neither** `+1` is a surprise
+
+The first is main's — `code/image_closure_3da1/run_all.sh` arrived at `3a1b0ff` (`mg-3da1`) while
+this branch was open. **The second is tranche 7's own transcript having shipped stale at its own
+commit, for the second tranche running.** At `ccd925c` the tree held **197** files named
+`run_all.sh` and the transcript committed there said **196** — the same off-by-one, measured on the
+pre-rebase tree and committed against the post-rebase one, that tranche 7's *own commit message*
+diagnosed for the `194 → 196` move a paragraph earlier.
+
+**This branch adds zero files** (`git diff --name-only --diff-filter=A origin/main...HEAD` is empty),
+which is what makes the split a measurement rather than an inference. The lesson is not that anybody
+was careless: `consumers.py` reads the **live index** by design, so its figure is a function of *when
+you ran it* and not of the commit you attach it to, and every rebase re-opens the hole. **The figure
+with the short half-life was the one no `AS_OF` pins** — which is this directory's whole subject,
+arriving on its own transcript twice.

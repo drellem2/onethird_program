@@ -26,6 +26,7 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, HERE)
 
 import census  # noqa: E402
@@ -39,12 +40,18 @@ RAN = []
 # and N18 is absent from this list for the first time: mg-e5f3 repaired what
 # it asserted, which is the event its own text asked to be told about.
 #
-# N25 joins it at mg-44da, and it was found by WRITING ANOTHER CONTROL rather
+# N25 joined it at mg-44da, and it was found by WRITING ANOTHER CONTROL rather
 # than by reading: N24's first draft asserted find(1)'s guard with a subject
 # spelled as a LIST, the pair came back (False, False), and the reason is that
-# R3's find half cannot see that spelling at all.  A control that fails for a
+# R3's find half could not see that spelling at all.  A control that fails for a
 # reason its author did not predict is the cheapest finding in this directory.
-KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N25")
+#
+# N25 LEAVES AT mg-23af AND N27 TAKES ITS PLACE, so this tuple TURNS OVER rather
+# than shrinking, and that is deliberate: the repair for an under-count left an
+# under-count of its own -- a list spelling longer than the 24-character window
+# -- and a tranche that repaired the first while quietly dropping the count from
+# 5 to 4 would be publishing a smaller number for a defect that moved.
+KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27")
 
 
 def check(name, got, want, why):
@@ -531,8 +538,27 @@ print()
 
 
 def fpair(src, path=None):
-    """(what the LOOSE flag half sees, what the repaired one sees)."""
-    return (bool(pinnable.unordered_walks(src, path, flags="loose")),
+    """(what the LOOSE flag half sees, what the repaired one sees).
+
+    Both halves pin `finds="space"`, which is mg-23af's own subject applied to
+    mg-23af's own controls: these controls are about the FLAG repair, and a
+    later repair to another half of the same rule must not be allowed to move
+    what they assert while their text goes on naming the flag half.
+    """
+    return (bool(pinnable.unordered_walks(src, path, flags="loose",
+                                          finds="space")),
+            bool(pinnable.unordered_walks(src, path, finds="space")))
+
+
+def ftriple(src, path=None):
+    """(mg-0e77's rule, tranche 8's rule, THE RULE) -- the find(1) half.
+
+    Three because the find half has now been repaired at a different axis from
+    the flag half, and a pair could not say which of the two moved a control.
+    """
+    return (bool(pinnable.unordered_walks(src, path, flags="loose",
+                                          finds="space")),
+            bool(pinnable.unordered_walks(src, path, finds="space")),
             bool(pinnable.unordered_walks(src, path)))
 
 
@@ -589,20 +615,48 @@ check("N24 find(1)'s `-type` takes the same guard — and it moves NOTHING",
       "a guard that waits for its first false positive is one somebody has to "
       "find twice.")
 
-check("N25 find(1) in the LIST spelling is INVISIBLE — reported, not repaired",
-      fpair("""    subprocess.run(["find", root, "-type", "f"], check=True)"""),
-      (False, False),
+check("N25 find(1) in the LIST spelling — WAS INVISIBLE, NOW SEEN",
+      ftriple("""    subprocess.run(["find", root, "-type", "f"], check=True)"""),
+      (False, False, True),
       "FOUND BY WRITING N24's CONTROL AND GETTING THE WRONG ANSWER, which is "
       "this arc's own pattern: the figure moves when somebody builds the next "
-      "thing. R3's find half requires `find` followed by WHITESPACE, so the "
-      "LIST spelling P5 exists for is invisible to it — the exact blind spot "
+      "thing. R3's find half required `find` followed by WHITESPACE, so the "
+      "LIST spelling P5 exists for was invisible to it — the exact blind spot "
       "P5 was written about, one alternative along, and an UNDER-count rather "
-      "than an over-count. NOT REPAIRED HERE and the reason is the one tranche "
-      "7 gave for declining this tranche's own subject: one rule change "
-      "measured in both directions is a tranche's whole claim, and widening "
-      "`find` is a second change whose false-positive direction nobody has "
-      "measured — `find` is an ordinary English verb, where `grep` is not. "
-      "This control fires the day somebody does it, and that is the signal.")
+      "than an over-count. Tranche 8 declined it and said what would have to "
+      "happen first: `find` is an ordinary English verb where `grep` is not, "
+      "so the false-positive direction had to be measured. mg-23af measured "
+      "it and this control is now the repair's own — a command name is a WHOLE "
+      "TOKEN, so the closing quote of its string literal counts where a `(` "
+      "does not. It leaves KNOWN_DEFECT the way N18 did, in the tranche that "
+      "did the thing its own text asked to be told about.")
+
+check("N26 `doc.find(x)` is a CALL, not a command — the direction that was declined",
+      ftriple("""    i = line.find(sep, line.index("-name"))"""),
+      (False, False, False),
+      "THE FALSE-POSITIVE DIRECTION TRANCHE 8 REFUSED TO WIDEN WITHOUT, and it "
+      "is PLANTED because the estate has no instance — 0 lines at 12aa5f8 fire "
+      "under the rejected shape and do not fire under the rule, so the counts "
+      "could not have said so and permuted.py section 5 prints that zero. Had "
+      "the find half simply taken the GREP half's shape (`find` then any 24 "
+      "characters) this line would fire, and 238 more lines would join the "
+      "exposed population, nearly all of them Python spelling `find` as a "
+      "method. The separating fact is grammatical rather than statistical: "
+      "there is no spelling of find(1) whose next character is `(`.")
+
+check("N27 a LIST spelling PAST the 24-char window is still invisible — A LIMIT",
+      ftriple('    subprocess.run(["find", os.path.join(root, sub), "-type", "f"])'),
+      (False, False, False),
+      "THE UNDER-COUNT THIS UNDER-COUNT REPAIR LEAVES, which is the defect "
+      "class arriving inside its own remedy and is why it is asserted rather "
+      "than mentioned. The window is P5's and its price was declared for the "
+      "grep half when the window was written; nobody had measured it on the "
+      "find half, and the answer is that it bites the same way. It takes N25's "
+      "place in KNOWN_DEFECT — the count of known defects does not fall for "
+      "this tranche, it turns over, and a tranche that let it fall would be "
+      "reporting a repair as a reduction. Widening the window is the next "
+      "change and its own false-positive direction is unmeasured, which is "
+      "the sentence tranche 8 wrote about this one.")
 
 print()
 print("CONTROLS ON permuted.py — mg-20ee's CONDITION 2 (mg-885d)")
@@ -694,6 +748,88 @@ check("N17 an AS_OF header line traces to the pin's own SOURCE",
       "%s. The pin's author wrote the header in CODE before any transcript "
       "existed, which is why `script` is the strong half of provenance and "
       "`record` — a token quoted in prose — is declared weak.")
+
+print()
+print("CONTROLS ON THIS DIRECTORY'S OWN POINTERS (mg-23af)")
+print("-" * 78)
+print()
+
+# EVERY `SEE CONTROL X` IN THIS DIRECTORY RESOLVES, AND IT IS CHECKED PER SITE.
+# mg-23af found two that did not: pinnable.py said `--recursive` staying lit was
+# "a control (P24) rather than a claim" and no P24 has ever existed, and
+# permuted.py's section 2 credited its literal-matching half to a control this
+# suite has never issued.  Both sentences exist ONLY to say `go and check`, and
+# both named somewhere with nothing at it.  The second was worse, because that
+# number is a real control of ANOTHER suite -- a reader who went looking found
+# something, and it was about something else.  So the population is (file, name)
+# pairs and a name resolving somewhere in the estate is not enough.
+#
+# THE REPAIR IS AN INSTRUMENT AND NOT A REWORDING (mg-937c's rule), because a
+# hand-fixed pointer is exactly as unbacked as the one it replaces.
+#
+# FOREIGN references are legal and DECLARED, and the declaration is MEASURED:
+# the owning directory must really run a control by that name, or this control
+# is a way to excuse any pointer at all -- P15's shape, one file over.
+FOREIGN = {("README.md", "N14"): "code/state_ratchet_e331"}
+# BURNED numbers are never issued to a new control.  P24 is burned because
+# pinnable.py's dead pointer named it: issuing it would make that pointer
+# RESOLVE, to a control about something else, which is strictly worse than
+# leaving it dangling.  A burned name may be discussed anywhere and must NEVER
+# be defined here, and this control fails in BOTH directions.
+BURNED = ("P24",)
+CTL = re.compile(r'check\("([NPC][0-9]+[a-z]?)\b')
+REF = re.compile(r"\b([NPC][0-9]+[a-z]?)\b")
+_here = sorted(f for f in os.listdir(HERE)
+               if f.endswith((".py", ".sh", ".md")))
+# .txt is excluded because transcripts are GENERATED -- including this control's
+# own output, which names every id it checked and would back itself.
+_defined = set(CTL.findall(open(os.path.join(HERE, "selftest_20ee.py"),
+                                encoding="utf-8").read()))
+# THE REGISTER MAY NAME ITS OWN ENTRIES, AND NOTHING ELSE.  THIS CONTROL FIRED
+# ON ITSELF THE FIRST TIME IT RAN -- on the FOREIGN literal three lines up, which
+# is a DECLARATION and not a pointer -- which is this directory's own rule (a
+# remedy is an artifact of the same kind as the defect it remedies) arriving
+# live rather than as a paragraph.  The exemption is the narrowest one that is
+# true: selftest_20ee.py may write a name it declares, and a name it does not
+# declare is a pointer here like anywhere else.
+_DECLARED = set(BURNED) | {k[1] for k in FOREIGN}
+_dangling, _burnt_issued, _foreign_unbacked = [], [], []
+for _f in _here:
+    with open(os.path.join(HERE, _f), encoding="utf-8", errors="replace") as _h:
+        for _name in sorted(set(REF.findall(_h.read()))):
+            if _name in BURNED or _name in _defined:
+                continue
+            if _f == "selftest_20ee.py" and _name in _DECLARED:
+                continue
+            _owner = FOREIGN.get((_f, _name))
+            if _owner is None:
+                _dangling.append("%s:%s" % (_f, _name))
+            elif not any(_name in open(os.path.join(ROOT, _owner, _g),
+                                       encoding="utf-8",
+                                       errors="replace").read()
+                         for _g in sorted(os.listdir(os.path.join(ROOT, _owner)))
+                         if _g.endswith(".py")):
+                _foreign_unbacked.append("%s:%s -> %s" % (_f, _name, _owner))
+_burnt_issued = [b for b in BURNED if b in _defined]
+
+check("P25 every `see control X` in this directory RESOLVES",
+      (_dangling, _foreign_unbacked, _burnt_issued),
+      ([], [], []),
+      "THE DEFECT THIS CONTROL IS BUILT FROM IS IN THE TWO SENTENCES THAT SAID "
+      "`THIS IS CONTROLLED, NOT CLAIMED` — %d source files and %d control ids "
+      "at this commit, cross-referenced rather than read. The three lists are "
+      "kept apart on purpose: a DANGLING pointer names nothing, a FOREIGN one "
+      "names another suite's control and is legal only when declared AND when "
+      "that suite really runs it, and a BURNED one must never be issued here. "
+      "The middle list is the one that keeps this control honest — an "
+      "undeclared-foreign escape would let any pointer through, which is P15's "
+      "shape one file over. Its own limit, declared: it reads .py/.sh/.md and "
+      "NOT the transcripts, because a transcript is generated and this "
+      "control's own output names every id it checked. AND IT FIRED ON ITSELF "
+      "THE FIRST TIME IT RAN — on the FOREIGN literal in its own source, which "
+      "is a declaration and not a pointer — so the register may name its own "
+      "entries and nothing else."
+      % (len(_here), len(_defined)))
 
 print()
 print("=" * 78)

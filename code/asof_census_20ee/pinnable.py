@@ -162,25 +162,66 @@ HEXTOK = re.compile(r"\b[0-9a-f]{7,40}\b")
 # the shell's own tokenising rather than a judgement about the word: `-r` is a
 # flag when the dash STARTS a word, and `UN-STRUCK` is one word.  `--recursive`
 # is unaffected -- its second dash is preceded by a dash, which is not a word
-# character -- and that is a control (P24) rather than a claim.
+# character -- and that is a control (P22) rather than a claim.
+#
+# THE POINTER ON THE LINE ABOVE SAID `P24` UNTIL mg-23af AND NO SUCH CONTROL HAS
+# EVER EXISTED -- a sentence whose whole content is `go and check` naming a place
+# with nothing at it.  P24 IS NOW BURNED AND WILL NEVER BE ISSUED: numbering a
+# new control P24 would make this dead pointer RESOLVE, to a control about
+# something else, which is strictly worse than leaving it dangling.  Found by
+# cross-referencing rather than by reading, and P25 is now that cross-reference.
 _DASH = r"(?<![A-Za-z0-9_])"
 
+# A COMMAND NAME IS A WHOLE TOKEN, AND SAYING SO IS THE WHOLE OF mg-23af.  R3's
+# find(1) half required `find` followed by WHITESPACE, so the LIST spelling that
+# the grep half's 24-character window exists to buy -- ["find", root, "-type"] --
+# was invisible to it: an UNDER-count, and the silent direction.  Tranche 8
+# reported it as N25 and declined it, because `find` is an ordinary English verb
+# where `grep` is not, and widening it is a change whose false-positive direction
+# nobody had measured.  THIS TRANCHE MEASURED IT, and the measurement is why the
+# find half does NOT simply take the grep half's shape:
+#
+#     shape                                  exposed on   R3 hits at 12aa5f8
+#     `find` + whitespace   (tranche 8)       90 lines           1
+#     `find` + any 24 chars (grep's own)     328 lines           1
+#     `find` + whitespace OR quote (RULE)    115 lines           1
+#
+# ALL THREE FIRE ON THE SAME SINGLE HIT, so the estate's counts cannot tell the
+# three designs apart at all -- the choice is made on the EXPOSURE and not on the
+# delta, and permuted.py's section 4 prints both columns for exactly that reason.
+# Grep's own shape is rejected because 238 of the 240 lines it newly admits spell
+# `find` as PYTHON: `doc.find(needle)`, `def find(x)`, `pred["find"]`.  The rule
+# admits the closing quote of a string literal and nothing else, which is where a
+# command name ends in the LIST spelling, and a `(` is a call in Python's grammar
+# rather than a command in the shell's.  A fact about tokenising, not a judgement
+# about the word -- the same shape of guard as mg-44da's, one half along.
+_FIND_SPACE = r"\bfind\s+[^\n|]*"                    # tranche 8, and mg-0e77's
+_FIND_TOKEN = r"\bfind\b(?=[\s\"'])[^\n|]{0,24}?"    # the rule
 
-def _walk_re(dash):
+
+def _walk_re(dash, findhead):
     return re.compile(r"""
         \bgrep\b[^\n]{0,24}?%(d)s-[A-Za-z]*[rR]   # grep -r / -rn / "grep", "-rn"
       | \bos\.(?:walk|listdir|scandir)\s*\(
       | \.iterdir\s*\(
       | \bglob\.(?:glob|iglob)\s*\(
-      | \bfind\s+[^\n|]*%(d)s-(?:type|name)\b     # shelled-out find(1)
-    """ % {"d": dash}, re.X)
+      | %(f)s%(d)s-(?:type|name)\b                # shelled-out find(1)
+    """ % {"d": dash, "f": findhead}, re.X)
 
 
-# BOTH SPELLINGS ARE KEPT, which is the arrangement `prose` already has: a
-# repair whose BEFORE is not printed beside its AFTER is an assertion, and
-# permuted.py's section 4 counts them side by side.
-WALK_LOOSE = _walk_re("")      # mg-0e77's rule, character for character
-WALK = _walk_re(_DASH)         # the rule
+# EVERY SPELLING IS KEPT, which is the arrangement `prose` already has: a repair
+# whose BEFORE is not printed beside its AFTER is an assertion, and permuted.py's
+# section 4 counts them side by side.  WALK_BOUNDARY is kept for a second reason
+# that is this tranche's own subject one file over -- section 4's account of
+# which directories mg-44da silenced must be read at mg-44da's RULE, or a later
+# tranche's rule change moves a published attribution while claiming to explain
+# the earlier one.
+WALK_BY = {(f, d): _walk_re(dash, find)
+           for f, find in (("space", _FIND_SPACE), ("token", _FIND_TOKEN))
+           for d, dash in (("loose", ""), ("boundary", _DASH))}
+WALK_LOOSE = WALK_BY[("space", "loose")]        # mg-0e77's, character for character
+WALK_BOUNDARY = WALK_BY[("space", "boundary")]  # mg-44da's, character for character
+WALK = WALK_BY[("token", "boundary")]           # the rule
 # The negative half.  git sorts its own output, so `git grep` and `git ls-files`
 # are ORDERED READS OF A COMMIT and must never fire; nor may a walk the subject
 # has already ordered itself.  Without this half R3 fires on every correct
@@ -364,7 +405,8 @@ def declared_revs(text, resolves):
     return [t for t in dict.fromkeys(HEXTOK.findall(text)) if resolves(t)]
 
 
-def unordered_walks(text, path=None, prose="none", flags="boundary"):
+def unordered_walks(text, path=None, prose="none", flags="boundary",
+                    finds="token"):
     """Lines that enumerate the filesystem in an order no commit determines.
 
     `flags` selects the FLAG HALF the same way and for the same reason:
@@ -373,6 +415,14 @@ def unordered_walks(text, path=None, prose="none", flags="boundary"):
                     the tolerance window opens a flag cluster, so a HYPHENATED
                     WORD is one.
         "boundary"  the rule.  A flag's dash starts a word.
+
+    `finds` selects the find(1) HALF, and it is a THIRD axis rather than a
+    second value of `flags` because the two repairs must be readable apart:
+
+        "space"     tranche 8's, and mg-0e77's.  `find` followed by WHITESPACE,
+                    so the LIST spelling is invisible -- an UNDER-count.
+        "token"     the rule.  A command name is a whole token, so the closing
+                    quote of its own string literal counts too.
 
     `prose` selects WHICH OF THREE RULES is being asked, so that all three can
     be counted SIDE BY SIDE the way permuted.py prints `set` beside `bag` -- a
@@ -440,6 +490,24 @@ def unordered_walks(text, path=None, prose="none", flags="boundary"):
     contributed.  It is applied anyway because it is the same defect in the
     same rule, and a guard that waits for its first false positive is one
     somebody has to find twice.
+
+    AND A COMMAND NAME IS A WHOLE TOKEN (mg-23af).  Writing that guard's control
+    turned up an UNDER-count in the same half and tranche 8 declined it: R3's
+    find(1) required a following SPACE, so `["find", root, "-type", "f"]` -- the
+    exact spelling the grep half's window exists to buy -- could not be seen at
+    all.  It is repaired here and IT MOVES NOTHING EITHER: 80 -> 80 hits, ZERO
+    added and ZERO removed, because the estate at 12aa5f8 contains no find(1) in
+    the list spelling.  So the counts say nothing about this repair in either
+    direction, and saying that plainly is the point -- what carries it is the
+    EXPOSURE (90 -> 115 lines where the head can match, against 328 for the grep
+    half's own shape) and the controls, N25 and N26.
+
+    THE REMEDY IS SUBJECT TO THE DEFECT IT REMEDIES, and here that is literal:
+    this repair is an UNDER-count repair, and it leaves one.  A list spelling
+    whose argument runs past the 24-character window is still invisible --
+    `["find", os.path.join(root, sub), "-type", "f"]` -- which is P5's declared
+    limit reaching the half it was never measured on.  N27 asserts it, and it
+    replaces N25 in KNOWN_DEFECT rather than being counted as a repair.
     """
     raw = text.splitlines()
     if prose == "read":
@@ -449,7 +517,7 @@ def unordered_walks(text, path=None, prose="none", flags="boundary"):
                                 ).splitlines()
     else:
         lines = code_only(text, path)[0].splitlines()
-    walk = WALK_LOOSE if flags == "loose" else WALK
+    walk = WALK_BY[(finds, flags)]
     hits = []
     for i, ln in enumerate(lines):
         if not walk.search(ln) or ORDERED.search(ln):

@@ -60,10 +60,20 @@ residue down, one literal line per line, BEFORE reading the verdict.  Every
 exclusive line must be matched by a declared one; anything left over is a
 FINDING and this file says so.
 
-    THE NEGATIVE HALF CARRIES THE WEIGHT AND IS CONTROLLED (N14): a declaration
+    THE NEGATIVE HALF CARRIES THE WEIGHT AND IS CONTROLLED (P14): a declaration
     that matched loosely would be a way to pass any diff at all, which would make
     this instrument the opposite of what it is.  Matching is LITERAL and by
     OCCURRENCE -- declaring a line once does not excuse it twice.
+
+    THAT POINTER CARRIED AN `N`-NUMBER UNTIL mg-23af AND THIS SUITE HAS NEVER
+    ISSUED IT -- one of two sentences in this directory whose entire content was
+    `go and check` and which named somewhere with nothing at it (pinnable.py's
+    read `P24`).  Both were found by CROSS-REFERENCING rather than by reading;
+    both are repaired by making the instrument print it rather than by rewording
+    the sentence, and P25 is that instrument.  The first was the worse of the
+    two, because the number it named IS a real control -- of another suite --
+    so a reader who went looking found something and it was about something
+    else.  P25 therefore resolves per SITE and not per name.
 
 --------------------------------------------------------------------------------
 3.  WHAT THIS FILE IS NOT
@@ -109,8 +119,10 @@ FINDING and this file says so.
     sees neither a TRAILING comment nor a DOCSTRING, and 6 of the 9 real hits
     are docstrings.  A rule measured by a one-line test, in the transcript
     reporting it, is section 1's own `18 of 129` shape one section along.
-    Section 4 now counts all three rules side by side, prints every hit the
-    repair removes, and names the residue it does not reach.
+    Section 4 now counts all FIVE rules side by side, prints every hit each
+    repair removes, and names the residue none of them reaches; section 5 is
+    mg-23af's, whose rule change moves no count in either direction and says
+    so, and which measures the EXPOSURE because the delta cannot decide it.
 
     sh code/asof_census_20ee/run_all.sh        # section 3 only: the estate scan
     python3 code/asof_census_20ee/permuted.py <path> [<old-rev>] [<new-rev>]
@@ -587,7 +599,7 @@ def estate_mode():
         print("  transcripts carry a repeated address line at this commit.")
     print()
 
-    banner("4  R3's PROSE OVER-COUNT, REPAIRED -- AND ALL THREE RULES\n   COUNTED SIDE BY SIDE, THE WAY SET IS COUNTED BESIDE BAG")
+    banner("4  R3's PROSE OVER-COUNT, REPAIRED -- AND ALL FIVE RULES\n   COUNTED SIDE BY SIDE, THE WAY SET IS COUNTED BESIDE BAG")
     print("  mg-885d reported this and did not repair it: R3 matched the")
     print("  invocation WHEREVER IT APPEARED, so a sentence NAMING the")
     print("  invocation fired it, and N11 -- mg-0e77's control for `the word in")
@@ -609,24 +621,29 @@ def estate_mode():
     import pinnable
     srcs = [p for p in text(git("ls-tree", "-r", "--name-only", AS_OF)).splitlines()
             if p.endswith(".py") or p.endswith(".sh")]
-    # FOUR RULES, AND THE FIRST THREE PIN `flags="loose"` ON PURPOSE (mg-44da).
-    # They are mg-0e77's FLAG half by definition -- the prose change is the only
-    # thing they are allowed to vary -- so reading them at the repaired flag half
-    # would move three published figures while claiming to measure something
-    # else.  That is this file's own subject arriving in the edit that measures
-    # it: a transcript whose numbers change for a reason its prose does not name.
-    old, half, prose_only, new, unsep = {}, {}, {}, {}, []
+    # FIVE RULES, AND EACH ONE PINS EVERY AXIS IT IS NOT MEASURING (mg-44da,
+    # mg-23af).  The first three are mg-0e77's FLAG half by definition -- the
+    # prose change is the only thing they are allowed to vary -- so reading them
+    # at a repaired flag half would move three published figures while claiming
+    # to measure something else.  The fourth is mg-44da's, and it pins
+    # `finds="space"` for the same reason one tranche later: it is the flag
+    # repair's figure, and letting this tranche's find(1) repair into it would
+    # republish 80 as a number measuring two changes.  That is this file's own
+    # subject arriving in the edit that measures it -- a transcript whose numbers
+    # change for a reason its prose does not name.
+    old, half, prose_only, flg_only, new, unsep = {}, {}, {}, {}, {}, []
     for p, blob in batch(AS_OF, srcs):
         if blob is None:
             continue
         s = text(blob)
         if not pinnable.code_only(s, p)[1]:
             unsep.append(p)
-        for store, mode, flg in ((old, "read", "loose"),
-                                 (half, "comments", "loose"),
-                                 (prose_only, "none", "loose"),
-                                 (new, "none", "boundary")):
-            h = pinnable.unordered_walks(s, p, prose=mode, flags=flg)
+        for store, mode, flg, fnd in ((old, "read", "loose", "space"),
+                                      (half, "comments", "loose", "space"),
+                                      (prose_only, "none", "loose", "space"),
+                                      (flg_only, "none", "boundary", "space"),
+                                      (new, "none", "boundary", "token")):
+            h = pinnable.unordered_walks(s, p, prose=mode, flags=flg, finds=fnd)
             if h:
                 store[p] = h
 
@@ -640,17 +657,20 @@ def estate_mode():
     print("      %4d  files this Python could NOT separate from their prose"
           % len(unsep))
     print()
-    print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
+    print("      %-46s %4d hits, %3d file(s), %3d dir(s)"
           % ("mg-0e77's rule -- prose read as code", n(old), len(old),
              len(dirs(old))))
-    print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
+    print("      %-46s %4d hits, %3d file(s), %3d dir(s)"
           % ("comments blanked ONLY -- THE HALF-REPAIR", n(half), len(half),
              len(dirs(half))))
-    print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
+    print("      %-46s %4d hits, %3d file(s), %3d dir(s)"
           % ("comments AND docstrings -- tranche 7", n(prose_only),
              len(prose_only), len(dirs(prose_only))))
-    print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
-          % ("...AND a flag's dash starts a word -- THE RULE", n(new),
+    print("      %-46s %4d hits, %3d file(s), %3d dir(s)"
+          % ("...AND a flag's dash starts a word -- tranche 8", n(flg_only),
+             len(flg_only), len(dirs(flg_only))))
+    print("      %-46s %4d hits, %3d file(s), %3d dir(s)"
+          % ("...AND a command name is a token -- THE RULE", n(new),
              len(new), len(dirs(new))))
     print()
 
@@ -666,7 +686,10 @@ def estate_mode():
     # the prose over-count, which is a figure no tranche ever measured.
     gone, added = delta(old, prose_only)
     hgone, hadded = delta(old, half)
-    fgone, fadded = delta(prose_only, new)
+    fgone, fadded = delta(prose_only, flg_only)
+    # mg-23af's own delta, read against mg-44da's rule and not against the
+    # prose rule -- the same separation, one axis along.
+    tgone, tadded = delta(flg_only, new)
     print("  BOTH DIRECTIONS, AND THE SECOND IS THE ONE THAT DECIDED THE")
     print("  DESIGN.  Blanking comments ALONE removes %d and ADDS %d:"
           % (len(hgone), len(hadded)))
@@ -690,7 +713,7 @@ def estate_mode():
     for p, h in gone:
         print("      %s\n          %s" % (p, h[:68]))
     print()
-    silent = sorted(dirs(old) - dirs(new))
+    silent = sorted(dirs(old) - dirs(prose_only))
     print("  %d DIRECTORIES GO SILENT, AND ONE OF THEM IS THE HEADLINE:"
           % len(silent))
     for d in silent:
@@ -760,7 +783,7 @@ def estate_mode():
     for p, h in fadded:
         print("      ADDED    %s\n               %s" % (p, h[:66]))
     print()
-    fsilent = sorted(dirs(prose_only) - dirs(new))
+    fsilent = sorted(dirs(prose_only) - dirs(flg_only))
     print("  %d DIRECTORIES GO SILENT, AND THE CHECK THAT MATTERS IS THE OTHER"
           % len(fsilent))
     print("  DIRECTION -- every one of them was READ:")
@@ -795,7 +818,7 @@ def estate_mode():
                     why = "PROSE, blanked (mg-e5f3)"
                 elif pinnable.ORDERED.search(ln):
                     why = "SORTED on this line"
-                elif not pinnable.WALK.search(coded[i]):
+                elif not pinnable.WALK_BOUNDARY.search(coded[i]):
                     why = "HYPHENATED WORD -- THIS REPAIR"
                 else:
                     why = "SORTED in the enclosing block"
@@ -822,13 +845,117 @@ def estate_mode():
     print("  look like it contributed to the %d.  N24 is that measurement; N25"
           % len(fgone))
     print("  is what writing N24 turned up, an UNDER-count in the same half:")
-    print("  R3's `find` requires a following SPACE, so the LIST spelling that")
-    print("  P5 exists for is invisible to it.  Reported, NOT repaired, for the")
-    print("  reason tranche 7 gave for declining this tranche's own subject --")
-    print("  `find` is an ordinary English verb where `grep` is not, so")
-    print("  widening it is a second change whose false-positive direction")
-    print("  nobody has measured.  Two tranches running, the residue named at")
-    print("  the low water mark is where the next subject came from.")
+    print("  R3's `find` required a following SPACE, so the LIST spelling that")
+    print("  P5 exists for was invisible to it.  Tranche 8 reported it and did")
+    print("  NOT repair it, because `find` is an ordinary English verb where")
+    print("  `grep` is not, and widening it is a change whose false-positive")
+    print("  direction nobody had measured.  THIS TRANCHE MEASURED IT.")
+    print()
+
+    banner("5  A COMMAND NAME IS A WHOLE TOKEN (mg-23af) -- THE THIRD TRANCHE\n"
+           "   RUNNING WHOSE SUBJECT CAME OUT OF ITS PREDECESSOR'S PRINTED\n"
+           "   RESIDUE, AND THE FIRST WHOSE COUNTS CANNOT DECIDE IT")
+    print("  The spelling `[\"find\", root, \"-type\", \"f\"]` is the one the grep")
+    print("  half's 24-character window exists to buy, and R3's find half could")
+    print("  not see it: a command name ends a TOKEN, and in that spelling the")
+    print("  character after it is the closing quote of its own string literal")
+    print("  rather than a space.  A fact about tokenising, not a judgement")
+    print("  about the word -- mg-44da's guard one half along.")
+    print()
+    print("  BOTH DIRECTIONS, AND BOTH ARE ZERO.  The repair removes %d and"
+          % len(tgone))
+    print("  ADDS %d, because the estate at %s contains no find(1) in the list"
+          % (len(tadded), AS_OF))
+    print("  spelling AT ALL.  So this tranche's whole rule change is invisible")
+    print("  to the estate scan in EVERY direction, and the honest reading is")
+    print("  that the counts here decide NOTHING -- an over-count repair that")
+    print("  removes nothing and an under-count repair that adds nothing look")
+    print("  identical from the delta, and only one of them is this one.")
+    print()
+
+    # THE EXPOSURE IS THE MEASUREMENT THE DELTA CANNOT BE (mg-23af).  Tranche 8
+    # declined this repair for a reason -- `find` is an ordinary English verb --
+    # and a delta of 0 does not answer it, because a rule can be wide open and
+    # still fire on nothing.  What answers it is HOW MANY LINES THE HEAD CAN
+    # MATCH AT ALL, computed here for the shipped rule and for the design it
+    # rejects, on the same corpus and in the same run.
+    HEADS = (("`find` + WHITESPACE           tranche 8, and mg-0e77's",
+              r"\bfind\s+"),
+             ("`find` + ANY 24 CHARS         the grep half's own shape",
+              r"\bfind\b"),
+             ("`find` + WHITESPACE or QUOTE  THE RULE",
+              r"\bfind\b(?=[\s\"'])"))
+    heads = [(lbl, re.compile(rx)) for lbl, rx in HEADS]
+    # The find HALF alone, one full pattern per candidate head, so the three can
+    # be counted against each other rather than against the whole rule.
+    halves = [(lbl, re.compile(rx + (r"[^\n|]*" if i == 0 else r"[^\n|]{0,24}?")
+                               + r"(?<![A-Za-z0-9_])-(?:type|name)\b"))
+              for i, (lbl, rx) in enumerate(HEADS)]
+    WIDE = halves[1][1]
+    expo, half_hits = collections.Counter(), collections.Counter()
+    admitted, wide_hits = [], []
+    for p, blob in batch(AS_OF, srcs):
+        if blob is None:
+            continue
+        s = text(blob)
+        coded = pinnable.code_only(s, p)[0].splitlines()
+        for ln in coded:
+            for lbl, rx in heads:
+                if rx.search(ln):
+                    expo[lbl] += 1
+            for lbl, rx in halves:
+                if rx.search(ln):
+                    half_hits[lbl] += 1
+            if heads[2][1].search(ln) and not heads[0][1].search(ln):
+                admitted.append((p, ln.strip()))
+            if WIDE.search(ln) and not pinnable.WALK.search(ln):
+                wide_hits.append((p, ln.strip()))
+    agree = len({half_hits[lbl] for lbl, _ in HEADS}) == 1
+    findhits = half_hits[HEADS[2][0]]
+    print("  WHAT EACH SHAPE IS EXPOSED TO, AND WHAT EACH ONE ACTUALLY FIRES ON:")
+    print()
+    print("      %-56s %11s %9s" % ("", "exposed on", "fires on"))
+    for lbl, _ in heads:
+        print("      %-56s %5d line(s) %3d hit(s)"
+              % (lbl, expo[lbl], half_hits[lbl]))
+    print()
+    print("  ALL THREE FIRE ON THE SAME %d HIT%s, AND THEY %s -- so the counts"
+          % (findhits, "" if findhits == 1 else "S",
+             "AGREE" if agree else "DO NOT, READ THE TABLE"))
+    print("  cannot tell the three designs apart, and the choice is made on")
+    print("  the exposure column rather than on any delta.")
+    print()
+    print("  THE GREP HALF'S OWN SHAPE IS REJECTED and the reason is %d lines:"
+          % (expo[HEADS[1][0]] - expo[HEADS[0][0]]))
+    print("  that is what it newly admits, and they are PYTHON -- `doc.find(x)`,")
+    print("  `def find(a)`, `pred[\"find\"]` -- in a corpus where the word is a")
+    print("  method far more often than a command.  `find(` is a call in")
+    print("  Python's grammar and there is no spelling of find(1) whose next")
+    print("  character is `(`, so the rule admits the closing quote and stops.")
+    print()
+    print("  THE %d LINES THE RULE DOES NEWLY ADMIT, EVERY ONE PRINTED, because"
+          % len(admitted))
+    print("  a widening that does not show what it let in is an assertion --")
+    print("  and NONE of them carries a `-type`/`-name` in the window:")
+    print()
+    for p, ln in admitted:
+        print("      %s\n          %s" % (p, ln[:66]))
+    print()
+    print("  AND THE REJECTED SHAPE'S FALSE POSITIVES ARE MEASURED, NOT")
+    print("  PREDICTED: %d line(s) at %s would fire under it and do not under"
+          % (len(wide_hits), AS_OF))
+    print("  the rule.  IT IS ZERO, and that is the honest number -- the")
+    print("  separating shape is PLANTED as N26 precisely because the estate")
+    print("  has no instance of it, so the counts could not have said so.")
+    print()
+    print("  REPORTED AT THE LOW WATER MARK -- THIS REPAIR LEAVES AN UNDER-COUNT")
+    print("  OF ITS OWN, WHICH IS THE DEFECT CLASS IT IS REPAIRING: a list")
+    print("  spelling whose argument runs past the 24-character window is still")
+    print("  invisible, `[\"find\", os.path.join(root, sub), \"-type\", \"f\"]`.")
+    print("  That is P5's declared limit reaching the half nobody had measured")
+    print("  it on.  N27 asserts it and takes N25's place in KNOWN_DEFECT --")
+    print("  the residue named at the low water mark is where three tranches")
+    print("  running have found their subject.")
     print()
 
     print("=" * 78)
