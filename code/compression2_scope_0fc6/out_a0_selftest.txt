@@ -1,0 +1,78 @@
+
+==============================================================================
+a0.1  poset enumeration plugs back to published counts
+==============================================================================
+  [GREEN] labelled posets n=1   1 (published 1)
+  [GREEN] labelled posets n=2   3 (published 3)
+  [GREEN] labelled posets n=3   19 (published 19)
+  [GREEN] labelled posets n=4   219 (published 219)
+  [GREEN] labelled posets n=5   4231 (published 4231)
+  [GREEN] labelled posets n=6   130023 (published 130023)
+
+==============================================================================
+a0.2  linear-extension counts plug back to known values
+==============================================================================
+  [GREEN] e(chain_1) = 1   1
+  [GREEN] e(antichain_1) = 1!   1
+  [GREEN] e(chain_2) = 1   1
+  [GREEN] e(antichain_2) = 2!   2
+  [GREEN] e(chain_3) = 1   1
+  [GREEN] e(antichain_3) = 3!   6
+  [GREEN] e(chain_4) = 1   1
+  [GREEN] e(antichain_4) = 4!   24
+  [GREEN] e(chain_5) = 1   1
+  [GREEN] e(antichain_5) = 5!   120
+  [GREEN] e(chain_6) = 1   1
+  [GREEN] e(antichain_6) = 6!   720
+
+==============================================================================
+a0.3  word statistics: inv and the prefix area agree, and both are right by hand
+==============================================================================
+  [GREEN] inv(CA) = 1   1
+  [GREEN] prefix-area(CA) = 1  [compression2 (3)]   1
+  [GREEN] inv(AC) = 0   0
+  [GREEN] prefix-area(AC) = 0  [compression2 (3)]   0
+  [GREEN] inv(ACCA) = 2   2
+  [GREEN] prefix-area(ACCA) = 2  [compression2 (3)]   2
+  [GREEN] inv(AACC) = 0   0
+  [GREEN] prefix-area(AACC) = 0  [compression2 (3)]   0
+  [GREEN] inv(CCAA) = 4   4
+  [GREEN] prefix-area(CCAA) = 4  [compression2 (3)]   4
+  [GREEN] inv(CACA) = 3   3
+  [GREEN] prefix-area(CACA) = 3  [compression2 (3)]   3
+
+==============================================================================
+a0.4  the note's own numbers reproduce
+==============================================================================
+  [GREEN] 1/(24 ln 2) = 0.06011...   0.06011
+  [GREEN] 1 - 1/(24 ln 2) = 0.9399 (note line 113)   0.93989
+
+==============================================================================
+a0.5  PLANTED WORLD 1 — a wrong decoder must be caught
+==============================================================================
+  [GREEN] clobbering the root word breaks the round trip (detector is alive)   684 of 720 broken
+
+==============================================================================
+a0.6  PLANTED WORLD 2 — the separation detector on a population where it SHOULD fire
+==============================================================================
+  [GREEN] a genuinely separating statistic IS detected as separating   |supp| 12 (poset 0<1, n=4) vs 24 (mixture)
+
+==============================================================================
+a0.7  PLANTED WORLD 3 — a wrong-direction world for the entropy lemma
+==============================================================================
+  [GREEN] m=32: the UNCONSTRAINED word EXCEEDS the note's bound (the bound has content)   H_unif=60.6686 > bound=60.1519
+  [GREEN] m=64: the UNCONSTRAINED word EXCEEDS the note's bound (the bound has content)   H_unif=124.1714 > bound=120.3052
+  [GREEN] m=128: the UNCONSTRAINED word EXCEEDS the note's bound (the bound has content)   H_unif=251.6728 > bound=240.6110
+       [note] the crossover is m = 27: below it the note's per-node bound is WEAKER than the free bound log2 C(2m,m), i.e. it says nothing at small blocks
+  [GREEN] m=8: note bound < 2m (non-vacuous vs 2m bits)   15.0344 < 16
+  [GREEN] m=16: note bound < 2m (non-vacuous vs 2m bits)   30.0745 < 32
+  [GREEN] m=32: note bound < 2m (non-vacuous vs 2m bits)   60.1519 < 64
+
+==============================================================================
+a0.8  PLANTED WORLD 4 — max-entropy solver on a problem with a known answer
+==============================================================================
+  [GREEN] cap=1/2 at n=3 recovers log2(3!)   2.584962501 vs 2.584962501
+  [GREEN] cap=1/2 at n=4 recovers log2(4!)   4.584962501 vs 4.584962501
+  [GREEN] cap=0 at n=3 collapses to the point mass (H -> 0, tol 1e-2 bits)   0.001776
+
+RESULT: GREEN — all checks passed

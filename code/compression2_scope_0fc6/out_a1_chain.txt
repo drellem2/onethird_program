@@ -1,0 +1,84 @@
+
+==============================================================================
+a1.1  the merge encoding is a BIJECTION, and (2) and (3) are identities
+==============================================================================
+  [GREEN] n=2: L <-> (W_B) is a bijection on every L(P)   3 posets, 4 extensions, 0 collisions
+  [GREEN] n=2: (2)  inv_L*(L) = sum_B K_B   4 extensions
+  [GREEN] n=2: (3)  K_B = sum_t d_t(W_B)   4 node-words so far
+  [GREEN] n=3: L <-> (W_B) is a bijection on every L(P)   19 posets, 42 extensions, 0 collisions
+  [GREEN] n=3: (2)  inv_L*(L) = sum_B K_B   42 extensions
+  [GREEN] n=3: (3)  K_B = sum_t d_t(W_B)   88 node-words so far
+  [GREEN] n=4: L <-> (W_B) is a bijection on every L(P)   219 posets, 960 extensions, 0 collisions
+  [GREEN] n=4: (2)  inv_L*(L) = sum_B K_B   960 extensions
+  [GREEN] n=4: (3)  K_B = sum_t d_t(W_B)   2968 node-words so far
+  [GREEN] n=5: L <-> (W_B) is a bijection on every L(P)   4231 posets, 42840 extensions, 0 collisions
+  [GREEN] n=5: (2)  inv_L*(L) = sum_B K_B   42840 extensions
+  [GREEN] n=5: (3)  K_B = sum_t d_t(W_B)   174328 node-words so far
+  [GREEN] n=6 (antichain, all 720 orders): bijection
+  [GREEN] n=6 (antichain, all 720 orders): (2)
+  [GREEN] n=6 (antichain, all 720 orders): (3)
+  [GREEN] n=7 (antichain, all 5040 orders): bijection
+  [GREEN] n=7 (antichain, all 5040 orders): (2)
+  [GREEN] n=7 (antichain, all 5040 orders): (3)
+  [GREEN] n=8 (antichain, all 40320 orders): bijection
+  [GREEN] n=8 (antichain, all 40320 orders): (2)
+  [GREEN] n=8 (antichain, all 40320 orders): (3)
+
+       [scope] 89926 linear extensions (all labelled posets n <= 5, plus every order at n = 6,7,8); 490408 node-words.
+       [note] BIJECTION, not compression: (W_B) determines L and L determines (W_B).
+              compression2's 'compression' FORGETS NOTHING.  It is a re-coordinatisation
+              (merge sort's recording tape) plus an entropy estimate — a different KIND
+              of object from compression.tex's C_o, which is a genuine quotient map.
+
+==============================================================================
+a1.2  WHICH POSETS SATISFY HYPOTHESIS (1)?
+==============================================================================
+  n=3:     6 of    19 non-chain posets satisfy (1)   (min delta over them: 1/3)
+  n=4:    48 of   219 non-chain posets satisfy (1)   (min delta over them: 1/3)
+  n=5:   360 of  4231 non-chain posets satisfy (1)   (min delta over them: 1/3)
+
+       [note] every member has delta(P) <= 1/3, i.e. every member is AT OR BELOW the
+              1/3-2/3 boundary.  A poset with delta > 1/3 cannot satisfy (1), so the
+              hypothesis population IS the boundary-and-below class this corpus already
+              studies (docs/FACTS.md F19, mg-6ff4).
+
+==============================================================================
+a1.3  (4)  E K_B <= m^2/3 on the hypothesis population
+==============================================================================
+  [GREEN] n=3: E K_B <= |A||C|/3 at every node of every member   12 node-instances, 0 violations, worst E K_B / cap = 1.0000
+  [GREEN] n=4: E K_B <= |A||C|/3 at every node of every member   144 node-instances, 0 violations, worst E K_B / cap = 1.0000
+  [GREEN] n=5: E K_B <= |A||C|/3 at every node of every member   1440 node-instances, 0 violations, worst E K_B / cap = 1.0000
+
+==============================================================================
+a1.4  (5)  the entropy lemma, against the EXACT per-node entropy
+==============================================================================
+  [GREEN] n=3: H(W_B) <= 2m - m^3/(3 ln2 (4m^2-1)) at every balanced node   6 balanced-node instances, 0 violations
+  [GREEN] n=4: H(W_B) <= 2m - m^3/(3 ln2 (4m^2-1)) at every balanced node   144 balanced-node instances, 0 violations
+  [GREEN] n=5: H(W_B) <= 2m - m^3/(3 ln2 (4m^2-1)) at every balanced node   720 balanced-node instances, 0 violations
+
+       [scope] the lemma is TRUE here but is NOT TIGHT at these block sizes: a0.7
+               measures that the note's per-node bound is WEAKER than the free bound
+               log2 C(2m,m) for every m < 27, i.e. for every block of fewer than 54
+               elements it says less than 'the word is a word'.
+
+==============================================================================
+a1.5  (6)  log2 e(P) <= 0.9399 n log2 n on the hypothesis population
+==============================================================================
+  [GREEN] n=3: (6) holds on every member   6 members, 0 violations, min slack 2.884 bits
+  [GREEN] n=4: (6) holds on every member   48 members, 0 violations, min slack 5.934 bits
+  [GREEN] n=5: (6) holds on every member   360 members, 0 violations, min slack 9.327 bits
+
+==============================================================================
+a1.6  BUT WHERE DOES (6) FIRST BEAT THE FREE BOUND e(P) <= n! ?
+==============================================================================
+  first n with 0.9399 n log2 n  <  log2 n!  :  n = 16777063   (binary search; bites(16777063) = True, bites(16777062) = False)
+    n =         10:  note bound             31.2   log2 n!             21.8   weaker than n!
+    n =        100:  note bound            624.4   log2 n!            524.8   weaker than n!
+    n =       1000:  note bound           9366.7   log2 n!           8529.4   weaker than n!
+    n =      10000:  note bound         124889.6   log2 n!         118458.1   weaker than n!
+    n =    1000000:  note bound       18733436.3   log2 n!       18488884.8   weaker than n!
+    n =   10000000:  note bound      218556756.5   log2 n!      218108029.2   weaker than n!
+    n =  100000000:  note bound     2497791503.0   log2 n!     2513272986.4   BOUND BITES
+  [GREEN] (6) is NUMERICALLY VACUOUS below a crossover above 10^6   crossover n = 16777063
+
+RESULT: GREEN — all checks passed
