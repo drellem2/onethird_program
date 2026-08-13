@@ -1,6 +1,8 @@
 #!/bin/sh
 # run_all.sh -- the whole instrument for mg-94c3's independent audit of mg-76b2.
-# ~2 minutes.
+# 26.38 s on a quiet host, 41.40 s on a loaded one (measured, mg-d72e; this line said
+# '~2 minutes', which was never a run).  a4_census is 0.26-0.43 s of that and is the only
+# section build.sh runs on every merge -- via run_a4_census.sh, not via this file.
 #
 # Exit codes are PRE-REGISTERED here and re-checked against the run.  Every
 # section is expected to exit 0.  No section of this audit has a detector-fires
