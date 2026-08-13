@@ -347,7 +347,33 @@ Nothing in this estate arranged that.
 
 ---
 
-## 9. THE FILES
+## 9. WHAT WAS RUN, AND WHAT IT PRINTED
+
+Every number in this document is a run on this branch on 2026-08-13, on this host.
+
+| | |
+|---|---|
+| `sh code/self_red_sweep_502f/run_all.sh` | **exit 0**, 0.41 / 0.41 / 0.40 s. 30 of 30 worlds; no member of the class. |
+| `sh ./build.sh` before this branch | **exit 0**, 88.9 s. The baseline: any redness below is caused by what follows it. |
+| `x1_positive_control.py` under the class-shaped redirect | **exit 0**, 110.3 s, 8 of 8 AS REQUIRED |
+| `x1_positive_control.py` writing outside the watched class | **exit 0**, 109.0 s, 8 of 8 AS REQUIRED — 12 lines of difference, all in dirty-transcript listings |
+| both scripts under the old published redirect, after the guard | **exit 2**, refusal naming the file; the shell had already emptied it (`1 file changed, 128 deletions(-)`) |
+| `x1_positive_control.py` repaired, run correctly | **exit 0**, 113.6 s; writes its own transcript |
+| `sh ./build.sh` on this branch, before the transcript refresh | **exit 1** — f771: 2 disagreements, both `220 → 221 directories under code/`, i.e. this suite's own directory |
+| `sh ./build.sh` on this branch, after it | **exit 0**, 90.8 s, `VERDICT: GREEN — 0 disagreements` |
+| `x0_exhibit.py` repaired, from that green tree | **exit 0**, 185.2 s, `CAUGHT` — the guard does not interfere with the correct invocation |
+
+**One of those rows was my own defect, not a finding.** An intermediate run of `x0_exhibit.py`
+came back `exit 2 — REFUSED, the gate is ALREADY RED before anything was planted`, which is
+the exact symptom this ticket is about. It was not: my measurement harness had run
+`x1_positive_control.py` immediately before without restoring the transcripts its gate runs
+dirtied, so f771 was correctly red about a planted `STATE.md`'s leftovers. mg-724a's D5, in
+my own scaffolding, producing this ticket's headline symptom for an unrelated reason —
+which is a fair sample of how easy the original defect was to misread.
+
+---
+
+## 10. THE FILES
 
 | | |
 |---|---|
