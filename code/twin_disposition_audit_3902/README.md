@@ -1,11 +1,39 @@
 # mg-3902 — does the rendered twin's pin RESOLVE against git?
 
+> ## ⚠️ FOLDED IN. THE CHECK BELOW NOW RUNS AS `twin_pin.py`'s SECTION 7 (mg-7cc3).
+>
+> This directory no longer ships code and is no longer in `build.sh`'s loop. What is left is
+> **`out_a1_prerepair.txt`**, the record of what the six-section control missed: three
+> provably false pins, three `VERDICT: CLEAN`, exit 0.
+>
+> **Everything below this box is mg-3902's own text, kept unedited**, because the argument for
+> why the split existed is the expensive part and deleting it would leave the fold looking
+> like a preference. Read the last section first — *"Why this is a separate suite and not
+> `twin_pin.py`'s section 7"* — and then this:
+>
+> | mg-3902 said | mg-7cc3 did |
+> |---|---|
+> | the census refuses 8 unclaimed arm-shaped sites, taking `./build.sh` to `REFUSED`, exit 2 | registered them: `lib9876.ARMS` went 50 arms / 59 sites -> **55 / 67**, `CENSUS COMPLETE` |
+> | the 5 probes cannot run, because `make_sandbox()` builds a tree with no `.git` | `lib9876.make_sandbox()` commits the sandbox on a branch called `main` and repoints the pin at it; **55 of 55 arms DISCRIMINATE** |
+> | the root cause is in `reconcile()`, written and demonstrated and backed out | landed: it **refuses** while `STATE.md` on disk differs from `STATE.md` at `HEAD`, then names the newest **integration-reachable** commit carrying those bytes |
+> | reachability must be REPORTED and NOT GRADED | corrected by mg-daba before this fold: **integration** green, **in flight** reported, **orphan** RED. Section 7 carries that classifier unchanged |
+> | this is a SECOND control over the same pin, and closing the split is the filed successor | closed. `build.sh` went from **nine looped suites to eight** — the first time that file has ever shrunk |
+>
+> **The scripts were deleted rather than left beside section 7 for a reason that is not
+> tidiness.** `a1_prerepair.py` REFUSES (exit 2) when `twin_pin.py` differs from `origin/main`,
+> **by design** — its own docstring says a landed section 7 turns its `OLD` column into a
+> comparison of a thing with itself. So the suite that was in the gate goes red on the branch
+> that folds it in, and the deletion is its author's instruction rather than a judgement call.
+> `a2_pin_resolves.py` and `a3_negative_control.py` went with it (`a1` imported both), and the
+> transcript they produced stays.
+
+
 The audit this directory belongs to is
 `docs/audit-mg-3902-the-twin-disposition-and-its-pin.md`. Read that for the finding; this
 file is how to run the check and what its verdict does and does not mean.
 
 ```sh
-sh code/twin_disposition_audit_3902/run_all.sh     # also runs from ./build.sh
+python3 code/rendered_twin_pin_9bc2/twin_pin.py    # section 7; also runs from ./build.sh
 ```
 
 ## The one question `twin_pin.py`'s six sections never ask
@@ -118,10 +146,11 @@ written — is the filed successor.
 | file | what it is |
 |---|---|
 | `PREDICTIONS.md` | filed at `fe7790a`, before any file under audit was opened, with the exposure disclosed |
-| `a1_prerepair.py` | runs the false-pin inputs through `twin_pin.py` **as of `origin/main`** — the old checker is CLEAN on 3 of 3, the third being the orphan-but-byte-identical one |
-| `a2_pin_resolves.py` | the control: does the pin resolve, name the revision it digests, and name one this repository integrates? |
-| `a3_negative_control.py` | six ways the pin can lie, each caught and each expect string absent from the unmutated report; plus the classifier's four branches, including the two that must **not** grade |
-| `run_all.sh` | the runner, with the three guards this lineage's runners kept failing (no pipe, verdict-line required, unknown exit refused) |
+| `out_a1_prerepair.txt` | **KEPT.** The transcript of the false-pin inputs run through `twin_pin.py` **as of `origin/main`** — the old checker is CLEAN on 3 of 3, the third being the orphan-but-byte-identical one. This is the record the fold preserves |
+| ~~`a1_prerepair.py`~~ | deleted at mg-7cc3: it refuses by design once section 7 lands (see the box at the top) |
+| ~~`a2_pin_resolves.py`~~ | deleted at mg-7cc3: it **is** section 7 now, arms `C7a`/`C7b`/`C7c` |
+| ~~`a3_negative_control.py`~~ | deleted at mg-7cc3: its mutations are `negative_control.py`'s row `N20` and `a2_discriminate.py`'s probes `C7a`-`C7c`, `R5` |
+| ~~`run_all.sh`~~ | deleted at mg-7cc3: removed from `build.sh`'s loop, nothing left for it to run |
 
 ## The instrument's own defect, kept
 

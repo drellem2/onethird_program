@@ -176,6 +176,35 @@ def m_two_commits(text):
                   r"\g<1> (was deadbeefcafe)", text, count=1, flags=re.S)
 
 
+# ------------------------------------------------- arms added by mg-7cc3's fold of mg-3902
+_PIN_COMMIT = re.compile(r"(\n\s*commit:\s*)[0-9a-f]{7,40}")
+_VISIBLE_AT = re.compile(r'(<span id="provenance">.*?@ )[0-9a-f]{7,40}', re.S)
+
+
+@mutation("BOTH copies of the pinned commit name a revision that does not exist", "7",
+          "the pinned commit DOES NOT RESOLVE in this repository", "twin")
+def m_pin_unresolvable(text):
+    """mg-3902's HEADLINE MEASUREMENT, reproduced here as a row of this table.
+
+    Setting the pin's `commit:` AND its visible duplicate to a commit this repository does not
+    contain left the SIX-section control at `VERDICT: CLEAN`, exit 0.  Section 3 compares the
+    pinned digest against the LIVE WORKING TREE and section 6 compares the pinned commit
+    against the visible copy of ITSELF, so moving both copies together satisfied every check
+    there was.  That is `Generated 2026-07-19` in a new field: an unfalsifiable provenance
+    claim, shipped inside the instrument built to remove unfalsifiable provenance claims.
+
+    BOTH COPIES, NOT ONE, AND THAT IS THE WHOLE POINT.  Mutating only the visible line is
+    already covered — it is `m_desync_visible`, and section 6 catches it.  This row exists
+    because moving them TOGETHER was invisible, and it is section 7 that sees it.
+
+    The commit is a literal here and that does not rot: `deadbee` is chosen for NOT naming
+    anything, and the fixtures this file's own header warns about are the ones that name
+    something real and stop doing so.
+    """
+    text = _PIN_COMMIT.sub(lambda m: m.group(1) + "deadbee", text, count=1)
+    return _VISIBLE_AT.sub(lambda m: m.group(1) + "deadbee", text, count=1)
+
+
 # ---------------------------------------------------------------------- positive control
 @mutation("NO MUTATION — the baseline", "-",
           None, "none")

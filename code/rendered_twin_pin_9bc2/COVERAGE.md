@@ -13,6 +13,7 @@ and the gap is where the next instance of this defect will live.
 | 4 | kind marks | Every ledger row carries the same `Kind` mark in both documents. Live; does not consult the pin. |
 | 5 | default-deny guard | The twin does not call itself `Generated <date>`, and does not claim canonicity on a line that fails to name `STATE.md`. |
 | 6 | visible ↔ machine pin | The header's human-readable provenance line quotes the same commit as the machine-readable pin. |
+| 7 | the pin resolves | The pinned commit **exists**, is an **ancestor of an integration ref**, and **carries the `STATE.md` the pin digests**. The only section that asks git anything. |
 
 Section 3 **differs on nearly every run and that is not a defect.** `STATE.md` changes
 constantly outside the ledger; if section 3 carried the verdict, the control would be red
@@ -261,3 +262,41 @@ ledger table only, and three of mg-188d's four twin edits are prose that no sect
 **(4)** stands at full strength: that row 8's cell was actually rewritten rests on the diff being
 in the same commit as the re-pin. **(5) IS NOW CLOSED and was the highest-value follow-up named
 here:** `./build.sh` runs this suite on every merge request, via `mg-724a`'s gate.
+
+## Section 7 arrives, and it closes a hole this file could not see (mg-7cc3)
+
+`twin_pin.py` gained **section 7** — the only section that asks git anything. mg-3902 found the
+hole, wrote the check as a separate suite because the fold was blocked, and filed the fold as
+its successor; this is that successor.
+
+- **The hole, stated as the shape rather than the instance.** Section 3 checks the pinned
+  digest against the LIVE WORKING TREE and section 6 checks the pinned commit against a VISIBLE
+  COPY OF ITSELF. **Neither of the two provenance fields was ever compared against the thing
+  they claim to describe.** Setting both copies to `deadbee` was measured leaving this control
+  at `VERDICT: CLEAN`, exit 0 — an unfalsifiable provenance claim shipped inside the instrument
+  built to remove unfalsifiable provenance claims, which is `Generated 2026-07-19` one layer
+  down.
+
+- **EXISTENCE, ANCESTRY AND BYTE-IDENTITY ARE THREE DIFFERENT QUESTIONS.** The live bad pin,
+  `c308368`, **resolved**: a section 7 asking only "does this commit exist?" would have gone
+  green on the exact input that motivated it. Ancestry is asked first and reported first; the
+  digest is a consequence and reporting it first sends the reader off to regenerate a digest
+  when the pin itself is what is wrong.
+
+- **The root cause was in `reconcile()` and is now refused rather than detected.** It stamped
+  `rev-parse --short HEAD` while digesting the working tree. The refusal costs **two commits
+  instead of one**, and it is the only guarantee available that the revision a pin names and
+  the bytes it digests are one revision.
+
+- **What section 7 still does not cover.** It cannot tell you the pinned revision is the RIGHT
+  one to have pinned — only that it exists, integrates, and carries what the pin says it does.
+  A reconciliation that re-pins at a commit whose `STATE.md` is byte-identical but which is not
+  the revision the twin's cells were read from is invisible here, exactly as **(4)** above is
+  invisible: the pin records that the cells WERE updated and cannot verify it.
+
+- **`unknown` is a fourth world and not a fifth kind of red.** A tree with no repository — an
+  export, a tarball, a probe's sandbox — is REPORTED and not graded. That branch exists because
+  the same defect has now been written twice in this arc: mg-9876's `S1`/`S2`/`S3` (*"`ROOT` was
+  not a git repo and three arms were condemned by one line"*) and then mg-3902's first draft of
+  this very check. Reading that it exists did not stop it being written again, so it is built
+  in — `lib9876.make_sandbox(history=False)` keeps the world reachable.

@@ -76,6 +76,26 @@ SECTION 6 — the VISIBLE provenance line quotes the pin (the duplicate is check
   commits parsed out of the visible line: ['b364767']
   PASS  the visible line names exactly the pinned commit and no other.
 
+SECTION 7 — the pin RESOLVES against git (reachability first, then byte-identity)
+--------------------------------------------------------------------------------------
+  Sections 1-6 ask git nothing.  Section 3 compares the pinned digest against the
+  LIVE WORKING TREE and section 6 compares the pinned commit against a VISIBLE COPY
+  OF ITSELF, so the commit field was checked only against its own duplicate.  Setting
+  BOTH copies to `deadbee` left this control CLEAN at exit 0 (mg-3902, measured).
+
+  pinned commit  : b364767  ->  b3647677d511f4b7ea9c1a2709fa9fa5e912a3d9
+  ancestor of origin/main : yes
+  ancestor of main        : yes
+
+  PASS  the pinned commit is an ancestor of `origin/main`.  BOTH halves of the
+        acceptance criterion hold: main-ancestry AND byte-identity.
+
+  STATE.md AT the pinned commit : 118158cb98ac41a2a6a097e1b833390413653c9d172df84aab59bd0e5bae17b6
+  STATE.md digest IN the pin    : 118158cb98ac41a2a6a097e1b833390413653c9d172df84aab59bd0e5bae17b6
+  PASS  the commit the page NAMES carries the STATE.md the page was
+        DIGESTED against — the two provenance fields agree with GIT,
+        not merely with each other.
+
 ======================================================================================
 VERDICT: CLEAN — the twin is pinned and its ledger rows have not moved.
 ======================================================================================
