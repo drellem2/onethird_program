@@ -22,24 +22,10 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  THE DISAGREEMENTS, SHOWN
+§2  NO DISAGREEMENTS
 --------------------------------------------------------------------------------------------
-  Lines quoted after normalisation, so that this transcript cannot itself
-  smuggle a worktree path into the corpus.
-  `-` is the committed copy, `+` is this tree.
+  Every watched transcript that moved during this gate run moved only in the two
+  declared families that are not a function of repo state.  No committed
+  transcript asserts anything this tree contradicts.
 
-  code/face_geometry_repair_e35b/out_verify_e35b.txt
-    @@ -53 +53 @@
-    - [PASS] V6d REACH -- of the 210 formatted values V6b counts, 194 are PRINTED in t
-    + [PASS] V6d REACH -- of the 210 formatted values V6b counts, 194 are PRINTED in t
-    @@ -57 +57 @@
-    - [PASS] V7b OPERAND -- no `%d/%d` in controls.py is supplied the SAME SOURCE EXPR
-    + [PASS] V7b OPERAND -- no `%d/%d` in controls.py is supplied the SAME SOURCE EXPR
-    @@ -60 +60 @@
-    - [PASS] V6c REGENERATED -- controls_output.txt is byte-identical to a fresh `cont
-    ... 1 further hunk line(s) not shown
-
-  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
-  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
-
-VERDICT: RED — 1 committed transcript(s) disagree with this tree.  0.11s
+VERDICT: GREEN — 0 disagreements.  0.28s
