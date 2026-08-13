@@ -1,3 +1,21 @@
+==============================================================================
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (mg-20ee)
+==============================================================================
+  attacked battery read at : 7f04902cb6c95343e4b7541f873b80a7bba50a26
+      AS_OF, the pinned default
+
+  EVERY `line NNN` BELOW IS AN ADDRESS into an artifact produced by
+  code/face_geometry/, which this audit DOES NOT OWN.  The battery used to be
+  copied from the WORKING TREE, so those numbers moved whenever anyone amended
+  controls.py -- and they already had: a re-run on 2026-08-13 puts the injected
+  banner at line 67 where this transcript says 60.
+
+  WHAT IS STABLE, and it is the whole verdict: which routes are REPELLED and
+  which SUCCEED, and the control row each produced.  The committed tree is
+  still never modified; it is now not even read.  To attack a different
+  revision of the battery:
+
+      E720_ATTACK_AT=HEAD python3 attack_artifact_check.py   (or =WORKTREE)
 mg-e720 -- INDEPENDENT ATTACK BATTERY ON artifact_banner_check AS REPAIRED BY mg-7d5a
 ==============================================================================
 Object under attack: code/face_geometry/controls.py at d5a3043.

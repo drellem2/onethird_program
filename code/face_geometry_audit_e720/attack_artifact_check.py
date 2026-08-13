@@ -37,7 +37,51 @@ import sys
 import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC_DIR = os.path.normpath(os.path.join(HERE, "..", "face_geometry"))
+REPO = os.path.dirname(os.path.dirname(HERE))
+SRC_REL = "code/face_geometry"
+SRC_DIR = os.path.normpath(os.path.join(HERE, "..", SRC_REL.split("/")[-1]))
+
+#: THE COMMIT THE ATTACKED BATTERY IS TAKEN FROM (mg-20ee).
+#:
+#: This script copies code/face_geometry/ and mutates the copy, then reports
+#: WHICH LINE of the produced artifact carries the banner.  Those line numbers
+#: are addresses into an artifact produced by a file this instrument DOES NOT
+#: OWN, and copying from the WORKING TREE meant they moved whenever anyone
+#: amended controls.py.  They already had: a re-run on 2026-08-13 reports the
+#: injected banner at line 67 where the transcript says 60, because
+#: code/face_geometry/controls.py grew under this audit.
+#:
+#: So the battery is materialised AT A DECLARED COMMIT.  The committed tree is
+#: still never modified -- that property is unchanged and now stronger, since
+#: the source is not even read from the tree.
+AS_OF = "7f04902cb6c95343e4b7541f873b80a7bba50a26"
+
+#: Override, for attacking a different revision of the battery: any commit-ish,
+#: or the literal WORKTREE (the pre-pin behaviour).
+AT = os.environ.get("E720_ATTACK_AT", "").strip() or AS_OF
+
+
+def materialise(dest):
+    """code/face_geometry as of AT, written into `dest`.
+
+    `git archive` rather than a worktree copy: the bytes attacked are then a
+    property of a named commit rather than of whoever last edited the tree."""
+    if AT == "WORKTREE":
+        shutil.copytree(SRC_DIR, dest)
+        return
+    os.makedirs(dest)
+    tar = subprocess.run(["git", "-C", REPO, "archive", AT, SRC_REL],
+                         capture_output=True)
+    if tar.returncode != 0:
+        raise SystemExit(
+            "mg-e720: cannot read %s at %s: %s\n"
+            "  (E720_ATTACK_AT=%r; unset it for the pinned run.)"
+            % (SRC_REL, AT, tar.stderr.decode("utf-8", "replace").strip(), AT))
+    un = subprocess.run(["tar", "-x", "-C", dest, "--strip-components", "2"],
+                        input=tar.stdout, capture_output=True)
+    if un.returncode != 0:
+        raise SystemExit("mg-e720: cannot unpack %s at %s: %s"
+                         % (SRC_REL, AT, un.stderr.decode("utf-8", "replace").strip()))
 BANNER = "ALL CONTROLS PASS"
 NMAX = "4"          # n <= 4 keeps a full run near 0.4 s; the control is n-free
 
@@ -52,7 +96,7 @@ def run(mutate, label, expect_control_fires):
     tmp = tempfile.mkdtemp(prefix="mg-e720-")
     try:
         work = os.path.join(tmp, "fg")
-        shutil.copytree(SRC_DIR, work)
+        materialise(work)
         path = os.path.join(work, "controls.py")
         with open(path, encoding="utf-8") as fh:
             src = fh.read()
@@ -289,5 +333,29 @@ def main():
     print("tomorrow\" each say more than the code does.")
 
 
+STAMP = """\
+==============================================================================
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (mg-20ee)
+==============================================================================
+  attacked battery read at : %s
+      %s
+
+  EVERY `line NNN` BELOW IS AN ADDRESS into an artifact produced by
+  code/face_geometry/, which this audit DOES NOT OWN.  The battery used to be
+  copied from the WORKING TREE, so those numbers moved whenever anyone amended
+  controls.py -- and they already had: a re-run on 2026-08-13 puts the injected
+  banner at line 67 where this transcript says 60.
+
+  WHAT IS STABLE, and it is the whole verdict: which routes are REPELLED and
+  which SUCCEED, and the control row each produced.  The committed tree is
+  still never modified; it is now not even read.  To attack a different
+  revision of the battery:
+
+      E720_ATTACK_AT=HEAD python3 attack_artifact_check.py   (or =WORKTREE)
+""" % (AT, "AS_OF, the pinned default" if AT == AS_OF
+       else "OVERRIDE via E720_ATTACK_AT -- NOT the as-of stamp " + AS_OF[:7])
+
+
 if __name__ == "__main__":
+    print(STAMP, end="")
     main()

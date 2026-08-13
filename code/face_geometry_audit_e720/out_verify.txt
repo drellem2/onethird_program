@@ -1,3 +1,28 @@
+==============================================================================
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (mg-20ee)
+==============================================================================
+  history read at : 8fab00615a6d25ed1b9a2298abcfedc2d6785d20
+      AS_OF, the pinned default
+
+  THIS AUDIT'S EVIDENCE IS A SET OF `git log` WALKS, and a walk started at HEAD
+  answers "whatever the history looks like when you happen to run me".  Here
+  that is not a relocated reader -- THE WALKS ARE SCORED AS VERDICTS.  One had
+  already flipped: at HEAD, TARGET 1's "no commit ever added the row to
+  STATE.md" comes back REFUTED, because the -S/-G walks now reach commits that
+  were not in this audit's history when it ran.  See README for the list and
+  for why that is REPORTED rather than pinned away.
+
+  So every walk is bounded by the commit above.  It is the PARENT of the commit
+  carrying this transcript, not that commit: an instrument is RUN BEFORE IT IS
+  COMMITTED, so the history it measured is the history without its own commit.
+
+  EVERY `file:NNN` BELOW IS AN ADDRESS into a file this audit does not own and
+  is valid at that commit and nowhere else.  WHAT IS STABLE is what the audit
+  concludes about each target.  To re-ask against today's history:
+
+      E720_AT=HEAD python3 verify_landing_claims.py
+
+  which RE-WALKS.  Each run is correct about its own history.
 mg-e720 -- INDEPENDENT AUDIT OF mg-7d5a (d5a3043), RE-MEASURED
 ==========================================================================
 Rows scored REPRODUCED are mg-7d5a's claims that a disjoint rebuild

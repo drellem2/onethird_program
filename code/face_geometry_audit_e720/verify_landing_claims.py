@@ -14,6 +14,7 @@ byte-identically at every future commit.  A count that has to be re-frozen is a
 count that will be quoted stale.
 """
 
+import os
 import re
 import subprocess
 import sys
@@ -29,6 +30,30 @@ SCORE = []
 REPO = subprocess.run(["git", "rev-parse", "--show-toplevel"],
                       capture_output=True, text=True,
                       cwd=__file__.rsplit("/", 1)[0]).stdout.strip()
+
+
+#: THE COMMIT THIS AUDIT IS TAKEN OVER (mg-20ee).
+#:
+#: Every `git log` walk below started at HEAD, so its answers were "whatever the
+#: history looks like when you happen to run me" -- and this instrument prints
+#: those answers as VERDICTS, not as addresses.  It had already flipped one: at
+#: HEAD, TARGET 1's "no commit ever added the row to STATE.md" comes back
+#: REFUTED, because the `-S`/`-G` walks now reach commits that were not in this
+#: audit's history when it ran.
+#:
+#: CHOSEN ON A MEASUREMENT, AND IT IS THE PARENT OF THE CARRYING COMMIT, NOT THE
+#: CARRYING COMMIT.  7f04902 is where these transcripts live, and pinning THERE
+#: leaves one line wrong: the `-60` walk then reaches 7f04902 itself and reports
+#: it among the commits saying "changes behaviour".  An instrument is RUN BEFORE
+#: IT IS COMMITTED, so the history it measured is the history WITHOUT its own
+#: commit.  At 7f04902^ the committed transcript reproduces BYTE-IDENTICALLY --
+#: checked before a line of it was edited.  It is an ANCESTOR OF main.
+AS_OF = "8fab00615a6d25ed1b9a2298abcfedc2d6785d20"
+
+#: Override, for re-measuring against a different history: any commit-ish.
+#: Unset is the pinned default and the only value that reproduces the
+#: committed transcript.
+AT = os.environ.get("E720_AT", "").strip() or AS_OF
 
 
 def git(*args, binary=False):
@@ -83,11 +108,11 @@ def target_1_the_struck_sentence():
           at877.startswith("| **G″**"),
           "line 877 as f6756c0 left it:\n  %s" % at877[:120])
 
-    s = git("log", "--format=%h", "-S", "G″", "--", "STATE.md").split()
+    s = git("log", "--format=%h", "-S", "G″", AT, "--", "STATE.md").split()
     # -S only sees a NET change in occurrence count; -G sees any touching commit.
     # -G on the ROW'S OWN TEXT is the stronger question and is run too.
     gg = git("log", "--format=%h", "-G",
-             "one of whose blocks induces an antichain", "--", "STATE.md").split()
+             "one of whose blocks induces an antichain", AT, "--", "STATE.md").split()
     score("no commit ever added the row to STATE.md",
           set(s) == {"ba3ec79", "1e61031"} and gg == ["1e61031"],
           "git log -S 'G″'   -- STATE.md : %s  (mg-f2e1 quoting, mg-a2bd's strike record)\n"
@@ -376,7 +401,7 @@ def target_4_the_changelog():
           "TRUNCATION' and no list of sites.  Landed by db08b4c (mg-1319): git log -S\n"
           "on that flag returns %s."
           % git("log", "--format=%h", "-S", "Flagged because `38/38` is quoted as a headline",
-                "--", PROBE).split())
+                AT, "--", PROBE).split())
 
     prev = blob("ba3ec79^", PROBE)
     score("'the entry that stood here claimed the correction outright' was imprecise: "
@@ -456,9 +481,9 @@ def target_5_beyond_the_brief():
         return re.sub(r"\s+", " ", s)
 
     # who REPAIRED mg-5630's A4, and who SAID "changes behaviour" -- two commits.
-    said = [c for c in git("log", "--format=%h", "-60").split()
+    said = [c for c in git("log", "--format=%h", "-60", AT).split()
             if "changes behaviour" in flat(git("log", "-1", "--format=%B", c))]
-    repairer = [c for c in git("log", "--format=%h", "-60").split()
+    repairer = [c for c in git("log", "--format=%h", "-60", AT).split()
                 if "the scoring defect fixed in controls.py" in
                 flat(git("log", "-1", "--format=%B", c))]
     score("the A6 narrowing attributes its quotation to the right commit",
@@ -529,5 +554,36 @@ def main():
     return 0
 
 
+STAMP = """\
+==============================================================================
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (mg-20ee)
+==============================================================================
+  history read at : %s
+      %s
+
+  THIS AUDIT'S EVIDENCE IS A SET OF `git log` WALKS, and a walk started at HEAD
+  answers "whatever the history looks like when you happen to run me".  Here
+  that is not a relocated reader -- THE WALKS ARE SCORED AS VERDICTS.  One had
+  already flipped: at HEAD, TARGET 1's "no commit ever added the row to
+  STATE.md" comes back REFUTED, because the -S/-G walks now reach commits that
+  were not in this audit's history when it ran.  See README for the list and
+  for why that is REPORTED rather than pinned away.
+
+  So every walk is bounded by the commit above.  It is the PARENT of the commit
+  carrying this transcript, not that commit: an instrument is RUN BEFORE IT IS
+  COMMITTED, so the history it measured is the history without its own commit.
+
+  EVERY `file:NNN` BELOW IS AN ADDRESS into a file this audit does not own and
+  is valid at that commit and nowhere else.  WHAT IS STABLE is what the audit
+  concludes about each target.  To re-ask against today's history:
+
+      E720_AT=HEAD python3 verify_landing_claims.py
+
+  which RE-WALKS.  Each run is correct about its own history.
+""" % (AT, "AS_OF, the pinned default" if AT == AS_OF
+       else "OVERRIDE via E720_AT -- NOT the as-of stamp " + AS_OF[:7])
+
+
 if __name__ == "__main__":
+    print(STAMP, end="")
     sys.exit(main())
