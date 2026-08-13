@@ -159,7 +159,11 @@ force it `≥ 0`), *"the sharp edge"*, and the object three separate routes conv
 reopened *quantitatively* by mg-88bd as `D ≤ ε_spec` — ⚠️ **CLOSED AS A LEVER (mg-9b6b): no
 `D` is both provable and worth an unreached order**; and **(EQ)** —
 `max_x |E[pos_σ x] − rank_e x| = O(1)`, elementary, *"the only one of the three that is a
-cancellation statement rather than a decay statement"*. **Retired or dead:** the *"external
+cancellation statement rather than a decay statement"*. ⚠️ **`(B-cov)` AND `(EQ)` ARE PRICED
+CONDITIONALLY (mg-5987): each IS the conjecture restricted, by the contraposition that makes
+`(R)` one; above an explicit constant it delivers no order at any `n`, below the measured floor
+every order a census can see — and the deciding constant is unpinned across that gap**
+([`OneThird-LeverTest-mg-5987.md`](docs/OneThird-LeverTest-mg-5987.md)). **Retired or dead:** the *"external
 k=1 stability tool"* for Stanley's inequality (refuted, mg-dcae — the reduction to it was
 circular, so any usable statement *"must consume the frozen hypothesis directly"*);
 mg-0ed7's `Φ→Var` reduction (**REFUTED**, mg-8f56); and the tempering/deformation route to

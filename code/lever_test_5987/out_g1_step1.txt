@@ -1,0 +1,113 @@
+================================================================================================
+mg-5987  g1 — STEP 1: IS THE HYPOTHESIS `frozen`?   (B-cov) and (EQ), both at once
+================================================================================================
+
+§1. THE POPULATION.  Both statements quantify over the frozen class, so the first question is how
+    many members of it any census here can see.  Re-established rather than quoted, because a
+    directory that prints zeros over a class it did not check is printing zeros about nothing.
+
+    n | classes | non-chain | primitive | δ < 1/3 (frozen) | δ ≤ 1/3 (weak)
+   ---+---------+-----------+-----------+------------------+---------------
+    3 |       5 |         4 |         2 |                0 |              1
+    4 |      16 |        15 |         7 |                0 |              2
+    5 |      63 |        62 |        31 |                0 |              3
+    6 |     318 |       317 |       184 |                0 |              5
+    7 |    2045 |      2044 |      1351 |                0 |              8
+
+    The frozen class is EMPTY at every n ≤ 7 and the weak class has ONE member, at n = 3 — the
+    boundary poset, δ = 1/3 EXACTLY.  So step 1 bites on (B-cov) and (EQ) exactly as it bites on
+    (R), and for the same reason: there is no member to measure either statement at.
+
+
+§2. IS THERE AN UNCONDITIONAL READING?  For (R) there IS one — docs/FACTS.md F26 gives an
+    unconditional density ceiling `d ≤ 1 − ⌈(n−1)/2⌉/C(n,2)`, which owes nothing to the conjecture
+    and is what mg-9b6b priced as the dial's PROVABLE end.  Asked of these two, the answer is NO at
+    every constant, and it is a PROOF rather than a census: the antichain refutes both at every n.
+
+    n  | A_n: max_x |h − rank_e|  | A_n: Σ C_x / E[inv_e] |  checked against profile()
+   ----+--------------------------+-----------------------+---------------------------
+     3 | 1                        | 1/3                   |  term for term
+     4 | 3/2                      | 2/3                   |  term for term
+     6 | 5/2                      | 4/3                   |  term for term
+     8 | 7/2                      | 2                     |  term for term
+    10 | 9/2                      | 8/3                   |  term for term
+    40 | 39/2                     | 38/3                  |  closed form only
+   100 | 99/2                     | 98/3                  |  closed form only
+
+    Both are (n−1)/2 and (n−2)/3 — UNBOUNDED, so no constant `C` makes either statement true
+    unconditionally, at any n ≥ 4.  And the witness is reading-independent, which is the only
+    reason this section can come BEFORE §3 chooses a reading: `h` is constant on A_n, so every
+    reference order is a permutation of the same rank vector and the bias is (n−1)/2 at all of
+    them.  ⚠️  A_n is PRIMITIVE, so the restriction to primitives does not rescue either.
+
+
+§3. AND THE CONCLUSIONS DO NOT REFER.  STATE.md's glossary: `e` is *"the >2/3-majority order all
+    biases align with — reference, not a choice"*, and its λ_std row says in as many words that
+    *"frozen removes the choice ... that is a hypothesis, not a convention"*.  Both of these
+    statements name `e` — (EQ) in `rank_e`, (B-cov) in `E[inv_e]` — so off the frozen class they
+    do not merely become false, they stop having a subject.  Measured:
+
+    n  | primitives | `e` FULLY decided (every pair ≥2/3) | = δ(P) ≤ 1/3 ?
+   ----+------------+-------------------------------------+----------------
+    3 |          2 |                                   1 | yes, at every member
+    4 |          7 |                                   0 | yes, at every member
+    5 |         31 |                                   0 | yes, at every member
+    6 |        184 |                                   0 | yes, at every member
+    7 |       1351 |                                   0 | yes, at every member
+
+    `e` is fully decided at 1 primitive over n ≤ 7 — the n = 3 boundary poset — and at NONE from
+    n = 4 on.  The two columns agree at every member because they are the same predicate: every
+    incomparable pair ≥2/3-decided IS δ(P) ≤ 1/3.  The definedness of the notation and the
+    emptiness of the class are ONE fact, not two.
+
+
+§4. SO THE READING IS PRICED RATHER THAN PICKED.  This directory evaluates both statements at the
+    BARYCENTRIC reference — sort by `h(x) = E[pos_σ x]`, always a linear extension because `x < y`
+    forces `h(x) < h(y)`.  Two measurements justify it, and the first is the one that makes every
+    later verdict reading-proof.
+
+   (a) the ENVELOPE over ALL linear extensions as reference, n ≤ 6, primitives.  Every
+       number is a FLOOR over the class — the smallest value the primitives take under that
+       reading — because the floor is what step 2 prices.  ⚠️  THE FAVOURABLE END IS NOT THE
+       SAME END FOR THE TWO OBJECTS, which is measured here rather than assumed: a LOWER
+       floor delivers FEWER orders, so `min over e` is the reading most favourable to the
+       lever, and the barycentric order sits at that end for (EQ) and at the OTHER end for
+       (B-cov) — it roughly minimises inversions, and inversions are (B-cov)'s DENOMINATOR.
+             (EQ): max_x |h − rank_e|                     (B-cov): Σ C_x / E[inv_e]
+        min over e | max over e | bary at min |  min over e | max over e | bary at max
+       ------------+------------+-------------+-------------+------------+------------
+   n=3   1/3       | 1          |    2/2      |  2/9        | 1/3        |    2/2
+   n=4   2/5       | 6/5        |    7/7      |  1/5        | 8/25       |    7/7
+   n=5   4/11      | 9/8        |   31/31     |  1/4        | 2/5        |   31/31
+   n=6   4/13      | 15/13      |  184/184    |  54/221     | 2/5        |  184/184
+
+       So the barycentric reading is the MOST favourable one for (EQ) — it is the argmin at every
+       primitive in the population, so (EQ)'s price under it is a lower bound on its price under
+       every reading — and the LEAST favourable one for (B-cov), where it sits at the max over `e`
+       at every primitive.  Each verdict below is therefore stated at the end that cannot flatter
+       it.  What no reading changes is the shape: BOTH columns are bounded at every `n` here, so
+       *"the floor does not run away"* is a fact about the objects and not about the choice — and
+       that is the only property step 2 consumes.
+
+   (b) where STATE.md's own `e` EXISTS, it IS the barycentric order — the wrong-direction
+       control, taken on the relaxed class β = 2/5 where the population is NOT empty:
+       β = 1/3: fully decided at   1 primitives (n ≤ 7), majority == barycentric at 1 of 1
+       β = 2/5: fully decided at  32 primitives (n ≤ 7), majority == barycentric at 32 of 32
+       TOTAL 33 of 33.  The stand-in is not a convention chosen to be
+       convenient; it is the same order wherever the real one is defined at all.
+
+§5. VERDICT ON STEP 1 — IT BITES ON BOTH, AND HARDER THAN ON (R).
+
+    (R)  hypothesis frozen ⟹ population empty ......................... yes
+         an unconditional reading exists (F26) ........................ YES
+         the conclusion `d ≤ D` refers off the class .................. yes, `d` needs no reference
+
+    (EQ) and (B-cov)
+         hypothesis frozen ⟹ population empty ......................... yes, re-established §1
+         an unconditional reading exists .............................. NO, at any constant (§2)
+         the conclusion refers off the class .......................... NO — `e` is decided only
+                                                                        where the class is (§3)
+
+    So neither escapes at step 1.  What is measurable is the contrapositive, exactly as mg-9b6b
+    said — and pricing it is step 2, which is `g2`.
+

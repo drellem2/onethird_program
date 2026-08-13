@@ -22,10 +22,40 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  NO DISAGREEMENTS
+§2  THE DISAGREEMENTS, SHOWN
 --------------------------------------------------------------------------------------------
-  Every watched transcript that moved during this gate run moved only in the two
-  declared families that are not a function of repo state.  No committed
-  transcript asserts anything this tree contradicts.
+  Lines quoted after normalisation, so that this transcript cannot itself
+  smuggle a worktree path into the corpus.
+  `-` is the committed copy, `+` is this tree.
 
-VERDICT: GREEN — 0 disagreements.  0.19s
+  code/control_audit_9876/out_a4_sweep.txt
+    @@ -5 +5 @@
+    - population: 229 directories under code/
+    + population: 230 directories under code/
+    @@ -13 +13 @@
+    - 220 candidate site(s) in 76 of 229 directories
+    + 220 candidate site(s) in 76 of 230 directories
+    @@ -116,3 +116,3 @@
+    - ships a file named for negative/self/positive-control : 150 of 229
+    ... 5 further hunk line(s) not shown
+
+  code/rendered_twin_pin_9bc2/out_control.txt
+    @@ -37 +37 @@
+    - actual STATE.md sha256 : 2e1b206cbf315b7c2df34e0bc757160949c6ce42290f62b19f49995
+    + actual STATE.md sha256 : 51503649f7128c93aef5fef4e611357928d6d0457086840f00907da
+
+  code/state_ratchet_e331/out_ratchet.txt
+    @@ -8,3 +8,3 @@
+    - words             5047      <- THE GATED QUANTITY (len(text.split()))
+    - bytes             34306
+    - lines             206
+    + words             5099      <- THE GATED QUANTITY (len(text.split()))
+    + bytes             34698
+    + lines             210
+    @@ -24,4 +24,4 @@
+    ... 64 further hunk line(s) not shown
+
+  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
+  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
+
+VERDICT: RED — 3 committed transcript(s) disagree with this tree.  0.31s

@@ -1,0 +1,113 @@
+================================================================================================
+mg-5987  g3 — STEP 3: THE WHOLE DIAL, BOTH RESIDUALS
+================================================================================================
+
+§1. THE FAMILY THAT CARRIES BOTH DIALS PAST THE CENSUS.  `Z_n`: `x_i < x_j` iff `j − i ≥ 2`, so
+    the incomparable pairs are exactly the consecutive ones and `L(Z_n)` is in bijection with the
+    MATCHINGS of a path.  Everything below is closed form; `g0` checks it term for term against the
+    general machinery at n = 3…11.
+
+        |L(Z_n)| = F_{n+1}        q_i = Pr[(i,i+1) transposed] = F_i F_{n−i} / F_{n+1}
+        h(x_i) − i = q_i − q_{i−1}          C_{x_i} = 2 q_i q_{i−1}          E[inv_e] = Σ q_i
+
+    ⚠️  `Z_n` IS PRIMITIVE AT EVERY `n` — its incomparability graph is a path — which is the whole
+    reason it can carry a verdict where mg-9b6b's ordinal-sum family could not: mg-f5be's
+    primitivity objection lapsed that refutation above n = 3 and does not touch this one.
+
+      n |     |L(Z_n)| | max_x |h − rank_e| | Σ C_x / E[inv_e]
+   -----+--------------+--------------------+------------------
+      3 |            3 | 1/3     0.333333 | 1/3    0.333333
+      4 |            5 | 2/5     0.400000 | 8/25   0.320000
+      5 |            8 | 3/8     0.375000 | 2/5    0.400000
+      8 |           34 | 13/34   0.382353 |        0.454018
+     14 |          610 |         0.381967 |        0.498062
+     15 |          987 |         0.381966 |        0.501825
+     20 |        10946 |         0.381966 |        0.514856
+     50 | F_51, 11 digits |         0.381966 |        0.537820
+    100 | F_101, 21 digits |         0.381966 |        0.545337
+    300 | F_301, 63 digits |         0.381966 |        0.550311
+
+    Both columns CONVERGE and neither runs away:
+
+        max_x |h − rank_e| = F_{n−1}/F_{n+1} → 1/φ² = (3−√5)/2 = 0.381966
+        Σ C_x / E[inv_e]                    → 1 − 1/√5      = 0.552786
+
+    and the first is EXACTLY `q_1`, attained at the end of the path: `b_1 = q_1 − q_0 = q_1`.
+
+
+§2. AND THE CAP IS A THEOREM, NOT A LIMIT.  A limit says what happens eventually; the price needs
+    a bound at EVERY n.  Both come from one Fibonacci identity, checked below rather than cited:
+
+        F_{a+b−1} = F_a F_b + F_{a−1} F_{b−1}   ⟹   F_i F_{n−i} ≤ F_{n−1}   ⟹   q_i ≤ q_1
+
+    so    max_x |h − rank_e| = q_1 = F_{n−1}/F_{n+1} ≤ 2/5           at every n ≥ 3
+    and   Σ C_x / E[inv_e]   = 2 Σ q_i q_{i−1} / Σ q_i ≤ 2 q_1 ≤ 4/5  at every n ≥ 3
+
+    identity F_{a+b−1} = F_a F_b + F_{a−1} F_{b−1}, a,b ≤ 39 ....... 0 failures
+    q_i ≤ q_1 at every n ≤ 199 and every i .......................... 0 failures
+    both caps hold at every n ≤ 399 ................................ 0 failures
+    sup over n ≤ 399:  bias = 2/5 (at n = 4),  ρ = 0.550926
+
+§3. THE DIAL, IN mg-9b6b's OWN TABLE SHAPE.  `D`/`C` from the end nothing consumes to the end
+    everything does.  ⚠️  THE `unreached` COLUMN IS THE ONE TO READ AND FOR TWO OF THE THREE ROWS
+    IT CANNOT BE FILLED: it counts orders above the census frontier of 14, and that needs the floor
+    at n > 14, which for (R) is the theorem `2/n` and for these two is nothing at all.
+
+    residual   | setting                     | delivers            | unreached (n > 14)
+   ------------+-----------------------------+---------------------+--------------------
+    (R)        | F26, PROVEN                 | nothing             | 0
+    (R)        | ε_dem·(n+1)/n  — row 8      | n = 3…98            | 84
+    (R)        | F23's 4⌊n/3⌋/(n(n−1))       | every n ≥ 4         | all of them
+    (EQ)       | C ≥ 2/5      — the cap      | NOTHING, at every n | 0, at every n
+    (EQ)       | C < 37/123 = 0.300813       | every n = 3…8       | NOT COMPUTABLE HERE
+    (B-cov)    | C ≥ 4/5      — the cap      | NOTHING, at every n | 0, at every n
+    (B-cov)    | C < 8/25 = 0.320000         | every n = 3…8       | NOT COMPUTABLE HERE
+
+    THE TWO `NOT COMPUTABLE` CELLS ARE THE FINDING, NOT A GAP IN THE SWEEP.  mg-9b6b's currency is
+    unreached orders; unreached orders are a function of the primitive floor above n = 14; and the
+    floor above n = 14 is a THEOREM for `d` and an open question for both of these.  No amount of
+    census closes that cell — a sweep to n = 12 would still be inside the verified range.
+
+
+§4. WHERE THE ANSWER FLIPS, AND WHAT SITS THERE.  The two ends disagree, so there is a crossing,
+    and the whole verdict is a question of which side the architecture's own constant is on.
+
+    (EQ):     0 orders at every n for  C ≥ 2/5 = 0.400000        (theorem, §2)
+              every swept order for   C < 37/123 = 0.300813        (census to n = 8, g2)
+    (B-cov):  0 orders at every n for  C ≥ 4/5 = 0.800000        (theorem, §2)
+              every swept order for   C < 8/25 = 0.320000          (census to n = 8, g2)
+
+    Against them, what the architecture names: ε_dem = 1/50 = 0.0200, and
+    STATE.md records the constant that SUFFICES as unpinned by ~2 orders of magnitude (audit F5).
+
+        the flip for (EQ)     sits at   ≈ 0.3 – 0.4   =  15× – 20× ε_dem
+        the flip for (B-cov)  sits at   ≈ 0.4 – 0.8   =  20× – 40× ε_dem
+
+    A 2-orders-of-magnitude window on the required constant spans BOTH flips.  So the record as it
+    stands cannot say which side either residual is on, and *"is it a lever?"* is not answerable
+    from the mathematics of the residual alone — it is answerable from a constant nobody has
+    computed end to end.
+
+
+§5. WHAT WOULD MAKE THE TEST RETURN AN ANSWER — one object, named so it can be looked for.
+
+    A THEOREM ABOUT `floor_Q(n)` — the analogue of `d ≥ 2/n` for either quantity.  Two shapes and
+    they answer opposite ways, which is what makes it worth doing:
+
+      (a) `floor_Q(n) ≥ c > 0` at every n.  Then every C < c delivers EVERY order — the whole
+          conjecture in one step, mg-9b6b's data end — and the residual is dead at every setting
+          below c, with no cutoff at all.  Note this is WORSE than (R): (R)'s delivery STOPS at
+          n = 2/D precisely because its floor decays past D.  A floor that does not decay never
+          gets overtaken, so the initial segment is everything.
+
+      (b) `floor_Q(n) → 0`.  Then each fixed C has a cutoff `n_C` and the price is finite and
+          computable, exactly as for (R) — and the number of UNREACHED orders it buys becomes a
+          figure somebody can put in this table instead of `NOT COMPUTABLE HERE`.
+
+    The measured floors are consistent with both and settle neither.  They are NOT monotone, which
+    is reported rather than smoothed — and they are read from g2 rather than copied:
+
+    (EQ)    floor, n = 3…8:      1/3      2/5     4/11     4/13     4/13   37/123
+                            0.3333   0.4000   0.3636   0.3077   0.3077   0.3008
+    (B-cov) floor, n = 3…8:      1/3     8/25      2/5      2/5  176/399  140/319
+                            0.3333   0.3200   0.4000   0.4000   0.4411   0.4389

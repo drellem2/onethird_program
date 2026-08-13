@@ -1,0 +1,143 @@
+================================================================================================
+mg-5987  g2 — STEP 2: THE CONTRAPOSITIVE, AND WHAT IT DELIVERS
+================================================================================================
+
+§1. THE CONTRAPOSITIVE, INSTANTIATED AT ALL THREE RESIDUALS.  One line each, and the third is
+    mg-0b96 §2's own reading of (1_D), reproduced here so the three can be read off one table.
+
+    (R)_D      frozen ⟹ d(P) ≤ D                    ⟺   the conjecture on { d > D }
+    (EQ)_C     frozen ⟹ max_x |h − rank_e| ≤ C      ⟺   the conjecture on { max_x |h − rank_e| > C }
+    (B-cov)_C  frozen ⟹ Σ_x C_x ≤ C · E[inv_e]      ⟺   the conjecture on { Σ_x C_x / E[inv_e] > C }
+
+    None of the three escapes step 2 as a yes/no question.  All three ARE the conjecture restricted.
+
+   … swept n = 3
+   … swept n = 4
+   … swept n = 5
+   … swept n = 6
+   … swept n = 7
+   … swept n = 8, primitives only
+
+§2. THE FLOORS.  `floor_Q(n) = min{ Q(P) : P primitive non-chain at order n }`, exact.
+
+    n | primitives | floor of max|h−rank|      | floor of Σ C_x / E[inv]   | floor of d = 2/n
+   ---+------------+---------------------------+---------------------------+------------------
+    3 |          2 | 1/3       = 0.33333    | 1/3       = 0.33333    | 2/3    = 0.66667   ✓ = 2/n
+    4 |          7 | 2/5       = 0.40000    | 8/25      = 0.32000    | 1/2    = 0.50000   ✓ = 2/n
+    5 |         31 | 4/11      = 0.36364    | 2/5       = 0.40000    | 2/5    = 0.40000   ✓ = 2/n
+    6 |        184 | 4/13      = 0.30769    | 2/5       = 0.40000    | 1/3    = 0.33333   ✓ = 2/n
+    7 |       1351 | 4/13      = 0.30769    | 176/399   = 0.44110    | 2/7    = 0.28571   ✓ = 2/n
+    8 |      12524 | 37/123    = 0.30081    | 140/319   = 0.43887    | 1/4    = 0.25000   ✓ = 2/n
+
+    THE THIRD COLUMN IS THE CONTROL AND IT IS WHY THE OTHER TWO MATTER.  `d`'s floor is exactly
+    `2/n` at every order — mg-0b96's primitivity bound, reproduced here from the census side — and
+    it is a THEOREM and it DECAYS.  Both properties are load-bearing, and the second one runs the
+    OPPOSITE WAY from the way it first reads: a decaying floor is what makes `(R)`'s price FINITE.
+    `{d > D}` covers order `n` while `2/n > D` and stops covering it at `n = 2/D`, which is why
+    mg-9b6b could write *"forbids up to n = 98"*.  A floor that does NOT decay is never overtaken
+    by a fixed dial setting, so its delivery has no upper cutoff at all.  The other two floors sit
+    between 0.30 and 0.45 across the whole reachable range and `g3` caps both at every `n` with an
+    explicit primitive family — but a cap is not a decay, and §3 is where that bites.
+
+    the same floors over ALL non-chain classes rather than the primitives (n ≤ 7):
+    n |  non-chain | floor of max|h−rank| | floor of Σ C_x / E[inv]
+   ---+------------+----------------------+------------------------
+    3 |          4 | 1/3                  | 0
+    4 |         15 | 1/3                  | 0
+    5 |         62 | 1/3                  | 0
+    6 |        317 | 4/13                 | 0
+    7 |       2044 | 4/13                 | 0
+
+    The non-chain floor of Σ C_x / E[inv] is ZERO from n = 4 on, and that is not a rival
+    measurement — it is the ordinal sums.  A poset with a cut has every pair indicator at an
+    element either constant or confined to one summand, so its same-side covariance vanishes
+    identically.  Pricing over that population would report *"delivers nothing"* for a reason that
+    has nothing to do with (B-cov), which is exactly the mistake mg-f5be's primitivity objection
+    exists to prevent, so every verdict below is over the PRIMITIVES.
+
+
+§3. THE PRICE, IN mg-9b6b's OWN CURRENCY: orders of the conjecture the contrapositive delivers.
+    An order is delivered when the restricted class covers the WHOLE primitive population there.
+    ⚠️  Read only to n = 8: this table cannot see an order it has not swept, so *"delivers"* below
+    means *"delivers among n = 3…8"*.  What happens at every n is `g3`'s, via the family.
+
+    dial C  | (EQ)_C delivers          | (B-cov)_C delivers
+   ---------+--------------------------+---------------------------
+   1/50     | [3, 4, 5, 6, 7, 8]       | [3, 4, 5, 6, 7, 8]
+   1/10     | [3, 4, 5, 6, 7, 8]       | [3, 4, 5, 6, 7, 8]
+   1/4      | [3, 4, 5, 6, 7, 8]       | [3, 4, 5, 6, 7, 8]
+   3/10     | [3, 4, 5, 6, 7, 8]       | [3, 4, 5, 6, 7, 8]
+   2/5      | []                       | [7, 8]
+   1/2      | []                       | []
+   4/5      | []                       | []
+   1        | []                       | []
+
+    And the (R) column, for the same reading, computed through lib9b6b — a CONSISTENCY CHECK on
+    this arm's price machinery rather than a second measurement of mg-9b6b's figure:
+
+    (R) at row 8's D_needed = ε_dem·(n+1)/n delivers n = 3…98 — 96 orders, 84 of them UNREACHED (n > 14).
+    Over the same window this table sees, n = 3…8, (R) delivers all 6.
+
+§4. THE REFINEMENT THE ORDERS COUNTER CANNOT MAKE.  A count of delivered orders is binary per
+    order: it returns 0 for a statement that settles nothing and ALSO for one that settles every
+    primitive but one at every order.  Those are not the same object, and the difference is the
+    whole question this directory was filed to answer — so the fraction is reported beside it.
+
+    dial C  | (EQ)_C settles                             | (B-cov)_C settles
+            | n=5      n=6      n=7      n=8             | n=5      n=6      n=7      n=8
+   ---------+--------------------------------------------+-----------------------------------------
+   1/50     | 100.0% 100.0% 100.0% 100.0%  | 100.0% 100.0% 100.0% 100.0%
+   1/4      | 100.0% 100.0% 100.0% 100.0%  | 100.0% 100.0% 100.0% 100.0%
+   2/5      |  90.3%  97.3%  99.4%  99.8%  |  96.8%  99.5% 100.0% 100.0%
+   1/2      |  80.6%  89.7%  96.5%  98.5%  |  83.9%  97.3%  99.3%  99.9%
+   4/5      |  48.4%  59.8%  73.6%  80.0%  |  48.4%  69.6%  86.9%  95.6%
+
+    ⚠️  READ THE 100.0% ROWS AS WHAT THEY ARE.  A row at 100% across the sweep is a statement that
+    delivers those orders outright — coverage and counter agree there.  The rows that matter are
+    the ones just BELOW 100%: at C = 2/5 the counter says (EQ) delivers NOTHING, and the coverage
+    says it settles 99.8% of the primitives at n = 8 — 25 posets of 12 524 stand between *"zero
+    price"* and *"the whole order"*.  That is the refinement, and it is not a decoration: an
+    escape carried by 25 posets is not the same object as an escape carried by half the class, and
+    mg-9b6b's counter returns the same 0 for both.  Both residuals also have settings where the
+    coverage is genuinely small — (EQ) at C = 4/5 settles 80% at n = 8 — so the counter is not
+    always wrong here, only unable to tell which case it is in.
+
+    AND THE COVERAGE RISES WITH `n` AT FIXED `C` — 90.3 → 99.8% for (EQ) at C = 2/5 — so the
+    exceptional set is shrinking as a FRACTION even though `g3` shows it is never empty.
+
+
+    THE EXCEPTIONS, COUNTED RATHER THAN INFERRED FROM THE PERCENTAGE.  A rounded 99.8% is not a
+    number anybody can check a claim against, and the claim this arc rests on is about the SIZE of
+    the exceptional set — so it is printed as posets, at the settings the verdict is stated at.
+
+    (EQ)    at C = 2/5, n = 7:      8 of 1351 primitives NOT settled  (0.59%)
+    (EQ)    at C = 2/5, n = 8:     31 of 12524 primitives NOT settled  (0.25%)
+    (B-cov) at C = 4/5, n = 7:    177 of 1351 primitives NOT settled  (13.10%)
+    (B-cov) at C = 4/5, n = 8:    554 of 12524 primitives NOT settled  (4.42%)
+
+§4b. THE TWO THRESHOLDS, WRITTEN OUT — the exact constants §3's table is read at.  `g3` needs
+     them for its dial and READS THEM FROM THIS ARM rather than carrying a copy: a figure typed
+     twice is a figure that goes stale in one of its two homes (mg-2959's finding, and the reason
+     this arm writes `floors.json` instead of `g3` quoting a number from this transcript).
+
+    (EQ)_C     delivers every swept order (n = 3…8) iff  C < 37/123 = 0.30081   (the floor at n = 8)
+    (B-cov)_C  delivers every swept order (n = 3…8) iff  C < 8/25 = 0.32000   (the floor at n = 4)
+    ⚠️  NOT the same constant, and not the one an eye would pick off §2's table: both minima
+    are at the ENDS of the swept range and the (B-cov) one is at n = 4, because neither
+    floor is monotone in n.
+
+§5. VERDICT ON STEP 2.
+
+    Neither escapes step 2 as a question.  Both ARE the conjecture restricted, exactly as (R) is,
+    and by the same one-line contraposition.  What differs is that the price CANNOT BE COMPUTED in
+    mg-9b6b's currency, and the reason is precise rather than a shortage of sweep:
+
+        the currency is UNREACHED orders (n > 14, above the census frontier);
+        an unreached order is delivered iff floor_Q(n) > C at that n;
+        so the currency is a function of the floor ABOVE n = 14 —
+
+    and for `(R)` that floor is a THEOREM (`2/n`), while for these two it is a CENSUS that stops at
+    n = 8, every order of which is already verified.  No further sweeping fixes this: n = 12 is
+    still inside the verified range.  What the census DOES settle is the two ends, and `g3` pins
+    them — 0 orders at every n above an explicit cap, every swept order below the measured floor.
+

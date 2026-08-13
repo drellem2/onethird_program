@@ -1,0 +1,87 @@
+================================================================================================
+mg-5987  g0 — CONTROLS
+================================================================================================
+
+1. THE ENUMERATOR, against OEIS A000112 (posets up to isomorphism).
+  [ok ] A000112 at n = 1..7  — [1, 2, 5, 16, 63, 318, 2045]
+
+2. `count_ext` (ideal DP) against BRUTE-FORCE enumeration of L(P), every class n ≤ 6.
+  [ok ] |L(P)| agrees at all 405 classes n ≤ 6  — []
+
+3. `profile()` against BRUTE FORCE — h, Var, and the variance split Var = diag + C.
+   The split is the ONE identity every (B-cov) number in this directory rests on:
+   pos_σ(x) = 1 + Σ_y s_xy, so Var(pos_x) = Σ_y Var(s_xy) + Σ_{y≠z} Cov(s_xy, s_xz).
+  [ok ] E[pos_σ x] agrees at all 128 posets  — 0 mismatches
+  [ok ] Var(pos_σ x) agrees — so Σ_x C_x is what it says it is  — 0 mismatches
+  [ok ] Var = diag + C holds identically  — 0 mismatches
+
+3b. `E[inv_e]` — (B-cov)'s DENOMINATOR — against brute force, at two reference orders.
+  [ok ] E[inv_e] agrees at 128 posets × 2 reference orders  — 0 mismatches
+
+4. mg-dcae's SPLIT, against brute force: E[Σ disp²] = Σ Var(pos_x) + Σ (h(x) − rank_e x)².
+   This is the identity that makes (B-cov) and (B-bias) a decomposition of (B) rather than
+   two unrelated obligations.  It holds at EVERY reference order and is checked at two.
+  [ok ] the split holds at 60 posets × 2 reference orders  — 0 mismatches
+
+5. docs/FACTS.md F11's SIGN, reproduced: C_x ≥ 0 at every (poset, element) row.
+   ⚠️  NOT an independent corroboration of F11 — `p_before` is shared with the library F11
+   was measured through.  What IS independent is the population: F11 sampled n = 5, 6;
+   this is exhaustive to n = 7, and `g3` carries the sign to every n by a closed form.
+  [ok ] C_x ≥ 0 at 5149 (poset, element) rows  — 0 negative
+
+6. THE CLOSED FORMS, term by term against the general machinery.
+  [ok ] Z_n: |L| = F_{n+1}, bias, Σ C_x, E[inv], ρ  (n = 3..11)  — 0 mismatches
+  [ok ] A_n: bias = (n−1)/2, ρ = (n−2)/3, Σ C_x     (n = 3..11)  — 0 mismatches
+  [ok ] Z_n is primitive at n = 3..11
+  [ok ] A_n is primitive at n = 3..11
+
+7. THE PRICE MACHINERY, against mg-9b6b's OWN PUBLISHED FIGURE.
+   `delivers()` is fed (R)'s floor — `2/n`, the primitive density floor — at row 8's D.
+   ⚠️  Computed THROUGH lib9b6b, so this is a consistency check on this arm's price
+   machinery, NOT a second measurement of mg-9b6b's 84.
+  [ok ] (R) at row 8 forbids a frozen primitive up to n = 98  — max n = 98
+  [ok ] (R) at row 8 delivers 96 orders, 84 of them unreached (n > 14)  — 96 orders, 84 unreached
+  [ok ] `delivers` on a hand table
+  [ok ] `coverage` on a hand list
+
+8. PLANTED DEFECTS — three live, and the fourth is reported inert rather than swapped out.
+  [ok ] P1  C_x without the factor 2 — CAUGHT by Var = diag + C
+  [ok ] P2  h dropping the forced-below count — CAUGHT by brute force
+  [ok ] P3  E[inv_e] ignoring the reference order — CAUGHT by brute force
+
+   TWO CANDIDATE PLANTS CAME BACK INERT.  Both are printed rather than swapped out, and
+   both fail for the same reason in two costumes: a plant has to be a defect the DOMAIN
+   can express, and `joint_before`'s two skipped branches are skipped because the domain
+   forbids the case, not because the author preferred to.
+  [inert] P4  the `return 0` branch is UNREACHABLE: fired 0 times over 128 posets,
+          and the reason is structural rather than a shortage of population — adding `y < x`
+          creates only `{a ≤ y} < {b ≥ x}`, and `x ≤ y` is false because y ∥ x, so `x < z`
+          can never arise.  A plant on it would report green against a correct library.
+  [inert] P5  re-closing an already-forced `z < x` fired 0 times as the code runs —
+          and the reason is an IMPORTED INVARIANT rather than a fact about posets, which is
+          why it is checked in both directions instead of asserted: `lib6ff4`'s canonical
+          labelling is a linear extension, and the inner loop runs over an ASCENDING
+          sublist, so `z ≤ y` cannot hold.  Reverse the sublist and the case arises
+          455 times — where `_closure_with` returns its own INPUT at 455 of
+          455.  So the skip is an optimisation, not a correctness guard.
+  [ok ] P4's branch really is unreachable (fired 0 times)  — 0
+  [ok ] lib6ff4's canonical labelling IS a linear extension (down[i] ⊆ {0..i−1})
+  [ok ] P5's case is unreachable as the loop runs, and reachable when it is reversed  — 0 asc, 455 desc
+  [ok ] and there the re-close is a no-op — an optimisation, not a guard  — 455 of 455
+
+9. WRONG-DIRECTION CONTROL — the same machinery on a class that is NOT empty.
+   g1's central measurement is a zero: STATE.md's reference order `e` is fully decided at
+   almost no reachable poset.  A zero over an empty class is worth nothing unless the same
+   instrument returns something on a class that is not empty, so it is asked twice.
+  β = 1/3: fully decided at   1 of 224 primitives, n ≤ 6 — and the majority order EQUALS the barycentric order at 1 of 1
+  [ok ] at β = 1/3 the class is all but empty (≤ 1 member)  — 1
+  β = 2/5: fully decided at  12 of 224 primitives, n ≤ 6 — and the majority order EQUALS the barycentric order at 12 of 12
+  [ok ] at β = 2/5 the class is NOT empty — the instrument still returns orders  — 12
+  [ok ] and where `e` exists at all it IS the barycentric order  — 12 of 12
+
+10. `majority_reference` at β = 1/3 against lib6ff4's own `majority_order`.
+  [ok ] the parametrised reference reproduces lib6ff4 at its own threshold  — 0
+
+================================================================================================
+g0 VERDICT: GREEN — 27 controls
+================================================================================================
