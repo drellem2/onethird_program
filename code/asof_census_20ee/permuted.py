@@ -609,15 +609,24 @@ def estate_mode():
     import pinnable
     srcs = [p for p in text(git("ls-tree", "-r", "--name-only", AS_OF)).splitlines()
             if p.endswith(".py") or p.endswith(".sh")]
-    old, half, new, unsep = {}, {}, {}, []
+    # FOUR RULES, AND THE FIRST THREE PIN `flags="loose"` ON PURPOSE (mg-44da).
+    # They are mg-0e77's FLAG half by definition -- the prose change is the only
+    # thing they are allowed to vary -- so reading them at the repaired flag half
+    # would move three published figures while claiming to measure something
+    # else.  That is this file's own subject arriving in the edit that measures
+    # it: a transcript whose numbers change for a reason its prose does not name.
+    old, half, prose_only, new, unsep = {}, {}, {}, {}, []
     for p, blob in batch(AS_OF, srcs):
         if blob is None:
             continue
         s = text(blob)
         if not pinnable.code_only(s, p)[1]:
             unsep.append(p)
-        for store, mode in ((old, "read"), (half, "comments"), (new, "none")):
-            h = pinnable.unordered_walks(s, p, prose=mode)
+        for store, mode, flg in ((old, "read", "loose"),
+                                 (half, "comments", "loose"),
+                                 (prose_only, "none", "loose"),
+                                 (new, "none", "boundary")):
+            h = pinnable.unordered_walks(s, p, prose=mode, flags=flg)
             if h:
                 store[p] = h
 
@@ -638,8 +647,11 @@ def estate_mode():
           % ("comments blanked ONLY -- THE HALF-REPAIR", n(half), len(half),
              len(dirs(half))))
     print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
-          % ("comments AND docstrings -- THE RULE", n(new), len(new),
-             len(dirs(new))))
+          % ("comments AND docstrings -- tranche 7", n(prose_only),
+             len(prose_only), len(dirs(prose_only))))
+    print("      %-44s %4d hits, %3d file(s), %3d dir(s)"
+          % ("...AND a flag's dash starts a word -- THE RULE", n(new),
+             len(new), len(dirs(new))))
     print()
 
     def delta(a, b):
@@ -649,8 +661,12 @@ def estate_mode():
                if h not in a.get(p, [])]
         return gone, add
 
-    gone, added = delta(old, new)
+    # THE PROSE DELTA IS STILL MEASURED AGAINST THE PROSE RULE ALONE.  Reading
+    # it against `new` would fold mg-44da's 3 into mg-e5f3's 9 and publish 12 as
+    # the prose over-count, which is a figure no tranche ever measured.
+    gone, added = delta(old, prose_only)
     hgone, hadded = delta(old, half)
+    fgone, fadded = delta(prose_only, new)
     print("  BOTH DIRECTIONS, AND THE SECOND IS THE ONE THAT DECIDED THE")
     print("  DESIGN.  Blanking comments ALONE removes %d and ADDS %d:"
           % (len(hgone), len(hadded)))
@@ -698,20 +714,121 @@ def estate_mode():
     print()
     narrated = [(p, h) for p, v in sorted(new.items()) for h in v
                 if "print(" in h]
-    print("  WHAT IS LEFT, REPORTED AT THE LOW WATER MARK.  %d of the %d"
-          % (len(narrated), n(new)))
-    print("  surviving hits are still prose -- sentences inside a print(...):")
+    was = [(p, h) for p, v in sorted(prose_only.items()) for h in v
+           if "print(" in h]
+    print("  WHAT IS LEFT, REPORTED AT THE LOW WATER MARK -- prose surviving")
+    print("  inside a print(...), %d of the %d hits:" % (len(narrated), n(new)))
     print()
     for p, h in narrated:
         print("      %s\n          %s" % (p, h[:68]))
     print()
     print("  They stay because the boundary above is a fact about the")
-    print("  language rather than a judgement about a callee.  One of them")
-    print("  shows a SECOND over-count in R3 that this branch does not touch:")
-    print("  the short-flag cluster fires on a HYPHENATED WORD, so")
-    print("  `grep 'STANDING UN-STRUCK'` matches on `-STR`.  Reported, not")
-    print("  repaired; R3's flag half is mg-0e77's rule and one rule change")
-    print("  measured in both directions is this tranche's whole claim.")
+    print("  language rather than a judgement about a callee.")
+    print()
+    print("  THIS COUNT MOVED, %d -> %d, AND IT IS ATTRIBUTED RATHER THAN LEFT"
+          % (len(was), len(narrated)))
+    print("  AS DRIFT: tranche 7 published %d here, and the one that is gone is"
+          % len(was))
+    print("  THIS TRANCHE'S OWN SUBJECT -- the `UN-STRUCK` line below was in")
+    print("  this list because R3 fired on it, and it is out of the list")
+    print("  because R3 no longer does.  A residue shrinking because the rule")
+    print("  got better looks identical, from the count alone, to a residue")
+    print("  shrinking because the report got quieter.")
+    print()
+    print("-" * 78)
+    print("  AND A FLAG'S DASH STARTS A WORD (mg-44da).  Tranche 7 printed the")
+    print("  line above and named the SECOND over-count it shows, then declined")
+    print("  it: `R3's flag half is mg-0e77's rule and one rule change measured")
+    print("  in both directions is this tranche's whole claim`.  This is that")
+    print("  change.  THE SUBJECT CAME OUT OF THE PREDECESSOR'S OWN RESIDUE --")
+    print("  a tranche reported what it would not fix, and the next one was")
+    print("  told by that list rather than by a person.")
+    print()
+    print("  The 24-character window that buys the LIST spelling let ANY dash")
+    print("  inside it open a flag cluster, so a HYPHENATED WORD was one:")
+    print("  `grep 'STANDING UN-STRUCK'` matched on `-STR`.  The guard is a")
+    print("  fact about the shell's own tokenising rather than a judgement")
+    print("  about the word -- a flag's dash STARTS a word, and `UN-STRUCK` is")
+    print("  one word.  `--recursive` is unaffected because its second dash is")
+    print("  preceded by a dash, which is not a word character (P22).")
+    print()
+    print("  BOTH DIRECTIONS.  The repair removes %d and ADDS %d:"
+          % (len(fgone), len(fadded)))
+    print()
+    for p, h in fgone:
+        print("      REMOVED  %s\n               %s" % (p, h[:66]))
+    for p, h in fadded:
+        print("      ADDED    %s\n               %s" % (p, h[:66]))
+    print()
+    fsilent = sorted(dirs(prose_only) - dirs(new))
+    print("  %d DIRECTORIES GO SILENT, AND THE CHECK THAT MATTERS IS THE OTHER"
+          % len(fsilent))
+    print("  DIRECTION -- every one of them was READ:")
+    for d in fsilent:
+        print("      %s" % d)
+    print()
+    # COMPUTED, NOT ASSERTED (mg-44da).  The claim that a silent directory
+    # hides no real walk is exactly the claim a broken repair would also make,
+    # and a hand-typed `every one was read` rots the moment somebody edits one
+    # of these files -- mg-1344's P5, in the sentence defending against it.  So
+    # the enumeration sites in each newly-silent directory are RE-SCANNED here
+    # and shown with the reason each is not a hit.
+    print("  EVERY ENUMERATION SITE IN THOSE DIRECTORIES, RE-SCANNED, WITH THE")
+    print("  REASON IT IS NOT A HIT -- and the reasons are NOT all this repair.")
+    print("  THE FIRST DRAFT OF THIS PARAGRAPH SAID THEY WERE, and computing it")
+    print("  is what said otherwise: a directory going silent at this tranche")
+    print("  can be silent for something the PREVIOUS tranche did.")
+    print()
+    why_count = collections.Counter()
+    for d in fsilent:
+        for p, blob in batch(AS_OF, [q for q in srcs
+                                     if q.rsplit("/", 1)[0] == d]):
+            if blob is None:
+                continue
+            src = text(blob)
+            bare = src.splitlines()
+            coded = pinnable.code_only(src, p)[0].splitlines()
+            for i, ln in enumerate(bare):
+                if not pinnable.WALK_LOOSE.search(ln):
+                    continue
+                if not pinnable.WALK_LOOSE.search(coded[i]):
+                    why = "PROSE, blanked (mg-e5f3)"
+                elif pinnable.ORDERED.search(ln):
+                    why = "SORTED on this line"
+                elif not pinnable.WALK.search(coded[i]):
+                    why = "HYPHENATED WORD -- THIS REPAIR"
+                else:
+                    why = "SORTED in the enclosing block"
+                why_count[why] += 1
+                print("      %-46s %s" % (p.rsplit("/", 1)[1], why))
+                print("          %s" % ln.strip()[:64])
+    print()
+    for why, c in sorted(why_count.items()):
+        print("      %2d  %s" % (c, why))
+    print()
+    print("  SO THE TWO DIRECTORIES DO NOT GO SILENT FOR ONE REASON, AND SAYING")
+    print("  SO IS THE POINT: only %d of these sites are this tranche's doing."
+          % why_count["HYPHENATED WORD -- THIS REPAIR"])
+    print("  The rest were already silent and the directories stayed lit")
+    print("  because of the ones that were not.  NO SITE IS LEFT UNEXPLAINED --")
+    print("  the one real `os.walk` here, libc2b3.py's, collects into a list and")
+    print("  `return sorted(found)` five lines below, which is the window rule")
+    print("  doing its job rather than this repair hiding a true positive.  A")
+    print("  repair that DID hide one would look identical FROM THE COUNTS")
+    print("  ALONE, so the counts are not what this rests on.")
+    print()
+    print("  THE find(1) HALF TAKES THE SAME GUARD AND IT MOVES NOTHING -- 0")
+    print("  hits at %s, measured separately and declared rather than left to" % AS_OF)
+    print("  look like it contributed to the %d.  N24 is that measurement; N25"
+          % len(fgone))
+    print("  is what writing N24 turned up, an UNDER-count in the same half:")
+    print("  R3's `find` requires a following SPACE, so the LIST spelling that")
+    print("  P5 exists for is invisible to it.  Reported, NOT repaired, for the")
+    print("  reason tranche 7 gave for declining this tranche's own subject --")
+    print("  `find` is an ordinary English verb where `grep` is not, so")
+    print("  widening it is a second change whose false-positive direction")
+    print("  nobody has measured.  Two tranches running, the residue named at")
+    print("  the low water mark is where the next subject came from.")
     print()
 
     print("=" * 78)

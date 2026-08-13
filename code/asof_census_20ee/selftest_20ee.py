@@ -38,7 +38,13 @@ RAN = []
 # each says in its own text what it would mean if it ever went the other way,
 # and N18 is absent from this list for the first time: mg-e5f3 repaired what
 # it asserted, which is the event its own text asked to be told about.
-KNOWN_DEFECT = ("N4", "N5", "C3", "N21")
+#
+# N25 joins it at mg-44da, and it was found by WRITING ANOTHER CONTROL rather
+# than by reading: N24's first draft asserted find(1)'s guard with a subject
+# spelled as a LIST, the pair came back (False, False), and the reason is that
+# R3's find half cannot see that spelling at all.  A control that fails for a
+# reason its author did not predict is the cheapest finding in this directory.
+KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N25")
 
 
 def check(name, got, want, why):
@@ -513,6 +519,90 @@ check("N11 the word `grep` in prose",
       "commentary than code — every docstring in this directory names its "
       "own method. A rule that matched the word rather than the invocation "
       "would fire on the file explaining it.")
+
+print()
+print("  A FLAG'S DASH STARTS A WORD (mg-44da).  Tranche 7 named this")
+print("  over-count in its own transcript and DECLINED it -- `R3's flag half")
+print("  is mg-0e77's rule and one rule change measured in both directions is")
+print("  this tranche's whole claim`.  This is that change, and the pairs below")
+print("  are (what mg-0e77's rule sees, what the repaired rule sees) so the")
+print("  BEFORE is printed beside the AFTER rather than asserted.")
+print()
+
+
+def fpair(src, path=None):
+    """(what the LOOSE flag half sees, what the repaired one sees)."""
+    return (bool(pinnable.unordered_walks(src, path, flags="loose")),
+            bool(pinnable.unordered_walks(src, path)))
+
+
+check("N22 a HYPHENATED WORD is not a flag cluster",
+      fpair("""print("  echo \\"$E2OUT\\" | grep 'STANDING UN-STRUCK' || true")"""),
+      (True, False),
+      "THE CONTROL THIS TRANCHE EXISTS FOR, and the line is runner_exit_c2b3's "
+      "real one rather than a shape invented to fail. The 24-character window "
+      "that buys the LIST spelling (P5) let ANY dash in it open a cluster, so "
+      "`UN-STRUCK` read as `-STR`. It is one of the two hits tranche 7 printed "
+      "as surviving prose inside a `print(...)` — so the residue that tranche "
+      "reported at its low water mark is where this one's subject came from, "
+      "and the estate scan says 83 -> 80 with ZERO added.")
+
+check("N23 a hyphenated word in the ARGUMENT, not in a quoted snippet",
+      fpair('     "bare grep over run_all.sh @%s re-derives %d" % (L.PINNED, bare)),'),
+      (True, False),
+      "runner_exit_repair_7522's real line, and the SECOND spelling of the "
+      "same defect: here the hyphen is in ordinary English (`re-derives` -> "
+      "`-der`), not in a shell snippet the file is quoting. One example would "
+      "have left the rule looking like a special case for `UN-STRUCK`; the "
+      "defect is the window, and two unrelated hyphenations are what says so.")
+
+check("P22 `grep --recursive` still fires",
+      fpair("    subprocess.run(['grep', '--recursive', pat, root])"),
+      (True, True),
+      "THE BOUNDARY IS A WORD BOUNDARY, NOT `PRECEDED BY WHITESPACE`, and that "
+      "distinction is the whole reason the guard is a lookbehind for a WORD "
+      "CHARACTER. A long flag's second dash is preceded by a dash, which is "
+      "not one, so the tolerant half keeps working. A guard written as `\\s-` "
+      "would have silenced this and the counts would not have said so — it is "
+      "outside the estate at 12aa5f8, which is exactly why it is planted.")
+
+check("P23 a real `-r` on the SAME LINE as a hyphenated word still fires",
+      fpair("""    run("grep 'UN-STRUCK' x"); run(["grep", "-rn", pat])"""),
+      (True, True),
+      "the repair can only remove a line where EVERY candidate dash in the "
+      "window is word-internal, because the engine backtracks over the lazy "
+      "window and tries each one. Asserting that from the pattern would be "
+      "reading a regex rather than running it; this runs it. A repair that "
+      "stopped at the first rejected dash would be an UNDER-count, which is "
+      "the silent direction.")
+
+check("N24 find(1)'s `-type` takes the same guard — and it moves NOTHING",
+      (fpair('  find "$ROOT" -type f -name "*.py"'),
+       fpair("  find the well-type marker in docs and STATE.md")),
+      ((True, True), (True, False)),
+      "A GUARD THAT MOVES NOTHING, DECLARED RATHER THAN SMUGGLED IN. The same "
+      "hyphenated-word defect is in R3's find(1) half, and the repair is "
+      "applied there too — but measured separately at 12aa5f8 it removes ZERO "
+      "hits, so it contributes nothing to the 83 -> 80 and this control is "
+      "how that is said out loud rather than left to look like it helped. It "
+      "is applied anyway because it is the same defect in the same rule, and "
+      "a guard that waits for its first false positive is one somebody has to "
+      "find twice.")
+
+check("N25 find(1) in the LIST spelling is INVISIBLE — reported, not repaired",
+      fpair("""    subprocess.run(["find", root, "-type", "f"], check=True)"""),
+      (False, False),
+      "FOUND BY WRITING N24's CONTROL AND GETTING THE WRONG ANSWER, which is "
+      "this arc's own pattern: the figure moves when somebody builds the next "
+      "thing. R3's find half requires `find` followed by WHITESPACE, so the "
+      "LIST spelling P5 exists for is invisible to it — the exact blind spot "
+      "P5 was written about, one alternative along, and an UNDER-count rather "
+      "than an over-count. NOT REPAIRED HERE and the reason is the one tranche "
+      "7 gave for declining this tranche's own subject: one rule change "
+      "measured in both directions is a tranche's whole claim, and widening "
+      "`find` is a second change whose false-positive direction nobody has "
+      "measured — `find` is an ordinary English verb, where `grep` is not. "
+      "This control fires the day somebody does it, and that is the signal.")
 
 print()
 print("CONTROLS ON permuted.py — mg-20ee's CONDITION 2 (mg-885d)")
