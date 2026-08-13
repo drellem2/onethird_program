@@ -1,0 +1,79 @@
+============================================================================================
+mg-502f  PLANTED WORLDS — the mechanism, the detector, the guard
+============================================================================================
+
+§M  THE MECHANISM, COMPUTED WITH mg-f771's OWN DECISION FUNCTION
+--------------------------------------------------------------------------------------------
+  A shell redirect opens its target BEFORE the process starts.  So during a run
+  of `python3 s.py > code/d/out_s.txt` that file is first EMPTY and then PARTIAL,
+  and `./build.sh` ends by grading it.  These rows hand f771's real
+  `verdict_for(committed, worktree)` the real committed bytes of a real tracked
+  transcript against exactly those two states.  Nothing is simulated and nothing
+  is asserted: DISAGREES here IS the gate exiting 1.
+
+  victim: code/gate_fixed_point_f771/out_g1_controls.txt  (60 lines, 4485 bytes)
+
+  M1    EMPTY — the instant the shell opens the redirect           DISAGREES   AS REQUIRED
+  M2    PARTIAL — the file while the script is still running       DISAGREES   AS REQUIRED
+  M3    UNTOUCHED — the control.  No redirect, no disagreement     AGREES      AS REQUIRED
+
+  M3 IS NOT DECORATION.  Without it M1 and M2 are consistent with a function
+  that returns DISAGREES for everything, which would make this whole ticket a
+  report about a broken grader rather than about a broken invocation.
+
+§D  THE DETECTOR — eight sources it must classify
+--------------------------------------------------------------------------------------------
+  D1-D3 are shapes an EARLIER DRAFT OF THESE RULES GOT WRONG, kept as worlds so
+  the rule cannot silently return to the version that missed a live instance.
+
+  D1    ONE HOP: argv built, handed to a local helper (x1's shape) True        AS REQUIRED
+  D2    DIRECT: subprocess.run(["sh", "build.sh"]) (x0's shape)    True        AS REQUIRED
+  D3    PROSE: gate only ever PRINTED, something else executed     False       AS REQUIRED
+  D4    DOCSTRING ONLY: no code literal, no exec — NOT an edge     False       AS REQUIRED
+  D5    SELF-WRITER is recognised as writing its own transcript    True        AS REQUIRED
+  D6    A NON-WRITER is not mistaken for one                       False       AS REQUIRED
+  D7    A GUARDED script is recognised as guarded                  True        AS REQUIRED
+  D8    AN UNGUARDED self-writer is NOT                            False       AS REQUIRED
+
+  D9-D12  THE BINDING RULES, on a planted tracked set.  Each rule below caught an
+  instance the rule before it missed, which is why there are three and not one.
+
+  D9    NAME: code/d/w.py <-> code/d/out_w.txt                     [('code/d/o AS REQUIRED
+  D10   ARROW: a README table row (x1's binding, and its ONLY one) [('code/d/o AS REQUIRED
+  D11   REDIRECT: a literal redirect in a runner                   [('code/d/o AS REQUIRED
+  D12   AN UNTRACKED TARGET IS NOT A BINDING — f771 grades tracked []          AS REQUIRED
+
+  D13  A FILE THIS INSTRUMENT CANNOT PARSE MUST BE REPORTED, NOT SKIPPED.
+  D13   an unparseable source raises rather than returning 'no edg True        AS REQUIRED
+
+  D14  THE PREFILTER CANNOT CHANGE A VERDICT — it is strictly weaker than both
+  rules, so anything it drops could not have been an edge or a route.
+  D14   a source with no gate literal anywhere is dropped          False       AS REQUIRED
+  D15   a source that names the handshake is KEPT even with no gat True        AS REQUIRED
+
+§G  THE GUARD — real file descriptors, this real repository
+--------------------------------------------------------------------------------------------
+  The guard asks whether stdout IS a tracked transcript, by INODE and not by
+  path string, because `> out_s.txt` from the directory and `> code/d/out_s.txt`
+  from the root are one situation.
+
+  G1    stdout IS a tracked transcript -> the guard names it       code/gate_f AS REQUIRED
+  G2    a DIFFERENT tracked transcript is named, not the first     code/state_ AS REQUIRED
+  G3    an UNTRACKED out_*.txt under code/ is NOT refused          None        AS REQUIRED
+  G4    a file outside the repository is NOT refused               None        AS REQUIRED
+  G5    a character device (/dev/null, a tty) is NOT refused       None        AS REQUIRED
+  G6    a PIPE is NOT refused — and CANNOT be; §3 declares it      None        AS REQUIRED
+
+  G7  THE REFUSAL ITSELF FIRES, END TO END, AT EXIT 2.  A live subprocess whose
+  stdout is a real tracked transcript, opened in APPEND so the world does not
+  destroy the file it borrows.
+  G7    the guarded probe exits 2 rather than running              2           AS REQUIRED
+  G8    and the refusal says which file, on stderr                 True        AS REQUIRED
+  G9    and the borrowed transcript is unchanged (append, nothing  4485        AS REQUIRED
+
+§V  VERDICT
+--------------------------------------------------------------------------------------------
+  27 of 27 worlds scored as required.
+
+VERDICT: GREEN — the mechanism is real, the detector detects, the guard refuses.
+  0.12s

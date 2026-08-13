@@ -174,6 +174,16 @@ def run_and_transcribe():
     f771 needs it to be, and the exhibit stops interfering with the gate it is exhibiting.
     """
     import io
+    # mg-502f.  THE REPAIR ABOVE CHANGED THE DEFAULT INVOCATION; IT DID NOT REMOVE THE OLD
+    # ONE.  `python3 x0_exhibit.py > out_x0_exhibit.txt` is still published — in build.sh's
+    # own mg-479c block, three paragraphs of it, and in mg-502f's ticket body — and typing
+    # it truncates this file at the moment the shell opens the redirect, whether or not
+    # this function later rewrites it.  So the invocation is REFUSED rather than left to be
+    # re-typed.  mg-502f swept the estate for the class and found this file and one other.
+    sys.path.insert(0, os.path.join(REPO, "code", "self_red_sweep_502f"))
+    import guard_502f
+    guard_502f.refuse_if_self_red("x0_exhibit.py")
+
     buf = io.StringIO()
     real = sys.stdout
     sys.stdout = buf

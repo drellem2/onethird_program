@@ -1,0 +1,70 @@
+============================================================================================
+mg-502f  SELF-RED EXHIBITS — does any tracked script redden the gate it is running?
+============================================================================================
+
+§0  THE TARGET SET — what actually runs mg-f771's control
+--------------------------------------------------------------------------------------------
+  The precondition names `./build.sh` OR any target that runs
+  gate_fixed_point_f771.  Those are the same set in this repository, and that is
+  MEASURED here rather than asserted: f771 refuses without the handshake
+  BUILD_SH_RAN_THE_SUITES, so every route to it passes through a line that
+  sets that variable.  Tracked lines that set it, comments excluded:
+
+      build.sh:342  BUILD_SH_RAN_THE_SUITES=1 sh code/gate_fixed_point_f771/run_al
+
+  ONE ROUTE, AND IT IS build.sh.  §1 may therefore look for `build.sh` alone.
+
+§1  THE EXEC EDGES — tracked scripts that can reach `./build.sh`
+--------------------------------------------------------------------------------------------
+  A gate literal in CODE (not in a docstring, not in a `#` comment) plus an exec
+  primitive somewhere in the same file.  The two conditions are DECOUPLED and
+  the reason is a miss: the tighter rule 'a gate literal inside an exec call'
+  was written first and did not see x1_positive_control.py, which builds the
+  argv and hands it to a local helper.  One hop defeated it.  lib_502f §A.
+
+  code/alias_agreement_06d1/x0_exhibit.py              gate literal in code at [50]
+                                                       exec primitive at        [50, 139]
+  code/state_ratchet_e331/x1_positive_control.py       gate literal in code at [201]
+                                                       exec primitive at        [71, 308]
+  code/sweep_evidence_control_d2c2/p1_names.py         gate literal in code at [75]
+                                                       exec primitive at        NONE — prose, not an invocation
+
+§2  THE VERDICTS
+--------------------------------------------------------------------------------------------
+  INSTANCE  runs the gate, a tracked transcript is bound to it, and the script
+            does NOT write that file itself — so the committed bytes can only
+            have arrived by a capture, and the next capture is self-red.
+  EXPOSED   runs the gate, writes its own transcript (mg-479c's repair), but does
+            not REFUSE the redirect.  The default invocation is safe and the old
+            one is still published — in build.sh's own mg-479c block and in
+            mg-502f's ticket body — and typing it truncates the file again.
+  GUARDED   runs the gate and REFUSES when its stdout is a tracked transcript.
+  NO-BIND   runs the gate; no tracked transcript is bound to it.
+  PROSE     the gate literal is a printed string; nothing here runs the gate.
+
+  GUARDED   code/alias_agreement_06d1/x0_exhibit.py
+            transcript code/alias_agreement_06d1/out_x0_exhibit.txt   bound by NAME
+            refuses when stdout IS a tracked transcript, so no run of this
+            script can hand the gate a truncated file.  Writes it: YES.
+  GUARDED   code/state_ratchet_e331/x1_positive_control.py
+            transcript code/state_ratchet_e331/out_x1_positive.txt   bound by ARROW
+            refuses when stdout IS a tracked transcript, so no run of this
+            script can hand the gate a truncated file.  Writes it: YES.
+  PROSE     code/sweep_evidence_control_d2c2/p1_names.py
+            gate named at [75]; no exec primitive in the file.
+
+§3  WHAT THIS SWEEP CANNOT SEE
+--------------------------------------------------------------------------------------------
+  * `cmd | tee code/d/out_s.txt`.  A pipe leaves no literal for §B to bind and
+    no regular file for the guard to recognise.  This estate forbids the pipe
+    form already, for an older and unrelated reason (`cmd | tee f` makes `$?`
+    tee's status — mg-9bc2, restated in three runners), so the forbidden form
+    and the invisible form coincide.  That is luck, not design.
+  * an UNTRACKED script.  Nothing outside `git ls-files` is read, and a script
+    nobody committed is a script this sweep is not claiming anything about.
+  * a shell that reaches the gate through a variable — `G=./build.sh; $G`.
+    §1's shell rule matches a literal.  No tracked shell file does this today
+    and one that did would be reported by nothing here.
+
+VERDICT: GREEN — no tracked script runs `./build.sh` into a file the gate reads.
+  0.25s

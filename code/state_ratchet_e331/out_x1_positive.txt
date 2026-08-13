@@ -6,11 +6,11 @@ mg-e331 §4 — POSITIVE CONTROL: the ratchet demonstrated FAILING, on real comm
 --------------------------------------------------------------------------------------------
   b80dea0e (pre-restructure) :  29094 words
   cc4c663e (mg-ea0e landing) :   4658 words
-  the tree as it stands      :  19077 words
+  the tree as it stands      :  21328 words
 
-  X1   pre-restructure STATE.md (29,094 w)         AS REQUIRED  exit 1 · RATCHET VERDICT: RED — ABOVE-CEILING: 29094 words is +10017 past t
-  X2   mg-ea0e's own landing (4,658 w)             AS REQUIRED  exit 1 · RATCHET VERDICT: RED — SLACK-UNRATCHETED: 4658 words is 14419 belo
-  X3   the tree as it stands — NOT red on arrival  AS REQUIRED  exit 0 · RATCHET VERDICT: GREEN — 19077 words, ceiling 19077, tighten below
+  X1   pre-restructure STATE.md (29,094 w)         AS REQUIRED  exit 1 · RATCHET VERDICT: RED — ABOVE-CEILING: 29094 words is +7766 past th
+  X2   mg-ea0e's own landing (4,658 w)             AS REQUIRED  exit 1 · RATCHET VERDICT: RED — SLACK-UNRATCHETED: 4658 words is 16670 belo
+  X3   the tree as it stands — NOT red on arrival  AS REQUIRED  exit 0 · RATCHET VERDICT: GREEN — 21328 words, ceiling 21328, tighten below
   X4   a CEILING.json that does not parse          AS REQUIRED  exit 2 · RATCHET VERDICT: REFUSED — this ratchet did not reach a decision, 
 
 §4.2  X5 — THE COUNTERFACTUAL.  Had this ratchet landed WITH mg-ea0e on 2026-08-06,
@@ -38,15 +38,26 @@ mg-e331 §4 — POSITIVE CONTROL: the ratchet demonstrated FAILING, on real comm
   9efb3df47 2026-08-10   16960 w  BLOCKED  mg-9bc2
   4fcbc7138 2026-08-10   17067 w  BLOCKED  mg-2f44
   f97710234 2026-08-10   18969 w  BLOCKED  mg-8d63
+  42b5bb005 2026-08-10   19077 w  BLOCKED  mg-e331
+  48e92d746 2026-08-10   19750 w  BLOCKED  —
+  d19d12787 2026-08-12   19907 w  BLOCKED  mg-03cf
+  54038e726 2026-08-12   20583 w  BLOCKED  mg-c59e
+  4ce7da39a 2026-08-12   20583 w  BLOCKED  mg-cdd5
+  b395f2b8b 2026-08-12   20784 w  BLOCKED  mg-602d
+  5130b016c 2026-08-13   20783 w  BLOCKED  mg-7c78
+  b3647677d 2026-08-13   21328 w  BLOCKED  mg-0e8c
+  dbe79d434 2026-08-13   21328 w  BLOCKED  mg-6ff4
+  de8aa863e 2026-08-13   21328 w  BLOCKED  mg-6ff4
+  d86e5afdc 2026-08-13   21328 w  BLOCKED  mg-8748
 
-  20 of 20 landings since mg-ea0e would have been BLOCKED by a ratchet set to
+  31 of 31 landings since mg-ea0e would have been BLOCKED by a ratchet set to
   mg-ea0e's own achieved size; 0 would have passed.
 
   READ THIS CAREFULLY, BECAUSE IT CUTS BOTH WAYS.  It is the evidence that the
   mechanism would have bitten, and it is ALSO the evidence for §3's decision not
-  to set today's ceiling at 6,000: a threshold that stops 20 consecutive landings
+  to set today's ceiling at 6,000: a threshold that stops 31 consecutive landings
   does not hold a line, it gets removed.  What the ratchet buys is that each of
-  those 20 landings would have had to RAISE the number and say why — and the
+  those 31 landings would have had to RAISE the number and say why — and the
   raises themselves would then be the record nobody currently has.
 
 §4.3  X0 AND X6 — ONE PLANTED TREE, TWO COMMANDS, ONE DIFFERENCE.
@@ -58,29 +69,29 @@ mg-e331 §4 — POSITIVE CONTROL: the ratchet demonstrated FAILING, on real comm
   §1.4).  So the planted tree is not a hypothetical: it is what this repository
   looks like when one more attempt goes into STATE.md rather than beside it.
 
-  planted STATE.md : 24786 words (+5709 against the ceiling of 19077)
+  planted STATE.md : 27037 words (+5709 against the ceiling of 21328)
 
   X0  the PRE-EXISTING gate, code/control_gate_724a/run_all.sh — untouched by this
       ticket.  It must exit 0: the point of X0 is that the gate this repository
       already had CANNOT SEE this, which is why a new gated quantity is the remedy
       and a new schedule is not.
-      STATE.md sha256 ccde5301853ea326 -> ccde5301853ea326  RESTORED byte-identically
+      STATE.md sha256 09e45268db93b1fd -> 09e45268db93b1fd  RESTORED byte-identically
       code/control_gate_724a/run_all.sh
       exit 0
         GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
       BLIND, as required: the gate this repository already had exits 0 on a STATE.md it should be alarmed by.
-      14 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a2_discriminate.txt, code/control_audit_9876/out_a4_sweep.txt, code/control_gate_724a/out_gate.txt...
+      4 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a4_sweep.txt, code/control_gate_724a/out_gate.txt, code/rendered_twin_pin_9bc2/out_control.txt...
 
   X6  `./build.sh` — the command .pogo/refinery.toml names and the refinery runs.
       Same tree, same bytes, one suite added.  It must exit non-zero AND the
       non-zero must be attributable to this ratchet by its own decision line.
-      STATE.md sha256 ccde5301853ea326 -> ccde5301853ea326  RESTORED byte-identically
+      STATE.md sha256 09e45268db93b1fd -> 09e45268db93b1fd  RESTORED byte-identically
       build.sh
       exit 1
         GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
-        RATCHET VERDICT: RED — ABOVE-CEILING: 24786 words is +5709 past the declared ceiling
+        RATCHET VERDICT: RED — ABOVE-CEILING: 27037 words is +5709 past the declared ceiling
       THE MERGE GATE GOES RED AND THE RATCHET IS NAMED AS THE CAUSE — a branch carrying that STATE.md does not land.
-      14 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a2_discriminate.txt, code/control_audit_9876/out_a4_sweep.txt, code/control_gate_724a/out_gate.txt...
+      5 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a4_sweep.txt, code/control_gate_724a/out_gate.txt, code/rendered_twin_pin_9bc2/out_control.txt...
 
 §4.4  X7 — P7, MEASURED RATHER THAN REMEMBERED.
 --------------------------------------------------------------------------------------------
@@ -88,12 +99,12 @@ mg-e331 §4 — POSITIVE CONTROL: the ratchet demonstrated FAILING, on real comm
   carrying the 186,710-byte pre-restructure STATE.md.  X0 above already showed it
   blind to a 24,678-word file, but P7 named THAT file, so P7 is scored against
   THAT file and not against a nearby one that happens to agree with me.
-      STATE.md sha256 ccde5301853ea326 -> ccde5301853ea326  RESTORED byte-identically
+      STATE.md sha256 09e45268db93b1fd -> 09e45268db93b1fd  RESTORED byte-identically
       code/control_gate_724a/run_all.sh
       exit 2
         GATE VERDICT: REFUSED — this gate did not reach a decision, so nothing above is
       exit 2 — recorded, not required.  P7 is scored on this number in §4.4.
-      16 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a2_discriminate.txt, code/control_audit_9876/out_a3_auditor_selftest.txt, code/control_audit_9876/out_a4_sweep.txt...
+      8 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a2_discriminate.txt, code/control_audit_9876/out_a3_auditor_selftest.txt, code/control_audit_9876/out_a4_sweep.txt...
 
   P7: MISS — the pre-existing gate came back X7 exit 2 on that tree.
 

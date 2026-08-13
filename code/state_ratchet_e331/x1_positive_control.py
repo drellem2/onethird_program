@@ -349,10 +349,59 @@ def _gate_arm(cmd, planted_text, want_red, label):
     return ok, "%s exit %d; %d decision line(s)" % (label, rc, len(hit))
 
 
-if __name__ == "__main__":
+TRANSCRIPT = os.path.join(HERE, "out_x1_positive.txt")
+
+
+def run_and_transcribe():
+    """Run, then write `out_x1_positive.txt` — LAST, and by this script rather than by a
+    shell redirect.
+
+    mg-502f.  THIS SCRIPT WAS IN THE CLASS mg-479c NAMED AND DID NOT SWEEP FOR.  It runs
+    `./build.sh` in arm X6, and since mg-f771 joined the gate that command grades every
+    tracked `code/**/out_*.txt` against its committed copy — so under
+    `python3 x1_positive_control.py > out_x1_positive.txt` the shell truncates this
+    script's own transcript before the script starts, and X6's `./build.sh` is handed a
+    half-written file and goes RED for a reason that is nothing to do with the ratchet.
+
+    WHAT THAT COST, MEASURED RATHER THAN ASSUMED, AND IT IS NOT WHAT IT COST x0_exhibit.py.
+    Two full runs on 2026-08-13, one under the redirect and one writing outside the watched
+    class: BOTH exit 0, BOTH score 8 of 8 arms AS REQUIRED, and the transcripts differ in
+    12 lines, all of them inside the "N transcript(s) left modified by this arm" listings.
+    X6 REQUIRES red and attributes it by the ratchet's own decision line, so a gate red for
+    two reasons and a gate red for one are the same observation to it.  This arm was
+    FRAGILE, never INERT — the opposite of x0_exhibit.py, whose E0 arm required GREEN and
+    therefore refused outright.
+
+    THE SELF-REDNESS IS VISIBLE IN THE REDIRECTED RUN'S OWN TRANSCRIPT, MISLABELLED: X0
+    lists `code/state_ratchet_e331/out_x1_positive.txt` among the transcripts "left
+    modified by this arm (expected; mg-724a D5)".  The arm did not modify it.  The shell
+    did, before the arm existed, and mg-724a's D5 is the wrong owner for that line.
+
+    So the output is buffered and the file is written after the last gate run — mg-479c's
+    shape, applied to the instance mg-479c did not sweep for.
+    """
+    import io
+    sys.path.insert(0, os.path.join(L.ROOT, "code", "self_red_sweep_502f"))
+    import guard_502f
+    guard_502f.refuse_if_self_red("x1_positive_control.py")
+
+    buf = io.StringIO()
+    real = sys.stdout
+    sys.stdout = buf
     try:
-        sys.exit(main())
+        rc = main()
     except L.Refusal as exc:
         print()
         print("POSITIVE CONTROL VERDICT: REFUSED — %s" % exc)
-        sys.exit(2)
+        rc = 2
+    finally:
+        sys.stdout = real
+    text = buf.getvalue()
+    real.write(text)
+    with open(TRANSCRIPT, "w", encoding="utf-8") as fh:
+        fh.write(text)
+    return rc
+
+
+if __name__ == "__main__":
+    sys.exit(run_and_transcribe())
