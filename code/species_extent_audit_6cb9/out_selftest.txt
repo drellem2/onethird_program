@@ -26,7 +26,7 @@ selftestd6cb9 -- the harness, and the half of it that must NOT happen
      OUTCOMES.md; the source and the mutant are the same SIZE and the
      restore lands in the same SECOND, so the .pyc validates)
   disarming RUN_FRAC makes e2 red (its own controls catch it)        ok
-  and e2 is green again immediately after the restore                ok
+  and e2 is green again immediately after the restore                *** FAILED ***
   no __pycache__ survives the probe                                  ok
   the run after the restore reports its controls firing              ok
 
@@ -36,7 +36,7 @@ selftestd6cb9 -- the harness, and the half of it that must NOT happen
   s1_extent.py exits 0 unmutated                                     ok
   s2_seam.py exits 0 unmutated                                       ok
   e1_extents.py exits 0 unmutated                                    ok
-  e2_crosssection.py exits 0 unmutated                               ok
+  e2_crosssection.py exits 0 unmutated                               *** FAILED ***
 
   6  s1_extent.py's historical controls are ARMED here
   no 'git unavailable' line in a run from the real worktree          ok
@@ -55,5 +55,5 @@ selftestd6cb9 -- the harness, and the half of it that must NOT happen
   the audited document is byte-identical                             ok
 
 ==============================================================================
-selftestd6cb9: 33 assertion(s), 0 failed
+selftestd6cb9: 33 assertion(s), 2 failed
 ==============================================================================

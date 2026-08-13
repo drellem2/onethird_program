@@ -30,7 +30,7 @@ A1b  EVERY PROBE, PREDICTED EXIT FIRST
   id     checker              dir  mutation                                             exp  got  verdict
   Q0a    check_doc.py         -    unmutated                                            0    0    as predicted
   Q1     check_doc.py         IN   un-strike X6b (`y(i) <= y(j)`) in the document       1    1    as predicted
-  Q2     check_doc.py         IN   delete C4's `2 of 45` anchor from the repair doc     1    0    *** MISSED ***
+  Q2     check_doc.py         IN   delete C4's `2 of 45` anchor from the repair doc     1    1    as predicted
   Q3     check_doc.py         OUT  X6a asserted live in a THIRD docs/*.md               0    0    as predicted
   Q4     check_doc.py         OUT  X6a asserted live in code/species_7d75               0    0    as predicted
   Q5     check_doc.py         OUT  an un-struck X1 in the repair doc, away from C4 -- ' 0    0    as predicted
@@ -39,7 +39,7 @@ A1b  EVERY PROBE, PREDICTED EXIT FIRST
   Q7     w3_scope.py          IN   X4 in a NEW EXTENSIONLESS file species_7d75/NOTES    1    1    as predicted
   Q8     w3_scope.py          OUT  X5 in species_remainder_f8fa -- another tree         0    0    as predicted
   Q9     w3_scope.py          OUT  X7 -- not on w3's two-item list -- in species_7d75   0    0    as predicted
-  Q10    w3_scope.py          WIDE X4 in species_7d75/sub/leak.md -- a SUBDIRECTORY     0    0    *** EXTENT WIDER ***
+  Q10    w3_scope.py          WIDE X4 in species_7d75/sub/leak.md -- a SUBDIRECTORY     0    1    extent TRUE here
   Q0c    s1_extent.py         -    unmutated                                            0    0    as predicted
   Q11    s1_extent.py         IN   X6a in species_repair_6f61/run_all.sh                1    1    as predicted
   Q12    s1_extent.py         IN   X1 in a NEW EXTENSIONLESS species_repair_a4ef/NOTES  1    1    as predicted
@@ -47,7 +47,7 @@ A1b  EVERY PROBE, PREDICTED EXIT FIRST
   Q14    s1_extent.py         OUT  X1 in a NAMED exclusion (a4ef/PREDICTIONS.md)        0    0    as predicted
   Q15    s1_extent.py         OUT  X1 in code/species_extent_d633 -- a disclaimed tree  0    0    as predicted
   Q16    s1_extent.py         OUT  X1 in docs/ other than the one document              0    0    as predicted
-  Q17    s1_extent.py         WIDE X3 in species_7d75/sub/leak.md -- a SUBDIRECTORY     0    0    *** EXTENT WIDER ***
+  Q17    s1_extent.py         WIDE X3 in species_7d75/sub/leak.md -- a SUBDIRECTORY     0    1    extent TRUE here
   Q18    s1_extent.py         IN   a non-UTF-8 file added to species_7d75               0    0    as predicted
   Q17e   e1_extents.py        WIDE with Q17's subdirectory in place, does E1 say the ex 0    0    *** EXTENT WIDER ***
   Q0d    s2_seam.py           -    unmutated                                            0    0    as predicted
@@ -70,17 +70,17 @@ A1c  PER CHECKER, BOTH DIRECTIONS, WHICH IS THE DELIVERABLE
 
   This audit is about extents, so its own findings name theirs.
 
-  check_doc.py   baseline clean | INSIDE 1/2 fired | OUTSIDE 3/3 silent
+  check_doc.py   baseline clean | INSIDE 2/2 fired | OUTSIDE 3/3 silent
        sites IN : un-strike X6b (`y(i) <= y(j)`) in the document; delete C4's `2 of 45` anchor from the repair doc
        sites OUT: X6a asserted live in a THIRD docs/*.md; X6a asserted live in code/species_7d75; an un-struck X1 in the repair doc, away from C4 -- 'and for 
-  w3_scope.py    baseline clean | INSIDE 2/2 fired | OUTSIDE 2/2 silent | 1 WIDE site(s) NOT READ
+  w3_scope.py    baseline clean | INSIDE 2/2 fired | OUTSIDE 2/2 silent | 0 WIDE site(s) NOT READ
        sites IN : X5 in a committed out_*.txt in species_7d75; X4 in a NEW EXTENSIONLESS file species_7d75/NOTES
        sites OUT: X5 in species_remainder_f8fa -- another tree; X7 -- not on w3's two-item list -- in species_7d75
-       site WIDE: X4 in species_7d75/sub/leak.md -- a SUBDIRECTORY -> exit 0
-  s1_extent.py   baseline clean | INSIDE 4/4 fired | OUTSIDE 3/3 silent | 1 WIDE site(s) NOT READ
+       site WIDE: X4 in species_7d75/sub/leak.md -- a SUBDIRECTORY -> exit 1
+  s1_extent.py   baseline clean | INSIDE 4/4 fired | OUTSIDE 3/3 silent | 0 WIDE site(s) NOT READ
        sites IN : X6a in species_repair_6f61/run_all.sh; X1 in a NEW EXTENSIONLESS species_repair_a4ef/NOTES; X4 in a committed out_*.txt -- 'NOT skipped'; a non-UTF-8 file added to species_7d75
        sites OUT: X1 in a NAMED exclusion (a4ef/PREDICTIONS.md); X1 in code/species_extent_d633 -- a disclaimed tree; X1 in docs/ other than the one document
-       site WIDE: X3 in species_7d75/sub/leak.md -- a SUBDIRECTORY -> exit 0
+       site WIDE: X3 in species_7d75/sub/leak.md -- a SUBDIRECTORY -> exit 1
   s2_seam.py     baseline clean | INSIDE 2/2 fired | OUTSIDE 4/4 silent
        sites IN : a 60-300 char PROSE paragraph duplicated verbatim; a >300 char paragraph pair at 45-90% -- the 45% sweep ALONE
        sites OUT: a HEADING duplicated verbatim; a <=60 char passage duplicated verbatim; a 60-300 char pair at 45-90%, not 90%+; a TABLE ROW duplicated verbatim
@@ -91,13 +91,13 @@ A1d  THE WIDE SITES -- a claimed region the code does not read
 ==============================================================================
 
   Q10    w3_scope.py          X4 in species_7d75/sub/leak.md -- a SUBDIRECTORY
-         exit 0 -- SILENT.  The printed extent claims this file and no pass reads it.
+         exit 1 -- fired, the extent is true here
   Q17    s1_extent.py         X3 in species_7d75/sub/leak.md -- a SUBDIRECTORY
-         exit 0 -- SILENT.  The printed extent claims this file and no pass reads it.
+         exit 1 -- fired, the extent is true here
   Q17e   e1_extents.py        with Q17's subdirectory in place, does E1 say the extent is true?
          exit 0 -- SILENT.  The printed extent claims this file and no pass reads it.
 
-  3 WIDE site(s) are silent.  Both repaired scans read
+  1 WIDE site(s) are silent.  Both repaired scans read
   `os.listdir(root)` and `continue` past anything that is not
   `os.path.isfile`.  A directory is therefore dropped BY A RULE NO
   SENTENCE CARRIES -- word for word the defect mg-d633 removed one
@@ -159,7 +159,7 @@ A1f  THE SANDBOX SEAM mg-d633's OWN E3 RUNS IN
 
 
 ==============================================================================
-A1 TOTAL BAD: 1
+A1 TOTAL BAD: 0
 ==============================================================================
 
 EXTENT OF THIS NUMBER.  29 probes over 5 checkers, each ONE mutation

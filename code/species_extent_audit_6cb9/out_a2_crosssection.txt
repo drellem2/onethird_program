@@ -8,14 +8,14 @@ A2a  THE CROSS-SECTION CHECK, RE-INTRODUCED STRUCK CLAIMS, ON DISK
   scripts in this arc have reported a finding and exited 0.
 
   id    dir  what                                                 exp  got  standing  verdict
-  R0    -    unmutated                                            0    0    0         as predicted
-  R25   IN   B1 itself: §4's struck AM §17.5 quotation, live and  1    1    1         as predicted
-  R26   IN   §8's struck extremal claim (X1), restated live in an 1    1    1         as predicted
-  R27   IN   a struck claim in a SECOND document, restated in ano 1    1    1         as predicted
-  R28   OUT  the SAME restatement, in a DIFFERENT document from i 0    0    0         as predicted
-  R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    1         *** MISSED ***
-  R29b  OUT  the restatement INSIDE a paragraph that says it does 0    0    0         as predicted
-  R30   OUT  the restatement inside a SECOND strike               0    0    0         as predicted
+  R0    -    unmutated                                            0    1    5         *** MISSED ***
+  R25   IN   B1 itself: §4's struck AM §17.5 quotation, live and  1    1    6         as predicted
+  R26   IN   §8's struck extremal claim (X1), restated live in an 1    1    6         as predicted
+  R27   IN   a struck claim in a SECOND document, restated in ano 1    1    6         as predicted
+  R28   OUT  the SAME restatement, in a DIFFERENT document from i 0    1    5         *** MISSED ***
+  R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    6         *** MISSED ***
+  R29b  OUT  the restatement INSIDE a paragraph that says it does 0    1    5         *** MISSED ***
+  R30   OUT  the restatement inside a SECOND strike               0    1    5         *** MISSED ***
 
   Every IN row above is a struck claim put back in ANOTHER SECTION of
   the SAME document, exactly the way §0 carried §4's strike from
@@ -29,11 +29,21 @@ A2b  WHAT THE FIRING RUN ACTUALLY PRINTS
 ==============================================================================
 
   --- R25
+     strike line 39    run  13 of  15 ( 87%)  restated at line 36     *** STANDING UN-STRUCK ***
+     strike line 143   run   9 of  11 ( 82%)  restated at line 143    *** STANDING UN-STRUCK ***
+     strike line 118   run  17 of  19 ( 89%)  restated at line 369    *** STANDING UN-STRUCK ***
      strike line 486   run  42 of  42 (100%)  restated at line 1257   *** STANDING UN-STRUCK ***
-     14 file(s) carry a strike, 33 strike(s) measured, 1 standing.
+     strike line 495   run  12 of  19 ( 63%)  restated at line 637    *** STANDING UN-STRUCK ***
+     strike line 552   run  14 of  26 ( 54%)  restated at line 492    *** STANDING UN-STRUCK ***
+     43 file(s) carry a strike, 154 strike(s) measured, 6 standing.
   --- R27
+     strike line 39    run  13 of  15 ( 87%)  restated at line 36     *** STANDING UN-STRUCK ***
      strike line 624   run  32 of  33 ( 97%)  restated at line 890    *** STANDING UN-STRUCK ***
-     14 file(s) carry a strike, 33 strike(s) measured, 1 standing.
+     strike line 143   run   9 of  11 ( 82%)  restated at line 143    *** STANDING UN-STRUCK ***
+     strike line 118   run  17 of  19 ( 89%)  restated at line 369    *** STANDING UN-STRUCK ***
+     strike line 495   run  12 of  19 ( 63%)  restated at line 637    *** STANDING UN-STRUCK ***
+     strike line 552   run  14 of  26 ( 54%)  restated at line 492    *** STANDING UN-STRUCK ***
+     43 file(s) carry a strike, 154 strike(s) measured, 6 standing.
 
   all three IN probes print STANDING UN-STRUCK                   ok
 
@@ -42,21 +52,21 @@ A2b  WHAT THE FIRING RUN ACTUALLY PRINTS
 A2c  THE COMMITTED RUN'S EXTENT LINE, AGAINST THE TREE IT SHIPPED IN
 ==============================================================================
 
-  the committed out_e2_crosssection.txt says      100 markdown file(s)
-  `git ls-tree HEAD` -- the tree it shipped in -- 105
-  a clean re-run in this worktree says            109
-  of which 4 are THIS instrument's own files, which is why the
+  the committed out_e2_crosssection.txt says      267 markdown file(s)
+  `git ls-tree HEAD` -- the tree it shipped in -- 530
+  a clean re-run in this worktree says            530
+  of which 0 are THIS instrument's own files, which is why the
   comparison below is against the SHIPPED tree and not against my
   worktree: measuring a commit with your own additions in the count
   is the defect this section is about.
 
   the LIVE run's extent line is true                             ok
-  the COMMITTED run's extent line is true at HEAD                *** FALSE, off by 5 ***
+  the COMMITTED run's extent line is true at HEAD                *** FALSE, off by 263 ***
   the census, three ways:
-      committed evidence says       12 file(s) carry a strike, 30 strike(s)
-      the SHIPPED tree at HEAD has  12 and 30
-      this worktree's live run says 14 and 33
-  the committed CENSUS is right for the shipped tree             ok
+      committed evidence says       18 file(s) carry a strike, 37 strike(s)
+      the SHIPPED tree at HEAD has  43 and 154
+      this worktree's live run says 43 and 154
+  the committed CENSUS is right for the shipped tree             *** WRONG ***
   The live run differs from both because THIS instrument's own
   PREDICTIONS.md contains a literal `~~strike~~` in its probe table
   and e2 reads every *.md under code/.  My instrument perturbs the
@@ -65,38 +75,28 @@ A2c  THE COMMITTED RUN'S EXTENT LINE, AGAINST THE TREE IT SHIPPED IN
   So exactly ONE thing in the committed output is stale: the FILE
   COUNT in its extent line, and the line numbers that go with it.
 
-  Which tree does 100 describe?  Counting *.md at each commit:
-      e8fbd4f   105  docs+repair: BOTH WIDE EXTENTS ARE CLOSED BY
-      ed9cde4   101  docs+repair: THE VERTEX COLUMN REPORTS THE S
-      a97ad17   101  docs+audit: independent audit of the mg-a318
-      c7f9673   100  control+repair: THE DELETION TEST NOW BITES   <-- the committed number describes THIS tree
-      036ce86    99  pm-onethird: name the product-level read — t
-      286d503    99  docs+audit: independent audit of the mg-db09
-      7f66005    96  evidence+control: regenerate the mg-2da3 con
-      b80dea0    96  docs+repair: THE GATE NOW READS THE FIGURE A
+  Which tree does 267 describe?  Counting *.md at each commit:
+      60f68c7   530  refresh: GATE TRANSCRIPTS RECOMMITTED UNDER 
+      56cc6bf   530  fix: TWO ROWS OF MY OWN NEW TARGET 3 WERE TH
+      625cf5d   530  repair: THE [CANNOT FAIL] ROW'S SECOND CONJU
+      9d24df3   530  unfreeze: verify_landing.py TARGET 3 IS RE-A
+      f2117f1   530  readme: THE COMMIT-SELECTION HALF OF THE ROO
+      13df87b   530  fix: THE SANDBOX'S OWN SHA WAS LEAKING INTO 
+      9cee8b0   530  fold: mg-3902's PIN-RESOLUTION CHECK IS twin
+      e337f23   530  repair: mg-d3f3's SIX FINDINGS LANDED — the 
 
-  The evidence committed by the repair was produced 3 commit(s)
-  BEFORE the commit that ships it.  This arc's own Appendix A
-  already carries, from mg-8e30 / e16e41c:
-      A COMMIT THAT MEASURES SOMETHING IT ALSO MODIFIES MUST
-      PUBLISH THE POST-COMMIT MEASUREMENT
 
-  The 5 markdown file(s) in the SHIPPED tree and not in the tree the
+  The 0 markdown file(s) in the SHIPPED tree and not in the tree the
   committed evidence measured -- the files that evidence does not
   cover, with whether each carries a strike:
-      code/species_extent_d633/OUTCOMES.md                             0 strike(s)
-      code/species_extent_d633/PREDICTIONS.md                          0 strike(s)
-      code/species_extent_d633/README.md                               0 strike(s)
-      docs/OneThird-Hodge-Side-Leverage-Mg8a5cRepair-IndependentAudit.md 0 strike(s)
-      docs/OneThird-Species-Hopf-Monoids-Repair-Extent-Measured.md     0 strike(s)
 
-  4 of them are the repair's OWN documents, and 0 of them carry a
+  0 of them are the repair's OWN documents, and 0 of them carry a
   strike.  So the VERDICT survives -- none of the unread files could
   have changed it, and re-run at HEAD it is still 0 standing (R0).
   What is false is the EXTENT LINE, and this audit is about extent
   lines: the run shipped as evidence for a cross-section check did
   not read the document the repair itself added, and says 100 where
-  the tree it is committed into holds 105.  A second, independent
+  the tree it is committed into holds 530.  A second, independent
   witness: the committed rows for the Bratteli document cite strike
   line 112 and the shipped tree has it at 120 -- the output was
   produced before this commit's own parent.  Same shape as mg-8e30
@@ -114,10 +114,7 @@ A2d  IS THE CROSS-SECTION CHECK REACHABLE FROM WHERE THE BELIEF LIVED?
   the four checkers' own printed output name it        2 of 2  ok
   the document that carried B1 names it                1 of 1  ok
   the repair document names it                         1 of 1  ok
-  the species trees' run_all.sh reach it               0 of 3  ***
-        NOT reachable from  code/species_repair_a4ef/run_all.sh
-        NOT reachable from  code/species_repair_6f61/run_all.sh
-        NOT reachable from  code/species_remainder_f8fa/run_all.sh
+  the species trees' run_all.sh reach it               3 of 3  ok
 
   The last row is the one that matters and it is the finding: the
   three species trees each ship a `run_all.sh`, and a worker who runs
@@ -129,7 +126,7 @@ A2d  IS THE CROSS-SECTION CHECK REACHABLE FROM WHERE THE BELIEF LIVED?
   stood.
 
 ==============================================================================
-A2 TOTAL BAD: 2
+A2 TOTAL BAD: 6
 ==============================================================================
 
 EXTENT OF THIS NUMBER.  8 probes against e2_crosssection.py, each ONE

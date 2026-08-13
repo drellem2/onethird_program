@@ -3,6 +3,13 @@
 **Work item:** mg-6cb9. **Audits:** mg-d633 (`e8fbd4f`), which repaired mg-7dd3 (`798afb7`)
 against mg-a4ef (`106e121`).
 
+> **READ `README-mg-54b1.md` FIRST.** The four transcripts were re-run on 2026-08-13 and **three
+> of the eight findings below have moved.** Findings #1 and #3 are **repaired in the subject**;
+> #4 is **larger**; #5's missed prediction now fires; and `a3_differ_and_placement.py` — which
+> produced findings #5–#8 — **no longer runs at all**, so those four are unverified as of today.
+> This page is left as its author wrote it, against the tree of `e8fbd4f`. `README-mg-54b1.md`
+> carries the measurement.
+
 ```
 sh code/species_extent_audit_6cb9/run_all.sh      # ~3 min, no network
 ```
