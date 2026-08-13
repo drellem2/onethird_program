@@ -1,0 +1,112 @@
+
+==============================================================================
+a5.1  THE FORM IS GRADED:  E = sum_l E_l, because the edge set PARTITIONS by scale
+==============================================================================
+  [GREEN] n=4 antichain: every BK edge carries EXACTLY ONE scale   |L(P)| = 24, 36 edges, 2 scales
+  [GREEN] n=4 antichain: E(f) = sum_l E_l(f) exactly   3 random integer f, exact rationals
+  [GREEN] n=4  0<1: every BK edge carries EXACTLY ONE scale   |L(P)| = 12, 15 edges, 2 scales
+  [GREEN] n=4  0<1: E(f) = sum_l E_l(f) exactly   3 random integer f, exact rationals
+  [GREEN] n=4  0<1, 2<3: every BK edge carries EXACTLY ONE scale   |L(P)| = 6, 6 edges, 2 scales
+  [GREEN] n=4  0<1, 2<3: E(f) = sum_l E_l(f) exactly   3 random integer f, exact rationals
+  [GREEN] n=8  four 2-chains + 0<2<4<6: every BK edge carries EXACTLY ONE scale   |L(P)| = 105, 210 edges, 3 scales
+  [GREEN] n=8  four 2-chains + 0<2<4<6: E(f) = sum_l E_l(f) exactly   3 random integer f, exact rationals
+  [GREEN] n=8  two 4-chains: every BK edge carries EXACTLY ONE scale   |L(P)| = 70, 140 edges, 3 scales
+  [GREEN] n=8  two 4-chains: E(f) = sum_l E_l(f) exactly   3 random integer f, exact rationals
+
+==============================================================================
+a5.2  AND IT ANNIHILATES THE COARSE FILTRATION:  E_l(Pi_l f) = 0.  (8) as a form
+==============================================================================
+  [GREEN] n=4 antichain: E_l(Pi_l f) = 0 at every scale   2 scales, 3 random f, exact rationals
+  [GREEN] n=4  0<1: E_l(Pi_l f) = 0 at every scale   2 scales, 3 random f, exact rationals
+  [GREEN] n=4  0<1, 2<3: E_l(Pi_l f) = 0 at every scale   2 scales, 3 random f, exact rationals
+  [GREEN] n=8  four 2-chains + 0<2<4<6: E_l(Pi_l f) = 0 at every scale   3 scales, 3 random f, exact rationals
+  [GREEN] n=8  two 4-chains: E_l(Pi_l f) = 0 at every scale   3 scales, 3 random f, exact rationals
+
+       [finding] this is identity (8) restated at the level of QUADRATIC FORMS, and it
+                 is exact.  A scale-l edge holds every COARSER word fixed, so it cannot
+                 move a function of them.  It is the strongest TRUE statement in the
+                 direction the note's closing paragraph points.
+
+==============================================================================
+a5.2c  PLANTED WORLD — the same statement with the level read off the WORD POSITION
+==============================================================================
+  [GREEN] n=4 antichain: the POSITION grading BREAKS a5.2 (as it must)   3 of 6 instances are nonzero
+  [GREEN] n=4  0<1: the POSITION grading BREAKS a5.2 (as it must)   3 of 6 instances are nonzero
+  [GREEN] n=4  0<1, 2<3: the POSITION grading BREAKS a5.2 (as it must)   3 of 6 instances are nonzero
+
+       [control] a5.2 is a property of THIS grading, not of gradings in general.  a4.2
+                 measured that the position grading is not even a well-defined partition
+                 of EDGES; this measures that assuming it were would be wrong in the one
+                 place the whole construction is load-bearing.
+
+==============================================================================
+a5.3  THE ALIGNMENT FAILS.  E_l(f) = E_l(D_l f) is FALSE — and I wrote it as a lemma
+==============================================================================
+  The step the note needs is not a5.2 but the stronger `E_l(f) = E_l(D_l f)`, which would
+  make the Rayleigh quotient a ratio of two sums over the SAME index.  It is false.
+
+  n=4 antichain                            3 of  6 instances DISAGREE    by scale (coarsest first): [3, 0]
+  n=4  0<1                                 3 of  6 instances DISAGREE    by scale (coarsest first): [3, 0]
+  n=4  0<1, 2<3                            0 of  6 instances DISAGREE    by scale (coarsest first): [0, 0]
+  n=8  four 2-chains + 0<2<4<6             3 of  9 instances DISAGREE    by scale (coarsest first): [3, 0, 0]
+  n=8  two 4-chains                        0 of  9 instances DISAGREE    by scale (coarsest first): [0, 0, 0]
+  [GREEN] E_l(f) = E_l(D_l f) is REFUTED on this population   the arm was written asserting it; the assertion did not survive its own run
+
+       [finding] THE REASON, and it is the note's own risk.  E_l annihilates everything
+                 COARSER than l (a5.2) but READS everything FINER: a scale-l edge holds
+                 the finer words fixed, and f is still a function of them, so f(L)-f(L')
+                 does not survive the averaging inside Pi_{l+1}.  The true structure is
+                 TRIANGULAR — E(f) = sum_l E_l(Q_l f) with Q_l = I - Pi_l — and not
+                 diagonal.  The FORM is graded (a5.1) and the NORM is graded (a4.3b) and
+                 THE TWO GRADINGS DO NOT MATCH.  Grading a form is not decoupling it,
+                 and the note's step from (8) to 'a multiscale family of median-graph
+                 problems' is exactly that step.
+       [where it DOES hold] at the two posets whose finest scale carries no choice, the
+                 identity is true for a degenerate reason and not a structural one.
+
+==============================================================================
+a5.4  SO THE PER-SCALE BOUND DOES NOT FOLLOW — and written down anyway it is VACUOUS
+==============================================================================
+  poset                                  |L(P)|     gap_BK     min_l mu_l    per-scale mu_l
+  n=4 antichain                              24    0.585786     0.000000     ['0.585786', '0.000000']
+  [GREEN] n=4 antichain: min_l mu_l does not exceed gap_BK   min_l mu_l = 0.000000, gap_BK = 0.585786
+  n=4  0<1                                   12    0.585786     0.000000     ['0.585786', '0.000000']
+  [GREEN] n=4  0<1: min_l mu_l does not exceed gap_BK   min_l mu_l = 0.000000, gap_BK = 0.585786
+  n=4  0<1, 2<3                               6    0.585786     0.585786     ['0.585786']
+  [GREEN] n=4  0<1, 2<3: min_l mu_l does not exceed gap_BK   min_l mu_l = 0.585786, gap_BK = 0.585786
+  n=8  four 2-chains + 0<2<4<6              105    0.198062     0.000000     ['0.249556', '0.000000']
+  [GREEN] n=8  four 2-chains + 0<2<4<6: min_l mu_l does not exceed gap_BK   min_l mu_l = 0.000000, gap_BK = 0.198062
+  n=8  two 4-chains                          70    0.152241     0.152241     ['0.152241']
+  [GREEN] n=8  two 4-chains: min_l mu_l does not exceed gap_BK   min_l mu_l = 0.152241, gap_BK = 0.152241
+
+       [finding] the finest scale contributes mu = 0 at every poset measured.  Its edge
+                 set does not connect its own increment space — the 2x2 merges are single
+                 BK edges, and a function supported on one 2x2 fiber and orthogonal to
+                 the coarse flag has zero scale-l energy.  So even if a5.3's identity
+                 held, `gap_BK >= min_l mu_l` would read `gap_BK >= 0`.  The multiscale
+                 route as the note states it is not lossy; it is EMPTY, and it is empty
+                 for a reason visible at n = 4.
+
+==============================================================================
+a5.5  THE CURRENCY.  What a lower bound on gap_BK is worth in this programme
+==============================================================================
+
+  This is the ONE paragraph of `compression2.tex` at which the spectral closure is the right
+  citation, and the ticket says so: those tickets apply if the note routes through the spectral
+  gap and are silent otherwise.  The main body does not route through it.  This closing
+  paragraph does, explicitly and by name.
+
+    STATE.md:29  the bridge L1b "is NOT SPECTRAL IN ANY LOAD-BEARING SENSE" (mg-05ec §5), and
+                 leg (ii): "nothing in this programme consumes a BK-gap LOWER bound" (mg-145f)
+                 -- while a sharp lower bound is ALREADY PROVEN by someone else, Wilson 2004,
+                 gap_BK >= (1 - cos(pi/n))/(n-1), verified FP at n = 4,5.
+
+  So the object this paragraph aims at is a lower bound on `gap_BK`: the corpus records that
+  nothing reads one and that a sharp one already exists in the literature.  a5.3 and a5.4 then
+  measure that this route does not produce one at all.  Both halves have to be said -- "no
+  consumer" alone would be a corpus search, and "the route is empty" alone would be a fact
+  about an object nobody needed.
+
+  [GREEN] a5.5 is a citation, not a measurement   STATE.md:29 and mg-145f quoted at the note's CLOSING paragraph only
+
+RESULT: GREEN — all checks passed
