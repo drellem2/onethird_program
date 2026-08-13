@@ -32,29 +32,12 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   HOW FAR EACH HAS DRIFTED IS ON STDERR, for the reason the paragraph above gives:
   it moves with every landing and this file must not.  lib_f771.CORPUS_SCOPED.
 
-§2  THE DISAGREEMENTS, SHOWN
+§2  NO DISAGREEMENTS
 --------------------------------------------------------------------------------------------
-  Lines quoted after normalisation, so that this transcript cannot itself
-  smuggle a worktree path into the corpus.
-  `-` is the committed copy, `+` is this tree.
+  Every watched transcript that moved during this gate run moved only in the
+  declared families that are not a function of THIS BRANCH's repo state: the two
+  normaliser families, or a corpus-scoped reading whose pin moved and whose drift
+  is inside the bound.  No committed transcript asserts anything this tree
+  contradicts that this branch is the author of.
 
-  DISAGREES code/rendered_twin_pin_9bc2/out_control.txt
-    @@ -37 +37 @@
-    - actual STATE.md sha256 : 51503649f7128c93aef5fef4e611357928d6d0457086840f00907da
-    + actual STATE.md sha256 : fc12604ba098b424a4fc06cf775879ce751d41517201fb28b9519f4
-
-  DISAGREES code/state_ratchet_e331/out_ratchet.txt
-    @@ -8,3 +8,3 @@
-    - words             5099      <- THE GATED QUANTITY (len(text.split()))
-    - bytes             34698
-    - lines             210
-    + words             5199      <- THE GATED QUANTITY (len(text.split()))
-    + bytes             35466
-    + lines             211
-    @@ -24,4 +24,4 @@
-    ... 53 further hunk line(s) not shown
-
-  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
-  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
-
-VERDICT: RED — 2 committed transcript(s) disagree with this tree.  0.31s
+VERDICT: GREEN — 0 disagreements.  0.11s
