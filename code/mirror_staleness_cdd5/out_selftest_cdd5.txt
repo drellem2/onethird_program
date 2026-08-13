@@ -62,7 +62,7 @@ section_present -- heading, §-mention and bold forms
   [PASS] 5 does not match 5.0'                                      got=False
 
 section_heading_set -- for the renumbering question
-  [PASS] headings collected                                         got={"5.0'", '2.3', '1'}
+  [PASS] headings collected                                         got={"5.0'", '1', '2.3'}
   [PASS] MISSING gives the empty set                                got=set()
 
   50 PASS, 0 FAIL

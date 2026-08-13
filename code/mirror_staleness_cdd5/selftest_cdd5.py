@@ -13,12 +13,33 @@ import lib_cdd5 as L
 N = [0, 0]
 
 
+def show(v):
+    """`repr`, except a SET is rendered in sorted order.
+
+    `%r` of a set of str is a function of PYTHONHASHSEED, so a transcript printing one is
+    not a fixed point on an unchanged tree -- and this one was committed in one arbitrary
+    ordering.  MEASURED, NOT INFERRED (mg-937c): six runs of this file on an unchanged tree
+    gave at least three distinct orderings of the same three elements, and mg-30bd's sweep
+    graded that as a moved verdict about the corpus.  It was neither: the comparison above
+    is on the SET, which is order-blind, so only the printing was ever unstable.
+
+    Sorted by `repr` rather than by value because the set under test may hold mixed types
+    and `sorted()` would raise on those -- a renderer that crashes on an input the assertion
+    itself accepts would be a second defect in the fix for the first.  mg-5491.
+    """
+    if isinstance(v, (set, frozenset)):
+        if not v:
+            return repr(v)                       # `set()` / `frozenset()`, as repr gives it
+        return "{%s}" % ", ".join(sorted(map(repr, v)))
+    return repr(v)
+
+
 def check(name, got, want):
     ok = got == want
     N[0 if ok else 1] += 1
-    print("  [%s] %-58s got=%r" % ("PASS" if ok else "FAIL", name, got))
+    print("  [%s] %-58s got=%s" % ("PASS" if ok else "FAIL", name, show(got)))
     if not ok:
-        print("         want=%r" % (want,))
+        print("         want=%s" % show(want))
 
 
 def main():

@@ -80,6 +80,7 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
     103  VERDICT-STALE/token    VERDICT-STALE — a verdict TOKEN appeared, vanished or changed
       0  GONE                   the run REMOVED a tracked transcript
     105  UNUSABLE/ungraded      the producing run was KILLED or REFUSED — not graded, see §6.3
+      0  DECLARED/not-a-fixed-point the transcript declares it is not a fixed point — see §3b
 
   --------------------------------------------------------------------------------------
   VERDICT-STALE, reachable by a runner: 137  (103 token, 34 number)
@@ -91,6 +92,14 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
   against its committed copy is the harness accusing the corpus of its own truncation,
   which is mg-479c's defect exactly.  They are UNMEASURED, not clean.  Exit 1 is NOT in
   this class — in this corpus that means a control FIRED, which is a completed run.
+
+==========================================================================================
+§3b  THE DECLARATIONS — TRANSCRIPTS THAT SAY THEY CANNOT BE A FIXED POINT
+==========================================================================================
+
+  NO CENSUS IN THIS RECORD.  It was written before mg-5491, so nothing has looked,
+  and that is a different answer from `nobody has declared`.  Re-take any suite —
+  `python3 -B sweep.py --only <dir> --pass2` — and the census is refreshed whole.
 
 ==========================================================================================
 §4  THE VERDICT-STALE TRANSCRIPTS, WITH THE LINES THAT MOVED

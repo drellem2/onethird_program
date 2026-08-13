@@ -55,6 +55,15 @@ mg-30bd selftest -- the worlds the classifier must catch, and the five it must n
   the naive mask still grades W3 as BENIGN/address+asof              ok
   the naive mask still grades W9 as VERDICT-STALE/number             ok
 
+  mg-5491 — WHAT IS AND IS NOT A DECLARATION
+  --------------------------------------------------------------------------
+  D0   ok                   a `#`-commented marker on line 2, with a reason
+  D1   ok                   the same marker with no `#` and no indent
+  D2   ok                   MALFORMED: the marker with nothing after it -> "", which is NOT None
+  D3   ok                   BOUNDARY: a QUOTATION past the window exempts nothing  <- None ON PURPOSE
+  D4   ok                   BOUNDARY: prose that means it but is not the literal  <- None ON PURPOSE
+  D5   ok                   BOUNDARY: the marker mid-sentence is a mention, not a declaration
+
 ==============================================================================
-mg-30bd selftest: 19 world(s) + 10 assertion(s), 0 failed
+mg-30bd selftest: 25 world(s) + 10 assertion(s), 0 failed
 ==============================================================================

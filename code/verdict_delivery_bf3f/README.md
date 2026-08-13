@@ -166,6 +166,29 @@ caller — mg-ec63 recorded that this arc's own probes execute any `run_all.sh`
 they find, and that two runners in one directory share their `out_*.txt` paths,
 which produced a zero-byte transcript beside a non-zero exit.
 
+### FOUR OF THESE TRANSCRIPTS ARE DATED EVIDENCE, AND THEY ARE NOW SAID TO BE (mg-5491)
+
+`out_d2_cause.txt`, `out_d3_fire.txt`, `out_d4_live.txt` and
+`out_verdictwatch.txt` read the **live** mg verdict and mail stream. Nothing in
+this repository can make them reproduce, and re-running the suite replaces them
+with a measurement of a different afternoon. Every figure this README quotes —
+the 122, the 25, the 16 of 191 — comes from that pinned run and not from
+whatever the store says today.
+
+`code/verdict_staleness_30bd`'s sweep was regenerating all four and grading the
+movement as a **stale verdict about the corpus**: four false entries in a list
+of 150. The question its owner asked was *evidence, or a dashboard?* — and the
+answer here is **evidence**, so the four are pinned. `run_all.sh` now writes a
+`NOT-A-FIXED-POINT:` declaration at the head of each of those four transcripts
+(and of no other), which is the literal `lib30bd.DECLARATION` reads. The
+declaration is emitted by the runner rather than by the probes because
+`verdictwatch.py` is a shipped CLI whose stdout is a contract — `--json` must
+stay NDJSON.
+
+`d1_population.py` and `selftest_bf3f.py` are **not** declared. They are
+functions of this tree, they reproduce, and a declaration on them would be
+false — which is checkable, and `code/verdict_staleness_30bd` §3b checks it.
+
 ---
 
 ## WHAT I DID NOT DO

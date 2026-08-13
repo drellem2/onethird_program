@@ -26,10 +26,41 @@ WORK="$(mktemp -d "${TMPDIR:-/tmp}/bf3f-run-XXXXXX")"
 trap 'rm -rf "$WORK"' EXIT
 
 fail=0
+
+# THE FOUR PROBES THAT READ THE LIVE STORE, NAMED HERE AND NOWHERE ELSE (mg-5491).
+# d1_population and selftest_bf3f are NOT in this list: they are functions of this tree
+# and they reproduce, which is why the list is a list and not "everything here".
+LIVE_PROBES=" d2_cause d3_fire d4_live verdictwatch "
+
+# The declaration a live-reading probe's transcript carries, emitted by the RUNNER and not
+# by the probe.  verdictwatch.py is a shipped CLI whose stdout is a contract -- its --json
+# mode must stay NDJSON -- so a banner printed from inside it would be a defect.  The runner
+# knows which probes read the store; the probes do not need to.
+declaration() {
+    cat <<'DECL'
+# =============================================================================
+# NOT-A-FIXED-POINT: this probe reads the LIVE mg verdict and mail stream, which
+# lives outside this repository and moves every hour.
+# =============================================================================
+# A re-run is a NEW measurement of a different afternoon, not a check of this
+# one, and no commit can make the figures below reproduce.  They are DATED
+# EVIDENCE for the finding this directory's README states, so they are pinned:
+# re-running this suite replaces them.  The marker above is the literal
+# code/verdict_staleness_30bd reads (lib30bd.DECLARATION), which was grading
+# these four probes as stale verdicts about the corpus.  Written by run_all.sh,
+# not by the probe, because verdictwatch.py is a shipped CLI whose stdout is a
+# contract -- its --json mode must stay NDJSON.  mg-5491.
+DECL
+}
+
 run() {   # run <name> <expected-exit> <script...>
     local name="$1" want="$2"; shift 2
     printf '\n=== %s (expecting exit %s)\n' "$name" "$want"
-    python3 -u "$@" > "$WORK/out_$name.txt" 2>&1
+    case "$LIVE_PROBES" in
+        *" $name "*) declaration > "$WORK/out_$name.txt" ;;
+        *)           : > "$WORK/out_$name.txt" ;;
+    esac
+    python3 -u "$@" >> "$WORK/out_$name.txt" 2>&1
     local got=$?
     printf '    exit %s' "$got"
     if [ "$got" = "$want" ]; then

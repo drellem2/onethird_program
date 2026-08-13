@@ -272,6 +272,19 @@ as `disk == blob@912f1b1`, which goes **RED the day the mirror is brought curren
 control. It is now scored on two direction-stable facts (disk tracks `HEAD`; the two
 pinned revisions differ) with the checkout's staleness **reported, not scored**.
 
+**A seventh, found from outside and repaired here (mg-937c → mg-5491):** the
+selftest printed `%r` of a **set of `str`**, which is a function of
+`PYTHONHASHSEED`, so `out_selftest_cdd5.txt` was **not a fixed point on an
+unchanged tree** — six runs, at least three orderings, and it had been committed
+in one arbitrary one. `code/verdict_staleness_30bd`'s sweep graded that motion as
+a moved *verdict about the corpus*: one false entry in a list of 150. It was
+never a verdict move — the assertion itself compares **sets**, which are
+order-blind, so only the printing was ever unstable. `check()` now renders a set
+in sorted order (by `repr`, so a mixed-type set cannot make the renderer raise
+where the assertion would not) and the transcript is refreshed. Re-measured the
+same way it was found: **six runs, one hash** against the committed version's
+**four distinct hashes in six runs**.
+
 ## 7. What this cannot see
 
 * **B1** A citing document outside `docs/` and `code/` in this repository, or one

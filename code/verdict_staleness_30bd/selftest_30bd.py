@@ -188,10 +188,43 @@ def main():
             fails += 1
         out.append("  %-66s %s" % ("the naive mask still grades %s as %s" % (wid, want_naive),
                                    "ok" if ok else "*** FAILED ***"))
+    # mg-5491's DECLARATION, BOUNDED THE SAME WAY THE CLASSIFIER IS.  The worlds that must
+    # NOT be a declaration are the ones that matter: this estate's instruments quote each
+    # other, so the marker WILL appear inside transcripts that are not declaring anything —
+    # report.py prints it in its own §3b, and out_owners_937c.txt and this file's own
+    # transcript quote it below.  D3 is the world that stops those exempting themselves.
+    out.append("")
+    out.append("  mg-5491 — WHAT IS AND IS NOT A DECLARATION")
+    out.append("  " + "-" * 74)
+    head20 = "\n".join("line %d" % i for i in range(L.DECLARATION_WINDOW + 4))
+    marked = "# " + L.DECLARATION + " it reads a stream outside this repository"
+    decl_worlds = [
+        ("D0", "a `#`-commented marker on line 2, with a reason",
+         "== a transcript ==\n" + marked + "\nbody\n",
+         "it reads a stream outside this repository"),
+        ("D1", "the same marker with no `#` and no indent",
+         L.DECLARATION + " the producer can no longer see what it saw\n",
+         "the producer can no longer see what it saw"),
+        ("D2", "MALFORMED: the marker with nothing after it -> \"\", which is NOT None",
+         "# " + L.DECLARATION + "\n", ""),
+        ("D3", "BOUNDARY: a QUOTATION past the window exempts nothing  <- None ON PURPOSE",
+         head20 + "\n" + marked + "\n", None),
+        ("D4", "BOUNDARY: prose that means it but is not the literal  <- None ON PURPOSE",
+         "# A TRUE RECORD.  DO NOT RE-RUN THIS.\n", None),
+        ("D5", "BOUNDARY: the marker mid-sentence is a mention, not a declaration",
+         "# the marker is spelled " + L.DECLARATION + " and it goes at the top\n", None),
+    ]
+    for wid, what, text, want in decl_worlds:
+        got = L.declaration(text)
+        ok = (got == want)
+        if not ok:
+            fails += 1
+        out.append("  %-4s %-20s %s" % (wid, "ok" if ok else "*** FAILED *** %r" % (got,), what))
+
     out.append("")
     out.append("=" * 78)
     out.append("mg-30bd selftest: %d world(s) + %d assertion(s), %d failed"
-               % (len(WORLDS), len(checks) + len(naive_checks), fails))
+               % (len(WORLDS) + len(decl_worlds), len(checks) + len(naive_checks), fails))
     out.append("=" * 78)
     print("\n".join(out))
     return 1 if fails else 0
