@@ -304,6 +304,8 @@ have been the joke version.
 - **Regenerate `out_demo_f2.txt`.** It did not need it: with V6b green again the demonstration
   reproduces its committed transcript **byte for byte**, 20/20 cells. It was never stale in
   content — it was a correct record that the tree had drifted away from and drifted back to.
+  *(A record of mg-843d. mg-fa8a regenerated it, because it added a sixth construction to that
+  demonstration and a fifth column: it is **30/30 cells** now.)*
 - **Widen the census's population.** The channel bounds (`fstrings`, `format_calls`,
   `str_calls`, `nonliteral_mod`) are untouched at 0/0/0/1.
 - **Gate anything else, or repair anything else that is red.** Two are noted and left, because
@@ -319,11 +321,22 @@ have been the joke version.
 
 ## Files
 
-- `verify_e35b.py` — **29 checks** over the 86-poset `n ≤ 5` population (24 at mg-e35b, 28 after
-  mg-8af0, 29 after mg-843d); re-derives every new number by a route that shares no line with the
-  repair, cross-checks the witness search against exhaustive search over permutations × sign
-  vectors, checks the forcedness claims in the AST, and prints the could-it-have-moved table.
-  Exit 0 iff every check passes.
+- `verify_e35b.py` — **30 checks** over the 86-poset `n ≤ 5` population (24 at mg-e35b, 28 after
+  mg-8af0, 29 after mg-843d, 30 after mg-fa8a); re-derives every new number by a route that shares
+  no line with the repair, cross-checks the witness search against exhaustive search over
+  permutations × sign vectors, checks the forcedness claims in the AST, and prints the
+  could-it-have-moved table. Exit 0 iff every check passes.
+
+  **The thirtieth is `V7b OPERAND` (mg-fa8a, landing mg-d3f3's F-2).** Every other row here reads
+  a `%`-expression's **format string** or the bytes it produced; mg-d3f3 counted **2 accesses to
+  `.left` and 0 to `.right`** across the whole mg-8af0 repair, and mg-fcb2's F1 was a defect in
+  `.right` — `% (N, N, …)` under *"corrupted on %d/%d posets"*. V7b `ast`-parses `controls.py`
+  and scores that no `%d/%d` anywhere in it takes the same source expression on both sides, with
+  the F1 site required to be one of the pairs so the row cannot pass by the sentence being
+  deleted. It is watched going red on **C6** of `../face_geometry_repair_8af0/demo_f2_row_can_go_red.py`.
+  V6b's and V6c's row names were corrected in the same commit (mg-d3f3's F-3): V6b measures the
+  **multiset of conversion types** in one function, not "no count has been added or removed"
+  anywhere; the measurement did not change and the names did.
 - `out_verify_e35b.txt` — its committed transcript.
 - `demo_v6d_row_can_go_red.py` — V6d watched going red on four mutations (mg-843d).
 - `out_demo_v6d.txt` — its committed transcript.

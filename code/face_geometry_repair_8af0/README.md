@@ -8,6 +8,21 @@ assigned here, and the brief mandates their **order**:
 > mechanism that hid it fully intact and the next count will land in the same blind spot.
 
 That order is in the git history and is checkable: `903a2e9` (F2) precedes `a8d1723` (F1).
+(Post-rebase, the landed commits are `c420303`/`0c3a2ba`/`534c06b`/`66130f8`/`2657490`; every
+file each repair commit touches carries the same blob pre- and post-rebase, so no work was
+lost — measured by mg-d3f3's `a4.1`/`a4.2`.)
+
+**The ordering was obeyed and it is not evidence, which this document did not say (mg-d3f3's
+F-4, landed by mg-fa8a).** The committed transcripts at the three repair commits read
+`0c3a2ba` **26 checks, 0 refuted**; `534c06b` **27 checks, 0 refuted**; `66130f8` **28 checks, 0
+refuted**. **The repaired verifier was never watched failing on the real tree.** On the branch
+that landed, F2-before-F1 is a *commit ordering*, not a demonstration — and `a1` says why it
+could not have been one: F1's repair moved no digit (86/86 → 86/86), so F1's *return* moves none
+either, and V6a/V6c/V6d are substring and byte comparisons against unchanged bytes. Worth
+recording: the **sibling** branch of the same ticket (`0c39f34`, never merged) *did* exit 1 at
+its F2 commit, because it added V7 at F2 time rather than at F1 time. The evidence that the
+replacement rows fire lives in `demo_f2_row_can_go_red.py`, which is where a demonstration
+belongs, and it now carries **C6** — F1 put back at the source — for the row that answers this.
 
 | finding | what it was | landed by |
 |---|---|---|
@@ -25,13 +40,36 @@ That is why F1 survived: the tautological `86/86` is not in the table, and nothi
 notice that it wasn't.
 
 Three rows replace it, each scored against something **outside the file**, each carrying its
-population and grain **in its own name**:
+population and grain **in its own name** — and a fourth was added later, by mg-fa8a, for the
+channel none of the three could see:
 
 | row | population | grain | goes red when |
 |---|---|---|---|
 | **V6a ANCHORED** | the 12 `TABLE` entries | one entry | a classified count is removed or reworded in the artifact |
-| **V6b CENSUS** | the `%`-format expressions lexically inside `negative_control_incidence` | one conversion specifier (184 of them) | a count is added to or removed from the source |
+| **V6b CENSUS** | the `%`-format expressions lexically inside `negative_control_incidence` | one conversion specifier (184 of them) | the **multiset of conversion types** in that one function moves |
 | **V6c REGENERATED** | the artifact | one byte | `controls_output.txt` is hand-edited or stale |
+| **V7b OPERAND** (mg-fa8a) | adjacent integer conversions separated by `/` in a `%`-format with a literal left operand, **anywhere in `controls.py`** | one such pair | a `%d/%d` is supplied the same source expression on both sides, or the F1 site stops being in the population |
+
+**V7b is the row that reads `.right`, and it is the only one.** It is scored against
+`controls.py`'s **operand tuples**, so it is the first row in this repair that could see a defect
+whose whole content is which expression was supplied — which is what F1 was. Its limit is
+declared beside it and printed into the transcript: it catches *the same expression on both sides
+of a `/`*, not two different expressions that happen to be equal, and not an unmovable count that
+is not one side of a ratio.
+
+**V6b's cell said *"a count is added to or removed from the source"* and that is not the
+measurement (mg-d3f3's F-3, landed by mg-fa8a).** What it compares is a seven-field dict of
+conversion-type **multiplicities**, over **one** of the eleven calls `main()` makes. Two
+constructions, both run: remove one `%d`-bearing count from `negative_control_incidence` and add
+a different one → **census identical, every row green, exit 0**, a count added and a count
+removed; and add a printed count to the *sibling* `negative_control_construction` → it **reaches
+the artifact** and moves none of V6a/V6b/V6c/V6d, exit 0. The same count added *inside* the
+section turns V6b and V6d red, so neither construction is reporting a row that never fires.
+**"TRIPWIRE" is honest about the mechanism and was not honest about the scope**; the row name
+and the two docstrings now carry the population, and the measurement is unchanged. Fixing the
+name rather than widening the row is deliberate: a row whose name overstates it has a **naming**
+defect, and weakening the row to make the old name true would be the same error pointed the
+other way.
 
 `forced` is still computed and printed. **It is no longer scored** — "3 of my own 12 rows say
 FORCED" is a fact about this file, and scoring it is what produced the defect.
@@ -45,21 +83,30 @@ The one non-literal `%` in the section today is `i % 3` inside a sign vector; it
 
 ### The rows are watched firing
 
-`demo_f2_row_can_go_red.py` — **20 cells, five constructions × four rows**, all as
-`PREDICTIONS.md` E5/E6c forecast before the code existed:
+`demo_f2_row_can_go_red.py` — **30 cells, six constructions × five rows**. C1–C5 are as
+`PREDICTIONS.md` E5/E6c forecast before the code existed; C6 and the V7b column were added by
+mg-fa8a and are predicted in that file's own docstring:
 
 ```
-  construction                                                     old row   V6a       V6b       V6c
-  C1 twelfth count added to the ARTIFACT by hand                   GREEN     GREEN     GREEN     RED
-  C2 twelfth count added to CONTROLS.PY, artifact regenerated      GREEN     GREEN     RED       GREEN
-  C3 a classified count reworded in the ARTIFACT (61/86 -> 61/87)  GREEN     RED       GREEN     RED
-  C4 the same count reworded AT THE SOURCE, values unchanged       GREEN     RED       GREEN     GREEN
-  C5 mg-8af0's OWN edit to the table literal, repo untouched       RED       GREEN     GREEN     GREEN
+  construction                                                     old row   V6a       V6b       V6c       V7b
+  C1 twelfth count added to the ARTIFACT by hand                   GREEN     GREEN     GREEN     RED       GREEN
+  C2 twelfth count added to CONTROLS.PY, artifact regenerated      GREEN     GREEN     RED       GREEN     GREEN
+  C3 a classified count reworded in the ARTIFACT (61/86 -> 61/87)  GREEN     RED       GREEN     RED       GREEN
+  C4 the same count reworded AT THE SOURCE, values unchanged       GREEN     RED       GREEN     GREEN     GREEN
+  C5 mg-8af0's OWN edit to the table literal, repo untouched       RED       GREEN     GREEN     GREEN     GREEN
+  C6 mg-fcb2's F1 PUT BACK at the source, artifact regenerated     GREEN     GREEN     GREEN     GREEN     RED
 ```
 
 **C1 is mg-fcb2's own construction, verbatim.** **C5 is the point**: the only input the old
-condition ever responded to is an edit to its own literal. **C4 is red for V6a alone**, so none
-of the three replacements is redundant.
+condition ever responded to is an edit to its own literal. **C4 is red for V6a alone** and **C6
+is red for V7b alone**, so none of the four replacements is redundant.
+
+**C6 is the row this table did not have, and it is four greens wide.** The defect this ticket was
+named after, put back at the source, moves *nothing* the F2 repair added — and it moves no byte
+of the artifact either: **41081 against the committed 41081**, measured in the demonstration
+rather than asserted here. mg-d3f3 ran the same construction against **all 35 scored artefacts**
+of this repair and scored **0 red**; V7b is the answer to that number and the C6 row is where it
+is checked.
 
 ---
 
@@ -89,6 +136,16 @@ without quoting numbers the run does not compute. `verify_e35b.py` gains **V7**,
 re-derives 86/86 from `top_laplacians` rather than from the helper `controls.py` uses, and the
 **twelfth** table entry — the count that was printed, was a tautology, and was absent from a
 table headed with its own population.
+
+**V7 is not a check on F1, and mg-d3f3's F-1 is that this document said it was.** V7 asks
+whether the *number* is 86 by a second route; the tautology answered 86 too. **The row that
+asks whether the F1 defect is present is `V7b OPERAND`, added by mg-fa8a**: it `ast`-parses
+`controls.py`, reads the **`.right`** of every `%`-expression, and scores that no `%d/%d`
+anywhere in the file is supplied the same source expression on both sides — with the F1 site
+itself required to be in that population, so the row cannot pass by the sentence being deleted.
+mg-d3f3 measured **2 accesses to `.left` and 0 to `.right`** across every source-reading
+artefact of this repair; V7b is the first. It reads 35 pairs, 0 repeating, the F1 site
+resolving to `site_rows[3][1] / N` at `controls.py:2245`.
 
 ---
 
@@ -266,6 +323,9 @@ a port of two F3 results. It is recorded here rather than left for the next runn
 > Leaving it unregenerated rather than papering over the disagreement is what made that
 > checkable.
 
+*(That block records mg-843d. mg-fa8a did regenerate `out_demo_f2.txt`, because it changed the
+demonstration itself — a sixth construction and a fifth column, **30/30 cells**.)*
+
 ### Not shown
 
 - **n > 6.** The sweep is n = 3..6. The argument in the docstring of
@@ -304,14 +364,47 @@ misses, kept as written.**
 | E7 | the artifact regenerates byte-identically | **HIT** — so V6c exists |
 | E8 | the F1 commit moves no digit in the artifact | **HIT** — every count in that diff is unchanged; the digits added are ticket ids and the two witnesses named in prose |
 | E9 | F2 commit precedes F1; **F1's diff to verify_e35b.py is empty** | **HALF-MISS** — order holds, the second clause does not |
-| E10 | five exit codes | **HIT, 5/5** |
+| E10 | five exit codes | **HIT 4/5, and the fifth was never run** — corrected by mg-fa8a, see below |
 
 **E6a, in detail, because a factor of two is not a rounding error.** I predicted 85 formatted
 values in the section and there are **184** (150 integer, 34 string). The prediction was made by
 eye from a function I had read but not counted, and being wrong by 2.2× is the reason the census
-is a **declared measurement** and not a number written into prose. What the miss changes: with
+is a **declared measurement** and not a number written into prose. ~~What the miss changes: with
 184 sites and 12 table entries there is no per-count mapping available, so V6b **cannot** be a
-coverage check and is scored as a tripwire with that word in its own row name.
+coverage check and is scored as a tripwire with that word in its own row name.~~
+
+**That causal claim is false and is withdrawn (mg-d3f3's F-6, landed by mg-fa8a).** The miss
+changed **nothing** about V6b's grain. E6a itself derived the conclusion *before measuring
+anything*, from `SITES > 11`: *"E6a — SITES … is **more than 11** … so no per-row mapping is
+available and the census must be reported at its own grain."* 85 > 11 and 184 > 11 give the
+same verdict, so the 2.2× miss is not what made V6b a tripwire — **the reason was already in
+the prediction that missed.** The addendum asked whether the miss and the limitation "agree";
+they do not disagree about a *number* (both say 184), they disagree about a *cause*. What the
+miss is really evidence about is **reading a thousand-line function by eye**, and that sentence
+was not in the scoring table until now.
+
+**E10, corrected: it was scored HIT 5/5 and the fourth row was never run (mg-d3f3's F-5, landed
+by mg-fa8a).** Four of the five have a committed artefact behind them. The fourth —
+*"`verify_e35b.py` **repaired**, against the **pre-repair** artifact → 1"* — has none, and
+nothing in this repair builds that world. mg-d3f3's `a5` built it from `git`, in all three
+readings the sentence admits:
+
+| reading | measured | E10 said | |
+|---|---|---|---|
+| R-a the whole pre-repair tree (`5f542f0`), repaired verifier (`66130f8`) | **0** | 1 | MISS |
+| R-b the repaired tree with a stale artifact from `5f542f0` | **1** | 1 | HIT |
+| R-c the real tree at the F2 commit | **0** | 1 | MISS |
+
+**HIT under one reading of three, and the one that comes out 1 is the stale-artifact reading —
+where V6c fires, and V6c is a row about staleness, not about F1.** Under both readings that are
+*about F1*, the answer is **0**. R-a is the sharpest measurement in mg-d3f3's audit and it is
+about this instrument, not about that prediction: **the complete repaired verifier, run against
+`code/face_geometry/` as it was before this repair touched anything, reports 28 checks, 0
+refuted.** It did not separate the repaired tree from the unrepaired one, because every
+difference this repair made lives in prose, in the operand of one `%`, and in the verifier's own
+`TABLE` — and until `V7b OPERAND` **no row read any of those three**. This README draws the
+run/reasoned distinction elsewhere repeatedly and at its own expense; E10's fourth row is the
+one place it did not, and it is corrected here rather than dropped.
 
 **E6b was right and incomplete.** There are 0 f-strings, as predicted. But writing the census
 turned up a channel the prediction did not name — a `%` whose left operand is not a string
@@ -334,15 +427,28 @@ is informative and is kept.
   and re-run green: `code/face_geometry/run_all.sh` exits 0,
   `code/face_geometry_repair_e35b/run_all.sh` exits 0 with **28 checks, 0 refuted**. *(Both
   numbers record the tree this repair shipped on. Since mg-843d that runner has a second step and
-  the verifier has 29 checks; see "Running it" below.)*
+  the verifier has 29 checks; since mg-fa8a's `V7b OPERAND` it has **30**. See "Running it"
+  below.)*
 - **It did not touch mg-fcb2's F4** (V6's justification for "NOT-GAUGE on 288 of 297"), which is
   not in this ticket's brief, nor the two findings of the six the brief does not assign.
 - **V6b does not check that the 12 entries are the right ones.** It fires when the set of
   printed positions changes. `PREDICTIONS.md` E12 declared that limit before the code existed,
   and the demonstration prints it as a NOT-SHOWN line.
 - **V6b would not have caught F1.** Substituting a different expression into an existing `%d`
-  moves no specifier. That is why F1 needed V7 and not just a census — the census closes the
-  *next* count, not this one, which is exactly what the brief asked for.
+  moves no specifier. The census closes the *next* count, not this one, which is exactly what
+  the brief asked for.
+
+  **The sentence that used to end that bullet was false and is withdrawn (mg-d3f3's F-1, landed
+  by mg-fa8a).** It read *"That is why F1 needed V7 and not just a census."* **V7 is GREEN with
+  F1 present** — measured, `a1.2` — because V7 checks `site == 86 and "corrupted on 86/86
+  posets" in art` and both halves are true of the tautology too, which is this repair's own E1.
+  V7's in-file comment never claimed otherwise (*"what this row CANNOT do is tell whether 86/86
+  is the right answer for the right reason"*); the prose here did, and naming a remedy that does
+  not remedy is the half of a declared limit that reads as candour. What F1 needed is a row that
+  reads the **operand** of the `%` rather than the digits it prints. That row is **V7b OPERAND**,
+  added by mg-fa8a in `verify_e35b.py`, and it is watched going red on construction **C6** of
+  `demo_f2_row_can_go_red.py` — F1 back at the source, artifact byte-identical at 41081, and
+  V7b the only one of five rows that moves.
 - **The n ≥ 3 forcing argument is not machine-checked for n > 6.** The argument is general; the
   sweep that makes its premise a checked fact rather than a reading of two functions is not.
 - **No claim is made that 86/86 is right for the right reason.** V7 is a second route to one
@@ -359,9 +465,9 @@ is informative and is kept.
 ## Running it
 
 ```sh
-sh code/face_geometry_repair_8af0/run_all.sh     # 32.0 s, 4 steps since mg-36f5, exit 0 since mg-843d
-python3 code/face_geometry_repair_8af0/probe_f3_tightness.py   # 4.9 s, 8 checks, exit 0
-sh code/face_geometry_repair_e35b/run_all.sh     # 42.3 s, exit 0, 29 checks + the V6d demo (mg-843d)
+sh code/face_geometry_repair_8af0/run_all.sh     # 37.6 s, 4 steps since mg-36f5, exit 0 since mg-843d
+python3 code/face_geometry_repair_8af0/probe_f3_tightness.py   # 5.6 s, 8 checks, exit 0
+sh code/face_geometry_repair_e35b/run_all.sh     # 43.9 s, exit 0, 30 checks + the V6d demo (mg-fa8a)
 sh code/face_geometry/run_all.sh                 # ~20 s, exit 0
 ```
 
@@ -369,7 +475,11 @@ The first line read **`~32 s ... EXIT 1 today, see below`** until mg-843d, and t
 `demo_f2_row_can_go_red.py` inheriting V6b's red baseline — it is 0 again now that the census is
 answered, with `out_demo_f2.txt` unchanged. The third line read **`~5 s, exit 0, 28 checks`**; it
 is the longer of the two runners now, and unlike every other line here it is **not** hand-invoked
-— it is one of `build.sh`'s gated suites. Both re-measured on 2026-08-13, not carried forward.
+— it is one of `build.sh`'s gated suites. Both re-measured on 2026-08-13, not carried forward.  **Every figure in this block was
+re-measured again at mg-fa8a**, on the tree that ships this line, and the first two moved: the
+8af0 runner is 32.0 s -> 37.6 s because `demo_f2_row_can_go_red.py` gained a sixth construction
+(C6, F1 put back at the source), which is 26.95 s of the 37.6 on its own.  That is the price of
+the demonstration and it is stated with the number rather than absorbed.
 
 The first runner re-raises the **first** non-zero status, not the last, so an early refutation
 cannot be overwritten by a later pass — and that path was tested with a deliberately failing
