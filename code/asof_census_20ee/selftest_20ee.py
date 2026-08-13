@@ -31,9 +31,18 @@ sys.path.insert(0, HERE)
 import census  # noqa: E402
 
 FAILED = []
+RAN = []
+
+# The controls that assert a DEFECT or a LIMIT rather than a repair.  Named
+# rather than counted, because which ones they are is the load-bearing fact --
+# each says in its own text what it would mean if it ever went the other way,
+# and N18 is absent from this list for the first time: mg-e5f3 repaired what
+# it asserted, which is the event its own text asked to be told about.
+KNOWN_DEFECT = ("N4", "N5", "C3", "N21")
 
 
 def check(name, got, want, why):
+    RAN.append(name)
     ok = got == want
     print("  %-4s %-52s %s" % ("PASS" if ok else "FAIL", name,
                                "" if ok else "got %r, want %r" % (got, want)))
@@ -366,21 +375,135 @@ check("N10 a walk the subject has already SORTED",
       "difference R3 warns about, and the transcript is repo-valued without "
       "any pin. Firing here would price a repair that is already paid.")
 
-check("N18 prose quoting the INVOCATION, flag and all — FIRES (mg-885d)",
-      bool(pinnable.unordered_walks(
-          "    which is an ordered read of a commit; there is no `grep -r` here")),
-      True,
-      "A KNOWN-DEFECT CONTROL, in the form N4, N5 and C3 already take. N11 "
-      "below plants the BARE word and passes; the rule matches the word plus a "
-      "following short-flag cluster, so a sentence NAMING the invocation is a "
-      "shape N11 does not reach. MEASURED across the estate at 12aa5f8 rather "
-      "than supposed: 3 of R3's 92 hits sit on comment lines, and BOTH hits in "
-      "audit_scope_text.py — THE INSTRUMENT TRANCHE 4 PINNED — are comments "
-      "explaining the defect it already repaired, so condition 0 still tells a "
-      "repaired instrument to expect a permuted transcript. That is N9's own "
-      "rationale failing by PROSE instead of by the git form. Asserted rather "
-      "than repaired, because R3 is mg-0e77's rule: teach it to see prose and "
-      "this control goes RED, which is the signal to update its self-hit count.")
+print()
+print("  R3 READS CODE, NOT PROSE (mg-e5f3).  N18 was a KNOWN-DEFECT control")
+print("  asserting the over-count; its own text said `teach R3 to see prose")
+print("  and this control goes RED, which is the signal to update it`.  It is")
+print("  updated here, and every control below is written as a PAIR -- what")
+print("  mg-0e77's rule said, beside what the repaired rule says -- because a")
+print("  repair whose BEFORE is not printed beside its AFTER is an assertion.")
+print()
+
+DOCSTRING_PROSE = (
+    'def read(paths):\n'
+    '    """The corpus read.\n'
+    '\n'
+    '    It used to be a `grep -rn` over the live worktree, which is the\n'
+    '    defect this instrument has already repaired.\n'
+    '    """\n'
+    '    return ordered_read(paths)\n')
+
+TRAILING_COMMENT = (
+    'def read(paths):\n'
+    '    hits = ordered_read(paths)      # was a `grep -rn` over docs/\n'
+    '    return hits\n')
+
+SHELL_COMMENT = (
+    '#!/bin/sh\n'
+    '# this step used to `grep -rn` over docs/ and no longer does\n'
+    'python3 s1_scope.py > out_scope.txt\n')
+
+LIST_FORM_IN_FILE = (
+    'def read(paths, pat):\n'
+    '    return subprocess.run(["grep", "-rn", "-E", pat] + paths)\n')
+
+HASH_INSIDE_A_STRING = (
+    'def read(paths, pat):\n'
+    '    strip = subprocess.run(["sed", "-e", "s/#.*//"] + paths)\n'
+    '    return subprocess.run(["grep", "-rn", pat] + paths), strip\n')
+
+COMMENT_ONLY_SUPPRESSOR = (
+    'def read(paths, pat):\n'
+    '    out = subprocess.run(["grep", "-rn", pat] + paths)\n'
+    '    # the caller applies sorted( ) to this before it is printed\n'
+    '    return out\n')
+
+
+def pair(src, path=None):
+    """(what mg-0e77's rule sees, what the repaired rule sees)."""
+    return (bool(pinnable.unordered_walks(src, path, prose="read")),
+            bool(pinnable.unordered_walks(src, path)))
+
+
+check("N18 prose naming the invocation, in a DOCSTRING (was the defect)",
+      pair(DOCSTRING_PROSE, "s1_scope.py"),
+      (True, False),
+      "THE CONTROL THIS REPAIR EXISTS FOR, and it is the SUCCESSOR to a "
+      "known-defect control rather than a new claim: mg-885d asserted this "
+      "shape FIRING and said updating it would be the signal that R3 had been "
+      "taught to see prose. MEASURED across the estate at 12aa5f8, not "
+      "supposed: 9 of R3's 92 hits were prose, in 8 files, and the file it "
+      "landed hardest on was audit_scope_text.py — THE INSTRUMENT TRANCHE 4 "
+      "REPAIRED AND PINNED — whose only two hits were comments explaining the "
+      "defect it no longer has. Condition 0 was telling a repaired instrument "
+      "to expect a permuted transcript, which is N9's own rationale failing by "
+      "PROSE instead of by the git form.")
+
+check("N19 the same sentence as a TRAILING comment on a code line",
+      pair(TRAILING_COMMENT, "s1_scope.py"),
+      (True, False),
+      "N11 plants a WHOLE-LINE comment, and a rule that only skipped lines "
+      "beginning with `#` would pass N11 and still fire here — which is what "
+      "mg-885d's own count of `3 hits on comment lines` was measuring, and it "
+      "is why that count was an UNDER-count of the over-count: it tested "
+      "`startswith('#')` and could not see this shape or N18's at all.")
+
+check("N20 a SHELL comment naming the invocation",
+      pair(SHELL_COMMENT, "run_all.sh"),
+      (True, False),
+      "half this estate's corpus reads are shell, so half its commentary is "
+      "too, and `#` is the comment in both languages. A shell script gets the "
+      "line scanner rather than `tokenize` — Python has no answer about a "
+      "language that is not Python — and that narrowness is declared in "
+      "code_only's docstring rather than hidden behind a shared code path.")
+
+check("P19 the LIST form of the invocation, inside a real file",
+      pair(LIST_FORM_IN_FILE, "s1_scope.py"),
+      (True, True),
+      "THE NEGATIVE DIRECTION, AND IT IS THE ONE THAT WOULD BE SILENT. The "
+      "only subject R3 has ever had spells its corpus read as STRING LITERALS "
+      "IN A LIST (P5), so a repair that blanked STRINGS rather than DOCSTRINGS "
+      "would go blind to the one form the rule was built to see — an "
+      "UNDER-count, which section D of consumers.py names as the worse of the "
+      "two ways to be wrong because nothing in the output would say so. A "
+      "docstring is a string STANDING ALONE AS A STATEMENT and no other string "
+      "is touched; this is that boundary, planted.")
+
+check("P20 a `#` INSIDE a string does not blank the walk after it",
+      pair(HASH_INSIDE_A_STRING, "s1_scope.py"),
+      (True, True),
+      "the reason `tokenize` is asked rather than a regex written, which is "
+      "R2's shape one rule over: `git cat-file -e` is git's own answer to `is "
+      "this a revision`, and `tokenize` is Python's own answer to `is this a "
+      "comment`. A scanner cutting at the first `#` would blank a real walk "
+      "sitting after one in a string — and THIS FILE'S OWN `WALK` PATTERN "
+      "CONTAINS A `#`, so the naive rule would misread the rule.")
+
+check("P21 a walk whose ONLY ordering is claimed in a COMMENT — now FIRES",
+      pair(COMMENT_ONLY_SUPPRESSOR, "s1_scope.py"),
+      (False, True),
+      "THE HALF THAT GOES THE OTHER WAY, and it is why the two prose surfaces "
+      "MOVE TOGETHER. R3's negative half read the whole enclosing block, so a "
+      "SENTENCE containing `sorted(` silenced a real walk. Blanking comments "
+      "ALONE was measured before it was rejected: it removes 3 hits and ADDS "
+      "ONE — to pinnable.py itself, whose docstring line was being suppressed "
+      "by a `sorted(` in a block comment. A repair introducing the defect it "
+      "repairs, in the half nobody would have looked at. PLANTED RATHER THAN "
+      "FOUND: at 12aa5f8 the full repair adds ZERO hits, so no instrument in "
+      "the estate is ordered only in prose — this world says what would "
+      "happen, and the estate scan says it does not happen.")
+
+check("N21 a bare FRAGMENT still reads prose — a DECLARED LIMIT",
+      pair("    the corpus read was a `grep -r` over docs/ until tranche 4"),
+      (True, True),
+      "A KNOWN-LIMIT CONTROL in the form N18 used to take. Separating code "
+      "from prose needs SYNTAX, and a fragment has none: `tokenize` refuses "
+      "it, the fallback removes comments only, and a sentence that is neither "
+      "a comment nor a docstring is indistinguishable from code. This does "
+      "not reach pinnable.py's own reads — main() passes whole files, and the "
+      "count of files that FAIL to tokenize is printed in its R3 section "
+      "rather than swallowed, because a repair that quietly stops applying is "
+      "worse than one that never did.")
 
 check("N11 the word `grep` in prose",
       pinnable.unordered_walks(
@@ -487,10 +610,23 @@ print("=" * 78)
 if FAILED:
     print("RED — %d control(s) failed: %s" % (len(FAILED), ", ".join(FAILED)))
 else:
-    print("GREEN — 2 positive, 4 negative and 1 known-defect control on the "
-          "address census, 3 positive, 1 known-defect and 2 rc-tolerance "
-          "controls on the consumer census, 4 positive, 6 negative and 1 known-defect "
-          "control on the pinnable pre-condition, and 5 positive plus 2 negative on "
-          "the condition-2 comparator, all land where they must.")
+    # COUNTED, NOT HAND-TALLIED (mg-e5f3).  This sentence used to spell the
+    # breakdown out per instrument, and this branch added seven controls to
+    # one section, which is exactly how it would have gone quietly false --
+    # the shape mg-30bd's census counts, in the file whose subject is that a
+    # rule must be measured rather than stated.  The controls that confirm a
+    # KNOWN DEFECT rather than a repair are NAMED and not counted: which they
+    # are is the load-bearing fact, and a number cannot carry it.
+    print("GREEN — %d control(s) land where they must: %d positive, %d "
+          "negative and %d on the consumer census's three-way classification, "
+          "across the address census, the consumer census, the pinnable "
+          "pre-condition and the condition-2 comparator.  %s confirm a KNOWN "
+          "DEFECT or a DECLARED LIMIT rather than a repair, and each says in "
+          "its own text what turning it green would mean."
+          % (len(RAN), sum(1 for n in RAN if n[0] == "P"),
+             sum(1 for n in RAN if n[0] == "N"),
+             sum(1 for n in RAN if n[0] == "C"),
+             ", ".join(n.split()[0] for n in RAN
+                       if n.split()[0] in KNOWN_DEFECT)))
 print("=" * 78)
 raise SystemExit(1 if FAILED else 0)

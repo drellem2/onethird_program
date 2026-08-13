@@ -131,10 +131,12 @@ is the shape mg-20ee's remedy was built for.
     git checkout -- code/species_repair_a4ef
 """
 
+import io
 import os
 import re
 import subprocess
 import sys
+import tokenize
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                      "..", ".."))
@@ -163,6 +165,118 @@ WALK = re.compile(
 # has already ordered itself.  Without this half R3 fires on every correct
 # instrument in the estate, including the repaired form it exists to recommend.
 ORDERED = re.compile(r"git\s+(?:grep|ls-files)|sorted\s*\(|\|\s*sort\b")
+
+
+def _blank(s):
+    """`s` with every non-space character replaced by a space.
+
+    COLUMNS ARE PRESERVED ON PURPOSE.  R3's window is computed from the walk's
+    own INDENTATION, so a blanking that shortened lines would move the boundary
+    it scans to and silence hits for a reason that has nothing to do with prose.
+    """
+    return re.sub(r"\S", " ", s)
+
+
+def _blank_comments(src, shell):
+    """Blank every comment, tracking quote state so a `#` in a string survives.
+
+    Per line and deliberately so: this is the FALLBACK for a fragment or a file
+    Python cannot parse, and a scanner that carried quote state across lines
+    would turn one unbalanced quote into a file-long blanking.  A shell `#`
+    starts a comment only at a word boundary -- `grep '#'` and `a#b` are not
+    comments, and `sed -e s/#//` is an argument.
+    """
+    out = []
+    for ln in src.split("\n"):
+        quote, cut = None, None
+        for i, ch in enumerate(ln):
+            if quote:
+                if ch == quote:
+                    quote = None
+                continue
+            if ch in "'\"":
+                quote = ch
+            elif ch == "#" and (not shell or i == 0 or ln[i - 1] in " \t;&|()"):
+                cut = i
+                break
+        out.append(ln if cut is None else ln[:cut] + _blank(ln[cut:]))
+    return "\n".join(out)
+
+
+def _blank_prose_py(src):
+    """Blank Python's comments and DOCSTRINGS, or report that it could not.
+
+    ASKING THE LANGUAGE RATHER THAN GUESSING AT IT, which is R2's shape one
+    rule over: `tokenize` is Python's own answer to "is this a comment", the
+    way `git cat-file -e` is git's own answer to "is this a revision".  A
+    regex for `#` cannot tell a comment from a `#` inside a regex, and this
+    file's own WALK pattern contains one.
+
+    A DOCSTRING IS A STRING STANDING ALONE AS A STATEMENT, and no other string
+    is touched -- which is the boundary that keeps P5 alive.  The only subject
+    R3 has ever had spells its invocation as string literals in a list,
+    `["grep", "-rn", ...]`, so a rule that blanked STRINGS would go blind to
+    the one form it was built to see: an under-count, and the silent direction.
+
+    Returns (text, True), or (src, False) when the source does not tokenize --
+    a fragment, or a file this Python cannot parse.  THE FAILURE IS RETURNED
+    RATHER THAN SWALLOWED because falling back to comments alone restores the
+    docstring half of the over-count, and a repair that quietly stops applying
+    is worse than one that never did.
+    """
+    try:
+        toks = list(tokenize.generate_tokens(io.StringIO(src).readline))
+    except Exception:
+        return src, False
+    lines = src.split("\n")
+    kill, sig = [], []
+    for t in toks:
+        if t.type == tokenize.COMMENT:
+            kill.append((t.start, t.end))
+        elif t.type not in (tokenize.NL, tokenize.INDENT, tokenize.DEDENT):
+            sig.append(t)
+    starts_line = True
+    for i, t in enumerate(sig):
+        if t.type == tokenize.STRING and starts_line:
+            nxt = sig[i + 1] if i + 1 < len(sig) else None
+            if nxt is None or nxt.type == tokenize.NEWLINE:
+                kill.append((t.start, t.end))
+        starts_line = t.type == tokenize.NEWLINE
+    for (sr, sc), (er, ec) in kill:
+        sr, er = sr - 1, er - 1
+        if sr == er:
+            lines[sr] = lines[sr][:sc] + _blank(lines[sr][sc:ec]) + lines[sr][ec:]
+        else:
+            lines[sr] = lines[sr][:sc] + _blank(lines[sr][sc:])
+            for r in range(sr + 1, er):
+                lines[r] = _blank(lines[r])
+            lines[er] = _blank(lines[er][:ec]) + lines[er][ec:]
+    return "\n".join(lines), True
+
+
+def code_only(src, path=None):
+    """`src` with its PROSE blanked out -- R3's corpus, and not its text.
+
+    THE BOUNDARY IS `TEXT THE INTERPRETER NEVER EXECUTES`, which is a fact
+    about the language rather than a judgement about intent.  Comments and
+    docstrings are that text.  A string passed to a call is NOT, because
+    nothing here can tell `print("grep -rn ...")` from
+    `run(["grep", "-rn", ...])` without knowing which callee executes -- and
+    a rule that special-cased `print` would be silently incomplete the moment
+    a subject narrates through `banner()` or `sys.stdout.write`.  That residue
+    is MEASURED rather than assumed away: 2 of the 83 surviving hits at
+    12aa5f8 are prose inside a `print(...)`, and permuted.py's section 4
+    prints them.
+
+    Returns (text, separated) -- `separated` is False when the docstring half
+    could not run.
+    """
+    if path is not None and path.endswith(".sh"):
+        return _blank_comments(src, shell=True), True
+    out, ok = _blank_prose_py(src)
+    if ok:
+        return out, True
+    return _blank_comments(src, shell=False), False
 
 
 def git(*args):
@@ -229,8 +343,20 @@ def declared_revs(text, resolves):
     return [t for t in dict.fromkeys(HEXTOK.findall(text)) if resolves(t)]
 
 
-def unordered_walks(text):
+def unordered_walks(text, path=None, prose="none"):
     """Lines that enumerate the filesystem in an order no commit determines.
+
+    `prose` selects WHICH OF THREE RULES is being asked, so that all three can
+    be counted SIDE BY SIDE the way permuted.py prints `set` beside `bag` -- a
+    repair whose before is not printed beside its after is an assertion, and a
+    rejected design quoted rather than re-taken is the `18 of 129` shape:
+
+        "read"      mg-0e77's rule, character for character.  Prose included.
+        "comments"  THE HALF-REPAIR, KEPT SO IT CAN BE RE-MEASURED AND NOT
+                    MERELY REPORTED AS REJECTED.  It is wrong, it is wrong in
+                    a direction nobody would look at, and permuted.py's
+                    section 4 prints the hit it ADDS.
+        "none"      the rule.  Comments and docstrings both.
 
     MEASURED, NOT REASONED ABOUT (mg-0e77).  `grep -rn` emits hits in
     directory-enumeration order.  On the filesystem this repository lives on
@@ -245,14 +371,39 @@ def unordered_walks(text):
     form that reads a corpus AT a commit is `git grep <rev>`, and git SORTS.
     So pinning a `grep -r` corpus necessarily permutes the transcript, and
     mg-20ee's condition 2 -- "reproduces byte-identically" -- CANNOT be met by
-    a correct pin.  Measured on the pin that produced this rule:
-    landscape_repair_audit_3b51 went 18 of 129 lines permuted and
-    landscape_repair_1953 30 of 149, with the two line SETS identical and not
-    one address, count or verdict moved.  Read byte-identity as SET-identity
-    plus a declared permutation for a subject R3 fires on, or a correct pin
-    reads as a failed one.
+    a correct pin.  Read byte-identity as BAG-IDENTITY PLUS A DECLARED
+    PERMUTATION for a subject R3 fires on, or a correct pin reads as a failed
+    one -- and `bag` rather than `set`, because a set forgets MULTIPLICITY and
+    the transcripts this rule fires on repeat addresses (mg-885d).  The hand
+    figures this docstring used to quote -- `18 of 129` and `30 of 149` -- are
+    not reproduced by anything and are not repeated; permuted.py takes that
+    measurement, and takes it three ways because `permuted` does not pick one.
+
+    AND IT READS CODE, NOT PROSE (mg-e5f3).  The rule matched the invocation
+    wherever it appeared, so A SENTENCE NAMING THE INVOCATION FIRED IT, and in
+    an estate where every docstring explains its own method that is not a rare
+    shape: 9 of 92 hits at 12aa5f8, in 8 files.  It landed hardest on
+    audit_scope_text.py -- THE INSTRUMENT TRANCHE 4 REPAIRED AND PINNED, whose
+    only two hits were comments explaining the defect it no longer has -- so
+    condition 0 told a repaired instrument to expect a permuted transcript,
+    which is N9's own rationale failing by PROSE instead of by the git form.
+
+    THE TWO PROSE SURFACES MOVE TOGETHER, AND THAT WAS MEASURED RATHER THAN
+    ARGUED.  Blanking COMMENTS ALONE ADDS A HIT -- to this very file: the walk
+    line at the top of this docstring was suppressed by a `sorted(` that lives
+    in the block comment below, so removing comments removes the SUPPRESSOR
+    and un-silences a line no operator could act on.  A repair introducing the
+    defect it repairs, in the half nobody would have looked at.  Blanking
+    comments AND docstrings: 92 -> 83 hits, 9 removed, ZERO ADDED.
     """
-    lines = text.splitlines()
+    raw = text.splitlines()
+    if prose == "read":
+        lines = raw
+    elif prose == "comments":
+        lines = _blank_comments(text, shell=bool(path and path.endswith(".sh"))
+                                ).splitlines()
+    else:
+        lines = code_only(text, path)[0].splitlines()
     hits = []
     for i, ln in enumerate(lines):
         if not WALK.search(ln) or ORDERED.search(ln):
@@ -280,7 +431,11 @@ def unordered_walks(text):
                     break
             span.append(nxt)
         if not any(ORDERED.search(s) for s in span):
-            hits.append(ln.strip())
+            # THE ORIGINAL LINE, NOT THE BLANKED ONE.  An operator asked to go
+            # and read why must be shown the text that is in the file; a hit
+            # printed with its trailing comment shaved off would be a second
+            # thing to reconcile against the source.
+            hits.append(raw[i].strip())
     return hits
 
 
@@ -327,10 +482,21 @@ def main(subject):
     print("  Neither is a defect; both are the reason the rules are stated as")
     print("  `go and read why` rather than as verdicts.")
     print()
-    print("  R3 FIRES ON THIS DIRECTORY SIX TIMES AND EVERY ONE IS FALSE, and")
+    own = sum(len(unordered_walks(git("show", "HEAD:%s" % p), p))
+              for p in git("ls-files", "--", os.path.dirname(
+                  os.path.relpath(os.path.abspath(__file__), ROOT))).splitlines()
+              if p.endswith(".py") or p.endswith(".sh"))
+    # COUNTED, NOT ASSERTED.  This sentence read `SIX TIMES` as a literal until
+    # mg-e5f3 added controls to selftest_20ee.py, each of which plants a needle
+    # and moves the number.  A self-hit count written as prose is a figure that
+    # goes stale the next time somebody adds a control -- which is the class
+    # mg-30bd's census exists to count, in the file arguing that rules must be
+    # measured rather than stated.
+    print("  R3 FIRES ON THIS DIRECTORY %d TIME(S) AND EVERY ONE IS FALSE, and"
+          % own)
     print("  that is checked here rather than left for a reader: 1 hit is R3's")
-    print("  OWN REGEX SOURCE and 5 are its controls' planted needles.  This")
-    print("  is the README's section 4 -- a control that plants its own probe")
+    print("  OWN REGEX SOURCE and the rest are its controls' planted needles.")
+    print("  This is the README's section 4 -- a control that plants its own probe")
     print("  into the corpus it searches -- for the FOURTH time in this arc,")
     print("  and section 4's remedy DOES NOT APPLY: it says assemble the")
     print("  needle at runtime, and a DETECTOR FOR A TOKEN CANNOT AVOID")
@@ -401,10 +567,17 @@ def main(subject):
         print("  AND READ WHY, and it does not say the corpus is pinned.")
         print()
 
-    walks = []
+    walks, prose_only, unseparated = [], [], []
     for s in scripts:
-        for ln in unordered_walks(git("show", "HEAD:%s" % s)):
+        src = git("show", "HEAD:%s" % s)
+        if not code_only(src, s)[1]:
+            unseparated.append(s)
+        code_hits = unordered_walks(src, s)
+        for ln in code_hits:
             walks.append((s, ln))
+        for ln in unordered_walks(src, s, prose="read"):
+            if ln not in code_hits:
+                prose_only.append((s, ln))
 
     print("-" * 78)
     print("R3  UNORDERED WALKS -- the subject enumerates the filesystem, so")
@@ -418,6 +591,33 @@ def main(subject):
         print("      ordered read of a commit (`git grep`, `git ls-files`) or")
         print("      sorted by the subject itself.")
     print()
+    if prose_only:
+        print("  AND %d LINE(S) THAT THE RULE FIRED ON BEFORE mg-e5f3 AND DOES"
+              % len(prose_only))
+        print("  NOT NOW -- PROSE NAMING THE INVOCATION, printed rather than")
+        print("  silently dropped, because a repair that removes hits without")
+        print("  showing which ones is indistinguishable from one that broke:")
+        print()
+        for s, ln in prose_only:
+            print("      %-52s %s" % (s, ln[:60]))
+        print()
+        if not walks:
+            print("  THIS SUBJECT'S ONLY R3 HITS WERE PROSE.  Before mg-e5f3 the")
+            print("  verdict below carried `+R3: expect a permuted transcript`")
+            print("  for sentences DESCRIBING an enumeration this subject does")
+            print("  not do -- N9's rationale (`every repaired instrument in the")
+            print("  estate is told it is still defective`) arriving by prose.")
+            print()
+    if unseparated:
+        print("  %d SCRIPT(S) COULD NOT BE SEPARATED FROM THEIR PROSE -- Python"
+              % len(unseparated))
+        print("  could not tokenize them, so only their comments were removed")
+        print("  and the DOCSTRING half of the over-count is still live here.")
+        print("  Printed because a repair that quietly stops applying is worse")
+        print("  than one that never did:")
+        for s in unseparated:
+            print("      %s" % s)
+        print()
     if walks:
         print("  THIS IS A RULE ABOUT CONDITION 2, NOT ABOUT WHETHER TO PIN.")
         print("  The only form that reads a corpus AT a commit is")
@@ -427,12 +627,21 @@ def main(subject):
         print("  permute the transcript, and mg-20ee's `reproduces")
         print("  byte-identically` cannot be met by it.")
         print()
-        print("  READ CONDITION 2 AS SET-IDENTITY PLUS A DECLARED PERMUTATION.")
-        print("  Measured on the pin that produced this rule: 18 of 129 lines")
-        print("  permuted in landscape_repair_audit_3b51 and 30 of 149 in")
-        print("  landscape_repair_1953, the two line SETS identical, and not")
-        print("  one address, count or verdict moved in either.  Scored as a")
-        print("  byte comparison that is a FAILED pin; it was a clean one.")
+        print("  READ CONDITION 2 AS BAG-IDENTITY PLUS A DECLARED PERMUTATION,")
+        print("  AND `BAG` IS NOT A SYNONYM FOR THE `SET` THIS FILE USED TO")
+        print("  PRINT: a set forgets MULTIPLICITY, and mg-3b51's own pinned")
+        print("  transcript prints one address twice while mg-1953's prints one")
+        print("  three times, so a pin dropping one occurrence would move an")
+        print("  address and the count it belongs to and score IDENTICAL.")
+        print("  DO NOT EYEBALL IT -- permuted.py scores it:")
+        print("      python3 code/asof_census_20ee/permuted.py <transcript> <rev>")
+        print()
+        print("  The `18 of 129` and `30 of 149` this file used to quote were")
+        print("  hand counts and NEITHER REPRODUCES.  Re-taken mechanically the")
+        print("  two pins are 21 of 129 and 26 of 148 core positions, 9 and 11")
+        print("  lines that MUST move; `18` is neither, and nobody could tell")
+        print("  WHICH QUANTITY it had been.  Both pins still hold -- the")
+        print("  verdict did not move, only the figure nothing stood behind.")
         print()
         print("  AND R3 IS NOT A REASON NOT TO PIN.  The order was never a")
         print("  function of repo state, so the permutation is the transcript")
