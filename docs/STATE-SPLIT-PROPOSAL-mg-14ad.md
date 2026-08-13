@@ -1,10 +1,10 @@
 # Splitting `STATE.md` — the proposal, the budgets, and what has already landed (mg-14ad)
 
-**Status: PART LANDED, PART PROPOSED. Read the two apart.** The one-pager and the first
-7,110 words of reduction are **landed** and are described in §1–§3 as fact. Everything from
-§4 on is a **proposal with word budgets and is not landed**, because the ticket's own
-sequencing note is right: *"propose the target structure first … a restructure that lands
-and then has to be re-litigated costs more than the outline does."*
+**Status: §1–§3 LANDED (mg-14ad). §4 LANDED EXCEPT ITS LEDGER ROW (mg-927a, 2026-08-13).**
+`STATE.md` is **5,987 words**, inside mg-ea0e's standing 6,000-word target for the first time
+since that target was set, and the ceiling is banked at 5,987 / 5,487. **§8 at the foot of this
+document records what landed, which two budgets were not met and why, and the one row that
+cannot land at all.** Read §4's table as the estimate it was, and §8 as the measurement.
 
 ---
 
@@ -188,3 +188,91 @@ ticket's own sequencing point and the reason this document exists rather than a 
 Land §1–§3 (done). **Agree §4's budgets before moving a paragraph**, then land it as one
 commit that re-derives the twin pin and re-banks the ceiling in the same landing. Do not
 give the executive summary a ratchet.
+
+---
+
+# §8 — WHAT LANDED (mg-927a, 2026-08-13), AND THE TWO BUDGETS THAT WERE WRONG
+
+`STATE.md` **14,337 → 5,987 words**. Ceiling banked **14,337 → 5,987**, `tighten_below`
+**13,837 → 5,487**, in the same commit, per `CEILING.json`'s own `how_to_change_this`.
+
+## 8.1 The measured outcome against §4's estimate
+
+| § | §4 said | landed | what actually happened |
+|---|---|---|---|
+| preamble / header riders | 150 | **~400** | The `docs/FACTS.md` pointer must carry a live **entry count** (`code/facts_registry_03cf` §3 gates it) and the `docs/CONCEPTS.md` pointer must exist (`code/concepts_gate_602d`). Full riders → [`docs/state-history/state-preamble-riders.md`](state-history/state-preamble-riders.md) |
+| The one-paragraph state | 250 | **~420** | The 1,634-word L1b blockquote → [`l1b-statement-full.md`](state-history/l1b-statement-full.md); the three superseded readings → [`headline-corrections.md`](state-history/headline-corrections.md). The struck clause and its replacement stay **together** in the row (mg-957a) |
+| Two axes, one bridge | 200 | **~250** | mg-05ec's three legs → [`proof-chain-riders.md`](state-history/proof-chain-riders.md) |
+| Glossary | 270 | **270** | kept, as proposed |
+| The proof, and what's proven | 400 | **~490** | mermaid and the two-open-links sentence kept; node-`B` rider, machinery strike history and mg-65f5's fork resolution → `proof-chain-riders.md` |
+| Kinds | 250 | **492 — UNCHANGED, DELIBERATELY** | **§4 and §5.2 of this document contradict each other and §5.2 wins.** §5.2 calls these "the most valuable 500 words in the file" and says they should be *promoted, not compressed* |
+| Full ledger | 600 | **2,814 — NOT MOVED** | see §8.3. This is not a deferral, it is a blocker |
+| The single lemma to prove | 300 | **~190** | plain-language restatement → `proof-chain-riders.md` |
+| Attempt index | 300 | **~150 — the section LEFT** | see §8.2 |
+| Where the threads converge | 215 | **215** | kept, as proposed |
+| Appendix A | 0 | **0** | folded into the new *Reference material, linked* table |
+| Why 1/3 — the elementary anchor | 0 | **0** | → [`docs/why-one-third-elementary-anchor.md`](why-one-third-elementary-anchor.md) |
+| **total** | **~2,935** | **5,987** | |
+
+## 8.2 The attempt index could not reach 300 with its rows in place — so the rows left
+
+§4 budgets it **300 from 3,784** with the rows *staying* and only their Result cells relocating.
+**Measured, that is unreachable.** mg-14ad's own relocation convention keeps each row's
+Status-label and Attempt columns **verbatim in the row**, and across the 28 rows those two columns
+alone are **~2,200 words** before a single Result cell is counted. The convention and the budget
+cannot both hold.
+
+**§5's own rule decides which gives way:** *"a row stays in `STATE.md` if the current argument
+consumes it; its history leaves."* An attempt-index row is **by construction** a record of
+something already walked, and no live ledger row consumes any of them. So the section moved whole
+and verbatim to [`docs/state-history/attempt-index.md`](state-history/attempt-index.md), which is
+also Daniel's own instruction — *"reference material can be linked at the bottom"*.
+
+## 8.3 The ledger row of §4 cannot land in a merge request at all — and that is a finding
+
+§4 budgets the **Full ledger 2,887 → 600**. §6 correctly flags that
+`code/rendered_twin_pin_9bc2` digests those rows and that the pin must be re-derived after.
+**It cannot be.** Four facts, each read out of the estate rather than assumed:
+
+1. The twin's drift **worklist is a gated field** — `twin.worklist` in
+   `code/control_gate_724a/BASELINE.json`. Move a pinned row without re-pinning and `./build.sh`
+   goes RED, so the edit cannot merge on its own.
+2. `twin_pin.py`'s `reconcile()` **refuses** while `STATE.md` on disk differs from `STATE.md` at
+   `HEAD` — so the re-pin cannot be in the same commit as the row edit. Its own comment:
+   *"THE COST IS TWO COMMITS INSTEAD OF ONE."*
+3. `pin_target()` then looks for an **integration-reachable** commit carrying those `STATE.md`
+   bytes. For a row that exists only on a branch there is none, so it falls back to `HEAD` and
+   prints its own warning: *"THE REFINERY REBASES: this hash is rewritten out of existence when
+   the branch lands and the pin becomes an ORPHAN, which section 7 grades RED."*
+4. This is not hypothetical. `7e7bfb7 twin: point the pin at the commit that survives the rebase
+   — 2fbd5ce did not exist after it (mg-cdd5)` is this repository's record of it happening, and
+   mg-3902's audit records that the repair traded correct-and-unreachable for reachable-and-wrong.
+
+**So a ledger-row relocation needs two landings — move + reconcile the twin's cell, then re-pin
+once those bytes are on `main` — and nothing in the estate sequences that today.** That is the
+carried remainder, and it is a sequencing gap in the pin mechanism rather than a paragraph nobody
+got round to moving.
+
+## 8.4 The two targets, reconciled explicitly
+
+**mg-ea0e's 6,000 words STANDS and is now MET. The ~2,935 in §4 does NOT supersede it.** The
+distance from 5,987 to ~2,935 is essentially the Full ledger, i.e. §8.3's blocker, so ~2,935 is
+not a target that can be aimed at until that is sequenced. The ceiling is set at **5,987, the
+achieved measurement** — not at 6,000 and not at 2,935: a ceiling is a monotone floor and binds
+from where it is set, and 2,935 today would be **red on arrival by 3,052 words**, blocking every
+merge in this repository for a reason no author of an unrelated branch could act on.
+
+## 8.5 Coordination, done before a paragraph moved
+
+`mg-30bd` / `p30bd`, `pm-onethird` (the `mg-7cc3` / `mg-daba` twin-pin lineage) and the mayor were
+mailed before the first edit, with the section-by-section plan and the headline that **none of the
+12 pinned ledger rows moves**. Verified after: `twin_pin.py` reports `VERDICT: CLEAN`, all 12 row
+digests unchanged, worklist `(none)`. **Nothing needed re-deriving.**
+
+## 8.6 The executive summary is still outside every instrument
+
+Checked, not assumed: `grep -rl EXECUTIVE-SUMMARY` over the tree returns `STATE.md`, `README.md`,
+this document, `state-preamble-riders.md`, and `code/state_ratchet_e331/CEILING.json` +
+`out_ratchet.txt` — the last two being the ratchet's **prose declaration that it excludes the
+file**, not a read of it. **No instrument reads `EXECUTIVE-SUMMARY.md`.** It gained no ratchet, no
+pin and no address here.
