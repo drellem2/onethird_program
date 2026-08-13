@@ -1,0 +1,79 @@
+==============================================================================
+mg-20ee — GROUND TRUTH: DO THE COMMITTED TRANSCRIPTS STILL REPRODUCE?
+==============================================================================
+
+  measured on   : 2026-08-13, against the working tree at 5a62e8c
+  candidates    : the 44 instruments census.py flags AND whose addressed file
+                  git says has changed since the transcript was committed
+  method        : re-run each suite, diff its own directory, restore it
+  produced by   : sh ground_truth.sh <dirs>   (~70 min; executes instrument code)
+
+  THIS IS THE NUMBER TO QUOTE, NOT census.py's.  The classifier is a net and
+  over-counts twice by construction; this re-runs the instruments and asks the
+  only question that settles it.  Of 44 candidates:
+
+        32  DIFFERS      — the committed transcript does NOT reproduce
+         9  REPRODUCES   — the classifier was wrong about these
+         3  NO_RUN_ALL   — no runner; not measurable this way
+
+  So the honest already-stale count on this evidence is 32, not 44 and not
+  pc824's 40.  The nine REPRODUCES are the second bias made visible: several
+  of them already read their corpus at a declared commit, which the classifier
+  cannot see.
+
+  TWO ENTRIES ARE NOT INDEPENDENT AND ARE MARKED WHERE THEY APPEAR:
+    * n0_strike_audit_dd8b reports REPRODUCES because mg-20ee had ALREADY
+      pinned it when the sweep reached it — an independent confirmation of that
+      pin, not a pre-existing property.
+    * census_remainder_f8e5 reports rc=143: its worker was killed after 37
+      minutes to unblock the sweep, so its line is UNRELIABLE and it should be
+      re-measured before anyone acts on it.
+
+  absent_step_7ae5 and anchor_drift_96df were measured BEFORE mg-20ee pinned
+  them; both are repaired as of this branch.
+
+------------------------------------------------------------------------------
+  code/absent_step_7ae5 DIFFERS rc=0 lines=29+/11-
+  code/anchor_drift_96df DIFFERS rc=0 lines=7+/7-
+  code/audit_2c77 DIFFERS rc=1 lines=61+/35-
+  code/audit_330a DIFFERS rc=1 lines=458+/35-
+  code/branching_audit_a218 DIFFERS rc=1 lines=76+/68-
+  code/census_audit_4d3b DIFFERS rc=0 lines=90+/119-
+  code/census_remainder_f8e5 DIFFERS rc=143 lines=99+/263-
+  code/eps_spec_sweep_372e DIFFERS rc=0 lines=115+/22-
+  code/face_geometry_audit_e720 DIFFERS rc=0 lines=11+/11-
+  code/face_geometry_audit_fcb2 DIFFERS rc=1 lines=35+/143-
+  code/hash_population_6e58 DIFFERS rc=1 lines=167+/75-
+  code/hodge_leverage_audit_7e39 REPRODUCES rc=1
+  code/hodge_leverage_audit_8a5c DIFFERS rc=1 lines=75+/79-
+  code/landing_audit_sweep_64cb DIFFERS rc=1 lines=363+/111-
+  code/landscape_repair_1953 DIFFERS rc=0 lines=27+/8-
+  code/landscape_repair_audit_3b51 DIFFERS rc=0 lines=59+/20-
+  code/libweak_audit_c4f5 NO_RUN_ALL
+  code/mirror_staleness_cdd5 DIFFERS rc=0 lines=69+/37-
+  code/mirror_staleness_cdd5/prerepair NO_RUN_ALL
+  code/n0_strike_audit_dd8b REPRODUCES rc=1
+  code/pairbias_indep_audit_6bd1 DIFFERS rc=0 lines=4+/4-
+  code/rate_sweep_910c REPRODUCES rc=1
+  code/runner_exit_audit_56dc DIFFERS rc=0 lines=136+/130-
+  code/runner_exit_audit_dee4 DIFFERS rc=0 lines=774+/91-
+  code/runner_exit_c2b3 DIFFERS rc=1 lines=93+/52-
+  code/runner_exit_repair_70c7 DIFFERS rc=0 lines=23+/17-
+  code/runner_exit_repair_7522 DIFFERS rc=1 lines=317+/11-
+  code/species_audit_73df DIFFERS rc=0 lines=20+/57-
+  code/species_audit_7dd3 DIFFERS rc=0 lines=101+/112-
+  code/species_extent_d633 DIFFERS rc=1 lines=255+/18-
+  code/species_remainder_f8fa DIFFERS rc=1 lines=2+/2-
+  code/species_repair_a4ef DIFFERS rc=1 lines=2+/4-
+  code/state_audit_6a2f REPRODUCES rc=0
+  code/state_claims_repair_0120 REPRODUCES rc=0
+  code/state_delegation_repair_a74f REPRODUCES rc=0
+  code/state_landing_control_2da3 REPRODUCES rc=1
+  code/state_relocation_audit_b0ae DIFFERS rc=0 lines=7+/7-
+  code/state_suppression_repair_5f7c REPRODUCES rc=1
+  code/state_visibility_audit_65eb REPRODUCES rc=0
+  code/summary_guard_audit_407f DIFFERS rc=0 lines=40+/64-
+  code/superseded_descent_688c DIFFERS rc=0 lines=84+/7-
+  code/superseded_figures_5827 DIFFERS rc=1 lines=136+/37-
+  code/unitmap_audit_9f91 NO_RUN_ALL
+  code/verdict_delivery_bf3f DIFFERS rc=0 lines=243+/80-

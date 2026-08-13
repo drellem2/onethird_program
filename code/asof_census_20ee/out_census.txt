@@ -1,0 +1,557 @@
+==============================================================================
+mg-20ee — TRANSCRIPTS CARRYING A COMPUTED FOREIGN ADDRESS
+==============================================================================
+
+  corpus read at : 5a62e8c88c4458453e47593d3474d584d2def8ff
+      AS_OF, the pinned default
+
+  THE COUNTS BELOW ARE CORPUS-VALUED.  They measure this repository, not this
+  ticket, and they move whenever an instrument or a transcript is added.  That
+  is why they are pinned: an unpinned census cannot be watched shrinking,
+  because you could never tell a repair from a corpus that grew.
+
+  THIS IS A NET, NOT A VERDICT.  It over-counts twice by construction -- once on
+  instruments that merely echo a foreign file's own prose citation, and once on
+  instruments that ALREADY read at a declared commit, which it cannot see.  It
+  under-counts addresses into files outside this repository, which git cannot
+  see at all.  out_ground_truth.txt is the correction and is the number to
+  quote.
+
+   125 transcripts carry a computed foreign address
+    73 distinct instruments
+  2070 addresses in total
+
+------------------------------------------------------------------------------
+BY INSTRUMENT -- transcripts, addresses, and the files addressed
+------------------------------------------------------------------------------
+  code/absent_step_7ae5                       1 transcript(s)   21 address(es)
+        -> STATE.md
+        -> code/downstream_constants_ac0c/README.md
+        -> code/eps0_threshold_3969/README.md
+        -> code/libweak_c3ca/README.md
+        -> docs/FACTS.md
+        -> docs/OneThird-Counterexample-Under-The-Action.md
+        -> docs/OneThird-DownstreamConstants-mg-ac0c.md
+        -> docs/OneThird-L4-Branch-ii-Consumability.md
+        -> docs/OneThird-L4-Threshold-eps0-mg-3969.md
+        -> docs/OneThird-PairBias-EpsSup-mg-832f-IndependentAudit.md
+        -> docs/OneThird-Primitivity-Objection-mg-f5be.md
+        -> docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+  code/adjudication_audit_a0d6                1 transcript(s)    3 address(es)
+        -> docs/OneThird-L2-Conditionality-mg-28ff.md
+  code/anchor_drift_96df                      2 transcript(s)   82 address(es)
+        -> README.md
+        -> STATE.md
+        -> code/row3b_audit_eba7/OUTCOMES.md
+        -> docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md
+        -> docs/OneThird-SupersededDescent-mg-688c.md
+        -> docs/imports/compression.tex
+        -> docs/roadmap.md
+        -> docs/state-history/audit-mg-2eed-of-mg-b488.md
+        -> docs/state-history/audit-mg-eba7-of-mg-55f2.md
+  code/anchor_population_audit_0ba7           3 transcript(s)    6 address(es)
+        -> code/audit_330a/lib330a.py
+        -> code/branching_audit_58da/lib58da.py
+        -> code/branching_audit_e34a/libe34a.py
+        -> code/repair_69d1/lib69d1.py
+        -> code/repair_8d5e/lib8d5e.py
+  code/audit_2c77                             1 transcript(s)   15 address(es)
+        -> code/face_geometry_instr_5f9a/kern5f9a.py
+        -> code/repair_69d1/PREDICTIONS.md
+        -> code/repair_69d1/README.md
+        -> code/repair_69d1/lib69d1.py
+        -> code/repair_69d1/out_p1_bound.txt
+        -> code/repair_69d1/out_selftest_69d1.txt
+        -> code/repair_69d1/p1_bound.py
+        -> code/repair_69d1/selftest_69d1.py
+        -> docs/landing-mg-0b07-implicit-disjunction.md
+        -> docs/repair-mg-69d1-bound-and-reason.md
+  code/audit_330a                             2 transcript(s)   57 address(es)
+        -> code/audit_2c77/PREDICTIONS.md
+        -> code/audit_2c77/README.md
+        -> code/audit_2c77/lib2c77.py
+        -> code/audit_2c77/out_q3_operands.txt
+        -> code/audit_2c77/q3_operands.py
+        -> code/audit_2c77/q4_prerepair.py
+        -> code/branching_audit_e34a/libe34a.py
+        -> code/face_geometry_audit_eaef/PREDICTIONS.md
+        -> code/face_geometry_instr_5f9a/d2_deletion.py
+        -> code/repair_8d5e/lib8d5e.py
+        -> code/repair_8d5e/r4_self.py
+        -> code/repair_8d5e/selftest_8d5e.py
+        -> docs/audit-mg-eaef-the-bound-and-the-exit-code.md
+  code/branching_audit_321d                   1 transcript(s)    1 address(es)
+        -> code/branching_locate_db09/out_t5_labels.txt
+  code/branching_audit_5800                   1 transcript(s)    4 address(es)
+        -> code/branching_repair_41aa/out_r3_rescope.txt
+        -> code/branching_repair_41aa/r3_rescope.py
+  code/branching_audit_58da                   1 transcript(s)    1 address(es)
+        -> code/branching_locate_db09/out_t5_labels.txt
+  code/branching_audit_a218                   1 transcript(s)   37 address(es)
+        -> code/branching_locate_db09/README.md
+        -> code/branching_locate_db09/out_t1_tl.txt
+        -> code/branching_locate_db09/t1_tl.py
+        -> docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md
+        -> docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+        -> docs/roadmap.md
+  code/branching_audit_d330                   1 transcript(s)    3 address(es)
+        -> code/branching_locate_db09/out_t5_labels.txt
+        -> code/branching_locate_db09/t5_labels.py
+  code/c3_audit_a94c3                         1 transcript(s)   19 address(es)
+        -> code/c3_prefix_capture_76b2/PREDICTIONS.md
+        -> code/c3_prefix_capture_76b2/out_s4_budget.txt
+        -> code/c3_prefix_capture_76b2/s4_budget.py
+        -> docs/OneThird-C3-PrefixCapture-mg-76b2.md
+  code/census_audit_4d3b                      1 transcript(s)    7 address(es)
+        -> code/census_repair_f3ff/s1_rows.py
+        -> code/census_repair_f3ff/s2_controls.py
+        -> code/census_repair_f3ff/s3_graph.py
+  code/census_remainder_f8e5                  3 transcript(s)   19 address(es)
+        -> code/audit_c067/c1_rebase.py
+        -> code/audit_c067/c2_anchors.py
+        -> code/audit_c067/c3_shopping.py
+        -> code/hash_population_6e58/lib6e58.py
+        -> code/hash_population_6e58/p1_ways.py
+        -> code/hodge_leverage_audit_f922/audit_repair.py
+        -> code/repair_b2af/selftest_b2af.py
+        -> code/repair_b2af/t4_preserve.py
+        -> code/transcript_census_1abe/lib_1abe.py
+        -> code/transcript_census_1abe/selftest_1abe.py
+        -> code/transcript_census_1abe/t2_census.py
+        -> code/transcript_census_1abe/t3_shas.py
+  code/compression_novelty_623a               1 transcript(s)    4 address(es)
+        -> code/l2_underclaim_audit_3bb9/README.md
+        -> code/l2_underclaim_audit_3bb9/lib3bb9.py
+        -> docs/OneThird-L2-Conditionality-mg-28ff.md
+        -> docs/OneThird-L2-Conditionality-mg-3bb9-RepairAudit.md
+  code/contradiction_repair_d19f              2 transcript(s)   19 address(es)
+        -> code/l2_conditionality_28ff/b1_footrule.py
+        -> docs/OneThird-L2-Conditionality-mg-28ff.md
+        -> docs/OneThird-SweepLoss-mg-51f4.md
+  code/control_audit_9876                     2 transcript(s)   50 address(es)
+        -> code/compression2_scope_0fc6/run_all.sh
+        -> code/compression_kfoliation_8d66/run_all.sh
+        -> code/convex_criterion_8748/run_all.sh
+        -> code/demand_relaxation_7564/run_all.sh
+        -> code/eps_spec_sweep_372e/run_all.sh
+        -> code/l1b_currency_0e8c/run_all.sh
+        -> code/l2_conditionality_28ff/run_all.sh
+        -> code/lstar_789d/run_all.sh
+        -> code/lstar_landing_8d63/run_all.sh
+        -> code/primitivity_f5be/run_all.sh
+        -> code/state_restructure_ea0e/run_all.sh
+  code/corpus_universe_1d6c                   5 transcript(s)   59 address(es)
+        -> code/branching_audit_5800/README.md
+        -> code/branching_bound_audit_aaf4/PREDICTIONS.md
+        -> code/branching_bound_audit_aaf4/README.md
+        -> code/branching_bound_d075/PREDICTIONS.md
+        -> code/branching_bound_d075/README.md
+        -> code/branching_bound_d075/out_s6_class.txt
+        -> code/branching_bound_d075/s1_census.py
+        -> code/branching_bound_d075/s6_class.py
+        -> code/branching_repair_41aa/README.md
+        -> docs/OneThird-Branching-Graphs-Where-This-Lives.md
+        -> docs/repair-mg-1d6c-the-universe-and-the-glob.md
+        -> docs/repair-mg-d075-the-figure-and-its-scope.md
+  code/dated_population_2ff6                  1 transcript(s)   11 address(es)
+        -> code/corpus_fixedpoint_fd9c/s2_drift.py
+        -> code/grain_arity_9160/PREDICTIONS.md
+        -> code/grain_arity_9160/README.md
+        -> code/grain_axis_audit_03d1/OUTCOMES.md
+        -> code/grain_axis_audit_03d1/README.md
+  code/downstream_constants_ac0c              1 transcript(s)   23 address(es)
+        -> code/eps0_audit_d3c7/README.md
+        -> code/eps0_threshold_3969/README.md
+        -> docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md
+        -> docs/OneThird-ChainIV-CaptureFraction-mg-81ff.md
+        -> docs/OneThird-ChainSelection-mg-9461.md
+        -> docs/OneThird-DemandRelaxation-mg-7564.md
+        -> docs/OneThird-L4-Threshold-eps0-mg-3969.md
+        -> docs/OneThird-L4-Threshold-eps0-mg-d3c7-IndependentAudit.md
+        -> docs/OneThird-PairBias-Independence-mg-6bd1-IndependentAudit.md
+        -> docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+  code/eps_spec_sweep_372e                    2 transcript(s)   10 address(es)
+        -> STATE.md
+        -> docs/OneThird-Counterexample-Under-The-Action.md
+        -> docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md
+        -> docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md
+        -> docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+        -> docs/state-history/attempt-mg-88bd.md
+  code/face_geometry_audit_1c80               1 transcript(s)    1 address(es)
+        -> code/face_geometry_audit_fcf1/out_nc4.txt
+  code/face_geometry_audit_e720               1 transcript(s)    6 address(es)
+        -> STATE.md
+  code/face_geometry_audit_fcb2               1 transcript(s)    2 address(es)
+        -> code/face_geometry/controls.py
+  code/figures_revision_repair_5035           4 transcript(s)   24 address(es)
+        -> code/grain_axis_audit_03d1/a3_ledger.py
+        -> code/runner_exit_repair_7522/lib7522.py
+        -> code/runner_exit_repair_bf79/out_p2_population.txt
+        -> code/runner_exit_repair_bf79/out_p4_figures.txt
+        -> code/runner_exit_repair_bf79/out_selftest_bf79.txt
+        -> docs/OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md
+        -> docs/landing-mg-d0e2-vacuous-check.md
+  code/grain_arity_9160                       1 transcript(s)    5 address(es)
+        -> code/runner_exit_repair_70c7/out_r4_property.txt
+        -> code/runner_exit_repair_bf79/out_p1_grain.txt
+  code/grain_axis_audit_03d1                  1 transcript(s)    5 address(es)
+        -> code/runner_exit_repair_70c7/out_r4_property.txt
+        -> code/runner_exit_repair_bf79/out_p1_grain.txt
+  code/hash_population_6e58                   2 transcript(s)   27 address(es)
+        -> code/audit_330a/lib330a.py
+        -> code/audit_330a/s4_term.py
+        -> code/branching_bound_audit_aaf4/a1_population.py
+        -> code/branching_bound_audit_aaf4/a2_reproduce.py
+        -> code/branching_bound_audit_aaf4/a3_criticism.py
+        -> code/branching_bound_d075/s1_census.py
+        -> code/branching_bound_d075/s2_reproduce.py
+        -> code/branching_bound_d075/s3_bound.py
+        -> code/branching_bound_d075/s4_hedge.py
+        -> code/branching_bound_d075/s5_own_criticism.py
+        -> code/census_repair_f3ff/s1_rows.py
+        -> code/face_geometry_audit_6653/verify_claims.py
+        -> code/face_geometry_audit_e720/verify_landing_claims.py
+        -> code/face_geometry_landing_7d5a/verify_landing.py
+        -> code/repair_b2af/lib_b2af.py
+        -> code/repair_b2af/t1_population.py
+        -> code/runner_exit_c2b3/k4_control.py
+  code/hodge_leverage_audit_7e39              1 transcript(s)   10 address(es)
+        -> code/hodge_leverage_landing_e1d0/verify_landing.py
+        -> code/hodge_leverage_repair_6df0/repair_ec07.py
+  code/hodge_leverage_audit_8a5c              1 transcript(s)    5 address(es)
+        -> STATE.md
+  code/hodge_leverage_audit_97fb              1 transcript(s)    9 address(es)
+        -> code/hodge_leverage_audit_ec07/audit_ec07.py
+        -> code/hodge_leverage_landing_e1d0/verify_landing.py
+        -> code/hodge_leverage_repair_6df0/repair_ec07.py
+  code/l2_landing_a564                        1 transcript(s)   15 address(es)
+        -> code/l2_audit_29fe/s3_counterfactual.py
+        -> code/l2_conditionality_28ff/PREDICTIONS.md
+        -> code/l2_conditionality_28ff/b1_footrule.py
+        -> code/l2_conditionality_28ff/b2_census.py
+        -> code/l2_conditionality_28ff/b5_trend.py
+        -> code/l2_conditionality_28ff/out_b1_footrule.txt
+        -> code/sweep_loss_51f4/out_s3_n7.txt
+  code/landing_audit_sweep_64cb               1 transcript(s)   10 address(es)
+        -> STATE.md
+        -> docs/OneThird-LStar-mg-5cba-IndependentAudit.md
+        -> docs/OneThird-LStar-mg-789d.md
+        -> docs/landing-mg-8d63-the-lstar-refutation.md
+        -> docs/roadmap.md
+  code/landscape_repair_1953                  1 transcript(s)   45 address(es)
+        -> STATE.md
+        -> docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md
+        -> docs/OneThird-Hodge-Side-Leverage.md
+        -> docs/OneThird-Intrinsic-Face-Geometry-Probe.md
+        -> docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md
+        -> docs/OneThird-L4-Branch-ii-Consumability-IndependentAudit.md
+        -> docs/OneThird-Landscape-Repair-IndependentAudit.md
+        -> docs/OneThird-Landscape-Where-This-Lives-IndependentAudit.md
+        -> docs/OneThird-Landscape-Where-This-Lives.md
+        -> docs/roadmap.md
+  code/landscape_repair_audit_3b51            1 transcript(s)   28 address(es)
+        -> STATE.md
+        -> docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md
+        -> docs/OneThird-Hodge-Side-Leverage.md
+        -> docs/OneThird-Intrinsic-Face-Geometry-Probe.md
+        -> docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md
+        -> docs/OneThird-L4-Branch-ii-Consumability-IndependentAudit.md
+        -> docs/OneThird-Landscape-Where-This-Lives-IndependentAudit.md
+        -> docs/OneThird-Landscape-Where-This-Lives.md
+        -> docs/roadmap.md
+  code/libweak_audit_c4f5                     1 transcript(s)    1 address(es)
+        -> STATE.md
+  code/lstar_reaudit_5e82                     1 transcript(s)    2 address(es)
+        -> code/audit_5cba/out_a5_scope.txt
+        -> docs/OneThird-LStar-mg-5cba-IndependentAudit.md
+  code/mirror_staleness_cdd5                  2 transcript(s)   10 address(es)
+        -> STATE.md
+        -> code/libweak_audit_c4f5/PREDICTIONS.md
+        -> docs/OneThird-Compression-Consumers-mg-145f.md
+        -> docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md
+        -> docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md
+        -> docs/OneThird-lambda-std-Operative-Form.md
+        -> docs/state-history/audit-mg-eba7-of-mg-55f2.md
+  code/mirror_staleness_cdd5/prerepair        2 transcript(s)   20 address(es)
+        -> STATE.md
+  code/n0_strike_audit_dd8b                   2 transcript(s)    2 address(es)
+        -> STATE.md
+  code/pairbias_indep_audit_6bd1              2 transcript(s)    6 address(es)
+        -> docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md
+        -> docs/OneThird-PairBias-Independence-mg-345e.md
+  code/rate_sweep_910c                        3 transcript(s)   22 address(es)
+        -> STATE.md
+        -> docs/OneThird-Counterexample-Under-The-Action.md
+        -> docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md
+        -> docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md
+        -> docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+        -> docs/state-history/attempt-mg-88bd.md
+  code/repair_b2af                            2 transcript(s)   36 address(es)
+        -> code/audit_2c77/PREDICTIONS.md
+        -> code/audit_2c77/README.md
+        -> code/audit_2c77/q3_operands.py
+        -> code/audit_330a/README.md
+        -> code/audit_330a/lib330a.py
+        -> code/audit_330a/out_s4_term.txt
+        -> code/audit_330a/s4_term.py
+        -> code/branching_audit_e34a/libe34a.py
+        -> code/face_geometry_audit_eaef/PREDICTIONS.md
+        -> code/face_geometry_audit_eaef/README.md
+        -> code/publication_anchor_132a/anchor_132a.py
+        -> docs/audit-mg-330a-the-anchor-and-the-term.md
+        -> docs/audit-mg-eaef-the-bound-and-the-exit-code.md
+  code/runner_exit_audit_05eb                 1 transcript(s)    1 address(es)
+        -> code/state_restructure_34bf/run_all.sh
+  code/runner_exit_audit_56dc                 2 transcript(s)   18 address(es)
+        -> README.md
+        -> code/runner_exit_c2b3/selftestc2b3.py
+        -> code/runner_exit_repair_70c7/r4_property.py
+        -> code/runner_exit_repair_70c7/r5_population.py
+        -> code/state_delegation_audit_16eb/run_all.sh
+        -> code/state_delegation_repair_0049/run_all.sh
+        -> docs/repair-mg-70c7-grain-and-population.md
+  code/runner_exit_audit_dee4                 4 transcript(s)   44 address(es)
+        -> README.md
+        -> code/branching_audit_2060/run_all.sh
+        -> code/branching_audit_a218/c0_repro.sh
+        -> code/runner_exit_c2b3/k2_consume.py
+        -> code/runner_exit_c2b3/selftestc2b3.py
+        -> code/runner_exit_repair_7522/lib7522.py
+        -> code/runner_exit_repair_7522/s2_status.py
+        -> code/runner_exit_repair_7522/s3_figure.py
+        -> code/runner_exit_repair_7522/selftest7522.py
+        -> code/state_delegation_audit_16eb/run_all.sh
+        -> code/state_delegation_repair_0049/run_all.sh
+        -> code/state_landing_audit_bd41/instrument_sensitivity.py
+        -> docs/OneThird-RunnerExit-ArcWideSweep.md
+        -> docs/OneThird-RunnerExit-PopulationRepair.md
+  code/runner_exit_c2b3                       2 transcript(s)   21 address(es)
+        -> code/branching_audit_2060/run_all.sh
+        -> code/branching_audit_2060/selftest2060.py
+        -> code/branching_audit_957f/run_all.sh
+        -> code/branching_audit_a218/c0_repro.sh
+        -> code/branching_locate_db09/selftestdb09.py
+        -> code/hodge_leverage_audit_f922/audit_repair.py
+        -> code/landscape_audit_d673/audit_populations.py
+        -> code/landscape_audit_d673/audit_spectrum.py
+        -> code/runner_exit_repair_7522/s4_unpin.py
+        -> code/runner_exit_repair_7522/selftest7522.py
+        -> code/species_audit_7dd3/selftest7dd3.py
+        -> code/species_depth_audit_4700/kern4700.py
+        -> code/species_extent_d633/selftestd633.py
+        -> code/species_remainder_f8fa/selftestf8fa.py
+        -> code/species_remainder_f8fa/w3_scope.py
+        -> code/species_repair_a4ef/selftesta4ef.py
+        -> code/species_sites_821e/kern821e.py
+        -> docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md
+        -> docs/OneThird-Species-Hopf-Monoids-ExtentRepair-IndependentAudit.md
+  code/runner_exit_repair_70c7                5 transcript(s)   43 address(es)
+        -> README.md
+        -> code/branching_audit_2060/run_all.sh
+        -> code/runner_exit_c2b3/k1_census.py
+        -> code/runner_exit_c2b3/k2_consume.py
+        -> code/runner_exit_c2b3/libc2b3.py
+        -> code/runner_exit_c2b3/selftestc2b3.py
+        -> code/runner_exit_repair_7522/lib7522.py
+        -> code/runner_exit_repair_7522/s2_status.py
+        -> code/runner_exit_repair_7522/s3_figure.py
+        -> code/runner_exit_repair_7522/selftest7522.py
+        -> code/runner_exit_repair_bf79/selftestbf79.py
+        -> code/state_delegation_audit_16eb/run_all.sh
+        -> code/state_delegation_repair_0049/run_all.sh
+        -> docs/OneThird-RunnerExit-PopulationRepair.md
+  code/runner_exit_repair_7522                4 transcript(s)   55 address(es)
+        -> README.md
+        -> code/face_geometry_audit_f1b2/audit_injections.py
+        -> code/face_geometry_audit_f1b2/run_audit.sh
+        -> code/face_geometry_audit_fcf1/audit_nc4.py
+        -> code/face_geometry_audit_fcf1/run_audit.sh
+        -> code/runner_exit_c2b3/k1_census.py
+        -> code/runner_exit_c2b3/k2_consume.py
+        -> code/runner_exit_c2b3/k3_retro.py
+        -> code/runner_exit_c2b3/libc2b3.py
+        -> code/runner_exit_c2b3/selftestc2b3.py
+        -> code/species_depth_audit_4700/kern4700.py
+        -> code/species_depth_audit_4700/q2_wiring.py
+        -> code/state_delegation_audit_16eb/run_all.sh
+        -> code/state_delegation_repair_0049/run_all.sh
+        -> code/state_restructure_34bf/run_all.sh
+  code/runner_exit_repair_bf79                1 transcript(s)    2 address(es)
+        -> code/runner_exit_c2b3/k2_consume.py
+  code/species_audit_73df                     1 transcript(s)   27 address(es)
+        -> README.md
+        -> code/species_7d75/out_t1_grading.txt
+        -> code/species_7d75/out_t3_bidigare.txt
+        -> code/species_7d75/out_t6_fock_and_record.txt
+        -> code/species_7d75/t1_grading.py
+        -> code/species_7d75/t3_bidigare.py
+        -> code/species_7d75/t6_fock_and_record.py
+  code/species_audit_7dd3                     2 transcript(s)   16 address(es)
+        -> code/species_7d75/out_t6_fock_and_record.txt
+        -> code/species_7d75/t4_one_operation.py
+        -> code/species_7d75/t6_fock_and_record.py
+        -> code/species_audit_73df/out_c5_doc.txt
+        -> code/species_repair_a4ef/out_c5_doc_73df_after.txt
+        -> docs/OneThird-Audit-mg-7d75-Species-Hopf-Monoids.md
+        -> docs/OneThird-Branching-Graphs-Repair.md
+        -> docs/OneThird-Branching-Graphs-Where-This-Lives.md
+        -> docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md
+        -> docs/OneThird-Hodge-Side-Leverage.md
+        -> docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md
+        -> docs/OneThird-Landscape-Repair-IndependentAudit.md
+  code/species_bound_audit_6ef4               1 transcript(s)    6 address(es)
+        -> code/species_bound_repair_5040/out_r4_self.txt
+        -> code/species_depth_audit_4700/q4_standing.py
+        -> code/species_sites_821e/out_a2_6cb9_after.txt
+        -> docs/OneThird-Species-Hopf-Monoids-Bound-IndependentAudit.md
+        -> docs/OneThird-Species-Hopf-Monoids-Sites-IndependentAudit.md
+  code/species_extent_d633                    3 transcript(s)   18 address(es)
+        -> code/species_7d75/out_t6_fock_and_record.txt
+        -> code/species_7d75/t4_one_operation.py
+        -> code/species_7d75/t6_fock_and_record.py
+        -> code/species_audit_73df/out_c5_doc.txt
+        -> code/species_repair_a4ef/out_c5_doc_73df_after.txt
+        -> docs/OneThird-Audit-mg-7d75-Species-Hopf-Monoids.md
+        -> docs/OneThird-Branching-Graphs-Repair.md
+        -> docs/OneThird-Branching-Graphs-Where-This-Lives.md
+        -> docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md
+        -> docs/OneThird-Hodge-Side-Leverage.md
+        -> docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md
+        -> docs/OneThird-Landscape-Repair-IndependentAudit.md
+  code/species_remainder_f8fa                 2 transcript(s)    7 address(es)
+        -> README.md
+        -> code/species_7d75/out_t3_bidigare.txt
+        -> code/species_7d75/t3_bidigare.py
+  code/species_repair_a4ef                    2 transcript(s)   24 address(es)
+        -> README.md
+        -> code/species_7d75/out_t1_grading.txt
+        -> code/species_7d75/out_t3_bidigare.txt
+        -> code/species_7d75/out_t6_fock_and_record.txt
+        -> code/species_7d75/t1_grading.py
+        -> code/species_7d75/t3_bidigare.py
+        -> code/species_7d75/t6_fock_and_record.py
+  code/state_audit_6a2f                       1 transcript(s)   54 address(es)
+        -> STATE.md
+  code/state_claims_repair_0120               3 transcript(s)   84 address(es)
+        -> code/audit_2c77/README.md
+        -> code/audit_330a/README.md
+        -> code/audit_c067/PREDICTIONS.md
+        -> code/audit_c067/README.md
+        -> code/branching_audit_19ec/README.md
+        -> code/branching_bound_d075/README.md
+        -> code/census_repair_f3ff/README.md
+        -> code/face_geometry_audit_fcb2/README.md
+        -> code/hodge_leverage_repair_3f3b/PREDICTIONS.md
+        -> code/repair_b2af/README.md
+        -> code/species_bound_audit_6ef4/PREDICTIONS.md
+        -> code/species_extent_d633/README.md
+        -> code/state_delegation_repair_0049/README.md
+        -> code/state_delegation_repair_0049/render0049.py
+        -> code/state_delegation_repair_a74f/README.md
+        -> code/state_delegation_repair_a74f/claims_a74f.py
+        -> code/state_delegation_repair_a74f/prose_a74f.py
+        -> code/state_delegation_repair_a74f/run_all.sh
+        -> code/state_landing_control_2da3/delta_control.py
+        -> code/state_visibility_audit_65eb/PREDICTIONS.md
+        -> code/state_visibility_audit_65eb/README.md
+        -> code/state_visibility_audit_65eb/run_all.sh
+        -> code/state_visibility_audit_65eb/six65eb.py
+        -> docs/OneThird-Audit-mg-7dd3-Extent-Repair.md
+        -> docs/OneThird-Species-Hopf-Monoids-Repair-Extent-Measured.md
+        -> docs/repair-mg-8d5e-derived-anchor-and-the-term.md
+        -> docs/roadmap.md
+  code/state_delegation_audit_16eb            2 transcript(s)   13 address(es)
+        -> code/state_delegation_repair_0049/README.md
+        -> code/state_delegation_repair_0049/render0049.py
+  code/state_delegation_repair_a74f           1 transcript(s)   40 address(es)
+        -> STATE.md
+        -> code/state_delegation_repair_0049/README.md
+        -> code/state_delegation_repair_0049/render0049.py
+        -> code/state_landing_control_2da3/COVERAGE.md
+        -> code/state_landing_control_2da3/delta_control.py
+        -> docs/state-history/README.md
+  code/state_landing_control_2da3             1 transcript(s)   18 address(es)
+        -> docs/state-history/README.md
+  code/state_relocation_audit_b0ae            1 transcript(s)    5 address(es)
+        -> STATE.md
+  code/state_suppression_repair_5f7c          2 transcript(s)   65 address(es)
+        -> STATE.md
+        -> code/state_delegation_repair_0049/README.md
+        -> code/state_delegation_repair_0049/mutations_0049.py
+        -> code/state_delegation_repair_0049/render0049.py
+        -> code/state_delegation_repair_a74f/README.md
+        -> code/state_delegation_repair_a74f/prose_a74f.py
+        -> code/state_landing_control_2da3/COVERAGE.md
+        -> code/state_landing_control_2da3/delta_control.py
+        -> docs/state-history/README.md
+  code/state_visibility_audit_65eb            4 transcript(s)  567 address(es)
+        -> STATE.md
+        -> code/state_delegation_audit_16eb/README.md
+        -> code/state_delegation_audit_16eb/claims16eb.py
+        -> code/state_delegation_audit_16eb/run_all.sh
+        -> code/state_delegation_repair_0049/README.md
+        -> code/state_delegation_repair_0049/render0049.py
+        -> code/state_delegation_repair_0049/run_all.sh
+        -> code/state_delegation_repair_a74f/PREDICTIONS.md
+        -> code/state_delegation_repair_a74f/README.md
+        -> code/state_delegation_repair_a74f/battery_a74f.py
+        -> code/state_delegation_repair_a74f/claims_a74f.py
+        -> code/state_delegation_repair_a74f/prose_a74f.py
+        -> code/state_landing_control_2da3/COVERAGE.md
+        -> code/state_landing_control_2da3/delta_control.py
+        -> code/state_landing_control_2da3/negative_control.py
+        -> code/state_landing_control_2da3/presentation.py
+        -> code/state_landing_control_2da3/run_all.sh
+        -> docs/state-history/README.md
+  code/summary_guard_audit_407f               1 transcript(s)   14 address(es)
+        -> code/census_repair_f3ff/s1_rows.py
+        -> code/census_repair_f3ff/s2_controls.py
+        -> code/census_repair_f3ff/s3_graph.py
+  code/superseded_descent_688c                1 transcript(s)    6 address(es)
+        -> STATE.md
+        -> code/row3b_audit_eba7/OUTCOMES.md
+        -> docs/OneThird-Compression-W1-LinearEigenfunction-Provenance-mg-bb60.md
+        -> docs/state-history/audit-mg-eba7-of-mg-55f2.md
+  code/superseded_figures_5827                2 transcript(s)  110 address(es)
+        -> STATE.md
+        -> code/libweak_audit_c4f5/OUTCOMES.md
+        -> code/libweak_audit_c4f5/PREDICTIONS.md
+        -> code/libweak_audit_c4f5/README.md
+        -> docs/OneThird-LIBweak-mg-c3ca.md
+        -> docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md
+        -> docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+        -> docs/OneThird-lambda-std-Operative-Form.md
+        -> docs/state-history/attempt-mg-88bd.md
+  code/suppression_polarity_audit_40e4        2 transcript(s)   32 address(es)
+        -> code/state_delegation_repair_0049/README.md
+        -> code/state_delegation_repair_a74f/README.md
+        -> code/state_delegation_repair_a74f/prose_a74f.py
+        -> code/state_suppression_repair_5f7c/PREDICTIONS.md
+        -> code/state_suppression_repair_5f7c/README.md
+        -> code/state_suppression_repair_5f7c/polarity_5f7c.py
+  code/sweep_evidence_control_d2c2            2 transcript(s)   22 address(es)
+        -> README.md
+        -> code/audit_successor_consolidation_9134/README.md
+        -> code/audit_successor_consolidation_9134/consolidate_9134.py
+        -> code/audit_successor_consolidation_9134/out_consolidate.txt
+        -> code/compression_novelty_623a/a1_identities.py
+        -> code/compression_novelty_623a/out_a1_identities.txt
+        -> code/compression_novelty_623a/out_a3_sites.txt
+        -> code/counterexample_audit_a7b4/README.md
+        -> code/counterexample_audit_a7b4/selfcheck.py
+        -> code/face_geometry_audit_d0e2/README.md
+        -> code/sibling_sweep_7085/out_r1_sweep.txt
+        -> code/sibling_sweep_7085/out_r1_sweep_FIRSTRUN_2FAIL.txt
+        -> code/state_delegation_audit_16eb/README.md
+        -> code/state_delegation_audit_5644/README.md
+  code/truncate_sweep_ec63                    1 transcript(s)    2 address(es)
+        -> code/runner_exit_repair_bf79/out_p1_grain.txt
+  code/unitmap_audit_9f91                     1 transcript(s)    5 address(es)
+        -> STATE.md
+        -> docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md
+        -> docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md
+  code/verdict_delivery_bf3f                  1 transcript(s)    1 address(es)
+        -> STATE.md
+  code/verdict_path_repair_1d26               2 transcript(s)    8 address(es)
+        -> code/species_extent_d633/e2_crosssection.py
+        -> code/species_extent_d633/kernd633.py
