@@ -63,7 +63,18 @@ STATE = os.path.join(ROOT, "STATE.md")
 # allowed and is one edit -- move the number, and say in the commit what the words are and why
 # they could not be a citation instead.  The distinction matters because "cite, do not restate"
 # is the file's own first rule, and almost every honest reason to grow it is a reason to cite.
-WORDS_CEILING = 3200
+#
+# RAISED 3,200 -> 3,300 at mg-1903, and the words are ONE §5 ROW: "a compression designed from
+# the poset injects realizability", the intuition Daniel named on 2026-08-13, with the two-line
+# exhibit that kills it and the site where the poset-dependence washes out.  WHY IT COULD NOT BE
+# A CITATION -- which is the test this file sets for its own raise -- is that §5 IS the citation
+# site.  Every row there is a pointer PLUS the one sentence that lets a reader recognise the
+# intuition as the one they are about to have; a row reading "see mg-0fc6 §2" reproduces exactly
+# the omission mg-1903 exists to repair, because the reader who needs it is designing the next
+# compression and does not yet know that document is about him.  The raise is 100 words and the
+# file lands at 3,230: that RESTORES the pre-entry headroom (73 words) rather than granting new
+# slack, so the next writer faces the same cap this one did and not a looser one.
+WORDS_CEILING = 3300
 
 # Section anchors: (label, phrase that must appear in a '## ' heading).
 S_QUANTITIES = ("S2 quantities", "what each one MEANS")
