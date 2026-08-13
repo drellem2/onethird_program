@@ -109,6 +109,48 @@
 #
 # THE EDIT IS HERE, AGAIN, for the reason this file's header gives: refinery.toml alone would
 # put it on route 1 and leave default discovery reaching a gate list one suite short.
+#
+# --- mg-f771 -------------------------------------------------------------------------------
+# A SEVENTH SUITE JOINS THE GATE, IT RUNS OUTSIDE THE LOOP, AND ITS SUBJECT IS THIS FILE.
+# 0.18 s measured.  THE WHOLE GATE IS MEASURED AT 44.7 s ON THIS HOST WITH IT IN.  That is
+# BELOW the 45.6 s mg-28b6 recorded for the six-suite gate, and for the reason mg-602d's
+# entry already gives: read either as a measurement of its own run and neither as a property
+# of the gate.  ⚠️ THIS COMMENT WAS DRAFTED SAYING 46.9 s, WHICH WAS THE ADDITION ARITHMETIC
+# AND NOT A RUN — mg-17aa's D4, drafted inside the comment of the very suite whose subject is
+# a committed number that disagrees with the thing it describes.  Corrected by running it,
+# before the first commit rather than after.
+#
+# WHAT IT GATES IS THE GATE'S OWN SIDE EFFECT.  Every suite above rewrites the tracked
+# transcripts it owns, so every merge into this repository leaves the tree dirty BY
+# CONSTRUCTION -- mg-69b4 filed it as D5, "the gate leaves four tracked files modified in two
+# directories that are not mine", and nothing owned it.  The cost was not the dirty tree.  It
+# was that `code/facts_registry_03cf/out_f0_registry_discipline.txt` sat on main reading
+# `VERDICT: GREEN -- 20 entries` about a registry that has 23, for as long as nobody happened
+# to commit the refresh.  These transcripts are QUOTED -- docs/FACTS.md:110 links one, and
+# code/sweep_evidence_control_d2c2/p1_names.py reads another out of `git HEAD:` on purpose --
+# so a stale one is a REPORT, not a build artifact, and the part written to be quotable was
+# the wrong half.
+#
+# THE INVARIANT: a committed out_*.txt must never be able to disagree with the repo it
+# describes.  It is enforced by reading what the six suites above have just written and
+# comparing it with the committed copy.  IT IS NOT A BYTE COMPARISON, AND IT CANNOT BE:
+# these transcripts embed wall-clock timings and ABSOLUTE WORKTREE PATHS, so the same repo
+# state produces different bytes in every polecat worktree.  Byte-equality is unsatisfiable
+# here and a gate that can never be green is worse than no gate.  Exactly two families are
+# declared not to be a function of repo state (checkout root, decimal seconds) and every
+# other difference is RED.  code/gate_fixed_point_f771/lib_f771.py holds the two rules and
+# nine planted worlds bound them -- six the normaliser MUST catch, three it must NOT.
+#
+# THE COST, STATED RATHER THAN DISCOVERED: a branch that moves STATE.md must now also carry
+# the refreshed transcripts, because `bytes 138335` in the ratchet's transcript IS a function
+# of repo state.  That is the current dirty-tree behaviour made mandatory instead of
+# accidental, which is the trade mg-f771 named in advance and chose.
+#
+# IT RUNS OUTSIDE THE LOOP because it must run LAST -- it reads the other suites' side
+# effects -- and because it needs the freshness handshake the loop cannot give it.  Run on
+# its own it would compare committed transcripts against worktree copies nothing had
+# refreshed, find them equal, and print a green meaning only "nobody hand-edited these".  So
+# it REFUSES without BUILD_SH_RAN_THE_SUITES=1, which is set on exactly this one line.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \
@@ -124,6 +166,12 @@ do
     RC=$?
     [ "$RC" -gt "$STATUS" ] && STATUS=$RC
 done
+
+echo
+echo "############################################################ code/gate_fixed_point_f771/run_all.sh"
+BUILD_SH_RAN_THE_SUITES=1 sh code/gate_fixed_point_f771/run_all.sh
+RC=$?
+[ "$RC" -gt "$STATUS" ] && STATUS=$RC
 echo
 echo "############################################################ build.sh"
 echo "worst suite exit: $STATUS   (0 green · 1 a control fired · 2 refused/broken)"
