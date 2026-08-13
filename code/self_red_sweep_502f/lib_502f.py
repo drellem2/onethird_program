@@ -128,6 +128,45 @@ def _reporting_parents(tree):
     return out
 
 
+def _fixture_constants(tree):
+    """(ids of literals that are module-level ALL-CAPS constants, names of those constants).
+
+    A MODULE-LEVEL `NAME = "...build.sh..."` IS A CONSTANT OR A FIXTURE, NOT AN INVOCATION,
+    AND THIS RULE WAS ADDED BECAUSE THIS INSTRUMENT FLAGGED ITSELF.  `lib_502f.GATE =
+    "build.sh"` is the string this sweep looks FOR, and `s0_controls.SRC_ONE_HOP` is a
+    planted source deliberately shaped like the defect; both are module-level upper-case
+    assignments, and without this rule the sweep reports its own two files as exec-edge
+    sites forever.  Worse, `s0_controls.py` then resolved to GUARDED in §2 — because
+    `calls_guard` is a substring test and that file necessarily contains the guard's name —
+    which is an ACCIDENTAL pass, the one kind of green that is worth less than a red.
+
+    THE EVASION IS CLOSED RATHER THAN ACCEPTED.  `GATE = "build.sh"` followed by
+    `subprocess.run(["sh", GATE])` would otherwise hide a real edge behind a constant, so
+    the NAMES are returned too and `py_gate_edge` re-flags any that appear inside an exec
+    call's arguments.  Worlds D19-D20.
+    """
+    lits, names = set(), set()
+    for node in tree.body:
+        targets = []
+        if isinstance(node, ast.Assign):
+            targets = node.targets
+        elif isinstance(node, ast.AnnAssign):
+            targets = [node.target]
+        else:
+            continue
+        upper = [t.id for t in targets
+                 if isinstance(t, ast.Name) and t.id.isupper()]
+        if not upper:
+            continue
+        found = [n for n in ast.walk(node)
+                 if isinstance(n, ast.Constant) and isinstance(n.value, str)
+                 and GATE in n.value]
+        if found:
+            lits.update(id(n) for n in found)
+            names.update(upper)
+    return lits, names
+
+
 def py_gate_edge(source):
     """(gate_literal_lines, exec_lines) for a python source.
 
@@ -141,14 +180,22 @@ def py_gate_edge(source):
     those by reading them rather than by tightening the rule into missing another hop.
     """
     tree = ast.parse(source)
-    doc = _docstring_nodes(tree) | _reporting_parents(tree)
-    lits = sorted({n.lineno for n in ast.walk(tree)
-                   if isinstance(n, ast.Constant) and isinstance(n.value, str)
-                   and GATE in n.value and id(n) not in doc})
+    fixtures, fixture_names = _fixture_constants(tree)
+    doc = _docstring_nodes(tree) | _reporting_parents(tree) | fixtures
+    lits = {n.lineno for n in ast.walk(tree)
+            if isinstance(n, ast.Constant) and isinstance(n.value, str)
+            and GATE in n.value and id(n) not in doc}
     execs = sorted({n.lineno for n in ast.walk(tree) if isinstance(n, ast.Call)
                     and ((isinstance(n.func, ast.Attribute) and n.func.attr in EXEC_NAMES)
                          or (isinstance(n.func, ast.Name) and n.func.id in EXEC_NAMES))})
-    return lits, execs
+    # A fixture constant that is USED in an exec call is an edge after all.
+    for n in ast.walk(tree):
+        if not (isinstance(n, ast.Call) and n.lineno in execs):
+            continue
+        for a in ast.walk(n):
+            if isinstance(a, ast.Name) and a.id in fixture_names:
+                lits.add(a.lineno)
+    return sorted(lits), execs
 
 
 def sh_gate_edge(source):
@@ -185,14 +232,20 @@ def bindings(script_rel, tracked_files, texts):
       ARROW      a documented pairing on one line of a tracked markdown file, e.g. a
                  README table row `| x1_positive_control.py -> out_x1_positive.txt |`.
                  Caught x1, whose transcript name is NOT its own stem and which no file
-                 in this repository redirects into.
+                 in this repository redirected into before mg-502f's own README quoted
+                 the measurement command.
+
+    EVERY RULE THAT BINDS IS REPORTED, not the first one to fire, and that is not tidiness:
+    x1's binding was ARROW-ONLY until this ticket's README wrote the redirect down, and a
+    first-match report would now say REDIRECT and quietly erase the finding that the
+    redirect had never been written anywhere.
     """
     d = os.path.dirname(script_rel)
     stem = os.path.basename(script_rel)[:-3]
     found = {}
     by_name = "%s/out_%s.txt" % (d, stem)
     if by_name in tracked_files:
-        found[by_name] = "NAME"
+        found[by_name] = {"NAME"}
     for rel, text in texts.items():
         if not (rel.endswith(".md") or rel.endswith(".sh")):
             continue
@@ -204,9 +257,9 @@ def bindings(script_rel, tracked_files, texts):
                     if os.path.basename(script_rel) not in m.group(1):
                         continue
                     cand = "%s/%s" % (d, os.path.basename(m.group(2)))
-                    if cand in tracked_files and cand not in found:
-                        found[cand] = rule
-    return sorted((t, found[t]) for t in found)
+                    if cand in tracked_files:
+                        found.setdefault(cand, set()).add(rule)
+    return sorted((t, "+".join(sorted(found[t]))) for t in found)
 
 
 def self_writes(source, transcript_rel):

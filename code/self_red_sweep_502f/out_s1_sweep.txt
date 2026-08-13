@@ -10,7 +10,7 @@ mg-502f  SELF-RED EXHIBITS — does any tracked script redden the gate it is run
   BUILD_SH_RAN_THE_SUITES, so every route to it passes through a line that
   sets that variable.  Tracked lines that set it, comments excluded:
 
-      build.sh:342  BUILD_SH_RAN_THE_SUITES=1 sh code/gate_fixed_point_f771/run_al
+      build.sh     BUILD_SH_RAN_THE_SUITES=1 sh code/gate_fixed_point_f771/run_all.sh
 
   TWO DIRECTORIES ARE EXEMPT FROM THIS QUESTION AND FROM THIS QUESTION ONLY.
   Each is shown with how many handshake mentions in CODE it was not asked about,
@@ -33,18 +33,22 @@ mg-502f  SELF-RED EXHIBITS — does any tracked script redden the gate it is run
   was written first and did not see x1_positive_control.py, which builds the
   argv and hands it to a local helper.  One hop defeated it.  lib_502f §A.
 
-  code/alias_agreement_06d1/x0_exhibit.py              gate literal in code at [50]
-                                                       exec primitive at        [50, 139]
-  code/self_red_sweep_502f/lib_502f.py                 gate literal in code at [39]
-                                                       exec primitive at        [58]
-  code/self_red_sweep_502f/s0_controls.py              gate literal in code at [54, 63, 68, 76, 82, 166]
-                                                       exec primitive at        [264, 281]
-  code/self_red_sweep_502f/s1_sweep.py                 gate literal in code at [89, 134]
-                                                       exec primitive at        NONE — prose, not an invocation
-  code/state_ratchet_e331/x1_positive_control.py       gate literal in code at [201]
-                                                       exec primitive at        [71, 308]
-  code/sweep_evidence_control_d2c2/p1_names.py         gate literal in code at [75]
-                                                       exec primitive at        NONE — prose, not an invocation
+  NO LINE NUMBERS ARE ON STDOUT AND THAT IS DELIBERATE — they are on stderr.
+  A tracked transcript carrying `build.sh:342` is an address into a file other
+  tickets edit: it rots on any unrelated change, and it makes THIS transcript
+  move for a reason that is not this instrument's subject.  That is mg-20ee's
+  defect class over this exact population of transcripts, and an instrument
+  about a class it is easy to join silently should not join a neighbouring one.
+  Counts are repo state and stay; addresses are navigation and go to stderr.
+
+  code/alias_agreement_06d1/x0_exhibit.py              1 gate literal(s) in code
+                                                       2 exec primitive(s)
+  code/self_red_sweep_502f/s1_sweep.py                 2 gate literal(s) in code
+                                                       NO exec primitive — prose, not an invocation
+  code/state_ratchet_e331/x1_positive_control.py       1 gate literal(s) in code
+                                                       2 exec primitive(s)
+  code/sweep_evidence_control_d2c2/p1_names.py         1 gate literal(s) in code
+                                                       NO exec primitive — prose, not an invocation
 
 §2  THE VERDICTS
 --------------------------------------------------------------------------------------------
@@ -60,23 +64,19 @@ mg-502f  SELF-RED EXHIBITS — does any tracked script redden the gate it is run
   PROSE     the gate literal is a printed string; nothing here runs the gate.
 
   GUARDED   code/alias_agreement_06d1/x0_exhibit.py
-            transcript code/alias_agreement_06d1/out_x0_exhibit.txt   bound by NAME
+            transcript code/alias_agreement_06d1/out_x0_exhibit.txt   bound by ARROW+NAME+REDIRECT
             refuses when stdout IS a tracked transcript, so no run of this
             script can hand the gate a truncated file.  Writes it: YES.
-  NO-BIND   code/self_red_sweep_502f/lib_502f.py
-            runs the gate; no tracked out_*.txt is bound to it.
-  GUARDED   code/self_red_sweep_502f/s0_controls.py
-            transcript code/self_red_sweep_502f/out_s0_controls.txt   bound by NAME
-            refuses when stdout IS a tracked transcript, so no run of this
-            script can hand the gate a truncated file.  Writes it: NO.
   PROSE     code/self_red_sweep_502f/s1_sweep.py
-            gate named at [89, 134]; no exec primitive in the file.
+            names the gate in code 2 time(s); no exec primitive in the
+            file, so nothing here can run it.
   GUARDED   code/state_ratchet_e331/x1_positive_control.py
-            transcript code/state_ratchet_e331/out_x1_positive.txt   bound by REDIRECT
+            transcript code/state_ratchet_e331/out_x1_positive.txt   bound by ARROW+REDIRECT
             refuses when stdout IS a tracked transcript, so no run of this
             script can hand the gate a truncated file.  Writes it: YES.
   PROSE     code/sweep_evidence_control_d2c2/p1_names.py
-            gate named at [75]; no exec primitive in the file.
+            names the gate in code 1 time(s); no exec primitive in the
+            file, so nothing here can run it.
 
 §3  WHAT THIS SWEEP CANNOT SEE
 --------------------------------------------------------------------------------------------
@@ -92,4 +92,4 @@ mg-502f  SELF-RED EXHIBITS — does any tracked script redden the gate it is run
     and one that did would be reported by nothing here.
 
 VERDICT: GREEN — no tracked script runs `./build.sh` into a file the gate reads.
-  0.34s
+  0.27s

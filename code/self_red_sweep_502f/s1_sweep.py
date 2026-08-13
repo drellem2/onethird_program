@@ -85,7 +85,8 @@ def main(root=L.ROOT):
     print()
     setters = L.handshake_setters(hot)
     for rel, i, s in setters:
-        print("      %s:%d  %s" % (rel, i, s[:62]))
+        print("      %-12s %s" % (rel, s[:66]))
+        sys.stderr.write("mg-502f s1: route at %s:%d\n" % (rel, i))
     if len(setters) != 1 or setters[0][0] != "build.sh":
         print()
         print("  MORE THAN ONE ROUTE, OR A ROUTE THAT IS NOT build.sh.  This sweep's §1 looks")
@@ -139,12 +140,24 @@ def main(root=L.ROOT):
         if lines:
             sh_sites.append((rel, lines))
 
+    print("  NO LINE NUMBERS ARE ON STDOUT AND THAT IS DELIBERATE — they are on stderr.")
+    print("  A tracked transcript carrying `build.sh:342` is an address into a file other")
+    print("  tickets edit: it rots on any unrelated change, and it makes THIS transcript")
+    print("  move for a reason that is not this instrument's subject.  That is mg-20ee's")
+    print("  defect class over this exact population of transcripts, and an instrument")
+    print("  about a class it is easy to join silently should not join a neighbouring one.")
+    print("  Counts are repo state and stay; addresses are navigation and go to stderr.")
+    print()
     for rel, lits, execs in sorted(sites):
-        print("  %-52s gate literal in code at %s" % (rel, lits))
-        print("  %-52s exec primitive at        %s"
-              % ("", execs[:6] if execs else "NONE — prose, not an invocation"))
+        print("  %-52s %d gate literal(s) in code" % (rel, len(lits)))
+        print("  %-52s %s"
+              % ("", ("%d exec primitive(s)" % len(execs)) if execs
+                 else "NO exec primitive — prose, not an invocation"))
+        sys.stderr.write("mg-502f s1: %s gate literals at %s, exec at %s\n"
+                         % (rel, lits, execs[:6]))
     for rel, lines in sorted(sh_sites):
-        print("  %-52s shell invocation at      %s" % (rel, lines))
+        print("  %-52s %d shell invocation(s)" % (rel, len(lines)))
+        sys.stderr.write("mg-502f s1: %s shell invocation at %s\n" % (rel, lines))
     if broken:
         print()
         for rel, exc in broken:
@@ -170,7 +183,9 @@ def main(root=L.ROOT):
         src = texts[rel]
         if not execs:
             print("  PROSE     %s" % rel)
-            print("            gate named at %s; no exec primitive in the file." % lits)
+            print("            names the gate in code %d time(s); no exec primitive in the"
+                  % len(lits))
+            print("            file, so nothing here can run it.")
             continue
         binds = L.bindings(rel, tracked_set, texts)
         if not binds:

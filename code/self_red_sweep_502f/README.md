@@ -299,6 +299,38 @@ else**, so a self-red script placed inside either one is found.
 mg-479c's repaired script an `INSTANCE` outright. That overstates a real repair. The split
 is the honest form and it is what surfaced the guard as the missing half.
 
+**D4b — RUNNING THE SWEEP AGAINST ITS OWN COMMITTED SELF FOUND AN ACCIDENTAL PASS, WHICH IS
+THE WORST KIND OF GREEN.** Once committed, `lib_502f.py` (whose `GATE = "build.sh"` is the
+string the sweep looks *for*) and `s0_controls.py` (whose planted sources are deliberately
+shaped like the defect) both appeared in §1 as exec-edge sites. `s0_controls.py` then
+resolved to **GUARDED** in §2 — not because it is guarded, but because `calls_guard` is a
+substring test and that file necessarily contains the guard's name. *An accidental pass, in
+the arm written to make passes non-accidental.*
+
+Three narrow repairs, no blanket exemption:
+
+* `_fixture_constants` — a module-level ALL-CAPS assignment holding the gate's name is a
+  constant or a fixture, **unless that constant reaches an exec call**, which is checked
+  (worlds D19–D20) so `GATE = "build.sh"; subprocess.run(["sh", GATE])` cannot hide.
+* D19/D20's own sources were **hoisted to module constants**, so the existing rule applies
+  instead of a second rule being written for them.
+* D2's claim *text* was reworded so it no longer spells the gate's name. A rule teaching
+  `_reporting_parents` about `score()` would have been a rule about one file.
+
+**D4c — foreign line numbers were on stdout, and that is mg-20ee's defect class.** `§0
+build.sh:342` is an address into a file other tickets edit: it rots on any unrelated change
+— it had already gone `342 → 352` between this branch's first submission and its rebase —
+and it makes this transcript move for a reason that is not this instrument's subject. Line
+numbers are now on **stderr**; counts, which are stable repo state, stay on stdout. An
+instrument about a class it is easy to join silently should not join a neighbouring one.
+
+**D4d — `bindings` reported the first rule that fired, and this ticket's own README broke
+that.** `x1_positive_control.py`'s binding was **ARROW-only** — the fact §3 is built on —
+until §9 of this document quoted the measurement command, which is a literal redirect in a
+tracked file. First-match reporting would then have said `REDIRECT` and quietly erased the
+finding. Every rule that binds is now reported: `ARROW+REDIRECT`. (The rules are nested, not
+disjoint: `ARROW` is the weaker same-line test, so every `REDIRECT` is also an `ARROW`.)
+
 **D5 — the sweep parsed all 1164 tracked `.py` files and took 8.74 s** before a prefilter
 took it to 0.22 s. Reported because a "0.4 s" in §6 that was never 8.74 s would be
 mg-17aa's D4.
@@ -379,7 +411,7 @@ which is a fair sample of how easy the original defect was to misread.
 |---|---|
 | `lib_502f.py` | the detector rules, isolated so `s0_controls.py` tests these and not a re-spelling |
 | `guard_502f.py` | the runtime refusal; imports `lib_f771.is_transcript` so there is one definition of the watched class |
-| `s0_controls.py` → `out_s0_controls.txt` | 30 planted worlds: the mechanism (§M), the detector (§D), the guard (§G) |
+| `s0_controls.py` → `out_s0_controls.txt` | 32 planted worlds: the mechanism (§M), the detector (§D), the guard (§G) |
 | `s1_sweep.py` → `out_s1_sweep.txt` | the estate, swept |
 | `run_all.sh` | the runner. `.tmp` + `mv`, stdout only, no pipe — for this suite's own subject |
 

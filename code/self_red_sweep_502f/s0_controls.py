@@ -102,6 +102,18 @@ subprocess.run(["sh", "g.sh"], env={"BUILD_SH_RAN_THE_SUITES": "1"})
 
 SRC_BROKEN = 'def f(:\n    pass\n'
 
+# D19/D20's sources are MODULE-LEVEL CONSTANTS LIKE EVERY OTHER PLANTED SOURCE HERE, and
+# they were written inline inside the score() calls first.  That put a `build.sh` literal in
+# a FUNCTION-LOCAL string, which `_fixture_constants` does not exempt, so this file appeared
+# in the sweep's own §1 as an exec-edge site — and then resolved to GUARDED in §2, because
+# `calls_guard` is a substring test and this file necessarily contains the guard's name.  An
+# ACCIDENTAL PASS, in the arm written to make passes non-accidental, found by running the
+# sweep against its own committed self.  Hoisting them makes the existing rule apply rather
+# than adding a second one.
+SRC_FIXTURE_ONLY = 'SRC = "sh build.sh"\nimport subprocess\nsubprocess.run(["git", "s"])\n'
+
+SRC_FIXTURE_USED = 'GATE = "build.sh"\nimport subprocess\nsubprocess.run(["sh", GATE])\n'
+
 
 def main():
     t0 = time.time()
@@ -163,7 +175,12 @@ def main():
 
     score("D1", "ONE HOP: argv built, handed to a local helper (x1's shape)",
           edge(SRC_ONE_HOP), True)
-    score("D2", "DIRECT: subprocess.run([\"sh\", \"build.sh\"]) (x0's shape)",
+    # THE CLAIM TEXT DELIBERATELY DOES NOT SPELL THE GATE'S NAME.  It used to, and that
+    # single literal — an argument to score(), which prints it, but not to print() itself —
+    # kept this whole file in the sweep's §1 as an exec-edge site.  Narrowing
+    # `_reporting_parents` to know about score() would be a rule about one file; wording a
+    # claim so it does not contain the string it is a claim about costs nothing.
+    score("D2", "DIRECT: an argv literal handed straight to a subprocess (x0's shape)",
           edge(SRC_DIRECT), True)
     score("D3", "PROSE: gate only ever PRINTED, something else executed",
           edge(SRC_PROSE), False)
@@ -192,8 +209,12 @@ def main():
           b_arrow, [("code/d/out_other.txt", "ARROW")])
     b_red = L.bindings("code/d/u.py", planted,
                        {"code/d/run_all.sh": "python3 -u u.py > out_other.txt 2>&1"})
-    score("D11", "REDIRECT: a literal redirect in a runner",
-          b_red, [("code/d/out_other.txt", "REDIRECT")])
+    # BOTH RULES FIRE, AND THAT IS THE RULES BEING NESTED RATHER THAN A BUG.  ARROW is the
+    # weaker test — a `.py` and an `out_*.txt` on one line — so every REDIRECT is also an
+    # ARROW.  Reporting both is what makes x1's ARROW-ONLY history readable in §2 after
+    # this ticket's own README wrote its redirect down.
+    score("D11", "REDIRECT: a literal redirect in a runner (ARROW is nested in it)",
+          b_red, [("code/d/out_other.txt", "ARROW+REDIRECT")])
     b_untracked = L.bindings("code/d/t.py", planted,
                              {"code/d/README.md": "t.py -> out_nowhere.txt"})
     score("D12", "AN UNTRACKED TARGET IS NOT A BINDING — f771 grades tracked files",
@@ -206,6 +227,15 @@ def main():
     except SyntaxError:
         broke = True
     score("D13", "an unparseable source raises rather than returning 'no edge'", broke, True)
+    print()
+    print("  D19-D20  A MODULE-LEVEL ALL-CAPS CONSTANT IS A FIXTURE, NOT AN INVOCATION —")
+    print("  and the evasion it opens is closed.  This rule exists because THIS INSTRUMENT")
+    print("  FLAGGED ITSELF: `lib_502f.GATE = \"build.sh\"` is the string the sweep looks")
+    print("  for, and the planted sources above are deliberately shaped like the defect.")
+    score("D19", "a fixture constant alone is NOT an edge",
+          edge(SRC_FIXTURE_ONLY), False)
+    score("D20", "the SAME constant, USED in an exec call, IS an edge",
+          edge(SRC_FIXTURE_USED), True)
     print()
     print("  D16-D18  THE ROUTE EXEMPTION, HELD TO ITS DECLARED SIZE.  §0 does not ask two")
     print("  directories whether they are a second route to f771, and an exemption that can")

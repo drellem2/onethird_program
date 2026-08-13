@@ -27,7 +27,7 @@ mg-502f  PLANTED WORLDS — the mechanism, the detector, the guard
   the rule cannot silently return to the version that missed a live instance.
 
   D1    ONE HOP: argv built, handed to a local helper (x1's shape) True        AS REQUIRED
-  D2    DIRECT: subprocess.run(["sh", "build.sh"]) (x0's shape)    True        AS REQUIRED
+  D2    DIRECT: an argv literal handed straight to a subprocess (x True        AS REQUIRED
   D3    PROSE: gate only ever PRINTED, something else executed     False       AS REQUIRED
   D4    DOCSTRING ONLY: no code literal, no exec — NOT an edge     False       AS REQUIRED
   D5    SELF-WRITER is recognised as writing its own transcript    True        AS REQUIRED
@@ -40,11 +40,18 @@ mg-502f  PLANTED WORLDS — the mechanism, the detector, the guard
 
   D9    NAME: code/d/w.py <-> code/d/out_w.txt                     [('code/d/o AS REQUIRED
   D10   ARROW: a README table row (x1's binding, and its ONLY one) [('code/d/o AS REQUIRED
-  D11   REDIRECT: a literal redirect in a runner                   [('code/d/o AS REQUIRED
+  D11   REDIRECT: a literal redirect in a runner (ARROW is nested  [('code/d/o AS REQUIRED
   D12   AN UNTRACKED TARGET IS NOT A BINDING — f771 grades tracked []          AS REQUIRED
 
   D13  A FILE THIS INSTRUMENT CANNOT PARSE MUST BE REPORTED, NOT SKIPPED.
   D13   an unparseable source raises rather than returning 'no edg True        AS REQUIRED
+
+  D19-D20  A MODULE-LEVEL ALL-CAPS CONSTANT IS A FIXTURE, NOT AN INVOCATION —
+  and the evasion it opens is closed.  This rule exists because THIS INSTRUMENT
+  FLAGGED ITSELF: `lib_502f.GATE = "build.sh"` is the string the sweep looks
+  for, and the planted sources above are deliberately shaped like the defect.
+  D19   a fixture constant alone is NOT an edge                    False       AS REQUIRED
+  D20   the SAME constant, USED in an exec call, IS an edge        True        AS REQUIRED
 
   D16-D18  THE ROUTE EXEMPTION, HELD TO ITS DECLARED SIZE.  §0 does not ask two
   directories whether they are a second route to f771, and an exemption that can
@@ -81,7 +88,7 @@ mg-502f  PLANTED WORLDS — the mechanism, the detector, the guard
 
 §V  VERDICT
 --------------------------------------------------------------------------------------------
-  30 of 30 worlds scored as required.
+  32 of 32 worlds scored as required.
 
 VERDICT: GREEN — the mechanism is real, the detector detects, the guard refuses.
   0.14s
