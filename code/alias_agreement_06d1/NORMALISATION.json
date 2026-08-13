@@ -1,0 +1,981 @@
+{
+ "canonical_tolerances": {},
+ "conventions": {
+  "eps/c3ca-over-n2": {
+   "description": "ILLUSTRATIVE ONLY \u2014 no pinned name is in this frame.  eps as OneThird-LIBweak-mg-c3ca.md:172 writes it: eps_c3ca = E[inv_e] / n^2.",
+   "source": "code/c3_audit_a94c3/a1_algebra.py:15"
+  },
+  "eps/spectral-6-over-n2-minus-1": {
+   "description": "ILLUSTRATIVE ONLY \u2014 no pinned name is in this frame.  eps as Op-Form :437 and STATE.md:15 write it: eps_spec = 6 E[inv_e] / (n^2 - 1).",
+   "source": "code/c3_audit_a94c3/a1_algebra.py:14"
+  },
+  "mg-0d1b-raw": {
+   "description": "The frame in which mg-0d1b measured these names agreeing: every value is reported as its own tree's entry point returns it, with no factor applied.  This is the canonical frame BY CONSTRUCTION \u2014 it is the frame all twelve recorded tolerances are stated over \u2014 and not by any argument that it is the natural one.",
+   "source": "code/alias_index_0d1b/alias_groups.json, via code/alias_agreement_06d1/BASELINE.json (mg-0d1b, carried by mg-06d1)"
+  }
+ },
+ "declarations": {
+  "anticorrelation_c50b:Delta": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Delta_P` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "anticorrelation_c50b:M": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `M` (4 names, 4 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "anticorrelation_c50b:Phi_star": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_pref` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "anticorrelation_c50b:gamma_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "anticorrelation_c50b:leak(1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "anticorrelation_c50b:mu_exhaustive": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref` (7 names, 7 trees) agreeing to a max spread of 9.097167e-13 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 9.097167463778533e-13
+  },
+  "anticorrelation_c50b:mu_upper": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref (upper bound)` (2 names, 2 trees) agreeing to a max spread of 1.107879e-07 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 1.1078788481055923e-07
+  },
+  "anticorrelation_c50b:rho": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho` (3 names, 3 trees) agreeing to a max spread of 4.440892e-15 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.440892098500626e-15
+  },
+  "anticorrelation_c50b:rho*Delta": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho*Delta_P` (6 names, 6 trees) agreeing to a max spread of 7.310375e-12 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 7.310374527946806e-12
+  },
+  "audit_5cba:Delta": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Delta_P` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "audit_5cba:LK[1]/LE": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "audit_5cba:M": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `M` (4 names, 4 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "audit_5cba:gamma_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "audit_5cba:mu_pref_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref` (7 names, 7 trees) agreeing to a max spread of 9.097167e-13 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 9.097167463778533e-13
+  },
+  "audit_5cba:v_L": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho*Delta_P` (6 names, 6 trees) agreeing to a max spread of 7.310375e-12 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 7.310374527946806e-12
+  },
+  "c3_audit_a94c3:delta1(A_1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "c3_audit_a94c3:leak(A_1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "c3_audit_a94c3:one_minus_rho(1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `1 - rho(A_1)` (3 names, 3 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "c3_audit_a94c3:spectral_gap": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "c3_prefix_capture_76b2:leak(A_1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "c3_prefix_capture_76b2:phi_star": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_all` (6 names, 5 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "c3_prefix_capture_76b2:phi_star_prefix": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_pref` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "c3_prefix_capture_76b2:rho_prefix(1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `1 - rho(A_1)` (3 names, 3 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "chain_iv_c_81ff:lambda2_bracket": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "chain_iv_c_81ff:prefix_Q(1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `1 - rho(A_1)` (3 names, 3 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "direct_prefix_audit_2de0:E_footrule": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `E_footrule` (4 names, 4 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "direct_prefix_audit_2de0:E_leak(A_1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "direct_prefix_audit_2de0:delta_1_prefix(1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "direct_prefix_audit_2de0:phi_star": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_all` (6 names, 5 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "eleak_repair_8311:E_leak(A_1,def)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "eleak_repair_8311:phi_star(def)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_all` (6 names, 5 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "eleak_repair_8311:phi_star(inv)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_all` (6 names, 5 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "eleak_repair_8311:prefix_min": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_pref` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_audit_29fe:Delta": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Delta_P` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_audit_29fe:EDF": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `E_footrule` (4 names, 4 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_audit_29fe:Phi_star_all": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_all` (6 names, 5 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_audit_29fe:Phi_star_pref": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_pref` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_audit_29fe:V10": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho*Delta_P` (6 names, 6 trees) agreeing to a max spread of 7.310375e-12 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 7.310374527946806e-12
+  },
+  "l2_audit_29fe:bracket_gap": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "l2_audit_29fe:bracket_mu_pref": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref` (7 names, 7 trees) agreeing to a max spread of 9.097167e-13 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 9.097167463778533e-13
+  },
+  "l2_audit_29fe:leak[1]": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_conditionality_28ff:E_footrule": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `E_footrule` (4 names, 4 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_conditionality_28ff:V10": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho*Delta_P` (6 names, 6 trees) agreeing to a max spread of 7.310375e-12 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 7.310374527946806e-12
+  },
+  "l2_conditionality_28ff:cone_min": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref` (7 names, 7 trees) agreeing to a max spread of 9.097167e-13 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 9.097167463778533e-13
+  },
+  "l2_conditionality_28ff:delta_max": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Delta_P` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_conditionality_28ff:gap_exact_bounds": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "l2_conditionality_28ff:leak(A_1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_conditionality_28ff:phi_star": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_all` (6 names, 5 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_conditionality_28ff:phi_star_prefix": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_pref` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_underclaim_audit_3bb9:Delta": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Delta_P` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_underclaim_audit_3bb9:V00": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho` (3 names, 3 trees) agreeing to a max spread of 4.440892e-15 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.440892098500626e-15
+  },
+  "l2_underclaim_audit_3bb9:V10": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho*Delta_P` (6 names, 6 trees) agreeing to a max spread of 7.310375e-12 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 7.310374527946806e-12
+  },
+  "l2_underclaim_audit_3bb9:gap_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "l2_underclaim_audit_3bb9:leak[0]": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "l2_underclaim_audit_3bb9:mu_pref_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref` (7 names, 7 trees) agreeing to a max spread of 9.097167e-13 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 9.097167463778533e-13
+  },
+  "lstar_789d:Delta": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Delta_P` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "lstar_789d:LK[1]/LE": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "lstar_789d:M": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `M` (4 names, 4 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "lstar_789d:Phi_star": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_pref` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "lstar_789d:gamma_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "lstar_789d:mu_faces": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref` (7 names, 7 trees) agreeing to a max spread of 9.097167e-13 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 9.097167463778533e-13
+  },
+  "lstar_789d:mu_ub_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref (upper bound)` (2 names, 2 trees) agreeing to a max spread of 1.107879e-07 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 1.1078788481055923e-07
+  },
+  "lstar_789d:rho*Delta": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho*Delta_P` (6 names, 6 trees) agreeing to a max spread of 7.310375e-12 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 7.310374527946806e-12
+  },
+  "lstar_789d:rho_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `rho` (3 names, 3 trees) agreeing to a max spread of 4.440892e-15 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.440892098500626e-15
+  },
+  "sweep_loss_51f4:E_footrule": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `E_footrule` (4 names, 4 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "sweep_loss_51f4:M_mean": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `M` (4 names, 4 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "sweep_loss_51f4:cone_min": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `mu_pref` (7 names, 7 trees) agreeing to a max spread of 9.097167e-13 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 9.097167463778533e-13
+  },
+  "sweep_loss_51f4:delta_max": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Delta_P` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "sweep_loss_51f4:gap_float": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `gamma` (9 names, 9 trees) agreeing to a max spread of 4.665708e-10 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 4.665707820095122e-10
+  },
+  "sweep_loss_51f4:leak_pref(1)": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `leak(A_1)` (13 names, 11 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  },
+  "sweep_loss_51f4:phi_star_pref": {
+   "convention": "mg-0d1b-raw",
+   "derivation": "SEEDED, NOT ASSERTED: mg-0d1b measured group `Phi*_pref` (7 names, 7 trees) agreeing to a max spread of 0.000000e+00 over POP-PRIM at 306 posets, and mg-06d1 pinned that as the tolerance.  Agreement in the raw frame IS the evidence that these names share a normalisation; the identity factor records that evidence and adds nothing to it.  This declaration is REDUNDANT for this name and exists so that the next name in this group cannot be added without one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "seeded_from_measured_spread": 0.0
+  }
+ },
+ "illustrative": {
+  "c3_audit_a94c3:eps_spec": {
+   "convention": "eps/spectral-6-over-n2-minus-1",
+   "derivation": "eps_spec = 6 E[inv_e] / (n^2 - 1) and eps_c3ca = E[inv_e] / n^2, so eps_spec / eps_c3ca = 6 n^2 / (n^2 - 1).  Taking eps_c3ca as the canonical frame, eps_spec's factor is that ratio.  NOT A CONSTANT: a flat 6 is wrong by +0.083 at n=3 and only approaches correct as n -> infinity.",
+   "factor": {
+    "den": [
+     -1,
+     0,
+     1
+    ],
+    "num": [
+     0,
+     0,
+     6
+    ]
+   },
+   "source": "code/c3_audit_a94c3/a1_algebra.py:14-18 (statement); code/unitmap_audit_9f91/out_m1_map.txt:17-22 (exact rationals at n=3,4,5,6,8, under the heading 'what a flat factor of 6 gets wrong at small n')"
+  },
+  "unitmap_audit_9f91:eps_c3ca": {
+   "convention": "eps/c3ca-over-n2",
+   "derivation": "The canonical frame CHOSEN FOR THIS EXAMPLE, and the choice is arbitrary and carries no claim: taking eps_spec as canonical instead would give eps_c3ca the reciprocal factor (n^2 - 1)/(6 n^2) and every canonical value would move by the same factor.  A normalisation field states RELATIVE frames; it does not privilege one.",
+   "factor": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   },
+   "source": "code/unitmap_audit_9f91/out_m1_map.txt:17-22"
+  }
+ },
+ "note": "THE NORMALISATION FIELD (mg-479c).  Per NAME, not per quantity: two names for one quantity may legitimately differ by a stated factor, and this file is where that factor is said.  Semantics: raw = factor(n) * canonical, so canonical = raw / factor(n), with factor a rational function of n in exact integer coefficients ascending in n.  An UNDECLARED normalisation is REFUSED (exit 2) and never defaulted to 'same'.  Seeded once by mknorm.py, which refuses to run again; a new name is declared BY HAND with its own derivation.",
+ "pinned_digest": "47ae3821afc66fc2",
+ "semantics": {
+  "convention": "a NAME for a frame.  Within one alias group: same convention => equal factors, different conventions => different factors.  Both are hard refusals.",
+  "factor": "{num: [c0, c1, ...], den: [d0, d1, ...]} \u2014 integer coefficients ASCENDING in n; evaluated as an exact Fraction; {num:[1],den:[1]} is the identity and is a PASS-THROUGH, not a multiply by 1.0",
+  "raw = factor(n) * canonical": true
+ }
+}

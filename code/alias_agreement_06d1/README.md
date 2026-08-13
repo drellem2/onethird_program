@@ -245,6 +245,180 @@ defects of my own, all kept:
   **the largest unswept candidate in the corpus**.
 * It does not cover the **172 trees** no adapter reaches, of which mg-0d1b's `x1` classifies
   59 as doing the arc's mathematics with no adapter.
+* **(mg-479c)** It does not establish that any declared normalisation is the **right** one —
+  see §7's D9. The field records what somebody claimed a name's frame is; nothing here
+  checks the claim against the tree that produces the name.
+
+---
+
+## §7 THE NORMALISATION FIELD (mg-479c)
+
+**The gap.** Everything above compares **values** across the names of one quantity. It had
+no representation for two names denoting one quantity **in different normalisations**, so a
+factor of 2 between two live conventions and a genuine 2× error were **the same signal**.
+Both directions fail:
+
+* **FALSE RED** — two conventions that agree modulo a factor report as a disagreement. On a
+  gate that blocks merges, a red for a non-reason is how gates get disabled.
+* **FALSE PASS** — a genuine 2× error becomes dismissable as *"just a normalisation
+  difference"*, because the check gives an operator **no way to tell them apart**.
+
+**Nothing is firing today, and that is why it was built today.** The twelve pinned groups
+contain no normalisation pair; the gate has run with zero disagreements. The exposure is
+**prospective** — it arrives the moment the check is widened (mg-a397's candidates) or a new
+alias is registered — and a representation added after the first false red is a
+representation added under pressure to make a red go away.
+
+### The field is per NAME, not per quantity
+
+Two names for one quantity may legitimately differ by a **stated** factor, so the factor is
+a property of the name. The semantics are one line:
+
+```
+raw(name, at a poset of size n)  ==  factor(name, n) * canonical(quantity, n)
+```
+
+`NORMALISATION.json` declares, for each of the 71 pinned names, a **convention** (a name for
+a frame) and a **factor** (the frame's content). `{"num":[1],"den":[1]}` is the identity and
+is a **pass-through**, not a multiply by `1.0` — routing the identity through a multiply
+would make the seven exact-equality rows depend on `v * 1.0 == v` also holding of `None`, of
+`inf`, and of whatever a tree returns next.
+
+**The factor is a rational function of `n`, and this corpus already needed one.**
+`code/c3_audit_a94c3/a1_algebra.py:14` records `eps_spec = 6E[inv_e]/(n²−1)` against
+`eps_c3ca = E[inv_e]/n²`, i.e. `eps_spec/eps_c3ca = 6n²/(n²−1)`. Arm **N3** reads the exact
+rationals `code/unitmap_audit_9f91/out_m1_map.txt` tabulates at five values of `n` — under
+that file's own heading *"what a flat factor of 6 gets wrong at small n"* — and checks the
+declared factor against their ratio in `Fraction` arithmetic: **declared 5 of 5, a flat
+constant 6 zero of 5.** A constant-factor field could not have represented one of the three
+examples the ticket itself names, and that was known **before** the representation was
+chosen (H2 of `PREDICTIONS-mg-479c.md`, filed in advance and scored as a report at zero
+credit).
+
+### One input, two verdicts — the whole demonstration
+
+`W9c` and `W10` in `g1_values.py` plant **identical columns**: a real `leak(A_1)` column that
+`anticorrelation_c50b` actually produced, **doubled**. They differ only in the declarations,
+and they come out opposite ways:
+
+| arm | declarations | verdict |
+|---|---|---|
+| **W9a** | the pre-479c comparison (`norm=None`) | **RED** — the false red, with no field in which to say otherwise |
+| **W9b** | factor `2` declared, group tolerance still mg-0d1b's **raw-frame** max spread | **REFUSED** — not rescaled |
+| **W9c** | factor `2` **and** a canonical-frame tolerance | **GREEN**, canonical spread bit-identical to the baseline's `0.000e+00` |
+| **W9d** | W9c's declarations, plus one extra ULP on top | **RED** — a declared factor buys a frame, not slack |
+| **W10** | the live declarations — one shared convention | **RED**, *and the message says why* |
+
+W10's RED now reads, in full:
+
+```
+BOTH NAMES DECLARE THE SAME CONVENTION ('mg-0d1b-raw'), so this residue is NOT a
+  normalisation difference.
+  It is a disagreement between two implementations of one quantity in one frame.
+  File a ticket.
+  NOTE: the two columns are in a CONSTANT RATIO of 2 across every comparable poset.
+  That is the shape of an undeclared normalisation — but the declarations above say
+  there is none, so either a factor is missing from this file or one of the two trees
+  is wrong by that factor.  The instrument cannot tell which and does not guess.
+```
+
+The ratio note is **exact-only**: it fires when the two raw columns stand in an exactly
+constant `Fraction` ratio at every comparable poset, which is a strong condition and is
+usually **silent**. It is a diagnostic and never a verdict — it moves nothing from red to
+green or back, and it never proposes a factor to declare.
+
+### An undeclared normalisation is REFUSED, not defaulted to "same"
+
+Exit **2**, not exit 1, and the difference is the ticket's item 3. On a merge gate, exit 1
+says *"two of your numbers disagree, file a ticket"* and exit 2 says *"this instrument could
+not answer"* — conflating them tells an author the wrong thing. This is c9876's and cb417's
+lesson (a missing value must be loud, never blank) applied to a **field** rather than to a
+cell. **W12** runs it against the **good** columns on purpose: the values agree perfectly,
+the declaration is removed, and the instrument still refuses, because agreement measured in
+a frame nobody has stated is not a measurement anybody can quote.
+
+### The 71 identity factors are SEEDED, not asserted
+
+The only evidence anybody has that these names share a normalisation is that **mg-0d1b
+measured them agreeing** in the raw frame. Writing `"factor": 1` seventy-one times by hand
+would have been seventy-one assertions this ticket cannot back (filed in advance as **E1**).
+So `mknorm.py` seeds each declaration from `BASELINE.json` and carries the measured spread
+it was seeded from as a machine-checkable number, which `libnorm.validate` re-checks against
+the record on **every** gate run — arm **D6** edits one and the gate refuses. The
+declarations are **redundant** for these 71 names and exist so the 72nd cannot be added
+silently. `mknorm.py` **refuses to run once the file exists**, because a script that fills in
+identity declarations for whatever is in the record would silently absorb the next name into
+the identity normalisation, which is this ticket's own defect arriving through its remedy.
+
+### The tolerance is a number in a frame, and the frame moved
+
+mg-0d1b's tolerances are the **observed max raw spread** over POP-PRIM. The moment a group
+gains a non-identity member the comparison happens in a different frame and that number no
+longer governs it. Members with *different* factors do not admit a single rescale, so the
+instrument **refuses** and requires a canonical-frame tolerance with its own source (`W9b`,
+`D8`). The converse is refused too: a canonical tolerance declared for a group whose members
+are all identity is a number nobody checked, waiting to take effect on the next declaration
+edit (`D9`). Silently rescaling the frame while keeping the number that governs it would be
+this ticket's own defect one level up — filed in advance as **E4**.
+
+### THE CHANGE DECIDES NOTHING, AND THAT IS MEASURED
+
+Item 4 of the ticket: settling whether STATE.md's row is in the halved or the doubled form
+is a mathematical question and was mg-5e82's business. mg-5e82 has since settled it — that
+row now reads `μ_pref²/2 **in this row's own normalisation**` and names mg-479c as carrying
+the general hazard — so there is nothing left here to decide even by accident. Arm **N5**
+measures it anyway: **0 of 71** pinned names carry a non-identity factor, **0 of 12** groups
+carry more than one convention, **0** live declarations use the `(L*)`/`(M♯)` gap's language,
+**0** canonical tolerances are declared. What that establishes is that the **declarations**
+are silent; that STATE.md is untouched is a property of the diff, and N5 says so rather than
+claiming it.
+
+### THE COST
+
+**0.02 s.** `g3_normalisation.py` recomputes no tree — it is a property of two committed JSON
+files and one committed transcript. `g1`'s falsification block went from 0.1 s to **0.63 s**
+(the exact-ratio diagnostic walks the pinned pairs in `Fraction` arithmetic); its 29 s
+recompute is untouched and is reused by the seven new worlds rather than repeated. Condition
+2 of `PREDICTIONS-mg-479c.md` set ~5 s as the line above which the arms would have gone
+off-gate. They did not reach it.
+
+### FIVE DEFECTS OF MY OWN, AND THE FIRST ONE IS NOT CLOSED
+
+**A remedy is an artifact of the same kind as the defect, so it is subject to that defect.**
+
+* **D6 — A DECLARED FACTOR IS AN UNFALSIFIABLE ESCAPE HATCH, AND I CANNOT CLOSE IT.** An
+  operator facing a real 2× disagreement can make it go away by declaring a factor of 2.
+  Nothing in this machinery can tell that edit from a correct one — the two are the same
+  bytes. **This was filed at 0.70 before the instrument existed (P6) and it survived
+  intact.** What is bought is that the edit cannot be made *quietly*: a factor is the content
+  of a convention, so declaring one without also declaring a **new convention** is
+  self-contradictory and refuses (`W11`), every factor is printed on **every** run green as
+  well as red (`N0`), and that printing lands in a committed transcript that
+  `code/gate_fixed_point_f771` compares against the tree on every merge. That makes the
+  hatch **loud**. It does not make it narrow.
+* **D7 — the digest is a speed bump and I nearly shipped it as a control.** `pinned_digest`
+  makes an edit to a pinned declaration a two-place edit; anybody willing to update both gets
+  past it. It is kept because two places is worse than one for an accidental edit, and it is
+  labelled in `N2` rather than counted as a control.
+* **D8 — the seeded derivations quote the group label, and my first "decides nothing" arm
+  reported nine hits on the word `mu_pref`.** Six of the twelve groups *are* about `μ_pref`;
+  matching the bare name reported nine findings that meant nothing — a red for a non-reason,
+  in the arm whose subject is reds for non-reasons. The scan is now on the **clause**
+  (`(L*)`, `(M♯)`, `μ_pref²`, the halved/doubled wording), and the near miss is recorded here
+  rather than quietly fixed.
+* **D9 — this arm checks that a frame is DECLARED, never that it is RIGHT.** A name in a
+  doubled convention, declared as identity by somebody who believed it, passes everything
+  here. That is mg-06d1's own **D4** (agreement is not correctness) one level up, and it is
+  the same trade: what is bought is that the claim is now *written down* and comparable.
+* **D10 — the worked example is not gated by anything that computes it.** `eps_spec` /
+  `eps_c3ca` is the corpus's live `n`-dependent normalisation and **no adapter produces
+  either name**, so it sits in an `illustrative` section that `N3` validates against
+  committed exact rationals and `g1` never compares. If either quantity's definition moves,
+  `N3` catches it only via `out_m1_map.txt`; if that transcript moves too, nothing here
+  notices. It is a demonstration that the representation is strong enough, not a control on
+  the pair.
+
+---
 
 ## Files
 
@@ -252,9 +426,15 @@ defects of my own, all kept:
 |---|---|
 | `BASELINE.json` | the pinned expectation: 12 groups, 71 names, tolerances carried from mg-0d1b, plus the predicate vector digest and return types |
 | `mkbaseline.py` | derives that file from `alias_groups.json`. **Run by hand. Never by the gate.** |
+| `NORMALISATION.json` | mg-479c's normalisation field: per **name**, the convention it reports in and the factor to divide by. 71 live declarations + 2 illustrative |
+| `mknorm.py` | seeds that file from `BASELINE.json`'s measured spreads. **Run by hand, once. Refuses to run again.** |
+| `libnorm.py` | the representation: the rational-function factor, the refusals, and the canonicalisation |
 | `libagree.py` | the comparison, the mutation harness, and the CAUGHT/MISSED/UNFALSIFIABLE scoreboard |
 | `predicates.py` | the ten primitivity predicates, carried verbatim from x3's V4 |
-| `g1_values.py` | the float arm — 12 groups over POP-PRIM, + 8 planted worlds. **30 s** |
+| `g1_values.py` | the float arm — 12 groups over POP-PRIM in the canonical frame, + 15 planted worlds. **30 s** |
 | `g2_predicate.py` | the predicate arm — 10 names over POP-ALL, + 7 planted worlds. **0.2 s** |
+| `g3_normalisation.py` | the declaration arm — 71 declarations, + 10 planted worlds. **0.02 s** |
 | `x0_exhibit.py` | the end-to-end control: a real edit to a real tree, `./build.sh`, verified restore. **Not run by the gate** |
-| `run_all.sh` | what `build.sh` invokes. g2 first, then g1; worst exit wins |
+| `PREDICTIONS-mg-479c.md` | mg-479c's pre-registration, committed 2026-08-10 before one line of `libnorm.py` existed |
+| `SCORING-mg-479c.md` | that pre-registration scored against what the instrument did |
+| `run_all.sh` | what `build.sh` invokes. g2, then g3, then g1; worst exit wins |
