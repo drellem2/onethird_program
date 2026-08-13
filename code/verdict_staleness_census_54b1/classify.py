@@ -113,7 +113,16 @@ if differing and ao == 0:
   This sample was selected for nothing, and in it a transcript that moves at
   all has moved a verdict.  ON THIS EVIDENCE, PINNING IS NOT THE REMEDY HERE:
   what these instruments lack is not a declared commit but ANYTHING THAT
-  RE-RUNS THEM.""")
+  RE-RUNS THEM.
+
+  AND THE ZERO IS A MEASUREMENT RATHER THAN A CLASSIFIER THAT CANNOT SAY IT.
+  A count of zero is worthless from a detector nobody has watched produce a
+  nonzero one, which is this arc's own recurring complaint.  ADDRESSES ONLY is
+  reachable and is watched being reached: c0_controls.py lands EIGHT planted
+  worlds in it -- a moved sha, a corpus size, line numbers, a duration, a date,
+  a worktree root, a changed path, and a duration on a VERDICT line -- plus the
+  real diff of 6c9ab90, whose own commit message says the row that scores
+  stayed put.  The class fires; this sample simply contains none of it.""")
 elif differing:
     print("""  %d of %d differing transcripts moved only addresses, so an AS_OF pin --
   mg-20ee's remedy -- would settle that fraction of this population and would
