@@ -423,10 +423,45 @@ pin with two revisions.
   `out_ground_truth.txt` and tranche 3's two make about themselves, and the same blind spot.
 - The `2 353` slip in `docs/OneThird-Landscape-Repair-IndependentAudit.md:190` and `:290` is
   **unowned** and belongs to whoever owns that document.
-- **Not repaired and not this branch's:** `code/control_gate_724a/out_gate.txt` and
-  `code/gate_fixed_point_f771/out_g1_controls.txt` still carry the absolute worktree path of the
-  polecat that last committed them. Restored, not committed, for the third tranche running — see
-  tranche 3's note; it belongs to `mg-724a` / `mg-f771`.
+### The backstop ran, and the operator-valued transcripts are now **counted**
+
+`./build.sh` is green — `worst suite exit: 0`, `VERDICT: GREEN — 0 disagreements`, gate
+`GATE VERDICT: GREEN` — and left **five** tracked transcripts modified. Four are `mg-f771`'s
+declared `W3` timing noise, and the byte counts beside them — `9455` and `45349` — are **unchanged**,
+which is the repo-state half: this branch adds nothing those censuses count. All five were
+**restored, not committed**, for the reason tranche 3 gives.
+
+The fifth is not noise, and it is a **third** instance of the defect tranche 3 named in two:
+
+```
+- N14  STATE.md absent from the tree   CAUGHT   cannot read /Users/daniel/.pogo/polecats/p14ad/…
++ N14  STATE.md absent from the tree   CAUGHT   cannot read /Users/daniel/.pogo/polecats/p0e77/…
+```
+
+`code/state_ratchet_e331/out_ratchet.txt` carries the absolute worktree path of the polecat that
+last committed it. So counted rather than described, over every tracked transcript in the estate:
+
+    9 tracked out_*.txt carry a polecat worktree path, naming 7 distinct polecats
+
+    census_audit_4d3b/out_a5_selfdefect.txt          p4d3b
+    control_gate_724a/out_gate.txt                   p14ad
+    mirror_staleness_cdd5/out_s0_state.txt           pcdd5
+    mirror_staleness_cdd5/prerepair/out_s0_state.txt pcdd5
+    sibling_sweep_7085/out_r1_sweep.txt              p7085
+    sibling_sweep_7085/out_r1_sweep_FIRSTRUN_2FAIL   p7085
+    species_extent_audit_6cb9/out_a3_differ.txt      p54b1
+    state_ratchet_e331/out_ratchet.txt               p14ad
+    verdict_audit_f911/out_a4_recover.txt            pf911
+
+**Tranche 3's prediction is confirmed in the field.** It wrote that every branch inherits these and
+that *"each recommit re-points them at a new polecat"*; `control_gate_724a/out_gate.txt` said `p54b1`
+then and says **`p14ad`** now, and `gate_fixed_point_f771/out_g1_controls.txt` no longer carries a
+path at all. The class is not two files inside `build.sh`'s loop — it is nine files across seven
+directories, six of them **outside** the loop, where `g0` cannot see them at all.
+
+Not repaired here: five of the nine belong to directories with their own owners, and a fix is one
+normalisation rule plus nine regenerations, which is its own item. Named, counted, and left —
+`mg-724a` / `mg-f771` and the owning directories.
 
 ---
 
