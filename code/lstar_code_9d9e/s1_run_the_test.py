@@ -183,10 +183,14 @@ R.note("reading L*, and L* is the half mg-0fc6 measured the poset-dependence was
 R.banner("s1.6  compression2's REAL OBJECT — the PER-NODE conditional entropies, on the "
          "boundary family")
 
-R.note("The note bounds `H(W_v | earlier words) <= (1-c)(a+b)` at each node and sums over the")
-R.note("n log2 n total word length.  The chain rule makes the sum EXACTLY log2 e(P), which is")
-R.note("this table's own control -- if the entropies did not sum to log2 e(P) the decomposition")
-R.note("would not be the note's.")
+R.note("The note's route is: bound `H(W_v | earlier words)` at each node, then sum over the total")
+R.note("word length to get `log2 e(P) <= 0.9399 n log2 n`.  So the per-node ceiling the aggregate")
+R.note("constant corresponds to is `0.9399 (a+b)`, and that is the column below.  ⚠️ The total")
+R.note("word length of the bisection tree is T(n) -- 44 at n = 12, the same quantity MERGE-TAPE")
+R.note("charges -- against the note's `n log2 n` = 43.02; the two differ by the rounding in the")
+R.note("tree and the column is not sensitive to which is used.")
+R.note("The chain rule makes the entropies sum to EXACTLY log2 e(P), which is this table's own")
+R.note("control -- if they did not, the decomposition would not be the note's.")
 R.line()
 
 

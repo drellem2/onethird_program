@@ -101,7 +101,7 @@ and `s0.7` checks the bound itself at all 4 472 posets with `n ≤ 5`.
 antichain.** At `n = 12`: `+22.2` bits of margin on the boundary family, `+19.0` on two chains,
 `+0.000` at the antichain.
 
-**It is `O(n²)` per node and never enumerates `L(P)`.** So the ticket's question has a **YES**, and
+**It is polynomial per node — a 2-D DP over the two sequences — and never enumerates `L(P)`.** So the ticket's question has a **YES**, and
 it is cheap. What the rest of this document is about is what that YES is worth.
 
 ### 3.1 `L*` is not what is doing the work

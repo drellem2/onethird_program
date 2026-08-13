@@ -350,8 +350,9 @@ def tape(t, perm):
 def feasible_merges(left, right, rel):
     """How many interleavings of `left` and `right` respect `P`.
 
-    A 2-D DP, `O(a*b)`.  THIS IS THE COST CLAIM: the `P`-conditioned code reads `P` at every node
-    in quadratic time and NEVER enumerates `L(P)`, which is `mg-99f4`'s Q2 asked of a code.
+    A 2-D DP over the two sequences -- `O(a*b*(a+b))` as written, since each step rescans the
+    remaining opposite side.  THIS IS THE COST CLAIM: the `P`-conditioned code reads `P` at every
+    node in POLYNOMIAL time and NEVER enumerates `L(P)`, which is `mg-99f4`'s Q2 asked of a code.
 
     Correctness rests on one fact about the bisection tree: every pair of elements is separated
     at exactly one node -- their least common ancestor -- and merging preserves the order inside
