@@ -7,7 +7,7 @@ g1  THE AGREEMENT CHECK — mg-0d1b's 12 measured groups, compared
 G1a  RECOMPUTE — every scalar by the tree that owns it, through its own entry point
 ==============================================================================
 
-  80 columns from 12 trees in 37.0s
+  80 columns from 12 trees in 31.4s
   spread self-check against lib0d1b.spread on every pinned pair: 0 mismatches
 
 ==============================================================================
@@ -77,4 +77,4 @@ G1c  POSITIVE CONTROL — fifteen planted worlds, and the good input scored firs
 g1 RESULT
 ==============================================================================
   12 groups agree at mg-0d1b's measured tolerances; 0 falsification arms unsatisfactory.
-  recompute 37.0s · falsification 0.64s · total 37.6s
+  recompute 31.4s · falsification 0.65s · total 32.1s
