@@ -1,0 +1,398 @@
+==============================================================================
+mg-54b1  IS IT STALE IN THE STRONG SENSE?  A SWEEP OF THE BLIND SPOT
+==============================================================================
+
+  measured on   : 2026-08-13
+  population    : instruments carrying a tracked out_*.txt that are in
+                  NEITHER ./build.sh's loop NOR mg-20ee's 44 candidates,
+                  sampled by md5 of their path.  c1_population.py sizes
+                  the population and picks the sample; this reads the run.
+  method        : re-run the suite IN A CLONE, keep the diff, classify it
+  produced by   : sh sweep_54b1.sh <clone> <outdir> <N> <timeout>
+  note          : 40 of the 137, md5 order, 120 s budget per instrument, 61 min wall; run in a clone at this branch's ecf5eda
+
+  THE QUESTION mg-20ee's GROUND TRUTH DOES NOT ASK.  Its answer is DIFFERS
+  or REPRODUCES -- any byte.  Its own tranche exists because most of those
+  bytes are ADDRESSES, and an AS_OF pin removes them with no verdict having
+  moved.  This splits DIFFERS in two.
+
+  class                n
+  VERDICT MOVED        9
+  DEAD                 2
+  ADDRESSES ONLY       1
+  REPRODUCES           8
+  NOT RUN              1
+  TIMEOUT             19
+  TOTAL               40
+
+  Of 20 instruments the sweep could measure, 11 are stale in the
+  STRONG sense -- a verdict moved, or the instrument no longer runs
+  at all -- which is 55%.
+
+==============================================================================
+§1b  OF THE TRANSCRIPTS THAT DIFFER, HOW MANY DIFFER ONLY IN ADDRESSES?
+==============================================================================
+
+  This is the number that decides whether mg-20ee's remedy -- pin the
+  instrument at an AS_OF commit so the addresses stop moving -- would help
+  this population at all.  An AS_OF pin removes an ADDRESSES ONLY difference
+  and does nothing whatever for a moved verdict.
+
+  transcripts that DIFFER at all                 12
+      of those, only ADDRESSES moved              1
+      of those, a VERDICT moved                  11
+
+  1 of 12 differing transcripts moved only addresses, so an AS_OF pin --
+  mg-20ee's remedy -- would settle that fraction of this population and would
+  do nothing for the rest.
+
+==============================================================================
+§2  EVERY INSTRUMENT, WITH ITS CLASS
+==============================================================================
+
+  instrument                                     class          rc      secs lines      load
+  code/branching_audit_d330                      VERDICT MOVED  rc=1      65 21+/35-    -
+  code/cannot_fail_audit_79ba                    VERDICT MOVED  rc=0      97 26+/32-    -
+  code/census_repair_f3ff                        VERDICT MOVED  rc=0      59 74+/75-    -
+  code/face_geometry_audit_e7bc                  VERDICT MOVED  rc=1       0 8+/7-      -
+  code/face_geometry_audit_eaef                  VERDICT MOVED  rc=1      20 5+/5-      -
+  code/hodge_leverage_audit_f922                 VERDICT MOVED  rc=1       5 51+/39-    -
+  code/hodge_leverage_landing_e1d0               VERDICT MOVED  rc=1       2 41+/166-   -
+  code/hodge_leverage_repair_8eca                VERDICT MOVED  rc=1       4 4+/143-    -
+  code/verdict_path_repair_1d26                  VERDICT MOVED  rc=1       3 4+/4-      -
+  code/census_timeout_a71f                       DEAD           rc=1     110 68+/155-   -
+  code/face_geometry_audit_d0e2                  DEAD           rc=1       5 13+/60-    -
+  code/compression_novelty_623a                  ADDRESSES ONLY rc=0      61 18+/18-    -
+  code/c3_prefix_capture_76b2                    REPRODUCES     rc=0      66 0+/0-      -
+  code/chain_iv_audit_00b3                       REPRODUCES     rc=0     120 0+/0-      -
+  code/compression_audit_8bc7                    REPRODUCES     rc=0      73 0+/0-      -
+  code/convex_criterion_8748                     REPRODUCES     rc=0      89 0+/0-      -
+  code/hodge_leverage_audit_3c24                 REPRODUCES     rc=0      62 0+/0-      -
+  code/hodge_leverage_join                       REPRODUCES     rc=0      41 0+/0-      -
+  code/state_control_audit_babf                  REPRODUCES     rc=0       1 0+/0-      -
+  code/state_landing_audit_bd41                  REPRODUCES     rc=0      18 0+/0-      -
+  code/anticorrelation_c50b                      NOT RUN        rc=2       0 0+/0-      -
+  code/audit_5cba                                TIMEOUT        rc=137   120 1+/32-     -
+  code/branching_audit_321d                      TIMEOUT        rc=137   120 7+/25-     -
+  code/branching_audit_957f                      TIMEOUT        rc=137   120 2+/77-     -
+  code/branching_repair_76cc                     TIMEOUT        rc=137   120 0+/144-    -
+  code/branching_repair_7e58                     TIMEOUT        rc=137   120 1+/92-     -
+  code/chain_iv_c_81ff                           TIMEOUT        rc=137   120 0+/68-     -
+  code/counterexample_audit_0a11                 TIMEOUT        rc=137   120 0+/0-      -
+  code/counterexample_audit_a7b4                 TIMEOUT        rc=137   120 0+/0-      -
+  code/direct_prefix_audit_2de0                  TIMEOUT        rc=137   120 0+/58-     -
+  code/face_geometry_audit_c4c8                  TIMEOUT        rc=137   120 0+/218-    -
+  code/grain_arity_9160                          TIMEOUT        rc=137   120 24+/24-    -
+  code/grain_axis_audit_03d1                     TIMEOUT        rc=137   120 97+/81-    -
+  code/hodge_leverage_audit_86a3                 TIMEOUT        rc=137   120 0+/36-     -
+  code/hodge_leverage_audit_8aae                 TIMEOUT        rc=137   120 1+/219-    -
+  code/hodge_leverage_repair_6df0                TIMEOUT        rc=137   120 2+/232-    -
+  code/pinned_ref_durability_223d                TIMEOUT        rc=137   120 7+/7-      -
+  code/runner_exit_audit_05eb                    TIMEOUT        rc=137   120 3+/148-    -
+  code/species_audit_a61f                        TIMEOUT        rc=137   120 0+/115-    -
+  code/species_bound_repair_5040                 TIMEOUT        rc=137   120 0+/161-    -
+
+==============================================================================
+§3  THE EVIDENCE FOR EVERY `VERDICT MOVED`
+==============================================================================
+
+  Quoted so this number can be checked rather than believed.  c0's R3 is a
+  real diff this classifier over-counts, so a reader who wants the catch and
+  not the net should read these.  At most three lines per file.
+
+  --- code/branching_audit_d330
+      code/branching_audit_d330/out_e4_rerun.txt
+        RULE A: a [TAG] row appeared or vanished
+        -  [NOT CLASSIFIED BY THE REPAIR] --- examined below
+        +  
+        RULE A: a word changed
+        -  WHAT IS AND IS NOT WEAKENED, stated precisely:
+        +  the failure is not the pure parser shape predicted; examine.
+        RULE A: a word changed
+        -  * 174 of the 198 cells --- 53 dimension and 121 edge --- still
+        +  FINDING: c1_branching.py reports 0 findings on the repaired tree with 0 count-cells 
+        ... 1 further changed line(s) not shown
+
+  --- code/cannot_fail_audit_79ba
+      code/cannot_fail_audit_79ba/out_a1_cannot_fail.txt
+        RULE A: a word changed
+        -  [HOLDS] world 'real population': every anchor of both trees matched exactly once
+        +  [BROKEN] world 'real population': every anchor of both trees matched exactly once
+        RULE A: a word changed
+        -  [HOLDS] world 'a pair of I4 clears both forced gates': every anchor of both trees ma
+        +  [BROKEN] world 'a pair of I4 clears both forced gates': every anchor of both trees m
+        RULE A: a word changed
+        -  [HOLDS] world 'a pair of I1 clears both forced gates': every anchor of both trees ma
+        +  [BROKEN] world 'a pair of I1 clears both forced gates': every anchor of both trees m
+        ... 3 further changed line(s) not shown
+      code/cannot_fail_audit_79ba/out_a3_repair_blocked.txt
+        RULE A: a word changed
+        -  [HOLDS] verify_landing.py TARGET 3 freezes the conjunct A1 shows is a tautology, as 
+        +  [BROKEN] verify_landing.py TARGET 3 freezes the conjunct A1 shows is a tautology, as
+        RULE A: a word changed
+        -  [HOLDS] and it freezes two more of mg-17aa's own source literals beside it -- the ro
+        +  [BROKEN] and it freezes two more of mg-17aa's own source literals beside it -- the r
+        RULE A: a word changed
+        -  [HOLDS] mg-17aa re-aimed this target because its PREVIOUS three literals had the sam
+        +  [BROKEN] mg-17aa re-aimed this target because its PREVIOUS three literals had the sa
+        ... 13 further changed line(s) not shown
+
+  --- code/census_repair_f3ff
+      code/census_repair_f3ff/out_s0_freshness.txt
+        RULE A: a word changed
+        -  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derive
+        +  checkout HEAD=949c43926b6e behind origin/main by 0
+      code/census_repair_f3ff/out_s1_rows.txt
+        RULE A: a word changed
+        -  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derive
+        +  checkout HEAD=949c43926b6e behind origin/main by 0
+      code/census_repair_f3ff/out_s2_controls.txt
+        RULE A: a word changed
+        -  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derive
+        +  checkout HEAD=949c43926b6e behind origin/main by 0
+        RULE A: a word changed
+        -  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derive
+        +  checkout HEAD=949c43926b6e behind origin/main by 0
+        RULE A: a word changed
+        -  row 2 mg-d112: origin/main REFUTED (5)   stale REFUTED (4)   <-- same verdict, count
+        +  row 2 mg-d112: origin/main REFUTED (5)   stale REFUTED (5)
+        ... 2 further changed line(s) not shown
+      code/census_repair_f3ff/out_s3_graph.txt
+        RULE A: a word changed
+        -  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derive
+        +  checkout HEAD=949c43926b6e behind origin/main by 0
+        RULE A: a word changed
+        -  NOTE: 1 checkout(s) were behind origin/main at start: one_third_width_three
+        +  
+        RULE A: a word changed
+        -  The derivation below uses origin/main, so the staleness did not
+        +  work store: /Users/daniel/.macguffin/work, 2766 ticket file(s) readable.
+        ... 4 further changed line(s) not shown
+      code/census_repair_f3ff/out_s4_crosscheck.txt
+        RULE A: a word changed
+        -  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derive
+        +  checkout HEAD=949c43926b6e behind origin/main by 0
+
+  --- code/face_geometry_audit_e7bc
+      code/face_geometry_audit_e7bc/out_g1_positive_control.txt
+        RULE A: a word changed
+        -  [HOLDS ] and it is still the flip of the CURRENT artifact: byte-equal to this file's
+        +  [BROKEN] and it is still the flip of the CURRENT artifact: byte-equal to this file's
+        RULE A: a word changed
+        -  [clear  ] the committed positive control is not the flip of the current artifact
+        +  [FINDING] the committed positive control is not the flip of the current artifact
+        RULE A: a word changed
+        -  [HOLDS ] pc_all_pass.txt is committed beside this file and is exactly the committed 
+        +  [BROKEN] pc_all_pass.txt is committed beside this file and is exactly the committed 
+        ... 1 further changed line(s) not shown
+
+  --- code/face_geometry_audit_eaef
+      code/face_geometry_audit_eaef/out_e2_bound.txt
+        RULE A: a word changed
+        -  [HOLDS ] THE SENTENCE THIS SECTION IS ABOUT IS IN THE COMMITTED TRANSCRIPT, exactly 
+        +  [BROKEN] THE SENTENCE THIS SECTION IS ABOUT IS IN THE COMMITTED TRANSCRIPT, exactly 
+        RULE B: a scored counter changed
+        -  5 claim(s) scored; 0 BROKEN.  2 finding(s).
+        +  5 claim(s) scored; 1 BROKEN.  2 finding(s).
+
+  --- code/hodge_leverage_audit_f922
+      code/hodge_leverage_audit_f922/out_audit.txt
+        RULE A: a word changed
+        -  HEAD              11,378     10,623      +755  HEAD (this audit)
+        +  HEAD               1,614     10,623    -9,009  HEAD (this audit)
+        RULE A: a [TAG] row appeared or vanished
+        -  [ENLARGEMENT STATED] STATE.md
+        +  
+        RULE A: a [TAG] row appeared or vanished
+        -  
+        +  [ENLARGEMENT STATED] docs/OneThird-Hodge-Side-Leverage-Mg3c24Repair-IndependentAudit
+        ... 25 further changed line(s) not shown
+
+  --- code/hodge_leverage_landing_e1d0
+      code/hodge_leverage_landing_e1d0/out_verify.txt
+        RULE A: a word changed
+        -  [CONFIRMED] GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 section a
+        +  [REFUTED  ] GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 section a
+        RULE A: a word changed
+        -  [CONFIRMED] GATE @ the STATE.md row: FIGURE CENSUS -- all 17 figure token(s) a reade
+        +  [REFUTED  ] GATE @ the STATE.md row: FIGURE CENSUS -- 11 unlicensed figure(s) at thi
+        RULE A: a word changed
+        -  [CONFIRMED] GATE @ the STATE.md row: FIGURE ORDER -- all 17 figure token(s) are in t
+        +  [REFUTED  ] GATE @ the STATE.md row: FIGURE ORDER -- the section asserts 0 figure to
+        ... 46 further changed line(s) not shown
+
+  --- code/hodge_leverage_repair_8eca
+      code/hodge_leverage_repair_8eca/out_repair_8eca.txt
+        RULE A: a word changed
+        -  H8: mg-8aae's own probe: the mg-a2bd table's before/after           GATE FIRES  GATE
+        +  H8: mg-8aae's own probe: the mg-a2bd table's before/after           GATE FIRES  GATE
+        RULE A: a word changed
+        -  rows that failed: 1; the first of them: GATE @ H8: FIGURE ORDER -- the section asser
+        +  rows that failed: 29; the first of them: GATE: the enlargement 2 928 -> 6 069 is sta
+        RULE A: a word changed
+        -  H8: the other sense: the row-history line's two historical columns  GATE FIRES  GATE
+        +  H8: the other sense: the row-history line's two historical columns  GATE FIRES  GATE
+        ... 29 further changed line(s) not shown
+
+  --- code/verdict_path_repair_1d26
+      code/verdict_path_repair_1d26/out_selftest_1d26.txt
+        RULE A: a word changed
+        -  the neutralised sandbox is GREEN                                 ok
+        +  the neutralised sandbox is GREEN                                 *** FINDING ***
+        RULE B: a scored counter changed
+        -  SELFTEST1D26 TOTAL BAD: 0
+        +  SELFTEST1D26 TOTAL BAD: 1
+
+==============================================================================
+§3b  DID THE BRANCH THAT MEASURED THIS PERTURB WHAT IT MEASURED?
+==============================================================================
+
+  The sweep runs in a clone of the branch that carries it, so this branch's
+  OWN additions are in the corpus these instruments walk.  Several of them
+  count markdown files, or directories under code/, and a branch that adds one
+  moves those counts -- 6c9ab90 and 417a789 are two commits in this history
+  that exist only to recommit transcripts for that reason.
+
+  So every quoted evidence line is screened for this ticket's own strings.  A
+  hit does not prove the finding is an artefact, and a clean screen does not
+  prove none is; what it does is stop the question going unasked.
+
+  0 of the quoted evidence lines name this ticket or its directory.
+
+==============================================================================
+§3c  DID ANY INSTRUMENT REWRITE SOMEBODY ELSE'S TRANSCRIPT?
+==============================================================================
+
+  The sweep keeps the WHOLE-REPO diff a run produced, not just the diff of
+  its own directory, because a runner that writes outside itself is exactly
+  the kind of thing this sweep should not hide.  But it also means a
+  transcript could be attributed to the run that touched it rather than to
+  the instrument that owns it, which would inflate the count.  So the two are
+  separated and printed.
+
+  code/runner_exit_audit_05eb wrote 1 transcript(s) outside its own directory:
+      code/branching_audit_2060/out_b0_repro.txt
+
+==============================================================================
+§4  DEAD -- THE INSTRUMENT RAISED AND PRODUCED NO COMPARABLE TRANSCRIPT
+==============================================================================
+
+  A transcript whose instrument no longer RUNS is worse than a stale
+  one: nothing re-derives it and its committed copy reads as a
+  measurement.  code/species_extent_audit_6cb9's a3 arm is this,
+  and it is why the class exists.
+
+      code/face_geometry_audit_d0e2
+      code/census_timeout_a71f
+
+==============================================================================
+§5  TIMEOUT -- NOT MEASURED, AND NOT COUNTED AS REPRODUCING
+==============================================================================
+
+  Killed at the sweep's budget, mid-run.  These are UNMEASURED, and a
+  TIMEOUT IS NOT A PROPERTY OF THE INSTRUMENT: it is a property of the
+  instrument, the budget AND the host.  The run that produced the committed
+  transcript shared a 10-core machine with other agents whose load average was
+  measured by hand at 16 when it started and 60 an hour later, so an
+  instrument needing 60 s on an idle host can miss a 120 s budget here.  The
+  `load` column exists so a later reader does not have to take my word for
+  that; where it reads `not recorded`, the column was added after that row was
+  produced.
+
+  percentage above is over the measured set and says so.  Re-run
+  sweep_54b1.sh with a larger timeout to close them.
+
+      code/chain_iv_c_81ff                           killed at 120s, host load not recorded
+      code/pinned_ref_durability_223d                killed at 120s, host load not recorded
+      code/branching_audit_957f                      killed at 120s, host load not recorded
+      code/direct_prefix_audit_2de0                  killed at 120s, host load not recorded
+      code/hodge_leverage_audit_86a3                 killed at 120s, host load not recorded
+      code/branching_audit_321d                      killed at 120s, host load not recorded
+      code/grain_arity_9160                          killed at 120s, host load not recorded
+      code/face_geometry_audit_c4c8                  killed at 120s, host load not recorded
+      code/species_bound_repair_5040                 killed at 120s, host load not recorded
+      code/audit_5cba                                killed at 120s, host load not recorded
+      code/counterexample_audit_0a11                 killed at 120s, host load not recorded
+      code/branching_repair_76cc                     killed at 120s, host load not recorded
+      code/runner_exit_audit_05eb                    killed at 120s, host load not recorded
+      code/hodge_leverage_audit_8aae                 killed at 120s, host load not recorded
+      code/branching_repair_7e58                     killed at 120s, host load not recorded
+      code/counterexample_audit_a7b4                 killed at 120s, host load not recorded
+      code/species_audit_a61f                        killed at 120s, host load not recorded
+      code/grain_axis_audit_03d1                     killed at 120s, host load not recorded
+      code/hodge_leverage_repair_6df0                killed at 120s, host load not recorded
+
+==============================================================================
+§6  NOT RUN -- 'NOTHING CHANGED' IS NOT 'IT REPRODUCED'
+==============================================================================
+
+  A sweep that decides by `did the tree change?` cannot tell a transcript
+  that came back byte-identical from a runner that DIED BEFORE WRITING
+  ANYTHING.  Both leave the tree exactly as clean.  Found in this sample and
+  not reasoned about:
+
+      code/anticorrelation_c50b                      rc=2 in 0s
+
+  code/anticorrelation_c50b's run_all.sh has no `cd` to its own directory and
+  names `s0_selftest.py` bare, so run from the repository root it exits
+  immediately with `can't open file`.  That is a finding for its owner -- an
+  instrument nobody can re-take is past stale -- and it is ALSO a defect in
+  this sweep, which recorded it as REPRODUCES until this class existed.
+
+  THE HAZARD IS THE METHOD'S AND NOT THIS INSTRUMENT'S ALONE.
+  mg-20ee's ground_truth.sh decides the same way -- `sh "$d/run_all.sh"` from
+  the repository root, then `git diff -- "$d"` -- so its NINE `REPRODUCES`
+  rows carry the same question, and 13 of the 193 tracked run_all.sh in this
+  repository have no `cd` of their own.  Most of those are meant to be run
+  from the root and are fine; separating the two needs a per-instrument look,
+  which is NOT done here and is named instead.  This arm reports only what it
+  measured in its own sample.
+
+  THE TEST USED IS `nothing changed AND (rc >= 2 OR the run took 0 s)`, and it
+  is deliberately narrow: rc 0 and rc 1 are both normal exits for an audit in
+  this corpus -- mg-20ee's own transcript carries REPRODUCES rows at rc=1 --
+  so a refusal that exits 1 is invisible here and is not claimed otherwise.
+
+==============================================================================
+SWEEP TOTAL STRONG: 11 of 20 measured (20 unmeasured)
+==============================================================================
+
+WHY A PARTIAL SWEEP IS STILL A SAMPLE AND NOT A PREFIX.  The work list is the
+137 runnable blind-spot directories ordered by the md5 of their path, which is
+independent of anything this measures, so the ordering is a random permutation
+and ANY PREFIX OF IT IS A SIMPLE RANDOM SAMPLE.  That is the property that
+makes a sweep stopped on a clock still worth quoting, and it is why the order
+is md5 and not alphabetical -- the names are alphabetical by topic, and a
+prefix of THAT is a sample of nothing.
+
+AND THE STOPPING RULE IS DISCLOSED, because I could see the rows as they
+landed: this run was stopped on a TIME BUDGET and not on a count and not on
+its answer.  A reader who wants that dependency removed should re-run with a
+larger N; the sample is a function of the path, so the rows above reappear
+unchanged and the new ones are appended.
+
+EXTENT OF THIS NUMBER.  It is a SAMPLE of the blind spot, not a count of it:
+c1_population.py prints the population's size and this prints the sample's.
+The classifier's two rules and both directions of its error are planted in
+c0_controls.py and its one measured over-count on a real diff is published
+there rather than tuned away.  It says NOTHING about the instruments in
+./build.sh's loop, which mg-f771 regrades on every merge, nor about mg-20ee's
+44, which its own ground truth already re-ran.  And a TIMEOUT is not a
+reproduction: an instrument too slow for the budget is unmeasured here and
+should not be read as healthy.
+
+THE RULE I ALMOST ADDED, AND THE ROW THAT SHOWED IT WOULD HAVE BEEN WRONG.
+DEAD is detected by a Traceback in the transcript, which only appears when the
+runner redirects stderr into it.  A runner that does NOT would leave a
+TRUNCATED transcript instead -- many deletions, almost no additions -- and
+every removed verdict line in it would be counted as a moved verdict.  The
+obvious guard is a ratio: call a diff DEAD when deletions swamp additions.
+
+IT WOULD HAVE BEEN WRONG ON THE FIRST ROW IT MET.  code/hodge_leverage_repair_8eca
+came back `4+/143-`, the exact shape, and it is not a crash: the run reports
+`green` -> `STILL RED` and `rows that failed: 1` -> `29`, and the transcript
+shrank because the run STOPPED CONFIRMING things it used to confirm.  A
+vanished [CONFIRMED] block is the strongest form of a moved verdict, not
+evidence of a dead instrument.  So no ratio rule is added, and the reason is
+a measurement rather than a preference: the shape of the diff does not
+distinguish a truncated run from a run with less to say.

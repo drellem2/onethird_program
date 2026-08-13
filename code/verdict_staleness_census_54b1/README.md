@@ -153,6 +153,52 @@ finding it.
 inside its budget is *unmeasured*, and `classify.py` counts it as unmeasured rather than as
 reproducing. Silently skipping it would read as coverage.
 
+## 4b — What the sweep found
+
+One run, 2026-08-13, 40 of the 137 in md5 order, 120 s per instrument, 61 minutes wall.
+
+    VERDICT MOVED     9        DEAD              2
+    ADDRESSES ONLY    1        REPRODUCES        8
+    NOT RUN           1        TIMEOUT          19
+                                                ---
+                                                 40
+
+**Of the 20 it could measure, 11 are stale in the strong sense — 55 %.** Nineteen more were killed
+at the budget on a host whose load average was 16 when the sweep started and 60 an hour later;
+they are **unmeasured**, not healthy, and half the sample being unmeasured is this run's largest
+weakness.
+
+**Of the 12 transcripts that differ at all, exactly 1 differs only in its addresses.** That is the
+number that decides whether `mg-20ee`'s remedy reaches this population, and it says it does not:
+an `AS_OF` pin removes an address difference and does nothing whatever for a moved verdict. Its 44
+were nominated *by a classifier for foreign addresses*, so an address-only difference is precisely
+what it went looking for and precisely what pinning fixed. **These instruments do not need a
+declared commit. They need anything at all that re-runs them.**
+
+The evidence is quoted in `out_sweep_54b1.txt` §3, one `-`/`+` pair per finding, because `c0`
+measures a real over-count on a real diff and a number without its evidence is a net.
+
+## 4c — Three defects in this instrument, each found by measurement
+
+None of these came from reading the code; each came from running it against real data, and all
+three are kept as controls:
+
+* **A magnitude counted as a finding.** `VERDICT:[^0-9]*(\d+)` matched the `0` of
+  `VERDICT: CLEAN  0.11s`, so a run 0.03 s slower reported a moved verdict — on the exact line
+  shape `mg-f771`'s W3 declares NOISE, inside the rule written to keep magnitudes out. `N8`.
+* **A repair reported as a death.** `TRACEBACK in diff_text` was a membership test against a whole
+  captured diff — `mg-9876`'s own smell — and a unified diff carries context and *removed* lines.
+  Six transcripts here carry a traceback on purpose, and **this branch created the third case
+  itself** by committing one into `6cb9`'s `out_a3_differ.txt`: the day `a3` is re-aimed, the diff
+  reads `-Traceback` and nothing would have stopped this classifier calling that repair a death.
+  `D3`, `D4`.
+* **Silence read as success.** `code/anticorrelation_c50b`'s runner has no `cd` and names
+  `s0_selftest.py` bare, so from the repository root it exits instantly having written nothing —
+  which leaves the tree exactly as clean as a perfect reproduction. The sweep scored it
+  `REPRODUCES`. **`mg-20ee`'s `ground_truth.sh` decides the same way**, so its nine `REPRODUCES`
+  rows carry the same question; 13 of the 193 tracked runners have no `cd`, most of them meant to
+  be run from the root. Separating those needs a per-instrument look and is **named, not done**.
+
 ## 5 — What this does not do
 
 * **The sweep is a sample of the blind spot, not a count of it.** `c1` prints the population's
