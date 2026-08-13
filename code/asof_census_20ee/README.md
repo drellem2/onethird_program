@@ -752,3 +752,28 @@ An under-count is the worse failure — nothing in the output says so — and th
   declared limit** are now **named** rather than counted — which they are is the load-bearing fact,
   and a number cannot carry it. `N18` leaves that list for the first time: it asked to be told when
   the thing it asserted got repaired, and this is that.
+
+### The backstop ran, and mg-9876's arm census does **not** move
+
+`./build.sh` exits 0 — `worst suite exit: 0`, `VERDICT: GREEN — 0 disagreements` — and
+`out_a4_sweep.txt` reproduces **byte-identically**: `145 of 224` shipping a control and `146 of 224`
+recording a demonstrated failure, the denominator still 224, all three unchanged. Checked rather than
+assumed, because tranche 4's `+1` came from exactly this arm and looked like noise until somebody
+attributed it. **This branch adds no directory and no file** — it modifies six that were already
+there, in a directory already counted in both arms — so neither numerator nor denominator can move,
+and naming *why* it does not move is the half that distinguishes this from tranche 4.
+
+Six tracked transcripts were left modified and **all six were restored, not committed**. Five are
+`mg-f771`'s declared `W3` timing noise (`109.9s → 88.0s`, `114.3s → 96.5s`) and the byte counts
+beside them — `11674` and `52441` — are **unchanged**, which is the repo-state half: this branch adds
+nothing those censuses count. The sixth is `state_ratchet_e331/out_ratchet.txt`'s `N14` row, which
+carries the **absolute worktree root of the polecat that last committed it**; committing it would
+swap one polecat for another and buy nothing, which is `mg-4020`'s finding and `mg-1344`'s explicit
+decision, and it remains `mg-724a` / `mg-f771`'s to fix.
+
+**`out_consumers.txt` is committed here and its movement is NOT this branch's fact.** It was last
+regenerated at `820ade4`; the tree has gained `code/verdict_staleness_30bd` since (`mg-30bd`,
+`c4190b5`), so the corpus figures go `193 → 194` files and `145 → 146`, and the new rows name that
+directory. **This branch adds zero files** (`git diff --name-only --diff-filter=A main..HEAD` is
+empty), which is what makes the attribution a measurement rather than an inference. Regenerating it
+is the gate's own instruction; leaving it stale would be the drift this directory exists to count.
