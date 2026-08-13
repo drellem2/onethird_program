@@ -90,6 +90,38 @@ if measured:
     print("  at all -- which is %.0f%%." % (100.0 * strong / measured))
 print()
 
+hdr("§1b  OF THE TRANSCRIPTS THAT DIFFER, HOW MANY DIFFER ONLY IN ADDRESSES?")
+
+vm = counts.get("VERDICT MOVED", 0) + counts.get("DEAD", 0)
+ao = counts.get("ADDRESSES ONLY", 0)
+differing = vm + ao
+print("""  This is the number that decides whether mg-20ee's remedy -- pin the
+  instrument at an AS_OF commit so the addresses stop moving -- would help
+  this population at all.  An AS_OF pin removes an ADDRESSES ONLY difference
+  and does nothing whatever for a moved verdict.""")
+print()
+print("  transcripts that DIFFER at all              %5d" % differing)
+print("      of those, only ADDRESSES moved          %5d" % ao)
+print("      of those, a VERDICT moved               %5d" % vm)
+print()
+if differing and ao == 0:
+    print("""  NOT ONE of the differing transcripts in this sample differs only in its
+  addresses.  That is the opposite of what mg-20ee measured, and the reason is
+  that the two populations were SELECTED DIFFERENTLY: its 44 were nominated by
+  a classifier FOR FOREIGN ADDRESSES, so a difference that was nothing but an
+  address is exactly what it went looking for and exactly what pinning fixed.
+  This sample was selected for nothing, and in it a transcript that moves at
+  all has moved a verdict.  ON THIS EVIDENCE, PINNING IS NOT THE REMEDY HERE:
+  what these instruments lack is not a declared commit but ANYTHING THAT
+  RE-RUNS THEM.""")
+elif differing:
+    print("""  %d of %d differing transcripts moved only addresses, so an AS_OF pin --
+  mg-20ee's remedy -- would settle that fraction of this population and would
+  do nothing for the rest.""" % (ao, differing))
+else:
+    print("  Nothing in this sample differs, so this arm has nothing to split.")
+print()
+
 hdr("§2  EVERY INSTRUMENT, WITH ITS CLASS")
 
 print("  %-46s %-14s %-6s %5s %-10s %s" % ("instrument", "class", "rc", "secs", "lines", "load"))
