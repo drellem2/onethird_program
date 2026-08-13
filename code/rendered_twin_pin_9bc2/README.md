@@ -233,6 +233,23 @@ an export or a shallow clone silently honouring any declaration at all, because 
 a declaration is to *remove* a row from the field the merge gate exists for. Not grading and
 not honouring are the same doctrine at opposite signs. Arm `C8e` and world N29 hold it.
 
+### What it costs on the merge critical path
+
+**mg-724a's gate went 54.3 s → 110.1 s on this host**, measured from the committed
+`out_gate.txt` on either side of the change and not from arithmetic: twin 4.9 → 9.7 s, audit
+49.5 → 100.4 s. Fifteen new arms, each run **twice** by `a2_discriminate.py` with each side in
+its own sandbox, is a few seconds an arm by construction. `.pogo/refinery.toml`'s timeout is
+20 minutes, so the headroom is ~11× against the ~75× that file recorded at 16 s — a quarter of
+what it was, which is the half of this that is a cost and not a purchase.
+
+**One formatting repair came out of the same measurement.** `gate.py` printed its per-suite
+timing as `%6.1fs`, which right-aligns, so `97.6s` carried one more leading space than
+`100.4s`. mg-f771's normaliser rewrites the *number* to `<t>s` and cannot touch the padding
+around it, so this line disagreed with its committed copy **across the 100-second boundary**
+and the merge gate went RED for a wall-clock difference it had already declared to be noise.
+Two consecutive runs here did exactly that. The fix is on the producing side; widening the
+normaliser is the unfalsifiable escape hatch `lib_f771.py`'s own header refuses.
+
 ### What is NOT covered, in one line each
 
 Landing A can declare a row, relocate its essay and **leave the twin's cell untouched** —

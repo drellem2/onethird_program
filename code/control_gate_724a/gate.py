@@ -67,7 +67,17 @@ def main():
             rc, text = L.run_suite(rel)
             timings[suite] = time.time() - t0
             exits[suite], transcripts[suite] = rc, text
-            print("  %-6s %-42s exit %-3d %6.1fs  %d bytes"
+            # THE TIMING IS NOT COLUMN-PADDED, AND THAT IS A REPAIR RATHER THAN A STYLE
+            # CHOICE (mg-1344).  It read `%6.1fs`, which right-aligns, so `97.6s` carries one
+            # more leading space than `100.4s`.  mg-f771's normaliser rewrites the NUMBER to
+            # `<t>s` and cannot touch the padding around it, so this line disagreed with its
+            # committed copy across the 100-second boundary and the merge gate went RED for a
+            # wall-clock difference it had already declared to be noise.  MEASURED, not
+            # predicted: two consecutive runs on this host at 97.6s and 100.4s did exactly
+            # that.  The fix belongs HERE and not in the normaliser — widening that is the
+            # unfalsifiable escape hatch lib_f771's own header refuses, and it would swallow
+            # real differences to hide a formatting one.
+            print("  %-6s %-42s exit %-3d %.1fs  %d bytes"
                   % (suite, rel, rc, timings[suite], len(text)))
         t_suites = time.time() - t_all
         baseline = L.load_baseline()
@@ -83,7 +93,7 @@ def main():
         print("evidence about the branch.  A gate that maps 'could not tell' onto 'nothing")
         print("wrong' is the defect this whole line of work exists to remove.")
         return 2
-    print("  %-6s %-42s      %6.1fs total" % ("", "(both suites)", t_suites))
+    print("  %-6s %-42s      %.1fs total" % ("", "(both suites)", t_suites))
     print()
 
     # ---- §2 -------------------------------------------------------------------------------

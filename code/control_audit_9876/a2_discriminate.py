@@ -39,6 +39,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import contextlib
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -805,9 +806,17 @@ for _aid in _NC_BY_ARM:
 def _world_probe(builder, index, expect):
     def build(box):
         def run(base_report):
-            tmp = L.make_sandbox(history=False)
-            sp, tp = _pair(tmp)
-            rows = builder(tmp, L.read(sp), L.read(tp), base_report)
+            # A BARE TEMP DIRECTORY, NOT `make_sandbox()`, AND THE REASON IS THE MERGE
+            # CRITICAL PATH.  These builders take the two documents as TEXT and construct
+            # their own repository inside the directory they are handed, so a copytree of
+            # the whole estate here would be six of them per run buying nothing.  mg-724a
+            # measured the same class of waste in `ancestry()` — "the difference between a
+            # 39 s and a 23 s producer" — in a probe that runs on every merge.
+            tmp = tempfile.mkdtemp(prefix="ca9876-world-")
+            try:
+                rows = builder(tmp, L.read(L.STATE), L.read(L.TWIN), base_report)
+            finally:
+                shutil.rmtree(tmp, ignore_errors=True)
             if index >= len(rows):
                 raise RuntimeError("the world builder returned no row %d" % index)
             name, _sec, verdict, detail = rows[index]
@@ -1034,7 +1043,14 @@ def p_c8e(box):
     ppath = _declare(plain, ["1"])
 
     good = lambda: L.run_control(sp, tp, _ctl(box), path)                  # noqa: E731
-    bad = lambda: L.run_control(psp, ptp, _ctl(plain), ppath)              # noqa: E731
+
+    def bad():
+        # The harness's `finally` removes `box`, not this second tree, so it removes its own.
+        try:
+            return L.run_control(psp, ptp, _ctl(plain), ppath)
+        finally:
+            shutil.rmtree(plain, ignore_errors=True)
+
     return good, bad, has("REPORTED, NOT GRADED, AND NOT HONOURED")
 
 
