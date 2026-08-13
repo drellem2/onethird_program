@@ -298,6 +298,20 @@ the recorded digest — the opposite direction from this ticket's requirement (1
 one, because it is the direction that leaves the row digests describing the thing they were
 taken over.
 
+**But it was chosen by the method that produces bad pins, and that is worth separating from the
+outcome.** pm-onethird's refinement (from `p20ee`, across five instruments in `mg-20ee`) is that
+**main-ancestry must be asked before byte-identity**, because *"choosing on byte-identity first
+is what produced the bad pin — it makes the unreachable commit look like the only right
+answer."* `7eb561e` asked byte-identity first: it searched for *the* revision hashing to
+`118158cb…` and took the answer. That search returns one obviously-correct candidate and offers
+no occasion to notice whether it is on `main`. **It landed on a main-reachable commit, and
+nothing in the method made that happen** — `c308368`, the pin it replaced, was found by the same
+question and was not reachable at all.
+
+So the pin is right, and it was right by the draw rather than by construction. Grading
+reachability is what converts that into a checked property: a future repair that asks the same
+question and gets an orphan now cannot land, whichever order the person asked in.
+
 **What was actually owed here was the check, not the data.** A pin verified by hand and written
 up in prose is a provenance claim nobody can re-run — which is the exact defect this lineage
 exists to remove, one document along. So the table above is reproducible:
