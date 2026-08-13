@@ -30,10 +30,13 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
     912  of them sit in a directory that has a run_all.sh  (the candidates)
     187  candidate suite(s) run, of 187 in the population
 
-    665  transcript(s) a runner ACTUALLY REWROTE — the measured population
-    255  transcript(s) in a candidate directory that NO RUNNER TOUCHED
+  ⚠️  A RE-MEASUREMENT IN THIS RECORD WAS TAKEN AT A DIFFERENT COMMIT: a4a041d9cbd54f3838bed698140253dcf174e265.
+     Rows from it describe a tree this report does not otherwise describe.
+
+    663  transcript(s) a runner ACTUALLY REWROTE — the measured population
+    257  transcript(s) in a candidate directory that NO RUNNER TOUCHED
     139  transcript(s) in a directory with no run_all.sh at all
-     15  transcript(s) rewritten by a suite that does not own them
+     13  transcript(s) rewritten by a suite that does not own them
 
   A TRANSCRIPT ITS OWN RUNNER DOES NOT REWRITE IS NOT EVIDENCE OF ANYTHING.  It is
   outside this measurement in exactly the way mg-c824's out_a4_census.txt was outside
@@ -72,21 +75,21 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
 §3  THE CLASSIFICATION
 ==========================================================================================
 
-    314  IDENTICAL              byte-identical to the committed copy
+    312  IDENTICAL              byte-identical to the committed copy
      13  BENIGN/timing+path     BENIGN — mg-f771's N1 checkout path / N2 decimal seconds
-     16  BENIGN/address+asof    BENIGN — A1 line address / A2 sha, date, clock
+     17  BENIGN/address+asof    BENIGN — A1 line address / A2 sha, date, clock
      80  NON-VERDICT            differs, but in no verdict line (corpus sizes live here)
-     34  VERDICT-STALE/number   VERDICT-STALE — a number under an unmoved token moved
-    103  VERDICT-STALE/token    VERDICT-STALE — a verdict TOKEN appeared, vanished or changed
+     32  VERDICT-STALE/number   VERDICT-STALE — a number under an unmoved token moved
+     96  VERDICT-STALE/token    VERDICT-STALE — a verdict TOKEN appeared, vanished or changed
       0  GONE                   the run REMOVED a tracked transcript
-    105  UNUSABLE/ungraded      the producing run was KILLED or REFUSED — not graded, see §6.3
-      0  DECLARED/not-a-fixed-point the transcript declares it is not a fixed point — see §3b
+    108  UNUSABLE/ungraded      the producing run was KILLED or REFUSED — not graded, see §6.3
+      5  DECLARED/not-a-fixed-point the transcript declares it is not a fixed point — see §3b
 
   --------------------------------------------------------------------------------------
-  VERDICT-STALE, reachable by a runner: 137  (103 token, 34 number)
+  VERDICT-STALE, reachable by a runner: 128  (96 token, 32 number)
   --------------------------------------------------------------------------------------
 
-  105 further transcript(s) came from a run this sweep KILLED AT THE LIMIT, or from one
+  108 further transcript(s) came from a run this sweep KILLED AT THE LIMIT, or from one
   that REFUSED (exit 2, build.sh's own convention).  They are NOT in the number above
   and NOT in any number in this report: a half-written or declined transcript compared
   against its committed copy is the harness accusing the corpus of its own truncation,
@@ -97,9 +100,64 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
 §3b  THE DECLARATIONS — TRANSCRIPTS THAT SAY THEY CANNOT BE A FIXED POINT
 ==========================================================================================
 
-  NO CENSUS IN THIS RECORD.  It was written before mg-5491, so nothing has looked,
-  and that is a different answer from `nobody has declared`.  Re-take any suite —
-  `python3 -B sweep.py --only <dir> --pass2` — and the census is refreshed whole.
+  A transcript may say, IN ITS OWN FIRST 20 LINES, that it is not a fixed point and
+  why — a line whose text after any leading `#` begins `NOT-A-FIXED-POINT:`.  It is then
+  RUN, RECORDED AND LISTED exactly as before, and NOT counted as a finding about the
+  corpus.  The three shapes this exists for: a transcript whose producer can no
+  longer see what it saw, one that reads state living outside this repository, and
+  one whose subject is a stream rather than a tree.  None of those is a stale
+  verdict; all of them were being counted as one.
+
+  WHY THIS IS NOT AN ESCAPE HATCH, AND IT IS THE SECOND HALF THAT DOES THE WORK.
+  The marker is a hand-typed literal, not a regex over disclaimers; it must be in
+  the first 20 lines, so a QUOTATION of it — this line, for instance — exempts
+  nothing; every declaration is counted and listed below with the bucket it would
+  have carried; AND IT IS CHECKED IN THE DIRECTION THAT CAN EMBARRASS IT.  A
+  transcript declaring it cannot reproduce, which then REPRODUCES, is a FALSE
+  DECLARATION and is reported as one.
+
+  census taken at : a4a041d9cbd5  over all 1079 tracked transcript(s) in the tree AT THAT
+                    COMMIT — the whole tree, not only the swept directories, and
+                    not the 1051 this sweep walked.  A `--only` re-measurement of one
+                    suite still refreshes this census whole.
+
+      5  transcript(s) carry the marker
+      5  of them are HONOURED — the marker carries a reason
+      0  are MALFORMED — the marker is there and says nothing after it, so it is NOT
+         honoured and the transcript is graded exactly as if the line were absent
+
+  --------------------------------------------------------------------------------------
+  NO FALSE DECLARATIONS.  Every honoured declaration belongs to a transcript the
+  sweep regenerated into something that is NOT byte-identical or benign, which
+  is the only half of `I cannot be a fixed point` a record can decide.
+  --------------------------------------------------------------------------------------
+
+  code/audit_c067/out_c1_rebase.txt
+      the producer pairs commits by subject inside `git log -n 40`
+      declared not a fixed point — would have been VERDICT-STALE/token
+
+  code/verdict_delivery_bf3f/out_d2_cause.txt
+      this probe reads the LIVE mg verdict and mail stream, which
+      declared not a fixed point — would have been VERDICT-STALE/token
+
+  code/verdict_delivery_bf3f/out_d3_fire.txt
+      this probe reads the LIVE mg verdict and mail stream, which
+      declared not a fixed point — would have been VERDICT-STALE/number
+
+  code/verdict_delivery_bf3f/out_d4_live.txt
+      this probe reads the LIVE mg verdict and mail stream, which
+      declared not a fixed point — would have been VERDICT-STALE/token
+
+  code/verdict_delivery_bf3f/out_verdictwatch.txt
+      this probe reads the LIVE mg verdict and mail stream, which
+      declared not a fixed point — would have been VERDICT-STALE/token
+
+  AND WHAT THIS CANNOT CHECK, WHICH IS THE HALF THAT MATTERS MOST.  Nothing here
+  decides that a REASON is the right reason, or that no commit could have made the
+  transcript reproduce.  A declaration is a judgement by the transcript's owner and
+  this section is an ADDRESS for it, not a proof of it — mg-937c's own line about
+  `cause`, one instrument along.  The defence is that it is loud: a corpus quietly
+  declaring its way to zero findings would do so in this list, in public.
 
 ==========================================================================================
 §4  THE VERDICT-STALE TRANSCRIPTS, WITH THE LINES THAT MOVED
@@ -147,17 +205,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       + <sha> audit+instrument: THE HEAD CORPUS **IS** A FIXED POINT AND D7 IS REFUTED
       … and 69 more verdict line(s) moved
 
-  code/audit_c067/out_c1_rebase.txt
-      VERDICT-STALE/token    CONFIRMED -1, REFUTED +1, TRUE -2
-      regenerated by  code/audit_c067/run_all.sh
-      - # A TRUE RECORD WHOSE OWN PRODUCER CAN NO LONGER SEE IT.  DO NOT RE-RUN THIS.
-      - # record going false.  A RE-RUN WRITES 0 OVER A 5 THAT IS TRUE.
-      - [CONFIRMED] C1a mg-132a's 5 commit(s) were REPLAYED onto a larger tree by the 
-      - [CONFIRMED] C1a' and all 5 of the pre-rebase commit(s) are UNREACHABLE from th
-      + [CONFIRMED] C1a' and all 0 of the pre-rebase commit(s) are UNREACHABLE from th
-      - [FINDING  ] C1a'' ⚠️ AND THE EXPOSURE NARROWED WHILE THIS AUDIT WAS RUNNING.  
-      … and 2 more verdict line(s) moved
-
   code/audit_c067/out_c2_anchors.txt
       VERDICT-STALE/number   same tokens, a number under one of them moved
       regenerated by  code/audit_c067/run_all.sh
@@ -190,12 +237,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       regenerated by  code/branching_audit_19ec/run_all.sh
       - that clause carries a bound                                BAD  <-- it does no
       - the F2a REPLACEMENT carries a rank bound                   BAD  <-- it does no
-
-  code/branching_audit_2060/out_b0_repro.txt
-      VERDICT-STALE/token    BAD -1
-      regenerated by  code/sibling_sweep_7085/run_all.sh
-      NOTE  THE OWNING RUNNER REPRODUCES THIS BYTE-IDENTICALLY and the move above is code/sibling_sweep_7085's regeneration.  Not a verdict move on this record's own evidence — re-measure before reading one into it (mg-937c)
-      - TOTAL BAD: 0
 
   code/branching_audit_321d/out_h2_grain.txt
       VERDICT-STALE/token    FALSE -1, FINDING -4, FINDINGS -3, HIT -1, VERDICT +1
@@ -443,7 +484,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
   code/face_geometry_audit_1c80/out_claims.txt
       VERDICT-STALE/token    BROKEN +4, HOLDS -2
       regenerated by  code/face_geometry_audit_1c80/run_all.sh
-      NOTE  1 other suite(s) reproduced this byte-identically (code/superseded_descent_688c); the move above is the owning runner's, so the finding stands on it.  A measurement condition, §6.4
       - BROKEN `deciding_gate`'s docstring: 'The predicate answers ... in three
       + BROKEN 'nmax=2 behaves exactly as it did before this commit (3 failures)'
       + BROKEN the condition is untouched -- `cond = cond and absorb == 0` still score
@@ -455,7 +495,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
   code/face_geometry_audit_1c80/out_mutations.txt
       VERDICT-STALE/token    FAIL -1, MISSED +6
       regenerated by  code/face_geometry_audit_1c80/run_all.sh
-      NOTE  1 other suite(s) reproduced this byte-identically (code/superseded_descent_688c); the move above is the owning runner's, so the finding stands on it.  A measurement condition, §6.4
       + M1   delete the |s_i s_j| = 1 gate from the predica   None      1            C
       + M2   delete the s_i^2 = 1 gate from the predicate     None      0            I
       + M3   deciding_gate reports 'parity' where it report   None      0            C
@@ -580,12 +619,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       - routing check: [PASS]  3 of 4 rows forced
       - routing check: [PASS]  3 of 4 rows forced
       … and 8 more verdict line(s) moved
-
-  code/face_geometry_audit_f1b2/out_scoring.txt
-      VERDICT-STALE/token    PASS -1
-      regenerated by  code/superseded_descent_688c/run_all.sh
-      NOTE  NEITHER OBSERVATION IS THE OWNING RUNNER'S — code/runner_exit_audit_dee4 says IDENTICAL, code/superseded_descent_688c says the move, and code/face_geometry_audit_f1b2 is not a candidate suite at all — it has no run_all.sh.  The listing above is one foreign suite's answer (mg-937c)
-      - B. IS THE ROUTING CHECK'S ANSWER FORCED?  It is scored [PASS] on '0 < len(forc
 
   code/face_geometry_audit_fcb2/out_a1_counts.txt
       VERDICT-STALE/token    GREEN -1, RED -2, REFUTED -16, TRUE -1
@@ -911,7 +944,7 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       - THE NOT-CLEAN ROWS, NAMED (3):
       + -> docs/OneThird-StandardDominance-ComparisonRoute.md  [+REFUTED x2, WITHDRAWN
       + -> docs/OneThird-StandardDominance-ComparisonRoute.md  [+REFUTED x2, WITHDRAWN
-      + THE NOT-CLEAN ROWS, NAMED (6):
+      + THE NOT-CLEAN ROWS, NAMED (8):
 
   code/mirror_staleness_cdd5/out_s4_anchors.txt
       VERDICT-STALE/token    REFUSED +1
@@ -919,12 +952,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       - anchors whose line DIFFERS                        5
       + REFUSED rather than guessed.
       + anchors whose line DIFFERS                        8
-
-  code/mirror_staleness_cdd5/out_selftest_cdd5.txt
-      VERDICT-STALE/number   same tokens, a number under one of them moved
-      regenerated by  code/mirror_staleness_cdd5/run_all.sh
-      - …                   got={"5.0'", '2.3', '1'}
-      + …                   got={'1', "5.0'", '2.3'}
 
   code/pinned_ref_durability_223d/out_r1_population.txt
       VERDICT-STALE/token    FINDING +2
@@ -1171,16 +1198,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       - R1 TOTAL BAD: 0      R1 PREDICTIONS MISSED: 3
       + R1 TOTAL BAD: 1      R1 PREDICTIONS MISSED: 3
 
-  code/species_bound_repair_5040/out_r2_wiring.txt
-      VERDICT-STALE/token    BAD -4, CLEAN -1, FINDING -1
-      regenerated by  code/state_delegation_audit_5644/run_all.sh
-      - R2 TOTAL BAD: 0
-      - R2a  THE THREE REWIRED RUNNERS, CLEAN
-      - R2e  A CRASH IN e2 IS NO LONGER REPORTED AS A FINDING e2 DID NOT MAKE
-      - species_remainder_f8fa     exit 0   prints `E2 TOTAL BAD:`  yes   ok
-      - species_repair_6f61        exit 0   prints `E2 TOTAL BAD:`  yes   ok
-      - species_repair_a4ef        exit 0   prints `E2 TOTAL BAD:`  yes   ok
-
   code/species_depth_audit_4700/out_selftest.txt
       VERDICT-STALE/token    FAILED +2
       regenerated by  code/species_depth_audit_4700/run_all.sh
@@ -1196,7 +1213,7 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
   code/species_extent_d633/out_e1_extents.txt
       VERDICT-STALE/number   same tokens, a number under one of them moved
       regenerated by  code/species_extent_d633/run_all.sh
-      NOTE  2 other suite(s) reproduced this byte-identically (code/sibling_sweep_7085, code/species_bound_repair_5040); the move above is the owning runner's, so the finding stands on it.  A measurement condition, §6.4
+      NOTE  1 other suite(s) reproduced this byte-identically (code/species_bound_repair_5040); the move above is the owning runner's, so the finding stands on it.  A measurement condition, §6.4
       - e2_crosssection.py   exit 0   201 file(s) under the repo (102 docs, 99 code), 
       + e2_crosssection.py   exit 1   531 file(s) under the repo (182 docs, 349 code),
       - …, 52 code), 55 outside, 20 binary, 0 ATTEMPTED AND FAILED
@@ -1205,7 +1222,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
   code/species_extent_d633/out_e2_crosssection.txt
       VERDICT-STALE/number   same tokens, a number under one of them moved
       regenerated by  code/species_extent_d633/run_all.sh
-      NOTE  1 other suite(s) reproduced this byte-identically (code/sibling_sweep_7085); the move above is the owning runner's, so the finding stands on it.  A measurement condition, §6.4
       - E2 CHECKED 267 markdown file(s) AND FOUND 1 THING(S) WRONG
       - E2 TOTAL BAD: 1
       + E2 CHECKED 531 markdown file(s) AND FOUND 5 THING(S) WRONG
@@ -1220,18 +1236,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       + e2 is GREEN on the clean clone                                   *** FAILED **
       + e2 is RED with the plant, and says why                           *** FAILED **
       + the SAME sentence in a paragraph that retracts it does NOT fire  *** FAILED **
-
-  code/species_repair_6f61/out_r2_columns.txt
-      VERDICT-STALE/token    BAD -2, MISS -2, MISSED -3, VERDICT -1
-      regenerated by  code/state_delegation_audit_5644/run_all.sh
-      NOTE  THE OWNING RUNNER REPRODUCES THIS BYTE-IDENTICALLY and the move above is code/state_delegation_audit_5644, code/state_relocation_audit_b0ae's regeneration.  Not a verdict move on this record's own evidence — re-measure before reading one into it (mg-937c)
-      - R2 PREDICTIONS MISSED: 2 of 45
-      - R2 TOTAL BAD: 0
-      - R2c  THE PER-COLUMN VERDICT
-      - R2e  THE TWO MISSED PREDICTIONS, AND WHY THEY MISSED
-      - TOTAL BAD below counts columns left UNDEMONSTRATED, which is the
-      - verdict           ok         ok         ok         ok       MISS
-      … and 1 more verdict line(s) moved
 
   code/species_sites_821e/out_selftest.txt
       VERDICT-STALE/token    FAILED +2
@@ -1269,6 +1273,17 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       - get-default-0    1 site(s)   -- MISSING KEY -> 0 : a row never measured scores
       + get-default-0    3 site(s)   -- MISSING KEY -> 0 : a row never measured scores
 
+  code/superseded_descent_688c/out_s2_descent.txt
+      VERDICT-STALE/token    GREEN +1, VERDICT +8
+      regenerated by  code/superseded_descent_688c/run_all.sh
+      + at <sha>: ## Kill-shot 2 — Standard dominance — **GREEN**
+      + by <sha>  repair: THE VERDICT IS LEAVE-AND-RECORD AND IT WAS ALREA
+      + by <sha>  repair: THE VERDICT IS LEAVE-AND-RECORD AND IT WAS ALREA
+      + by <sha>  repair: THE VERDICT IS LEAVE-AND-RECORD AND IT WAS ALREA
+      + by <sha>  repair: THE VERDICT IS LEAVE-AND-RECORD AND IT WAS ALREA
+      + by <sha>  repair: THE VERDICT IS LEAVE-AND-RECORD AND IT WAS ALREA
+      … and 3 more verdict line(s) moved
+
   code/superseded_figures_5827/out_gate.txt
       VERDICT-STALE/token    FAIL +1, PASS +1, WRONG +1
       regenerated by  code/superseded_figures_5827/run_all.sh
@@ -1285,48 +1300,6 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
       VERDICT-STALE/token    CONFIRMED -1
       regenerated by  code/sweep_evidence_control_d2c2/run_all.sh
       - CONFIRMED — the two sets are identical, and the ticket's guess is
-
-  code/verdict_delivery_bf3f/out_d2_cause.txt
-      VERDICT-STALE/token    CONFIRMED +16, FAIL +1, FAILS +1, FALSE +2, HOLDS +2, VERDICT +92
-      regenerated by  code/verdict_delivery_bf3f/run_all.sh
-      + 0.2  mg-131e  VERDICT mg-131e: the <= direction is certified at n=
-      + 0.2  mg-223d  mg-223d VERDICT: <sha> is 1 of 26, cause is unifor
-      + 0.2  mg-2ff6  mg-2ff6 VERDICT: 0 of 27 -> 22 of 27 by cfd9c's own
-      + 0.3  mg-8d66  mg-8d66 VERDICT: your PREMISE is right and it is wha
-      + 0.4  mg-77fe  VERDICT mg-77fe — the le_to_facet sizing is LANDED,
-      + 0.5  mg-28ff  mg-28ff VERDICT: branch (C) LANDS at n<=6 — C_3^(III
-      … and 88 more verdict line(s) moved
-
-  code/verdict_delivery_bf3f/out_d3_fire.txt
-      VERDICT-STALE/number   same tokens, a number under one of them moved
-      regenerated by  code/verdict_delivery_bf3f/run_all.sh
-      - [PASS] the delivery is arm B: got ['mg-3dc0'], expected ['mg-3dc0']
-      - [PASS] the reported drop is arm A: got ['mg-3c2b'], expected ['mg-3c2b']
-      + [PASS] the delivery is arm B: got ['mg-c837'], expected ['mg-c837']
-      + [PASS] the reported drop is arm A: got ['mg-b16f'], expected ['mg-b16f']
-      - arm A  mg-3c2b: landed, and I am DELIBERATELY NOT MAILING THE VERDICT.
-      + arm A  mg-b16f: landed, and I am DELIBERATELY NOT MAILING THE VERDICT.
-
-  code/verdict_delivery_bf3f/out_d4_live.txt
-      VERDICT-STALE/token    DISAGREES +1, HOLDS +1, MISS +1, MISSING +1, RED +1, REFUTED +1, SILENT -1, UNMEASURED +1, WIDER -1
-      regenerated by  code/verdict_delivery_bf3f/run_all.sh
-      - 2026-07-31T07:13:43Z  mg-3934  worker=3934      CI RED ON MAIN 21 HOURS: Gate 
-      - 2026-08-05T17:33:37Z  mg-f3ff  worker=f3ff      THE DROPPED-VERDICT CENSUS WAS
-      - 2026-08-06T00:37:28Z  mg-1d26  worker=z1d26     THE HOLE IS 3x WIDER THAN CERT
-      + 2026-08-12T21:29:52Z  mg-cdd5  worker=pcdd5     A REFUTED CLAIM IS STANDING UN
-      + 2026-08-13T03:44:15Z  mg-f771  worker=pf771     A COMMITTED out_*.txt CURRENTL
-      + 2026-08-13T04:01:40Z  mg-843d  worker=p843d     A TRIPWIRE IS RED ON MAIN RIGH
-      … and 7 more verdict line(s) moved
-
-  code/verdict_delivery_bf3f/out_verdictwatch.txt
-      VERDICT-STALE/token    DISAGREES +1, MISSING +1, RED +2, REFUTED +1, VERDICT +1
-      regenerated by  code/verdict_delivery_bf3f/run_all.sh
-      + 2026-08-12T21:29:52Z  mg-cdd5   pm-onethird   pcdd5    done              0  A 
-      + 2026-08-13T03:44:15Z  mg-f771   pm-onethird   pf771    done              0  A 
-      + 2026-08-13T04:01:40Z  mg-843d   pm-onethird   p843d    done              0  A 
-      + 2026-08-13T06:19:45Z  mg-8748   pm-onethird   p8748    done              0  KE
-      + 2026-08-13T06:48:20Z  mg-1903   pm-onethird   p1903    done              0  CO
-      + 2026-08-13T09:59:48Z  mg-502f   pm-onethird   p502f    done              0  SW
 
   code/verdict_path_repair_1d26/out_selftest_1d26.txt
       VERDICT-STALE/token    FINDING +1
@@ -1486,7 +1459,7 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
      mg-f771's own declared hole (its §1: "a transcript no suite rewrites is never
      modified and therefore never appears below") one level out.
 
-  2  A RUNNER THAT DECLINES.  255 transcript(s) in candidate directories were not
+  2  A RUNNER THAT DECLINES.  257 transcript(s) in candidate directories were not
      rewritten by their runner at all.  §5 reaches the ones whose producer is written
      in the runner as a plain redirect; the rest stay unmeasured.
 
@@ -1546,9 +1519,9 @@ mg-30bd — VERDICT-STALENESS: how many committed transcripts still say somethin
 
       54  presumed stale     mg-20ee's original, superseded
       32  already-stale      the census ground truth — AUTHORITATIVE FOR ADDRESSES
-     150  verdict-stale      this measurement, over a DIFFERENT population
+     141  verdict-stale      this measurement, over a DIFFERENT population
 
-  150 DOES NOT SUPERSEDE 32 AND IT DOES NOT CONTAIN IT.  That is the misreading this
+  141 DOES NOT SUPERSEDE 32 AND IT DOES NOT CONTAIN IT.  That is the misreading this
   section exists to stop: the two are counts of DIFFERENT POPULATIONS under different
   questions, and neither is a correction of the other.  32 remains the authoritative
   already-stale ADDRESS count and this report does not touch it.

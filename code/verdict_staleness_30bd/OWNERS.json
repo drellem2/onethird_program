@@ -3,6 +3,7 @@
   "declared_by": "mg-937c",
   "corpus_at": "f2117f1",
   "record": "sweep_30bd.jsonl",
+  "declared_rows": 150,
   "what_this_is": [
     "One row per VERDICT-STALE transcript in the record, both passes.  It is the",
     "baseline `the list has not grown` is graded against AND it is the per-instance",
@@ -25,6 +26,18 @@
     "about why a verdict moved, and pretending otherwise is the laundering this file",
     "exists to avoid.  `owner` is DERIVED FROM THE DIRECTORY NAME — it is an ADDRESS,",
     "not a consent, and no agent has agreed to any row by its presence here."
+  ],
+  "what_declared_rows_is": [
+    "THE SIZE OF THIS BASELINE ON THE DAY IT WAS DECLARED, and it is here because",
+    "mg-5491 needed it to be a MEASUREMENT rather than a sentence.  The list moves --",
+    "rows retire when somebody repairs a transcript, rows arrive when somebody",
+    "re-measures a suite -- so `150` became a figure this directory's prose stated",
+    "and none of its transcripts printed, which is exactly the class mg-2959's arm",
+    "counts.  The arm prints this beside the live count, so the two are read",
+    "together and the movement is visible instead of being an unexplained edit.",
+    "IT IS A HAND FIELD AND NOTHING CHECKS IT.  It is a claim about a commit that",
+    "has already happened (cd28bd2); the honest defence is that it is stated as a",
+    "date-stamped declaration and not as a live property."
   ],
   "how_to_move_a_value": [
     "A row LEAVES when its transcript is no longer VERDICT-STALE in the record — the",
@@ -1067,6 +1080,14 @@
       "cause": "CORPUS-COUNT",
       "disposition": "PIN-AS-DATED",
       "read": "full"
+    },
+    "code/superseded_descent_688c/out_s2_descent.txt": {
+      "class": "token",
+      "owner": "mg-688c",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "sample",
+      "why": "ARRIVED AFTER THE BASELINE, and it is the first row this arm caught rather than inherited (mg-5491).  s2_descent.py:254 runs an UNBOUNDED `git log -S <needle>` over the citing repository and prints `by <sha>  <subject>` for the introducing commit of every broken anchor, so the transcript is a function of how many commits that history has -- mg-e720's family, and the repair is to bound the walk rather than to re-pin a figure.  8 of the 9 moved verdict lines are those subjects and the ninth is a quoted `**GREEN**` table row from the cited revision.  IT CARRIES NO `NOTE` IN SECTION 4 AND THAT IS THE POINT: report.py's `<sha> <subject>` detector needs a masked sha at LINE START and these lines start `by `, so this row is a live instance of the under-detection mg-937c section 6 item 4 named and did not repair."
     },
     "code/superseded_figures_5827/out_gate.txt": {
       "class": "token",

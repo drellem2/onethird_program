@@ -11,17 +11,20 @@ mg-937c — THE OWNERS OF THE VERDICT-STALE LIST, AND WHETHER IT HAS GROWN
                     hours and is deliberately outside every runner (run_all.sh).
 
 ==========================================================================================
-§1  THE STANDING: WHAT 150 ROWS OF READING CAME TO
+§1  THE STANDING: WHAT 151 ROWS OF READING CAME TO
 ==========================================================================================
 
-  150 row(s), over 73 owning directories.  THE CAUSE IS THE HAND FIELD AND IT IS THE
+  151 row(s), over 74 owning directories.  THE CAUSE IS THE HAND FIELD AND IT IS THE
   WHOLE POINT OF THE FILE — a baseline nobody has read is a number that launders
   whatever was true on the day it was taken, which is why mg-30bd refused to set one.
+
+  DECLARED OVER 150 ROW(S) AT f2117f1, AND IT CARRIES 151 NOW.  §4 says which rows left and
+  why; §3 says which arrived.  A baseline whose size is prose cannot show either.
 
      71  SUBJECT-MOVED            an audit of another ticket's artifact, and the artif
      43  CORPUS-COUNT             a census figure over a growing corpus, sharing a lin
      19  CONTROL-FLIPPED          this suite's own control or selftest reaches a diffe
-      8  HISTORY-WALK             an unbounded history walk quoting commit subjects — 
+      9  HISTORY-WALK             an unbounded history walk quoting commit subjects — 
       4  LIVE-OUTSIDE-REPO        not a function of this repository at all — it reads 
       3  RECORD-DISAGREES         the record contains a second graded observation of t
       1  DECLARED-UNREPRODUCIBLE  the transcript's own text says it must not be re-run
@@ -29,33 +32,33 @@ mg-937c — THE OWNERS OF THE VERDICT-STALE LIST, AND WHETHER IT HAS GROWN
 
      87  TICKET                   a graded outcome genuinely moved and somebody has to
      43  PIN-AS-DATED             the figure is a dated census; the repair is an as-of
-      8  BOUND-THE-WALK           mg-e720's repair — bound the walk, so the transcript
+      9  BOUND-THE-WALK           mg-e720's repair — bound the walk, so the transcript
       6  RE-MEASURE               this record cannot settle it — re-run the suite alon
       6  UNTRACK-OR-PIN           the transcript is not a function of repo state; it c
 
      90  read in FULL — the record quotes every verdict line that moved
-     60  read as a SAMPLE — the record caps its quotation at 6 lines and this entry
+     61  read as a SAMPLE — the record caps its quotation at 6 lines and this entry
          has more, so the cause above was assigned from part of the move.  SAID
          RATHER THAN SMOOTHED: `read` is checked against the record below, so this
          is the one figure here that cannot be overstated.
 
   --------------------------------------------------------------------------------------
-  AND THE STRUCTURAL FACT UNDERNEATH ALL 150, MEASURED RATHER THAN FELT:
+  AND THE STRUCTURAL FACT UNDERNEATH ALL 141, MEASURED RATHER THAN FELT:
   --------------------------------------------------------------------------------------
 
-  ./build.sh runs 9 suite(s).  The record ran 187.  Of the 150 verdict-stale
+  ./build.sh runs 9 suite(s).  The record ran 187.  Of the 141 verdict-stale
   transcripts, 0 sit in a directory the merge gate runs.
 
   THAT NUMBER IS THE ANSWER TO `WHO OWNS THESE`, AND IT IS NOT A PERSON.  Every one
-  of the 150 is in a directory nothing on the merge path ever runs, so no branch has
+  of the 141 is in a directory nothing on the merge path ever runs, so no branch has
   ever been told about any of them.  mg-f771's fixed-point control IS the whole-run
   before/after diff §6.6 asks for — `every tracked file under code/ named out_*.txt,
   compared against HEAD` — and its committed transcript says
       `VERDICT: GREEN — 0 disagreements.`
-  THAT IS NOT IN TENSION WITH THESE 150, AND THE RECONCILIATION IS THE COVERAGE READ
+  THAT IS NOT IN TENSION WITH THESE 141, AND THE RECONCILIATION IS THE COVERAGE READ
   ABOVE RATHER THAN A CAVEAT ABOUT EITHER NUMBER.  g0 can only compare a transcript
   THE GATE'S OWN RUN REWROTE, and the gate's run reaches 9 of the 187 candidate
-  suites.  A green whole-run diff over a ninth of the corpus and 150 stale transcripts
+  suites.  A green whole-run diff over a ninth of the corpus and 141 stale transcripts
   in the other eight ninths are THE SAME MEASUREMENT, not two that need reconciling.
 
 ==========================================================================================
@@ -66,20 +69,14 @@ mg-937c — THE OWNERS OF THE VERDICT-STALE LIST, AND WHETHER IT HAS GROWN
   STRONGEST bucket.  That is the right headline and it is silent about the
   disagreement, so the disagreement is counted here and annotated there.
 
-    113  rewritten transcript(s) observed by more than one suite
-     11  verdict-stale entr(ies) with a disagreeing observation in the same record
-      3  of those where the BENIGN observation is not a foreign suite's
+    110  rewritten transcript(s) observed by more than one suite
+      5  verdict-stale entr(ies) with a disagreeing observation in the same record
+      0  of those where the BENIGN observation is not a foreign suite's
 
-      code/branching_audit_2060/out_b0_repro.txt
-          THE OWNING RUNNER REPRODUCES THIS BYTE-IDENTICALLY
-      code/face_geometry_audit_f1b2/out_scoring.txt
-          NEITHER OBSERVATION IS THE OWNING RUNNER'S
-      code/species_repair_6f61/out_r2_columns.txt
-          THE OWNING RUNNER REPRODUCES THIS BYTE-IDENTICALLY
 
   THE COUNTERFACTUAL, PRINTED SO IT IS A MEASUREMENT AND NOT AN ARGUMENT.  Dropping
-  those 3 would move §3's runner-reachable headline 137 -> 134, and the total in
-  report.py's own §7 table 150 -> 147 entries.  They are
+  those 0 would move §3's runner-reachable headline 128 -> 128, and the total in
+  report.py's own §7 table 141 -> 141 entries.  They are
   NOT dropped: which observation is authoritative is a decision about the corpus and
   belongs to the instance's owner.  That a decision is OWED is a fact about the
   record, and it now has a number.
@@ -105,7 +102,53 @@ mg-937c — THE OWNERS OF THE VERDICT-STALE LIST, AND WHETHER IT HAS GROWN
 §4  WHAT HAS BEEN REPAIRED SINCE THE BASELINE — REPORTED, NEVER GRADED
 ==========================================================================================
 
-  Nothing.  No row's transcript has left the verdict-stale list.
+  A ROW LEAVES FOR THREE REASONS AND ONLY TWO OF THEM ARE GOOD NEWS (mg-5491).
+  REPRODUCES and DECLARED are decided and the row may go.  UNMEASURED IS NEITHER:
+  the record no longer contains a GRADE for that transcript — every observation of
+  it was killed or refused, or the suites that used to rewrite it stopped — so
+  deleting the row would shrink the baseline by a transcript NOBODY MEASURED.
+  Unmeasured is not clean, which is §6.3's rule one level in.
+
+  RETIRED/DECLARED   code/audit_c067/out_c1_rebase.txt  (was token)
+           Its own text now declares it is not a fixed point, and §3b of
+           out_verdict_staleness.txt carries it with the bucket it would have
+           had.  DELETE this row; the entry has moved, not vanished.
+  RETIRED/REPRODUCES code/branching_audit_2060/out_b0_repro.txt  (was token)
+           The record regenerated it and graded it BENIGN.  A repair.  DELETE
+           this row from OWNERS.json; the baseline tightens and this stays green.
+  RETIRED/REPRODUCES code/face_geometry_audit_f1b2/out_scoring.txt  (was token)
+           The record regenerated it and graded it BENIGN.  A repair.  DELETE
+           this row from OWNERS.json; the baseline tightens and this stays green.
+  RETIRED/REPRODUCES code/mirror_staleness_cdd5/out_selftest_cdd5.txt  (was number)
+           The record regenerated it and graded it BENIGN.  A repair.  DELETE
+           this row from OWNERS.json; the baseline tightens and this stays green.
+  RETIRED/UNMEASURED code/species_bound_repair_5040/out_r2_wiring.txt  (was token)
+           *** DO NOT DELETE THIS ROW.  No grade for it survives in the record:
+           it is UNMEASURED, not repaired.  Re-measure the suite that owns it
+           (`sweep.py --only <dir> --pass2`), then read the answer.
+  RETIRED/REPRODUCES code/species_repair_6f61/out_r2_columns.txt  (was token)
+           The record regenerated it and graded it BENIGN.  A repair.  DELETE
+           this row from OWNERS.json; the baseline tightens and this stays green.
+  RETIRED/DECLARED   code/verdict_delivery_bf3f/out_d2_cause.txt  (was token)
+           Its own text now declares it is not a fixed point, and §3b of
+           out_verdict_staleness.txt carries it with the bucket it would have
+           had.  DELETE this row; the entry has moved, not vanished.
+  RETIRED/DECLARED   code/verdict_delivery_bf3f/out_d3_fire.txt  (was number)
+           Its own text now declares it is not a fixed point, and §3b of
+           out_verdict_staleness.txt carries it with the bucket it would have
+           had.  DELETE this row; the entry has moved, not vanished.
+  RETIRED/DECLARED   code/verdict_delivery_bf3f/out_d4_live.txt  (was token)
+           Its own text now declares it is not a fixed point, and §3b of
+           out_verdict_staleness.txt carries it with the bucket it would have
+           had.  DELETE this row; the entry has moved, not vanished.
+  RETIRED/DECLARED   code/verdict_delivery_bf3f/out_verdictwatch.txt  (was token)
+           Its own text now declares it is not a fixed point, and §3b of
+           out_verdict_staleness.txt carries it with the bucket it would have
+           had.  DELETE this row; the entry has moved, not vanished.
+
+  1 of the 10 retirements above are UNMEASURED and the row STAYS.  Reported and
+  NOT graded: nothing here is this directory's defect, and a red would be asking a
+  branch to re-run somebody else's suite to get green.
 
 ==========================================================================================
 §5  THE HAND FIELDS THAT THE RECORD CAN CONTRADICT
@@ -116,10 +159,10 @@ mg-937c — THE OWNERS OF THE VERDICT-STALE LIST, AND WHETHER IT HAS GROWN
   said plainly, because an arm that implied otherwise would be the laundering the
   file exists to avoid.
 
-    150  `read` agrees with whether the record quotes the whole move
-    150  `cause: RECORD-DISAGREES` agrees with the record's own disagreement, in
+    151  `read` agrees with whether the record quotes the whole move
+    151  `cause: RECORD-DISAGREES` agrees with the record's own disagreement, in
          BOTH directions — no row claims it falsely and no row omits it
-    150  cause and disposition are from the declared vocabularies
+    151  cause and disposition are from the declared vocabularies
 
 ==========================================================================================
 §6  WHAT THIS ARM CANNOT SEE — the enumeration's own blind spots, stated
@@ -132,7 +175,7 @@ mg-937c — THE OWNERS OF THE VERDICT-STALE LIST, AND WHETHER IT HAS GROWN
      put a live-tree number in a committed transcript, which is the defect 649b186
      removed from report.py two commits before this one, in this directory.
 
-  2  THE 105 UNGRADED ROWS AND THE 22 TIMED-OUT SUITES ARE OUTSIDE THIS BASELINE
+  2  THE 108 UNGRADED ROWS AND THE 22 TIMED-OUT SUITES ARE OUTSIDE THIS BASELINE
      ENTIRELY, and OWNERS.json says nothing about them.  They are not clean and not
      stale; they are unmeasured.  Re-measuring them is how this list grows.
 
@@ -143,18 +186,18 @@ mg-937c — THE OWNERS OF THE VERDICT-STALE LIST, AND WHETHER IT HAS GROWN
   4  THE `<sha> <subject>` DETECTOR IS NARROWER THAN THE FAMILY IT NAMES.  It needs
      a masked sha at the start of the line, so a walk that prints `HEAD's subject :
      <subject>` or a bare commit subject is missed.  FOUND BY READING, NOT BY THE
-     DETECTOR: 4 of the 8 rows this baseline calls HISTORY-WALK carry no NOTE in §4
+     DETECTOR: 5 of the 9 rows this baseline calls HISTORY-WALK carry no NOTE in §4
      of out_verdict_staleness.txt.  Reported, not repaired — widening the detector
      moves report.py's annotations and that is a change to the corpus's record.
 
-  5  AND THE ONE THAT OUTRANKS THEM.  A successor working only these 150 is working
+  5  AND THE ONE THAT OUTRANKS THEM.  A successor working only these 141 is working
      the list mg-30bd's instrument could see.  §6.6 of out_verdict_staleness.txt is
      unchanged and still owed: mg-6cb9 was found by a whole-run before/after diff,
      by accident, and not by any enumeration including this one.  What §1 above adds
      is WHERE to point that diff — the 178 suites ./build.sh does not run.
 
 ==========================================================================================
-OWNERS VERDICT: GREEN — 150 verdict-stale transcript(s), 150 with a row, 0 without.
+OWNERS VERDICT: GREEN — 141 verdict-stale transcript(s), 141 with a row, 0 without.
 ==========================================================================================
 
 ==========================================================================================
@@ -175,8 +218,9 @@ OWNERS VERDICT: GREEN — 150 verdict-stale transcript(s), 150 with a row, 0 wit
   P6   a cause outside the declared vocabulary -> caught        ok
   P7   the unmutated baseline -> no finding of any kind         ok
   P8   a row naming THIS arm's own transcript -> graded, not exempt ok
-  P9   a DECLARED transcript -> RETIRED, and no finding         ok
+  P9   a DECLARED transcript -> RETIRED/DECLARED, and no NEW finding ok
   P10  a marker with NO REASON -> not honoured, the row stays   ok
+  P11  a row the record has NO GRADE for -> RETIRED/UNMEASURED, not REPRODUCES ok
 
-  12 worlds, all as planted.
+  13 worlds, all as planted.
 

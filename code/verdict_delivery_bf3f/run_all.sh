@@ -39,12 +39,12 @@ LIVE_PROBES=" d2_cause d3_fire d4_live verdictwatch "
 declaration() {
     cat <<'DECL'
 # =============================================================================
-# NOT-A-FIXED-POINT: this probe reads the LIVE mg verdict and mail stream, which
-# lives outside this repository and moves every hour.
+# NOT-A-FIXED-POINT: it reads the live mg store, which is outside this repository
+# and moves every hour, so no commit can make the figures below reproduce.
 # =============================================================================
-# A re-run is a NEW measurement of a different afternoon, not a check of this
-# one, and no commit can make the figures below reproduce.  They are DATED
-# EVIDENCE for the finding this directory's README states, so they are pinned:
+# A re-run is a NEW measurement of a different afternoon and not a check of this
+# one.  The figures below are DATED EVIDENCE for the finding this directory's
+# README states -- the 122, the 25, the 16 of 191 -- so they are pinned:
 # re-running this suite replaces them.  The marker above is the literal
 # code/verdict_staleness_30bd reads (lib30bd.DECLARATION), which was grading
 # these four probes as stale verdicts about the corpus.  Written by run_all.sh,

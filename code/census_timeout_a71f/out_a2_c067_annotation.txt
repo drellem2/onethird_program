@@ -8,10 +8,10 @@ a2 -- `audit_c067/out_c1_rebase.txt` IS TRUE AND ITS OWN PRODUCER CANNOT SEE THA
       -- refs, history, the file list of `main` -- so it is a fact about the object store as it
       stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
       is the only honest thing an instrument in this class can do.
-    as-of      ccd925cf76791196f006aa3ecd02a446d36bb390
+    as-of      aca67da412967ddd63b7aa62b00e30c6f63bccb5
     subject    code/audit_c067/out_c1_rebase.txt
     carrier    47e56b3bd628
-    distance   `main` is 445 commits past the carrier
+    distance   `main` is 449 commits past the carrier
 
 ------------------------------------------------------------------------------
 A2a -- THE NOTE IS PRESENT, AND THE RECORD UNDER IT IS UNTOUCHED
@@ -22,7 +22,7 @@ has been altered."  That is checkable, so it is checked here rather than
 promised -- against the blob at the transcript's own carrying commit.
 
 [OK       ] A2a the end-of-note marker appears EXACTLY 1 time(s).  More than one and the split below would be ambiguous; zero and the note is absent
-[OK       ] A2a' the 8944 bytes below the marker are byte-identical to the blob at 47e56b3.  The annotation ADDED 3941 bytes above the record and CHANGED none of it
+[OK       ] A2a' the 8944 bytes below the marker are byte-identical to the blob at 47e56b3.  The annotation ADDED 4261 bytes above the record and CHANGED none of it
 
 ------------------------------------------------------------------------------
 A2b -- EVERY OFF-`main` COMMIT THE RECORD NAMES, TWINNED WITH NO WINDOW
