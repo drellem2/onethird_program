@@ -377,6 +377,26 @@ figures go to stderr**, for the same reason `README` D4 put the changed set ther
   FAIL) and `audit.sweep_grade`, **gated** in `BASELINE.json` precisely so that *the sweep's
   detector stopped discriminating* is red even where its counts are not.
 
+### The branch paid the tax it removes, on its way in, and that is the last measurement
+
+`mr-d9v4sgqtjv1j0e4iso80`, 2026-08-13 23:07Z: **`CONFLICT (content): Merge conflict in
+code/control_audit_9876/out_a4_sweep.txt`**. While this branch sat in the merge queue, `main`
+gained a landing that moved the census, and the branch that removes the conflict class was
+refused by it — a third instance, one morning after the two the ticket was filed for, on the
+same object.
+
+Resolved the way the record already says these must be: **by re-running the producer at each
+rebase step, never by hand** — a hand-merge is the one resolution that can invent a transcript
+neither side produced (`mg-54b1`, applied at `mg-3da1`). After the rebase `./build.sh` is green
+and the regenerated census is **byte-identical to the committed one**, so it does not appear in
+`g0`'s moved list at all.
+
+It is worth being exact about what this instance does and does not show. It is **not** a
+failure of the mechanism: the mechanism removes the need for a *future* branch to carry the
+census, and this branch necessarily carries it, because it is the branch that changes the
+producer — which is `C9`'s rule applied to its own author. What it shows is the frequency. The
+window between submit and rebase was **under a minute**, and it was enough.
+
 ### What this does not do
 
 It does not touch `out_gate.txt`, `out_ratchet.txt` or `out_control.txt`, whose moves are
