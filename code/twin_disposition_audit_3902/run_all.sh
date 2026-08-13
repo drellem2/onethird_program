@@ -81,8 +81,14 @@ case "$COMPARE" in
 esac
 
 if [ "$STATUS" -eq 0 ]; then
-    echo "CLEAN — the twin's pin resolves, names the revision it digests, and this control"
-    echo "        was demonstrated to fail on five ways it could stop being true."
+    # THE COUNT IS READ OUT OF THE RUN, NOT TYPED HERE.  It said "five ways" as a literal and
+    # went stale the moment mg-daba added a sixth — a summary line that disagrees with the
+    # transcript directly above it is the same defect this suite exists to report, one file
+    # over.  `sed` rather than a second grep so an absent line yields empty, not a false count.
+    CAUGHT=$(sed -n 's/^\([0-9]* of [0-9]*\) caught;.*/\1/p' "$HERE/out_negative_control.txt")
+    echo "CLEAN — the twin's pin resolves, names the revision it digests, and that revision"
+    echo "        is one this repository integrates; and this control was demonstrated to"
+    echo "        fail on ${CAUGHT:-an unread number of} ways it could stop being true."
 else
     echo "RED — see above."
 fi

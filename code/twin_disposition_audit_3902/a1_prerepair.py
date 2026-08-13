@@ -40,6 +40,7 @@ OLD = os.path.join(ROOT, PIN_REL)
 
 sys.path.insert(0, HERE)
 import a2_pin_resolves as A2  # noqa: E402
+import a3_negative_control as A3  # noqa: E402
 
 BASE_REF = "origin/main"
 
@@ -74,9 +75,28 @@ def mut_nonexistent_commit(text):
     return text.replace(pinned.group(1), "0" * len(pinned.group(1)))
 
 
+def mut_orphan_but_byte_identical(text):
+    """Repoint the pin at an ORPHAN commit whose STATE.md IS the digested one (mg-daba).
+
+    The other two rows are false about the DIGEST, which is the half both columns were
+    already arguing about.  This one is TRUE about the digest and false about ancestry — the
+    conflict case, and the one `c308368` actually was.  It is the strongest row in the table
+    precisely because the falsehood is invisible to any amount of hashing: the bytes check
+    out, and no merge will ever bring the commit they check out at into `main`.
+    """
+    pinned = re.search(r"\n  commit: ([0-9a-f]{7,40})", text)
+    if not pinned:
+        return None
+    orphan = A3._an_orphan_commit_with_the_pinned_state(pinned.group(1))
+    if orphan is None or orphan == pinned.group(1):
+        return None
+    return text.replace(pinned.group(1), orphan)
+
+
 MUTATIONS = [
     ("pin repointed at a REAL commit carrying a DIFFERENT STATE.md", mut_wrong_real_commit),
     ("pin AND visible line both name a commit THAT DOES NOT EXIST", mut_nonexistent_commit),
+    ("pin at an ORPHAN commit whose STATE.md is BYTE-IDENTICAL", mut_orphan_but_byte_identical),
 ]
 
 

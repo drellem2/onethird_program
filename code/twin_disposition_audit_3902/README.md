@@ -36,13 +36,52 @@ which is not reachable from `origin/main` (it lives only on `origin/polecat-p0e8
 | that `STATE.md` hashes to the digest the pin records | that no ledger row has drifted — `twin_pin.py` section 2 owns that |
 | the page's provenance claim is checkable and true | that the page's **prose** matches `STATE.md` — nothing covers that either |
 
-Reachability from `origin/main` is **reported and never graded**. A polecat re-pinning on its
-own branch legitimately names a commit that has not merged yet, and grading that would make
-the gate red on every correct in-flight reconciliation — a red for a non-reason, shipped
-inside a remedy for reds for non-reasons. It is printed loudly anyway, because **the refinery
-rebases**: a pin written against an unmerged commit is rewritten out of existence when the
-branch lands. `2fbd5ce` died that way at mg-cdd5; `c308368` was dying that way when this was
-written.
+### Reachability is now GRADED (mg-daba), and this file said the opposite for one run
+
+It shipped as **reported and never graded**, on this argument: a polecat re-pinning on its own
+branch legitimately names a commit that has not merged, and grading that would make the gate
+red on every correct in-flight reconciliation — a red for a non-reason, shipped inside a remedy
+for reds for non-reasons.
+
+**The argument is right about in-flight commits and was applied one class too wide.** `c308368`
+was not in flight on the branch that carried it; it was on **somebody else's** unmerged branch,
+`origin/polecat-p0e8c`, which no merge would ever bring into `main`. Ungraded, that is a pin
+whose referent is a branch nobody maintains. pm-onethird's acceptance criterion for all pinning
+work is **main-ancestry AND byte-identity**, not byte-identity alone; the tie-break when they
+conflict is **regenerate at the main-reachable commit**, never keep the orphan because its
+bytes agree.
+
+So the three worlds are separated instead of merged, and only the third is red:
+
+| world | test | graded? |
+|---|---|---|
+| **integration** | an ancestor of `origin/main` (or `main`) | GREEN — both halves hold |
+| **in flight** | an ancestor of *this* `HEAD` but of no integration ref | **reported, not graded** — the one legitimate way to name an unmerged commit, and still not acceptable: **the refinery rebases**, so this hash is rewritten out of existence when the branch lands. `2fbd5ce` died that way at mg-cdd5 |
+| **orphan** | an ancestor of neither | **RED** — `c308368` exactly |
+| *unknown* | no integration ref resolves in this checkout | reported, not graded — *"git cannot answer" is not "the answer is no"*, and this suite already reproduced that defect once (below) |
+
+Telling in-flight from orphan does **not** need a human, which is what the original note
+assumed. An ancestor of this `HEAD` is in flight *here*; an ancestor of neither is on somebody
+else's branch or on none.
+
+**Byte-identity does not rescue an orphan, and that is demonstrated rather than argued.**
+`a3_negative_control.py` builds one with `git commit-tree` on the pinned commit's own tree: its
+`STATE.md` hashes to the pin's digest *exactly*, and no ref points at it. One input, two
+checkers — **this file as shipped calls it `CLEAN`, exit 0; as it now stands, `BROKEN`, exit
+2.** (That fixture — used by `a3`'s sixth mutation and `a1`'s third row, which construct the
+*same* object — is the only thing in this suite that writes anything: one loose, unreachable
+object in `.git`, with fixed identity and dates so its hash is stable and it is created once
+and thereafter found rather than rewritten. `git gc` prunes it. Nothing in the working tree is
+touched.)
+
+**THE COST, STATED RATHER THAN DISCOVERED LATER.** A branch that reconciles and pins its *own*
+commit is `in flight` and green while it runs locally — and the refinery then **rebases it**,
+which moves that commit and leaves the pin an `orphan`. So that branch now goes **RED at the
+merge gate** where it previously merged silently and landed a dead pin. That is the intended
+behaviour and it is the moment the falsehood is created, but it is a real new refusal on a real
+workflow, and the remedy is the tie-break: **re-pin at a commit already reachable from
+`origin/main`** — for a reconciliation that does not itself change `STATE.md`, that is
+available, because the digest is unchanged by the twin-only edit.
 
 ## The root cause, which this suite detects but does not fix
 
@@ -79,9 +118,9 @@ written — is the filed successor.
 | file | what it is |
 |---|---|
 | `PREDICTIONS.md` | filed at `fe7790a`, before any file under audit was opened, with the exposure disclosed |
-| `a1_prerepair.py` | runs both section-7 inputs through `twin_pin.py` **as of `origin/main`** — the old checker was CLEAN on 2 of 2 |
-| `a2_pin_resolves.py` | the control: does the pin resolve, and does it name the revision it digests? |
-| `a3_negative_control.py` | five ways the pin can lie; each must be caught, each expect string absent from the unmutated report |
+| `a1_prerepair.py` | runs the false-pin inputs through `twin_pin.py` **as of `origin/main`** — the old checker is CLEAN on 3 of 3, the third being the orphan-but-byte-identical one |
+| `a2_pin_resolves.py` | the control: does the pin resolve, name the revision it digests, and name one this repository integrates? |
+| `a3_negative_control.py` | six ways the pin can lie, each caught and each expect string absent from the unmutated report; plus the classifier's four branches, including the two that must **not** grade |
 | `run_all.sh` | the runner, with the three guards this lineage's runners kept failing (no pipe, verdict-line required, unknown exit refused) |
 
 ## The instrument's own defect, kept

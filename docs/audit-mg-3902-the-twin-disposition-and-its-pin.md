@@ -247,14 +247,92 @@ unmerged commit; grading that would make the gate red on every correct in-flight
 reconciliation, which would be a red for a non-reason shipped inside a remedy for reds for
 non-reasons. It is printed loudly because the refinery rebases and the hash will not survive.
 
+> **SUPERSEDED at mg-daba — the third bullet is now GRADED, and the paragraph under it is
+> right about a narrower class than it claims.** The in-flight case is real, but `c308368` was
+> not it: an ancestor of no integration ref *and of no commit on the branch that carried the
+> pin* is on somebody else's unmerged branch, and no human is needed to tell the two apart.
+> `a2_pin_resolves.py` now separates **integration** (green) from **in flight** (reported) from
+> **orphan** (red), and `a3_negative_control.py` reaches all four branches of that classifier
+> — including the two that must not grade — on derived inputs. See §*A pin can be
+> byte-identical and still false* below.
+
 **It was RED against `origin/main` on the day it was written** — exit 2, naming both halves
 of the `c308368` defect. A check that earns its place on the merge critical path by failing
 is worth more than one that arrives green.
 
-**It has been shown to fail, five ways** (`a3_negative_control.py`, 5 of 5 caught): pin at a
+**It has been shown to fail, six ways** (`a3_negative_control.py`, 6 of 6 caught): pin at a
 real-but-wrong commit; pin at a nonexistent commit; `commit:` deleted; `state-sha256` deleted;
-whole pin block removed. Each expect string is checked against the *unmutated* report first —
-mg-9876's guard — so no row can be satisfied by a string the report prints anyway.
+whole pin block removed; and — added at mg-daba — **pin at an orphan commit whose `STATE.md`
+is byte-identical to the recorded digest**. Each expect string is checked against the
+*unmutated* report first — mg-9876's guard — so no row can be satisfied by a string the report
+prints anyway.
+
+---
+
+## mg-daba — A PIN CAN BE BYTE-IDENTICAL AND STILL FALSE, AND THIS ONE IS NEITHER
+
+**The pair on `main` is TRUE, and that is a measurement, not a reprieve.** mg-daba was filed to
+re-pin the twin to a true pair on the strength of `commit: c308368 / state-sha256: 118158cb…`.
+That pair no longer exists: `7eb561e` — the commit that landed *this* audit — repointed
+`commit:` to `b364767`, and everything checkable about the result now holds.
+
+| field | check | result |
+|---|---|---|
+| `commit: b364767` | `git merge-base --is-ancestor b364767 origin/main` | **ancestor** |
+| `state-sha256: 118158cb…` | sha256 of `git show b364767:STATE.md` | **118158cb…**, identical |
+| `commit-date: 2026-08-13` | `b364767`'s committer date | **2026-08-13** |
+| 12 row digests | recomputed over `STATE.md` **at `b364767`**, not the working tree | **12 of 12 match**, columns identical |
+| visible header line | `twin_pin.py` §6 | names `b364767` and no other |
+| the other 5 commits the page names in prose | `21ee93f 25cc5b2 491d42c 6cd5b1d 9dc53a6` | all exist, all ancestors of `origin/main` |
+
+So **no re-pin was made**, and that is the finding rather than the absence of one. Re-pinning a
+correct pin writes a reconciliation that did not happen, which `COVERAGE.md` §4 calls *"the
+single easiest way to defeat the whole mechanism"*. The row digests were taken over
+`STATE.md@b364767`; moving them to today's `STATE.md` to make the whole-file digest agree would
+have destroyed the drift signal §2 exists to carry.
+
+**Which pair was wrong, and which repair made it wrong.** `mg-cdd5` repointed a rebased-away
+commit without re-deriving the digest, trading *correct-and-unreachable* for
+*reachable-and-wrong*. `7eb561e` then moved `commit:` to the revision whose `STATE.md` hashes to
+the recorded digest — the opposite direction from this ticket's requirement (1), and the right
+one, because it is the direction that leaves the row digests describing the thing they were
+taken over.
+
+**What was actually owed here was the check, not the data.** A pin verified by hand and written
+up in prose is a provenance claim nobody can re-run — which is the exact defect this lineage
+exists to remove, one document along. So the table above is reproducible:
+`code/twin_disposition_audit_3902/run_all.sh`, and it goes **red** if any row of it stops being
+true.
+
+**The gap that made this ticket necessary is closed at the acceptance criterion, not at the
+data.** Byte-identity alone cannot see an orphan: `git commit-tree` on the pinned commit's own
+tree yields a commit whose `STATE.md` hashes to the pin's digest *exactly* and which no ref
+reaches. Run against that twin, **the checker as mg-3902 shipped it reports `CLEAN`, exit 0;
+with reachability graded it reports `BROKEN`, exit 2** — same input, same repository, two
+checkers. That is now `a3`'s sixth mutation and `a1`'s third row.
+
+**The `deadbee` acceptance test, run on the file rather than reasoned about.** Both copies of
+the commit set to a revision that does not exist:
+
+| what was run | result |
+|---|---|
+| `twin_pin.py` — sections 1–6, **unchanged by mg-daba** | `VERDICT: CLEAN`, **exit 0** |
+| `code/twin_disposition_audit_3902/run_all.sh` — gated by `build.sh` | `VERDICT: BROKEN`, **exit 2** |
+
+**So the acceptance test passes at the GATE and still fails inside the INSTRUMENT**, and the
+distinction is not cosmetic: anyone running `twin_pin.py` directly — which is what its own pin
+block tells the reader to do — is still told `CLEAN` about a pin naming a commit that does not
+exist. Closing that is `mg-7cc3`'s section 7 and nothing here substitutes for it.
+
+Credit where it is owed: `deadbee` going red at the gate is **mg-3902's**, not this ticket's —
+the nonexistent-commit mutation was in the suite as landed. What mg-daba adds is the case that
+was red in *neither* column, because it is false about ancestry while being true about every
+byte: the orphan.
+
+**Still not done, and still owned by `mg-7cc3`:** the writer. `twin_pin.py`'s `reconcile()`
+stamps `git rev-parse --short HEAD` while digesting the **working tree**, so the next
+reconciliation that also edits `STATE.md` produces a false pair again — caught now at the gate
+instead of silently, which is an improvement and not a fix.
 
 ---
 

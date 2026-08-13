@@ -245,6 +245,16 @@
 # origin/main whose STATE.md is not the one the pin digests.  That is a check earning its slot
 # on the merge critical path by failing, not by passing.
 #
+# mg-daba GRADED THE HALF THIS SUITE ONLY REPORTED, and the effect on this file is a NEW WAY
+# FOR THE GATE TO REFUSE that did not exist before.  Reachability was printed and never graded,
+# on the sound argument that an in-flight reconciliation legitimately names an unmerged commit.
+# That argument covers a commit on THIS branch; `c308368` was on SOMEBODY ELSE'S.  The suite now
+# separates integration (green) from in-flight (reported) from orphan (RED).  The cost is real
+# and is stated in that README: a branch that pins its own commit is green locally, THE REFINERY
+# REBASES IT, and the pin becomes an orphan — so such a branch now goes RED here instead of
+# merging silently and landing a dead pin.  Re-pin at a commit already reachable from
+# origin/main before submitting.
+#
 # WHY IT IS A SEPARATE SUITE AND NOT `twin_pin.py`'s SECTION 7, which is where it belongs:
 # mg-9876's arm census REFUSES an arm-shaped site no registered arm claims, so adding the
 # section took `GATE VERDICT: REFUSED`, exit 2 — measured, and it would have blocked every

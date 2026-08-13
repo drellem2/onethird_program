@@ -14,7 +14,8 @@ mg-3902 a1 — what the EXISTING control says about a provably false pin
   ----------------------------------------------------------------------------------------------------
   pin repointed at a REAL commit carrying a DIFFERENT STATE.md  CLEAN — MISSED IT     caught (exit 2)
   pin AND visible line both name a commit THAT DOES NOT EXIST   CLEAN — MISSED IT     caught (exit 2)
+  pin at an ORPHAN commit whose STATE.md is BYTE-IDENTICAL      CLEAN — MISSED IT     caught (exit 2)
 
-  VERDICT: the shipped control is CLEAN on 2 of 2 inputs that
+  VERDICT: the shipped control is CLEAN on 3 of 3 inputs that
            state a falsehood about which STATE.md this page renders;
-           a2_pin_resolves.py catches 2 of 2.
+           a2_pin_resolves.py catches 3 of 3.

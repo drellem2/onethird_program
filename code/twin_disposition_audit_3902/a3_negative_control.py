@@ -22,6 +22,22 @@ NOTHING BELOW NAMES A COMMIT AS A LITERAL.  The pinned commit is the one thing e
 reconciliation moves, so a fixture that spells it out is a fixture with an expiry date — and
 mg-2f44 demonstrated in this lineage that it can expire SILENTLY.  Each mutation reads the
 commit out of the pin it was handed.
+
+THE ORPHAN ROW IS THE ONE THING IN THIS SUITE THAT WRITES (mg-daba) — it and `a1_prerepair.py`'s
+third row, which construct the SAME object — and it is worth knowing what it writes.  `c308368`'s defect — byte-identical STATE.md at a commit reachable only from a branch
+nobody maintains — cannot be reproduced from anything already in this repository without
+depending on `origin/polecat-p0e8c` surviving, which is the very property mg-3902 warned not
+to rely on.  So the row CONSTRUCTS one: `git commit-tree` on the PINNED COMMIT'S OWN TREE
+yields a commit whose STATE.md hashes to the pinned digest exactly, and which no ref points
+at.  That is a loose object in `.git`, not a change to the working tree, and it is written
+with fixed author and committer identity and timestamps, so its hash is the same on every run
+and the object is created once and thereafter found rather than rewritten.  It is unreachable
+by construction and `git gc` prunes it.
+
+The row scores the world that MATTERS MOST here: the two halves of the acceptance criterion
+in CONFLICT.  Byte-identity holds and main-ancestry does not, so a control that graded only
+the digest would call it clean — which is what happened, on `main`, for the run that made
+mg-3902 exist.
 """
 
 import hashlib
@@ -113,6 +129,114 @@ def m_no_pin(text):
     return text[:i] + text[j:]
 
 
+def _an_orphan_commit_with_the_pinned_state(pinned):
+    """A commit carrying the PINNED tree that no ref reaches.  Constructed, never found.
+
+    `c308368` in a bottle: `git show <it>:STATE.md` hashes to the pin's digest, and no merge
+    will ever bring it into `main`.  Fixed identity and dates make the hash deterministic, so
+    this writes one loose object across all runs rather than one per run.
+    """
+    rc, tree = A2.git("rev-parse", "--verify", "--quiet", pinned + "^{tree}")
+    if rc != 0:
+        return None
+    env = dict(os.environ,
+               GIT_AUTHOR_NAME="mg-daba negative control",
+               GIT_AUTHOR_EMAIL="mg-daba@invalid",
+               GIT_AUTHOR_DATE="2000-01-01T00:00:00+0000",
+               GIT_COMMITTER_NAME="mg-daba negative control",
+               GIT_COMMITTER_EMAIL="mg-daba@invalid",
+               GIT_COMMITTER_DATE="2000-01-01T00:00:00+0000")
+    proc = subprocess.run(["git", "-C", ROOT, "commit-tree", tree, "-m",
+                           "unreachable fixture for a3_negative_control.py"],
+                          capture_output=True, text=True, env=env)
+    if proc.returncode != 0:
+        return None
+    return proc.stdout.strip()[:7]
+
+
+@mutation("pin repointed at an ORPHAN commit whose STATE.md is BYTE-IDENTICAL to the digest",
+          "REACHABLE FROM NOTHING THIS REPOSITORY INTEGRATES")
+def m_orphan_but_byte_identical(text):
+    """The conflict case: byte-identity holds, main-ancestry does not.
+
+    This is `c308368`'s shape and the reason the reachability half is graded at all.  Under
+    the digest check alone this mutation is INDISTINGUISHABLE from a correct pin — which is
+    not a prediction, it is what `main` reported for the run mg-3902 audited.
+    """
+    pinned = _pinned_commit(text)
+    if not pinned:
+        return text
+    orphan = _an_orphan_commit_with_the_pinned_state(pinned)
+    if orphan is None or orphan == pinned:
+        return text
+    return text.replace(pinned, orphan)
+
+
+def reachability_truth_table(base):
+    """All four branches of `classify_reachability`, each reached by a DERIVED input.
+
+    THE TABLE ABOVE CAN ONLY WATCH THE GRADE FIRE.  A grade that fires is half of a control;
+    the other half is the escape hatch that keeps it off correct work, and an escape hatch
+    nobody has watched OPEN is exactly as unfalsifiable as a check nobody has watched fire.
+    `in-flight` is that hatch, and there is no rot-proof fixture for it in a tree that equals
+    `main`: an ancestor of HEAD that is not an ancestor of `main` exists only while a branch
+    is unmerged, so a row that waited for one would pass or rot depending on the day it ran.
+    It is reached here by handing the classifier a SUBSTITUTE integration ref — the pinned
+    commit's own parent — against which the pinned commit is by construction not an ancestor
+    while remaining one of HEAD.  The world is real; only the name `origin/main` is stood in
+    for.
+
+    `unknown` is the row that guards this suite's own kept defect: with no integration ref
+    resolvable, the classifier must say it cannot tell, not `orphan`.
+
+    Returns the number of holes.
+    """
+    print("=" * 92)
+    print("THE CLASSIFIER'S FOUR BRANCHES — each reached by a derived input, none by a literal")
+    print("=" * 92)
+    print()
+
+    pinned = _pinned_commit(base)
+    rc, full = A2.git("rev-parse", "--verify", "--quiet", (pinned or "HEAD") + "^{commit}")
+    if rc != 0:
+        print("SETUP FAILED: the pinned commit does not resolve, so no branch below can be")
+        print("              reached.  This is a hole, not a pass.")
+        return 1
+
+    orphan = _an_orphan_commit_with_the_pinned_state(pinned)
+    cases = [
+        ("integration", "the real integration refs", full, A2.INTEGRATION_REFS),
+        ("in-flight", "a substitute integration ref: the pinned commit's own parent",
+         full, (pinned + "~1",)),
+        ("unknown", "an integration ref that resolves nowhere", full,
+         ("refs/heads/no-such-integration-branch-mg-daba",)),
+        ("orphan", "the real integration refs, against the constructed orphan",
+         orphan, A2.INTEGRATION_REFS),
+    ]
+
+    holes = 0
+    width = max(len(c[1]) for c in cases)
+    print(f"{'want'.ljust(12)}  {'input'.ljust(width)}  got           detail")
+    print("-" * 92)
+    for want, label, rev, refs in cases:
+        if rev is None:
+            print(f"{want.ljust(12)}  {label.ljust(width)}  SETUP FAILED  the fixture could "
+                  f"not be constructed")
+            holes += 1
+            continue
+        got, detail = A2.classify_reachability(rev, refs)
+        if got != want:
+            holes += 1
+        print(f"{want.ljust(12)}  {label.ljust(width)}  {got:<12}  {detail}")
+    print()
+    if holes:
+        print(f"{len(cases) - holes} of {len(cases)} branches reached; {holes} hole(s).")
+    else:
+        print(f"All {len(cases)} branches reached, including the two that must NOT grade.")
+    print()
+    return holes
+
+
 def main():
     base = open(TWIN, encoding="utf-8").read()
 
@@ -170,6 +294,9 @@ def main():
     print()
     print(f"{len(rows) - holes} of {len(rows)} caught; {holes} hole(s).")
     print()
+
+    holes += reachability_truth_table(base)
+
     if holes:
         print("A HOLE IS A FINDING, NOT A TEST FAILURE TO SUPPRESS — it is a way the pin can")
         print("lie that this control does not see.  Write it down before silencing it.")

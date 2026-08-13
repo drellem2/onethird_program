@@ -15,11 +15,10 @@ mg-3902 — does the rendered twin's pin RESOLVE against git?
 
   reachable from origin/main : yes
   reachable from main        : yes
-  Reachability is REPORTED, NEVER GRADED.  A `NO` means either an in-flight
-  reconciliation on a branch — fine, and the hash will be REWRITTEN by the
-  refinery's rebase before it lands — or a pin that has already outlived the
-  commit it names.  Those are different, and only a human can tell which.
+
+  PASS  the pinned commit is an ancestor of `origin/main`.  BOTH halves of
+        the acceptance criterion hold: main-ancestry AND byte-identity.
 
 ======================================================================================
-VERDICT: CLEAN — the pin resolves, and names the revision it digests.
+VERDICT: CLEAN — the pin resolves, names the revision it digests, and that revision is one this repository integrates.
 ======================================================================================

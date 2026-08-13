@@ -22,10 +22,50 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  NO DISAGREEMENTS
+§2  THE DISAGREEMENTS, SHOWN
 --------------------------------------------------------------------------------------------
-  Every watched transcript that moved during this gate run moved only in the two
-  declared families that are not a function of repo state.  No committed
-  transcript asserts anything this tree contradicts.
+  Lines quoted after normalisation, so that this transcript cannot itself
+  smuggle a worktree path into the corpus.
+  `-` is the committed copy, `+` is this tree.
 
-VERDICT: GREEN — 0 disagreements.  0.09s
+  code/control_audit_9876/out_a4_sweep.txt
+    @@ -117 +117 @@
+    - a committed transcript records a demonstrated failure  : 143 of 220
+    + a committed transcript records a demonstrated failure  : 144 of 220
+
+  code/twin_disposition_audit_3902/out_a1_prerepair.txt
+    @@ -16,0 +17 @@
+    + pin at an ORPHAN commit whose STATE.md is BYTE-IDENTICAL      CLEAN — MISSED IT 
+    @@ -18 +19 @@
+    - VERDICT: the shipped control is CLEAN on 2 of 2 inputs that
+    + VERDICT: the shipped control is CLEAN on 3 of 3 inputs that
+    @@ -20 +21 @@
+    - a2_pin_resolves.py catches 2 of 2.
+    + a2_pin_resolves.py catches 3 of 3.
+
+  code/twin_disposition_audit_3902/out_negative_control.txt
+    @@ -5 +5 @@
+    - mutation                                                             verdict    
+    + mutation                                                                        
+    @@ -7,5 +7,6 @@
+    - pin repointed at a REAL commit carrying a DIFFERENT STATE.md         CAUGHT     
+    - pin names a commit THAT DOES NOT EXIST, consistently in both copies  CAUGHT     
+    - the pin's `commit:` field is deleted outright                        CAUGHT     
+    - the pin's `state-sha256` is deleted, leaving the commit unchecked    CAUGHT     
+    ... 23 further hunk line(s) not shown
+
+  code/twin_disposition_audit_3902/out_pin_resolves.txt
+    @@ -18,4 +18,3 @@
+    - Reachability is REPORTED, NEVER GRADED.  A `NO` means either an in-flight
+    - reconciliation on a branch — fine, and the hash will be REWRITTEN by the
+    - refinery's rebase before it lands — or a pin that has already outlived the
+    - commit it names.  Those are different, and only a human can tell which.
+    + 
+    + PASS  the pinned commit is an ancestor of `origin/main`.  BOTH halves of
+    + the acceptance criterion hold: main-ancestry AND byte-identity.
+    ... 3 further hunk line(s) not shown
+
+  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
+  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
+
+VERDICT: RED — 4 committed transcript(s) disagree with this tree.  0.21s

@@ -54,6 +54,31 @@ second CHECKER, not a second CLAIM — it derives everything from the pin it rea
 no provenance of its own — but a reader who finds them disagreeing should believe `twin_pin.py`
 about rows and this file about commits, and should close the split rather than pick a side.
 
+REACHABILITY IS NOW GRADED (mg-daba), AND THIS FILE SHIPPED THE OPPOSITE FOR ITS FIRST RUN.
+As written above, reachability was REPORTED AND NEVER GRADED, on the argument that a polecat
+re-pinning on its own branch legitimately names an unmerged commit.  That argument is sound
+about IN-FLIGHT commits and was applied one class too wide.  `c308368` was not in flight on
+this branch: it lived on SOMEBODY ELSE'S unmerged branch, `origin/polecat-p0e8c`, which no
+merge would ever bring into `main`.  Ungraded, that is a pin whose referent is a branch nobody
+is maintaining — and the acceptance criterion pm-onethird handed down for all pinning work is
+that a pin must satisfy BOTH main-ancestry AND byte-identity, not byte-identity alone.
+
+So the three cases are separated instead of merged, and only the third is graded:
+
+  INTEGRATION  an ancestor of `origin/main` (or `main`) — the criterion is met.  GREEN.
+  IN FLIGHT    not on an integration branch, but an ancestor of THIS `HEAD`: a reconciliation
+               on the current branch that has not merged yet.  REPORTED, NOT GRADED — but it
+               does NOT yet satisfy the criterion, and it says so, because THE REFINERY
+               REBASES and the hash will be rewritten out of existence when the branch lands.
+  ORPHAN       an ancestor of NEITHER.  This is `c308368` exactly, and it is RED.  A pin whose
+               referent is reachable from nothing this repository integrates is a provenance
+               claim that has already outlived its referent.
+
+WHEN THE TWO HALVES CONFLICT, THIS FILE DOES NOT PICK ONE.  A pin can be byte-identical at an
+orphan commit — `git commit-tree` on the pinned tree produces one on demand, and
+`a3_negative_control.py` does exactly that rather than describing it.  The remedy is to
+REGENERATE at the main-reachable commit, never to keep the orphan because its bytes agree.
+
 EXIT CODES.  0 clean · 2 the pin states something false about git.  There is deliberately no
 "1 = drift" grade here: drift is the normal condition of a hand-maintained rendering and
 mg-9bc2's section 2 owns it.  A pin that names a revision it does not describe is never
@@ -76,7 +101,7 @@ PIN_START = "<!-- STATE-PIN v1"
 PIN_END = "STATE-PIN end -->"
 
 # The integration branches this repository actually merges to, most authoritative first.
-# Reachability is REPORTED against these and never graded — see `report()`.
+# Reachability against these is GRADED — see `classify_reachability()` and the docstring.
 INTEGRATION_REFS = ("origin/main", "main")
 
 
@@ -107,6 +132,43 @@ def git(*args, binary=False):
     if binary:
         return proc.returncode, proc.stdout
     return proc.returncode, proc.stdout.decode("utf-8", "replace").strip()
+
+
+def classify_reachability(full, integration_refs=INTEGRATION_REFS):
+    """Which of the four worlds the named commit is in.  Returns (verdict, detail).
+
+    `verdict` is one of `integration`, `in-flight`, `orphan`, `unknown`.  Only `orphan` is
+    graded; see the module docstring for why the middle case is not.
+
+    TAKING THE REFS AS AN ARGUMENT IS NOT GENERALITY FOR ITS OWN SAKE.  The `in-flight` branch
+    is the escape hatch that keeps this grade off correct in-flight reconciliations, and an
+    escape hatch nobody has watched open is the same unfalsifiable thing as a check nobody has
+    watched fire.  There is no rot-proof fixture for it in a tree that equals `main` — an
+    ancestor of HEAD that is not an ancestor of `main` exists only while a branch is unmerged
+    — so `a3_negative_control.py` exercises it by passing a SUBSTITUTE integration ref instead
+    of by waiting for the right day.
+
+    `unknown` is separate from `orphan` on purpose, and the distinction is this file's own
+    kept defect one turn later: GIT CANNOT ANSWER IS NOT THE ANSWER IS NO.  A checkout with no
+    `main` and no `origin/main` — a shallow clone, an export, a fresh worktree of one branch —
+    cannot be asked this question, and condemning a correct pin there is the S1/S2/S3 shape
+    this suite already reproduced once.
+    """
+    resolved = [r for r in integration_refs
+                if git("rev-parse", "--verify", "--quiet", r)[0] == 0]
+    if not resolved:
+        return "unknown", "no integration ref resolves in this checkout"
+    for ref in resolved:
+        if git("merge-base", "--is-ancestor", full, ref)[0] == 0:
+            return "integration", ref
+
+    rc_head, _ = git("rev-parse", "--verify", "--quiet", "HEAD")
+    if rc_head != 0:
+        return "unknown", "HEAD does not resolve, so 'on this branch' has no meaning here"
+    rc_anc, _ = git("merge-base", "--is-ancestor", full, "HEAD")
+    if rc_anc == 0:
+        return "in-flight", "an ancestor of this HEAD but of no integration ref"
+    return "orphan", "an ancestor of neither an integration ref nor this HEAD"
 
 
 def report(twin_text):
@@ -201,14 +263,14 @@ def report(twin_text):
                     emit("        recorded digest.")
                     worst = 2
 
-            # ------------------------------------------------- reachability (reported)
-            # NOT GRADED, and the asymmetry is deliberate.  A polecat re-pinning on its own
-            # branch legitimately names a commit that has not merged; grading that would make
-            # the gate red on every correct in-flight reconciliation, which is a red for a
-            # non-reason shipped inside a remedy for red-for-a-non-reason.  It is still worth
-            # printing loudly, because THE REFINERY REBASES: a pin written against an unmerged
-            # commit is rewritten out of existence when the branch lands.  `2fbd5ce` died that
-            # way at mg-cdd5 and `c308368` was dying that way when this file was written.
+            # ------------------------------------------------ reachability (GRADED, mg-daba)
+            # The three worlds are separated rather than merged, and only the third is red.
+            # See the module docstring: "not on main" covers both a correct in-flight
+            # reconciliation and a pin that has outlived its referent, and grading them alike
+            # would be a red for a non-reason shipped inside a remedy for red-for-a-non-reason
+            # — which is why this file shipped ungraded first.  Telling them apart does not
+            # need a human: an ancestor of THIS HEAD is in flight HERE, and an ancestor of
+            # neither is on somebody else's branch or on none.  `c308368` was the latter.
             emit()
             for ref in INTEGRATION_REFS:
                 rc_ref, _ = git("rev-parse", "--verify", "--quiet", ref)
@@ -217,14 +279,43 @@ def report(twin_text):
                     continue
                 rc_anc, _ = git("merge-base", "--is-ancestor", full, ref)
                 emit(f"  reachable from {ref:<12}: {'yes' if rc_anc == 0 else 'NO'}")
-            emit("  Reachability is REPORTED, NEVER GRADED.  A `NO` means either an in-flight")
-            emit("  reconciliation on a branch — fine, and the hash will be REWRITTEN by the")
-            emit("  refinery's rebase before it lands — or a pin that has already outlived the")
-            emit("  commit it names.  Those are different, and only a human can tell which.")
+
+            verdict, detail = classify_reachability(full)
+            emit()
+            if verdict == "integration":
+                emit(f"  PASS  the pinned commit is an ancestor of `{detail}`.  BOTH halves of")
+                emit("        the acceptance criterion hold: main-ancestry AND byte-identity.")
+            elif verdict == "in-flight":
+                emit("  IN FLIGHT — REPORTED, NOT GRADED, AND NOT YET ACCEPTABLE.")
+                emit(f"        The pinned commit is {detail}, i.e. a reconciliation on this")
+                emit("        branch that has not merged.  That is the one legitimate way to")
+                emit("        name an unmerged commit and it is why this is not red.  It is")
+                emit("        also not done: THE REFINERY REBASES, so this hash is rewritten")
+                emit("        out of existence when the branch lands and the pin becomes an")
+                emit("        ORPHAN below.  `2fbd5ce` died that way at mg-cdd5.  Re-pin at a")
+                emit("        main-reachable commit before merging.")
+            elif verdict == "unknown":
+                emit(f"  REPORTED, NOT GRADED — {detail}.")
+                emit("        Git cannot answer this question here, and 'cannot answer' is not")
+                emit("        'the answer is no'.  A red for that reason would condemn a pin")
+                emit("        this checkout is simply unable to check.")
+            else:
+                emit("  FAIL  THE PINNED COMMIT IS REACHABLE FROM NOTHING THIS REPOSITORY INTEGRATES.")
+                emit("        It is an ancestor of no integration ref and of no")
+                emit("        commit on this branch either, so it lives on somebody else's")
+                emit("        unmerged branch — or on none at all — and no merge will ever")
+                emit("        bring it into `main`.  `c308368` was exactly this: reachable")
+                emit("        only from `origin/polecat-p0e8c`, a branch nobody maintains.")
+                emit("        BYTE-IDENTITY DOES NOT RESCUE IT.  A pin can hash correctly at")
+                emit("        an orphan commit; that makes the claim reproducible for exactly")
+                emit("        as long as the object survives.  REGENERATE the pin at the")
+                emit("        main-reachable commit rather than keeping this one.")
+                worst = 2
 
     emit()
     emit("=" * 86)
-    emit({0: "VERDICT: CLEAN — the pin resolves, and names the revision it digests.",
+    emit({0: "VERDICT: CLEAN — the pin resolves, names the revision it digests, and that "
+             "revision is one this repository integrates.",
           2: "VERDICT: BROKEN — the pin states something false about git."}[worst])
     emit("=" * 86)
     return worst, out
