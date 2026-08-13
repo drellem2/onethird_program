@@ -2,6 +2,9 @@
 # mg-30bd — the three things in this directory that ARE a fixed point.  Standard library only.
 #   selftest_30bd  19 planted worlds bounding the classifier: five that must come out BENIGN
 #   report         the count, read off the frozen sweep record.  Pure function of that file.
+#   owners_937c    mg-937c: OWNERS.json against the record — has the list GROWN?  The only
+#                  arm here that exits 1 on the CORPUS's population, and it may because
+#                  what it grades is this directory's own declaration about it.
 #   prose_30bd     mg-2959: every FIGURE in this directory's PROSE, against its own
 #                  transcripts.  RUNS LAST, so it grades the transcripts this run just
 #                  wrote and not the ones that happened to be on disk beforehand.
@@ -25,6 +28,26 @@
 # have the standing to declare — mg-30bd is tagged `declares-remainder` and this is one of
 # the things it declares.
 #
+# --- mg-937c -------------------------------------------------------------------------
+# THE BASELINE NOW EXISTS, SO THE PRECONDITION ABOVE IS DISCHARGED AND THE `owners` ARM
+# GATES `THE LIST HAS NOT GROWN` — but the paragraph above stays exactly as written,
+# because it is still true of `report.py` and the whole point is which of the two arms
+# may exit 1.  `owners_937c.py` grades OWNERS.json, which is THIS DIRECTORY'S OWN FILE:
+# every finding it can raise is repairable in the commit that raises it, by adding a row
+# or fixing a field.  `report.py` grades other people's directories and still exits 0.
+#
+# AND THE OTHER POLARITY IS PLANTED RATHER THAN PROMISED (P2): a row whose transcript has
+# been REPAIRED is GREEN and prints the deletion.  A baseline that went red when somebody
+# fixed one of the 150 would be mg-e35b's shape wearing the remedy's clothes.
+#
+# STILL NOT IN `build.sh`, AND NOW FOR A DIFFERENT REASON THAN THE ONE ABOVE.  The record
+# is frozen; the arm can only move when somebody edits the record or OWNERS.json, and that
+# somebody is running this suite deliberately.  What a merge gate would buy is catching an
+# APPENDED `--only` re-measurement whose author did not look — real, but it is the same
+# author in the same commit, and the cost is putting a suite that reports 150 findings
+# about other directories on every branch's critical path.  Priced and declined; see
+# README §10, and it is named there as a decision rather than left as an omission.
+#
 # THE PROSE ARM EXITS 1 ON A FINDING AND `report.py` DOES NOT, AND THE DIFFERENCE IS WHOSE
 # DEFECT IT IS.  `report.py` reports a population of findings ABOUT THE CORPUS, none of which
 # this directory may repair; the prose arm reports figures IN THIS DIRECTORY'S OWN README,
@@ -40,7 +63,7 @@ d=$(cd "$(dirname "$0")" && pwd)
 TMPS=""
 trap 'rm -f $TMPS' EXIT INT TERM HUP
 STATUS=0
-for arm in selftest_30bd:out_selftest_30bd report:out_verdict_staleness prose_30bd:out_prose_30bd
+for arm in selftest_30bd:out_selftest_30bd report:out_verdict_staleness owners_937c:out_owners_937c prose_30bd:out_prose_30bd
 do
     script=${arm%%:*}
     out=${arm##*:}

@@ -21,6 +21,7 @@ mg-2959 -- IS EVERY FIGURE IN THIS DIRECTORY'S PROSE BACKED BY ONE OF ITS
 P1  THE BACKING CORPUS, AND THE ONE FILE IT EXCLUDES BY NAME
 ==============================================================================
 
+      backs   out_owners_937c.txt
       backs   out_selftest_30bd.txt
       backs   out_verdict_staleness.txt
       EXCLUDED  out_prose_30bd.txt   -- this arm's own transcript
@@ -33,15 +34,15 @@ P1  THE BACKING CORPUS, AND THE ONE FILE IT EXCLUDES BY NAME
   destroying the thing it repairs.  P4c plants the world that proves the
   exclusion does work rather than merely reads as though it should.
 
-      126 distinct figure(s) backed by the corpus above
+      134 distinct figure(s) backed by the corpus above
 
 
 ==============================================================================
 P2  THE CENSUS
 ==============================================================================
 
-     54  line(s) carrying at least one figure
-     48  BACKED                 every figure printed by a transcript above
+     79  line(s) carrying at least one figure
+     73  BACKED                 every figure printed by a transcript above
       0  UNBACKED/own-voice     outside a fence -- GRADED, and the finding
       6  UNBACKED/quoted        inside a ``` fence -- REPORTED, NOT GRADED
 
@@ -103,8 +104,33 @@ P2  THE CENSUS
       README.md       326  7                  still reported as backed, so §7's table is p
       README.md       338  4,17,187,22        invisible — **measured on the real instance*
       README.md       339  17                 did **not** fire, because the report prints 
+      README.md       344  10                 ## 10  The owners arm, and the baseline it m
+      README.md       346  8                  §8's items 1 and 2 are **one** piece of work
+      README.md       347  150                per instance for all 150; item 2 wants a bas
+      README.md       372  9,187,150          `./build.sh` runs **9** suites. The record r
+      README.md       377  150                the corpus and 150 stale transcripts in the 
+      README.md       379  150                ### Six of the 150 are not findings about th
+      README.md       382  5                  a re-run writes a false `0` over a true `5`,
+      README.md       383  40                 inside `git log -n 40`. The sweep re-ran it 
+      README.md       395  113                113 rewritten transcripts were regenerated b
+      README.md       397  4                  §4 entries there is one; for **two** the obs
+      README.md       399  137,134,150,147    annotated and left in the count. Dropping th
+      README.md       400  7                  those figures are quoted in this README, in 
+      README.md       407  8                  §8 item 2's precondition — a committed basel
+      README.md       411  150                same author in the same commit — and would c
+      README.md       415  9                  ### What this leaves, including one instance
+      README.md       417  105,22,219         The 105 UNGRADED rows, the 22 timed-out suit
+      README.md       420  178                where to point that diff, at the 178 suites 
+      README.md       422  4,8                `HEAD's subject : <subject>` is missed: **4 
+      README.md       423  4                  `HISTORY-WALK` carry no `NOTE` in §4, measur
+      README.md       424  10,9               Finally, the pointer `§10` two paragraphs up
+      README.md       425  10                 hole — mg-7522's rule reads the `10` as a fi
+      README.md       426  9                  planted worlds, which is set membership work
       run_all.sh        3  19                 #   selftest_30bd  19 planted worlds boundin
-      run_all.sh       17  6,900              #     python3 -B sweep.py --workers 6 --time
+      run_all.sh       20  6,900              #     python3 -B sweep.py --workers 6 --time
+      run_all.sh       41  150                # fixed one of the 150 would be mg-e35b's sh
+      run_all.sh       47  150                # author in the same commit, and the cost is
+      run_all.sh       49  10                 # README §10, and it is named there as a dec
 
 
 ==============================================================================
@@ -196,7 +222,7 @@ P5  WHAT THIS ARM CANNOT SEE
 
      The 17 is backed, and by what is worth printing rather than paraphrasing
      -- a FOREIGN finding quoted inside this directory's own report:
-         out_verdict_staleness.txt:308  - FINDINGS: 0, population: the 17 survivors at or above 
+         out_verdict_staleness.txt:309  - FINDINGS: 0, population: the 17 survivors at or above 
 
      It was found by reading the record, not by this check.  Role needs a
      per-figure anchor, an anchor is a hand-typed quotation of the prose,

@@ -1,0 +1,1121 @@
+{
+  "_": "mg-937c — THE DECLARED BASELINE, WHICH IS THE OWNERS LIST AND NOT A COUNT.",
+  "declared_by": "mg-937c",
+  "corpus_at": "f2117f1",
+  "record": "sweep_30bd.jsonl",
+  "what_this_is": [
+    "One row per VERDICT-STALE transcript in the record, both passes.  It is the",
+    "baseline `the list has not grown` is graded against AND it is the per-instance",
+    "ownership mg-30bd's README §8 item 1 left open, deliberately in ONE file: a",
+    "baseline that is not a list of things somebody read is a number that launders",
+    "whatever was true on the day it was taken, which is why mg-30bd refused to set",
+    "one.  You cannot declare this baseline without naming a cause for every entry.",
+    "",
+    "NOTHING REGENERATES THIS FILE.  It is a hand-maintained declaration like",
+    "code/control_gate_724a/BASELINE.json, and `owners_937c.py` is what compares it",
+    "to the record.  So it is itself a member of the class this directory counts,",
+    "and the arm is the comparison that keeps it honest."
+  ],
+  "what_the_arm_can_and_cannot_check": [
+    "CAN: that every stale entry in the record has a row (growth), that no row's",
+    "class has strengthened, that `read` matches whether the record quotes the whole",
+    "move, and that `cause: RECORD-DISAGREES` agrees with the record's own",
+    "disagreement.  Those four are falsifiable and three of them are hand fields.",
+    "CANNOT: that a cause is the RIGHT cause.  Nothing here can check a judgement",
+    "about why a verdict moved, and pretending otherwise is the laundering this file",
+    "exists to avoid.  `owner` is DERIVED FROM THE DIRECTORY NAME — it is an ADDRESS,",
+    "not a consent, and no agent has agreed to any row by its presence here."
+  ],
+  "how_to_move_a_value": [
+    "A row LEAVES when its transcript is no longer VERDICT-STALE in the record — the",
+    "arm prints the exact deletion and stays GREEN, because going red when somebody",
+    "repairs a transcript is mg-e35b's red-on-improvement.",
+    "A row ARRIVES only with a cause and a disposition, from the vocabularies below,",
+    "assigned by reading the entry in out_verdict_staleness.txt.  A row added to",
+    "silence the arm without that reading is the defect, not the fix."
+  ],
+  "causes": {
+    "LIVE-OUTSIDE-REPO": "not a function of this repository at all — it reads state that lives outside the tree, so no commit can make it reproduce",
+    "NONDETERMINISM": "the producer is not deterministic on an unchanged tree",
+    "DECLARED-UNREPRODUCIBLE": "the transcript's own text says it must not be re-run, and the sweep re-ran it",
+    "HISTORY-WALK": "an unbounded history walk quoting commit subjects — moves when main moves (mg-e720's family)",
+    "CORPUS-COUNT": "a census figure over a growing corpus, sharing a line with a verdict token",
+    "SUBJECT-MOVED": "an audit of another ticket's artifact, and the artifact was changed after the audit was taken",
+    "CONTROL-FLIPPED": "this suite's own control or selftest reaches a different verdict on this tree",
+    "RECORD-DISAGREES": "the record contains a second graded observation of this transcript that does not agree, and the disagreeing one is not the owner's"
+  },
+  "dispositions": {
+    "RE-MEASURE": "this record cannot settle it — re-run the suite alone at a higher limit on a quiet host (§6.4, README §8 item 3)",
+    "PIN-AS-DATED": "the figure is a dated census; the repair is an as-of statement or a bounded population, not a new number",
+    "BOUND-THE-WALK": "mg-e720's repair — bound the walk, so the transcript stops being a function of how many commits main has",
+    "UNTRACK-OR-PIN": "the transcript is not a function of repo state; it cannot be a fixed point until it is made one or stops being tracked as evidence",
+    "TICKET": "a graded outcome genuinely moved and somebody has to decide which side is right.  This is the class that needs a work item per instance"
+  },
+  "rows": {
+    "code/adjudication_audit_a0d6/out_a4_selfcheck.txt": {
+      "class": "token",
+      "owner": "mg-a0d6",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "RE-MEASURE",
+      "read": "full",
+      "why": "the flipped row is `C4 zero files outside code/adjudication_audit_a0d6 differ`, a predicate about what the RUN did to the tree rather than about the tree.  §6.4's family: re-measure alone on a quiet host before reading a regression into it."
+    },
+    "code/anticorrelation_c50b/out_s4_lstar.txt": {
+      "class": "token",
+      "owner": "mg-c50b",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/anticorrelation_c50b/out_s5_n8_scope.txt": {
+      "class": "token",
+      "owner": "mg-c50b",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/audit_2c77/out_q3_operands.txt": {
+      "class": "token",
+      "owner": "mg-2c77",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/audit_2c77/out_q4_prerepair.txt": {
+      "class": "token",
+      "owner": "mg-2c77",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/audit_330a/out_s4_term.txt": {
+      "class": "token",
+      "owner": "mg-330a",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "sample"
+    },
+    "code/audit_c067/out_c1_rebase.txt": {
+      "class": "token",
+      "owner": "mg-c067",
+      "cause": "DECLARED-UNREPRODUCIBLE",
+      "disposition": "UNTRACK-OR-PIN",
+      "read": "sample",
+      "why": "the transcript's own first line is `A TRUE RECORD WHOSE OWN PRODUCER CAN NO LONGER SEE IT.  DO NOT RE-RUN THIS.` and it explains that a re-run writes a false 0 over a true 5 because the producer pairs commits by subject inside `git log -n 40`.  The sweep re-ran it anyway and graded the result: this row is a FALSE POSITIVE by the subject's own declaration, and the classifier has no notion of the declaration."
+    },
+    "code/audit_c067/out_c2_anchors.txt": {
+      "class": "number",
+      "owner": "mg-c067",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full",
+      "why": "`finds these 4 commits only while a ref still points at them` -> 3.  Same directory and the same ref-window cause as out_c1_rebase.txt, but this transcript carries no DO-NOT-RE-RUN declaration, so it is graded as the dated census it is."
+    },
+    "code/audit_c067/out_c5_vocab.txt": {
+      "class": "token",
+      "owner": "mg-c067",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/audit_c067/out_selftest_c067.txt": {
+      "class": "number",
+      "owner": "mg-c067",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/audit_successor_arming_a518/out_controls.txt": {
+      "class": "number",
+      "owner": "mg-a518",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/branching_audit_19ec/out_e2_f2_clauses.txt": {
+      "class": "token",
+      "owner": "mg-19ec",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/branching_audit_2060/out_b0_repro.txt": {
+      "class": "token",
+      "owner": "mg-2060",
+      "cause": "RECORD-DISAGREES",
+      "disposition": "RE-MEASURE",
+      "read": "full"
+    },
+    "code/branching_audit_321d/out_h2_grain.txt": {
+      "class": "token",
+      "owner": "mg-321d",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/branching_audit_321d/out_h3_setlevel.txt": {
+      "class": "token",
+      "owner": "mg-321d",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/branching_audit_321d/out_h4_mine.txt": {
+      "class": "token",
+      "owner": "mg-321d",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/branching_audit_321d/out_h5_doccheck.txt": {
+      "class": "token",
+      "owner": "mg-321d",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "sample"
+    },
+    "code/branching_audit_58da/out_g1_provenance.txt": {
+      "class": "token",
+      "owner": "mg-58da",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "full",
+      "why": "a commit subject with no masked sha in front of it, so report.py's `<sha> <subject>` detector does not fire.  The moved line is `instrument: THE CLASSIFIER FOR VERDICT-STALENESS...` — mg-30bd's OWN commit, arriving in somebody else's transcript."
+    },
+    "code/branching_audit_58da/out_g4_fleet.txt": {
+      "class": "token",
+      "owner": "mg-58da",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/branching_audit_a218/out_c1_branching.txt": {
+      "class": "number",
+      "owner": "mg-a218",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/branching_audit_a218/out_c2_vertexsets.txt": {
+      "class": "number",
+      "owner": "mg-a218",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/branching_audit_a218/out_c3_withdrawal.txt": {
+      "class": "token",
+      "owner": "mg-a218",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/branching_audit_a218/out_c4_seam.txt": {
+      "class": "token",
+      "owner": "mg-a218",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/branching_audit_a218/out_c5_record.txt": {
+      "class": "token",
+      "owner": "mg-a218",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/branching_audit_d330/out_e4_rerun.txt": {
+      "class": "token",
+      "owner": "mg-d330",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/branching_audit_d330/out_e5_seam.txt": {
+      "class": "number",
+      "owner": "mg-d330",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/branching_audit_e34a/out_k2_five.txt": {
+      "class": "token",
+      "owner": "mg-e34a",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "sample",
+      "why": "`HEAD's subject : instrument: THE CLASSIFIER FOR VERDICT-STALENESS` — a walk the `<sha> <subject>` detector misses because the subject is introduced by a label."
+    },
+    "code/branching_audit_e34a/out_k3_undisturbed.txt": {
+      "class": "token",
+      "owner": "mg-e34a",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/census_audit_4d3b/out_a3_fetchfail.txt": {
+      "class": "token",
+      "owner": "mg-4d3b",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/census_audit_4d3b/out_a4_move.txt": {
+      "class": "token",
+      "owner": "mg-4d3b",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/census_audit_4d3b/out_a5_selfdefect.txt": {
+      "class": "number",
+      "owner": "mg-4d3b",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/census_repair_f3ff/out_s2_controls.txt": {
+      "class": "token",
+      "owner": "mg-f3ff",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/census_repair_f3ff/out_s3_graph.txt": {
+      "class": "token",
+      "owner": "mg-f3ff",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "full",
+      "why": "three added lines are commit subjects (`audit: ...`, `census+repair: ...`) with the sha already consumed by the label, so the walk detector does not fire."
+    },
+    "code/contradiction_repair_d19f/out_r3_selfcheck.txt": {
+      "class": "token",
+      "owner": "mg-d19f",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "RE-MEASURE",
+      "read": "full",
+      "why": "same shape as adjudication_audit_a0d6's C4 — `exactly one document outside this tree changed` is a predicate about the run, not about the corpus.  §6.4."
+    },
+    "code/corpus_fixedpoint_fd9c/out_s2_drift.txt": {
+      "class": "token",
+      "owner": "mg-fd9c",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/corpus_fixedpoint_fd9c/out_s4_convention.txt": {
+      "class": "number",
+      "owner": "mg-fd9c",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/counterexample_audit_0a11/out_check_doc.txt": {
+      "class": "token",
+      "owner": "mg-0a11",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/counterexample_audit_0a11/out_locator.txt": {
+      "class": "token",
+      "owner": "mg-0a11",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/eps_spec_sweep_372e/out_s3_control.txt": {
+      "class": "number",
+      "owner": "mg-372e",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/face_geometry_audit_0b07/out_p1_derived.txt": {
+      "class": "token",
+      "owner": "mg-0b07",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_1c80/out_claims.txt": {
+      "class": "token",
+      "owner": "mg-1c80",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_1c80/out_mutations.txt": {
+      "class": "token",
+      "owner": "mg-1c80",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_c4c8/out_h1_per_return.txt": {
+      "class": "token",
+      "owner": "mg-c4c8",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_c4c8/out_h2_the_nine_and_the_clause.txt": {
+      "class": "token",
+      "owner": "mg-c4c8",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/face_geometry_audit_c4c8/out_h3_control.txt": {
+      "class": "token",
+      "owner": "mg-c4c8",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_d0e2/out_e1_deletion.txt": {
+      "class": "token",
+      "owner": "mg-d0e2",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_d3f3/out_a0_selftest.txt": {
+      "class": "number",
+      "owner": "mg-d3f3",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/face_geometry_audit_d3f3/out_a1_f1_revert.txt": {
+      "class": "token",
+      "owner": "mg-d3f3",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/face_geometry_audit_d3f3/out_a3_disclosure.txt": {
+      "class": "token",
+      "owner": "mg-d3f3",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_d3f3/out_a4_order_and_scope.txt": {
+      "class": "number",
+      "owner": "mg-d3f3",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/face_geometry_audit_d3f3/out_a5_e10_row4.txt": {
+      "class": "token",
+      "owner": "mg-d3f3",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/face_geometry_audit_eaef/out_e1_operand.txt": {
+      "class": "number",
+      "owner": "mg-eaef",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/face_geometry_audit_eaef/out_e2_bound.txt": {
+      "class": "token",
+      "owner": "mg-eaef",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/face_geometry_audit_f1b2/out_injections.txt": {
+      "class": "token",
+      "owner": "mg-f1b2",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/face_geometry_audit_f1b2/out_nmax.txt": {
+      "class": "token",
+      "owner": "mg-f1b2",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_f1b2/out_scoring.txt": {
+      "class": "token",
+      "owner": "mg-f1b2",
+      "cause": "RECORD-DISAGREES",
+      "disposition": "RE-MEASURE",
+      "read": "full",
+      "why": "code/face_geometry_audit_f1b2 has no run_all.sh, so NEITHER observation in the record is its owning runner's: two foreign suites regenerated it and disagreed."
+    },
+    "code/face_geometry_audit_fcb2/out_a1_counts.txt": {
+      "class": "token",
+      "owner": "mg-fcb2",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_audit_fcb2/out_a3_standard_elsewhere.txt": {
+      "class": "token",
+      "owner": "mg-fcb2",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/face_geometry_audit_fcb2/out_a6_control_at_commit.txt": {
+      "class": "token",
+      "owner": "mg-fcb2",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/face_geometry_rows_17aa/out_verify_17aa.txt": {
+      "class": "token",
+      "owner": "mg-17aa",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "sample"
+    },
+    "code/figures_revision_repair_5035/out_f1_rule.txt": {
+      "class": "token",
+      "owner": "mg-5035",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/figures_revision_repair_5035/out_f2_contamination.txt": {
+      "class": "number",
+      "owner": "mg-5035",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/figures_revision_repair_5035/out_f3_published.txt": {
+      "class": "number",
+      "owner": "mg-5035",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/grain_axis_audit_03d1/out_a2_blindspot.txt": {
+      "class": "number",
+      "owner": "mg-03d1",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/grain_axis_audit_03d1/out_a3_ledger.txt": {
+      "class": "token",
+      "owner": "mg-03d1",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/grain_axis_audit_03d1/out_a4_sweep.txt": {
+      "class": "number",
+      "owner": "mg-03d1",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/hash_population_6e58/out_p2_population.txt": {
+      "class": "token",
+      "owner": "mg-6e58",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "sample"
+    },
+    "code/hash_population_6e58/out_p3_unrestricted.txt": {
+      "class": "token",
+      "owner": "mg-6e58",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/hash_population_6e58/out_p4_gate.txt": {
+      "class": "number",
+      "owner": "mg-6e58",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/hodge_leverage_audit_835f/out_audit_a318.txt": {
+      "class": "token",
+      "owner": "mg-835f",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_audit_8a5c/out_audit_8e30.txt": {
+      "class": "token",
+      "owner": "mg-8a5c",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_audit_8aae/out_audit_8916.txt": {
+      "class": "token",
+      "owner": "mg-8aae",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_audit_9207/out_audit_9207.txt": {
+      "class": "token",
+      "owner": "mg-9207",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_audit_97fb/out_audit_97fb.txt": {
+      "class": "token",
+      "owner": "mg-97fb",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_audit_ec07/out_audit_ec07.txt": {
+      "class": "token",
+      "owner": "mg-ec07",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_audit_f922/out_audit.txt": {
+      "class": "token",
+      "owner": "mg-f922",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_landing_e1d0/out_verify.txt": {
+      "class": "token",
+      "owner": "mg-e1d0",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt": {
+      "class": "token",
+      "owner": "mg-3f3b",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_repair_6df0/out_repair_6df0.txt": {
+      "class": "token",
+      "owner": "mg-6df0",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_repair_8916/out_repair_8916.txt": {
+      "class": "token",
+      "owner": "mg-8916",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_repair_8eca/out_repair_8eca.txt": {
+      "class": "token",
+      "owner": "mg-8eca",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt": {
+      "class": "token",
+      "owner": "mg-ff3e",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/landing_audit_sweep_64cb/out_s0_selftest.txt": {
+      "class": "token",
+      "owner": "mg-64cb",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/landing_audit_sweep_64cb/out_s1_population.txt": {
+      "class": "number",
+      "owner": "mg-64cb",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/landing_audit_sweep_64cb/out_s2_collisions.txt": {
+      "class": "token",
+      "owner": "mg-64cb",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/landing_audit_sweep_64cb/out_s3_adjudicate.txt": {
+      "class": "token",
+      "owner": "mg-64cb",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/landing_audit_sweep_64cb/out_s5_cost.txt": {
+      "class": "number",
+      "owner": "mg-64cb",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/landing_audit_sweep_64cb/out_s6_rule.txt": {
+      "class": "number",
+      "owner": "mg-64cb",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/landscape_repair_audit_3b51/out_scope_text.txt": {
+      "class": "number",
+      "owner": "mg-3b51",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/lstar_reaudit_5e82/out_a6_provenance.txt": {
+      "class": "token",
+      "owner": "mg-5e82",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full",
+      "why": "`STATE.md on main contains the mu_pref^2 clause  got=False` — the same STATE.md relocation, reaching a second directory.  a6 VERDICT goes SATISFACTORY -> AN ARM FAILED."
+    },
+    "code/mirror_staleness_cdd5/out_s0_state.txt": {
+      "class": "token",
+      "owner": "mg-cdd5",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "full",
+      "why": "`the tip <sha> <date> docs: re-scope C3 ...` — a one-line walk of the tip commit."
+    },
+    "code/mirror_staleness_cdd5/out_s2_sweep.txt": {
+      "class": "token",
+      "owner": "mg-cdd5",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/mirror_staleness_cdd5/out_s4_anchors.txt": {
+      "class": "token",
+      "owner": "mg-cdd5",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/mirror_staleness_cdd5/out_selftest_cdd5.txt": {
+      "class": "number",
+      "owner": "mg-cdd5",
+      "cause": "NONDETERMINISM",
+      "disposition": "UNTRACK-OR-PIN",
+      "read": "full",
+      "why": "MEASURED, NOT INFERRED: `%r` of a set of str under PYTHONHASHSEED randomisation.  Six runs of selftest_cdd5.py on an unchanged tree produced at least three distinct orderings of the same three elements.  This transcript cannot be a fixed point for anybody, and the move is not a verdict move.  Sorting before printing ends it."
+    },
+    "code/pinned_ref_durability_223d/out_r1_population.txt": {
+      "class": "token",
+      "owner": "mg-223d",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "sample"
+    },
+    "code/pinned_ref_durability_223d/out_r2_cause.txt": {
+      "class": "token",
+      "owner": "mg-223d",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "sample"
+    },
+    "code/pinned_ref_durability_223d/out_r4_durable.txt": {
+      "class": "token",
+      "owner": "mg-223d",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/pinned_ref_durability_223d/out_r5_self.txt": {
+      "class": "token",
+      "owner": "mg-223d",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/publication_anchor_132a/out_anchor_132a.txt": {
+      "class": "token",
+      "owner": "mg-132a",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "sample"
+    },
+    "code/repair_8d5e/out_r3_term.txt": {
+      "class": "token",
+      "owner": "mg-8d5e",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/repair_8d5e/out_r4_self.txt": {
+      "class": "token",
+      "owner": "mg-8d5e",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/runner_exit_audit_05eb/out_j4_scope.txt": {
+      "class": "token",
+      "owner": "mg-05eb",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/runner_exit_audit_56dc/out_t1_grain.txt": {
+      "class": "number",
+      "owner": "mg-56dc",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/runner_exit_audit_56dc/out_t2_strictest.txt": {
+      "class": "token",
+      "owner": "mg-56dc",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/runner_exit_audit_56dc/out_t4_standing.txt": {
+      "class": "number",
+      "owner": "mg-56dc",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/runner_exit_audit_56dc/out_t5_fixture.txt": {
+      "class": "number",
+      "owner": "mg-56dc",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/runner_exit_audit_dee4/out_a1_outside.txt": {
+      "class": "token",
+      "owner": "mg-dee4",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "sample"
+    },
+    "code/runner_exit_audit_dee4/out_a3_anchor.txt": {
+      "class": "token",
+      "owner": "mg-dee4",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/runner_exit_audit_dee4/out_a4_superlatives.txt": {
+      "class": "token",
+      "owner": "mg-dee4",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "sample"
+    },
+    "code/runner_exit_audit_dee4/out_a5_floor.txt": {
+      "class": "token",
+      "owner": "mg-dee4",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/runner_exit_c2b3/out_k1_census.txt": {
+      "class": "token",
+      "owner": "mg-c2b3",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/runner_exit_repair_7522/out_s1_population.txt": {
+      "class": "number",
+      "owner": "mg-7522",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/runner_exit_repair_bf79/out_p3_ruleset.txt": {
+      "class": "number",
+      "owner": "mg-bf79",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/runner_exit_repair_bf79/out_p4_figures.txt": {
+      "class": "number",
+      "owner": "mg-bf79",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/runner_exit_repair_bf79/out_selftest_bf79.txt": {
+      "class": "token",
+      "owner": "mg-bf79",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full",
+      "why": "a tripwire that was PLANTED to fire: `IT FIRED.  mg-5035 repaired the rule and this row went red, which is` the designed outcome.  The verdict moved because the instrument worked, so the repair is to refresh the transcript, not to restore the 0."
+    },
+    "code/species_audit_73df/out_c4_scope.txt": {
+      "class": "number",
+      "owner": "mg-73df",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_audit_73df/out_c5_doc.txt": {
+      "class": "number",
+      "owner": "mg-73df",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_audit_7dd3/out_d2_extent.txt": {
+      "class": "token",
+      "owner": "mg-7dd3",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_audit_7dd3/out_d3_seam.txt": {
+      "class": "token",
+      "owner": "mg-7dd3",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/species_audit_7dd3/out_d5_mutations.txt": {
+      "class": "token",
+      "owner": "mg-7dd3",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/species_bound_audit_6ef4/out_t3_census.txt": {
+      "class": "token",
+      "owner": "mg-6ef4",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "full"
+    },
+    "code/species_bound_repair_5040/out_r1_bound.txt": {
+      "class": "number",
+      "owner": "mg-5040",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_bound_repair_5040/out_r2_wiring.txt": {
+      "class": "token",
+      "owner": "mg-5040",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_bound_repair_5040/out_r3_summaries.txt": {
+      "class": "token",
+      "owner": "mg-5040",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/species_bound_repair_5040/out_r4_self.txt": {
+      "class": "token",
+      "owner": "mg-5040",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/species_depth_audit_4700/out_q1_depth.txt": {
+      "class": "token",
+      "owner": "mg-4700",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/species_depth_audit_4700/out_q2_wiring.txt": {
+      "class": "token",
+      "owner": "mg-4700",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/species_depth_audit_4700/out_selftest.txt": {
+      "class": "token",
+      "owner": "mg-4700",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_extent_audit_6cb9/out_a1_bothways.txt": {
+      "class": "token",
+      "owner": "mg-6cb9",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "sample",
+      "why": "THE KNOWN INSTANCE.  `A1 TOTAL BAD: 1 -> 0` is what p6e4f found by accident while pinning something else, and refusing to fold it into a pinning branch is what created mg-30bd.  Two more transcripts in this directory move and p6e4f reported one."
+    },
+    "code/species_extent_audit_6cb9/out_a2_crosssection.txt": {
+      "class": "token",
+      "owner": "mg-6cb9",
+      "cause": "HISTORY-WALK",
+      "disposition": "BOUND-THE-WALK",
+      "read": "sample"
+    },
+    "code/species_extent_audit_6cb9/out_a3_differ.txt": {
+      "class": "token",
+      "owner": "mg-6cb9",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/species_extent_audit_6cb9/out_selftest.txt": {
+      "class": "token",
+      "owner": "mg-6cb9",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "RE-MEASURE",
+      "read": "full",
+      "why": "§6.4 measured a REFUSAL in THIS DIRECTORY under host load 40-50 that does not reproduce on a quiet machine.  Of all 150 rows this is the one the record itself warns about by name."
+    },
+    "code/species_extent_d633/out_e1_extents.txt": {
+      "class": "number",
+      "owner": "mg-d633",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/species_extent_d633/out_e2_crosssection.txt": {
+      "class": "number",
+      "owner": "mg-d633",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/species_extent_d633/out_e3_bothways.txt": {
+      "class": "token",
+      "owner": "mg-d633",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_gate_audit_d53d/out_g3_layer2.txt": {
+      "class": "token",
+      "owner": "mg-d53d",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_gate_audit_d53d/out_g4_self.txt": {
+      "class": "token",
+      "owner": "mg-d53d",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_gate_audit_d53d/out_selftest_d53d.txt": {
+      "class": "token",
+      "owner": "mg-d53d",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/species_repair_6f61/out_r2_columns.txt": {
+      "class": "token",
+      "owner": "mg-6f61",
+      "cause": "RECORD-DISAGREES",
+      "disposition": "RE-MEASURE",
+      "read": "sample"
+    },
+    "code/species_sites_821e/out_selftest.txt": {
+      "class": "token",
+      "owner": "mg-821e",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/state_restructure_ea0e/out_verify_relocation_ea0e.txt": {
+      "class": "token",
+      "owner": "mg-ea0e",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample",
+      "why": "STATE.md was cut 5,987 -> 4,851 words by mg-bdb0's two-landing relocation while this transcript stood still.  MISSING +18 is that cut seen from the other side."
+    },
+    "code/summary_guard_audit_407f/out_a1_arms.txt": {
+      "class": "token",
+      "owner": "mg-407f",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/summary_guard_audit_407f/out_a2_idiom.txt": {
+      "class": "token",
+      "owner": "mg-407f",
+      "cause": "CORPUS-COUNT",
+      "disposition": "PIN-AS-DATED",
+      "read": "full"
+    },
+    "code/superseded_figures_5827/out_gate.txt": {
+      "class": "token",
+      "owner": "mg-5827",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "sample"
+    },
+    "code/sweep_evidence_control_d2c2/out_p1_names.txt": {
+      "class": "token",
+      "owner": "mg-d2c2",
+      "cause": "SUBJECT-MOVED",
+      "disposition": "TICKET",
+      "read": "full"
+    },
+    "code/verdict_delivery_bf3f/out_d2_cause.txt": {
+      "class": "token",
+      "owner": "mg-bf3f",
+      "cause": "LIVE-OUTSIDE-REPO",
+      "disposition": "UNTRACK-OR-PIN",
+      "read": "sample"
+    },
+    "code/verdict_delivery_bf3f/out_d3_fire.txt": {
+      "class": "number",
+      "owner": "mg-bf3f",
+      "cause": "LIVE-OUTSIDE-REPO",
+      "disposition": "UNTRACK-OR-PIN",
+      "read": "full"
+    },
+    "code/verdict_delivery_bf3f/out_d4_live.txt": {
+      "class": "token",
+      "owner": "mg-bf3f",
+      "cause": "LIVE-OUTSIDE-REPO",
+      "disposition": "UNTRACK-OR-PIN",
+      "read": "sample"
+    },
+    "code/verdict_delivery_bf3f/out_verdictwatch.txt": {
+      "class": "token",
+      "owner": "mg-bf3f",
+      "cause": "LIVE-OUTSIDE-REPO",
+      "disposition": "UNTRACK-OR-PIN",
+      "read": "full"
+    },
+    "code/verdict_path_repair_1d26/out_selftest_1d26.txt": {
+      "class": "token",
+      "owner": "mg-1d26",
+      "cause": "CONTROL-FLIPPED",
+      "disposition": "TICKET",
+      "read": "full"
+    }
+  }
+}
