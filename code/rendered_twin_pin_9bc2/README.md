@@ -93,9 +93,10 @@ somebody can read instead of an impression.
 | file | what it is |
 |---|---|
 | `lib9bc2.py` | ledger parsing (markdown + HTML), normalisation, digests, the pin format |
-| `twin_pin.py` | the control (7 sections) and `--reconcile` |
+| `twin_pin.py` | the control (8 sections) and `--reconcile` |
 | `seed_pin.py` | one-shot: seed the pin at `276aead`, the last commit that edited **both** files |
-| `negative_control.py` | 17 mutations, each naming the section that must catch it |
+| `negative_control.py` | 26 arms — 23 mutations, each naming the section that must catch it, and three worlds built in a real throwaway git repository |
+| `IN-FLIGHT.json` | **absent, and that is the normal state.** Section 8's declaration: the ledger rows whose re-pin is deferred to a second landing. Written by hand at landing A, deleted at landing B |
 | `COVERAGE.md` | what the control does not cover, including its own two shipped defects |
 
 ## SECTION 7 — the one that asks git, added by mg-7cc3
@@ -187,3 +188,56 @@ not a check. mg-3902 put the objection best about its own version of this: *an e
 nobody has watched open is the same unfalsifiable thing as a check nobody has watched fire.*
 It has now been watched open, once, by hand, on 2026-08-13 — which is better than the
 alternative and is weaker than the other seven rows.
+
+## SECTION 8 — the two-landing protocol, added by mg-1344
+
+**The problem was not that something could go wrong.** It was that something correct could
+not happen. `docs/STATE-SPLIT-PROPOSAL-mg-14ad.md` §8.3 measured it: the `Full ledger`
+section's **2,887 → 600 word** relocation *cannot land in a merge request at all*, because
+three individually correct facts close on each other — the row edit alone turns the gated
+`twin.worklist` red, `reconcile()` refuses to re-pin in the same commit, and a re-pin one
+commit later names a hash the refinery's rebase destroys. `7e7bfb7` is the receipt.
+
+**The remedy is two landings, and section 8 is what makes landing A green.**
+
+| | what happens | what section 8 says |
+|---|---|---|
+| **A** | relocate the row's essay, reconcile the twin's *cell*, **do not re-pin**, and write `IN-FLIGHT.json` naming the rows | `HONOURED` — the rows leave section 2's worklist, the verdict word becomes `IN FLIGHT`, exit **0** |
+| *(A merges)* | those `STATE.md` bytes are now on an integration ref | `DISCHARGEABLE` — **RED**, and red for every branch until B lands |
+| **B** | `--reconcile --rows N`, delete `IN-FLIGHT.json`, return `twin.inflight` to `[]` | `PASS` on section 7 — `pin_target()` finds a main-reachable commit |
+
+**The one thing that makes this a remedy rather than laundering** is that `HONOURED` is
+decided by `reachable_state_commit()` — *the same function `pin_target()` calls* — so the
+declaration is honoured for precisely as long as a correct pin is impossible, and not one
+merge longer. `twin.worklist`'s baseline value in `BASELINE.json` is deliberately
+**unchanged at `[]`**: an undeclared moved row is red exactly as before. See `COVERAGE.md`'s
+section-8 entry for the full argument, the priced alternatives, and the declared cost.
+
+### The protocol, measured end to end
+
+Six worlds on 2026-08-13, three of them in a throwaway git repository built by
+`negative_control.py` on every run, and three by hand in the same shape.
+
+| world | section 8 says | exit |
+|---|---|---|
+| no `IN-FLIGHT.json` (the normal state) | `PASS  no IN-FLIGHT.json` | **0** |
+| **landing A on a branch**: row 1 relocated, declared, `main` does not carry it | `HONOURED — REPORTED, NOT GRADED`, and row 1 is **absent from the worklist** | **0** |
+| **the same declaration once `main` carries the bytes** | `DISCHARGEABLE … THE DEFERRAL HAS EXPIRED` | **2** |
+| **landing B**: `--reconcile --rows 1` on that repository | `pinning at a1baf62, the newest commit reachable from \`main\`…`, and section 7 then `PASS` on ancestry **and** the digest | 0 |
+| landing B done but `IN-FLIGHT.json` left behind | `FAIL  declares row(s) that have NOT moved` **and** `THE DEFERRAL HAS EXPIRED` — both directions force the file out | 2 |
+| a declaration with no history to check the expiry against | `REPORTED, NOT GRADED, AND NOT HONOURED` — the rows stay in the worklist | 1 |
+
+**The last row is the fail-open direction and it was nearly shipped.** Section 7 answers
+`unknown` by reporting and not grading, which is right there; copied here it would have meant
+an export or a shallow clone silently honouring any declaration at all, because the effect of
+a declaration is to *remove* a row from the field the merge gate exists for. Not grading and
+not honouring are the same doctrine at opposite signs. Arm `C8e` and world N29 hold it.
+
+### What is NOT covered, in one line each
+
+Landing A can declare a row, relocate its essay and **leave the twin's cell untouched** —
+`COVERAGE.md` item 4b, and it is item 4 one level up rather than a new hole. And the whole
+protocol is **not exercised by any standing landing**: this branch ships the mechanism and
+does **not** move the ledger row. The first real landing A is the successor, and until it
+lands the six rows above are the only evidence — three of them re-run on every merge, three
+by hand.

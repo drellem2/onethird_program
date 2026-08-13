@@ -9,7 +9,7 @@ its four branches classify four different worlds.
 
 THE LIST
 --------------------------------------------------------------------------------------------
-  twin_pin.py   (20 arm(s))
+  twin_pin.py   (25 arm(s))
     C1a  §1         pin block present                                           grade 2
          subject: the twin names a STATE.md revision at all
     C1b  §1         row sets agree                                              grade 2
@@ -40,6 +40,16 @@ THE LIST
          subject: the revision the page names is an ancestor of an integration branch, so a reader who fetches `main` can still see it
     C7c  §7         the named revision carries the digested STATE.md            grade 2
          subject: the commit the page NAMES is the revision the page was DIGESTED against, as opposed to the two fields merely agreeing with each other
+    C8a  §8         the declaration is readable as one                          grade 2
+         subject: a file whose only power is to make this gate accept a moved row is well-formed, so the weakening it buys can be audited at all
+    C8b  §8         declared rows exist and are pinned                          grade 2
+         subject: a declared relocation names a real ledger row that the pin actually carries, as opposed to a label that subtracts nothing and hides that it subtracts nothing
+    C8c  §8         declared rows have actually MOVED                           grade 2
+         subject: a row is declared in flight because it was relocated, not in advance of being relocated — the same act R3 refuses one function over
+    C8d  §8         THE DEFERRAL EXPIRES                                        grade 2
+         subject: the excuse for not re-pinning — that no integration-reachable commit carries these STATE.md bytes — is still TRUE, as opposed to having been true when it was written
+    C8e  §8         an unverifiable deferral is not honoured                    grade 0
+         subject: a checkout that cannot evaluate the expiry declines to apply the subtraction, so an export or a shallow clone cannot be where a declaration goes unchecked
     R1   §reconcile --reconcile requires --rows                                 grade 2
          subject: a re-pin names the rows whose cells were actually reconciled
     R2   §reconcile refuse unknown row labels                                   grade 2
@@ -63,7 +73,7 @@ THE LIST
     L5   §parse     pin block is terminated                                     grade 2
          subject: a pin that starts is a pin that ends, so the parse cannot silently truncate
 
-  negative_control.py   (20 arm(s))
+  negative_control.py   (29 arm(s))
     N1   §1         mutation: pin block deleted                                 grade 1
          subject: C1a fires when the pin is removed
     N2   §1         mutation: twin row deleted                                  grade 1
@@ -96,6 +106,24 @@ THE LIST
          subject: C6b fires when the visible line names the pin AND another revision
     N20  §7         mutation: BOTH provenance copies name a nonexistent commit  grade 1
          subject: C7a fires on the input that left the six-section control CLEAN at exit 0
+    N21  §8         mutation: a row declared that has not moved                 grade 1
+         subject: C8c fires on the cheapest way to abuse a declaration — buying a standing subtraction for a row that is fine
+    N22  §8         mutation: a row declared that does not exist                grade 1
+         subject: C8b fires when a declaration names a label the ledger does not have
+    N23  §8         mutation: the declaration is not valid JSON                 grade 1
+         subject: C8a fires rather than reading an unparseable declaration as an absent one
+    N24  §8         mutation: the declaration names no rows                     grade 1
+         subject: C8a fires on a declaration that can only weaken this section and let nothing through
+    N25  §8         mutation: the declaration carries no reason                 grade 1
+         subject: C8a fires on an unauditable declaration, and on one that strands whoever meets its expiry with no instruction
+    N26  §8         mutation: the declaration is at another schema              grade 1
+         subject: C8a fires rather than reading fields it does not understand
+    N27  §8         world: landing A on a branch is HONOURED                    grade 1
+         subject: the protocol's whole point holds — a declared relocation whose bytes are on no integration ref MERGES, and the row leaves section 2's worklist
+    N28  §8         world: the same declaration once main has it                grade 1
+         subject: C8d fires against a REAL history, so the expiry is a fact about git rather than a sentence in a docstring
+    N29  §8         world: a declaration with no history to check               grade 1
+         subject: C8e fires — the subtraction is declined where it cannot be verified, which is the fail-open direction this whole section had in its first draft
     N19  §-         the baseline-absence guard                                  grade 1
          subject: a mutation's expect string is absent from the UNMUTATED report, so a CAUGHT means the mutation caused it
     N11  §-         the positive control (baseline)                             grade 1
@@ -113,7 +141,7 @@ THE LIST
     S3   §seed      refuse to re-seed over a pin                                grade 2
          subject: seeding is a one-time act and cannot silently overwrite a reconciled pin
 
-  run_all.sh   (7 arm(s))
+  run_all.sh   (8 arm(s))
     H1   §runner    structural failure is reported                              grade 2
          subject: a broken pin mechanism reaches the reader as a non-zero exit
     H2   §runner    a hole in the negative control is reported                  grade 2
@@ -128,9 +156,11 @@ THE LIST
          subject: the DRIFT branch's worklist has rows in it, so the grade came from section 2
     H7   §runner    an unknown exit code is BROKEN, not CLEAN                   grade 2
          subject: the control's exit code is one of its three declared verdicts
+    H8   §runner    section 8 produced a reading at all                         grade 2
+         subject: the declared-in-flight set is a fact this run reached, as opposed to a line that vanished because section 8 never ran
 
-SIZE: 55 arms across 5 source files.
-      by grade — 31 structural (2), 22 drift/report (1), 2 advisory (0)
+SIZE: 70 arms across 5 source files.
+      by grade — 36 structural (2), 31 drift/report (1), 3 advisory (0)
 
 ============================================================================================
 COMPLETENESS — every arm-shaped SITE in the sources must be claimed by an arm
@@ -138,17 +168,26 @@ COMPLETENESS — every arm-shaped SITE in the sources must be claimed by an arm
 Discovery is deliberately over-broad.  An unclaimed site is a FINDING and fails this
 census; it is how a check added without registration stops being invisible.
 
-  discovered sites: 67
-    twin_pin.py            30
+  discovered sites: 86
+    twin_pin.py            37
     lib9bc2.py             6
-    negative_control.py    21
+    negative_control.py    33
     seed_pin.py            3
     run_all.sh             7
 
-  PASS  all 67 registered site strings resolve.
+  PASS  all 85 registered site strings resolve.
 
-  PASS  all 67 discovered sites are claimed by a registered arm.
+  PASS  all 86 discovered sites are claimed by a registered arm.
+
+  note  5 registered site(s) resolve to lines the discovery patterns
+        do not match — these are arms whose site string is a body line rather than
+        the arm's head.  Listed so the difference is not mistaken for coverage:
+        negative_control.py:499  score("landing A planted in a real git repository", EXPECT_HONOURED,
+        negative_control.py:504  score("landing A after its bytes reach `main`", EXPECT_EXPIRED)
+        negative_control.py:508  def unknown_world(tmp, base_state, base_twin, base_report):
+        run_all.sh:149  echo "CLEAN — the twin's pinned ledger rows all still match STATE.md."
+        twin_pin.py:875  emit("  REPORTED, NOT GRADED, AND NOT HONOURED.  Git cannot be asked h
 
 ============================================================================================
-CENSUS COMPLETE — 55 arms, 67 sites, none unclaimed.
+CENSUS COMPLETE — 70 arms, 86 sites, none unclaimed.
 ============================================================================================

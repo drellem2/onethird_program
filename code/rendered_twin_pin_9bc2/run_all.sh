@@ -78,6 +78,23 @@ if [ "$NEGATIVE" -ne 0 ]; then
     echo "That is worse than drift: read out_negative_control.txt and record it in COVERAGE.md."
     exit 2
 fi
+
+# THE IN-FLIGHT SET IS READ OUT OF SECTION 8 AND PRINTED IN EVERY TERMINAL BRANCH (mg-1344),
+# for mg-188d's reason two fields over and not a new one: mg-724a's gate reads
+# `twin.inflight` by exactly-once anchored match, so a line that exists only when something
+# is in flight would take the gate to REFUSED on every ordinary run.  A field observable
+# only in one state cannot report the other.  `(none)` is the EMPTY SET, never an empty tail.
+INFLIGHT=$(sed -n 's/^  declared in-flight rows: //p' \
+               code/rendered_twin_pin_9bc2/out_control.txt)
+if [ -z "$INFLIGHT" ]; then
+    echo
+    echo "BROKEN — section 8 printed no \`declared in-flight rows:\` line, so the twin's"
+    echo "declared-relocation field has no reading at all.  That is not an empty set: an"
+    echo "absent line and a declaration of nothing are different facts and this runner will"
+    echo "not report the first as the second."
+    exit 2
+fi
+
 if [ "$CONTROL" -eq 1 ]; then
     # THE ROWS ARE READ OUT OF SECTION 2, NEVER TYPED.  This branch used to end with the
     # sentence "Row 9 was mg-2f44's and is RECONCILED; row 8 is the one no ticket names yet"
@@ -95,6 +112,7 @@ if [ "$CONTROL" -eq 1 ]; then
         echo "a worklist of nothing presented as a worklist."
         exit 2
     fi
+    echo "The DECLARED IN-FLIGHT relocations, READ OUT OF SECTION 8 rather than typed here: ${INFLIGHT}"
     exit 0
 fi
 if [ "$CONTROL" -ne 0 ]; then
@@ -115,5 +133,19 @@ fi
 # directory over.  `(none)` rather than an empty tail so the line cannot be mistaken for a
 # truncated one; lib724a reads that token as the EMPTY SET.
 echo "The worklist, READ OUT OF SECTION 2 rather than typed here: (none)"
-echo "CLEAN — the twin's pinned ledger rows all still match STATE.md."
+echo "The DECLARED IN-FLIGHT relocations, READ OUT OF SECTION 8 rather than typed here: ${INFLIGHT}"
+# THE CLOSING WORD IS TAKEN FROM THE INSTRUMENT'S OWN VERDICT LINE, NOT FROM THE EXIT CODE
+# (mg-1344).  `IN FLIGHT` and `CLEAN` are both exit 0 — deliberately, because section 8
+# honours a deferral for exactly as long as section 7 honours an in-flight commit — so a
+# runner that branched on `$CONTROL` alone would print `CLEAN — the twin's pinned ledger rows
+# all still match STATE.md` over a tree in which some of them demonstrably do not.  That
+# sentence is precisely the laundered green this directory's own header is about.
+case "$VERDICT_LINE" in
+    *"IN FLIGHT"*)
+        echo "IN FLIGHT — every moved ledger row is DECLARED and its deferral has not expired."
+        echo "This is NOT clean: landing B is owed and section 8 grades it RED the moment"
+        echo "these bytes reach an integration ref." ;;
+    *)
+        echo "CLEAN — the twin's pinned ledger rows all still match STATE.md." ;;
+esac
 exit 0

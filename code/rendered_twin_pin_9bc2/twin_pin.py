@@ -24,9 +24,9 @@ THE `STATE.md` IT IS A RENDERING OF — mg-1abe's phrase, A PUBLISHER IS NOT A P
 check that pin.  The pin lives in the twin, at the top of the file, so it cannot be
 separated from the artifact it describes.
 
-SEVEN CHECKS.  Sections 1-3 are the pin; 4 is a cross-document check that does not use the
+EIGHT CHECKS.  Sections 1-3 are the pin; 4 is a cross-document check that does not use the
 pin at all; 5 is a default-deny guard on the sentences that caused this; 6 checks the one
-duplicate this repair deliberately introduces; 7 is the only one that asks GIT anything.
+duplicate this repair deliberately introduces; 7 and 8 are the ones that ask GIT anything.
 
     1  the pin is present, parses, and its row set matches both documents
     2  per-row digests: which STATE.md ledger rows have MOVED since the twin was pinned
@@ -36,6 +36,52 @@ duplicate this repair deliberately introduces; 7 is the only one that asks GIT a
     6  the VISIBLE provenance line in the header quotes the same commit as the pin
     7  the pinned commit RESOLVES, is one this repository INTEGRATES, and carries the
        STATE.md the pin digests
+    8  DECLARED IN-FLIGHT RELOCATIONS: rows whose re-pin is deferred to a second landing,
+       and whether that deferral has EXPIRED
+
+SECTION 8 IS mg-1344's, AND IT EXISTS BECAUSE SECTIONS 1-7 CLOSED A DEADLOCK AROUND A ROW
+THAT HAS TO MOVE.  Three facts, each read out of the estate:
+
+    (1) moving a pinned ledger row grows section 2's worklist, and `twin.worklist` is a GATED
+        field in code/control_gate_724a/BASELINE.json, so the row edit is RED on its own;
+    (2) `reconcile()` REFUSES while STATE.md on disk differs from STATE.md at HEAD, so the
+        re-pin cannot share the row edit's commit — "THE COST IS TWO COMMITS INSTEAD OF ONE";
+    (3) a re-pin in a later commit on the SAME branch names a hash the refinery's rebase
+        rewrites out of existence, and section 7 grades the resulting orphan RED.  `2fbd5ce`
+        died exactly that way (7e7bfb7, mg-cdd5).
+
+Each is individually correct and they close on each other, so `docs/state-split-proposal`'s
+Full-ledger row — 2,887 words down to 600 — could not land at all.  THE FACT THIS SECTION
+CHANGES IS (1), AND IT DOES NOT CHANGE IT BY MAKING THE GATE QUIETER.  A ledger-row
+relocation is split into two landings:
+
+    LANDING A   move the row's essay out, reconcile the twin's CELL, do NOT re-pin, and
+                DECLARE the row in `IN-FLIGHT.json` beside this file.
+    LANDING B   once those bytes are on an integration ref, `--reconcile --rows N`.
+                `pin_target()` now finds a main-reachable commit and section 7 PASSES.
+
+A declared row is subtracted from section 2's worklist — and that subtraction is the whole
+of what could be laundering, so it is bought with a predicate that EXPIRES ON ITS OWN:
+
+    HONOURED       no integration-reachable commit carries these STATE.md bytes, so
+                   landing B is IMPOSSIBLE right now.  Reported, not graded — exactly the
+                   polarity section 7 already uses for an in-flight COMMIT.
+    DISCHARGEABLE  one does.  Landing B is possible, therefore the deferral is over and the
+                   declaration is no longer an excuse.  GRADED RED.
+
+The predicate is `reachable_state_commit()` — the SAME search `pin_target()` runs, called
+rather than paraphrased, so "the gate honours this" and "a correct pin can be made" cannot
+drift apart into two answers.  The consequence is the point: the moment landing A merges,
+its own declaration goes RED and stays RED until landing B lands.  A laundered field is
+green forever; this one cannot stay green past the moment its excuse expires.
+
+WHAT THIS COSTS, STATED RATHER THAN DISCOVERED.  Between landing A and landing B `main` is
+RED for everybody, not only for the author who opened the protocol.  That is a real tax on
+an unrelated branch and it is the construction gate.py's own §3 warns about — with one
+difference that is why it is taken anyway: the remedy is ONE COMMAND, it is printed in the
+failure, and ANY author can run it.  The alternatives were priced and are worse: editing
+`twin.worklist` in BASELINE.json is permanent and expires never, and leaving the deadlock in
+place means the row never moves at all.  See COVERAGE.md item 6.
 
 SECTION 7 IS mg-3902's CHECK, FOLDED IN (mg-7cc3), AND IT IS HERE BECAUSE SECTIONS 1-6 COULD
 NOT SEE THE DEFECT.  Section 3 compares the pinned digest against the LIVE WORKING TREE;
@@ -72,6 +118,7 @@ less than "the twin is correct", and it is strictly more than a date.
 
 import argparse
 import hashlib
+import json
 import os
 import re
 import subprocess
@@ -80,9 +127,15 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib9bc2 as L  # noqa: E402
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(HERE))
 STATE = os.path.join(ROOT, "STATE.md")
 TWIN = os.path.join(ROOT, "docs", "state-of-the-wall.html")
+
+# Section 8's declaration.  ABSENCE IS THE NORMAL STATE and is not a finding: a repository
+# with no relocation in flight has no file here, which is why the check is not "the file
+# exists and is well-formed" but "IF it exists, it is well-formed AND its excuse still holds".
+INFLIGHT = os.path.join(HERE, "IN-FLIGHT.json")
 
 # Section 5's default-deny rules.  Each is (regex, why, exemption-predicate-or-None).
 # A rule fires when the regex matches a tag-stripped line AND the exemption does not hold.
@@ -203,14 +256,170 @@ def classify_reachability(full, table=None, integration_refs=INTEGRATION_REFS):
     return "orphan", "an ancestor of neither an integration ref nor this HEAD"
 
 
+def blob_oid(data):
+    """The git object id these bytes WOULD have as a blob.  Writes nothing.
+
+    Used so that "is this STATE.md already on an integration ref?" is answered by comparing
+    OBJECT IDS — the same comparison `pin_target()` has always made — rather than by reading
+    73 blobs out and hashing them here.
+    """
+    proc = subprocess.run(["git", "-C", ROOT, "hash-object", "-t", "blob", "--stdin"],
+                          input=data, capture_output=True)
+    return proc.stdout.decode("utf-8", "replace").strip() if proc.returncode == 0 else ""
+
+
+def reachable_state_commit(blob, integration_refs=INTEGRATION_REFS):
+    """(ref, commit) for the NEWEST integration-reachable commit whose STATE.md is `blob`.
+
+    THE ONE PREDICATE, CALLED TWICE, NEVER PARAPHRASED.  `pin_target()` asks it to decide
+    which commit a re-pin may name; section 8 asks it to decide whether a deferred re-pin is
+    still deferred.  Those two must be the same question or the gate honours a deferral that
+    a re-pin could already have discharged — a second copy of this search that agrees today
+    is worse than one (lib724a's own reason for being a library).
+
+    ONE `cat-file --batch-check` PER REF, NOT ONE `rev-parse` PER CANDIDATE.  73 commits
+    touch STATE.md on `main` today and section 8 runs on every control run, not only on
+    `--reconcile`; 73 subprocesses on the merge critical path, in a control `a2_discriminate`
+    already runs 110 times, is a cost paid for nothing.
+    """
+    if not blob:
+        return None
+    for ref in integration_refs:
+        if git("rev-parse", "--verify", "--quiet", ref)[0] != 0:
+            continue
+        rc, listing = git("rev-list", ref, "--", "STATE.md")
+        candidates = listing.split() if rc == 0 else []
+        if not candidates:
+            continue
+        proc = subprocess.run(
+            ["git", "-C", ROOT, "cat-file", "--batch-check=%(objectname)"],
+            input="".join(c + ":STATE.md\n" for c in candidates).encode(),
+            capture_output=True)
+        oids = proc.stdout.decode("utf-8", "replace").split("\n")
+        for candidate, oid in zip(candidates, oids):
+            if oid.strip() == blob:
+                return ref, candidate
+    return None
+
+
+# ---------------------------------------------------------------------------------------
+# SECTION 8 — the in-flight relocation declaration
+# ---------------------------------------------------------------------------------------
+
+_INFLIGHT_REQUIRED = ("declared_by", "why", "landing_b")
+
+
+def load_inflight(path):
+    """Read IN-FLIGHT.json.  Returns (declaration_or_None, faults).
+
+    A FAULT IS A STRUCTURAL FAILURE, NOT DRIFT, and the reason is the same one BASELINE.json
+    gives for refusing a field with no `why`: this file's only job is to make the gate accept
+    something it would otherwise refuse, so a malformed one is a weakening nobody can audit.
+    Absence returns (None, []) and is silent.
+
+    THE FIELDS ARE REQUIRED FOR THE SAME REASON `--reconcile` REQUIRES `--rows`.  A
+    declaration with a one-word reset is a declaration that gets written instead of read.
+    `landing_b` is required and PRINTED because the whole protocol is that somebody, possibly
+    not the author, has to run it — an expiry with no instruction attached is an expiry that
+    strands whoever meets it.
+    """
+    if not os.path.exists(path):
+        return None, []
+    try:
+        with open(path, encoding="utf-8") as fh:
+            raw = json.load(fh)
+    except ValueError as exc:
+        return None, ["%s is not valid JSON: %s" % (os.path.basename(path), exc)]
+    faults = []
+    if not isinstance(raw, dict) or raw.get("schema") != 1:
+        return None, ["%s declares schema %r; this control reads schema 1 only."
+                      % (os.path.basename(path), (raw or {}).get("schema")
+                         if isinstance(raw, dict) else None)]
+    rows = raw.get("rows")
+    # THE LABEL SHAPE IS CHECKED HERE AND NOT LEFT TO `sort_labels`, which does
+    # `int(re.match(r"\d+", s).group())` and raises AttributeError on anything that does not
+    # start with a digit.  A declaration carrying `"rows": ["foo"]` would then take this
+    # control down with a traceback — and a traceback and a finding leave the same exit code
+    # (mg-9876), so the runner would have reported a malformed declaration as DRIFT.
+    if (not isinstance(rows, list)
+            or not all(isinstance(r, str) and re.fullmatch(r"\s*[0-9]+[a-z]?\s*", r or "")
+                       for r in rows)):
+        faults.append("`rows` must be a list of ledger row labels of the ledger's own shape "
+                      "— digits with an optional trailing letter, e.g. [\"3b\", \"6\"].")
+        rows = []
+    elif not rows:
+        faults.append(
+            "`rows` is EMPTY.  A declaration that names no row cannot let anything through "
+            "and can only weaken this section; delete the file instead.")
+    for field in _INFLIGHT_REQUIRED:
+        if not str(raw.get(field, "")).strip():
+            faults.append("`%s` is missing or empty.  Every field here is load-bearing: this "
+                          "file exists to make the gate accept a moved row, and one that does "
+                          "not say who, why and how it ends is unauditable." % field)
+    raw["rows"] = [r.strip() for r in rows]
+    return raw, faults
+
+
 def sort_labels(labels):
     return sorted(labels, key=lambda s: (int(re.match(r"\d+", s).group()), s))
 
 
-def check(state_text, twin_text, state_sha):
-    """Run all five sections.  Returns (exit_code, list_of_lines)."""
+def state_bytes_of(path, text):
+    """The BYTES the discharge test hashes.
+
+    Read from disk rather than re-encoded from the text: `open(..., encoding="utf-8")`
+    translates line endings, so a CRLF STATE.md would be hashed as an LF one and the search
+    would silently never match — a permanent `honoured`, which is the direction that fails
+    open.  The text is only the fallback for a caller with no readable path.
+    """
+    try:
+        with open(path, "rb") as fh:
+            return fh.read()
+    except OSError:
+        return text.encode("utf-8")
+
+
+def classify_discharge(state_bytes):
+    """Has the deferral expired?  Returns (verdict, detail).
+
+    `honoured`      no integration-reachable commit carries these STATE.md bytes, so
+                    `--reconcile` CANNOT produce a main-reachable pin and landing B is
+                    genuinely impossible.  This is the window the declaration is for.
+    `dischargeable` one does.  Landing B is possible NOW, so the deferral is over.
+    `unknown`       git cannot be asked here.  GIT CANNOT ANSWER IS NOT THE ANSWER IS NO —
+                    section 7's own rule, and the reason an export or a tarball does not get
+                    a red about a checkout rather than about a declaration.
+
+    THE THREE `unknown` ROUTES ARE ENUMERATED RATHER THAN LEFT AS AN `else`, BECAUSE EVERY
+    ONE OF THEM FAILED OPEN IN THE FIRST DRAFT OF THIS FUNCTION.  No work tree, no integration
+    ref, and an unobtainable blob id all reached `reachable_state_commit() -> None`, which is
+    the same return value as "searched, and these bytes are on no integration ref" — i.e. the
+    search not being ABLE to run was reported as the search having run and come back clean.
+    That is the defect this whole directory exists for, re-created inside the arm added to
+    remedy it, and it was found by enumerating it rather than by anything failing.
+    """
+    refs = " or ".join(INTEGRATION_REFS)
+    if not have_history():
+        return "unknown", "no git work tree at %s" % ROOT
+    if all(git("rev-parse", "--verify", "--quiet", r)[0] != 0 for r in INTEGRATION_REFS):
+        return "unknown", "no integration ref (%s) resolves in this checkout" % refs
+    oid = blob_oid(state_bytes)
+    if not oid:
+        return "unknown", "git could not compute an object id for these STATE.md bytes"
+    hit = reachable_state_commit(oid)
+    if hit is None:
+        return "honoured", ("no commit reachable from %s carries this STATE.md, so a re-pin "
+                            "here could only name an unmerged hash" % refs)
+    ref, commit = hit
+    return "dischargeable", ("%s is reachable from `%s` and carries this exact STATE.md"
+                             % (git("rev-parse", "--short", commit)[1], ref))
+
+
+def check(state_text, twin_text, state_sha, state_path=STATE, inflight_path=INFLIGHT):
+    """Run all eight sections.  Returns (exit_code, list_of_lines)."""
     out = []
     worst = 0
+    decl, decl_faults = load_inflight(inflight_path)
 
     def emit(line=""):
         out.append(line)
@@ -278,22 +487,53 @@ def check(state_text, twin_text, state_sha):
     emit("-" * 86)
     now = L.row_digests(state_text)
     moved, unmoved = [], []
+    # THE DECLARATION IS CONSULTED HERE AND GRADED IN SECTION 8, AND THE SPLIT IS DELIBERATE.
+    # Section 2 reports the FACT (which rows moved) and the SPLIT (which of them are
+    # declared); whether the declaration is any good is one question asked in one place.
+    declared = [] if decl is None else list(decl["rows"])
+    discharge, discharge_why = ("none", "no declaration")
+    if decl is not None:
+        discharge, discharge_why = classify_discharge(state_bytes_of(state_path, state_text))
+    # ONLY `honoured` SUBTRACTS, AND `unknown` DELIBERATELY DOES NOT.  Section 7 treats
+    # `unknown` as "reported, not graded" because grading it would condemn a pin the checkout
+    # cannot check — a red about the CHECKOUT.  Here the polarity is the other way up: the
+    # declaration's effect is to REMOVE a row from the field the merge gate exists for, so
+    # honouring one whose expiry cannot be evaluated is a subtraction taken on trust.  Not
+    # grading it and not honouring it are the same doctrine applied to opposite signs.
+    honoured = set(declared) if discharge == "honoured" else set()
     for label in sort_labels(s_labels & p_labels):
         if pin["rows"][label] == now[label]:
             unmoved.append(label)
             emit(f"  row {label:<3}  ok       {now[label]}")
         else:
             moved.append(label)
-            emit(f"  row {label:<3}  MOVED    pinned {pin['rows'][label]}  ->  now {now[label]}")
+            mark = "   [DECLARED IN FLIGHT — section 8]" if label in honoured else ""
+            emit(f"  row {label:<3}  MOVED    pinned {pin['rows'][label]}  ->  "
+                 f"now {now[label]}{mark}")
+    undeclared = [l for l in moved if l not in honoured]
     emit()
-    if moved:
+    # THE WORKLIST IS THE UNDECLARED HALF, AND THE DECLARED HALF IS NOT HIDDEN — IT IS
+    # PRINTED ON THE LINE ABOVE, COUNTED HERE, AND GATED SEPARATELY as `twin.inflight`.
+    # Subtracting a row from the field mg-724a's gate exists for is the one move in this
+    # whole repair that could be laundering, so: the subtraction requires a committed
+    # declaration, section 8 grades that declaration on a predicate that expires by itself,
+    # and the SUM of the two fields is what it always was.
+    if moved and honoured:
+        emit(f"  {len(honoured & set(moved))} of the {len(moved)} moved row(s) are DECLARED "
+             f"IN FLIGHT: {' '.join(sort_labels(honoured & set(moved)))}")
+    if undeclared:
         worst = max(worst, 1)
-        emit(f"  DRIFT  {len(moved)} of {len(s_labels & p_labels)} ledger rows have changed in")
-        emit(f"         STATE.md since the twin was last reconciled: {' '.join(moved)}")
+        emit(f"  DRIFT  {len(undeclared)} of {len(s_labels & p_labels)} ledger rows have "
+             f"changed in")
+        emit(f"         STATE.md since the twin was last reconciled: {' '.join(undeclared)}")
         emit("         Each is a row the twin renders from text that no longer exists.")
         emit("         This is the WORKLIST.  Reconcile the twin's cell, then re-pin that row:")
         emit(f"             python3 code/rendered_twin_pin_9bc2/twin_pin.py --reconcile "
-             f"--rows {','.join(moved)}")
+             f"--rows {','.join(undeclared)}")
+    elif moved:
+        emit(f"  IN FLIGHT  every one of the {len(moved)} moved row(s) is declared in")
+        emit(f"             {os.path.relpath(inflight_path, ROOT)}, so the UNDECLARED worklist")
+        emit("             is empty.  That is not the same as clean and section 8 says so.")
     else:
         emit(f"  PASS  all {len(unmoved)} pinned rows still match STATE.md.")
     emit()
@@ -558,12 +798,103 @@ def check(state_text, twin_text, state_sha):
                     emit("        digested the one AFTER it.")
     emit()
 
+    # ---------------------------------------------------------------- section 8
+    emit("SECTION 8 — DECLARED IN-FLIGHT RELOCATIONS, and whether the deferral has EXPIRED")
+    emit("-" * 86)
+    emit("  Section 2 subtracts a DECLARED row from its worklist.  That subtraction is the")
+    emit("  only thing here that could be laundering, so this section is where it is paid")
+    emit("  for: a declared row must have actually moved, and the declaration is honoured")
+    emit("  ONLY while `--reconcile` could not produce a main-reachable pin anyway.")
+    emit()
+    # THE FIELD-SHAPED LINE IS PRINTED ON EVERY RUN, INCLUDING THE EMPTY ONE (mg-188d's rule,
+    # inherited deliberately).  Its own directory learnt this the expensive way: the worklist
+    # line was printed only in the DRIFT branch, so mg-724a's gate could read the field
+    # exactly while the twin was broken and REFUSED the first clean run in the page's history.
+    # A field observable only in the failing state cannot report its own success.
+    emit(f"  declared in-flight rows: {' '.join(sort_labels(declared)) if declared else '(none)'}")
+    emit()
+    if decl_faults:
+        worst = 2
+        emit("  FAIL  the in-flight declaration is not readable as one:")
+        for fault in decl_faults:
+            emit(f"        - {fault}")
+        emit("        A malformed declaration is a STRUCTURAL failure and not drift: this")
+        emit("        file's only power is to make the gate accept a moved row, so one that")
+        emit("        cannot be read is a weakening nobody can audit.")
+    elif decl is None:
+        emit(f"  PASS  no {os.path.basename(inflight_path)} — no relocation is in flight, which")
+        emit("        is the normal state.  Nothing is subtracted from section 2's worklist.")
+    else:
+        emit(f"  declared by  : {decl['declared_by']}")
+        emit(f"  landing B    : {decl['landing_b']}")
+        emit(f"  why          : {str(decl['why']).strip().splitlines()[0][:120]}")
+        emit()
+        unknown_rows = [r for r in declared if r not in now]
+        unpinned = [r for r in declared if r in now and r not in p_labels]
+        still = [r for r in declared if r in now and r in p_labels and r not in moved]
+        if unknown_rows:
+            worst = 2
+            emit(f"  FAIL  declares row(s) that are not in STATE.md's ledger: "
+                 f"{' '.join(unknown_rows)}")
+        if unpinned:
+            worst = 2
+            emit(f"  FAIL  declares row(s) the pin does not carry: {' '.join(unpinned)}.  There")
+            emit("        is no deferred re-pin for a row that was never pinned.")
+        if still:
+            worst = 2
+            emit(f"  FAIL  declares row(s) that have NOT moved: {' '.join(still)}.")
+            emit("        Declaring an in-flight relocation for a row nobody relocated is the")
+            emit("        same act as re-pinning a row nobody reconciled, one level up — the")
+            emit("        move COVERAGE.md item 4 calls the easiest way to defeat this")
+            emit("        mechanism.  It buys a standing subtraction for a row that is fine.")
+        if not (unknown_rows or unpinned or still):
+            emit(f"  PASS  every declared row is a pinned ledger row that has actually moved.")
+        emit()
+        emit(f"  discharge test : {discharge.upper()} — {discharge_why}")
+        if discharge == "dischargeable":
+            worst = 2
+            emit("  FAIL  THE DEFERRAL HAS EXPIRED.  Landing A's bytes are on an integration")
+            emit("        ref, so `pin_target()` can now name a commit that survives the")
+            emit("        rebase and landing B is not merely possible but overdue.  From here")
+            emit("        the declaration is no longer an excuse, it is an unrepaired pin.")
+            emit("        THIS RED IS NOT ONLY THE DECLARER'S TO CLEAR — anyone may run it:")
+            emit(f"            {decl['landing_b']}")
+            emit(f"        then delete {os.path.relpath(inflight_path, ROOT)} in the same commit")
+            emit("        and move `twin.inflight` back to [] in BASELINE.json.")
+            emit("        (`reconcile()` also requires STATE.md on disk to equal STATE.md at")
+            emit("        HEAD, so commit or restore any unrelated edit to it first.)")
+        elif discharge == "honoured":
+            emit("  HONOURED — REPORTED, NOT GRADED, AND NOT A CLEAN TWIN.")
+            emit("        Landing B is impossible right now for the reason that created this")
+            emit("        protocol, so a red here would be a red for a state nobody can leave.")
+            emit("        This is the same polarity section 7 gives an in-flight COMMIT, and it")
+            emit("        is bought the same way: it expires by itself.  The instant these")
+            emit("        bytes reach an integration ref this section goes RED and stays RED")
+            emit("        until landing B lands.")
+        else:
+            emit("  REPORTED, NOT GRADED, AND NOT HONOURED.  Git cannot be asked here, and")
+            emit("        'cannot answer' is not 'the answer is no' — so this declaration is")
+            emit("        not condemned.  It is also not APPLIED: the declared rows stay in")
+            emit("        section 2's worklist, because subtracting them would be a weakening")
+            emit("        this checkout has no way to check.  Section 7 declines to grade an")
+            emit("        unverifiable pin for the same reason this declines to honour an")
+            emit("        unverifiable deferral; the sign differs, the doctrine does not.")
+    emit()
+
     emit("=" * 86)
-    emit({0: "VERDICT: CLEAN — the twin is pinned and its ledger rows have not moved.",
-          1: "VERDICT: DRIFT — see section 2's worklist.  The twin renders rows that have "
-             "since changed.",
-          2: "VERDICT: STRUCTURAL FAILURE — the pin mechanism itself is broken or a banned "
-             "claim is back."}[worst])
+    if worst == 0 and moved and honoured:
+        # A FOURTH VERDICT WORD, BECAUSE `CLEAN` WOULD BE FALSE.  Exit 0 matches section 7's
+        # treatment of an in-flight commit — reported, not graded — and the WORD is what
+        # mg-724a's gate reads (`twin.verdict_grade`), so this state is a declared baseline
+        # movement rather than a silent pass.  The exit code was never the classifier here.
+        emit("VERDICT: IN FLIGHT — every moved ledger row is declared in flight and the "
+             "deferral has not expired.")
+    else:
+        emit({0: "VERDICT: CLEAN — the twin is pinned and its ledger rows have not moved.",
+              1: "VERDICT: DRIFT — see section 2's worklist.  The twin renders rows that have "
+                 "since changed.",
+              2: "VERDICT: STRUCTURAL FAILURE — the pin mechanism itself is broken or a banned "
+                 "claim is back."}[worst])
     emit("=" * 86)
     return worst, out
 
@@ -598,18 +929,18 @@ def pin_target():
     if not have_history():
         return "", ""
     _rc, head_blob = git("rev-parse", "--verify", "--quiet", "HEAD:STATE.md")
-    for ref in INTEGRATION_REFS:
-        if git("rev-parse", "--verify", "--quiet", ref)[0] != 0:
-            continue
-        rc, listing = git("rev-list", ref, "--", "STATE.md")
-        if rc != 0:
-            continue
-        for candidate in listing.split():
-            if git("rev-parse", "--verify", "--quiet", candidate + ":STATE.md")[1] == head_blob:
-                short = git("rev-parse", "--short", candidate)[1]
-                print(f"pinning at {short}, the newest commit reachable from `{ref}` whose "
-                      f"STATE.md is these bytes.")
-                return short, git("log", "-1", "--format=%cs", candidate)[1]
+    # THE SEARCH MOVED OUT OF THIS FUNCTION AND IS NOT A COPY (mg-1344).  Section 8 asks the
+    # SAME question to decide whether a deferred re-pin may still be deferred, and two
+    # implementations of "which commit may this pin name?" that agree today would eventually
+    # disagree — at which point the gate would honour a deferral this function could already
+    # have discharged.
+    hit = reachable_state_commit(head_blob)
+    if hit is not None:
+        ref, candidate = hit
+        short = git("rev-parse", "--short", candidate)[1]
+        print(f"pinning at {short}, the newest commit reachable from `{ref}` whose "
+              f"STATE.md is these bytes.")
+        return short, git("log", "-1", "--format=%cs", candidate)[1]
     short = git("rev-parse", "--short", "HEAD")[1]
     print(f"WARNING: no commit reachable from {' or '.join(INTEGRATION_REFS)} carries this")
     print(f"         STATE.md, so the pin names HEAD ({short}), which has not merged.")
@@ -715,18 +1046,44 @@ def main():
                     help="comma-separated ledger rows to re-pin, or 'all'")
     ap.add_argument("--note", default="hand-maintained rendering; reconciled per row",
                     help="the note recorded in the pin block")
-    ap.add_argument("--state", default=STATE, help="override the STATE.md path (tests)")
-    ap.add_argument("--twin", default=TWIN, help="override the twin path (tests)")
+    ap.add_argument("--state", default=None, help="override the STATE.md path (tests)")
+    ap.add_argument("--twin", default=None, help="override the twin path (tests)")
+    ap.add_argument("--inflight", default=None,
+                    help="override the IN-FLIGHT.json path (tests)")
+    # `--root` EXISTS SO SECTIONS 7 AND 8 CAN BE PLANTED AGAINST A REAL GIT, NOT A FAKE ONE.
+    # Both grade REACHABILITY, and reachability cannot be mutated by editing a file — so
+    # negative_control.py builds a throwaway repository with a real `main` and runs this
+    # instrument inside it.  It narrows nothing: it moves the WHOLE question, and a run
+    # pointed at an empty directory answers `unknown` and grades nothing, which is louder
+    # than a pass rather than quieter.
+    ap.add_argument("--root", default=None,
+                    help="override the repository root git is resolved against (tests)")
     args = ap.parse_args()
+
+    # `--root` MOVES ALL THREE DEFAULTS WITH IT, and that is not tidiness.  `reconcile()`
+    # reads the module globals, not these arguments, so a `--root` that repointed only git
+    # would give this file two roots at once — resolving a pin against one repository while
+    # digesting another's STATE.md.  That is mg-3902's defect exactly, re-created by the
+    # option added to demonstrate it.
+    global ROOT, STATE, TWIN, INFLIGHT
+    if args.root:
+        ROOT = os.path.abspath(args.root)
+        STATE = os.path.join(ROOT, "STATE.md")
+        TWIN = os.path.join(ROOT, "docs", "state-of-the-wall.html")
+        INFLIGHT = os.path.join(ROOT, "code", "rendered_twin_pin_9bc2", "IN-FLIGHT.json")
+    STATE = args.state or STATE
+    TWIN = args.twin or TWIN
+    INFLIGHT = args.inflight or INFLIGHT
 
     if args.reconcile:
         if not args.rows:
             sys.exit("--reconcile requires --rows: name the rows you reconciled, or 'all'")
         return reconcile(args.rows, args.note)
 
-    state_text = open(args.state, encoding="utf-8").read()
-    twin_text = open(args.twin, encoding="utf-8").read()
-    code, lines = check(state_text, twin_text, sha256_file(args.state))
+    state_text = open(STATE, encoding="utf-8").read()
+    twin_text = open(TWIN, encoding="utf-8").read()
+    code, lines = check(state_text, twin_text, sha256_file(STATE),
+                        state_path=STATE, inflight_path=INFLIGHT)
     print("\n".join(lines))
     return code
 

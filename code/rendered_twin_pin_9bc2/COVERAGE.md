@@ -13,7 +13,8 @@ and the gap is where the next instance of this defect will live.
 | 4 | kind marks | Every ledger row carries the same `Kind` mark in both documents. Live; does not consult the pin. |
 | 5 | default-deny guard | The twin does not call itself `Generated <date>`, and does not claim canonicity on a line that fails to name `STATE.md`. |
 | 6 | visible ↔ machine pin | The header's human-readable provenance line quotes the same commit as the machine-readable pin. |
-| 7 | the pin resolves | The pinned commit **exists**, is an **ancestor of an integration ref**, and **carries the `STATE.md` the pin digests**. The only section that asks git anything. |
+| 7 | the pin resolves | The pinned commit **exists**, is an **ancestor of an integration ref**, and **carries the `STATE.md` the pin digests**. |
+| 8 | in-flight relocations | Any row section 2 subtracted was **declared**, has **actually moved**, and its deferral **has not expired** — i.e. no integration-reachable commit carries these `STATE.md` bytes yet. |
 
 Section 3 **differs on nearly every run and that is not a defect.** `STATE.md` changes
 constantly outside the ledger; if section 3 carried the verdict, the control would be red
@@ -56,6 +57,15 @@ easiest way to defeat the whole mechanism.** The defence is that the re-pin is a
 in the commit that contains no corresponding change to the twin's ledger cells, which a
 reviewer can see; that is a social defence, not a mechanical one.
 
+**4b. Whether a DECLARED in-flight relocation actually reconciled the twin's cell.** Item 4
+above, one level up, and it is the same hole for the same reason. Section 8 checks that a
+declared row really moved in `STATE.md` and that its deferral has not expired. It cannot
+check that the twin's *cell* for that row was rewritten — nothing can, for the reason in item
+1: the twin is a summary and no byte relation to `STATE.md` exists. **A landing A that
+relocates the row's essay, declares it, and leaves the twin's cell untouched is green here.**
+The defence is the same social one item 4 names: the declaration is a new committed file
+naming the rows, in a diff that either does or does not also touch those cells.
+
 **5. ~~That the control is run at all.~~ CLOSED — `mg-724a`, recorded here `mg-188d`.** The
 superseded text is kept struck rather than deleted, because it was the highest-value follow-up
 this file named and the record of it being paid should survive: ~~*Nothing in this repository
@@ -68,6 +78,32 @@ through `code/control_gate_724a`, and the refinery is configured to fail the mer
 exit — demonstrated by `mg-724a` blocking a real merge request in 19 seconds, not argued. What it
 gates on is `BASELINE.json`'s declared fields, so read that file for what a green gate is actually
 asserting; it is narrower than *"the twin is correct"* for every reason on this page.
+
+**6. The COST of the two-landing protocol, which is real and is a choice rather than an
+oversight.** Between landing A and landing B, `main` is RED for **every** branch, not only
+the one that opened the protocol — section 8 grades `DISCHARGEABLE` the instant landing A's
+bytes reach an integration ref. That is the construction `code/control_gate_724a/gate.py`'s
+own §3 refuses for its `recorded` fields, *"a gate that fails for reasons its author cannot
+act on is a gate that gets removed six weeks later"*, and it is taken here anyway on one
+difference: **the author CAN act on it.** The remedy is one command, section 8 prints it in
+the failure, it needs no knowledge of what landing A was about, and anyone may run it. The
+three priced alternatives are worse:
+
+- **Move `twin.worklist` in `BASELINE.json` instead.** One line, no red at all, and it never
+  comes back — the field that makes the twin's exit code mean something would carry a
+  permanent expectation that a published ledger row is drifted. That is laundering, and
+  `mg-724a`'s `x1` exhibit exists to show what that field is load-bearing for.
+- **Grade `DISCHARGEABLE` as a report rather than a red.** Then nothing whatever forces
+  landing B, and the declaration is a permanent subtraction with better paperwork.
+- **Leave the deadlock.** The row never moves. That is the state this mechanism was built to
+  leave, and `docs/STATE-SPLIT-PROPOSAL-mg-14ad.md` §8.3 is the measurement of it.
+
+**7. `--root` is a real bypass and is declared.** `twin_pin.py --root <somewhere with no git>`
+makes sections 7 and 8 both answer `unknown`, which grades nothing. It exists because
+reachability cannot be planted by editing a file and the three worlds that demonstrate
+section 8 need a real repository; it moves the WHOLE question rather than narrowing it, and
+`run_all.sh` never passes it. Section 8's `unknown` also **declines to honour** a declaration
+rather than honouring it — so the one thing `--root` cannot buy is a quiet subtraction.
 
 ## The instrument's own defects, all three caught by running it
 
@@ -316,3 +352,100 @@ branch commit on top of `main` by hand. **If that selection silently regressed t
 `rev-parse --short HEAD`, nothing in the gate would say so** — what would eventually say so is
 section 7, on the next reconciling branch, reporting `IN FLIGHT` where it now reports `PASS`.
 That is a real detector and it is one merge too late.
+
+## Section 8 arrives, and it is a DEADLOCK being broken rather than a hole being closed (mg-1344)
+
+Every previous section on this page was added because something could go wrong and nothing
+would say so. **Section 8 is the opposite case: nothing was wrong, and something correct
+could not happen.** `docs/STATE-SPLIT-PROPOSAL-mg-14ad.md` §4 budgets the `Full ledger`
+section **2,887 → 600 words** by relocating four row essays. mg-927a landed every other line
+of §4 and measured that this one **cannot land at all** — not "was not got to".
+
+**The three facts, and each is individually correct.**
+
+1. Moving a pinned ledger row grows section 2's worklist, and `twin.worklist` is a **gated**
+   field in `code/control_gate_724a/BASELINE.json`. The row edit alone is RED.
+2. `reconcile()` **refuses** while `STATE.md` on disk differs from `STATE.md` at `HEAD`, so
+   the re-pin cannot share the row edit's commit. That refusal is `mg-7cc3`'s repair of
+   `mg-3902`'s root cause and its own comment says *"THE COST IS TWO COMMITS INSTEAD OF ONE."*
+3. A re-pin one commit later on the same branch names a hash **the refinery's rebase destroys**
+   — `pin_target()` finds no integration-reachable commit, falls back to `HEAD`, and prints
+   its own warning. Section 7 grades the resulting orphan RED. `7e7bfb7 twin: point the pin
+   at the commit that survives the rebase — 2fbd5ce did not exist after it (mg-cdd5)` is this
+   repository's receipt that it has happened.
+
+**WHICH OF THE THREE THIS CHANGES, AND WHY IT IS NOT LAUNDERING.** It changes **(1)**, and it
+does not change it by making the gate quieter. A ledger-row relocation becomes two landings —
+**A**: move the essay, reconcile the twin's cell, do not re-pin, and **declare** the row in
+`IN-FLIGHT.json`; **B**: once those bytes are on an integration ref, `--reconcile --rows N`,
+which now finds a main-reachable commit and passes section 7. A declared row is subtracted
+from section 2's worklist, and **the subtraction is the entire risk**, so it is bought with a
+predicate that expires without anyone deciding to let it:
+
+> the declaration is HONOURED only while **no integration-reachable commit carries these
+> `STATE.md` bytes** — i.e. only while landing B is *impossible*.
+
+That predicate is `reachable_state_commit()`, **the same function `pin_target()` calls** to
+choose which commit a re-pin may name. It is called, not paraphrased, so *"the gate honours
+this"* and *"a correct pin can be made"* cannot become two answers. The consequence is the
+point and it is the whole argument: **the moment landing A merges, its own declaration goes
+RED, and it stays red until landing B lands.** A laundered field is green forever. This one
+cannot stay green past the moment its excuse expires — measured in both directions against a
+real git history, not argued (`negative_control.py`'s three planted worlds, and `a2`'s
+`C8d`).
+
+**What the gate sees.** `twin.worklist` is now the **undeclared** half and its baseline value
+is **unchanged at `[]`** — deliberately, because moving *that* value is the laundering-shaped
+edit. The declared half is a second gated field, `twin.inflight`, also `[]` today. A branch
+that moves a row without declaring it is RED exactly as before; a branch that declares one
+moves `twin.inflight` and `twin.verdict_grade` (`CLEAN` → `IN FLIGHT`) and says why in
+`BASELINE.json`. The sum of the two fields is what `twin.worklist` alone used to be.
+
+**`IN FLIGHT` is a fourth verdict word at exit 0, and the polarity is borrowed, not invented.**
+Section 7 has always treated an in-flight **commit** as *reported, not graded* — grading it
+would make the gate red on every correct in-flight reconciliation. Section 8 gives an
+in-flight **worklist** the same treatment for the same reason. The exit code was never this
+directory's classifier; the verdict word is, and `run_all.sh` now takes its closing sentence
+from that word rather than from `$CONTROL`, because a runner that printed *"CLEAN — the twin's
+pinned ledger rows all still match STATE.md"* over a tree where some demonstrably do not is
+this directory's founding defect for the fifth time.
+
+### Two fail-open paths this section shipped with, and how they were found
+
+Neither was found by anything failing. They were found by **enumerating the ways the remedy
+could exhibit the defect it remedies** — which is the rule this estate states and which is
+skipped exactly when a fix demonstrably works, as this one did at the time.
+
+- **Three different "git could not answer" routes returned the same value as "git answered,
+  and the bytes are on no integration ref".** No work tree, no integration ref, and an
+  unobtainable blob id all reached `reachable_state_commit() -> None`, i.e. `HONOURED`. The
+  search not being *able* to run was reported as the search having run and come back clean —
+  an unfalsifiable claim inside the arm added to keep a subtraction honest. The three routes
+  are now enumerated and answer `unknown`.
+- **`unknown` was going to be honoured, by copying section 7's polarity one line too far.**
+  Section 7 reports and does not grade an unverifiable pin, because grading it would condemn
+  a pin the *checkout* cannot check. Here the sign is inverted: the declaration's effect is to
+  **remove** a row from the field the merge gate exists for, so honouring one whose expiry
+  cannot be evaluated is a subtraction taken on trust — an export, a tarball or a shallow
+  clone would silently honour any declaration at all. `unknown` now reports, grades nothing,
+  and **does not honour**: the rows stay in the worklist. Arm `C8e` and world N29 are that
+  half, planted rather than promised.
+
+### And one the estate's own instruments found, in mg-1344's first run of them
+
+Three, in fact, and none of them by reading:
+
+- **The arm census REFUSED**, naming fifteen unregistered arm-shaped sites this branch had
+  added. That is `a1_census`'s stated purpose — *"when somebody adds a seventh section to
+  `twin_pin.py` and does not register it, the census refuses instead of quietly reporting a
+  stale 38"* — met by a branch adding an eighth. Fifteen arms are now registered.
+- **`a2`'s runner probes went LAUNDERED for H3, H4, H6 and H7.** The stub `twin_pin.py` those
+  probes substitute prints only a VERDICT line, so the runner's new `declared in-flight rows`
+  refusal (arm H8) fired in *every* world and both sides exited 2. The stub is the control's
+  **contract** with its runner and the contract grew a line; it now carries it.
+- **`a3`'s planted world P5 rotted.** Its injection point was two consecutive lines of
+  `twin_pin.py` quoted verbatim, and the fourth verdict word landed between them. The harness
+  scored `SETUP FAILED` rather than a pass — P4's own subject, working — and the fixture now
+  derives its anchor by position. That is the *fifth* recorded instance in this arc of a
+  fixture spelling out the thing that changes, this time in the file whose job is proving the
+  auditor can fail.

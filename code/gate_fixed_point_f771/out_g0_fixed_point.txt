@@ -22,10 +22,79 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  NO DISAGREEMENTS
+§2  THE DISAGREEMENTS, SHOWN
 --------------------------------------------------------------------------------------------
-  Every watched transcript that moved during this gate run moved only in the two
-  declared families that are not a function of repo state.  No committed
-  transcript asserts anything this tree contradicts.
+  Lines quoted after normalisation, so that this transcript cannot itself
+  smuggle a worktree path into the corpus.
+  `-` is the committed copy, `+` is this tree.
 
-VERDICT: GREEN — 0 disagreements.  0.18s
+  code/control_audit_9876/out_a1_census.txt
+    @@ -12 +12 @@
+    - twin_pin.py   (20 arm(s))
+    + twin_pin.py   (25 arm(s))
+    @@ -42,0 +43,10 @@
+    + C8a  §8         the declaration is readable as one                          grad
+    + subject: a file whose only power is to make this gate accept a moved row is well
+    + C8b  §8         declared rows exist and are pinned                          grad
+    + subject: a declared relocation names a real ledger row that the pin actually car
+    ... 65 further hunk line(s) not shown
+
+  code/control_audit_9876/out_a2_discriminate.txt
+    @@ -41,0 +42,10 @@
+    + C8a   the declaration is readable as one                          DISCRIMINATES 
+    + known-bad input: the in-flight declaration cannot be parsed
+    + C8b   declared rows exist and are pinned                          DISCRIMINATES 
+    + known-bad input: the declaration names a row the ledger does not have
+    + C8c   declared rows have actually MOVED                           DISCRIMINATES 
+    + known-bad input: the declaration names a row nobody has relocated
+    + C8d   THE DEFERRAL EXPIRES                                        DISCRIMINATES 
+    ... 36 further hunk line(s) not shown
+
+  code/control_audit_9876/out_a4_sweep.txt
+    @@ -13 +13 @@
+    - 219 candidate site(s) in 76 of 223 directories
+    + 222 candidate site(s) in 76 of 223 directories
+    @@ -18,0 +19,4 @@
+    + control_audit_9876  (15)
+    + code/control_audit_9876/a2_discriminate.py:76  return lambda rc, text: needle in
+    + code/control_audit_9876/a2_discriminate.py:873  return good, bad, lambda rc, tex
+    + code/control_audit_9876/a2_discriminate.py:1080  return good, bad, lambda rc, te
+    ... 21 further hunk line(s) not shown
+
+  code/control_gate_724a/out_gate.txt
+    @@ -7,3 +7,3 @@
+    - twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      <t>s  9455 bytes
+    - audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  45349 bytes
+    - (both suites)                                     <t>s total
+    + twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      <t>s  11674 bytes
+    + audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  52441 bytes
+    + (both suites)                                    <t>s total
+    @@ -13,2 +13,2 @@
+    ... 34 further hunk line(s) not shown
+
+  code/rendered_twin_pin_9bc2/out_control.txt
+    @@ -98,0 +99,12 @@
+    + SECTION 8 — DECLARED IN-FLIGHT RELOCATIONS, and whether the deferral has EXPIRED
+    + --------------------------------------------------------------------------------
+    + Section 2 subtracts a DECLARED row from its worklist.  That subtraction is the
+    + only thing here that could be laundering, so this section is where it is paid
+    + for: a declared row must have actually moved, and the declaration is honoured
+    + ONLY while `--reconcile` could not produce a main-reachable pin anyway.
+    + 
+    ... 5 further hunk line(s) not shown
+
+  code/rendered_twin_pin_9bc2/out_negative_control.txt
+    @@ -29,0 +30,6 @@
+    + a declaration for a row that has NOT moved                            8    CAUGH
+    + a declaration for a row that is not in the ledger                     8    CAUGH
+    + a declaration that is not valid JSON                                  8    CAUGH
+    + a declaration with an EMPTY row list                                  8    CAUGH
+    + a declaration with no `why` and no `landing_b`                        8    CAUGH
+    + a declaration at an unreadable schema version                         8    CAUGH
+    @@ -30,0 +37,3 @@
+    ... 6 further hunk line(s) not shown
+
+  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
+  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
+
+VERDICT: RED — 6 committed transcript(s) disagree with this tree.  0.61s

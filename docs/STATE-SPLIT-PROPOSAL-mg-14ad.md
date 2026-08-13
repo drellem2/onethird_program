@@ -206,7 +206,7 @@ give the executive summary a ratchet.
 | Glossary | 270 | **270** | kept, as proposed |
 | The proof, and what's proven | 400 | **~490** | mermaid and the two-open-links sentence kept; node-`B` rider, machinery strike history and mg-65f5's fork resolution → `proof-chain-riders.md` |
 | Kinds | 250 | **492 — UNCHANGED, DELIBERATELY** | **§4 and §5.2 of this document contradict each other and §5.2 wins.** §5.2 calls these "the most valuable 500 words in the file" and says they should be *promoted, not compressed* |
-| Full ledger | 600 | **2,814 — NOT MOVED** | see §8.3. This is not a deferral, it is a blocker |
+| Full ledger | 600 | **2,814 — NOT MOVED** | see §8.3. It was a blocker; §8.3a records the deadlock being broken (mg-1344) and it is now a **sequenced** deferral of two landings |
 | The single lemma to prove | 300 | **~190** | plain-language restatement → `proof-chain-riders.md` |
 | Attempt index | 300 | **~150 — the section LEFT** | see §8.2 |
 | Where the threads converge | 215 | **215** | kept, as proposed |
@@ -252,6 +252,37 @@ also Daniel's own instruction — *"reference material can be linked at the bott
 once those bytes are on `main` — and nothing in the estate sequences that today.** That is the
 carried remainder, and it is a sequencing gap in the pin mechanism rather than a paragraph nobody
 got round to moving.
+
+### 8.3a The estate sequences it now — mg-1344, 2026-08-13
+
+**The sentence above is superseded in exactly one word: `today`.** `twin_pin.py` grew a
+**section 8** and the two landings are a protocol the merge gate can tell apart from drift.
+
+**Which of the four facts changed: (1), and not by making the gate quieter.** A relocation
+declares its rows in `code/rendered_twin_pin_9bc2/IN-FLIGHT.json`; a declared row leaves
+section 2's worklist and enters a second gated field, `twin.inflight`. `twin.worklist`'s
+baseline is **unchanged at `[]`** — moving *that* value is the laundering-shaped edit and it
+was refused. Facts 2, 3 and 4 are untouched and still correct.
+
+**What buys the subtraction is an expiry nobody has to remember.** The declaration is
+honoured only while `reachable_state_commit()` — *the same search `pin_target()` runs* —
+finds no integration-reachable commit carrying those `STATE.md` bytes, i.e. only while
+landing B is impossible. **The instant landing A merges, its own declaration is graded RED**
+and stays red until landing B lands. Measured in both directions against a real git history,
+not argued; `code/rendered_twin_pin_9bc2/README.md`'s section-8 table has the six worlds.
+
+**The declared cost.** Between the two landings `main` is red for every branch, not only the
+declaring one. The remedy is one command, section 8 prints it in the failure, and anyone may
+run it. `COVERAGE.md` item 6 prices the three alternatives and why each is worse.
+
+**THE LEDGER ROW STILL HAS NOT MOVED, AND mg-1344 DID NOT MOVE IT.** That branch ships the
+mechanism and nothing else. The relocation is two further landings and they are a different
+kind of work — deciding which of rows 3b, 6, 8 and 11's essay text §5's rule sends to
+`docs/state-history/` is a judgement about the mathematics, not about formatting, and mg-927a
+declined the same class of call for the same reason. **When landing A happens, `CEILING.json`
+must be banked DOWN in that commit** to the **measured** post-cut word count with
+`tighten_below` 500 under it — measured, never the §4 estimate, and never ~2,935, which §8.4
+already refuses.
 
 ## 8.4 The two targets, reconciled explicitly
 
