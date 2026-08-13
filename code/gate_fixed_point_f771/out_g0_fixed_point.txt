@@ -22,32 +22,10 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  THE DISAGREEMENTS, SHOWN
+§2  NO DISAGREEMENTS
 --------------------------------------------------------------------------------------------
-  Lines quoted after normalisation, so that this transcript cannot itself
-  smuggle a worktree path into the corpus.
-  `-` is the committed copy, `+` is this tree.
+  Every watched transcript that moved during this gate run moved only in the two
+  declared families that are not a function of repo state.  No committed
+  transcript asserts anything this tree contradicts.
 
-  code/control_audit_9876/out_a4_sweep.txt
-    @@ -5 +5 @@
-    - population: 219 directories under code/
-    + population: 220 directories under code/
-    @@ -13 +13 @@
-    - 217 candidate site(s) in 75 of 219 directories
-    + 219 candidate site(s) in 76 of 220 directories
-    @@ -63 +63 @@
-    - … and 63 more directories, listed in full below
-    ... 14 further hunk line(s) not shown
-
-  code/control_gate_724a/out_gate.txt
-    @@ -8 +8 @@
-    - audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  41473 bytes
-    + audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  41499 bytes
-    @@ -27 +27 @@
-    - audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseli
-    + audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseli
-
-  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
-  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
-
-VERDICT: RED — 2 committed transcript(s) disagree with this tree.  0.15s
+VERDICT: GREEN — 0 disagreements.  0.09s
