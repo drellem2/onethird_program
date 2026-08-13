@@ -112,6 +112,98 @@ across five. The ticket's *"do not do all 64 in one branch"* is right for a seco
 not give — not only reviewability, but that a rushed pin is indistinguishable from a correct one
 in the diff and is caught only by the two-direction test.
 
+---
+
+# Tranche 3 (`mg-4020`) — a condition **before** the three, and the instrument that could not run
+
+Tranche 2 pinned one instrument and built condition 3. Tranche 3 pinned **none**, and that is the
+result rather than a shortfall: the two cheapest instruments left on the work-list were worked in
+drift order and **neither is repairable by a pin**, for two different reasons. Reporting that at a
+low water mark is what tranche 2's own README asks for.
+
+## 1. Condition 3's instrument died on 23 of the 27 instruments condition 3 is for
+
+`consumers.py` was built against one subject and ran correctly on it. Used on a second —
+`code/landscape_repair_audit_3b51` — it **crashed**, after printing a correct-looking header.
+
+`git grep` exits **1 for no match** and 2+ for a real error; the `git()` wrapper read every
+non-zero as fatal. So any subject script that nothing outside its own directory names took the
+whole census down. Blast radius, **measured across the remaining work-list rather than guessed:
+23 of 27 crash, 4 run** — and one of the 4 is the single subject it was built against.
+
+**The repair that made it correct is what made it fatal.** *A basename is not a name* searches a
+**shared** basename by full repository path, and `code/audit_2c77/run_all.sh` appears in no other
+tracked file. The rule that stopped the census reporting every README in the estate is the rule
+that guaranteed it would find nothing — and finding nothing was fatal. Four of the 23 are that
+rule alone. This is tranche 2's *"a repair can introduce the defect it repairs"* by a second route.
+
+The previously-fatal case is now a **printed figure**, not a tolerated silence: the count of
+subject scripts named in no tracked `*.py`/`*.sh` outside their own directory, with their names,
+and the sentence that the census has **no evidence either way** about them. A repair that turned a
+crash into a silence would be worse than the crash. The default subject reports **`0 of 6`** —
+which is precisely why this was never seen.
+
+## 2. Condition 0: **is a pin the remedy at all?**
+
+`pinnable.py`. Conditions 1–3 all assume the question is settled; this asks it, by classifying a
+drift the caller has already produced. Two rules, each built from a real instance:
+
+| rule | fires when | real instance |
+|---|---|---|
+| **R1 ignored address** | a changed line names a path `git check-ignore` matches — in **no commit**, so no `AS_OF` reaches it | `species_repair_a4ef` |
+| **R2 declared revision** | a subject script carries a hex token `git cat-file -e` **resolves** | `state_relocation_audit_b0ae` |
+
+**Neither is a verdict.** R1 says a pin cannot remove *that line*; R2 says a pin already *exists*.
+Both are reasons to stop and read before paying the ~45 minutes conditions 1–3 cost.
+
+## 3. The three instruments, measured
+
+| instrument | drift | class | why a pin is or is not the remedy |
+|---|---|---|---|
+| `species_repair_a4ef` | `2+/5-` | **not pinnable** | its whole drift names `__pycache__` in sibling trees — `.gitignore`'d, so in no commit |
+| `state_relocation_audit_b0ae` | `7+/7-` | **already pinned** | `OLD_REV`/`NEW_REV` declared; drift is entirely B8.2, which its own runner header calls *"about the repo as it stands"* |
+| `landscape_repair_1953` | `27+/8-` | **pinnable** | a walk of `docs/`, `23` → `44` occurrences as the corpus went 267 → 530 files |
+
+`a4ef` is **measured in both directions at HEAD with no pin whatever**: create the three empty
+directories and the committed transcript reproduces **byte-identically**; remove them and the
+`2+/5-` returns. **The transcript is a function of which suites the operator has run**, not of repo
+state. Pinning `b0ae`'s B8.2 would not repair the section — it would delete the question it asks.
+
+**So the work-list is not 26 pinnings.** Whether it is *mostly* pinnings is **not known and is not
+claimed** — three instruments is three instruments. What is established is that *"drifts"* and
+*"wants an `AS_OF`"* are different properties, and the second must be measured per instrument
+rather than inherited from membership of a list nominated by a classifier **for foreign
+addresses**. `mg-54b1`'s sweep reached the same conclusion from the other direction on an
+**unselected** sample, which is why this is a rule and not an anecdote.
+
+## 4. A control that planted its own probe into the corpus it searched
+
+`C5` requires that a needle nothing names returns empty. Spelled as one literal it **found itself
+the moment it was committed** — this file is a tracked `*.py` and the rule greps tracked `*.py`.
+The needle is now assembled from pieces at runtime.
+
+That is the **measurement environment leaking into the measurement** for the third time in this
+arc, by a third route — after tranche 2's dirty-worktree baseline and `mg-54b1`'s *"the sweep runs
+in a clone of the branch that carries it"*. It is no longer a hazard to remember; it is a thing to
+**check for by construction** whenever a control plants a string.
+
+## 5. What tranche 3 leaves
+
+**26 instruments remain**, unchanged in count, and that is honest: this tranche bought triage and a
+working condition-3 instrument, not pins. `out_pinnable_a4ef.txt` and `out_pinnable_b0ae.txt` are
+**one dated hand-run each and no suite re-takes them** — the same declaration `out_ground_truth.txt`
+makes about itself, and the same blind spot.
+
+`pinnable.py` is **not in `run_all.sh`**, because it requires a suite to have been run and *not*
+restored — a state no build path should be in.
+
+**The next tranche should triage before it pins**: run the suite, run `pinnable.py`, and only then
+start conditions 1–3. `landscape_repair_1953` is the ready candidate, and it is a **shared-script**
+pin — its transcript is produced by `landscape_repair_audit_3b51/audit_scope_text.py`, so condition
+3 applies for real, and the repaired `consumers.py` confirms `1953` as the C1 consumer.
+
+---
+
 **Two entries in `out_ground_truth.txt` are not independent**, and are marked there:
 `n0_strike_audit_dd8b` reports `REPRODUCES` only because this branch had already pinned it when
 the sweep reached it, and `census_remainder_f8e5` reports `rc=143` because its worker was killed

@@ -1,0 +1,74 @@
+==============================================================================
+mg-4020 -- IS A PIN THE REMEDY?  code/species_repair_a4ef
+==============================================================================
+
+  mg-20ee condition 0, asked BEFORE conditions 1-3 are paid for.
+  METHOD AND BLIND SPOT are in this file's docstring and are not
+  repeated here; what is repeated is the sentence that matters --
+  THIS IS A PREFILTER AND NOT A VERDICT.  See the residue section.
+
+  THIS INSTRUMENT ANSWERS ITS OWN TWO RULES AND THE ANSWERS ARE
+  PRINTED RATHER THAN LEFT TO BE FOUND.  R2 fires on its own
+  directory: census.py declares AS_OF = 5a62e8c.  And its OUTPUT
+  carries ignored addresses whenever R1 does, so a committed
+  transcript of this file is itself a document R1 would flag.
+  Neither is a defect; both are the reason the rules are stated as
+  `go and read why` rather than as verdicts.
+
+  IT IS ALSO NOT PINNED AND NOT ON A BUILD PATH, DELIBERATELY.  It
+  reads HEAD and the LIVE worktree diff because it must answer
+  about the tree you are ABOUT TO CHANGE -- consumers.py's
+  declaration, for the same reason.  It cannot go in run_all.sh
+  because it REQUIRES a suite to have been run and not restored,
+  which is a state no build path should be in.
+
+  changed lines: 7      distinct path tokens in them: 3
+  subject scripts read for a declared revision: 6
+
+------------------------------------------------------------------------------
+R1  IGNORED ADDRESSES -- git is configured never to track these,
+    so they are in NO COMMIT and NO AS_OF PIN REACHES THEM
+------------------------------------------------------------------------------
+
+      code/species_7d75/__pycache__
+      code/species_repair_6f61/__pycache__
+      code/species_remainder_f8fa/__pycache__
+
+------------------------------------------------------------------------------
+R2  DECLARED REVISIONS IN THE SUBJECT'S OWN SCRIPTS -- if these
+    exist, SOMETHING HERE IS ALREADY PINNED
+------------------------------------------------------------------------------
+
+      code/species_repair_a4ef/s1_extent.py                ebecd89
+      code/species_repair_a4ef/s1_extent.py                83ac472
+
+  A REVISION IS DECLARED HERE AND THE TRANSCRIPT DRIFTS ANYWAY.
+  READ THE INSTRUMENT BEFORE PINNING FURTHER:
+  state_relocation_audit_b0ae is pinned twice over and its
+  runner header DECLARES the exception -- B8.2 is 'about the
+  repo as it stands', and pinning it would not repair the
+  section, it would delete the question it asks.
+
+  BUT THIS RULE OVER-COUNTS, DECLARED: a revision may be a
+  CONTROL's rather than the corpus read's.  MEASURED on the
+  first subject it met -- species_repair_a4ef's ebecd89 and
+  83ac472 are its controls (a) and (b) reading the PRE-REPAIR
+  trees, and its corpus read is not pinned at all.  R2 says GO
+  AND READ WHY, and it does not say the corpus is pinned.
+
+------------------------------------------------------------------------------
+RESIDUE -- what a pin is CAPABLE of reaching.  NOT A PROMISE
+------------------------------------------------------------------------------
+
+  0 of 3 path token(s) are not ignored.
+
+  This is where conditions 1-3 BEGIN, not where they are answered.
+  A residual drift may still be a moved verdict, a dead runner, or
+  an absolute path that reproduced for exactly one operator --
+  mg-20ee's tranche 1 hit all three, and none of them is a pin.
+  IF YOU SKIP CONDITIONS 1-3 BECAUSE THIS SECTION IS NON-EMPTY,
+  YOU HAVE USED THIS FILE AS THE OPPOSITE OF WHAT IT IS.
+
+==============================================================================
+PINNABLE: NOT WHOLLY PINNABLE -- 3 ignored address(es)
+==============================================================================

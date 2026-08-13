@@ -6,6 +6,19 @@
 # none of which belongs on a build path.  out_ground_truth.txt records one
 # dated run; re-run it by hand.
 #
+# mg-4020: pinnable.py is NOT run here, and not for cost -- it is a diff read
+# and takes no time at all.  It REQUIRES the subject suite to have been run and
+# NOT restored, because it classifies a drift rather than producing one, and a
+# build path must not be in that state.  It REFUSES an empty diff rather than
+# reporting it clean, so wiring it here would make it fail on every clean tree.
+# Run it by hand, between running a suite and restoring it:
+#     sh code/species_repair_a4ef/run_all.sh
+#     python3 code/asof_census_20ee/pinnable.py code/species_repair_a4ef
+#     git checkout -- code/species_repair_a4ef
+# out_pinnable_a4ef.txt and out_pinnable_b0ae.txt are one dated hand-run each
+# and NO SUITE RE-TAKES THEM -- the declaration out_ground_truth.txt already
+# makes about itself, and the same blind spot.
+#
 # mg-6e4f: consumers.py IS run here.  It is a `git grep` over HEAD and takes
 # about a second — unlike ground_truth.sh it executes no instrument code and
 # writes nothing outside this directory.  Its default subject is the instrument
