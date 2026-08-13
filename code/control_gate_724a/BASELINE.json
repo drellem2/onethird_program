@@ -35,13 +35,13 @@
     },
     "twin.mutations_caught": {
       "class": "gated",
-      "value": 16,
-      "why": "16 of 16 mutations caught by negative_control.py.  A drop means the twin's control has gone blind to something it used to see."
+      "value": 17,
+      "why": "17 of 17 mutations caught by negative_control.py.  A drop means the twin's control has gone blind to something it used to see.  MOVED 16 -> 17 BY mg-7cc3, WHICH ADDED THE MUTATION THE SIX-SECTION CONTROL COULD NOT CATCH: both copies of the pinned commit set to a revision that does not exist.  mg-3902 measured that input leaving twin_pin.py at VERDICT: CLEAN, exit 0 — moving BOTH copies together satisfied section 3 (which compares against the live working tree) and section 6 (which compares the pin against its own duplicate).  Section 7 catches it."
     },
     "twin.mutations_total": {
       "class": "gated",
-      "value": 16,
-      "why": "The number of mutations negative_control.py plants.  Gated because a mutation quietly deleted is coverage quietly removed, and it would otherwise be invisible: 15 of 15 caught reads exactly like 16 of 16."
+      "value": 17,
+      "why": "The number of mutations negative_control.py plants.  Gated because a mutation quietly deleted is coverage quietly removed, and it would otherwise be invisible: 16 of 16 caught reads exactly like 17 of 17.  MOVED 16 -> 17 BY mg-7cc3 for the same reason as twin.mutations_caught."
     },
     "twin.holes": {
       "class": "gated",
@@ -75,23 +75,23 @@
     },
     "audit.arms": {
       "class": "gated",
-      "value": 50,
-      "why": "Registered arms.  a1's scope is code/rendered_twin_pin_9bc2 ONLY, so this number does not move when other tickets add directories — which is what makes it gateable where the sweep counts below are not."
+      "value": 55,
+      "why": "Registered arms.  a1's scope is code/rendered_twin_pin_9bc2 ONLY, so this number does not move when other tickets add directories — which is what makes it gateable where the sweep counts below are not.  MOVED 50 -> 55 BY mg-7cc3, WHICH FOLDED mg-3902's PIN-RESOLUTION CHECK IN AS SECTION 7.  The five are C7a (the pinned commit resolves), C7b (it is an ancestor of an integration ref), C7c (it carries the STATE.md the pin digests), R5 (reconcile REFUSES while STATE.md on disk differs from STATE.md at HEAD — the root cause), and N20 (the mutation for C7a).  Three arms and not one because the three questions stop holding independently: `c308368` RESOLVED and was UNREACHABLE, while the pins the old reconcile() wrote were reachable and digested the wrong revision."
     },
     "audit.sites": {
       "class": "gated",
-      "value": 59,
-      "why": "Arm-shaped sites the census rediscovers in that same bounded directory."
+      "value": 67,
+      "why": "Arm-shaped sites the census rediscovers in that same bounded directory.  MOVED 59 -> 67 BY mg-7cc3: six emit sites in section 7, one sys.exit in reconcile(), one @mutation in negative_control.py.  This number is what made mg-3902 back the section out — the eight unclaimed sites took the census to CENSUS INCOMPLETE and ./build.sh to REFUSED, exit 2.  They are claimed now."
     },
     "audit.arms_probed": {
       "class": "gated",
-      "value": 50,
-      "why": "Arms a2 ran against a known-bad input.  Must track audit.arms; a gap between them means arms exist that nothing tried to falsify."
+      "value": 55,
+      "why": "Arms a2 ran against a known-bad input.  Must track audit.arms; a gap between them means arms exist that nothing tried to falsify.  MOVED 50 -> 55 BY mg-7cc3, tracking audit.arms.  THE PROBES ARE THE HALF THAT WAS ACTUALLY BLOCKED: mg-3902 reported `NO PROBE 5 -> C7a C7b R5 N20 N21` and exited 1, because make_sandbox() built a tree with no .git and the question section 7 asks has no answer inside one.  lib9876.make_sandbox now commits the sandbox on a branch called `main` and repoints the pin at that commit."
     },
     "audit.arms_discriminating": {
       "class": "gated",
-      "value": 50,
-      "why": "Arms demonstrated RED against a known-bad input and silent on the good one.  MOVED 49 -> 50 by mg-188d's repair of C3 (see audit.runner_exit).  RED IS EITHER DIRECTION: 50 -> 49 means an arm stopped discriminating; 50 -> 51 means an arm was added and the census must move with it."
+      "value": 55,
+      "why": "Arms demonstrated RED against a known-bad input and silent on the good one.  MOVED 49 -> 50 by mg-188d's repair of C3 (see audit.runner_exit).  RED IS EITHER DIRECTION: 50 -> 49 means an arm stopped discriminating; 50 -> 51 means an arm was added and the census must move with it.  MOVED 50 -> 55 BY mg-7cc3.  All five new arms were demonstrated RED on a known-bad input and silent on a good one, and C7b's bad world is the one that discriminates: a REAL commit built with `git commit-tree` on HEAD's own tree, so its STATE.md is BYTE-IDENTICAL to the digest the pin records and the arm is red anyway.  A section 7 that asked only `does this commit exist?` would have gone green on the exact pin that motivated the ticket."
     },
     "audit.arms_not_shown": {
       "class": "gated",

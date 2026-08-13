@@ -8,6 +8,17 @@ mg-0e8c, mg-28b6).
 
 ---
 
+> **STATUS, 2026-08-13 (mg-7cc3): the check this audit produced now lives inside the
+> instrument it audits, as `twin_pin.py`'s SECTION 7, and `code/twin_disposition_audit_3902/`
+> ships no code.** The data half was corrected separately by **mg-daba** — the pin on `main`
+> is true in both fields — so the two things this audit found have both landed and by
+> different hands. What survives in that directory is `out_a1_prerepair.txt`, the transcript
+> of three provably false pins run through the six-section control: three `VERDICT: CLEAN`,
+> exit 0. Section 7 asks **ancestry before byte-identity**, because `c308368` *resolves* and a
+> check for mere existence would have gone green on the pin this audit is about.
+
+---
+
 ## THE HEADLINE, WHICH IS NOT WHAT THE TICKET ASKED FOR
 
 **The page's provenance pin named a commit that does not carry the `STATE.md` the pin

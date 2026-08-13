@@ -30,6 +30,8 @@ mechanically and refuses if any site is unclaimed.  That is the only part of thi
 enumeration that can be wrong quietly, so it is the part that is checked by machine.
 """
 
+import atexit
+import hashlib
 import os
 import re
 import shutil
@@ -168,6 +170,27 @@ ARMS = [
        "there is a pinned commit for the visible line to be compared against",
        ['FAIL  the pin carries no `commit:` field'], 2),
 
+    # ----------------------------------------------- twin_pin.py section 7 (mg-7cc3 fold)
+    # THE THREE QUESTIONS ARE SEPARATE ARMS BECAUSE THEY CAN STOP HOLDING INDEPENDENTLY, which
+    # is this registry's definition of an arm and not a taste about granularity.  `c308368`
+    # RESOLVED and was UNREACHABLE; a pin produced by the old `reconcile()` was reachable and
+    # digested the wrong revision.  One arm over all three would have been green on the first
+    # and is the reason mg-3902's brief had to be corrected mid-flight.
+    _a("C7a", "twin_pin.py", "7", "the pinned commit resolves",
+       "the revision the page names is one that exists in this repository",
+       ['emit("  FAIL  the pinned commit DOES NOT RESOLVE in this repository.")'], 2),
+    _a("C7b", "twin_pin.py", "7", "the pinned commit is one this repository INTEGRATES",
+       "the revision the page names is an ancestor of an integration branch, so a reader "
+       "who fetches `main` can still see it",
+       ['emit("  FAIL  THE PINNED COMMIT IS REACHABLE FROM NOTHING THIS REPOSITORY")',
+        'PASS  the pinned commit is an ancestor of'], 2),
+    _a("C7c", "twin_pin.py", "7", "the named revision carries the digested STATE.md",
+       "the commit the page NAMES is the revision the page was DIGESTED against, as opposed "
+       "to the two fields merely agreeing with each other",
+       ['emit("  FAIL  the pinned commit carries no STATE.md, so it cannot be the")',
+        'emit("  FAIL  THE PIN NAMES ONE REVISION AND DIGESTS ANOTHER.")',
+        'emit("  PASS  the commit the page NAMES carries the STATE.md the page was")'], 2),
+
     # ------------------------------------------------- twin_pin.py --reconcile refusals
     _a("R1", "twin_pin.py", "reconcile", "--reconcile requires --rows",
        "a re-pin names the rows whose cells were actually reconciled",
@@ -181,6 +204,14 @@ ARMS = [
     _a("R4", "twin_pin.py", "reconcile", "exactly one provenance span",
        "the visible provenance line moves with the machine pin, wholly or not at all",
        ['REFUSED: expected exactly one <span id="provenance">'], 2),
+    # THE ROOT CAUSE, ARMED (mg-7cc3).  C7a-C7c DETECT a false pin; this one is the arm that
+    # stops the function from MAKING one.  `reconcile()` stamped `rev-parse --short HEAD`
+    # while digesting the WORKING TREE, so every reconciliation that also edited STATE.md
+    # named the revision before the edit and digested the one after it — the pin was false the
+    # instant it was written, and nothing in six sections could say so.
+    _a("R5", "twin_pin.py", "reconcile", "refuse to re-pin over an uncommitted STATE.md",
+       "the revision a new pin names and the bytes it digests are ONE revision",
+       ['REFUSED: STATE.md on disk differs from STATE.md at HEAD'], 2),
 
     # ------------------------------------------------------------------ lib9bc2.py
     _a("L1", "lib9bc2.py", "parse", "STATE.md ledger header present",
@@ -256,6 +287,10 @@ ARMS = [
     _a("N18", "negative_control.py", "6", "mutation: two commits in the visible line",
        "C6b fires when the visible line names the pin AND another revision",
        ['@mutation("visible provenance names the pinned commit AND a second one'], 1),
+    _a("N20", "negative_control.py", "7", "mutation: BOTH provenance copies name a "
+       "nonexistent commit",
+       "C7a fires on the input that left the six-section control CLEAN at exit 0",
+       ['@mutation("BOTH copies of the pinned commit name a revision that does not exist"'], 1),
     _a("N19", "negative_control.py", "-", "the baseline-absence guard",
        "a mutation's expect string is absent from the UNMUTATED report, so a CAUGHT means "
        "the mutation caused it",
@@ -301,19 +336,148 @@ ARMS_BY_ID = {a.id: a for a in ARMS}
 # sandbox
 # ======================================================================================
 
-def make_sandbox(prefix="ca9876-"):
-    """A throwaway tree with the same shape the target expects: <root>/{STATE.md,docs,code}.
+# ---------------------------------------------------------------------------------------
+# THE SANDBOX HAS REAL GIT HISTORY (mg-7cc3), AND THAT IS WHAT UNBLOCKED SECTION 7.
+#
+# It used to be a bare temp tree with no `.git`, and mg-3902 backed its pin-resolution check
+# out of `twin_pin.py` for exactly that reason: the probes it would have needed could not run,
+# because THE QUESTION SECTION 7 ASKS HAS NO ANSWER INSIDE A TREE WITH NO HISTORY.  So the
+# check shipped as a separate suite, a second control over the same pin, with the fold filed
+# as its successor.  This is the load-bearing half of that successor.
+#
+# WHAT THE SANDBOX IS NOW: a self-consistent world.  Its STATE.md and twin are committed on a
+# branch called `main`, and the twin's pin is then repointed at THAT commit and at the digest
+# of THAT STATE.md — so a probe can construct the good world (the pin names the sandbox's own
+# revision and both halves of the acceptance criterion hold) and every bad world beside it: a
+# commit that does not resolve, a commit reachable from nothing, a commit whose STATE.md is
+# not the one the pin digests.  That is a better fixture than anything writable from outside,
+# because nothing in it is borrowed from the repository under audit — the lineage's own
+# recurring defect, recorded three times in this directory.
+#
+# THE PIN IS REPOINTED AFTER THE COMMIT AND THE TREE IS NOT RE-COMMITTED, which is not
+# sloppiness: a pin can only name a commit that already exists, so amending it in would change
+# the sha the pin names.  That chicken-and-egg IS the root cause mg-3902 found in
+# `reconcile()`, and the sandbox reproduces the honest resolution of it — the twin at HEAD is
+# one revision behind the twin on disk, and the pin is true about STATE.md, which is what the
+# pin claims to be about.
+#
+# THE IDENTITY AND DATES ARE FIXED so the sandbox's commit sha is a function of its contents
+# alone.  A probe transcript that moved every run would be unreadable, and mg-f771 compares
+# committed transcripts against what `./build.sh` produces.
+_GIT_ENV = {
+    "GIT_AUTHOR_NAME": "mg-9876 sandbox", "GIT_AUTHOR_EMAIL": "sandbox@example.invalid",
+    "GIT_COMMITTER_NAME": "mg-9876 sandbox", "GIT_COMMITTER_EMAIL": "sandbox@example.invalid",
+    "GIT_AUTHOR_DATE": "2026-01-01T00:00:00+00:00",
+    "GIT_COMMITTER_DATE": "2026-01-01T00:00:00+00:00",
+}
+
+# `-c` overrides rather than inherited config: a global `core.excludesFile` that happens to
+# ignore one of the copied files would silently commit a DIFFERENT tree than the sandbox has
+# on disk, and a template dir with hooks in it would run somebody's hooks inside an audit.
+_GIT_CONF = ["-c", "core.excludesFile=/dev/null", "-c", "init.templateDir=",
+             "-c", "commit.gpgsign=false", "-c", "gc.auto=0"]
+
+
+def sandbox_git(root, *args, check=True):
+    """Run git inside a sandbox.  Raises on failure — a silently unbuilt fixture is not a
+    fixture, and `SETUP FAILED` is a verdict this harness already knows how to print."""
+    env = dict(os.environ)
+    env.update(_GIT_ENV)
+    proc = subprocess.run(["git", "-C", root] + _GIT_CONF + list(args),
+                          capture_output=True, text=True, env=env)
+    if check and proc.returncode != 0:
+        raise AssertionError("git %s failed in the sandbox: %s"
+                             % (" ".join(args), (proc.stderr or proc.stdout).strip()))
+    return proc.returncode, proc.stdout.strip()
+
+
+_PIN_COMMIT = re.compile(r"(\n\s*commit:\s*)[0-9a-f]{7,40}")
+_PIN_DATE = re.compile(r"(\n\s*commit-date:\s*)\d{4}-\d\d-\d\d")
+_PIN_SHA = re.compile(r"(\n\s*state-sha256:\s*)[0-9a-f]{64}")
+_VISIBLE = re.compile(r'(<span id="provenance">.*?@ )[0-9a-f]{7,40}( \()\d{4}-\d\d-\d\d',
+                      re.S)
+
+
+def _repoint(twin_path, commit, date, state_sha):
+    """Point BOTH copies of the provenance string at the sandbox's own commit.
+
+    Both, because `twin_pin.py` section 6 checks that they agree and a sandbox whose section 6
+    is red by construction would make every probe's good side structurally broken — the
+    `borrowed brokenness` defect this directory has recorded three times, arriving by way of
+    a fixture instead of a subject.
+    """
+    text = read(twin_path)
+    subs = [(_PIN_COMMIT, commit), (_PIN_DATE, date), (_PIN_SHA, state_sha)]
+    for pattern, value in subs:
+        text, n = pattern.subn(lambda m, v=value: m.group(1) + v, text, count=1)
+        if n != 1:
+            raise AssertionError("sandbox: %s matched %d times in the twin, expected 1"
+                                 % (pattern.pattern, n))
+    text, n = _VISIBLE.subn(lambda m: m.group(1) + commit + m.group(2) + date, text, count=1)
+    if n != 1:
+        raise AssertionError("sandbox: the visible provenance line matched %d times, "
+                             "expected 1" % n)
+    write(twin_path, text)
+
+
+def _copy_tree(tmp):
+    os.makedirs(os.path.join(tmp, "docs"), exist_ok=True)
+    os.makedirs(os.path.join(tmp, "code"), exist_ok=True)
+    shutil.copytree(TARGET, os.path.join(tmp, "code", TARGET_DIRNAME), dirs_exist_ok=True)
+    shutil.copy2(STATE, os.path.join(tmp, "STATE.md"))
+    shutil.copy2(TWIN, os.path.join(tmp, "docs", "state-of-the-wall.html"))
+    return tmp
+
+
+_TEMPLATE = []
+
+
+def _template():
+    """Build the committed world ONCE per process and hand out copies of it.
+
+    THE REASON IS MEASURED, NOT TIDINESS.  `git init` + `add` + `commit` is 0.26 s and this
+    harness builds 61 sandboxes, so building each one from scratch put 15 s on the merge
+    critical path — against an 11 s producer.  Copying a built tree is 0.02 s.  Every sandbox
+    is still a private, mutable copy: probes commit into theirs (C7c does) and nothing is
+    shared but the bytes they start from.
+    """
+    if not _TEMPLATE:
+        tmp = _copy_tree(tempfile.mkdtemp(prefix="ca9876-template-"))
+        sandbox_git(tmp, "init", "--quiet")
+        # `symbolic-ref` rather than `init -b main`, which git only learned in 2.28.  The
+        # branch has to be called `main` because that is one of the integration refs section 7
+        # grades against, and a sandbox on `master` would classify its own HEAD an ORPHAN.
+        sandbox_git(tmp, "symbolic-ref", "HEAD", "refs/heads/main")
+        sandbox_git(tmp, "add", "-A")
+        sandbox_git(tmp, "commit", "--quiet", "-m", "sandbox: STATE.md and its rendered twin")
+        _rc, commit = sandbox_git(tmp, "rev-parse", "--short", "HEAD")
+        _rc, date = sandbox_git(tmp, "log", "-1", "--format=%cs")
+        with open(os.path.join(tmp, "STATE.md"), "rb") as fh:
+            state_sha = hashlib.sha256(fh.read()).hexdigest()
+        _repoint(os.path.join(tmp, "docs", "state-of-the-wall.html"), commit, date, state_sha)
+        _TEMPLATE.append(tmp)
+        atexit.register(shutil.rmtree, tmp, True)
+    return _TEMPLATE[0]
+
+
+def make_sandbox(prefix="ca9876-", history=True):
+    """A throwaway tree with the same shape the target expects: <root>/{STATE.md,docs,code},
+    committed on a branch called `main` unless `history=False`.
 
     Probes mutate INSIDE here.  Nothing in this instrument writes the working tree; the one
     place that could — `twin_pin.reconcile()`, which writes `TWIN` — is exercised with the
     module's globals repointed here, and `assert_sandboxed` refuses if they are not.
+
+    `history=False` exists so that the NO-HISTORY world stays reachable: `twin_pin.py`
+    section 7 reports and does not grade when there is no repository to ask, and that branch
+    is exactly the S1/S2/S3 shape this directory's COVERAGE.md records — `ROOT was not a git
+    repo and three arms were condemned by one line`.  A world nothing enters is a world
+    nothing checks.
     """
     tmp = tempfile.mkdtemp(prefix=prefix)
-    os.makedirs(os.path.join(tmp, "docs"))
-    os.makedirs(os.path.join(tmp, "code"))
-    shutil.copytree(TARGET, os.path.join(tmp, "code", TARGET_DIRNAME))
-    shutil.copy2(STATE, os.path.join(tmp, "STATE.md"))
-    shutil.copy2(TWIN, os.path.join(tmp, "docs", "state-of-the-wall.html"))
+    if not history:
+        return _copy_tree(tmp)
+    shutil.copytree(_template(), tmp, dirs_exist_ok=True, symlinks=True)
     return tmp
 
 

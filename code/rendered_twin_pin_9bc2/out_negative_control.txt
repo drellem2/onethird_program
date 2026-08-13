@@ -9,26 +9,27 @@ must appear.
 The drift set above is DERIVED FROM THE PIN, never typed in — see the note at the
 top of this file for the two fixtures that rotted when it was (mg-2f44).
 
-mutation                                                           sec  verdict  detail
+mutation                                                              sec  verdict  detail
 --------------------------------------------------------------------------------------------
-pin block deleted entirely                                         1    CAUGHT   exit 2; looked for 'no STATE-PIN block in the twin' (absent from the baseline)
-a ledger row deleted from the twin only                            1    CAUGHT   exit 2; looked for 'the row sets disagree' (absent from the baseline)
-one character changed in an UNDRIFTED STATE.md ledger row (row 1)  2    CAUGHT   exit 1; looked for 'row 1    MOVED' (absent from the baseline)
-a whole STATE.md ledger cell emptied (row 10 status)               2    CAUGHT   exit 1; looked for 'row 10   MOVED' (absent from the baseline)
-twin's KIND mark for row 10 flipped FP -> U                        4    CAUGHT   exit 2; looked for 'row 10   MISMATCH' (absent from the baseline)
-STATE.md's KIND mark for row 9 flipped FP✗ -> U                    4    CAUGHT   exit 2; looked for 'row 9    MISMATCH' (absent from the baseline)
-`Generated <date>` re-introduced into the header                   5    CAUGHT   exit 2; looked for 'matches /\\bGenerated\\b' (absent from the baseline)
-the twin re-claims canonicity in the footer                        5    CAUGHT   exit 2; looked for 'a canonicity claim on a line that does not name STATE.md' (absent from the baseline)
-visible provenance line points at a DIFFERENT commit than the pin  6    CAUGHT   exit 2; looked for 'the visible provenance line does not name exactly the pinned commit' (absent from the baseline)
-visible provenance line removed (pin becomes machine-only)         6    CAUGHT   exit 2; looked for 'no <span id="provenance">' (absent from the baseline)
-the ledger GAINS A COLUMN (header and every row)                   1    CAUGHT   exit 2; looked for "the ledger's column set has changed since the pin" (absent from the baseline)
-the pin's `state-sha256` field is deleted outright                 3    CAUGHT   exit 2; looked for 'the pin carries no well-formed `state-sha256` field' (absent from the baseline)
-the pin's `columns` field is deleted outright                      1    CAUGHT   exit 2; looked for 'the pin does not record the ledger columns' (absent from the baseline)
-`Generated <date>` re-introduced BEHIND an HTML comment opener     5    CAUGHT   exit 2; looked for 'matches /\\bGenerated\\b' (absent from the baseline)
-visible provenance names the pinned commit AND a second one        6    CAUGHT   exit 2; looked for 'does not name exactly the pinned commit' (absent from the baseline)
-NO MUTATION — the baseline                                         -    CAUGHT   exit 0; worklist is EXACTLY (none) — parsed from section 2, expectation derived from the pin
+pin block deleted entirely                                            1    CAUGHT   exit 2; looked for 'no STATE-PIN block in the twin' (absent from the baseline)
+a ledger row deleted from the twin only                               1    CAUGHT   exit 2; looked for 'the row sets disagree' (absent from the baseline)
+one character changed in an UNDRIFTED STATE.md ledger row (row 1)     2    CAUGHT   exit 1; looked for 'row 1    MOVED' (absent from the baseline)
+a whole STATE.md ledger cell emptied (row 10 status)                  2    CAUGHT   exit 1; looked for 'row 10   MOVED' (absent from the baseline)
+twin's KIND mark for row 10 flipped FP -> U                           4    CAUGHT   exit 2; looked for 'row 10   MISMATCH' (absent from the baseline)
+STATE.md's KIND mark for row 9 flipped FP✗ -> U                       4    CAUGHT   exit 2; looked for 'row 9    MISMATCH' (absent from the baseline)
+`Generated <date>` re-introduced into the header                      5    CAUGHT   exit 2; looked for 'matches /\\bGenerated\\b' (absent from the baseline)
+the twin re-claims canonicity in the footer                           5    CAUGHT   exit 2; looked for 'a canonicity claim on a line that does not name STATE.md' (absent from the baseline)
+visible provenance line points at a DIFFERENT commit than the pin     6    CAUGHT   exit 2; looked for 'the visible provenance line does not name exactly the pinned commit' (absent from the baseline)
+visible provenance line removed (pin becomes machine-only)            6    CAUGHT   exit 2; looked for 'no <span id="provenance">' (absent from the baseline)
+the ledger GAINS A COLUMN (header and every row)                      1    CAUGHT   exit 2; looked for "the ledger's column set has changed since the pin" (absent from the baseline)
+the pin's `state-sha256` field is deleted outright                    3    CAUGHT   exit 2; looked for 'the pin carries no well-formed `state-sha256` field' (absent from the baseline)
+the pin's `columns` field is deleted outright                         1    CAUGHT   exit 2; looked for 'the pin does not record the ledger columns' (absent from the baseline)
+`Generated <date>` re-introduced BEHIND an HTML comment opener        5    CAUGHT   exit 2; looked for 'matches /\\bGenerated\\b' (absent from the baseline)
+visible provenance names the pinned commit AND a second one           6    CAUGHT   exit 2; looked for 'does not name exactly the pinned commit' (absent from the baseline)
+BOTH copies of the pinned commit name a revision that does not exist  7    CAUGHT   exit 2; looked for 'the pinned commit DOES NOT RESOLVE in this repository' (absent from the baseline)
+NO MUTATION — the baseline                                            -    CAUGHT   exit 0; worklist is EXACTLY (none) — parsed from section 2, expectation derived from the pin
 
-16 of 16 caught; 0 hole(s).
+17 of 17 caught; 0 hole(s).
 0 row(s) UNFALSIFIABLE — expect string present in the unmutated report (mg-9876's guard).
 
 Every mutation was caught by the section that claimed it.

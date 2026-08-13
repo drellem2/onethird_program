@@ -22,10 +22,4 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  NO DISAGREEMENTS
---------------------------------------------------------------------------------------------
-  Every watched transcript that moved during this gate run moved only in the two
-  declared families that are not a function of repo state.  No committed
-  transcript asserts anything this tree contradicts.
-
-VERDICT: GREEN — 0 disagreements.  0.07s
+REFUSED — cannot read code/twin_disposition_audit_3902/out_negative_control.txt: [Errno 2] No such file or directory: '/Users/daniel/.pogo/polecats/p7cc3/code/twin_disposition_audit_3902/out_negative_control.txt'

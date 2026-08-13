@@ -328,6 +328,106 @@ def p_c6b(box):
     return good, bad, in_sect(6, "does not name exactly the pinned commit")
 
 
+# ------------------------------------------------------------- section 7 (mg-7cc3's fold)
+#
+# THESE ARE THE PROBES mg-3902 COULD NOT WRITE, AND THE REASON IS THE SANDBOX RATHER THAN THE
+# SECTION.  Its brief says so in terms: `make_sandbox()` builds a temp tree with no `.git`, so
+# the question section 7 asks has no answer inside it, and `a2` reported `NO PROBE 5 -> C7a
+# C7b R5 N20 N21` and exited 1.  `lib9876.make_sandbox` now commits the tree on a branch
+# called `main` and repoints the pin at that commit, so the GOOD world is a real one — the pin
+# names the sandbox's own revision, main-reachable and byte-identical — and every bad world is
+# CONSTRUCTED beside it rather than borrowed from the repository under audit.
+#
+# NOTHING HERE NAMES A COMMIT OF THIS REPOSITORY.  mg-3902's own negative control had to reach
+# for `c308368`, a real orphan on somebody else's branch, because from outside there was
+# nowhere else to get one — and a fixture that is a hash somebody else's `git gc` can prune is
+# a fixture with a countdown on it.  Inside the sandbox an orphan is two git commands.
+
+_PIN_COMMIT = re.compile(r"(\n\s*commit:\s*)[0-9a-f]{7,40}")
+_VISIBLE_AT = re.compile(r'(<span id="provenance">.*?@ )[0-9a-f]{7,40}', re.S)
+
+
+def _repoint_pin(twin_path, commit):
+    """Move BOTH copies of the provenance commit.
+
+    BOTH, so section 6 stays green and section 7 is the only thing under test.  Moving one is
+    a different arm — C6b — and it already has its own probe; a bad input that trips two arms
+    is evidence about neither.  It is also the shape of the original defect: mg-3902 measured
+    the six-section control CLEAN at exit 0 precisely because both copies moved TOGETHER.
+    """
+    text = L.read(twin_path)
+    text, n1 = _PIN_COMMIT.subn(lambda m: m.group(1) + commit, text, count=1)
+    text, n2 = _VISIBLE_AT.subn(lambda m: m.group(1) + commit, text, count=1)
+    if (n1, n2) != (1, 1):
+        raise AssertionError("expected one pin commit and one visible commit, found %d and %d"
+                             % (n1, n2))
+    L.write(twin_path, text)
+
+
+@probe("C7a", "the pin names a commit that does not exist in this repository")
+def p_c7a(box):
+    sp, tp = _pair(box)
+    good = lambda: L.run_control(sp, tp, _ctl(box))                        # noqa: E731
+
+    def bad():
+        _repoint_pin(tp, "deadbee")
+        return L.run_control(sp, tp, _ctl(box))
+    return good, bad, in_sect(7, "FAIL  the pinned commit DOES NOT RESOLVE")
+
+
+@probe("C7b", "the pin names a REAL commit that is an ancestor of nothing this repository "
+              "integrates — and whose STATE.md is BYTE-IDENTICAL to the digest")
+def p_c7b(box):
+    """THE ONE THAT DISCRIMINATES, and the reason pm-onethird corrected this ticket mid-flight.
+
+    A section 7 that asks `does this commit exist?` goes GREEN on the exact pin that motivated
+    the check: `c308368` resolves, it is a real object, it is simply reachable from nothing
+    this repository merges.  So the bad world here is not a fabricated sha — C7a owns that —
+    it is a REAL commit built with `git commit-tree` on HEAD's own tree, which makes its
+    STATE.md byte-identical to the digest the pin records.
+
+    BYTE-IDENTITY THEREFORE HOLDS AND THE ARM IS STILL RED, which is the claim stated rather
+    than demonstrated everywhere else in this lineage: the two halves of the acceptance
+    criterion are independent, and the tie-break when they conflict is to REGENERATE at the
+    main-reachable commit, never to keep the orphan because its bytes agree.
+    """
+    sp, tp = _pair(box)
+    good = lambda: L.run_control(sp, tp, _ctl(box))                        # noqa: E731
+
+    def bad():
+        _rc, tree = L.sandbox_git(box, "rev-parse", "HEAD^{tree}")
+        _rc, orphan = L.sandbox_git(box, "commit-tree", tree, "-m",
+                                    "orphan: the same tree, reachable from no ref")
+        _repoint_pin(tp, orphan)
+        return L.run_control(sp, tp, _ctl(box))
+    return good, bad, in_sect(7, "FAIL  THE PINNED COMMIT IS REACHABLE FROM NOTHING")
+
+
+@probe("C7c", "the pin names a real, main-reachable commit whose STATE.md is not the one it "
+              "digests — the pin the old reconcile() wrote")
+def p_c7c(box):
+    """The bad world is REACHABLE, so C7b is silent and only this arm speaks.
+
+    It is also the world `reconcile()` produced for its whole life: a commit that is on the
+    branch, and a digest taken over a later STATE.md.  Built here by advancing STATE.md by one
+    commit and then putting the working tree BACK — so the tree under test is unchanged and
+    the only thing that moved is which revision the pin names.
+    """
+    sp, tp = _pair(box)
+    good = lambda: L.run_control(sp, tp, _ctl(box))                        # noqa: E731
+
+    def bad():
+        original = L.read(sp)
+        L.write(sp, original + "\n<!-- mg-7cc3 probe: a LATER STATE.md -->\n")
+        L.sandbox_git(box, "add", "-A")
+        L.sandbox_git(box, "commit", "--quiet", "-m", "a later STATE.md")
+        _rc, later = L.sandbox_git(box, "rev-parse", "--short", "HEAD")
+        L.write(sp, original)
+        _repoint_pin(tp, later)
+        return L.run_control(sp, tp, _ctl(box))
+    return good, bad, in_sect(7, "FAIL  THE PIN NAMES ONE REVISION AND DIGESTS ANOTHER")
+
+
 # ------------------------------------------------------------------ reconcile refusals
 
 def _reconcile(box, *args):
@@ -458,6 +558,26 @@ def p_r4(box):
         _PENDING[box] = [duplicate_span]
         return _reconcile(box, "--rows", row)
     return good, bad, has('REFUSED: expected exactly one <span id="provenance">')
+
+
+@probe("R5", "STATE.md has an edit that is not committed, so the pin about to be written "
+             "would name one revision and digest another")
+def p_r5(box):
+    """THE ROOT CAUSE, PROBED — and it needs history to probe at all, which is why it is new.
+
+    The refusal compares STATE.md on disk against STATE.md at HEAD.  In a tree with no `.git`
+    there is no HEAD, the comparison cannot be made, and the arm cannot be shown to fire.  It
+    is the same shape as C7a-C7c and it is why all five of these arms arrived together.
+    """
+    _snapshot(box)
+    row = _moved_row(box)
+    sp, _tp = _pair(box)
+    good = lambda: _reconcile(box, "--rows", row)                          # noqa: E731
+
+    def bad():
+        _PENDING[box] = [lambda: L.write(sp, L.read(sp) + "\n<!-- mg-7cc3 probe -->\n")]
+        return _reconcile(box, "--rows", row)
+    return good, bad, has("REFUSED: STATE.md on disk differs from STATE.md at HEAD")
 
 
 # ------------------------------------------------------------------ lib9bc2 parser raises
@@ -623,6 +743,7 @@ _NC_BY_ARM = {
     "N16": "the pin's `columns` field is deleted outright",
     "N17": "`Generated <date>` re-introduced BEHIND an HTML comment opener",
     "N18": "visible provenance names the pinned commit AND a second one",
+    "N20": "BOTH copies of the pinned commit name a revision that does not exist",
 }
 
 

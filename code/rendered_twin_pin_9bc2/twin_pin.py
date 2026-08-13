@@ -24,9 +24,9 @@ THE `STATE.md` IT IS A RENDERING OF — mg-1abe's phrase, A PUBLISHER IS NOT A P
 check that pin.  The pin lives in the twin, at the top of the file, so it cannot be
 separated from the artifact it describes.
 
-SIX CHECKS.  Sections 1-3 are the pin; 4 is a cross-document check that does not use the pin
-at all; 5 is a default-deny guard on the sentences that caused this; 6 checks the one
-duplicate this repair deliberately introduces.
+SEVEN CHECKS.  Sections 1-3 are the pin; 4 is a cross-document check that does not use the
+pin at all; 5 is a default-deny guard on the sentences that caused this; 6 checks the one
+duplicate this repair deliberately introduces; 7 is the only one that asks GIT anything.
 
     1  the pin is present, parses, and its row set matches both documents
     2  per-row digests: which STATE.md ledger rows have MOVED since the twin was pinned
@@ -34,8 +34,30 @@ duplicate this repair deliberately introduces.
     4  KIND MARKS agree between the two documents, live, right now
     5  the twin does not claim to be `Generated`, and does not claim canonicity for itself
     6  the VISIBLE provenance line in the header quotes the same commit as the pin
+    7  the pinned commit RESOLVES, is one this repository INTEGRATES, and carries the
+       STATE.md the pin digests
 
-EXIT CODES.  0 clean · 1 drift (section 2/3) · 2 structural failure (section 1/4/5/6).
+SECTION 7 IS mg-3902's CHECK, FOLDED IN (mg-7cc3), AND IT IS HERE BECAUSE SECTIONS 1-6 COULD
+NOT SEE THE DEFECT.  Section 3 compares the pinned digest against the LIVE WORKING TREE;
+section 6 compares the pinned commit against a VISIBLE COPY OF ITSELF in the page header.  So
+the field whose own header calls itself "the only thing in this file that says which STATE.md
+it is a rendering of" was checked only against its own duplicate, and two copies of a string
+agreeing with each other is consistency, not provenance.  MEASURED, not argued: setting BOTH
+copies to `deadbee` — a commit that does not exist — left this control at `VERDICT: CLEAN`,
+exit 0.  It was not hypothetical either: at `origin/main` on 2026-08-13 the pin named
+`c308368`, a commit reachable only from `origin/polecat-p0e8c` whose STATE.md is not the one
+the pin digests.
+
+REACHABILITY IS CHECKED BEFORE BYTE-IDENTITY, AND THE ORDER IS LOAD-BEARING (pm-onethird,
+2026-08-13).  `c308368` RESOLVES — it is a real object — so a section 7 that asked only "does
+this commit exist?" would go green on the exact pin that motivated the check.  And choosing on
+byte-identity first is what produced the bad pin: "which commit does this file reproduce at?"
+returns one obviously-correct answer, and if that commit is off main you are then arguing
+yourself out of the only candidate you found.  Asking "which main-reachable commits are
+eligible?" first cannot produce the bad pin at all.  So an unreachable pin reports NOT AN
+ANCESTOR as the primary fault; the digest is printed after it and is a consequence.
+
+EXIT CODES.  0 clean · 1 drift (section 2/3) · 2 structural failure (section 1/4/5/6/7).
 Drift is a lower grade than structural failure on purpose: drift is the normal condition of
 a hand-maintained rendering between reconciliations, and it is INFORMATION — the row list is
 the worklist.  A missing pin, a row set that disagrees, or a re-introduced `Generated` is a
@@ -85,6 +107,10 @@ _VISIBLE_COMMIT = re.compile(r"\b[0-9a-f]{7,40}\b")
 # Section 3 requires the pin to CARRY a whole-file digest, not merely to disagree with one.
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
+# The integration branches this repository actually merges to, most authoritative first.
+# Reachability against these is what section 7 GRADES.
+INTEGRATION_REFS = ("origin/main", "main")
+
 BANNED = [
     (re.compile(r"\bGenerated\b\s*20\d\d-\d\d-\d\d"),
      "a generation date on a file that is NOT generated — the false claim this ticket "
@@ -100,6 +126,81 @@ BANNED = [
 def sha256_file(path):
     with open(path, "rb") as fh:
         return hashlib.sha256(fh.read()).hexdigest()
+
+
+def git(*args, binary=False):
+    proc = subprocess.run(["git", "-C", ROOT] + list(args), capture_output=True)
+    if binary:
+        return proc.returncode, proc.stdout
+    return proc.returncode, proc.stdout.decode("utf-8", "replace").strip()
+
+
+def have_history():
+    """Is ROOT the TOP of a git work tree?
+
+    NOT `rev-parse --git-dir`, which is what mg-3902's version of this check asked, and the
+    difference is not pedantry: `git -C <tmpdir>` walks UPWARDS, so a temporary tree that
+    happens to sit under somebody's repository answers YES and section 7 then resolves this
+    tree's pin against a foreign history.  The pin describes THIS root's STATE.md, so the
+    question is whether THIS root is a repository, not whether one is above it.
+    """
+    rc, top = git("rev-parse", "--show-toplevel")
+    return rc == 0 and os.path.realpath(top) == os.path.realpath(ROOT)
+
+
+def ancestry(full, integration_refs=INTEGRATION_REFS):
+    """[(ref, is_ancestor_or_None)] for each integration ref; None means the ref is absent.
+
+    Computed once and read twice — the printed table and `classify_reachability` used to ask
+    git the same four questions each, which is 8 subprocesses per run against a control that
+    `a2_discriminate.py` runs 110 times.  Measured: it is the difference between a 39 s and a
+    23 s producer on the merge critical path.
+    """
+    out = []
+    for ref in integration_refs:
+        if git("rev-parse", "--verify", "--quiet", ref)[0] != 0:
+            out.append((ref, None))
+        else:
+            out.append((ref, git("merge-base", "--is-ancestor", full, ref)[0] == 0))
+    return out
+
+
+def classify_reachability(full, table=None, integration_refs=INTEGRATION_REFS):
+    """Which of four worlds the pinned commit is in.  Returns (verdict, detail).
+
+    `verdict` is one of `integration`, `in-flight`, `orphan`, `unknown`, and only `orphan` is
+    graded.  mg-3902 wrote this classifier and mg-daba corrected its polarity; it is carried
+    across here rather than re-derived, because the argument behind the four branches is the
+    expensive part and it is already paid for.
+
+    WHY `in-flight` IS NOT RED.  A polecat that reconciles on its own branch legitimately
+    names a commit that has not merged.  Grading that would make the gate red on every
+    correct in-flight reconciliation — a red for a non-reason, shipped inside a remedy for
+    reds for non-reasons.  It is REPORTED, and reported as not-yet-acceptable, because THE
+    REFINERY REBASES: that hash is rewritten out of existence when the branch lands.
+
+    WHY `orphan` IS RED.  `c308368` was not in flight on the branch that carried it; it was
+    on SOMEBODY ELSE's unmerged branch, which no merge would ever bring into `main`.  Telling
+    the two apart does not need a human — an ancestor of THIS HEAD is in flight here, and an
+    ancestor of neither is on somebody else's branch or on none.
+
+    WHY `unknown` IS SEPARATE FROM `orphan`.  GIT CANNOT ANSWER IS NOT THE ANSWER IS NO.  A
+    checkout with no `main` and no `origin/main` — a shallow clone, an export, a fresh
+    worktree of one branch — cannot be asked this question, and condemning a correct pin
+    there is a red about the checkout rather than about the pin.
+    """
+    table = ancestry(full, integration_refs) if table is None else table
+    if all(anc is None for _ref, anc in table):
+        return "unknown", "no integration ref resolves in this checkout"
+    for ref, anc in table:
+        if anc:
+            return "integration", ref
+
+    if git("rev-parse", "--verify", "--quiet", "HEAD")[0] != 0:
+        return "unknown", "HEAD does not resolve, so 'on this branch' has no meaning here"
+    if git("merge-base", "--is-ancestor", full, "HEAD")[0] == 0:
+        return "in-flight", "an ancestor of this HEAD but of no integration ref"
+    return "orphan", "an ancestor of neither an integration ref nor this HEAD"
 
 
 def sort_labels(labels):
@@ -356,6 +457,107 @@ def check(state_text, twin_text, state_sha):
             emit("        A reader and the control would be told two different revisions.")
     emit()
 
+    # ---------------------------------------------------------------- section 7
+    emit("SECTION 7 — the pin RESOLVES against git (reachability first, then byte-identity)")
+    emit("-" * 86)
+    emit("  Sections 1-6 ask git nothing.  Section 3 compares the pinned digest against the")
+    emit("  LIVE WORKING TREE and section 6 compares the pinned commit against a VISIBLE COPY")
+    emit("  OF ITSELF, so the commit field was checked only against its own duplicate.  Setting")
+    emit("  BOTH copies to `deadbee` left this control CLEAN at exit 0 (mg-3902, measured).")
+    emit()
+    pinned_commit = pin.get("commit", "")
+    if not have_history():
+        emit(f"  no git work tree at {ROOT}")
+        emit("  REPORTED, NOT GRADED — this section resolves a pin against history and there")
+        emit("        is none here.  GIT CANNOT ANSWER IS NOT THE ANSWER IS NO: an export, a")
+        emit("        tarball or a probe's sandbox cannot be asked this question, and a red")
+        emit("        for that reason would condemn a pin this checkout cannot check.  It is")
+        emit("        mg-9876's own S1/S2/S3 — `ROOT was not a git repo and three arms were")
+        emit("        condemned by one line` — and it has now been written twice, so it is")
+        emit("        built in rather than remembered.")
+    elif not pinned_commit:
+        emit("  the pin carries no `commit:` field, so there is no revision to resolve here.")
+        emit("  Section 6 already grades that absence (arm C6c) and this section does not")
+        emit("  grade it a second time: one defect, one red.")
+    else:
+        rc, full = git("rev-parse", "--verify", "--quiet", pinned_commit + "^{commit}")
+        if rc != 0:
+            worst = 2
+            emit("  FAIL  the pinned commit DOES NOT RESOLVE in this repository.")
+            emit(f"        `{pinned_commit}` names no commit here, so the page names a STATE.md")
+            emit("        revision nobody can look at — exactly as checkable as `Generated")
+            emit("        <date>` was, in the field that replaced it.")
+        else:
+            emit(f"  pinned commit  : {pinned_commit}  ->  {full}")
+            table = ancestry(full)
+            for ref, anc in table:
+                shown = "(no such ref in this checkout)" if anc is None else \
+                        ("yes" if anc else "NO")
+                emit(f"  ancestor of {ref:<12}: {shown}")
+            emit()
+
+            # REACHABILITY IS ASKED FIRST AND ITS ANSWER IS PRINTED FIRST.  See the module
+            # docstring: the digest is a consequence, and reporting it first sends the reader
+            # off to regenerate a digest when the pin itself is what is wrong.
+            world, why7 = classify_reachability(full, table)
+            if world == "integration":
+                emit(f"  PASS  the pinned commit is an ancestor of `{why7}`.  BOTH halves of the")
+                emit("        acceptance criterion hold: main-ancestry AND byte-identity.")
+            elif world == "orphan":
+                worst = 2
+                emit("  FAIL  THE PINNED COMMIT IS REACHABLE FROM NOTHING THIS REPOSITORY")
+                emit("        INTEGRATES.  It is an ancestor of no integration ref and of no")
+                emit("        commit on this branch either, so it lives on somebody else's")
+                emit("        unmerged branch — or on none at all — and no merge will ever")
+                emit("        bring it into `main`.  `c308368` was exactly this.")
+                emit("        THIS IS THE PRIMARY FAULT.  Whatever the digest below says, the")
+                emit("        remedy is to REGENERATE the pin at a main-reachable commit;")
+                emit("        BYTE-IDENTITY DOES NOT RESCUE AN ORPHAN, because a pin can hash")
+                emit("        correctly at a commit that survives only until `git gc`.")
+            elif world == "in-flight":
+                emit("  IN FLIGHT — REPORTED, NOT GRADED, AND NOT YET ACCEPTABLE.")
+                emit(f"        The pinned commit is {why7},")
+                emit("        i.e. a reconciliation on this branch")
+                emit("        that has not merged.  That is the one legitimate way to name an")
+                emit("        unmerged commit and it is why this is not red.  It is also not")
+                emit("        done: THE REFINERY REBASES, so this hash is rewritten out of")
+                emit("        existence when the branch lands and the pin becomes an ORPHAN.")
+                emit("        `2fbd5ce` died that way at mg-cdd5.  Re-pin at a main-reachable")
+                emit("        commit before merging — `--reconcile` now picks one for you.")
+            else:
+                emit(f"  REPORTED, NOT GRADED — {why7}.")
+                emit("        Git cannot answer this question here, and 'cannot answer' is not")
+                emit("        'the answer is no'.")
+            emit()
+
+            rc, blob = git("show", full + ":STATE.md", binary=True)
+            if rc != 0:
+                worst = 2
+                emit("  FAIL  the pinned commit carries no STATE.md, so it cannot be the")
+                emit("        revision this page is a rendering of.")
+            else:
+                there = hashlib.sha256(blob).hexdigest()
+                emit(f"  STATE.md AT the pinned commit : {there}")
+                emit(f"  STATE.md digest IN the pin    : {pinned_sha or '(absent)'}")
+                if not _SHA256.match(pinned_sha):
+                    emit("  (no well-formed digest to compare against — section 3 grades that,")
+                    emit("   arm C3a.  Absence is not agreement, and it is not graded twice.)")
+                elif there == pinned_sha:
+                    emit("  PASS  the commit the page NAMES carries the STATE.md the page was")
+                    emit("        DIGESTED against — the two provenance fields agree with GIT,")
+                    emit("        not merely with each other.")
+                else:
+                    worst = 2
+                    emit("  FAIL  THE PIN NAMES ONE REVISION AND DIGESTS ANOTHER.")
+                    emit("        A reader who runs `git show <commit>:STATE.md` to check this")
+                    emit("        rendering is handed a different file than the one the row")
+                    emit("        digests were taken over.  This is what `reconcile()` produced")
+                    emit("        for its whole life before mg-7cc3: it stamped `rev-parse HEAD`")
+                    emit("        while digesting the WORKING TREE, so any reconciliation that")
+                    emit("        also edited STATE.md named the revision BEFORE the edit and")
+                    emit("        digested the one AFTER it.")
+    emit()
+
     emit("=" * 86)
     emit({0: "VERDICT: CLEAN — the twin is pinned and its ledger rows have not moved.",
           1: "VERDICT: DRIFT — see section 2's worklist.  The twin renders rows that have "
@@ -364,6 +566,58 @@ def check(state_text, twin_text, state_sha):
              "claim is back."}[worst])
     emit("=" * 86)
     return worst, out
+
+
+def pin_target():
+    """The (commit, date) a re-pin should record.  REACHABILITY FIRST, then byte-identity.
+
+    THIS USED TO BE `git rev-parse --short HEAD`, AND THAT ONE LINE IS THE ROOT CAUSE mg-3902
+    found (mg-7cc3 repairs it).  It stamped HEAD while `reconcile()` digested the WORKING
+    TREE.  Those are the same revision only while STATE.md is clean — and a reconciliation is
+    exactly the case where it is not, since the natural way to do one is to edit the STATE.md
+    row, rewrite the twin's cell and re-pin, all in the commit about to be made.  Do that and
+    the pin names the revision BEFORE the edit and digests the one AFTER it.  Every
+    reconciliation that touched STATE.md produced a false pin, and nothing checked it.
+
+    `reconcile()` refuses outright when STATE.md on disk differs from STATE.md at HEAD, so by
+    the time this runs the bytes being digested ARE some committed revision's bytes.  The
+    question left is WHICH revision to name, and it is asked in the order pm-onethird handed
+    down on 2026-08-13: WHICH COMMITS ARE ELIGIBLE (ancestors of an integration ref), and only
+    then WHICH OF THOSE REPRODUCES.  Asking it the other way round — "which commit does this
+    file reproduce at?" — returns one obviously-correct answer, and when that answer is off
+    main you are left arguing yourself out of the only candidate you found.  That is how
+    `c308368` was pinned.
+
+    SO A TWIN-ONLY RECONCILIATION NEVER LANDS AN IN-FLIGHT PIN AGAIN.  Its STATE.md is
+    unchanged, so an integration-reachable commit carrying these exact bytes exists and is
+    named.  A reconciliation whose STATE.md has ALSO landed on this branch and nowhere else
+    has no such commit; that falls back to HEAD and SAYS SO, because the alternative is
+    refusing a correct act.  Section 7 reports that pin `IN FLIGHT`, and the refinery's rebase
+    will turn it into an ORPHAN — so the warning is the whole point of printing it.
+    """
+    if not have_history():
+        return "", ""
+    _rc, head_blob = git("rev-parse", "--verify", "--quiet", "HEAD:STATE.md")
+    for ref in INTEGRATION_REFS:
+        if git("rev-parse", "--verify", "--quiet", ref)[0] != 0:
+            continue
+        rc, listing = git("rev-list", ref, "--", "STATE.md")
+        if rc != 0:
+            continue
+        for candidate in listing.split():
+            if git("rev-parse", "--verify", "--quiet", candidate + ":STATE.md")[1] == head_blob:
+                short = git("rev-parse", "--short", candidate)[1]
+                print(f"pinning at {short}, the newest commit reachable from `{ref}` whose "
+                      f"STATE.md is these bytes.")
+                return short, git("log", "-1", "--format=%cs", candidate)[1]
+    short = git("rev-parse", "--short", "HEAD")[1]
+    print(f"WARNING: no commit reachable from {' or '.join(INTEGRATION_REFS)} carries this")
+    print(f"         STATE.md, so the pin names HEAD ({short}), which has not merged.")
+    print("         Section 7 will report it IN FLIGHT, and THE REFINERY REBASES: this hash")
+    print("         is rewritten out of existence when the branch lands and the pin becomes")
+    print("         an ORPHAN, which section 7 grades RED.  Re-run --reconcile after the")
+    print("         STATE.md change has landed on main.")
+    return short, git("log", "-1", "--format=%cs", "HEAD")[1]
 
 
 def reconcile(rows_arg, note):
@@ -375,6 +629,21 @@ def reconcile(rows_arg, note):
     twin.  Naming a row that has not moved is refused, and `--rows all` still prints every
     row it re-pins so the diff shows what was claimed.
     """
+    # THE ROOT CAUSE, REFUSED RATHER THAN DETECTED (mg-3902 found it, mg-7cc3 repairs it).
+    # See `pin_target()`.  The commit named and the bytes digested have to be one revision,
+    # and the only way to guarantee that is to refuse while they are two.  THE COST IS TWO
+    # COMMITS INSTEAD OF ONE: land the STATE.md edit, then reconcile the twin against it.
+    # The twin is left UNWRITTEN — a half-done re-pin is worse than a refused one.
+    if have_history():
+        rc, head_blob = git("show", "HEAD:STATE.md", binary=True)
+        with open(STATE, "rb") as fh:
+            disk = fh.read()
+        if rc == 0 and disk != head_blob:
+            sys.exit("REFUSED: STATE.md on disk differs from STATE.md at HEAD, so a re-pin "
+                     "here would name one revision and digest another — the exact defect "
+                     "mg-3902 found in this function.  Commit the STATE.md change first, "
+                     "then reconcile the twin against it.  The twin has NOT been written.")
+
     state_text = open(STATE, encoding="utf-8").read()
     twin_text = open(TWIN, encoding="utf-8").read()
     now = L.row_digests(state_text)
@@ -407,10 +676,7 @@ def reconcile(rows_arg, note):
         if label not in now:
             del merged[label]
 
-    commit = subprocess.run(["git", "-C", ROOT, "rev-parse", "--short", "HEAD"],
-                            capture_output=True, text=True).stdout.strip()
-    date = subprocess.run(["git", "-C", ROOT, "log", "-1", "--format=%cs", "HEAD"],
-                          capture_output=True, text=True).stdout.strip()
+    commit, date = pin_target()
     block = L.render_pin(commit, date, sha256_file(STATE), merged, note,
                          " | ".join(L.ledger_columns(state_text)))
 

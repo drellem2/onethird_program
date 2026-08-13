@@ -232,6 +232,48 @@
 # ALREADY RED before anything was planted" -- correctly, about a redness it had caused
 # itself.  The script now writes its own transcript after the last run instead.  Anything
 # else that shells `./build.sh` while writing into `code/**/out_*.txt` has this bug.
+# --- mg-7cc3 -------------------------------------------------------------------------------
+# ⚠️ THE EIGHTH LOOPED SUITE IS GONE, AND THIS IS THE FIRST TIME THIS FILE HAS EVER SHRUNK.
+# `code/twin_disposition_audit_3902/run_all.sh` is removed from the loop below and its
+# scripts are deleted, because THE CHECK IT RAN NOW RUNS INSIDE THE INSTRUMENT IT WAS AUDITING
+# — `twin_pin.py` SECTION 7.  mg-3902's own README says that is where it belongs and names the
+# fold as its filed successor; the block below is mg-3902's, kept verbatim as the record of
+# why the split existed, and this paragraph is why it no longer does.
+#
+# NOTHING IS LOST AND THE COVERAGE GOES UP.  The check is now on the same critical path by a
+# shorter route (mg-724a's gate runs the twin suite, which runs twin_pin.py), and it acquired
+# what a separate suite could not give it: mg-9876's arm census now claims section 7's six
+# sites, and `a2_discriminate.py` demonstrates all three of its arms RED against a known-bad
+# input and silent on a good one.  The registry went 50 arms / 59 sites -> 55 / 67.
+#
+# WHY THE OLD SUITE COULD NOT SIMPLY BE LEFT IN BESIDE IT.  Two reasons, one of them fatal:
+#   1. `a1_prerepair.py` REFUSES (exit 2) when `twin_pin.py` differs from `origin/main`, by
+#      design — its OLD column is `the control as shipped` and a landed section 7 makes that
+#      column a comparison of a thing with itself.  Its docstring says so in as many words.
+#      So the suite that was in this loop goes RED on the branch that folds it in, and the
+#      deletion is the author's own instruction rather than a judgement call.
+#   2. Two controls over one pin is a cost mg-3902 accepted deliberately and named; leaving
+#      both after the fold is the version nobody meant.
+# `out_a1_prerepair.txt` is KEPT, unrun, as the record of what the six-section control missed:
+# three provably false pins, three `VERDICT: CLEAN`, exit 0.
+#
+# THE COST, MEASURED ON THIS HOST AND NOT PREDICTED — mg-17aa's D4, and the arithmetic is not
+# quoted anywhere below.  Section 7 shells out to git six times per run of the control, and
+# `a2_discriminate.py` runs that control 110 times.  THE PAIRED MEASUREMENT, taken back to back
+# on the same host by stashing this branch and running the gate at `main` between the two:
+#
+#     WHOLE GATE, before   89.7 s   (exit 0)     WHOLE GATE, after   108.5 s
+#     mg-724a §1, the two suites it runs:  12.4 s  ->  31.0 s
+#     a2_discriminate.py alone:            11.0 s  ->  28.3 s
+#
+# TWO THINGS WERE DONE ABOUT IT RATHER THAN NONE, both measured: mg-9876's sandbox is built
+# ONCE per process and copied rather than `git init`ed 61 times (0.26 s -> 0.013 s each), and
+# section 7 asks git for its ancestry table once instead of twice (that producer 39 s -> 28 s).
+# What is left is the cost of asking git a question 110 times.  +18.8 s is 1.6% of the
+# 20-minute merge-gate timeout, and it buys a check that was ALREADY on this critical path as
+# a whole separate suite — this file is one suite shorter than it was.
+#
+# --- mg-3902 (kept: why the split existed) --------------------------------------------------
 # THE EIGHTH LOOPED SUITE IS code/twin_disposition_audit_3902 (mg-3902), AND IT IS HERE FOR
 # THE REASON THIS FILE EXISTS AT ALL.  It asks the one question mg-9bc2's six sections never
 # ask: does the rendered twin's pin RESOLVE against git?  Section 3 compares the pinned digest
@@ -337,7 +379,6 @@ for suite in \
     code/concepts_gate_602d/run_all.sh \
     code/l1b_application_28b6/run_all.sh \
     code/face_geometry_repair_e35b/run_all.sh \
-    code/twin_disposition_audit_3902/run_all.sh \
     code/c3_audit_a94c3/run_a4_census.sh
 do
     echo

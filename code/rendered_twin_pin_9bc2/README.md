@@ -93,7 +93,96 @@ somebody can read instead of an impression.
 | file | what it is |
 |---|---|
 | `lib9bc2.py` | ledger parsing (markdown + HTML), normalisation, digests, the pin format |
-| `twin_pin.py` | the control (6 sections) and `--reconcile` |
+| `twin_pin.py` | the control (7 sections) and `--reconcile` |
 | `seed_pin.py` | one-shot: seed the pin at `276aead`, the last commit that edited **both** files |
-| `negative_control.py` | 11 mutations, each naming the section that must catch it |
+| `negative_control.py` | 17 mutations, each naming the section that must catch it |
 | `COVERAGE.md` | what the control does not cover, including its own two shipped defects |
+
+## SECTION 7 — the one that asks git, added by mg-7cc3
+
+Sections 1-6 shipped without ever asking git anything, and the gap has a shape worth naming:
+**section 3 compares the pinned digest against the LIVE WORKING TREE, and section 6 compares
+the pinned commit against a VISIBLE COPY OF ITSELF.** So the field whose own header calls
+itself *"the only thing in this file that says which `STATE.md` it is a rendering of"* was
+checked only against its own duplicate, and two copies of a string agreeing with each other is
+consistency, not provenance.
+
+**Measured, not argued (mg-3902):** setting **both** copies to `deadbee` — a commit that does
+not exist — left this control at `VERDICT: CLEAN`, **exit 0**. It is now
+`negative_control.py`'s row 16 and section 7 catches it.
+
+**It was not hypothetical.** At `origin/main` on 2026-08-13 the pin named `c308368`, reachable
+only from `origin/polecat-p0e8c`, whose `STATE.md` hashes to `3d8d56d0…` against the pin's
+recorded `118158cb…`. mg-daba corrected that data; this section is the half that could not see
+it. Both were owed and they were separate tickets.
+
+### Reachability is checked BEFORE byte-identity, and the order is the point
+
+`c308368` **resolves.** It is a real object. A section 7 that asked *"does this commit exist?"*
+would go green on the exact pin that motivated it. And choosing on byte-identity first is what
+produced the bad pin: *"which commit does this file reproduce at?"* returns one obviously
+correct answer, and when that answer is off `main` you are then arguing yourself out of the
+only candidate you found. Asking *"which main-reachable commits are eligible?"* first cannot
+produce the bad pin at all. So an unreachable pin reports **NOT AN ANCESTOR** as the primary
+fault and the digest is printed after it as a consequence.
+
+| world | test | graded? |
+|---|---|---|
+| **integration** | an ancestor of `origin/main` (or `main`) | **GREEN** — both halves hold |
+| **in flight** | an ancestor of *this* `HEAD` but of no integration ref | **reported, not graded** — the one legitimate way to name an unmerged commit, and still not done: **the refinery rebases**, so this hash is rewritten out of existence when the branch lands. `2fbd5ce` died that way at mg-cdd5 |
+| **orphan** | an ancestor of neither | **RED** — `c308368` exactly |
+| *unknown* | no integration ref resolves, or there is no repository here | reported, not graded — *"git cannot answer" is not "the answer is no"* |
+
+**Byte-identity does not rescue an orphan, and that is demonstrated rather than argued.**
+`a2_discriminate.py`'s C7b probe builds one with `git commit-tree` on `HEAD`'s own tree inside
+mg-9876's sandbox: its `STATE.md` is byte-identical to the digest the pin records, and the arm
+is red anyway.
+
+## The root cause, repaired — `reconcile()` refuses, and then picks a better commit
+
+`reconcile()` stamped `git rev-parse --short HEAD` while digesting the **working tree**. Those
+are the same revision only while `STATE.md` is clean — and a reconciliation is exactly the case
+where it is not, since the natural way to do one is to edit the `STATE.md` row, rewrite the
+twin's cell and re-pin, all in one commit. Do that and **the pin names the revision before the
+edit and digests the one after it.** Every reconciliation that touched `STATE.md` produced a
+false pin, and nothing could say so.
+
+Two changes, in that order:
+
+1. **It refuses** while `STATE.md` on disk differs from `STATE.md` at `HEAD`, and leaves the
+   twin unwritten. The cost is **two commits instead of one**: land the `STATE.md` edit, then
+   reconcile the twin against it.
+2. **It then names the newest commit reachable from an integration ref whose `STATE.md` is
+   these exact bytes** — eligibility first, reproduction second. A twin-only reconciliation
+   therefore never lands an in-flight pin again, which matters because section 7 now *grades*
+   the orphan that a rebase would turn it into. When no such commit exists (the `STATE.md`
+   change is on this branch and nowhere else) it falls back to `HEAD` and **says so**, loudly.
+
+## Every claim above is a run, with its exit code
+
+Nine measurements on this branch on 2026-08-13. The two rows pm-onethird named as this
+ticket's acceptance demonstrations are the third and fourth.
+
+| world | section 7 says | exit |
+|---|---|---|
+| the pin as it stands on `main` (`b364767`) | `PASS` on ancestry, `PASS` on the digest | **0** |
+| — the same tree through the six-section control | there was no section 7 | 0 |
+| **both copies set to `deadbee`** (mg-3902's measurement) | `FAIL  the pinned commit DOES NOT RESOLVE` | **2** |
+| **both copies set to `c308368`** — a REAL commit, reachable only from `origin/polecat-p0e8c` | `FAIL  … REACHABLE FROM NOTHING THIS REPOSITORY INTEGRATES`, then the digest fault after it | **2** |
+| an orphan built with `git commit-tree` on `HEAD`'s own tree, digest byte-identical | `FAIL` on ancestry, `PASS` on the digest — the discriminating case | 2 |
+| a later, main-reachable commit whose `STATE.md` is not the digested one | `PASS` on ancestry, `FAIL  THE PIN NAMES ONE REVISION AND DIGESTS ANOTHER` | 2 |
+| an **in-flight** commit: an ancestor of `HEAD`, of no integration ref | `IN FLIGHT — REPORTED, NOT GRADED, AND NOT YET ACCEPTABLE` | **0** |
+| a tree with **no `.git`** | `REPORTED, NOT GRADED — no git work tree` | **0** |
+| `--reconcile --rows 1` with an uncommitted `STATE.md` edit | `REFUSED: STATE.md on disk differs from STATE.md at HEAD`, and the twin was **not** written (checked) | 1 |
+
+**The last three rows are the ones that could have been red for a non-reason and are not.**
+
+### What is NOT a standing control, named rather than left to be discovered
+
+Rows 3-6 and 9 are arms: `a2_discriminate.py` runs each of them two-sidedly on every merge, so
+they cannot quietly stop firing. **Rows 7 and 8 are not.** They are ungraded reports, so there
+is nothing for an arm to score, and what is on the record for them is the measurement above and
+not a check. mg-3902 put the objection best about its own version of this: *an escape hatch
+nobody has watched open is the same unfalsifiable thing as a check nobody has watched fire.*
+It has now been watched open, once, by hand, on 2026-08-13 — which is better than the
+alternative and is weaker than the other seven rows.
