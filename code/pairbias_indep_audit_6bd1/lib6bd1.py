@@ -9,11 +9,50 @@ be inherited along with its result.
 Exact rationals everywhere. No float on any path that decides anything.
 """
 
+import os
+import subprocess
 from fractions import Fraction
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 OPFORM = REPO / "docs" / "OneThird-lambda-std-Operative-Form.md"
+
+#: THE COMMIT THIS AUDIT'S CORPUS IS READ AT (mg-20ee).
+#:
+#: b5 and the selftest print `NNN: <row>` -- line numbers into STATE.md, a file
+#: mg-6bd1 does not own -- and they read it from the WORKING TREE.  ALREADY
+#: FIRED: a re-run on 2026-08-13 moves the glossary row from :43 to :51 and the
+#: mg-61bb row from :155 to :165, with EVERY ADJUDICATION IDENTICAL.  The same
+#: read now serves the Op-Form ledger, which had not yet moved but is the same
+#: construction and would have.
+#:
+#: CHOSEN ON A MEASUREMENT: at 52d290a -- the commit carrying these transcripts
+#: -- STATE.md puts those rows at exactly :43 and :155, and all six committed
+#: transcripts reproduce byte-identically.  Checked before one was edited.
+AS_OF = "52d290a961872ca532973f7dbef9f0c1203a7c6e"
+
+#: Override, for re-measuring against a different corpus: any commit-ish, or the
+#: literal WORKTREE.  Unset is the pinned default and is the only value that
+#: reproduces the committed transcripts.
+AT = os.environ.get("PAIRBIAS_INDEP_AT", "").strip() or AS_OF
+
+
+def read_at(rel):
+    """REPO/rel as of AT.  Every `NNN:` this audit prints is an offset into
+    THESE bytes, so pinning the bytes is what pins the addresses."""
+    rel = str(rel)
+    if rel.startswith(str(REPO)):
+        rel = os.path.relpath(rel, str(REPO))
+    if AT == "WORKTREE":
+        return (REPO / rel).read_text()
+    got = subprocess.run(["git", "-C", str(REPO), "show", "%s:%s" % (AT, rel)],
+                         capture_output=True)
+    if got.returncode != 0:
+        raise SystemExit(
+            "mg-6bd1: cannot read %s at %s: %s\n"
+            "  (PAIRBIAS_INDEP_AT=%r; unset it for the pinned run.)"
+            % (rel, AT, got.stderr.decode("utf-8", "replace").strip(), AT))
+    return got.stdout.decode("utf-8", "replace")
 
 
 # ----------------------------------------------------------------- ledger reader
@@ -103,7 +142,10 @@ def _deps_from_label(label, valid_ids):
 
 
 def read_ledger(path=None):
-    text = (path or OPFORM).read_text()
+    # mg-20ee: the CORPUS ledger is read at AT; an explicitly-passed path is a
+    # SYNTHETIC FIXTURE (the selftest writes one) and must be read off disk --
+    # pinning a fixture would look for it in a commit that never had it.
+    text = read_at(OPFORM) if path is None else Path(path).read_text()
     rows = _ledger_rows(text)
     ids = {r[0] for r in rows}
     claims, edges, rejected = {}, {}, {}
@@ -183,3 +225,29 @@ def E_unif_footrule_sum(n):
 def E_unif_inv(n):
     """E_unif[inv] = C(n,2)/2."""
     return C2(n) / 2
+
+
+def asof_stamp():
+    """The as-of block b5 and the selftest open the address screen with."""
+    return """\
+------------------------------------------------------------------------------
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (mg-20ee)
+------------------------------------------------------------------------------
+  corpus read at : %s
+      %s
+
+  EVERY `NNN:` PREFIXING A QUOTED ROW IS AN ADDRESS, NOT A FINDING.  It is an
+  offset into STATE.md, a file this audit DOES NOT OWN, and it moves whenever
+  pm-onethird amends it.  IT ALREADY HAD: read live on 2026-08-13 the glossary
+  row is at :51 and the mg-61bb row at :165, against the :43 and :155 recorded
+  here -- WITH EVERY ADJUDICATION IDENTICAL.  THE QUOTED ROW ITSELF IS THE
+  PRIMARY ADDRESS: it survives STATE.md moving, the number does not.
+
+  EVERYTHING ELSE IS STABLE: the rows-matched counts, the naive-grep confound
+  count, the L4-token screens and every ADJUDICATION.  To re-ask against the
+  current corpus:
+
+      PAIRBIAS_INDEP_AT=HEAD sh run_all.sh    (or =WORKTREE, or any commit)
+------------------------------------------------------------------------------
+""" % (AT, "AS_OF, the pinned default" if AT == AS_OF
+       else "OVERRIDE via PAIRBIAS_INDEP_AT -- NOT the as-of stamp " + AS_OF[:7])

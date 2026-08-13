@@ -50,3 +50,31 @@ the party under audit**, which is why they are on the page rather than quietly f
   found no files, and printed *"L4-indicator tokens: NONE"* for every input: it confirmed
   the verdict under audit by failing to open the evidence. Guarded by S3, which requires
   a missing evidence path to **raise** rather than return clean.
+
+## The corpus is read at an as-of commit (`mg-20ee`)
+
+`b5` and the selftest print `NNN: <row>` — **line numbers into `STATE.md`**, a file this audit
+does not own — and read it from the working tree. **It had already fired**: read live on
+2026-08-13 the glossary row is at `:51` and the `mg-61bb` row at `:165`, against the `:43` and
+`:155` recorded here, **with every adjudication identical**. Same statements, new addresses.
+
+This is the second time the same screen has been caught reading badly. §D4's kept defect was the
+screen running **blind** — bare relative paths meant `grep` opened nothing and the screen
+confirmed the verdict under audit by failing to open the evidence. This is the same screen
+running on **bytes that move under it**, so its addresses were valid at no stated commit.
+
+`lib6bd1.read_at` now reads at `AS_OF = 52d290a` via `git show`, and the Op-Form ledger goes
+through the same reader — it had not yet moved, but it is the same construction and would have.
+`PAIRBIAS_INDEP_AT=HEAD` (or `=WORKTREE`, or any commit) re-measures.
+
+An explicitly-passed ledger path is still read **off disk**: that is the selftest's *synthetic
+fixture*, and pinning a fixture would look for it in a commit that never contained it.
+
+**Both directions measured.**
+
+- *Unchanged corpus*: all six transcripts reproduced **byte-identically with zero changes**
+  before the stamp was added — step 1 of the numbers-neutrality method passing outright. With the
+  stamp they are `+20 / -0` and `+20 / -0`, and two consecutive `run_all.sh` runs are identical.
+- *Changed corpus* (`PAIRBIAS_INDEP_AT=HEAD`): `b5` differs in 8 lines and **every one is an
+  address or the as-of block**. Every adjudication, rows-matched count, naive-grep confound count
+  and L4-token screen is identical.

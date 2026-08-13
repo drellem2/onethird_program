@@ -14,6 +14,8 @@ INEQUALITY OR STEP that fails when L4 is withdrawn — naming a document is not 
 """
 
 import subprocess
+
+import lib6bd1 as L  # mg-20ee: the corpus is read AT A DECLARED COMMIT
 from pathlib import Path
 
 # DEFECT OF THIS SCRIPT, KEPT IN THE SOURCE (mg-6bd1 §D4) — THE SAME FLATTERING SHAPE
@@ -85,20 +87,25 @@ def pull(spec):
     if spec is None:
         return [], 0
     path, pat = spec
-    f = REPO / path
-    if not f.exists():
-        raise SystemExit(f"BUG: {f} does not exist — this screen must not run blind")
-    rows = [f"{i}: {l}" for i, l in enumerate(f.read_text().split("\n"), 1) if pat in l]
+    # mg-20ee: read AT A DECLARED COMMIT.  The §D4 defect kept above was the
+    # screen running BLIND; this is the same screen running on bytes that move
+    # under it, so the addresses it prints were valid at no stated commit.
+    text = L.read_at(path)
+    if not text:
+        raise SystemExit(f"BUG: {path} is empty at {L.AT} — this screen must not run blind")
+    rows = [f"{i}: {l}" for i, l in enumerate(text.split("\n"), 1) if pat in l]
     naive = 0
     if "mg-" in pat:
         mgid = [t for t in pat.split() if t.startswith("mg-")][0].strip("()")
-        naive = sum(1 for l in f.read_text().split("\n") if mgid in l)
+        naive = sum(1 for l in text.split("\n") if mgid in l)
     return rows, naive
 
 
 print("=" * 78)
 print("B5 — mg-345e's dependency list, walked ONE LEVEL DOWN")
 print("=" * 78)
+print()
+print(L.asof_stamp(), end="")
 print()
 print("SCREEN (machine) + ADJUDICATION (hand). The screen cannot see an unrecorded")
 print("dependence; the adjudication is what decides, and it is bound by mg-6bd1's P14:")

@@ -2,6 +2,26 @@
 B5 — mg-345e's dependency list, walked ONE LEVEL DOWN
 ==============================================================================
 
+------------------------------------------------------------------------------
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (mg-20ee)
+------------------------------------------------------------------------------
+  corpus read at : 52d290a961872ca532973f7dbef9f0c1203a7c6e
+      AS_OF, the pinned default
+
+  EVERY `NNN:` PREFIXING A QUOTED ROW IS AN ADDRESS, NOT A FINDING.  It is an
+  offset into STATE.md, a file this audit DOES NOT OWN, and it moves whenever
+  pm-onethird amends it.  IT ALREADY HAD: read live on 2026-08-13 the glossary
+  row is at :51 and the mg-61bb row at :165, against the :43 and :155 recorded
+  here -- WITH EVERY ADJUDICATION IDENTICAL.  THE QUOTED ROW ITSELF IS THE
+  PRIMARY ADDRESS: it survives STATE.md moving, the number does not.
+
+  EVERYTHING ELSE IS STABLE: the rows-matched counts, the naive-grep confound
+  count, the L4-token screens and every ADJUDICATION.  To re-ask against the
+  current corpus:
+
+      PAIRBIAS_INDEP_AT=HEAD sh run_all.sh    (or =WORKTREE, or any commit)
+------------------------------------------------------------------------------
+
 SCREEN (machine) + ADJUDICATION (hand). The screen cannot see an unrecorded
 dependence; the adjudication is what decides, and it is bound by mg-6bd1's P14:
 naming a document is not enough — the failing step must be exhibited.
