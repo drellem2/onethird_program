@@ -30,7 +30,7 @@ defect — only running it two ways decides that.
         code/species_depth_audit_4700/q2_wiring.py:159  msg = "E2 CROSS-SECTION FAILED" in out
     species_sites_821e  (11)
         code/species_sites_821e/kern821e.py:100  if WIRE_MARK not in text:
-        code/species_sites_821e/kern821e.py:320  if needle not in body:
+        code/species_sites_821e/kern821e.py:332  if needle not in body:
         code/species_sites_821e/p3_wiring.py:111  ctl_a = "(a) B1 restored" in out and "fires, 1 finding -- ok" in out
     species_bound_repair_5040  (10)
         code/species_bound_repair_5040/r1_bound.py:77  names = name in out
