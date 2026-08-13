@@ -1,0 +1,19 @@
+mg-d3f3 a2 -- the V6b row name against the V6b measurement
+  V6b's declared value, in full, because the finding is about its SHAPE: {'specifiers': 210, 'd': 162, 's': 48, 'fstrings': 0, 'format_calls': 0, 'str_calls': 0, 'nonliteral_mod': 1}
+  it is a multiset of conversion TYPES, so any edit preserving the type counts preserves the row.
+
+  [PASS] a2.1 Y1 ADD AND REMOVE -- one %d-bearing count deleted from `negative_control_incidence` and a different one added: V6a, V6b, V6c and V6d are ALL GREEN (population: the four V6 rows; grain: one row)  -- red: ['the artifact no longer ASSERTS the h']; the removed sentence was '    * WHERE A ROW REPORTS THE SPECTRUM MOVING ON FEWER T'; the artifact moved by 884 bytes and the census by 0
+  PREDICTION MISS, KEPT AS WRITTEN.  P3a predicted the verifier would exit 0 on Y1.  It exits 1.  The V6 half of the prediction is what a2.1 scores and it held; the exit code did not, because the print Y1 deleted happened to carry the phrase V5's HEDGE row anchors on ("WHAT IS IN THE REMAINDER IS NOW STATED").  That is a real red and it is not the census's: a literal-anchor row elsewhere in the file caught the collateral, not the count.  Y1b below removes the collateral and leaves the claim.
+  [PASS] a2.1b Y1b -- the count alone removed (its `%d` made literal text, its operand dropped) and a new single-`%d` count added: the verifier exits 0 with all rows green, so a count WAS added and a count WAS removed and nothing in the file says so (P3a, cleanly)  -- exit 0, red: none
+    FORCED                 specifiers V6b measures under Y1/Y1b = 210  -- FORCED BY THE CONSTRUCTION: both are built to preserve the multiset, so this row could not have come out otherwise and is not offered as evidence -- the evidence is the exit code beside it
+  [PASS] a2.2 Y2 OUT OF POPULATION -- a count added to the sibling section `negative_control_construction` REACHES the artifact and moves none of V6a/V6b/V6c/V6d; verifier exit 0 (P3b)  -- the new count is in controls_output.txt; exit 0, red: none
+  THE SENTENCE THIS CONTRADICTS, verbatim from verify_e35b.py's V6c row: "so a count CANNOT be added to the artifact without moving V6b".  Y2 adds one and V6b does not move.  The claim is true of `negative_control_incidence` and false of the artifact, and the row says artifact.
+  [PASS] a2.3 Y3 (WRONG DIRECTION) -- the SAME count added INSIDE the section does turn V6b red and exits 1, so Y1 and Y2 are not reporting a census that never fires  -- exit 1, red: ['V6b CENSUS -- NEGATIVE CONTROL 4 pri', 'V6d REACH -- of the 210 formatted va']
+    COULD MOVE             sections main() calls into the artifact = 11  -- a section added to or removed from main() moves it; V6b's population is 1 of them (negative_control_incidence)
+  [PASS] a2.4 the artifact is the output of more than one section, which is why Y2 exists  -- scoring_self_test, positive_control_homology, negative_control_signs, positive_control_poset_counts, positive_control_face_complex, positive_control_FP_homology, negative_control_identity, negative_control_construction, negative_control_incidence, artifact_banner_check, summarise
+
+  VERDICT ON THE WORD.  "TRIPWIRE" is honest about the MECHANISM -- it fires on a change rather than proving a correspondence, and the row says so.  It is not honest about the SCOPE, and the scope is the half a reader scores the repair by.  The repair for this is one clause, not a redesign: the population belongs in the row name.  That is a recommendation, not an edit -- nothing here is changed.
+  [PASS] a2.5 nothing under code/ was written  -- moved: none
+
+  2 printed counts, 1 FORCED and named above.  This tally is itself FORCED (it is a count of this file's own rows) and is printed, not scored.
+6 checks, 0 refuted.

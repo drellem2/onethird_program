@@ -1,0 +1,11 @@
+mg-d3f3 a0 -- audit harness self-test (controls before the audit)
+  [PASS] a0.1 BASELINE -- the unmutated sandbox exits 0 with 29 rows, all green, and reproduces out_verify_e35b.txt byte for byte  -- exit 0, 29 rows, 0 red, transcript identical
+    COULD MOVE             rows scored by the verifier        = 29  -- a row added or deleted in verify_e35b.py moves it; it is 29 today and was 28 before mg-843d added V6d
+  [PASS] a0.2 THE HARNESS SEES RED -- mg-8af0's C3 (a classified count reworded in the artifact by hand) turns V6a and V6c red and exits 1  -- exit 1, 4 red: ['V6a ANCHORED -- every one of the 12 clas', 'V6c REGENERATED -- controls_output.txt i', 'V6d REACH -- of the 210 formatted values', 'artifact carries the coverage sizing  --']
+    COULD MOVE             rows red under C3                  = 4  -- V6d also reads the artifact, so the 3 here is V6a + V6c + V6d and it would be 2 on the pre-mg-843d tree
+  [PASS] a0.3 THE TAG LOOKUP CANNOT MATCH NOTHING -- row() raises rather than reporting an absent row as green  -- raised: "tag 'V6a' matched 0 rows, not 1"
+  [PASS] a0.4 NO WRITE ESCAPES THE SANDBOX -- all 21 tracked files under face_geometry/, _repair_e35b/ and _repair_8af0/ are byte-identical before and after  -- moved: none
+    COULD MOVE             tracked files hashed               = 21  -- a file added to any of the three directories moves it
+
+  3 printed counts, 0 FORCED and named above.  This tally is itself FORCED (it is a count of this file's own rows) and is printed, not scored.
+4 checks, 0 refuted.

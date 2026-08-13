@@ -1,0 +1,24 @@
+mg-d3f3 a1 -- F1 put back at the source, and the whole candidate space asked whether it noticed
+  the F1 site, verbatim, at controls.py:2282:
+      % (site_rows[3][1], N, ...)
+  X1 puts back mg-fcb2's F1:  % (N, N, ...)
+  X2 is the wrong-direction control: % (N - 1, N, ...)  -- still unable to respond to the
+      corruption, but it prints different digits
+
+  [PASS] a1.1 X1 -- with F1 put back, the artifact is BYTE-IDENTICAL to the committed one (P1a)  -- regenerated 41081 bytes against the committed 41081; controls.py exit 0
+    FORCED                 bytes differing in the artifact    = 0  -- mg-8af0's E1 measured the repair as digit-neutral, so its reversal is digit-neutral too; this 0 could not have come out otherwise once E1 held and is printed, not offered as evidence
+  [PASS] a1.2 X1 -- verify_e35b.py exits 0 with all 29 rows green: V6a, V6b, V6c, V6d and V7 ALL PASS with F1 present (P1b)  -- exit 0, red rows: none
+  [PASS] a1.3 X1 -- every other scored artefact of the repair also exits 0 with F1 present: the two demonstrations and the three probes (P1c)  -- demo_f2_row_can_go_red.py exit 0, probe_f1_count_moves.py exit 0, probe_f3_ridge_multiplicity.py exit 0, probe_f3_tightness.py exit 0, demo_v6d_row_can_go_red.py exit 0
+  probe_f1_count_moves.py is the artefact whose whole subject is this count, and it exits 0 because it never opens controls.py: it rebuilds the measured numerator from top_laplacians and TRANSCRIBES the tautology as `len(ps)`.  It is a statement about two definitions, not about the file that uses one of them.
+    COULD MOVE             artefacts in the candidate space   = 35  -- 1 artifact-byte comparison + 29 verifier rows + 5 scripts; a row or script added to the repair moves it
+    FORCED                 of them that go red when F1 returns = 0  -- FORCED by a1.1: an artifact-scored row cannot move on byte-identical bytes, and no artefact reads the F1 site's SOURCE.  Naming the forcing is the point -- this 0 is not evidence that the repair is weak, it is a restatement of E1
+  [PASS] a1.4 X2 (WRONG DIRECTION) -- a tautology that prints DIFFERENT digits does move the artifact  -- regenerated 41081 bytes against 41081; the sentence now reads 'corrupted on 85/86 posets'
+  [PASS] a1.5 X2 -- and THEN the rows fire: V6a red, V7 red, exit 1  -- exit 1, 2 red: ['V6a ANCHORED -- every one of the 12 clas', '`le_to_facet` is corrupted at the SITE o']
+    COULD MOVE             rows red under X2                  = 2  -- which rows fire depends on which anchors the moved digits sit in; V6b stays green in both constructions because no specifier moved in either
+
+  THE DIVIDING LINE, MEASURED: X1 and X2 are the same defect class -- an operand at the F1 site that cannot respond to the corruption the sentence is about.  X1 is invisible to all 35 artefacts and X2 is caught by two rows.  What separates them is not the defect; it is whether the digits happened to move.  So the repair's guard is a guard on the OUTPUT and F1 was a defect in the EXPRESSION, and the two only coincide when a reader is lucky.
+  WHAT THIS IS NOT.  It is not a claim that the F1 repair failed: the printed number IS now a measurement, and probe_f1_count_moves.py shows it taking three values.  It is a claim about the SCOPE of the declared limit -- see a3.
+  [PASS] a1.6 nothing under code/ was written  -- moved: none
+
+  4 printed counts, 2 FORCED and named above.  This tally is itself FORCED (it is a count of this file's own rows) and is printed, not scored.
+6 checks, 0 refuted.

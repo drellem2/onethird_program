@@ -1,0 +1,26 @@
+mg-d3f3 a5 -- E10's fourth row, built and scored
+  [PASS] a5.1 THE ROW AND ITS SCORE BOTH EXIST, verbatim: E10 predicts exit 1 for the repaired verifier against the pre-repair artifact, and the README scores the table HIT, 5/5  -- row present: True; score present: True
+  [PASS] a5.2 AND NOTHING IN THE REPAIR BUILDS THAT WORLD.  No artefact under face_geometry/, _repair_e35b/ or _repair_8af0/ reads a blob out of git or names the pre-repair commit as an input; the one file that mentions 5f542f0 does so in a comment about TRANSCRIBING the old condition, not about running against the old tree.  So the cell is scored HIT with no run behind it  -- artefacts naming 5f542f0 or shelling to git: ['demo_f2_row_can_go_red.py']
+    COULD MOVE             cells of E10 with a committed artefact behind them = 4  -- run_all.sh's two exit codes, mg-e35b's own committed transcript, and out_demo_f2.txt; a fifth artefact would move it to 5, which is what this file recommends and does not perform
+
+  [PASS] a5.3 THE WORLD BUILDS AND THE ROW IS SCORED: face_geometry/ at 5f542f0 with verify_e35b.py at 66130f8 exits 0.  E10 predicted 1.  The row is therefore a MISS -- and it was TRUE-BY-CONSTRUCTION rather than measured, which is the finding either way  -- exit 0; 0 rows red: none; last line '28 checks, 0 refuted.'
+    COULD MOVE             exit code of E10's fourth world, measured here for the first time = 0  -- it is a property of two commits and it is what E10 bet on; a repaired verifier that did not classify the F1 count would print 0
+
+    the rows that fire in E10's fourth world, in full:
+      (none)
+
+    "the pre-repair artifact" has three available readings and the row does not
+    pick one, so each is built rather than argued:
+
+      reading                                                    measured E10 said
+      R-a  the whole pre-repair TREE, repaired verifier          0        1   MISS
+      R-b  the repaired tree with a STALE artifact from 5f542f0  1        1   HIT
+      R-c  the real tree at the F2 commit (a4.4's transcript)    0        1   MISS
+  [PASS] a5.4 E10's FOURTH ROW IS A HIT UNDER 1 OF THE 3 READINGS AND A MISS UNDER 2, and nothing in the repository picks the reading or runs any of them.  The one that comes out 1 is the STALE-ARTIFACT reading, where V6c fires -- and V6c is a row about staleness, not about F1.  Under the two readings that are about F1 the answer is 0  -- R-b's red rows: ['V6c REGENERATED -- controls_output.txt is by']
+    COULD MOVE             readings of E10 row 4 under which it is a HIT = 1  -- a fourth reading, or a repair that made the F1 defect visible, would move it
+
+  AND THE SHARPEST FORM OF a1, WHICH FALLS OUT OF R-a: mg-8af0's COMPLETE repaired verifier, run against the tree AS IT WAS BEFORE mg-8af0 TOUCHED IT, reports 28 checks and 0 refuted.  The instrument does not separate the repaired tree from the unrepaired one.  Every difference the repair made is in prose, in the operand of one `%` expression, and in the verifier's own TABLE -- and none of those three is a thing any row of the verifier reads.
+  WHAT THIS DOES NOT SAY.  It does not say the prediction was wrong to be believed -- it is the kind of claim a careful author can be confident of from reading.  It says a table headed with the word SCORED contains one cell that was reasoned to and four that were run, and does not distinguish them.  mg-8af0 draws exactly that distinction elsewhere, repeatedly and at its own expense (the E6a miss, the E9 half-miss, R0-style disclosure of paper derivations), which is why the one place it does not is worth a row.
+
+  3 printed counts, 0 FORCED and named above.  This tally is itself FORCED (it is a count of this file's own rows) and is printed, not scored.
+4 checks, 0 refuted.
