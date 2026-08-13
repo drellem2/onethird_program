@@ -202,7 +202,21 @@ print("SWEEP TOTAL STRONG: %d of %d measured (%d unmeasured)"
       % (strong, measured, counts.get("TIMEOUT", 0)))
 print("=" * 78)
 print()
-print("""EXTENT OF THIS NUMBER.  It is a SAMPLE of the blind spot, not a count of it:
+print("""WHY A PARTIAL SWEEP IS STILL A SAMPLE AND NOT A PREFIX.  The work list is the
+137 runnable blind-spot directories ordered by the md5 of their path, which is
+independent of anything this measures, so the ordering is a random permutation
+and ANY PREFIX OF IT IS A SIMPLE RANDOM SAMPLE.  That is the property that
+makes a sweep stopped on a clock still worth quoting, and it is why the order
+is md5 and not alphabetical -- the names are alphabetical by topic, and a
+prefix of THAT is a sample of nothing.
+
+AND THE STOPPING RULE IS DISCLOSED, because I could see the rows as they
+landed: this run was stopped on a TIME BUDGET and not on a count and not on
+its answer.  A reader who wants that dependency removed should re-run with a
+larger N; the sample is a function of the path, so the rows above reappear
+unchanged and the new ones are appended.
+
+EXTENT OF THIS NUMBER.  It is a SAMPLE of the blind spot, not a count of it:
 c1_population.py prints the population's size and this prints the sample's.
 The classifier's two rules and both directions of its error are planted in
 c0_controls.py and its one measured over-count on a real diff is published
@@ -212,13 +226,18 @@ there rather than tuned away.  It says NOTHING about the instruments in
 reproduction: an instrument too slow for the budget is unmeasured here and
 should not be read as healthy.
 
-ONE CLASS THIS RUN DID NOT ENCOUNTER, NAMED BECAUSE IT WOULD BE MISREAD.
+THE RULE I ALMOST ADDED, AND THE ROW THAT SHOWED IT WOULD HAVE BEEN WRONG.
 DEAD is detected by a Traceback in the transcript, which only appears when the
 runner redirects stderr into it.  A runner that does NOT would leave a
 TRUNCATED transcript instead -- many deletions, almost no additions -- and
-every removed verdict line in it would be counted as a moved verdict.  No such
-row is in this sweep: every truncated diff here belongs to a TIMEOUT, which is
-already excluded from the measured set.  If a future run shows one, the shape
-to look for is in the `lines=` column and the rule to add belongs beside the
-Traceback rule, with the real case as its justification rather than a
-threshold guessed in advance.""")
+every removed verdict line in it would be counted as a moved verdict.  The
+obvious guard is a ratio: call a diff DEAD when deletions swamp additions.
+
+IT WOULD HAVE BEEN WRONG ON THE FIRST ROW IT MET.  code/hodge_leverage_repair_8eca
+came back `4+/143-`, the exact shape, and it is not a crash: the run reports
+`green` -> `STILL RED` and `rows that failed: 1` -> `29`, and the transcript
+shrank because the run STOPPED CONFIRMING things it used to confirm.  A
+vanished [CONFIRMED] block is the strongest form of a moved verdict, not
+evidence of a dead instrument.  So no ratio rule is added, and the reason is
+a measurement rather than a preference: the shape of the diff does not
+distinguish a truncated run from a run with less to say.""")
