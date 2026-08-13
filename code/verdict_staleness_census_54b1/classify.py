@@ -47,7 +47,8 @@ for line in open(tsv, encoding="utf-8"):
         verdict, ev = L.classify_diff(diff)
     foreign = [c for c in changed
                if L.TRANSCRIPT.match(c) and not c.startswith(d + "/")]
-    rows.append((d, verdict, rc, secs, n, ev, foreign))
+    load = f[7] if len(f) > 7 else ""
+    rows.append((d, verdict, rc, secs, n, ev, foreign, load))
 
 hdr("mg-54b1  IS IT STALE IN THE STRONG SENSE?  A SWEEP OF THE BLIND SPOT")
 
@@ -91,8 +92,9 @@ print()
 
 hdr("§2  EVERY INSTRUMENT, WITH ITS CLASS")
 
-for d, v, rc, secs, n, _e, _f in sorted(rows, key=lambda r: (order.get(r[1], 9), r[0])):
-    print("  %-46s %-14s rc=%-4s %4ss %s" % (d, v, rc, secs, n))
+print("  %-46s %-14s %-6s %5s %-10s %s" % ("instrument", "class", "rc", "secs", "lines", "load"))
+for d, v, rc, secs, n, _e, _f, ld in sorted(rows, key=lambda r: (order.get(r[1], 9), r[0])):
+    print("  %-46s %-14s rc=%-3s %5s %-10s %s" % (d, v, rc, secs, n, ld or "-"))
 print()
 
 hdr("§3  THE EVIDENCE FOR EVERY `VERDICT MOVED`")
@@ -101,7 +103,7 @@ print("""  Quoted so this number can be checked rather than believed.  c0's R3 i
   real diff this classifier over-counts, so a reader who wants the catch and
   not the net should read these.  At most three lines per file.""")
 print()
-for d, v, _rc, _s, _n, ev, _f in sorted(rows):
+for d, v, _rc, _s, _n, ev, _f, _l in sorted(rows):
     if v != "VERDICT MOVED":
         continue
     print("  --- %s" % d)
@@ -129,7 +131,7 @@ print("""  The sweep runs in a clone of the branch that carries it, so this bran
 print()
 OWN = ("54b1", "verdict_staleness_census")
 hits = 0
-for d, v, _rc, _s, _n, ev, _f in sorted(rows):
+for d, v, _rc, _s, _n, ev, _f, _l in sorted(rows):
     if v != "VERDICT MOVED":
         continue
     for path, evs in sorted(ev.items()):
@@ -152,7 +154,7 @@ print("""  The sweep keeps the WHOLE-REPO diff a run produced, not just the diff
   the instrument that owns it, which would inflate the count.  So the two are
   separated and printed.""")
 print()
-foreign_rows = [(d, f) for d, _v, _rc, _s, _n, _e, f in sorted(rows) if f]
+foreign_rows = [(d, f) for d, _v, _rc, _s, _n, _e, f, _l in sorted(rows) if f]
 if not foreign_rows:
     print("  0 instruments changed a transcript outside their own directory,")
     print("  so every class above is attributed to the instrument that owns it.")
@@ -163,7 +165,7 @@ else:
             print("      %s" % c)
 print()
 
-dead = [d for d, v, _r, _s, _n, _e, _f in rows if v == "DEAD"]
+dead = [d for d, v, _r, _s, _n, _e, _f, _l in rows if v == "DEAD"]
 if dead:
     hdr("§4  DEAD -- THE INSTRUMENT RAISED AND PRODUCED NO COMPARABLE TRANSCRIPT")
     print("  A transcript whose instrument no longer RUNS is worse than a stale")
@@ -175,15 +177,24 @@ if dead:
         print("      %s" % d)
     print()
 
-to = [(d, s) for d, v, _r, s, _n, _e, _f in rows if v == "TIMEOUT"]
+to = [(d, s, l) for d, v, _r, s, _n, _e, _f, l in rows if v == "TIMEOUT"]
 if to:
     hdr("§5  TIMEOUT -- NOT MEASURED, AND NOT COUNTED AS REPRODUCING")
-    print("  Killed at the sweep's budget, mid-run.  These are UNMEASURED; the")
+    print("""  Killed at the sweep's budget, mid-run.  These are UNMEASURED, and a
+  TIMEOUT IS NOT A PROPERTY OF THE INSTRUMENT: it is a property of the
+  instrument, the budget AND the host.  The run that produced the committed
+  transcript shared a 10-core machine with other agents whose load average was
+  measured by hand at 16 when it started and 60 an hour later, so an
+  instrument needing 60 s on an idle host can miss a 120 s budget here.  The
+  `load` column exists so a later reader does not have to take my word for
+  that; where it reads `not recorded`, the column was added after that row was
+  produced.""")
+    print()
     print("  percentage above is over the measured set and says so.  Re-run")
     print("  sweep_54b1.sh with a larger timeout to close them.")
     print()
-    for d, s in to:
-        print("      %-46s killed at %ss" % (d, s))
+    for d, s, l in to:
+        print("      %-46s killed at %ss, host load %s" % (d, s, l or "not recorded"))
     print()
 
 print("=" * 78)
@@ -199,4 +210,15 @@ there rather than tuned away.  It says NOTHING about the instruments in
 ./build.sh's loop, which mg-f771 regrades on every merge, nor about mg-20ee's
 44, which its own ground truth already re-ran.  And a TIMEOUT is not a
 reproduction: an instrument too slow for the budget is unmeasured here and
-should not be read as healthy.""")
+should not be read as healthy.
+
+ONE CLASS THIS RUN DID NOT ENCOUNTER, NAMED BECAUSE IT WOULD BE MISREAD.
+DEAD is detected by a Traceback in the transcript, which only appears when the
+runner redirects stderr into it.  A runner that does NOT would leave a
+TRUNCATED transcript instead -- many deletions, almost no additions -- and
+every removed verdict line in it would be counted as a moved verdict.  No such
+row is in this sweep: every truncated diff here belongs to a TIMEOUT, which is
+already excluded from the measured set.  If a future run shows one, the shape
+to look for is in the `lines=` column and the rule to add belongs beside the
+Traceback rule, with the real case as its justification rather than a
+threshold guessed in advance.""")

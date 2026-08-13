@@ -46,8 +46,16 @@ while IFS= read -r d; do
   n=$(git diff --numstat | awk '{a+=$1;b+=$2} END{printf "%d+/%d-", a, b}')
   if [ -z "$changed" ]; then cls=REPRODUCES; else cls=DIFFERS; fi
   [ "$rc" = "137" ] && cls=TIMEOUT
-  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
-    "$d" "$cls" "$rc" "$((end-start))" "$n" "$changed" "$untracked" >> "$OUTDIR/sweep.tsv"
+  # LOAD IS RECORDED BECAUSE A TIMEOUT IS NOT A PROPERTY OF THE INSTRUMENT.
+  # The run that produced out_sweep_54b1.txt shared a 10-core host whose load
+  # average was measured by hand at 16 when it started and 60 an hour later,
+  # and an instrument that needs 60 s idle can miss a 120 s budget at that
+  # load.  Without this column a reader cannot tell a slow instrument from a
+  # busy host, and the first run of this sweep could not tell them apart.
+  load=$(uptime | sed 's/.*averages*: *//' | awk '{print $1}' | tr -d ',')
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+    "$d" "$cls" "$rc" "$((end-start))" "$n" "$changed" "$untracked" "$load" \
+    >> "$OUTDIR/sweep.tsv"
   echo "[$i/$total] $d $cls rc=$rc $((end-start))s $n" >> "$OUTDIR/progress.log"
   git checkout -q -- . 2>/dev/null
   git clean -fdqx -e '.git' 2>/dev/null
