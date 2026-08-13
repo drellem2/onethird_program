@@ -1,0 +1,77 @@
+============================================================================================
+mg-6ff4  c0  controls — including the two that must fail
+============================================================================================
+
+T1  isomorphism-class counts vs OEIS A000112
+--------------------------------------------------------------------------------------------
+    n=1         1  expected        1   [ok]
+    n=2         2  expected        2   [ok]
+    n=3         5  expected        5   [ok]
+    n=4        16  expected       16   [ok]
+    n=5        63  expected       63   [ok]
+    n=6       318  expected      318   [ok]
+    n=7      2045  expected     2045   [ok]
+    n=8     16999  expected    16999   [ok]
+
+T2  the census, re-measured, against mg-7c78 a5's printed table
+--------------------------------------------------------------------------------------------
+      n     posets    min delta         =1/3         <1/3   vs a5
+      2          1          1/2            0            0   [agrees]
+      3          4          1/3            1            0   [agrees]
+      4         15          1/3            2            0   [agrees]
+      5         62          1/3            3            0   [agrees]
+      6        317          1/3            5            0   [agrees]
+      7       2044          1/3            8            0   [agrees]
+      8      16998          1/3           12            0   [agrees]
+
+T3  the two identities, against brute-force enumeration of L(P), and the SCOPE that
+    separates them
+--------------------------------------------------------------------------------------------
+    (a) LINEARITY, any reference order:    399 posets · mismatches 0   [PASS]
+    (b) SHORTCUT  E[inv_e] = sum min(p,1-p), IN SCOPE (every pair >= 2/3-decided,
+        i.e. delta <= 1/3):              11 posets · mismatches 0   [PASS]
+    (c) ⚠️  THE SAME SHORTCUT OUT OF SCOPE:   388 posets · WRONG at 192 of them.
+        THAT IS THE CONTROL, NOT A FAILURE.  The shortcut is co-extensive with the
+        boundary/frozen condition itself: off it, `e` is not the majority order, the
+        per-pair disagreement is NOT min(p,1-p), and using it anyway understates
+        E[inv_e]. Every arm here applies it ONLY inside (b)'s scope.
+
+T4  the 3-element V, by hand
+--------------------------------------------------------------------------------------------
+    L(P) = [(0, 1, 2), (0, 2, 1), (2, 0, 1)]
+    p table = {(0, 2): '2/3', (1, 2): '1/3'}
+    e = (0, 2, 1) (unique=True)   delta = 1/3   E[inv_e] = 2/3   eps = 1/2
+    hand values {'|L|': '3', 'e': '(0, 2, 1)', 'Einv': '2/3', 'eps': '1/2', 'delta': '1/3'}   [PASS]
+
+T5  ordinal additivity — delta is a max, E[inv_e] is a sum
+--------------------------------------------------------------------------------------------
+    305 ordinal sums A(+)B, |A|,|B| <= 4, |A(+)B| <= 7 · failures 0   [PASS]
+
+T6  the two-atom law saturates n/(n+1) in the eps_spec normalisation
+--------------------------------------------------------------------------------------------
+    n= 3  E_mu[inv_e] =      1   eps =    3/4   n/(n+1) =    3/4   [ok]
+    n= 4  E_mu[inv_e] =      2   eps =    4/5   n/(n+1) =    4/5   [ok]
+    n= 5  E_mu[inv_e] =   10/3   eps =    5/6   n/(n+1) =    5/6   [ok]
+    n= 6  E_mu[inv_e] =      5   eps =    6/7   n/(n+1) =    6/7   [ok]
+    n= 7  E_mu[inv_e] =      7   eps =    7/8   n/(n+1) =    7/8   [ok]
+    n= 8  E_mu[inv_e] =   28/3   eps =    8/9   n/(n+1) =    8/9   [ok]
+    n= 9  E_mu[inv_e] =     12   eps =   9/10   n/(n+1) =   9/10   [ok]
+    ⚠️  This measure is NOT a poset's L(P): it is supported on 2 of n! orders.  That is
+    the point — c3's gap is measured against an object that exists and is not realizable.
+
+T7  WRONG-DIRECTION CONTROL — a deliberately wrong reference order at the V
+--------------------------------------------------------------------------------------------
+    reference (0, 2, 1)   E[inv] =   2/3   eps =   1/2  <- the majority order e
+    reference (0, 1, 2)   E[inv] =     1   eps =   3/4
+    reference (2, 0, 1)   E[inv] =     1   eps =   3/4
+    eps MOVES across reference orders: True   [PASS — the instrument is sensitive to e]
+
+T8  WRONG-DIRECTION CONTROL — a constructed frozen table must NOT be called boundary
+--------------------------------------------------------------------------------------------
+    hand table {(0, 1): '3/4', (0, 2): '4/5'}  ->  delta = 1/4
+    classified AT the boundary: False (must be False) · BELOW it: True (must be True)   [PASS]
+    The boundary test is an EQUALITY.  A `<=` in its place would swallow the frozen
+    class into the boundary class and every number in this instrument would be a
+    frozen-class claim by accident.  That is the failure this control exists for.
+
+VERDICT: GREEN
