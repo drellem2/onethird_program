@@ -101,3 +101,29 @@ the 110 runs `a2` makes.
 
 +18.8 s is 1.6% of the 20-minute merge-gate timeout, and `build.sh` is one looped suite
 shorter than it was — the check this pays for was already on that critical path.
+
+## `out_a4_sweep.txt` is corpus-scoped and now says so (mg-05c6)
+
+a4 sweeps **every** directory under `code/`, so its transcript moves when anybody's branch
+lands. Graded byte-for-byte against the tree a reader is standing in — which is what
+mg-f771's `g0` did — that made this one file a thing every branch had to rewrite: **34 real
+moves in the last 200 commits on `main`, more than any other transcript in the corpus**, and
+two merge requests conflicting on it in one morning on content neither branch wrote by hand.
+
+The counts here were already classed `recorded, not gated` in `code/control_gate_724a`'s
+`BASELINE.json` for exactly this reason. Byte-comparing the whole transcript gated them
+through the back door.
+
+So `a4_sweep.py` now prints a **corpus pin** — a sha256 over exactly the bytes it reads,
+minus this directory's own, with the directory and file counts beside it — as its first
+figure, and `lib_f771.CORPUS_SCOPED` names this path. **Pin moved ⇒ the corpus moved and the
+disagreement is not the reading branch's; a branch restores this file rather than committing
+it.** Pin *unchanged* beside a moved text ⇒ the instrument changed its answer on an unchanged
+corpus, which stays RED — and since the pin excludes this directory, a change made **here**
+never buys the exemption and the owner still refreshes its own file. Population drift past 10
+directories is `STALE`, also red, so the report cannot rot indefinitely.
+
+**Nothing about a4's own control changed.** §4's two-sided detector check and
+`audit.sweep_grade` are what gate whether these counts are citable; the pin governs only
+whose branch owes the refresh. The reasoning, the eight planted worlds that bound the
+exemption and the three costs it carries are in `code/gate_fixed_point_f771/README.md` §8.

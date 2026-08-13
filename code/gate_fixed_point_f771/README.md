@@ -237,3 +237,112 @@ eroded by exactly the mechanism it warned about, one merge at a time. Making the
 *mandatory* — which is what this ticket does — makes that erosion regular instead of
 occasional. Not repaired here: it is another directory's instrument, and the repair is a
 choice between pinning a sha and pinning the numbers, which belongs with whoever owns it.
+
+## 8. mg-05c6 — the transcript whose subject is the whole corpus has no per-branch fixed point
+
+Section 5 predicted the cost in one bullet — *"Transcripts will conflict between branches"* —
+and named the resolution: re-run `./build.sh` after the rebase, never hand-merge. That is still
+the right resolution and it is not what this section changes. What section 5 did not price is
+**how many branches pay it and for whose change**, and by 2026-08-13 the record had an answer.
+
+### The measurement
+
+Over the last 200 commits on `main`, grading each transcript's move with `verdict_for` — so
+these are moves that survive N1–N3, not churn:
+
+| transcript | real moves |
+|---|---|
+| `code/control_audit_9876/out_a4_sweep.txt` | **34** |
+| `code/gate_fixed_point_f771/out_g0_fixed_point.txt` | 28 |
+| `code/control_gate_724a/out_gate.txt` | 20 |
+| `code/rendered_twin_pin_9bc2/out_control.txt` | 18 |
+
+`out_a4_sweep.txt` is mg-9876's smell index, **a reading over every directory under `code/`**.
+25 of its 34 moves changed `population:` itself; **2 moved only because a line number shifted
+in a `.py` file elsewhere in the corpus**, which is the same defect arriving without a new
+directory. Two merge requests conflicted on it in one morning (`mr-d9up972tjv1j0e4ismsg` at
+09:56Z, and `mr-d9urij2tjv1j0e4isn40` at 12:32Z on `out_g0_fixed_point.txt`, which flips red
+whenever the census does). The census's population walked `178 → 231` over 35 committed
+versions.
+
+### The rule this broke was already written, one directory over
+
+`code/control_gate_724a/BASELINE.json` classes `audit.sweep_membership_candidates` as
+**`recorded`, not `gated`**, and its `why` is this section's whole argument in mg-724a's own
+words:
+
+> a4 sweeps EVERY directory under code/, so this count moves when any ticket adds code — and
+> the gate runs on the REBASED tree, so it moves when SOMEBODY ELSE's branch lands. … Had this
+> field been gated, mg-724a's own branch would have been blocked by an unrelated merge — the
+> exact *a gate that fails for reasons the author cannot act on* failure mode.
+
+Its neighbour `audit.arms` is gated for the stated converse reason: *"a1's scope is
+`code/rendered_twin_pin_9bc2` ONLY, so this number does not move when other tickets add
+directories — which is what makes it gateable where the sweep counts below are not."*
+
+**Byte-comparing the whole transcript gated the recorded fields through the back door.** This
+section is mg-724a's recorded/gated split applied to the transcript class, not a new doctrine.
+
+### The mechanism
+
+A corpus-scoped producer prints a **corpus pin**: a digest of exactly the bytes it read, less
+its own directory, with the population beside it. `verdict_for` gains two verdicts:
+
+* **`CORPUS`** — declared path, pin moved. The corpus moved; the difference is not the reading
+  branch's. Not red. The branch **restores** the file rather than committing it (mg-4020).
+* **`STALE`** — declared path, pin moved, population drift past `CORPUS_DRIFT_LIMIT` (10
+  directories). **Red.** A pinned report nobody refreshes is the defect this whole control
+  exists to find.
+
+and **`DISAGREES` is unchanged in the two cases that matter**: same pin beside a moved text
+(the instrument changed its answer on an unchanged corpus), and a declared transcript that
+stopped printing a pin. The pin **excludes the producer's own directory** — §3 of the sweep
+reads every `.txt`/`.md` including its own transcript, so a pin over the file containing it has
+no fixed point, and the exclusion is also what stops a change made *there* buying the grade.
+
+### Section 4 applied to this remedy
+
+The remedy is an exemption, and an exemption is the artifact most likely to exhibit the defect
+it repairs — a silent hole. Eight planted worlds `C1`–`C8` in `g1_controls.py`, three green on
+purpose, fed the same `verdict_for` `g0` calls:
+
+* `C2` — **same pin, moved text, still RED.** The fence. If this goes quiet the exemption has
+  become an escape hatch.
+* `C3` — `C1`'s exact pair at an **undeclared path**, red. The exemption is a list, not a shape
+  a transcript can grow into by printing a pin line.
+* `C5` — the declared transcript **stopped printing its pin**, red. Losing the pin is how this
+  would go silent.
+* `C8` — the same pair with **no path given**, red. `relpath` defaults to `None` so a caller
+  that does not name the file cannot be handed the exemption by accident.
+* Four registry rows carry the exclusions, each with the measurement that decided it — most
+  usefully `out_gate.txt`, the near miss: 20 real moves, but only **4** of them are the §1 byte
+  counts that follow the census, and 16 are its own gated fields moving.
+
+`g0`'s own transcript stays stable: the registry is printed (static, from code) and **the drift
+figures go to stderr**, for the same reason `README` D4 put the changed set there.
+
+### The cost, stated rather than glossed
+
+* **A branch that trips the `STALE` bound pays a refresh it did not cause, and which branch
+  pays is arbitrary.** The per-branch tax is amortised, not abolished. On the census's own
+  history — population `178 → 231` over 34 refreshes — a bound of 10 would have required **6**
+  refreshes and a bound of 5 would have required 11. 10 is an **82% reduction**, and it is a
+  number rather than a hope.
+* **One drift is not bounded at all.** A corpus change that adds no directory — the shifted
+  line number above — never trips the bound, so the census can stay stale in that respect
+  indefinitely. That is the price of measuring staleness in the census's own headline unit, and
+  it is 2 of 34 on the record rather than an unknown.
+* **A strict `AGREES` becomes a forgiven `CORPUS`.** The pin moves on any change under `code/`,
+  so a substantive regression in the census could now ride along with an unrelated landing.
+  What still catches that is not this control: a4's own two-sided detector control (exit 2 on
+  FAIL) and `audit.sweep_grade`, **gated** in `BASELINE.json` precisely so that *the sweep's
+  detector stopped discriminating* is red even where its counts are not.
+
+### What this does not do
+
+It does not touch `out_gate.txt`, `out_ratchet.txt` or `out_control.txt`, whose moves are
+measured above as mostly their own — section 5's STATE.md cost is untouched and `W8` still
+holds it. It does not make the tree stop going dirty. And it does not repair section 7's `d2c2`
+finding, though it changes its arithmetic: the erosion of `HEAD:out_a4_sweep.txt` becomes *less*
+regular, not more, which is the opposite of what section 7 predicted this ticket's remedy would
+do to it.

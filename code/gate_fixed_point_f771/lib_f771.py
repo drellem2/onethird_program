@@ -44,6 +44,12 @@ NOTHING ELSE IS:
         line after the path reads as noise (world W12, green on purpose).  A change that
         alters the tail before the cut is still caught, which is what keeps W6 alive.
 
+A FOURTH FAMILY WAS ADDED BY mg-05c6 AND IT IS NOT A NORMALISER RULE.  N1-N3 forgive
+differences that are not a function of repo state.  The corpus-scoped family forgives a
+difference that IS a function of repo state and is not a function of THIS BRANCH's repo
+state — which is a different claim and is therefore graded by a different mechanism, a pin
+the producer prints, rather than by widening `normalise`.  See CORPUS_SCOPED below.
+
 A WIDER NORMALISER IS AN UNFALSIFIABLE ESCAPE HATCH — an operator facing a real
 disagreement can silence it by widening the rule, and nothing in the machinery tells that
 edit from a correct one.  That is mg-479c's P6 in this file's own subject matter, and the
@@ -128,19 +134,123 @@ def texts_equivalent(a, b):
     return all(lines_equivalent(x, y) for x, y in zip(la, lb))
 
 
-def verdict_for(committed, worktree):
+# ---- THE CORPUS-SCOPED CLASS (mg-05c6) -----------------------------------------------
+#
+# THE DEFECT, MEASURED.  `code/control_audit_9876/out_a4_sweep.txt` is a reading over EVERY
+# directory under `code/`.  Grading it against the tree the reader is standing in therefore
+# makes every branch that touches `code/` a writer of one shared file: 34 of the last 200
+# commits on `main` moved it — more than any other transcript — and on 2026-08-13 two merge
+# requests conflicted on it in one morning, on content neither branch wrote by hand.  25 of
+# those 34 moved `population:` itself; 2 moved only because a line number shifted in a `.py`
+# file somewhere else in the corpus, which is the same defect without a new directory.
+#
+# THE RULE THIS BREAKS WAS ALREADY WRITTEN, one directory over, about these very counts.
+# `code/control_gate_724a/BASELINE.json` classes `audit.sweep_membership_candidates` as
+# `recorded, not gated`: "a4 sweeps EVERY directory under code/, so this count moves when any
+# ticket adds code — and the gate runs on the REBASED tree, so it moves when SOMEBODY ELSE's
+# branch lands", the "gate that fails for reasons the author cannot act on" failure mode,
+# measured on mg-724a's own first live run.  Its neighbour `audit.arms` is gated for the
+# stated converse reason: "a1's scope is code/rendered_twin_pin_9bc2 ONLY, so this number does
+# not move when other tickets add directories — which is what makes it gateable where the
+# sweep counts below are not."  Byte-comparing the whole transcript GATED the recorded fields
+# through the back door.  This is that split applied to the transcript class.
+#
+# WHY IT IS NOT AN ESCAPE HATCH, which is the only question worth asking about an exemption:
+#
+#   (a) IT IS A DECLARED LIST, NOT A SHAPE.  Nothing about a transcript's contents earns
+#       this grade; a path is in the dict below or it is not, and widening it is an edit
+#       somebody makes and a reviewer reads.  World C3 puts the same pair of texts at an
+#       undeclared path and requires DISAGREES.
+#   (b) THE PRODUCER MUST PIN WHAT IT READ.  Both copies must carry a `corpus pin` line.  A
+#       transcript that stops declaring itself is graded DISAGREES, not forgiven (C5).
+#   (c) SAME PIN + DIFFERENT TEXT IS STILL RED.  That is the load-bearing clause (C2): it is
+#       exactly the case "the instrument changed its answer on an unchanged corpus", and the
+#       producer's pin deliberately EXCLUDES its own directory, so a change made where the
+#       instrument lives never buys the grade.
+#   (c') WHAT THIS GIVES UP, SAID PLAINLY.  Before this, a branch changing nothing the census
+#       reads left the file byte-identical and got AGREES; now the pin moves on any change
+#       under code/, so a strict AGREES becomes a forgiven CORPUS and a substantive
+#       regression in the census could ride along with an unrelated landing.  What still
+#       catches that is not this control: a4's own two-sided detector control (§4 of
+#       a4_sweep.py, exit 2 on FAIL) and `audit.sweep_grade`, GATED in mg-724a's
+#       BASELINE.json precisely so that "the sweep's detector stopped discriminating" is red
+#       even though its counts are not.  The instrument is gated by its own control; the
+#       reading is not gated by anybody's tree.  That is the split, and it is mg-724a's.
+#   (d) THE DRIFT IS BOUNDED.  A pinned transcript that nobody ever refreshes is a report
+#       that rots, and this control's whole subject is a committed report that disagrees with
+#       the repo it describes.  Past CORPUS_DRIFT_LIMIT directories of population drift the
+#       verdict is STALE, which is RED.
+#
+# THE COST, STATED RATHER THAN GLOSSED.  A branch that trips the STALE bound pays a refresh
+# it did not cause, and which branch pays is arbitrary — the per-branch tax amortised, not
+# abolished.  Measured over the 35 committed versions of the census on `main`, whose
+# population walked 178 -> 231: at a bound of 10 directories those 34 refreshes would have
+# been 6, and at 5 they would have been 11.  10 is the value here, an 82% reduction.
+# AND ONE DRIFT IS NOT BOUNDED AT ALL: a corpus change that adds no directory — the shifted
+# line number above — never trips this, so the census can be stale in that respect
+# indefinitely.  That is the price of measuring staleness in the census's own headline unit,
+# and it is 2 of 34 on the record rather than an unknown.
+CORPUS_SCOPED = {
+    "code/control_audit_9876/out_a4_sweep.txt":
+        "mg-9876's smell index: a reading over every directory under code/, whose own "
+        "counts mg-724a already classes `recorded, not gated` for this exact reason.",
+}
+
+# The population drift, in directories, past which a corpus-scoped transcript is STALE.
+CORPUS_DRIFT_LIMIT = 10
+
+# What a corpus-scoped producer must print.  `12` and not `full` so the line fits beside a
+# legible count; a collision at 48 bits would have to be manufactured, and manufacturing one
+# requires the corpus access that would let you edit the transcript directly.
+CORPUS_PIN = re.compile(r"^corpus pin: ([0-9a-f]{12})\s+\((\d+) directories", re.M)
+
+
+def corpus_pin(text):
+    """(digest, population) as the producer printed it, or None if it printed no pin."""
+    m = CORPUS_PIN.search(text)
+    if not m:
+        return None
+    return m.group(1), int(m.group(2))
+
+
+def verdict_for(committed, worktree, relpath=None):
     """The decision, isolated so that `g1_controls.py` tests THIS and not a re-spelling.
 
     AGREES     the bytes are identical.
-    NOISE      they differ only in the declared non-repo-state families.
+    NOISE      they differ only in the declared non-repo-state families (N1-N3).
+    CORPUS     `relpath` is a DECLARED corpus-scoped transcript and its pin moved, so the
+               difference is the corpus's and not this branch's.  Not red.
+    STALE      the same, but the corpus has moved further than CORPUS_DRIFT_LIMIT.  RED.
     DISAGREES  the committed copy asserts something this tree contradicts.  RED.
+
+    `relpath` defaults to None so that a caller who does not know which file it is holding
+    can never be handed the exemption by accident: the corpus-scoped branch is reachable
+    only by naming a path that is in the declared dict.
     """
     if committed == worktree:
         return "AGREES"
     a, b = normalise(committed), normalise(worktree)
     if a == b or texts_equivalent(a, b):
         return "NOISE"
+    if relpath in CORPUS_SCOPED:
+        pin_a, pin_b = corpus_pin(committed), corpus_pin(worktree)
+        if pin_a is None or pin_b is None:
+            # A declared corpus-scoped transcript that does not carry a pin is not
+            # forgiven.  Losing the pin is how this exemption would go silent.
+            return "DISAGREES"
+        if pin_a[0] == pin_b[0]:
+            # Same corpus, different answer: the INSTRUMENT moved.  This is the clause the
+            # whole exemption rests on and it is the one world C2 plants.
+            return "DISAGREES"
+        if abs(pin_b[1] - pin_a[1]) > CORPUS_DRIFT_LIMIT:
+            return "STALE"
+        return "CORPUS"
     return "DISAGREES"
+
+
+# The verdicts that fail the gate.  Named once, because `bad = ...` written out twice in two
+# arms is how a verdict quietly stops counting in one of them.
+RED_VERDICTS = ("DISAGREES", "STALE")
 
 
 # THE ONE EXEMPTION, AND IT IS ONE FILE RATHER THAN THIS DIRECTORY.

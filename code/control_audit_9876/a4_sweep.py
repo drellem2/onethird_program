@@ -20,8 +20,34 @@ detector that discriminates — the local instance of that error is the whole re
 ticket exists.  So the tee detector is required to FIND the known `| tee` runners in the arc
 and to NOT find one in `rendered_twin_pin_9bc2`, whose first version had one and whose
 current version does not.  A run where either half fails is a broken sweep and says so.
+
+--- mg-05c6 ---------------------------------------------------------------------------------
+THIS TRANSCRIPT IS CORPUS-SCOPED AND NOW SAYS SO IN ITS OWN FIRST LINES.  Every number below
+is a reading over EVERY directory under `code/`, so it moves when ANYBODY's branch lands —
+and `mg-f771`'s g0 grades a committed `out_*.txt` against the tree the reader is standing in.
+The two together made this one file a thing every branch had to rewrite: 34 of the last 200
+commits on `main` moved it, more than any other transcript in the corpus, and two merge
+requests conflicted on it in one morning on content neither branch wrote by hand.
+
+`mg-724a` HAD ALREADY WRITTEN THE RULE THIS BREAKS, one file over, about these very counts:
+`audit.sweep_membership_candidates` is `recorded, not gated` in BASELINE.json because "a4
+sweeps EVERY directory under code/, so this count moves when any ticket adds code — and the
+gate runs on the REBASED tree, so it moves when SOMEBODY ELSE's branch lands", the "gate that
+fails for reasons the author cannot act on" failure mode.  Its neighbour `audit.arms` is
+gateable for the stated converse reason: "a1's scope is code/rendered_twin_pin_9bc2 ONLY, so
+this number does not move when other tickets add directories".  Byte-comparing the whole
+transcript GATES the recorded fields through the back door.
+
+So the sweep now prints a CORPUS PIN — a digest of exactly the bytes it read, MINUS this
+directory's own — and g0 reads it.  Pin moved ⇒ the corpus moved and the disagreement is not
+this branch's.  Pin UNCHANGED and the text differs ⇒ the instrument changed its answer on an
+unchanged corpus, which is a real finding and stays RED.  The exclusion of this directory is
+not tidiness: §3 reads every `.txt`/`.md` under each directory, this file included, so a pin
+over the file that contains it has no fixed point.  It is also what keeps the exemption
+honest — a change made HERE never buys the CORPUS grade, and the owner refreshes its own file.
 """
 
+import hashlib
 import os
 import re
 import sys
@@ -74,6 +100,51 @@ def rel(path):
     return os.path.relpath(path, L.ROOT)
 
 
+# ---- the corpus pin (mg-05c6) --------------------------------------------------------
+# The extensions are EXACTLY the ones the three sections above read: `.py` for §1, `.sh`
+# for §2, and `.py`/`.sh`/`.txt`/`.md` for §3.  A pin over a wider set would move for
+# changes this transcript cannot see, and a pin over a narrower one would sit still while
+# the transcript moved — either way g0 would be reading a claim the digest does not carry.
+OWN_DIRNAME = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
+PIN_EXTS = (".py", ".sh", ".txt", ".md")
+
+
+def corpus_pin(all_dirs):
+    """A digest of the bytes this sweep reads, less this directory's own, plus the
+    directory NAMES — so that a new directory shipping nothing still moves the pin.
+
+    THE PATHS ARE SORTED BEFORE HASHING AND THAT IS LOAD-BEARING.  `os.walk` yields
+    subdirectories in `os.listdir` order, which is a fact about the filesystem and not
+    about the repository; an unsorted digest would differ between two checkouts of the
+    same commit and g0 would read every branch as a corpus that had moved.  Paths are
+    repo-relative for the same reason N1 exists in lib_f771: an absolute one carries the
+    worktree root into a number that is supposed to be a function of repo state alone.
+    """
+    entries = []
+    for name, path in all_dirs:
+        if name == OWN_DIRNAME:
+            continue
+        for f in files(path, PIN_EXTS):
+            entries.append(rel(f))
+    entries.sort()
+
+    h = hashlib.sha256()
+    h.update(b"dirs\0")
+    h.update("\n".join(n for n, _ in all_dirs).encode("utf-8"))
+    h.update(b"\0files\0")
+    for r in entries:
+        try:
+            body = L.read(os.path.join(L.ROOT, r))
+        except (OSError, UnicodeDecodeError):
+            # Recorded as unreadable rather than skipped: skipping would make a file that
+            # BECOMES unreadable invisible to the pin.
+            body = "<unreadable>"
+        h.update(r.encode("utf-8"))
+        h.update(b"\0")
+        h.update(hashlib.sha256(body.encode("utf-8")).digest())
+    return h.hexdigest()[:12], len(entries)
+
+
 def main():
     print("=" * 92)
     print("mg-9876 — SMELL INDEX over code/ (candidates, NOT adjudications)")
@@ -81,6 +152,19 @@ def main():
     print()
 
     all_dirs = list(dirs())
+    pin, pin_files = corpus_pin(all_dirs)
+    print("CORPUS-SCOPED TRANSCRIPT (mg-05c6) — every number below is a reading over the whole")
+    print("of code/, so it moves when anybody's branch lands.  mg-f771's g0 grades this file")
+    print("against the CORPUS PIN and not against the tree the reader is standing in: a pin that")
+    print("moved says the corpus moved, and the disagreement is not the reading branch's.  A pin")
+    print("that did NOT move beside a text that did says this INSTRUMENT changed its answer on an")
+    print("unchanged corpus, and that stays RED.  The pin covers exactly the bytes this sweep")
+    print("reads, less this directory's own — §3 reads this very file, so a pin including it")
+    print("would have no fixed point, and a change made here must never buy the exemption.")
+    print()
+    print(f"corpus pin: {pin}  ({len(all_dirs)} directories, {pin_files} files, "
+          f"excluding code/{OWN_DIRNAME}/)")
+    print()
     print(f"population: {len(all_dirs)} directories under code/")
     print()
 

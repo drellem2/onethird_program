@@ -21,6 +21,42 @@ mg-f771  PLANTED WORLDS — what this control catches, and what it is declared b
 
   14 of 14 worlds landed where they must.
 
+§1b  THE CORPUS-SCOPED EXEMPTION, AND THE 8 WORLDS THAT BOUND IT (mg-05c6)
+--------------------------------------------------------------------------------------------
+  An exemption forgiving a difference that IS repo state needs a sharper fence
+  than the normaliser's.  C2 is the fence: same pin, moved text, still RED.
+
+  C1   expect CORPUS    got CORPUS    ok        the corpus moved under a declared corpus-scoped reading — GREEN ON PURPOSE, and the conflict this ticket was filed about  <- GREEN ON PURPOSE
+       at code/control_audit_9876/out_a4_sweep.txt
+  C2   expect DISAGREES got DISAGREES ok        SAME PIN, MOVED TEXT — the instrument changed its answer on an unchanged corpus.  If this ever goes quiet the exemption has become an escape hatch
+       at code/control_audit_9876/out_a4_sweep.txt
+  C3   expect DISAGREES got DISAGREES ok        C1's EXACT pair at a path that is not in the declared dict — the exemption is a list, not a shape, and printing a pin line does not earn it
+       at code/control_audit_9876/out_a2_discriminate.txt
+  C4   expect STALE     got STALE     ok        drift past the declared bound of 10 directories — a pinned report nobody refreshes is the defect this whole control exists to find
+       at code/control_audit_9876/out_a4_sweep.txt
+  C5   expect DISAGREES got DISAGREES ok        the declared transcript STOPPED PRINTING ITS PIN — losing the pin is how this exemption would go silent, so it is graded rather than forgiven
+       at code/control_audit_9876/out_a4_sweep.txt
+  C6   expect NOISE     got NOISE     ok        a wall-clock timing under a corpus-scoped path still reads NOISE — the pin is a FOURTH family and does not displace N1-N3  <- GREEN ON PURPOSE
+       at code/control_audit_9876/out_a4_sweep.txt
+  C7   expect AGREES    got AGREES    ok        the negative control in the other direction: identical bytes at a corpus-scoped path are AGREES and never CORPUS  <- GREEN ON PURPOSE
+       at code/control_audit_9876/out_a4_sweep.txt
+  C8   expect DISAGREES got DISAGREES ok        C1's pair with NO path at all — a caller that does not name the file cannot be handed the exemption by accident, which is why `relpath` defaults to None
+       at <no path given to verdict_for>
+
+  8 of 8 corpus worlds landed where they must.
+
+  THE REGISTRY IS A LIST OF 1 PATH(S) AND WHAT IS NOT IN IT IS THE OTHER HALF:
+      declared  ok        code/control_audit_9876/out_a4_sweep.txt
+           the census: 34 real moves in the last 200 commits on main, the most of any transcript, and its own counts are `recorded, not gated` in mg-724a's BASELINE.json
+      not       ok        code/control_gate_724a/out_gate.txt
+           NOT declared, and it is the near miss: 20 real moves, but only 4 of them are the §1 byte counts that follow the census.  16 are its own gated fields moving, which is exactly what a merge gate's transcript is for
+      not       ok        code/gate_fixed_point_f771/out_g1_controls.txt
+           this transcript: its content is a function of the planted worlds, i.e. of code, and a corpus-scoped grade on it would exempt the control from itself
+      not       ok        code/grain_axis_audit_03d1/out_a4_sweep.txt
+           mg-03d1's, and it is the sharp case: the SAME BASENAME as the declared one and a different instrument behind it.  The registry is keyed by full path, so a basename rule — the obvious spelling — would have exempted this file and nothing would have said so
+      not       ok        code/libweak_audit_c4f5/out_a4_census.txt
+           mg-c824's, which nothing regenerates — a similar NAME is not a similar subject, and the registry is read by path
+
 §2  THE WATCHED CLASS, AND THE ONE EXEMPTION IN IT
 --------------------------------------------------------------------------------------------
   An exemption that can widen without a control is not an exemption, it is a hole.
@@ -57,4 +93,4 @@ mg-f771  PLANTED WORLDS — what this control catches, and what it is declared b
   world above, and nothing in this directory would notice.  Named rather than
   discovered: no such suite exists today, and that is a fact about today.
 
-VERDICT: GREEN — 14 planted worlds, 7 membership rows and 2 refusals all land where they must; the normaliser's blindness and the one exemption are both the declared ones.  0.11s
+VERDICT: GREEN — 14 planted worlds, 8 corpus worlds, 7 membership rows, 5 registry rows and 2 refusals all land where they must; the normaliser's blindness, the corpus-scoped exemption and the one self-exclusion are all the declared ones.  0.04s

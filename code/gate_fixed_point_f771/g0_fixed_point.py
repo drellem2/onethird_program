@@ -34,6 +34,14 @@ invariant it enforces, on its second run, measured rather than anticipated.  The
 detail is therefore written to STDERR, where the build log keeps it and no tracked file does.
 Only the DISAGREES list, which is repo state, is on stdout.
 
+ONE CLASS OF TRANSCRIPT IS GRADED AGAINST A PIN AND NOT AGAINST THIS TREE (mg-05c6).  A
+transcript whose subject is the WHOLE corpus has no per-branch fixed point: it moves when
+anybody's branch lands, so the invariant above made every branch a writer of one shared file
+and two of them conflicted on it in one morning.  Such a transcript declares itself, prints a
+digest of what it read, and is graded CORPUS — not red — when that digest moved.  Same digest
+beside a moved text is still RED, and drift past a declared bound is STALE, which is red.  The
+declared list, the reasoning and the cost are in `lib_f771.CORPUS_SCOPED`.
+
 A SECOND LIMIT, and it is the one that costs.  `bytes 138325` in
 `code/state_ratchet_e331/out_ratchet.txt` is STATE.md's size, which IS a function of repo
 state — so a branch that edits STATE.md and does not carry a refreshed transcript goes RED
@@ -105,27 +113,49 @@ def main():
     print("  wall-clock timing rounded to the same tenth as last run — and putting it in a")
     print("  tracked file made THIS ARM fail its own invariant on its second run.  README D4.")
     print()
+    print("  AND %d TRANSCRIPT(S) ARE GRADED AGAINST A CORPUS PIN RATHER THAN AGAINST THIS"
+          % len(L.CORPUS_SCOPED))
+    print("  TREE, because their subject IS the tree and so they have no per-branch fixed")
+    print("  point.  The list is declared, not a shape a transcript can grow into:")
+    for rel in sorted(L.CORPUS_SCOPED):
+        print("      %s" % rel)
+    print("  A pin that moved says the corpus moved and the difference is not this branch's.")
+    print("  The SAME pin beside a moved text says the instrument changed its answer on an")
+    print("  unchanged corpus, and is RED.  Drift past %d directories is STALE, also red."
+          % L.CORPUS_DRIFT_LIMIT)
+    print("  HOW FAR EACH HAS DRIFTED IS ON STDERR, for the reason the paragraph above gives:")
+    print("  it moves with every landing and this file must not.  lib_f771.CORPUS_SCOPED.")
+    print()
 
     graded = []
     try:
         for rel in changed:
-            graded.append((rel, L.verdict_for(L.committed_text(rel), L.worktree_text(rel))))
+            graded.append((rel, L.verdict_for(L.committed_text(rel),
+                                              L.worktree_text(rel), rel)))
     except L.Refused as exc:
         print("REFUSED — %s" % exc)
         return 2
 
-    bad = [r for r, v in graded if v == "DISAGREES"]
+    bad = [r for r, v in graded if v in L.RED_VERDICTS]
     noise = [r for r, v in graded if v == "NOISE"]
+    corpus = [r for r, v in graded if v == "CORPUS"]
 
     # The jitter channel.  The build log keeps it; no tracked file does.
     err = sys.stderr
-    err.write("mg-f771 g0: %d watched transcript(s) moved — %d DISAGREES, %d NOISE\n"
-              % (len(graded), len(bad), len(noise)))
+    err.write("mg-f771 g0: %d watched transcript(s) moved — %d red, %d NOISE, %d CORPUS\n"
+              % (len(graded), len(bad), len(noise), len(corpus)))
     for rel, v in graded:
         err.write("mg-f771 g0:   %-9s %s\n" % (v, rel))
     if noise:
         err.write("mg-f771 g0: the NOISE ones moved but say the same thing.  Leaving them "
                   "modified is not a defect and committing them is not required.\n")
+    for rel in corpus:
+        pin_c = L.corpus_pin(L.committed_text(rel))
+        pin_w = L.corpus_pin(L.worktree_text(rel))
+        err.write("mg-f771 g0: %s is corpus-scoped; its pin moved %s -> %s and its population "
+                  "%d -> %d (bound %d).  Restore it rather than committing it — the refresh "
+                  "is owed by whoever trips the bound, not by this branch.\n"
+                  % (rel, pin_c[0], pin_w[0], pin_c[1], pin_w[1], L.CORPUS_DRIFT_LIMIT))
 
     if bad:
         print("§2  THE DISAGREEMENTS, SHOWN")
@@ -133,9 +163,20 @@ def main():
         print("  Lines quoted after normalisation, so that this transcript cannot itself")
         print("  smuggle a worktree path into the corpus.")
         print("  `-` is the committed copy, `+` is this tree.")
+        verdicts = dict(graded)
         for rel in bad:
             print()
-            print("  %s" % rel)
+            print("  %-9s %s" % (verdicts[rel], rel))
+            if verdicts[rel] == "STALE":
+                pin_c = L.corpus_pin(L.committed_text(rel))
+                pin_w = L.corpus_pin(L.worktree_text(rel))
+                print("    a corpus-scoped transcript whose population drifted %d -> %d, past"
+                      % (pin_c[1], pin_w[1]))
+                print("    the declared bound of %d.  This branch did not cause the drift and"
+                      % L.CORPUS_DRIFT_LIMIT)
+                print("    the arbitrariness of who pays is the declared cost of the bound —")
+                print("    but a pinned report nobody ever refreshes is the defect this whole")
+                print("    control exists to find.  lib_f771.CORPUS_SCOPED states the price.")
             rows, dropped = L.first_disagreement(
                 L.committed_text(rel), L.worktree_text(rel))
             for mark, text in rows:
@@ -155,9 +196,11 @@ def main():
 
     print("§2  NO DISAGREEMENTS")
     rule()
-    print("  Every watched transcript that moved during this gate run moved only in the two")
-    print("  declared families that are not a function of repo state.  No committed")
-    print("  transcript asserts anything this tree contradicts.")
+    print("  Every watched transcript that moved during this gate run moved only in the")
+    print("  declared families that are not a function of THIS BRANCH's repo state: the two")
+    print("  normaliser families, or a corpus-scoped reading whose pin moved and whose drift")
+    print("  is inside the bound.  No committed transcript asserts anything this tree")
+    print("  contradicts that this branch is the author of.")
     print()
     print("VERDICT: GREEN — 0 disagreements.  %.2fs" % (time.time() - t0))
     return 0
