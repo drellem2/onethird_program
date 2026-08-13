@@ -439,15 +439,22 @@ item was the whole of §2.
 
 ### The oscillation is measured, not described
 
-Over the record, pinned at `AS_OF 0cb0fa4` by mg-585e's `v1_oscillation.py`: **31 committed
-versions of `out_g0_fixed_point.txt`, 16 of them RED, 24 shape flips, and 7 commits of `main`
-whose entire diff is that one file** — five of them titled *refresh: THE FIXED-POINT
-TRANSCRIPT SAYS GREEN AND IT IS THE ONLY FILE THIS RUN COMMITS*. A lower bound rather than a
-total: a red run repaired before its author committed leaves no trace, so this is how often it
-reached `main`. The mechanism is visible in the byte sizes — 15 green versions collapse onto
-**three** distinct sizes and the 16 red ones onto **fifteen**, because green is a fixed point
-of the run and red is never a fixed point of the commit that carries it, that commit *being*
-the repair.
+Over the record, at `AS_OF 0cb0fa4`: **31 committed versions of `out_g0_fixed_point.txt`, 16
+of them RED, 24 flips, and 7 commits of `main` whose entire diff is that one file** — five of
+them titled *refresh: THE FIXED-POINT TRANSCRIPT SAYS GREEN AND IT IS THE ONLY FILE THIS RUN
+COMMITS*. A lower bound rather than a total: a red run repaired before its author committed
+leaves no trace, so this is how often it reached `main`. The mechanism is visible in the byte
+sizes — 15 green versions collapse onto **three** distinct sizes and the 16 red ones onto
+**fifteen**, because green is a fixed point of the run and red is never a fixed point of the
+commit that carries it, that commit *being* the repair.
+
+The figures are mg-585e's and were **re-measured here from `git log`/`git show` over that same
+pin** rather than cited, because the directory that first took them is not on `main` and a
+citation to a file no reader can open is the defect one estate over (mg-23af's `P24`). Every
+one reproduces. One is worth stating precisely, because the obvious reading of *shape flip* is
+not the one that gives 24: **24 is the number of consecutive-version RED↔GREEN changes.**
+Flipping on the `§2` **heading** instead gives **26**, and the difference is two early versions
+that carry no `§2` heading at all.
 
 ### What replaced §2
 
@@ -538,8 +545,9 @@ about the re-implementation — mg-d2c2):
 
 A **census** of the watched class — how many transcripts exist, in how many directories — is
 also invariant under the repair, and it is the worse trade. Priced by mg-585e over
-`137bc4ce..0cb0fa4` (129 commits touching `code/`): a census would have moved on **31** of
-them against the **30** that touched this transcript, with an **overlap of 4**. Two different
+`137bc4ce..0cb0fa4` and **re-measured here for the reason given above** — 129 commits touching
+`code/`, a census moving on **31** of them against the **30** that touched this transcript,
+with an **overlap of 4**, every figure reproducing. Two different
 quantities whose near-equality is arithmetic and not identity — it moves about as often, on a
 nearly disjoint set, and relocates the churn into mg-05c6's conflict class instead of leaving
 it as one extra commit in one worktree. The rule inventory moves on **neither**.
