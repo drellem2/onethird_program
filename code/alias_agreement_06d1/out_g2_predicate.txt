@@ -19,7 +19,7 @@ G2a  THE LIVE READING — ten predicates, and what they actually discriminate
   lstar_789d:primitive                           True 306  False  98  types bool
   sweep_loss_51f4:is_primitive                   True 306  False  98  types bool
 
-  captured in 0.28s   0 problem(s)
+  captured in 0.35s   0 problem(s)
 
 ==============================================================================
 G2b  POSITIVE CONTROL — five planted worlds on the captured vectors
@@ -62,4 +62,4 @@ G2c  WHY THIS ARM RUNS ON POP-ALL — the same fact, read from the other end
 g2 RESULT
 ==============================================================================
   10 names for ONE predicate agree at all 404 posets, discriminating 306/98; 0 arms unsatisfactory.
-  capture 0.28s · total 0.28s
+  capture 0.35s · total 0.35s

@@ -22,10 +22,29 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  NO DISAGREEMENTS
+§2  THE DISAGREEMENTS, SHOWN
 --------------------------------------------------------------------------------------------
-  Every watched transcript that moved during this gate run moved only in the two
-  declared families that are not a function of repo state.  No committed
-  transcript asserts anything this tree contradicts.
+  Lines quoted after normalisation, so that this transcript cannot itself
+  smuggle a worktree path into the corpus.
+  `-` is the committed copy, `+` is this tree.
 
-VERDICT: GREEN — 0 disagreements.  0.17s
+  code/rendered_twin_pin_9bc2/out_control.txt
+    @@ -37 +37 @@
+    - actual STATE.md sha256 : 09e45268db93b1fd5c92b0f1a4a30cd90a454ffd4fe8a5a8486d780
+    + actual STATE.md sha256 : 5acce465b7cc26576cd80c06def049d4e8a86aaf7353233e084a0be
+
+  code/state_ratchet_e331/out_ratchet.txt
+    @@ -8,2 +8,2 @@
+    - words             21328      <- THE GATED QUANTITY (len(text.split()))
+    - bytes             138345
+    + words             14337      <- THE GATED QUANTITY (len(text.split()))
+    + bytes             96573
+    @@ -11,2 +11,2 @@
+    - longest line      15417 chars
+    - lines over 2000   15
+    ... 67 further hunk line(s) not shown
+
+  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
+  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
+
+VERDICT: RED — 2 committed transcript(s) disagree with this tree.  0.33s

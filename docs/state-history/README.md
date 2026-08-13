@@ -175,6 +175,40 @@ net. Two boundary rulings, stated so they can be argued with rather than guessed
 | `STATE.md:135` | the **GREEN · PROVEN, all finite posets · first proof-carried generalisation in the arc (mg-276d)** row | [`attempt-mg-276d.md`](attempt-mg-276d.md) | 13,190 | 7,705 | 9,049 |
 | `STATE.md:136` | the **AMBER-POSITIVE · THE BET IS PRICED (mg-a3d4)** row | [`attempt-mg-a3d4.md`](attempt-mg-a3d4.md) | 15,386 | 8,442 | 10,684 |
 
+## Second landing — mg-14ad, 2026-08-13: the five rows the ratchet had recorded as DEBT
+
+**These five are a SEPARATE landing and are measured differently from the table above** —
+`Result column` characters at `9dc1f87`, not whole-cell bytes at `60f4dac` — so they are
+kept apart rather than appended to a table whose figures mean something else. Only the
+**Result** column moved; the Status-label and Attempt columns stayed in the row (and are
+reproduced in each history file for context).
+
+Why these five and not a judgement call: `code/state_ratchet_e331/out_p1_growth.txt` §3
+already named them, as *"every attempt-index row added since [mg-ea0e] — 7351 words, 44837
+chars, 5 rows"*, with the remedy *"relocate attempt rows to their per-attempt files"*. They
+were the only attempt-index rows that had never been relocated.
+
+| row | which row | history file | result col before | after |
+|---|---|---|---|---|
+| `STATE.md:174` | the **GREEN · UNBLOCKS mg-6bc2 on its own second disjunct (mg-345e)** row | [`attempt-mg-345e.md`](attempt-mg-345e.md) | 4,231 | 208 |
+| `STATE.md:177` | the **RED on the constant · RED on the rate · GREEN on one branch (mg-200d)** row | [`attempt-mg-200d.md`](attempt-mg-200d.md) | 10,099 | 483 |
+| `STATE.md:178` | the **CORRECTS MERGED WORK · P6 rescored HELD (mg-ba78)** row | [`attempt-mg-ba78.md`](attempt-mg-ba78.md) | 5,483 | 199 |
+| `STATE.md:179` | the **GREEN · reduces `C₃` to L2 — it does not discharge L2 (mg-76b2)** row | [`attempt-mg-76b2.md`](attempt-mg-76b2.md) | 9,954 | 571 |
+| `STATE.md:180` | the **REFUTED — and a proved theorem shipped inside the refutation (mg-51f4)** row | [`attempt-mg-51f4.md`](attempt-mg-51f4.md) | 14,241 | 966 |
+
+`STATE.md` overall: **21,328 → 14,218 words**, and `code/state_ratchet_e331/CEILING.json`
+was banked to the achieved figure **in the same commit**, which is the half of the rule that
+makes a cut hold. **No line number in `STATE.md` moved**: every edit rewrites a cell inside
+an existing line and no line was added or removed.
+
+**What stayed in each row is the leading bolded verdict run, verbatim** — including, where a
+headline is immediately followed by its own strike-through correction (`:180`), *both*, so
+that no row asserts a claim whose retraction has been moved out from under it. That is
+mg-34bf's original design constraint and it is the one thing this landing could most easily
+have broken.
+
+---
+
 **`cell before` and `cell after` are measured at `60f4dac` and at the landing `57f962f`**,
 not at current `HEAD`, and the pair is what the restructure did. One cell has moved since:
 mg-7735's F1 correction took row `:135`'s to **7,878**. No other cell in the table has
