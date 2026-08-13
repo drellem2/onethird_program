@@ -27,6 +27,18 @@ PATTERNS = [
      r'Delta_1 *= *0|\\Delta_1 *= *0|Δ₁ *= *0'),
     ('DECISIVE', 'minimal counterexample is ordinal-sum INDECOMPOSABLE',
      r'(minimal|counterexample)[^.\n]{0,80}(indecomposab|not decomposab|decomposab)'),
+    # ADDED AFTER THE FIRST RUN, AND THE REASON IS KEPT HERE RATHER THAN IN A
+    # COMMIT MESSAGE.  The pattern above returned ONE hit, unrelated, and I was
+    # a paragraph away from reporting 'minimal counterexamples are ordinal-sum
+    # indecomposable' as new.  It is STATE.md's own glossary row 55 and
+    # CONCEPTS.md:44, and I found it by READING while checking something else.
+    # The grep missed it because the corpus says 'primitive' where I wrote
+    # 'indecomposable'.  A vocabulary mismatch is exactly how a corpus search
+    # produces a false NEW, so the repaired pattern is added and the miss is
+    # published rather than quietly fixed.
+    ('DECISIVE', 'the SAME fact in the corpus vocabulary: primitive / ordinal sum',
+     r'primitiv[^.\n]{0,120}ordinal sum|ordinal sum[^.\n]{0,120}primitiv|'
+     r'[Mm]inimal counterexamples? (are|is) primitive'),
     ('DECISIVE', 'delta of an ordinal sum = max of the sides',
      r'delta[^.\n]{0,40}(ordinal sum|oplus|\(\+\))|(ordinal sum|oplus)[^.\n]{0,40}delta'),
     ('DECISIVE', 'the density-stratified eps_0 ceiling',
