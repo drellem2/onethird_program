@@ -22,51 +22,10 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  THE DISAGREEMENTS, SHOWN
+§2  NO DISAGREEMENTS
 --------------------------------------------------------------------------------------------
-  Lines quoted after normalisation, so that this transcript cannot itself
-  smuggle a worktree path into the corpus.
-  `-` is the committed copy, `+` is this tree.
+  Every watched transcript that moved during this gate run moved only in the two
+  declared families that are not a function of repo state.  No committed
+  transcript asserts anything this tree contradicts.
 
-  code/control_audit_9876/out_a2_discriminate.txt
-    @@ -12 +12 @@
-    - C1a   pin block present                                           DISCRIMINATES 
-    + C1a   pin block present                                           DISCRIMINATES 
-    @@ -14 +14 @@
-    - C1b   row sets agree                                              DISCRIMINATES 
-    + C1b   row sets agree                                              DISCRIMINATES 
-    @@ -16 +16 @@
-    - C1c   ledger columns are pinned                                   DISCRIMINATES 
-    ... 112 further hunk line(s) not shown
-
-  code/control_gate_724a/out_gate.txt
-    @@ -7 +7 @@
-    - twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   <t>s  13325 bytes
-    + twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   <t>s  11458 bytes
-    @@ -31 +31 @@
-    - twin.inflight                      gated     MATCH                       baselin
-    + twin.inflight                      gated     MATCH                       baselin
-    @@ -37 +37 @@
-    - twin.verdict_grade                 gated     MATCH                       baselin
-    ... 1 further hunk line(s) not shown
-
-  code/rendered_twin_pin_9bc2/out_control.txt
-    @@ -9 +9 @@
-    - pin commit      : b364767
-    + pin commit      : ab5862e
-    @@ -22 +22 @@
-    - row 3b   MOVED    pinned f38bfefb2b7792cd  ->  now d8b53cb04a4d8498   [DECLARED 
-    + row 3b   ok       d8b53cb04a4d8498
-    @@ -25 +25 @@
-    - row 6    MOVED    pinned 5b904a7a29c45746  ->  now 003aa784c81584a9   [DECLARED 
-    ... 62 further hunk line(s) not shown
-
-  code/rendered_twin_pin_9bc2/out_negative_control.txt
-    @@ -36 +36 @@
-    - NO MUTATION — the baseline                                            -    CAUGH
-    + NO MUTATION — the baseline                                            -    CAUGH
-
-  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
-  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
-
-VERDICT: RED — 4 committed transcript(s) disagree with this tree.  0.35s
+VERDICT: GREEN — 0 disagreements.  0.18s
