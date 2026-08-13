@@ -423,7 +423,11 @@ def _repoint(twin_path, commit, date, state_sha):
 def _copy_tree(tmp):
     os.makedirs(os.path.join(tmp, "docs"), exist_ok=True)
     os.makedirs(os.path.join(tmp, "code"), exist_ok=True)
-    shutil.copytree(TARGET, os.path.join(tmp, "code", TARGET_DIRNAME), dirs_exist_ok=True)
+    # `__pycache__` is IGNORED, because it is the one thing under TARGET whose bytes are not a
+    # function of the repository: a `.pyc` carries the source's mtime, and a sandbox commit
+    # whose sha moves with a bytecode cache is a fixture nobody can reason about.
+    shutil.copytree(TARGET, os.path.join(tmp, "code", TARGET_DIRNAME), dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns("__pycache__"))
     shutil.copy2(STATE, os.path.join(tmp, "STATE.md"))
     shutil.copy2(TWIN, os.path.join(tmp, "docs", "state-of-the-wall.html"))
     return tmp

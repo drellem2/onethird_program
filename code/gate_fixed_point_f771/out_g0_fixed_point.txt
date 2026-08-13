@@ -22,4 +22,29 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-REFUSED — cannot read code/twin_disposition_audit_3902/out_negative_control.txt: [Errno 2] No such file or directory: '/Users/daniel/.pogo/polecats/p7cc3/code/twin_disposition_audit_3902/out_negative_control.txt'
+§2  THE DISAGREEMENTS, SHOWN
+--------------------------------------------------------------------------------------------
+  Lines quoted after normalisation, so that this transcript cannot itself
+  smuggle a worktree path into the corpus.
+  `-` is the committed copy, `+` is this tree.
+
+  code/control_audit_9876/out_a2_discriminate.txt
+    @@ -150,6 +150,6 @@
+    - OBSERVED NOW: with the pin's commit truncated to '85eb', section 6 says FAIL. WH
+    - WAS FOUND: the test was `pinned_commit in shown` — a membership test against the
+    - whole visible line — so any prefix of the displayed hash satisfied it, and so di
+    - line naming the pinned commit ALONGSIDE another revision. Ticket smell #1, in th
+    - arm added to check a duplicated provenance string. REPAIRED to parse the commits
+    - of the line and compare the list EXACTLY (mg-9876).
+    + OBSERVED NOW: with the pin's commit truncated to its first 4 characters, section
+    ... 5 further hunk line(s) not shown
+
+  code/control_gate_724a/out_gate.txt
+    @@ -8 +8 @@
+    - audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  45333 bytes
+    + audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  45349 bytes
+
+  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
+  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
+
+VERDICT: RED — 2 committed transcript(s) disagree with this tree.  0.13s

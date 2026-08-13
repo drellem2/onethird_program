@@ -972,9 +972,18 @@ def x_sec6_substring(box):
     L.write(tp, t.replace(f"commit: {full}", f"commit: {full[:4]}", 1))
     rc, out = L.run_control(sp, tp, _ctl(box))
     passed = "PASS  the visible line quotes the pinned commit" in sect(out, 6)
+    # THE TRUNCATED VALUE IS DESCRIBED AND NOT PRINTED (mg-7cc3), and that is a repair rather
+    # than a wording change.  This line used to embed `full[:4]` — four characters of the
+    # PINNED COMMIT — into a tracked transcript, so it moved at every re-pin.  mg-9876's
+    # sandbox now names its OWN commit, whose sha is a function of everything copied into the
+    # sandbox, so the same line began moving whenever `STATE.md`, the twin, or any file in the
+    # audited directory changed at all: mg-f771 graded this transcript DISAGREES on a run
+    # where nothing about the finding had moved.  Measured, on this branch, twice.  What the
+    # register is reporting is that a PREFIX passed, and the prefix's spelling was never the
+    # evidence — mg-20ee's rule about addresses in tracked output, one directory over.
     return (passed,
-            f"OBSERVED NOW: with the pin's commit truncated to {full[:4]!r}, section 6 says "
-            f"{'PASS' if passed else 'FAIL'}.  WHAT WAS FOUND: the test was "
+            f"OBSERVED NOW: with the pin's commit truncated to its first 4 characters, "
+            f"section 6 says {'PASS' if passed else 'FAIL'}.  WHAT WAS FOUND: the test was "
             f"`pinned_commit in shown` — a membership test against the whole visible line — so "
             f"any prefix of the displayed hash satisfied it, and so did a line naming the "
             f"pinned commit ALONGSIDE another revision.  Ticket smell #1, in the arm added to "
