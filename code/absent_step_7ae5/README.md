@@ -79,18 +79,19 @@ reformat the numbers.** The corpus is read at a declared commit via `git ls-tree
 instead of from the working tree, and the transcript opens with an as-of stamp naming that commit
 and saying which of its lines are addresses and which are findings.
 
-**`AS_OF = 3fce8b9`, chosen on a measurement.** At that commit the previously-committed
-transcript reproduces **byte-identically** — checked before one line of it was edited, which is
-step 1 of the numbers-neutrality method passing. The regenerated transcript is `40 +/ 0 -` against
-the old one: the stamp is added and **not one existing line moves**.
+**`AS_OF = 1024bc2`, and reachability beat byte-identity.** The transcript's own header stamps
+`3fce8b9`, and `3fce8b9` is the *only* commit at which the previously-committed transcript
+reproduces byte-identically — measured. But it is **not an ancestor of `origin/main`**: the
+refinery rebased this instrument's branch, and `3fce8b9` survives only because
+`origin/polecat-p7ae5` still points at it. Pinning there would trade an unfalsifiable transcript
+for a fragile one that dies the day somebody reaps that branch — the defect `mg-daba` already
+records elsewhere in this tree. So the pin is `1024bc2`, `main`'s twin of that commit.
 
-**The residual cost, stated rather than left to be found.** `3fce8b9` is reachable from
-`origin/polecat-p7ae5` — the branch that produced this instrument — but it is **not an ancestor of
-`main`**: the refinery rebased the branch and `main` carries the twin `1024bc2`. The two are *not*
-interchangeable, and the difference was measured: `1024bc2`'s corpus is 512 files against
-`3fce8b9`'s 508, and three raw-hit counts move with it (`15→18`, `16→17`, `49→51`). So `1024bc2`
-is recorded as a fallback with its price, not as an equivalent. If `3fce8b9` is ever pruned,
-`a4_novelty.py` **exits non-zero with that message** rather than falling back to a live read.
+**The price is paid in the open.** `1024bc2`'s corpus is 512 files against `3fce8b9`'s 508, and
+three raw-hit counts move with it: `15→18`, `16→17`, `49→51`. Those are **corpus-valued, not
+verdicts** — `A4`'s own closing paragraph already said every count here is documentary over its
+file set — and **no classification moves**. If `AS_OF` is ever unreachable the script exits
+non-zero rather than falling back to a live read.
 
 **Both directions were measured, which is the acceptance.**
 
@@ -99,6 +100,8 @@ is recorded as a fallback with its price, not as an equivalent. If `3fce8b9` is 
 - *Changed corpus* (`A4_NOVELTY_AT=HEAD`): 46 lines differ. 16 of them are `raw hits:` counts and
   the remaining 30 are addresses, per-file tallies, or the as-of block. **No classification
   moves** — every `DECISIVE`/`NON-DECISIVE` verdict is identical.
+- *Against the pre-`mg-20ee` transcript*: the three counts above, plus addresses and the stamp.
+  **Every `DECISIVE`/`NON-DECISIVE` classification is identical** — checked line by line.
 
 **The raw-hit counts are corpus-valued, and the stamp says so.** This is worth stating because
 getting it wrong would be the same error one level up. A count of how much of *the whole

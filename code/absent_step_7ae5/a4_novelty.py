@@ -39,22 +39,23 @@ SELF = os.path.join('code', 'absent_step_7ae5')
 
 # The commit whose corpus this transcript addresses.
 #
-# CHOSEN ON A MEASUREMENT: at this commit the committed transcript reproduces
-# BYTE-IDENTICALLY (checked before one line of it was edited -- that is step 1 of
-# the numbers-neutrality method passing, and it is the whole unlock).  It is the
-# commit the transcript's own header already stamped.
+# A PIN MUST BE REACHABLE FROM main, AND THAT BEAT BYTE-IDENTITY HERE.  The
+# transcript's own header stamps 3fce8b9, and at 3fce8b9 the previously-committed
+# transcript reproduces BYTE-IDENTICALLY -- measured, and it is the only commit
+# that does.  But 3fce8b9 is NOT AN ANCESTOR OF origin/main: the refinery rebased
+# this instrument's branch, and 3fce8b9 survives only because
+# origin/polecat-p7ae5 still points at it.  Pinning there would trade an
+# unfalsifiable transcript for a fragile one that dies the day somebody reaps
+# that branch -- the defect mg-daba already records elsewhere in this tree.
 #
-# ITS REACHABILITY IS THE RESIDUAL COST, AND IT IS STATED RATHER THAN LEFT TO BE
-# FOUND.  3fce8b9 is reachable from `origin/polecat-p7ae5` -- the polecat branch
-# that produced this instrument -- but it is NOT AN ANCESTOR OF main: the
-# refinery rebased the branch and main carries the twin 1024bc2.  The two are not
-# interchangeable and the difference was MEASURED, not assumed: 1024bc2's corpus
-# is 512 files against 3fce8b9's 508, and three raw-hit COUNTS move with it
-# (15->18, 16->17, 49->51).  Counts are findings here, not addresses, so 1024bc2
-# is the wrong pin and is recorded only as the fallback if 3fce8b9 is ever
-# pruned.  If that happens this script EXITS NON-ZERO with an actionable message
-# rather than falling back to a live read.
-AS_OF = "3fce8b9aabcfaa37475fbc6c1f3df3ebe971753c"
+# So the pin is 1024bc2, main's twin of that commit, and THE PRICE IS PAID IN
+# THE OPEN RATHER THAN AVOIDED.  Its corpus is 512 files against 3fce8b9's 508,
+# and three raw-hit counts move with it: 15->18, 16->17, 49->51.  Those are
+# CORPUS-VALUED, not verdicts -- see the as-of stamp, and A4's own closing
+# paragraph, which already said every count here is documentary over its file
+# set.  NO CLASSIFICATION MOVES.  If AS_OF is ever unreachable this script EXITS
+# NON-ZERO rather than falling back to a live read.
+AS_OF = "1024bc2148f41430aebeb2bf1ea47a2bca6846bf"
 
 # Override, for re-measuring against a different corpus: any commit-ish, or the
 # literal WORKTREE.  Unset is the pinned default and is the only value that
@@ -68,10 +69,9 @@ def _git(*args):
         raise SystemExit(
             "a4_novelty: cannot read the corpus at %s: %s\n"
             "  (A4_NOVELTY_AT=%r; unset it for the pinned run.)\n"
-            "  If AS_OF itself is gone, origin/polecat-p7ae5 held it and main's\n"
-            "  twin is 1024bc2 -- which is NOT equivalent: it moves three raw-hit\n"
-            "  counts (15->18, 16->17, 49->51).  Re-pinning there is a\n"
-            "  re-measurement and must be recorded as one."
+            "  AS_OF is an ancestor of origin/main; if it is unreachable the\n"
+            "  repository is not the one this transcript was taken over, and a\n"
+            "  live read would hide that rather than report it."
             % (AT, got.stderr.decode("utf-8", "replace").strip(), AT))
     return got.stdout
 
@@ -144,8 +144,8 @@ print("""AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (
 
   corpus read at : %s
       %s
-      reachable from origin/polecat-p7ae5; NOT an ancestor of main, and main's
-      twin 1024bc2 is not equivalent -- see a4_novelty.py's AS_OF note
+      an ANCESTOR OF origin/main, which is a condition on the pin and not a
+      convenience: a pin onto a polecat branch dies when the branch is reaped
 
   EVERY `path:NNN` BELOW IS AN ADDRESS, NOT A FINDING.  Each is an offset into a
   file this instrument DOES NOT OWN, and it moves whenever any other ticket
@@ -163,7 +163,11 @@ print("""AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (
   repository and not mg-7ae5 -- as A4's own closing paragraph already says
   ("Every count above is DOCUMENTARY, at this commit, over this file set").
   MEASURED, NOT ASSERTED: against HEAD this run moves 46 lines, of which 16 are
-  raw-hit counts and the rest are addresses, tallies, or this block.
+  raw-hit counts and the rest are addresses, tallies, or this block.  THREE OF
+  THOSE COUNTS ALSO MOVE AGAINST THE PREVIOUSLY COMMITTED TRANSCRIPT (15->18,
+  16->17, 49->51), because that transcript was taken over 3fce8b9 -- a commit
+  that is NOT an ancestor of main -- and the pin is required to be reachable.
+  The corpus grew by four files; no classification moves.
 
   WHAT IS STABLE, and it is what A4 actually concludes: the pattern set, the
   DECISIVE/NON-DECISIVE classification of each pattern, and the scope ruling in
