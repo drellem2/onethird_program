@@ -27,6 +27,17 @@
 # cannot.  Its comparison mode is the hand-run one:
 #     python3 code/asof_census_20ee/permuted.py <transcript> <old-rev> [<new-rev>]
 #
+# mg-e8b0: worklist.py IS run here, for permuted.py's reason and not for
+# ground_truth.sh's: it executes NO instrument code and needs no dirty tree.
+# Every figure it prints is a function of two commits, read through `git show`
+# and `git log`, so out_worklist.txt reproduces BYTE-IDENTICALLY -- condition 2
+# as originally written -- which is the only honest arrangement for the file
+# whose subject is that out_ground_truth.txt cannot.  Its own hand-run half is
+# the comparison mode, and it is NOT run here because its input comes from
+# ground_truth.sh:
+#     sh code/asof_census_20ee/ground_truth.sh <dirs> > /tmp/gt.txt
+#     python3 code/asof_census_20ee/worklist.py --rerun /tmp/gt.txt
+#
 # mg-6e4f: consumers.py IS run here.  It is a `git grep` over HEAD and takes
 # about a second — unlike ground_truth.sh it executes no instrument code and
 # writes nothing outside this directory.  Its default subject is the instrument
@@ -37,6 +48,8 @@ python3 selftest_20ee.py > out_selftest_20ee.txt
 python3 census.py        > out_census.txt
 python3 consumers.py     > out_consumers.txt
 python3 permuted.py      > out_permuted.txt
+python3 worklist.py      > out_worklist.txt
 echo "mg-20ee census: $(sed -n '/transcripts carry/p' out_census.txt | tr -s ' ')"
 echo "mg-6e4f consumers: $(sed -n '/^CONSUMERS:/p' out_consumers.txt)"
 echo "mg-885d condition 2: $(sed -n '/^CONDITION 2:/p' out_permuted.txt)"
+echo "mg-e8b0 work-list: $(sed -n '/^CONDITION 0 (work-list):/p' out_worklist.txt)"

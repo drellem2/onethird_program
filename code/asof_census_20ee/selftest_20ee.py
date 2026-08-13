@@ -51,7 +51,15 @@ RAN = []
 # under-count of its own -- a list spelling longer than the 24-character window
 # -- and a tranche that repaired the first while quietly dropping the count from
 # 5 to 4 would be publishing a smaller number for a defect that moved.
-KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27")
+# N28 JOINS AT mg-e8b0 AND NOTHING LEAVES, so this tuple GROWS: the `record
+# knows about this pin` rule is a substring count and cannot tell a sentence
+# ACCOUNTING for a pin from one OFFERING the same instrument as remaining work.
+# ITS LIVE INSTANCE WAS CLOSED IN THE SAME COMMIT -- tranche 1's `the small ones
+# ... are cheap` had been offering an instrument this arc pinned at tranche 2,
+# for four tranches -- and the control was moved ONTO THE RULE rather than
+# dropped, because a control that goes red when somebody closes its instance
+# invites the next tranche to `repair` it by re-opening the trap.
+KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28")
 
 
 def check(name, got, want, why):
@@ -754,6 +762,109 @@ print("CONTROLS ON THIS DIRECTORY'S OWN POINTERS (mg-23af)")
 print("-" * 78)
 print()
 
+print()
+print("CONTROLS ON worklist.py — IS THE WORK-LIST ITSELF STILL TRUE (mg-e8b0)")
+print("-" * 78)
+print()
+print("  out_ground_truth.txt is the number this directory tells everybody to")
+print("  quote and it is ONE DATED RUN, ~70 minutes, executing instrument code.")
+print("  So it has the property every instrument on it is on it FOR, and five")
+print("  tranches have quoted its count without re-taking it.  worklist.py asks")
+print("  the repository instead, and the three controls below are the three")
+print("  ways it could be wrong: it could read its own subject LIVE (P26), it")
+print("  could publish one of two pin rules without measuring the other (P27),")
+print("  and its `the record knows about this pin` rule cannot tell a sentence")
+print("  ACCOUNTING for a pin from one OFFERING the same instrument as work")
+print("  still to do (N28) -- which is the defect this tranche was told by.")
+print()
+
+import worklist  # noqa: E402
+
+# ONE SCAN, SHARED.  Three controls calling it separately would triple this
+# suite's cost for three copies of the same answer, and a control that got a
+# DIFFERENT answer from its neighbour would be reporting on a moving tree,
+# which is the defect the file under test is about.
+_WL_OPENED = []
+_real_open = open
+
+
+def _watched_open(file, *a, **kw):
+    try:
+        p = os.path.abspath(file if isinstance(file, str) else str(file))
+    except Exception:                                   # a file descriptor
+        p = ""
+    if p.startswith(ROOT + os.sep):
+        _WL_OPENED.append(os.path.relpath(p, ROOT))
+    return _real_open(file, *a, **kw)
+
+
+try:
+    import builtins
+    builtins.open = _watched_open
+    _WL = worklist.scan()
+finally:
+    builtins.open = _real_open
+
+check("P26 worklist reads its own subject AT A COMMIT, never off disk",
+      (_WL_OPENED, len(_WL["rows"])),
+      ([], 44),
+      "THE DEFECT THIS FILE COULD MOST EASILY HAVE. Its subject is a "
+      "TRANSCRIPT IN THIS DIRECTORY, and permuted.py had to repair exactly "
+      "this in itself at mg-e5f3 — a section 4 figure taken by reading the "
+      "LIVE WORKTREE, in the file arguing that a transcript must be a "
+      "function of repo state. So it is RUN rather than promised: `open` is "
+      "replaced for the whole scan and every path under the repository root "
+      "it is asked for is recorded. The list must be EMPTY — out_ground_truth."
+      "txt, README.md, the log and the diffs all arrive through `git show` "
+      "and `git log`. The row count is beside it so that a scan which read "
+      "nothing because it did nothing cannot pass this.")
+
+check("P27 the two pin rules DISAGREE, in both directions, at AS_OF",
+      (sorted(_WL["only_a"]), sorted(_WL["only_b"])),
+      ([("code/species_extent_d633", "e29ba2a")],
+       [("code/absent_step_7ae5", "6af53b9")]),
+      "RULE A reads the commit SUBJECT and RULE B reads the DIFF for a "
+      "revision that resolves, and the verdict rests on B. That choice is "
+      "worth nothing unless the two are known to differ, so the instances are "
+      "PINNED here rather than described: e29ba2a calls itself a pin and its "
+      "diff to species_extent_d633 declares no revision — the pin landed in "
+      "species_remainder_f8fa, which the same commit touches, so A over-counts "
+      "because A SUBJECT IS A PROPERTY OF A COMMIT AND A COMMIT TOUCHES "
+      "SEVERAL DIRECTORIES. And 6af53b9 is the other direction: `fix: REPIN "
+      "a4_novelty TO A main-REACHABLE COMMIT` declares a revision under a verb "
+      "the convention does not cover, which is mg-daba's own defect being "
+      "repaired. Change either rule and this control says so.")
+
+# THE TWO SENTENCES ARE THE REAL ONES, one from the record as tranche 9 found
+# it and one from the annotation tranche 9 replaced it with.
+_OFFERS = "(`species_remainder_f8fa` at `2+/2-`, `species_repair_a4ef`) are cheap"
+_ACCOUNTS = "`species_remainder_f8fa` was **pinned at `e29ba2a`** and reproduces"
+_f8fa = [r for r in _WL["moved"] if r["dir"] == "code/species_remainder_f8fa"][0]
+check("N28 `the record knows` cannot tell ACCOUNTING from OFFERING — A LIMIT",
+      (_ACCOUNTS.count("species_remainder_f8fa"),
+       _OFFERS.count("species_remainder_f8fa"),
+       bool(_f8fa["by_content"]), _f8fa["named"] > 0),
+      (1, 1, True, True),
+      "A DECLARED LIMIT, ASSERTED ON THE RULE AND NOT ON ITS INSTANCE — AND "
+      "THE MOVE FROM ONE TO THE OTHER IS THE POINT. `named in this record` is "
+      "a SUBSTRING COUNT, so a sentence ACCOUNTING for a pin and a sentence "
+      "OFFERING THE SAME INSTRUMENT AS REMAINING WORK score IDENTICALLY, and "
+      "the two planted here are the real ones. THE LIVE INSTANCE WAS CLOSED IN "
+      "THIS COMMIT: species_remainder_f8fa was pinned at e29ba2a — this arc's "
+      "OWN tranche 2, mg-6e4f — and the only sentence naming it was tranche "
+      "1's `the small ones … are cheap`, which went on offering a pinned "
+      "instrument for four tranches and is now annotated. HAD THIS CONTROL "
+      "STAYED ON THAT SENTENCE, closing the trap would have turned it RED, and "
+      "a later tranche could have `repaired` the control by re-opening the "
+      "trap. The last two clauses keep a live foot in the estate: that row IS "
+      "pinned and the rule DOES score it accounted for, so the UNACCOUNTED "
+      "count in out_worklist.txt is a LOW WATER MARK. WHAT TURNING THIS GREEN "
+      "WOULD MEAN: somebody taught the rule to read what a sentence SAYS, "
+      "which is a rule about English — that is why this is a LIMIT and not a "
+      "bug, and why the instrument PRINTS the sentence instead.")
+
+print()
+
 # EVERY `SEE CONTROL X` IN THIS DIRECTORY RESOLVES, AND IT IS CHECKED PER SITE.
 # mg-23af found two that did not: pinnable.py said `--recursive` staying lit was
 # "a control (P24) rather than a claim" and no P24 has ever existed, and
@@ -846,7 +957,8 @@ else:
     print("GREEN — %d control(s) land where they must: %d positive, %d "
           "negative and %d on the consumer census's three-way classification, "
           "across the address census, the consumer census, the pinnable "
-          "pre-condition and the condition-2 comparator.  %s confirm a KNOWN "
+          "pre-condition, the condition-2 comparator and the work-list's own "
+          "re-take.  %s confirm a KNOWN "
           "DEFECT or a DECLARED LIMIT rather than a repair, and each says in "
           "its own text what turning it green would mean."
           % (len(RAN), sum(1 for n in RAN if n[0] == "P"),

@@ -1,0 +1,256 @@
+==============================================================================
+mg-e8b0 -- IS THE WORK-LIST STILL TRUE?  Read at AS_OF = 07a2fd0
+==============================================================================
+
+  out_ground_truth.txt is the number this directory tells everybody
+  to quote, and it is ONE DATED RUN against the tree at 5a62e8c.
+  The count derived from it has been carried forward BY HAND since
+  mg-0e77 and NOTHING HAS RE-TAKEN THE RUN -- the transcript's own
+  commit count, one line up, is that sentence measured.  This
+  section asks the repository, which is cheap and is one-directional:
+  movement can FALSIFY a recorded row and can never confirm one.
+  METHOD AND BLIND SPOTS are in this file's docstring and are not
+  repeated; the sentence that matters is: THIS DOES NOT REPLACE THE
+  RE-RUN.  An untouched instrument goes stale when its CORPUS moves.
+
+------------------------------------------------------------------------------
+1  THE LIST'S OWN AGE, IN THE UNIT THIS REPOSITORY MOVES IN
+------------------------------------------------------------------------------
+
+      the sweep's tree                                     5a62e8c
+      this file's AS_OF                                    07a2fd0
+      commits on main between them                         110
+      commits the sweep's transcript has EVER had          1
+      candidate rows recorded                              44
+        recorded DIFFERS                                   32
+        recorded REPRODUCES                                9
+        recorded NO_RUN_ALL                                3
+
+------------------------------------------------------------------------------
+2  THE ROWS THE REPOSITORY CONTRADICTS
+------------------------------------------------------------------------------
+
+      directories moved since the sweep                    12 of 44
+        a pin landed, by CONTENT -- the verdict            8
+        a pin landed, by SUBJECT -- the wide net           9
+        of the verdict rows, unnamed in this record        0
+
+  A row is FALSIFIED when a pin has landed ON IT since the sweep:
+  the recorded verdict is a statement about a tree that no longer
+  exists.  MOVED WITHOUT A PIN is printed as NOT FALSIFIED, because
+  a commit touching a directory says nothing about its transcript.
+
+  THE VERDICT RESTS ON THE CONTENT RULE AND NOT ON THE SUBJECT ONE,
+  and section 3 is where that choice is measured rather than argued:
+  A SUBJECT IS A PROPERTY OF A COMMIT, AND A COMMIT TOUCHES SEVERAL
+  DIRECTORIES.  Where they disagree the commit's own diff is read to
+  say WHICH directory the pin landed in, so the over-count is
+  attributed rather than declared.
+
+  code/absent_step_7ae5
+      recorded                     DIFFERS  40 line(s) of drift
+      commits since the sweep      2
+          6af53b9   fix: REPIN a4_novelty TO A main-REACHABLE COMMIT — the p
+          de8376a   pin: a4_novelty READS ITS CORPUS AT A DECLARED COMMIT, s
+      pin by SUBJECT / by CONTENT  de8376a / 6af53b9,de8376a
+      named in this record         5 time(s)
+          | `absent_step_7ae5` | `1024bc2` | 3 counts move, **no classific
+          own first commit. `absent_step_7ae5` reproduces byte-identically
+          3. **`main`'s twin of a rebased commit** (`absent_step_7ae5`), w
+          That is tranche 1's rule 3 (`absent_step_7ae5`) and `mg-daba`'s 
+          byte-identity** — `absent_step_7ae5` and `anchor_drift_96df` eac
+      -> FALSIFIED.  A pin has landed; the record names it.
+
+  code/anchor_drift_96df
+      recorded                     DIFFERS  14 line(s) of drift
+      commits since the sweep      1
+          c42c221   pin: THE ANCHOR-DRIFT INSTRUMENT WAS DOING TO ITSELF WHA
+      pin by SUBJECT / by CONTENT  c42c221 / c42c221
+      named in this record         4 time(s)
+          | `anchor_drift_96df` | `f59fe1f` | `+7/-1`, `+1/-1` | 6 lines, 
+          - **An absolute worktree path** printed into the transcript (`an
+          `anchor_drift_96df`, now sitting in **two suites inside `build.s
+          byte-identity** — `absent_step_7ae5` and `anchor_drift_96df` eac
+      -> FALSIFIED.  A pin has landed; the record names it.
+
+  code/face_geometry_audit_e720
+      recorded                     DIFFERS  22 line(s) of drift
+      commits since the sweep      1
+          77f9350   pin: mg-e720's EVIDENCE IS `git log` WALKS AND THEY WERE
+      pin by SUBJECT / by CONTENT  77f9350 / 77f9350
+      named in this record         3 time(s)
+          | `face_geometry_audit_e720` | `8fab006` | `+18/-0`, `+25/-0` | 
+          2. **The parent of the carrying commit** (`face_geometry_audit_e
+          - **Unbounded history walks** scored as verdicts (`face_geometry
+      -> FALSIFIED.  A pin has landed; the record names it.
+
+  code/landscape_repair_1953
+      recorded                     DIFFERS  35 line(s) of drift
+      commits since the sweep      1
+          de4ec4b   pin: THE READY PIN LANDED, AND `ONE PIN, TWO TRANSCRIPTS
+      pin by SUBJECT / by CONTENT  de4ec4b / de4ec4b
+      named in this record         3 time(s)
+          | `landscape_repair_1953` | `27+/8-` | **pinnable** | a walk of 
+          `audit_scope_text.py` is executed by `code/landscape_repair_1953
+          reproduce byte-identically. The same holds for `landscape_repair
+      -> FALSIFIED.  A pin has landed; the record names it.
+
+  code/landscape_repair_audit_3b51
+      recorded                     DIFFERS  79 line(s) of drift
+      commits since the sweep      1
+          de4ec4b   pin: THE READY PIN LANDED, AND `ONE PIN, TWO TRANSCRIPTS
+      pin by SUBJECT / by CONTENT  de4ec4b / de4ec4b
+      named in this record         6 time(s)
+          `code/landscape_repair_audit_3b51` — it **crashed**, after print
+          ### The next candidate, diagnosed but **not** pinned — `landscap
+          Tranche 3 diagnosed `landscape_repair_audit_3b51` and left it, c
+          **Direction 2, measured rather than asserted.** Running `code/la
+          **Two directories go silent, and one of them is `landscape_repai
+          an empty one. Re-run end to end today (3m 44s), `code/landscape_
+      -> FALSIFIED.  A pin has landed; the record names it.
+
+  code/mirror_staleness_cdd5
+      recorded                     DIFFERS  106 line(s) of drift
+      commits since the sweep      1
+          0aeb2dc   declare: THE CLASSIFIER GETS A NOTION OF A TRANSCRIPT TH
+      pin by SUBJECT / by CONTENT  - / -
+      named in this record         2 time(s)
+          mirror_staleness_cdd5/out_s0_state.txt           pcdd5
+          mirror_staleness_cdd5/prerepair/out_s0_state.txt pcdd5
+      -> NOT FALSIFIED.  Moved, but no pin rule fires.
+
+  code/n0_strike_audit_dd8b
+      recorded                     REPRODUCES
+      commits since the sweep      1
+          6172593   pin: THE N0-STRIKE CENSUS COUNTS AT A DECLARED COMMIT — 
+      pin by SUBJECT / by CONTENT  6172593 / 6172593
+      named in this record         3 time(s)
+          | `n0_strike_audit_dd8b` | `dafe759` | `+28/-0` × 4 | counts mov
+          1. **The newest ancestor that reproduces** (`n0_strike_audit_dd8
+          `n0_strike_audit_dd8b` reports `REPRODUCES` only because this br
+      -> FALSIFIED.  A pin has landed; the record names it.
+
+  code/pairbias_indep_audit_6bd1
+      recorded                     DIFFERS  8 line(s) of drift
+      commits since the sweep      1
+          ffecc21   pin: THE SAME SCREEN CAUGHT READING BADLY A SECOND WAY —
+      pin by SUBJECT / by CONTENT  ffecc21 / ffecc21
+      named in this record         2 time(s)
+          | `pairbias_indep_audit_6bd1` | `52d290a` | `+20/-0` × 2 | 8 lin
+          - **A synthetic fixture routed through the pin** (`pairbias_inde
+      -> FALSIFIED.  A pin has landed; the record names it.
+
+  code/species_audit_7dd3
+      recorded                     DIFFERS  213 line(s) of drift
+      commits since the sweep      1
+          3ab2346   condition-3: FOUR MORE INSTRUMENTS RUN THE PINNED CHECKE
+      pin by SUBJECT / by CONTENT  - / -
+      named in this record         0 time(s)
+      -> NOT FALSIFIED.  Moved, but no pin rule fires.
+
+  code/species_extent_d633
+      recorded                     DIFFERS  273 line(s) of drift
+      commits since the sweep      1
+          e29ba2a   pin: w3_scope READS ITS CORPUS AT A DECLARED COMMIT — an
+      pin by SUBJECT / by CONTENT  e29ba2a / -
+      named in this record         0 time(s)
+      -> NOT FALSIFIED.  e29ba2a calls itself a pin and its
+         diff HERE declares no revision.  The revision it
+         declares is in:
+             code/species_remainder_f8fa
+
+  code/species_remainder_f8fa
+      recorded                     DIFFERS  4 line(s) of drift
+      commits since the sweep      2
+          7c533f7   readme: THE CONSUMER TABLE, MEASURED — six of nine instr
+          e29ba2a   pin: w3_scope READS ITS CORPUS AT A DECLARED COMMIT — an
+      pin by SUBJECT / by CONTENT  e29ba2a / e29ba2a
+      named in this record         1 time(s)
+          (`species_remainder_f8fa` at `2+/2-`, `species_repair_a4ef` at `
+      -> FALSIFIED.  A pin has landed; the record names it.
+
+  code/verdict_delivery_bf3f
+      recorded                     DIFFERS  323 line(s) of drift
+      commits since the sweep      2
+          aefb2ec   measure: THE THREE ROWS THE RECORD CONTRADICTED ARE SETT
+          0aeb2dc   declare: THE CLASSIFIER GETS A NOTION OF A TRANSCRIPT TH
+      pin by SUBJECT / by CONTENT  - / -
+      named in this record         0 time(s)
+      -> NOT FALSIFIED.  Moved, but no pin rule fires.
+
+------------------------------------------------------------------------------
+3  TWO RULES FOR `A PIN LANDED`, COUNTED SIDE BY SIDE
+------------------------------------------------------------------------------
+
+  Neither is a definition.  RULE A reads the commit SUBJECT, which
+  this estate writes to a convention; RULE B reads the DIFF for a
+  revision that resolves, which is pinnable.py's R2 across one
+  commit.  They are printed together because THEY DISAGREE ON REAL
+  ROWS HERE, in both directions, and a file publishing one of them
+  alone would be publishing a choice it had not measured.
+
+      (directory, commit) pairs either rule fires on       10
+        rule A only -- the subject says `pin:`             1
+        rule B only -- the diff added a resolving rev      1
+        both                                               8
+
+      B NOT A  code/absent_step_7ae5                      6af53b9
+               a revision declared here by a commit that does
+               not call itself a pin
+      A NOT B  code/species_extent_d633                   e29ba2a
+               a commit calling itself a pin whose diff to this
+               directory adds NO revision that resolves
+
+------------------------------------------------------------------------------
+4  `WANTS AN AS_OF`, MEASURED PER INSTRUMENT FOR ALL 44 ROWS
+------------------------------------------------------------------------------
+
+  mg-4020 established that `drifts` and `wants an AS_OF` are
+  DIFFERENT PROPERTIES and that the second must be measured per
+  instrument rather than inherited from list membership.  It
+  measured three.  This is pinnable.py's R2 -- a revision declared
+  in the subject's own scripts that RESOLVES -- asked of every row
+  at AS_OF, which needs no dirty tree and so is not the 45 minutes
+  conditions 1-3 cost.  IT CARRIES R2's OVER-COUNT UNCHANGED: the
+  revision may be a CONTROL's rather than the corpus read's, so
+  firing means `go and read why`, not `pinned`.
+
+      rows declaring a revision at AS_OF                   36 of 44
+        of the recorded DIFFERS rows                       27
+      recorded DIFFERS, no revision, not falsified         5
+
+  THE LAST NUMBER IS THE ONE A SUCCESSOR WANTS, and it is a
+  PREFILTER and not a work-list: `no revision declared` is not
+  `wants one` -- mg-4020's a4ef drift is `.gitignore`d directories
+  no AS_OF can reach, and it declares two revisions anyway.  These
+  are the rows nothing on record has yet given a reason to skip:
+
+      code/superseded_descent_688c                   91 line(s) of recorded drift
+      code/summary_guard_audit_407f                  104 line(s) of recorded drift
+      code/eps_spec_sweep_372e                       137 line(s) of recorded drift
+      code/verdict_delivery_bf3f                     323 line(s) of recorded drift
+      code/landing_audit_sweep_64cb                  474 line(s) of recorded drift
+
+------------------------------------------------------------------------------
+5  WHAT THIS SECTION CANNOT SAY, RESTATED WHERE IT IS READ
+------------------------------------------------------------------------------
+
+  * NOT FALSIFIED IS NOT REPRODUCES.  36 rows are not contradicted
+    by anything above, and that is a statement about the REPOSITORY,
+    not about their transcripts.  The backstop is ground_truth.sh.
+  * A PIN IS NOT A REPAIR.  Rule A and rule B both say a revision
+    was declared, not that the transcript now reproduces --
+    pinnable.py's R2 fires on b0ae, which is pinned and drifts.
+  * RULE B READS `git show`, WHICH PRINTS NOTHING FOR A MERGE.  A
+    pin landing in a merge commit would be invisible to it.  There
+    are 0 merge commits between the two revisions this file reads,
+    and none in this repository at all, because the refinery
+    REBASES -- so the rule is safe HERE by a property of the repo
+    and not by anything this file does.  Counted rather than
+    assumed, because the day that changes nothing else will say so.
+  * THE UNACCOUNTED COUNT IS A LOW WATER MARK.  `named in this
+    record` is a substring count, so an instrument this record names
+    for any other reason -- AS REMAINING WORK, SAY -- reads as
+    accounted for.  N28 asserts that with its live instance.
+
+CONDITION 0 (work-list): 8 of 44 rows FALSIFIED, 0 UNACCOUNTED, at 07a2fd0
