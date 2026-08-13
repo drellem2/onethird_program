@@ -808,6 +808,108 @@ against the density-aware bound the gap is **zero**.
 
 ---
 
+# FROM `mg-0fc6` — THE ONE PART OF THE `compression2` SCOPING THAT IS NOT ITS VERDICT
+
+One entry, registered here **on that document's own recommendation** (§6 item 3): *"Keep `a4.3b`
+separately from the verdict. The filtration/multiplier distinction is a small, true, reusable
+fact about which convex combinations are canonical, and it is orthogonal to whether this note's
+route works."* `mg-0fc6`'s headline verdict is `SCOPE: low` on `docs/imports/compression2.tex`
+and it is **cited, not restated** — the entry below is not that verdict and takes no position on
+it, which is what *orthogonal* means. Notation: `Π` a conditional expectation `E[· | C]` for a
+partition `C` of a finite probability space, i.e. the orthogonal projection onto the functions
+constant on blocks; a family is **nested** (a **filtration**) when `Π_a Π_b = Π_min(a,b)`.
+
+## F24 · Convex combinations of compressions: the COMPRESSIONS never combine, the INCREMENTS combine exactly when the family is NESTED
+
+**STATEMENT.** Three clauses, and the first is the one that fixes how the other two may be said.
+
+> **(A)** For orthogonal projections `A`, `B` and any `t ∈ (0,1)`, `tA + (1−t)B` is idempotent
+> **iff `A = B`**. So *"combine the compressions in convex combinations"* never yields a
+> compression — **on any family, nested or transverse**.
+>
+> **(B)** If `Π_0 ≤ … ≤ Π_K` is a **filtration**, the increments `D_l = Π_l − Π_{l−1}` are
+> mutually orthogonal projections with `Σ_l D_l = Π_K − Π_0`; `Var(f) = Σ_l ‖D_l f‖²` exactly
+> when `Π_0 = E` and `Π_K = I`; and `M = Σ_l λ_l D_l` is self-adjoint, commutes with every `Π_k`,
+> and satisfies `M D_l = λ_l D_l` — a **Littlewood–Paley multiplier**, diagonal in the scale
+> decomposition, spectrum exactly the weights.
+>
+> **(C)** `Π_b − Π_a` is a projection **iff `Ran Π_a ⊆ Ran Π_b`**, i.e. iff the two are nested.
+> **An `iff`, not a heuristic:** increments exist exactly when the family is nested, and
+> everything in (B) follows from having them. Nestedness is decidable in **one pass over the
+> partitions** — `C_b` refines `C_a` — with no matrix formed.
+
+**KIND.** `U` — (A), (B) and (C) are proved for orthogonal projections on any real
+inner-product space, with no poset in the statements
+([`code/convex_criterion_8748/`](../code/convex_criterion_8748/) `c1`, `c2` docstrings;
+`PREDICTIONS.md` R1, R2). Every **population figure** below, and the census in **NOT**, is `FP`
+and nothing more. Per `STATE.md:99`'s standing rule this entry aggregates a `U` with an `FP` and
+**the weakest kind in it is `FP`**.
+
+**SCOPE.** The three implications are **proved**. Corroboration, with its caps:
+
+| | population | result |
+|---|---|---|
+| (A) | **all ordered pairs of set partitions of a 4- and 5-point space** × 5 values of `t` — `225×5` and `2704×5` | 0 exceptions; idempotent at the equal pairs only |
+| (A) | 4 018 labelled posets `n = 3,4,5`, `(Π_o, Π_e)`, `|L(P)| ≤ 24`, **301 skipped and counted** | non-idempotent at 4 018 of 4 018 |
+| (A) | `compression2`'s scales at `n = 4, 6, 8` — the **nested** family | non-idempotent there too, at 24 of 24 (pair, `t`) instances |
+| (B) | **7 posets, `n = 4…8`, `|L(P)| ≤ 42`** (chosen for the exact-matrix budget, not sampled) | filtration, orthogonality, `Σ D_l = I − Π_0` all exact; `Var = Σ‖D_l f‖²` at 11 statistics each — 8 random plus `inv_e`, `pos_x`, `disp²` — max deviation **0** |
+| (C) | **all ordered pairs of set partitions of a 4- and 5-point space** — 225 and 2 704 | 0 exceptions; **not** a projection at 165 of 225 and 2 346 of 2 704, so the criterion discriminates |
+| cheap ⟺ expensive | the same 225 and 2 704 pairs | refinement `≡` `Π_a Π_b = Π_b Π_a = Π_a`, **0 disagreements** |
+
+⚠️ **Nothing above a 5-point space is checked for the partition sweeps and nothing above
+`n = 8` for the poset rows.** What carries above them is the **proof**; the tables are
+corroboration and are not the warrant.
+
+**FROM.** `mg-0fc6` §4 and `a4.3b`,
+[`OneThird-Compression2-Scope-mg-0fc6.md`](OneThird-Compression2-Scope-mg-0fc6.md) — where the
+fact was found, at **one poset** (the `n = 4` antichain, 3 levels, 5 random `f`) — and `mg-8748`,
+[`OneThird-ConvexCombination-Criterion-mg-8748.md`](OneThird-ConvexCombination-Criterion-mg-8748.md),
+instrument [`code/convex_criterion_8748/`](../code/convex_criterion_8748/), which proved (A) and
+(C), took the census, and re-measured (B). ⚠️ **On the admission test:** what is registered here
+is the **statement**; `mg-8748`'s document is the scoping and the measurement report, and its own
+disposition — *this is a selection criterion and not a result* — is **not** copied here.
+
+**THE HONEST SCOPING, CARRIED VERBATIM FROM `mg-0fc6` §4 AND REQUIRED TO TRAVEL WITH THE ENTRY.**
+*"the variance identity is Pythagoras and holds for **any** filtration. The content is the
+**nestedness**, which is by construction of the dyadic tree. It is still a real structural
+difference from the transverse pair, and it is the one place Daniel's stated design is strictly
+better than the objects the closed arc used."* **The claim is not that `compression2`'s scales
+are special; it is that nested beats transverse for this purpose and nestedness is cheap to
+check.** The value is as a **selection criterion for future constructions**, not as a result.
+
+**NOT.** Five near-misses, and the first two are how this entry would most likely be misquoted.
+
+- ⚠️ **NOT *"convex combinations of nested compressions are canonical"*, which is FALSE** by (A) —
+  the nested family fails that step exactly as the transverse one does. The canonical object is a
+  convex combination of the **INCREMENTS**. Daniel's phrasing (*"combine them in convex
+  combinations"*, 2026-08-13T00:40Z) names the compressions, and the fact has to be restated
+  before it is true.
+- ⚠️ **NOT a claim that nestedness is NECESSARY for the variance to split.** The operative
+  property is **mutual orthogonality of the increments**; nestedness is the constructive route to
+  it — a whole *ordered* family at once, canonically, and cheap to check — and it is not the only
+  route. **Measured:** at **30 of 3 670** transverse posets `Π_o Π_e = P_0` exactly, the two
+  σ-algebras are independent, and the cross term vanishes anyway (`FP`, `n ≤ 5` labelled,
+  `|L(P)| ≤ 24`). That was `c3.3`'s own asserted lemma, refuted by its own run and kept.
+- ⚠️ **`mg-0fc6` `a4.3a`'s `40 of 40` must NOT be quoted as evidence of TRANSVERSALITY.** By (A)
+  non-idempotence of `(Π_o+Π_e)/2` follows from `Π_o ≠ Π_e` alone, and that row's population is
+  *posets where the two differ*: it measures **distinctness**. The row is true and correctly
+  reported at source. **And transversality is not uniform** — over every labelled poset at
+  `n = 3,4,5` with `|L(P)| ≥ 2` (4 319) the pair is transverse at **3 971** and **nested and
+  distinct at 348**, never equal (`FP`, `n ≤ 5`). *"`compression.tex`'s transverse pair"* is a
+  statement about the typical poset.
+- ⚠️ **NOT a realizability fact, and not evidence that a construction is going anywhere.**
+  `compression2`'s scales are nested **and** the note is realizability-blind (`mg-0fc6` §2), so
+  passing this test told nobody anything about the route. `STATE.md:21` is untouched. The
+  companion first-check is `mg-0fc6` `a2.3`'s two-measure exhibit — identical pair marginals, one
+  a linear-extension measure and one not — re-derived independently at `mg-8748` `c4.1` onto the
+  same witness, `n = 6`, `e(P) = 9`, max flip `1/3`.
+- ⚠️ **NOT a new degree of freedom on `compression.tex`'s family.** `k·I − Σ_i Π_i` **is**
+  `k·(I − ` the equal-weight convex combination `)`, exactly, so "combine them convexly" there
+  names the operator `mg-8d66` already priced — **F6**, and `mg-409a`'s bar, cited not
+  re-measured.
+
+---
+
 # Housekeeping
 
 **Adding an entry.** Append it with all five fields. If you cannot write the **SCOPE** line —

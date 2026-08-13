@@ -2,7 +2,7 @@
 mg-9876 — SMELL INDEX over code/ (candidates, NOT adjudications)
 ============================================================================================
 
-population: 216 directories under code/
+population: 217 directories under code/
 
 §1  MEMBERSHIP TESTS AGAINST A WHOLE CAPTURED OUTPUT
 --------------------------------------------------------------------------------------------
@@ -10,7 +10,7 @@ The shape of instance 3: `"8 9" in out` where `out` is the entire report, so a
 line printed unconditionally elsewhere satisfies it forever.  A candidate is not a
 defect — only running it two ways decides that.
 
-  215 candidate site(s) in 73 of 216 directories
+  215 candidate site(s) in 73 of 217 directories
 
     species_gate_audit_d53d  (20)
         code/species_gate_audit_d53d/g1_population.py:116  clean[rn] = (rc, E2_SAYS in out)
@@ -70,10 +70,11 @@ defect — only running it two ways decides that.
 Instance 1 exactly: `cmd | tee f` makes `$?` TEE's status, and tee succeeds
 whatever it is fed.  POSIX sh has no PIPESTATUS to reach for.
 
-  `| tee` : 29 site(s) in 10 directories
+  `| tee` : 30 site(s) in 11 directories
       code/compression2_scope_0fc6/run_all.sh:17  python3 "$a" | tee "out_${a%.py}.txt"
       code/compression_kfoliation_8d66/run_all.sh:6  python3 k0_selftest.py 2>&1 | tee out_k0_selftest.txt
       code/compression_kfoliation_8d66/run_all.sh:15  python3 "$arm.py" 2>&1 | tee "out_$arm.txt"
+      code/convex_criterion_8748/run_all.sh:18  python3 "$a" | tee "out_${a%.py}.txt"
       code/demand_relaxation_7564/run_all.sh:12  python3 d0_selftest.py 2>&1 | tee out_d0_selftest.txt
       code/demand_relaxation_7564/run_all.sh:21  python3 "$arm.py" 2>&1 | tee "out_$arm.txt"
       code/eps_spec_sweep_372e/run_all.sh:5  python3 "$here/s1_census.py"    | tee "$here/out_s1_census.txt"
@@ -100,8 +101,9 @@ whatever it is fed.  POSIX sh has no PIPESTATUS to reach for.
       code/primitivity_f5be/run_all.sh:7  python3 "$a.py" | tee "out_$a.txt"
       code/state_restructure_ea0e/run_all.sh:19  python3 code/state_restructure_ea0e/verify_relocation_ea0e.py "${BASE}" 2>&1 | tee "${OU
       code/state_restructure_ea0e/run_all.sh:21  echo "exit ${rc}" | tee -a "${OUT}"
-  `$?` immediately after a pipeline : 1 site(s) in 1 directories
+  `$?` immediately after a pipeline : 2 site(s) in 2 directories
       code/compression2_scope_0fc6/run_all.sh:18  python3 "$a" | tee "out_${a%.py}.txt"  ->  RC=$?
+      code/convex_criterion_8748/run_all.sh:19  python3 "$a" | tee "out_${a%.py}.txt"  ->  RC=$?
 
 §3  DOES THE DIRECTORY SHIP ANYTHING THAT TRIES TO MAKE ITS OWN CONTROL FAIL?
 --------------------------------------------------------------------------------------------
@@ -111,9 +113,9 @@ control at all, and whether any committed transcript records a demonstrated
 failure.  A directory with neither has no evidence its instrument can fail; that is
 weaker than saying it cannot.
 
-  ships a file named for negative/self/positive-control : 139 of 216
-  a committed transcript records a demonstrated failure  : 139 of 216
-  NEITHER, though the directory ships code               : 27 of 216
+  ships a file named for negative/self/positive-control : 140 of 217
+  a committed transcript records a demonstrated failure  : 140 of 217
+  NEITHER, though the directory ships code               : 27 of 217
 
   directories with code and no evidence of a falsification attempt:
       audit_successor_consolidation_9134  compression_novelty_623a            counterexample_audit_0a11         
@@ -141,5 +143,5 @@ in advance, and to be exercised against a constructed negative.
     [PASS]  pipe-status: must fire on a constructed `cmd | tee f` followed by `rc=$?`, which is why a 0 count below is a measurement and not a dead detector
 
 ============================================================================================
-SWEEP OK — 215 membership candidates, 29 tee sites, 27 directories with no falsification evidence.  All CANDIDATES.
+SWEEP OK — 215 membership candidates, 30 tee sites, 27 directories with no falsification evidence.  All CANDIDATES.
 ============================================================================================
