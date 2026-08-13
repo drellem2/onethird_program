@@ -1,0 +1,141 @@
+==============================================================================
+s2.1  THE CROSSOVER LAW IN CLOSED FORM — and it is checked, not asserted
+==============================================================================
+       A code-length bound of SHAPE A is  `log2 e(P) <= c * n log2 n`  with `c < 1` constant.
+       The free bound is `log2 e(P) <= log2 n!`, available to anybody with no theorem at all.
+       Since `log2 n! = n log2 n - n log2 e + O(log n)`, shape A beats free exactly when
+       
+               (1 - c) * n log2 n  >  n log2 e  + O(log n),   i.e.   log2 n  >  log2 e/(1-c),
+       
+               so        n*(c)  =  2 ^ ( log2(e) / (1 - c) )   =  2 ^ ( 1.442695 / (1-c) ).
+       
+       DOUBLY EXPONENTIAL IN 1/(1-c).  Checked against the binary search over the exact
+       `lgamma` factorial, which knows nothing about this formula:
+
+       c        closed form n*      binary search n*    ratio
+     0.50000              7.389                   3    2.4630
+     0.70000              28.03                  19    1.4753
+     0.80000              148.4                 131    1.1329
+     0.90000          2.203e+04               21968    1.0027
+  [GREEN] c = 0.90000: closed form within 1% of the exact crossover   2.203e+04 vs 21968
+     0.93989          1.678e+07            16777063    1.0000
+  [GREEN] c = 0.93989: closed form within 1% of the exact crossover   1.678e+07 vs 16777063
+     0.95000          4.852e+08           485164978    1.0000
+  [GREEN] c = 0.95000: closed form within 1% of the exact crossover   4.852e+08 vs 485164978
+     0.97000          2.996e+14     299559246913643    1.0000
+  [GREEN] c = 0.97000: closed form within 1% of the exact crossover   2.996e+14 vs 299559246913643
+       THE CLOSED FORM IS ASYMPTOTIC AND ITS ERROR IS DECLARED RATHER THAN AVERAGED AWAY.  It
+       drops the `+0.5 log2(2 pi n)` Stirling term, which is a POSITIVE contribution to
+       `log2 n!` and therefore makes the true crossover EARLIER than the formula says.  The
+       formula is graded ONLY at `c >= 0.9`, where it is within 1%; below that it OVERSTATES
+       badly — 2.46x at c = 0.5, where n* is 3 and the dropped term is most of the answer.
+       The rows below 0.9 are printed and NOT graded, because a tolerance wide enough to pass
+       them would be too wide to catch anything.  s2.3 tabulates the EXACT column; the closed
+       form exists to make the elasticity in s2.2 readable.
+==============================================================================
+s2.2  THE ELASTICITY — why this family is structurally prone to vacuity
+==============================================================================
+       From the closed form,   d(ln n*)/dc  =  ln2 * log2(e) / (1-c)^2  =  1 / (1-c)^2.
+       So the crossover moves by a factor of `e^(dc/(1-c)^2)` per unit change in `c`:
+
+       c        1/(1-c)^2     n* multiplied by, per 0.01 of c
+     0.5000          4.0     0.961  (i.e. /1.0 for c down 0.01)
+     0.7000         11.1     0.895  (i.e. /1.1 for c down 0.01)
+     0.8000         25.0     0.779  (i.e. /1.3 for c down 0.01)
+     0.9000        100.0     0.368  (i.e. /2.7 for c down 0.01)
+     0.9400        277.8     0.062  (i.e. /16.1 for c down 0.01)
+     0.9700       1111.1     0.000  (i.e. /66910.5 for c down 0.01)
+  [GREEN] at compression2's own constant the elasticity is 277   so 0.01 off `c` divides the crossover by ~16
+       THIS IS WHY s0.6's ROUNDING MATTERED.  Four printed digits of `c` do not pin `n*` to
+       four digits — the doc's `0.9399` and the code's `1 - 1/(24 ln 2)` differ in the fifth
+       place and their crossovers differ by 57,186.  A family whose headline number is that
+       sensitive to its constant is one where `does it bite?` cannot be answered by improving
+       the constant a little, and s2.4 says what it CAN be answered by.
+==============================================================================
+s2.3  THE ACCEPTANCE TABLE — the constant a shape-A code must reach
+==============================================================================
+       Inverting the law: to bite at `n`, a shape-A bound needs `c < 1 - log2(e)/log2(n)`.
+       Computed by bisection on the EXACT predicate, so the Stirling term is carried:
+
+       target n*      required c     required saving (1-c)   against compression2's 6.01%
+       10000000       0.9380              6.20%                  1.0x more
+          10000       0.8915             10.85%                  1.8x more
+           1000       0.8559             14.41%                  2.4x more
+            100       0.7899             21.01%                  3.5x more
+             50       0.7591             24.09%                  4.0x more
+             20       0.7066             29.34%                  4.9x more
+             10       0.6560             34.40%                  5.7x more
+  [GREEN] to bite at n = 100 a shape-A code must save 21.0% of n log2 n   compression2's mechanism saved 6.01% and landed at n* = 1.7e7 — 3.5x short
+       
+       THE FRONTIER THAT MATTERS IS n ~ 10^2, NOT 10^7.  mg-0b96 priced the `d`-lever at
+       `n = 99`; the census frontier is 14 and the conjecture is verified to 14.  So the
+       ticket's own bar — `does it bite below 10^7` — is the WEAK form of the question, and a
+       proposal clearing it by a factor of 1000 would still be 3.5x short of the constant it
+       needs where the programme actually lives.
+==============================================================================
+s2.4  THE SHAPE DICHOTOMY — and this is the finding
+==============================================================================
+       SHAPE B is a bound of the form  `log2 e(P) <= c * log2 n!`  with `c < 1` constant.
+       It bites at EVERY n, by definition, for every c < 1.  There is no crossover to compute.
+
+       shape                              crossover n*        vacuity risk
+     A:  c * n log2 n,   c = 0.99            >2^70 (~3e+43)      severe
+     A:  c * n log2 n,   c = 0.94                17307626      severe
+     A:  c * n log2 n,   c = 0.90                   21968      severe
+     A:  c * n log2 n,   c = 0.80                     131      severe
+     B:  c * log2 n!,    c = 0.99                       3      none
+     B:  c * log2 n!,    c = 0.94                       3      none
+     B:  c * log2 n!,    c = 0.90                       3      none
+     B:  c * log2 n!,    c = 0.80                       3      none
+  [GREEN] shape A at c = 0.99 has n* beyond the 2^70 search cap (closed form ~3e+43)   a 1% saving on the wrong scale is worth nothing at any n a human will write down
+       THE `None` IS THE SEARCH CAP AND NOT AN ABSENCE — `crossover()` searches to 2^70 and
+       reports `None` above it.  At c = 0.99 the closed form puts n* near 2^144, so the row is
+       `the answer exists and is astronomically large`, not `there is no crossover`.
+       
+         SO VACUITY IN THIS FAMILY IS A PROPERTY OF THE REFERENCE SCALE, NOT OF THE MECHANISM.
+       
+       `n log2 n` exceeds `log2 n!` by `n log2 e = 1.4427 n` — a term LINEAR in n, against a
+       saving that is a constant fraction of `n log2 n`.  Any constant-fraction saving on the
+       larger scale must first pay back that linear term, and paying it back needs
+       `log2 n > log2(e)/(1-c)`.  That is the entire content of compression2's 1.7e7 and it is
+       arithmetic about the two scales, not about the merge tree.
+       
+       THE OPERATIVE QUESTION TO PUT TO A PREFIX-CODE PROPOSAL IS THEREFORE ONE LINE, AND IT
+       IS NOT `WHAT IS YOUR CONSTANT`:
+       
+           Does the code's expected length beat  ceil(log2 n!)  — the length of the code that
+           indexes L into all of S_n and ignores P entirely — AT THE n YOU CLAIM IT?
+       
+       A code answers that at any single `n` by construction, since it IS a code: run it.  No
+       asymptotic constant needs to be proved to find out.  That is the cheap test this ticket
+       asked for, and it is cheaper than the ticket supposed.
+==============================================================================
+s2.5  IS THE GOOD SHAPE REACHABLE — what compression2's OWN measurements say
+==============================================================================
+       mg-0fc6 a3.1 measured `max{H(mu) : mu in M_n} / log2 n!` over the pair-bias information
+       set, which is the sharpest shape-B constant any bound on that set can have:
+
+       n        max H(mu)/log2 n!   (mg-0fc6 a3.1, cited not re-measured)
+       3          0.907
+       4          0.900
+       5          0.893
+       6          0.887
+       7          0.883
+  [GREEN] every measured value is strictly below 1   so a shape-B bound with c < 1 EXISTS on this set at every n measured
+  [GREEN] and the sequence is strictly decreasing over n = 3..7   0.907 -> 0.883
+       
+       READ CAREFULLY, BECAUSE THIS IS AN EXISTENCE STATEMENT AND NOT A CONSTRUCTION.  It says
+       the sharpest bound on the information set is shape B with `c <= 0.883` at n = 7, so
+       nothing in the SCALE forbids a non-vacuous bound.  It does NOT say a code achieving it
+       exists, and it does not say the sequence stays below 1 — five points do not settle a
+       limit, and the estate's own warning applies: `what carries above them is the proof`.
+       mg-0fc6's a3.2 is the standing caution in the other direction — the two-atom law has
+       `H = 0.9183` bits at EVERY n and simultaneously maximal `E[inv_e]`, so low entropy and
+       maximal inversions coexist and an entropy bound does not deliver an inversion bound.
+       
+       WHAT IS ESTABLISHED HERE IS THE SCREENING QUESTION AND ITS ANSWER FOR THE ONE ATTEMPT
+       ON RECORD:  compression2's (6) is shape A, and shape A is vacuous at every n below
+       2^(log2 e/(1-c)).  A successor that produces a shape-A bound with a better constant is
+       a repeat.  A successor that produces a shape-B bound is not, at any constant below 1.
+
+arm exit: 0   (0 green, 0 red row(s))

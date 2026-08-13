@@ -1,0 +1,90 @@
+==============================================================================
+s0.1  THE EXTERNAL ANCHOR — labelled poset counts against OEIS A001035
+==============================================================================
+  [GREEN] n = 1: 1 labelled posets   A001035 says 1
+  [GREEN] n = 2: 3 labelled posets   A001035 says 3
+  [GREEN] n = 3: 19 labelled posets   A001035 says 19
+  [GREEN] n = 4: 219 labelled posets   A001035 says 219
+  [GREEN] n = 5: 4231 labelled posets   A001035 says 4231
+       The enumerator is brute force over 3^C(n,2) orientations plus a transitivity filter.
+       It shares no idea with the minimal-element recursions used elsewhere in code/, so this
+       is a SECOND ROUTE to A001035 rather than the estate's route run again.
+==============================================================================
+s0.2  A SECOND ROUTE TO e(P) — enumeration against a down-set DP that never enumerates
+==============================================================================
+  [GREEN] e(P) agrees on all 4473 posets, n = 1..5   0 disagreements
+==============================================================================
+s0.3  THE SET AND THE POSET ARE INVERSE — P = intersection of L(P), on every poset
+==============================================================================
+  [GREEN] relation_from(linear_extensions(P)) == P at n = 2..5   0 failures
+       This is the control that makes s1.1's BIJECTION a measurement rather than a definition:
+       without it, `LL_n -> posets` would not be well defined and the census would be counting
+       something else.
+==============================================================================
+s0.4  L* IS A LINEAR EXTENSION WHEN IT EXISTS — the defining property, checked
+==============================================================================
+  [GREEN] L* in L(P) at all 2150 posets where L* exists, n = 2..5   0 failures
+       ALSO THE PROOF, in one line, and it is why s1.4's T2a row reads res = 1: if x < y in P
+       then pi_xy = 1 > 1/2, so x beats y in the majority tournament and precedes y in L*.
+       So L* extends P whenever it is a total order at all.  The run is the vacuity guard.
+==============================================================================
+s0.5  delta AGAINST HAND VALUES
+==============================================================================
+  [GREEN] delta = 0 at the 3-chain (max over the EMPTY set)   expected 0
+  [GREEN] delta = 1/2 at the 3-antichain   expected 1/2
+  [GREEN] delta = 1/2 at 0 < 1, 0 < 2   expected 1/2
+==============================================================================
+s0.6  THE CROSSOVER BINARY SEARCH REPRODUCES compression2's OWN MEASURED NUMBER
+==============================================================================
+  [GREEN] crossover(c = 1 - 1/(24 ln 2) = 0.9398877) = 16777063   mg-0fc6 a1.6 measured 16,777,063 by its own binary search
+       THE EXTERNAL ANCHOR FOR s2.  mg-0fc6's figure was produced by different code in a
+       different directory against the same definition; reproducing it to the UNIT is what
+       licenses s2 to quote crossover numbers for constants nobody has measured yet.
+
+       AND THE ANCHOR WENT RED ON ITS FIRST RUN, WHICH IS REPORTED RATHER THAN QUIETLY FIXED.
+       This control was first written against `0.9399`, the constant as it is PRINTED in
+       mg-0fc6's own table header (`OneThird-Compression2-Scope-mg-0fc6.md:113`).  The arm
+       computes `NOTE_CONST = 1 - 1/(24 ln 2)` = 0.9398877, and the header is that rounded to
+       four places.  The two do not give the same crossover:
+  [GREEN] the PRINTED constant 0.9399 gives n* = 16834249   +57186 against the published 16,777,063 — 0.34%
+       NOT AN ERROR IN mg-0fc6's MEASUREMENT — its number is correct for the constant its code
+       uses, and the row header is a rounding in prose.  It is recorded because 0.34% of an
+       order-10^7 crossover is 57,186 and because THE SENSITIVITY IS THE POINT s2 makes: the
+       elasticity `d(ln n*)/dc = 1/(1-c)^2` is 277 at this constant, so four printed digits of
+       `c` do not pin `n*` to four digits.  A ticket that asks 'does it bite below 10^7?' is
+       asking a question whose answer moves under rounding, and that is a fact about the
+       FAMILY rather than about any one paper.
+  [GREEN] crossover(c = 1.0) is None   no c >= 1 ever bites
+  [GREEN] crossover(c = 0.0) = 3   a free bound bites at the first n
+==============================================================================
+s0.7  PLANT 1 — an enumerator that drops the antisymmetry of the strict order
+==============================================================================
+  [GREEN] planted: transitivity filter removed -> 27 at n = 3   A001035 says 19; the control CATCHES it
+  [GREEN] and the library is restored   19 again
+==============================================================================
+s0.8  PLANT 2 — a BK graph that counts every pair, not the adjacent transpositions
+==============================================================================
+  [GREEN] BK(S_3) has 6 edges, not 15   the Cayley graph of S_3 on adjacent transpositions is a 6-cycle
+       The plant a wrong BK graph would produce is the COMPLETE graph, and 6 != 15 separates
+       them at the smallest n where the two differ at all.
+==============================================================================
+s0.9  PLANT 3 — CAME BACK INERT, AND IS PRINTED RATHER THAN SWAPPED OUT
+==============================================================================
+       The plant was: make `weak_ideal` accept ANY adjacent transposition that lands in S,
+       rather than one that REMOVES an inversion.  It changes NOTHING on this population:
+  [GREEN] the loosened predicate agrees at 110 of 110 posets   0 discrimination — the plant is INERT here
+       WHY IT IS INERT, and it is a fact about the domain rather than about the plant: on an
+       L(P) every member is connected to L* through L(P) itself, so the two readings coincide.
+       A plant has to be a defect the domain can EXPRESS.  Reported, not replaced — a green
+       from an inert plant says nothing about the control's power and pretending otherwise is
+       the failure mode this section exists to avoid.
+==============================================================================
+s0.10  PLANT 4 — a crossover that compares against n log2 n instead of log2 n!
+==============================================================================
+  [GREEN] planted: comparing c*n log2 n against n log2 n -> n* = 3   says every c < 1 bites at n = 3; the real answer is 16,777,063
+       THIS IS THE PLANT THAT MATTERS, because the whole of s2 is the claim that the REFERENCE
+       SCALE is what decides vacuity.  A library that silently compared against the wrong scale
+       would make s2's finding true by construction.  s0.6's agreement with mg-0fc6 to the unit
+       is what rules it out.
+
+arm exit: 0   (0 green, 0 red row(s))

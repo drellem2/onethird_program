@@ -1,0 +1,190 @@
+==============================================================================
+s1.1  LL_n <-> POSETS IS A BIJECTION — so the consumable half is a function of P
+==============================================================================
+  [GREEN] n = 2: |LL_n| = 3 distinct extension sets from 3 posets   A001035 says 3 — INJECTIVE, no collisions
+  [GREEN] n = 3: |LL_n| = 19 distinct extension sets from 19 posets   A001035 says 19 — INJECTIVE, no collisions
+  [GREEN] n = 4: |LL_n| = 219 distinct extension sets from 219 posets   A001035 says 219 — INJECTIVE, no collisions
+  [GREEN] n = 5: |LL_n| = 4231 distinct extension sets from 4231 posets   A001035 says 4231 — INJECTIVE, no collisions
+       Surjective by definition and injective by the count, with `s0.3` supplying the inverse
+       explicitly (`P = intersection of L(P)`).  So:
+       
+         THE CONSUMABLE RESTRICTION OF ANY SUBSET-CONSTRUCTION IS A FUNCTION OF THE POSET.
+       
+       This is mg-8b32's C1 arriving by a different road.  C1 says a function of `P` factors
+       through `pi` because `P = {(x,y) : pi_xy = 1}`.  The road here does not mention `pi` at
+       all: it says that the SET `L(P)` already determines `P`, so a construction that reads
+       the set reads nothing the poset did not already carry — AT THE INPUTS WHERE IT CAN BE
+       CONSUMED.  Daniel's class survives C1 exactly because `S` ranges wider than `LL_n`, and
+       s1.2 measures how much wider, and s1.5 measures what the extra width is worth.
+==============================================================================
+s1.2  HOW MUCH WIDER — the consumable inputs as a fraction of the enlarged domain
+==============================================================================
+     n   |S_n|=n!    |2^{S_n}|            |LL_n|    fraction consumable
+     2         2   2^2                        3   7.500e-01
+     3         6   2^6                       19   2.969e-01
+     4        24   2^24                     219   1.305e-05
+     5       120   2^120                   4231   10^(-32)
+  [GREEN] the enlargement is the whole point of the live class, and it is astronomical   and EVERY input it adds is one at which no e(P) exists to be bounded
+       The row to read is n = 5: the live class hands a construction 2^120 inputs, of which
+       4231 carry an `e(P)`.  The other 2^120 - 4231 are where every demonstrated separation
+       in this class lives — mg-8b32 b2.3's `supp(mu)` rows included.
+==============================================================================
+s1.3  THE DICHOTOMY, CONSTRUCTIVELY — same bounds, opposite separation verdicts
+==============================================================================
+  [GREEN] phi_bk, phi_sep and phi_blind agree at all 19 consumable inputs (n = 3)   so they support LITERALLY THE SAME BOUNDS — see the diff in s1.5
+  [GREEN] the witness: S = {id, reverse} has the ANTICHAIN's marginals and is not an L(P)   all pi = 1/2, |S| = 2 against e(antichain) = 6
+       THIS REPRODUCES THE TICKET'S HEADLINE ASSET ON THIS DIRECTORY'S OWN CODE, at n = 3
+       instead of mg-8b32's n = 6, and it is a REPRODUCTION OF THE SHAPE AND NOT OF THE
+       POSITION: mg-8b32's witness sits INSIDE hypothesis (1); the antichain has delta = 1/2
+       and this one does not.  What carries across is that a marginal-equivalent non-realizable
+       SET exists and that the BK graph reads it differently.
+
+     construction     on L(antichain)   on the witness   separates?   bounds
+     phi_bk                 6                0          YES          identical
+     phi_sep                6               -1          YES          identical
+     phi_blind              6                6          no           identical
+  [GREEN] phi_sep SEPARATES and phi_blind does NOT, on the same witness   and they were just measured to agree on every consumable input
+       
+         THAT IS THE DICHOTOMY.  Separation was moved from `YES` to `no` without changing a
+         single value at a consumable input, hence without changing a single bound.  So no
+         bound can depend on it, and the 12-against-0 this ticket was filed carrying is not
+         evidence that a bound is nearer.  NOT `not yet` — the two are independent coordinates
+         of the same function, and mg-8b32's own b2.3 measures one of them.
+==============================================================================
+s1.4  THE RESOLUTION CENSUS — what the four TIER-2 separators do ON the consumable set
+==============================================================================
+       `res(Phi) = |Phi(LL_n)|`, the number of DISTINCT values a construction takes across all
+       the inputs at which it could be consumed.  `res = 1` means the construction cannot tell
+       two posets apart, and `e(P)` is not constant, so it cannot bound `e(P)`.
+
+     separator                                n   defined on   res(Phi)   values
+     T2a  L* is a member of the set          3       12           1   [True]
+     T2b  |S| equals e(P(pi(S)))             3       19           1   [True]
+     T2c  S is a weak-order ideal under L*   3       12           1   [True]
+     T2d  the BK graph of S  [edge count]    3       19           4   [0, 1, 2, 6]
+     T2a  L* is a member of the set          4       96           1   [True]
+     T2b  |S| equals e(P(pi(S)))             4      219           1   [True]
+     T2c  S is a weak-order ideal under L*   4       96           1   [True]
+     T2d  the BK graph of S  [edge count]    4      219          10   0..36 (10 distinct)
+     T2a  L* is a member of the set          5     2040           1   [True]
+     T2b  |S| equals e(P(pi(S)))             5     4231           1   [True]
+     T2c  S is a weak-order ideal under L*   5     2040           1   [True]
+     T2d  the BK graph of S  [edge count]    5     4231          29   0..240 (29 distinct)
+  [GREEN] T2a  at n = 3: res = 1   CONSTANT on every consumable input
+  [GREEN] T2b  at n = 3: res = 1   CONSTANT on every consumable input
+  [GREEN] T2c  at n = 3: res = 1   CONSTANT on every consumable input
+  [GREEN] T2d  at n = 3: res = 4   NOT constant — the one survivor of this test
+  [GREEN] T2a  at n = 4: res = 1   CONSTANT on every consumable input
+  [GREEN] T2b  at n = 4: res = 1   CONSTANT on every consumable input
+  [GREEN] T2c  at n = 4: res = 1   CONSTANT on every consumable input
+  [GREEN] T2d  at n = 4: res = 10   NOT constant — the one survivor of this test
+  [GREEN] T2a  at n = 5: res = 1   CONSTANT on every consumable input
+  [GREEN] T2b  at n = 5: res = 1   CONSTANT on every consumable input
+  [GREEN] T2c  at n = 5: res = 1   CONSTANT on every consumable input
+  [GREEN] T2d  at n = 5: res = 29   NOT constant — the one survivor of this test
+       
+       THREE OF THE FOUR ARE CONSTANT, AND THAT IS NOT AN ACCIDENT OF THE POPULATION — each
+       has a one-line proof and the run is its vacuity guard:
+         T2a  `L* in S`   : L* extends P whenever it exists (s0.4), so it is in L(P).  True.
+         T2b  `|S| = e(P)`: on S = L(P) this reads |L(P)| = e(P).  True by definition.
+         T2c  weak ideal  : L(P) is a lower ideal of the weak order rooted at L* — measured
+              True at every consumable input here, and it is the classical fact.
+       Each is a predicate that DEFINES realizability from one side.  A predicate whose whole
+       content is `the realizable inputs are realizable` separates perfectly and resolves
+       nothing, which is the same defect `gap(mu) = log2 e(P) - H(mu)` has (mg-8b32 b4) wearing
+       different clothes: there the constant is 0, here it is True.
+==============================================================================
+s1.5  WHAT EACH IS WORTH AS A BOUND, IN BITS — the sharpest bound each can support
+==============================================================================
+       For a construction Phi the SHARPEST bound derivable from it is
+           B_Phi(v) = max{ e(P) : Phi(L(P)) = v },     and then   e(P) <= B_Phi(Phi(L(P))).
+       Nothing weaker is a bound and nothing stronger is derivable, so this is the whole
+       consumable content of Phi.  The free bound is e(P) <= n!; the gain is what B_Phi saves
+       against it, in bits, and ZERO gain is the definition of unconsumable.
+       
+       THE POPULATION IS THE ONE THE SEPARATOR IS DEFINED ON, AND THAT MATTERS — T2a and T2c
+       read `L*`, which does not exist at every poset (s1.4's `defined on` column: 2040 of 4231
+       at n = 5).  The free bound is therefore taken as `max e(P)` over THAT population, not
+       over all posets.  Bucketing `undefined` as if it were a value is what the first draft of
+       this section did, and it credited T2a with 2.26 bits it has not got: the split it was
+       scoring is `does L* exist`, which is a TIER-0 function of `pi` and not the row.
+
+     separator                                n   population   free bnd   max gain   verdict
+     T2a  L* is a member of the set          3         12      1.585     0.0000   ZERO
+  [GREEN] T2a  at n = 3: max gain over the free bound = 0.0000 bits
+     T2b  |S| equals e(P(pi(S)))             3         19      2.585     0.0000   ZERO
+  [GREEN] T2b  at n = 3: max gain over the free bound = 0.0000 bits
+     T2c  S is a weak-order ideal under L*   3         12      1.585     0.0000   ZERO
+  [GREEN] T2c  at n = 3: max gain over the free bound = 0.0000 bits
+     T2d  the BK graph of S  [edge count]    3         19      2.585     2.5850   nonzero
+  [GREEN] T2d  at n = 3: max gain over the free bound = 2.5850 bits
+     T2a  L* is a member of the set          4         96      2.322     0.0000   ZERO
+  [GREEN] T2a  at n = 4: max gain over the free bound = 0.0000 bits
+     T2b  |S| equals e(P(pi(S)))             4        219      4.585     0.0000   ZERO
+  [GREEN] T2b  at n = 4: max gain over the free bound = 0.0000 bits
+     T2c  S is a weak-order ideal under L*   4         96      2.322     0.0000   ZERO
+  [GREEN] T2c  at n = 4: max gain over the free bound = 0.0000 bits
+     T2d  the BK graph of S  [edge count]    4        219      4.585     4.5850   nonzero
+  [GREEN] T2d  at n = 4: max gain over the free bound = 4.5850 bits
+     T2a  L* is a member of the set          5       2040      4.644     0.0000   ZERO
+  [GREEN] T2a  at n = 5: max gain over the free bound = 0.0000 bits
+     T2b  |S| equals e(P(pi(S)))             5       4231      6.907     0.0000   ZERO
+  [GREEN] T2b  at n = 5: max gain over the free bound = 0.0000 bits
+     T2c  S is a weak-order ideal under L*   5       2040      4.644     0.0000   ZERO
+  [GREEN] T2c  at n = 5: max gain over the free bound = 0.0000 bits
+     T2d  the BK graph of S  [edge count]    5       4231      6.907     6.9069   nonzero
+  [GREEN] T2d  at n = 5: max gain over the free bound = 6.9069 bits
+       
+       T2a, T2b, T2c: ZERO BITS AT EVERY n, and it is s1.4's `res = 1` cashed out — a constant
+       puts every poset of its population in ONE bucket, so B_Phi is that population's own free
+       bound and the inequality it yields is the one that was free before the construction ran.
+       T2d, THE ONE SURVIVOR, IS NONZERO — and it is a TIER-1 object.  mg-8b32's b2.2 already
+       lists `the BK graph of L(P)` under FACTORS.  So the only TIER-2 construction on record
+       with any consumable content has that content on the TIER-1 side of its own reading, and
+       the tier-2 reading contributes exactly the part s1.3 just showed is free.
+==============================================================================
+s1.6  AND THE SURVIVOR'S BOUND IS CIRCULAR — the second failure mode, measured
+==============================================================================
+       A bound is consumable only if its right-hand side is CHEAPER TO KNOW than e(P).  The BK
+       edge count on L(P) is a sum over L(P), so knowing it presupposes the enumeration that
+       gives e(P) outright.  That is the `gap(mu)` defect again.
+       
+       AND THE RUN MADE THAT THE *ONLY* REASON, WHICH THE FIRST DRAFT OF THIS SECTION GOT
+       BACKWARDS.  It asserted that |E| fails to determine e(P) and the measurement says the
+       opposite — printed as measured, because a stronger survivor makes the verdict rest on
+       cost alone rather than on two half-arguments:
+  [GREEN] n = 3: |E| takes 4 values over 19 posets   0 of the 4 are ambiguous about e(P)
+  [GREEN] n = 4: |E| takes 10 values over 219 posets   0 of the 10 are ambiguous about e(P)
+  [GREEN] n = 5: |E| takes 29 values over 4231 posets   1 of the 29 are ambiguous about e(P)
+       |E| = 4    ->  e(P) in [4, 5]
+       
+       SO AT n = 3, 4 THE EDGE COUNT DETERMINES e(P) OUTRIGHT and the ambiguity only appears at
+       n = 5.  A `res > 1` construction that is very nearly an e(P)-oracle is exactly what a
+       consumability hunt would want — and it is unconsumable anyway, for the reason above.
+  [GREEN] and e(P) - 1 <= |E| at every poset, n = 3   BK-graph connectivity — |E| is bounded BELOW by e(P), never above it
+  [GREEN] and e(P) - 1 <= |E| at every poset, n = 4   BK-graph connectivity — |E| is bounded BELOW by e(P), never above it
+  [GREEN] and e(P) - 1 <= |E| at every poset, n = 5   BK-graph connectivity — |E| is bounded BELOW by e(P), never above it
+       SO THE INEQUALITY RUNS THE WRONG WAY FOR THE PROGRAMME.  `e(P) <= |E| + 1` is true and
+       useless: it bounds the thing we cannot compute by a strictly larger thing we can compute
+       only by computing it.  The s1.5 gain is real, and it is not consumable — which is why
+       this arm reports TWO failure modes and not one.
+==============================================================================
+s1.7  THE SCREEN — the two questions, and they are cheap enough to ask FIRST
+==============================================================================
+       Everything above is one instrument: a candidate `Phi` in this class is consumable only
+       if it passes BOTH.
+       
+         Q1  RESOLUTION.  Is `Phi` non-constant on `LL_n`?   (one pass over the posets)
+         Q2  COST.  Is `Phi(L(P))` obtainable without enumerating `L(P)`?
+       
+       Separation is not among them and cannot be, by s1.3.  On the four constructions the
+       estate has on record the screen returns:
+
+     separator                                Q1 res>1   Q2 cheap   CONSUMABLE
+     T2a  L* is a member of the set         no         n/a        NO
+     T2b  |S| equals e(P(pi(S)))            no         n/a        NO
+     T2c  S is a weak-order ideal under L*  no         n/a        NO
+     T2d  the BK graph of S  [edge count]   YES        no         NO
+  [GREEN] 4 of 4 on-record TIER-2 separators fail the screen   3 fail on Q1 (constant), 1 on Q2 (circular); none fails on separation, which is not asked
+
+arm exit: 0   (0 green, 0 red row(s))
