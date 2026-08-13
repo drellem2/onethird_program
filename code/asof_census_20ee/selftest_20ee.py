@@ -209,12 +209,27 @@ print("  that it worked came entirely from the one directory where every")
 print("  script happened to be named elsewhere.")
 print()
 
+# THE NEEDLE IS ASSEMBLED AT RUNTIME AND THAT IS NOT A STYLE CHOICE.  Written
+# as one literal it FAILED THE MOMENT IT WAS COMMITTED: this file is a tracked
+# *.py, git_grep_l greps tracked *.py at HEAD, and the control duly found
+# itself and reported one hit where it required none.  A control that plants
+# its own probe into the corpus it searches is the measurement environment
+# leaking into the measurement -- the same class as mg-6e4f's dirty-worktree
+# baseline and mg-54b1's `the sweep runs in a clone of the branch that carries
+# it`, reached here by a third route.  code/species_repair_a4ef/run_all.sh
+# already avoids writing out a pattern for this reason; this is that rule
+# applied to a self-test.
+_ABSENT = "mg4020_" + "absent_" + "needle.py"
+
 check("C5 a needle nothing outside the subject names",
-      consumers.git_grep_l("zzz_no_such_script_mg4020.py", ("*.py", "*.sh")),
+      consumers.git_grep_l(_ABSENT, ("*.py", "*.sh")),
       [],
       "FINDING NOTHING IS AN ANSWER, and it is the ordinary answer for a "
       "library or a numbered step. Before this it was a crash, after a "
-      "correct-looking header had already printed.")
+      "correct-looking header had already printed. THE NEEDLE IS ASSEMBLED "
+      "FROM PIECES: spelled as one literal this control FOUND ITSELF the "
+      "moment it was committed, because it is a tracked *.py and this rule "
+      "greps tracked *.py.")
 
 _narrow = "no SystemExit -- rc>=2 was swallowed"
 try:
@@ -231,12 +246,68 @@ check("C6 a REAL git error is still fatal",
       "is no-match; rc 2 and above stays fatal.")
 
 print()
+print("CONTROLS ON pinnable.py — mg-20ee's CONDITION 0 (mg-4020)")
+print("-" * 78)
+print()
+print("  Conditions 1-3 all assume a pin is the remedy.  pinnable.py asks")
+print("  whether it is, by classifying a drift the caller has already")
+print("  produced.  Planted diffs and an INJECTED resolver, so the controls")
+print("  do not depend on which commits this clone happens to contain.")
+print()
+
+import pinnable  # noqa: E402
+
+check("P3 an IGNORED path in a changed line",
+      [a for a in pinnable.addresses_of(
+          "+          code/species_7d75/__pycache__   directory rule")
+       if pinnable.is_ignored(a)],
+      ["code/species_7d75/__pycache__"],
+      "species_repair_a4ef's real line. .gitignore's `__pycache__/` carries "
+      "a TRAILING SLASH and matches directories only, so check-ignore says "
+      "NO to this path as written — both forms are tested, and a rule that "
+      "tested one would have missed the instance it was built from.")
+
+check("N6 a TRACKED path in a changed line",
+      [a for a in pinnable.addresses_of("+    docs/roadmap.md:41")
+       if pinnable.is_ignored(a)],
+      [],
+      "landscape_repair_1953's real line, and the contrast that makes R1 "
+      "mean anything: a pin CAN restore a tracked file's old content, so "
+      "this drift is mg-20ee's remedy working as designed and must not be "
+      "swept into `no pin reaches it`.")
+
+check("N7 a diff HEADER is not an address",
+      pinnable.addresses_of(
+          "--- a/code/x/out_a.txt\n+++ b/code/x/out_a.txt\n+ nothing here"),
+      [],
+      "every unified diff names its own file twice at the top. Counting "
+      "those would make each instrument address itself and put a path in "
+      "EVERY diff, which is the shape that turns a prefilter into noise.")
+
+check("P4 a declared revision the repository RESOLVES",
+      pinnable.declared_revs("OLD_REV = \"78ae4d9\"", lambda t: True),
+      ["78ae4d9"],
+      "state_relocation_audit_b0ae's real line — the instrument that is "
+      "ALREADY PINNED and drifts anyway.")
+
+check("N8 a hex-SHAPED english word, not resolvable",
+      pinnable.declared_revs("the figure was defaced by the rebase",
+                            lambda t: False),
+      [],
+      "THE NEGATIVE HALF, AND IT CARRIES THE WEIGHT. `defaced` is seven "
+      "characters and every one of them is a hex digit. RESOLUTION is what "
+      "makes R2 a rule rather than a regex: without `git cat-file -e` this "
+      "rule reports prose as a pin, and R2's whole claim is that SOMEBODY "
+      "DECLARED A REVISION.")
+
+print()
 print("=" * 78)
 if FAILED:
     print("RED — %d control(s) failed: %s" % (len(FAILED), ", ".join(FAILED)))
 else:
     print("GREEN — 2 positive, 4 negative and 1 known-defect control on the "
-          "address census, and 3 positive, 1 known-defect and 2 rc-tolerance "
-          "controls on the consumer census, all land where they must.")
+          "address census, 3 positive, 1 known-defect and 2 rc-tolerance "
+          "controls on the consumer census, and 2 positive plus 3 negative "
+          "on the pinnable pre-condition, all land where they must.")
 print("=" * 78)
 raise SystemExit(1 if FAILED else 0)
