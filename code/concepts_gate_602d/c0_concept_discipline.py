@@ -74,7 +74,31 @@ STATE = os.path.join(ROOT, "STATE.md")
 # compression and does not yet know that document is about him.  The raise is 100 words and the
 # file lands at 3,230: that RESTORES the pre-entry headroom (73 words) rather than granting new
 # slack, so the next writer faces the same cap this one did and not a looser one.
-WORDS_CEILING = 3300
+#
+# RAISED 3,300 -> 3,310 at mg-3da1, and the words are ONE §5 ROW SITTING DIRECTLY BENEATH
+# mg-1903's: "restrict M_n to the REALIZABLE pi and the ceiling drops", which is STATE.md row 8's
+# own closing sentence -- "every route below 1 must add a realizability fact" -- read as a
+# constraint on pi.  It is vacuous at the vertices, for every such restriction at once, because
+# pi(delta_sigma) IS a vertex (mg-c776 T2, generalised mg-3da1 T-3da1).
+#
+# WHY IT COULD NOT BE A CITATION is mg-1903's own test and this row fails it for a SHARPER reason
+# than its neighbour did: §5 already carries mg-1903's row, which kills poset-DESIGNED
+# compressions and says in its own text that it does NOT kill poset-design in general.  A reader
+# who sees that row and no other concludes the pi-level realizability route is still open -- so
+# the omission here is not merely a missing pointer, it is a NEIGHBOURING ROW THAT READS AS
+# LEAVING THE DOOR OPEN.  Filing this as "see mg-3da1" is precisely the failure this landing was
+# dispatched to repair: STATE.md carried row 8's question and, measured at 860c0a1, ZERO
+# occurrences of `image`, `c776` or `R_n` -- the question at the reader's site and the answer
+# somewhere else.
+#
+# THE RAISE IS 10 WORDS, WHICH IS SMALL BECAUSE THE ROW WAS CUT TO FIT AND NOT BECAUSE IT WAS
+# SHORT WHEN WRITTEN: the first draft ran 94 words over this cap and was tightened twice against
+# this gate (94 -> 39 -> 10) before any raise was taken.  It does NOT restore headroom the way
+# mg-1903's did -- the file lands AT the new cap with none -- and that is stated rather than
+# glossed: the next writer faces a tighter position than this one did, and the honest remedy is
+# a cut somewhere in §1-§4, which this branch did not attempt because summarising another
+# ticket's conceptual text to buy room for its own is how a shared file gets quietly rewritten.
+WORDS_CEILING = 3310
 
 # Section anchors: (label, phrase that must appear in a '## ' heading).
 S_QUANTITIES = ("S2 quantities", "what each one MEANS")
