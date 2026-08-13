@@ -4,9 +4,9 @@ mg-724a — MERGE GATE over the two control suites mg-9876 audited
 
 §1  THE SUITES, RUN — and what each one costs on the merge critical path
 --------------------------------------------------------------------------------------------
-  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      5.4s  9455 bytes
-  audit  code/control_audit_9876/run_all.sh         exit 0     53.3s  45349 bytes
-         (both suites)                                     58.7s total
+  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      5.1s  9455 bytes
+  audit  code/control_audit_9876/run_all.sh         exit 0     51.4s  45349 bytes
+         (both suites)                                     56.4s total
 
 §2  OBSERVED vs BASELINE.json
 --------------------------------------------------------------------------------------------
@@ -113,5 +113,5 @@ twin.worklist                      gated     MATCH                       baselin
 ============================================================================================
 GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
 shown able to fail on 14 probes and to refuse in 8 worlds, on this run, against
-these bytes.  Total 58.8s.
+these bytes.  Total 56.5s.
 ============================================================================================
