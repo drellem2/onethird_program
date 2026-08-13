@@ -246,6 +246,26 @@ Re-declaring 184 → 210 is a decision about somebody else's tripwire — the on
 a live disagreement without answering it — and it belongs to whoever owns mg-17aa's debt, not to
 a port of two F3 results. It is recorded here rather than left for the next runner to rediscover.
 
+> **ANSWERED by mg-843d, 2026-08-13, and the paragraph above is why it could be.** Filing it
+> rather than fixing it was right: the question was whether the 26 values belong in the census,
+> and it is decided at the **site** level — mg-17aa's rewrite removed 5 sites (28 specifiers) and
+> added 11 (54), all of them its own row rewrite, all of them `%`-format expressions inside the
+> function, which is the population `census()` declares. **They belong; the declaration was the
+> stale side and it moved to 210 with that derivation recorded at the declaration itself.** Two
+> things came out of answering it that moving the number would not have produced: only **11** of
+> the 26 are new *printed* values (14 sit in a branch mg-17aa keeps on purpose and the run never
+> takes, 2 are an eagerly-evaluated `dict.get` default), which is now measured and scored as a
+> new **V6d REACH** row with its own five-construction demonstration; and
+> `code/face_geometry_repair_e35b/run_all.sh` is now **one of `build.sh`'s gated suites**, which is the
+> half of the finding this section named — *nothing ran it.* See
+> `code/face_geometry_repair_e35b/README.md`, "The census question, answered".
+>
+> **`out_demo_f2.txt` needed no regeneration and none was done.** With V6b green again the
+> demonstration reproduces the committed transcript **byte for byte**, 20/20 cells. It was not a
+> stale record; it was a correct record of a tree that had drifted away and has drifted back.
+> Leaving it unregenerated rather than papering over the disagreement is what made that
+> checkable.
+
 ### Not shown
 
 - **n > 6.** The sweep is n = 3..6. The argument in the docstring of
@@ -312,7 +332,9 @@ is informative and is kept.
 - **It did not re-audit mg-e35b's mathematics.** The dichotomy (297 = 288 + 9 + 0), the
   gauge/non-similar splits, the vacuity separation and the absorbability routing are untouched
   and re-run green: `code/face_geometry/run_all.sh` exits 0,
-  `code/face_geometry_repair_e35b/run_all.sh` exits 0 with **28 checks, 0 refuted**.
+  `code/face_geometry_repair_e35b/run_all.sh` exits 0 with **28 checks, 0 refuted**. *(Both
+  numbers record the tree this repair shipped on. Since mg-843d that runner has a second step and
+  the verifier has 29 checks; see "Running it" below.)*
 - **It did not touch mg-fcb2's F4** (V6's justification for "NOT-GAUGE on 288 of 297"), which is
   not in this ticket's brief, nor the two findings of the six the brief does not assign.
 - **V6b does not check that the 12 entries are the right ones.** It fires when the set of
@@ -337,11 +359,17 @@ is informative and is kept.
 ## Running it
 
 ```sh
-sh code/face_geometry_repair_8af0/run_all.sh     # ~32 s, 4 steps since mg-36f5 -- EXIT 1 today, see below
+sh code/face_geometry_repair_8af0/run_all.sh     # 32.0 s, 4 steps since mg-36f5, exit 0 since mg-843d
 python3 code/face_geometry_repair_8af0/probe_f3_tightness.py   # 4.9 s, 8 checks, exit 0
-sh code/face_geometry_repair_e35b/run_all.sh     # ~5 s,  exit 0, 28 checks
+sh code/face_geometry_repair_e35b/run_all.sh     # 42.3 s, exit 0, 29 checks + the V6d demo (mg-843d)
 sh code/face_geometry/run_all.sh                 # ~20 s, exit 0
 ```
+
+The first line read **`~32 s ... EXIT 1 today, see below`** until mg-843d, and the `1` was
+`demo_f2_row_can_go_red.py` inheriting V6b's red baseline — it is 0 again now that the census is
+answered, with `out_demo_f2.txt` unchanged. The third line read **`~5 s, exit 0, 28 checks`**; it
+is the longer of the two runners now, and unlike every other line here it is **not** hand-invoked
+— it is one of `build.sh`'s gated suites. Both re-measured on 2026-08-13, not carried forward.
 
 The first runner re-raises the **first** non-zero status, not the last, so an early refutation
 cannot be overwritten by a later pass — and that path was tested with a deliberately failing

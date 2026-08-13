@@ -151,6 +151,59 @@
 # its own it would compare committed transcripts against worktree copies nothing had
 # refreshed, find them equal, and print a green meaning only "nobody hand-edited these".  So
 # it REFUSES without BUILD_SH_RAN_THE_SUITES=1, which is set on exactly this one line.
+#
+# --- mg-843d -------------------------------------------------------------------------------
+# AN EIGHTH SUITE JOINS THE GATE -- the SEVENTH IN THE LOOP, since mg-f771's runs after it and
+# outside it -- AND IT IS THE ONE THAT WAS ALREADY RED.  THE WHOLE GATE IS MEASURED AT
+# 88.4 / 87.1 / 85.2 s ON THIS HOST WITH IT IN -- three runs, quoted as three, because mg-602d's
+# entry had to correct itself for quoting the addition arithmetic (mg-17aa's D4) and a single
+# figure here would hide a 3 s spread that is load, not the gate.  Against 44.8 s measured on the
+# same host minutes earlier WITHOUT it.  This is the most expensive addition since mg-06d1's and
+# by some way the largest proportional one: it very nearly doubles the gate.  The cost is argued
+# below and it is NOT argued as small.
+#
+# WHY IT IS BEING ANSWERED AT ALL.  `code/face_geometry_repair_e35b/verify_e35b.py` exited 1 on
+# main from `de86fee` (2026-08-10) to today: its V6b CENSUS row measured 210 formatted values in
+# NEGATIVE CONTROL 4 against a declared 184.  The tripwire was not broken -- it was firing,
+# correctly, on a real unconstructed input, and nothing in the estate ran it.  Every merge in
+# those three days gated GREEN with a red control in the same tree, including `7025d03` at 45 s.
+# That is a control firing into a room with nobody in it, and it is the shape this file exists
+# to stop.  The census question is answered in that suite's README and the declaration moved to
+# 210 WITH ITS DERIVATION; the suite is green before it is added here, which is the ordering the
+# ticket demanded -- a red suite joining the gate blocks every merge in the repository.
+#
+# WHY THIS SCRIPT AND NOT EVERY SCRIPT IN code/**.  Most of `code/` is one-off audits and
+# probes: instruments that measured a tree, published a transcript, and finished.  Re-running
+# those on every merge would gate on history.  This suite is not that, and the test is what its
+# rows READ rather than what its directory is called:
+#
+#     V6a ANCHORED     reads code/face_geometry/controls_output.txt   -- another ticket's file
+#     V6b CENSUS       reads code/face_geometry/controls.py           -- another ticket's file
+#     V6c REGENERATED  RUNS  code/face_geometry/controls.py           -- another ticket's file
+#     V6d REACH        RUNS  it and splits V6b's total by fate        -- another ticket's file
+#
+# Every one of the four is scored against a file OTHER tickets keep editing, and `de86fee` is
+# the proof that they do.  A row whose input is a live file is a standing control; a row whose
+# input is its own literal is the defect mg-fcb2's F2 was about, and this suite had that row and
+# had it removed.  By that test the six suites above belong here and this one does too.
+#
+# WHAT IT COSTS AND WHAT COULD GO INSTEAD.  The gate grew by 43.6 s; the suite's own runner
+# measures 42.3 s standalone, so ~1 s is this loop and the rest is the work.  Of the 42.3 s,
+# 7.2 s is the verifier and 35.0 s is `demo_v6d_row_can_go_red.py`, which watches the new V6d
+# row go red on four mutations of a throwaway copy of code/face_geometry/.  The demonstration is
+# 83% of the addition, and it is named here as the removable half so that dropping it later is a
+# decision with a number attached.  It is NOT dropped now, for the reason this ticket is about:
+# a demonstration nothing runs is a claim that rots, and this file is where the estate finds out
+# whether something runs.
+#
+# AND IT IS UNDER mg-f771's INVARIANT FROM ITS FIRST GATE RUN, which is the right way round.
+# This suite writes two tracked transcripts -- out_verify_e35b.txt and out_demo_v6d.txt -- and
+# mg-f771's control reads both, so a committed copy of either that disagrees with what the gate
+# just produced is RED.  Neither embeds a wall-clock or a worktree path, so neither leans on
+# mg-f771's two normalisation rules; they converge by being deterministic rather than by being
+# exempted.  That matters more than usual here: this whole ticket is about a transcript
+# (out_demo_f2.txt) that sat on main disagreeing with the tree, and the suite added to stop that
+# happening again arriving OUTSIDE the control that stops it would have been the joke version.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \
@@ -158,7 +211,8 @@ for suite in \
     code/alias_agreement_06d1/run_all.sh \
     code/facts_registry_03cf/run_all.sh \
     code/concepts_gate_602d/run_all.sh \
-    code/l1b_application_28b6/run_all.sh
+    code/l1b_application_28b6/run_all.sh \
+    code/face_geometry_repair_e35b/run_all.sh
 do
     echo
     echo "############################################################ $suite"

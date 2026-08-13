@@ -1,0 +1,24 @@
+V6d, watched firing.  Four mutations of a throwaway copy of code/face_geometry/, scored by verify_e35b.py's own functions.
+
+baseline split on the real tree: {'printed': 194, 'unreached': 14, 'discarded': 2}
+printed sites: 38, unreached at line(s) [1801], discarded at line(s) [1891]
+
+  construction                                                               V6b CENSUS        V6c REGENERATED   V6d REACH         
+  D0 the copy, unmutated                                                     GREEN             GREEN             GREEN             
+  D1 a PRINTED value moved into an unreachable branch, artifact regenerated  GREEN             GREEN             RED               
+  D2 a new %d in a branch nobody runs                                        RED               GREEN             RED               
+  D3 a new %d in what the run PRINTS, artifact regenerated                   RED               GREEN             RED               
+  D4 the artifact hand-edited                                                GREEN             RED               RED               
+
+  the numbers behind the verdicts -- V6b is ONE total, V6d is the split of it:
+  D0  census 210  reach {'printed': 194, 'unreached': 14, 'discarded': 2}
+  D1  census 210  reach {'printed': 192, 'unreached': 16, 'discarded': 2}   [guarded the statement at controls.py line 1459]
+  D2  census 211  reach {'printed': 194, 'unreached': 15, 'discarded': 2}   [appended `if False: print('... %d' % 1)` to the section]
+  D3  census 211  reach {'printed': 195, 'unreached': 14, 'discarded': 2}   [appended `print('... %d' % 1)` to the section]
+  D4  census 210  reach {'printed': 194, 'unreached': 14, 'discarded': 2}
+  D2 and D3 BOTH move the census by 1, in opposite directions of meaning: D2 lands in `unreached`, D3 in `printed`.  That sentence is the whole reason V6d exists.
+
+D0 IS THE CONTROL ON THE TECHNIQUE: the AST round trip reproduces the committed artifact byte for byte (V6c GREEN above), so the RED cells below it are the mutations and not the reformatting.
+NOT SHOWN: that V6d catches every way a value can stop being printed.  It is scored on ONE number per fate, so two changes that cancel are invisible to it -- the same limit V6b carries and states.
+
+15/15 cells as tabulated in this file's docstring.  V6d is the ONLY row that goes red on D1, and V6b reports the same number for D2 and D3 while V6d separates them.
