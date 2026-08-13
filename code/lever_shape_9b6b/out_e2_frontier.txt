@@ -1,0 +1,134 @@
+====================================================================================================
+mg-9b6b  e2  the frontier is real, it rises, and it rises in the wrong place
+====================================================================================================
+----------------------------------------------------------------------------------------------------
+m1  G(s) = max{ d : δ ≤ s } — THE (R)-SHAPED READING, AND ITS POLE
+    Residual (R) asks for a density ceiling under a BALANCE hypothesis.  Here is that
+    ceiling, computed exhaustively.  The `members` column is printed beside every one
+    because a ceiling over an EMPTY class is not a ceiling of 0, it is not a ceiling.
+
+        n  hypothesis                            members        max d
+        4  <= 1/4                                      0        EMPTY
+        4  <= 3/10                                     0        EMPTY
+        4  <  1/3   FROZEN -- what row 8 needs          0        EMPTY
+        4  <= 1/3   the boundary class                 2          1/3
+        4  <= 7/20                                     2          1/3
+        4  <= 2/5                                      3          1/2
+        4  <= 9/20                                     3          1/2
+        4  <= 1/2   everything                        15            1
+
+        5  <= 1/4                                      0        EMPTY
+        5  <= 3/10                                     0        EMPTY
+        5  <  1/3   FROZEN -- what row 8 needs          0        EMPTY
+        5  <= 1/3   the boundary class                 3          1/5
+        5  <= 7/20                                     3          1/5
+        5  <= 2/5                                     10         7/10
+        5  <= 9/20                                    14         7/10
+        5  <= 1/2   everything                        62            1
+
+        6  <= 1/4                                      0        EMPTY
+        6  <= 3/10                                     0        EMPTY
+        6  <  1/3   FROZEN -- what row 8 needs          0        EMPTY
+        6  <= 1/3   the boundary class                 5         4/15
+        6  <= 7/20                                     5         4/15
+        6  <= 2/5                                     23         8/15
+        6  <= 9/20                                    54          2/3
+        6  <= 1/2   everything                       317            1
+
+        7  <= 1/4                                      0        EMPTY
+        7  <= 3/10                                     0        EMPTY
+        7  <  1/3   FROZEN -- what row 8 needs          0        EMPTY
+        7  <= 1/3   the boundary class                 8         4/21
+        7  <= 7/20                                     8         4/21
+        7  <= 2/5                                     59          2/3
+        7  <= 9/20                                   254          5/7
+        7  <= 1/2   everything                      2044            1
+
+        8  <= 1/4                                      0        EMPTY
+        8  <= 3/10                                     0        EMPTY
+        8  <  1/3   FROZEN -- what row 8 needs          0        EMPTY
+        8  <= 1/3   the boundary class                12          1/7
+        8  <= 7/20                                    12          1/7
+        8  <= 2/5                                    157        15/28
+        8  <= 9/20                                  1323          3/4
+        8  <= 1/2   everything                     16998            1
+
+    m1.a    ok      EVERY hypothesis strictly below the 1/3 boundary is empty at every n = 4..8 (15 of 15 cells)
+    m1.b    ok      and G is non-decreasing in s at every n = 4..8 where it is defined
+    THE POLE IS THE FINDING.  G is a real function everywhere it has members, and it
+    has none on the frozen side.  An instrument computing (R) therefore returns a
+    healthy, rising, exactly-computed answer at every hypothesis EXCEPT the one row 8
+    consumes, where it returns nothing at all -- and `nothing at all` is what a ceiling
+    of `d <= anything` looks like from inside the tool.  That is why this route reads
+    as open from the instrument side however many times it is closed from the logic
+    side (e1 m2).
+----------------------------------------------------------------------------------------------------
+m2  F(t) = min{ δ : d ≥ t } — THE mg-0b96 §6 READING, EVERY STEP
+    This is the largest `f` there can be: any true `δ ≥ f(d)` has f(t) <= F(t) at every
+    t.  So the whole question `does a density-to-balance bound exist` is a question
+    about THIS staircase and nothing else.
+
+      n=3   2 steps
+            d>=1/3: 1/3  d>=1: 1/2
+      n=4   3 steps
+            d>=1/6: 1/3  d>=1/2: 2/5  d>=2/3: 1/2
+      n=5   4 steps
+            d>=1/10: 1/3  d>=3/10: 4/11  d>=3/5: 2/5  d>=4/5: 1/2
+      n=6   7 steps
+            d>=1/15: 1/3  d>=1/3: 5/14  d>=7/15: 2/5  d>=3/5: 8/19  d>=2/3: 19/45  d>=11/15: 7/15  d>=4/5: 1/2
+      n=7  10 steps
+            d>=1/21: 1/3  d>=5/21: 5/14  d>=1/3: 14/39  d>=3/7: 8/21  d>=11/21: 36/91  d>=13/21: 2/5  d>=5/7: 8/19  d>=16/21: 28/61  d>=17/21: 7/15  d>=6/7: 1/2
+      n=8  10 steps
+            d>=1/28: 1/3  d>=5/28: 16/45  d>=11/28: 17/46  d>=3/7: 27/70  d>=15/28: 67/169  d>=4/7: 141/340  d>=17/28: 263/630  d>=3/4: 22/49  d>=11/14: 401/854  d>=23/28: 1/2
+    m2.a    ok      10 distinct steps at n = 8 -- the relation is real, not flat
+    m2.b    ok      it runs from 1/3 at the sparse end to 1/2 at the antichain
+----------------------------------------------------------------------------------------------------
+m3  G(1/3) AGAINST docs/FACTS.md F23 — A CONSISTENCY CHECK, NOT A CORROBORATION
+    F23 says max{ d : δ = 1/3 } = 4*floor(n/3)/(n(n-1)), FP exhaustive n = 3..9.
+    ⚠️  THIS ARM COMPUTES IT THROUGH lib6ff4, WHICH IS THE LIBRARY mg-6ff4 MEASURED F23
+    WITH.  Agreement therefore says this arm's enumeration and delta agree with F23's;
+    it does NOT independently corroborate F23, and a disagreement would impeach this
+    directory first.  It is here because everything below reads G(1/3) off this table.
+
+        n  G(1/3) measured  F23 closed form  
+        3             2/3             2/3  agree
+        4             1/3             1/3  agree
+        5             1/5             1/5  agree
+        6            4/15            4/15  agree
+        7            4/21            4/21  agree
+        8             1/7             1/7  agree
+    m3.a    ok      agrees at every n = 3..8
+----------------------------------------------------------------------------------------------------
+m4  ZERO SLACK AT THE THRESHOLD ROW 8 NEEDS
+    mg-0b96 §6 wants f(D_needed) >= 1/3.  F(D_needed) is the largest value f can take
+    there.  If those two are EQUAL, the asked-for bound is tight -- it has to be exactly
+    sharp at its own threshold, with no room for any argument that loses anything.
+
+        n  D_needed(n)   F(D_needed)        slack  equality witness
+        3  2/75                  1/3            0  1 poset(s), densest at d = 2/3
+        4  1/40                  1/3            0  2 poset(s), densest at d = 1/3
+        5  3/125                 1/3            0  3 poset(s), densest at d = 1/5
+        6  7/300                 1/3            0  5 poset(s), densest at d = 4/15
+        7  4/175                 1/3            0  8 poset(s), densest at d = 4/21
+        8  9/400                 1/3            0  12 poset(s), densest at d = 1/7
+    m4.a    ok      slack is EXACTLY ZERO at every n = 3..8
+
+    AND THE WITNESSES ARE THE BOUNDARY CLASS, WHICH IS NOT GOING AWAY.  e1 m1's
+    ordinal-sum family puts a delta = 1/3 poset above D_needed at 63 orders (n = 3..66
+    except 65), so the zero slack is not a small-n artefact: it is a construction that
+    runs out only where F23's own ceiling drops below D_needed, at n = 67.
+----------------------------------------------------------------------------------------------------
+VERDICT
+    THE FRONTIER IS REAL AND IT IS UNCONSUMABLE, WHICH ARE NOT THE SAME SENTENCE.
+
+    Everything G says is said about a class with delta >= 1/3.  Row 8 consumes G at
+    delta < 1/3.  The two do not overlap, and the gap between them is not a matter of
+    reaching a larger n: the class is empty at every n IF THE CONJECTURE HOLDS THERE,
+    so a census can never populate it and can never fail to.  The measurable half of
+    the frontier and the consumable half are disjoint by construction.
+
+    WHAT THIS ARM DOES NOT SHOW.  It does not show a density-to-balance bound is FALSE
+    -- e1 m3 shows the strict reading is, on the unrestricted class, and nothing here
+    touches the flat one, which is true if and only if the conjecture is.  And every
+    number here is kind FP at n <= 8: the staircase above 1/3 is unconditional
+    information, but it is information about 20 000 posets, not about all of them.

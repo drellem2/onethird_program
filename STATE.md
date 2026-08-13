@@ -156,8 +156,8 @@ Ordering for aggregation: `U`/`U-id` ≻ `FP` ≻ `OPEN`. `FP✗` is a *refutati
 audited mg-d112): **(B-cov)** — *"break the wrong-signed same-side covariance"* (FKG/XYZ
 force it `≥ 0`), *"the sharp edge"*, and the object three separate routes converge on;
 **(R)** — *"do frozen posets have a density ceiling `d(P) ≤ D < 1`?"* (mg-210d),
-elementary, and reopened *quantitatively* by mg-88bd as `D ≤ ε_spec`: *"a door recorded as
-the wrong shape is now the right shape with the wrong size"*; and **(EQ)** —
+reopened *quantitatively* by mg-88bd as `D ≤ ε_spec` — ⚠️ **CLOSED AS A LEVER (mg-9b6b): no
+`D` is both provable and worth an unreached order**; and **(EQ)** —
 `max_x |E[pos_σ x] − rank_e x| = O(1)`, elementary, *"the only one of the three that is a
 cancellation statement rather than a decay statement"*. **Retired or dead:** the *"external
 k=1 stability tool"* for Stanley's inequality (refuted, mg-dcae — the reduction to it was
