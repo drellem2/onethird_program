@@ -251,6 +251,73 @@
 # merge request in this repository.  Registering it properly needs 5 new probes in
 # `a2_discriminate.py`, and those cannot run: `make_sandbox()` builds a tree with no `.git`,
 # so the question has no answer inside it.  Folding this into section 7 is the filed successor.
+#
+# --- mg-d72e -------------------------------------------------------------------------------
+# A TENTH SUITE JOINS THE GATE -- the NINTH IN THE LOOP, since mg-f771's runs after the loop
+# and outside it -- AND IT IS THE CHEAPEST ADDITION THIS FILE HAS EVER MADE.
+#
+# THE SUITE ALONE: 0.26 / 0.26 / 0.26 s on a quiet host, and 0.42 / 0.43 / 0.40 s an hour
+# later on a loaded one.  Six runs, quoted as six, because a single figure would hide that
+# THIS HOST'S LOAD MOVES THE MEASUREMENT BY MORE THAN 50%.
+#
+# THE WHOLE GATE, WITH IT IN: 120.01 / 91.55 / 92.60 / 91.45 / 93.14 / 162.71 s.
+# THE WHOLE GATE, WITHOUT IT, at origin/main ee382ce between those two triples:
+# 93.15 / 91.50 / 94.23 s.
+#
+# THE ADDITION IS NOT VISIBLE IN THE GATE TOTAL AND THAT IS THE HONEST REPORT, NOT A HEDGE.
+# The with-it runs span 71 s (91.45 to 162.71) on an unchanged tree; the thing being added
+# costs 0.4 s.  The 120 s and 162 s runs are this host under other agents' load, and the
+# fastest run of all nine is a run WITH the suite -- which is not evidence that it speeds the
+# gate up and must not be read as any.  Read every number here as a measurement of its own
+# run and not as a property of the gate -- mg-602d's rule, and the reason mg-843d quoted
+# three runs rather than one.  What can be said against the budget is said from the SUITE's
+# own number and not from the difference of two noisy totals: 0.4 s is 0.03% of the
+# 20-minute merge-gate timeout, so this is NOT a material fraction of the budget and no
+# decision is being sent back to be re-made.
+#
+# ⚠️ EVERY NUMBER IN THIS PARAGRAPH WAS TAKEN TWICE.  The first set was measured against a
+# nine-suite gate and was STALE BEFORE IT WAS COMMITTED: `origin/main` added mg-3902's suite
+# while this branch was in flight, so the baseline it was quoted against no longer existed.
+# It was re-taken after the rebase rather than adjusted, because an adjusted number is
+# mg-17aa's D4 wearing a measurement's clothes.
+#
+# WHAT IT GATES IS A HOLE mg-f771's OWN TRANSCRIPT NAMES.  g0 watches tracked `code/**/out_*.txt`
+# THAT A SUITE REWRITES, and says so in its own §1: "a transcript no suite rewrites is never
+# modified and therefore never appears below -- which is how mg-c824's out_a4_census.txt stays
+# outside this control by construction."  That exclusion was CORRECT while the transcript could
+# not reproduce: mg-c824 found it non-reproducible BY CONSTRUCTION, because it printed line
+# numbers into four documents other tickets amend.  mg-c824 pinned the corpus reads to a
+# declared commit and the transcript became byte-reproducible, which made this suite eligible
+# for the loop FOR THE FIRST TIME.  Putting it in the loop makes it a transcript a suite
+# rewrites, which is the exact condition g0's §1 tests -- so the hole g0 documents about itself
+# closes, and it closes because the underlying defect was repaired rather than because the
+# control was widened over an artefact that could not satisfy it.
+#
+# DEMONSTRATED, NOT ASSERTED (which is what mg-843d's `demo_v6d` exists to insist on).  A
+# single byte changed in the COMMITTED copy of out_a4_census.txt turns `gate_fixed_point_f771`
+# RED -- verdict RED, 1 disagreement, the hunk shown -- and the same planted byte on the tree
+# as it was BEFORE this commit leaves the gate GREEN, because nothing rewrote the file and g0
+# never saw it.  Both halves were run; the transcript of the red run is quoted in
+# code/c3_audit_a94c3/README.md §A4-IN-THE-GATE.  A suite in the loop but not in the control is
+# the appearance of coverage without coverage, and one measurement separates the two.
+#
+# WHY A NEW RUNNER AND NOT `code/c3_audit_a94c3/run_all.sh`.  The instrument's own runner has
+# five sections and costs 26.38 s measured on the quiet host and 41.40 s on the loaded one --
+# roughly 100x this addition, on either host, for the coverage this ticket
+# is about.  It is NOT rejected as worthless: all five of its transcripts reproduce
+# BYTE-IDENTICALLY (measured, `git status` clean after a full run), so widening to it later is
+# a decision with a number attached rather than an experiment.  What the other four sections do
+# NOT have is a live input of any kind -- they open no file and read no corpus path (measured:
+# no `open`, no `git show`, no `subprocess` in any of them), so they are pure computation whose
+# transcripts can only move when their own source moves.  a4_census is the section that reads
+# the corpus, and it is the one g0 names.  So the gate takes that section, at 0.26-0.43 s, and
+# `run_all.sh` stays what it is: the instrument you run to re-take mg-94c3's audit.
+#
+# THE RESIDUAL, STATED RATHER THAN DISCOVERED.  a4_census exits 1 if `AS_OF` (7b7d093) becomes
+# unreachable, and a gate red for a pruned commit is the "innocent branch red" pf771 designed
+# against.  MEASURED: `git merge-base --is-ancestor 7b7d093 origin/main` -> YES, so it is
+# reachable for as long as main is and the failure needs a history rewrite, not routine gc.
+# The objection is real in general and does not apply here.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \
@@ -260,7 +327,8 @@ for suite in \
     code/concepts_gate_602d/run_all.sh \
     code/l1b_application_28b6/run_all.sh \
     code/face_geometry_repair_e35b/run_all.sh \
-    code/twin_disposition_audit_3902/run_all.sh
+    code/twin_disposition_audit_3902/run_all.sh \
+    code/c3_audit_a94c3/run_a4_census.sh
 do
     echo
     echo "############################################################ $suite"
