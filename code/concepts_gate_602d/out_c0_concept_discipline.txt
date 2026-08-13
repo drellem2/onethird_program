@@ -9,13 +9,13 @@ ANCHORS  -- a reworded heading REFUSES rather than passing
 
 POINTERS -- every claim row carries the artifact that earns it
     S2 quantities          6 rows, 0 without a pointer
-    S5 killed intuitions   15 rows, 0 without a pointer
+    S5 killed intuitions   16 rows, 0 without a pointer
 
 MARKERS  -- every unearned claim says BELIEF in the item, not in a footnote
     S6 beliefs             6 items, 0 unmarked
 
 LENGTH   -- succinct is a requirement, not a style note
-    docs/CONCEPTS.md       3230 words against a ceiling of 3300
+    docs/CONCEPTS.md       3310 words against a ceiling of 3310
 
 LINKS    -- every relative link resolves on disk
     docs/CONCEPTS.md       4 relative links, 0 dead

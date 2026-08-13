@@ -34,7 +34,7 @@ SECTION 2 — per-row digests: which STATE.md rows have MOVED since the twin was
 SECTION 3 — whole-file digest (the coarse signal)
 --------------------------------------------------------------------------------------
   pinned STATE.md sha256 : 471298808ca27b6738662fa99b5639743bd43e7b09c2d2b94107308d579af6ee
-  actual STATE.md sha256 : fb5b2b65434432e8e6c876fe8f8fdc3622a88916cb6773f8fe0223fc220a4cca
+  actual STATE.md sha256 : de1b6ff9fb185fcfed2be96ff605df693dde539bbd0b85191d6c7e0bc8ddf753
   DIFFERS  STATE.md has changed since the pin.
            This alone is NOT a defect and must not be read as one, and it no
            longer grades: STATE.md changes constantly outside the ledger, and
