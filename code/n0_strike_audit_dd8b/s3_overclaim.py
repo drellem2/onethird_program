@@ -25,6 +25,8 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import libdd8b as L  # mg-20ee: the corpus is read AT A DECLARED COMMIT
+
 TARGETS = [
     "STATE.md",
     "docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md",
@@ -200,8 +202,7 @@ def main():
     ok = controls()
     totals = {}
     for rel in TARGETS:
-        with open(os.path.join(REPO, rel)) as f:
-            totals[rel] = scan_file(rel, f.read())
+        totals[rel] = scan_file(rel, L.read_at(rel))
     print()
     print("=" * 78)
     print("BASELINE (pre-mg-24fb) — the numbers a later audit compares against")
@@ -215,4 +216,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print(L.stamp("s3_overclaim.py"), end="")
     sys.exit(main())

@@ -23,6 +23,8 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import libdd8b as L  # mg-20ee: the corpus is read AT A DECLARED COMMIT
+
 INHERITED = {
     "docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md":
         [15, 137, 148, 165, 255, 260],
@@ -40,9 +42,7 @@ def git(*a):
 def main():
     rc = 0
     for rel, nums in INHERITED.items():
-        path = os.path.join(REPO, rel)
-        with open(path) as f:
-            lines = f.read().split("\n")
+        lines = L.read_at(rel).split("\n")
 
         print()
         print("#" * 78)
@@ -50,8 +50,7 @@ def main():
         print("#" * 78)
 
         # --- could the numbers have drifted? ---
-        log = git("log", "--oneline", "origin/main", "--", rel).split("\n")
-        log = [l for l in log if l.strip()]
+        log = L.log_at(rel)
         print(f"\n  COMMITS TOUCHING THIS FILE ON origin/main: {len(log)}")
         for l in log:
             print(f"    {l}")
@@ -98,4 +97,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print(L.stamp("s4_sites.py"), end="")
     sys.exit(main())

@@ -1,3 +1,31 @@
+==============================================================================
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (mg-20ee)
+==============================================================================
+  corpus read at : dafe75910f731927affdf366457d681e262acf62
+      AS_OF, the pinned default
+
+  EVERY `:NNN` BELOW IS AN ADDRESS, NOT A FINDING.  Each is an offset into a
+  `docs/` file this instrument DOES NOT OWN, and it moves whenever another
+  ticket amends that file.  They are valid at the commit named above and
+  nowhere else.  THE QUOTED LINE UNDER EACH ADDRESS IS THE PRIMARY ADDRESS --
+  it survives the file moving; the number does not.
+
+  AND SO ARE THE COUNTS, which is the part that matters here: the occurrence
+  and line counts, the per-document line/character sizes, and the commit
+  tallies are all taken OVER THE PINNED CORPUS.  This instrument's job IS to
+  count, so a live read would not merely relocate a reader -- it would
+  re-answer the question at a corpus the verdict was never taken over.  It had
+  already done so: mg-24fb amended the mg-33f5 document after these transcripts
+  were written.
+
+  WHAT IS STABLE: the term sets, the controls, and the adjudication each
+  section reaches.  Run with no environment set and this transcript reproduces
+  BYTE-IDENTICALLY.  To ask the same questions of the CURRENT corpus:
+
+      N0_STRIKE_AT=HEAD python3 s3_overclaim.py      (or =WORKTREE, or any commit)
+
+  which RE-MEASURES AND RE-ADDRESSES.  Both runs are correct about their own
+  corpus, and their disagreeing is not a defect in either.
 
 ##############################################################################
 # CONTROLS — run BEFORE any verdict, because an untested guard proves nothing

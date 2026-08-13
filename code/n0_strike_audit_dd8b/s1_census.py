@@ -27,6 +27,8 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import libdd8b as L  # mg-20ee: the corpus is read AT A DECLARED COMMIT
+
 TARGETS = [
     "docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md",
     "docs/OneThird-LIBweak-mg-c3ca.md",
@@ -216,12 +218,10 @@ def main():
     ok_neg = negative_control()
 
     for rel in TARGETS:
-        path = os.path.join(REPO, rel)
-        if not os.path.exists(path):
+        if not L.exists_at(rel):
             print(f"\n!!! MISSING TARGET: {rel}")
             continue
-        with open(path) as f:
-            text = f.read()
+        text = L.read_at(rel)
         nlines = len(text.split("\n"))
         print()
         print("#" * 78)
@@ -245,4 +245,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print(L.stamp("s1_census.py"), end="")
     sys.exit(main())

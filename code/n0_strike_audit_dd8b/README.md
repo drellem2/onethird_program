@@ -278,3 +278,46 @@ while I read it. It establishes NOTHING about mg-24fb**, which has not run.
     python3 code/n0_strike_audit_dd8b/s4_sites.py      # inherited line numbers resolved
 
 `s4` exits 1 by design — three inherited addresses do not carry the term, and that is Finding 1b.
+
+## The corpus is read at an as-of commit (`mg-20ee`)
+
+`s1`–`s4` all print `path:NNN` into `docs/` documents and `STATE.md` — files this instrument
+does not own — and `s1`/`s3`'s headline numbers are **counts over those same documents**. All
+four read them from the working tree, so the transcripts were non-reproducible by construction
+and had already gone stale: `mg-24fb` amended the `mg-33f5` document after these ran, and a
+worktree re-run on 2026-08-13 moves the primary term from *8 occurrences on 7 lines* to *9 on 8*,
+with every address moving under it.
+
+Here a live read is worse than a relocated reader. **Counting is this instrument's whole job**, so
+reading live silently re-answers the question at a corpus the verdict was never taken over.
+
+`libdd8b.py` reads the corpus at `AS_OF` via `git show`. `N0_STRIKE_AT=HEAD` (or `=WORKTREE`, or
+any commit) re-measures.
+
+**`AS_OF = dafe759`, and the obvious choice was wrong.** `80bd591` is the commit that *carries*
+these four transcripts, and it does **not** reproduce them — `STATE.md` gained a line before it
+landed, putting `s3`'s last strong-form assertion at `:210` against the committed `:209`. The
+transcripts were written on a polecat branch that was then rebased onto a main which had already
+moved, so **the commit a transcript is committed at is not in general the commit it was measured
+at**. `dafe759` is the newest ancestor at which all four transcripts reproduce with **zero**
+differing lines, and it *is* an ancestor of `main`, so this pin does not depend on a polecat
+branch surviving.
+
+One measurement trap, kept because it sent the first attempt to the wrong commit: `s1` prints
+`len(text)`, which is **characters**. These documents are full of multibyte `—`/`⟹`/`₀`, so a byte
+count disagrees with the transcript by 302 and makes the matching revision look mismatched.
+
+**Both directions measured.**
+
+- *Unchanged corpus*: all four transcripts regenerate `28 +/ 0 -` — the stamp is added and **not
+  one existing line moves** — and two consecutive `run_all.sh` runs are byte-identical.
+- *Changed corpus* (`N0_STRIKE_AT=HEAD`): `s1` differs in 64 lines, `s3` in 135. **Counts are
+  among them, and that is not a defect of the pin — it is why the pin is mandatory here.** For a
+  census instrument the counts *are* the verdict, so the acceptance's "only addresses move" cannot
+  hold in direction 2 and it would be false to claim it does. What direction 2 does establish is
+  that the *machinery* is untouched: **every positive and negative control is identical** at both
+  corpora. Each run is correct about its own corpus.
+
+`s4`'s "commits touching this file" was asked of `origin/main`, which grows — the answer was
+*"how many commits have touched this file by the time you happen to run me"*. It is now asked of
+`AS_OF`, like every other number here.

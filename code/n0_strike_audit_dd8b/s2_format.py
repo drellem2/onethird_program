@@ -25,6 +25,8 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import libdd8b as L  # mg-20ee: the corpus is read AT A DECLARED COMMIT
+
 TARGETS = [
     "docs/OneThird-LIBweak-mg-c3ca.md",
     "docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md",
@@ -73,9 +75,7 @@ def closers(text):
 
 
 def run(rel):
-    path = os.path.join(REPO, rel)
-    with open(path) as f:
-        text = f.read()
+    text = L.read_at(rel)
     lines = text.split("\n")
 
     print()
@@ -174,4 +174,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print(L.stamp("s2_format.py"), end="")
     sys.exit(main())
