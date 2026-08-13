@@ -1,0 +1,217 @@
+==============================================================================
+mg-54b1 C1  THE POPULATION, AND THE SIZE OF THE BLIND SPOT
+==============================================================================
+
+  Recomputed from `git ls-files` and from build.sh and mg-20ee's own
+  transcript on every run.  Nothing below is a written-in number.
+
+  tracked transcripts under code/ (out_*.txt)       1054
+  directories carrying at least one                  218
+      of those, with a run_all.sh to re-take them    188
+      with NO runner at all                           30
+
+  WATCHED BY ./build.sh's LOOP (mg-f771 regrades these)
+      code/alias_agreement_06d1
+      code/c3_audit_a94c3
+      code/concepts_gate_602d
+      code/control_gate_724a
+      code/face_geometry_repair_e35b
+      code/facts_registry_03cf
+      code/gate_fixed_point_f771
+      code/l1b_application_28b6
+      code/state_ratchet_e331
+          9 directories
+
+      every entry resolves to a runner on disk              ok
+
+  RE-RUN BY mg-20ee's ground_truth.sh                   44 candidates
+
+  THE BLIND SPOT -- in NEITHER population
+      directories carrying a transcript              165
+      of those, runnable                             138
+      of those, with no runner                        27
+
+      76% of every transcript-carrying directory in this repository
+      is re-taken by nothing on any schedule.
+
+==============================================================================
+§2  THE INSTANCE THAT PROVES THE TWO POPULATIONS ARE DIFFERENT
+==============================================================================
+
+  in ./build.sh's loop                 no    ok
+  in mg-20ee's 44 candidates           no    ok
+  carries tracked transcripts          yes   ok
+  has a run_all.sh                     yes   ok
+
+  mg-20ee's census.py is a classifier for FOREIGN ADDRESSES -- a transcript
+  that names a file or a commit outside the instrument that wrote it.  6cb9
+  carries none, so it was never nominated, and `A1 TOTAL BAD: 1` -> `0` is a
+  verdict that moved without any address moving at all.  That is the whole
+  argument that the strong sense needs its own census: the classifier that
+  produced the 44 cannot in principle find this population.
+
+==============================================================================
+§3  THIS INSTRUMENT IS IN ITS OWN BLIND SPOT, AND IT IS NOT EXEMPT
+==============================================================================
+
+  code/verdict_staleness_census_54b1
+      in ./build.sh's loop          no
+      in mg-20ee's 44               no
+      counted in the blind spot     yes
+      carries code/verdict_staleness_census_54b1/out_c0_controls.txt
+      carries code/verdict_staleness_census_54b1/out_c1_population.txt
+
+  THE EXPENSIVE ARM OF THIS INSTRUMENT IS ITSELF A TRANSCRIPT NO RUNNER
+  REWRITES.  out_sweep_54b1.txt records ONE DATED RUN of sweep_54b1.sh over a
+  sample; run_all.sh does not re-take it, because it costs about an hour and
+  executes every instrument in the sample.  So this directory's own sweep
+  transcript will go stale in exactly the sense it was built to count, and
+  saying so here is the only thing that distinguishes it from the 137.
+
+  mg-20ee's out_ground_truth.txt has the same property and says so in its own
+  header: `It is NOT a fixed point and does not claim to be`.  The two cheap
+  arms -- c0 and this one -- ARE re-taken by run_all.sh and are fixed points.
+
+==============================================================================
+C1 TOTAL BAD: 0
+==============================================================================
+
+THE 138 RUNNABLE DIRECTORIES IN THE BLIND SPOT:
+  code/adjacent_triples_7c78
+  code/adjudication_audit_a0d6
+  code/alias_index_0d1b
+  code/anchor_population_audit_0ba7
+  code/anticorrelation_c50b
+  code/asof_census_20ee
+  code/audit_5cba
+  code/audit_c067
+  code/audit_successor_arming_a518
+  code/audit_successor_consolidation_9134
+  code/boundary_epsilon_6ff4
+  code/branching_af28
+  code/branching_audit_19ec
+  code/branching_audit_2060
+  code/branching_audit_321d
+  code/branching_audit_5800
+  code/branching_audit_58da
+  code/branching_audit_6ad0
+  code/branching_audit_957f
+  code/branching_audit_d330
+  code/branching_audit_e34a
+  code/branching_bound_audit_aaf4
+  code/branching_bound_d075
+  code/branching_locate_db09
+  code/branching_repair_41aa
+  code/branching_repair_76cc
+  code/branching_repair_7e58
+  code/branching_warrant_dffa
+  code/c3_prefix_capture_76b2
+  code/cannot_fail_audit_79ba
+  code/census_repair_f3ff
+  code/census_timeout_a71f
+  code/chain_iv_audit_00b3
+  code/chain_iv_c_81ff
+  code/compression2_scope_0fc6
+  code/compression_audit_8bc7
+  code/compression_consumers_145f
+  code/compression_kfoliation_8d66
+  code/compression_novelty_623a
+  code/compression_rate_409a
+  code/contradiction_repair_d19f
+  code/control_audit_9876
+  code/convex_criterion_8748
+  code/corpus_fixedpoint_fd9c
+  code/corpus_universe_1d6c
+  code/counterexample_audit_0a11
+  code/counterexample_audit_a7b4
+  code/counterexample_audit_c6bc
+  code/counterexample_repair_dea5
+  code/dated_population_2ff6
+  code/demand_relaxation_7564
+  code/direct_prefix_audit_2de0
+  code/downstream_constants_ac0c
+  code/eleak_repair_8311
+  code/face_geometry_audit_0b07
+  code/face_geometry_audit_1c80
+  code/face_geometry_audit_6653
+  code/face_geometry_audit_c4c8
+  code/face_geometry_audit_d0e2
+  code/face_geometry_audit_d3f3
+  code/face_geometry_audit_e7bc
+  code/face_geometry_audit_eaef
+  code/face_geometry_instr_5f9a
+  code/face_geometry_landing_7d5a
+  code/face_geometry_landing_da45
+  code/face_geometry_repair_8af0
+  code/face_geometry_rows_17aa
+  code/figures_revision_repair_5035
+  code/grain_arity_9160
+  code/grain_axis_audit_03d1
+  code/hodge_leverage_audit_3c24
+  code/hodge_leverage_audit_835f
+  code/hodge_leverage_audit_86a3
+  code/hodge_leverage_audit_8aae
+  code/hodge_leverage_audit_9207
+  code/hodge_leverage_audit_97fb
+  code/hodge_leverage_audit_d39d
+  code/hodge_leverage_audit_ec07
+  code/hodge_leverage_audit_f922
+  code/hodge_leverage_join
+  code/hodge_leverage_landing_e1d0
+  code/hodge_leverage_repair_3f3b
+  code/hodge_leverage_repair_6df0
+  code/hodge_leverage_repair_8916
+  code/hodge_leverage_repair_8eca
+  code/hodge_leverage_repair_ff3e
+  code/idiom_sweep_audit_18dc
+  code/l1b_currency_0e8c
+  code/l2_conditionality_28ff
+  code/landscape_audit_d673
+  code/landscape_ebd8
+  code/lstar_789d
+  code/lstar_landing_8d63
+  code/lstar_reaudit_5e82
+  code/pairbias_audit_a832f
+  code/pairbias_independence_345e
+  code/pairbias_repair_ba78
+  code/pinned_ref_durability_223d
+  code/primitivity_f5be
+  code/publication_anchor_132a
+  code/rendered_twin_pin_9bc2
+  code/repair_69d1
+  code/repair_8d5e
+  code/repair_b2af
+  code/runner_exit_audit_05eb
+  code/runner_exit_repair_bf79
+  code/search_reach_abe8
+  code/self_red_sweep_502f
+  code/sibling_sweep_7085
+  code/species_7d75
+  code/species_audit_a61f
+  code/species_bound_audit_6ef4
+  code/species_bound_repair_5040
+  code/species_depth_audit_4700
+  code/species_extent_audit_6cb9
+  code/species_gate_audit_d53d
+  code/species_repair_6f61
+  code/species_rung_repair_4adb
+  code/species_sites_821e
+  code/state_control_audit_2216
+  code/state_control_audit_babf
+  code/state_delegation_audit_16eb
+  code/state_delegation_audit_5644
+  code/state_delegation_repair_0049
+  code/state_delegation_repair_bee1
+  code/state_landing_audit_bd41
+  code/state_layer_audit_218d
+  code/state_restructure_ea0e
+  code/summary_guard_cf83
+  code/suppression_polarity_audit_40e4
+  code/sweep_evidence_control_d2c2
+  code/sweep_loss_51f4
+  code/transcript_census_1abe
+  code/truncate_sweep_ec63
+  code/um_frontier_b417
+  code/unified_gate_audit_446b
+  code/verdict_path_repair_1d26
+  code/verdict_staleness_census_54b1

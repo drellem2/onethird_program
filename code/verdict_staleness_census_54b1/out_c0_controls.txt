@@ -1,0 +1,149 @@
+==============================================================================
+mg-54b1 C0  PLANTED WORLDS -- the strong sense, in both directions
+==============================================================================
+
+  A world is one changed line in one transcript.  `VERDICT MOVED` is the
+  strong sense this instrument exists to count; `ADDRESSES ONLY` is what
+  mg-20ee's pinning tranche removes and what must NOT be counted as a
+  finding.  The NEGATIVE worlds are the load-bearing half: a classifier
+  that says VERDICT MOVED to everything measures nothing.
+
+  §1  MUST FIRE -- a verdict moved
+
+  W1    expect VERDICT MOVED  got VERDICT MOVED  ok  6cb9 a1 Q2: the marker vocabulary
+        RULE A: a word changed
+        -  Q2     check_doc.py  IN  delete C4's anchor    1    0    *** MISSED ***
+        +  Q2     check_doc.py  IN  delete C4's anchor    1    1    as predicted
+  W2    expect VERDICT MOVED  got VERDICT MOVED  ok  6cb9 selftest: ok -> FAILED
+        RULE A: a word changed
+        -  e2_crosssection.py exits 0 unmutated                               ok
+        +  e2_crosssection.py exits 0 unmutated                     *** FAILED ***
+  W3    expect VERDICT MOVED  got VERDICT MOVED  ok  e35b verify: a bracket tag flipped
+        RULE A: a word changed
+        -  [PASS] V6d REACH -- of the 210 formatted values V6b counts
+        +  [FAIL] V6d REACH -- of the 210 formatted values V6b counts
+  W4    expect VERDICT MOVED  got VERDICT MOVED  ok  6cb9 a1: RULE B, the digit IS the verdict
+        RULE B: a scored counter changed
+        -  A1 TOTAL BAD: 1
+        +  A1 TOTAL BAD: 0
+  W5    expect VERDICT MOVED  got VERDICT MOVED  ok  6cb9 a1: RULE B, a fired ratio
+        RULE B: a scored counter changed
+        -  check_doc.py   baseline clean | INSIDE 1/2 fired | OUTSIDE 3/3 silent
+        +  check_doc.py   baseline clean | INSIDE 2/2 fired | OUTSIDE 3/3 silent
+  W6    expect VERDICT MOVED  got VERDICT MOVED  ok  6cb9 a1: SILENT -> fired, a vocabulary nobody enumerated
+        RULE A: a word changed
+        -  exit 0 -- SILENT.  The printed extent claims this file
+        +  exit 1 -- fired, the extent is true here
+  W7    expect VERDICT MOVED  got VERDICT MOVED  ok  6cb9 selftest: RULE B, an assertion tally
+        RULE B: a scored counter changed
+        -  selftestd6cb9: 33 assertion(s), 0 failed
+        +  selftestd6cb9: 33 assertion(s), 2 failed
+
+  §2  MUST NOT FIRE -- an address or a magnitude moved and nothing else
+      GREEN ON PURPOSE.  These are exactly what mg-20ee's AS_OF pins
+      remove, and counting one as a finding would make this census a
+      restatement of the census it exists to be different from.
+
+  N1    expect ADDRESSES ONLY got ADDRESSES ONLY ok  a sha moved
+  N2    expect ADDRESSES ONLY got ADDRESSES ONLY ok  a corpus size moved -- mg-f771 W2's own shape
+  N3    expect ADDRESSES ONLY got ADDRESSES ONLY ok  line numbers moved, verdict column absent from both
+  N4    expect ADDRESSES ONLY got ADDRESSES ONLY ok  a duration moved -- mg-f771 W3's declared NOISE
+  N5    expect ADDRESSES ONLY got ADDRESSES ONLY ok  a date moved
+  N6    expect ADDRESSES ONLY got ADDRESSES ONLY ok  a worktree root moved -- mg-f771 N1's own shape
+  N7    expect ADDRESSES ONLY got ADDRESSES ONLY ok  an addressed PATH moved; see the EXTENT note below
+  N8    expect ADDRESSES ONLY got ADDRESSES ONLY ok  MY OWN DEFECT: a duration on a VERDICT line, read as a scored counter
+
+  §3  THE OTHER TWO CLASSES
+
+  D1    expect DEAD           got DEAD           ok  a3_differ_and_placement.py today: the instrument no longer runs
+  D2    expect REPRODUCES     got REPRODUCES     ok  an empty diff
+
+==============================================================================
+§4  RULE B'S VOCABULARY, PRINTED SO THAT GROWING IT IS VISIBLE
+==============================================================================
+
+  RULE A names no verdict words and cannot be outrun by an instrument
+  that invents its own.  RULE B is the half that CAN be blind: it is a
+  list, and a scored counter whose shape is not on it reads as an
+  address.  There are 6 entries and they are:
+
+      TOTAL BAD        TOTAL BAD:\s*(\d+)
+      assertions       (\d+)\s+assertion\(s\),\s*(\d+)\s+failed
+      failure tally    (\d+)\s+(?:failed|BROKEN|unsatisfactory|bad|wrong|refuted|disagree)\b
+      VERDICT count    VERDICT:.*?\b(\d+)\s+[A-Za-z]+\(s\)
+      fired ratio      (?:INSIDE|OUTSIDE)\s+(\d+)\s*/\s*(\d+)\s+(?:fired|silent)
+      found wrong      FOUND\s+(\d+)\s+THING
+
+  WHICH ENTRIES A WORLD ABOVE ACTUALLY EXERCISES IS MEASURED, NOT LISTED.
+  The first draft of this section named three by hand and was WRONG:
+  `failure tally` also matches the `0 failed` of W7's assertion line, so
+  a hand-written coverage list under-reported its own coverage.  The
+  entries below are the ones no planted world reaches, computed by
+  running every world's two lines back through the list.
+
+      VERDICT count    no planted world
+      found wrong      no planted world
+
+  4 of 6 entries exercised.
+
+==============================================================================
+§6  REAL DIFFS FROM THIS REPOSITORY'S OWN HISTORY
+==============================================================================
+
+  A planted world is a line I wrote.  These are diffs somebody else
+  produced, LABELLED BY THEIR OWN COMMIT MESSAGE rather than by me, which is
+  the only labelling here I did not author.
+
+  R1    expect VERDICT MOVED  got VERDICT MOVED  ok
+        mg-54b1's own refresh of 6cb9 a1 -- three verdicts, and the reason this ticket exists
+        RULE A: a word changed
+        -  Q2     check_doc.py         IN   delete C4's `2 of 45` anchor from the repair doc   
+        +  Q2     check_doc.py         IN   delete C4's `2 of 45` anchor from the repair doc   
+  R2    expect ADDRESSES ONLY got ADDRESSES ONLY ok
+        `220 -> 221 directories because this branch adds one, and the row that flagged mine stays at 27` -- its own words
+  R3    classifier says VERDICT MOVED  ADJUDICATED ADDRESSES ONLY *** OVER-COUNT, KNOWN ***
+        `the arm census gains one directory` -- a LISTING that gained an entry, which this classifier calls a moved verdict.  NOT SCORED AS A PASS AND NOT TUNED AWAY: separating a census listing from a findings listing needs to know which one this line is, and a rule that knew would be a rule about one file.  This is the calibration number -- one real over-count in three real diffs.
+        RULE A: a word changed
+        -  alias_agreement_06d1:1  audit_c067:1  audit_successor_consolidation_9134:1  branchin
+        +  alias_agreement_06d1:1  audit_c067:1  audit_successor_consolidation_9134:1  branchin
+
+==============================================================================
+§5  THE EXTENT OF THIS CLASSIFIER, AND WHICH WAY IT ERRS
+==============================================================================
+
+  UNDER-COUNTS.  RULE A erases addresses before comparing, so a diff whose
+  only change is WHICH FILE or WHICH LINE a finding is about reads as
+  ADDRESSES ONLY -- world N7 above is that case, planted GREEN on purpose.
+  A finding that moved to a different subject is a real change and this
+  classifier will not report it.
+
+  OVER-COUNTS.  RULE A fires on ANY non-address word that changed on a line,
+  including prose an author edited beside a result.  A transcript whose
+  narration was reworded reads as VERDICT MOVED.
+
+  ONE MISS, MEASURED RATHER THAN REASONED ABOUT.  RULE A erases digits, so a
+  verdict carried ONLY by a digit is invisible to it and reaches RULE B's
+  declared list or nothing.  This line is one of the three the mg-54b1 ticket
+  itself quotes as a moved verdict, and no entry in the list matches it:
+        -  3 WIDE site(s) are silent.  Both repaired scans read
+        +  1 WIDE site(s) are silent.  Both repaired scans read
+        classifier: MISSED
+
+  6cb9 is still reported VERDICT MOVED, because its `*** MISSED ***` and
+  `TOTAL BAD` lines moved in the same run.  An instrument whose ONLY movement
+  is an unlisted counter would be missed outright, and that is the shape a
+  successor should widen RULE B for -- with a world beside it.
+
+  THEREFORE THE COUNT IS NOT PUBLISHED ALONE.  classify.py prints the quoted
+  -/+ pair for every VERDICT MOVED it reports, so a reader can do to this
+  classifier what mg-20ee did to census.py: check the net against the catch.
+
+  NOT MEASURED HERE AT ALL: an instrument whose baseline control has gone red,
+  which makes its remaining rows unscorable without any of them changing.
+  code/species_extent_audit_6cb9's a2 arm is exactly that and this classifier
+  reports it as VERDICT MOVED for the four rows that moved, which is true but
+  is not the finding.  Naming it is all this instrument does about it.
+
+==============================================================================
+C0 TOTAL BAD: 0
+==============================================================================
