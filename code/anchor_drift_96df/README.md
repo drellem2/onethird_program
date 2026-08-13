@@ -203,3 +203,44 @@ second reason not to renumber it away.
 
 Re-run rather than quoting the transcripts: they carry line numbers into a moving
 file, which is the defect this ticket is about.
+
+## `a1` and `a2` read THIS repository at an as-of commit too (`mg-20ee`)
+
+`lib96df`'s **E1** says an instrument about stale reads must not itself read a stale checkout —
+and then applies that only to the *mirror*. The repo-wide sweeps in `a1` and `a2` walked **this**
+repository's working tree, so every `doc:NNN` they printed was an offset into a file this
+instrument does not own, over a corpus that grows under it: the exact defect `mg-96df` exists to
+measure, in the measuring instrument. It had already fired — a re-run on 2026-08-13 moved the
+repo-wide population from **365 to 413** and the anchor-shaped count from **483 to 531**.
+
+**E1b** turns E1 around on this repository. The citing repo is read at `SELF_AS_OF = f59fe1f` via
+`git ls-tree`/`git show`, the same mechanism E1 already required of the mirror. No predicate and
+no verdict changes; what changes is which bytes the predicates are evaluated over.
+`ANCHOR_DRIFT_AT=HEAD` (or `=WORKTREE`, or any commit) re-measures against a different corpus.
+
+**Two other things had to be named before the transcripts could reproduce at all**, and both were
+pre-existing:
+
+- **E1c — `a1` printed the absolute worktree path** (`/Users/daniel/.pogo/polecats/p96df`). That
+  made the transcript reproduce for exactly one operator. What identifies the citing repo is the
+  **commit**, not the checkout, so the line now prints `SELF_AT`. `program_root()` is still used
+  to locate the git directory; it is no longer printed and no longer walked.
+- **X1 spelled "before and after the repair" as "HEAD vs the working tree"**, which is only the
+  same thing while the repair is still uncommitted in the author's own checkout. For every later
+  operator it silently re-answered a different question. The two states are now named:
+  `SELF_AT^` is before, `SELF_AT` is after. Measured, not asserted — this reproduces the committed
+  `363/115`, `77/33` and `253/32` exactly.
+
+**X5's number moves once, and the reason is worth keeping.** It went `483 → 489`, and the
+instrument's own contribution `22 → 28`. The cause is not the pin: `a2` counted **its own
+not-yet-written transcript**. `out_a1_anchors.txt` carries 22 anchor-shaped strings and
+`out_a2_controls.txt` carries 6, but `a2` runs before `a2`'s own output exists, so the old run
+saw only a1's 22. `22 + 6 = 28` is the self-consistent value and the pinned run is the first one
+that can reach it. **The verdict does not move** — `without > with_ex` still holds and X5's point
+(the exclusion matters) is untouched. So the number was *self-referentially unstable*, and
+pinning is what gave this instrument a fixed point at all.
+
+**Both directions measured, which is the acceptance.** Unchanged corpus: two consecutive
+`run_all.sh` runs are byte-identical — the transcripts are a fixed point. Changed corpus
+(`ANCHOR_DRIFT_AT=HEAD`): `a1` differs in 6 lines and **every one is an address, a
+population count, or the as-of block**; no adjudication changes.

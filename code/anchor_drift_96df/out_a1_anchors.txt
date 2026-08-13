@@ -2,7 +2,13 @@
 mg-96df a1 -- WHERE THE CITED TEXT IS NOW, re-derived
 ==============================================================================
 
-  citing repo (this worktree) : /Users/daniel/.pogo/polecats/p96df
+  citing repo, read at        : f59fe1f01e5ea63953b13211571dcddacc6535b9
+      (E1b, mg-20ee: A COMMIT, NOT A CHECKOUT.  This line used to print
+       the absolute worktree path, which made the transcript reproduce
+       for exactly one operator.  Every `doc:NNN` below is an offset
+       into THESE bytes and is valid at no other commit; the repo-wide
+       counts are corpus-valued for the same reason.  To re-measure
+       against the current tree: ANCHOR_DRIFT_AT=HEAD, or =WORKTREE.)
   cited repo                  : /Users/daniel/research/one_third_width_three
   its HEAD                    : 949c43926b6e [main-mirror]
   its origin/main             : 949c43926b6e

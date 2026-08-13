@@ -26,6 +26,20 @@ E2: the revision this runs against is REPORTED, never assumed.  mg-688c's
 table is pinned to 949c439 and says so; the defect it is about is exactly a
 pinned answer outliving its pin.  `mirror_state()` reads the true remote and
 the caller prints whether the measured ref is still the remote's `main`.
+
+E1b, ADDED BY mg-20ee, AND IT IS E1 TURNED AROUND ON THIS REPOSITORY.  E1 says
+an instrument about stale reads must not itself read a stale checkout, and then
+applies that ONLY TO THE MIRROR.  The repo-wide sweeps in a1 and a2 walked THIS
+repository's WORKING TREE, so every `doc:NNN` they print is an offset into a
+file this instrument does not own, over a corpus that grows under it -- the
+exact defect mg-96df exists to measure, in the measuring instrument.  It had
+already fired: a re-run on 2026-08-13 moved the repo-wide population from 365
+to 413 and the anchor-shaped count from 483 to 531.
+
+So the citing repo is now read AT A DECLARED COMMIT too, via `git ls-tree` and
+`git show` -- the same mechanism E1 already required of the mirror.  This
+changes no predicate and no verdict; it changes which bytes the predicates are
+evaluated over, from "whatever is checked out" to "a named commit".
 """
 import os
 import re
@@ -64,12 +78,88 @@ def git(args, cwd):
     return p.returncode, p.stdout, p.stderr
 
 
+#: The commit of THIS repository whose bytes the repo-wide sweeps address
+#: (mg-20ee).  CHOSEN ON A MEASUREMENT: at this commit the committed
+#: transcripts reproduce byte-identically apart from the worktree-path line
+#: that E1c removes, checked before the sweeps were touched.
+SELF_AS_OF = "f59fe1f01e5ea63953b13211571dcddacc6535b9"
+
+#: Override, for re-measuring against a different corpus of THIS repo: any
+#: commit-ish, or the literal WORKTREE.  Unset is the pinned default and is the
+#: only value that reproduces the committed transcripts.
+SELF_AT = os.environ.get("ANCHOR_DRIFT_AT", "").strip() or SELF_AS_OF
+
+
 def program_root():
-    """This repository's root -- the worktree this instrument is committed in."""
+    """This repository's root -- the worktree this instrument is committed in.
+
+    E1c (mg-20ee): USED ONLY TO LOCATE THE GIT DIRECTORY, never printed and
+    never walked.  It is an absolute path into whichever polecat worktree
+    happens to be running, so printing it made the transcript unreproducible
+    for every operator but the one who wrote it -- `p96df` in the committed
+    copy.  What identifies the citing repo is the COMMIT, not the checkout."""
     rc, out, err = git(["rev-parse", "--show-toplevel"], cwd=here())
     if rc != 0:
         raise RuntimeError("not in a git worktree: %s" % err.strip())
     return out.strip()
+
+
+def self_git(root, args):
+    rc, out, err = git(args, cwd=root)
+    if rc != 0:
+        raise SystemExit(
+            "mg-96df: cannot read this repository at %s: %s\n"
+            "  (ANCHOR_DRIFT_AT=%r; unset it for the pinned run.)"
+            % (SELF_AT, err.strip(), SELF_AT))
+    return out
+
+
+_SELF_TREE = []
+
+
+def self_tracked(root):
+    """Every tracked path of THIS repository as of SELF_AT.
+
+    The repo-wide sweeps address these bytes, so pinning them is what pins the
+    addresses.  E1b: no working-tree walk.  Cached for the same reason
+    `self_read` is -- `in_this_repo` asks this once per cited document."""
+    if _SELF_TREE:
+        return _SELF_TREE
+    _SELF_TREE.extend(_self_tracked_uncached(root))
+    return _SELF_TREE
+
+
+def _self_tracked_uncached(root):
+    if SELF_AT == "WORKTREE":
+        out = []
+        for dirpath, dirnames, filenames in os.walk(root):
+            dirnames[:] = [d for d in dirnames if d != ".git"]
+            rel = os.path.relpath(dirpath, root)
+            rel = "" if rel == "." else rel
+            for fn in filenames:
+                out.append(os.path.join(rel, fn) if rel else fn)
+        return sorted(out)
+    return sorted(p for p in self_git(
+        root, ["ls-tree", "-r", "--name-only", SELF_AT]).split("\n") if p)
+
+
+#: X5 sweeps the whole corpus three times over, so a `git show` per (file,
+#: sweep) is thousands of subprocesses for identical bytes.  Cached; the bytes
+#: are pinned, so the cache cannot go stale within a run.
+_SELF_BLOBS = {}
+
+
+def self_read(root, rel):
+    """REPO/rel as of SELF_AT."""
+    if rel in _SELF_BLOBS:
+        return _SELF_BLOBS[rel]
+    if SELF_AT == "WORKTREE":
+        with open(os.path.join(root, rel), encoding="utf-8", errors="replace") as fh:
+            body = fh.read()
+    else:
+        body = self_git(root, ["show", "%s:%s" % (SELF_AT, rel)])
+    _SELF_BLOBS[rel] = body
+    return body
 
 
 def find_mirror():

@@ -92,18 +92,24 @@ def main():
     print("mg-96df a2 -- CONTROLS ON THE REPAIR")
     print("=" * 78)
 
-    notes = {}
-    for rel in EDITED:
-        with open(os.path.join(root, rel), encoding="utf-8") as fh:
-            notes[rel] = fh.read()
+    # E1b (mg-20ee).  X1 compares the three edited documents BEFORE and AFTER
+    # mg-96df's repair.  It used to spell that "HEAD vs the working tree",
+    # which is only the same thing while the repair is still uncommitted in
+    # the author's own checkout -- so it measured p96df's desk, and for every
+    # later operator it silently re-answered a different question about a
+    # corpus three months further on.  The two states are now named as what
+    # they are: SELF_AT^ is before the repair, SELF_AT is after it.  MEASURED,
+    # NOT ASSERTED: this reproduces the committed 363/115, 77/33 and 253/32.
+    notes = {rel: L.self_read(root, rel) for rel in EDITED}
+    before = L.SELF_AT + "^" if L.SELF_AT != "WORKTREE" else "HEAD"
 
     # ------------------------------------------------------------------ X1
     banner("X1  APPEND-ONLY -- no existing line number in the three edited\n"
            "    documents moved, so no anchor INTO them can have broken.")
     for rel in EDITED:
-        rc, head, _ = L.git(["show", "HEAD:" + rel], cwd=root)
+        rc, head, _ = L.git(["show", before + ":" + rel], cwd=root)
         if rc != 0:
-            arm("X1 " + os.path.basename(rel)[:22], False, "not at HEAD")
+            arm("X1 " + os.path.basename(rel)[:22], False, "not at " + before)
             continue
         old = head.split("\n")
         new = notes[rel].split("\n")
@@ -119,25 +125,20 @@ def main():
             "%d lines unchanged, %d appended" % (n, max(0, len(new) - n))
             if same else "AN EXISTING LINE CHANGED -- anchors into this file broke")
 
+    # E1b (mg-20ee): the corpus is read AT L.SELF_AT, not off the working tree.
     incoming = []
-    for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if d != ".git"]
-        rel = os.path.relpath(dirpath, root)
-        if rel.startswith("code/anchor_drift_96df"):
+    for path in L.self_tracked(root):
+        if path.startswith("code/anchor_drift_96df"):
             continue
-        for fn in filenames:
-            if not fn.endswith((".md", ".txt", ".py", ".html")):
-                continue
-            p = os.path.join(dirpath, fn)
-            try:
-                with open(p, encoding="utf-8") as fh:
-                    body = fh.read()
-            except (UnicodeDecodeError, OSError):
-                continue
-            for target in EDITED:
-                for m in re.finditer(re.escape(target) + r":(\d+)", body):
-                    incoming.append((os.path.relpath(p, root), target,
-                                     int(m.group(1))))
+        if not path.endswith((".md", ".txt", ".py", ".html")):
+            continue
+        try:
+            body = L.self_read(root, path)
+        except (UnicodeDecodeError, OSError):
+            continue
+        for target in EDITED:
+            for m in re.finditer(re.escape(target) + r":(\d+)", body):
+                incoming.append((path, target, int(m.group(1))))
     arm("X1 incoming anchors exist", len(incoming) > 0,
         "%d line anchors point INTO the three edited documents -- this is why "
         "the notes are appended" % len(incoming))
@@ -203,8 +204,7 @@ def main():
             hits = 0
             for rel in A1.repo_files(root):
                 try:
-                    with open(os.path.join(root, rel), encoding="utf-8") as fh:
-                        body = fh.read()
+                    body = L.self_read(root, rel)
                 except (UnicodeDecodeError, OSError):
                     continue
                 hits += len(A1.RE_EXPLICIT.findall(body))

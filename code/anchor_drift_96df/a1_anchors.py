@@ -114,12 +114,10 @@ def in_mirror(mirror, doc):
 
 
 def in_this_repo(root, doc):
-    """Does a file of that basename exist in THIS repository?"""
-    for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if d != ".git"]
-        if doc in filenames:
-            return True
-    return False
+    """Does a file of that basename exist in THIS repository, as of SELF_AT?
+
+    E1b (mg-20ee): asked of a NAMED COMMIT, not of whatever is checked out."""
+    return any(os.path.basename(p) == doc for p in L.self_tracked(root))
 
 
 def scope_bare(mirror, root, doc, cache):
@@ -151,16 +149,13 @@ def dedupe(anchors):
 
 
 def repo_files(root):
-    for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if d != ".git"]
-        rel = os.path.relpath(dirpath, root)
-        rel = "" if rel == "." else rel
+    """The repo-wide sweep's corpus, as of SELF_AT (E1b, mg-20ee)."""
+    for path in L.self_tracked(root):
+        rel = os.path.dirname(path)
         if any(rel == e or rel.startswith(e + os.sep) for e in EXCLUDED_DIRS):
-            dirnames[:] = []
             continue
-        for fn in filenames:
-            if fn.endswith((".md", ".txt", ".py", ".tex", ".json", ".sh", ".yml")):
-                yield os.path.join(rel, fn) if rel else fn
+        if path.endswith((".md", ".txt", ".py", ".tex", ".json", ".sh", ".yml")):
+            yield path
 
 
 def main():
@@ -177,7 +172,16 @@ def main():
         return 2
 
     now = st.remote_main or st.origin_main
-    print("  citing repo (this worktree) : %s" % root)
+    print("  citing repo, read at        : %s%s" % (
+        L.SELF_AT,
+        "" if L.SELF_AT == L.SELF_AS_OF
+        else "   <- OVERRIDE, not the as-of stamp " + L.SELF_AS_OF[:7]))
+    print("      (E1b, mg-20ee: A COMMIT, NOT A CHECKOUT.  This line used to print")
+    print("       the absolute worktree path, which made the transcript reproduce")
+    print("       for exactly one operator.  Every `doc:NNN` below is an offset")
+    print("       into THESE bytes and is valid at no other commit; the repo-wide")
+    print("       counts are corpus-valued for the same reason.  To re-measure")
+    print("       against the current tree: ANCHOR_DRIFT_AT=HEAD, or =WORKTREE.)")
     print("  cited repo                  : %s" % st.path)
     print("  its HEAD                    : %s [%s]" % (st.head[:12], st.branch))
     print("  its origin/main             : %s" % (st.origin_main or "-")[:12])
@@ -291,8 +295,7 @@ def main():
     wide = []
     for rel in repo_files(root):
         try:
-            with open(os.path.join(root, rel), encoding="utf-8") as fh:
-                text = fh.read()
+            text = L.self_read(root, rel)
         except (UnicodeDecodeError, OSError):
             continue
         for i, line in enumerate(text.split("\n"), start=1):
