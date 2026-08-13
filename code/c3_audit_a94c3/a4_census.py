@@ -10,19 +10,72 @@ mg-76b2 nor this audit wrote.  If that predicate reads L4's modulus F, the whole
 chain reads F and mg-76b2's scope statement is false.
 
 Scores P6 and P7.  Also re-checks mg-76b2's claim 14 against Op-Form itself.
+
+AS-OF PINNING, mg-c824.  This section prints LINE NUMBERS INTO DOCUMENTS IT DOES
+NOT OWN -- mg-76b2's deliverable, mg-76b2's instrument, Op-Form, and mg-3ce3's
+probe in ANOTHER REPOSITORY.  Those addresses are not a property of anything this
+audit established; they are offsets into files other tickets amend.  Between this
+transcript's commit and 2026-08-13 the deliverable was amended twice (ade980b,
+bb6a0ff) and the instrument once (48cbbd8), so a re-run moved 32 lines of the
+transcript and CHANGED NO VERDICT -- the same statements, found at new addresses.
+
+That made the transcript NON-REPRODUCIBLE BY CONSTRUCTION, which is worse than it
+sounds: this lineage repairs labels under a numbers-neutrality method whose step 1
+is "reproduce the committed output byte-identically before touching anything", and
+that method COULD NOT BE APPLIED TO THIS INSTRUMENT AT ALL.  mg-be0b's repair
+stopped here for exactly that reason.
+
+THE FIX IS TO PIN THE BYTES, NOT TO REFORMAT THE NUMBERS.  A line number into
+someone else's file is a volatile address by nature and no printing convention
+makes one stable; what CAN be made stable is THE THING ADDRESSED.  So the corpus
+is read AT A DECLARED COMMIT via `git show` rather than from the working tree, and
+the transcript stamps that commit at the top.  The property this buys:
+
+  * a re-run against the pinned corpus is BYTE-IDENTICAL for as long as AS_OF is
+    reachable -- so the numbers-neutrality method applies to this file again;
+  * a re-run against a changed corpus (A4_CENSUS_AT=HEAD, or =WORKTREE) differs
+    ONLY in the addresses and in the as-of block, both of which the transcript
+    marks as address-valued;
+  * mg-3ce3's probe is in another repository and CANNOT be pinned from here, so
+    its content digest is recorded instead and D1b's addresses are valid at it.
+
+WHAT THIS DOES NOT CHANGE is what the instrument concludes.  Every count, every
+census, every classification, every P-score below is exactly what it was.
 """
 
+import hashlib
 import os
 import re
+import subprocess
 from libA94 import banner
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
-DOC = os.path.join(REPO, "docs", "OneThird-C3-PrefixCapture-mg-76b2.md")
-OPFORM = os.path.join(REPO, "docs", "OneThird-lambda-std-Operative-Form.md")
-INSTR = os.path.join(REPO, "code", "c3_prefix_capture_76b2")
+DOC_REL = "docs/OneThird-C3-PrefixCapture-mg-76b2.md"
+OPFORM_REL = "docs/OneThird-lambda-std-Operative-Form.md"
+INSTR_REL = "code/c3_prefix_capture_76b2"
 PROBE = ("/Users/daniel/research/one_third_width_three/scripts/"
          "onethird_mg3ce3_L4_near_ordinal_stability_probe.py")
+
+# The commit mg-94c3 audited.  README s0 already names it ("as merged at
+# 7b7d093"), and the transcript's own commit c80a4f1 reads THE SAME BYTES for
+# every in-repo corpus path -- measured, not assumed: the deliverable blob
+# (1b8184c5), the Op-Form blob (c406c73f) and the instrument tree (f69cdef3) are
+# identical at 7b7d093 and at c80a4f1.
+AS_OF = "7b7d093d2795dc7d3a5c544d50f905be43efcf79"
+
+# mg-3ce3's probe lives in /Users/daniel/research/one_third_width_three, which
+# this repository cannot pin.  Its digest at the as-of stamp is recorded so that
+# a stale D1b address is distinguishable from a live one.
+PROBE_SHA256_AS_OF = \
+    "f446211a2cb454df71a360220ff5d21736356f2f706990205803d71f80cdd6cf"
+
+# Override, for re-measuring against a different corpus: any commit-ish, or the
+# literal WORKTREE.  Unset is the pinned default and is the only value that
+# reproduces the committed transcript.
+AT = os.environ.get("A4_CENSUS_AT", "").strip() or AS_OF
+# Short form for the per-section address markers: abbreviate a sha, never a name.
+AT_SHORT = AT[:7] if re.fullmatch(r"[0-9a-f]{40}", AT) else AT
 
 rc = 0
 
@@ -32,19 +85,82 @@ def read(p):
         return fh.read()
 
 
+def read_at(rel):
+    """REPO/rel as of commit AT.  Every `rel:NNN` this script prints is an offset
+    into THESE bytes, so pinning the bytes is what pins the addresses."""
+    if AT == "WORKTREE":
+        return read(os.path.join(REPO, rel))
+    got = subprocess.run(["git", "-C", REPO, "show", f"{AT}:{rel}"],
+                         capture_output=True)
+    if got.returncode != 0:
+        raise SystemExit(f"a4_census: cannot read {rel} at {AT}: "
+                         f"{got.stderr.decode('utf-8', 'replace').strip()}\n"
+                         f"  (A4_CENSUS_AT={AT!r}; unset it for the pinned run)")
+    return got.stdout.decode("utf-8")
+
+
+def listdir_at(rel):
+    if AT == "WORKTREE":
+        return sorted(os.listdir(os.path.join(REPO, rel)))
+    got = subprocess.run(
+        ["git", "-C", REPO, "ls-tree", "--name-only", f"{AT}:{rel}"],
+        capture_output=True)
+    if got.returncode != 0:
+        raise SystemExit(f"a4_census: cannot list {rel} at {AT}: "
+                         f"{got.stderr.decode('utf-8', 'replace').strip()}")
+    return sorted(got.stdout.decode("utf-8").split())
+
+
 def mg76b2_files():
-    out = [("docs/OneThird-C3-PrefixCapture-mg-76b2.md", read(DOC))]
-    for fn in sorted(os.listdir(INSTR)):
+    out = [(DOC_REL, read_at(DOC_REL))]
+    for fn in listdir_at(INSTR_REL):
         if fn.endswith((".py", ".md", ".sh", ".txt")):
-            out.append((f"code/c3_prefix_capture_76b2/{fn}",
-                        read(os.path.join(INSTR, fn))))
+            out.append((f"{INSTR_REL}/{fn}", read_at(f"{INSTR_REL}/{fn}")))
     return out
 
+
+probe_sha = (hashlib.sha256(read(PROBE).encode("utf-8")).hexdigest()
+             if os.path.exists(PROBE) else None)
+
+banner("AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS")
+print(f"""  in-repo corpus read at : {AT}
+      {'AS_OF, the pinned default'
+       if AT == AS_OF else
+       'OVERRIDE via A4_CENSUS_AT -- NOT the as-of stamp ' + AS_OF[:7]}
+  mg-3ce3 probe, sha256  : {probe_sha or 'ABSENT'}
+      {'matches the as-of stamp'
+       if probe_sha == PROBE_SHA256_AS_OF else
+       'MOVED SINCE THE AS-OF STAMP -- D1b ADDRESSES ARE STALE'}
+
+  EVERY `file:NNN` AND EVERY `char NNN` BELOW IS AN ADDRESS, NOT A FINDING.  Each
+  is an offset into a file this audit DOES NOT OWN, and it moves whenever another
+  ticket amends that file.  They are valid at the commit named above and nowhere
+  else.  THE QUOTED LINE UNDER EACH ADDRESS IS THE PRIMARY ADDRESS -- it survives
+  the file moving; the number after the colon does not, and is printed second for
+  that reason.  The address and its quoted line are ONE OBJECT: if the corpus
+  moves, expect BOTH to change together.
+
+  CORPUS-VALUED TOO, and marked where it is printed: the census-universe size on
+  the next line, which measures the corpus rather than mg-76b2.
+
+  EVERYTHING ELSE IS STABLE: every count of hits, every classification, every
+  verdict and every P-score.  Run with no environment set and this transcript reproduces
+  BYTE-IDENTICALLY, because the bytes read are pinned rather than live.  To ask
+  the same questions of the CURRENT corpus instead:
+
+      A4_CENSUS_AT=HEAD python3 a4_census.py     (or =WORKTREE, or any commit)
+
+  which RE-MEASURES AND RE-ADDRESSES.  Compare the two runs' VERDICTS; the numbers
+  after the colons are expected to differ, and their differing is not a defect in
+  either run.
+""")
 
 FILES = mg76b2_files()
 print(f"  census universe: {len(FILES)} files, "
       f"{sum(t.count(chr(10)) for _, t in FILES)} lines "
-      f"(mg-76b2's deliverable AND its whole instrument, transcripts included)\n")
+      f"(mg-76b2's deliverable AND its whole instrument, transcripts included)")
+print(f"  [a SIZE OF THE CORPUS at {AT_SHORT}, so it is corpus-valued like the "
+      f"addresses and not a finding]\n")
 
 # --------------------------------------------------------------------------
 banner("D1. THE L4 CENSUS -- P6")
@@ -60,7 +176,8 @@ for name, txt in FILES:
     for i, line in enumerate(txt.splitlines(), 1):
         if PAT.search(line):
             hits.append((name, i, line.strip()))
-print(f"  {len(hits)} lines mention L4, a modulus, or an F(.) application:\n")
+print(f"  {len(hits)} lines mention L4, a modulus, or an F(.) application")
+print(f"  [the count is the finding; the `:NNN` are ADDRESSES at {AT_SHORT}]:\n")
 for name, i, line in hits:
     short = line if len(line) <= 96 else line[:93] + "..."
     print(f"    {name}:{i}\n        {short}")
@@ -74,7 +191,8 @@ print("""
 
 print("""  THE INPUT LIST OF EVERY DERIVED NUMBER OF mg-76b2, written out:
 
-    C_3 = 1                <- L2, Cheeger's hard half, |A\\sigma(A)|=|A^c\\sigma(A^c)|,
+    C_3 = 1                <- L2's FIRST DISJUNCT, Cheeger's hard half,
+                              |A\\sigma(A)|=|A^c\\sigma(A^c)|, and
                               'monotone ==> threshold sets are prefixes'.  No F.
     eps_dem = eps_leak^2/2 <- C_3 = 1 and eps_leak.                        No F.
     2x10^-2                <- eps_leak = 1/5.                              No F.
@@ -82,6 +200,29 @@ print("""  THE INPUT LIST OF EVERY DERIVED NUMBER OF mg-76b2, written out:
     c > 1 - eps_leak       <- eps_leak and Lemma 2.1.                      No F.
     c > 0.80 / c > 0.98    <- eps_leak = 0.20 / 0.02.                      No F.
     (II) vs (III) = 10     <- 2/eps_leak.                                  No F.
+
+  (SCOPE ADDED AT THE CLAIM, mg-c824, on mg-be0b's finding, which is on mg-3329's,
+  which is on mg-fa70's.  Row 1 read "<- L2", and L2 is a DISJUNCTION -- "a
+  dominant standard eigenvector is monotone in the distinguished order, OR AT
+  LEAST YIELDS A LOW-CONDUCTANCE PREFIX", carried on STATE.md's ledger ROW 9,
+  which carries it on mg-76b2's document, which carries it on a .tex that is NOT
+  IN THIS REPOSITORY and was not re-read here.  So an unqualified "L2" reads as
+  EITHER disjunct, while C_3 = 1 is established on the FIRST.  The clause this row
+  ALREADY carried, 'monotone ==> threshold sets are prefixes', IS that first
+  disjunct -- so nothing computed changes and NO NUMBER MOVES; only the label
+  over-reached.  The second disjunct is UNQUANTIFIED -- weaker than and different
+  from refuted -- and is not struck here.  This is the site mg-be0b's sweep STOPPED
+  AT, because step 1 of the numbers-neutrality method failed here; the as-of
+  pinning stamped above is what makes it pass, and it passes: 23 of 23 addresses
+  and every numeric token of the previous transcript are unchanged across this
+  edit.
+
+  THE CITATION IS BY ROW, NOT BY LINE, AND THAT IS THIS TICKET'S OWN LESSON TURNED
+  ON ITSELF.  This note first read "STATE.md:116" -- a line number into a document
+  a4_census does not own, i.e. the exact defect being repaired, reintroduced inside
+  the repair.  It was ALREADY WRONG when written: the text is at STATE.md:126
+  today.  A ledger ROW NUMBER is an identity and survives the file moving; a line
+  number is an address and does not.)
 
   So the ENTIRE dependence on L4 is routed through the single number eps_leak.
   Is THAT number F-free?  mg-76b2 says it is; Op-Form:444 says it is; both are
@@ -100,7 +241,9 @@ else:
             if re.search(r"\bsurvives\s*=", l) or re.search(r"surviving\s*=", l)
             or re.search(r"balanced_full\s*=", l)]
     print(f"  {PROBE}")
-    print(f"  {len(plines)} lines.  The predicate that calibrates eps_leak:\n")
+    print(f"  {len(plines)} lines.  The predicate that calibrates eps_leak")
+    print(f"  [ANOTHER REPOSITORY -- unpinnable from here; the `:NNN` are")
+    print(f"   addresses valid at sha256 {PROBE_SHA256_AS_OF[:16]}...]:\n")
     for i, l in surv:
         print(f"    :{i}  {l}")
     body = "\n".join(l for i, l in surv)
@@ -139,7 +282,9 @@ for name, txt in FILES:
     for i, line in enumerate(txt.splitlines(), 1):
         if P200.search(line):
             occ.append((name, i, line.strip()))
-print(f"  {len(occ)} occurrences:\n")
+print(f"  {len(occ)} occurrences")
+print(f"  [the count and each [labelled]/[BARE] verdict are the finding;")
+print(f"   the `:NNN` are ADDRESSES at {AT_SHORT}]:\n")
 for name, i, line in occ:
     short = line if len(line) <= 100 else line[:97] + "..."
     cond = bool(LBL.search(line))
@@ -193,10 +338,13 @@ print("""
 
 # --------------------------------------------------------------------------
 banner("D3. mg-76b2 CLAIM 14 -- was Op-Form sec.4.3 really never re-examined?")
-op = read(OPFORM)
+op = read_at(OPFORM_REL)
 ban_start = op.find("SUPERSEDED INPUT")
 ban = op[ban_start:ban_start + 3000] if ban_start >= 0 else ""
 lists = re.findall(r"§§?[\d.]+(?:[–-]§?[\d.]+)?", ban)
+print(f"  supersession banner, anchored on the string it is found by:")
+print(f"      \"{ban.splitlines()[0][:70] if ban else 'NOT FOUND'}\"")
+print(f"  [ADDRESS at {AT_SHORT}, and the coarsest one here -- a raw byte offset]")
 print(f"  supersession banner found at char {ban_start}")
 print(f"  section references inside the banner: {sorted(set(lists))}")
 mentions_43 = "§4.3" in ban

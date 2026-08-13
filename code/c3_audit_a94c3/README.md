@@ -94,3 +94,91 @@ Three of the four were caught by my own negative controls firing **against corre
 - `ε_leak = 0.20` is **HEURISTIC** — `mg-3ce3`'s envelope — and is not pinned here.
 - Every `1−λ_std` is FLOAT (Jacobi). Comparisons that could turn on float noise are stated with
   their tolerance (`1e-9` for eigen-multiplicity and inequality slack, `1e-12` for zero-gap).
+
+## 6. `a4_census` is pinned to an as-of commit (`mg-c824`)
+
+`a4_census.py` prints **line numbers into documents it does not own** — `mg-76b2`'s
+deliverable, `mg-76b2`'s instrument, `Op-Form`, and `mg-3ce3`'s probe *in another
+repository*. Those addresses are not a property of anything this audit established. Between
+this transcript's commit and 2026-08-13 the deliverable was amended twice (`ade980b`,
+`bb6a0ff`) and the instrument once (`48cbbd8`), so a re-run moved **32 lines and changed no
+verdict** — the same statements, found at new addresses.
+
+That made `out_a4_census.txt` **non-reproducible by construction**, and the cost was not
+cosmetic: this lineage repairs labels under a numbers-neutrality method whose step 1 is
+*"reproduce the committed output byte-identically before touching anything"*, so the method
+**could not be applied to this file at all**. `mg-be0b` stopped its sweep here for exactly
+that reason.
+
+**The fix pins the bytes rather than reformatting the numbers.** A line number into someone
+else's file is a volatile address by nature and no printing convention makes one stable;
+what *can* be made stable is the thing addressed. `a4_census` now reads its corpus at a
+declared commit via `git show` — `AS_OF = 7b7d093`, the commit §0 above already names as
+what this audit audits, and the same bytes the transcript's own commit `c80a4f1` saw (blobs
+`1b8184c5`, `c406c73f`, tree `f69cdef3`, identical at both).
+
+| | |
+|---|---|
+| pinned re-run | **byte-identical**, for as long as `AS_OF` is reachable |
+| `A4_CENSUS_AT=HEAD` (or `=WORKTREE`, or any commit) | re-measures and **re-addresses**; measured against `HEAD` at `4c68992`, **every differing line is an address, the corpus-size line, or the as-of block**, and **all seven verdicts are identical** |
+| `mg-3ce3`'s probe | in another repository and unpinnable from here, so its `sha256` is stamped instead and `D1b`'s addresses are declared valid at that digest |
+
+The transcript now opens with an **as-of stamp** naming what is an address and what is a
+finding, and each address list is marked where it is printed. The label repair at the `C₃ = 1`
+row of `a4_census.py`'s dependency list — `:77` as `mg-be0b` addressed it — (`← L2` →
+**L2's FIRST DISJUNCT**, the site `mg-be0b` stopped at) landed
+under the numbers-neutrality method after the pin, and it passes: **23 of 23 addresses
+unchanged, no numeric token of the previous transcript lost, and the only four lines that do
+not survive verbatim are the three headers whose colon moved and the repaired label itself.**
+
+### This remedy exhibited the defect it repairs, and the enumeration caught it
+
+The scope note added at `:77` first cited **`STATE.md:116`** — a line number into a document
+`a4_census` does not own, i.e. the exact defect, reintroduced inside its own repair. It was
+**already wrong when written**: that text sits at `STATE.md:126` today. It now cites the
+**ledger row** (`row 9`) and quotes the disjunction verbatim. A row number is an identity; a
+line number is an address.
+
+Two residual costs, stated rather than left to be discovered:
+
+1. **`AS_OF` must stay reachable.** If it is ever pruned, `a4_census` exits non-zero with an
+   actionable message — deliberately, rather than falling back to a live read and emitting a
+   transcript that silently disagrees with the committed one.
+2. **`a4_census` now needs `git` and a work-tree.** Copied outside a repository it fails;
+   `A4_CENSUS_AT=WORKTREE` is the escape hatch and reproduces the pre-pin behaviour.
+
+Pinning also makes this suite eligible for `build.sh`'s looped set for the first time. It is
+**not** added here — out of scope for `mg-c824`.
+
+### The general finding: `a4_census` is not the only one — 64 instruments, 98 transcripts
+
+A count, not an impression. Over every tracked `code/**/out_*.txt`, an address `path:NNN` was
+taken as **computed into a foreign file** when (a) the path resolves to a tracked file outside
+the transcript's own instrument directory, (b) the literal token `path:NNN` does **not** occur
+in that instrument's own `.py`/`.sh` (which would make it a hardcoded citation, a
+stale-citation hazard but not a reproducibility one), and (c) the instrument actually reads
+that file — it names it, or walks the tree.
+
+| measure | count |
+|---|---|
+| transcripts carrying a computed foreign address | **105** |
+| distinct instruments | **64** |
+| instruments where the addressed file has **already moved** since the transcript was committed | **40** |
+| transcripts whose addresses are therefore presumed **already stale** | **54** |
+
+So the defect is not rare and it has already fired in a majority of the instruments that
+carry it. **None of them is fixed here** — `mg-c824` says name them and it will be scoped.
+The full list is in this ticket's verdict mail to `pm-onethird`. The classifier's known bias
+is toward over-counting (an instrument that merely *echoes* a foreign file's own prose
+citation is counted), and toward under-counting addresses into files outside this repository,
+which `git ls-files` cannot see at all — `a4_census`'s own `mg-3ce3` probe is one such.
+
+**One mislabel found in passing and deliberately not fixed.** `code/gate_fixed_point_f771/`
+attributes `mg-c824` to `code/libweak_audit_c4f5/out_a4_census.txt` — in `lib_f771.py`'s
+*WHAT IS WATCHED* paragraph, in `g1_controls.py`'s membership row `E5`, and inside both
+committed gate transcripts. (Cited by paragraph and by row, not by line, for the reason
+this section is about.) The two
+files share a basename; `mg-c824`'s is **this** one. The gate's *logic* is unaffected (it
+watches everything, regenerates nothing, and `E5`'s point holds of either file), so this is a
+label, not a defect — and repairing it would regenerate a `build.sh`-looped gate's transcripts
+inside a repair whose whole warrant is that nothing moves.

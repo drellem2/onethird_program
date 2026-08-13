@@ -1,4 +1,35 @@
+==============================================================================
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS
+==============================================================================
+  in-repo corpus read at : 7b7d093d2795dc7d3a5c544d50f905be43efcf79
+      AS_OF, the pinned default
+  mg-3ce3 probe, sha256  : f446211a2cb454df71a360220ff5d21736356f2f706990205803d71f80cdd6cf
+      matches the as-of stamp
+
+  EVERY `file:NNN` AND EVERY `char NNN` BELOW IS AN ADDRESS, NOT A FINDING.  Each
+  is an offset into a file this audit DOES NOT OWN, and it moves whenever another
+  ticket amends that file.  They are valid at the commit named above and nowhere
+  else.  THE QUOTED LINE UNDER EACH ADDRESS IS THE PRIMARY ADDRESS -- it survives
+  the file moving; the number after the colon does not, and is printed second for
+  that reason.  The address and its quoted line are ONE OBJECT: if the corpus
+  moves, expect BOTH to change together.
+
+  CORPUS-VALUED TOO, and marked where it is printed: the census-universe size on
+  the next line, which measures the corpus rather than mg-76b2.
+
+  EVERYTHING ELSE IS STABLE: every count of hits, every classification, every
+  verdict and every P-score.  Run with no environment set and this transcript reproduces
+  BYTE-IDENTICALLY, because the bytes read are pinned rather than live.  To ask
+  the same questions of the CURRENT corpus instead:
+
+      A4_CENSUS_AT=HEAD python3 a4_census.py     (or =WORKTREE, or any commit)
+
+  which RE-MEASURES AND RE-ADDRESSES.  Compare the two runs' VERDICTS; the numbers
+  after the colons are expected to differ, and their differing is not a defect in
+  either run.
+
   census universe: 15 files, 2770 lines (mg-76b2's deliverable AND its whole instrument, transcripts included)
+  [a SIZE OF THE CORPUS at 7b7d093, so it is corpus-valued like the addresses and not a finding]
 
 ==============================================================================
 D1. THE L4 CENSUS -- P6
@@ -9,7 +40,8 @@ D1. THE L4 CENSUS -- P6
   So the census is not 'does L4 appear' -- it appears, and it should -- it is
   'does a DERIVED NUMBER of mg-76b2 depend on F'.
 
-  10 lines mention L4, a modulus, or an F(.) application:
+  10 lines mention L4, a modulus, or an F(.) application
+  [the count is the finding; the `:NNN` are ADDRESSES at 7b7d093]:
 
     docs/OneThird-C3-PrefixCapture-mg-76b2.md:237
         `mg-845e`'s gate is *"(a) L4's consumable threshold `ε₀` … AND (b) `C₃` quantified at a
@@ -39,7 +71,8 @@ D1. THE L4 CENSUS -- P6
 
   THE INPUT LIST OF EVERY DERIVED NUMBER OF mg-76b2, written out:
 
-    C_3 = 1                <- L2, Cheeger's hard half, |A\sigma(A)|=|A^c\sigma(A^c)|,
+    C_3 = 1                <- L2's FIRST DISJUNCT, Cheeger's hard half,
+                              |A\sigma(A)|=|A^c\sigma(A^c)|, and
                               'monotone ==> threshold sets are prefixes'.  No F.
     eps_dem = eps_leak^2/2 <- C_3 = 1 and eps_leak.                        No F.
     2x10^-2                <- eps_leak = 1/5.                              No F.
@@ -47,6 +80,29 @@ D1. THE L4 CENSUS -- P6
     c > 1 - eps_leak       <- eps_leak and Lemma 2.1.                      No F.
     c > 0.80 / c > 0.98    <- eps_leak = 0.20 / 0.02.                      No F.
     (II) vs (III) = 10     <- 2/eps_leak.                                  No F.
+
+  (SCOPE ADDED AT THE CLAIM, mg-c824, on mg-be0b's finding, which is on mg-3329's,
+  which is on mg-fa70's.  Row 1 read "<- L2", and L2 is a DISJUNCTION -- "a
+  dominant standard eigenvector is monotone in the distinguished order, OR AT
+  LEAST YIELDS A LOW-CONDUCTANCE PREFIX", carried on STATE.md's ledger ROW 9,
+  which carries it on mg-76b2's document, which carries it on a .tex that is NOT
+  IN THIS REPOSITORY and was not re-read here.  So an unqualified "L2" reads as
+  EITHER disjunct, while C_3 = 1 is established on the FIRST.  The clause this row
+  ALREADY carried, 'monotone ==> threshold sets are prefixes', IS that first
+  disjunct -- so nothing computed changes and NO NUMBER MOVES; only the label
+  over-reached.  The second disjunct is UNQUANTIFIED -- weaker than and different
+  from refuted -- and is not struck here.  This is the site mg-be0b's sweep STOPPED
+  AT, because step 1 of the numbers-neutrality method failed here; the as-of
+  pinning stamped above is what makes it pass, and it passes: 23 of 23 addresses
+  and every numeric token of the previous transcript are unchanged across this
+  edit.
+
+  THE CITATION IS BY ROW, NOT BY LINE, AND THAT IS THIS TICKET'S OWN LESSON TURNED
+  ON ITSELF.  This note first read "STATE.md:116" -- a line number into a document
+  a4_census does not own, i.e. the exact defect being repaired, reintroduced inside
+  the repair.  It was ALREADY WRONG when written: the text is at STATE.md:126
+  today.  A ledger ROW NUMBER is an identity and survives the file moving; a line
+  number is an address and does not.)
 
   So the ENTIRE dependence on L4 is routed through the single number eps_leak.
   Is THAT number F-free?  mg-76b2 says it is; Op-Form:444 says it is; both are
@@ -56,7 +112,9 @@ D1. THE L4 CENSUS -- P6
 D1b. eps_leak = 0.20 AT ITS SOURCE -- mg-3ce3's predicate, in another repo
 ==============================================================================
   /Users/daniel/research/one_third_width_three/scripts/onethird_mg3ce3_L4_near_ordinal_stability_probe.py
-  872 lines.  The predicate that calibrates eps_leak:
+  872 lines.  The predicate that calibrates eps_leak
+  [ANOTHER REPOSITORY -- unpinnable from here; the `:NNN` are
+   addresses valid at sha256 f446211a2cb454df...]:
 
     :294  balanced_full=(1/3 - 1e-12 <= p_full <= 2/3 + 1e-12),
     :299  surviving = [r for r in balanced_side_pairs if r["balanced_full"]]
@@ -92,7 +150,9 @@ D2. THE mg-200d CENSUS -- P7
   its deliverable and instrument, and ask of each: is it labelled, and does a
   headline claim of mg-76b2 change if the conjecture is WITHDRAWN?
 
-  9 occurrences:
+  9 occurrences
+  [the count and each [labelled]/[BARE] verdict are the finding;
+   the `:NNN` are ADDRESSES at 7b7d093]:
 
     [labelled] docs/OneThird-C3-PrefixCapture-mg-76b2.md:61
         > `C₃`-free chain and *if* the mg-200d route survives mg-131e, the demand `2/(n+1) ≤ ε_dem`
@@ -158,6 +218,9 @@ D2. THE mg-200d CENSUS -- P7
 ==============================================================================
 D3. mg-76b2 CLAIM 14 -- was Op-Form sec.4.3 really never re-examined?
 ==============================================================================
+  supersession banner, anchored on the string it is found by:
+      "SUPERSEDED INPUT — every numeric budget below is 100× too pessimistic "
+  [ADDRESS at 7b7d093, and the coarsest one here -- a raw byte offset]
   supersession banner found at char 583
   section references inside the banner: ['§10', '§3.4', '§6.3', '§6.4', '§7', '§7.2', '§7.3', '§7.4', '§§6.4–7.4']
   banner mentions §4.3                : False
