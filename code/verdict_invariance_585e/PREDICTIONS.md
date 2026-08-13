@@ -128,3 +128,11 @@ Both are repaired by the landing commit that carries the RED transcript, so a **
 `./build.sh` and a **second commit** were needed to turn it green — the 32nd committed version
 is RED and the 33rd is the refresh.  The prediction is not clever; it is what §1 of the README
 says must happen, happening.
+
+**AND P7 WAS PAID TWICE.**  The first submission failed the merge gate on a rebase conflict in
+`out_a4_sweep.txt`, `out_gate.txt` and `out_g0_fixed_point.txt` — `mg-05c6` and three other
+commits landed while this branch was queued.  So this branch paid the oscillation toll (P7) AND
+the conflict toll (`mg-05c6`) on the same landing, which is the two carry-forward candidates of
+its own ticket arriving one after the other.  `out_v1_oscillation.txt` came through the rebase
+**byte-identical** because it is pinned at `AS_OF`; the two sandbox arms moved because the
+instrument they run had just changed.  README §7.

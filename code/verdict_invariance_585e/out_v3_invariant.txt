@@ -8,7 +8,7 @@ mg-585e v3  A TRANSCRIPT OF THE INPUTS — built, run on both verdicts, and pric
 
   proposed report on red tree == on green tree                    YES — BYTE-IDENTICAL
   proposed report on red tree == on noise tree                    YES
-  bytes                                                          1745
+  bytes                                                          1985
   and no scrubbing was applied to either side: there is no clock in it at all.
 
   THE PLANT.  The same writer with the outcome appended — today's arrangement —
@@ -23,8 +23,8 @@ mg-585e v3  A TRANSCRIPT OF THE INPUTS — built, run on both verdicts, and pric
 
   mutation      N2 widened to eat integer seconds as well as decimal ones
   report moved under the mutation                                 YES
-      -  SECONDS      re.compile(r"\b\d+\.\d+\s*s\b")
-      +  SECONDS      re.compile(r"\b\d+(?:\.\d+)?\s*s\b")
+      -  SECONDS              re.compile(r"\b\d+\.\d+\s*s\b")
+      +  SECONDS              re.compile(r"\b\d+(?:\.\d+)?\s*s\b")
 
   SO THE EXEMPTION BECOMES REMOVABLE AND THE REMOVAL BUYS SOMETHING SPECIFIC.
   lib_f771's own docstring names its main risk: 'A WIDER NORMALISER IS AN
@@ -38,7 +38,7 @@ mg-585e v3  A TRANSCRIPT OF THE INPUTS — built, run on both verdicts, and pric
   On the red tree, TODAY, with no change to g0 at all:
     exit status                                                   1
     stderr names the disagreeing transcript                       YES
-      mg-f771 g0: 1 watched transcript(s) moved — 1 DISAGREES, 0 NOISE
+      mg-f771 g0: 1 watched transcript(s) moved — 1 red, 0 NOISE, 0 CORPUS
       mg-f771 g0:   DISAGREES code/sample_suite/out_sample.txt
 
   The exit status is what `run_all.sh` reads and what `build.sh` folds into the

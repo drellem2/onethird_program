@@ -159,6 +159,17 @@ commits, and it moves into **`mg-05c6`'s conflict class** — the file every con
 must regenerate — instead of into an extra commit in one worktree.  Swapping an oscillation in a
 worktree for a conflict in the merge queue is a worse trade at the same frequency.
 
+**mg-05c6 LANDED WHILE THIS BRANCH WAS IN THE MERGE QUEUE AND IT CONFIRMS THE PRICING FROM THE
+OTHER SIDE.**  It did not stop committing the census; it declared a **corpus-scoped** class —
+`lib_f771.CORPUS_SCOPED` — whose members are graded against a *pin* rather than against the
+tree, `out_a4_sweep.txt` first among them.  That is the census route taken to its conclusion,
+and what it costs is written into the instrument: the file that moves on every landing had to be
+**exempted from the control that watches it**, with a drift limit and a pin as the fence.  So the
+measurement above is not an argument against a hypothetical — it is the price of the thing that
+just shipped, and it is a fourth route rather than a refutation of one.  **It leaves
+`SELF_EXCLUDED` exactly where it was**, so this directory's subject is untouched by it and the
+successor below is still the next step.
+
 **The rule inventory moves on neither.**  It is a function of `lib_f771.py`, which neither the
 repair nor a new directory under `code/` touches.  Of the three candidates it is the only one
 invariant under **both**.
@@ -227,6 +238,27 @@ branch that re-scoped another instrument's detector to make its own number look 
 doing the worse thing.  The second site, `lib585e.py`'s `if old not in text:`, is the guarded
 shape: it refuses when a sandbox patch anchor is absent, and its two-way run is `v0`'s `D1` and
 `D2`, which are exactly the worlds in which that anchor is gone.
+
+**THIS BRANCH FAILED THE MERGE GATE ON A REBASE CONFLICT, WHICH IS THE TICKET'S SECOND
+CANDIDATE ARRIVING UNINVITED — AND THE PIN IS WHY ONE TRANSCRIPT SURVIVED IT.**  `mg-05c6` and
+three other commits landed while this branch sat in the queue; the rebase conflicted on
+`out_a4_sweep.txt`, `out_gate.txt` and `out_g0_fixed_point.txt` — three generated files, none
+written by hand.  Resolved by **re-running the producers** and not by hand (mg-54b1): a
+hand-merge is the one resolution that can invent a transcript neither side produced.  What is
+worth recording is the asymmetry on this branch's own four transcripts: `out_v1_oscillation.txt`
+came through the rebase **byte-identical**, because every figure in it is a function of
+`AS_OF 0cb0fa4` and two commits; `out_v2_partition.txt` and `out_v3_invariant.txt` moved,
+because they run the instrument that `mg-05c6` had just changed.  **A pinned transcript does not
+conflict in the merge queue.**  That is a fact about pins and not a proposal, and it belongs to
+`mg-05c6`, not here.
+
+**AND THE INVENTORY HAD TO GROW, WHICH IS THE DEMONSTRATION RATHER THAN A COMPLICATION.**
+`mg-05c6` gave `verdict_for` a third argument and added `corpus_pin` and `producer_pin`, so the
+deciding surface went from four functions to six and the constant list gained `CORPUS_SCOPED`
+and `CORPUS_DRIFT_LIMIT`.  Left alone, the digest would have covered four of six while printing
+the same field name — `D1`'s failure mode with a bigger blast radius.  A report of the verdict's
+**inputs** is only worth anything if it tracks the instrument, and this is the first time it had
+to.
 
 **Declared blind spots.** The sandboxes hold one watched transcript; nothing measured here says
 what `g0` does when several disagree at once, and `v3`'s claim is that the proposed report does

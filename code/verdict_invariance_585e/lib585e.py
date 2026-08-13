@@ -237,34 +237,64 @@ def run_g0(sandbox):
 # back covering a function that no longer exists under the name it was asked about.  The
 # plant fired on this library's own construction and the matcher was tightened rather than
 # the plant relaxed.
+#
+# mg-05c6 LANDED WHILE THIS BRANCH WAS IN THE MERGE QUEUE AND WIDENED THE DECIDING SURFACE.
+# `verdict_for` gained a third argument and two helpers — `corpus_pin` and `producer_pin` —
+# and a whole class of transcript is now graded against a PIN rather than against the tree.
+# They are added here rather than left out, because a digest that covers four of six deciding
+# functions is D1's failure mode with a bigger blast radius: it reports the same field name
+# while covering less.  That this list had to move IS the demonstration — the inventory tracks
+# the instrument, which is the entire claim being made for it.
 DECIDING = ("def normalise(", "def lines_equivalent(", "def texts_equivalent(",
-            "def verdict_for(")
+            "def corpus_pin(", "def producer_pin(", "def verdict_for(")
 
 # The constants that ARE spelled as constants, so a widening of them lands in a diff a reader
-# can read rather than as a moved hash.
-INVENTORY = ("FS_ROOTS", "ABS_TO_REPO", "ABS_ANY", "SECONDS", "SELF_EXCLUDED")
+# can read rather than as a moved hash.  `CORPUS_SCOPED` and `CORPUS_DRIFT_LIMIT` are
+# mg-05c6's, and they DECIDE — a path in that set is forgiven a difference that IS a function
+# of repo state — so an inventory without them would be describing the instrument as it was
+# yesterday.  Multi-line statements are carried WHOLE (see `_blocks`) rather than by their
+# first line, or `CORPUS_SCOPED = {` would print as `{` and its membership would be invisible
+# in both the inventory and the digest.
+INVENTORY = ("FS_ROOTS", "ABS_TO_REPO", "ABS_ANY", "SECONDS", "SELF_EXCLUDED",
+             "CORPUS_SCOPED", "CORPUS_DRIFT_LIMIT")
 
 
-def _slice_defs(source):
-    """The text of the deciding functions, in file order, docstrings and all.  A top-level
-    `def` ends the previous one; nothing here nests, and if that ever changes the digest gets
-    LARGER rather than smaller, which fails safe."""
+def _blocks(source, prefixes, what):
+    """The full text of every top-level statement whose first line starts with one of
+    `prefixes`, in file order.
+
+    A top-level line ENDS the previous block, so a multi-line `def` or a multi-line literal is
+    carried whole.  Nothing here nests; if that ever changes the block gets LARGER rather than
+    smaller, which fails safe.  Missing exactly one prefix is a REFUSAL and not a shorter
+    digest — a digest that silently covers less while printing the same field name is D1.
+    """
     lines = source.splitlines(True)
-    starts = []
+    found = {}
     for i, ln in enumerate(lines):
-        if any(ln.startswith(d) for d in DECIDING):
-            starts.append(i)
-    if len(starts) != len(DECIDING):
-        raise Refused("expected %d deciding functions in lib_f771.py, found %d — the "
-                      "instrument has been restructured and this digest is no longer about "
-                      "what it says it is about" % (len(DECIDING), len(starts)))
+        for pfx in prefixes:
+            if ln.startswith(pfx) and pfx not in found:
+                found[pfx] = i
+    missing = [p for p in prefixes if p not in found]
+    if missing:
+        raise Refused("lib_f771.py does not define %s: %s — the instrument has been "
+                      "restructured and this report is no longer about what it says it is "
+                      "about" % (what, ", ".join(missing)))
     out = []
-    for s in starts:
+    for pfx in prefixes:
+        s = found[pfx]
         e = s + 1
         while e < len(lines) and not (lines[e].strip() and not lines[e][:1].isspace()):
             e += 1
-        out.append("".join(lines[s:e]))
-    return "".join(out)
+        out.append((pfx, "".join(lines[s:e])))
+    return out
+
+
+def _flatten(text, limit):
+    """A multi-line statement on one line, so the inventory stays a table."""
+    one = " ".join(x.strip() for x in text.splitlines() if x.strip())
+    if "=" in one:
+        one = one.split("=", 1)[1].strip()
+    return one[:limit] + ("…" if len(one) > limit else "")
 
 
 def read_inputs(root):
@@ -279,15 +309,12 @@ def read_inputs(root):
             source = fh.read()
     except OSError as exc:
         raise Refused("cannot read %s: %s" % (path, exc))
-    constants = []
-    for name in INVENTORY:
-        for ln in source.splitlines():
-            if ln.startswith(name + " ") or ln.startswith(name + "="):
-                constants.append((name, ln.split("=", 1)[1].strip() or "(continues)"))
-                break
-        else:
-            raise Refused("constant %s is not defined at module level in lib_f771.py" % name)
-    digest = hashlib.sha256(_slice_defs(source).encode("utf-8")).hexdigest()
+    constants = [(name, _flatten(text, 72))
+                 for name, text in _blocks(source, tuple(n + " =" for n in INVENTORY),
+                                           "inventory constant(s)")]
+    deciding = _blocks(source, DECIDING, "deciding function(s)")
+    digest = hashlib.sha256(
+        "".join(t for _, t in deciding).encode("utf-8")).hexdigest()
     return {"constants": constants, "digest": digest}
 
 
@@ -320,9 +347,10 @@ def invariant_report(root, width=92):
     add("  The verdict is on stderr and in the exit status, which is what the gate reads.")
     add("")
     for name, value in inputs["constants"]:
-        add("  %-12s %s" % (name, value[:width - 16]))
+        add("  %-20s %s" % (name.rstrip(" ="), value[:width - 24]))
     add("")
-    add("  deciding functions (%s)" % ", ".join(d.split()[1].rstrip("(") for d in DECIDING))
+    add("  deciding functions (%s)"
+        % ", ".join(d.split()[1].rstrip("(") for d in DECIDING))
     add("  sha256 of their source: %s" % inputs["digest"])
     add("")
     add("  A WIDER NORMALISER IS AN UNFALSIFIABLE ESCAPE HATCH — lib_f771's own words about")
