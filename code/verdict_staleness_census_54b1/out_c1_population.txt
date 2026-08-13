@@ -5,7 +5,7 @@ mg-54b1 C1  THE POPULATION, AND THE SIZE OF THE BLIND SPOT
   Recomputed from `git ls-files` and from build.sh and mg-20ee's own
   transcript on every run.  Nothing below is a written-in number.
 
-  tracked transcripts under code/ (out_*.txt)       1054
+  tracked transcripts under code/ (out_*.txt)       1056
   directories carrying at least one                  218
       of those, with a run_all.sh to re-take them    188
       with NO runner at all                           30
@@ -60,6 +60,7 @@ mg-54b1 C1  THE POPULATION, AND THE SIZE OF THE BLIND SPOT
       counted in the blind spot     yes
       carries code/verdict_staleness_census_54b1/out_c0_controls.txt
       carries code/verdict_staleness_census_54b1/out_c1_population.txt
+      carries code/verdict_staleness_census_54b1/out_sweep_54b1.txt
 
   THE EXPENSIVE ARM OF THIS INSTRUMENT IS ITSELF A TRANSCRIPT NO RUNNER
   REWRITES.  out_sweep_54b1.txt records ONE DATED RUN of sweep_54b1.sh over a

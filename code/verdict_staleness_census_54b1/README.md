@@ -49,21 +49,31 @@ directory existing rather than for widening `census.py`.
 `mg-20ee`'s own transcript on every run. **Nothing below is a written-in number**, which is why
 this arm is a fixed point and the sweep is not.
 
-    tracked transcripts under code/ (out_*.txt)      1052
-    directories carrying at least one                 217
-        with a run_all.sh to re-take them             187
+    tracked transcripts under code/ (out_*.txt)      1056
+    directories carrying at least one                 218
+        with a run_all.sh to re-take them             188
         with NO runner at all                          30
 
     watched by ./build.sh's loop                        9
     re-run by mg-20ee's ground_truth.sh                44
 
-    THE BLIND SPOT -- in NEITHER                      164
-        of those, runnable                            137
+    THE BLIND SPOT -- in NEITHER                      165
+        of those, runnable                            138
         of those, with no runner                       27
 
 **76 % of every transcript-carrying directory in this repository is re-taken by nothing on any
-schedule.** `6cb9` was one of the 164, and it was found only because a polecat ran it for an
+schedule.** `6cb9` was one of the 165, and it was found only because a polecat ran it for an
 unrelated reason.
+
+> **These numbers moved once while this branch was open, and the table above is the second
+> reading.** The first said `1052 / 217 / 164 / 137`; a rebase onto seven new `main` commits added
+> a directory and every one of them moved. **`out_c1_population.txt` regenerated correctly and
+> this prose did not, which is the defect this whole ticket is about, happening to its own
+> README.** It is recorded rather than quietly corrected because it is the cheapest possible
+> demonstration that a number copied out of a transcript into prose has no mechanism behind it —
+> and it is the argument for reading `out_c1_population.txt` rather than this paragraph. The
+> **sweep is unaffected**: `c1_population.py --sample 40` returns the same 40 directories before
+> and after, checked element-for-element, because the sample is a function of the path.
 
 ## 3 — The classifier, and both directions of its error
 
