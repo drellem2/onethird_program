@@ -1,0 +1,31 @@
+==============================================================================
+mg-20ee — CONTROLS ON THE CENSUS CLASSIFIER
+==============================================================================
+
+POSITIVE CONTROLS — shapes the classifier MUST count
+------------------------------------------------------------------------------
+  PASS P1 computed address into a foreign doc               
+        the instrument reads the file and the token is not in its source — the defect mg-20ee repairs.
+  PASS P2 computed address into another instrument's source 
+        foreignness is about the OWNING DIRECTORY, not about the file extension.
+
+NEGATIVE CONTROLS — shapes it MUST NOT count.  These carry the weight,
+because the declared bias of this census is that it OVER-counts.
+------------------------------------------------------------------------------
+  PASS N1 an address into the instrument's OWN directory    
+        not foreign, so not this defect: the instrument owns what it addresses and nobody else can move it under it.
+  PASS N2 a HARDCODED citation, token present in the source 
+        a stale-citation hazard and a DIFFERENT repair — pinning the corpus would not fix a number typed by hand.
+  PASS N3 a file the instrument never reads                 
+        an echo of someone else's prose citation, not a computed address.
+  PASS N4 an untracked path                                 
+        UNDER-COUNT, DECLARED AND CONFIRMED: addresses outside this repository are invisible to git and so to this census. a4_census's mg-3ce3 probe is one such. The floor is real and this control is why it is a floor.
+
+THE CONTROL THAT CONFIRMS A KNOWN DEFECT RATHER THAN A REPAIR
+------------------------------------------------------------------------------
+  PASS N5 an instrument that ALREADY reads at a declared commit 
+        COUNTED ANYWAY — this is the census's second declared over-count, planted so it cannot be forgotten. code/state_audit_6a2f is the real instance. If somebody teaches the classifier to see pinned reads this control FAILS, and that is the signal to update census.py's docstring and out_ground_truth.txt together.
+
+==============================================================================
+GREEN — 2 positive, 4 negative and 1 known-defect control all land where they must.
+==============================================================================
