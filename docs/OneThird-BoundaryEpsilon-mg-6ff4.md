@@ -1,7 +1,7 @@
 # `ε_spec` AT THE BOUNDARY `δ(P) = 1/3` — THE DISTRIBUTION, THE TREND, AND THE REALIZABILITY GAP MEASURED
 
 `mg-6ff4`, 2026-08-13, filed by `pm-onethird` off Daniel asking where the real constant actually
-sits. Instrument: [`code/boundary_epsilon_6ff4/`](../code/boundary_epsilon_6ff4/) — five arms,
+sits. Instrument: [`code/boundary_epsilon_6ff4/`](../code/boundary_epsilon_6ff4/) — six arms,
 standard library only, exact rationals on every verdict path, no float and no solver anywhere a
 number is compared.
 
@@ -22,12 +22,18 @@ number is compared.
 > sawtooths upward at every `n` divisible by 3 (`1/6` at `n = 5` up to `8/35` at `n = 6`), and any
 > reading of it as a clean decreasing sequence is wrong. The **envelope** falls like `1/n`.
 >
-> **THE REALIZABILITY GAP, MEASURED.** The pair-marginal supremum `n/(n+1)` is attained by the
-> two-atom law, which is not a poset. The worst actual poset at the boundary sits a factor of
-> **at least `3(n−1)/4`** below it — exactly that when `3 | n`, larger otherwise: `1.5×` at
-> `n = 3`, **`6×` at `n = 9`**, and growing **linearly in `n` without bound**. ⚠️ **The honest unit is the RATIO, not the difference.** The difference
-> `n/(n+1) − max_P ε_obs` merely saturates at `1` and makes realizability look like it buys a
-> constant. It buys a factor that grows.
+> **THE REALIZABILITY GAP, MEASURED — AND IT IS A DENSITY GAP AND NOTHING ELSE.** Against the
+> **flat** pair-marginal supremum `n/(n+1)` (attained by the two-atom law, which is not a poset)
+> the worst actual boundary poset sits a factor of **at least `3(n−1)/4`** below — exactly that
+> when `3 | n`, larger otherwise: `1.5×` at `n = 3`, **`6×` at `n = 9`**, growing linearly. ⚠️ **But
+> `mg-0e8c`/`mg-ac0c` landed on `main` while this branch was open and the supply is NOT flat: it is
+> `ε_sup = d·n/(n+1)`, LINEAR IN THE INCOMPARABILITY DENSITY (`STATE.md:125`). Against THAT bound
+> the gap at every one of the 49 boundary posets is EXACTLY ZERO, with no slack at all** — the
+> boundary class **is** the equality case of the supply bound, because `mg-0e8c`'s chain uses
+> `Pr[flipped] < 1/3` per pair and at `δ = 1/3` every pair sits at exactly `1/3` (§5.1, `c5`).
+> **So realizability buys nothing here beyond the density**, and what this instrument actually
+> measures is how dense a `δ = 1/3` poset can be: `d ≤ 4⌊n/3⌋/(n(n−1))`. That is residual `(R)`,
+> which `mg-0e8c` had already named as the lever — **this puts a number on it at the boundary.**
 >
 > **`e` IS CANONICAL HERE, AND NOT FOR THE REASON THE CORPUS USUALLY GIVES.** The strict `> 2/3`
 > tournament — the one the no-3-cycle argument actually proves acyclic — orients **0 of 82**
@@ -238,6 +244,47 @@ same thing `mg-6bc2` §3.1 reports at its LP optimisers, now measured on **real 
 fall lives in the **density `d`**. So the operative lever is residual **`(R)`**, the *number* of
 incomparable pairs, and this is that statement measured rather than derived from an optimum.
 
+### §5.1 ⚠️ THE CORRECTION: the supply is `d·n/(n+1)`, and against it the gap is ZERO
+
+**`mg-0e8c` (restated at `STATE.md:125`, landed and re-scoped by `mg-ac0c` at `99be747`, while this
+branch was open) states the supply as `ε_sup = d·n/(n+1)`, linear in the incomparability density —
+not the flat `n/(n+1)` §5's table compares against.** `c5` was written after reading it and asks the
+question the correction forces.
+
+| `n` | max `ε_obs` | flat `n/(n+1)` | ratio vs flat | `d·n/(n+1)` at that poset | ratio vs density-aware |
+|---|---|---|---|---|---|
+| 3 | `1/2` | `3/4` | 1.500 | `1/2` | **1 — SATURATED** |
+| 5 | `1/6` | `5/6` | 5.000 | `1/6` | **1 — SATURATED** |
+| 7 | `1/6` | `7/8` | 5.250 | `1/6` | **1 — SATURATED** |
+| 9 | `3/20` | `9/10` | 6.000 | `3/20` | **1 — SATURATED** |
+
+**Exact equality at all 49 members, `n = 3…9`, zero mismatches** (`c5` `m1`). And the reason is one
+line: `mg-0e8c`'s chain gets `E[inv_e] < m/3` from `Pr[flipped] < 1/3` **per pair**; at `δ = 1/3`
+*exactly*, every incomparable pair sits at *exactly* `1/3`, so that inequality is an **equality**.
+**The boundary class is the equality case of the supply bound.**
+
+**What that costs this document, said plainly.** §5's factor `3(n−1)/4` is not wrong, but it is
+**a gap against a bound evaluated at `d = 1`, i.e. at the antichain's density**, and essentially all
+of it is the density term. **The realizability gap against the bound the corpus now states is
+zero.** Anyone quoting §5's ratio as *"how far below the pair-marginal bound real posets sit"* would
+be crediting realizability with what density already explains.
+
+**What survives, and it is the sharper statement.** The question becomes *how dense can a
+`δ = 1/3` poset be*, and that is measured here for the first time:
+
+    max{ d(P) : δ(P) = 1/3, |P| = n }  =  4⌊n/3⌋/(n(n−1))  ~  4/(3n)
+
+— `2/3, 1/3, 1/5, 4/15, 4/21, 1/7, 1/6` at `n = 3…9`, exhaustive. That is **residual `(R)`**,
+which `mg-0e8c` had already identified as the operative lever; what is added is a number for it at
+the boundary. ⚠️ **And it re-reads §4's crossing in `STATE.md`'s own currency:** the wall is already
+**down** — proven, all `n`, L4-free — at `d ≲ 2×10⁻²`, so under the closed form the densest
+`δ = 1/3` poset **leaves the open dense regime for good at `n = 67`**. The boundary class is a
+witness for the open regime **only at small `n`**. (Extrapolation past `n = 9`, labelled as such.)
+
+**Why this is a new section and not an edit to §5.** The superseded reading has to stay legible
+next to what narrows it — the same call `mg-ac0c` made on its own S3 an hour earlier, for the same
+reason.
+
 ---
 
 ## §6. How `e` was chosen — the ticket's item 4, and it is not a formality
@@ -301,10 +348,12 @@ quantity being measured.** Without `m2`, `ε_obs` at the boundary would be a ran
 - **A trend argument.** The maximum of `ε_spec` over the closest-to-frozen posets that exist falls
   like `4/(3n)` (with a `mod 3` sawtooth), exhaustively verified to `n = 9` and, under a width
   restriction, beyond (`c2`).
-- **A measured lower bound on what realizability buys**, in the honest unit: a factor `3(n−1)/4`,
-  `= 6` at `n = 9`, growing without bound. As far as this corpus records, that number had not been
-  computed. It is a **lower** bound on the gap in the sense that the boundary is the most
-  inversion-rich `δ ≤ 1/3` population available; it says nothing about a class that is empty.
+- **A measured maximum incomparability density at the boundary**: `d ≤ 4⌊n/3⌋/(n(n−1)) ~ 4/(3n)`,
+  exhaustive to `n = 9`. That is a number for residual `(R)` on the closest-available class, and it
+  is what §5's realizability figure reduces to once `mg-0e8c`'s density-linear supply is used
+  (§5.1). ⚠️ **What it does NOT support is a claim that realizability buys a growing factor**: against
+  `ε_sup = d·n/(n+1)` the gap is **zero** at every member. The factor `3(n−1)/4` is the gap against
+  the same bound evaluated at the antichain's density, and it must be quoted with that clause.
 - **A correction to how `e`'s canonicity is justified at the boundary** (§6): the usual argument
   orients `0 of 82` pairs.
 
@@ -322,6 +371,11 @@ quantity being measured.** Without `m2`, `ε_obs` at the boundary would be a ran
   comfortable", that would be the extrapolation quoted as a measurement.
 - **Say anything about width `≥ 4` at `n ≥ 10`.** `c2` buys reach with a width restriction and
   inherits `mg-c47a`'s **DROPPED** residual unchanged (`STATE.md` attempt index).
+
+- ⚠️ **They do not add a realizability fact.** The boundary class **saturates** the pair-marginal
+  supply bound at its own density, so it exhibits no slack for a realizability argument to exploit
+  — it is the equality case, not a witness against it. `mg-345e`'s finding that every density fact
+  on record is a **lower** bound on `d` is untouched by this.
 
 **The single object that would kill all of it**: a **new primitive poset with `δ ≤ 1/3`** at some
 `n ≥ 10`. Everything in §§3–5 is the ordinal-sum algebra applied to the one primitive member that

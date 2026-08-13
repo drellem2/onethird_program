@@ -21,8 +21,9 @@ frozen-class number. Every arm says so in its own output.
 | `c2_reach.py` | reach beyond the exhaustive range, bought with a **width restriction** that is named at every table: width `≤ 3` exhaustive to `n = 10`, width `≤ 2` exhaustive to `n = 12`. The one question it asks is whether a **new primitive** poset with `δ ≤ 1/3` appears. | ~10 min |
 | `c3_gap.py [nmax]` | the realizability gap: `n/(n+1)` (attained by the two-atom law, which is not a poset) against the worst actual boundary poset, as a **difference and a ratio**; the `mg-6bc2` identity `ε_spec = 3·d·q̄·n/(n+1)` at every member; and the extrapolated crossing with `ε_dem`, labelled as extrapolation. | ~5 min |
 | `c4_e_choice.py [nmax]` | how `e` is chosen and whether the choice is forced: the strict `> 2/3` tournament, the weak `≥ 2/3` one, uniqueness, whether `e ∈ L(P)`, `ε` against every alternative reference order, and the 3-cycle that would break it. | ~3 min at `n = 8` |
+| `c5_supply_scope.py [nmax]` | **written after `mg-0e8c`/`mg-ac0c` landed on `main` mid-branch.** The supply is `ε_sup = d·n/(n+1)`, linear in density, not the flat `n/(n+1)` `c3` compares against — so this asks whether the density-aware bound is **saturated** at the boundary (it is, exactly, at every member), prints both gaps side by side, and reports the maximum incomparability density a `δ = 1/3` poset attains. | ~5 min |
 
-`sh run_all.sh` runs all five and reports the worst exit. **This suite is NOT in `build.sh`** — it
+`sh run_all.sh` runs all six and reports the worst exit. **This suite is NOT in `build.sh`** — it
 is a one-off measurement, not a control, and the committed `out_*.txt` are its record.
 
 ## The one identity everything rests on

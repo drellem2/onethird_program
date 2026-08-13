@@ -24,8 +24,6 @@ mg-03cf  docs/FACTS.md asked its own question
   F18   `2/3` IS THE RUN-DENSITY THRESHOLD, AND IT IS A DIFFERENT  PASS
   F19   At `δ(P) = 1/3` every incomparable pair is ADJACENT in `e` PASS
   F20   The reversibility bound, of which F1 is the `k = 2` slice  PASS
-  F21   `E[inv_e] = Σ_{x∥y} min(p_xy, 1−p_xy)`, and the EXACT scop PASS
-  F22   No 3-element antichain ⟹ the weak-majority order `e` EXIST PASS
 
 §2  VOCABULARY -- every KIND names a STATE.md:99 mark, or says WEAKER in words
 ----------------------------------------------------------------------------------------
@@ -49,20 +47,18 @@ mg-03cf  docs/FACTS.md asked its own question
   F18   `U-id`+`U`   PASS
   F19   `FP`   PASS
   F20   `U`   PASS
-  F21   `U-id`+`FP`   PASS
-  F22   `U`+`FP`   PASS
 
 §3  COUNT -- STATE.md's pointer must not drift from the registry
 ----------------------------------------------------------------------------------------
-  STATE.md claims 22 entries; docs/FACTS.md has 22   [PASS]
+  STATE.md claims 20 entries; docs/FACTS.md has 20   [PASS]
 
 §4  LINKS -- every relative link in the registry resolves on disk
 ----------------------------------------------------------------------------------------
-  20 relative links checked, 0 broken   [PASS]
+  18 relative links checked, 0 broken   [PASS]
 
 §5  THE POSITIVE CONTROL -- this arm is shown able to fail
 ----------------------------------------------------------------------------------------
   an entry with its SCOPE field renamed is [CAUGHT]
   an entry graded with an invented mark is [CAUGHT]
 
-VERDICT: GREEN — 22 entries
+VERDICT: GREEN — 20 entries

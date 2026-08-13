@@ -774,6 +774,38 @@ property of the boundary class, not a theorem about it, and the implication must
 without it. ⚠️ It says nothing about the frozen class, which is empty at every `n` reached; under
 the strict hypothesis `δ < 1/3` the standard argument works and this entry is not needed.
 
+## F23 · How dense a `δ = 1/3` poset can be — a NUMBER for residual `(R)` at the boundary, and the class SATURATES the supply bound
+
+**STATEMENT.** Over the **boundary class** `δ(P) = 1/3`, the incomparability density
+`d = m/C(n,2)` satisfies
+
+> **`max{ d(P) : δ(P) = 1/3, |P| = n } = 4⌊n/3⌋/(n(n−1)) ~ 4/(3n)`**,
+
+and at **every** member `ε_spec = d·n/(n+1)` **exactly** — i.e. the boundary class is the
+**equality case** of the supply bound `ε_sup = d·n/(n+1)` (`mg-0e8c`, `STATE.md:125`), with **zero
+slack**. The reason is one line: that bound comes from `Pr[flipped] < 1/3` per pair, and at
+`δ = 1/3` exactly every incomparable pair sits at exactly `1/3`.
+
+**KIND.** `U-id` for the equality `ε_spec = d·n/(n+1)` on any poset all of whose incomparable pairs
+are exactly `1/3`-decided (arithmetic, all `n`). `FP` for the density maximum, which is a census.
+
+**SCOPE.** Density maximum: **exhaustive over every isomorphism class, `n = 3…9`** — `2/3, 1/3, 1/5,
+4/15, 4/21, 1/7, 1/6` — and, under a **width restriction** that is not a proof of anything above it,
+width `≤ 3` exhaustive to `n = 10` and width `≤ 2` exhaustive to `n = 12` with the same closed form.
+Saturation: **0 mismatches at all 49 members `n = 3…9`** (`mg-6ff4` `c5` `m1`, `m3`).
+⚠️ **48 of the 49 are ORDINAL SUMS** and a minimal counterexample is primitive (`STATE.md:55`).
+⚠️ The frozen class `δ < 1/3` is **empty at every `n` reached** and this is not a statement about it.
+
+**FROM.** `mg-6ff4` §5.1, [`docs/OneThird-BoundaryEpsilon-mg-6ff4.md`](OneThird-BoundaryEpsilon-mg-6ff4.md).
+
+**NOT.** ⚠️ **THIS IS NOT A REALIZABILITY FACT AND IT IS THE OPPOSITE OF ONE.** `STATE.md:21` needs
+a fact that pushes real posets **below** the pair-marginal bound; the boundary class sits **exactly
+on** it at its own density, so it exhibits no slack for such an argument to exploit. What it bounds
+is `d`, and `mg-345e`'s finding that every density fact on record is a **lower** bound on `d` is
+untouched. ⚠️ **Do not quote the `3(n−1)/4` factor of `mg-6ff4` §5 as this entry's content** — that
+is the gap against the supply bound evaluated at `d = 1`, i.e. at the antichain's density, and
+against the density-aware bound the gap is **zero**.
+
 ---
 
 # Housekeeping

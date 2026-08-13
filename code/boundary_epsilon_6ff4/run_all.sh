@@ -16,7 +16,7 @@
 # the arm, not from the plumbing.  (Convention inherited from code/adjacent_triples_7c78.)
 d=$(cd "$(dirname "$0")" && pwd)
 STATUS=0
-for arm in c0_selftest c1_census c2_reach c3_gap c4_e_choice
+for arm in c0_selftest c1_census c2_reach c3_gap c4_e_choice c5_supply_scope
 do
     (cd "$d" && python3 "$arm.py" > "out_$arm.txt" 2>&1)
     RC=$?

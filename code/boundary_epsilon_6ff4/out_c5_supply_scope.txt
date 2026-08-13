@@ -1,0 +1,65 @@
+====================================================================================================
+mg-6ff4  c5  the supply is d*n/(n+1), not a flat n/(n+1) -- what that leaves
+====================================================================================================
+
+    ... n = 3 swept
+    ... n = 4 swept
+    ... n = 5 swept
+    ... n = 6 swept
+    ... n = 7 swept
+    ... n = 8 swept
+    ... n = 9 swept
+
+m1  IS THE DENSITY-AWARE SUPPLY BOUND SATURATED AT THE BOUNDARY?
+----------------------------------------------------------------------------------------------------
+    eps_obs == d*n/(n+1) checked at all 49 boundary posets · mismatches 0   [PASS]
+
+    ⚠️  THE REALIZABILITY GAP AGAINST THE BOUND THE CORPUS NOW STATES IS **ZERO**, AT
+    EVERY MEMBER, WITH NO SLACK AT ALL.  The reason is one line: mg-0e8c's chain uses
+    Pr[flipped] < 1/3 per pair to get E[inv_e] < m/3; at delta = 1/3 EXACTLY every
+    incomparable pair sits at exactly 1/3, so the inequality is an EQUALITY and the
+    boundary class IS the equality case of the supply bound.
+    So this instrument's `realizability gap' is a DENSITY gap and nothing else, and
+    mg-0e8c/mg-ac0c already own the observation that d is the lever.
+
+m2  THE TWO GAPS SIDE BY SIDE -- neither may be quoted as the other
+----------------------------------------------------------------------------------------------------
+      n      max eps   flat n/(n+1)  ratio vs flat d*n/(n+1) at max   ratio vs density
+      3          1/2            3/4          1.500              1/2      1 (SATURATED)
+      4         4/15            4/5          3.000             4/15      1 (SATURATED)
+      5          1/6            5/6          5.000              1/6      1 (SATURATED)
+      6         8/35            6/7          3.750             8/35      1 (SATURATED)
+      7          1/6            7/8          5.250              1/6      1 (SATURATED)
+      8         8/63            8/9          7.000             8/63      1 (SATURATED)
+      9         3/20           9/10          6.000             3/20      1 (SATURATED)
+
+    LEFT COLUMN PAIR: the gap against a bound that assumes d = 1, i.e. against the
+    ANTICHAIN's density.  RIGHT: the gap against the bound at the poset's own density.
+    The first is real and is the price of the two-atom law being non-realizable AND
+    dense; the second is zero.  Quoting the first as `how far below the bound real
+    posets sit' overstates what realizability buys, because most of it is density.
+
+m3  WHAT IS LEFT, IN STATE.md's OWN CURRENCY
+----------------------------------------------------------------------------------------------------
+    STATE.md:125 -- the wall is already DOWN, proven for all n and L4-free, at
+    d <~ 2e-2; what is open is the DENSE regime.  So the question this instrument can
+    actually answer is: HOW DENSE IS THE BOUNDARY CLASS?
+
+      n max d at delta=1/3  = 4*floor(n/3)/    in the OPEN
+                                 (n(n-1))  dense regime?
+      3              2/3              2/3            yes
+      4              1/3              1/3            yes
+      5              1/5              1/5            yes
+      6             4/15             4/15            yes
+      7             4/21             4/21            yes
+      8              1/7              1/7            yes
+      9              1/6              1/6            yes
+
+    Under the closed form, the densest boundary poset leaves the open regime for good
+    at n = 67 (first n at or below: 65; it returns above once, at n = 66).
+    ⚠️  EXTRAPOLATION past n = 9, exactly as c3 m4's is, and worth what the closed
+    form's survival is worth.  What it says is that the boundary class is a WITNESS
+    FOR THE OPEN REGIME only at small n: by n = 67 the densest object at delta = 1/3
+    has fallen into the regime where L1b is already a theorem.
+
+VERDICT: GREEN
