@@ -41,19 +41,62 @@ the two lists over all trees is `code/species_repair_a4ef/s1_extent.py`.
 A PASS HERE IS NOT COVERAGE OF THAT EXTENT.
 
     python3 code/species_remainder_f8fa/w3_scope.py
+
+AS-OF PINNING, mg-6e4f (mg-20ee tranche 2).  Every hit below is `path:NNN` or
+`path line NNN` INTO A FILE THIS INSTRUMENT DOES NOT OWN -- addresses into
+`code/species_7d75`, which mg-a4ef, mg-821e, mg-5040 and mg-4adb have all
+amended since this transcript was written.  The corpus is now read AT A
+DECLARED COMMIT via `git ls-tree`/`git cat-file` rather than from the working
+tree, so the sha determines the addresses rather than annotating them.
+
+AND THE DEFECT HERE WAS NOT ONLY THE ADDRESS.  The committed transcript
+recorded `declined, STATED: __pycache__` -- a directory git has never tracked.
+It is written by running any script in the target tree, so the committed run
+was reproducible for an operator who had run `code/species_7d75` and for
+nobody who had not.  Reading at a commit removes it: a pinned run cannot see
+an untracked directory, and the residue block therefore reports `nothing at
+all`.  That is an EXTENT line, not a verdict -- `bad` counts NOT-STATED
+declines only, and no NOT-STATED decline exists at either reading.
 """
 
 import os
 import re
+import subprocess
 import sys
 
 from kernf8fa import hdr
 
 bad = 0
 HERE = os.path.dirname(os.path.abspath(__file__))
-# The directory under test defaults to the source instrument.  It is
-# overridable so the SAME checker can be pointed at the pre-repair tree --
-# which is how `out_w3_scope_before.txt` is produced, and the reason that
+ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
+TARGET = os.path.join("code", "species_7d75")
+
+# The commit whose `code/species_7d75` this transcript addresses.
+#
+# CHOSEN UNDER mg-20ee's TWO CONDITIONS, IN ORDER.  (1) `git merge-base
+# --is-ancestor e337f23 origin/main` is YES -- it was origin/main's tip when
+# this pin was made, so no rebase can strand it, which is mg-daba's defect and
+# was committed deliberately once already in tranche 1.  (2) at that commit
+# the previously-committed transcript reproduces except for the two
+# `__pycache__` residue lines described above, which no commit can reproduce
+# because git has never held that directory.
+#
+# THE CHOICE IS NOT LOAD-BEARING ACROSS ITS RANGE, AND THAT IS MEASURED
+# RATHER THAN ASSUMED: `code/species_7d75` last moved at 52aeaf4, and
+# `git rev-parse 52aeaf4:code/species_7d75` and `e337f23:code/species_7d75`
+# are the SAME TREE 1e007b47.  Every commit in that range gives byte-identical
+# addresses.  The newest main-reachable one is taken, per mg-20ee's rule 1.
+AS_OF = "e337f231f3bcde6cfa935eb6a2751bd27608ff3f"
+
+# Override, for re-measuring against a different corpus: any commit-ish, or
+# the literal WORKTREE, which restores the pre-pin live read exactly.  Unset
+# is the pinned default and is the only value that reproduces the committed
+# transcript.
+AT = os.environ.get("W3_SCOPE_AT", "").strip() or AS_OF
+
+# The directory under test defaults to the source instrument, READ AT `AT`.
+# It is overridable so the SAME checker can be pointed at the pre-repair tree
+# -- which is how `out_w3_scope_before.txt` is produced, and the reason that
 # file is evidence rather than decoration:
 #
 #     git worktree list                      # from this repo
@@ -61,9 +104,79 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 #         | tar -x -C /tmp/pre
 #     python3 w3_scope.py /tmp/pre/code/species_7d75
 #
-SRC = (os.path.abspath(sys.argv[1]) if len(sys.argv) > 1
-       else os.path.normpath(os.path.join(HERE, "..", "species_7d75")))
+# AN EXPLICIT PATH IS READ OFF DISK AND IS NOT ROUTED THROUGH THE PIN.  That
+# is mg-20ee's own hazard, met in tranche 1 by pairbias_indep_audit_6bd1: a
+# fixture looked for in a commit that never contained it took a transcript
+# from 226 lines to 2.  Only the corpus DEFAULT is pinned.
+EXPLICIT = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else None
+SRC = EXPLICIT or os.path.join(ROOT, TARGET)
+
+
+# mg-6e4f.  A COPY OF THIS TREE HAS NO OBJECT STORE, AND NINE INSTRUMENTS RUN
+# THIS FILE INSIDE ONE.
+#
+# `w3_scope.py` is not only a transcript producer.  It is a SHARED CHECKER:
+# species_audit_7dd3, species_extent_d633, species_extent_audit_6cb9,
+# species_gate_audit_d53d, species_depth_audit_4700, species_rung_repair_4adb,
+# species_sites_821e and species_audit_73df all execute it.  Most of them work
+# the same way -- `shutil.copytree` the repo into a tempdir, mutate the copy,
+# run the checker there -- and THAT COPY HAS NO `.git`.  A pinned read cannot
+# be performed in it BY CONSTRUCTION, and the first version of this pin turned
+# mg-7dd3's D5 control M0d, `no mutation`, into `exit 1, predicted 0
+# *** PREDICTION MISSED ***`, MEASURED before this paragraph existed.
+#
+# SO THE PIN IS CONDITIONED ON BEING IN THE REPOSITORY IT PINS, AND THE TEST IS
+# IDENTITY, NOT PRESENCE: `git rev-parse --show-toplevel` must come back equal
+# to this file's own ROOT.  A tempdir that happens to sit inside some other
+# checkout would otherwise resolve to that checkout and read a corpus from a
+# repository nobody named.
+#
+# THIS IS NOT A SILENT FALLBACK, WHICH IS WHAT mg-20ee's TRANCHE 1 REFUSED.
+# The two cases it refused are still refused: if this IS the repository and
+# AS_OF is unreachable, the run EXITS NON-ZERO rather than reading live, and a
+# pin resolving to an empty tree exits non-zero rather than reporting a vacuous
+# PASS.  What is allowed is the case those rules do not cover -- a tree that is
+# not a git repository at all, where the caller can only have meant the tree in
+# front of it -- and it is ANNOUNCED in the stamp, at the top of the run, in
+# the same block that would otherwise name the commit.
+def _in_own_repo():
+    got = subprocess.run(["git", "-C", ROOT, "rev-parse", "--show-toplevel"],
+                         capture_output=True)
+    if got.returncode != 0:
+        return False
+    top = got.stdout.decode("utf-8", "replace").strip()
+    return bool(top) and os.path.realpath(top) == os.path.realpath(ROOT)
+
+
+DETACHED = EXPLICIT is None and AT != "WORKTREE" and not _in_own_repo()
+PINNED = EXPLICIT is None and AT != "WORKTREE" and not DETACHED
 print("# target: %s" % os.path.join(*SRC.split(os.sep)[-2:]))
+print()
+print("# AS OF %s (mg-6e4f, mg-20ee tranche 2)." % (AT if PINNED else "-"))
+if PINNED:
+    print("# The corpus is read from git at that commit, NOT from the working")
+    print("# tree.  EVERY `file:NNN` and `file line NNN` below is an ADDRESS")
+    print("# into code/species_7d75 and is a property of THAT COMMIT.  The")
+    print("# file count and the residue block are corpus-valued in the same")
+    print("# way.  WHAT IS NOT: every ok / STILL ASSERTED / marked / UNMARKED")
+    print("# / MISSING word, and the W3 SCOPE verdict -- those are findings")
+    print("# about code/species_7d75 and do not move with the addresses.")
+    print("# A pinned run cannot see an untracked directory, so the")
+    print("# __pycache__ rule below is stated and never fires.")
+elif DETACHED:
+    print("# NOT PINNED, AND THE PIN WAS NOT DECLINED -- IT WAS IMPOSSIBLE.")
+    print("# This copy of the tree is not the repository the pin names, so")
+    print("# there is no object store to read %s from and the" % AS_OF[:7])
+    print("# live tree is the only corpus there is.  That is the case a")
+    print("# scratch-copy harness creates and it is the reading such a harness")
+    print("# wants; it is announced here rather than left to be inferred from")
+    print("# addresses that quietly stopped meaning anything.")
+else:
+    print("# NOT PINNED: this run read %s live."
+          % ("an explicit path" if EXPLICIT else "the working tree"))
+    print("# Its addresses are offsets into whatever that tree holds now and")
+    print("# reproduce nothing.  W3_SCOPE_AT=%r." % os.environ.get(
+        "W3_SCOPE_AT", ""))
 print()
 
 # mg-d633, on mg-7dd3's A1: this listing filtered on `.py/.txt/.md`, so
@@ -203,8 +316,88 @@ def read_residue(root, reached):
     return sorted(files), text, sorted(set(stated)), sorted(set(unstated))
 
 
-_REACHED, DECLINED_STATED, DECLINED_UNSTATED = walk_residue(SRC)
-FILES, TEXT, _READ_STATED, _READ_UNSTATED = read_residue(SRC, _REACHED)
+# mg-6e4f.  THE PINNED READER, AND IT KEEPS BOTH LAYERS AND BOTH RESIDUES.
+# The two functions above decide what is REACHED and what is READ, and each
+# names everything it declined; a pinned read that collapsed them into one
+# `git ls-tree | cat-file` loop would have quietly deleted the finding channel
+# this file spent four tickets building.  So the same contract is implemented
+# against the object store:
+#
+#   LAYER 1, reached.  `git ls-tree -r` at the commit.  A blob is reached.  A
+#     SYMLINK (mode 120000) and a GITLINK (mode 160000) are declined NOT
+#     STATED -- no sentence here has ever put them outside the claim, and
+#     under the live walk a symlink to a regular file was READ, so declining
+#     one silently would be a rule arriving as silence.  Neither exists in
+#     this tree; the point is that the next one arrives as RED.
+#   LAYER 2, read.  `git cat-file blob` then decode.  Not-UTF-8 is the SAME
+#     STATED decline, worded identically so a future diff means something.  A
+#     blob that cannot be read back is NOT STATED.
+#
+# `__pycache__` CANNOT APPEAR HERE and the stated rule is kept anyway: it is
+# the rule the extent line names, it still governs the WORKTREE and explicit-
+# path readings, and deleting it would make the two readings disagree about
+# what they are doing rather than about what they found.
+def git_residue(rev, prefix):
+    """(files, text, stated, unstated) for the tree at `rev` under `prefix`.
+
+    Same 4-tuple, same wording, same contract as walk_residue+read_residue.
+    """
+    files, text, stated, unstated = [], {}, [], []
+    got = subprocess.run(
+        ["git", "-C", ROOT, "ls-tree", "-r", "-z", "--full-tree", rev,
+         "--", prefix], capture_output=True)
+    if got.returncode != 0:
+        raise SystemExit(
+            "w3_scope: cannot read %s at %s: %s\n"
+            "  (W3_SCOPE_AT=%r; unset it for the pinned run, or set it to\n"
+            "   WORKTREE for the pre-pin live read.)"
+            % (prefix, rev, got.stderr.decode("utf-8", "replace").strip(),
+               os.environ.get("W3_SCOPE_AT", "")))
+    for ent in got.stdout.decode("utf-8", "surrogateescape").split("\0"):
+        if not ent:
+            continue
+        meta, path = ent.split("\t", 1)
+        mode, _kind, sha = meta.split(" ", 2)
+        rel = os.path.relpath(path, prefix)
+        if mode == "120000":
+            unstated.append((rel, "symlink in the pinned tree -- the live "
+                                  "walk read a symlink to a regular file and "
+                                  "this reading does not"))
+            continue
+        if mode == "160000":
+            unstated.append((rel, "gitlink (submodule) -- its bytes are not "
+                                  "in this repository at all"))
+            continue
+        blob = subprocess.run(["git", "-C", ROOT, "cat-file", "blob", sha],
+                              capture_output=True)
+        if blob.returncode != 0:
+            unstated.append((rel, "REACHED AND NOT READ: git cat-file failed "
+                                  "on %s.  This is NOT an encoding problem "
+                                  "-- the file's bytes were never seen"
+                                  % sha[:12]))
+            continue
+        try:
+            text[rel] = blob.stdout.decode("utf-8")
+        except UnicodeDecodeError:
+            stated.append((rel, "file rule, STATED: bytes are not valid "
+                                "UTF-8 text (UnicodeDecodeError)"))
+            continue
+        files.append(rel)
+    if not files:
+        raise SystemExit(
+            "w3_scope: %s is EMPTY at %s -- refusing to report a vacuous "
+            "PASS.\n  A pin that resolves to a tree the corpus was never in "
+            "is mg-20ee's own\n  hazard (tranche 1, pairbias_indep_audit_6bd1"
+            ": 226 lines to 2)." % (prefix, rev))
+    return sorted(files), text, sorted(set(stated)), sorted(set(unstated))
+
+
+if PINNED:
+    FILES, TEXT, DECLINED_STATED, DECLINED_UNSTATED = git_residue(AT, TARGET)
+    _READ_STATED, _READ_UNSTATED = [], []
+else:
+    _REACHED, DECLINED_STATED, DECLINED_UNSTATED = walk_residue(SRC)
+    FILES, TEXT, _READ_STATED, _READ_UNSTATED = read_residue(SRC, _REACHED)
 DECLINED_STATED = sorted(set(DECLINED_STATED) | set(_READ_STATED))
 DECLINED_UNSTATED = sorted(set(DECLINED_UNSTATED) | set(_READ_UNSTATED))
 NESTED = [f for f in FILES if os.sep in f]

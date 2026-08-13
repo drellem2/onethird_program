@@ -1,5 +1,16 @@
 # target: code/species_7d75
 
+# AS OF e337f231f3bcde6cfa935eb6a2751bd27608ff3f (mg-6e4f, mg-20ee tranche 2).
+# The corpus is read from git at that commit, NOT from the working
+# tree.  EVERY `file:NNN` and `file line NNN` below is an ADDRESS
+# into code/species_7d75 and is a property of THAT COMMIT.  The
+# file count and the residue block are corpus-valued in the same
+# way.  WHAT IS NOT: every ok / STILL ASSERTED / marked / UNMARKED
+# / MISSING word, and the W3 SCOPE verdict -- those are findings
+# about code/species_7d75 and do not move with the addresses.
+# A pinned run cannot see an untracked directory, so the
+# __pycache__ rule below is stated and never fires.
+
 # files read: 18, 0 of them below the tree root   (0 reached and not
 # read, listed by reason below; skipped as __pycache__: the whole directory
 # rule)
@@ -14,7 +25,7 @@
 # extent below says so.  A regular file this process cannot OPEN is
 # NOT: no sentence here has ever put it outside the claim, so it lands
 # in the second list and is counted.  Both layers, one residue:
-#   declined, STATED:     __pycache__   directory rule, STATED: __pycache__/
+#   declined: nothing at all
 
 ==============================================================================
 W3a  the corrected statements are not still ASSERTED in the instrument
@@ -84,7 +95,7 @@ AND THE BOUND OF THAT SENTENCE IS STATED (mg-5040, on mg-4700's OPEN
 force and carried by no sentence -- os.walk does not follow a
 SYMLINKED DIRECTORY -- so the claim was true a SECOND time only
 because of a shape the tree happened to have.  It is not widened a
-third time: the walk returns what it declined (1 stated, 0 not
+third time: the walk returns what it declined (0 stated, 0 not
 stated, both listed at the head of this run) and a not-stated entry
 is a finding, so the next rule nobody thought of arrives as RED
 rather than as silence.

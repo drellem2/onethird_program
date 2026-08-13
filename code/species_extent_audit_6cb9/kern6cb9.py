@@ -67,6 +67,22 @@ def run_checker(rel, args=()):
     """
     path = os.path.join(REPO, rel)
     env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1")
+    # mg-6e4f, on mg-20ee.  A HARNESS THAT PLANTS IN THE WORKTREE MUST RUN THE
+    # CHECKER AGAINST THE WORKTREE.  `w3_scope.py` is now AS-OF PINNED -- its
+    # corpus default is read out of git at a declared commit -- so a probe that
+    # writes `code/species_7d75/NOTES` and then runs it is asking a checker
+    # about a tree the plant is not in.  MEASURED before this line existed:
+    # Q6 and Q7 went `1 1 as predicted` -> `1 0 *** MISSED ***`, w3's row went
+    # `INSIDE 2/2 fired` -> `0/2`, Q10 went `extent TRUE here` -> `*** EXTENT
+    # WIDER ***`, and A1 TOTAL BAD went 0 -> 2.
+    #
+    # A1 GOING RED IS THE RIGHT BEHAVIOUR AND IS WHY THIS IS ONE LINE: this
+    # harness caught the pin loudly rather than certifying a checker that had
+    # stopped reading anything it plants.  The pin publishes an override for
+    # exactly this case and it is used here, per checker, with the reason at
+    # the site.
+    env.update({"w3_scope.py": {"W3_SCOPE_AT": "WORKTREE"}}
+               .get(os.path.basename(path), {}))
     p = subprocess.run([sys.executable, "-B", os.path.basename(path)]
                        + list(args),
                        cwd=os.path.dirname(path), capture_output=True,

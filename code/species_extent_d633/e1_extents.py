@@ -48,6 +48,32 @@ CHECKERS = [
 ]
 
 
+# mg-6e4f, on mg-20ee.  A CHECKER THAT READS A DECLARED COMMIT IS INVISIBLE TO
+# AN open() TRACER, AND E1'S WHOLE METHOD IS AN open() TRACER.
+#
+# `w3_scope.py` is now AS-OF PINNED: its corpus default is read out of git at a
+# declared commit, so the addresses in its transcript stop moving.  Read that
+# way it opens NOTHING under the repo, and E1a's `18 file(s)` became `0`, three
+# `want <= got` rows went `*** FALSE ***`, and E1 TOTAL BAD went 0 -> 3 --
+# MEASURED, not predicted, before this line existed.
+#
+# THE QUESTION E1 ASKS IS ABOUT THE TREE, so it must ask it OF the tree.  "Does
+# this checker read every regular file of code/species_7d75" is a claim about
+# the worktree E1 enumerates two lines later; asking it of a checker reading a
+# 2026-08-13 commit compares two different sets and calls the difference a
+# defect.  So the pin is turned OFF for the duration of the trace, by the
+# override w3_scope publishes for exactly this, and the reason is here rather
+# than in a table somewhere.
+#
+# THIS IS NARROW ON PURPOSE.  It names one checker.  The general shape --
+# pinning an instrument's DEFAULT reading silently changes the answer of every
+# other instrument that RUNS it -- is mg-6e4f's finding and is recorded in
+# code/species_remainder_f8fa/README.md, not worked around wholesale here.
+LIVE_READ_ENV = {
+    "w3_scope.py": {"W3_SCOPE_AT": "WORKTREE"},
+}
+
+
 def trace(rel):
     """Run one checker under the tracer; (exit, stdout, text reads rel to
     REPO, binary read count).  Reads outside REPO -- the tempdir copies
@@ -56,6 +82,7 @@ def trace(rel):
     fd, rec = tempfile.mkstemp(prefix="d633_", suffix=".json")
     os.close(fd)
     env = dict(os.environ, D633_TRACE=rec, PYTHONDONTWRITEBYTECODE="1")
+    env.update(LIVE_READ_ENV.get(os.path.basename(path), {}))
     p = subprocess.run([sys.executable, TRACER, os.path.basename(path)],
                        cwd=os.path.dirname(path), capture_output=True,
                        text=True, env=env)
