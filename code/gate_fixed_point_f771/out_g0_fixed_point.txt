@@ -32,39 +32,12 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   HOW FAR EACH HAS DRIFTED IS ON STDERR, for the reason the paragraph above gives:
   it moves with every landing and this file must not.  lib_f771.CORPUS_SCOPED.
 
-§2  THE DISAGREEMENTS, SHOWN
+§2  NO DISAGREEMENTS
 --------------------------------------------------------------------------------------------
-  Lines quoted after normalisation, so that this transcript cannot itself
-  smuggle a worktree path into the corpus.
-  `-` is the committed copy, `+` is this tree.
+  Every watched transcript that moved during this gate run moved only in the
+  declared families that are not a function of THIS BRANCH's repo state: the two
+  normaliser families, or a corpus-scoped reading whose pin moved and whose drift
+  is inside the bound.  No committed transcript asserts anything this tree
+  contradicts that this branch is the author of.
 
-  DISAGREES code/control_gate_724a/out_gate.txt
-    @@ -8 +8 @@
-    - audit  code/control_audit_9876/run_all.sh         exit 0   <t>s  55049 bytes
-    + audit  code/control_audit_9876/run_all.sh         exit 0   <t>s  55076 bytes
-    @@ -27 +27 @@
-    - audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseli
-    + audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseli
-
-  DISAGREES code/verdict_invariance_585e/out_v2_partition.txt
-    @@ -28,2 +28,2 @@
-    - head lines 24, and they are identical
-    - §2 onward: green 7 line(s), red 18 line(s)
-    + head lines 34, and they are identical
-    + §2 onward: green 9 line(s), red 18 line(s)
-
-  DISAGREES code/verdict_invariance_585e/out_v3_invariant.txt
-    @@ -11 +11 @@
-    - bytes                                                          1745
-    + bytes                                                          1985
-    @@ -26,2 +26,2 @@
-    - -  SECONDS      re.compile(r"\b\d+\.\d+\s*s\b")
-    - +  SECONDS      re.compile(r"\b\d+(?:\.\d+)?\s*s\b")
-    + -  SECONDS              re.compile(r"\b\d+\.\d+\s*s\b")
-    + +  SECONDS              re.compile(r"\b\d+(?:\.\d+)?\s*s\b")
-    ... 3 further hunk line(s) not shown
-
-  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
-  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
-
-VERDICT: RED — 3 committed transcript(s) disagree with this tree.  0.19s
+VERDICT: GREEN — 0 disagreements.  0.12s
