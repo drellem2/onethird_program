@@ -1,0 +1,122 @@
+==============================================================================
+mg-7ae5 / A2 — THE PRICE OF THE 'THIN PREFIX' HYPOTHESIS, n <= 6
+==============================================================================
+
+A. THE CLASS, ON BOTH POPULATIONS
+
+   NORMAL-FORM population — (poset, distinguished order) pairs
+   n    total          0     1/50      1/7      1/5    17/78      1/2        1
+   3    6         0.3333   0.3333   0.3333   0.3333   0.3333   0.8333   1.0000
+   4    39        0.3077   0.3077   0.4103   0.4615   0.4615   1.0000   1.0000
+   5    356       0.2275   0.2275   0.3511   0.6461   0.6461   0.9860   1.0000
+   6    4823      0.1561   0.1561   0.3541   0.6040   0.6664   1.0000   1.0000
+
+   CLASS population — thin if ANY order and ANY prefix is thin
+   n    classes        0     1/50      1/7      1/5    17/78      1/2        1
+   3    4         0.5000   0.5000   0.5000   0.5000   0.5000   0.7500   1.0000
+   4    15        0.5333   0.5333   0.6000   0.6667   0.6667   1.0000   1.0000
+   5    62        0.5000   0.5000   0.6129   0.8710   0.8710   0.9839   1.0000
+   6    317       0.4196   0.4196   0.6593   0.8833   0.9085   1.0000   1.0000
+
+   Read: the fraction of the population admitting a prefix cut at or below
+   each eps.  The eps = 0 column is EXACTLY the ordinal-sum-decomposable
+   fraction (a0 §B proves the identity by exhaustion, both directions).
+
+B. STRATIFIED BY delta(P) — the frozen proxy
+   No poset has delta < 1/3 (that is the conjecture).  The stratum that
+   matters is the one closest to it.
+
+   n = 3   min delta over all posets = 1/3   (6 normal forms)
+      band                   count         0     1/50      1/7      1/5    17/78      1/2        1
+      delta = 1/3 exactly    3        0.0000   0.0000   0.0000   0.0000   0.0000   1.0000   1.0000
+      1/3 < delta <= 0.40    0        — empty —
+      delta > 0.40           3        0.6667   0.6667   0.6667   0.6667   0.6667   0.6667   1.0000
+      ALL                    6        0.3333   0.3333   0.3333   0.3333   0.3333   0.8333   1.0000
+
+   n = 4   min delta over all posets = 1/3   (39 normal forms)
+      band                   count         0     1/50      1/7      1/5    17/78      1/2        1
+      delta = 1/3 exactly    6        1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
+      1/3 < delta <= 0.40    5        0.0000   0.0000   0.8000   0.8000   0.8000   1.0000   1.0000
+      delta > 0.40           28       0.2143   0.2143   0.2143   0.2857   0.2857   1.0000   1.0000
+      ALL                    39       0.3077   0.3077   0.4103   0.4615   0.4615   1.0000   1.0000
+
+   n = 5   min delta over all posets = 1/3   (356 normal forms)
+      band                   count         0     1/50      1/7      1/5    17/78      1/2        1
+      delta = 1/3 exactly    9        1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
+      1/3 < delta <= 0.40    69       0.1449   0.1449   0.2609   0.4493   0.4493   0.9855   1.0000
+      delta > 0.40           278      0.2230   0.2230   0.3525   0.6835   0.6835   0.9856   1.0000
+      ALL                    356      0.2275   0.2275   0.3511   0.6461   0.6461   0.9860   1.0000
+
+   n = 6   min delta over all posets = 1/3   (4823 normal forms)
+      band                   count         0     1/50      1/7      1/5    17/78      1/2        1
+      delta = 1/3 exactly    21       1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
+      1/3 < delta <= 0.40    198      0.6717   0.6717   0.9394   0.9596   0.9596   1.0000   1.0000
+      delta > 0.40           4604     0.1301   0.1301   0.3260   0.5869   0.6523   1.0000   1.0000
+      ALL                    4823     0.1561   0.1561   0.3541   0.6040   0.6664   1.0000   1.0000
+
+C. P3 / P4, SCORED
+   at n = 6, eps = 1/5 (the live calibration):
+     whole population        0.6040
+     delta = 1/3 stratum     1.0000
+     by n: 0.3333  0.4615  0.6461  0.6040
+     rising in n?            False
+
+   P3 predicted 40-85 % at n = 6 and rising in n.
+   P4 predicted the low-delta stratum is at least as thin-prefixed as the
+   population — i.e. the hypothesis does NOT bite harder where it must.
+
+D'. THE HYPOTHESIS CLASS AFTER MINIMALITY — the section that prices (T)
+
+   a0 §B4 checks exhaustively that delta(P[A] (+) P[B]) = max(delta P[A],
+   delta P[B]).  So a DECOMPOSABLE frozen poset has a frozen SIDE, and a
+   MINIMAL counterexample cannot be decomposable.  Step 6 therefore never sees
+   any poset in the eps = 0 column: minimality removes it, unconditionally and
+   for free.  What is left is the population (T) has content on.
+
+   n    forms     indecomp  min Delta_1>0  delta = 1/3 among indecomposable
+   3    6         4         1/3            3
+   4    39        27        1/10           0
+   5    356       275       1/14           0
+   6    4823      4070      1/30           0
+
+   THE COLUMN ON THE RIGHT IS THE PRICE, AND ITS FIRST ROW IS AN EXCEPTION
+   THAT MUST BE CARRIED RATHER THAN ROUNDED AWAY.
+
+     n = 3   THREE posets attain delta = 1/3 and are INDECOMPOSABLE.  They are
+             Op-Form Cl. 3.3's P0 = {a<b} u {c} and its relabellings — the
+             object that document uses to prove minimality supplies no interior
+             slack.  So the sentence 'delta = 1/3 forces decomposability' is
+             FALSE, and it is false at the smallest n where it could be tested.
+     n = 4,5,6   ZERO.  Every poset attaining delta = 1/3 exactly is ordinal-sum
+             DECOMPOSABLE, hence carries a frozen side, hence is excluded by
+             minimality before Step 6 ever runs.
+
+   On the range where a minimal counterexample could live (n >= 15, Peczarski /
+   Gupta via mg-33f5) the enumerable evidence is the second row, and it says:
+   the objects closest to frozen that exist are exactly the objects Step 6 never
+   has to handle, and they sit at Delta_1 = 0 — the CENTRE of L4's hypothesis
+   class, not its edge.  The enumerable population therefore carries almost no
+   evidence about the region where (T) has content.
+   [FP over n <= 6, and n = 3 is a live exception inside it.  This is a
+    non-refutation, not a theorem, and it says nothing above n = 6.]
+
+   And what survives, per delta band, on the INDECOMPOSABLE population:
+      n    band                   count         0     1/50      1/7      1/5    17/78      1/2        1
+      4    delta = 1/3 exactly    0        — EMPTY —
+      4    1/3 < delta <= 0.40    5        0.0000   0.0000   0.8000   0.8000   0.8000   1.0000   1.0000
+      4    delta > 0.40           22       0.0000   0.0000   0.0000   0.0909   0.0909   1.0000   1.0000
+      5    delta = 1/3 exactly    0        — EMPTY —
+      5    1/3 < delta <= 0.40    59       0.0000   0.0000   0.1356   0.3559   0.3559   0.9831   1.0000
+      5    delta > 0.40           216      0.0000   0.0000   0.1667   0.5926   0.5926   0.9815   1.0000
+      6    delta = 1/3 exactly    0        — EMPTY —
+      6    1/3 < delta <= 0.40    65       0.0000   0.0000   0.8154   0.8769   0.8769   1.0000   1.0000
+      6    delta > 0.40           4005     0.0000   0.0000   0.2252   0.5251   0.6002   1.0000   1.0000
+
+D. WHAT THE eps = 0 COLUMN MEANS, STATED SO IT IS NOT OVERREAD
+   Delta_1 = 0 at a cut IFF P = P[A] (+) P[B] there (a0 §B1/B2, exhaustive
+   n <= 6, both directions, 0 violations).  So L4's name — 'near-ordinal-sum
+   stability' — is literally accurate: eps_0 is a DISTANCE TO DECOMPOSABILITY,
+   and (T) says every frozen poset within eps_0 of decomposable has a balanced
+   pair.  A decomposable poset P[A] (+) P[B] is not special to the conjecture:
+   it inherits its pairs from its two sides, which is what makes the transfer
+   look plausible and what mg-d3c7's family shows is not enough.

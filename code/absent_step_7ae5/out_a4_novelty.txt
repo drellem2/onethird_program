@@ -1,0 +1,83 @@
+==============================================================================
+mg-7ae5 / A4 — NOVELTY AND ATTEMPT SWEEP
+==============================================================================
+corpus: 508 .md/.tex/.html files at 5968f17, excluding code/absent_step_7ae5/
+
+DECISIVE — decomposability identity: Delta_1 = 0 <=> ordinal sum
+  raw hits: 7
+    code/eps0_threshold_3969/README.md:66  | **NC1** | a chain has `Δ₁ = 0` at every prefix and no `δ` | catches an off-by-one in the `σ(A_k)` convention |
+    docs/OneThird-L4-Branch-ii-Consumability.md:439  > **Separate flag, unresolved:** family `W` at `a = 4, t = 2` is `n = 8`, `Δ₁ = 0.125`, and is a **RED
+    docs/OneThird-L4-Branch-ii-Consumability.md:489  | 29 | `W` at `a=4, t=2` is a RED for the repaired branch-(iii) predicate at `Δ₁ = 0.125` | 9 | **PROVEN** (that it is a RED); **UNVERIFIED** (that it
+    docs/OneThird-L4-Threshold-eps0-mg-3969.md:728  (positive control on the `δ` code); **NC1** chains have `Δ₁ = 0` at every prefix and no `δ`;
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:276  `8AC ⊕ 8AC` with one cross-relation deleted — `n = 16`, `ε = Δ₁ = 0.0019`, `λ_std = 0.996`. A real
+    docs/state-history/attempt-mg-63e3.md:58  As proposed it ended *"…and one may take it to be an **interface** pair"*; that clause is refuted twice — modulus-free at `n = 3` (`P = AC_2 ⊕ C_1`, `
+    docs/state-history/attempt-mg-88bd.md:68  Corroborated independently by mg-3ce3's `8AC ⊕ 8AC`-minus-one-cross witness (`n=16`, `Δ₁ = 0.0019`, `λ_std = 0.996`).
+
+DECISIVE — minimal counterexample is ordinal-sum INDECOMPOSABLE
+  raw hits: 1
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:621  `γ`-counterexamples** (`:57–62`, verbatim: *"If `P` is a width-3 indecomposable
+
+DECISIVE — delta of an ordinal sum = max of the sides
+  raw hits: 0
+
+DECISIVE — the density-stratified eps_0 ceiling
+  raw hits: 2
+    code/downstream_constants_ac0c/README.md:43  | `a2_closure.py` | the ladder over every admissible `ε₀`; the closure verdicts; the coarse pin on L2's second disjunct; the requirement solved for `ε
+    docs/OneThird-DownstreamConstants-mg-ac0c.md:263  | `ε₀` | chain (I)≡(III) demand | closes only at density `d ≤` (at `n → ∞`) |
+
+DECISIVE — the margin (n+1)^2/(n^2-n) or (n+1)/(n-1)
+  raw hits: 0
+
+DECISIVE — the transfer named as the CURRENCY CROSSING of the chain
+  raw hits: 0
+
+NON-DECISIVE — the word "frozen-conditional"
+  raw hits: 20
+    STATE.md                                                               3
+    docs/OneThird-DownstreamConstants-mg-ac0c.md                           3
+    docs/state-history/threads-chronology.md                               3
+    docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md                    2
+    docs/OneThird-PairBias-EpsSup-mg-832f-IndependentAudit.md              2
+    docs/OneThird-PairBias-Independence-mg-345e.md                         2
+    code/compression_consumers_145f/README.md                              1
+    code/pairbias_independence_345e/PREDICTIONS.md                         1
+    docs/CONCEPTS.md                                                       1
+    docs/OneThird-Compression-Consumers-mg-145f.md                         1
+    docs/OneThird-LIBweak-mg-c3ca.md                                       1
+
+NON-DECISIVE — attempts ON L4 / the transfer
+  raw hits: 16
+    STATE.md                                                               2
+    docs/OneThird-L1b-Restatement-mg-0e8c.md                               2
+    docs/OneThird-L4-Threshold-eps0-mg-d3c7-IndependentAudit.md            2
+    code/c3_audit_a94c3/PREDICTIONS.md                                     1
+    code/chain_iv_c_81ff/README.md                                         1
+    code/pairbias_indep_audit_6bd1/PREDICTIONS.md                          1
+    code/pairbias_sharpening_6bc2/PREDICTIONS.md                           1
+    docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md             1
+    docs/OneThird-ChainIV-CaptureFraction-mg-81ff.md                       1
+    docs/OneThird-DownstreamConstants-mg-ac0c.md                           1
+    docs/OneThird-L4-Threshold-eps0-mg-3969.md                             1
+    docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md                    1
+
+NON-DECISIVE — near-ordinal-sum stability
+  raw hits: 49
+    docs/state-of-the-wall.html                                            11
+    STATE.md                                                               6
+    docs/OneThird-Spectra-StockTake-mg-05ec.md                             5
+    docs/OneThird-L4-Branch-ii-Consumability.md                            4
+    docs/OneThird-L4-Branch-ii-Consumability-IndependentAudit.md           3
+    docs/OneThird-L4-Branch-ii-Sublinear-Modulus.md                        2
+    docs/OneThird-L4-Threshold-eps0-mg-3969.md                             2
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md            2
+    docs/OneThird-lambda-std-Operative-Form.md                             2
+    docs/state-history/attempt-mg-63e3.md                                  2
+    README.md                                                              1
+    docs/CONCEPTS.md                                                       1
+
+WHAT THIS CAN AND CANNOT ESTABLISH, kept rather than dropped.
+A grep establishes that a PHRASE is absent.  It cannot establish that a
+STATEMENT is absent — STATE.md:29's limit on mg-145f's corpus search, which it
+marks 'NOT A LEDGER KIND AT ALL'.  Every count above is DOCUMENTARY, at this
+commit, over this file set, and the pricing verdict in the deliverable rests on
+the READING of the hits, not on the counts.
