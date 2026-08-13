@@ -1,14 +1,18 @@
 #!/bin/sh
 # mg-8af0: regenerate this repair's transcripts.  Four of them since mg-36f5.
 #
-# Pure Python 3, no third-party packages, exact integer arithmetic.  Measured
-# runtime 2026-08-05 on a 2024 laptop, on the tree that ships this comment:
-# ~21 s total -- demo_f2 ~12 s (it regenerates controls_output.txt several times
-# over inside a temporary directory, which is the point of it), probe_f1 ~0.4 s,
-# probe_f3 ~8.3 s at n <= 6.  mg-36f5 adds probe_f3_tightness, measured 4.9 s on
-# 2026-08-13 on the tree that ships THIS comment, so ~26 s total.  There is NO CI
-# in this repository -- this runner is hand-invoked, like every other run_all.sh
-# here.
+# Pure Python 3, no third-party packages, exact integer arithmetic.  RE-MEASURED
+# 2026-08-13 on the tree that ships THIS comment, step by step and not carried
+# forward: demo_f2 26.95 s, probe_f1 0.15 s, probe_f3 12.26 s, probe_f3_tightness
+# 5.60 s -- 37.6 s for the whole runner.  The previous figures (~12 / 0.4 / 8.3 /
+# 4.9, "~26 s total") were taken on 2026-08-05 and 2026-08-13 respectively and
+# are superseded rather than adjusted.  demo_f2 is the cost and it roughly
+# DOUBLED at mg-fa8a, from five constructions to six: each one regenerates
+# controls_output.txt inside a temporary directory, which is the point of it, and
+# C6 is the construction that puts mg-fcb2's F1 back at the source.  There is NO
+# CI in this repository -- this runner is hand-invoked, like every other
+# run_all.sh here except code/face_geometry_repair_e35b/run_all.sh, which
+# build.sh gates.
 #
 # NOT `python3 x.py | tee out.txt`: a pipeline's exit status in POSIX sh is the
 # LAST command's, so `tee` succeeding would mask a probe exiting 1 (mg-f922,
@@ -33,7 +37,7 @@ step() {
     cat "$out"
 }
 
-step "F2: can the V6 row go red?  five constructions, old row and new" \
+step "F2: can the V6 row go red?  six constructions, old row and new" \
      demo_f2_row_can_go_red.py out_demo_f2.txt
 echo
 step "F1: the site count on three populations, tautology vs measured" \

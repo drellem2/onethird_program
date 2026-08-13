@@ -1,15 +1,18 @@
-mg-8af0 -- can the V6 row go red?  Five constructed inputs, old row and new rows scored on each.
-population: 5 constructions x 4 rows = 20 cells.  grain: one (construction, row) cell, GREEN = the row passed = the input did not move it.
+mg-8af0 -- can the V6 row go red?  Six constructed inputs, old row and new rows scored on each.
+population: 6 constructions x 5 rows = 30 cells.  grain: one (construction, row) cell, GREEN = the row passed = the input did not move it.
 
-  construction                                                     old row   V6a ANCHORED      V6b CENSUS        V6c REGENERATED 
-  C1 twelfth count added to the ARTIFACT by hand                   GREEN     GREEN             GREEN             RED             
-  C2 twelfth count added to CONTROLS.PY, artifact regenerated      GREEN     GREEN             RED               GREEN           
-  C3 a classified count reworded in the ARTIFACT (61/86 -> 61/87)  GREEN     RED               GREEN             RED             
-  C4 the same count reworded AT THE SOURCE (backticks dropped), ar GREEN     RED               GREEN             GREEN           
-  C5 mg-8af0's OWN edit to the table literal (3/11 -> 4/12), repos RED       GREEN             GREEN             GREEN           
+  construction                                                     old row   V6a ANCHORED      V6b CENSUS        V6c REGENERATED   V7b OPERAND     
+  C1 twelfth count added to the ARTIFACT by hand                   GREEN     GREEN             GREEN             RED               GREEN           
+  C2 twelfth count added to CONTROLS.PY, artifact regenerated      GREEN     GREEN             RED               GREEN             GREEN           
+  C3 a classified count reworded in the ARTIFACT (61/86 -> 61/87)  GREEN     RED               GREEN             RED               GREEN           
+  C4 the same count reworded AT THE SOURCE (backticks dropped), ar GREEN     RED               GREEN             GREEN             GREEN           
+  C5 mg-8af0's OWN edit to the table literal (3/11 -> 4/12), repos RED       GREEN             GREEN             GREEN             GREEN           
+  C6 mg-fcb2's F1 PUT BACK at the source (% (N, N, ...)), artifact GREEN     GREEN             GREEN             GREEN             RED             
 
   the old row is GREEN on C1-C4 -- it took no input from either the artifact or the source, so no construction ON THE REPOSITORY could move it.  It is RED on C5, where nothing in the repository changed and the literal beside it did.  That is mg-fcb2's F2 in one line, reproduced here rather than quoted.
-  each replacement row is RED on at least one construction, and C4 is red for V6a alone -- so none of the three is redundant and each has been SHOWN to fire.
-  NOT SHOWN: that the three rows catch every way a count could be added.  V6b is a tripwire on the SET of printed positions, so substituting a different expression into an existing %d -- which is exactly what mg-fcb2's F1 was -- moves none of them.  That is why F1 needed a row of its own (V7) and not just a census.
+  each replacement row is RED on at least one construction, and C4 is red for V6a alone and C6 for V7b alone -- so none of the four is redundant and each has been SHOWN to fire.
+  C6's artifact is 41081 bytes against the COMMITTED 41081 -- IDENTICAL, so the defect is back at the source and no byte of controls_output.txt moved.  MEASURED here, not asserted: it is the premise every green cell on the C6 row depends on.
+  NOT SHOWN: that the V6 rows catch every way a count could be added.  V6b is a tripwire on the SET of printed positions, so substituting a different expression into an existing %d -- which is exactly what mg-fcb2's F1 was -- moves none of them.  C6 is that input and the row above it is empty of reds: old row, V6a, V6b and V6c are ALL GREEN with F1 back at the source.
+  THE SENTENCE THAT USED TO CLOSE THIS PARAGRAPH WAS FALSE AND IS WITHDRAWN (mg-d3f3 F-1, corrected by mg-fa8a).  It read `That is why F1 needed a row of its own (V7) and not just a census.`  V7 is GREEN WITH F1 PRESENT -- it checks that the site count is 86 and that the artifact prints 86/86, and both are true of the tautology too, which is the whole content of mg-8af0's own E1.  V7's own in-file comment never claimed otherwise (`what this row CANNOT do is tell whether 86/86 is the right answer for the right reason`); the prose around it did.  What F1 needed is a row that reads the OPERAND of the `%` and not its digits, and that row is V7b, watched going red on C6 above and nowhere else.
 
-20/20 cells as predicted in PREDICTIONS.md E5/E6c.
+30/30 cells as predicted -- E5/E6c for C1-C5, and this file's own docstring for C6 (mg-fa8a).

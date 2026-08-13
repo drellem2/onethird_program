@@ -33,16 +33,31 @@ and grain written into its own name:
                     matched as a verbatim substring.  Population: the entries of
                     `TABLE`.  Grain: one entry.  RED when a classified count is
                     removed or reworded.
-  V6b CENSUS     -- the set of formatted values NEGATIVE CONTROL 4 prints is
-                    unchanged since this table was written.  Population: the
+  V6b CENSUS     -- the MULTISET OF CONVERSION TYPES NEGATIVE CONTROL 4 prints
+                    is unchanged since this table was written.  Population: the
                     `%`-format expressions lexically inside
                     `negative_control_incidence` in controls.py.  Grain: one
-                    conversion specifier.  RED when a count is added or removed
-                    at the source.  It is a TRIPWIRE and says so: it does not
-                    check that the entries of `TABLE` are the right ones.
+                    conversion specifier.  RED when the multiset moves.  It is a
+                    TRIPWIRE and says so: it does not check that the entries of
+                    `TABLE` are the right ones.
+                    THE ROW NAME USED TO SAY "no count has been added or
+                    removed", and that is NOT what it measures (mg-d3f3's F-3,
+                    corrected by mg-fa8a).  Two things it does not see, both
+                    constructed and run: removing one `%d` count and adding
+                    another inside the section leaves the multiset IDENTICAL,
+                    and a count added to any of the other TEN calls `main()`
+                    makes reaches the artifact outside this population
+                    altogether.  The measurement did not change; the name did.
   V6c REGENERATED-- controls_output.txt is byte-identical to a fresh run.  RED
                     when the artifact is hand-edited or goes stale, which is the
-                    one channel V6b cannot see.
+                    one channel V6b cannot see WITHIN V6b's population.
+  V7b OPERAND    -- no `%d/%d` in controls.py takes the same source expression
+                    as numerator and denominator, and F1's own site is one of
+                    them.  Population: adjacent integer conversions separated by
+                    `/`, anywhere in controls.py.  Grain: one such pair.  The
+                    only row here that reads the `.right` of a `%`, and the only
+                    one a revert of mg-fcb2's F1 turns RED.  Added by mg-fa8a
+                    landing mg-d3f3's F-2.
   V6d REACH      -- V6b's population, split by whether the value actually
                     reaches the artifact: printed / unreached / discarded.
                     Same population, same grain, different ROUTE -- it RUNS the
@@ -289,6 +304,69 @@ def census(controls_src, fn_name="negative_control_incidence"):
             else:
                 out["nonliteral_mod"] += 1
     return out
+
+
+# --- THE OPERAND SIDE OF A `%`, WHICH NOTHING IN THIS REPAIR EVER READ ------
+# mg-d3f3's F-2, landed by mg-fa8a.  Measured across every source-reading
+# artefact of the mg-8af0 repair: 2 accesses to a `%`-BinOp's `.left` (the
+# format string, in `census()` above) and ZERO to its `.right` (the operand
+# tuple).  mg-fcb2's F1 WAS A DEFECT IN `.right` -- `% (N, N, ...)` supplied to
+# "the named load-bearing site is corrupted on %d/%d posets", the same
+# expression as numerator and denominator -- so no census over `.left` could
+# have seen it WHATEVER ITS POPULATION HAD BEEN, and V6a/V6c/V6d compare bytes
+# the defect left unchanged (86/86 before, 86/86 after).  The technique this
+# row needs was already in this file: V4a `ast`-parses controls.py to settle a
+# claim about the SOURCE rather than about the mathematics.  It was not pointed
+# at the defect.
+RATIO_SITE = "corrupted on %d/%d posets"
+
+
+def ratio_operands(controls_src):
+    """Every adjacent `%d/%d` in controls.py, with the two OPERAND expressions.
+
+    POPULATION: pairs of conversion specifiers separated by a literal `/` in the
+    format string of a `%`-expression whose left operand is a string literal,
+    anywhere in controls.py -- deliberately NOT `negative_control_incidence`
+    alone, which is V6b's population and only one of the eleven calls `main()`
+    makes into the artifact.  GRAIN: one such pair, i.e. one operand-tuple slot
+    read against its neighbour.
+
+    Returns `(pairs, unmapped)`.  Each pair is
+    `(lineno, excerpt, numerator_source, denominator_source)`, the last two
+    being `ast.unparse` of the operands -- so "the same expression twice" is
+    decided on the SOURCE TEXT of the operands and never on the digits they
+    produce, which is the whole reason F1 survived a byte comparison.
+
+    `unmapped` counts the `%`-expressions whose operands cannot be mapped to
+    specifiers: a non-literal left operand (`i % 3` -- arithmetic, the channel
+    `census()` declares rather than exempts) or a `*` width, which consumes an
+    operand the format string does not name.  Counted and reported, never
+    exempted, for the reason `census()` gives about the same channel.
+    """
+    pairs, unmapped = [], 0
+    for node in ast.walk(ast.parse(controls_src)):
+        if not (isinstance(node, ast.BinOp) and isinstance(node.op, ast.Mod)):
+            continue
+        left = node.left
+        if not (isinstance(left, ast.Constant) and isinstance(left.value, str)):
+            unmapped += 1
+            continue
+        fmt = left.value
+        spans = [(m.start(), m.end()) for m in _SPEC.finditer(fmt)
+                 if m.group(1) != "%"]
+        if any("*" in fmt[s:e] for s, e in spans):
+            unmapped += 1
+            continue
+        ops = node.right.elts if isinstance(node.right, ast.Tuple) else [node.right]
+        for k, (s, e) in enumerate(spans):
+            if k + 1 >= len(spans) or k + 1 >= len(ops):
+                continue
+            if fmt[e:e + 1] != "/" or spans[k + 1][0] != e + 1:
+                continue                    # not `%d/%d`: some other `/`
+            pairs.append((node.lineno,
+                          fmt[max(0, s - 40):spans[k + 1][1] + 40],
+                          ast.unparse(ops[k]), ast.unparse(ops[k + 1])))
+    return pairs, unmapped
 
 
 def unanchored(artifact, table=TABLE):
@@ -782,13 +860,17 @@ def main():
           not missing, "unanchored: %s" % (missing if missing else "none"))
 
     got = census(open(os.path.join(PROBE, "controls.py")).read())
-    check("V6b CENSUS -- NEGATIVE CONTROL 4 prints %d formatted values and no "
-          "count has been added or removed since this table was written "
-          "(population: the %%-format expressions lexically inside "
+    check("V6b CENSUS -- NEGATIVE CONTROL 4 prints %d formatted values and the "
+          "MULTISET OF CONVERSION TYPES has not moved since this table was "
+          "written (population: the %%-format expressions lexically inside "
           "`negative_control_incidence`; grain: one conversion specifier).  A "
           "TRIPWIRE: it does not check that the %d entries above are the right "
-          "ones, only that the set of printed values has not moved underneath "
-          "them" % (CENSUS_DECLARED["specifiers"], len(TABLE)),
+          "ones, only that that multiset has not moved underneath them -- so "
+          "removing one `%%d` and adding another INSIDE the section is "
+          "invisible to it, and so is anything printed by the other ten calls "
+          "`main()` makes (mg-d3f3 F-3: the name said `no count has been added "
+          "or removed`, which is neither what is measured nor true)"
+          % (CENSUS_DECLARED["specifiers"], len(TABLE)),
           got == CENSUS_DECLARED,
           "measured %s; declared %s" % (got, CENSUS_DECLARED))
 
@@ -847,11 +929,73 @@ def main():
           "here: n = 1 admitted gives 86/87 and a no-op corruption gives 0/86, "
           "against 87/87 and 86/86 from the expression this replaces")
 
+    # -- V7b: F1's SHAPE, read at the operand side (mg-d3f3 F-2, mg-fa8a) ----
+    # V7 above re-derives F1's NUMBER and is green with F1 present, because 86
+    # is what the tautology printed too.  This row reads the EXPRESSION.  It is
+    # the only row in this file that touches the `.right` of a `%`, and the
+    # only one that goes red on a revert of F1 -- measured, and watched firing
+    # as construction C6 of
+    # code/face_geometry_repair_8af0/demo_f2_row_can_go_red.py.
+    ratios, unmapped = ratio_operands(open(os.path.join(PROBE, "controls.py")).read())
+    same = [(ln, a) for ln, _, a, b in ratios if a == b]
+    at_site = [(ln, a, b) for ln, ex, a, b in ratios if RATIO_SITE in ex]
+    print("V7b -- F1's SHAPE at the operand side, not its digits (mg-d3f3 F-2)")
+    check("V7b OPERAND -- no `%%d/%%d` in controls.py is supplied the SAME "
+          "SOURCE EXPRESSION on both sides, and the site mg-fcb2's F1 was at "
+          "(%r) is one of them (population: adjacent integer conversions "
+          "separated by a literal `/` in a %%-format with a literal left "
+          "operand, ANYWHERE in controls.py -- not V6b's one function; grain: "
+          "one such pair).  F1 was `%% (N, N, ...)` here: a numerator that is "
+          "its own denominator prints N/N whatever the code does, and no row "
+          "over the format string or over the artifact's bytes can see that, "
+          "because F1 moved neither" % RATIO_SITE,
+          not same and len(at_site) == 1 and at_site[0][1] != at_site[0][2],
+          "%d pairs read, %d repeat an expression (%s); the F1 site resolves to "
+          "%s at controls.py:%s"
+          % (len(ratios), len(same), same if same else "none",
+             "%s / %s" % (at_site[0][1], at_site[0][2]) if len(at_site) == 1
+             else "%d matches -- NOT ONE" % len(at_site),
+             at_site[0][0] if len(at_site) == 1 else "-"))
+    # PRINTED, NOT SCORED, and the reason is this file's own history: scoring
+    # the SIZE of that population would be a second tripwire on the same file
+    # V6b already tripwires, firing on every legitimate ratio anybody adds and
+    # discriminating nothing that V6b does not.  What is scored above is a
+    # property every member must have, plus the presence of the one member the
+    # row is named for -- so the row cannot pass by the population emptying.
+    print("    (%d %%-expressions in controls.py cannot have their operands "
+          "mapped to specifiers -- a non-literal left operand or a `*` width -- "
+          "and are OUT of the population above.  Counted, not exempted, for the "
+          "reason census() gives about the same channel.  The population size "
+          "itself is PRINTED, NOT SCORED: V6b already tripwires this file's "
+          "count of printed values, and a second one here would fire on every "
+          "legitimate ratio and separate nothing.)" % unmapped)
+    # THE LIMIT, DECLARED IN THE SAME BREATH, because a remedy for "a declared
+    # limit that names a remedy which does not remedy" is the last place to
+    # leave one out.  V7b catches ONE SHAPE: the same source expression on both
+    # sides of a `/`.  It does NOT catch two DIFFERENT expressions that are
+    # equal by construction (`len(ps)` against `N`), a tautology that is not a
+    # ratio, or a count that is wrong rather than unmovable.  It is a check on
+    # the OPERAND TEXT, not a proof that a number can move -- the pair of inputs
+    # that shows THIS number moves is in probe_f1_count_moves.py and is what V7
+    # points at.  Scope claimed: exactly F1's shape.
+    print("    NOT SHOWN by V7b: that no OTHER tautology can be written here.  "
+          "Two different expressions that happen to be equal (`len(ps)` and "
+          "`N`) pass it, and so does any unmovable count that is not one side "
+          "of a `/`.  What it covers is the shape mg-fcb2's F1 had, and the "
+          "evidence that it covers that shape is C6 of "
+          "code/face_geometry_repair_8af0/demo_f2_row_can_go_red.py, where F1 "
+          "goes back at the source and this is the ONLY row of the five that "
+          "turns red.")
+
     fresh = regenerate(PROBE)
     check("V6c REGENERATED -- controls_output.txt is byte-identical to a fresh "
-          "`controls.py 5`, so a count cannot be added to the artifact without "
-          "moving V6b (this closes the one channel V6b cannot see: a "
-          "hand-edited or stale artifact)",
+          "`controls.py 5`, so a count cannot be added to the artifact BY HAND "
+          "without this row seeing it (this closes the one channel V6b cannot "
+          "see: a hand-edited or stale artifact).  It does NOT say that a count "
+          "cannot reach the artifact without moving V6b -- the row used to say "
+          "exactly that and it is false, because ten of the eleven calls "
+          "`main()` makes are outside V6b's population and regenerate happily "
+          "(mg-d3f3 F-3, corrected by mg-fa8a)",
           fresh == art,
           "fresh %d bytes / %d lines, committed %d bytes / %d lines"
           % (len(fresh), fresh.count("\n"), len(art), art.count("\n")))

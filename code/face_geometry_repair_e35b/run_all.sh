@@ -29,8 +29,11 @@
 # days because nothing ran it.  See build.sh's mg-843d block for the decision
 # and its cost.
 #
-# MEASURED, 2026-08-13, on the tree that ships this comment: 7.2 s for the
-# verifier and 35.0 s for the demonstration, 42 s in total.  The demonstration
+# MEASURED, 2026-08-13, on the tree that ships this comment: 7.4 s for the
+# verifier and 36.5 s for the demonstration, 44 s in total.  (7.2 / 35.0 / 42
+# before mg-fa8a added V7b; the row costs an `ast.parse` of controls.py and
+# nothing else, and the difference here is within this host's run-to-run
+# spread.)  The demonstration
 # is 83% of that and is the removable half if the cost is ever judged wrong --
 # removing it is a decision with a number attached, which is more than the
 # suite's absence from the gate ever had.
