@@ -343,6 +343,101 @@ def walk_bare_subject(line):
 
 
 # ======================================================================================
+# THE OUT-OF-FAMILY COLUMN'S OWN POWER — A CONTROL THAT HAS NEVER FIRED IS A CLAIM (mg-cda7)
+# ======================================================================================
+#
+# WHAT mg-aff1 SHIPPED AND WHAT IT LEFT.  The widening above went 10 hits -> 18 and reported
+# two numbers, not one: ALL 8 GAINED IN-FAMILY, and THE OUT COLUMN DID NOT MOVE.  That is
+# the right pair to print — 10 -> 18 alone is equally consistent with `found eight more of
+# the thing` and `started matching a neighbouring thing`.  What it does not establish is
+# THAT THE PAIR IS HARD TO PRODUCE.  mg-aff1's own carry-forward says so in as many words:
+# is the OUT column sensitive enough to have caught a bad widening?
+#
+# THE COLUMN HAS POWER AND IT IS MEASURED, NOT ASSERTED.  `owners_937c.py` §6b runs the
+# battery below over every quoted line in the record.  Of the candidates that gain any line
+# at all, EVERY ONE moves the OUT column — the refutation of `anywhere` was not luck.
+#
+# AND THE COLUMN HAS A BLIND SPOT, WHICH IS STRUCTURAL AND NOT A TUNING.  The in/out split
+# is a PROXY over PATHS: a line is in-family because the row it sits in was read and filed
+# HISTORY-WALK, not because anybody looked at the line.  So a widening confined to lines
+# INSIDE those rows moves the OUT column by exactly zero however wrong it is, and §6b prints
+# how much room that leaves.  Two of the planted widenings below are in that room: `finding
+# sha` and `predicted row` each gain lines, gain them ALL IN-FAMILY, and leave OUT where it
+# was — mg-aff1's exact signature, on rules that are not walk detectors at all.
+#
+# SO `OUT UNMOVED` IS NECESSARY AND NOT SUFFICIENT, and the third column is what closes it:
+# OWNERS.json's `walk_lines` carries a hand verdict for EVERY quoted line inside a
+# HISTORY-WALK row, and a widening is graded on how many NOT-WALK lines it gains.  That is
+# the same remedy mg-937c gave the 150 — read them one at a time and put the reading in a
+# file the arm grades against the record — one level in, at the LINE instead of the ROW.
+# What it does not do is decide whether a reading is RIGHT: nothing here checks that, the
+# same declaration this directory already makes about `cause`, and §6b says it plainly.
+
+import hashlib                                                     # noqa: E402
+
+
+def line_key(text):
+    """A stable identity for one quoted line: 12 hex of sha256 over its stripped text.
+
+    Keyed by DIGEST rather than by text because the record's lines run to 900 characters and
+    a hand file is unreadable at that width; the entry carries an excerpt beside the digest
+    so a reader still sees what was read.  Keyed on the MASKED line, which is what the record
+    stores, so the key is a function of the frozen sweep and not of any tree.
+    """
+    return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()[:12]
+
+
+# THE BATTERY.  Every rule is kept here rather than written inline in the arm, for the reason
+# mg-aff1 moved the detector out of report.py: a rule nothing can plant a world against is a
+# rule nobody can bound.  Four are the versions of the detector that have been written (the
+# shipped one, the one it replaced, and the two refuted); the rest are CANDIDATES — some are
+# widenings a successor might plausibly reach for, and some are bad on purpose.  They are in
+# one list so that §6b grades them by the SAME two columns and nothing is graded by hand.
+#
+# `bad` is this file's own claim about the rule and is NOT what the arm reports on: the arm
+# reports the columns and lets them disagree with it.  A field that could not disagree would
+# be a label, not a measurement.
+CANDIDATE_WIDENINGS = [
+    ("C1", "any label character, same tail", False,
+     r"^(?:HEAD:\s*)?.{0,16}<sha>[:,]?\s+\S"),
+    ("C2", "drop the trailing `\\s+\\S`", False,
+     r"^(?:HEAD:\s*)?[A-Za-z ]{0,16}<sha>"),
+    ("C3", "let the label carry punctuation", False,
+     r"^(?:HEAD:\s*)?[\w .*+()\[\]-]{0,16}<sha>[:,]?\s+\S"),
+    ("C4", "window 40 — the top of the plateau", False,
+     r"^(?:HEAD:\s*)?[A-Za-z ]{0,40}<sha>[:,]?\s+\S"),
+    ("C5", "any `... subject :` label", False,
+     r"^\s*\S.{0,20}subject\s*:\s*\S"),
+    ("C6", "two shas on the line", False,
+     r"<sha>\s+.*<sha>"),
+    ("C7", "a masked date on the line", False,
+     r"<date>"),
+    ("C8", "a sha followed by a digit column", False,
+     r"^(?:HEAD:\s*)?[A-Za-z ]{0,16}<sha>\s+\d"),
+    # --- bad on purpose.  B1 and B2 are the two that the OUT column cannot see. ---------
+    ("B1", "a `FINDING: <sha>` sentence", True,
+     r"^\s*(?:\*\*\* )?FINDING: <sha>"),
+    ("B2", "a `P<n> predicted / got` row", True,
+     r"^\s*P\d+[a-z]?\s+predicted\b"),
+    ("B3", "an `A<n> TOTAL BAD:` counter", True,
+     r"^\s*A\d+ TOTAL BAD:"),
+    ("B4", "the bare-subject rule, case-blind", True,
+     r"(?i)^\s*[a-z][a-z0-9_]*(?:[+/][a-z0-9_]+)*:\s+\S"),
+    ("B5", "any line quoting a sha at all", True,
+     r"<sha>"),
+]
+
+
+def candidate(pattern):
+    """A candidate widening as a predicate.  A widening cannot LOSE hits — it is the shipped
+    rule OR the candidate — so the columns below are deltas of a superset and never a swap.
+    That is a property of how the battery is composed, and it is why `gained` is subtraction.
+    """
+    rx = re.compile(pattern)
+    return lambda line: bool(is_walk_line(line) or rx.search(line))
+
+
+# ======================================================================================
 # THE VERDICT
 # ======================================================================================
 

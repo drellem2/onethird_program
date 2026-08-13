@@ -91,6 +91,23 @@ def load_owners():
         return json.load(fh)
 
 
+def quoted_lines(buckets, pass2):
+    """Every quoted line the record holds, as (path, masked text).
+
+    ONE definition, called by `grade()` and by §6a/§6b alike.  mg-1344's rule: two copies of
+    `which lines the record quotes` drift into an arm graded against a population its own
+    report no longer reports, and this list is now the input to a hand file.
+    """
+    lines = []
+    for pth, tup in sorted(buckets.items()):
+        for _m, t in (tup[2] or []):
+            lines.append((pth, t))
+    for pth, (row2, _d) in sorted(pass2.items()):
+        for _m, t in (row2.get("hunk") or []):
+            lines.append((pth, t))
+    return lines
+
+
 def grade(header, suites, doc):
     """Every finding this arm can raise, as data.  Returned rather than printed so the
     planted worlds in §6 can run the SAME function over a mutated world and read its
@@ -105,7 +122,8 @@ def grade(header, suites, doc):
     rows = doc["rows"]
 
     f = {"grown": [], "strengthened": [], "retired": [], "weakened": [],
-         "bad_read": [], "bad_disagree": [], "bad_vocab": []}
+         "bad_read": [], "bad_disagree": [], "bad_vocab": [],
+         "walk_unread": [], "walk_stale": [], "walk_notwalk": []}
 
     for pth in sorted(stale):
         cls = "token" if stale[pth] == L.VERDICT_TOKEN else "number"
@@ -166,6 +184,31 @@ def grade(header, suites, doc):
             note.startswith("THE OWNING RUNNER") or note.startswith("NEITHER"))
         if own_benign != (row["cause"] == "RECORD-DISAGREES"):
             f["bad_disagree"].append((pth, row["cause"], own_benign))
+
+    # ---- mg-cda7: the PER-LINE hand list, graded in BOTH directions --------------------
+    # `walk_lines` is the third column §6b needs, and it is a hand file, so it rots exactly
+    # the way OWNERS.json's rows would without this arm.  Two checks, and the second is the
+    # one that matters: an in-family line with no entry is UNREAD — a new HISTORY-WALK row
+    # arriving quietly is how the list would go complete against a corpus that moved — and an
+    # entry naming a line the record no longer holds is STALE.  Neither is a judgement.
+    # THE THIRD IS THE GATE THE OUT COLUMN COULD NOT PROVIDE: the SHIPPED rule taking a line
+    # somebody read as NOT-WALK is a NOTE printed on a line that is not a history walk.
+    walk_paths = {p for p, r in rows.items() if r["cause"] == "HISTORY-WALK"}
+    wl = doc.get("walk_lines") or {}
+    seen_keys = set()
+    for pth, t in quoted_lines(buckets, pass2):
+        if pth not in walk_paths:
+            continue
+        k = L.line_key(t)
+        seen_keys.add(k)
+        entry = wl.get(k)
+        if entry is None:
+            f["walk_unread"].append((pth, k, t.strip()[:66]))
+        elif entry["verdict"] == "NOT-WALK" and L.is_walk_line(t):
+            f["walk_notwalk"].append((pth, k, t.strip()[:66]))
+    for k in sorted(wl):
+        if k not in seen_keys:
+            f["walk_stale"].append((k, wl[k]["excerpt"][:66]))
     return f, stale, buckets, pass2, observed, ran
 
 
@@ -490,13 +533,7 @@ def main():
     e(rule("="))
     e("")
     mark = len(out)
-    lines = []
-    for pth, tup in sorted(buckets.items()):
-        for _m, t in (tup[2] or []):
-            lines.append((pth, t))
-    for pth, (row2, _d) in sorted(pass2.items()):
-        for _m, t in (row2.get("hunk") or []):
-            lines.append((pth, t))
+    lines = quoted_lines(buckets, pass2)
     hw_paths = {p for p, r in rows.items() if r["cause"] == "HISTORY-WALK"}
     rules = [("line-start  (mg-937c, replaced)", L.walk_line_start),
              ("SHIPPED     (mg-aff1)", L.is_walk_line),
@@ -594,10 +631,171 @@ def main():
     e("  rather than discovering it.")
     e("")
 
-    findings = len(f["grown"]) + len(f["strengthened"]) + len(bad)
+    # ---- §6b ---------------------------------------------------------------------------
+    # THE OUT COLUMN'S OWN POWER (mg-cda7).  §6a is a measurement of the DETECTOR; this is a
+    # measurement of the CONTROL §6a defends it with.  mg-aff1's carry-forward asked for it
+    # in as many words: a control that has never fired is a claim.
+    e(rule("="))
+    e("§6b  IS THE OUT COLUMN SENSITIVE ENOUGH? — THE CONTROL, MEASURED — mg-cda7")
+    e(rule("="))
+    e("")
+    wl = doc.get("walk_lines") or {}
+    infam = [(p, t) for p, t in lines if p in hw_paths]
+    nwalk = sum(1 for v in wl.values() if v["verdict"] == "WALK")
+    e("  §6a's defence of the shipped rule is `the OUT column did not move`, and it is only")
+    e("  a defence if that is HARD TO PRODUCE.  Nobody had measured whether it is.  The")
+    e("  in/out split is a PROXY OVER PATHS — a line is in-family because the ROW it sits in")
+    e("  was read and filed HISTORY-WALK, not because anybody looked at the LINE — so a")
+    e("  widening confined to those rows moves the OUT column by ZERO however wrong it is.")
+    e("")
+    e("  SO THERE IS A THIRD COLUMN, AND IT IS A READING: OWNERS.json's `walk_lines` carries")
+    e("  a hand verdict for each of the %d quoted line(s) inside a HISTORY-WALK row — %d read"
+      % (len(infam), nwalk))
+    e("  as WALK, %d as NOT-WALK.  mg-937c's remedy for the 150, one level in, at the LINE"
+      % (len(wl) - nwalk))
+    e("  instead of the ROW.  NOTHING CHECKS THAT A READING IS RIGHT, which is word for word")
+    e("  what OWNERS.json already declares about `cause`; what stops it being tuned to")
+    e("  flatter the shipped rule is that every rule below is graded against the SAME list.")
+    e("")
+    walk_bad = f["walk_unread"] + f["walk_stale"] + f["walk_notwalk"]
+    if not walk_bad:
+        e("  %5d  every in-family quoted line has an entry — a HISTORY-WALK row arriving"
+          % len(infam))
+        e("         with unread lines is a FINDING, not a silent gap")
+        e("  %5d  every entry still names a line the record holds — BOTH directions, for the"
+          % len(wl))
+        e("         reason `cause: RECORD-DISAGREES` is checked in both")
+        e("  %5d  the SHIPPED rule takes no line read NOT-WALK" % len(wl))
+    for pth, k, t in f["walk_unread"]:
+        e("  *** UNREAD in-family line: %s  key=%s" % (pth, k))
+        e("      %s" % t)
+        e("      Read it and add an entry to `walk_lines`, or this section is complete")
+        e("      against a corpus that moved.")
+    for k, ex in f["walk_stale"]:
+        e("  *** STALE `walk_lines` entry, the record no longer holds it: key=%s" % k)
+        e("      %s" % ex)
+    for pth, k, t in f["walk_notwalk"]:
+        e("  *** THE SHIPPED RULE TAKES A LINE READ NOT-WALK: %s  key=%s" % (pth, k))
+        e("      %s" % t)
+    e("")
+    base = [(p, t) for p, t in lines if L.is_walk_line(t)]
+    b_in = sum(1 for p, _t in base if p in hw_paths)
+    b_out = len(base) - b_in
+    e("  EVERY RULE THAT HAS BEEN WRITTEN OR PLANTED, ON THE SAME %d LINE(S).  `gain` is"
+      % len(lines))
+    e("  against the SHIPPED rule and is never negative: a candidate is the shipped rule OR")
+    e("  itself, so these are supersets and not swaps.  `dOUT` is the control under test.")
+    e("")
+    e("  %-4s %-34s %5s %5s %5s %5s %6s" %
+      ("id", "rule", "hits", "gain", "g-in", "dOUT", "!WALK"))
+    e("  " + rule("-")[:68])
+    e("  %-4s %-34s %5d %5s %5s %5s %6s" %
+      ("--", "SHIPPED (mg-aff1) — the baseline", len(base), "--", "--", "--", "--"))
+    caught = missed = gainful = 0
+    witness = []
+    for cid, label, _bad, pat in L.CANDIDATE_WIDENINGS:
+        fn = L.candidate(pat)
+        hit = [(p, t) for p, t in lines if fn(t)]
+        gain = [(p, t) for p, t in hit if not L.is_walk_line(t)]
+        g_in = sum(1 for p, _t in gain if p in hw_paths)
+        d_out = (len(hit) - sum(1 for p, _t in hit if p in hw_paths)) - b_out
+        nw = sum(1 for p, t in gain
+                 if p in hw_paths and (wl.get(L.line_key(t)) or {}).get("verdict") == "NOT-WALK")
+        if gain:
+            gainful += 1
+            if d_out:
+                caught += 1
+            else:
+                missed += 1
+                witness.append((cid, label, len(gain), g_in, nw))
+        e("  %-4s %-34s %5d %5d %5d %5d %6d"
+          % (cid, label, len(hit), len(gain), g_in, d_out, nw))
+    e("")
+    e("  %d OF THE %d GAIN NOTHING AT ALL, which is worth its own line rather than being"
+      % (len(L.CANDIDATE_WIDENINGS) - gainful, len(L.CANDIDATE_WIDENINGS)))
+    e("  read past: several of the widenings a successor would plausibly reach for are")
+    e("  NO-OPS on this corpus — the shipped rule already takes everything they would.  So")
+    e("  `hits did not move` is the common answer and a rule that DOES gain is the unusual")
+    e("  one, which is the context the numbers below are read in.")
+    e("")
+    e("  THE COLUMN HAS POWER AND IT IS A NUMBER NOW: of the %d rule(s) that gain any line"
+      % gainful)
+    e("  at all, %d MOVE THE OUT COLUMN.  mg-aff1's refutation of `anywhere` was not luck —"
+      % caught)
+    e("  the OUT population is %d line(s) over %d path(s), so a rule that reaches past the"
+      % (len(lines) - len(infam), len({p for p, _t in lines if p not in hw_paths})))
+    e("  walk shape almost cannot avoid it.  THAT IS THE HALF THAT DEFENDS mg-aff1.")
+    e("")
+    if witness:
+        e("  AND %d DO NOT, WHICH IS THE HALF THAT BOUNDS IT.  Each of these gains lines,"
+          % missed)
+        e("  gains them ALL IN-FAMILY, and leaves the OUT column exactly where it was —")
+        e("  mg-aff1's own signature, letter for letter — on a rule that is not a walk")
+        e("  detector at all.  THE THIRD COLUMN IS WHAT DISAGREES WITH THEM:")
+        e("")
+        for cid, label, g, gi, nw in witness:
+            e("    %-4s %-36s gained %d, %d in-family, OUT +0, %d read NOT-WALK"
+              % (cid, label, g, gi, nw))
+        e("")
+    e("  SO `OUT UNMOVED` IS NECESSARY AND NOT SUFFICIENT.  That is the correction this")
+    e("  section makes to §6a, and it is made ON THE RECORD rather than on taste: the")
+    e("  witnesses above are rules that pass the control and are wrong.")
+    e("")
+    # THE CEILING.  How much room is there in the blind spot?  Computed, not bounded by
+    # taste: a line is REACHABLE if its exact text occurs nowhere outside a HISTORY-WALK row,
+    # because then the rule `match this literal` gains it with the OUT column provably still.
+    # An exact-literal rule is the crudest member of the class and therefore the safest
+    # witness — anything a regex can do to a line, a literal can do to that line.
+    import collections as _c
+    out_texts = _c.Counter(t.strip() for p, t in lines if p not in hw_paths)
+    miss = [(p, t) for p, t in infam if not L.is_walk_line(t)]
+    reach = [(p, t) for p, t in miss if out_texts[t.strip()] == 0]
+    reach_nw = [(p, t) for p, t in reach
+                if (wl.get(L.line_key(t)) or {}).get("verdict") == "NOT-WALK"]
+    e("  THE CEILING ON THE BLIND SPOT, COMPUTED RATHER THAN ESTIMATED:")
+    e("    %3d  in-family line(s) the shipped rule does not take" % len(miss))
+    e("    %3d  of those are REACHABLE with the OUT column provably still — their exact"
+      % len(reach))
+    e("         text occurs nowhere outside a HISTORY-WALK row, so `match this literal`")
+    e("         gains them and moves nothing.  A literal is the crudest rule there is,")
+    e("         which makes it the safest witness: it needs no argument to be possible.")
+    e("    %3d  of those %d are hand-read NOT-WALK — the room a bad widening has, and the"
+      % (len(reach_nw), len(reach)))
+    e("         reason the third column is a file and not a sentence.")
+    e("")
+    added_in = sum(1 for p, _t in added if p in hw_paths)
+    added_nw = sum(1 for p, t in added
+                   if (wl.get(L.line_key(t)) or {}).get("verdict") == "NOT-WALK")
+    e("  AND THE SHIPPED RULE'S OWN ROW, GRADED BY THE COLUMN mg-aff1 DID NOT HAVE:")
+    e("  %d gained, %d in-family, OUT unmoved, AND %d OF %d READ NOT-WALK.  The two numbers"
+      % (len(added), added_in, added_nw, len(added)))
+    e("  mg-aff1 published still stand; this is the third, and it is the one the witnesses")
+    e("  above would have failed.  A widening that takes a NOT-WALK line is a FINDING here")
+    e("  and exits 1 — this is OWNERS.json, this directory's own file, and the repair is in")
+    e("  the same commit: narrow the rule, or read the line again and say why.")
+    e("")
+    e("  WHAT THIS SECTION STILL CANNOT DO, SAID HERE RATHER THAN DISCOVERED LATER.  The")
+    e("  third column only sees lines inside HISTORY-WALK rows, because that is the only")
+    e("  population anybody has read line by line; a widening's damage OUTSIDE them is what")
+    e("  the OUT column is for, and neither column subsumes the other.  A rule bad in BOTH")
+    e("  places is caught twice and a rule bad in neither is not bad here — which is the")
+    e("  most this can claim without somebody reading the other %d line(s)."
+      % (len(lines) - len(infam)))
+    e("")
+    e("  AND THIS SECTION'S OWN CLAIM IS THE CLAIM IT WAS WRITTEN TO REFUSE, so the third")
+    e("  column's power is PLANTED rather than argued: §7's P12c flips one reading to")
+    e("  NOT-WALK under the live rule and the finding fires, P12a and P12b delete and")
+    e("  invent an entry, and P13 checks the arm is SILENT on the %d line(s) read NOT-WALK"
+      % (len(wl) - nwalk))
+    e("  that the rule correctly does not take — the polarity a remedy gets wrong, since a")
+    e("  column that fired on those would report every transcript line in the corpus.")
+    e("")
+
+    findings = (len(f["grown"]) + len(f["strengthened"]) + len(bad)
+                + len(walk_bad))
     e(rule("="))
     if findings:
-        e("OWNERS VERDICT: %d FINDING(S) IN THIS DIRECTORY'S OWN FILES — see §3 and §5."
+        e("OWNERS VERDICT: %d FINDING(S) IN THIS DIRECTORY'S OWN FILES — see §3, §5 and §6b."
           % findings)
     else:
         e("OWNERS VERDICT: GREEN — %d verdict-stale transcript(s), %d with a row, 0 without."
@@ -781,6 +979,48 @@ def plant(header, suites, doc):
            if r[0] == "code/nowhere_0000/out_repaired.txt"]
     W_.append(("P11", "a row the record has NO GRADE for -> RETIRED/UNMEASURED, not REPRODUCES",
                got, got == ["UNMEASURED"]))
+
+    # P12 mg-cda7 — THE THIRD COLUMN'S OWN THREE FAILURES, PLANTED.  `walk_lines` is a hand
+    #     file and it rots the way OWNERS.json's rows would without P1: an entry deleted, an
+    #     entry that outlives its line, and the one the whole section exists for — the
+    #     SHIPPED rule taking a line somebody read as NOT-WALK.  The third is planted by
+    #     FLIPPING A VERDICT rather than by inventing a rule, because grade() sees rules only
+    #     through `is_walk_line`; flipping the reading under the live rule builds exactly the
+    #     world a bad widening would produce and needs no second detector to do it.
+    wl_keys = sorted(doc.get("walk_lines") or {})
+    victim3 = next(k for k in wl_keys
+                   if doc["walk_lines"][k]["verdict"] == "WALK"
+                   and L.is_walk_line(doc["walk_lines"][k]["excerpt"]))
+    d = copy.deepcopy(doc)
+    d["walk_lines"].pop(victim3)
+    f = run(d)
+    W_.append(("P12a", "an in-family line with no entry -> UNREAD, a finding",
+               [k for _p, k, _t in f["walk_unread"]],
+               [k for _p, k, _t in f["walk_unread"]] == [victim3]))
+    d = copy.deepcopy(doc)
+    d["walk_lines"]["deadbeef0000"] = {"excerpt": "a line the record does not hold",
+                                       "verdict": "WALK", "why": "planted by P12b"}
+    f = run(d)
+    W_.append(("P12b", "an entry whose line has left the record -> STALE, a finding",
+               [k for k, _e in f["walk_stale"]],
+               [k for k, _e in f["walk_stale"]] == ["deadbeef0000"]))
+    d = copy.deepcopy(doc)
+    d["walk_lines"][victim3]["verdict"] = "NOT-WALK"
+    f = run(d)
+    W_.append(("P12c", "the SHIPPED rule taking a NOT-WALK line -> a finding",
+               [k for _p, k, _t in f["walk_notwalk"]],
+               [k for _p, k, _t in f["walk_notwalk"]] == [victim3]))
+
+    # P13 mg-cda7 — AND THE OTHER POLARITY, WHICH IS THE ONE A REMEDY GETS WRONG.  A line
+    #     read NOT-WALK that the shipped rule DOES NOT take is the normal, correct state of
+    #     16 of these entries, and a third column that fired on it would report every
+    #     transcript line in the corpus as a defect.  Planted on the live file so the check
+    #     is that the arm is SILENT where it should be, not merely loud where it should be.
+    quiet = next(k for k in wl_keys if doc["walk_lines"][k]["verdict"] == "NOT-WALK")
+    f = run(doc)
+    W_.append(("P13", "a NOT-WALK line the rule does not take -> NOT a finding",
+               (quiet in [k for _p, k, _t in f["walk_notwalk"]], len(f["walk_notwalk"])),
+               not f["walk_notwalk"]))
 
     return W_, sum(1 for _n, _w, _g, ok in W_ if not ok)
 

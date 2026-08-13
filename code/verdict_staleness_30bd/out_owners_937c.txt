@@ -277,6 +277,103 @@ mg-937c — THE OWNERS OF THE VERDICT-STALE LIST, AND WHETHER IT HAS GROWN
   rather than discovering it.
 
 ==========================================================================================
+§6b  IS THE OUT COLUMN SENSITIVE ENOUGH? — THE CONTROL, MEASURED — mg-cda7
+==========================================================================================
+
+  §6a's defence of the shipped rule is `the OUT column did not move`, and it is only
+  a defence if that is HARD TO PRODUCE.  Nobody had measured whether it is.  The
+  in/out split is a PROXY OVER PATHS — a line is in-family because the ROW it sits in
+  was read and filed HISTORY-WALK, not because anybody looked at the LINE — so a
+  widening confined to those rows moves the OUT column by ZERO however wrong it is.
+
+  SO THERE IS A THIRD COLUMN, AND IT IS A READING: OWNERS.json's `walk_lines` carries
+  a hand verdict for each of the 38 quoted line(s) inside a HISTORY-WALK row — 15 read
+  as WALK, 16 as NOT-WALK.  mg-937c's remedy for the 150, one level in, at the LINE
+  instead of the ROW.  NOTHING CHECKS THAT A READING IS RIGHT, which is word for word
+  what OWNERS.json already declares about `cause`; what stops it being tuned to
+  flatter the shipped rule is that every rule below is graded against the SAME list.
+
+     38  every in-family quoted line has an entry — a HISTORY-WALK row arriving
+         with unread lines is a FINDING, not a silent gap
+     31  every entry still names a line the record holds — BOTH directions, for the
+         reason `cause: RECORD-DISAGREES` is checked in both
+     31  the SHIPPED rule takes no line read NOT-WALK
+
+  EVERY RULE THAT HAS BEEN WRITTEN OR PLANTED, ON THE SAME 854 LINE(S).  `gain` is
+  against the SHIPPED rule and is never negative: a candidate is the shipped rule OR
+  itself, so these are supersets and not swaps.  `dOUT` is the control under test.
+
+  id   rule                                hits  gain  g-in  dOUT  !WALK
+  --------------------------------------------------------------------
+  --   SHIPPED (mg-aff1) — the baseline      18    --    --    --     --
+  C1   any label character, same tail        20     2     0     2      0
+  C2   drop the trailing `\s+\S`             18     0     0     0      0
+  C3   let the label carry punctuation       18     0     0     0      0
+  C4   window 40 — the top of the plateau    18     0     0     0      0
+  C5   any `... subject :` label             18     0     0     0      0
+  C6   two shas on the line                  22     4     0     4      0
+  C7   a masked date on the line             18     0     0     0      0
+  C8   a sha followed by a digit column      18     0     0     0      0
+  B1   a `FINDING: <sha>` sentence           21     3     3     0      3
+  B2   a `P<n> predicted / got` row          20     2     2     0      2
+  B3   an `A<n> TOTAL BAD:` counter          32    14     2    12      2
+  B4   the bare-subject rule, case-blind    166   148     8   140      4
+  B5   any line quoting a sha at all         54    36     3    33      3
+
+  6 OF THE 13 GAIN NOTHING AT ALL, which is worth its own line rather than being
+  read past: several of the widenings a successor would plausibly reach for are
+  NO-OPS on this corpus — the shipped rule already takes everything they would.  So
+  `hits did not move` is the common answer and a rule that DOES gain is the unusual
+  one, which is the context the numbers below are read in.
+
+  THE COLUMN HAS POWER AND IT IS A NUMBER NOW: of the 7 rule(s) that gain any line
+  at all, 5 MOVE THE OUT COLUMN.  mg-aff1's refutation of `anywhere` was not luck —
+  the OUT population is 816 line(s) over 179 path(s), so a rule that reaches past the
+  walk shape almost cannot avoid it.  THAT IS THE HALF THAT DEFENDS mg-aff1.
+
+  AND 2 DO NOT, WHICH IS THE HALF THAT BOUNDS IT.  Each of these gains lines,
+  gains them ALL IN-FAMILY, and leaves the OUT column exactly where it was —
+  mg-aff1's own signature, letter for letter — on a rule that is not a walk
+  detector at all.  THE THIRD COLUMN IS WHAT DISAGREES WITH THEM:
+
+    B1   a `FINDING: <sha>` sentence          gained 3, 3 in-family, OUT +0, 3 read NOT-WALK
+    B2   a `P<n> predicted / got` row         gained 2, 2 in-family, OUT +0, 2 read NOT-WALK
+
+  SO `OUT UNMOVED` IS NECESSARY AND NOT SUFFICIENT.  That is the correction this
+  section makes to §6a, and it is made ON THE RECORD rather than on taste: the
+  witnesses above are rules that pass the control and are wrong.
+
+  THE CEILING ON THE BLIND SPOT, COMPUTED RATHER THAN ESTIMATED:
+     22  in-family line(s) the shipped rule does not take
+     14  of those are REACHABLE with the OUT column provably still — their exact
+         text occurs nowhere outside a HISTORY-WALK row, so `match this literal`
+         gains them and moves nothing.  A literal is the crudest rule there is,
+         which makes it the safest witness: it needs no argument to be possible.
+     10  of those 14 are hand-read NOT-WALK — the room a bad widening has, and the
+         reason the third column is a file and not a sentence.
+
+  AND THE SHIPPED RULE'S OWN ROW, GRADED BY THE COLUMN mg-aff1 DID NOT HAVE:
+  8 gained, 8 in-family, OUT unmoved, AND 0 OF 8 READ NOT-WALK.  The two numbers
+  mg-aff1 published still stand; this is the third, and it is the one the witnesses
+  above would have failed.  A widening that takes a NOT-WALK line is a FINDING here
+  and exits 1 — this is OWNERS.json, this directory's own file, and the repair is in
+  the same commit: narrow the rule, or read the line again and say why.
+
+  WHAT THIS SECTION STILL CANNOT DO, SAID HERE RATHER THAN DISCOVERED LATER.  The
+  third column only sees lines inside HISTORY-WALK rows, because that is the only
+  population anybody has read line by line; a widening's damage OUTSIDE them is what
+  the OUT column is for, and neither column subsumes the other.  A rule bad in BOTH
+  places is caught twice and a rule bad in neither is not bad here — which is the
+  most this can claim without somebody reading the other 816 line(s).
+
+  AND THIS SECTION'S OWN CLAIM IS THE CLAIM IT WAS WRITTEN TO REFUSE, so the third
+  column's power is PLANTED rather than argued: §7's P12c flips one reading to
+  NOT-WALK under the live rule and the finding fires, P12a and P12b delete and
+  invent an entry, and P13 checks the arm is SILENT on the 16 line(s) read NOT-WALK
+  that the rule correctly does not take — the polarity a remedy gets wrong, since a
+  column that fired on those would report every transcript line in the corpus.
+
+==========================================================================================
 OWNERS VERDICT: GREEN — 141 verdict-stale transcript(s), 141 with a row, 0 without.
 ==========================================================================================
 
@@ -301,6 +398,10 @@ OWNERS VERDICT: GREEN — 141 verdict-stale transcript(s), 141 with a row, 0 wit
   P9   a DECLARED transcript -> RETIRED/DECLARED, and no NEW finding ok
   P10  a marker with NO REASON -> not honoured, the row stays   ok
   P11  a row the record has NO GRADE for -> RETIRED/UNMEASURED, not REPRODUCES ok
+  P12a an in-family line with no entry -> UNREAD, a finding     ok
+  P12b an entry whose line has left the record -> STALE, a finding ok
+  P12c the SHIPPED rule taking a NOT-WALK line -> a finding     ok
+  P13  a NOT-WALK line the rule does not take -> NOT a finding  ok
 
-  13 worlds, all as planted.
+  17 worlds, all as planted.
 

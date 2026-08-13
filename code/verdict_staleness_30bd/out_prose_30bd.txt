@@ -34,17 +34,17 @@ P1  THE BACKING CORPUS, AND THE ONE FILE IT EXCLUDES BY NAME
   destroying the thing it repairs.  P4c plants the world that proves the
   exclusion does work rather than merely reads as though it should.
 
-      133 distinct figure(s) backed by the corpus above
+      139 distinct figure(s) backed by the corpus above
 
 
 ==============================================================================
 P2  THE CENSUS
 ==============================================================================
 
-    105  line(s) carrying at least one figure
-     96  BACKED                 every figure printed by a transcript above
+    122  line(s) carrying at least one figure
+    114  BACKED                 every figure printed by a transcript above
       0  UNBACKED/own-voice     outside a fence -- GRADED, and the finding
-      9  UNBACKED/quoted        inside a ``` fence -- REPORTED, NOT GRADED
+      8  UNBACKED/quoted        inside a ``` fence -- REPORTED, NOT GRADED
 
   A FENCE IS A QUOTATION.  This README fences the ALL-CAPS derivation table
   §2's token set came from, the gate hunk §4 quotes from a sandbox run, and
@@ -66,6 +66,7 @@ P2  THE CENSUS
       README.md        47  4                  | 4 | `NON-VERDICT` | differs, but in no ver
       README.md        52  530,531            mask wide enough to eat `530 markdown file(s
       README.md        71  1051               1051 tracked transcripts at `f2117f1`, ranke
+      README.md        79  33,19,13,8,5,5     MISS 33   MISSED 19   FAILED 13   FALSE 8      [fence]
       README.md        86  9                  **Both blocks above are quotations of a run 
       README.md        97  530                * **over-inclusion.** A corpus-size count sh
       README.md       104  3                  ## 3  The two boundary worlds, and the one t
@@ -149,6 +150,23 @@ P2  THE CENSUS
       README.md       594  17,6               lines back the 17 (**6**) and prints the fir
       README.md       595  900                all of them, which is that not one is about 
       README.md       599  87                 - **The 87 `TICKET` rows**, and `PIN-AS-DATE
+      README.md       604  13                 ## 13  Is the out-of-family column sensitive
+      README.md       607  12                 itself: **a control that has never fired is 
+      README.md       616  7,5                that are bad on purpose. Of the **7** that g
+      README.md       618  816,179            **816** lines over **179** paths, so a rule 
+      README.md       619  6,13               it. Worth reading beside that: **6** of the 
+      README.md       625  3                  The other **2** pass. `a FINDING: <sha> sent
+      README.md       633  22                 The room that leaves is computed rather than
+      README.md       634  14                 rule does not take; **14** of them reachable
+      README.md       636  10,14              and moves nothing; and **10** of those 14 re
+      README.md       643  38,15              a hand verdict on whether that line is a row
+      README.md       644  16,150             `WALK` and **16** distinct texts as `NOT-WAL
+      README.md       654  10                 raises them, which is why this arm may exit 
+      README.md       664  8,8,8              **8** gained, **8** in-family, out unmoved, 
+      README.md       666  12                 have failed. So §12's claim is not withdrawn
+      README.md       672  816                - **The other 816 lines, and the direction t
+      README.md       680  816                and nobody has looked for the rest. If the 8
+      README.md       686  12                 reason that shape stays open is still §12's,
       run_all.sh        3  19                 #   selftest_30bd  19 planted worlds boundin
       run_all.sh       20  6,900              #     python3 -B sweep.py --workers 6 --time
       run_all.sh       41  150                # fixed one of the 150 would be mg-e35b's sh
@@ -168,7 +186,6 @@ P3  THE FINDINGS
       README.md        74  3057,225,355,613,1 PASS 3057/225   TOTAL 630/355   FAIL 613/162
       README.md        75  72,493,246,477,470 FIRES 530/72    VERDICT 493/246 REPRODUCES 4
       README.md        76  414,119,390,109,36 RED 414/119     FAILS 390/109   FALSE 369/16
-      README.md        79  33                 MISS 33   MISSED 19   FAILED 13   FALSE 8   
       README.md       139  9455               - twin  …  9455 bytes
       README.md       140  9482               + twin  …  9482 bytes
       README.md       236  137,103            = 137 reachable by a runner (103 token, 34 n
@@ -228,7 +245,7 @@ P4  THE CONTROLS -- THIS ARM IS SHOWN TO FIRE, ON THE BYTES THAT SHIPPED
 P5  WHAT THIS ARM CANNOT SEE
 ==============================================================================
 
-  1  A QUOTATION IS NOT GRADED.  9 unbacked figure(s) sit inside a fence
+  1  A QUOTATION IS NOT GRADED.  8 unbacked figure(s) sit inside a fence
      and are listed in P3 rather than counted against the verdict.  §2's
      ALL-CAPS derivation table is the big one: the frequency counts that
      chose the token set were produced by a run nobody kept, so THE ONLY
@@ -246,7 +263,7 @@ P5  WHAT THIS ARM CANNOT SEE
      where the record says 22 timed out, and THIS ARM DOES NOT FIRE ON IT:
          figures 17, 187, 900, none of them missing -> BACKED
 
-     The 17 is BACKED, by 6 line(s) across this directory's transcripts, and
+     The 17 is BACKED, by 8 line(s) across this directory's transcripts, and
      0 of them carries the 900 s cap beside it -- so not one is the sentence
      §4 states.  The first, printed rather than paraphrased:
          out_owners_937c.txt:241  width  3-12 -> 17 hit(s)
@@ -269,6 +286,6 @@ P5  WHAT THIS ARM CANNOT SEE
 
 ==============================================================================
 mg-2959 prose arm: every figure this README states in its own voice is
-printed by one of this directory's own transcripts.  9 quoted figure(s)
+printed by one of this directory's own transcripts.  8 quoted figure(s)
 reported and NOT graded -- see P5.1, which is a hole and not a pass.
 ==============================================================================

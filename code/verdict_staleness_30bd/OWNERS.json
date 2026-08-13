@@ -47,6 +47,192 @@
     "assigned by reading the entry in out_verdict_staleness.txt.  A row added to",
     "silence the arm without that reading is the defect, not the fix."
   ],
+  "what_walk_lines_is": [
+    "mg-cda7 — ONE ENTRY PER QUOTED LINE INSIDE A `HISTORY-WALK` ROW, with a hand",
+    "verdict on whether that LINE is a row of a git-log walk.  It exists because the",
+    "in-family / out-of-family split mg-aff1 reports is a proxy over PATHS: a line",
+    "counts in-family because the ROW it sits in was read and filed HISTORY-WALK, not",
+    "because anybody looked at the line.  So a widening confined to these rows leaves",
+    "the OUT column at exactly where it was however wrong it is, and two of the",
+    "planted widenings in lib30bd.CANDIDATE_WIDENINGS do precisely that.",
+    "",
+    "`owners_937c.py` §6b grades every candidate widening against this list, so",
+    "`OUT unmoved` stops being the whole defence and `gained N lines somebody read as",
+    "NOT-WALK` becomes a number a rule can fail on.  A widening that takes a NOT-WALK",
+    "line is a FINDING and exits 1: it is this directory's own file and the repair is",
+    "in the same commit — narrow the rule, or read the line again and say why.",
+    "",
+    "CAN BE CHECKED: that every in-family quoted line in the record has an entry",
+    "(a new HISTORY-WALK row arrives UNREAD and is a finding), and that every entry",
+    "still occurs in the record (a stale entry is a finding).  Both directions, for",
+    "the reason `cause: RECORD-DISAGREES` is checked in both.",
+    "CANNOT: that a verdict is the RIGHT verdict.  Nothing checks a reading, which",
+    "is word for word what this file already declares about `cause`.  What stops it",
+    "being tuned to flatter the shipped rule is that §6b grades EVERY rule against",
+    "the same list and prints them side by side, including rules written after it.",
+    "",
+    "KEYED BY DIGEST — 12 hex of sha256 over the stripped MASKED line, which is what",
+    "the record stores — because these lines run to 900 characters and a hand file is",
+    "unreadable at that width.  The excerpt beside it is what a reader reads; the",
+    "digest is what the arm matches on."
+  ],
+  "walk_lines": {
+    "93af16d0d552": {
+      "excerpt": "*** FINDING: <sha>'s summary says `20 sites remain unqualified in the tree, EVERY ONE A RECORD`.",
+      "verdict": "NOT-WALK",
+      "why": "a FINDING sentence that quotes a sha to say whose summary it is contradicting.  V5's shape at full length: the sha is the SUBJECT of the sentence, not a column of a walk."
+    },
+    "3f898eee7632": {
+      "excerpt": "FINDING: <sha>'s summary says `20 sites remain unqualified in the tree, EVERY ONE A RECORD`.  Re",
+      "verdict": "NOT-WALK",
+      "why": "the same finding without the `***` marker.  Same reading."
+    },
+    "3712168d8c8c": {
+      "excerpt": "*** FINDING: <sha>'s summary says `20 sites remain unqualified in the tree, EVERY ONE A RECORD`.",
+      "verdict": "NOT-WALK",
+      "why": "the same finding with the moved number that made this transcript stale.  Same reading."
+    },
+    "d13552a8ddc1": {
+      "excerpt": "<sha> apply: THE FINDING WAS ALREADY APPLIED AND THE ENUMERATION MISSED ONE SITE — mg-0e8c res",
+      "verdict": "WALK",
+      "why": "a sha column then a commit subject — the shape that always worked."
+    },
+    "51478268d71a": {
+      "excerpt": "<sha> audit+docs: mg-eaa1's INDEPENDENT AUDIT of mg-131e — ALL SEVEN CHECKS PASS, THE n-INDEXE",
+      "verdict": "WALK",
+      "why": "sha column, commit subject."
+    },
+    "381c46817216": {
+      "excerpt": "<sha> audit+instrument: THE HEAD CORPUS **IS** A FIXED POINT AND D7 IS REFUTED IN ITS OWN STAT",
+      "verdict": "WALK",
+      "why": "sha column, commit subject."
+    },
+    "3c88fce9dce7": {
+      "excerpt": "instrument: THE CLASSIFIER FOR VERDICT-STALENESS, AND THE FIVE WORLDS THAT MUST COME OUT BENIGN",
+      "verdict": "WALK",
+      "why": "a BARE commit subject with the sha stripped — the shape mg-aff1 left open.  Read as a walk because the identical string appears in branching_audit_e34a behind `HEAD's subject    :`, which is where it came from."
+    },
+    "77a581bfb31f": {
+      "excerpt": "FINDINGS: 0, population: for each output run_all.sh writes: that it reproduces byte for byte or ",
+      "verdict": "NOT-WALK",
+      "why": "the run's own findings count and its population sentence.  No history in it."
+    },
+    "99a581199096": {
+      "excerpt": "TOTAL BAD: 0",
+      "verdict": "NOT-WALK",
+      "why": "a counter."
+    },
+    "21a2fd4ee9aa": {
+      "excerpt": "FINDING: out_g4_fleet.txt does not reproduce even with the one revision normalised away: 144 lin",
+      "verdict": "NOT-WALK",
+      "why": "a finding about a transcript, naming no commit at all."
+    },
+    "f6ebe91fbc7e": {
+      "excerpt": "FINDINGS: 1, population: for each output run_all.sh writes: that it reproduces byte for byte or ",
+      "verdict": "NOT-WALK",
+      "why": "the same count line with the moved number."
+    },
+    "337bac5e6775": {
+      "excerpt": "HEAD's subject    : instrument: THE CLASSIFIER FOR VERDICT-STALENESS, AND THE FIVE WORLDS THAT M",
+      "verdict": "WALK",
+      "why": "mg-937c §6.4's named shape: a one-commit walk of HEAD, with the sha in the line above."
+    },
+    "d3d41842c658": {
+      "excerpt": "TOTAL BAD: 1",
+      "verdict": "NOT-WALK",
+      "why": "a counter."
+    },
+    "7f2a0668043e": {
+      "excerpt": "audit: mg-fcb2's own instruments and A1 -- THE COVERAGE LINE'S 86/86 IS A TAUTOLOGY WITH A FALSE",
+      "verdict": "WALK",
+      "why": "a BARE commit subject.  `audit:` is a commit type this estate's log carries."
+    },
+    "366fe74d9c09": {
+      "excerpt": "census+repair: THE FOUR ROWS RE-DERIVED FROM THE TREE — 2 of 4 REFUTED on a population of 4, and",
+      "verdict": "WALK",
+      "why": "a BARE commit subject, and the one that names `census+repair` — the type that shows the vocabulary is open."
+    },
+    "262a753fe072": {
+      "excerpt": "the tip      <sha> <date>  docs: re-scope C3 — \"exactly the ordinal sums\" is a small-n coinciden",
+      "verdict": "WALK",
+      "why": "the widest true label on the record, 13 characters, then a sha and a date column."
+    },
+    "43ff1de388c5": {
+      "excerpt": "<sha>  <sha>  evidence: THE INSTRUMENT THAT RAISED THE FINDINGS, R",
+      "verdict": "WALK",
+      "why": "two sha columns then a commit subject."
+    },
+    "40d786ca5052": {
+      "excerpt": "FINDINGS 1",
+      "verdict": "NOT-WALK",
+      "why": "a counter, no colon."
+    },
+    "7268361424d2": {
+      "excerpt": "<sha>  *** NONE ***  evidence: THE INSTRUMENT THAT RAISED THE FINDINGS, R",
+      "verdict": "WALK",
+      "why": "a sha column, a `NONE` cell, then a commit subject."
+    },
+    "dd7a410dceb5": {
+      "excerpt": "FINDINGS 0",
+      "verdict": "NOT-WALK",
+      "why": "a counter, no colon."
+    },
+    "5cb3aa58f3f9": {
+      "excerpt": "P3f    predicted 3                        got 6                        *** MISSED ***",
+      "verdict": "NOT-WALK",
+      "why": "a predictions table row.  `predicted`/`got`/`MISSED` is a control's own scoreboard."
+    },
+    "6fa431d997ae": {
+      "excerpt": "<sha>  says 2          refresh: FOUR ARMS OF mg-6cb9 RE-RUN AND FOUR DIFFER",
+      "verdict": "WALK",
+      "why": "sha column, a value column, then a commit subject."
+    },
+    "5b2d012c6cff": {
+      "excerpt": "P3f    predicted 3                        got 7                        *** MISSED ***",
+      "verdict": "NOT-WALK",
+      "why": "the same prediction row with the moved number."
+    },
+    "ee8a46569a97": {
+      "excerpt": "at <sha>: ## Kill-shot 2 — Standard dominance — **GREEN**",
+      "verdict": "WALK",
+      "why": "a labelled sha with a COLON behind it — mg-aff1's second repaired shape."
+    },
+    "62b7f1957778": {
+      "excerpt": "by <sha>  repair: THE VERDICT IS LEAVE-AND-RECORD AND IT WAS ALREA",
+      "verdict": "WALK",
+      "why": "`by <sha>` then a commit subject — mg-aff1's subject."
+    },
+    "4a9c02face47": {
+      "excerpt": "A2 TOTAL BAD: 2",
+      "verdict": "NOT-WALK",
+      "why": "a counter behind an arm label."
+    },
+    "9a8ecf58b092": {
+      "excerpt": "R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    1         *** MISSED *",
+      "verdict": "NOT-WALK",
+      "why": "a planted-world table row.  Its `OUT` column is a mutation id and has nothing to do with this section's OUT column."
+    },
+    "5bb2d9a04863": {
+      "excerpt": "<sha>   530  repair: mg-d3f3's SIX FINDINGS LANDED — the",
+      "verdict": "WALK",
+      "why": "sha column, a line-count column, then a commit subject."
+    },
+    "2f2856991179": {
+      "excerpt": "<sha>   531  instrument: THE CLASSIFIER FOR VERDICT-STALE",
+      "verdict": "WALK",
+      "why": "sha column, a line-count column, then a commit subject."
+    },
+    "ec3369d48ef4": {
+      "excerpt": "A2 TOTAL BAD: 6",
+      "verdict": "NOT-WALK",
+      "why": "the same counter with the moved number."
+    },
+    "c565909c3dfd": {
+      "excerpt": "R0    -    unmutated                                            0    1    5         *** MISSED *",
+      "verdict": "NOT-WALK",
+      "why": "the unmutated control row of a planted-world table."
+    }
+  },
   "causes": {
     "LIVE-OUTSIDE-REPO": "not a function of this repository at all — it reads state that lives outside the tree, so no commit can make it reproduce",
     "NONDETERMINISM": "the producer is not deterministic on an unchanged tree",
