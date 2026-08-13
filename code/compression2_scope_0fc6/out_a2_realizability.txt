@@ -1,0 +1,60 @@
+
+==============================================================================
+a2.1  CONTROL — the realizability oracle on cases whose answer is known
+==============================================================================
+  [GREEN] every uniform linear-extension measure at n <= 5 is accepted   4469 posets
+  [GREEN] REJECTED: non-uniform on a genuine L(P)   not uniform on its support
+  [GREEN] REJECTED: two antipodal atoms (the corpus's two-atom law)   support is not L(P): |L(P)|=24 vs |supp|=2
+  [GREEN] REJECTED: (2/3)Unif + (1/3)delta_L*   not uniform on its support
+
+==============================================================================
+a2.2  THE NOTE'S ENTIRE CHAIN, RUN ON A MEASURE THAT IS NOT A POSET'S
+==============================================================================
+  [GREEN] n=4: the witness is NOT a linear-extension measure   not uniform on its support
+  [GREEN] n=4: it SATISFIES hypothesis (1)   max flip = 1/3
+  [GREEN] n=4: compression2 (2) holds on it verbatim
+  [GREEN] n=4: compression2 (3) holds on it verbatim
+  [GREEN] n=4: compression2 (4) holds on it verbatim
+  [GREEN] n=4: compression2 (5) holds on it verbatim
+  [GREEN] n=4: compression2 (6) holds on it verbatim
+       H(mu) = 3.8337 bits   note bound (6) = 7.5191   log2 n! = 4.5850
+  [GREEN] n=6: the witness is NOT a linear-extension measure   not uniform on its support
+  [GREEN] n=6: it SATISFIES hypothesis (1)   max flip = 1/3
+  [GREEN] n=6: compression2 (2) holds on it verbatim
+  [GREEN] n=6: compression2 (3) holds on it verbatim
+  [GREEN] n=6: compression2 (4) holds on it verbatim
+  [GREEN] n=6: compression2 (5) holds on it verbatim
+  [GREEN] n=6: compression2 (6) holds on it verbatim
+       H(mu) = 7.2370 bits   note bound (6) = 14.5774   log2 n! = 9.4919
+  [GREEN] n=8: the witness is NOT a linear-extension measure   not uniform on its support
+  [GREEN] n=8: it SATISFIES hypothesis (1)   max flip = 1/3
+  [GREEN] n=8: compression2 (2) holds on it verbatim
+  [GREEN] n=8: compression2 (3) holds on it verbatim
+  [GREEN] n=8: compression2 (4) holds on it verbatim
+  [GREEN] n=8: compression2 (5) holds on it verbatim
+  [GREEN] n=8: compression2 (6) holds on it verbatim
+       H(mu) = 11.1175 bits   note bound (6) = 22.5573   log2 n! = 15.2992
+
+       [finding] every step of the note holds for a measure that is not any poset's.
+                 The chain reads P through (1) ALONE, and (1) is a statement about the
+                 measure's PAIR MARGINALS.  That is the corpus's information set M_n
+                 (STATE.md:21), not a realizability fact.
+
+==============================================================================
+a2.3  TWO MEASURES WITH IDENTICAL PAIR MARGINALS — one realizable, one not
+==============================================================================
+  [GREEN] a hypothesis-population poset with a kernel square exists   n = 6, e(P) = 9
+  [GREEN] a pair-marginal kernel direction exists over that support   ((4, 5, 3, 1, 2, 0), (5, 4, 3, 2, 1, 0), (5, 4, 3, 1, 2, 0), (4, 5, 3, 2, 1, 0))
+  [GREEN] mu1 and mu2 have IDENTICAL pair marginals
+  [GREEN] mu1 IS a linear-extension measure
+  [GREEN] mu2 is NOT a linear-extension measure   not uniform on its support
+  [GREEN] BOTH sit inside hypothesis (1)   max flip = 1/3
+  [GREEN] the note's ONLY input, (1), takes the same value on both   1/3
+  [GREEN] every step of the note returns the same verdict on both
+       H(mu1) = 3.169925   H(mu2) = 3.149673  — the MEASURES differ; the note's INPUT does not.
+
+       [finding] P5 CONFIRMED.  The poset-dependence washes out at exactly one place:
+                 L* and (1) are both functions of the PAIR MARGINALS, and the dyadic
+                 tree is a function of L*.  Nothing downstream reads P again.
+
+RESULT: GREEN — all checks passed
