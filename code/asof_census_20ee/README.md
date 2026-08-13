@@ -225,6 +225,37 @@ restored — a state no build path should be in.
 **The next tranche should triage before it pins**: run the suite, run `pinnable.py`, and only then
 start conditions 1–3.
 
+### Noted, not fixed — the **gate's own** transcripts carry an absolute worktree path
+
+The backstop for this branch was a full `./build.sh` (green, `worst suite exit: 0`). It reported
+`VERDICT: GREEN — 0 disagreements` and left **seven** tracked transcripts modified. Six lines are
+timing, which `mg-f771`'s `W3` declares as noise; the byte counts beside them — `9455`, `45349` —
+are **unchanged**, so this branch adds nothing those censuses count.
+
+The remaining difference is **not** noise:
+
+```
+-  S1  ... /Users/daniel/.pogo/polecats/p54b1/code/control_gate_724a/BASELINE.json.no-such-file
++  S1  ... /Users/daniel/.pogo/polecats/p4020/code/control_gate_724a/BASELINE.json.no-such-file
+```
+
+`code/control_gate_724a/out_gate.txt` and `code/gate_fixed_point_f771/out_g1_controls.txt` carry
+the **absolute worktree path of the polecat that last committed them**. They reproduce for exactly
+one operator and for nobody else, ever — which is precisely the defect tranche 1 named in
+`anchor_drift_96df`, now sitting in **two suites inside `build.sh`'s own loop**.
+
+Two things follow, and neither is repaired here:
+
+1. **`g0` is GREEN across it.** The gate's own fixed-point check does not catch a transcript that
+   can only reproduce for one operator — `mg-f771` §4's *"they say nothing about whether the
+   watched class is the right class"*, met in the field rather than in the abstract.
+2. **Every branch inherits it.** This is a standing reason gate transcripts get recommitted, and
+   each recommit re-points them at a new polecat.
+
+**These seven were restored, not committed.** Committing them would have replaced `p54b1` with
+`p4020` — planting the exact defect this directory exists to remove, on behalf of every later
+operator. Out of scope for `mg-4020`; it belongs to `mg-724a` / `mg-f771`.
+
 ### The next candidate, diagnosed but **not** pinned — `landscape_repair_audit_3b51`
 
 Triaged here, and left for tranche 4 rather than rushed, because *"a rushed pin is
