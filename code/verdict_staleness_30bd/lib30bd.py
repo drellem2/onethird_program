@@ -112,6 +112,22 @@ def mask_address_and_asof(text):
     return text
 
 
+# THE ONE THAT FAILED, KEPT RATHER THAN DELETED.  This was the first `ADDRESS`, and it eats
+# `TOTAL BAD:1` — i.e. it turns the exact number this ticket is about into a benign address
+# move.  `selftest_30bd.py` re-runs the classification under it every time the suite runs, so
+# the failure is a measurement on the record and not a sentence in a README.
+NAIVE_ADDRESS = re.compile(r"(?<=[\w./-]):\d+\b")
+
+
+def naive_mask(text):
+    """A1 as first written, with A2 unchanged, for the selftest's demonstration only."""
+    text = NAIVE_ADDRESS.sub(":<L>", text)
+    text = DATE.sub("<date>", text)
+    text = CLOCK.sub("<clock>", text)
+    text = SHA.sub("<sha>", text)
+    return text
+
+
 # ======================================================================================
 # THE TOKEN SET
 # ======================================================================================
@@ -139,9 +155,14 @@ def is_verdict_line(line):
     return bool(TOKEN_RE.search(line))
 
 
-def canonical(text):
-    """N1+N2 (mg-f771) then A1+A2.  The text every comparison below is made on."""
-    return mask_address_and_asof(lib_f771.normalise(text))
+def canonical(text, mask=None):
+    """N1+N2 (mg-f771) then A1+A2.  The text every comparison below is made on.
+
+    `mask` is a parameter for ONE reason: `selftest_30bd.py` re-runs the classification under
+    the ADDRESS REGEX THAT FAILED, so that failure stays on the record as a run rather than
+    as a sentence in a README.  Nothing else passes it.
+    """
+    return (mask or mask_address_and_asof)(lib_f771.normalise(text))
 
 
 def verdict_lines(text):
@@ -178,14 +199,14 @@ VERDICT_STALE = (VERDICT_TOKEN, VERDICT_NUMBER)
 BENIGN = (IDENTICAL, BENIGN_F771, BENIGN_ADDR)
 
 
-def classify(committed, worktree):
+def classify(committed, worktree, mask=None):
     """(bucket, detail) for one committed transcript against its regeneration at HEAD."""
     f = lib_f771.verdict_for(committed, worktree)
     if f == "AGREES":
         return IDENTICAL, ""
     if f == "NOISE":
         return BENIGN_F771, "mg-f771 N1/N2/N3"
-    a, b = canonical(committed), canonical(worktree)
+    a, b = canonical(committed, mask), canonical(worktree, mask)
     if a == b or lib_f771.texts_equivalent(a, b):
         return BENIGN_ADDR, "A1 line addresses / A2 sha, date, clock"
     va, vb = verdict_lines(a), verdict_lines(b)

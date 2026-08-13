@@ -142,6 +142,46 @@ A second fidelity check, on real data rather than on the gate: `code/species_ext
 `e2_crosssection.py` was run once in the sandbox and once in this worktree and the two
 outputs are **byte-identical** (both exit 1, both `E2 TOTAL BAD: 5`).
 
+### Two rows the harness must not grade, and one line that cost a two-hour sweep
+
+**A run that did not finish is not evidence.** Two ways that happens, and both were measured
+rather than anticipated:
+
+* **Killed at the limit.** 17 of 187 suites hit the 900 s cap. A process cut off mid-write
+  leaves a transcript that may be half written, and comparing *that* against the committed
+  copy is **the harness accusing the corpus of its own truncation** — mg-479c's defect
+  exactly, where a redirect handed mg-f771 a half-written file and f771 correctly graded
+  `DISAGREES` about a redness the harness had caused. Those rows are `UNUSABLE/ungraded`.
+* **Refused.** Exit 2. That is not this instrument's invention: `build.sh` prints the
+  convention in its own footer — `0 green · 1 a control fired · 2 refused/broken` — and a
+  transcript from a run that declined is not a measurement of anything. **Exit 1 is *not* in
+  this class**: in this corpus that means a control *fired*, which is a completed run with a
+  finding, and treating it as unusable would discard most of the corpus.
+
+Together these took the first reported figure **186 → 157 → 156**, all downward, before
+anything was committed.
+
+**And one of the two showed up in the motivating instance itself.** `6cb9`'s
+`a1_bothways.py` **refused (exit 2) under host load 40–50** in the full sweep, so the one
+transcript this whole ticket rests on came back ungraded. Re-run alone on a single worker it
+exits 0 and reproduces `p6e4f` exactly (`A1 TOTAL BAD: 1 → 0`). That re-run is a supported
+operation — the record **appends** and `report.py` takes the **last record per directory**.
+
+It is supported *now*. `sweep.py` opened its record `"w"`, so the `--only` re-measurement
+**deleted the 187-suite record it was meant to correct**, and the sweep had to be taken
+again. A harness whose repair operation destroys the thing being repaired is this estate's
+own recurring shape, and it turned up inside the instrument that counts it. `--fresh` is now
+the only way to truncate, and the comment on that line says what it cost.
+
+**And the repaired mechanism was then used twice, on the second sweep, which is the only
+evidence that it works.** `code/control_gate_724a` raised `OSError(28, 'No space left on
+device')` mid-sweep — the host filled up under other agents — and one `--only` re-run
+appended a clean row that the report picked up in place of the error, taking the record from
+186 suites to 187 without disturbing the other 186. `report.py` also takes the **first**
+header rather than the last, because `--fresh` truncates and every later header belongs to a
+one-directory correction: taking the last one printed *"187 suites run, of 1 in the
+population"* — an instrument reporting its own denominator from a correction to itself.
+
 ## 5  The runner-blind pass, and why it exists
 
 `code/species_extent_audit_6cb9/run_all.sh` gates its three audit scripts behind a selftest
@@ -177,10 +217,16 @@ In short:
 ## 7  What this does to the reported numbers
 
 ```
-54  presumed stale     mg-20ee's original, superseded
-32  already-stale      the census ground truth — AUTHORITATIVE FOR ADDRESSES
- n  verdict-stale      this measurement, over a DIFFERENT population
+ 54  presumed stale     mg-20ee's original, superseded
+ 32  already-stale      the census ground truth — AUTHORITATIVE FOR ADDRESSES
+150  verdict-stale      this measurement, over a DIFFERENT population
+     = 137 reachable by a runner (103 token, 34 number) + 13 reachable only by
+       bypassing one.  Out of 665 transcripts a runner actually rewrote, against
+       314 IDENTICAL, 29 BENIGN, 80 NON-VERDICT and 105 UNGRADED.
 ```
+
+**150 does not supersede 32 and it does not contain it.** They are counts of different
+populations under different questions and neither is a correction of the other.
 
 **The two are not nested and must not be added without saying so.** mg-20ee's 44 candidates
 are the transcripts that carry a foreign `path:NNN`; this population is the transcripts whose
@@ -191,7 +237,7 @@ two classes.
 
 ## 8  What this ticket does not do, and who has to
 
-`mg-30bd` is tagged **`declares-remainder`**. It measures; it repairs nothing. Three things
+`mg-30bd` is tagged **`declares-remainder`**. It measures; it repairs nothing. Four things
 are left open and named rather than left to be found:
 
 1. **Every entry in §4 and §5 needs an owner, per instance.** A batch repair is exactly what
@@ -202,6 +248,16 @@ are left open and named rather than left to be found:
    baseline, so there is nothing yet that can say *the list has grown*. Gating on that is the
    obvious successor and it needs a declared baseline this ticket does not have the standing
    to set.
-3. **This directory is not in its own population.** The sweep measures the corpus at HEAD
-   before this branch, so `code/verdict_staleness_30bd`'s own transcripts are outside every
-   number above — an instrument is run before it is committed (mg-20ee's `AS_OF` rule 2).
+3. **105 transcripts are UNGRADED and 22 suites timed out at 900 s** — 11.8% of the
+   population produced no usable answer, so every count here is a floor. Re-taking the sweep
+   at a higher limit on a quiet host is the cheapest way to move it, and the record now
+   supports doing that one directory at a time.
+
+4. **This directory is not in its own population, and the reason is mechanical rather than
+   an exemption.** The sweep ran at the commit that carries this instrument's *sources* and
+   none of its *transcripts* — an instrument is run before it is committed, which is
+   mg-20ee's own `AS_OF` rule 2 — so `code/verdict_staleness_30bd` is a candidate directory
+   with zero tracked `out_*.txt` and drops out of the population by the same test every
+   other directory is measured by. The next sweep will include it. That is the right
+   outcome and it is worth stating out loud: this instrument's own transcripts are subject
+   to exactly the defect it counts.

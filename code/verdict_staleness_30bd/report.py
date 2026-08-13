@@ -28,6 +28,36 @@ import lib30bd as L                                                # noqa: E402
 RECORD = os.path.join(HERE, "sweep_30bd.jsonl")
 W = 90
 
+# NOT A BUCKET OF THE CLASSIFIER — a bucket of the HARNESS.  See `_unusable_why`.
+UNUSABLE = "UNUSABLE/ungraded"
+
+# The commit whose corpus this sweep measured.  See the header block for why this and not
+# `header["head"]` is the identifier of the measurement.
+CORPUS_AT = "f2117f1"
+
+
+def _unusable_why(timed_out, rc):
+    """Why a row cannot be graded, or None.
+
+    TWO WAYS A RUN PRODUCES A TRANSCRIPT NOBODY MAY READ AS EVIDENCE:
+
+      killed at the limit — the process was cut off, so the file may be half written, and
+        comparing that against the committed copy is THE HARNESS ACCUSING THE CORPUS OF ITS
+        OWN TRUNCATION.  mg-479c's defect exactly: a redirect handed mg-f771 a half-written
+        file and f771 correctly graded DISAGREES about a redness the harness had caused.
+
+      REFUSED — exit 2.  That is not this instrument's invention: `build.sh` prints the
+        convention in its own footer, `0 green · 1 a control fired · 2 refused/broken`, and
+        a refusal means the instrument declined to reach a verdict.  A transcript from a run
+        that declined is not a measurement of anything.  Exit 1 is NOT in this class: in this
+        corpus exit 1 means a control FIRED, which is a completed run with a finding.
+    """
+    if timed_out:
+        return "killed at the limit"
+    if rc == 2:
+        return "the producing run REFUSED (exit 2)"
+    return None
+
 
 def rule(ch="-"):
     return ch * W
@@ -36,7 +66,7 @@ def rule(ch="-"):
 def load():
     if not os.path.exists(RECORD):
         return None, []
-    header, suites = None, []
+    header, bydir, heads = None, {}, set()
     with open(RECORD, encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
@@ -44,10 +74,25 @@ def load():
                 continue
             rec = json.loads(line)
             if rec.get("kind") == "header":
-                header = rec
+                # THE FIRST HEADER WINS, and this is not a coin toss.  `--fresh` truncates,
+                # so the first header in the file is the SWEEP's; every later one belongs to
+                # a `--only` re-measurement of one directory and carries `dirs: 1`.  Taking
+                # the last one printed "187 suites run, of 1 in the population" — an
+                # instrument reporting its own denominator from a correction to itself.
+                if header is None:
+                    header = rec
+                else:
+                    heads.add(rec.get("head"))
             else:
-                suites.append(rec)
-    return header, suites
+                # LAST RECORD PER DIRECTORY WINS.  A re-measurement of one suite is appended
+                # to this file rather than edited into it, so the record keeps the run that
+                # was superseded and the report reads the newer one.  `sweep.py --only <dir>
+                # >> sweep_30bd.jsonl` is the supported way to redo one line of a sweep.
+                bydir[rec["dir"]] = rec
+    if header is not None:
+        heads.discard(header.get("head"))
+        header = dict(header, foreign_heads=sorted(heads))
+    return header, [bydir[k] for k in sorted(bydir)]
 
 
 def main():
@@ -75,8 +120,17 @@ def main():
                 continue
             rewritten.setdefault(row["path"], set()).add(s["dir"])
             prev = buckets.get(row["path"])
-            cand = (row["bucket"], row.get("detail", ""), row.get("hunk"),
-                    row.get("dropped", 0), s["dir"], "runner")
+            # A RUN THAT WAS KILLED AT THE LIMIT LEAVES A TRANSCRIPT THAT MAY BE HALF
+            # WRITTEN, AND COMPARING THAT AGAINST THE COMMITTED COPY IS THE HARNESS
+            # ACCUSING THE CORPUS OF ITS OWN TRUNCATION.  That is mg-479c's exact defect —
+            # a redirect handing mg-f771 a half-written file and f771 correctly grading
+            # DISAGREES about a redness the harness caused.  So these rows are NOT graded:
+            # they are moved to UNUSABLE, counted, and kept out of every headline.
+            why = _unusable_why(s.get("timeout"), s.get("rc"))
+            bucket = UNUSABLE if why else row["bucket"]
+            cand = (bucket, row.get("detail", "") if not why else
+                    "%s — would have been %s" % (why, row["bucket"]),
+                    row.get("hunk"), row.get("dropped", 0), s["dir"], "runner")
             # A transcript two suites both rewrite is counted ONCE, under the strongest
             # bucket seen, and both producers are named in the listing.
             if prev is None or _rank(cand[0]) > _rank(prev[0]):
@@ -85,6 +139,10 @@ def main():
     pass2_rows = {}
     for s in suites:
         for row in s.get("pass2", []) or []:
+            why = _unusable_why(row.get("timeout"), row.get("rc"))
+            if why and row.get("bucket"):
+                row = dict(row, detail="%s — would have been %s" % (why, row["bucket"]),
+                           bucket=UNUSABLE)
             pass2_rows[row["path"]] = (row, s["dir"])
 
     p = subprocess.run(["git", "-C", ROOT, "ls-files", "code"],
@@ -102,7 +160,13 @@ def main():
     e("                    drift in its VERDICTS with no address moving at all, and such a")
     e("                    transcript is invisible to an address classifier BY CONSTRUCTION.")
     e("                    This measures that second class.  IT REPAIRS NOTHING.")
-    e("  head            : %s" % header["head"])
+    e("  sweep head      : %s" % header["head"])
+    e("  the corpus is   : `main` at %s.  THAT is the sha to quote and the one above is not:" % CORPUS_AT)
+    e("                    the sweep head is a BRANCH commit, the refinery rewrites it on")
+    e("                    merge, and a record naming a commit that will not exist is")
+    e("                    mg-daba's orphan pin in a different file.  The branch adds only")
+    e("                    this directory's own sources, which carry no tracked transcripts")
+    e("                    and are outside the population by the same test as everything else.")
     e("  method          : re-run each candidate suite in an isolated clone at HEAD, diff")
     e("                    every tracked out_*.txt against its committed copy, classify.")
     e("  per-suite limit : %d s" % header["timeout"])
@@ -124,7 +188,17 @@ def main():
     e("  %5d  tracked out_*.txt under code/ at this HEAD" % len(all_tx))
     e("  %5d  of them sit in a directory that has a run_all.sh  (the candidates)"
       % len(owned_by_candidate))
-    e("  %5d  candidate suite(s) run" % len(ran))
+    e("  %5d  candidate suite(s) run, of %d in the population" % (len(ran), header["dirs"]))
+    if header.get("foreign_heads"):
+        e("")
+        e("  ⚠️  A RE-MEASUREMENT IN THIS RECORD WAS TAKEN AT A DIFFERENT COMMIT: %s."
+          % ", ".join(header["foreign_heads"]))
+        e("     Rows from it describe a tree this report does not otherwise describe.")
+    if len(ran) < header["dirs"]:
+        e("")
+        e("  ⚠️  THIS RECORD IS INCOMPLETE — %d of %d suites have no row in it at all, so every"
+          % (header["dirs"] - len(ran), header["dirs"]))
+        e("     count below is a LOWER BOUND and none of them is a measurement of the corpus.")
     e("")
     e("  %5d  transcript(s) a runner ACTUALLY REWROTE — the measured population"
       % len(rewritten))
@@ -169,7 +243,7 @@ def main():
     e(rule("="))
     e("")
     order = [L.IDENTICAL, L.BENIGN_F771, L.BENIGN_ADDR, L.NON_VERDICT,
-             L.VERDICT_NUMBER, L.VERDICT_TOKEN, "GONE"]
+             L.VERDICT_NUMBER, L.VERDICT_TOKEN, "GONE", UNUSABLE]
     counts = {k: 0 for k in order}
     for pth, (b, _d, _h, _dr, _dir, _src) in buckets.items():
         counts[b] = counts.get(b, 0) + 1
@@ -181,6 +255,7 @@ def main():
         L.VERDICT_NUMBER: "VERDICT-STALE — a number under an unmoved token moved",
         L.VERDICT_TOKEN: "VERDICT-STALE — a verdict TOKEN appeared, vanished or changed",
         "GONE": "the run REMOVED a tracked transcript",
+        UNUSABLE: "the producing run was KILLED or REFUSED — not graded, see §6.3",
     }
     for k in order:
         if k in counts:
@@ -191,6 +266,14 @@ def main():
     e("  VERDICT-STALE, reachable by a runner: %d  (%d token, %d number)"
       % (len(vs), counts.get(L.VERDICT_TOKEN, 0), counts.get(L.VERDICT_NUMBER, 0)))
     e("  " + rule("-")[:86])
+    e("")
+    e("  %d further transcript(s) came from a run this sweep KILLED AT THE LIMIT, or from one"
+      % counts.get(UNUSABLE, 0))
+    e("  that REFUSED (exit 2, build.sh's own convention).  They are NOT in the number above")
+    e("  and NOT in any number in this report: a half-written or declined transcript compared")
+    e("  against its committed copy is the harness accusing the corpus of its own truncation,")
+    e("  which is mg-479c's defect exactly.  They are UNMEASURED, not clean.  Exit 1 is NOT in")
+    e("  this class — in this corpus that means a control FIRED, which is a completed run.")
     e("")
 
     # ------------------------------------------------------------------ the list
@@ -206,10 +289,13 @@ def main():
     for pth in vs:
         b, detail, hunk, dropped, dname, _src = buckets[pth]
         e("  %s" % pth)
-        e("      %-22s %s" % (b, detail))
+        e("      %-22s %s" % (b, short_detail(detail)))
         e("      regenerated by  %s/run_all.sh" % dname)
-        for mark, text in (hunk or []):
-            e("      %s %s" % (mark, text[:78]))
+        note = walk_note(hunk or [])
+        if note:
+            e("      NOTE  %s" % note)
+        for mark, text in show(hunk or []):
+            e("      %s %s" % (mark, text))
         if dropped:
             e("      … and %d more verdict line(s) moved" % dropped)
         e("")
@@ -253,10 +339,13 @@ def main():
         for pth in p2vs:
             row, dname = pass2_rows[pth]
             e("  %s" % pth)
-            e("      %-22s %s" % (row["bucket"], row.get("detail", "")))
+            e("      %-22s %s" % (row["bucket"], short_detail(row.get("detail", ""))))
             e("      produced by     %s   (in %s, rc=%s)" % (row.get("cmd"), dname, row.get("rc")))
-            for mark, text in (row.get("hunk") or []):
-                e("      %s %s" % (mark, text[:78]))
+            note = walk_note(row.get("hunk") or [])
+            if note:
+                e("      NOTE  %s" % note)
+            for mark, text in show(row.get("hunk") or []):
+                e("      %s %s" % (mark, text))
             if row.get("dropped"):
                 e("      … and %d more verdict line(s) moved" % row["dropped"])
             e("")
@@ -277,18 +366,35 @@ def main():
     e("     rewritten by their runner at all.  §5 reaches the ones whose producer is written")
     e("     in the runner as a plain redirect; the rest stay unmeasured.")
     e("")
-    e("  3  SUITES THAT DID NOT FINISH.  %d timed out at %d s and %d raised."
-      % (len(timed_out), header["timeout"], len(errored)))
+    unfinished = len(timed_out) + len(errored)
+    e("  3  SUITES THAT DID NOT FINISH, AS A COVERAGE BOUND AND NOT ONLY A LIST.")
+    e("     %d of %d suite(s) — %.1f%% — produced no usable answer: %d timed out at %d s and"
+      % (unfinished, len(ran), 100.0 * unfinished / max(1, len(ran)), len(timed_out),
+         header["timeout"]))
+    e("     %d raised.  A timed-out suite may have rewritten SOME of its transcripts before"
+      % len(errored))
+    e("     the limit, so its rows are kept and are NOT evidence that the rest agree — size")
+    e("     every total above against this fraction.")
     for s in timed_out:
         e("       T/O  %s" % s["dir"])
     for s in errored:
         e("       ERR  %s  %s" % (s["dir"], s["error"]))
     e("")
-    e("  4  THE TOKEN SET IS A CHOICE, AND §2 STATES BOTH ITS BIASES.  A verdict written in")
+    e("  4  THE ANSWER DEPENDS ON THE LOAD IT WAS TAKEN UNDER, which is a measurement")
+    e("     condition and not a caveat.  Suites here mutate a worktree and restore it, and")
+    e("     several check the restore by comparing `git status` (and .pyc mtimes) across a")
+    e("     probe — so a loaded host makes them REFUSE where a quiet one does not.  MEASURED,")
+    e("     ON THE INSTANCE THIS TICKET IS ABOUT: code/species_extent_audit_6cb9's")
+    e("     a1_bothways.py exited 2 under host load 40-50 during the full sweep, and exits 0")
+    e("     reproducing p6e4f exactly when re-run alone.  Anyone re-taking this sweep should")
+    e("     expect the UNGRADED count to move with the machine, and should re-measure a")
+    e("     refusal on one worker before reading anything into it.")
+    e("")
+    e("  5  THE TOKEN SET IS A CHOICE, AND §2 STATES BOTH ITS BIASES.  A verdict written in")
     e("     a word nobody put on the list is not counted, and this instrument cannot tell you")
     e("     how many those are — that is what makes §2 the instrument rather than a detail.")
     e("")
-    e("  5  AND THE ONE THAT MATTERS MOST: AN ENUMERATION ONLY SEES WHAT IT ENUMERATES.")
+    e("  6  AND THE ONE THAT MATTERS MOST: AN ENUMERATION ONLY SEES WHAT IT ENUMERATES.")
     e("     Everything above is a per-suite loop, so a transcript no loop entry reaches is")
     e("     invisible however the classifier is tuned.  THE THING THAT CATCHES WHAT AN")
     e("     ENUMERATION MISSES IS A WHOLE-RUN BEFORE/AFTER DIFF — run the corpus, diff the")
@@ -301,10 +407,16 @@ def main():
     e("§7  WHAT THIS DOES TO THE REPORTED NUMBERS")
     e(rule("="))
     e("")
-    e("      54  presumed stale        mg-20ee's original, superseded")
-    e("      32  already-stale         the census ground truth — AUTHORITATIVE FOR ADDRESSES")
-    e("      %2d  verdict-stale        this measurement, over a DIFFERENT population"
-      % (len(vs) + len([p for p in pass2_rows if pass2_rows[p][0].get("bucket") in L.VERDICT_STALE])))
+    total_vs = len(vs) + len([q for q in pass2_rows
+                              if pass2_rows[q][0].get("bucket") in L.VERDICT_STALE])
+    e("    %4d  presumed stale     mg-20ee's original, superseded" % 54)
+    e("    %4d  already-stale      the census ground truth — AUTHORITATIVE FOR ADDRESSES" % 32)
+    e("    %4d  verdict-stale      this measurement, over a DIFFERENT population" % total_vs)
+    e("")
+    e("  %d DOES NOT SUPERSEDE 32 AND IT DOES NOT CONTAIN IT.  That is the misreading this" % total_vs)
+    e("  section exists to stop: the two are counts of DIFFERENT POPULATIONS under different")
+    e("  questions, and neither is a correction of the other.  32 remains the authoritative")
+    e("  already-stale ADDRESS count and this report does not touch it.")
     e("")
     e("  THE TWO NUMBERS ARE NOT NESTED AND MUST NOT BE ADDED WITHOUT SAYING SO.  mg-20ee's")
     e("  44 candidates are the transcripts that carry a foreign `path:NNN`; this population is")
@@ -316,6 +428,70 @@ def main():
     e("")
     print("\n".join(out))
     return 0
+
+
+WALK = None
+
+
+def _walk_re():
+    global WALK
+    if WALK is None:
+        import re
+        # A `<sha> <subject>` line: what a `git log` walk prints once the sha has been
+        # masked by A2.  Named, not repaired: a transcript that QUOTES COMMIT SUBJECTS moves
+        # whenever history moves, which is mg-e720's family ("unbounded history walks scored
+        # as verdicts"), and adjudicating each instance is the successor's job, not this
+        # instrument's.  Counted so a reader can see the cause without re-deriving it.
+        WALK = re.compile(r"^\s*(?:HEAD:\s*)?<sha>\s+\S")
+    return WALK
+
+
+def show(rows):
+    """Render a hunk so a `-`/`+` pair NEVER prints as two identical lines.
+
+    The first version truncated at column 78 and printed pairs whose visible halves were
+    letter-for-letter equal — a report that shows a difference by showing no difference.
+    Here the window slides to the first differing character.
+    """
+    out = []
+    for i, (mark, text) in enumerate(rows):
+        other = None
+        if mark == "-" and i + 1 < len(rows) and rows[i + 1][0] == "+":
+            other = rows[i + 1][1]
+        elif mark == "+" and i and rows[i - 1][0] == "-":
+            other = rows[i - 1][1]
+        cut = 0
+        if other is not None:
+            n = min(len(text), len(other))
+            j = next((k for k in range(n) if text[k] != other[k]), n)
+            if j > 70:
+                cut = j - 24
+        body = ("…" + text[cut:cut + 77]) if cut else text[:78]
+        out.append((mark, body))
+    return out
+
+
+def short_detail(detail, limit=108):
+    """A token delta over 28 words is unreadable as one line, so it is cut WITH ITS COUNT.
+    A silent truncation reads as `that was all of it` (mg-502f)."""
+    if len(detail) <= limit:
+        return detail
+    parts = detail.split(", ")
+    kept, n = [], 0
+    for part in parts:
+        if n + len(part) + 2 > limit:
+            break
+        kept.append(part)
+        n += len(part) + 2
+    return ", ".join(kept) + ", … and %d more token(s)" % (len(parts) - len(kept))
+
+
+def walk_note(rows):
+    n = sum(1 for _m, t in rows if _walk_re().match(t))
+    if not n:
+        return None
+    return ("%d of %d quoted line(s) are `<sha> <subject>` — a history walk, so this moves "
+            "when main moves (mg-e720's family)" % (n, len(rows)))
 
 
 def _rank(bucket):

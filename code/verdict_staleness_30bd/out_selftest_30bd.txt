@@ -1,0 +1,60 @@
+==============================================================================
+mg-30bd selftest -- the worlds the classifier must catch, and the five it must not
+==============================================================================
+
+  id   expected             got                  what it is
+  --------------------------------------------------------------------------
+  W0   IDENTICAL            IDENTICAL            the same bytes twice
+  W1   BENIGN/timing+path   BENIGN/timing+path   a wall-clock timing (mg-f771 N2)  <- BENIGN ON PURPOSE
+  W2   BENIGN/timing+path   BENIGN/timing+path   a foreign checkout root (mg-f771 N1)  <- BENIGN ON PURPOSE
+  W3   BENIGN/address+asof  BENIGN/address+asof  a LINE ADDRESS moved -- mg-c824/mg-20ee's family  <- BENIGN ON PURPOSE
+  W4   BENIGN/address+asof  BENIGN/address+asof  the as-of block's sha moved  <- BENIGN ON PURPOSE
+  W5   BENIGN/address+asof  BENIGN/address+asof  the as-of block's date and clock moved  <- BENIGN ON PURPOSE
+  W6   VERDICT-STALE/token  VERDICT-STALE/token  a *** MISSED *** row stopped firing -- mg-6cb9's Q2 exactly
+  W7   VERDICT-STALE/token  VERDICT-STALE/token  VERDICT: GREEN became VERDICT: RED
+  W8   VERDICT-STALE/token  VERDICT-STALE/token  a selftest assertion started failing
+  W9   VERDICT-STALE/number VERDICT-STALE/number A1 TOTAL BAD: 1 -> 0 -- mg-6cb9's headline
+  W10  NON-VERDICT          NON-VERDICT          a corpus-size count on a line carrying no token
+  W11  NON-VERDICT          NON-VERDICT          a repo-relative path moved (mg-f771 W7) on a non-verdict line
+  W12  VERDICT-STALE/number VERDICT-STALE/number BOUNDARY: `TOTAL BAD:1` has no space and MUST NOT be eaten as an address
+  W13  BENIGN/address+asof  BENIGN/address+asof  BOUNDARY: an address that moved ON a verdict line is still a pinning  <- BENIGN ON PURPOSE
+  W14  NON-VERDICT          NON-VERDICT          the TAIL after a normalised checkout root differs (mg-f771 W6), no token on the line
+  W15  NON-VERDICT          NON-VERDICT          verdict lines REORDERED and nothing else -- layout is not a verdict move
+  W16  VERDICT-STALE/token  VERDICT-STALE/token  mg-6cb9's two real rows, verbatim: EXTENT WIDER stopped firing
+  W17  NON-VERDICT          NON-VERDICT          a count moved on a line with a token, but the token multiset did not -- reported as
+       NON-VERDICT only because the LINE has no number of its own; see W18
+  W18  VERDICT-STALE/number VERDICT-STALE/number THE STATED COST: a corpus-size count sharing a line with a token reads as a verdict
+       move.  Over-inclusive ON PURPOSE, and it is why the bucket is split in two
+
+  the token set, asserted rather than trusted
+  --------------------------------------------------------------------------
+  every token is ALL-CAPS                                            ok
+  no duplicates                                                      ok
+  no token shorter than 3 characters                                 ok
+  lower-case `pass` is NOT a token                                   ok
+  `PASSED` inside `BYPASSED` is NOT a token                          ok
+  a bare prose line is not a verdict line                            ok
+  `*** MISSED ***` is a verdict line                                 ok
+
+  THE ADDRESS REGEX THAT FAILED, RE-MEASURED ON EVERY RUN
+  --------------------------------------------------------------------------
+  A1 as first written was  (?<=[\w./-]):\d+\b  — a colon-and-digits after any
+  word character.  Under it:
+
+    W12  naive -> BENIGN/address+asof  shipped -> VERDICT-STALE/number
+    W3   naive -> BENIGN/address+asof  shipped -> BENIGN/address+asof 
+    W9   naive -> VERDICT-STALE/number shipped -> VERDICT-STALE/number
+
+  SO THE NAIVE MASK GRADES `TOTAL BAD:1 -> 0` AS A BENIGN ADDRESS MOVE — it turns
+  the exact number this ticket is about into mg-20ee's already-counted family, and
+  it does so while still handling build.sh:342 correctly, which is what makes the
+  defect invisible in the cases an author checks first.  W12 is the world that
+  holds the shipped regex narrow and W3 is the one that holds it wide enough.
+
+  the naive mask still grades W12 as BENIGN/address+asof             ok
+  the naive mask still grades W3 as BENIGN/address+asof              ok
+  the naive mask still grades W9 as VERDICT-STALE/number             ok
+
+==============================================================================
+mg-30bd selftest: 19 world(s) + 10 assertion(s), 0 failed
+==============================================================================

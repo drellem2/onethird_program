@@ -1,0 +1,1543 @@
+==========================================================================================
+mg-30bd — VERDICT-STALENESS: how many committed transcripts still say something this
+          tree no longer says?
+==========================================================================================
+
+  the question    : mg-20ee's census measures STALE ADDRESSES — `path:NNN` into files
+                    the instrument does not own — and says, correctly of ITS OWN
+                    population, that the verdicts are not affected.  A transcript can
+                    drift in its VERDICTS with no address moving at all, and such a
+                    transcript is invisible to an address classifier BY CONSTRUCTION.
+                    This measures that second class.  IT REPAIRS NOTHING.
+  sweep head      : 5bdd26bf4d5e2f4f84fc714b91071068f72e997a
+  the corpus is   : `main` at f2117f1.  THAT is the sha to quote and the one above is not:
+                    the sweep head is a BRANCH commit, the refinery rewrites it on
+                    merge, and a record naming a commit that will not exist is
+                    mg-daba's orphan pin in a different file.  The branch adds only
+                    this directory's own sources, which carry no tracked transcripts
+                    and are outside the population by the same test as everything else.
+  method          : re-run each candidate suite in an isolated clone at HEAD, diff
+                    every tracked out_*.txt against its committed copy, classify.
+  per-suite limit : 900 s
+  produced by     : python3 -B sweep.py  (hours; executes instrument code)
+                    then python3 -B report.py, which is what run_all.sh runs
+
+==========================================================================================
+§1  THE POPULATION, AND THE PART OF IT NO RUNNER REACHES
+==========================================================================================
+
+   1051  tracked out_*.txt under code/ at this HEAD
+    912  of them sit in a directory that has a run_all.sh  (the candidates)
+    187  candidate suite(s) run, of 187 in the population
+
+    665  transcript(s) a runner ACTUALLY REWROTE — the measured population
+    255  transcript(s) in a candidate directory that NO RUNNER TOUCHED
+    139  transcript(s) in a directory with no run_all.sh at all
+     15  transcript(s) rewritten by a suite that does not own them
+
+  A TRANSCRIPT ITS OWN RUNNER DOES NOT REWRITE IS NOT EVIDENCE OF ANYTHING.  It is
+  outside this measurement in exactly the way mg-c824's out_a4_census.txt was outside
+  mg-f771's control, and for the same reason: nothing regenerated it, so nothing
+  compared it.  §5 lists them and §6 is what that costs.
+
+==========================================================================================
+§2  THE TOKEN SET — THIS CHOICE IS THE INSTRUMENT, SO IT IS QUOTED IN FULL
+==========================================================================================
+
+  A line is a VERDICT LINE iff, after normalisation, it contains at least one of
+  these as a WHOLE WORD.  Case-sensitive: this corpus writes graded outcomes in
+  capitals and prose in sentence case, and the case rule is most of the selectivity.
+
+      AGREES          BAD             BROKEN          CAUGHT          CLEAN           CONFIRMED
+      DIFFER          DIFFERS         DISAGREES       FAIL            FAILED          FAILS
+      FALSE           FINDING         FINDINGS        FIRED           FIRES           GREEN
+      HELD            HIT             HOLDS           LAUNDERED       MISS            MISSED
+      MISSING         NARROWER        NOISE           OVERSTATES      PASS            PASSED
+      RED             REFUSED         REFUTED         REPRODUCES      SILENT          SLACK
+      TRUE            UNDERSTATES     UNFALSIFIABLE   UNMEASURED      VERDICT         VERDICTS
+      WIDER           WRONG
+
+  44 tokens.  A transcript is VERDICT-STALE iff the SORTED MULTISET of its verdict
+  lines differs between the committed copy and the regeneration — after mg-f771's
+  N1/N2/N3 and after this instrument's A1 (a `file.ext:NNN` address) and A2 (a sha, an
+  ISO date, a clock time).  Sorted, so a verdict that only MOVED DOWN THE PAGE is not
+  a verdict that moved.
+
+  WHAT THE CHOICE COSTS, BOTH WAYS:
+    over  — a corpus-size count sharing a line with a token reads as a verdict move.
+            That is why the bucket is split: TOKEN is the strong claim, NUMBER is not.
+    under — a verdict stated in a word not on this list, or in lower case, is invisible.
+
+==========================================================================================
+§3  THE CLASSIFICATION
+==========================================================================================
+
+    314  IDENTICAL              byte-identical to the committed copy
+     13  BENIGN/timing+path     BENIGN — mg-f771's N1 checkout path / N2 decimal seconds
+     16  BENIGN/address+asof    BENIGN — A1 line address / A2 sha, date, clock
+     80  NON-VERDICT            differs, but in no verdict line (corpus sizes live here)
+     34  VERDICT-STALE/number   VERDICT-STALE — a number under an unmoved token moved
+    103  VERDICT-STALE/token    VERDICT-STALE — a verdict TOKEN appeared, vanished or changed
+      0  GONE                   the run REMOVED a tracked transcript
+    105  UNUSABLE/ungraded      the producing run was KILLED or REFUSED — not graded, see §6.3
+
+  --------------------------------------------------------------------------------------
+  VERDICT-STALE, reachable by a runner: 137  (103 token, 34 number)
+  --------------------------------------------------------------------------------------
+
+  105 further transcript(s) came from a run this sweep KILLED AT THE LIMIT, or from one
+  that REFUSED (exit 2, build.sh's own convention).  They are NOT in the number above
+  and NOT in any number in this report: a half-written or declined transcript compared
+  against its committed copy is the harness accusing the corpus of its own truncation,
+  which is mg-479c's defect exactly.  They are UNMEASURED, not clean.  Exit 1 is NOT in
+  this class — in this corpus that means a control FIRED, which is a completed run.
+
+==========================================================================================
+§4  THE VERDICT-STALE TRANSCRIPTS, WITH THE LINES THAT MOVED
+==========================================================================================
+
+  `-` is the committed copy, `+` is this tree.  Quoted after normalisation, so this
+  transcript cannot itself smuggle a worktree path into the corpus.
+
+  code/adjudication_audit_a0d6/out_a4_selfcheck.txt
+      VERDICT-STALE/token    FAIL +1, FAILED +1, PASS -1
+      regenerated by  code/adjudication_audit_a0d6/run_all.sh
+      + [FAIL] C4 zero files outside code/adjudication_audit_a0d6 differ
+      - [PASS] C4 zero files outside code/adjudication_audit_a0d6 differ
+      + a4 FAILED: C4 zero files outside code/adjudication_audit_a0d6 differ
+
+  code/audit_2c77/out_q3_operands.txt
+      VERDICT-STALE/token    FINDING -1, WIDER -1
+      regenerated by  code/audit_2c77/run_all.sh
+      - FINDING: THE CENSUS IS STATED OVER A POPULATION WIDER THAN THE ONE IT CLASSIFI
+      - FINDING: `not determined` cannot be reached by any INPUT: its two preceding gu
+      - FINDINGS: 3, population: every operand of every `and`/`or` anywhere in face_co
+      + FINDING: `not determined` cannot be reached by any INPUT: its two preceding gu
+      + FINDINGS: 2, population: every operand of every `and`/`or` anywhere in face_co
+      - TOTAL BAD: 3
+      … and 1 more verdict line(s) moved
+
+  code/audit_2c77/out_q4_prerepair.txt
+      VERDICT-STALE/token    FINDING -1
+      regenerated by  code/audit_2c77/run_all.sh
+      - FINDING: k1 books 2 finding(s) at <sha> that are not in its committed transcri
+      - FINDINGS: 2, population: the three coverage numbers of mg-e34a's pre-repair co
+      - TOTAL BAD: 2
+      + FINDINGS: 1, population: the three coverage numbers of mg-e34a's pre-repair co
+      + TOTAL BAD: 1
+
+  code/audit_330a/out_s4_term.txt
+      VERDICT-STALE/token    AGREES +1, BROKEN +1, CAUGHT +2, CLEAN +1, CONFIRMED +11, FAIL +6, FAILS +1, FALSE +12, FINDING +1, … and 19 more token(s)
+      regenerated by  code/audit_330a/run_all.sh
+      NOTE  3 of 6 quoted line(s) are `<sha> <subject>` — a history walk, so this moves when main moves (mg-e720's family)
+      - *** FINDING: <sha>'s summary says `20 sites remain unqualified in the tree, EV
+      - FINDING: <sha>'s summary says `20 sites remain unqualified in the tree, EVERY 
+      + *** FINDING: <sha>'s summary says `20 sites remain unqualified in the tree, EV
+      + <sha> apply: THE FINDING WAS ALREADY APPLIED AND THE ENUMERATION MISSED ONE SI
+      + <sha> audit+docs: mg-eaa1's INDEPENDENT AUDIT of mg-131e — ALL SEVEN CHECKS PA
+      + <sha> audit+instrument: THE HEAD CORPUS **IS** A FIXED POINT AND D7 IS REFUTED
+      … and 69 more verdict line(s) moved
+
+  code/audit_c067/out_c1_rebase.txt
+      VERDICT-STALE/token    CONFIRMED -1, REFUTED +1, TRUE -2
+      regenerated by  code/audit_c067/run_all.sh
+      - # A TRUE RECORD WHOSE OWN PRODUCER CAN NO LONGER SEE IT.  DO NOT RE-RUN THIS.
+      - # record going false.  A RE-RUN WRITES 0 OVER A 5 THAT IS TRUE.
+      - [CONFIRMED] C1a mg-132a's 5 commit(s) were REPLAYED onto a larger tree by the 
+      - [CONFIRMED] C1a' and all 5 of the pre-rebase commit(s) are UNREACHABLE from th
+      + [CONFIRMED] C1a' and all 0 of the pre-rebase commit(s) are UNREACHABLE from th
+      - [FINDING  ] C1a'' ⚠️ AND THE EXPOSURE NARROWED WHILE THIS AUDIT WAS RUNNING.  
+      … and 2 more verdict line(s) moved
+
+  code/audit_c067/out_c2_anchors.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/audit_c067/run_all.sh
+      - …all`, so it finds these 4 commits only while a ref still points at them -- an
+      + …all`, so it finds these 3 commits only while a ref still points at them -- an
+
+  code/audit_c067/out_c5_vocab.txt
+      VERDICT-STALE/token    GREEN -1, RED -1, REFUSED +1, WRONG -1
+      regenerated by  code/audit_c067/run_all.sh
+      - …ABLE THAT HAD REWRITTEN 213 OTHER SITES WOULD HAVE MADE ITS OWN TRANSCRIPT UN
+      + …ABLE THAT HAD REWRITTEN 571 OTHER SITES WOULD HAVE MADE ITS OWN TRANSCRIPT UN
+      - code/audit_c067/README.md:<L>  with `0 refuted`, and no gate flips. `STALE-AND
+      - code/audit_c067/c1_rebase.py:<L>  f"predecessor's `0 STALE` was stale AND WRON
+      + code/alias_agreement_06d1/mknorm.py:<L>  every gate run.  A seed that goes sta
+
+  code/audit_c067/out_selftest_c067.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/audit_c067/run_all.sh
+      - …or <sha> re-derives to 510.  `anchor_132a.py`'s `verdict_for()` documents thi
+      + …or <sha> re-derives to 528.  `anchor_132a.py`'s `verdict_for()` documents thi
+
+  code/audit_successor_arming_a518/out_controls.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/audit_successor_arming_a518/run_all.sh
+      - VERDICT: live config is WIDE (9 examined, > 4)
+      + VERDICT: live config is WIDE (12 examined, > 4)
+
+  code/branching_audit_19ec/out_e2_f2_clauses.txt
+      VERDICT-STALE/token    BAD -2
+      regenerated by  code/branching_audit_19ec/run_all.sh
+      - that clause carries a bound                                BAD  <-- it does no
+      - the F2a REPLACEMENT carries a rank bound                   BAD  <-- it does no
+
+  code/branching_audit_2060/out_b0_repro.txt
+      VERDICT-STALE/token    BAD -1
+      regenerated by  code/sibling_sweep_7085/run_all.sh
+      - TOTAL BAD: 0
+
+  code/branching_audit_321d/out_h2_grain.txt
+      VERDICT-STALE/token    FALSE -1, FINDING -4, FINDINGS -3, HIT -1, VERDICT +1
+      regenerated by  code/branching_audit_321d/run_all.sh
+      - FINDING: g1's live FINDINGS (1) differ from its committed record (0): the docu
+      - FINDING: g1_provenance.py exits 1 on the tree as committed, with a finding its
+      - FINDING: g4_fleet.py's set-level attribution is FALSE on the tree as committed
+      - FINDINGS: 3, population: the 2 sites of the provenance-grain question -- g1's 
+      - TOTAL BAD: 3
+      + FINDINGS: 0, population: the 2 sites of the provenance-grain question -- g1's 
+      … and 6 more verdict line(s) moved
+
+  code/branching_audit_321d/out_h3_setlevel.txt
+      VERDICT-STALE/token    FINDING +2, FINDINGS +1
+      regenerated by  code/branching_audit_321d/run_all.sh
+      - FINDING: the set-level property does NOT hold on the tree as committed: 4 of t
+      + FINDING: the CURRENT roadmap still carries the retraction
+      + FINDING: the current roadmap still names the <clock> delivery
+      + FINDING: the set-level property does NOT hold on the tree as committed: 3 of t
+      + c5_record.py exits 1, SELF 0 FINDINGS 2:
+
+  code/branching_audit_321d/out_h4_mine.txt
+      VERDICT-STALE/token    BAD -3, FINDING -6, FINDINGS -3, HIT -4
+      regenerated by  code/branching_audit_321d/run_all.sh
+      - FINDING: M1. g1_provenance.py's byte-for-byte confirmation of the committed re
+      - FINDING: M2. The repair's narrowing is at the grain of the blindness for ABSEN
+      - FINDING: vertex COUNT disagrees at beta=2 n=1: target 9, mine 1
+      - FINDING: vertex COUNT disagrees at beta=2 n=2: target 9, mine 2
+      - FINDING: vertex COUNT disagrees at beta=2 n=3: target 9, mine 2
+      - FINDINGS: 2, population: the 3 probes on M1 (g1's record check) and the 4 prob
+      … and 7 more verdict line(s) moved
+
+  code/branching_audit_321d/out_h5_doccheck.txt
+      VERDICT-STALE/token    FIRES -16
+      regenerated by  code/branching_audit_321d/run_all.sh
+      - 0 disagreements in §2's re-run block     0 -> 7   FIRES
+      - 198 cells in §2's re-run block           198 -> 205   FIRES
+      - ACCOUNTED FOR, §3 table                  24 -> 31   FIRES
+      - CONFIRMED census, §3 table                   0        0   agree
+      - CONFIRMED census, §3 table               0 -> 7   FIRES
+      - M-1 probe count, §6                      3 -> 10   FIRES
+      … and 15 more verdict line(s) moved
+
+  code/branching_audit_58da/out_g1_provenance.txt
+      VERDICT-STALE/token    VERDICT +1
+      regenerated by  code/branching_audit_58da/run_all.sh
+      + instrument: THE CLASSIFIER FOR VERDICT-STALENESS, AND THE FIVE WORLDS THAT MUS
+
+  code/branching_audit_58da/out_g4_fleet.txt
+      VERDICT-STALE/token    FINDING +3, FINDINGS +1
+      regenerated by  code/branching_audit_58da/run_all.sh
+      + FINDING: c5_record.py is red on the working tree and is not accounted for by t
+      + FINDING: the CURRENT roadmap still carries the retraction
+      + FINDING: the current roadmap still names the <clock> delivery
+      - FINDINGS: 2, population: the 5 exit codes on the working tree, the cross-membe
+      + FINDINGS: 3, population: the 5 exit codes on the working tree, the cross-membe
+      - TOTAL BAD: 2
+      … and 2 more verdict line(s) moved
+
+  code/branching_audit_a218/out_c1_branching.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/branching_audit_a218/run_all.sh
+      - FINDINGS: 0, population: the 24 vertex-count cells, 53 vertex-dimension cells 
+      + FINDINGS: 0, population: the 24 vertex cells (read as SET), 53 vertex-dimensio
+
+  code/branching_audit_a218/out_c2_vertexsets.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/branching_audit_a218/run_all.sh
+      - FINDING: section 0's vertex column is a COUNT and is IDENTICAL for beta = 3, 2
+      - FINDINGS: 1, population: the 36 (parameter-pair, level) set-vs-count cells and
+      + FINDINGS: 0, population: the 36 (parameter-pair, level) set-vs-count cells and
+      - TOTAL BAD: 1
+      + THE FINDING THIS SCRIPT RAISED IS CLOSED (checked, not assumed):
+      + TOTAL BAD: 0
+
+  code/branching_audit_a218/out_c3_withdrawal.txt
+      VERDICT-STALE/token    FAIL +1, FINDING +1
+      regenerated by  code/branching_audit_a218/run_all.sh
+      - FINDINGS: 0, population: the 38 named text checks above
+      + FINDING: every occurrence sits inside a withdrawal or correction -- unmarked: 
+      + FINDINGS: 1, population: the 38 named text checks above
+      - TOTAL BAD: 0
+      + TOTAL BAD: 1
+      + [!!] every occurrence sits inside a withdrawal or correction        FAIL
+
+  code/branching_audit_a218/out_c4_seam.txt
+      VERDICT-STALE/token    FINDING -1
+      regenerated by  code/branching_audit_a218/run_all.sh
+      - FINDING: a passage deleted by <sha> survives UNMARKED at code/branching_locate
+      - FINDINGS: 1, population: the 34 surviving-copy sites at or above 0.80
+      - TOTAL BAD: 1
+      + FINDINGS: 0, population: the 34 surviving-copy sites at or above 0.80
+      + TOTAL BAD: 0
+
+  code/branching_audit_a218/out_c5_record.txt
+      VERDICT-STALE/token    FAIL +1, FINDING +1
+      regenerated by  code/branching_audit_a218/run_all.sh
+      - FINDING: nothing in X2 was repaired, as section 8 says -- the repair CHANGED 2
+      - FINDINGS: 1, population: the 10 named checks above
+      + FINDING: the CURRENT roadmap still carries the retraction
+      + FINDING: the current roadmap still names the <clock> delivery
+      + FINDINGS: 2, population: the 10 named checks above
+      - TOTAL BAD: 1
+      … and 4 more verdict line(s) moved
+
+  code/branching_audit_d330/out_e4_rerun.txt
+      VERDICT-STALE/token    FINDINGS -7
+      regenerated by  code/branching_audit_d330/run_all.sh
+      + FINDING: c1_branching.py reports 0 findings on the repaired tree with 0 count-
+      + FINDING: c1_branching.py reports 0 findings on the repaired tree with 0 count-
+      - FINDING: mg-13b2 widened one of mg-a218's five scripts and not the sibling wit
+      - FINDING: mg-13b2 widened one of mg-a218's five scripts and not the sibling wit
+      - FINDING: mg-a218's audit document says, in the present tense under REPRODUCE, 
+      - FINDING: mg-a218's audit document says, in the present tense under REPRODUCE, 
+      … and 9 more verdict line(s) moved
+
+  code/branching_audit_d330/out_e5_seam.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/branching_audit_d330/run_all.sh
+      - FINDINGS: 0, population: the 17 survivors at or above 0.80 over 61522 comparis
+      + FINDINGS: 0, population: the 17 survivors at or above 0.80 over 61978 comparis
+
+  code/branching_audit_e34a/out_k2_five.txt
+      VERDICT-STALE/token    BAD +8, FINDING +10, FINDINGS +14, HOLDS +2, RED +4, VERDICT +4
+      regenerated by  code/branching_audit_e34a/run_all.sh
+      - FINDINGS: 0, population: for each output run_all.sh writes: that it reproduces
+      - TOTAL BAD: 0
+      + FINDING: out_g4_fleet.txt does not reproduce even with the one revision normal
+      + FINDINGS: 1, population: for each output run_all.sh writes: that it reproduces
+      + HEAD's subject    : instrument: THE CLASSIFIER FOR VERDICT-STALENESS, AND THE 
+      + TOTAL BAD: 1
+      … and 40 more verdict line(s) moved
+
+  code/branching_audit_e34a/out_k3_undisturbed.txt
+      VERDICT-STALE/token    FINDING +1, VERDICT +1
+      regenerated by  code/branching_audit_e34a/run_all.sh
+      - FINDINGS: 0, population: every attribution g4 and g1 print, each against a gro
+      + FINDING: g4_fleet.py now exits 1 with 0/3 where mg-957f read exit 1 with 0/2; 
+      + FINDINGS: 1, population: every attribution g4 and g1 print, each against a gro
+      - TOTAL BAD: 0
+      + TOTAL BAD: 1
+      - g4  exit 1  SELF 0  FINDINGS 2
+      … and 2 more verdict line(s) moved
+
+  code/census_audit_4d3b/out_a3_fetchfail.txt
+      VERDICT-STALE/token    MISS -8, UNMEASURED +9, VERDICT -1, WRONG -2
+      regenerated by  code/census_audit_4d3b/run_all.sh
+      - F3  `The census was WRONG on 0 of its 4 rows and RIGHT on 0` -- a
+      - F3  `The census was WRONG on 0 of its 4 rows and RIGHT on 0` -- a
+      - measurement.  Both numbers count VERDICT values that are neither.
+      - |    1   mg-e35b   mg-fcf1   UNKNOWN                         0 / 0            
+      - |    2   mg-fccb   mg-d112   UNKNOWN                         0 / 0            
+      - |    3   mg-a74f   mg-16eb   UNKNOWN                         0 / 0            
+      … and 16 more verdict line(s) moved
+
+  code/census_audit_4d3b/out_a4_move.txt
+      VERDICT-STALE/token    FALSE -1
+      regenerated by  code/census_audit_4d3b/run_all.sh
+      - AND the `any pinned depth` quantifier is FALSE as written: rows
+      - row 1 (mg-fcf1): at depth 0 = REFUTED (7)   FIRST FLIP at depth 345 -> UPHELD
+      + row 1 (mg-fcf1): at depth 0 = REFUTED (7)   NEVER FLIPS at any depth 0..432
+      - row 2 (mg-d112): at depth 0 = REFUTED (5)   FIRST FLIP at depth 372 -> UPHELD
+      + row 2 (mg-d112): at depth 0 = REFUTED (5)   NEVER FLIPS at any depth 0..432
+
+  code/census_audit_4d3b/out_a5_selfdefect.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/census_audit_4d3b/run_all.sh
+      - |       P9: *** MISS or PARTIAL ***
+      + |       P9: *** MISS ***
+
+  code/census_repair_f3ff/out_s2_controls.txt
+      VERDICT-STALE/token    REFUTED +1, WRONG -1
+      regenerated by  code/census_repair_f3ff/run_all.sh
+      - row 2 mg-d112: origin/main REFUTED (5)   stale REFUTED (4)   <-- same verdict,
+      - scoped repo, local HEAD   -> 0 successors -> UPHELD   <-- THE CENSUS'S WRONG A
+      + row 2 mg-d112: origin/main REFUTED (5)   stale REFUTED (5)
+      + scoped repo, local HEAD   -> 1 successors -> REFUTED
+
+  code/census_repair_f3ff/out_s3_graph.txt
+      VERDICT-STALE/token    FALSE +1, REFUTED +2
+      regenerated by  code/census_repair_f3ff/run_all.sh
+      + audit: mg-fcb2's own instruments and A1 -- THE COVERAGE LINE'S 86/86 IS A TAUT
+      + census+repair: THE FOUR ROWS RE-DERIVED FROM THE TREE — 2 of 4 REFUTED on a po
+      + census+repair: THE FOUR ROWS RE-DERIVED FROM THE TREE — 2 of 4 REFUTED on a po
+
+  code/contradiction_repair_d19f/out_r3_selfcheck.txt
+      VERDICT-STALE/token    FAIL +1, FAILED +1, PASS -1
+      regenerated by  code/contradiction_repair_d19f/run_all.sh
+      + SELFCHECK FAILED: 1 arm(s): C4  mg-28ff is NOT edited; exactly one document ou
+      + [FAIL] C4  mg-28ff is NOT edited; exactly one document outside this tree chang
+      - [PASS] C4  mg-28ff is NOT edited; exactly one document outside this tree chang
+
+  code/corpus_fixedpoint_fd9c/out_s2_drift.txt
+      VERDICT-STALE/token    HIT -1
+      regenerated by  code/corpus_fixedpoint_fd9c/run_all.sh
+      - FINDING: S2d THE ARC'S CORPUS CENSUS IS MONOTONE, NOT OSCILLATORY: 1
+      + FINDING: S2d THE ARC'S CORPUS CENSUS IS MONOTONE, NOT OSCILLATORY: 2
+      - code/grain_arity_9160/README.md           :118  400    | P3 same at the corpus
+
+  code/corpus_fixedpoint_fd9c/out_s4_convention.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/corpus_fixedpoint_fd9c/run_all.sh
+      - …HE ARC DOES NOT MEET IT: 0
+      + …HE ARC DOES NOT MEET IT:
+
+  code/counterexample_audit_0a11/out_check_doc.txt
+      VERDICT-STALE/token    CLEAN -1, FAIL +2, MISS +1, SILENT +2
+      regenerated by  code/counterexample_audit_0a11/run_all.sh
+      - own section.  GUARDS CLEAN.
+      + M1a silent               output out_locator.txt does not contain '[SILENT MISS
+      + [FAIL] M1a silent               out:NO   in-section:yes  also-elsewhere:no
+      + [FAIL] silent misses            out:NO   in-section:yes  also-elsewhere:no
+      + silent misses            output out_locator.txt does not contain 'SILENT MISSE
+
+  code/counterexample_audit_0a11/out_locator.txt
+      VERDICT-STALE/token    MISS -10, SILENT -10
+      regenerated by  code/counterexample_audit_0a11/run_all.sh
+      - SILENT MISSES: 10
+      - [SILENT MISS] M10 the 'not a filter' caveat is deleted                   exit 
+      - [SILENT MISS] M11 a figure is deleted from the repair but survives in the targ
+      - [SILENT MISS] M12 the repair's own text asserts a struck claim           exit 
+      - [SILENT MISS] M13 the target's headline is silently un-repaired          exit 
+      - [SILENT MISS] M1a the headline p-value is wrong THROUGHOUT the repair doc exit
+      … and 6 more verdict line(s) moved
+
+  code/eps_spec_sweep_372e/out_s3_control.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/eps_spec_sweep_372e/run_all.sh
+      - unmutated: 0   mutated: 20   -> FIRED   (pre-declared FIRE: ok)
+      + unmutated: 0   mutated: 24   -> FIRED   (pre-declared FIRE: ok)
+
+  code/face_geometry_audit_0b07/out_p1_derived.txt
+      VERDICT-STALE/token    BROKEN +1, DIFFERS -1, FINDING -1, HOLDS -4, REPRODUCES +1
+      regenerated by  code/face_geometry_audit_0b07/run_all.sh
+      - 9 claim(s) scored; 0 BROKEN.  1 finding(s): A1
+      - The claim still HOLDS and d2 still exits 0, so nothing is hidden by it; what i
+      + 9 claim(s) scored; 1 BROKEN.  0 finding(s): none
+      - [FINDING A1] THE SUBJECT'S OWN CENTRAL TRANSCRIPT DOES NOT REGENERATE FROM THE
+      + [BROKEN] the unperturbed copy runs the subject's own d2 to completion and exit
+      - [HOLDS ] the unperturbed copy runs the subject's own d2 to completion and exit
+      … and 6 more verdict line(s) moved
+
+  code/face_geometry_audit_1c80/out_claims.txt
+      VERDICT-STALE/token    BROKEN +4, HOLDS -2
+      regenerated by  code/face_geometry_audit_1c80/run_all.sh
+      - BROKEN `deciding_gate`'s docstring: 'The predicate answers ... in three
+      + BROKEN 'nmax=2 behaves exactly as it did before this commit (3 failures)'
+      + BROKEN the condition is untouched -- `cond = cond and absorb == 0` still score
+      + BROKEN the routing still routes on `diag_preserved`
+      - LEDGER: 23 claims scored -- 17 HOLDS, 4 SCOPE, 2 BROKEN
+      + LEDGER: 23 claims scored -- 15 HOLDS, 4 SCOPE, 4 BROKEN
+      … and 8 more verdict line(s) moved
+
+  code/face_geometry_audit_1c80/out_mutations.txt
+      VERDICT-STALE/token    FAIL -1, MISSED +6
+      regenerated by  code/face_geometry_audit_1c80/run_all.sh
+      + M1   delete the |s_i s_j| = 1 gate from the predica   None      1            C
+      + M2   delete the s_i^2 = 1 gate from the predicate     None      0            I
+      + M3   deciding_gate reports 'parity' where it report   None      0            C
+      + M5   row I4's printed reason reverted to mg-8a12's,   None      0            C
+      + M6   row I4's `absorb == 0` deleted from its scored   None      0            I
+      + M7   sign_entries accumulated over ALL biting pairs   None      0            I
+      … and 1 more verdict line(s) moved
+
+  code/face_geometry_audit_c4c8/out_h1_per_return.txt
+      VERDICT-STALE/token    MISS +2
+      regenerated by  code/face_geometry_audit_c4c8/run_all.sh
+      - 34   det_shift_mod_p                  L674   CHANGES   0      I/0    *** MISS 
+      + 34   det_shift_mod_p                  L674   CHANGES   1      I/0    *** MISS 
+      - 37   not_isospectral                  L699   CHANGES   0      I/0    *** MISS 
+      + 37   not_isospectral                  L699   CHANGES   1      I/0    *** MISS 
+      + 55   diagonal_moves                   L988   CHANGES   0      C/1    *** MISS 
+      - FINDING: 2 MORE INERT RETURN(S) AT THE SAME GRANULARITY, IN THE SAME REPAIR'S 
+      … and 10 more verdict line(s) moved
+
+  code/face_geometry_audit_c4c8/out_h2_the_nine_and_the_clause.txt
+      VERDICT-STALE/token    MISS +2
+      regenerated by  code/face_geometry_audit_c4c8/run_all.sh
+      + MISS N9   predicted C/1, observed C/0
+      + N9   invert diagonal_moves (the routing)        CHANGES    0     0 return, 0 s
+      - … moves the DECISION on 1608 of 28900 pairs and the (decision, gate) on 1824
+      + … moves the DECISION on 1392 of 28900 pairs and the (decision, gate) on 1824
+      - [HOLDS ] baseline: the unmutated tree exits 0 and writes 23684 bytes
+      + [HOLDS ] baseline: the unmutated tree exits 0 and writes 41081 bytes
+
+  code/face_geometry_audit_c4c8/out_h3_control.txt
+      VERDICT-STALE/token    BROKEN +3, HOLDS -3
+      regenerated by  code/face_geometry_audit_c4c8/run_all.sh
+      - 43 of 43 rows read [FAIL] in the committed control
+      - 43 scored rows: 41 [PASS], 2 [CANNOT FAIL], 0 [FAIL]
+      - 8 claim(s) scored; 0 BROKEN.  1 FINDING(s).
+      + 45 of 45 rows read [FAIL] in the committed control
+      + 45 scored rows: 43 [PASS], 2 [CANNOT FAIL], 0 [FAIL]
+      + 8 claim(s) scored; 3 BROKEN.  1 FINDING(s).
+      … and 8 more verdict line(s) moved
+
+  code/face_geometry_audit_d0e2/out_e1_deletion.txt
+      VERDICT-STALE/token    FAIL -12, MISS -2, PASS -6
+      regenerated by  code/face_geometry_audit_d0e2/run_all.sh
+      - - [CANNOT FAIL] PROVEN PROPERTY, not a control row
+      - - [CANNOT FAIL] PROVEN PROPERTY, not a control row
+      - - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+      - - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+      - - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+      - - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+      … and 14 more verdict line(s) moved
+
+  code/face_geometry_audit_d3f3/out_a0_selftest.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/face_geometry_audit_d3f3/run_all.sh
+      - [PASS] a0.1 BASELINE -- the unmutated sandbox exits 0 with 29 rows, all green,
+      + [PASS] a0.1 BASELINE -- the unmutated sandbox exits 0 with 30 rows, all green,
+
+  code/face_geometry_audit_d3f3/out_a1_f1_revert.txt
+      VERDICT-STALE/token    FAIL +2, PASS -1, REFUTED +1
+      regenerated by  code/face_geometry_audit_d3f3/run_all.sh
+      + - a1.2 X1 -- verify_e35b.py exits 0 with all 30 rows green: V6a, V6b, V6c, V6d
+      + 6 checks, 2 REFUTED:
+      + [FAIL] a1.2 X1 -- verify_e35b.py exits 0 with all 30 rows green: V6a, V6b, V6c
+      + [FAIL] a1.3 X1 -- every other scored artefact of the repair also exits 0 with 
+      - [PASS] a1.2 X1 -- verify_e35b.py exits 0 with all 29 rows green: V6a, V6b, V6c
+      - [PASS] a1.3 X1 -- every other scored artefact of the repair also exits 0 with 
+
+  code/face_geometry_audit_d3f3/out_a3_disclosure.txt
+      VERDICT-STALE/token    FAIL +1, FALSE -1, GREEN -4, MISSING +1, PASS -13, RED -3, REFUTED -1, REPRODUCES -1
+      regenerated by  code/face_geometry_audit_d3f3/run_all.sh
+      - [PASS] a3.0 all 4 declared disclosure sites are present and located by a verba
+      - [PASS] a3.10 BUT C4 IS NOT F1-SHAPED, and the demonstration contains no F1-sha
+      - [PASS] a3.11 nothing under code/ was written  -- moved: none
+      - [PASS] a3.1a P2a IS REFUTED AT ONE OF THE FOUR SITES.  I predicted all four na
+      - [PASS] a3.2 THE FALSE HALF OF THE DISCLOSURE IS THE REMEDY IT NAMES, and it is
+      - [PASS] a3.3 V7's own comment DOES carry the hedge, so the FILE is honest at th
+      … and 8 more verdict line(s) moved
+
+  code/face_geometry_audit_d3f3/out_a4_order_and_scope.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/face_geometry_audit_d3f3/run_all.sh
+      - … classify'.  There are 54, and E11 is a HIT.  I record it as CALLED, not DISC
+      + … classify'.  There are 59, and E11 is a HIT.  I record it as CALLED, not DISC
+
+  code/face_geometry_audit_d3f3/out_a5_e10_row4.txt
+      VERDICT-STALE/token    FAIL +1, HIT +1, PASS -1, REFUTED +1
+      regenerated by  code/face_geometry_audit_d3f3/run_all.sh
+      + - a5.1 THE ROW AND ITS SCORE BOTH EXIST, verbatim: E10 predicts exit 1 for the
+      + 4 checks, 1 REFUTED:
+      - [PASS] a5.1 THE ROW AND ITS SCORE BOTH EXIST, verbatim: E10 predicts exit 1 fo
+      + [FAIL] a5.1 THE ROW AND ITS SCORE BOTH EXIST, verbatim: E10 predicts exit 1 fo
+
+  code/face_geometry_audit_eaef/out_e1_operand.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/face_geometry_audit_eaef/run_all.sh
+      - …om controls_output.txt: 23695 bytes, exit 0
+      + …om controls_output.txt: 41081 bytes, exit 0
+
+  code/face_geometry_audit_eaef/out_e2_bound.txt
+      VERDICT-STALE/token    BROKEN +1, HOLDS -1
+      regenerated by  code/face_geometry_audit_eaef/run_all.sh
+      - 5 claim(s) scored; 0 BROKEN.  2 finding(s).
+      + 5 claim(s) scored; 1 BROKEN.  2 finding(s).
+      + [BROKEN] THE SENTENCE THIS SECTION IS ABOUT IS IN THE COMMITTED TRANSCRIPT, ex
+      - [HOLDS ] THE SENTENCE THIS SECTION IS ABOUT IS IN THE COMMITTED TRANSCRIPT, ex
+
+  code/face_geometry_audit_f1b2/out_injections.txt
+      VERDICT-STALE/token    FAIL -1, PASS -3
+      regenerated by  code/runner_exit_audit_dee4/run_all.sh
+      - routing check  [NEW in mg-8a12]      FAIL
+      - routing check  [NEW in mg-8a12]      PASS
+      - routing check  [NEW in mg-8a12]      PASS
+      - routing check  [NEW in mg-8a12]      PASS
+
+  code/face_geometry_audit_f1b2/out_nmax.txt
+      VERDICT-STALE/token    FAIL -1, PASS -3
+      regenerated by  code/runner_exit_audit_dee4/run_all.sh
+      - CONTROLS FAILED: 3
+      + CONTROLS FAILED: 4
+      - routing check: [FAIL]  4 of 4 rows forced
+      - routing check: [PASS]  3 of 4 rows forced
+      - routing check: [PASS]  3 of 4 rows forced
+      - routing check: [PASS]  3 of 4 rows forced
+      … and 8 more verdict line(s) moved
+
+  code/face_geometry_audit_f1b2/out_scoring.txt
+      VERDICT-STALE/token    PASS -1
+      regenerated by  code/superseded_descent_688c/run_all.sh
+      - B. IS THE ROUTING CHECK'S ANSWER FORCED?  It is scored [PASS] on '0 < len(forc
+
+  code/face_geometry_audit_fcb2/out_a1_counts.txt
+      VERDICT-STALE/token    GREEN -1, RED -2, REFUTED -16, TRUE -1
+      regenerated by  code/face_geometry_audit_fcb2/run_all.sh
+      - INPUT 2 -- the population WIDENED to admit n = 1 (the section builds `range(2,
+      - REFUTED: A1.1a the coverage line's numerator and denominator are DIFFERENT exp
+      - REFUTED: A1.1b with the corruption replaced by a no-op the coverage line's fir
+      - REFUTED: A1.1c the coverage line's sentence -- 'the named load-bearing site is
+      - REFUTED: A1.1d V6's table -- headed 'EVERY COUNT THIS REPAIR PRINTS' -- contai
+      - REFUTED: A1.2a the condition scoring V6's completeness reads the ARTIFACT, not
+      … and 17 more verdict line(s) moved
+
+  code/face_geometry_audit_fcb2/out_a3_standard_elsewhere.txt
+      VERDICT-STALE/token    PASS -1, REFUTED +2
+      regenerated by  code/face_geometry_audit_fcb2/run_all.sh
+      + REFUTED: A3.3b ... and where it is forced, the repair says so in the artifact 
+      - [PASS] A3.3b ... and where it is forced, the repair says so in the artifact ra
+      + [REFUTED] A3.3b ... and where it is forced, the repair says so in the artifact
+
+  code/face_geometry_audit_fcb2/out_a6_control_at_commit.txt
+      VERDICT-STALE/token    PASS -6, REFUTED +1
+      regenerated by  code/face_geometry_audit_fcb2/run_all.sh
+      - [PASS] A6.1a the control fires at HEAD, on exactly one site
+      - [PASS] A6.3a the control is silent once the count is measured
+      - [PASS] A6.3b the repaired figure MOVES between the two populations (86/86 then
+      - [PASS] A6.4a the control is SELECTIVE: it flags a small minority of the `X/Y` 
+      - [PASS] A6.4b every site it flags is EXAMINED in this report rather than left a
+      - [PASS] A6.5a the second site is reported here rather than dropped for being ou
+      … and 1 more verdict line(s) moved
+
+  code/face_geometry_rows_17aa/out_verify_17aa.txt
+      VERDICT-STALE/token    BROKEN +2, HOLDS -2
+      regenerated by  code/face_geometry_rows_17aa/run_all.sh
+      - 27 claim(s) scored; 0 BROKEN.
+      + 27 claim(s) scored; 2 BROKEN.
+      - [HOLDS] 23 path(s) differ and every one of them is on the allowlist; 0 are not
+      + [BROKEN] 515 path(s) differ and every one of them is on the allowlist; 492 are
+      + [BROKEN] and NO frozen audit document is edited -- what moved in another ticke
+      - [HOLDS] and NO frozen audit document is edited -- what moved in another ticket
+      … and 2 more verdict line(s) moved
+
+  code/figures_revision_repair_5035/out_f1_rule.txt
+      VERDICT-STALE/token    REFUTED +2
+      regenerated by  code/figures_revision_repair_5035/run_all.sh
+      - … the corpus it excludes 14 of 50 distinct shaped tokens, 10 of which resolve 
+      + … the corpus it excludes 24 of 209 distinct shaped tokens, 18 of which resolve
+      + | **REFUTED — AND A PROVED THEOREM SHIPPED INSIDE THE REFUTATION, WHICH IS NOT
+      + | **REFUTED — AND A PROVED THEOREM SHIPPED INSIDE THE REFUTATION, WHICH IS NOT
+
+  code/figures_revision_repair_5035/out_f2_contamination.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/figures_revision_repair_5035/run_all.sh
+      - FINDING: F2a the repair moves 48 of 86750 numbers read as figures across 18 of
+      + FINDING: F2a the repair moves 65 of 168156 numbers read as figures across 31 o
+
+  code/figures_revision_repair_5035/out_f3_published.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/figures_revision_repair_5035/run_all.sh
+      - …on counted as a figure; 4 transcript(s) would read differently if re-run and 
+      + …on counted as a figure; 6 transcript(s) would read differently if re-run and 
+
+  code/grain_axis_audit_03d1/out_a2_blindspot.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/grain_axis_audit_03d1/run_all.sh
+      - A2 TOTAL BAD: 0
+      + A2 TOTAL BAD: 1
+
+  code/grain_axis_audit_03d1/out_a3_ledger.txt
+      VERDICT-STALE/token    FIRED +1, TRUE +1
+      regenerated by  code/grain_axis_audit_03d1/run_all.sh
+      + WHAT IS TRUE NOW.  mg-5035 repaired `lib7522.figures` with a DECLARED-
+      + `selftest03d1.py`'s tripwire for this defect FIRED on mg-5035's fix,
+
+  code/grain_axis_audit_03d1/out_a4_sweep.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/grain_axis_audit_03d1/run_all.sh
+      - A4 TOTAL FINDINGS: 43
+      - THIS IS A FINDING AND NOT A REPAIR.  Fixing 43 runners would rewrite
+      + A4 TOTAL FINDINGS: 61
+      + THIS IS A FINDING AND NOT A REPAIR.  Fixing 61 runners would rewrite
+
+  code/hash_population_6e58/out_p2_population.txt
+      VERDICT-STALE/token    HIT -3, MISS +3
+      regenerated by  code/hash_population_6e58/run_all.sh
+      - D-1    predicted 45                             measured 45                 HI
+      - D-2    predicted 15                             measured 15                 HI
+      - FINDING: THE DENOMINATOR IS WRONG BY 41 SITES AT THIS TREE: mg-330a's `_HASH_F
+      + D-1    predicted 45                             measured 55                 **
+      + D-2    predicted 15                             measured 19                 **
+      + FINDING: THE DENOMINATOR IS WRONG BY 75 SITES AT THIS TREE: mg-330a's `_HASH_F
+      … and 14 more verdict line(s) moved
+
+  code/hash_population_6e58/out_p3_unrestricted.txt
+      VERDICT-STALE/token    HIT -1, MISS +1
+      regenerated by  code/hash_population_6e58/run_all.sh
+      - P3-a   predicted 2                              measured 2                  HI
+      - P3-b   predicted >= 4 under POP-C               measured 19                 HI
+      + P3-a   predicted 2                              measured 4                  **
+      + P3-b   predicted >= 4 under POP-C               measured 35                 HI
+      - TOTAL BAD: 2
+      + TOTAL BAD: 3
+
+  code/hash_population_6e58/out_p4_gate.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/hash_population_6e58/run_all.sh
+      - FINDING: AND IT IS SILENT: OLDEST went 12 -> 11 in the clone, the absorbed sit
+      + FINDING: AND IT IS SILENT: OLDEST went 15 -> 14 in the clone, the absorbed sit
+      - OLDEST went 12 -> 11 and the gate is SILENT.
+      + OLDEST went 15 -> 14 and the gate is SILENT.
+
+  code/hodge_leverage_audit_835f/out_audit_a318.txt
+      VERDICT-STALE/token    CLEAN -1, CONFIRMED -24, FINDING -4, FIRED -1, FIRES -44, HIT -1, HOLDS -1, MISSED -1, REFUTED -5, … and 2 more token(s)
+      regenerated by  code/hodge_leverage_audit_835f/run_all.sh
+      - 1   the STATE.md row   gap      +9 999    FIRES       FIRES       silent
+      - 1   the STATE.md row   gap      FIRES       'answer'
+      - 10  H8                 cell     99 999    FIRES       FIRES       silent
+      - 10  H8                 cell     FIRES       'record'
+      - 11  H8                 hist     99 999    FIRES       FIRES       silent
+      - 11  H8                 hist     FIRES       'record'
+      … and 59 more verdict line(s) moved
+
+  code/hodge_leverage_audit_8a5c/out_audit_8e30.txt
+      VERDICT-STALE/token    CONFIRMED -5, FINDING -6, HOLDS +1, REFUTED +9, WRONG -2
+      regenerated by  code/hodge_leverage_audit_8a5c/run_all.sh
+      - FINDING  F-1: THE FIGURE GATE PASSES WHEN THE FIGURE A READER READS IS WRONG. 
+      - FINDING  F-2: AND THE REPAIR'S OWN NEGATIVE CONTROL CANNOT SEE IT.  `verify_la
+      - FINDING  F-3: `STATE.md:<L>` is `STATE.md:<L>` in the tree -- off by 3, stale 
+      + AND THE GATE HOLDS IN THIS TREE: every single-copy corruption of
+      - THE PRIMARY TARGET IS CONFIRMED: the repair's three figures are the
+      - [CONFIRMED] 10 of 10 independently re-derivable figures in the changed lines r
+      … and 21 more verdict line(s) moved
+
+  code/hodge_leverage_audit_8aae/out_audit_8916.txt
+      VERDICT-STALE/token    CONFIRMED -32, FAIL -11, FINDING -4, FIRES -13, MISSED +1, RED -9, REFUTED +15, SILENT -1
+      regenerated by  code/hodge_leverage_audit_8aae/run_all.sh
+      - CONFIRMED' and its own refuted PRIMARY rows.  Direction 1 is the repair's own
+      - FINDING  H-1: THE CENSUS IS A MULTISET, SO A PERMUTATION OF DECLARED FIGURES I
+      - FINDING  H-2: `SUMMARY vs ROWS` COMPARES A VARIABLE WITH ITSELF.  It scores `p
+      - H8 / STATE.md row cell                              RED    [FAIL]            g
+      - H8 / deliverable §14 copy, frozen since mg-a806     RED    [FAIL]            g
+      - H8 / gap, cell + relocated history                  RED    [FAIL]            g
+      … and 82 more verdict line(s) moved
+
+  code/hodge_leverage_audit_9207/out_audit_9207.txt
+      VERDICT-STALE/token    CONFIRMED -23, FINDING -4, FIRES +5, REFUTED +15, SILENT -6
+      regenerated by  code/hodge_leverage_audit_9207/run_all.sh
+      - 3 of 3 of its U1 rows now read GATE FIRES where it observed exit 0 at 3 of 3 -
+      - E2 H8: the two LABELS exchanged, the figures left alone     SILENT     1     0
+      - E2b H8: two LABELS exchanged AWAY from the control's own literals  SILENT     
+      - E3 H8: the two historical COLUMN HEADERS exchanged          SILENT     0     0
+      - E4 H8: two ROW LABELS exchanged INSIDE the designated table   FIRES     1     
+      - H8: +9 608 <-> +1 630                                  1     REFUTED   CONFIRM
+      … and 67 more verdict line(s) moved
+
+  code/hodge_leverage_audit_97fb/out_audit_97fb.txt
+      VERDICT-STALE/token    CONFIRMED -7, FINDING -2, FIRES -32, REFUTED +14, VERDICT -4, WRONG -1
+      regenerated by  code/hodge_leverage_audit_97fb/run_all.sh
+      - >> FINDING G2: THE F2 REPAIR'S OWN POPULATION IS A HAND LIST.  `COMPUTED` name
+      - >> FINDING G3: THE MATRIX'S OWN CENSUS IS A SUBSTRING TEST OVER A WHOLE ROW.  
+      + >> FINDING G2: THE F2 REPAIR'S OWN POPULATION IS A HAND LIST.  `COMPUTED` name
+      - FINDING G2: THE F2 REPAIR'S OWN POPULATION IS A HAND LIST.  `COMPUTED` names 2
+      - FINDING G3: THE MATRIX'S OWN CENSUS IS A SUBSTRING TEST OVER A WHOLE ROW.  `re
+      + FINDING G2: THE F2 REPAIR'S OWN POPULATION IS A HAND LIST.  `COMPUTED` names 2
+      … and 54 more verdict line(s) moved
+
+  code/hodge_leverage_audit_ec07/out_audit_ec07.txt
+      VERDICT-STALE/token    CAUGHT -1, CONFIRMED -21, FINDING -5, GREEN -4, MISS -1, REFUSED -3, REFUTED -8, SILENT -2, TRUE -1, … and 1 more token(s)
+      regenerated by  code/hodge_leverage_audit_ec07/run_all.sh
+      - - A7-B2 `partition` bent LOSSY (segments lower-cased -- D3's shape): `--reseal
+      - E-1 -- THE FIELD IT DOES NOT REACH IS THE SITE BOUNDARY, AND THE SAME KIND OF 
+      - E-2 -- THE STATED REASON IS NOT TRUE OF THE CODE AT 1 OF 3 SITES.  'text outsi
+      - E-6 -- ONE `--reseal` TURNS A REAL LABEL EXCHANGE FULLY GREEN, AND NOTHING IN 
+      - N19 H8: the two LABELS exchanged, figures left alone (mg-9207 E2)     REFUTED 
+      - N20 H8: the <sha> table's two ROW LABELS exchanged (E2b)            REFUTED   
+      … and 65 more verdict line(s) moved
+
+  code/hodge_leverage_audit_f922/out_audit.txt
+      VERDICT-STALE/token    CONFIRMED -15, FINDING -4, PASS +1, REFUTED +26
+      regenerated by  code/hodge_leverage_audit_f922/run_all.sh
+      - FINDING  F-B: the cell-only gap in the tree is +755, not −875: the landing's o
+      - FINDING  F-C: and the sign claim inverts: the disclosure says the cell-only ga
+      + FINDING  F-B: the cell-only gap in the tree is -9,009, not −875: the landing's
+      + FINDING  F-C: and the sign claim inverts: the disclosure says the cell-only ga
+      - FINDING  F-E: the landing's committed evidence does not reproduce at the commi
+      - FINDING  F-F: `code/hodge_leverage_landing_e1d0/run_all.sh` states 'this trans
+      … and 47 more verdict line(s) moved
+
+  code/hodge_leverage_landing_e1d0/out_verify.txt
+      VERDICT-STALE/token    CAUGHT -2, CONFIRMED -48, FAILS -1, FIRES -78, GREEN -2, REFUTED +22, SILENT -3, TRUE -1, WRONG -4
+      regenerated by  code/hodge_leverage_landing_e1d0/run_all.sh
+      - K01 the LIVE figure a reader meets, corrupted                 FIRES           
+      - K02 the figure DUPLICATED at the site (mg-8a5c F-1's shape)   FIRES           
+      - K03 a WRONG figure in ORDINARY PROSE (mg-835f G-1)            FIRES           
+      - K04 wrong prose REUSING a figure on the roster (mg-8916)      FIRES           
+      - K05 a NEW undeclared historical figure (the fail-closed cost  FIRES           
+      - K06 two DECLARED FIGURES exchanged (mg-8aae H-1)              FIRES           
+      … and 124 more verdict line(s) moved
+
+  code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt
+      VERDICT-STALE/token    CONFIRMED -6, FIRES -3, REFUTED +4
+      regenerated by  code/hodge_leverage_repair_3f3b/run_all.sh
+      - [CONFIRMED] S0a the runner is green on the unmutated tree (exit 0), so every f
+      - [CONFIRMED] S1a of the 7 `n/a` reason(s) the runner prints, 7 carry a COUNT ME
+      - [CONFIRMED] S1b of the artifact's 7 `n/a` cell(s), 7 are also declined by a de
+      - [CONFIRMED] S1c K11 @ the STATE.md row ON DISK: the site's pipe-table padding 
+      - [CONFIRMED] S1d the artifact's own matrix at K11 @ the STATE.md row reads 'FIR
+      - [CONFIRMED] S1e CONTROL: the pipe-table clause of `k_layout` removed and NOTHI
+      … and 7 more verdict line(s) moved
+
+  code/hodge_leverage_repair_6df0/out_repair_6df0.txt
+      VERDICT-STALE/token    CONFIRMED -6, FIRES -30, REFUSED +1, REFUTED +5, SILENT -2, WRONG -1
+      regenerated by  code/hodge_leverage_repair_6df0/run_all.sh
+      + - R1d a wrong LIVE FIGURE (−9 009 -> −9 010 in §14), then `--reseal`: exit Non
+      - K01 the LIVE figure a reader meets, corrupted                 FIRES           
+      - K02 the figure DUPLICATED at the site (mg-8a5c F-1's shape)   FIRES           
+      - K03 a WRONG figure in ORDINARY PROSE (mg-835f G-1)            FIRES           
+      - K04 wrong prose REUSING a figure on the roster (mg-8916)      FIRES           
+      - K05 a NEW undeclared historical figure (the fail-closed cost  FIRES           
+      … and 34 more verdict line(s) moved
+
+  code/hodge_leverage_repair_8916/out_repair_8916.txt
+      VERDICT-STALE/token    AGREES -1, CONFIRMED -20, FAIL -1, FINDING -1, FIRES -18, MISSED -4, REFUTED -13, WRONG -3
+      regenerated by  code/hodge_leverage_repair_8916/run_all.sh
+      - 'THE PRIMARY TARGET IS CONFIRMED'.  A document contradicting itself between it
+      - INSTRUMENT AGREES: unmodified, it now reports 0 findings at exit 0,
+      - N1 H8: wrong prose figure +9 999 (mg-835f's own U1)                   GATE FIR
+      - N1 the STATE.md row: wrong prose figure +9 999 (mg-835f's own U1)     GATE FIR
+      - N1 §14: wrong prose figure +9 999 (mg-835f's own U1)                  GATE FIR
+      - N2 H8: wrong prose figure +755 -- ALREADY ON THE ROSTER               GATE FIR
+      … and 34 more verdict line(s) moved
+
+  code/hodge_leverage_repair_8eca/out_repair_8eca.txt
+      VERDICT-STALE/token    CONFIRMED -28, FAIL -1, FIRED -1, FIRES -8, GREEN -3, MISSED -1, REFUTED -5, SILENT -1
+      regenerated by  code/hodge_leverage_repair_8eca/run_all.sh
+      - (3 of 3 rows tagged H-1 are [CONFIRMED].)
+      - (3 of 3 rows tagged H-2 are [CONFIRMED].)
+      - COULD NOT FAIL FOR ANY TREE.  The repair does not add checks -- it makes the
+      - D0  as it stands                      [CONFIRMED]   refuted 3  exit 1
+      - D1  the mg-8916 forcing hook          [REFUTED  ]   refuted 4  exit 1
+      - D2  the HEADLINE edited on disk       [REFUTED  ]   refuted 4  exit 1
+      … and 38 more verdict line(s) moved
+
+  code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt
+      VERDICT-STALE/token    CONFIRMED -21, REFUTED +23
+      regenerated by  code/hodge_leverage_repair_ff3e/run_all.sh
+      - - E2 H8: the two LABELS exchanged, the figures left alone -> 1 gate rows refut
+      - - E2b H8: two LABELS exchanged AWAY from the control's own literals -> 1 gate 
+      - - E3 H8: the two historical COLUMN HEADERS exchanged -> 1 gate rows refuted (F
+      - E2  H8: the two mg-a2bd table LABELS exchanged (mg-9207's own,    1    REFUTED
+      - E2b H8: the <sha> table's two ROW LABELS exchanged (mg-9207'    1    REFUTED  
+      - E3  H8: the two historical COLUMN HEADERS exchanged (mg-9207's    1    REFUTED
+      … and 44 more verdict line(s) moved
+
+  code/landing_audit_sweep_64cb/out_s0_selftest.txt
+      VERDICT-STALE/token    FAIL +1
+      regenerated by  code/landing_audit_sweep_64cb/run_all.sh
+      + [FAIL] B.landing mg-8d63 -> {mg-789d}
+
+  code/landing_audit_sweep_64cb/out_s1_population.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/landing_audit_sweep_64cb/run_all.sh
+      - count REFUSED             4          7      11
+      - count REFUSED             8         13      21
+      + count REFUSED             4          8      12
+      + count REFUSED             7         14      21
+
+  code/landing_audit_sweep_64cb/out_s2_collisions.txt
+      VERDICT-STALE/token    REFUSED -5
+      regenerated by  code/landing_audit_sweep_64cb/run_all.sh
+      - audit   wall  08-10T04:05..<clock>   write      REFUSED
+      - landing wall  07-31T00:10..<clock>   write      REFUSED
+      - mg-8d63   mg-789d   mg-5cba   STATE.md  CONCURRENT   REFUSED
+      - mg-8d63   mg-789d   mg-5cba   STATE.md  CONCURRENT   REFUSED
+      - verdicts: wall=CONCURRENT write=REFUSED  STATE.md=yes
+
+  code/landing_audit_sweep_64cb/out_s3_adjudicate.txt
+      VERDICT-STALE/token    REFUSED -2
+      regenerated by  code/landing_audit_sweep_64cb/run_all.sh
+      - mg-8d63   mg-789d   mg-5cba   STATE.md  CONCURRENT   REFUSED
+      - mg-8d63 par=mg-789d aud=mg-5cba  wall=CONCURRENT   write=REFUSED      STATE=y
+
+  code/landing_audit_sweep_64cb/out_s5_cost.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/landing_audit_sweep_64cb/run_all.sh
+      - count where the check would have FIRED       30
+      + count where the check would have FIRED       32
+
+  code/landing_audit_sweep_64cb/out_s6_rule.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/landing_audit_sweep_64cb/run_all.sh
+      - count PASS (every audit already DONE)    14
+      - count PASS (no audited parent)           193
+      - count landings still REFUSED at t=2099 9
+      + count PASS (every audit already DONE)    18
+      + count PASS (no audited parent)           231
+      + count landings still REFUSED at t=2099 10
+
+  code/landscape_repair_audit_3b51/out_scope_text.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/landscape_repair_audit_3b51/run_all.sh
+      - line 348   QUOTED/REFUTED
+      - line 366  > ⚠️ **EXECUTED. mg-d673 ran items 1, 2, 3, 5 and 6 and item 1 and i
+      + line 372   QUOTED/REFUTED
+      + line 390  > ⚠️ **EXECUTED. mg-d673 ran items 1, 2, 3, 5 and 6 and item 1 and i
+
+  code/lstar_reaudit_5e82/out_a6_provenance.txt
+      VERDICT-STALE/token    FAIL +1, FAILED +1
+      regenerated by  code/lstar_reaudit_5e82/run_all.sh
+      + [FAIL] STATE.md on main contains the mu_pref^2 clause                 got=Fals
+      - a6 VERDICT: ALL ARMS SATISFACTORY
+      + a6 VERDICT: *** AN ARM FAILED ***
+
+  code/mirror_staleness_cdd5/out_s0_state.txt
+      VERDICT-STALE/token    FALSE -1
+      regenerated by  code/mirror_staleness_cdd5/run_all.sh
+      - the tip      <sha> <date>  docs: re-scope C3 — "exactly the ordinal sums" is a
+
+  code/mirror_staleness_cdd5/out_s2_sweep.txt
+      VERDICT-STALE/token    REFUTED +3
+      regenerated by  code/mirror_staleness_cdd5/run_all.sh
+      + -> docs/OneThird-Spectral-NearOrdinalSum-KillShot-Probe.md  [+REFUTED x2, WITH
+      - THE NOT-CLEAN ROWS, NAMED (3):
+      + -> docs/OneThird-StandardDominance-ComparisonRoute.md  [+REFUTED x2, WITHDRAWN
+      + -> docs/OneThird-StandardDominance-ComparisonRoute.md  [+REFUTED x2, WITHDRAWN
+      + THE NOT-CLEAN ROWS, NAMED (6):
+
+  code/mirror_staleness_cdd5/out_s4_anchors.txt
+      VERDICT-STALE/token    REFUSED +1
+      regenerated by  code/mirror_staleness_cdd5/run_all.sh
+      - anchors whose line DIFFERS                        5
+      + REFUSED rather than guessed.
+      + anchors whose line DIFFERS                        8
+
+  code/mirror_staleness_cdd5/out_selftest_cdd5.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/mirror_staleness_cdd5/run_all.sh
+      - …                   got={"5.0'", '2.3', '1'}
+      + …                   got={'1', "5.0'", '2.3'}
+
+  code/pinned_ref_durability_223d/out_r1_population.txt
+      VERDICT-STALE/token    FINDING +2
+      regenerated by  code/pinned_ref_durability_223d/run_all.sh
+      - FINDINGS 1
+      + FINDINGS 3
+      - THE HEADLINE THIS TREE DOES **NOT** RUN: `381 BROKEN PINS`.
+      - TOTAL BAD: 1
+      + THE HEADLINE THIS TREE DOES **NOT** RUN: `463 BROKEN PINS`.
+      + TOTAL BAD: 3
+      … and 4 more verdict line(s) moved
+
+  code/pinned_ref_durability_223d/out_r2_cause.txt
+      VERDICT-STALE/token    FINDING -1
+      regenerated by  code/pinned_ref_durability_223d/run_all.sh
+      NOTE  2 of 6 quoted line(s) are `<sha> <subject>` — a history walk, so this moves when main moves (mg-e720's family)
+      - <sha>  <sha>  evidence: THE INSTRUMENT THAT RAISED THE FINDINGS, R
+      - FINDINGS 1
+      - TOTAL BAD: 1
+      + <sha>  *** NONE ***  evidence: THE INSTRUMENT THAT RAISED THE FINDINGS, R
+      + FINDINGS 0
+      + TOTAL BAD: 0
+      … and 1 more verdict line(s) moved
+
+  code/pinned_ref_durability_223d/out_r4_durable.txt
+      VERDICT-STALE/token    FINDING +1
+      regenerated by  code/pinned_ref_durability_223d/run_all.sh
+      - FINDINGS 0
+      - TOTAL BAD: 0
+      + FINDINGS 1
+      + TOTAL BAD: 1
+      + [FINDING  ] pins that are not yet held by something gc cannot collect: 5 of 32
+
+  code/pinned_ref_durability_223d/out_r5_self.txt
+      VERDICT-STALE/token    FINDING +2
+      regenerated by  code/pinned_ref_durability_223d/run_all.sh
+      - FINDINGS 0
+      + FINDINGS 2
+      - TOTAL BAD: 0
+      + TOTAL BAD: 2
+      + [FINDING  ] and no integer inside them moved either
+      + [FINDING  ] files changed outside this tree: 6 -- so no figure ANYWHERE else c
+
+  code/publication_anchor_132a/out_anchor_132a.txt
+      VERDICT-STALE/token    AGREES -5
+      regenerated by  code/publication_anchor_132a/run_all.sh
+      - …opulation re-derives to 495 -- the figure the transcript publishes -- so the 
+      + …opulation re-derives to 1172 -- the figure the transcript publishes -- so the
+      - [CONFIRMED] A3a THIS INSTRUMENT'S OWN TRANSCRIPT reads `AGREES` under the rule
+      + [CONFIRMED] A3a THIS INSTRUMENT'S OWN TRANSCRIPT reads `DISPLACED` under the r
+      - [CONFIRMED] A3d `--at` IS EXERCISED, NOT MERELY OFFERED: the same lattice run 
+      - [MEASURED ] A1c 1 figure(s) are DISPLACED: right when written and rebased onto
+      … and 5 more verdict line(s) moved
+
+  code/repair_8d5e/out_r3_term.txt
+      VERDICT-STALE/token    FINDING +1
+      regenerated by  code/repair_8d5e/run_all.sh
+      - FINDINGS: 0, population: every operand of every `and`/`or` in the census's two
+      - TOTAL BAD: 0
+      + FINDING: 1 unqualified site(s) fall in no named scope: code/repair_b2af/out_t3
+      + FINDINGS: 1, population: every operand of every `and`/`or` in the census's two
+      + TOTAL BAD: 1
+
+  code/repair_8d5e/out_r4_self.txt
+      VERDICT-STALE/token    FINDING +1, FINDINGS +2
+      regenerated by  code/repair_8d5e/run_all.sh
+      - FINDINGS: 0, population: every revision this deliverable's scripts derive or p
+      - TOTAL BAD: 0
+      + FINDING: 180 path(s) this repair changes fall in no named kind: .pogo/refinery
+      + FINDINGS: 1, population: every revision this deliverable's scripts derive or p
+      + TOTAL BAD: 1
+      + code/control_audit_9876/FINDINGS.md                  *** NOT ACCOUNTED FOR
+
+  code/runner_exit_audit_56dc/out_t1_grain.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/runner_exit_audit_56dc/run_all.sh
+      - FINDING: T1c `out_r4_property.txt` labels its outside-the-two-names count 10 `
+      - FINDING: T1d the quantity `executing sites at HEAD outside the two names` is s
+      + FINDING: T1c `out_r4_property.txt` labels its outside-the-two-names count 14 `
+      + FINDING: T1d the quantity `executing sites at HEAD outside the two names` is s
+      - | **R5a** | 9 sites outside the two names, 4 consuming | **HIT** |
+      + | **R5a** | 9 sites outside the two names, 4 consuming | **HIT** — and
+
+  code/runner_exit_audit_56dc/out_t2_strictest.txt
+      VERDICT-STALE/token    BAD -1, FINDING -2
+      regenerated by  code/runner_exit_audit_56dc/run_all.sh
+      - FINDING: T2a the strictest rule mg-70c7 applies to anything -- `r6_self.py`'s 
+      - FINDING: T2b the *one rule object* mg-70c7 merged is the SUBJECT's nine altern
+      - FINDING: T2c mg-70c7's own self-facing marker check (`r6_self.py` R6c) runs ov
+      - FINDING: T2d FLOOR ITEM, chosen by me and named in no list: `lib70c7.figures()
+      - T2 TOTAL FINDINGS: 4   TOTAL BAD: 0
+      + FINDING: T2a the strictest rule mg-70c7 applies to anything -- `r6_self.py`'s 
+      … and 2 more verdict line(s) moved
+
+  code/runner_exit_audit_56dc/out_t4_standing.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/runner_exit_audit_56dc/run_all.sh
+      - T4 TOTAL FINDINGS: 0   TOTAL BAD: 0
+      + T4 TOTAL FINDINGS: 0   TOTAL BAD: 1
+
+  code/runner_exit_audit_56dc/out_t5_fixture.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/runner_exit_audit_56dc/run_all.sh
+      - FINDING: T5d the class the PM asked to have counted has 38 members and 2 carry
+      - T5 TOTAL FINDINGS: 1   TOTAL BAD: 0
+      + FINDING: T5d the class the PM asked to have counted has 67 members and 1 carry
+      + T5 TOTAL FINDINGS: 1   TOTAL BAD: 1
+
+  code/runner_exit_audit_dee4/out_a1_outside.txt
+      VERDICT-STALE/token    BAD +1, DIFFERS +2, FAIL +83, FINDING +53, HIT +1, WRONG +1
+      regenerated by  code/runner_exit_audit_dee4/run_all.sh
+      + 34  echo "$d DIFFERS rc=$rc lines=$n files=$changed" >> "$OUT"
+      + 34  echo "$d DIFFERS rc=$rc lines=$n files=$changed" >> "$OUT"
+      + 52  case "$t" in *LIB-weak*) echo "    TITLE HIT: $(basename "$f") :
+      + 58  $(if [ -z "$note" ]; then echo "ok  "; else echo "BAD "; fi) $ke
+      + 61  summary="$summary  WRONG $key: exit $got != expected $expect ($l
+      - A1 TOTAL BAD: 0
+      … and 139 more verdict line(s) moved
+
+  code/runner_exit_audit_dee4/out_a3_anchor.txt
+      VERDICT-STALE/token    AGREES -1, DIFFERS +1, FINDING +1
+      regenerated by  code/runner_exit_audit_dee4/run_all.sh
+      - A3 TOTAL BAD: 1
+      + A3 TOTAL BAD: 2
+      - FINDING: A3c the repaired caller scan still enumerates targets by FILENAME -- 
+      - FINDING: A3d the published document states the pinned byte-comparison as `154 
+      - HEAD literal                 mg-7522 1   re-derived 1   AGREES
+      + FINDING: A3b HEAD literal: mg-7522 says 1, re-derived 4
+      … and 3 more verdict line(s) moved
+
+  code/runner_exit_audit_dee4/out_a4_superlatives.txt
+      VERDICT-STALE/token    FINDING +2, HOLDS -2
+      regenerated by  code/runner_exit_audit_dee4/run_all.sh
+      - A4 TOTAL BAD: 3
+      + A4 TOTAL BAD: 6
+      - FINDING: A4b the published document prints `0 USES` without the extent its own
+      + FINDING: A4c undispositioned strength-marked claim code/runner_exit_repair_752
+      + FINDING: A4c undispositioned strength-marked claim code/runner_exit_repair_752
+      + FINDING: A4c undispositioned strength-marked claim code/runner_exit_repair_752
+      … and 3 more verdict line(s) moved
+
+  code/runner_exit_audit_dee4/out_a5_floor.txt
+      VERDICT-STALE/token    FINDING +2
+      regenerated by  code/runner_exit_audit_dee4/run_all.sh
+      - A5 TOTAL BAD: 0
+      + A5 TOTAL BAD: 2
+      + FINDING: A5a code/runner_exit_c2b3/k1_census.py exits 1 at HEAD after mg-7522'
+      + FINDING: A5e this probe changed the worktree
+
+  code/runner_exit_c2b3/out_k1_census.txt
+      VERDICT-STALE/token    AGREES +1, DIFFERS -2, WRONG -1
+      regenerated by  code/runner_exit_c2b3/run_all.sh
+      - #     ticket 1 / re-derived 0 / DIFFERS
+      - # THE TICKET WAS RIGHT AND THE INSTRUMENT WAS WRONG.  `libc2b3.PIPEFAIL_RE` wa
+      - K1 TOTAL BAD: 0
+      + K1 TOTAL BAD: 11
+      - setting pipefail                   ticket  1   re-derived  0   DIFFERS
+      + setting pipefail                   ticket  1   re-derived  1   AGREES
+
+  code/runner_exit_repair_7522/out_s1_population.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/runner_exit_repair_7522/run_all.sh
+      - P2  ...status CONSUMED and discarded stage CAN FAIL        1          1
+      + P2  ...status CONSUMED and discarded stage CAN FAIL       18         36
+      - S1 TOTAL BAD: 0
+      + S1 TOTAL BAD: 35
+
+  code/runner_exit_repair_bf79/out_p3_ruleset.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/runner_exit_repair_bf79/run_all.sh
+      - …counterfactual, against 0 under a naive live-vs-committed diff whose extra -3
+      + …counterfactual, against 4 under a naive live-vs-committed diff whose extra 1 
+
+  code/runner_exit_repair_bf79/out_p4_figures.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/runner_exit_repair_bf79/run_all.sh
+      - …gnitude rule would drop 27 genuine figures and a resolves-as-an-object rule w
+      + …gnitude rule would drop 161 genuine figures and a resolves-as-an-object rule 
+
+  code/runner_exit_repair_bf79/out_selftest_bf79.txt
+      VERDICT-STALE/token    FALSE +1, FIRED +1
+      regenerated by  code/runner_exit_repair_bf79/run_all.sh
+      - AND THE FALSE EXCLUSION, asserted as FALSE so the finding cannot
+      + IT FIRED.  mg-5035 repaired the rule and this row went red, which is
+      + THE FALSE EXCLUSION WAS ASSERTED AS FALSE HERE, so that a later
+      + `figures() excludes a git revision` was FALSE for the whole
+      - selftestbf79 TOTAL BAD: 0
+      + selftestbf79 TOTAL BAD: 1
+
+  code/species_audit_73df/out_c4_scope.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/species_audit_73df/run_all.sh
+      - C4 TOTAL BAD: 1
+      + C4 TOTAL BAD: 0
+
+  code/species_audit_73df/out_c5_doc.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/species_audit_73df/run_all.sh
+      - C5 TOTAL BAD: 5
+      + C5 TOTAL BAD: 1
+
+  code/species_audit_7dd3/out_d2_extent.txt
+      VERDICT-STALE/token    HOLDS -1, TRUE -1
+      regenerated by  code/species_audit_7dd3/run_all.sh
+      - THE CLAIM THE ONE LIST HOLDS AND EVERY CHECKER PASSES ON:
+      - and is struck once.  Every extent line is TRUE.
+      - every struck claim is struck or explicitly negated at EVERY occurren *** FAILS
+      + the only file in the tree it does not read is run_all.sh             *** FAILS
+
+  code/species_audit_7dd3/out_d3_seam.txt
+      VERDICT-STALE/token    FAILS +2
+      regenerated by  code/species_audit_7dd3/run_all.sh
+      - D3 TOTAL BAD: 3
+      - s2_seam.py's EXTENT paragraph states the 300-character floor         *** FAILS
+      - the committed out_s2_seam.txt has no stray '%%' from an unformatted  *** FAILS
+      + D3 TOTAL BAD: 5
+      + that repetition is on the declared inspected list                    *** FAILS
+      + that repetition is on the declared inspected list                    *** FAILS
+      … and 2 more verdict line(s) moved
+
+  code/species_audit_7dd3/out_d5_mutations.txt
+      VERDICT-STALE/token    BAD +2, FINDING +2, MISSED +4
+      regenerated by  code/species_audit_7dd3/run_all.sh
+      - D5 PREDICTIONS MISSED: 2 of 34
+      + D5 PREDICTIONS MISSED: 4 of 34
+      + M12  X3 planted in code/species_7d75/run_all.sh           s1_extent.py     exi
+      + M25  an EXACT duplicate of a SHORT prose paragraph (98 ch s2_seam.py       exi
+      + MISSED  M12    exit 1, predicted 0
+      + MISSED  M25    exit 1, predicted 0
+      … and 2 more verdict line(s) moved
+
+  code/species_bound_audit_6ef4/out_t3_census.txt
+      VERDICT-STALE/token    DIFFER +1
+      regenerated by  code/state_suppression_repair_5f7c/run_all.sh
+      NOTE  1 of 3 quoted line(s) are `<sha> <subject>` — a history walk, so this moves when main moves (mg-e720's family)
+      - P3f    predicted 3                        got 6                        *** MIS
+      + <sha>  says 2          refresh: FOUR ARMS OF mg-6cb9 RE-RUN AND FOUR DIFFER
+      + P3f    predicted 3                        got 7                        *** MIS
+
+  code/species_bound_repair_5040/out_r1_bound.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/species_bound_repair_5040/run_all.sh
+      - R1 TOTAL BAD: 0      R1 PREDICTIONS MISSED: 3
+      + R1 TOTAL BAD: 1      R1 PREDICTIONS MISSED: 3
+
+  code/species_bound_repair_5040/out_r2_wiring.txt
+      VERDICT-STALE/token    BAD -4, CLEAN -1, FINDING -1
+      regenerated by  code/state_delegation_audit_5644/run_all.sh
+      - R2 TOTAL BAD: 0
+      - R2a  THE THREE REWIRED RUNNERS, CLEAN
+      - R2e  A CRASH IN e2 IS NO LONGER REPORTED AS A FINDING e2 DID NOT MAKE
+      - species_remainder_f8fa     exit 0   prints `E2 TOTAL BAD:`  yes   ok
+      - species_repair_6f61        exit 0   prints `E2 TOTAL BAD:`  yes   ok
+      - species_repair_a4ef        exit 0   prints `E2 TOTAL BAD:`  yes   ok
+
+  code/species_depth_audit_4700/out_selftest.txt
+      VERDICT-STALE/token    FAILED +2
+      regenerated by  code/species_depth_audit_4700/run_all.sh
+      + *** FAILED *** code/species_repair_a4ef/run_all.sh carries the call and guard 
+      + *** FAILED *** code/species_repair_a4ef/run_all.sh carries the printing verbat
+
+  code/species_extent_audit_6cb9/out_selftest.txt
+      VERDICT-STALE/token    FAILED +2
+      regenerated by  code/species_extent_audit_6cb9/run_all.sh
+      + and e2 is green again immediately after the restore                *** FAILED 
+      + e2_crosssection.py exits 0 unmutated                               *** FAILED 
+
+  code/species_extent_d633/out_e1_extents.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/species_extent_d633/run_all.sh
+      - e2_crosssection.py   exit 0   201 file(s) under the repo (102 docs, 99 code), 
+      + e2_crosssection.py   exit 1   531 file(s) under the repo (182 docs, 349 code),
+      - …, 52 code), 55 outside, 20 binary, 0 ATTEMPTED AND FAILED
+      + …, 52 code), 55 outside, 18 binary, 0 ATTEMPTED AND FAILED
+
+  code/species_extent_d633/out_e2_crosssection.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/species_extent_d633/run_all.sh
+      - E2 CHECKED 267 markdown file(s) AND FOUND 1 THING(S) WRONG
+      - E2 TOTAL BAD: 1
+      + E2 CHECKED 531 markdown file(s) AND FOUND 5 THING(S) WRONG
+      + E2 TOTAL BAD: 5
+
+  code/species_gate_audit_d53d/out_selftest_d53d.txt
+      VERDICT-STALE/token    FAILED +4
+      regenerated by  code/species_gate_audit_d53d/run_all.sh
+      - e2 is GREEN on the clean clone                                   ok
+      - e2 is RED with the plant, and says why                           ok
+      + and the tree is green again once the plant is removed            *** FAILED **
+      + e2 is GREEN on the clean clone                                   *** FAILED **
+      + e2 is RED with the plant, and says why                           *** FAILED **
+      + the SAME sentence in a paragraph that retracts it does NOT fire  *** FAILED **
+
+  code/species_repair_6f61/out_r2_columns.txt
+      VERDICT-STALE/token    BAD -2, MISS -2, MISSED -3, VERDICT -1
+      regenerated by  code/state_delegation_audit_5644/run_all.sh
+      - R2 PREDICTIONS MISSED: 2 of 45
+      - R2 TOTAL BAD: 0
+      - R2c  THE PER-COLUMN VERDICT
+      - R2e  THE TWO MISSED PREDICTIONS, AND WHY THEY MISSED
+      - TOTAL BAD below counts columns left UNDEMONSTRATED, which is the
+      - verdict           ok         ok         ok         ok       MISS
+      … and 1 more verdict line(s) moved
+
+  code/species_sites_821e/out_selftest.txt
+      VERDICT-STALE/token    FAILED +2
+      regenerated by  code/species_sites_821e/run_all.sh
+      + *** FAILED: species_repair_6f61 fails the run when the check fails
+      + *** FAILED: species_repair_6f61 prints the check's output, not just the call
+
+  code/state_restructure_ea0e/out_verify_relocation_ea0e.txt
+      VERDICT-STALE/token    FAIL +5, MISSING +18, PASS -5
+      regenerated by  code/state_restructure_ea0e/run_all.sh
+      - BROKEN       old   43   new STATE.md   11   reachable corpus    71
+      + BROKEN       old   43   new STATE.md   12   reachable corpus    76
+      + FAIL  every old line/column is present verbatim in STATE.md or a linked file  
+      + FAIL  kept + relocated >= old  (no byte of STATE.md was dropped)  --  surplus 
+      + FAIL  longest line under target
+      + FAIL  word count under target
+      … and 26 more verdict line(s) moved
+
+  code/summary_guard_audit_407f/out_a1_arms.txt
+      VERDICT-STALE/token    FINDING -6, HIT -4, MISS -5, PASS +1, UNMEASURED -1, VERDICTS -2
+      regenerated by  code/summary_guard_audit_407f/run_all.sh
+      - - s3_graph.py PUBLISHES PREDICTION VERDICTS from a run that measured nothing
+      - - s3_graph.py: P10 FLIPS HIT -> MISS purely because a repo could not be read
+      - - s3_graph.py: P9 FLIPS HIT -> MISS purely because a repo could not be read
+      - P8/P9/P10 are scored MISS off unpopulated accumulators; `UNMEASURED`, the thir
+      - [FINDING] s2_controls.py DIES with mg-4d3b's F5 VERBATIM: TypeError: object of
+      - [FINDING] s3_graph.py EXITS 0 under a total fetch failure
+      … and 5 more verdict line(s) moved
+
+  code/summary_guard_audit_407f/out_a2_idiom.txt
+      VERDICT-STALE/token    FIRES +2
+      regenerated by  code/summary_guard_audit_407f/run_all.sh
+      + LIVE -- and this is THE ONE THAT FIRES.  See below.
+      + LIVE -- and this is THE ONE THAT FIRES.  See below.
+      - get-default-0    1 site(s)   -- MISSING KEY -> 0 : a row never measured scores
+      + get-default-0    3 site(s)   -- MISSING KEY -> 0 : a row never measured scores
+
+  code/superseded_figures_5827/out_gate.txt
+      VERDICT-STALE/token    FAIL +1, PASS +1, WRONG +1
+      regenerated by  code/superseded_figures_5827/run_all.sh
+      NOTE  1 of 6 quoted line(s) are `<sha> <subject>` — a history walk, so this moves when main moves (mg-e720's family)
+      + <sha> docs: THE LIVE 100x-WRONG FIGURE IS STRUCK — the primary doc said the re
+      - A PASS below is a statement about THESE 1785 files and THESE 6 registry entrie
+      + A PASS below is a statement about THESE 2997 files and THESE 6 registry entrie
+      - GATE: PASS — 0 flat-text sites.
+      + GATE: FAIL — 6 flat-text site(s) quoting a superseded input.
+      + [PASS] C3c  6/eps_spec at the superseded 2e-4
+      … and 1 more verdict line(s) moved
+
+  code/sweep_evidence_control_d2c2/out_p1_names.txt
+      VERDICT-STALE/token    CONFIRMED -1
+      regenerated by  code/sweep_evidence_control_d2c2/run_all.sh
+      - CONFIRMED — the two sets are identical, and the ticket's guess is
+
+  code/verdict_delivery_bf3f/out_d2_cause.txt
+      VERDICT-STALE/token    CONFIRMED +16, FAIL +1, FAILS +1, FALSE +2, HOLDS +2, VERDICT +92
+      regenerated by  code/verdict_delivery_bf3f/run_all.sh
+      + 0.2  mg-131e  VERDICT mg-131e: the <= direction is certified at n=
+      + 0.2  mg-223d  mg-223d VERDICT: <sha> is 1 of 26, cause is unifor
+      + 0.2  mg-2ff6  mg-2ff6 VERDICT: 0 of 27 -> 22 of 27 by cfd9c's own
+      + 0.3  mg-8d66  mg-8d66 VERDICT: your PREMISE is right and it is wha
+      + 0.4  mg-77fe  VERDICT mg-77fe — the le_to_facet sizing is LANDED,
+      + 0.5  mg-28ff  mg-28ff VERDICT: branch (C) LANDS at n<=6 — C_3^(III
+      … and 88 more verdict line(s) moved
+
+  code/verdict_delivery_bf3f/out_d3_fire.txt
+      VERDICT-STALE/number   same tokens, a number under one of them moved
+      regenerated by  code/verdict_delivery_bf3f/run_all.sh
+      - [PASS] the delivery is arm B: got ['mg-3dc0'], expected ['mg-3dc0']
+      - [PASS] the reported drop is arm A: got ['mg-3c2b'], expected ['mg-3c2b']
+      + [PASS] the delivery is arm B: got ['mg-c837'], expected ['mg-c837']
+      + [PASS] the reported drop is arm A: got ['mg-b16f'], expected ['mg-b16f']
+      - arm A  mg-3c2b: landed, and I am DELIBERATELY NOT MAILING THE VERDICT.
+      + arm A  mg-b16f: landed, and I am DELIBERATELY NOT MAILING THE VERDICT.
+
+  code/verdict_delivery_bf3f/out_d4_live.txt
+      VERDICT-STALE/token    DISAGREES +1, HOLDS +1, MISS +1, MISSING +1, RED +1, REFUTED +1, SILENT -1, UNMEASURED +1, WIDER -1
+      regenerated by  code/verdict_delivery_bf3f/run_all.sh
+      - 2026-07-31T07:13:43Z  mg-3934  worker=3934      CI RED ON MAIN 21 HOURS: Gate 
+      - 2026-08-05T17:33:37Z  mg-f3ff  worker=f3ff      THE DROPPED-VERDICT CENSUS WAS
+      - 2026-08-06T00:37:28Z  mg-1d26  worker=z1d26     THE HOLE IS 3x WIDER THAN CERT
+      + 2026-08-12T21:29:52Z  mg-cdd5  worker=pcdd5     A REFUTED CLAIM IS STANDING UN
+      + 2026-08-13T03:44:15Z  mg-f771  worker=pf771     A COMMITTED out_*.txt CURRENTL
+      + 2026-08-13T04:01:40Z  mg-843d  worker=p843d     A TRIPWIRE IS RED ON MAIN RIGH
+      … and 7 more verdict line(s) moved
+
+  code/verdict_delivery_bf3f/out_verdictwatch.txt
+      VERDICT-STALE/token    DISAGREES +1, MISSING +1, RED +2, REFUTED +1, VERDICT +1
+      regenerated by  code/verdict_delivery_bf3f/run_all.sh
+      + 2026-08-12T21:29:52Z  mg-cdd5   pm-onethird   pcdd5    done              0  A 
+      + 2026-08-13T03:44:15Z  mg-f771   pm-onethird   pf771    done              0  A 
+      + 2026-08-13T04:01:40Z  mg-843d   pm-onethird   p843d    done              0  A 
+      + 2026-08-13T06:19:45Z  mg-8748   pm-onethird   p8748    done              0  KE
+      + 2026-08-13T06:48:20Z  mg-1903   pm-onethird   p1903    done              0  CO
+      + 2026-08-13T09:59:48Z  mg-502f   pm-onethird   p502f    done              0  SW
+
+  code/verdict_path_repair_1d26/out_selftest_1d26.txt
+      VERDICT-STALE/token    FINDING +1
+      regenerated by  code/verdict_path_repair_1d26/run_all.sh
+      - SELFTEST1D26 TOTAL BAD: 0
+      + SELFTEST1D26 TOTAL BAD: 1
+      - the neutralised sandbox is GREEN                                 ok
+      + the neutralised sandbox is GREEN                                 *** FINDING *
+
+==========================================================================================
+§5  THE RUNNER-BLIND PASS — TRANSCRIPTS THEIR OWN RUNNER DID NOT REWRITE
+==========================================================================================
+
+  A runner can decline to produce a transcript — most often because an earlier step
+  in it failed and it exited.  mg-6cb9 is exactly that and it is the instance this
+  whole ticket came from, so a sweep that stopped at runners would have MISSED THE
+  ONE KNOWN MEMBER OF THE POPULATION IT WAS COMMISSIONED TO COUNT.  This pass takes
+  the producing command out of the runner's own text and runs it alone.  A producer
+  the parser cannot see is reported `unparsed` and is NOT guessed at.
+
+     43  ran
+    219  unparsed
+
+     11  IDENTICAL              byte-identical to the committed copy
+      5  NON-VERDICT            differs, but in no verdict line (corpus sizes live here)
+     13  VERDICT-STALE/token    VERDICT-STALE — a verdict TOKEN appeared, vanished or changed
+     14  UNUSABLE/ungraded      the producing run was KILLED or REFUSED — not graded, see §6.3
+
+  --------------------------------------------------------------------------------------
+  VERDICT-STALE, reachable only by bypassing the runner: 13
+  --------------------------------------------------------------------------------------
+
+  code/anticorrelation_c50b/out_s4_lstar.txt
+      VERDICT-STALE/token    HOLDS -1
+      produced by     python3 s4_lstar.py   (in code/anticorrelation_c50b, rc=1)
+      - certified on integers at every one -- so (M#) HOLDS there, at every n, by S2.1
+
+  code/anticorrelation_c50b/out_s5_n8_scope.txt
+      VERDICT-STALE/token    FAILS -1
+      produced by     python3 s5_n8_scope.py   (in code/anticorrelation_c50b, rc=1)
+      - of which (F) FAILS at: 3589   <-- a LOWER BOUND on the n=8 (F)-failure count,
+
+  code/runner_exit_audit_05eb/out_j4_scope.txt
+      VERDICT-STALE/token    MISS +1
+      produced by     python3 j4_scope.py   (in code/runner_exit_audit_05eb, rc=0)
+      - PREDICTIONS: 3 of 3 as predicted, 0 MISSED (none)
+      + PREDICTIONS: 2 of 3 as predicted, 1 MISSED (Q19)
+      + Q19  predicted 34 of 34 repaired                  measured 42 of 42           
+
+  code/species_bound_repair_5040/out_r3_summaries.txt
+      VERDICT-STALE/token    FALSE +1, MISSED +4, WRONG +1
+      produced by     python3 -B r3_summaries.py   (in code/species_bound_repair_5040, rc=1)
+      - IN THIS WORKTREE   exit 1   A2 TOTAL BAD: 1
+      + IN THIS WORKTREE   exit 1   A2 TOTAL BAD: 6
+      + R0    -    unmutated                                            0    1    5   
+      + R28   OUT  the SAME restatement, in a DIFFERENT document from i 0    1    5   
+      - R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    1   
+      - R3 TOTAL BAD: 0
+      … and 6 more verdict line(s) moved
+
+  code/species_bound_repair_5040/out_r4_self.txt
+      VERDICT-STALE/token    BAD +1, BROKEN +2, CONFIRMED +10, FAIL +7, FAILS +3, FALSE +15, FINDING +1, FINDINGS +1, FIRED +1, … and 11 more token(s)
+      produced by     python3 -B r4_self.py   (in code/species_bound_repair_5040, rc=0)
+      + STATE.md: +| **CORRECTS MERGED WORK · P6 RESCORED `HELD` WHERE IT WAS PUBLISHE
+      + STATE.md: +| **GREEN · PROVEN, all finite posets · first proof-carried general
+      + STATE.md: +| **GREEN · REDUCES `C₃` TO L2 — IT DOES NOT DISCHARGE L2, AND L2 I
+      + STATE.md: +| **GREEN · UNBLOCKS mg-6bc2 ON ITS OWN SECOND DISJUNCT · CORRECTS 
+      + STATE.md: +| **RED ON THE CONSTANT · RED ON THE RATE TOO · GREEN ON ONE BRANCH
+      + STATE.md: +| **RED-conditional · witness fully CONFIRMED · CORRECTS MERGED WOR
+      … and 67 more verdict line(s) moved
+
+  code/species_depth_audit_4700/out_q1_depth.txt
+      VERDICT-STALE/token    BAD -2, FAILED -1, FALSE -4, FINDING -1, FIRES -6, MISSED -2, TRUE -2
+      produced by     python3 -B q1_depth.py   (in code/species_depth_audit_4700, rc=1)
+      - *** FINDING.  The F1 SHAPE SURVIVES THE REPAIR one rule to the
+      - D1g   predicted exit 1                     got exit 1 (FIRES)             as p
+      - D1h   predicted exit 1                     got exit 1 (FIRES)             as p
+      - D1i   predicted exit 1                     got exit 1 (FIRES)             as p
+      - D2b   predicted exit 0 (silent)            got exit 1 (FIRES)             *** 
+      - D2c   predicted exit 0 (extent TRUE)       got exit 0 (silent)            as p
+      … and 11 more verdict line(s) moved
+
+  code/species_depth_audit_4700/out_q2_wiring.txt
+      VERDICT-STALE/token    BAD -4, CAUGHT -1, CLEAN -1, FAILED -3, FINDING -3, GREEN -1, OVERSTATES -1, RED -1, VERDICT -1
+      produced by     python3 -B q2_wiring.py   (in code/species_depth_audit_4700, rc=1)
+      - *** FINDING.  Deleting the guard moves the MESSAGE and not the
+      - *** FINDING.  The claim that distinguishes this repair from the
+      - CAUGHT wired 3 of 3, GREEN unwired 3 of 3.  The second number is
+      - OVERSTATES what is load-bearing; the guard's only
+      - Q2 PREDICTIONS MISSED: 0
+      - Q2 TOTAL BAD: 4
+      … and 11 more verdict line(s) moved
+
+  code/species_extent_audit_6cb9/out_a1_bothways.txt
+      VERDICT-STALE/token    MISSED -1, SILENT -2, TRUE +2, WIDER -2
+      produced by     python3 -B a1_bothways.py   (in code/species_extent_audit_6cb9, rc=0)
+      - A1 TOTAL BAD: 1
+      + A1 TOTAL BAD: 0
+      - Q10    w3_scope.py          WIDE X4 in species_7d75/sub/leak.md -- a SUBDIRECT
+      - Q17    s1_extent.py         WIDE X3 in species_7d75/sub/leak.md -- a SUBDIRECT
+      + Q10    w3_scope.py          WIDE X4 in species_7d75/sub/leak.md -- a SUBDIRECT
+      + Q17    s1_extent.py         WIDE X3 in species_7d75/sub/leak.md -- a SUBDIRECT
+      … and 3 more verdict line(s) moved
+
+  code/species_extent_audit_6cb9/out_a2_crosssection.txt
+      VERDICT-STALE/token    FINDINGS +1, MISSED +4, VERDICT +1, WRONG +1
+      produced by     python3 -B a2_crosssection.py   (in code/species_extent_audit_6cb9, rc=1)
+      NOTE  2 of 6 quoted line(s) are `<sha> <subject>` — a history walk, so this moves when main moves (mg-e720's family)
+      - A2 TOTAL BAD: 2
+      - R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    1   
+      + <sha>   530  repair: mg-d3f3's SIX FINDINGS LANDED — the
+      + <sha>   531  instrument: THE CLASSIFIER FOR VERDICT-STALE
+      + A2 TOTAL BAD: 6
+      + R0    -    unmutated                                            0    1    5   
+      … and 7 more verdict line(s) moved
+
+  code/species_extent_audit_6cb9/out_a3_differ.txt
+      VERDICT-STALE/token    BAD -1, CONFIRMED -1, DIFFERS -7, FALSE -1, GREEN -3, NARROWER -1
+      produced by     python3 -B a3_differ_and_placement.py   (in code/species_extent_audit_6cb9, rc=1)
+      - A3 TOTAL BAD: 1
+      - A3c  EVERY FIX IS A CORRECTION.  WHERE DOES THE FALSE BELIEF LIVE?
+      - D1    s1_extent.py -- the widened scan             0        1     0     answer
+      - D1e   s1_extent.py -- is the widening GUARDED?     1        0     1     answer
+      - D2    w3_scope.py -- the widened scan              0        1     0     answer
+      - D2e   w3_scope.py -- is the widening GUARDED?      1        0     1     answer
+      … and 8 more verdict line(s) moved
+
+  code/species_extent_d633/out_e3_bothways.txt
+      VERDICT-STALE/token    MISSED +3
+      produced by     python3 e3_bothways.py   (in code/species_extent_d633, rc=1)
+      - E3 TOTAL BAD: 0
+      + E3 TOTAL BAD: 3
+      + P0e   e2_crosssection.py   -    unmutated                                     
+      + P20   e2_crosssection.py   OUT  the same restatement, in a paragraph that retr
+      + P21   e2_crosssection.py   OUT  a struck claim restated in a .py in a code tre
+
+  code/species_gate_audit_d53d/out_g3_layer2.txt
+      VERDICT-STALE/token    HELD -1, MISSED +1
+      produced by     python3 g3_layer2.py   (in code/species_gate_audit_d53d, rc=0)
+      - G3 PREDICTIONS SCORED: 6, MISSED: 1
+      + G3 PREDICTIONS SCORED: 6, MISSED: 2
+      - Q16    HELD
+      + Q16    *** MISSED ***
+
+  code/species_gate_audit_d53d/out_g4_self.txt
+      VERDICT-STALE/token    FAIL +1
+      produced by     python3 g4_self.py   (in code/species_gate_audit_d53d, rc=0)
+      + raw : arrow — AND DOES THE SCRIPT FAIL TO WRITE IT ITSELF?  If both, the only 
+
+==========================================================================================
+§6  WHAT THIS METHOD CANNOT SEE — stated per the mayor's instruction to p6e4f
+==========================================================================================
+
+  1  A TRANSCRIPT NO SUITE REGENERATES CANNOT BE CHECKED THIS WAY.  139 tracked
+     transcripts sit in a directory with no run_all.sh; nothing here regenerates them,
+     so nothing here compares them, and they are outside every number above.  This is
+     mg-f771's own declared hole (its §1: "a transcript no suite rewrites is never
+     modified and therefore never appears below") one level out.
+
+  2  A RUNNER THAT DECLINES.  255 transcript(s) in candidate directories were not
+     rewritten by their runner at all.  §5 reaches the ones whose producer is written
+     in the runner as a plain redirect; the rest stay unmeasured.
+
+  3  SUITES THAT DID NOT FINISH, AS A COVERAGE BOUND AND NOT ONLY A LIST.
+     22 of 187 suite(s) — 11.8% — produced no usable answer: 22 timed out at 900 s and
+     0 raised.  A timed-out suite may have rewritten SOME of its transcripts before
+     the limit, so its rows are kept and are NOT evidence that the rest agree — size
+     every total above against this fraction.
+       T/O  code/anchor_population_audit_0ba7
+       T/O  code/audit_5cba
+       T/O  code/boundary_epsilon_6ff4
+       T/O  code/branching_audit_957f
+       T/O  code/branching_repair_76cc
+       T/O  code/branching_repair_7e58
+       T/O  code/census_remainder_f8e5
+       T/O  code/census_timeout_a71f
+       T/O  code/chain_iv_c_81ff
+       T/O  code/counterexample_repair_dea5
+       T/O  code/hodge_leverage_audit_86a3
+       T/O  code/idiom_sweep_audit_18dc
+       T/O  code/l2_conditionality_28ff
+       T/O  code/lstar_789d
+       T/O  code/repair_b2af
+       T/O  code/runner_exit_audit_05eb
+       T/O  code/search_reach_abe8
+       T/O  code/species_bound_audit_6ef4
+       T/O  code/species_rung_repair_4adb
+       T/O  code/transcript_census_1abe
+       T/O  code/truncate_sweep_ec63
+       T/O  code/um_frontier_b417
+
+  4  THE ANSWER DEPENDS ON THE LOAD IT WAS TAKEN UNDER, which is a measurement
+     condition and not a caveat.  Suites here mutate a worktree and restore it, and
+     several check the restore by comparing `git status` (and .pyc mtimes) across a
+     probe — so a loaded host makes them REFUSE where a quiet one does not.  MEASURED,
+     ON THE INSTANCE THIS TICKET IS ABOUT: code/species_extent_audit_6cb9's
+     a1_bothways.py exited 2 under host load 40-50 during the full sweep, and exits 0
+     reproducing p6e4f exactly when re-run alone.  Anyone re-taking this sweep should
+     expect the UNGRADED count to move with the machine, and should re-measure a
+     refusal on one worker before reading anything into it.
+
+  5  THE TOKEN SET IS A CHOICE, AND §2 STATES BOTH ITS BIASES.  A verdict written in
+     a word nobody put on the list is not counted, and this instrument cannot tell you
+     how many those are — that is what makes §2 the instrument rather than a detail.
+
+  6  AND THE ONE THAT MATTERS MOST: AN ENUMERATION ONLY SEES WHAT IT ENUMERATES.
+     Everything above is a per-suite loop, so a transcript no loop entry reaches is
+     invisible however the classifier is tuned.  THE THING THAT CATCHES WHAT AN
+     ENUMERATION MISSES IS A WHOLE-RUN BEFORE/AFTER DIFF — run the corpus, diff the
+     tree, and read what moved without having decided in advance what could.  mg-6cb9
+     was found that way (by accident, by p6e4f, while pinning something else) and not
+     by any enumeration, including this one.
+
+==========================================================================================
+§7  WHAT THIS DOES TO THE REPORTED NUMBERS
+==========================================================================================
+
+      54  presumed stale     mg-20ee's original, superseded
+      32  already-stale      the census ground truth — AUTHORITATIVE FOR ADDRESSES
+     150  verdict-stale      this measurement, over a DIFFERENT population
+
+  150 DOES NOT SUPERSEDE 32 AND IT DOES NOT CONTAIN IT.  That is the misreading this
+  section exists to stop: the two are counts of DIFFERENT POPULATIONS under different
+  questions, and neither is a correction of the other.  32 remains the authoritative
+  already-stale ADDRESS count and this report does not touch it.
+
+  THE TWO NUMBERS ARE NOT NESTED AND MUST NOT BE ADDED WITHOUT SAYING SO.  mg-20ee's
+  44 candidates are the transcripts that carry a foreign `path:NNN`; this population is
+  the transcripts whose GRADED STATEMENTS moved.  A transcript can be in either, both,
+  or neither — code/species_extent_audit_6cb9 is in the second and NOT in the first,
+  which is why nobody had counted it.
+
+  Anything quoting 32 as "the staleness in the corpus" is quoting one of two classes.
+

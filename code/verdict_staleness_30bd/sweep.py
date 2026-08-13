@@ -153,6 +153,10 @@ def main():
     ap.add_argument("--timeout", type=int, default=900)
     ap.add_argument("--base", default=os.environ.get("SWEEP_BASE", "/tmp/mg30bd"))
     ap.add_argument("--only", nargs="*")
+    ap.add_argument("--fresh", action="store_true",
+                    help="TRUNCATE the record and start a new sweep.  Without it the run is "
+                         "APPENDED, and report.py takes the last record per directory — "
+                         "which is how one suite is re-measured without losing the rest.")
     ap.add_argument("--pass2-cap", type=int, default=12,
                     help="most transcripts to regenerate individually per directory")
     ap.add_argument("--pass2-timeout", type=int, default=300)
@@ -179,7 +183,13 @@ def main():
           flush=True)
 
     lock = threading.Lock()
-    fh = open(RECORD, "w", encoding="utf-8")
+    # APPEND, NOT TRUNCATE, AND THIS LINE COST A TWO-HOUR SWEEP.  It was `open(RECORD, "w")`,
+    # and re-measuring ONE directory with `--only` — which is exactly what the report's
+    # last-record-per-directory rule exists to support — deleted the 187-suite record it was
+    # meant to correct.  A harness whose repair operation destroys the thing being repaired
+    # is the shape this whole estate keeps finding; here it is in the instrument that counts
+    # it.  `--fresh` is the explicit way to start a new record, and it is now the only way.
+    fh = open(RECORD, "w" if args.fresh else "a", encoding="utf-8")
     fh.write(json.dumps({"kind": "header", "head": head, "dirs": len(dirs),
                          "transcripts": len(relpaths), "timeout": args.timeout,
                          "pass2": bool(args.pass2), "tokens": list(L.TOKENS)}) + "\n")

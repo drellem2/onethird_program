@@ -155,10 +155,43 @@ def main():
         if not ok:
             fails += 1
         out.append("  %-66s %s" % (label, "ok" if ok else "*** FAILED ***"))
+    # THE REGEX THAT FAILED, RE-RUN HERE RATHER THAN DESCRIBED IN A README.  A defect an
+    # author fixed before the first commit leaves no trace, and this one is the single
+    # clearest argument that this classifier is not mg-20ee's census renamed — so it is a
+    # measurement that runs every time, not a sentence somebody can delete without noticing.
+    out.append("")
+    out.append("  THE ADDRESS REGEX THAT FAILED, RE-MEASURED ON EVERY RUN")
+    out.append("  " + "-" * 74)
+    out.append("  A1 as first written was  (?<=[\\w./-]):\\d+\\b  — a colon-and-digits after any")
+    out.append("  word character.  Under it:")
+    out.append("")
+    naive_checks = []
+    for wid, want_naive, a, b in [
+        ("W12", L.BENIGN_ADDR, "A1 TOTAL BAD:1\n", "A1 TOTAL BAD:0\n"),
+        ("W3", L.BENIGN_ADDR, "the guard is at build.sh:342\n", "the guard is at build.sh:352\n"),
+        ("W9", L.VERDICT_NUMBER, "A1 TOTAL BAD: 1\n", "A1 TOTAL BAD: 0\n"),
+    ]:
+        got = L.classify(a, b, L.naive_mask)[0]
+        naive_checks.append((wid, want_naive, got))
+        out.append("    %-4s naive -> %-20s shipped -> %-20s"
+                   % (wid, got, L.classify(a, b)[0]))
+    out.append("")
+    out.append("  SO THE NAIVE MASK GRADES `TOTAL BAD:1 -> 0` AS A BENIGN ADDRESS MOVE — it turns")
+    out.append("  the exact number this ticket is about into mg-20ee's already-counted family, and")
+    out.append("  it does so while still handling build.sh:342 correctly, which is what makes the")
+    out.append("  defect invisible in the cases an author checks first.  W12 is the world that")
+    out.append("  holds the shipped regex narrow and W3 is the one that holds it wide enough.")
+    out.append("")
+    for wid, want_naive, got in naive_checks:
+        ok = (got == want_naive)
+        if not ok:
+            fails += 1
+        out.append("  %-66s %s" % ("the naive mask still grades %s as %s" % (wid, want_naive),
+                                   "ok" if ok else "*** FAILED ***"))
     out.append("")
     out.append("=" * 78)
     out.append("mg-30bd selftest: %d world(s) + %d assertion(s), %d failed"
-               % (len(WORLDS), len(checks), fails))
+               % (len(WORLDS), len(checks) + len(naive_checks), fails))
     out.append("=" * 78)
     print("\n".join(out))
     return 1 if fails else 0
