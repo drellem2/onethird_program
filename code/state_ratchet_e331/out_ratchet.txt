@@ -5,8 +5,8 @@ mg-e331 — STATE.md SIZE RATCHET
 §1  THE SUBJECT, MEASURED — the WORKING TREE, not a commit
 --------------------------------------------------------------------------------------------
   path              STATE.md
-  words             5053      <- THE GATED QUANTITY (len(text.split()))
-  bytes             34341
+  words             5048      <- THE GATED QUANTITY (len(text.split()))
+  bytes             34308
   lines             206
   longest line      4252 chars
   lines over 2000   1
@@ -21,10 +21,10 @@ mg-e331 — STATE.md SIZE RATCHET
 §2  THE DECLARED CEILING
 --------------------------------------------------------------------------------------------
   file              code/state_ratchet_e331/CEILING.json
-  words_ceiling     5053
-  tighten_below     4553
-  set_by            mg-3da1   at 5053 words
-  observed          5053  (+0 against the ceiling)
+  words_ceiling     5048
+  tighten_below     4548
+  set_by            mg-3da1   at 5048 words
+  observed          5048  (+0 against the ceiling)
 
   BANKED DOWN 21328 -> 14337 BY mg-14ad, 2026-08-13, AND THE CUT IS THE REMEDY THIS FILE
   ALREADY NAMED RATHER THAN A FRESH JUDGEMENT. out_p1_growth.txt §3 recorded the gap to
@@ -276,9 +276,9 @@ mg-e331 — STATE.md SIZE RATCHET
   requires, so the next 500 words of ordinary editing do not demand a config change and
   anything past that is banked or refused. The SLACK-UNRATCHETED half is what forced
   this number down in the same commit as the cut, and this is the third landing to use
-  it in the shrinking direction (mg-14ad, mg-927a, mg-bdb0). RAISED FROM 4851 TO 5053 BY
+  it in the shrinking direction (mg-14ad, mg-927a, mg-bdb0). RAISED FROM 4851 TO 5048 BY
   mg-3da1, IN THE COMMIT THAT CAUSED IT, against a file standing at EXACTLY the ceiling,
-  so any addition at all tripped it. THE WORDS ARE 202 AND THEY ARE A RIDER UNDER *Where
+  so any addition at all tripped it. THE WORDS ARE 197 AND THEY ARE A RIDER UNDER *Where
   the threads converge* RECORDING THAT THE ROUTE ROW 8's OWN SENTENCE POINTS AT IS DEAD.
   Row 8 ends 'every route below 1 must add a REALIZABILITY fact', and that fact provably
   cannot be a restriction on pi: for ANY class of measures containing the point masses,
@@ -286,7 +286,7 @@ mg-e331 — STATE.md SIZE RATCHET
   vertex -- realizability is VACUOUS AT THE VERTICES, so there is no cut and hence no
   LP, SDP or lift-and-project route (mg-c776 T2, generalised to every realizability
   restriction at mg-3da1 T-3da1). The rider carries the QUALIFIER in the same breath,
-  which is the half that made it worth 202 words rather than 60: 'the image cannot
+  which is the half that made it worth 197 words rather than 60: 'the image cannot
   tighten anything' is FALSE. Inside the convex cell of hypothesis (1) read on the
   MEASURE the image ceiling is exactly a d-fraction of the body's -- 2/3, 1/3, 1/5, 4/15
   at n = 3..6, an identity and not a fit -- because THAT reading excludes n!-1 of the n!
@@ -304,24 +304,34 @@ mg-e331 — STATE.md SIZE RATCHET
   which is mg-8b32's marginal-fiber fact that mg-c776 merely re-derived, and T-3da1
   fails the registry's homelessness test because it is consumed HERE. THE COST IS REAL
   AND IS NOT LAUNDERED: this is growth, mg-ea0e's 6,000-word target STANDS and remains
-  MET, now with 947 words of headroom instead of 1,149. What the raise buys is that the
-  growth is 202 words, it is declared, and the reason is written down. tighten_below
+  MET, now with 952 words of headroom instead of 1,149. What the raise buys is that the
+  growth is 197 words, it is declared, and the reason is written down. tighten_below
   MOVED 4,351 -> 4,553 WITH THE CEILING, preserving this file's stated 500-word
-  invariant.
+  invariant. RE-MEASURED AT 5048 AFTER A REBASE ONTO A MOVED main, AND THE NUMBER IS THE
+  MEASUREMENT RATHER THAN THE ONE THIS ENTRY FIRST CLAIMED. The first draft of this
+  raise banked 5053; main then gained mg-0b96, which ANSWERED the `d` question this
+  rider's last clause pointed FORWARD to as open, so the clause was rewritten to say
+  that mg-0b96 has priced it -- (1_D) is the conjecture on {d > D} by contraposition at
+  every strength, so the terminus is the TARGET ITSELF and not a lemma. THE REWRITE WAS
+  PAID FOR OUT OF THE RIDER'S OWN PROSE rather than by a second raise: the surrounding
+  sentences were tightened by more than the new clause cost, and the file came in 5
+  words UNDER the 5053 already banked. Banking DOWN to 5048 rather than keeping the
+  slack is this file's own rule that the ceiling is where the file stands; mg-0b96's own
+  STATE.md edit was word-neutral and is not part of this figure.
 
 §3  CAN THIS RATCHET FAIL, AND CAN IT REFUSE?  Probes against THIS run's values
 --------------------------------------------------------------------------------------------
-  N1   one word past the ceiling                   CAUGHT          5054 words is +1 past the declared ceiling o
-  N2   the ceiling plus another whole file         CAUGHT          10106 words is +5053 past the declared ceili
-  N3   one word under the tighten point            CAUGHT          4552 words is 501 below the declared ceiling
-  N4   half the tighten point                      CAUGHT          2276 words is 2777 below the declared ceilin
-  N5   the ceiling edge is exactly where declared  BOUNDARY        5053 -> GREEN, 5054 -> ABOVE-CEILING
-  N6   the tighten edge is exactly where declared  BOUNDARY        4553 -> GREEN, 4552 -> SLACK-UNRATCHETED
+  N1   one word past the ceiling                   CAUGHT          5049 words is +1 past the declared ceiling o
+  N2   the ceiling plus another whole file         CAUGHT          10096 words is +5048 past the declared ceili
+  N3   one word under the tighten point            CAUGHT          4547 words is 501 below the declared ceiling
+  N4   half the tighten point                      CAUGHT          2274 words is 2774 below the declared ceilin
+  N5   the ceiling edge is exactly where declared  BOUNDARY        5048 -> GREEN, 5049 -> ABOVE-CEILING
+  N6   the tighten edge is exactly where declared  BOUNDARY        4548 -> GREEN, 4547 -> SLACK-UNRATCHETED
   N7   a ceiling with an empty `why`               CAUGHT          <probe N7>: `why` is empty.  See REQUIRED in
   N8   a ceiling missing words_ceiling             CAUGHT          <probe N8> is missing required field(s): wor
-  N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 10 
-  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (5054) is above w
-  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '5053', not a 
+  N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 9 c
+  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (5049) is above w
+  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '5048', not a 
   N12  a negative word count                       CAUGHT          verdict() was handed words=-1
   N13  every mutation above actually mutates       CAUGHT          4 of 4 planted values differ from the observ
   N14  STATE.md absent from the tree               CAUGHT          cannot read STATE.md.absent-by-construction-
@@ -331,7 +341,7 @@ mg-e331 — STATE.md SIZE RATCHET
   UNEXPLAINED unfalsifiable.  0.001s.
 
 ============================================================================================
-RATCHET VERDICT: GREEN — 5053 words, ceiling 5053, tighten below 4553.
+RATCHET VERDICT: GREEN — 5048 words, ceiling 5048, tighten below 4548.
 This ratchet was shown able to fire in both directions and to refuse in 7 worlds,
 on this run, against these values.  0.00s total.
 ============================================================================================
