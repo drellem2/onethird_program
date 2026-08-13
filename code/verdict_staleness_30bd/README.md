@@ -503,5 +503,100 @@ are new.
   (`SUBJECT-MOVED` and `CONTROL-FLIPPED`) with a different question at the head of each.
 - **`PIN-AS-DATED` and `BOUND-THE-WALK`.** Mechanical by comparison and still one edit each.
 - **§10's `<sha> <subject>` detector.** Named again, and again not widened: it moves
-  `report.py`'s annotations across the corpus's record and wants its own commit.
+  `report.py`'s annotations across the corpus's record and wants its own commit. **That
+  commit is §12** — it is the one thing on this list that has since been done.
 - **§2's derivation** and **§6.6**. Both unchanged and both still owed.
+
+---
+
+## 12  The commit the detector wanted, and the shape it could not have — mg-aff1
+
+`mg-aff1` is the successor carrier `mg-937c` was closed against, and **its own carry-forward
+was already discharged when it was written.** That is measured rather than argued, and it is
+why this section is about something else. The ticket names two candidates — *entries whose
+owners turn out to be absent or ambiguous*, and *the first growth event measured against this
+baseline*. `out_owners_937c.txt` answers both in its own verdict line: every stale entry has
+a row and none is without one, and §11 above is the first growth event, caught and filed in
+the same pass. A carrier whose named remainder is closed is not a reason to close the
+carrier; it is a reason to read the list under it, and the item invites exactly that.
+
+### What was taken instead, and why it was the one worth taking
+
+The detector under-detection is the only entry named **three times** — in §10, in §11, and in
+the arm's own §6.4 — and each time as wanting its own commit. It had also just got worse in
+the place that matters: `code/superseded_descent_688c/out_s2_descent.txt`, the entry §11
+caught arriving, was one of the rows the detector could not see. An enumeration whose
+annotations are weakest on its newest rows is losing ground, quietly.
+
+### The repair is two shapes, and the argument is in the third
+
+The detector left `report.py` for `lib30bd.py`, beside `DECLARATION` and the token set, because
+a detector nothing can plant a world against is a detector nobody can bound. `selftest_30bd.py`
+now runs it on literal strings, and `owners_937c.py` §6a runs **every version of it that has
+ever been written** over every quoted line the record holds.
+
+- **A labelled sha.** `by <sha>  <subject>`, `at <sha>: ...`, `the tip      <sha> <date>  ...`
+  — a walk whose format string puts a word in front of the sha or a colon behind it.
+- **`HEAD's subject : <subject>`** — the shape §6.4 named by hand. A literal, for
+  `DECLARATION`'s reason: not a regex over prose that sounds like a commit subject.
+- **A bare commit subject**, with no sha and no label. Still open, and now for a *measured*
+  reason rather than a stated one.
+
+### The obvious widening is refuted on the record, not on taste
+
+`a <sha> anywhere in the line` is what anybody reaches for first, and §6a runs it: it takes
+**45** lines where the shipped rule takes 18, and **30** of those sit in rows this baseline
+does not call a history walk at all. Those are `FINDING:` sentences that happen to quote a
+sha, and annotating one would print *this moves when main moves* on somebody else's finding —
+the expensive direction, because a NOTE is an assertion about a transcript this directory does
+not own.
+
+What separates them is that **a walk line puts its sha in a column.** So the sha must sit at
+the head of the line behind at most a short label of letters and spaces — which
+`FINDING: … deleted by <sha> …` and `N20 H8: the <sha> table's` fail on their punctuation, not
+on their length. **The window is a plateau and not a tuning**, and §6a re-derives that on the
+record rather than on the planted strings: every width from 13 to 40 gives the same answer,
+and the shipped width sits inside that plateau rather than at its edge.
+
+### What it bought, what it cost, and the two hits printed rather than counted
+
+The rule mg-937c measured took **10** lines; this one takes 18. **Every one of the 8 it gained
+is in-family, and the out-of-family column did not move.** It stands at 2, both of them hit by
+the replaced rule as well, so neither is this repair's doing — and both are printed in §6a
+rather than left as a number, because those same two would otherwise be the whole warrant for
+calling the rule clean. They are walk lines by shape sitting in rows filed under the cause that
+dominates them: it is the **proxy** that disagrees there, not the detector, and §6a says so.
+
+Across the corpus's record this moves **8** lines and removes 5: three entries gain a `NOTE`
+and five have theirs reworded. No bucket, no count and no classification moves, which is the
+whole reason a NOTE is cheap to widen and expensive to get wrong.
+
+### The shape that stays open, and the rule for it that this directory may not write
+
+The residue is **2** of the 9, both bare commit subjects, and §6a lists them with their lines.
+A conventional-commit prefix takes them — and takes **4** lines that are not walks at all, so
+it is refuted the same way. A closed vocabulary of commit types would separate those today and
+rot tomorrow: this estate's own log carries `refresh`, `measure`, `declare`, `amend`, `land`,
+`discharge`, `owners`, `scope` and `census+repair`, and nothing closes that set. **The one rule
+that would work is refused on this directory's own grounds.** Matching the line against
+`git log` answers differently on different days, so the transcript carrying the answer stops
+being a function of repo state — mg-e720's family, which is the exact cause this NOTE names. A
+history-walk detector that walked history would be a member of the population it counts.
+
+### The remedy exhibited the defect one file over, and the arm beside it caught that
+
+§9's role-vs-set hole is illustrated in `prose_30bd.py` by §4's `17`, and the sentence
+introducing it claimed the backing line was *a foreign finding quoted inside this directory's
+own report*. This branch added a plateau table whose `width 3-12` row prints `17 hit(s)`, the
+arm started finding **that** instead — a number about a regex window, foreign to nothing — and
+a hand claim about which line would be found had rotted, in the paragraph explaining that hand
+claims rot. The repair is to stop claiming and start counting: the arm now reports how many
+lines back the 17 (**6**) and prints the first, and the sentence says the thing that is true of
+all of them, which is that not one is about the 900 s cap.
+
+### What this leaves
+
+- **The 87 `TICKET` rows**, and `PIN-AS-DATED` / `BOUND-THE-WALK`. Untouched by this section.
+- **The bare-subject residue.** Two rows, closed to any rule over the line's own text. It
+  wants a producer-side repair — bound the walk — not a better detector.
+- **§2's derivation** and **§6.6**. Still unchanged and still owed, now by three tickets.

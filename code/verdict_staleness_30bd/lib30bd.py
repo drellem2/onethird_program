@@ -250,6 +250,99 @@ def declaration(text):
 
 
 # ======================================================================================
+# THE HISTORY-WALK LINE — A DETECTOR THAT WAS NARROWER THAN THE FAMILY IT NAMED (mg-aff1)
+# ======================================================================================
+#
+# WHAT IT IS FOR.  `report.py` puts a NOTE on a verdict-stale entry whose moved lines are a
+# `git log` walk, because that entry's cause is legible from the lines themselves and a
+# reader should not have to re-derive it.  It annotates; it grades nothing, moves no bucket
+# and changes no count.  That is why widening it is cheap and why getting it wrong is not:
+# a NOTE is an assertion about somebody else's transcript, printed in this corpus's record.
+#
+# THE DEFECT.  It lived in `report.py` as `^\s*(?:HEAD:\s*)?<sha>\s+\S` — a masked sha at
+# the START of the line.  mg-937c's own arm measured what that missed and said so: 5 of the
+# 9 rows the baseline calls HISTORY-WALK carried no NOTE, found by READING them rather than
+# by the detector, and named three times as owed and as wanting its own commit.  The newest
+# of the nine arrived in mg-5491's first caught growth event and was one of the five, so the
+# under-detection was getting worse in the rows that were arriving.
+#
+# THE TWO SHAPES IT MISSED, AND THE ONE IT STILL DOES:
+#
+#   1  A LABELLED SHA.  `by <sha>  repair: ...`, `at <sha>: ## ...`,
+#      `the tip      <sha> <date>  docs: ...` — a walk whose format string puts a word in
+#      front of the sha, or a colon behind it.  Repaired here.
+#   2  `HEAD's subject : <subject>` — named in mg-937c's own §6.4 as the shape it misses.
+#      A hand-typed literal, exactly like DECLARATION and for the same reason.  Repaired.
+#   3  A BARE COMMIT SUBJECT with no sha and no label at all.  NOT repaired, and §6.4 of
+#      out_owners_937c.txt now measures why rather than asserting it: see `walk_bare_subject`.
+#
+# WHY THE WINDOW, WHICH IS THE HALF THAT DOES THE WORK.  `a <sha> anywhere in the line` is
+# the obvious widening and it is REFUTED ON THE RECORD, not argued against: it fires on
+# every FINDING sentence that happens to quote a sha, and out_owners_937c.txt §6.4 prints
+# the count.  A walk line puts its sha in a COLUMN, so the sha sits at the head of the line
+# behind at most a short word label — letters and spaces only, no punctuation, because
+# `FINDING: ... deleted by <sha> ...` and `N20 H8: the <sha> table's` are prose and their
+# prefixes say so.  The window is measured, not chosen: the widest true label on the record
+# is `the tip      ` at 13 characters, and the hit set is IDENTICAL at every window from 13
+# to 24, so 16 is inside a plateau rather than tuned to a corpus.
+#
+# WHAT NO WINDOW CAN DO, AND WHY THE THIRD SHAPE STAYS OPEN.  A bare commit subject is
+# prose, and the only non-fuzzy way to know one is to compare it against the history it came
+# from.  THAT IS REFUSED ON THIS DIRECTORY'S OWN GROUNDS: a detector that reads `git log`
+# answers differently on different days, so the transcript carrying its answer stops being a
+# function of repo state — which is mg-e720's family, the very class this NOTE names.  A
+# history-walk detector that walked history would be a member of the population it counts.
+
+WALK_LABEL_WINDOW = 16
+
+# The `HEAD's subject` label, hand-typed for DECLARATION's reason 1: a literal, not a regex
+# over "prose that sounds like a commit subject".
+HEAD_SUBJECT = re.compile(r"^\s*HEAD's subject\s*:\s*\S")
+
+WALK_SHA = re.compile(r"^(?:HEAD:\s*)?[A-Za-z ]{0,%d}<sha>[:,]?\s+\S" % WALK_LABEL_WINDOW)
+
+
+def is_walk_line(line):
+    """Is this masked line one row of a `git log` walk?  Pure string -> bool."""
+    return bool(WALK_SHA.match(line) or HEAD_SUBJECT.match(line))
+
+
+# THE THREE THAT FAILED, KEPT RATHER THAN DELETED — `naive_mask`'s arrangement one detector
+# along.  `selftest_30bd.py` runs them on planted strings and `owners_937c.py` runs them over
+# the whole record on every suite run, so the refutations are measurements and not sentences.
+# The first is THE RULE THIS ONE REPLACES: a repair whose BEFORE is not printed beside its
+# AFTER is an assertion, so the narrow rule ships and §6.4 reports both counts.
+
+WALK_LINE_START = re.compile(r"^\s*(?:HEAD:\s*)?<sha>\s+\S")
+
+WALK_ANYWHERE = re.compile(r"(?:^|\s)<sha>[:,]?\s+\S")
+
+# A conventional-commit prefix: `instrument: `, `census+repair: `.  Reads as decisive until
+# it is run — `unmutated: 0   mutated: 20`, `verdicts: wall=CONCURRENT` and
+# `species_repair_a4ef: \`set -e\` appears once` have the same shape and are not subjects.
+# A closed vocabulary of commit types would separate them today and rot silently tomorrow,
+# which is this detector's own defect one level in: this estate's log carries `refresh`,
+# `measure`, `declare`, `amend`, `land`, `discharge`, `owners`, `scope` and `census+repair`,
+# and the set is open by construction.
+WALK_BARE_SUBJECT = re.compile(r"^\s*[a-z][a-z0-9_]*(?:[+/][a-z0-9_]+)*:\s+\S")
+
+
+def walk_line_start(line):
+    """THE RULE mg-aff1 REPLACED — a masked sha at line start.  For the controls only."""
+    return bool(WALK_LINE_START.match(line))
+
+
+def walk_anywhere(line):
+    """THE OBVIOUS WIDENING, refuted on the record.  For the controls only."""
+    return bool(WALK_ANYWHERE.search(line))
+
+
+def walk_bare_subject(line):
+    """THE REMAINING SHAPE, undecidable from the line.  For the controls only."""
+    return bool(WALK_BARE_SUBJECT.match(line))
+
+
+# ======================================================================================
 # THE VERDICT
 # ======================================================================================
 

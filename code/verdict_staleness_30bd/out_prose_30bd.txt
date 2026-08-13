@@ -34,15 +34,15 @@ P1  THE BACKING CORPUS, AND THE ONE FILE IT EXCLUDES BY NAME
   destroying the thing it repairs.  P4c plants the world that proves the
   exclusion does work rather than merely reads as though it should.
 
-      131 distinct figure(s) backed by the corpus above
+      133 distinct figure(s) backed by the corpus above
 
 
 ==============================================================================
 P2  THE CENSUS
 ==============================================================================
 
-     89  line(s) carrying at least one figure
-     80  BACKED                 every figure printed by a transcript above
+    105  line(s) carrying at least one figure
+     96  BACKED                 every figure printed by a transcript above
       0  UNBACKED/own-voice     outside a fence -- GRADED, and the finding
       9  UNBACKED/quoted        inside a ``` fence -- REPORTED, NOT GRADED
 
@@ -133,6 +133,22 @@ P2  THE CENSUS
       README.md       490  4                  remedy for it. §4 now tells the three reason
       README.md       502  87                 - **The 87 `TICKET` rows.** Untouched. Still
       README.md       505  10                 - **§10's `<sha> <subject>` detector.** Name
+      README.md       507  12                 commit is §12** — it is the one thing on thi
+      README.md       512  12                 ## 12  The commit the detector wanted, and t
+      README.md       519  11                 a row and none is without one, and §11 above
+      README.md       525  10,11              The detector under-detection is the only ent
+      README.md       527  11                 the place that matters: `code/superseded_des
+      README.md       548  45,18,30           **45** lines where the shipped rule takes 18
+      README.md       558  13,40              record rather than on the planted strings: e
+      README.md       563  10,8               The rule mg-937c measured took **10** lines;
+      README.md       570  8,5                Across the corpus's record this moves **8** 
+      README.md       576  9                  The residue is **2** of the 9, both bare com
+      README.md       577  4                  A conventional-commit prefix takes them — an
+      README.md       588  9,4,17             §9's role-vs-set hole is illustrated in `pro
+      README.md       590  3,17               own report*. This branch added a plateau tab
+      README.md       594  17,6               lines back the 17 (**6**) and prints the fir
+      README.md       595  900                all of them, which is that not one is about 
+      README.md       599  87                 - **The 87 `TICKET` rows**, and `PIN-AS-DATE
       run_all.sh        3  19                 #   selftest_30bd  19 planted worlds boundin
       run_all.sh       20  6,900              #     python3 -B sweep.py --workers 6 --time
       run_all.sh       41  150                # fixed one of the 150 would be mg-e35b's sh
@@ -230,9 +246,10 @@ P5  WHAT THIS ARM CANNOT SEE
      where the record says 22 timed out, and THIS ARM DOES NOT FIRE ON IT:
          figures 17, 187, 900, none of them missing -> BACKED
 
-     The 17 is backed, and by what is worth printing rather than paraphrasing
-     -- a FOREIGN finding quoted inside this directory's own report:
-         out_verdict_staleness.txt:80  17  BENIGN/address+asof    BENIGN — A1 line address / A2
+     The 17 is BACKED, by 6 line(s) across this directory's transcripts, and
+     0 of them carries the 900 s cap beside it -- so not one is the sentence
+     §4 states.  The first, printed rather than paraphrased:
+         out_owners_937c.txt:241  width  3-12 -> 17 hit(s)
 
      It was found by reading the record, not by this check.  Role needs a
      per-figure anchor, an anchor is a hand-typed quotation of the prose,

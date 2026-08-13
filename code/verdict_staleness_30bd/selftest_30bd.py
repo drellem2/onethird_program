@@ -22,6 +22,7 @@ Pure strings in, buckets out.  No git, no sandbox, no corpus: this file is a fix
 construction, which is what lets it sit in `run_all.sh` beside a report that is not.
 """
 
+import re
 import sys
 
 import lib30bd as L
@@ -221,10 +222,91 @@ def main():
             fails += 1
         out.append("  %-4s %-20s %s" % (wid, "ok" if ok else "*** FAILED *** %r" % (got,), what))
 
+    # mg-aff1's WALK DETECTOR, BOUNDED THE SAME WAY.  The worlds that must NOT be a walk
+    # line are again the ones that matter: a NOTE is an assertion about somebody else's
+    # transcript, so a detector that over-fires is louder than one that under-fires and
+    # wrong in the direction that cannot be quietly absorbed.  V4 and V5 are the two
+    # refuted widenings run on the SAME strings, so the boundary is shown rather than
+    # claimed — `naive_mask`'s arrangement, one detector along.
+    out.append("")
+    out.append("  mg-aff1 — WHAT IS AND IS NOT A HISTORY-WALK LINE")
+    out.append("  " + "-" * 74)
+    walk_worlds = [
+        ("V0", True, "a bare masked sha at line start — the shape that always worked",
+         "<sha> apply: THE FINDING WAS ALREADY APPLIED"),
+        ("V1", True, "a LABELLED sha — `by <sha>  <subject>`, mg-aff1's subject",
+         "by <sha>  repair: THE VERDICT IS LEAVE-AND-RECORD"),
+        ("V2", True, "a labelled sha with a COLON behind it, not a space",
+         "at <sha>: ## Kill-shot 2 — Standard dominance — **GREEN**"),
+        ("V3", True, "the widest true label on the record, 13 characters",
+         "the tip      <sha> <date>  docs: re-scope C3"),
+        ("V4", True, "`HEAD's subject :` — the shape mg-937c §6.4 named",
+         "HEAD's subject    : instrument: THE CLASSIFIER FOR VERDICT-STALENESS"),
+        ("V5", False, "BOUNDARY: a FINDING sentence quoting a sha  <- NOT A WALK ON PURPOSE",
+         "FINDING: a passage deleted by <sha> survives UNMARKED at t1_tl.py:<L>"),
+        ("V6", False, "BOUNDARY: a sha behind a punctuated label  <- NOT A WALK ON PURPOSE",
+         "N20 H8: the <sha> table's two ROW LABELS exchanged (E2b)"),
+        ("V7", False, "BOUNDARY: a BARE COMMIT SUBJECT — the shape still open, §6.4",
+         "instrument: THE CLASSIFIER FOR VERDICT-STALENESS, AND THE FIVE WORLDS"),
+        ("V8", False, "BOUNDARY: a verdict line with no sha at all",
+         "  Q2  check_doc.py  delete C4's anchor   1  0  *** MISSED ***"),
+    ]
+    for wid, want, what, text in walk_worlds:
+        got = L.is_walk_line(text)
+        ok = (got == want)
+        if not ok:
+            fails += 1
+        out.append("  %-4s %-20s %s" % (wid, "ok" if ok else "*** FAILED *** %r" % (got,), what))
+    out.append("")
+    out.append("  AND THE TWO WIDENINGS THAT LOOK RIGHT UNTIL THEY ARE RUN, ON THE SAME STRINGS")
+    out.append("  " + "-" * 74)
+    out.append("  %-4s %-9s %-9s %-9s %s" % ("id", "shipped", "anywhere", "subject", "the string"))
+    for wid, _want, _what, text in walk_worlds:
+        out.append("  %-4s %-9s %-9s %-9s %s"
+                   % (wid, L.is_walk_line(text), L.walk_anywhere(text),
+                      L.walk_bare_subject(text), text[:44]))
+    out.append("")
+    out.append("  `anywhere` DROPS THE WINDOW and takes V5 with it — a FINDING that quotes a sha")
+    out.append("  is not a walk, and annotating it would put mg-e720's cause on somebody else's")
+    out.append("  finding.  `subject` takes V7 and it is the reason V7 is still open: it also")
+    out.append("  takes any `word: text` line, and no rule over the line's own text tells the")
+    out.append("  two apart.  Both are re-measured over the whole record in out_owners_937c.txt")
+    out.append("  §6.4, where the counts are, so neither refutation rests on these 9 strings.")
+    # THE WINDOW IS A PLATEAU AND NOT A TUNING, RE-DERIVED HERE RATHER THAN ASSERTED: the
+    # regex is rebuilt at every width from 13 to 24 and must give the SAME nine answers.  A
+    # constant that only works at the value its author picked is a fit to a corpus.
+    plateau = []
+    for k in range(13, 25):
+        alt = re.compile(r"^(?:HEAD:\s*)?[A-Za-z ]{0,%d}<sha>[:,]?\s+\S" % k)
+        plateau.append(tuple(bool(alt.match(t) or L.HEAD_SUBJECT.match(t))
+                             for _i, _w, _wh, t in walk_worlds))
+    shipped = tuple(L.is_walk_line(t) for _i, _w, _wh, t in walk_worlds)
+    walk_checks = [
+        ("the window is a PLATEAU: widths 13..24 give the shipped answer, all 12 of them",
+         all(p == shipped for p in plateau)),
+        # NOT `anywhere is strictly wider`, WHICH IS WHAT THIS CHECK SAID FIRST AND IT CAME
+        # BACK RED ON V4.  The two rules are not nested: `anywhere` drops the window and
+        # gains V5/V6, and it has no notion of the `HEAD's subject` literal, so it LOSES V4.
+        # Dropping the window is not a superset — it is a different rule, and the check now
+        # says which way each disagreement runs instead of asserting containment.
+        ("`anywhere` gains V5/V6 and LOSES V4 — the two rules are not nested",
+         all(L.walk_anywhere(t) for _i, _w, _wh, t in walk_worlds
+             if L.is_walk_line(t) and not L.HEAD_SUBJECT.match(t))
+         and L.walk_anywhere("FINDING: a passage deleted by <sha> survives UNMARKED")
+         and not L.walk_anywhere("HEAD's subject    : instrument: THE CLASSIFIER")),
+        ("a bare subject is NOT a walk line under the shipped rule",
+         not L.is_walk_line("census+repair: THE FOUR ROWS RE-DERIVED FROM THE TREE")),
+    ]
+    for label, ok in walk_checks:
+        if not ok:
+            fails += 1
+        out.append("  %-66s %s" % (label, "ok" if ok else "*** FAILED ***"))
+
     out.append("")
     out.append("=" * 78)
     out.append("mg-30bd selftest: %d world(s) + %d assertion(s), %d failed"
-               % (len(WORLDS) + len(decl_worlds), len(checks) + len(naive_checks), fails))
+               % (len(WORLDS) + len(decl_worlds) + len(walk_worlds),
+                  len(checks) + len(naive_checks) + len(walk_checks), fails))
     out.append("=" * 78)
     print("\n".join(out))
     return 1 if fails else 0

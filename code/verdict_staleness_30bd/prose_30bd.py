@@ -402,17 +402,29 @@ def main():
     print("         figures %s, none of them missing -> BACKED"
           % ", ".join(str(v) for v in L.figures(stale17)))
     print()
-    print("     The 17 is backed, and by what is worth printing rather than paraphrasing")
-    print("     -- a FOREIGN finding quoted inside this directory's own report:")
+    # WHICH LINE BACKS IT IS NOT STABLE, AND THIS SENTENCE FOUND THAT OUT THE HARD WAY
+    # (mg-aff1).  It used to read `a FOREIGN finding quoted inside this directory's own
+    # report`, which was a hand claim about a line nobody pinned: mg-aff1 added a plateau
+    # table to out_owners_937c.txt, one of its widths printed `17 hit(s)`, and the loop
+    # below started finding THAT instead — a number about a regex window, not foreign to
+    # anything.  The claim rotted the moment an unrelated section grew a 17, which is
+    # mg-1344's P5 happening to the sentence that describes it.  So the backers are now
+    # COUNTED and the first is PRINTED, and the paragraph says what is true of all of them.
+    backers = []
     for p in outs:
-        found = False
         for i, line in enumerate(L.read(p, None).splitlines(), 1):
             if 17 in L.figures(line):
-                print("         %s:%d  %s" % (os.path.basename(p), i, line.strip()[:56]))
-                found = True
-                break
-        if found:
-            break
+                backers.append((os.path.basename(p), i, line.strip()[:56]))
+    # `none of them is about the cap` IS ITSELF A CLAIM, so it is measured and not written:
+    # a line that backed §4's sentence would have to carry the cap beside the 17.
+    about_cap = sum(1 for _p, _i, t in backers if 900 in L.figures(t))
+    print("     The 17 is BACKED, by %d line(s) across this directory's transcripts, and"
+          % len(backers))
+    print("     %d of them carries the 900 s cap beside it -- so not one is the sentence"
+          % about_cap)
+    print("     §4 states.  The first, printed rather than paraphrased:")
+    if backers:
+        print("         %s:%d  %s" % backers[0])
     print()
     print("     It was found by reading the record, not by this check.  Role needs a")
     print("     per-figure anchor, an anchor is a hand-typed quotation of the prose,")
