@@ -1,4 +1,4 @@
-"""g3 — THE NORMALISATION FIELD.  The declarations, and the seven ways they are refused.
+"""g3 — THE NORMALISATION FIELD.  The declarations, and the sixteen ways they are refused.
 
 mg-479c.  mg-06d1's check compares VALUES and goes RED when two names for one quantity
 disagree.  It had no representation for two names denoting one quantity IN DIFFERENT
@@ -12,7 +12,7 @@ Everything here is a property of two committed JSON files and one committed tran
 it runs in milliseconds and — this is the part that matters — it still runs when g1 is RED.
 A declaration file that has gone self-contradictory is exactly the thing an author needs to
 be told about while the values are also disagreeing, and g1 stops at its own finding by
-design (its step 3, mg-e331's D4 read and not repeated).
+design (its step 4, mg-e331's D4 read and not repeated).
 
 THE DECLARATIONS ARE PRINTED IN FULL ON EVERY RUN, GREEN AS WELL AS RED.  That is not
 verbosity.  P6 of PREDICTIONS-mg-479c.md filed, in advance, that a declared factor is an
@@ -24,7 +24,6 @@ closed and README §7 says so.
 """
 
 import os
-import re
 import sys
 import time
 from fractions import Fraction
