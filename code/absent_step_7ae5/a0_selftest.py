@@ -235,6 +235,45 @@ check("C10 antichain min Delta_1 n=6", min(delta1(n, frozenset(),
                                            for k in range(1, n)),
       Fraction(1, 2), "Op-Form §4.2")
 
+# C11 — mg-832f's INDEPENDENT AUDIT, §7.1 and its box at :80-88.  It published
+#       BEFORE this ticket existed: 'above n = 3, every poset with delta <= 1/3
+#       is an ORDINAL SUM', 0 primitive at n = 4,5,6,7; the delta <= 1/3 counts
+#       3, 6, 9, 21; the non-chain counts 6, 39, 356, 4823; and the PRIMITIVE
+#       MINIMUM of delta at 2/5, 4/11, 5/14 (n = 4,5,6).  a2 §D' reproduces the
+#       first of these, so it is a REPRODUCTION and not a finding, and this
+#       control is where that is established rather than asserted.
+cnt13, cntnc, primmin, primat13 = {}, {}, {}, {}
+for n in range(3, 7):
+    c13 = cnc = 0
+    pm = None
+    p13 = 0
+    for rel in poset_iter(n):
+        ex = linear_extensions(n, rel)
+        dl = delta(n, rel, ex)
+        if dl is None:
+            continue
+        cnc += 1
+        prim = min(delta1(n, rel, ex, k) for k in range(1, n)) > 0
+        if dl <= Fraction(1, 3):
+            c13 += 1
+            if prim:
+                p13 += 1
+        if prim and (pm is None or dl < pm):
+            pm = dl
+    cnt13[n], cntnc[n], primmin[n], primat13[n] = c13, cnc, pm, p13
+check("C11a delta<=1/3 counts n=3..6", [cnt13[n] for n in range(3, 7)],
+      [3, 6, 9, 21], "mg-832f audit :324, verbatim")
+check("C11b non-chain counts n=3..6", [cntnc[n] for n in range(3, 7)],
+      [6, 39, 356, 4823], "mg-832f audit :324, verbatim")
+check("C11c primitive minimum of delta n=4..6",
+      [primmin[n] for n in range(4, 7)],
+      [Fraction(2, 5), Fraction(4, 11), Fraction(5, 14)],
+      "mg-832f audit :331 — 'strictly above 1/3 and not monotone'")
+check("C11d primitive posets with delta<=1/3, n=4..6",
+      [primat13[n] for n in range(4, 7)], [0, 0, 0],
+      "mg-832f audit :327 — and n=3 has %d, the exception they also record"
+      % primat13[3])
+
 # ------------------------------------------------------------------- D -----
 print("\nD. WRONG-DIRECTION WORLDS — each MUST break a published number")
 

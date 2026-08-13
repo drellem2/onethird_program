@@ -154,7 +154,17 @@ for n in range(3, NMAX + 1):
     print("   %-4d %-9d %-9d %-14s %d"
           % (n, len(sub), len(ind), str(mp), at13))
 print("""
-   THE COLUMN ON THE RIGHT IS THE PRICE, AND ITS FIRST ROW IS AN EXCEPTION
+   ⚠ THE RIGHT-HAND COLUMN IS NOT A FINDING OF THIS TICKET — IT IS A
+   REPRODUCTION.  mg-832f's independent audit published it before this ticket
+   existed (`:327`, verbatim: *'Above n = 3, every poset with delta <= 1/3 is an
+   ORDINAL SUM' — 0 primitive at n = 4,5,6,7*), together with the n = 3
+   exception and the delta <= 1/3 counts 3, 6, 9, 21.  a0 §C11 reproduces all
+   four on this independent code path and they agree exactly.  What is new here
+   is not the fact but its CURRENCY: because Delta_1 = 0 at a cut IFF the cut is
+   an ordinal-sum split (a0 §B1/B2), mg-832f's structural fact is a statement
+   about L4's hypothesis class — those posets sit at Delta_1 = 0, the CENTRE of
+   it.\n""")
+print("""   THE COLUMN ON THE RIGHT IS THE PRICE, AND ITS FIRST ROW IS AN EXCEPTION
    THAT MUST BE CARRIED RATHER THAN ROUNDED AWAY.
 
      n = 3   THREE posets attain delta = 1/3 and are INDECOMPOSABLE.  They are
@@ -174,6 +184,27 @@ print("""
    evidence about the region where (T) has content.
    [FP over n <= %d, and n = 3 is a live exception inside it.  This is a
     non-refutation, not a theorem, and it says nothing above n = %d.]""" % (NMAX, NMAX))
+
+print("""
+   E. THE SHARPEST FROZEN PROXY THERE IS: the PRIMITIVE MINIMUM of delta —
+      the poset closest to frozen that Step 6 could actually be handed.
+      mg-832f measured the minimum (2/5, 4/11, 5/14 at n = 4,5,6; a0 §C11c).
+      What nobody has asked is whether those minimisers have a THIN PREFIX,
+      i.e. whether (T)'s hypothesis even reaches them.\n""")
+print("      %-4s %-9s %-9s %s" % ('n', 'min delta', 'minimisers', 'their min Delta_1 over prefixes'))
+for n in range(4, NMAX + 1):
+    ind = [r for r in rows if r[0] == n and r[2] > 0]
+    if not ind:
+        continue
+    pm = min(r[3] for r in ind)
+    mins = [r for r in ind if r[3] == pm]
+    vals = sorted(set(r[2] for r in mins))
+    print("      %-4d %-9s %-9d %s"
+          % (n, str(pm), len(mins), ', '.join(str(v) for v in vals)))
+print("""
+      Read against the live calibration eps_leak = 1/5 and the required-scope
+      ceiling 1/7: a minimiser whose min Delta_1 is at or below those numbers is
+      inside L4's hypothesis class, so (T) has to cover it.""")
 
 print("\n   And what survives, per delta band, on the INDECOMPOSABLE population:")
 print("      %-4s %-22s %-7s %s"

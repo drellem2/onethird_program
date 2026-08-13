@@ -1,7 +1,7 @@
 # `code/absent_step_7ae5/` — mg-7ae5's instrument
 
 Deliverable: [`docs/OneThird-AbsentStep-mg-7ae5.md`](../../docs/OneThird-AbsentStep-mg-7ae5.md).
-Runtime **10.7 s** on this host, measured by `time sh run_all.sh` and not by addition.
+Runtime **11.7 s** on this host, measured by `time sh run_all.sh` and not by addition.
 
 ## 1. What this is for
 
@@ -23,11 +23,11 @@ measure the class.
 |---|---|
 | `PREDICTIONS.md` | committed at `5968f17`, before one line of `lib7ae5.py` existed — with the exposure disclosed: the ticket ordered me to read `mg-ac0c`'s table first, so `R1`–`R4` are REPORTS at zero credit |
 | `lib7ae5.py` | `Δ₁`, `Φ`, `p_xy`, `δ`, the density `d`, the ordinal-sum test, `U_either` on both populations, and the closure arithmetic in `mg-0e8c`'s density currency. Written independently of `lib3969.py` **on purpose** — agreement with mg-3969's published numbers is only evidence if the code paths are different |
-| `a0_selftest.py` | **§A** definitions against hand-computable objects · **§B** the decomposability identity and the `δ(P⊕Q) = max` lemma, by exhaustion · **§C** **eleven plug-backs** to values published by mg-3969, mg-d3c7, Op-Form, mg-0e8c and mg-ac0c · **§D** four wrong-direction worlds · **§E** the monotone-ceiling detector tested on a population where the answer is known and is NOT monotone |
+| `a0_selftest.py` | **§A** definitions against hand-computable objects · **§B** the decomposability identity and the `δ(P⊕Q) = max` lemma, by exhaustion · **§C** **fifteen plug-backs** to values published by mg-3969, mg-d3c7, Op-Form, mg-0e8c, mg-ac0c and **mg-832f** — the last four of which establish that `a2` §D' REPRODUCES mg-832f's finding rather than making one · **§D** four wrong-direction worlds · **§E** the monotone-ceiling detector tested on a population where the answer is known and is NOT monotone |
 | `a1_statement.py` | the absent step stated, and the **currency crossings** of the 25-row chain. No poset is enumerated: this is a reading of mg-ac0c §1, with each row's currency-in and currency-out declared so a reader can disagree row by row |
 | `a2_price_hypothesis.py` | the price: exhaustive over every poset on `n ≤ 6`, the size of the thin-prefix class on two populations, stratified by `δ(P)`, and then **after minimality** |
 | `a3_density.py` | the sparse reading: mg-d3c7's family against the closure requirement at its own density, then the exhaustive `n ≤ 6` failure sweep stratified by a density floor |
-| `a4_novelty.py` | six decisive patterns with every raw hit printed, three non-decisive ones reported as establishing nothing |
+| `a4_novelty.py` | seven decisive patterns with every raw hit printed, three non-decisive ones reported as establishing nothing. **The seventh was added mid-run after the first six produced a false NEW**, and the reason is in the source rather than in a commit message: the corpus says *primitive* where I wrote *indecomposable*, and a vocabulary mismatch is how a corpus search manufactures novelty |
 | `out_*.txt` | committed output of each, at the commit that added it |
 
 ## 3. The controls, and what each is for
@@ -41,6 +41,10 @@ measure the class.
 - **§C4 — mg-3969's Claim 6.1 witness reproduced in full**: `|L(P)| = 26`, `Δ₁ = 17/78`, and
   **all four** balanced-in-side pairs landing on `9/13, 19/26, 19/26, 4/13` — the published
   values, verbatim, on independent code.
+- **§C11 — mg-832f's audit reproduced on four values**, including the `δ ≤ 1/3` counts
+  `3, 6, 9, 21` and the primitive minimum of `δ` at `2/5, 4/11, 5/14`. These are the control
+  that keeps `a2` §D' honest: its headline is **mg-832f's**, published before this ticket
+  existed, and this instrument reproduces rather than discovers it.
 - **§E — the detector for `a3`'s monotone-ceiling claim, run on a synthetic population where
   the ceiling does NOT rise.** It reports the non-monotonicity. Without this, `a3`'s
   monotone result would be a claim about my loop rather than about posets.

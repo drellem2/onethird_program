@@ -53,6 +53,10 @@ C. PLUG-BACKS — ten values published by OTHER documents
   GREEN   C8 closure density at eps0=1/5                 got True                        — -> 2e-2 from above; exact value 1000001/50000000
   GREEN   C9 primitive d>=2/n meets 2e-2 at              got 100                         — mg-0e8c §4: 'exactly the n >= 100 threshold row 8 records'
   GREEN   C10 antichain min Delta_1 n=6                  got 1/2                         — Op-Form §4.2
+  GREEN   C11a delta<=1/3 counts n=3..6                  got [3, 6, 9, 21]               — mg-832f audit :324, verbatim
+  GREEN   C11b non-chain counts n=3..6                   got [6, 39, 356, 4823]          — mg-832f audit :324, verbatim
+  GREEN   C11c primitive minimum of delta n=4..6         got [Fraction(2, 5), Fraction(4, 11), Fraction(5, 14)]  — mg-832f audit :331 — 'strictly above 1/3 and not monotone'
+  GREEN   C11d primitive posets with delta<=1/3, n=4..6  got [0, 0, 0]                   — mg-832f audit :327 — and n=3 has 3, the exception they also record
 
 D. WRONG-DIRECTION WORLDS — each MUST break a published number
   GREEN   D1 max-normalisation still 17/78?              got True                        — EXPECTED-EQUAL at |A|=|B|: this witness CANNOT separate the two

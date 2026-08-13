@@ -1,7 +1,7 @@
 ==============================================================================
 mg-7ae5 / A4 — NOVELTY AND ATTEMPT SWEEP
 ==============================================================================
-corpus: 508 .md/.tex/.html files at 5968f17, excluding code/absent_step_7ae5/
+corpus: 508 .md/.tex/.html files at 3fce8b9, excluding code/absent_step_7ae5/
 
 DECISIVE — decomposability identity: Delta_1 = 0 <=> ordinal sum
   raw hits: 7
@@ -16,6 +16,24 @@ DECISIVE — decomposability identity: Delta_1 = 0 <=> ordinal sum
 DECISIVE — minimal counterexample is ordinal-sum INDECOMPOSABLE
   raw hits: 1
     docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:621  `γ`-counterexamples** (`:57–62`, verbatim: *"If `P` is a width-3 indecomposable
+
+DECISIVE — the SAME fact in the corpus vocabulary: primitive / ordinal sum
+  raw hits: 15
+    STATE.md:55  | `primitive` | incomparability graph connected ⟺ not an ordinal sum ⟺ `λ_std < 1` (strictly). Minimal counterexamples are primitive. | structure |
+    STATE.md:118  | 2 | ordinal sum ⟺ incomparability graph disconnected (primitive = negation) | `U-id` | **proven** | any |
+    code/libweak_c3ca/README.md:31  | `p2_primitive` | same, on the population the architecture admits (primitive = incomparability graph connected) | P1's critical witnesses are **ordin
+    docs/FACTS.md:648  ⚠️ **30 OF THE 31 ARE ORDINAL SUMS**; exactly **one** is primitive, and a minimal counterexample is
+    docs/OneThird-Counterexample-Under-The-Action.md:484  Verified, 0 bad of 2447 posets. Since minimal counterexamples are primitive (`STATE.md` row 2), a minimal
+    docs/OneThird-PairBias-EpsSup-mg-832f-IndependentAudit.md:83  > with `δ ≤ 1/3` is an ORDINAL SUM** — `0` primitive at `n = 4,5,6,7` — so each has
+    docs/OneThird-PairBias-EpsSup-mg-832f-IndependentAudit.md:328  `n = 4,5,6,7`. `STATE.md:47`: primitive ⟺ not an ordinal sum ⟺ `λ_std < 1`. So each of
+    docs/OneThird-Primitivity-Objection-mg-f5be.md:7  > ordinal sum while being primitive but keep in mind counterexamples are primitive"*
+    docs/OneThird-Primitivity-Objection-mg-f5be.md:430  something else again — *near* an ordinal sum while primitive, which his sentence can also
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:261  - **`W_n` is primitive, not an ordinal sum.** Its incomparability graph is the star `K_{1,n}`
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:407  Claim 7.2 uses only `m ≥ 1` (non-chain). But **minimal counterexamples are primitive** (STATE.md
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:770  relevant class since minimal counterexamples are primitive.
+    docs/state-history/attempt-mg-88bd.md:72  **Free audit by-products, recorded not acted on:** primitivity (`d ≥ 2/n`) sharpens "the master bound cannot deliver the target for any non-chain pose
+    docs/state-of-the-wall.html:372  <div class="grow"><span class="sym">primitive</span><span class="def">Incomparability graph connected ⟺ not a nontrivial ordinal sum ⟺ <span class="mo
+    docs/state-of-the-wall.html:402  <tr><td class="rowlabel">2</td><td class="what">ordinal sum ⟺ incomparability graph disconnected<span class="fx">(primitive = the negation)</span></td
 
 DECISIVE — delta of an ordinal sum = max of the sides
   raw hits: 0
