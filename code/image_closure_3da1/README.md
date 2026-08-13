@@ -38,11 +38,13 @@ So "cannot tighten anything" is the first two readings stated without the third 
 inequality first; `d1` shows no such inequality exists for *any* realizability restriction, hence
 none in LP, SDP or lift-and-project form. That is a permanent closure and it is one line.
 
-**`d` is not dead.** The image converts row 8's wall into *how large can `d` be for a frozen
-poset* — residual **(R)**, already on `STATE.md`'s board and already correctly ordered.
-`STATE.md` §6 records the prior honestly: a search for a frozen-conditional **upper** bound on `d`
-returns zero, and every density fact on record points the other way. The line does not die; it
-lands on a residual that was already there.
+**And `d` is where it lands — which `mg-0b96` has since priced.** The image converts row 8's wall
+into *how large can `d` be for a frozen poset*, residual **(R)**. `mg-0b96` landed while this
+branch sat in the merge queue and found that `(1_D)` and `(2_D)` are **the same statement by
+contraposition at every strength `D`**, with `D = 0` returning the conjecture with nothing
+removed — so `d` is a **sub-case of the target, not a lemma**. An unconditional bound does exist
+(`d ≤ 1 − Θ(1/n)`, `docs/FACTS.md` **F26**) and is short of `ε_dem` by **49×** and widening. So
+the terminus of the image line is the conjecture itself, and that is what closes it.
 
 ## 4. Controls
 

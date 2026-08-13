@@ -22,9 +22,11 @@ item could close.
 > the body's — at `n = 5`, a **fifth**. Reproduced here term for term on independent code.
 >
 > **What that changes is where the line went, not whether it died.** The image converts row 8's
-> wall into *how large can `d` be for a frozen poset* — which is residual **(R)**, already on the
-> board and already correctly ordered. Nobody should re-open the cut. Nobody should record `d` as
-> closed either.
+> wall into *how large can `d` be for a frozen poset* — residual **(R)**. And `mg-0b96`, which
+> landed while this branch sat in the merge queue, has since **priced** that: `(1_D)` is the
+> conjecture on `{d > D}` by contraposition **at every strength**, so the terminus of the image
+> line is **the target itself, not a lemma** (§5). Nobody should re-open the cut, and nobody
+> should read the reduction to `d` as progress.
 >
 > **RECOMMENDATION: land the closure and the qualifier together, at the site a reader reads.**
 > Done here in `STATE.md` and `docs/CONCEPTS.md` §5.
@@ -177,16 +179,27 @@ Where a claim of that shape is load-bearing it needs the containment argument. `
 the realizable points. Hence no LP, no SDP, no lift-and-project hierarchy. `T-3da1` closes it for
 every realizability restriction, not just `R_n`.
 
-**NOT CLOSED:** `d`. The image reduces row 8 to residual **(R)** — *do frozen posets have an
-incomparability-density ceiling `d(P) ≤ D < 1`?* — which was already on `STATE.md`'s board, already
-correctly ordered, and reopened *quantitatively* by `mg-88bd` as `D ≤ ε_spec`.
+**REDUCED, AND THE REDUCTION TURNS OUT TO BE A RESTATEMENT:** `d`. The image reduces row 8 to
+residual **(R)** — *do frozen posets have an incomparability-density ceiling `d(P) ≤ D < 1`?*
 
-**And the prior on (R) is recorded rather than left flattering.** `STATE.md` §6 marks it `BELIEF`
-and says the ground is thin: *a search for a frozen-conditional upper bound on `d` returns zero;
-every density fact on record points the other way.* `mg-c776` §4 reached `d` from a third
-direction and noted that **none of the three arcs asked whether the lever exists**. That question —
-*is there a frozen-conditional upper bound on `d` at all* — is the remainder this item hands on,
-and the honest expectation is that the answer is no.
+**`mg-0b96` landed while this branch sat in the merge queue and priced that reduction, so the
+forward-pointer this section first carried is replaced by its answer rather than left standing.**
+Its finding: `(1_D)` *every frozen poset has `d ≤ D`* and `(2_D)` *every poset with `d > D` has
+`δ ≥ 1/3`* are **the same statement by contraposition, at every strength `D`**, and `D = 0`
+returns the conjecture with nothing removed. So `d` is **a sub-case of the target, not a lemma** —
+*"which looks exactly like a lemma until somebody prices it."* At the `D ≈ 2×10⁻²` row 8 needs,
+primitivity's `d ≥ 2/n` first meets it at `n = 99`, so proving it would prove the conjecture at
+**every order below 99** against a census frontier of 14.
+
+**And the answer is not the flat NO this document first predicted.** An unconditional bound on `d`
+*does* exist and owes nothing to the conjecture — `d ≤ 1 − ⌈(n−1)/2⌉/C(n,2) = 1 − Θ(1/n)`, filed
+`docs/FACTS.md` **F26**, kind `U`, sharp on its own class. It is simply far too weak: worth
+`ε_sup = 0.98` at `n = 99`, short of `ε_dem` by **49×**, and **widening with `n`**.
+
+**So the terminus of the image line is the conjecture itself.** That is what closes it — not that
+`d` is unreachable, but that reaching it *is* the thing being reduced. `STATE.md` §6's `BELIEF`
+prior on `(R)` should be read with `F26` beside it: the search that *"returns zero"* now returns
+one, and `mg-0b96` filed it precisely *"to stop the next arc reading that zero as none can exist."*
 
 **Nothing in this document is a new boundary number.** `n ≤ 5` exhaustive, `n = 6` on `d3` only;
 `mg-c776` reaches `n = 7` and F23 is exhaustive to `n = 9`. **The population warning governs every
