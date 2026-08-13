@@ -75,6 +75,19 @@ A method with a KNOWN blind spot can be improved; a goal cannot.
       * ANYTHING OUTSIDE THIS REPOSITORY.  git grep cannot see it, which is
         the same under-count `census.py` declares for addresses.
 
+    THE BLIND-SPOT LIST ABOVE AND SECTION D'S LAST SENTENCE ARE LOAD-BEARING
+    AND ARE NOT TO BE TIDIED AWAY.  They read as negative and a later editor
+    improving this file will be tempted to cut them.  What they carry is the
+    only thing standing between this census and being read as complete: a
+    census with no stated blind spot is indistinguishable, to its reader, from
+    one that has none.  mg-6e4f found six affected consumers by RUNNING nine,
+    not by their announcing themselves -- and the two it found first announced
+    themselves only because it happened to be running them for another reason.
+    SO THE BACKSTOP IS THE LOAD-BEARING HALF AND THIS CENSUS IS A PREFILTER,
+    not the other way round.  Cutting the limit inverts that silently.  If you
+    are removing either, you are arguing that the method has no blind spot;
+    make that argument in the commit message.
+
     SO THE CENSUS IS NOT THE BACKSTOP AND MUST NOT BE TREATED AS ONE.  §D
     prints the RE-MEASUREMENT COMMAND for every no-arg consumer it found:
     run the consumer BEFORE and AFTER the pin and diff.  A consumer this
@@ -178,6 +191,16 @@ def main(subject):
     print("  this file's docstring and are not repeated here; what is repeated")
     print("  is the one sentence that matters -- THIS CENSUS IS NOT A")
     print("  BACKSTOP.  See section D.")
+    print()
+    print("  THE COUNTS BELOW ARE CORPUS-VALUED AND THIS INSTRUMENT IS NOT")
+    print("  PINNED, DELIBERATELY.  census.py reads its corpus at a declared")
+    print("  commit so that a repair can be watched shrinking.  This one must")
+    print("  answer about the tree you are ABOUT TO CHANGE, so it reads HEAD,")
+    print("  and its figures move when the estate does -- `run_all.sh (193")
+    print("  files)` became `(192)` the day main folded one suite into")
+    print("  another.  A moved count here is the corpus moving, not a finding;")
+    print("  what would be a finding is a NAME appearing in or leaving")
+    print("  section A.")
     print()
     print("  subject scripts: %d" % len(scripts))
     for s in scripts:
@@ -330,6 +353,16 @@ def main(subject):
     print("  consumer or the pin, do not pin over it -- or that consumer's")
     print("  own pre-existing staleness, which is a FINDING and belongs in")
     print("  its own work item rather than in a pinning commit.")
+    print()
+    print("  AND THE LIMIT THAT DOES NOT GO AWAY, PRINTED BECAUSE IT IS THE")
+    print("  LOAD-BEARING SENTENCE IN THIS RUN: a consumer this census misses")
+    print("  AND that nobody runs is INVISIBLE, and no instrument in this")
+    print("  directory fixes that.  Six of nine consumers were found affected")
+    print("  by RUNNING them.  That is a statistic about things that were run,")
+    print("  so it cannot license `a missed consumer would announce itself`.")
+    print("  THE BACKSTOP ABOVE IS THE LOAD-BEARING HALF; THIS CENSUS IS A")
+    print("  PREFILTER.  A method that says which half is which degrades")
+    print("  safely; one that does not degrades silently.")
     print()
     print("=" * 78)
     print("CONSUMERS: %d no-arg execution(s) CONFIRMED across %d instrument(s);"

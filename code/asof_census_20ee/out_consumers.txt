@@ -8,6 +8,16 @@ mg-6e4f -- CONSUMERS OF code/species_remainder_f8fa
   is the one sentence that matters -- THIS CENSUS IS NOT A
   BACKSTOP.  See section D.
 
+  THE COUNTS BELOW ARE CORPUS-VALUED AND THIS INSTRUMENT IS NOT
+  PINNED, DELIBERATELY.  census.py reads its corpus at a declared
+  commit so that a repair can be watched shrinking.  This one must
+  answer about the tree you are ABOUT TO CHANGE, so it reads HEAD,
+  and its figures move when the estate does -- `run_all.sh (193
+  files)` became `(192)` the day main folded one suite into
+  another.  A moved count here is the corpus moving, not a finding;
+  what would be a finding is a NAME appearing in or leaving
+  section A.
+
   subject scripts: 6
       kernf8fa.py
       run_all.sh
@@ -17,7 +27,7 @@ mg-6e4f -- CONSUMERS OF code/species_remainder_f8fa
       w3_scope.py
 
   matched by basename: 5 script(s); by FULL PATH: 1, because the
-  basename is shared -- run_all.sh (193 files)
+  basename is shared -- run_all.sh (192 files)
   documentation mentions in *.md / *.txt, counted and NOT listed
   because prose cannot execute anything: 146 file(s)
 
@@ -164,6 +174,16 @@ D  THE BACKSTOP, WHICH IS NOT THIS CENSUS
   consumer or the pin, do not pin over it -- or that consumer's
   own pre-existing staleness, which is a FINDING and belongs in
   its own work item rather than in a pinning commit.
+
+  AND THE LIMIT THAT DOES NOT GO AWAY, PRINTED BECAUSE IT IS THE
+  LOAD-BEARING SENTENCE IN THIS RUN: a consumer this census misses
+  AND that nobody runs is INVISIBLE, and no instrument in this
+  directory fixes that.  Six of nine consumers were found affected
+  by RUNNING them.  That is a statistic about things that were run,
+  so it cannot license `a missed consumer would announce itself`.
+  THE BACKSTOP ABOVE IS THE LOAD-BEARING HALF; THIS CENSUS IS A
+  PREFILTER.  A method that says which half is which degrades
+  safely; one that does not degrades silently.
 
 ==============================================================================
 CONSUMERS: 10 no-arg execution(s) CONFIRMED across 6 instrument(s);

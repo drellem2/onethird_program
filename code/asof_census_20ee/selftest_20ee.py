@@ -181,7 +181,12 @@ check("C3 a name with no exec token near it",
       "in the residue, and section C's work-list is C1 PLUS C2 for exactly "
       "this reason. If somebody teaches the rule to follow variables, this "
       "control FAILS, and that is the signal to update the docstring's "
-      "blind-spot list and section C's warning together.")
+      "blind-spot list and section C's warning together. DO NOT `FIX` THIS "
+      "CONTROL BY MAKING THE CENSUS PASS IT: a control that confirms a DEFECT "
+      "rather than a repair is unusual, and the failing case IS the assertion. "
+      "It is here in the form N4 and N5 already use one directory up, for the "
+      "same reason -- a declared bias that no control holds in place is a "
+      "sentence that goes quietly false.")
 
 check("C4 the exec token may stand on a LATER line",
       kinds('    p = subprocess.run(\n        [sys.executable, "w3_scope.py"])'),
