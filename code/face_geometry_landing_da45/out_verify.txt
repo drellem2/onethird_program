@@ -37,7 +37,7 @@ TARGET 1 -- WHICH GATE DECIDES, rebuilt from face_complex alone
 TARGET 2 -- THE ARTIFACT: it regenerates, and it now says T1's numbers
 ----------------------------------------------------------------------
   [HOLDS ] controls_output.txt regenerates byte-identically from a fresh run
-        41081 bytes, exit 0
+        42091 bytes, exit 0
   [HOLDS ] the artifact has exactly one row I4
   row I4 does NOT score absorbability, so the literals checked are the mg-17aa set
   [HOLDS ] row I4 prints 'Absorbability is NOT scored in this row', and T1 measured it independently
@@ -95,8 +95,8 @@ TARGET 3 -- THE ABSORBABILITY ANSWER IS ACCOUNTED FOR, WHEREVER THE POPULATION P
   [HOLDS ] [CONTINGENT] the four sites this target is about are RESOLVABLE BY ROLE in controls.py -- the row published as one that cannot fail, the expression it is scored on, the branch under which that expression's tallies accumulate, and the function that branch's own decision is handed to
   [HOLDS ] [CONTINGENT] WHICH rows the theorem row carries is COMPUTED FROM THE POPULATION, not written in: the branch's test is not a constant and depends on 21 name(s) reached through 17 call(s) into the sweep, so a corruption some pair of which can be absorbed puts the clause back with no edit here -- and widening the routing to a third forced gate, or renaming any of these, leaves this row green
         line 1725, depends on: L_mut, P, _, all_posets, app, blocked, claim1_pair, forced, gate_violations, md, mode, multi_ridge, muts, n, nmax, ps, range, row_stats, target, top_laplacians, vb
-  [HOLDS ] [CONTINGENT] and the theorem row is SCORED on that population too: its condition is not a constant and reads 3 of the 7 quantities accumulated under that branch, so it FAILS -- it does not merely misreport -- if what it asserts stops being true
-        line 1896, scored on: theorem_absorb, theorem_app, theorem_blocked
+  [HOLDS ] [CONTINGENT] and the theorem row is SCORED on that population too: its condition is not a constant and reads 1 of the 7 quantities accumulated under that branch, so it FAILS -- it does not merely misreport -- if what it asserts stops being true
+        line 1919, scored on: theorem_absorb
   [HOLDS ] [CONTINGENT] and the clause itself is STILL IN the file and still CONDITIONAL: `nc4_row_conjuncts` offers a conjunct reading the absorbability answer under a branch keyed on the routing decision it is passed, so deleting it by hand -- or hard-wiring it in unconditionally -- turns this row red
   [HOLDS ] [CONTINGENT] the battery still exits 0 with 0 failures
   [HOLDS ] [CONTINGENT] at least one row is labelled [CANNOT FAIL] and the bottom line still denies the all-pass banner (2 such row(s); the COUNT is reported and not scored, because a later row honestly routed to the label would redden a census of it -- the wrong-direction shape this whole target is being repaired for)

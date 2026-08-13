@@ -1731,6 +1731,14 @@ def negative_control_incidence(nmax):
             theorem_absorb += absorb
             theorem_both += both_gates    # how many of them the OTHER
                                           # forced gate also catches
+            # AND THIS ONE IS A PRINTED COUNT, NOT A SCORED ONE (mg-686c,
+            # landing mg-79ba's F1).  `theorem_blocked` and `theorem_app` are
+            # both accumulated HERE, under a branch taken exactly when
+            # `blocked == app`, so `theorem_blocked == theorem_app` sums one
+            # set of terms twice and cannot fail.  It was a conjunct of the
+            # [CANNOT FAIL] row's scored condition for one generation; it is
+            # now reported and named, which is what a conjunct FORCED BY THE
+            # ROUTING is worth by this file's own standard.
             theorem_blocked += blocked
             theorem_bdiag += blocked_diag
             theorem_bmag += blocked_mag
@@ -1867,10 +1875,25 @@ def negative_control_incidence(nmax):
               "and `gate_violations` finds a forced gate violated on %d of the %d, and "
               "mg-fcf1 swept every eligible ridge choice (1449/981/1459 for I1/I2/I3), "
               "not just the first one this file mutates.  A FALSE theorem is still a "
-              "failure: if some pair cleared both forced gates, or the predicate did "
-              "report absorbable, this row FAILS -- and the row would not merely fail, "
-              "the routing would put the clause back into that row's scored condition, "
-              "which is where the falsifiability of a real decision belongs.  AND WHAT "
+              "failure, AND WHAT IS SCORED HERE IS THE ABSORBABILITY COUNT ALONE "
+              "(mg-686c, landing mg-79ba's F1): if the predicate reported absorbable on "
+              "any pair this row carries, this row FAILS.  THE OTHER HALF OF THE "
+              "CONDITION THAT USED TO STAND HERE IS NOT SCORED, BECAUSE IT COULD NOT "
+              "FAIL: `theorem_blocked == theorem_app` accumulated both of its sides "
+              "under `if forced:` and `forced` IS `blocked == app`, so it summed the "
+              "same terms twice -- an identity, FORCED BY THE ROUTING in the sense "
+              "`nc4_row_conjuncts` classifies a row's conjuncts with two screens above, "
+              "and a forced conjunct inside a scored condition is this section's own "
+              "defect however true it is.  Both counts are still PRINTED, which is what "
+              "they were worth.  AND THE SENTENCE THAT USED TO STAND HERE WAS FALSE AS "
+              "PRINTED: it said this row FAILS if some pair cleared both forced gates, "
+              "and it does not -- run on two different rows, a pair clearing both gates "
+              "leaves the battery GREEN at exit 0, because the routing drops that "
+              "mutation out of the forced set and puts `absorb == 0` back into that "
+              "row's own scored condition, which is where the falsifiability of a real "
+              "decision belongs.  A row sentence that is not the row's measurement is "
+              "the defect this instrument exists to remove, and it was inside the "
+              "instrument (mg-79ba F1).  AND WHAT "
               "LINES (i) AND (ii) ARE NOT: a claim about which test in the code fires. "
               "They are implications, and the implementation realises them "
               "REDUNDANTLY, which is measured and not argued: on %d of these %d pairs "
@@ -1893,7 +1916,7 @@ def negative_control_incidence(nmax):
                      for n, m, _, _, _, bm, _ in forced_rows if bm) or "no row does",
                  theorem_absorb, theorem_app, theorem_blocked, theorem_app,
                  theorem_both, theorem_app),
-              theorem_absorb == 0 and theorem_blocked == theorem_app,
+              theorem_absorb == 0,
               cannot_fail=True)
 
     # A POSITIVE CONTROL ON THE REPAIR ITSELF.  RELABELLING IS NOT DETECTING: a
