@@ -185,6 +185,71 @@ def token_multiset(text):
 
 
 # ======================================================================================
+# THE DECLARATION — A TRANSCRIPT THAT SAYS IT CANNOT BE A FIXED POINT (mg-5491)
+# ======================================================================================
+#
+# WHY THE CLASSIFIER NEEDED ONE.  `code/audit_c067/out_c1_rebase.txt` opens
+#
+#     A TRUE RECORD WHOSE OWN PRODUCER CAN NO LONGER SEE IT.  DO NOT RE-RUN THIS.
+#
+# and explains, in the file, that a re-run writes a FALSE 0 over a TRUE 5 because its
+# producer pairs commits by subject inside `git log -n 40`.  mg-30bd's sweep re-ran it and
+# graded the result, so the record carries the instrument's own blindness as a finding about
+# the corpus.  `code/verdict_delivery_bf3f`'s four read the LIVE mg verdict and mail stream:
+# no commit can make them reproduce, and re-running them measures a different afternoon.
+# Those five are not findings about this repository at all, and reading them one at a time is
+# how that was found.  THE GENERAL REPAIR IS NOT FIVE EXCLUSIONS, IT IS A NOTION: give the
+# classifier a way for a transcript to say `I am not a fixed point, and here is why`, and the
+# whole class stops being false positives instead of these five stopping.
+#
+# WHY IT IS NOT AN UNFALSIFIABLE ESCAPE HATCH, WHICH IS THE OBJECTION IT HAS TO SURVIVE —
+# mg-f771's own warning about a wider normaliser, one instrument along.  Four things, and the
+# third is the one that does the work:
+#
+#   1  IT IS A HAND-TYPED LITERAL, not a regex over "prose that sounds like a disclaimer".
+#      `DO NOT RE-RUN THIS` in a sentence is not a declaration; this line is.
+#   2  IT MUST BE IN THE FIRST `DECLARATION_WINDOW` LINES.  A declaration is made at the
+#      HEAD of the file it is about.  The window is what stops a QUOTATION exempting the
+#      transcript that quotes it — and this estate's instruments quote each other constantly,
+#      including `report.py`, which prints this literal in its own §3b.
+#   3  IT IS CHECKED IN BOTH DIRECTIONS.  A transcript declaring itself unable to reproduce,
+#      WHICH THEN REPRODUCES BYTE-IDENTICALLY IN THE SWEEP, is a FALSE DECLARATION and
+#      report.py §3b says so as a finding.  That is the same discipline mg-937c put on
+#      `cause: RECORD-DISAGREES`: a hand field the record can contradict is a claim, and a
+#      hand field it cannot is a laundry.
+#   4  NOTHING IS HIDDEN.  Every declaration is COUNTED AND LISTED with the bucket it would
+#      have carried, so the exemption class is exactly as visible as the stale class, and it
+#      grows in public.
+#
+# WHAT IT STILL CANNOT CHECK, SAID HERE RATHER THAN DISCOVERED LATER: that the REASON is the
+# right reason, or that no commit could have made the transcript reproduce.  A declaration is
+# a judgement by the transcript's owner and this is an ADDRESS for it, not a proof of it.
+
+DECLARATION = "NOT-A-FIXED-POINT:"
+
+# 20 lines.  Long enough for a `#`-commented note header to carry the marker after a rule and
+# a title, short enough that no listing, table or quotation in the body of a transcript can
+# reach it.  Measured against the corpus rather than guessed: the five transcripts this
+# repair covers carry theirs at lines 2-6.
+DECLARATION_WINDOW = 20
+
+
+def declaration(text):
+    """The transcript's own declaration that it is not a fixed point, or None.
+
+    Returns the REASON — whatever follows the marker on its line.  An empty reason comes
+    back as `""` and is NOT honoured: report.py counts it MALFORMED and grades the
+    transcript exactly as if the line were not there, because a marker with nothing after it
+    is an exemption nobody signed.  The two are different answers and `None` is neither.
+    """
+    for line in text.split("\n")[:DECLARATION_WINDOW]:
+        s = line.strip().lstrip("#").strip()
+        if s.startswith(DECLARATION):
+            return s[len(DECLARATION):].strip()
+    return None
+
+
+# ======================================================================================
 # THE VERDICT
 # ======================================================================================
 

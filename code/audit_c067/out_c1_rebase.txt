@@ -2,6 +2,13 @@
 # A TRUE RECORD WHOSE OWN PRODUCER CAN NO LONGER SEE IT.  DO NOT RE-RUN THIS.
 # =============================================================================
 #
+# NOT-A-FIXED-POINT: the producer pairs commits by subject inside `git log -n 40`
+# and main is hundreds of commits past this record, so a re-run writes a false 0
+# over a true 5.  Regenerating this transcript does not measure the corpus, it
+# measures how far main has moved.  See the note below; added by mg-5491, which
+# is the line `code/verdict_staleness_30bd` reads (lib30bd.DECLARATION) so that
+# a sweep records this rather than grading it.  Nothing else is altered.
+#
 # THE RECORD BELOW IS CORRECT.  `C1a` asserts that mg-132a's 5 commits were
 # REPLAYED onto a larger tree by the refinery's rebase.  They were.  Re-run
 # `c1_rebase.py` today, at this transcript's own carrying commit or anywhere

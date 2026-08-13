@@ -95,7 +95,11 @@ def grade(header, suites, doc):
     """Every finding this arm can raise, as data.  Returned rather than printed so the
     planted worlds in §6 can run the SAME function over a mutated world and read its
     answer, instead of scraping the text of a report."""
-    owned, rew, buckets, observed, pass2 = R.population(suites)
+    # THE DECLARATION CENSUS IS PASSED THROUGH, NOT RE-DERIVED (mg-5491).  Same reason the
+    # two functions below are imported rather than paraphrased: a baseline graded against a
+    # population the report no longer reports has gone quietly complete against a different
+    # question.
+    owned, rew, buckets, observed, pass2 = R.population(suites, header.get("declared"))
     ran = {s["dir"] for s in suites if "error" not in s}
     stale = R.stale_set(buckets, pass2)
     rows = doc["rows"]
@@ -486,7 +490,7 @@ def plant(header, suites, doc):
 
     # P4  `read: full` ON AN ENTRY THE RECORD ONLY SAMPLES IS CAUGHT.  This is the field
     #     that makes "somebody read it" falsifiable rather than a claim.
-    owned, rew, buckets, observed, pass2 = R.population(suites)
+    owned, rew, buckets, observed, pass2 = R.population(suites, header.get("declared"))
     sampled = next(p for p, r in doc["rows"].items() if r["read"] == "sample")
     d = copy.deepcopy(doc)
     d["rows"][sampled]["read"] = "full"
@@ -539,6 +543,31 @@ def plant(header, suites, doc):
                len(f["retired"]),
                "code/verdict_staleness_30bd/out_owners_937c.txt"
                in [p for p, _c in f["retired"]]))
+
+    # P9  mg-5491's DECLARATION, PUT TO THIS ARM AND NOT ONLY TO THE REPORT.  A transcript
+    #     that declares itself not a fixed point leaves the stale list, so its row RETIRES —
+    #     and the arm must stay GREEN, because a baseline going red when somebody repairs one
+    #     of the 150 is mg-e35b's red-on-improvement wearing the remedy's clothes.  The world
+    #     is built by mutating the HEADER, which is where the census actually travels, rather
+    #     than by calling the exemption directly.
+    victim2 = sorted(p for p in doc["rows"]
+                     if p != "code/verdict_staleness_30bd/out_owners_937c.txt")[0]
+    h = dict(header, declared={victim2: "planted by P9 — it reads a stream, not a tree"})
+    f = grade(h, suites, doc)[0]
+    W_.append(("P9", "a DECLARED transcript -> RETIRED, and no finding",
+               (len(f["retired"]), len(f["grown"])),
+               victim2 in [p for p, _c in f["retired"]]
+               and not any(f[k] for k in ("grown", "strengthened", "bad_read",
+                                          "bad_disagree", "bad_vocab"))))
+
+    # P10 AND THE HALF THAT STOPS IT BEING AN ESCAPE HATCH.  A marker with NOTHING AFTER IT
+    #     is not a declaration: it is honoured by nobody, the row stays stale, and the report
+    #     lists it as MALFORMED.  An exemption that costs a reason is a claim; one that costs
+    #     a keyword is a keyword.
+    h = dict(header, declared={victim2: ""})
+    f = grade(h, suites, doc)[0]
+    W_.append(("P10", "a marker with NO REASON -> not honoured, the row stays",
+               len(f["retired"]), victim2 not in [p for p, _c in f["retired"]]))
 
     return W_, sum(1 for _n, _w, _g, ok in W_ if not ok)
 

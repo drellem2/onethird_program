@@ -30,6 +30,13 @@ W = 90
 # NOT A BUCKET OF THE CLASSIFIER — a bucket of the HARNESS.  See `_unusable_why`.
 UNUSABLE = "UNUSABLE/ungraded"
 
+# NOT A BUCKET OF THE CLASSIFIER EITHER — a bucket of THE SUBJECT.  A transcript carrying
+# `lib30bd.DECLARATION` in its first lines has said it cannot be a fixed point and why; the
+# sweep still runs it, still records what it did, and this report still prints it — it is
+# just not graded as a finding about the corpus.  §3b, and the both-directions check that
+# stops it being an escape hatch is there too (mg-5491).
+DECLARED = "DECLARED/not-a-fixed-point"
+
 # The commit whose corpus this sweep measured.  See the header block for why this and not
 # `header["head"]` is the identifier of the measurement.
 CORPUS_AT = "f2117f1"
@@ -66,6 +73,7 @@ def load():
     if not os.path.exists(RECORD):
         return None, []
     header, bydir, heads = None, {}, set()
+    declared, declared_at = None, None
     with open(RECORD, encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
@@ -73,6 +81,17 @@ def load():
                 continue
             rec = json.loads(line)
             if rec.get("kind") == "header":
+                # THE DECLARATION CENSUS IS THE ONE FIELD WHERE THE LAST HEADER WINS, AND
+                # THE ASYMMETRY WITH THE LINE BELOW IS DELIBERATE.  Every other header field
+                # describes THE SWEEP — its denominator, its limit — and a `--only`
+                # re-measurement's answer to those is about one directory, which is why the
+                # first header wins them.  `declared` describes THE TREE, is taken whole on
+                # every invocation (sweep.py writes it over all tracked transcripts, not over
+                # `--only`'s), and the newest reading of a whole-tree fact is the right one.
+                # A record predating mg-5491 carries none, and `None` — not `{}` — is how
+                # this report tells `nobody has declared` from `nothing has looked`.
+                if rec.get("declared") is not None:
+                    declared, declared_at = rec["declared"], rec.get("head")
                 # THE FIRST HEADER WINS, and this is not a coin toss.  `--fresh` truncates,
                 # so the first header in the file is the SWEEP's; every later one belongs to
                 # a `--only` re-measurement of one directory and carries `dirs: 1`.  Taking
@@ -90,11 +109,23 @@ def load():
                 bydir[rec["dir"]] = rec
     if header is not None:
         heads.discard(header.get("head"))
-        header = dict(header, foreign_heads=sorted(heads))
+        header = dict(header, foreign_heads=sorted(heads), declared=declared,
+                      declared_at=declared_at)
     return header, [bydir[k] for k in sorted(bydir)]
 
 
-def population(suites):
+def honoured(declared):
+    """The declarations this report ACTS on: marker present AND a reason given.
+
+    Split out and called from both `population()` and §3b so that `which declarations are
+    honoured` has one definition.  A marker with an empty reason is in `declared` and not in
+    here, which is exactly what lets §3b report it as MALFORMED while the transcript goes on
+    being graded — an exemption nobody signed is not an exemption (mg-5491).
+    """
+    return {p: r for p, r in (declared or {}).items() if r}
+
+
+def population(suites, declared=None):
     """The classification, from the record.  ONE FUNCTION, CALLED AND NOT PARAPHRASED.
 
     mg-937c's owners arm has to answer `which transcripts are VERDICT-STALE in this record`
@@ -111,11 +142,17 @@ def population(suites):
     `observed` is the one addition: EVERY graded observation, not only the winning one.
     `buckets` keeps a single row per transcript under the strongest bucket seen, which is
     the right headline and is lossy in one direction that matters — see `disagreement`.
+
+    `declared` is mg-5491's declaration census, from the record's header.  It moves a row to
+    the DECLARED bucket and NEVER TOUCHES `observed`, which keeps the classifier's real
+    answer for every observation — that is what §3b's false-declaration check reads, and a
+    declaration that ate its own evidence could not be contradicted by anything.
     """
     owned_by_candidate = set()
     rewritten = {}                       # path -> set of dirs that rewrote it
     buckets = {}                         # path -> (bucket, detail, hunk, dropped, dir, src)
     observed = {}                        # path -> [(dir, bucket)] — every observation
+    decl = honoured(declared)
     for s in suites:
         if "error" in s:
             continue
@@ -134,8 +171,16 @@ def population(suites):
             why = _unusable_why(s.get("timeout"), s.get("rc"))
             bucket = UNUSABLE if why else row["bucket"]
             observed.setdefault(row["path"], []).append((s["dir"], bucket))
-            cand = (bucket, row.get("detail", "") if not why else
-                    "%s — would have been %s" % (why, row["bucket"]),
+            detail = row.get("detail", "") if not why else \
+                "%s — would have been %s" % (why, row["bucket"])
+            # THE HARNESS'S FAULT OUTRANKS THE SUBJECT'S DECLARATION, and the order is not
+            # arbitrary: a killed run produced a transcript nobody may read as evidence
+            # EITHER WAY, so calling it DECLARED would credit the declaration with a
+            # measurement that was never taken.
+            if not why and row["path"] in decl:
+                bucket = DECLARED
+                detail = "declared not a fixed point — would have been %s" % row["bucket"]
+            cand = (bucket, detail,
                     row.get("hunk"), row.get("dropped", 0), s["dir"], "runner")
             # A transcript two suites both rewrite is counted ONCE, under the strongest
             # bucket seen, and both producers are named in the listing.
@@ -149,6 +194,9 @@ def population(suites):
             if why and row.get("bucket"):
                 row = dict(row, detail="%s — would have been %s" % (why, row["bucket"]),
                            bucket=UNUSABLE)
+            elif row.get("bucket") and row["path"] in decl:
+                row = dict(row, detail="declared not a fixed point — would have been %s"
+                           % row["bucket"], bucket=DECLARED)
             pass2_rows[row["path"]] = (row, s["dir"])
     return owned_by_candidate, rewritten, buckets, observed, pass2_rows
 
@@ -225,7 +273,8 @@ def main():
     out = []
     e = out.append
 
-    owned_by_candidate, rewritten, buckets, observed, pass2_rows = population(suites)
+    owned_by_candidate, rewritten, buckets, observed, pass2_rows = population(
+        suites, header.get("declared"))
 
     # THE POPULATION SIZE COMES FROM THE FROZEN RECORD AND NOT FROM `git ls-files`, AND THIS
     # LINE IS THIS INSTRUMENT CATCHING ITS OWN DISEASE.  It WAS a live `git ls-files code`,
@@ -331,7 +380,7 @@ def main():
     e(rule("="))
     e("")
     order = [L.IDENTICAL, L.BENIGN_F771, L.BENIGN_ADDR, L.NON_VERDICT,
-             L.VERDICT_NUMBER, L.VERDICT_TOKEN, "GONE", UNUSABLE]
+             L.VERDICT_NUMBER, L.VERDICT_TOKEN, "GONE", UNUSABLE, DECLARED]
     counts = {k: 0 for k in order}
     for pth, (b, _d, _h, _dr, _dir, _src) in buckets.items():
         counts[b] = counts.get(b, 0) + 1
@@ -344,6 +393,7 @@ def main():
         L.VERDICT_TOKEN: "VERDICT-STALE — a verdict TOKEN appeared, vanished or changed",
         "GONE": "the run REMOVED a tracked transcript",
         UNUSABLE: "the producing run was KILLED or REFUSED — not graded, see §6.3",
+        DECLARED: "the transcript declares it is not a fixed point — see §3b",
     }
     for k in order:
         if k in counts:
@@ -363,6 +413,102 @@ def main():
     e("  which is mg-479c's defect exactly.  They are UNMEASURED, not clean.  Exit 1 is NOT in")
     e("  this class — in this corpus that means a control FIRED, which is a completed run.")
     e("")
+
+    # ------------------------------------------------------------------ declarations
+    # §3b AND NOT §4, WITH EVERYTHING AFTER IT LEFT WHERE IT WAS.  Renumbering would move
+    # `§4`, `§5`, `§6.4` and `§6.6` — cross-references this estate quotes from mg-937c's arm,
+    # from three README §8 items, from OWNERS.json and from work items already filed.  A
+    # section number in this corpus is an ADDRESS, and mg-c824's whole family of findings is
+    # about addresses that moved under their readers.  So the new section takes a new name.
+    e(rule("="))
+    e("§3b  THE DECLARATIONS — TRANSCRIPTS THAT SAY THEY CANNOT BE A FIXED POINT")
+    e(rule("="))
+    e("")
+    if header.get("declared") is None:
+        e("  NO CENSUS IN THIS RECORD.  It was written before mg-5491, so nothing has looked,")
+        e("  and that is a different answer from `nobody has declared`.  Re-take any suite —")
+        e("  `python3 -B sweep.py --only <dir> --pass2` — and the census is refreshed whole.")
+        e("")
+    else:
+        decl = honoured(header["declared"])
+        malformed = sorted(p for p, r in header["declared"].items() if not r)
+        e("  A transcript may say, IN ITS OWN FIRST %d LINES, that it is not a fixed point and"
+          % L.DECLARATION_WINDOW)
+        e("  why — a line whose text after any leading `#` begins `%s`.  It is then"
+          % L.DECLARATION)
+        e("  RUN, RECORDED AND LISTED exactly as before, and NOT counted as a finding about the")
+        e("  corpus.  The three shapes this exists for: a transcript whose producer can no")
+        e("  longer see what it saw, one that reads state living outside this repository, and")
+        e("  one whose subject is a stream rather than a tree.  None of those is a stale")
+        e("  verdict; all of them were being counted as one.")
+        e("")
+        e("  WHY THIS IS NOT AN ESCAPE HATCH, AND IT IS THE SECOND HALF THAT DOES THE WORK.")
+        e("  The marker is a hand-typed literal, not a regex over disclaimers; it must be in")
+        e("  the first %d lines, so a QUOTATION of it — this line, for instance — exempts"
+          % L.DECLARATION_WINDOW)
+        e("  nothing; every declaration is counted and listed below with the bucket it would")
+        e("  have carried; AND IT IS CHECKED IN THE DIRECTION THAT CAN EMBARRASS IT.  A")
+        e("  transcript declaring it cannot reproduce, which then REPRODUCES, is a FALSE")
+        e("  DECLARATION and is reported as one.")
+        e("")
+        e("  census taken at : %s  (over all %d tracked transcripts, not only the swept dirs)"
+          % ((header.get("declared_at") or "?")[:12], header["transcripts"]))
+        e("")
+        e("  %5d  transcript(s) carry the marker" % len(header["declared"]))
+        e("  %5d  of them are HONOURED — the marker carries a reason" % len(decl))
+        e("  %5d  are MALFORMED — the marker is there and says nothing after it, so it is NOT"
+          % len(malformed))
+        e("         honoured and the transcript is graded exactly as if the line were absent")
+        for p in malformed:
+            e("       MALFORMED  %s" % p)
+        e("")
+        # THE FALSIFIABLE HALF.  `observed` keeps the classifier's real answer for every
+        # observation, so a declaration can be contradicted by the record that carries it.
+        false_decl, unobserved = [], []
+        for p in sorted(decl):
+            real = [b for _d, b in observed.get(p, [])]
+            if not real:
+                unobserved.append(p)
+            elif all(b in L.BENIGN for b in real):
+                false_decl.append((p, sorted(set(real))))
+        e("  " + rule("-")[:86])
+        if false_decl:
+            e("  *** FALSE DECLARATION(S): %d — the record contradicts the file" % len(false_decl))
+            e("  " + rule("-")[:86])
+            for p, real in false_decl:
+                e("      %s" % p)
+                e("          declares: %s" % decl[p])
+                e("          the sweep regenerated it and every observation was %s."
+                  % ", ".join(real))
+                e("          A transcript that reproduces IS a fixed point.  Remove the marker.")
+        else:
+            e("  NO FALSE DECLARATIONS.  Every honoured declaration belongs to a transcript the")
+            e("  sweep regenerated into something that is NOT byte-identical or benign, which")
+            e("  is the only half of `I cannot be a fixed point` a record can decide.")
+        e("  " + rule("-")[:86])
+        e("")
+        if unobserved:
+            e("  %5d  declared transcript(s) THIS RECORD NEVER REGENERATED, so the declaration"
+              % len(unobserved))
+            e("         is neither confirmed nor contradicted here.  Unmeasured, not accepted:")
+            for p in unobserved:
+                e("       UNOBSERVED  %s" % p)
+            e("")
+        for p in sorted(decl):
+            b = buckets.get(p) or (pass2_rows.get(p) or ({},))[0]
+            would = (b[1] if isinstance(b, tuple) else b.get("detail", "")) or ""
+            e("  %s" % p)
+            e("      %s" % decl[p])
+            if would:
+                e("      %s" % would)
+            e("")
+        e("  AND WHAT THIS CANNOT CHECK, WHICH IS THE HALF THAT MATTERS MOST.  Nothing here")
+        e("  decides that a REASON is the right reason, or that no commit could have made the")
+        e("  transcript reproduce.  A declaration is a judgement by the transcript's owner and")
+        e("  this section is an ADDRESS for it, not a proof of it — mg-937c's own line about")
+        e("  `cause`, one instrument along.  The defence is that it is loud: a corpus quietly")
+        e("  declaring its way to zero findings would do so in this list, in public.")
+        e("")
 
     # ------------------------------------------------------------------ the list
     e(rule("="))
@@ -586,8 +732,12 @@ def walk_note(rows):
 
 
 def _rank(bucket):
-    return {L.IDENTICAL: 0, L.BENIGN_F771: 1, L.BENIGN_ADDR: 2, L.NON_VERDICT: 3,
-            "GONE": 4, L.VERDICT_NUMBER: 5, L.VERDICT_TOKEN: 6}.get(bucket, 0)
+    # DECLARED sits at 0 with UNUSABLE and IDENTICAL, and it never competes: every
+    # observation of a declared path carries the same bucket, so the ranking among them is
+    # a tie by construction rather than a judgement about which producer to believe.
+    return {L.IDENTICAL: 0, DECLARED: 0, L.BENIGN_F771: 1, L.BENIGN_ADDR: 2,
+            L.NON_VERDICT: 3, "GONE": 4, L.VERDICT_NUMBER: 5,
+            L.VERDICT_TOKEN: 6}.get(bucket, 0)
 
 
 if __name__ == "__main__":

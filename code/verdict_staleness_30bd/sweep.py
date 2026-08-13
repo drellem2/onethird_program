@@ -172,6 +172,19 @@ def main():
         committed[rel] = git(ROOT, "show", "%s:%s" % (head, rel)).stdout
     dirs = args.only or candidate_dirs(ROOT)
 
+    # THE DECLARATION CENSUS (mg-5491), AND IT IS OVER THE WHOLE TREE EVEN UNDER `--only`.
+    # `report.py` may not read the worktree — 649b186 removed exactly that from it, in this
+    # directory, because a live-tree read makes a committed report drift away from the tree
+    # it describes.  So the census is taken HERE, where the committed blobs are already in
+    # hand, and travels in the record.  It is deliberately NOT per-directory: a `--only`
+    # re-measurement of one suite still refreshes the whole census, so the newest record
+    # always carries a COMPLETE list of who has declared rather than a fragment of one.
+    declared = {}
+    for rel in relpaths:
+        d = L.declaration(committed[rel])
+        if d is not None:
+            declared[rel] = d
+
     os.makedirs(args.base, exist_ok=True)
     print("mg-30bd sweep: %d candidate dir(s), %d tracked transcript(s), head %s"
           % (len(dirs), len(relpaths), head[:7]), flush=True)
@@ -192,7 +205,8 @@ def main():
     fh = open(RECORD, "w" if args.fresh else "a", encoding="utf-8")
     fh.write(json.dumps({"kind": "header", "head": head, "dirs": len(dirs),
                          "transcripts": len(relpaths), "timeout": args.timeout,
-                         "pass2": bool(args.pass2), "tokens": list(L.TOKENS)}) + "\n")
+                         "pass2": bool(args.pass2), "tokens": list(L.TOKENS),
+                         "declared": declared}) + "\n")
     done = [0]
 
     def job(d):

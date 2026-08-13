@@ -1,3 +1,15 @@
+# =============================================================================
+# NOT-A-FIXED-POINT: this probe reads the LIVE mg verdict and mail stream, which
+# lives outside this repository and moves every hour.
+# =============================================================================
+# A re-run is a NEW measurement of a different afternoon, not a check of this
+# one, and no commit can make the figures below reproduce.  They are DATED
+# EVIDENCE for the finding this directory's README states, so they are pinned:
+# re-running this suite replaces them.  The marker above is the literal
+# code/verdict_staleness_30bd reads (lib30bd.DECLARATION), which was grading
+# these four probes as stale verdicts about the corpus.  Written by run_all.sh,
+# not by the probe, because verdictwatch.py is a shipped CLI whose stdout is a
+# contract -- its --json mode must stay NDJSON.  mg-5491.
 verdictwatch -- store /Users/daniel/.macguffin -- filer pm-onethird
   landed items scanned : 149
   DELIVERED            : 25
