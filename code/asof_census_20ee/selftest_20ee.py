@@ -141,11 +141,61 @@ check("N5 an instrument that ALREADY reads at a declared commit",
       "and out_ground_truth.txt together.")
 
 print()
+print("CONTROLS ON consumers.py — mg-20ee's THIRD CONDITION (mg-6e4f)")
+print("-" * 78)
+print()
+print("  The consumer census decides, for a file that NAMES a script, whether")
+print("  it EXECUTES it and whether it passes a path.  A pin disturbs the")
+print("  no-arg callers and not the others, so the whole value of the")
+print("  instrument is in telling those three apart.  Planted lines, because a")
+print("  classifier only ever run against the real corpus has no evidence it")
+print("  can distinguish anything.")
+print()
+
+import consumers  # noqa: E402
+
+
+def kinds(text, needle="w3_scope.py"):
+    return [k for k, _n, _l in consumers.classify_text(text, needle)]
+
+
+check("C1 an exec with no path argument",
+      kinds('    rc, out = run_checker("code/a/w3_scope.py")'),
+      ["EXEC-NO-ARG"],
+      "the shape that GETS the pinned default and must be re-measured. "
+      "kern6cb9.py, kern4700.py and v2_layer2.py are the real instances.")
+
+check("C2 an exec that passes a scratch path",
+      kinds('    r = subprocess.run([sys.executable, "w3_scope.py", scratch])'),
+      ["EXEC-EXPLICIT-PATH"],
+      "the caller chose the tree, so the pin does not reach it. MEASURED on "
+      "the real instance: species_audit_73df/c4_scope.py is byte-identical "
+      "with and without the pin.")
+
+check("C3 a name with no exec token near it",
+      kinds('CHECKERS = [("w3_scope.py", "code/a/w3_scope.py")]'),
+      ["MENTION"],
+      "THE CONTROL THAT CONFIRMS A KNOWN DEFECT RATHER THAN A REPAIR. This "
+      "is e1_extents.py's real line. E1 DOES execute it -- through two "
+      "variables and a tracer -- and this census CANNOT SEE THAT. It lands "
+      "in the residue, and section C's work-list is C1 PLUS C2 for exactly "
+      "this reason. If somebody teaches the rule to follow variables, this "
+      "control FAILS, and that is the signal to update the docstring's "
+      "blind-spot list and section C's warning together.")
+
+check("C4 the exec token may stand on a LATER line",
+      kinds('    p = subprocess.run(\n        [sys.executable, "w3_scope.py"])'),
+      ["EXEC-NO-ARG"],
+      "a two-line call is the common formatting in this repository and a "
+      "same-line-only rule would have reported half the estate as inert.")
+
+print()
 print("=" * 78)
 if FAILED:
     print("RED — %d control(s) failed: %s" % (len(FAILED), ", ".join(FAILED)))
 else:
-    print("GREEN — 2 positive, 4 negative and 1 known-defect control all land "
-          "where they must.")
+    print("GREEN — 2 positive, 4 negative and 1 known-defect control on the "
+          "address census, and 3 positive plus 1 known-defect control on the "
+          "consumer census, all land where they must.")
 print("=" * 78)
 raise SystemExit(1 if FAILED else 0)

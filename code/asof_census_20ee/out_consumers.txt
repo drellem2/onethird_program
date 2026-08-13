@@ -1,0 +1,171 @@
+==============================================================================
+mg-6e4f -- CONSUMERS OF code/species_remainder_f8fa
+==============================================================================
+
+  mg-20ee condition 3: before pinning, find every instrument that
+  RUNS this one and re-measure it.  METHOD AND BLIND SPOT are in
+  this file's docstring and are not repeated here; what is repeated
+  is the one sentence that matters -- THIS CENSUS IS NOT A
+  BACKSTOP.  See section D.
+
+  subject scripts: 6
+      kernf8fa.py
+      run_all.sh
+      selftestf8fa.py
+      w1_opposite.py
+      w2_typemismatch.py
+      w3_scope.py
+
+  matched by basename: 5 script(s); by FULL PATH: 1, because the
+  basename is shared -- run_all.sh (193 files)
+  documentation mentions in *.md / *.txt, counted and NOT listed
+  because prose cannot execute anything: 146 file(s)
+
+------------------------------------------------------------------------------
+A  EXECUTIONS WITH NO PATH ARGUMENT -- these get the pinned default
+------------------------------------------------------------------------------
+
+  code/species_audit_73df/c4_scope.py                  runs w3_scope.py
+        line 232
+  code/species_audit_73df/run_all.sh                   runs w3_scope.py
+        line 8
+  code/species_audit_7dd3/d5_mutations.py              runs w3_scope.py
+        line 345
+  code/species_depth_audit_4700/kern4700.py            runs w3_scope.py
+        line 145
+  code/species_extent_audit_6cb9/kern6cb9.py           runs w3_scope.py
+        line 84
+  code/species_repair_6f61/check_doc.py                runs w3_scope.py
+        line 348
+  code/species_rung_repair_4adb/v2_layer2.py           runs w3_scope.py
+        line 136
+  code/species_rung_repair_4adb/v2_layer2.py           runs w3_scope.py
+        line 167
+  code/species_rung_repair_4adb/v2_layer2.py           runs w3_scope.py
+        line 253
+  code/species_rung_repair_4adb/v2_layer2.py           runs w3_scope.py
+        line 334
+
+------------------------------------------------------------------------------
+B  EXECUTIONS THAT PASS A PATH, and mentions with no exec token
+------------------------------------------------------------------------------
+
+  An explicit path is chosen by the caller and a pin does not
+  reach it.  A bare mention is printed rather than dropped: it is
+  the residue of this method, and an import lands here.
+
+  mention        code/runner_exit_audit_05eb/j2_retro.py        selftestf8fa.py
+  mention        code/runner_exit_c2b3/k2_consume.py            run_all.sh
+  mention        code/species_7d75/t6_fock_and_record.py        w3_scope.py
+  mention        code/species_audit_73df/c4_scope.py            w3_scope.py
+  mention        code/species_audit_7dd3/d1_source.py           w3_scope.py
+  mention        code/species_audit_7dd3/d2_extent.py           w3_scope.py
+  mention        code/species_audit_7dd3/d5_mutations.py        w3_scope.py
+  mention        code/species_audit_7dd3/d6_exitcodes.py        w3_scope.py
+  mention        code/species_audit_7dd3/kern7dd3.py            w3_scope.py
+  mention        code/species_audit_7dd3/selftest7dd3.py        w3_scope.py
+  mention        code/species_audit_7dd3/statements7dd3.py      w3_scope.py
+  mention        code/species_bound_audit_6ef4/kern6ef4.py      w3_scope.py
+  mention        code/species_bound_audit_6ef4/selftest6ef4.py  w3_scope.py
+  mention        code/species_bound_audit_6ef4/t1_bound.py      run_all.sh
+  mention        code/species_bound_audit_6ef4/t1_bound.py      w3_scope.py
+  mention        code/species_bound_repair_5040/kern5040.py     w3_scope.py
+  mention        code/species_bound_repair_5040/r1_bound.py     w3_scope.py
+  mention        code/species_bound_repair_5040/selftest5040.py w3_scope.py
+  mention        code/species_depth_audit_4700/kern4700.py      w3_scope.py
+  mention        code/species_depth_audit_4700/q1_depth.py      w3_scope.py
+  mention        code/species_depth_audit_4700/q2_wiring.py     selftestf8fa.py
+  mention        code/species_depth_audit_4700/selftest4700.py  run_all.sh
+  mention        code/species_depth_audit_4700/selftest4700.py  w3_scope.py
+  mention        code/species_extent_audit_6cb9/a1_bothways.py  w3_scope.py
+  mention        code/species_extent_audit_6cb9/a2_crosssection.py run_all.sh
+  mention        code/species_extent_audit_6cb9/a3_differ_and_placement.py w3_scope.py
+  mention        code/species_extent_audit_6cb9/kern6cb9.py     w3_scope.py
+  mention        code/species_extent_audit_6cb9/selftest6cb9.py w3_scope.py
+  mention        code/species_extent_d633/e1_extents.py         w3_scope.py
+  mention        code/species_extent_d633/e3_bothways.py        run_all.sh
+  mention        code/species_extent_d633/e3_bothways.py        w3_scope.py
+  mention        code/species_gate_audit_d53d/g1_population.py  w3_scope.py
+  mention        code/species_gate_audit_d53d/g2_red.py         w3_scope.py
+  mention        code/species_gate_audit_d53d/g3_layer2.py      run_all.sh
+  mention        code/species_gate_audit_d53d/g3_layer2.py      w3_scope.py
+  mention        code/species_gate_audit_d53d/g5_fourth.py      w3_scope.py
+  mention        code/species_repair_a4ef/kerna4ef.py           w3_scope.py
+  mention        code/species_repair_a4ef/s1_extent.py          w3_scope.py
+  mention        code/species_repair_a4ef/selftesta4ef.py       w3_scope.py
+  mention        code/species_repair_a4ef/stricken_a4ef.py      w3_scope.py
+  mention        code/species_rung_repair_4adb/kern4adb.py      w3_scope.py
+  mention        code/species_rung_repair_4adb/v2_layer2.py     w3_scope.py
+  mention        code/species_rung_repair_4adb/v4_neighbours.py w3_scope.py
+  mention        code/species_sites_821e/kern821e.py            w3_scope.py
+  mention        code/species_sites_821e/p1_depth.py            w3_scope.py
+  mention        code/species_sites_821e/selftest821e.py        w3_scope.py
+
+------------------------------------------------------------------------------
+C  THE INSTRUMENTS TO RE-MEASURE, and their runners
+------------------------------------------------------------------------------
+
+  THE WORK-LIST IS C1 PLUS C2, NOT C1.  The exec rule CONFIRMS a
+  consumer; it does not refute one.  A file that names a script in
+  code and whose exec token this rule did not see is UNCONFIRMED,
+  not cleared, and it goes on the list.
+
+  THIS IS NOT A PRECAUTION, IT IS A MEASURED MISS.  mg-6e4f had to
+  repair code/species_extent_d633/e1_extents.py -- E1a went
+  `18 file(s)` -> `0` and E1 TOTAL BAD 0 -> 3 under the pin -- and
+  THIS CENSUS DOES NOT CONFIRM IT.  e1 spawns
+  `[sys.executable, TRACER, os.path.basename(path)]`, so the
+  script's name reaches the exec through TWO variables and is
+  nowhere near an exec token on the page.  It lands in C2.  A
+  reader who works C1 only would have shipped that breakage.
+
+  C1  CONFIRMED -- an exec token stands beside the name
+      code/species_audit_73df                    sh code/species_audit_73df/run_all.sh
+      code/species_audit_7dd3                    sh code/species_audit_7dd3/run_all.sh
+      code/species_depth_audit_4700              sh code/species_depth_audit_4700/run_all.sh
+      code/species_extent_audit_6cb9             sh code/species_extent_audit_6cb9/run_all.sh
+      code/species_repair_6f61                   sh code/species_repair_6f61/run_all.sh
+      code/species_rung_repair_4adb              sh code/species_rung_repair_4adb/run_all.sh
+
+  C2  UNCONFIRMED -- names the script in *.py / *.sh, exec not seen
+      code/runner_exit_audit_05eb                sh code/runner_exit_audit_05eb/run_all.sh
+      code/runner_exit_c2b3                      sh code/runner_exit_c2b3/run_all.sh
+      code/species_7d75                          sh code/species_7d75/run_all.sh
+      code/species_bound_audit_6ef4              sh code/species_bound_audit_6ef4/run_all.sh
+      code/species_bound_repair_5040             sh code/species_bound_repair_5040/run_all.sh
+      code/species_extent_d633                   sh code/species_extent_d633/run_all.sh
+      code/species_gate_audit_d53d               sh code/species_gate_audit_d53d/run_all.sh
+      code/species_repair_a4ef                   sh code/species_repair_a4ef/run_all.sh
+      code/species_sites_821e                    sh code/species_sites_821e/run_all.sh
+
+------------------------------------------------------------------------------
+D  THE BACKSTOP, WHICH IS NOT THIS CENSUS
+------------------------------------------------------------------------------
+
+  Every name above came from a grep for a filename, so a consumer
+  reached by a constructed path, by a wrapper more than one hop
+  away, or from outside this repository IS NOT IN IT.  The census
+  cannot check itself.  What can: run each consumer BEFORE and
+  AFTER the pin and diff the two outputs.  A missed consumer shows
+  up in that diff whether or not it was enumerated -- provided you
+  run the suite it lives in.
+
+  For each instrument in section C:
+
+      git stash push -- <the pinned file>   # or check out the
+                                            # pre-pin revision
+      sh <dir>/run_all.sh > /tmp/pre.txt 2>&1
+      git stash pop
+      sh <dir>/run_all.sh > /tmp/post.txt 2>&1
+      diff /tmp/pre.txt /tmp/post.txt
+
+  An EMPTY diff is the result you want and it is a MEASUREMENT.
+  A non-empty one is either the pin reaching a consumer -- fix the
+  consumer or the pin, do not pin over it -- or that consumer's
+  own pre-existing staleness, which is a FINDING and belongs in
+  its own work item rather than in a pinning commit.
+
+==============================================================================
+CONSUMERS: 10 no-arg execution(s) CONFIRMED across 6 instrument(s);
+           9 further instrument(s) UNCONFIRMED.  WORK-LIST: 15.
+==============================================================================
