@@ -1,4 +1,4 @@
-/Users/daniel/.pogo/polecats/c06d1/code/alias_agreement_06d1/x0_exhibit.py:132: SyntaxWarning: 'return' in a 'finally' block
+/Users/daniel/.pogo/polecats/p479c/code/alias_agreement_06d1/x0_exhibit.py:143: SyntaxWarning: 'return' in a 'finally' block
   return 2
 x0  THE EXHIBIT — a real edit to a real tree, and the real gate command
 
@@ -8,42 +8,12 @@ x0  THE EXHIBIT — a real edit to a real tree, and the real gate command
 ==============================================================================
 E0  THE GATE ON THE UNMODIFIED TREE — scored FIRST
 ==============================================================================
-  ./build.sh  exit 0
-    alias-agreement worst exit: 0   (0 green · 1 a control fired · 2 refused/broken)
-    worst suite exit: 0   (0 green · 1 a control fired · 2 refused/broken)
-
-==============================================================================
-E1  PLANT — E_footrule gains 1/10^9 in ONE of the four trees that compute it
-==============================================================================
-  planted:  self._m["DF"] = F(tot, N) + F(1, 10 ** 9)
-  sha256    0256c6958fec80a4c8504c5966cd477bf5520eb8cd4ff47ee7b2935fd74b3dd0  (planted)
-
-==============================================================================
-E2  THE GATE ON THE PLANTED TREE
-==============================================================================
   ./build.sh  exit 1
+    alias-agreement worst exit: 0   (0 green · 1 a control fired · 2 refused/broken)
+    - alias-agreement worst exit: 0   (0 green · 1 a control fired · 2 refused/broken)
+    - worst suite exit: 0   (0 green · 1 a control fired · 2 refused/broken)
+    worst suite exit: 1   (0 green · 1 a control fired · 2 refused/broken)
 
-  the finding, as the gate printed it:
-      RED    E_footrule                4/ 4 names   spread 1.000e-09   tol 0.000e+00
-               DISAGREE — direct_prefix_audit_2de0:E_footrule  vs  sweep_loss_51f4:E_footrule
-                 spread 1.000000e-09 > tolerance 0.000000e+00 at poset #0: direct_prefix_audit_2de0:E_footrule = 2.6666666666666665   vs   sweep_loss_51f4:E_footrule = 2.6666666676666666
-      agree  M                         4 names   spread 0.000e+00   tol 0.000e+00
-
-  exit non-zero                      : True
-  names the perturbed alias          : True
-  names at least one OTHER alias     : True
-  aliases named in the gate output   : sweep_loss_51f4:E_footrule, direct_prefix_audit_2de0:E_footrule
-
-==============================================================================
-E3  RESTORE — byte-identically, under a checked digest
-==============================================================================
-  sha256   f95fce212fb8b37a1648a216ee17e0d2ef18510b4779f476e149dfc8c5126241  (after restore)
-  identical to before                : True
-  git reports the file unmodified    : True
-
-==============================================================================
-x0 RESULT
-==============================================================================
-  CAUGHT.  A one-term edit to one of four trees computing the footrule made
-  `./build.sh` — the command .pogo/refinery.toml names — exit non-zero and
-  name both aliases.  The tree is restored byte-identically.
+  REFUSED — the gate is ALREADY RED before anything was planted, so nothing below could
+  distinguish a catch from the standing state.  mg-9876's guard: a probe satisfied by the
+  good input is UNFALSIFIABLE and is never CAUGHT.

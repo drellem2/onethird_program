@@ -98,11 +98,22 @@ def main():
         print("  ./build.sh  exit %d" % rc1)
         # The finding itself, not every line in the corpus that contains the word
         # "spread": take the contiguous block the alias suite prints for a RED group.
+        #
+        # mg-479c: THIS WAS A FIXED `lines[i:i+4]` AND MY OWN CHANGE MADE THE BLOCK LONGER.
+        # The RED message now carries the declared conventions and factors, so a four-line
+        # window cuts it off mid-sentence — an exhibit whose job is to show what the gate
+        # said, showing part of it.  That is D3 of README §5 arriving a second time through
+        # a different door, so the window is no longer a count: it takes the RED line and
+        # every CONTINUATION line under it, and stops at the next line that is not one.
         lines = out1.splitlines()
         blk = []
         for i, ln in enumerate(lines):
             if ln.startswith("  RED "):
-                blk = lines[i:i + 4]
+                blk = [ln]
+                for nxt in lines[i + 1:]:
+                    if not nxt.startswith("       "):
+                        break
+                    blk.append(nxt)
                 break
         print()
         print("  the finding, as the gate printed it:")

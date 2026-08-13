@@ -1,0 +1,231 @@
+g3  THE NORMALISATION FIELD — mg-479c, per NAME and not per quantity
+
+  semantics   raw = factor(n) * canonical,  so canonical = raw / factor(n)
+  factor      a rational function of n in exact integer coefficients; the constant
+              is the degree-0 case and {num:[1],den:[1]} is a PASS-THROUGH
+  undeclared  REFUSED (exit 2).  Never defaulted to `same`.
+
+==============================================================================
+N0  THE DECLARATIONS, PRINTED IN FULL — every factor, on every run, green or red
+==============================================================================
+
+  Every pinned name below, with the convention it declares and the factor that would be
+  applied before comparison.  A `1` reads as `1` and not as a blank: the point of the field
+  is that silence is no longer a value it can take.
+
+  leak(A_1)                13 names   tol 0.000e+00 (raw frame)   1 convention(s)
+      anticorrelation_c50b:leak(1)                         mg-0d1b-raw    x 1
+      audit_5cba:LK[1]/LE                                  mg-0d1b-raw    x 1
+      c3_audit_a94c3:delta1(A_1)                           mg-0d1b-raw    x 1
+      c3_audit_a94c3:leak(A_1)                             mg-0d1b-raw    x 1
+      c3_prefix_capture_76b2:leak(A_1)                     mg-0d1b-raw    x 1
+      direct_prefix_audit_2de0:E_leak(A_1)                 mg-0d1b-raw    x 1
+      direct_prefix_audit_2de0:delta_1_prefix(1)           mg-0d1b-raw    x 1
+      eleak_repair_8311:E_leak(A_1,def)                    mg-0d1b-raw    x 1
+      l2_audit_29fe:leak[1]                                mg-0d1b-raw    x 1
+      l2_conditionality_28ff:leak(A_1)                     mg-0d1b-raw    x 1
+      l2_underclaim_audit_3bb9:leak[0]                     mg-0d1b-raw    x 1
+      lstar_789d:LK[1]/LE                                  mg-0d1b-raw    x 1
+      sweep_loss_51f4:leak_pref(1)                         mg-0d1b-raw    x 1
+  gamma                     9 names   tol 4.666e-10 (raw frame)   1 convention(s)
+      anticorrelation_c50b:gamma_float                     mg-0d1b-raw    x 1
+      audit_5cba:gamma_float                               mg-0d1b-raw    x 1
+      c3_audit_a94c3:spectral_gap                          mg-0d1b-raw    x 1
+      chain_iv_c_81ff:lambda2_bracket                      mg-0d1b-raw    x 1
+      l2_audit_29fe:bracket_gap                            mg-0d1b-raw    x 1
+      l2_conditionality_28ff:gap_exact_bounds              mg-0d1b-raw    x 1
+      l2_underclaim_audit_3bb9:gap_float                   mg-0d1b-raw    x 1
+      lstar_789d:gamma_float                               mg-0d1b-raw    x 1
+      sweep_loss_51f4:gap_float                            mg-0d1b-raw    x 1
+  Delta_P                   7 names   tol 0.000e+00 (raw frame)   1 convention(s)
+      anticorrelation_c50b:Delta                           mg-0d1b-raw    x 1
+      audit_5cba:Delta                                     mg-0d1b-raw    x 1
+      l2_audit_29fe:Delta                                  mg-0d1b-raw    x 1
+      l2_conditionality_28ff:delta_max                     mg-0d1b-raw    x 1
+      l2_underclaim_audit_3bb9:Delta                       mg-0d1b-raw    x 1
+      lstar_789d:Delta                                     mg-0d1b-raw    x 1
+      sweep_loss_51f4:delta_max                            mg-0d1b-raw    x 1
+  Phi*_pref                 7 names   tol 0.000e+00 (raw frame)   1 convention(s)
+      anticorrelation_c50b:Phi_star                        mg-0d1b-raw    x 1
+      c3_prefix_capture_76b2:phi_star_prefix               mg-0d1b-raw    x 1
+      eleak_repair_8311:prefix_min                         mg-0d1b-raw    x 1
+      l2_audit_29fe:Phi_star_pref                          mg-0d1b-raw    x 1
+      l2_conditionality_28ff:phi_star_prefix               mg-0d1b-raw    x 1
+      lstar_789d:Phi_star                                  mg-0d1b-raw    x 1
+      sweep_loss_51f4:phi_star_pref                        mg-0d1b-raw    x 1
+  mu_pref                   7 names   tol 9.097e-13 (raw frame)   1 convention(s)
+      anticorrelation_c50b:mu_exhaustive                   mg-0d1b-raw    x 1
+      audit_5cba:mu_pref_float                             mg-0d1b-raw    x 1
+      l2_audit_29fe:bracket_mu_pref                        mg-0d1b-raw    x 1
+      l2_conditionality_28ff:cone_min                      mg-0d1b-raw    x 1
+      l2_underclaim_audit_3bb9:mu_pref_float               mg-0d1b-raw    x 1
+      lstar_789d:mu_faces                                  mg-0d1b-raw    x 1
+      sweep_loss_51f4:cone_min                             mg-0d1b-raw    x 1
+  rho*Delta_P               6 names   tol 7.310e-12 (raw frame)   1 convention(s)
+      anticorrelation_c50b:rho*Delta                       mg-0d1b-raw    x 1
+      audit_5cba:v_L                                       mg-0d1b-raw    x 1
+      l2_audit_29fe:V10                                    mg-0d1b-raw    x 1
+      l2_conditionality_28ff:V10                           mg-0d1b-raw    x 1
+      l2_underclaim_audit_3bb9:V10                         mg-0d1b-raw    x 1
+      lstar_789d:rho*Delta                                 mg-0d1b-raw    x 1
+  Phi*_all                  6 names   tol 0.000e+00 (raw frame)   1 convention(s)
+      c3_prefix_capture_76b2:phi_star                      mg-0d1b-raw    x 1
+      direct_prefix_audit_2de0:phi_star                    mg-0d1b-raw    x 1
+      eleak_repair_8311:phi_star(def)                      mg-0d1b-raw    x 1
+      eleak_repair_8311:phi_star(inv)                      mg-0d1b-raw    x 1
+      l2_audit_29fe:Phi_star_all                           mg-0d1b-raw    x 1
+      l2_conditionality_28ff:phi_star                      mg-0d1b-raw    x 1
+  E_footrule                4 names   tol 0.000e+00 (raw frame)   1 convention(s)
+      direct_prefix_audit_2de0:E_footrule                  mg-0d1b-raw    x 1
+      l2_audit_29fe:EDF                                    mg-0d1b-raw    x 1
+      l2_conditionality_28ff:E_footrule                    mg-0d1b-raw    x 1
+      sweep_loss_51f4:E_footrule                           mg-0d1b-raw    x 1
+  M                         4 names   tol 0.000e+00 (raw frame)   1 convention(s)
+      anticorrelation_c50b:M                               mg-0d1b-raw    x 1
+      audit_5cba:M                                         mg-0d1b-raw    x 1
+      lstar_789d:M                                         mg-0d1b-raw    x 1
+      sweep_loss_51f4:M_mean                               mg-0d1b-raw    x 1
+  rho                       3 names   tol 4.441e-15 (raw frame)   1 convention(s)
+      anticorrelation_c50b:rho                             mg-0d1b-raw    x 1
+      l2_underclaim_audit_3bb9:V00                         mg-0d1b-raw    x 1
+      lstar_789d:rho_float                                 mg-0d1b-raw    x 1
+  1 - rho(A_1)              3 names   tol 0.000e+00 (raw frame)   1 convention(s)
+      c3_audit_a94c3:one_minus_rho(1)                      mg-0d1b-raw    x 1
+      c3_prefix_capture_76b2:rho_prefix(1)                 mg-0d1b-raw    x 1
+      chain_iv_c_81ff:prefix_Q(1)                          mg-0d1b-raw    x 1
+  mu_pref (upper bound)     2 names   tol 1.108e-07 (raw frame)   1 convention(s)
+      anticorrelation_c50b:mu_upper                        mg-0d1b-raw    x 1
+      lstar_789d:mu_ub_float                               mg-0d1b-raw    x 1
+
+  illustrative (parsed and validated; NEVER compared — no tree computes these):
+      c3_audit_a94c3:eps_spec                              eps/spectral-6-over-n2-minus-1 x (6n^2)/(n^2 - 1)
+      unitmap_audit_9f91:eps_c3ca                          eps/c3ca-over-n2 x 1
+
+==============================================================================
+N1  THE LIVE DECLARATIONS — completeness, provenance, and the two agreement rules
+==============================================================================
+
+  71 of 71 pinned names declared · 71 identity · 1 convention(s) across 12 groups
+  seeded_from_measured_spread re-checked against BASELINE.json: 71 names
+  0 refusals.
+
+==============================================================================
+N2  THE DIGEST — over the declarations RESTRICTED TO THE PINNED MEMBERS
+==============================================================================
+
+  Restricted, and the restriction is this ticket's own thesis applied to its own remedy:
+  a digest that moved because somebody declared a normalisation for an UNPINNED name would
+  put the gate RED for a non-reason, which is the failure mg-479c is about.  Arm D4 plants
+  exactly that and requires the digest not to move.
+
+  The digest is a SPEED BUMP AND NOT A CONTROL, and it is worth saying which.  It makes an
+  edit to a pinned declaration a two-place edit; anybody willing to update both gets past
+  it.  What actually makes such an edit loud is N0 above, printed into a committed
+  transcript that code/gate_fixed_point_f771 compares against the tree on every merge.
+
+  pinned in NORMALISATION.json : 47ae3821afc66fc2
+  recomputed here              : 47ae3821afc66fc2   match
+
+==============================================================================
+N3  THE FACTOR IS A RATIONAL FUNCTION OF n, AND THE CORPUS ALREADY NEEDED ONE
+==============================================================================
+
+  A CONSTANT per-name factor cannot represent one of the three examples the ticket itself
+  names.  `code/c3_audit_a94c3/a1_algebra.py:14` states eps_spec = 6 E[inv_e]/(n^2 - 1) and
+  eps_c3ca = E[inv_e]/n^2, so eps_spec/eps_c3ca = 6n^2/(n^2 - 1) -> 6.  This arm does not
+  take that on the statement's word: it reads the EXACT RATIONALS that
+  code/unitmap_audit_9f91/out_m1_map.txt tabulates for both quantities, and checks the
+  DECLARED factor against the ratio COLUMN of that table in Fraction arithmetic.  The
+  table is CARRIED, not retyped — the rows below are parsed out of the committed
+  transcript, so a change to either quantity's definition arrives here as a mismatch.
+
+  read 11 rows from unitmap_audit_9f91/out_m1_map.txt
+  declared factor for eps_spec (canonical frame = eps_c3ca): (6n^2)/(n^2 - 1)
+
+        n   eps_c3ca            eps_spec            tabulated ratio    declared factor    ratio - 6
+        3   1/9                 3/4                 27/4               27/4               +7.500e-01
+        4   1/8                 4/5                 32/5               32/5               +4.000e-01
+        5   2/15                5/6                 25/4               25/4               +2.500e-01
+        6   5/36                6/7                 216/35             216/35             +1.714e-01
+        7   1/7                 7/8                 49/8               49/8               +1.250e-01
+        8   7/48                8/9                 128/21             128/21             +9.524e-02
+       10   3/20                10/11               200/33             200/33             +6.061e-02
+       12   11/72               12/13               864/143            864/143            +4.196e-02
+      100   33/200              100/101             20000/3333         20000/3333         +6.001e-04
+     1000   333/2000            1000/1001           2000000/333333     2000000/333333     +6.000e-06
+  1000000   333333/2000000      1000000/1000001     2000000000000/333333333333   2000000000000/333333333333   +6.000e-12
+
+  the tabulated ratio column equals eps_spec/eps_c3ca at            11 of 11 n
+  the DECLARED rational function reproduces that ratio at           11 of 11 n
+  a CONSTANT factor of 6 reproduces it at                            0 of 11 n
+
+  A constant field could not have held this, and that was known BEFORE the representation
+  was chosen — H2 of PREDICTIONS-mg-479c.md, filed 2026-08-10 and scored as a REPORT at
+  zero credit.  The last column is what a flat 6 costs: it is still 6.001e-04 out at
+  n = 100 and only reaches 6 in the limit.
+
+  THIS PAIR IS ILLUSTRATIVE.  Neither name is pinned, no lib0d1b adapter produces either,
+  and nothing in g1 compares them.  What it demonstrates is that the REPRESENTATION is
+  strong enough for the examples the ticket names; it is not a control on the pair.
+
+==============================================================================
+N4  PLANTED DECLARATION WORLDS — every refusal, falsified
+==============================================================================
+
+  Declarations are mutated in memory on a deep copy, exactly the way mg-06d1's arms mutate
+  captured columns.  A planted world that had to be WRITTEN to NORMALISATION.json in order
+  to run would be a live declaration about a name nothing computes — E6 of this ticket's
+  pre-registration — so none of them is.
+
+    REFUSED-CORRECTLY D0 the live declarations, unmutated, must be GREEN (scored first)
+                      0 refusals
+    CAUGHT            D1 a pinned name's declaration REMOVED — undeclared must REFUSE, never default to `same`
+                      UNDECLARED
+    CAUGHT            D2 factor 2 declared under the SAME convention as its peers — must REFUSE
+                      CONVENTION-SPLIT; TOLERANCE-FRAME
+    CAUGHT            D3 a DIFFERENT convention declared with the SAME factor — a phantom convention, must REFUSE
+                      CONVENTION-PHANTOM
+    REFUSED-CORRECTLY D4 a declaration ADDED for an UNPINNED name — must stay GREEN and must NOT move the digest (E9: a red for a non-reason, inside the remedy)
+                      digest 47ae3821afc66fc2, unchanged: True
+    CAUGHT            D5 a factor of ZERO — must REFUSE (a normalisation cannot annihilate its quantity)
+                      CONVENTION-SPLIT; MALFORMED-FACTOR; TOLERANCE-FRAME
+    CAUGHT            D6 the quoted measured spread edited away from BASELINE.json's — must REFUSE (E1: the derivation is checked, not decorative)
+                      SEED-STALE
+    CAUGHT            D7 a convention id that is not defined in `conventions` — must REFUSE
+                      CONVENTION-PHANTOM; UNKNOWN-CONVENTION
+    CAUGHT            D8 a non-identity factor with the group's RAW-frame tolerance left in place — must REFUSE rather than rescale (E4)
+                      TOLERANCE-FRAME
+    CAUGHT            D9 a canonical tolerance declared for a group whose members are ALL identity — unused, must REFUSE
+                      TOLERANCE-UNUSED
+
+    8 CAUGHT · 2 REFUSED-CORRECTLY · 0 unsatisfactory, of 10 arms
+
+==============================================================================
+N5  WHAT THIS TICKET DECIDED, MEASURED: NOTHING
+==============================================================================
+
+  Item 4 of mg-479c: DO NOT RESOLVE ANY EXISTING AMBIGUITY AS PART OF THIS.  Settling
+  whether STATE.md's row is in the halved or the doubled form was mg-5e82's business and a
+  mathematical question; this ticket builds the machinery to REPRESENT the answer, not to
+  decide it.  mg-5e82 has since settled that row — STATE.md now reads `mu_pref^2/2 IN THIS
+  ROW'S OWN NORMALISATION (settled mg-5e82...)` and names mg-479c as carrying the general
+  hazard — so there is nothing left here to decide even by accident.  It is measured
+  anyway, because "proves an absence" is the shape of claim this arc keeps getting wrong
+  and a measured absence is at least checkable.
+
+  pinned names carrying a NON-IDENTITY factor          : 0 of 71
+  pinned groups carrying MORE THAN ONE convention      : 0 of 12
+  live declarations using the (L*)/(M#) gap's language : 0
+  canonical tolerances declared                        : 0
+  ...and the same detector on a PLANTED declaration    : 3 hit(s)  [('planted_tree:planted_name', '(L*)'), ('planted_tree:planted_name', '(M#)'), ('planted_tree:planted_name', 'mu_pref^2')]
+
+  WHAT THIS DOES NOT ESTABLISH.  It measures that the DECLARATIONS are silent about the
+  (L*)/(M#) gap.  It says nothing about the rest of the branch — that STATE.md is untouched
+  is a property of the diff, not of this file, and the reader who wants it should read the
+  diff.
+
+==============================================================================
+g3 RESULT
+==============================================================================
+  71 declarations valid; 0 falsification arms unsatisfactory.
+  total 0.02s

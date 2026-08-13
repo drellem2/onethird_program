@@ -40,12 +40,29 @@ which.  Per the ticket: a disagreement is a FINDING and gets a ticket, not a qui
 reconciliation — there is no `--refresh`, no `--accept`, and no rule that prefers the more
 recently edited tree.  Rewriting the expectation to match the observation is the laundering
 this arc keeps paying for.
+
+WHAT RED COULD NOT SAY UNTIL mg-479c, AND NOW CAN
+-------------------------------------------------
+Until mg-479c this file compared RAW values and had no representation for two names
+denoting one quantity IN DIFFERENT NORMALISATIONS.  A factor of 2 between two live
+conventions and a genuine 2x error produced the identical signal, in both directions: a
+FALSE RED on a gate that blocks merges, and a FALSE PASS in which a real error is
+dismissable as "just a normalisation difference".  `libnorm` now holds the field, the
+comparison happens AFTER canonicalising, and the RED message states the factor that was
+applied and whether the two names DECLARE THE SAME CONVENTION — which is the half that
+lets an operator tell the two cases apart.
+
+`norm=None` is the pre-mg-479c path, kept and reachable, because `g1_values.py` MEASURES
+the two paths agreeing on the real input rather than arguing that the identity factor is a
+pass-through.
 """
 
 import json
 import math
 import os
 import sys
+
+import libnorm as NM
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 INDEX_DIR = os.path.join(os.path.dirname(HERE), "alias_index_0d1b")
@@ -160,7 +177,7 @@ def selfcheck_spread(cols, groups):
     return bad
 
 
-def check_groups(cols, broken, baseline, tol_override=None):
+def check_groups(cols, broken, baseline, tol_override=None, norm=None, pop=None):
     """Every pinned group against its recorded tolerance.  Returns (verdicts, n_red).
 
     Four ways a group goes RED, and only the first is a "disagreement" in the everyday
@@ -172,11 +189,27 @@ def check_groups(cols, broken, baseline, tol_override=None):
       COMPARABILITY      a pinned name is still produced but is None/NaN/inf at a
                          different number of posets than when the tolerance was measured,
                          so the agreement is now being asserted over a different set.
+
+    `norm` (a `libnorm.Declarations`) canonicalises before comparing and annotates the
+    DISAGREE message with the factor applied and with whether the two names DECLARE THE
+    SAME CONVENTION.  `norm=None` is the pre-mg-479c comparison, unchanged, and is what the
+    falsification arms W1-W8 still run against.  COMPARABILITY is measured on the RAW
+    columns deliberately: canonicalisation is a division by a nonzero rational and cannot
+    change which positions are finite, so measuring it downstream would only hide a
+    canonicaliser that did.
     """
+    raw_cols = cols
+    if norm is not None:
+        cols = NM.canonicalise(cols, norm, pop)
     verdicts, red = [], 0
     for g in baseline["groups"]:
         pinned = [tuple(m) for m in g["members"]]
-        tol = g["tolerance"] if tol_override is None else tol_override
+        if tol_override is not None:
+            tol, frame = tol_override, "override"
+        elif norm is not None:
+            tol, frame = NM.tolerance_for(norm, g)
+        else:
+            tol, frame = g["tolerance"], "raw"
         problems = []
 
         missing = [m for m in pinned if m not in cols]
@@ -189,7 +222,7 @@ def check_groups(cols, broken, baseline, tol_override=None):
         present = [m for m in pinned if m in cols]
         for m in present:
             want = g["comparable"]["%s:%s" % m]
-            got = sum(1 for v in cols[m] if finite(v))
+            got = sum(1 for v in raw_cols[m] if finite(v))
             if got != want:
                 problems.append(("COMPARABILITY", m,
                                  "comparable at %d posets, baseline recorded %d"
@@ -198,17 +231,82 @@ def check_groups(cols, broken, baseline, tol_override=None):
         sp, a, b, idx, va, vb = worst_pair(cols, present) if len(present) > 1 \
             else (0.0, None, None, None, None, None)
         if len(present) > 1 and sp > tol:
-            problems.append(("DISAGREE", (a, b),
-                             "spread %.6e > tolerance %.6e at poset #%d: "
-                             "%s:%s = %.17g   vs   %s:%s = %.17g"
-                             % (sp, tol, idx, a[0], a[1], va, b[0], b[1], vb)))
+            detail = ("spread %.6e > tolerance %.6e (%s frame) at poset #%d: "
+                      "%s:%s = %.17g   vs   %s:%s = %.17g"
+                      % (sp, tol, frame, idx, a[0], a[1], va, b[0], b[1], vb))
+            if norm is not None:
+                detail += "\n             " + _norm_verdict(norm, a, b, idx, pop, raw_cols)
+            problems.append(("DISAGREE", (a, b), detail))
 
         verdicts.append({"label": g["label"], "tolerance": tol, "spread": sp,
+                         "frame": frame,
                          "n_pinned": len(pinned), "n_present": len(present),
                          "problems": problems})
         if problems:
             red += 1
     return verdicts, red
+
+
+def _norm_verdict(norm, a, b, idx, pop, raw_cols):
+    """The half of the RED message that tells a normalisation from a disagreement.
+
+    A bare inequality leaves an operator unable to say whether they are looking at two
+    live conventions or at a real 2x error, and that ambiguity is what makes a genuine
+    error dismissable.  So the message states, for both names, the convention they DECLARE
+    and the factor that was APPLIED before the comparison — and then says in one line what
+    follows from the two declarations being the same or different.
+    """
+    n = pop[idx][0] if pop is not None and idx is not None else None
+    ca, cb = norm.convention_of(a), norm.convention_of(b)
+    lines = ["declared: %s:%s  %s" % (a[0], a[1], NM.describe(norm, a, n)),
+             "          %s:%s  %s" % (b[0], b[1], NM.describe(norm, b, n))]
+    if ca is not None and ca == cb:
+        lines.append("BOTH NAMES DECLARE THE SAME CONVENTION (%r), so this residue is NOT "
+                     "a normalisation difference." % ca)
+        lines.append("  It is a disagreement between two implementations of one quantity "
+                     "in one frame.  File a ticket.")
+        if _looks_like_a_ratio(raw_cols, a, b):
+            lines.append("  NOTE: the two columns are in a CONSTANT RATIO of %s across "
+                         "every comparable poset.  That is the shape of an undeclared "
+                         "normalisation — but the declarations above say there is none, "
+                         "so either a factor is missing from this file or one of the two "
+                         "trees is wrong by that factor.  The instrument cannot tell "
+                         "which and does not guess."
+                         % _looks_like_a_ratio(raw_cols, a, b))
+    else:
+        lines.append("THE NAMES DECLARE DIFFERENT CONVENTIONS (%r vs %r) and the factors "
+                     "above were APPLIED before this comparison." % (ca, cb))
+        lines.append("  So the spread is what is LEFT OVER after the declared "
+                     "normalisation, not the normalisation itself.")
+    return "\n             ".join(lines)
+
+
+def _looks_like_a_ratio(cols, a, b):
+    """The exact constant ratio between two raw columns, or None.
+
+    A diagnostic and NOT a verdict: it never changes red to green or green to red, and it
+    never proposes a factor to declare.  It exists because "these two columns differ by
+    exactly 2 everywhere and neither declares a factor" is the single most useful sentence
+    that can be printed next to a disagreement, and printing it is the difference between
+    an operator who can act and one who is looking at an inequality.
+    """
+    if a not in cols or b not in cols:
+        return None
+    from fractions import Fraction
+    r = None
+    seen = 0
+    for x, y in zip(cols[a], cols[b]):
+        if not (finite(x) and finite(y)) or y == 0:
+            continue
+        q = Fraction(x) / Fraction(y)
+        seen += 1
+        if r is None:
+            r = q
+        elif q != r:
+            return None
+    if r is None or seen < 2 or r == 1:
+        return None
+    return str(r)
 
 
 def report(verdicts, quiet=False):
@@ -297,16 +395,28 @@ class Scoreboard(object):
         self.rows = []
 
     def arm(self, name, expect_red, red, note=""):
-        if self.base_red and expect_red:
+        return self.arm_state(name, "RED" if expect_red else "GREEN",
+                              "RED" if red else "GREEN", note)
+
+    def arm_state(self, name, expect, got, note=""):
+        """Three-state, because mg-479c added a third outcome that is neither.
+
+        REFUSED (exit 2) is not RED (exit 1) and the difference is the whole of the
+        ticket's item 3: an undeclared normalisation must fail LOUDLY as "this instrument
+        cannot answer", not quietly as "these two numbers disagree".  An arm that scored
+        the two the same could not tell a working refusal from a working red, so the
+        expectation is a state and not a boolean.  `expect`/`got` are GREEN, RED, REFUSED.
+        """
+        if self.base_red and expect != "GREEN":
             out = "UNFALSIFIABLE"                    # already red before the mutation
-        elif expect_red and red:
-            out = "CAUGHT"
-        elif expect_red and not red:
-            out = "MISSED"
-        elif not expect_red and not red:
-            out = "REFUSED-CORRECTLY"                # a world that must NOT go red
-        else:
+        elif got == expect:
+            out = "CAUGHT" if expect != "GREEN" else "REFUSED-CORRECTLY"
+        elif expect == "GREEN":
             out = "FALSE-POSITIVE"
+        elif got == "GREEN":
+            out = "MISSED"
+        else:
+            out = "WRONG-REASON"                     # fired, but not as the state expected
         self.rows.append((name, out, note))
         return out
 
@@ -317,7 +427,7 @@ class Scoreboard(object):
             print("    %-17s %s" % (out, name))
             if note:
                 print("                      %s" % note)
-            if out in ("MISSED", "FALSE-POSITIVE", "UNFALSIFIABLE"):
+            if out in ("MISSED", "FALSE-POSITIVE", "UNFALSIFIABLE", "WRONG-REASON"):
                 bad += 1
         caught = sum(1 for _n, o, _t in self.rows if o == "CAUGHT")
         refused = sum(1 for _n, o, _t in self.rows if o == "REFUSED-CORRECTLY")
