@@ -8,3 +8,94 @@ mg-6ff4  c3  the realizability gap, measured rather than argued
     ... n = 6 swept
     ... n = 7 swept
     ... n = 8 swept
+    ... n = 9 swept
+
+m1  THE THREE NUMBERS, at each n.  MEASURED = exhaustive over every isomorphism class.
+----------------------------------------------------------------------------------------------------
+      n  n/(n+1) (sup)  max eps (poset)  min eps (poset)        eps_dem      max/dem
+      3            3/4              1/2              1/2           1/50        25.00
+      4            4/5             4/15             4/15           1/50        13.33
+      5            5/6              1/6              1/6           1/50         8.33
+      6            6/7             8/35             4/35           1/50        11.43
+      7            7/8              1/6             1/12           1/50         8.33
+      8            8/9             8/63             4/63           1/50         6.35
+      9           9/10             3/20             1/20           1/50         7.50
+
+    The supremum column is NOT a poset.  It is attained by the two-atom law, a measure
+    on 2 of n! orders (c0 T6).  The gap between the two left columns is the price of
+    dropping realizability, and it is the object this arm exists to put a number on.
+
+m2  THE REALIZABILITY GAP -- difference and ratio
+----------------------------------------------------------------------------------------------------
+      n  sup = n/(n+1) worst real poset gap (difference) ratio sup/real
+      3            3/4              1/2              1/4          1.500
+      4            4/5             4/15             8/15          3.000
+      5            5/6              1/6              2/3          5.000
+      6            6/7             8/35            22/35          3.750
+      7            7/8              1/6            17/24          5.250
+      8            8/9             8/63            16/21          7.000
+      9           9/10             3/20              3/4          6.000
+
+    UNDER THE CLOSED FORM (c1 m4, checked exhaustively to n = 9):
+      max_P eps = 4*floor(n/3)/(n^2-1),  so the ratio is  ~ 3(n-1)/4  and GROWS
+      LINEARLY, while the difference merely saturates at 1.  THE RATIO IS THE HONEST
+      UNIT: realizability does not buy a constant, it buys a FACTOR THAT GROWS WITH n.
+      n  closed-form max         3(n-1)/4 measured ratio
+      3              1/2              3/2          1.500
+      4             4/15              9/4          3.000
+      5              1/6                3          5.000
+      6             8/35             15/4          3.750
+      7              1/6              9/2          5.250
+      8             8/63             21/4          7.000
+      9             3/20                6          6.000
+
+m3  THE mg-6bc2 IDENTITY  eps_spec = 3*d*qbar*n/(n+1), and which lever carries the fall
+----------------------------------------------------------------------------------------------------
+    identity checked at all 49 boundary posets · mismatches 0   [PASS]
+
+      n      qbar (min..max)   d (min..max)       3*d*qbar
+      3                  1/3            2/3            2/3
+      4                  1/3            1/3            1/3
+      5                  1/3            1/5            1/5
+      6                  1/3   2/15 .. 4/15   2/15 .. 4/15
+      7                  1/3   2/21 .. 4/21   2/21 .. 4/21
+      8                  1/3    1/14 .. 1/7    1/14 .. 1/7
+      9                  1/3    1/18 .. 1/6    1/18 .. 1/6
+
+    qbar over the WHOLE boundary class: [Fraction(1, 3)]
+    ⚠️  qbar is PINNED AT 1/3 -- the cap -- at every boundary poset, exactly as
+    mg-6bc2 §3.1 reports at its optimisers.  So the ENTIRE fall in eps lives in the
+    DENSITY d, which is 2k/C(n,2) = Theta(1/n) at the maximiser and Theta(1/n^2) at the
+    minimiser.  The operative lever is residual (R), the NUMBER of incomparable pairs,
+    and this is that statement measured on real posets rather than on an LP optimum.
+
+m4  THE CROSSING WITH eps_dem -- EXTRAPOLATION, NOT MEASUREMENT
+----------------------------------------------------------------------------------------------------
+    Measured range stops at n = 9.  Everything in this block is the closed form
+    CONTINUED, and it is worth exactly what the closed form's survival is worth.
+      n 4*floor(n/3)/(n^2-1)     vs eps_dem
+      9               3/20          above
+     12             16/143          above
+     15               5/56          above
+     20              8/133          above
+     30             40/899          above
+     45             15/506          above
+     60            80/3599          above
+     66            88/4355          above
+     69            23/1190          BELOW
+     90           120/8099          BELOW
+    120          160/14399          BELOW
+
+    First n at which the boundary MAXIMUM falls to or below eps_dem = 1/50: n = 65
+    LAST n at which it is still ABOVE eps_dem:                             n = 66
+    ⚠️  THOSE ARE DIFFERENT NUMBERS AND THE SECOND IS THE ONE THAT MEANS ANYTHING.
+    The maximum SAWTOOTHS -- it jumps up at every n divisible by 3, when one more copy
+    of V becomes affordable -- so `first n below` is not a crossing at all: it drops
+    below at n = 65 and comes back ABOVE at n = [66].  It is below eps_dem FOR GOOD only
+    from n = 67 onward.  A monotone reading of this sequence is WRONG, and reporting
+    only the first crossing would have published that wrong reading.
+    ⚠️  EXTRAPOLATION.  It assumes no new primitive poset with delta <= 1/3 exists at any
+    n, which is exactly what c1 and c2 could not check above their ranges.  Quoted as a
+    measurement it would be the 0/132 error in a new index.
+
+VERDICT: GREEN

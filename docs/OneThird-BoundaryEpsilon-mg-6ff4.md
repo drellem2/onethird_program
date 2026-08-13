@@ -17,14 +17,15 @@ number is compared.
 > `V = (a < b, c free)`, and **exactly one of the 49 is primitive: the `V` itself, at `n = 3`.**
 >
 > **THE TREND FALLS, AND IT FALLS AT THE RATE THE WHOLE QUESTION TURNS ON.** `max_P ε_obs =
-> 4⌊n/3⌋/(n²−1) ~ 4/(3n)` — `1/2` at `n = 3` down to `3/20` at `n = 9`. It is **not** monotone: it
+> 4⌊n/3⌋/(n²−1) ~ 4/(3n)` — `1/2` at `n = 3` down to `3/20` at `n = 9`, and to `16/143 ≈ 0.112` at
+> `n = 12` under a width-`≤2` restriction. It is **not** monotone: it
 > sawtooths upward at every `n` divisible by 3 (`1/6` at `n = 5` up to `8/35` at `n = 6`), and any
 > reading of it as a clean decreasing sequence is wrong. The **envelope** falls like `1/n`.
 >
 > **THE REALIZABILITY GAP, MEASURED.** The pair-marginal supremum `n/(n+1)` is attained by the
 > two-atom law, which is not a poset. The worst actual poset at the boundary sits a factor of
-> **exactly `3(n−1)/4`** below it — `1.5×` at `n = 3`, **`6×` at `n = 9`**, and growing **linearly
-> in `n` without bound**. ⚠️ **The honest unit is the RATIO, not the difference.** The difference
+> **at least `3(n−1)/4`** below it — exactly that when `3 | n`, larger otherwise: `1.5×` at
+> `n = 3`, **`6×` at `n = 9`**, and growing **linearly in `n` without bound**. ⚠️ **The honest unit is the RATIO, not the difference.** The difference
 > `n/(n+1) − max_P ε_obs` merely saturates at `1` and makes realizability look like it buys a
 > constant. It buys a factor that grows.
 >
@@ -138,7 +139,8 @@ travels with them.**
 
 ## §4. The distribution and the trend
 
-`c1` `m3`. Exhaustive; exact rationals.
+`c1` `m3`. **Exhaustive over every isomorphism class, `n = 3…9`**; exact rationals; the population
+of each row is the whole boundary class at that `n` and nothing is sampled.
 
 | `n` | count | min `ε` | median `ε` | max `ε` | max (dec) | max/`ε_dem` |
 |---|---|---|---|---|---|---|
@@ -177,6 +179,28 @@ falls because it is populated by ordinal sums, and a minimal counterexample is *
 population driving the trend is disjoint from the population the conjecture is about, save for one
 3-element poset.
 
+### §4.1 Reach beyond `n = 9`, and what it is bought with
+
+`c2`. Past the exhaustive range the population is **restricted by width**, and the restriction is
+named at every row. The prune is sound and complete for its class: width is monotone under induced
+subposets, so deleting a maximal element cannot raise it and the generator reaches every poset of
+that width.
+
+| population | reach | classes swept at the top `n` | boundary posets | new primitives with `δ ≤ 1/3` | `ε = 4k/(n²−1)` |
+|---|---|---|---|---|---|
+| **every isomorphism class** (`c1`) | `n ≤ 9` | 183 230 | 49 | **0** | holds at all 49 |
+| width `≤ 3`, exhaustive (`c2` `m1`) | `n ≤ 10` | 397 221 | 76 | **0** | holds at all 76 |
+| width `≤ 2`, exhaustive (`c2` `m2`) | `n ≤ 12` | 91 140 | 175 | **0** | holds at all 175 |
+
+The class counts continue to match `Σ_{k≥1} C(n−2k, k)` exactly at every `n` reached: **27, 40, 59**
+at `n = 10, 11, 12`. The maxima are `4/33`, `1/10`, `16/143` — `k = ⌊n/3⌋` is `3, 3, 4`, so `n = 11`
+is the sawtooth's flat stretch and `n = 12` is its next jump. **The frozen count is `0` in every
+restricted population too**, for the reason it is `0` everywhere.
+
+⚠️ **A width-`≤3` sweep that finds nothing is silent about width `≥ 4`.** That is `mg-c47a`'s
+width-`≥4`, `n ≥ 10` residual, **DROPPED** on tractability grounds (`STATE.md` attempt index), and
+this arm inherits the gap unchanged rather than reopening it.
+
 ---
 
 ## §5. The realizability gap, measured rather than argued
@@ -187,6 +211,9 @@ population driving the trend is disjoint from the population the conjecture is a
 two-atom law `μ = (2/3)δ_e + (1/3)δ_{rev e}`, a measure on **2 of `n!`** orders. `c0` T6 rebuilds it
 explicitly and confirms the value at `n = 3…9`, so the gap below is a gap against an object that
 **exists** and is simply not a poset's `L(P)`.
+
+**Population: every isomorphism class, `n = 3…9`, exhaustive.** The right-hand column is the one
+that scales.
 
 | `n` | sup `= n/(n+1)` | worst real poset at the boundary | difference | **ratio** |
 |---|---|---|---|---|
