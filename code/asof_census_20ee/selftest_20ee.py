@@ -59,7 +59,18 @@ RAN = []
 # for four tranches -- and the control was moved ONTO THE RULE rather than
 # dropped, because a control that goes red when somebody closes its instance
 # invites the next tranche to `repair` it by re-opening the trap.
-KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28")
+# N29 AND N30 JOIN AT mg-0bf1 AND NOTHING LEAVES, so this tuple GROWS AGAIN --
+# and N28 STAYS, which is the load-bearing part.  mg-0bf1 gives the question a
+# mechanical answer that reads no English (a sentence accounting for a pin is
+# YOUNGER than the pin), but it does that in a NEW rule in a NEW file:
+# worklist.py's `named in this record` is still a substring count, so N28 is
+# still true of the field it is asserted on.  What the date buys is an
+# IMPOSSIBILITY -- an older sentence CANNOT be an accounting -- and N29 is
+# where the limit went rather than where it died: a YOUNGER sentence MIGHT be
+# an accounting and need not be, so N28's remedy (THE INSTRUMENT PRINTS THE
+# SENTENCE) survives unchanged.  N30 is the complement: an instrument no record
+# names at all has no last word and is invisible to the rule at every revision.
+KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30")
 
 
 def check(name, got, want, why):
@@ -862,6 +873,125 @@ check("N28 `the record knows` cannot tell ACCOUNTING from OFFERING — A LIMIT",
       "WOULD MEAN: somebody taught the rule to read what a sentence SAYS, "
       "which is a rule about English — that is why this is a LIMIT and not a "
       "bug, and why the instrument PRINTS the sentence instead.")
+
+print()
+print("CONTROLS ON exemplars.py — HAS THE RECORD NAMED IT SINCE (mg-0bf1)")
+print("-" * 78)
+print()
+print("  N28 says `named in this record` cannot tell a sentence ACCOUNTING for")
+print("  a pin from one OFFERING the same instrument as remaining work, and it")
+print("  says closing that would take a rule about ENGLISH.  IT TAKES A DATE:")
+print("  a sentence accounting for a pin is younger than the pin.  These five")
+print("  are the ways that rule could be worth nothing -- it could read its")
+print("  subject off disk (P29), it could report a zero it is incapable of")
+print("  ever moving off (P30), its name matcher could fire inside words")
+print("  (P31), and it moves N28's limit rather than removing it (N29, N30).")
+print()
+
+import exemplars  # noqa: E402
+
+# ONE SCAN, SHARED, for P26's reason one file along.
+_EX_OPENED = []
+
+
+def _watched_open_ex(file, *a, **kw):
+    try:
+        p = os.path.abspath(file if isinstance(file, str) else str(file))
+    except Exception:                                   # a file descriptor
+        p = ""
+    if p.startswith(ROOT + os.sep):
+        _EX_OPENED.append(os.path.relpath(p, ROOT))
+    return _real_open(file, *a, **kw)
+
+
+try:
+    builtins.open = _watched_open_ex
+    _EX = exemplars.scan()
+finally:
+    builtins.open = _real_open
+
+check("P29 exemplars reads its subject AT A COMMIT, never off disk",
+      (_EX_OPENED, len(_EX["records"]) > 500, len(_EX["pairs"])),
+      ([], True, 352),
+      "THE SAME DEFECT P26 IS FOR, AND A WIDER SUBJECT: this file reads EVERY "
+      "markdown record in the tree, not one transcript, so a single `open` "
+      "would make its whole census a statement about somebody's dirty "
+      "worktree. RUN rather than promised — `open` is replaced for the entire "
+      "scan and every path under the repository root is recorded. The record "
+      "count and the pair count sit beside it so a scan that read nothing "
+      "because it did nothing cannot pass, which is the failure mode an "
+      "empty list would otherwise reward.")
+
+_REC = "code/asof_census_20ee/README.md"
+_BEFORE = exemplars.pair_verdict(_REC, "species_remainder_f8fa",
+                                 exemplars.AS_OF + "^")
+_AFTER = exemplars.pair_verdict(_REC, "species_remainder_f8fa")
+check("P30 the rule FIRES at AS_OF^ on the instance closed at AS_OF",
+      (_BEFORE["mentions"], _BEFORE["overtaken"],
+       [h[:7] for h in _BEFORE["after"]],
+       _AFTER["overtaken"], _AFTER["mentions"] > _BEFORE["mentions"]),
+      (1, True, ["e29ba2a"], False, True),
+      "THE WRONG-DIRECTION CONTROL, AND IT IS WHAT MAKES THIS FILE'S ZERO "
+      "FALSIFIABLE. The instance the rule was built from was CLOSED IN THE "
+      "COMMIT BEFORE AS_OF — mg-e8b0 annotated tranche 1's sentence — so at "
+      "AS_OF the rule correctly reports this record as accounted for, and a "
+      "rule that reports nothing is indistinguishable from a rule that SEES "
+      "nothing. So the SAME rule is asked the SAME pair one commit earlier, "
+      "where the only sentence naming the instrument was tranche 1's offer, "
+      "four tranches older than e29ba2a — this arc's own tranche 2 — and it "
+      "must FIRE, naming that commit. Both halves are asserted: turning "
+      "either one green alone means the rule stopped depending on the record "
+      "or stopped depending on the repository.")
+
+_loose_names = sorted(set(b for _, _, b, _ in _EX["loose_only"]))
+_tok_prerepair = [k for k in _EX["pairs"] if k[1] == "prerepair"]
+check("P31 a directory name is a WHOLE TOKEN — both directions, on real data",
+      (len(_EX["loose_only"]), _loose_names, len(_tok_prerepair)),
+      (52, ["prerepair"], 1),
+      "mg-23af's rule arriving in a new file and on a new subject: the loose "
+      "spelling of `does this record name that instrument` matches inside "
+      "words, and it costs 52 lines. ONE WORK-LIST ROW IS A SUBDIRECTORY "
+      "WHOSE BASENAME IS AN ORDINARY ENGLISH WORD — code/mirror_staleness_"
+      "cdd5/prerepair — and it matches inside every `k1_prerepair.py` in the "
+      "estate, which is where all 52 come from. THE SECOND DIRECTION IS THE "
+      "ONE THAT KEEPS THE GUARD HONEST and it is real data rather than a "
+      "plant: the guard must not silence the row itself, and the path "
+      "spelling `mirror_staleness_cdd5/prerepair/out_s0_state.txt` in this "
+      "directory's own README still fires because `/` is not a word "
+      "character. A guard measured only where it removes things is a guard "
+      "nobody has checked for over-reach.")
+
+_3b51 = exemplars.pair_verdict(_REC, "landscape_repair_audit_3b51")
+check("N29 a YOUNGER mention closes the pair whatever it says — A LIMIT",
+      (_3b51["overtaken"], _3b51["newest"][:7],
+       "go silent" in _3b51["text"], "pin" in _3b51["text"]),
+      (False, "93ead80", True, False),
+      "A DECLARED LIMIT, ASSERTED ON THE RULE, AND IT IS WHERE N28 ACTUALLY "
+      "WENT RATHER THAN WHERE IT DIED. The date orders ACCOUNTING and "
+      "OFFERING because a sentence accounting for a pin is NECESSARILY "
+      "younger than it — that is an impossibility, which is the only thing a "
+      "rule can have. IT DOES NOT IDENTIFY ACCOUNTING: a younger sentence "
+      "MIGHT be one, and this one is not. The newest mention of "
+      "landscape_repair_audit_3b51 in this record is tranche 6's sentence "
+      "about TWO DIRECTORIES GOING SILENT in a grep census, which says "
+      "nothing whatever about the pin tranche 4 landed on it, and it closes "
+      "the pair anyway. So the remedy N28 named survives unchanged: THE "
+      "INSTRUMENT PRINTS THE SENTENCE. What turning this green would mean is "
+      "what turning N28 green would have meant — somebody taught a rule to "
+      "read English — and the honest statement of this tranche is that the "
+      "date moved the limit one step and did not remove it.")
+
+check("N30 zero mentions is zero pairs — the population it cannot see",
+      (len(_EX["unnamed"]), _EX["unnamed"]),
+      (1, ["code/summary_guard_audit_407f"]),
+      "THE BLIND SPOT IS THE COMPLEMENT OF THE RULE AND IS COUNTED RATHER "
+      "THAN CONCEDED. This rule reads a record's LAST WORD about an "
+      "instrument; a record that has never had a word about it has no last "
+      "one, so an instrument no document in the estate names is invisible "
+      "here at every revision. It is the one figure in out_exemplars.txt that "
+      "GROWS WHEN THE CORPUS GETS WORSE, which is why it is pinned: a "
+      "successor that widens the record population must move this number or "
+      "explain why not.")
 
 print()
 

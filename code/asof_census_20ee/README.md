@@ -1236,3 +1236,153 @@ the trap is closed for the next reader. `N28` therefore asserts **the rule** and
 substring count, and the two strings it plants are the real ones. Had the control stayed on the
 sentence, closing the trap would have turned it **red**, and a later tranche could have "repaired"
 the control by re-opening the trap. It joins `KNOWN_DEFECT`, which grows `5 → 6`.
+
+---
+
+# Tranche 10 (`mg-0bf1`) — a mention is not a **date**, and `N28`'s account of its own remedy was wrong
+
+`mg-e8b0` found the defect and declared the limit. `N28`:
+
+> `named in this record` is a **substring count**, so a sentence *accounting* for a pin and a
+> sentence *offering the same instrument as remaining work* score **identically**. […] What turning
+> this green would mean: somebody taught the rule to read what a sentence **says**, which is a rule
+> about English — that is why this is a **limit** and not a bug.
+
+**The first half is true and the second half is wrong, and the correction is this tranche.** The
+difference between accounting and offering is not in the English. It is in the **date**:
+
+> A sentence **accounting** for a pin is **necessarily younger** than the pin.
+> A sentence **offering** the instrument is **older**.
+
+The field that separates them was in the repository the whole time, and the rule was throwing it
+away. `git blame` at a declared commit puts it back. The instrument is `exemplars.py`, it ships in
+`run_all.sh`, and its transcript reproduces byte-identically for `worklist.py`'s reason: every figure
+is a function of **one commit** — including **this file**, which is one of its subjects, so editing
+the README cannot move `out_exemplars.txt`.
+
+## 1. Per **(record, name)**, not per line — and the first draft was per line
+
+Per line the rule is useless, and measuring it is what said so: **290 mention lines** are older than
+a pin on the instrument they name, against **140 (record, name) pairs**. The 150 that drop out are
+one fact about this estate:
+
+> **A correction here is a younger sentence, not an edit to an older one.**
+
+Tranche 3 headed a section *"the next candidate, diagnosed but **not** pinned — `landscape_repair_audit_3b51`"*.
+Tranche 4 landed that pin. Tranche 3's section still says it and always will. Per line it reads as a
+live defect; it is not one, because **the answer is the next section**. So the rule takes a record's
+**newest** mention of an instrument — its *last word* — and asks whether a pin landed after **that**.
+
+The two halves compose rather than compete: the substring count says whether the record names it, the
+blame date says **whether it has named it since**.
+
+## 2. What it measures, and the one direction it can answer in
+
+At `AS_OF = 0cb0fa4`, over **44** work-list rows and **572** markdown records:
+
+| | |
+|---|---|
+| `(record, name)` pairs | **352** |
+| **OVERTAKEN** — a pin landed after the record's last word | **140** |
+| … in the named instrument's **own** record | 22 |
+| … in a **foreign** record — the verdict | **118** |
+
+**`OVERTAKEN` is one-directional**, which is `worklist.py`'s `FALSIFIED` / `NOT FALSIFIED` discipline
+one field along. It proves the record's last word is *older than a pin on its subject*. It does not
+prove the sentence is wrong — a pin is not a repair. And **`NOT OVERTAKEN` proves nothing at all**:
+the named instrument may have gone stale with no pin landing on it, which is the defect class this
+whole arc exists for.
+
+*Self* and *foreign* are kept apart because they are not the same claim. A directory's own README
+pre-dating a pin on that directory is ordinary. A **foreign** record is a reader somewhere else in
+the estate whose last word about this instrument is older than a change to it — `mg-e8b0`'s shape.
+
+## 3. The ticket's claim is **too wide**, and the commits column is what says so
+
+`mg-0bf1` carries one transferable claim: *wherever a remaining-count and a named exemplar are
+published together, the count will stay right and the name will rot.* Read *"together"* as **the same
+markdown section** — document structure, not prose, so this half does not smuggle back in the rule
+about English §1 avoids. **Both dates are measured, not one**: a file measuring the name's age while
+*asserting* the count's would be the defect this arc reports.
+
+**11 of 352** pairs are published beside a count at all. Of those: **2** have the younger count, **2**
+the younger name, and **7 have both fields written in one commit and never touched again**.
+
+> The count in those records did not stay right by being **maintained**. It stayed right because
+> **nothing in the record is maintained**, and a name beside it would rot exactly as fast.
+
+The narrowed claim the corpus does support — and the commits column is where a reader sees which
+records are which, the extremes being **14** commits and **1**:
+
+> **In a record that is *appended to*, the summary line is restated every tranche and the offer list
+> is not.**
+
+That is a property of a **running log**, not of counts and names. This directory's own README is the
+log: in `## What remains`, the offer list is `f26d5be` (tranche 1) and the count beside it is
+`0cb0fa4` (tranche 9) — **eight tranches apart, in one section**.
+
+## 4. The zero is **falsifiable**, which is the only reason it is worth printing
+
+The instance this rule was built from **was closed in the commit before `AS_OF`** — tranche 9
+annotated tranche 1's sentence — so at `AS_OF` the rule correctly reports this record as accounted
+for. **A rule that reports nothing is indistinguishable from a rule that sees nothing.** So the same
+rule is asked the same pair one commit earlier, and `P30` requires it to fire:
+
+| revision | mentions | newest | verdict |
+|---|---|---|---|
+| `0cb0fa4^` | 1 | `f26d5be` (tranche 1) | **OVERTAKEN by `e29ba2a`** |
+| `0cb0fa4` | 7 | `0cb0fa4` (tranche 9) | NOT OVERTAKEN |
+
+**The rule moved because the record did.** Both halves are asserted: turning either one green alone
+means the rule stopped depending on the record, or stopped depending on the repository.
+
+## 5. What this tranche leaves — reported at the low water mark
+
+**`N28` stays in `KNOWN_DEFECT`, and `N29` says where its limit actually went.** This tranche does
+*not* turn `N28` green: `worklist.py`'s `named` field is still a substring count, and the date lives
+in a **new rule in a new file**. What the date buys is an **impossibility** — an older sentence
+*cannot* be an accounting — which is the only thing a rule can have. It does **not** identify
+accounting: a younger sentence *might* be one and need not be.
+
+> `N29`'s instance is real and it is in this record. The newest mention of
+> `landscape_repair_audit_3b51` here is tranche 6's sentence about **two directories going silent in
+> a grep census** — which says nothing whatever about the pin tranche 4 landed on it, and closes the
+> pair anyway. So `N28`'s remedy survives unchanged: **the instrument prints the sentence.**
+
+- **`N30` — zero mentions is zero pairs.** One work-list row, `code/summary_guard_audit_407f`, is
+  named by **no** record in the tree, and this rule is blind to it at every revision by construction.
+  It is the one figure in `out_exemplars.txt` that **grows when the corpus gets worse**.
+- **Blame is the last touch, not the origin.** A reflow re-dates a sentence it did not change, so
+  **140 is a low water mark**. Declared rather than left to be discovered.
+- **`P31` — a directory name is a whole token**, which is `mg-23af`'s rule arriving in a new file on
+  a new subject, and it costs **52 lines**. One work-list row is a *subdirectory* whose basename is
+  an ordinary English word — `code/mirror_staleness_cdd5/prerepair` — and the loose spelling matches
+  inside every `k1_prerepair.py` in the estate. **Both directions are real data rather than a
+  plant:** the path spelling in this README still fires, because `/` is not a word character.
+- **The order index assumes a linear history**, and there are **0** merge commits at `AS_OF` because
+  the refinery rebases. Counted rather than assumed — the day that changes, the count says so.
+- **`docs/FACTS.md` and `docs/CONCEPTS.md` get no entry**, for `mg-3da1`'s reason a fourth time:
+  every measurement here is consumed by this landing, which fails the registry's own homelessness
+  test. `STATE.md` is untouched, so the ratchet is untouched and no twin re-pin is owed.
+
+### It bit again: `out_consumers.txt` moves `200` → `202`, and **tranche 9's own transcript was stale at its own commit**
+
+Neither `+1` is this branch's, checked rather than assumed: `code/lstar_code_9d9e/run_all.sh` at
+`3561300` and `code/lever_test_5987/run_all.sh` at `de9709c`, both main's, both landed **while
+tranche 9's branch was open**. The tree at `0cb0fa4` holds **202** files named `run_all.sh` and the
+transcript committed there says **200**.
+
+That is the third time in four tranches — `mg-e5f3`'s and `mg-44da`'s transcripts went stale the same
+way, and `mg-23af`'s did not. The diagnosis has not changed and does not need re-deriving:
+`consumers.py` reads the **live index** by design, so its figure is a function of *when you ran it*
+and not of the commit you attach it to, and every rebase re-opens the hole.
+
+**Reported and not repaired, and this is the second tranche to decline it** — which is worth saying
+plainly, because a sentence that three tranches have written and none has acted on is *this arc's own
+subject arriving in its own record*. The reason is unchanged and is a scope reason rather than a
+difficulty one: giving `consumers.py` an `AS_OF` changes what its published figure **means** (live
+tree → declared commit) and would move a number this branch is not measuring, in the same commit as
+a claim about something else. **This branch's own `202` carries exactly the same property**, and
+will be wrong the moment a `run_all.sh` lands on main before it merges. `out_exemplars.txt` cannot
+go stale that way and `out_consumers.txt` can, in one directory, which is the whole difference an
+`AS_OF` makes.
