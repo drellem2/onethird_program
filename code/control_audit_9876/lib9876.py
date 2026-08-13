@@ -511,6 +511,23 @@ def _copy_tree(tmp):
                     ignore=shutil.ignore_patterns("__pycache__"))
     shutil.copy2(STATE, os.path.join(tmp, "STATE.md"))
     shutil.copy2(TWIN, os.path.join(tmp, "docs", "state-of-the-wall.html"))
+    # AN INHERITED `IN-FLIGHT.json` IS DROPPED, AND THE SANDBOX WOULD BE INCOHERENT WITH IT
+    # (mg-bdb0).  `run_control` already refuses to let section 8 fall back to the REAL
+    # declaration — mg-1344's own note, `a sandbox that reads one file out of the tree it is
+    # isolating` — but the copytree above brings that same file INTO the sandbox, where the
+    # default path finds it anyway.  Worse than a leak: `_template()` then commits the whole
+    # tree onto a branch called `main`, so the sandbox's `main` carries exactly the STATE.md
+    # the declaration defers a re-pin for, and section 8 grades it `THE DEFERRAL HAS EXPIRED`
+    # BY CONSTRUCTION.  Every probe that reads a baseline verdict out of this sandbox was then
+    # reading a world in which landing B is not merely possible but overdue.  Measured, not
+    # reasoned about: with a real declaration on the working tree, N11, N13 and N19 all went
+    # UNFALSIFIABLE on their own good side, which is three arms of the auditor destroyed by
+    # the subject being MID-PROTOCOL — the fourth time in this lineage a fixture has borrowed
+    # the subject's own state, and the second time it has been the subject being fine rather
+    # than broken.  Probes that need a declaration plant their own; C8a-C8e all do.
+    inherited = os.path.join(tmp, "code", TARGET_DIRNAME, "IN-FLIGHT.json")
+    if os.path.exists(inherited):
+        os.remove(inherited)
     return tmp
 
 

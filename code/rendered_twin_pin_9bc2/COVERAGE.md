@@ -449,3 +449,66 @@ Three, in fact, and none of them by reading:
   derives its anchor by position. That is the *fifth* recorded instance in this arc of a
   fixture spelling out the thing that changes, this time in the file whose job is proving the
   auditor can fail.
+
+## Section 8 is USED for the first time, and the first use found five things (mg-bdb0)
+
+`mg-1344` shipped the protocol and deliberately did not exercise it; **`mg-bdb0` is landing A
+of the first real relocation** — ledger rows `3b`, `6`, `8` and `11`, the last unlanded line of
+`docs/STATE-SPLIT-PROPOSAL-mg-14ad.md` §4. Every one of the five below was found **by running
+it**, and none of them is a defect in section 8 itself: they are the estate around section 8
+assuming a world in which `IN-FLIGHT.json` does not exist — the assumption that was true on
+every run until this one, and that nothing could have falsified until a declaration was real.
+
+**This is the enumeration this file's own header asks for**: *a repair is an artifact of the
+same kind as the defect, so it is subject to that defect.* Section 8's remedy exhibits it
+squarely — a mechanism whose worlds are all planted cannot tell you what it does to a tree it
+is actually in.
+
+- **The negative control's sandbox did not carry the tree's own declaration, while its
+  expectation did.** `inflight_text = fn("") if target == "inflight" else ""` built every
+  sandbox WITHOUT `IN-FLIGHT.json`, and `expected_drift` subtracted the declared rows read from
+  the LIVE one. Two different worlds scored against each other. With no declaration in the
+  repository they agreed trivially and nothing said so; the moment one existed the **positive
+  control** reported `worklist is ['3b', '6', '8', '11'], expected exactly (none)`, the runner
+  exited 2 before printing its worklist line, and `mg-724a`'s gate answered **REFUSED**. Every
+  arm's sandbox now mirrors the tree.
+- **Fixing that alone would have made the positive control satisfiable by an instrument that
+  had stopped reporting the moved rows at all.** In the in-flight world section 2 subtracts the
+  declared rows, so the worklist line is absent and `want_rows` is empty — and a scorer that
+  checked only that is `mg-2f44`'s `"8 9" in out` arriving by the one route section 8 opened.
+  `score_baseline` now checks **both** of section 2's lines, against a declared set derived
+  from the pin and the declaration rather than typed, and refuses any exit code but 0 for a
+  wholly declared relocation.
+- **The planted landing-A world inherited the subject's pin, so it was a clean world only
+  while the subject was clean.** `build_protocol_repo` re-derived the whole-file `state-sha256`
+  from `base_state` and did **not** re-derive the twelve per-row digests. Once four of the
+  subject's rows differed from the committed pin, the "throwaway repository" contained five
+  drifted rows with one declared, `This is the WORKLIST` appeared, and **the one world in that
+  file that must pass** scored `HOLE`. The fixture now builds its own row digests and asserts
+  the count.
+- **The three planted worlds' expect strings stopped discriminating the moment this
+  repository went in flight.** `HONOURED — REPORTED, NOT GRADED` is in the real tree's own
+  report during landing A, so `mg-9876`'s guard correctly scored world A `UNFALSIFIABLE` — the
+  guard working, on an arm with nothing wrong with it. Each world now requires its own
+  `declared in-flight rows: 1` as well, the guard fires only if the **whole conjunction** is
+  already true of the unmutated report, and `a2`'s `N27`-`N29` hand the bad side the whole
+  conjunction. Three arms had gone `LAUNDERED` in between; that is the fix being checked by the
+  thing it changed.
+- **`make_sandbox()` copied `IN-FLIGHT.json` into a sandbox it then commits to `main`.**
+  `run_control` already refuses to let section 8 fall back to the REAL declaration —
+  mg-1344's own *"a sandbox that reads one file out of the tree it is isolating"* — but the
+  copytree brought the same file INTO the sandbox where the default path found it anyway, and
+  `_template()` commits the whole tree onto `main`. So the sandbox's `main` carried exactly the
+  `STATE.md` the declaration defers a re-pin for, and section 8 graded it **`THE DEFERRAL HAS
+  EXPIRED` by construction**. `N11`, `N13` and `N19` all went `UNFALSIFIABLE` on their own good
+  side: three arms of the auditor destroyed by the subject being **mid-protocol** — the fourth
+  time in this lineage a fixture has borrowed the subject's own state, and the second time it
+  was the subject being *fine* rather than broken. The sandbox drops any inherited declaration;
+  probes that need one plant their own.
+
+**What is still NOT covered, and item 4b is now a live cost rather than a hypothetical.**
+Landing A reconciled the twin's four cells and **nothing checked it** — the diff is the whole
+of the evidence, exactly as item 4b says. What was offered in its place: `IN-FLIGHT.json` names
+the rows, so a reviewer knows which four cells to read, and `docs/STATE-SPLIT-PROPOSAL-mg-14ad.md`
+§8.3b tabulates what left each row and under which clause. That is a better pointer than item 4b
+had, and it is still a social defence.

@@ -4,9 +4,9 @@ mg-724a — MERGE GATE over the two control suites mg-9876 audited
 
 §1  THE SUITES, RUN — and what each one costs on the merge critical path
 --------------------------------------------------------------------------------------------
-  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   11.7s  11674 bytes
-  audit  code/control_audit_9876/run_all.sh         exit 0   114.3s  52441 bytes
-         (both suites)                                   126.0s total
+  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   15.5s  13325 bytes
+  audit  code/control_audit_9876/run_all.sh         exit 0   123.8s  52431 bytes
+         (both suites)                                   139.3s total
 
 §2  OBSERVED vs BASELINE.json
 --------------------------------------------------------------------------------------------
@@ -24,17 +24,17 @@ audit.selftest_total               gated     MATCH                       baselin
 audit.sites                        gated     MATCH                       baseline=86  observed=86
 audit.sweep_dirs_without_evidence  recorded  MOVED (recorded, not gated)  baseline=25  observed=27
 audit.sweep_grade                  gated     MATCH                       baseline="OK"  observed="OK"
-audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseline=207  observed=222
+audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseline=207  observed=220
 audit.sweep_tee_sites              recorded  MOVED (recorded, not gated)  baseline=19  observed=30
 twin.control_exit                  gated     MATCH                       baseline=0  observed=0
 twin.holes                         gated     MATCH                       baseline=0  observed=0
-twin.inflight                      gated     MATCH                       baseline=[]  observed=[]
+twin.inflight                      gated     MATCH                       baseline=["11", "3b", "6", "8"]  observed=["11", "3b", "6", "8"]
 twin.mutations_caught              gated     MATCH                       baseline=26  observed=26
 twin.mutations_total               gated     MATCH                       baseline=26  observed=26
 twin.negative_exit                 gated     MATCH                       baseline=0  observed=0
 twin.runner_exit                   gated     MATCH                       baseline=0  observed=0
 twin.unfalsifiable_rows            gated     MATCH                       baseline=0  observed=0
-twin.verdict_grade                 gated     MATCH                       baseline="CLEAN"  observed="CLEAN"
+twin.verdict_grade                 gated     MATCH                       baseline="IN FLIGHT"  observed="IN FLIGHT"
 twin.worklist                      gated     MATCH                       baseline=[]  observed=[]
 
   Why each field that moved is declared the way it is:
@@ -98,7 +98,7 @@ twin.worklist                      gated     MATCH                       baselin
   E1   the twin runner's own exit status changes                                           CAUGHT                      twin.runner_exit reads DIVERGED and is gated
   E2   the audit runner's own exit status changes                                          CAUGHT                      audit.runner_exit reads DIVERGED and is gated
 
-  16 of 16 probes CAUGHT; 0 hole(s)/setup failure(s); 0 unexplained UNFALSIFIABLE.  0.10s.
+  16 of 16 probes CAUGHT; 0 hole(s)/setup failure(s); 0 unexplained UNFALSIFIABLE.  0.23s.
 
 §5  CAN THIS GATE REFUSE?  Self-contained worlds, nothing borrowed from the estate
 --------------------------------------------------------------------------------------------
@@ -116,5 +116,5 @@ twin.worklist                      gated     MATCH                       baselin
 ============================================================================================
 GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
 shown able to fail on 16 probes and to refuse in 8 worlds, on this run, against
-these bytes.  Total 126.1s.
+these bytes.  Total 139.6s.
 ============================================================================================

@@ -828,28 +828,42 @@ def _world_probe(builder, index, expect):
         # for, so its own guard must refuse to score CAUGHT.  The string is imported from
         # negative_control rather than repeated here: a second copy would agree today and
         # rot the moment either side is reworded, leaving a probe looking for nothing.
-        bad = lambda: run(expect)                                          # noqa: E731
+        # THE WHOLE CONJUNCTION, JOINED (mg-bdb0).  `expect` is a tuple since section 8's
+        # worlds had to become identifiable as being about a THROWAWAY repository rather
+        # than about whatever state this one is in; handing the bad side one member of it
+        # leaves the guard correctly unfired and this arm silently non-discriminating.
+        bad = lambda: run("\n".join(expect))                                # noqa: E731
 
         return good, bad, lambda rc, text: rc != 0
     return build
 
 
 PROBES.append(("N27", "the world's expect string is already in the unmutated report",
-               _world_probe(NC.protocol_worlds, 0, NC.EXPECT_HONOURED)))
+               _world_probe(NC.protocol_worlds, 0, NC.WORLD_EXPECT_LANDING_A)))
 PROBES.append(("N28", "the world's expect string is already in the unmutated report",
-               _world_probe(NC.protocol_worlds, 1, NC.EXPECT_EXPIRED)))
+               _world_probe(NC.protocol_worlds, 1, NC.WORLD_EXPECT_EXPIRED)))
 PROBES.append(("N29", "the world's expect string is already in the unmutated report",
-               _world_probe(NC.unknown_world, 0, NC.EXPECT_NOT_HONOURED)))
+               _world_probe(NC.unknown_world, 0, NC.WORLD_EXPECT_UNKNOWN)))
 
 
 @probe("N11", "the drift worklist is NOT the one derived from the pin")
 def p_n11(box):
     sp, tp = _pair(box)
     code, out = L.run_control(sp, tp, _ctl(box))
-    want = NC.expected_drift(L.read(sp), L.read(tp)) or []
+    # THE EXPECTATION IS DERIVED FROM THE WORLD THE RUN SAW, NOT FROM THE WORKING TREE
+    # (mg-bdb0).  These two calls defaulted to `NC.INFLIGHT`, i.e. the REAL repository's
+    # declaration, while `run_control` above reads the SANDBOX's — so the moment the two
+    # differed the probe was scoring one world's output against another world's expectation.
+    ip = os.path.join(_ctl(box), "IN-FLIGHT.json")
+    want = NC.expected_drift(L.read(sp), L.read(tp), ip) or []
+    # THE DECLARED HALF IS DERIVED TOO (mg-bdb0).  `score_baseline` now checks both of
+    # section 2's lines, so a probe that supplied only the worklist expectation would fail on
+    # its own GOOD side the moment a relocation is in flight — the arm going UNFALSIFIABLE
+    # for a reason that is nothing to do with what it probes.
+    wantd = NC.declared_and_moved(L.read(sp), L.read(tp), ip) or []
 
     def score(want_rows):
-        ok, detail = NC.score_baseline(code, out, want_rows)
+        ok, detail = NC.score_baseline(code, out, want_rows, wantd)
         return (0 if ok else 1), f"ok={ok}  {detail}"
 
     good = lambda: score(want)                                             # noqa: E731

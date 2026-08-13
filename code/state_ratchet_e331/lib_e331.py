@@ -62,8 +62,23 @@ def read_state():
         with open(STATE, encoding="utf-8") as fh:
             return fh.read()
     except OSError as exc:
+        # THE PATH IS REPOSITORY-RELATIVE, AND ABSOLUTE IS AN OPERATOR-VALUED TRANSCRIPT
+        # (mg-bdb0, on mg-4020's finding and mg-1344's rule).  `STATE` is absolute, so N14's
+        # committed row read `cannot read /Users/<someone>/.pogo/polecats/p92xx/STATE.md` —
+        # a transcript that reproduces for exactly ONE operator and for nobody else, ever.
+        # mg-4020 found the class, mg-1344 repaired out_gate.txt's S1 row the same way and
+        # left this one alone BECAUSE ITS BRANCH ONLY MOVED THE TIMING and re-pointing it
+        # would have swapped one polecat for another and bought nothing.  This branch moves
+        # the row's CONTENT — 5,987 words become 4,851 — so the file has to be committed, and
+        # committing it with an absolute path would plant the defect on behalf of every later
+        # operator instead of leaving it where it was.  That is mg-1344's own reasoning about
+        # its own transcript, applied to the file it explicitly named as still carrying this.
+        try:
+            shown = os.path.relpath(STATE, ROOT)
+        except ValueError:
+            shown = STATE
         raise Refusal("cannot read %s: %s\nThe subject of this ratchet is absent, which is "
-                      "neither green nor red." % (STATE, exc))
+                      "neither green nor red." % (shown, exc))
 
 
 def show(rev, path="STATE.md"):

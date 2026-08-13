@@ -1,10 +1,12 @@
 # Splitting `STATE.md` — the proposal, the budgets, and what has already landed (mg-14ad)
 
-**Status: §1–§3 LANDED (mg-14ad). §4 LANDED EXCEPT ITS LEDGER ROW (mg-927a, 2026-08-13).**
-`STATE.md` is **5,987 words**, inside mg-ea0e's standing 6,000-word target for the first time
-since that target was set, and the ceiling is banked at 5,987 / 5,487. **§8 at the foot of this
-document records what landed, which two budgets were not met and why, and the one row that
-cannot land at all.** Read §4's table as the estimate it was, and §8 as the measurement.
+**Status: §1–§3 LANDED (mg-14ad). §4 LANDED EXCEPT ITS LEDGER ROW (mg-927a, 2026-08-13).
+§4's LEDGER ROW: LANDING A LANDED (mg-bdb0, 2026-08-13) — the relocation is in, the twin's
+re-pin is DEFERRED to landing B, and until landing B lands `main` is RED for every branch.**
+`STATE.md` is **4,851 words**, inside mg-ea0e's standing 6,000-word target, and the ceiling is
+banked at 4,851 / 4,351. **§8 at the foot of this document records what landed, which two
+budgets were not met and why, and §8.3b records the row that could not land at all, landing.**
+Read §4's table as the estimate it was, and §8 as the measurement.
 
 ---
 
@@ -275,14 +277,74 @@ not argued; `code/rendered_twin_pin_9bc2/README.md`'s section-8 table has the si
 declaring one. The remedy is one command, section 8 prints it in the failure, and anyone may
 run it. `COVERAGE.md` item 6 prices the three alternatives and why each is worse.
 
-**THE LEDGER ROW STILL HAS NOT MOVED, AND mg-1344 DID NOT MOVE IT.** That branch ships the
-mechanism and nothing else. The relocation is two further landings and they are a different
+**THE LEDGER ROW STILL HAD NOT MOVED WHEN mg-1344 LANDED, AND mg-1344 DID NOT MOVE IT.** That
+branch ships the mechanism and nothing else; §8.3b below is the row moving. The relocation is two further landings and they are a different
 kind of work — deciding which of rows 3b, 6, 8 and 11's essay text §5's rule sends to
 `docs/state-history/` is a judgement about the mathematics, not about formatting, and mg-927a
 declined the same class of call for the same reason. **When landing A happens, `CEILING.json`
 must be banked DOWN in that commit** to the **measured** post-cut word count with
 `tighten_below` 500 under it — measured, never the §4 estimate, and never ~2,935, which §8.4
 already refuses.
+
+### 8.3b The row moved — mg-bdb0, 2026-08-13, LANDING A
+
+**§4's last line is landed as far as one commit can land it.** `Full ledger` **2,814 → 1,678
+words**, measured with the ratchet's own `sections()` decomposition on either side, and
+`STATE.md` **5,987 → 4,851**, banked in `CEILING.json` at 4,851 / 4,351 in this commit.
+
+**What the judgement was, per row, and the rule it was made under.** §5's rule — *a row stays
+in `STATE.md` if the current argument consumes it; its history leaves* — plus
+`docs/state-history/README.md`'s four relocation clauses, which are the operative form of it:
+**(a)** what a row used to say, or a strike of it; **(b)** an adjudication of a deliverable or
+an audit; **(c)** a derivation, construction, enumeration or numeric evidence supporting a
+claim the row still states; **(d)** a defect-mechanism note.
+
+| row | words | what left, and under which clause | what stayed |
+|---|---|---|---|
+| **3b** | 374 → 107 | (a) the mg-55f2 restatement provenance; (b)+(d) the "reading this row as *support*" defect class and mg-4a86's re-attribution of the `0/132`; (c) the kill-shot quotation, the `0/132` frame in its source's own words, the `δ(P) ∈ {0.473, 0.474, 0.500}` of the 166 | the refutation and its count, the conditional's identity with row 8 and its citation, and the standing instruction **always carry the frame with the number** |
+| **6** | 299 → 154 | (a)+(d) the mg-957a provenance repair and mg-e35c's F12 ruled out of scope; (c) where `width-3` enters `step8.tex` and the lemma-by-lemma reading of the four proofs | the source citation and its width-3 statement — a live fact about an EXTERNAL document, which `README.md`'s boundary ruling keeps in the row — **PRESENT AND INERT**, the one-sentence general statement, and the whole *what this does NOT cover* |
+| **8** | 1,328 → 665 | (a) *"this row said otherwise until mg-0e8c"*, the boundary the old phrasing stood on, *"the rest of this cell is unchanged"*, the `η = 0` witness and the `η` restored from the parent; (b) mg-c4f5's audit tally of mg-c3ca and mg-5ce3's re-derivation; (c) eleven pieces of working — the 82 posets, `Op-Form` §6.3's own words, the 5,230-poset vacuity population, the trace reduction, the two-normalisation arithmetic, the footrule statement, the `g(n)` construction behind *no `N₀` works* | both constants and the `≈50×` between them, the `ε_sup = d·n/(n+1)` density reading, every ⚠️ instruction, the kind marks, Daniel's undecided `1/6` question, and the honest net on the reverse arrows |
+| **11** | 235 → 174 | (a) the SUPERSEDED conditional form with its struck *"with no repair available"* — whose first half mg-34bf had already relocated — and the earlier witness `W` with the `Δ₁·n < 2` regime it could not leave | branch (i)/(ii)/(iii) as they now stand, the witness `W*`, the `F ≡ 0` escape, and the modulus-free refutation of (iii)-as-standalone |
+
+**RELOCATION, NOT REWRITING, AND IT IS CHECKABLE.** Every moved passage is a *literal slice* of
+the cell as it stood at `092a508`; the retained text is the rest of that cell, also literal,
+with the punctuation seams a removal leaves. **Retained + moved reconstruct each old cell
+character for character**, which is the property `mg-34bf`'s convention asks for and which was
+asserted mechanically before the file was written.
+
+**THE TWIN'S FOUR CELLS WERE RECONCILED IN THIS COMMIT AND NOTHING CHECKS THAT** —
+`code/rendered_twin_pin_9bc2/COVERAGE.md` item 4b, which is item 4 one level up: the twin is a
+*summary*, so no byte relation to `STATE.md` exists and none can be checked. What is offered
+instead is exactly what item 4b says is available: a declaration naming the rows, in a diff
+that either does or does not also touch those cells. It does. Row 6's cell **gained** the live
+width-3 caveat it never carried; rows 3b and 8 lost the passages that left the row, struck
+rather than deleted, so a reader can see the cell followed rather than drifted.
+
+**THE RE-PIN IS NOT HERE, AND THAT IS THE PROTOCOL.** `IN-FLIGHT.json` declares rows 3b, 6, 8
+and 11; `twin.inflight` moved `[]` → those four and `twin.verdict_grade` `CLEAN` → `IN FLIGHT`
+in `code/control_gate_724a/BASELINE.json`, each with its reason in its own `why`.
+**`twin.worklist` is UNCHANGED at `[]`** — that is the laundering-shaped edit, mg-1344 refused
+it and so does this branch. `twin_pin.py` reports `VERDICT: IN FLIGHT` at exit 0 with section 8
+`HONOURED`.
+
+> **THE COST, WHICH IS NOW BEING PAID RATHER THAN DESCRIBED.** From the moment this commit
+> reaches an integration ref, section 8 grades the same declaration `DISCHARGEABLE` and
+> `./build.sh` is **RED for every branch in this repository**, not only this one. That is
+> deliberate — it is what stops landing B being forgotten — and `COVERAGE.md` item 6 prices the
+> three alternatives. **The remedy is one command, section 8 prints it in the failure, and any
+> author may run it:**
+> `python3 code/rendered_twin_pin_9bc2/twin_pin.py --reconcile --rows 3b,6,8,11`, then delete
+> `IN-FLIGHT.json` and return `twin.inflight` to `[]` and `twin.verdict_grade` to `CLEAN` in the
+> same commit.
+
+**§4's 600 IS NOT MET AND IS NOT AIMED AT AGAIN, FOR §8.1's OWN REASON.** The landed figure is
+**1,678**, not 600, and the difference is not text left unmoved: it is what §5's rule leaves in
+place. Row 8 alone is 665 words of live claim — two constants, the factor between them, the
+density reading, five standing ⚠️ instructions, the `N₀` finding and its honest net — and
+compressing it to fit a budget would be summarising a ledger cell, which is the one thing
+`README.md`'s rule 3 forbids. That makes **600 the third §4 budget measured as unreachable
+under conventions this estate enforces**, after the attempt index and Kinds in §8.1. The
+ceiling records the achieved measurement, which is all it was ever built to do.
 
 ## 8.4 The two targets, reconciled explicitly
 

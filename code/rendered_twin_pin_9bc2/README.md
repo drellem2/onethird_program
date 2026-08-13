@@ -253,8 +253,23 @@ normaliser is the unfalsifiable escape hatch `lib_f771.py`'s own header refuses.
 ### What is NOT covered, in one line each
 
 Landing A can declare a row, relocate its essay and **leave the twin's cell untouched** —
-`COVERAGE.md` item 4b, and it is item 4 one level up rather than a new hole. And the whole
+`COVERAGE.md` item 4b, and it is item 4 one level up rather than a new hole. ~~And the whole
 protocol is **not exercised by any standing landing**: this branch ships the mechanism and
 does **not** move the ledger row. The first real landing A is the successor, and until it
 lands the six rows above are the only evidence — three of them re-run on every merge, three
-by hand.
+by hand.~~
+
+### The successor happened — mg-bdb0, 2026-08-13, and it is landing A for real
+
+**`STATE.md` ledger rows `3b`, `6`, `8` and `11` are relocated and declared**, `IN-FLIGHT.json`
+exists on that branch, `twin.inflight` moved `[]` → those four in `BASELINE.json` and
+`twin.verdict_grade` `CLEAN` → `IN FLIGHT`. `twin_pin.py` reports **`VERDICT: IN FLIGHT`** at
+exit 0 with section 8 **`HONOURED`**, `twin.worklist` is still `[]` and still means what it
+meant. The six planted worlds above are no longer the only evidence.
+
+**THE FIRST REAL USE FOUND FIVE THINGS, AND NOT ONE OF THEM IS IN SECTION 8.** They are all in
+the estate *around* it — the negative control, its fixtures, and `mg-9876`'s sandbox — each
+assuming a world in which `IN-FLIGHT.json` does not exist, which is what every run before this
+one was. Two of them turned the merge gate `REFUSED` rather than red. `COVERAGE.md`'s
+section-8-was-used entry has all five; the shape they share is that **a mechanism whose worlds
+are all planted cannot tell you what it does to a tree it is actually in.**
