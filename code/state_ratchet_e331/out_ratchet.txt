@@ -5,8 +5,8 @@ mg-e331 — STATE.md SIZE RATCHET
 §1  THE SUBJECT, MEASURED — the WORKING TREE, not a commit
 --------------------------------------------------------------------------------------------
   path              STATE.md
-  words             5048      <- THE GATED QUANTITY (len(text.split()))
-  bytes             34308
+  words             5047      <- THE GATED QUANTITY (len(text.split()))
+  bytes             34306
   lines             206
   longest line      4252 chars
   lines over 2000   1
@@ -21,10 +21,10 @@ mg-e331 — STATE.md SIZE RATCHET
 §2  THE DECLARED CEILING
 --------------------------------------------------------------------------------------------
   file              code/state_ratchet_e331/CEILING.json
-  words_ceiling     5048
-  tighten_below     4548
-  set_by            mg-3da1   at 5048 words
-  observed          5048  (+0 against the ceiling)
+  words_ceiling     5047
+  tighten_below     4547
+  set_by            mg-9b6b   at 5047 words
+  observed          5047  (+0 against the ceiling)
 
   BANKED DOWN 21328 -> 14337 BY mg-14ad, 2026-08-13, AND THE CUT IS THE REMEDY THIS FILE
   ALREADY NAMED RATHER THAN A FRESH JUDGEMENT. out_p1_growth.txt §3 recorded the gap to
@@ -317,21 +317,39 @@ mg-e331 — STATE.md SIZE RATCHET
   sentences were tightened by more than the new clause cost, and the file came in 5
   words UNDER the 5053 already banked. Banking DOWN to 5048 rather than keeping the
   slack is this file's own rule that the ceiling is where the file stands; mg-0b96's own
-  STATE.md edit was word-neutral and is not part of this figure.
+  STATE.md edit was word-neutral and is not part of this figure. BANKED DOWN 5048 ->
+  5047 BY mg-9b6b, IN THE COMMIT THAT CAUSED IT, AND IT IS ONE WORD. The edit is the (R)
+  bullet under *Where the threads converge*, which still described that residual as LIVE
+  -- `reopened quantitatively by mg-88bd` -- when mg-0b96 had priced it and mg-9b6b has
+  now priced the whole family: no D is both provable and worth an unreached order. THE
+  CLOSURE WAS PAID FOR OUT OF THE BULLET'S OWN PROSE AND NOT BY A RAISE: mg-88bd's line
+  `a door recorded as the wrong shape is now the right shape with the wrong size` left
+  this file, and it is not lost -- docs/state-history/threads-chronology.md carries it
+  VERBATIM in two places, and the pointer sentence directly under the residual list
+  already names mg-88bd as one of the paragraphs that file holds. It is relocated rather
+  than STRUCK because the strike convention is for claims that were WRONG, and mg-88bd's
+  reopening was not: it is superseded, which is what docs/state-history/ exists for. ONE
+  WORD IS NOT WORTH A CONFIG EDIT ON ITS OWN AND IS BANKED ANYWAY, FOR THE REASON THE
+  PREVIOUS ENTRY GIVES FIVE WORDS ABOVE THIS ONE: the ceiling is the MEASUREMENT and not
+  the budget, and slack kept is slack a later branch spends without declaring it.
+  mg-3da1 banked 5 words down for exactly this reason one commit ago; declining to bank
+  1 would make that rule a matter of size. mg-ea0e's 6,000-word target STANDS and
+  remains MET, with 953 words of headroom. tighten_below MOVED 4548 -> 4547 WITH THE
+  CEILING, preserving this file's stated 500-word invariant.
 
 §3  CAN THIS RATCHET FAIL, AND CAN IT REFUSE?  Probes against THIS run's values
 --------------------------------------------------------------------------------------------
-  N1   one word past the ceiling                   CAUGHT          5049 words is +1 past the declared ceiling o
-  N2   the ceiling plus another whole file         CAUGHT          10096 words is +5048 past the declared ceili
-  N3   one word under the tighten point            CAUGHT          4547 words is 501 below the declared ceiling
-  N4   half the tighten point                      CAUGHT          2274 words is 2774 below the declared ceilin
-  N5   the ceiling edge is exactly where declared  BOUNDARY        5048 -> GREEN, 5049 -> ABOVE-CEILING
-  N6   the tighten edge is exactly where declared  BOUNDARY        4548 -> GREEN, 4547 -> SLACK-UNRATCHETED
+  N1   one word past the ceiling                   CAUGHT          5048 words is +1 past the declared ceiling o
+  N2   the ceiling plus another whole file         CAUGHT          10094 words is +5047 past the declared ceili
+  N3   one word under the tighten point            CAUGHT          4546 words is 501 below the declared ceiling
+  N4   half the tighten point                      CAUGHT          2273 words is 2774 below the declared ceilin
+  N5   the ceiling edge is exactly where declared  BOUNDARY        5047 -> GREEN, 5048 -> ABOVE-CEILING
+  N6   the tighten edge is exactly where declared  BOUNDARY        4547 -> GREEN, 4546 -> SLACK-UNRATCHETED
   N7   a ceiling with an empty `why`               CAUGHT          <probe N7>: `why` is empty.  See REQUIRED in
   N8   a ceiling missing words_ceiling             CAUGHT          <probe N8> is missing required field(s): wor
-  N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 9 c
-  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (5049) is above w
-  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '5048', not a 
+  N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 10 
+  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (5048) is above w
+  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '5047', not a 
   N12  a negative word count                       CAUGHT          verdict() was handed words=-1
   N13  every mutation above actually mutates       CAUGHT          4 of 4 planted values differ from the observ
   N14  STATE.md absent from the tree               CAUGHT          cannot read STATE.md.absent-by-construction-
@@ -341,7 +359,7 @@ mg-e331 — STATE.md SIZE RATCHET
   UNEXPLAINED unfalsifiable.  0.001s.
 
 ============================================================================================
-RATCHET VERDICT: GREEN — 5048 words, ceiling 5048, tighten below 4548.
+RATCHET VERDICT: GREEN — 5047 words, ceiling 5047, tighten below 4547.
 This ratchet was shown able to fire in both directions and to refuse in 7 worlds,
 on this run, against these values.  0.00s total.
 ============================================================================================

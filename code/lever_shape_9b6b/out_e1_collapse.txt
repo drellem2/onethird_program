@@ -1,0 +1,132 @@
+====================================================================================================
+mg-9b6b  e1  every reading of mg-0b96 §6's escape hatch lands on the dial
+====================================================================================================
+----------------------------------------------------------------------------------------------------
+m1  THE EXPLICIT FAMILY, AND ITS `δ` COMPUTED RATHER THAN ARGUED
+    `boundary_family(n)` is floor(n/3) copies of {a<b, c} in ordinal sum plus a chain.
+    The ordinal-sum lemma gives delta = 1/3 at every n; here it is CHECKED against the
+    same delta_exact every other number in this directory uses, and its density is
+    checked against F23's closed form 4*floor(n/3)/(n(n-1)).
+
+        n  delta      d          F23 form     primitive?
+        3  1/3        2/3        2/3          yes
+        4  1/3        1/3        1/3          no -- an ordinal sum
+        5  1/3        1/5        1/5          no -- an ordinal sum
+        6  1/3        4/15       4/15         no -- an ordinal sum
+        7  1/3        4/21       4/21         no -- an ordinal sum
+        8  1/3        1/7        1/7          no -- an ordinal sum
+        9  1/3        1/6        1/6          no -- an ordinal sum
+    m1.a    ok      delta = 1/3 EXACTLY at every n = 3..9
+    m1.b    ok      and its density is F23's maximum at every n = 3..9
+----------------------------------------------------------------------------------------------------
+m2  THE FLAT READING: `S_f` = `(2_D)` = `(1_D)`, INSTANTIATED
+    The three predicates are computed through DIFFERENT comparisons -- (1_D) tests
+    `delta < beta` then `d > D`, (2_D) tests `d > D` then `delta < beta`, S_f tests
+    `d >= D` then `delta < beta` over the WHOLE population with no hypothesis filter.
+    A tautology cannot be strengthened by a run; what a run catches is these three
+    disagreeing, which would mean `frozen` and `delta >= 1/3` are not complements as
+    this instrument computes them.
+
+        n beta   D         |1_D hyp|  |2_D hyp|    ce(1_D)    ce(2_D) ce(S_f) extra
+        7 1/3    0                 0       2044          0          0 0
+        7 1/3    1/50              0       2044          0          0 0
+        7 1/3    1/10              0       2023          0          0 0
+        7 1/3    1/4               0       1857          0          0 0
+        7 1/3    1/2               0        874          0          0 0
+        7 1/3    3/4               0         68          0          0 0
+    m2.a    ok      (1_D) and (2_D) have the SAME counterexample set in all 60 (n, beta, D) cells
+
+    THE HYPOTHESIS POPULATIONS ARE NOT THE SAME AND THAT IS THE WHOLE ASYMMETRY:
+    at beta = 1/3 the (1_D) column is 0 at every n and every D -- the frozen class is
+    empty (e0 T6) -- while the (2_D) column is the entire non-chain population.  The
+    two readings agree on the VERDICT because they are contrapositives; they differ
+    completely on what a sweep actually looks at.
+
+    THE `>` / `>=` GAP.  mg-0b96 §6 writes `f(2e-2) >= 1/3`, which reads the threshold
+    CLOSED; (2_D) reads it open.  The two differ exactly on posets with d == D, i.e. by
+    one density quantum 1/C(n,2) -> 0.  Measured above: the `ce(S_f) extra` column is
+    non-zero in 1 of 60 cells, always exactly the posets sitting ON the threshold.
+----------------------------------------------------------------------------------------------------
+m3  THE STRICT READING IS NOT OPEN -- IT IS FALSE, AND THE REFUTERS ARE ON THE RECORD
+    If `f` is STRICTLY increasing at D (or if f(D) > 1/3 at all), then f(d) > 1/3 for
+    every d > D, so S_f demands delta > 1/3 STRICTLY on every poset denser than D.
+    The boundary class sits at delta = 1/3 EXACTLY.  So S_f is refuted at every n where
+    the boundary class reaches above D_needed(n) -- and m1's family is exactly that.
+
+        n  family d     D_needed(n)  d > D?     strict reading
+        3  2/3          2/75         yes        REFUTED
+        4  1/3          1/40         yes        REFUTED
+        5  1/5          3/125        yes        REFUTED
+        6  4/15         7/300        yes        REFUTED
+        7  4/21         4/175        yes        REFUTED
+        8  1/7          9/400        yes        REFUTED
+        9  1/6          1/45         yes        REFUTED
+       14  8/91         3/140        yes        REFUTED
+       15  2/21         8/375        yes        REFUTED
+       40  1/30         41/2000      yes        REFUTED
+       64  1/48         13/640       yes        REFUTED
+       65  21/1040      33/1625      no         not refuted by this family
+       66  4/195        67/3300      yes        REFUTED
+       67  4/201        34/1675      no         not refuted by this family
+       99  2/147        2/99         no         not refuted by this family
+
+    THE WITNESS SET IS COMPUTED, NOT ASSERTED AS A RANGE, AND IT IS RAGGED:
+      refuted at 63 values of n, from 3 to 66; the ONLY gap below the top is [65],
+      and above 66 there is none at all.
+    m3.a    ok      n = 65 is a HOLE INSIDE the range and it is the floor's doing: 65 = 3*21+2, so floor(n/3) sticks at 21 while D_needed keeps falling
+    m3.b    ok      and every n from 67 to 399 is outside, searched rather than asserted
+
+    ⚠️  `every n <= 66` WOULD HAVE BEEN FALSE AT EXACTLY ONE VALUE, and only computing
+    the set says so.  The hole is not an artefact of choosing this family: F23's
+    closed form IS the maximum over the whole boundary class, so if it continues then
+    at n = 65 NO delta = 1/3 poset reaches D_needed and the strict reading is
+    unrefuted there by any witness of this kind.
+
+    THE CROSSING IS EXACT ARITHMETIC, NOT A SWEEP: 4*floor(n/3)/(n(n-1)) > eps_dem*(n+1)/n
+    fails first at n = 67, where F23's ceiling itself drops below the density row 8
+    needs.  Below that the strict reading is FALSE; above it, this family stops being a
+    witness and the arm claims nothing.
+
+    KIND.  The refutation is `FP✗`-shaped -- one witness kills a universal -- but its
+    witness is a CONSTRUCTION, not a census: m1 verifies the family at n <= 9 and the
+    ordinal-sum lemma carries it to every n.  The `n <= 66` bound is arithmetic on
+    F23's CLOSED FORM, and F23's closed form is `FP` to n = 9.  ⚠️  SO THE REFUTATION
+    ABOVE n = 9 RESTS ON THE FAMILY'S OWN delta AND d, WHICH THE LEMMA GIVES, AND NOT
+    ON F23's MAXIMALITY, WHICH IT DOES NOT NEED.
+----------------------------------------------------------------------------------------------------
+m4  THE PRIMITIVITY OBJECTION, MEASURED AND CONCEDED
+    A minimal counterexample is primitive (STATE.md ledger row 2), so a version of S_f
+    restricted to PRIMITIVE posets would serve row 8 just as well -- and every refuter
+    in m3 is an ordinal sum, which is exactly what primitive excludes.  So: how much of
+    the boundary class is primitive?
+
+        n     delta = 1/3  of those, prim  their densities
+        3               1               1  ['2/3']
+        4               2               0  --
+        5               3               0  --
+        6               5               0  --
+        7               8               0  --
+        8              12               0  --
+    m4.a    ok      exactly ONE primitive boundary poset over every class at n <= 8, and it is n = 3
+
+    SO m3 DOES NOT SURVIVE THE PRIMITIVE RESTRICTION ABOVE n = 3, and that is stated
+    here rather than left for a reader to find.  What kills the primitive-restricted
+    S_f is m2, which does not care: restricted to primitives, S_f is (2_D) restricted
+    to primitives, and mg-0b96's price ALREADY RAN THROUGH PRIMITIVITY (its d2 uses
+    d >= 2/n to reach n = 99).  The restriction changes the class and not the price.
+
+    ⚠️  AND F23's OWN WARNING IS THE SAME OBSERVATION FROM THE OTHER SIDE: `48 of the 49
+    are ORDINAL SUMS`.  This arm re-measures it on its own population (30 of 31 at
+    n <= 8, F23's own frame runs to n = 9) and reads it FORWARD: the class that pins
+    `f` and the class row 8 quantifies over are disjoint above n = 3.
+----------------------------------------------------------------------------------------------------
+VERDICT
+    THE ESCAPE HATCH HAS EXACTLY ONE SURVIVING SHAPE AND IT IS THE CLOSED DOOR.
+    Flat reading  -> (2_D) -> (1_D), which mg-0b96 §2 closed.
+    Strict reading-> FALSE at 63 orders (3..66 except 65), by an ordinal-sum family.
+    Primitive-restricted -> m3 lapses, m2 does not; same statement, same price.
+
+    WHAT IS LEFT OF §6, AND IT IS NOT NOTHING: §6's own sentence says the object would
+    be `a statement about COUNT` where every known exclusion is `a statement about
+    STRUCTURE`.  That is a claim about METHOD, and it survives every line above.  A
+    method is not a lever: it changes who might pay the price, not what the price is.
