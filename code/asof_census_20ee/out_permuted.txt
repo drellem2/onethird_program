@@ -1,0 +1,162 @@
+==============================================================================
+mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
+==============================================================================
+
+  mg-20ee condition 2, which mg-0e77 re-read as SET-IDENTITY PLUS A
+  DECLARED PERMUTATION and then applied BY HAND.  Two things are
+  measured here that were previously prose: whether that wording is
+  the right one (section 2), and whether the two pins it was written
+  from survive the stricter reading (section 1).
+
+  METHOD AND BLIND SPOT are in this file's docstring and are not
+  repeated; the sentence that matters is repeated -- THIS DECIDES
+  CONDITION 2 AND NOTHING ELSE.  Conditions 1 and 3 are elsewhere,
+  and a pin at a commit in no branch passes here (mg-daba).
+
+------------------------------------------------------------------------------
+1  THE TWO PINS OF TRANCHE 4, RE-SCORED UNDER THE STRICTER TEST
+------------------------------------------------------------------------------
+
+  mg-0e77 reported `18 of 129 lines permuted` and `30 of 149`, the
+  two line SETS identical, measured BY HAND and quoted in three
+  files.  Re-taken here across the pinning commit de4ec4b, each
+  against a declaration file whose PROVENANCE is checked -- because a
+  declaration written by reading the diff excuses that diff entirely.
+
+  code/landscape_repair_audit_3b51/out_scope_text.txt
+      byte-identical                     False
+      bag-identical (whole file)         False
+      set-identical (whole file)         False
+      permutation                        21 of 129 positions, 9 must move
+      declaration                        declare_3b51.txt: 7 line(s), provenance blank=1 script=6
+      exclusive occurrences              7 declared, 0 NOT
+      -> PERMUTATION + DECLARED RESIDUE.  The pin holds, and
+         every line of its declaration traces to the pin's own
+         source or its published record rather than to the diff.
+
+  code/landscape_repair_1953/out_scope_text_3b51_rerun.txt
+      byte-identical                     False
+      bag-identical (whole file)         False
+      set-identical (whole file)         False
+      permutation                        26 of 148 positions, 11 must move
+      declaration                        declare_1953.txt: 10 line(s), provenance blank=1 record=1 script=8
+      exclusive occurrences              10 declared, 0 NOT
+      -> PERMUTATION + DECLARED RESIDUE.  The pin holds, and
+         every line of its declaration traces to the pin's own
+         source or its published record rather than to the diff.
+
+  2 of 2 survive, and the ONE PIN WHOSE RESIDUE IS NOT PURE
+  HEADER is the one whose commit message says so: the 1953 pin's
+  declaration is 10 lines, 7 of them the AS_OF block its own script
+  prints and THREE of them content -- `: 23` out, `: 24` in, and one
+  new address.  That is exactly mg-0e77's `23 -> 24 IS ITS WHOLE
+  PRICE AND IT IS PUBLISHED`, and this is the first time anything
+  could CHECK that the published price was the whole of it.  A
+  fourth moved line would have printed as UNDECLARED here.
+
+  AND NEITHER HAND FIGURE IS REPRODUCED, WHICH IS THE SECOND FINDING
+  OF THIS SECTION.  `18 of 129` and `30 of 149` are not wrong so
+  much as UNDEFINED: three defensible readings of `permuted` give
+
+      core positions holding a different line      21 and 26
+      lines that MUST move (core less its LCS)     9 and 11
+      lines a unified diff marks changed           25 and 32
+
+  and 18 is none of them.  The VERDICT does not move -- both pins
+  still hold -- so this is not a defect in tranche 4's conclusion.
+  It is the reason condition 2 needed an instrument rather than a
+  paragraph: a number quoted in three files with nothing behind it
+  cannot be re-taken, and nobody could tell WHICH QUANTITY it was.
+
+------------------------------------------------------------------------------
+2  BLAST RADIUS -- WHERE `SET` AND `BAG` CAN DISAGREE, COUNTED
+------------------------------------------------------------------------------
+
+  Over every tracked out_*.txt in the commit, a transcript on which
+  the two wordings CAN disagree is one carrying a repeated line:
+
+      1061  tracked out_*.txt at 12aa5f8
+      1010  carry a repeated line -- SET is strictly weaker there
+       123  carry a repeated line THAT NAMES A REPOSITORY PATH,
+            which is where the two wordings can disagree about an
+            ADDRESS -- the dimension condition 2 exists for
+
+      code/asof_census_20ee/out_census.txt                       84
+      code/state_visibility_audit_65eb/out_run_all.txt           35
+      code/suppression_polarity_audit_40e4/out_run_all.txt       32
+      code/state_suppression_repair_5f7c/out_run_all.txt         25
+      code/eps0_audit_d3c7/out_b3_smaller.txt                    25
+      code/pairbias_sharpening_6bc2/out_v2_optimiser.txt         16
+
+  THIS DIRECTORY IS IN THE LIST AND AT THE TOP OF IT, which is
+  section 4 of the README -- a control finding itself in the corpus
+  it searches -- for the FIFTH time in this arc, and unlike R3's
+  six self-hits THIS ONE IS TRUE: out_census.txt really does print
+  the same address many times, and really is a transcript on which a
+  set comparison would be weaker than a bag comparison.
+
+------------------------------------------------------------------------------
+3  THE HAZARD, DEMONSTRATED ON REAL DATA RATHER THAN PLANTED
+------------------------------------------------------------------------------
+
+  Take mg-3b51's own PINNED transcript at 12aa5f8 and delete ONE
+  occurrence of a line it prints twice:
+
+      docs/OneThird-Landscape-Where-This-Lives.md:447  negated/withdrawn
+
+  An address and the count it belongs to have moved.  The two
+  wordings answer differently:
+
+      set-identical : True   <- the prose's test says NOTHING HAPPENED
+      bag-identical : False   <- the test decided on here
+
+  A pin that did this would be published as clean under the
+  wording as written.  It is not a hypothetical shape: 123 tracked
+  transcripts carry a repeated address line at this commit.
+
+------------------------------------------------------------------------------
+4  AN OVER-COUNT IN R3, MEASURED -- PROSE THAT NAMES THE
+   INVOCATION FIRES IT, AND N11 PLANTS ONLY THE BARE WORD
+------------------------------------------------------------------------------
+
+  R3 matches the invocation plus a following short-flag cluster, and
+  N11 -- mg-0e77's negative control for `the word in prose` -- plants
+  the BARE word.  So a SENTENCE OF COMMENTARY NAMING THE INVOCATION
+  fires R3, and in an estate where every docstring names its own
+  method that is a shape worth counting rather than supposing.
+
+      1384  .py/.sh tracked at 12aa5f8
+        92  R3 hits across them
+         3  of those hits sit on a COMMENT line, in 2 file(s) --
+            prose, not an invocation, and R3 cannot tell them apart
+
+      code/landscape_repair_audit_3b51/audit_scope_text.py
+          # `grep -rn` over it, so D1, D2, D5, D6 and D7 measured whatever doc
+      code/landscape_repair_audit_3b51/audit_scope_text.py
+          #   2. its output is SORTED.  `grep -rn` emits directory-enumeration
+      code/runner_exit_c2b3/run_all.sh
+          #       63/23/1 becomes 64 / 23-by-bare-grep / 17-by-parse / 1.
+
+  AND THE FILE THIS LANDS HARDEST ON IS THE ONE TRANCHE 4 PINNED.
+  audit_scope_text.py's ONLY R3 hits are two comments EXPLAINING THE
+  DEFECT IT ALREADY REPAIRED -- its corpus read is `git grep <rev>`
+  now, and R3 reads the sentences describing what it used to be.  So
+  condition 0 run on it today still prints `+R3: expect a permuted
+  transcript`, which is exactly the failure N9's rationale exists to
+  prevent -- `every repaired instrument in the estate is told it is
+  still defective` -- arriving by PROSE instead of by the git form.
+
+  FOUND WHILE WRITING THIS FILE, WHICH IS RECORDED BECAUSE IT IS THE
+  HALF THAT WOULD OTHERWISE LOOK LIKE A CLEAN RESULT: an early draft
+  of permuted.py carried a sentence naming the invocation, R3 fired
+  on it, and REWORDING THE SENTENCE MADE THE HIT GO AWAY.  That is
+  not a repair of anything -- it removes one file from a rule that is
+  still wrong for the other 2 -- and this file scores 0 today.
+  So the shape is asserted as N18 in selftest_20ee.py, a KNOWN-DEFECT
+  control in the form N4, N5 and C3 already take: teach R3 to see
+  prose and N18 goes RED, which is the signal to update its declared
+  self-hit count.  R3 is mg-0e77's rule and this is not its repair.
+
+==============================================================================
+CONDITION 2: instrument GREEN -- 2 of 2 tranche-4 pins survive the stricter test; 1010 of 1061 transcripts are ones on which SET and BAG can disagree
+==============================================================================

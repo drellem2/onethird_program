@@ -103,9 +103,38 @@ CONTROLS ON R3 — THE UNORDERED WALK (mg-0e77)
         THE NEGATIVE HALF, AND IT CARRIES THE WEIGHT. This is the repaired line R3 exists to recommend, and it contains the literal `grep` plus a `-n` flag. git SORTS its output and reads a COMMIT, which is the whole point; a rule that fired here would condemn the repair as the defect and there would be nothing left to advise.
   PASS N10 a walk the subject has already SORTED            
         an instrument that ordered its own walk has already removed the difference R3 warns about, and the transcript is repo-valued without any pin. Firing here would price a repair that is already paid.
+  PASS N18 prose quoting the INVOCATION, flag and all — FIRES (mg-885d) 
+        A KNOWN-DEFECT CONTROL, in the form N4, N5 and C3 already take. N11 below plants the BARE word and passes; the rule matches the word plus a following short-flag cluster, so a sentence NAMING the invocation is a shape N11 does not reach. MEASURED across the estate at 12aa5f8 rather than supposed: 3 of R3's 92 hits sit on comment lines, and BOTH hits in audit_scope_text.py — THE INSTRUMENT TRANCHE 4 PINNED — are comments explaining the defect it already repaired, so condition 0 still tells a repaired instrument to expect a permuted transcript. That is N9's own rationale failing by PROSE instead of by the git form. Asserted rather than repaired, because R3 is mg-0e77's rule: teach it to see prose and this control goes RED, which is the signal to update its self-hit count.
   PASS N11 the word `grep` in prose                         
         R3 reads the subject's SCRIPTS, which in this estate carry more commentary than code — every docstring in this directory names its own method. A rule that matched the word rather than the invocation would fire on the file explaining it.
 
+CONTROLS ON permuted.py — mg-20ee's CONDITION 2 (mg-885d)
+------------------------------------------------------------------------------
+
+  R3 established that a CORRECT pin permutes its transcript, so
+  condition 2 was re-read as SET-IDENTITY PLUS A DECLARED PERMUTATION.
+  permuted.py is the first thing that can MEASURE that reading, and it
+  amends it: a SET forgets multiplicity, so the test is a BAG.  P11 is
+  the control that carries this whole file's weight — it is the case
+  the wording as written gets WRONG, and it is silent when it does.
+
+  PASS P11 a line's MULTIPLICITY changed — SET says nothing happened 
+        THE CONTROL THIS INSTRUMENT EXISTS FOR. mg-3b51's own pinned transcript prints one address twice and mg-1953's prints one three times; a pin that dropped one occurrence moves an ADDRESS and the COUNT it belongs to, and `set-identity` — the wording condition 2 was amended to — scores it IDENTICAL. 123 tracked transcripts carry a repeated line naming a path, so this is a shape the estate has.
+  PASS P12 a pure PERMUTATION is bag-identical and not byte-identical 
+        the case R3 predicts for every correct pin of a `grep -r` corpus: `git grep <rev>` sorts, the walk did not, and no line's content changed. Scored byte-wise this is a FAILED pin; it is a clean one.
+  PASS N15 an unchanged transcript is BYTE-identical        
+        the negative half of P12, and the reason condition 2 is not simply loosened: byte-identity still holds where it can, and ./build.sh and mg-f771's fixed point are RIGHT to keep comparing bytes. R3's permutation appears at the PIN TRANSITION, not run to run.
+  PASS P13 a MOVED VERDICT is not a permutation and is not hidden by one 
+        3b51's and 1953's transcripts differ on exactly this line BY DESIGN. A comparator that reported `permuted` for a shuffle that also moved a verdict would absorb mg-20ee's own discrimination — `if a verdict moves, that is a FINDING` — into a pass.
+  PASS N16 a DECLARED residue is excused                    
+        a pin ADDS an AS_OF block, and mg-20ee's discrimination expressly allows it to move. Without this the correct outcome of every pin would print as a finding, and the instrument would be unusable on the only case it is for.
+  PASS P14 a declaration is matched BY OCCURRENCE, not as a set 
+        THE NEGATIVE HALF OF N16 AND IT CARRIES THE WEIGHT. Declaring a line once must not excuse it twice, or P11's defect returns one level up — inside the mechanism built to catch it. A set-shaped declaration would pass a pin that dropped one of three identical addresses.
+  PASS P15 a declaration written from the DIFF traces to nothing 
+        THIS FILE'S OWN DEFECT, CONTROLLED. `--declare` is an artifact of the same kind as the thing it scores: a declaration written by reading the diff excuses that diff entirely and turns CONTENT MOVED into a silent pass. Provenance is what stops that being invisible, and both declarations shipped here are traced to the pin's own source or its published record — never to the diff.
+  PASS N17 an AS_OF header line traces to the pin's own SOURCE 
+        audit_scope_text.py:104 prints exactly this, with the revision as a %s. The pin's author wrote the header in CODE before any transcript existed, which is why `script` is the strong half of provenance and `record` — a token quoted in prose — is declared weak.
+
 ==============================================================================
-GREEN — 2 positive, 4 negative and 1 known-defect control on the address census, 3 positive, 1 known-defect and 2 rc-tolerance controls on the consumer census, and 4 positive plus 6 negative on the pinnable pre-condition, all land where they must.
+GREEN — 2 positive, 4 negative and 1 known-defect control on the address census, 3 positive, 1 known-defect and 2 rc-tolerance controls on the consumer census, 4 positive, 6 negative and 1 known-defect control on the pinnable pre-condition, and 5 positive plus 2 negative on the condition-2 comparator, all land where they must.
 ==============================================================================

@@ -19,6 +19,14 @@
 # and NO SUITE RE-TAKES THEM -- the declaration out_ground_truth.txt already
 # makes about itself, and the same blind spot.
 #
+# mg-885d: permuted.py IS run here, and unlike pinnable.py it can be, because
+# it needs no dirty tree: its estate scan reads a DECLARED COMMIT through
+# `git ls-tree` and `git cat-file`.  That is also why its own transcript
+# reproduces BYTE-IDENTICALLY -- condition 2 as originally written -- which is
+# the only honest arrangement for the file arguing that other transcripts
+# cannot.  Its comparison mode is the hand-run one:
+#     python3 code/asof_census_20ee/permuted.py <transcript> <old-rev> [<new-rev>]
+#
 # mg-6e4f: consumers.py IS run here.  It is a `git grep` over HEAD and takes
 # about a second — unlike ground_truth.sh it executes no instrument code and
 # writes nothing outside this directory.  Its default subject is the instrument
@@ -28,5 +36,7 @@ cd "$(dirname "$0")"
 python3 selftest_20ee.py > out_selftest_20ee.txt
 python3 census.py        > out_census.txt
 python3 consumers.py     > out_consumers.txt
+python3 permuted.py      > out_permuted.txt
 echo "mg-20ee census: $(sed -n '/transcripts carry/p' out_census.txt | tr -s ' ')"
 echo "mg-6e4f consumers: $(sed -n '/^CONSUMERS:/p' out_consumers.txt)"
+echo "mg-885d condition 2: $(sed -n '/^CONDITION 2:/p' out_permuted.txt)"

@@ -465,6 +465,151 @@ normalisation rule plus nine regenerations, which is its own item. Named, counte
 
 ---
 
+# Tranche 5 (`mg-885d`) — condition 2 gets an instrument, and the instrument amends the amendment
+
+Tranche 4 established that a **correct** pin cannot satisfy condition 2 as written, and re-read it as
+*"set-identity plus a declared permutation"*. That reading was then applied to two pins **by hand**
+and written into three files — this README, `pinnable.py`'s docstring, and `pinnable.py`'s printed
+output. Nothing in this estate could re-take it.
+
+Condition 0 has an instrument. Condition 3 has an instrument. **Condition 2 — the one that decides
+whether a pin landed — had a paragraph.** `permuted.py` is that instrument, and pointing it at the
+two pins the paragraph was written from produced both of this tranche's findings.
+
+## 1. `SET-IDENTITY` IS THE WRONG WORDING FOR THE RIGHT IDEA — the test is a **bag**
+
+A set forgets **how many times** a line occurs. Transcripts in this estate repeat lines constantly,
+and not only rules and blanks: `mg-3b51`'s own pinned transcript prints one address **twice**, and
+`mg-1953`'s re-run prints one **three times**. Under a set comparison, a pin that dropped one of
+those occurrences scores **IDENTICAL** — an address and the count it belongs to would have moved,
+invisibly, in the one test condition 2 exists to be trusted about.
+
+**Demonstrated on real data rather than planted** (`out_permuted.txt` §4): take mg-3b51's committed
+transcript at `12aa5f8`, delete one occurrence of the line it prints twice, and the two wordings
+disagree —
+
+    set-identical : True     <- the wording as amended says NOTHING HAPPENED
+    bag-identical : False    <- what this instrument decides on
+
+**Blast radius, counted at a pinned commit rather than guessed:**
+
+    1061  tracked out_*.txt at 12aa5f8
+    1010  carry a repeated line — SET is strictly weaker there
+     123  carry a repeated line THAT NAMES A REPOSITORY PATH
+
+The 123 is the number that matters: that is where the two wordings can disagree **about an address**,
+which is the dimension condition 2 exists for. This directory is at the top of that list
+(`out_census.txt`, 84 such lines) — section 4's *"a control finding itself in the corpus it
+searches"* for the **fifth** time in this arc, and unlike R3's six self-hits **this one is true**.
+
+This is not a defect in tranche 4's finding, which is correct and is why the instrument exists. It is
+the same shape that finding had: a rule stated in the words nearest to hand, met by an instrument,
+and found to be measuring something slightly wider than it says.
+
+## 2. Both tranche-4 pins survive — and the check could have failed
+
+| transcript | byte | bag | permutation | declaration | verdict |
+|---|---|---|---|---|---|
+| `3b51/out_scope_text.txt` | no | no | 21 of 129 positions, 9 must move | 7 lines: AS_OF header + one blank | **holds** |
+| `1953/out_scope_text_3b51_rerun.txt` | no | no | 26 of 148 positions, 11 must move | 10 lines, **3 of them content** | **holds** |
+
+The second pin's residue is not pure header, and **its own commit message says so**: `23` → `24` plus
+one new address is what mg-0e77 published as *"its whole price"*. This is the first time anything
+could check that the published price was **the whole of it** — a fourth moved line would have printed
+as `UNDECLARED`. It did not.
+
+## 3. Neither hand figure reproduces, and `18 of 129` is not wrong so much as **undefined**
+
+Three defensible readings of *"permuted"*, over the same two diffs:
+
+    core positions holding a different line      21 and 26
+    lines that MUST move (core less its LCS)      9 and 11
+    lines a unified diff marks changed           25 and 32
+
+`18` is none of them, and `30` is none of the second column either. **The verdict does not move** —
+both pins still hold — so this is not a defect in tranche 4's conclusion. It is the reason condition 2
+needed an instrument: a number quoted in three files with nothing behind it cannot be re-taken, and
+nobody could tell **which quantity it was**. `permuted.py` prints two of the three and names which it
+decides on.
+
+## 4. `A DECLARED PERMUTATION` is made mechanical, and this file's own defect is enumerated
+
+`--declare <file>` is where the operator writes the expected residue down, one literal line per line.
+Matching is literal and **by occurrence** — declaring a line once does not excuse it twice, or §1's
+defect returns one level up, inside the mechanism built to catch it (`P14`).
+
+**The remedy is an artifact of the same kind as the defect.** A declaration written by *reading the
+diff* excuses that diff entirely and turns `CONTENT MOVED` into a silent pass. So every declared line
+is traced to a source **that is not the diff**, and the count that traces to nothing is printed:
+
+| provenance | meaning |
+|---|---|
+| `script` | a literal prefix of a `print(...)` in the pinned instrument's **source** at the pinning commit — the strong half: written in code, before any transcript existed |
+| `record` | a distinctive token appears in the pin's **published record** — commit message plus the README it landed with. **Declared weak**: one token is a low bar, and it is here because the 1953 pin's price was published in prose and nowhere else |
+| `blank` | an empty line. Carries no address, count or verdict, so excusing one excuses nothing |
+| `UNSOURCED` | traces to neither. **This is the circular-declaration detector** (`P15`) |
+
+Both shipped declarations come out `script` + `record` + `blank`, zero `UNSOURCED`.
+
+## 5. Reported, not repaired — **an over-count in R3, and it lands on the instrument tranche 4 pinned**
+
+R3 matches the invocation plus a following short-flag cluster. mg-0e77 controlled *"the word in
+prose"* with `N11` — but **N11 plants the bare word**, so a **sentence of commentary naming the
+invocation** fires the rule, and in an estate where every docstring names its own method that is not
+a rare shape.
+
+**Counted at `12aa5f8` rather than supposed:**
+
+    1384  .py/.sh tracked
+      92  R3 hits across them
+       3  sit on a COMMENT line, in 2 files
+
+And the file it lands hardest on is `audit_scope_text.py` — **the instrument tranche 4 pinned**.
+Its *only* two R3 hits are comments **explaining the defect it already repaired**: its corpus read is
+`git grep <rev>` now, and R3 is reading the sentences describing what it used to be. Condition 0 run
+on it today still prints `+R3: expect a permuted transcript`. That is precisely the failure `N9`'s
+rationale exists to prevent — *"every repaired instrument in the estate is told it is still
+defective"* — arriving **by prose** instead of by the git form.
+
+Found while writing `permuted.py`: an early draft carried the same shape, R3 fired, and **rewording
+the sentence made the hit go away**. That repairs nothing — it removes one file from a rule still
+wrong for the others — and it is recorded because a clean self-score would otherwise read as
+evidence. The shape is asserted as `N18`, a known-defect control in the form `N4`, `N5` and `C3`
+already take: teach R3 to see prose and N18 goes RED, which is the signal to update its declared
+self-hit count. **R3 is mg-0e77's rule and this is not its repair.**
+
+## 6. What tranche 5 leaves
+
+**No pin landed, and 25 instruments remain — unchanged.** This tranche bought condition 2 an
+instrument and re-checked everything measured against the old reading, which is what the ticket asked
+for; reporting that at the low water mark is what tranche 2's own README asks for.
+
+The ticket's *"three properties, measured per instrument"* now has its third measured rather than
+predicted. **R3 predicts a permutation from the subject's text; `permuted.py` measures whether one
+actually happened, in the transcript.** Those are different questions and the second is the one
+condition 2 asks — R3 fires on 17 of 43 candidate directories, and for every one of them condition 2
+must now be **scored** rather than eyeballed.
+
+**Blind spots, and they are load-bearing:**
+
+- **It is not a verdict on the pin.** Bag-identity plus a declared residue says the transcript's
+  *content* did not move. It says nothing about condition 1 (is the AS_OF an ancestor of
+  `origin/main`?), nothing about condition 3, and nothing about whether the permutation is the one
+  `git grep`'s sort predicts. **A pin at a commit in no branch passes here** — which is `mg-daba`'s
+  defect exactly, and it is condition 1's job and not this one's.
+- **It is not a reason to stop comparing bytes.** R3's permutation appears at the **pin transition**,
+  not run to run: mg-0e77 measured enumeration order to be a deterministic function of the set of
+  names. `./build.sh` and `mg-f771`'s fixed point are right to compare bytes and nothing here asks
+  them to loosen.
+- **`record` provenance is weak by construction and says so.** One distinctive token shared with a
+  commit message passes it. A declaration is only worth what its provenance is, and the strong half
+  is `script`.
+- `out_permuted.txt` **is** re-taken by a suite — `run_all.sh` runs it, unlike `pinnable.py` and
+  `ground_truth.sh` — because it needs no dirty tree. That is the one blind spot in this directory
+  this file does **not** inherit.
+
+---
+
 **Two entries in `out_ground_truth.txt` are not independent**, and are marked there:
 `n0_strike_audit_dd8b` reports `REPRODUCES` only because this branch had already pinned it when
 the sweep reached it, and `census_remainder_f8e5` reports `rc=143` because its worker was killed
