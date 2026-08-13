@@ -1,0 +1,59 @@
+==============================================================================
+mg-79ba A3 -- THE FOREIGN RE-AIMS, AND WHAT THEY BLOCK
+==============================================================================
+
+==============================================================================
+A3.1 -- THE MINIMAL REPAIR OF A1's FINDING, RUN THROUGH mg-17aa's OWN RE-AIMED VERIFIER
+==============================================================================
+  [HOLDS] verify_landing.py TARGET 3 freezes the conjunct A1 shows is a tautology, as a source literal
+  [HOLDS] and it freezes two more of mg-17aa's own source literals beside it -- the routing quantity and the clause's new home
+        so a THIRD forced gate, or any renaming of `blocked`, breaks it too -- the routing quantity is exactly what mg-17aa itself widened from one gate to two
+  [HOLDS] mg-17aa re-aimed this target because its PREVIOUS three literals had the same shape, and says so in the file
+        the diagnosis is right and is written down one screen above the three new literals
+  [HOLDS] baseline: the staged (unrepaired) tree runs verify_landing.py to exit 0, so the staging itself is not what breaks it
+        107 line(s) of output
+  [HOLDS] repair 'drop the tautological conjunct' leaves the BATTERY green (exit 0) -- the repair is honest and changes no verdict
+    drop the tautological conjunct         verify_landing exit 1
+      [BROKEN] and what the clause asserted is carried by a [CANNOT FAIL] row that FAILS if it is false (`theorem_absorb == 0 and theorem_blocked == theorem
+  [HOLDS] ...and it turns verify_landing.py RED (exit 1).  The battery the repair is FOR stays green; the instrument mg-17aa re-aimed goes red BECAUSE the repair happened
+  [HOLDS] repair 'keep it but say what it is' leaves the BATTERY green (exit 0) -- the repair is honest and changes no verdict
+    keep it but say what it is             verify_landing exit 1
+      [BROKEN] and what the clause asserted is carried by a [CANNOT FAIL] row that FAILS if it is false (`theorem_absorb == 0 and theorem_blocked == theorem
+  [HOLDS] ...and it turns verify_landing.py RED (exit 1).  The battery the repair is FOR stays green; the instrument mg-17aa re-aimed goes red BECAUSE the repair happened
+  [HOLDS] repair 'replace it with a contingent one' leaves the BATTERY green (exit 0) -- the repair is honest and changes no verdict
+    replace it with a contingent one       verify_landing exit 1
+      [BROKEN] and what the clause asserted is carried by a [CANNOT FAIL] row that FAILS if it is false (`theorem_absorb == 0 and theorem_blocked == theorem
+  [HOLDS] ...and it turns verify_landing.py RED (exit 1).  The battery the repair is FOR stays green; the instrument mg-17aa re-aimed goes red BECAUSE the repair happened
+  [HOLDS] ALL THREE SPELLINGS OF THE REPAIR ARE BLOCKED, so this is a property of the freeze and not of one wording.  A control that goes red the day its own ticket's defect is fixed is the shape mg-e35b named, the shape mg-17aa found four instances of, and the shape mg-17aa wrote a fifth instance of while removing the fourth
+        blocked: 3 of 3
+
+==============================================================================
+A3.2 -- THE OTHER RE-AIM: AN EXACT TWO-SIDED FREEZE ON ANOTHER AUDIT'S BROKEN COUNT
+==============================================================================
+  [HOLDS] d4_auditor_rerun.py scores another audit's BROKEN count with EXACT equality against a literal (`n == want_broken`)
+  [HOLDS] and mg-17aa moved the literal 4 -> 5 rather than the shape, so the next person to FIX one more of e3_seams.py's flagged claims makes it 6 and this instrument goes red on the improvement
+        the file's own comment for the change says exactly that: 'the claim is false BECAUSE THE DEFECT IT FLAGGED WAS FIXED -- an audit record going red the day its finding is acted on'
+  [HOLDS] THIS IS REPORTED, NOT DEMONSTRATED.  Turning it red needs an edit to code/face_geometry_audit_d0e2/e3_seams.py, which is a frozen audit document belonging to a third ticket, and mg-17aa's own reason for not editing it is a good one.  So the claim here is structural: `==` on a literal, moved by mg-17aa, two-sided
+        and the shape is INHERITED from mg-5f9a rather than introduced by mg-17aa -- what mg-17aa did was keep it while writing a paragraph about why the same shape elsewhere was a defect
+
+==============================================================================
+A3.3 -- P8 SCORED AS A MISS: THE TRANSCRIPT IS STALE AND mg-17aa IS NOT WHY
+==============================================================================
+  [HOLDS] code/face_geometry_audit_d0e2/out_e3_seams.txt DISAGREES with what e3_seams.py prints today
+        committed 4770 bytes, live 4768 bytes
+  [HOLDS] and it was ALREADY stale before mg-17aa: it was last written at 5988134, and the artifact it records has moved 7 times since -- mg-17aa is one of those 7 and not the first
+        5988134 docs+audit: independent audit of mg-5f9a / 5cae82c (the instrumented predicate) — THE REPAIR IS REAL A
+  [HOLDS] mg-17aa also did not HIDE it: the subject line names the change, d4's literal is moved to match, and the file states the policy in terms -- 'e3 is NOT edited: a document written to record a tree is corrected by saying which tree it recorded'
+        MY PREDICTION P8 GUESSED AT AN EDIT THAT WAS NEVER MADE OR A CONCEALMENT THAT DID NOT HAPPEN.  It is scored a MISS.  The underlying staleness is real and belongs to mg-d0e2's directory, not to this ticket
+
+==============================================================================
+A3.4 -- P9: THE PRINTED `on shape` COUNT
+==============================================================================
+  [HOLDS] the [CANNOT FAIL] row prints a per-gate split ending `%d on shape` and the shipped value is 0
+        the literal `0 on shape` appears 5 times in the artifact
+  [HOLDS] and it is FORCED to 0 by the same argument the file already uses two screens away, where it classes `shape_ok == app` as FORCED BY CONSTRUCTION -- no `incidence_mode` changes the facet count, so no shipped pair can violate the shape gate.  The count is not named as forced where it is printed
+        this is the SMALLEST finding in the suite and is listed as such: the row does say FORCED of the whole clause it belongs to, so a careful reader is not misled -- only an incurious one
+
+==============================================================================
+19 claim(s) scored; 0 BROKEN.
+==============================================================================

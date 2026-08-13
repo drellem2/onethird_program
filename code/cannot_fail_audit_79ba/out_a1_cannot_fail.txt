@@ -1,0 +1,89 @@
+==============================================================================
+mg-79ba A1 -- THE [CANNOT FAIL] ROW'S OWN [CANNOT FAIL] CONJUNCT
+==============================================================================
+
+==============================================================================
+A1.1 -- THE CONJUNCT IS AN IDENTITY, READ OUT OF THE SOURCE
+==============================================================================
+  [HOLDS] `negative_control_incidence` is present and parses
+  [HOLDS] `forced` is assigned exactly once in the function, and it is exactly `blocked == app` -- two plain names, no arithmetic
+        1 assignment(s) to `forced`; line 1719
+  [HOLDS] `theorem_blocked` and `theorem_app` are each written exactly twice: initialised to 0, then incremented at exactly one site
+        theorem_blocked: 2 write(s); theorem_app: 2 write(s)
+  [HOLDS] and each increment adds exactly the name the routing compares -- `theorem_blocked += blocked`, `theorem_app += app`
+  [HOLDS] both increments sit under exactly one `if`, and its test is the bare name `forced` -- so the two sums range over the SAME rows, namely those with `blocked == app`
+        theorem_blocked guarded by 1 if(s); theorem_app by 1
+  [HOLDS] THEREFORE `theorem_blocked == theorem_app` IS AN IDENTITY.  Sum of `blocked` over {rows : blocked == app} equals sum of `app` over the same set, term by term.  No input to this program can make the conjunct false, and none is attempted below because none exists
+  [HOLDS] the [CANNOT FAIL] row is in the committed artifact (it appears 2 times -- once as the row and once in the closing summary)
+  [HOLDS] and it prints the failure condition this section refutes -- "if some pair cleared both forced gates ... this row FAILS"
+  [HOLDS] and NOWHERE in the artifact is that conjunct called forced, identical, tautological or arithmetic -- the words the file uses freely of the OTHER forced conjuncts two screens away
+        the same row calls `rej == app` and `shape_ok == app` FORCED by name; this conjunct is not named at all
+
+==============================================================================
+A1.2 -- A PAIR THAT CLEARS BOTH FORCED GATES: THE ROW STAYS GREEN
+==============================================================================
+  [HOLDS] baseline: the shipped battery exits 0
+        45 scored rows
+  [HOLDS] the injection into row I4 lands as exactly one substitution at each of its two anchors
+        both anchors matched once
+  [HOLDS] the injection into row I1 lands as exactly one substitution at each of its two anchors
+        both anchors matched once
+
+  row I4: exit 0, 0 FAIL row(s), [CANNOT FAIL] row present=True
+  [HOLDS] row I4 -- one pair cleared BOTH forced gates and the battery still exits 0 with 0 FAIL rows.  The [CANNOT FAIL] row's own sentence says it FAILS here.  It does not: the row's routing drops that mutation out of `forced_rows`, so the row simply reports one corruption fewer
+        exit 0; FAIL rows: none
+  [HOLDS] row I4 -- and the clause DID move where mg-17aa says it moves: `absorb == 0` is back in that row's scored condition, which is the half of the design that works
+        the `else` branch mg-17aa kept is reached
+
+  row I1: exit 0, 0 FAIL row(s), [CANNOT FAIL] row present=True
+  [HOLDS] row I1 -- one pair cleared BOTH forced gates and the battery still exits 0 with 0 FAIL rows.  The [CANNOT FAIL] row's own sentence says it FAILS here.  It does not: the row's routing drops that mutation out of `forced_rows`, so the row simply reports one corruption fewer
+        exit 0; FAIL rows: none
+  [HOLDS] row I1 -- and the clause DID move where mg-17aa says it moves: `absorb == 0` is back in that row's scored condition, which is the half of the design that works
+        the `else` branch mg-17aa kept is reached
+
+==============================================================================
+A1.3 -- DELETION TEST ON THE CONJUNCT mg-17aa ADDED
+==============================================================================
+  [HOLDS] world 'real population': every anchor of both trees matched exactly once
+        keep: 0 missed, delete: 0 missed
+  real population                                                keep exit 0 / delete exit 0
+  [HOLDS] world 'a pair of I4 clears both forced gates': every anchor of both trees matched exactly once
+        keep: 0 missed, delete: 0 missed
+  a pair of I4 clears both forced gates                          keep exit 0 / delete exit 0
+  [HOLDS] world 'a pair of I1 clears both forced gates': every anchor of both trees matched exactly once
+        keep: 0 missed, delete: 0 missed
+  a pair of I1 clears both forced gates                          keep exit 0 / delete exit 0
+  [HOLDS] world 'a pair of I4 has a SHAPE mismatch': every anchor of both trees matched exactly once
+        keep: 0 missed, delete: 0 missed
+  a pair of I4 has a SHAPE mismatch                              keep exit 1 / delete exit 1
+  [HOLDS] world 'a pair of I4 is reported ABSORBABLE while its gates stay violated': every anchor of both trees matched exactly once
+        keep: 0 missed, delete: 0 missed
+  a pair of I4 is reported ABSORBABLE while its gates stay viola keep exit 1 / delete exit 1
+  [HOLDS] `theorem_blocked == theorem_app` is load-bearing on NO world built here, including the two the row's own sentence names.  That is the same verdict mg-17aa's V5 reaches about `rej == app` and `shape_ok == app` -- and mg-17aa CLASSIFIES those two and names them in the artifact.  This one it does not
+        load-bearing on: no world
+  [HOLDS] and the row is NOT unfalsifiable overall -- its other conjunct `theorem_absorb == 0` does go red, on the world where the two procedures disagree.  So the finding is scoped to one conjunct, not to the row
+        see the ABSORBABLE world above: it is the only world in this suite that turns the [CANNOT FAIL] row red
+  [HOLDS] exhibited: with one pair reported absorbable, the [CANNOT FAIL] row goes RED at exit 1.  WHAT THAT WORLD IS, said plainly: two procedures disagreeing, not a corruption behaving differently.  `gate_violations` and `absorbable_by_diagonal_twist` are both derived from S.A.S = B, so no honest input reaches it -- the row's remaining measured content is a CONSISTENCY CHECK BETWEEN TWO IMPLEMENTATIONS, which is worth having and is not what the row says it is
+        exit 1; [CANNOT FAIL] row red: True
+
+==============================================================================
+A1.4 -- THE CONJUNCT IT REPLACED WAS FALSIFIABLE.  SAME INPUT, BOTH TREES
+==============================================================================
+  [HOLDS] the pre-mg-17aa controls.py is readable at its pinned blob (122891 bytes)
+  [HOLDS] it carries the conjunct mg-17aa replaced, verbatim
+        the literal 'theorem_absorb == 0 and theorem_diag == theorem_app,' is present
+  [HOLDS] and it routes on the single gate
+  [HOLDS] the SHAPE-MISMATCH input applies to the pre-mg-17aa (pinned blob) tree at both anchors
+        ok
+  pre-mg-17aa (pinned blob)    exit 1, [CANNOT FAIL] row RED = True
+  [HOLDS] the SHAPE-MISMATCH input applies to the shipped tree at both anchors
+        ok
+  shipped                      exit 1, [CANNOT FAIL] row RED = False
+  [HOLDS] ONE INPUT, TWO TREES: a biting pair with a shape mismatch turns the PRE-mg-17aa [CANNOT FAIL] row RED and leaves the SHIPPED one GREEN.  The conjunct mg-17aa removed had a falsifying input; the conjunct it installed has none.  `diag_moved` is counted after the shape guard `continue`, so such a pair is in `app` and in neither diagonal bucket -- `blocked` is asked BEFORE that guard, deliberately and with a comment saying why, which is what closed the gap
+        pre: RED=True, shipped: RED=False
+  [HOLDS] AND THE CHANGE WAS RIGHT ON THE MATHEMATICS, which is why this is a reporting finding and not a repair request: a shape mismatch DOES block absorbability, so counting it as blocked is correct and the old row's red there was a false alarm.  What is owed is that the row stop printing a falsification condition it no longer has
+        the recommendation is in README.md section 4 and is one sentence of prose, not a scoring change
+
+==============================================================================
+31 claim(s) scored; 0 BROKEN.
+==============================================================================
