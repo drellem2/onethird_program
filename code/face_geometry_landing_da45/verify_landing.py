@@ -473,12 +473,23 @@ def target_3():
     cf = [l for l in out.split("\n") if l.strip().startswith("[CANNOT FAIL]")]
     theorem = [l for l in cf if ROW_CLAIM.search(l)]
     claims = ROW_CLAIM.findall(theorem[0]) if theorem else []
+    # NEITHER BOUND HERE IS AN EQUALITY, and the first draft of this row had
+    # both.  `len(conds) == 4` reddens the day a fifth corruption is added and
+    # `len(claims) >= 1` reddens the day the population makes every
+    # absorbability answer a real decision and the theorem row correctly
+    # DISAPPEARS -- two wrong-direction rows, in the target being repaired for
+    # exactly that.  What is owed is that nothing be claimed that is not
+    # decomposed, and that the rows this landing knows about are all present.
     check("[CONTINGENT] the battery PUBLISHES the decomposition this target "
           "reads: one scored condition per NEGATIVE CONTROL 4 row, conjunct by "
-          "conjunct with each conjunct's class, and a [CANNOT FAIL] row "
-          "carrying the rows whose answer it holds (%d row(s) decomposed, %d "
-          "row(s) claimed by the theorem row)" % (len(conds), len(claims)),
-          len(conds) == len(MODES) and len(claims) == len(conds),
+          "conjunct with each conjunct's class, and (while any row's answer is "
+          "forced) a [CANNOT FAIL] row naming the rows whose answer it holds "
+          "(%d row(s) decomposed, at least this landing's %d; %d row(s) claimed "
+          "by the theorem row, all of them decomposed)"
+          % (len(conds), len(MODES), len(claims)),
+          len(conds) >= len(MODES)
+          and all(t in conds for t, _ in MODES)
+          and {t for t, _, _ in claims} <= set(conds),
           "; ".join("%s = %s" % (t, c) for t, c in sorted(conds.items())))
     carried = {t for t, _, _ in claims}
     scored = {t for t, c in conds.items() if "absorb" in c.lower()}
@@ -498,9 +509,12 @@ def target_3():
           all((t in scored) != (t in carried) for t in conds))
     check("[CONTINGENT] and the theorem row's per-row claim is `absorbable on "
           "0 of them` for every row it carries, read out of its own published "
-          "counts rather than out of its prose (%s)"
-          % ", ".join("%s %s/%s" % c for c in claims),
-          bool(claims) and all(a == b for _, a, b in claims))
+          "counts rather than out of its prose (%s).  AN EMPTY LIST IS NOT A "
+          "FAILURE OF THIS ROW: no theorem row means the population returned "
+          "every absorbability answer to a scored decision, which is the "
+          "outcome this arc is trying to reach"
+          % (", ".join("%s %s/%s" % c for c in claims) or "no row is carried"),
+          all(a == b for _, a, b in claims))
 
     # --- what the battery IS, parsed by role ----------------------------
     site = resolve_theorem_site(ctree)
