@@ -22,4 +22,43 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-REFUSED — cannot read HEAD:code/twin_disposition_audit_3902/out_a1_prerepair.txt — a watched transcript with no committed copy is a question this control cannot answer
+§2  THE DISAGREEMENTS, SHOWN
+--------------------------------------------------------------------------------------------
+  Lines quoted after normalisation, so that this transcript cannot itself
+  smuggle a worktree path into the corpus.
+  `-` is the committed copy, `+` is this tree.
+
+  code/alias_agreement_06d1/out_g1_values.txt
+    @@ -29,0 +30,3 @@
+    + normalisation: 71 of 71 names declared, 71 in the identity frame, 1 convention(s
+    + identity canonicalisation vs the pre-479c comparison on this same input: 12 of 1
+    + 
+    @@ -33 +36 @@
+    - G1c  POSITIVE CONTROL — eight planted worlds, and the good input scored first
+    + G1c  POSITIVE CONTROL — fifteen planted worlds, and the good input scored first
+    @@ -55,0 +59,14 @@
+    ... 17 further hunk line(s) not shown
+
+  code/control_audit_9876/out_a4_sweep.txt
+    @@ -5 +5 @@
+    - population: 218 directories under code/
+    + population: 219 directories under code/
+    @@ -13 +13 @@
+    - 216 candidate site(s) in 74 of 218 directories
+    + 217 candidate site(s) in 75 of 219 directories
+    @@ -63 +63 @@
+    - … and 62 more directories, listed in full below
+    ... 14 further hunk line(s) not shown
+
+  code/control_gate_724a/out_gate.txt
+    @@ -8 +8 @@
+    - audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  41449 bytes
+    + audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  41473 bytes
+    @@ -27 +27 @@
+    - audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseli
+    + audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseli
+
+  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
+  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
+
+VERDICT: RED — 3 committed transcript(s) disagree with this tree.  0.14s

@@ -7,7 +7,7 @@ g1  THE AGREEMENT CHECK — mg-0d1b's 12 measured groups, compared
 G1a  RECOMPUTE — every scalar by the tree that owns it, through its own entry point
 ==============================================================================
 
-  80 columns from 12 trees in 30.0s
+  80 columns from 12 trees in 37.0s
   spread self-check against lib0d1b.spread on every pinned pair: 0 mismatches
 
 ==============================================================================
@@ -27,10 +27,13 @@ G1b  THE COMPARISON — pinned membership, mg-0d1b's tolerances, unmodified
   agree  1 - rho(A_1)              3 names   spread 0.000e+00   tol 0.000e+00
   agree  mu_pref (upper bound)     2 names   spread 1.108e-07   tol 1.108e-07
 
+  normalisation: 71 of 71 names declared, 71 in the identity frame, 1 convention(s) in use
+  identity canonicalisation vs the pre-479c comparison on this same input: 12 of 12 groups bit-identical
+
   bit-reproducibility: 12 of 12 groups reproduce the baseline's observed spread exactly (7 of them are exact-equality rows)
 
 ==============================================================================
-G1c  POSITIVE CONTROL — eight planted worlds, and the good input scored first
+G1c  POSITIVE CONTROL — fifteen planted worlds, and the good input scored first
 ==============================================================================
 
   THIS ROW OF THE CORPUS HAS ONLY EVER SEEN AGREEMENT.  mg-0d1b found 0 disagreements in
@@ -53,11 +56,25 @@ G1c  POSITIVE CONTROL — eight planted worlds, and the good input scored first
                       reported as TREE-BROKEN
     REFUSED-CORRECTLY W8 the SAME mutation as W2, checked at a typed 1e-6 instead of the carried 4.666e-10, must go GREEN — the decorative tolerance, demonstrated
                       a gate written from the ticket's own rounded quote would be this one
+    CAUGHT            W9a the doubled column under the PRE-479c comparison (norm=None, the code path W1-W8 falsify) — RED, and nothing can tell it otherwise
+                      this is the false red as it exists today: correct arithmetic, wrong verdict, and no field in which to say so
+    CAUGHT            W9b the factor is now DECLARED, but the group's tolerance is still mg-0d1b's RAW-frame max spread — must REFUSE rather than rescale it (E4)
+                      TOLERANCE-FRAME
+    REFUSED-CORRECTLY W9c the SAME columns with the factor AND a canonical tolerance declared — GREEN, and the false red is gone
+                      canonical spread 0.000000e+00 against the baseline's observed 0.000000e+00 — BIT-IDENTICAL, so canonicalising by 2 recovered the column exactly
+    CAUGHT            W9d the correctly-declared factor with ONE EXTRA ULP on top — RED, and the message says the spread is what is LEFT OVER after the normalisation
+                      a declared factor buys a FRAME, not slack
+    CAUGHT            W10 the SAME columns as W9c under the LIVE declarations (one shared convention) — RED, and the message must distinguish it from W9c
+                      states that both names declare one convention: True; states the exact constant ratio between the raw columns: True
+    CAUGHT            W11 the 2x silenced QUIETLY — factor 2 under the peers' OWN convention — must REFUSE (one convention cannot carry two factors)
+                      CONVENTION-SPLIT
+    CAUGHT            W12 the declaration for anticorrelation_c50b:leak(1) is REMOVED while its values still agree PERFECTLY — must REFUSE
+                      a missing field is not evidence that this name shares its group's convention
 
-    6 CAUGHT · 2 REFUSED-CORRECTLY · 0 unsatisfactory, of 8 arms
+    12 CAUGHT · 3 REFUSED-CORRECTLY · 0 unsatisfactory, of 15 arms
 
 ==============================================================================
 g1 RESULT
 ==============================================================================
   12 groups agree at mg-0d1b's measured tolerances; 0 falsification arms unsatisfactory.
-  recompute 30.0s · falsification 0.54s · total 30.6s
+  recompute 37.0s · falsification 0.64s · total 37.6s
