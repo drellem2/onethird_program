@@ -65,3 +65,46 @@ place it is pointed is worth exactly what it says and no more.
    coordinates with it rather than duplicating it (mail sent at start of run).
 4. **It reads no `.tex`.** The source is not in this repository; L4, Steps 1–6 and the
    definitions are carried on the record of the documents that read it.
+
+## 5. `a4_novelty` is pinned to an as-of commit (`mg-20ee`)
+
+`a4_novelty.py` prints **line numbers into files this instrument does not own** — its corpus is
+*every* `.md`/`.tex`/`.html` in the repository. Those addresses are not a property of anything
+`mg-7ae5` established; they are offsets into files every other ticket amends. That made
+`out_a4_novelty.txt` **non-reproducible by construction**, and it had already gone stale: a
+worktree re-run on 2026-08-13 moved 29 lines.
+
+The remedy is `mg-c824`'s, proven on `code/c3_audit_a94c3/a4_census.py`: **pin the bytes, do not
+reformat the numbers.** The corpus is read at a declared commit via `git ls-tree`/`git show`
+instead of from the working tree, and the transcript opens with an as-of stamp naming that commit
+and saying which of its lines are addresses and which are findings.
+
+**`AS_OF = 3fce8b9`, chosen on a measurement.** At that commit the previously-committed
+transcript reproduces **byte-identically** — checked before one line of it was edited, which is
+step 1 of the numbers-neutrality method passing. The regenerated transcript is `40 +/ 0 -` against
+the old one: the stamp is added and **not one existing line moves**.
+
+**The residual cost, stated rather than left to be found.** `3fce8b9` is reachable from
+`origin/polecat-p7ae5` — the branch that produced this instrument — but it is **not an ancestor of
+`main`**: the refinery rebased the branch and `main` carries the twin `1024bc2`. The two are *not*
+interchangeable, and the difference was measured: `1024bc2`'s corpus is 512 files against
+`3fce8b9`'s 508, and three raw-hit counts move with it (`15→18`, `16→17`, `49→51`). So `1024bc2`
+is recorded as a fallback with its price, not as an equivalent. If `3fce8b9` is ever pruned,
+`a4_novelty.py` **exits non-zero with that message** rather than falling back to a live read.
+
+**Both directions were measured, which is the acceptance.**
+
+- *Unchanged corpus*: two consecutive pinned runs are byte-identical, and the committed
+  transcript is a fixed point of `run_all.sh`.
+- *Changed corpus* (`A4_NOVELTY_AT=HEAD`): 46 lines differ. 16 of them are `raw hits:` counts and
+  the remaining 30 are addresses, per-file tallies, or the as-of block. **No classification
+  moves** — every `DECISIVE`/`NON-DECISIVE` verdict is identical.
+
+**The raw-hit counts are corpus-valued, and the stamp says so.** This is worth stating because
+getting it wrong would be the same error one level up. A count of how much of *the whole
+repository* mentions a phrase measures the repository, not `mg-7ae5` — as `a4`'s own closing
+paragraph already said ("Every count above is DOCUMENTARY, at this commit, over this file set").
+What `a4` concludes — the classifications and the ruling that a grep can show a *phrase* absent
+but never a *statement* — is unchanged.
+
+`A4_NOVELTY_AT=WORKTREE` restores the pre-pin behaviour exactly.

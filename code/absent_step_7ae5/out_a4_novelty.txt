@@ -1,7 +1,47 @@
 ==============================================================================
 mg-7ae5 / A4 — NOVELTY AND ATTEMPT SWEEP
 ==============================================================================
+AS-OF STAMP -- WHICH LINES BELOW ARE ADDRESSES AND WHICH ARE FINDINGS (mg-20ee)
+
+  corpus read at : 3fce8b9aabcfaa37475fbc6c1f3df3ebe971753c
+      AS_OF, the pinned default
+      reachable from origin/polecat-p7ae5; NOT an ancestor of main, and main's
+      twin 1024bc2 is not equivalent -- see a4_novelty.py's AS_OF note
+
+  EVERY `path:NNN` BELOW IS AN ADDRESS, NOT A FINDING.  Each is an offset into a
+  file this instrument DOES NOT OWN, and it moves whenever any other ticket
+  amends that file.  They are valid at the commit named above and nowhere else.
+  THE QUOTED LINE AFTER EACH ADDRESS IS THE PRIMARY ADDRESS -- it survives the
+  file moving; the number after the colon does not.  The two are ONE OBJECT: if
+  the corpus moves, expect BOTH to change together.  The same declaration covers
+  the hardcoded `STATE.md:29` in this script's epilogue, which is an address into
+  the same pinned corpus and is valid at the same commit.
+
+  CORPUS-VALUED TOO, and this is stated because getting it wrong would be the
+  same error one level up: the file count on the next line, EVERY `raw hits:`
+  COUNT, and every per-file tally.  This instrument's corpus is THE WHOLE
+  REPOSITORY, so a count of how much of it mentions a phrase measures the
+  repository and not mg-7ae5 -- as A4's own closing paragraph already says
+  ("Every count above is DOCUMENTARY, at this commit, over this file set").
+  MEASURED, NOT ASSERTED: against HEAD this run moves 46 lines, of which 16 are
+  raw-hit counts and the rest are addresses, tallies, or this block.
+
+  WHAT IS STABLE, and it is what A4 actually concludes: the pattern set, the
+  DECISIVE/NON-DECISIVE classification of each pattern, and the scope ruling in
+  the closing paragraph -- that a grep can establish a PHRASE is absent and never
+  that a STATEMENT is, so the pricing verdict rests on the READING of the hits
+  and not on their number.  Run with no environment set and this transcript
+  reproduces BYTE-IDENTICALLY, because the bytes read are pinned rather than
+  live.  To ask the same questions of the CURRENT corpus instead:
+
+      A4_NOVELTY_AT=HEAD python3 a4_novelty.py    (or =WORKTREE, or any commit)
+
+  which RE-MEASURES AND RE-ADDRESSES.  Compare the two runs' CLASSIFICATIONS; the
+  counts and the numbers after the colons are expected to differ, and their
+  differing is not a defect in either run.
+
 corpus: 508 .md/.tex/.html files at 3fce8b9, excluding code/absent_step_7ae5/
+  [a SIZE OF THE CORPUS at 3fce8b9, so it is corpus-valued like the addresses and not a finding]
 
 DECISIVE — decomposability identity: Delta_1 = 0 <=> ordinal sum
   raw hits: 7
