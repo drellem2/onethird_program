@@ -1,0 +1,30 @@
+============================================================================================
+mg-28b6 c0 — IS mg-0e8c's RESTATEMENT ACTUALLY APPLIED, AT EVERY SITE, RIGHT NOW?
+============================================================================================
+
+-- 1. SITES — every canonical site the restatement moved ------------------------
+
+site                         file                               verdict
+--------------------------------------------------------------------------------------------
+STATE.md L1b blockquote      STATE.md                           ok   (lines 21-21, carries mg-0e8c)
+STATE.md Axis-1 bullet       STATE.md                           ok   (lines 31-31, carries mg-0e8c)
+STATE.md mermaid node C      STATE.md                           ok   (lines 67-67, carries ε_sup)
+STATE.md mermaid edge B->C   STATE.md                           ok   (lines 72-72, carries ε_sup)
+STATE.md row 8               STATE.md                           ok   (lines 125-125, carries mg-0e8c)
+CONCEPTS.md §4 the bridge    docs/CONCEPTS.md                   ok   (lines 125-131, carries mg-0e8c)
+ProofShape §1 move 3         docs/OneThird-ProofShape-mg-3af8.md ok   (lines 23-61, carries mg-0e8c)
+ProofShape §4 statement      docs/OneThird-ProofShape-mg-3af8.md ok   (lines 270-288, carries mg-0e8c)
+twin formula block           docs/state-of-the-wall.html        ok   (lines 263-263, carries mg-0e8c)
+twin row-8 cell              docs/state-of-the-wall.html        ok   (lines 409-409, carries mg-0e8c)
+twin chain link B->C         docs/state-of-the-wall.html        ok   (lines 385-385, carries mg-28b6)
+twin chain node C            docs/state-of-the-wall.html        ok   (lines 386-386, carries mg-28b6)
+
+-- 2. BARE FORM — the existence phrasing in an L1b context, with no rider -------
+
+occurrences of the existence phrasing in an L1b context : 17
+…of those, BARE (no rider, no strike)                    : 0
+
+============================================================================================
+c0 GREEN: all 12 canonical sites carry the restatement, and 17 occurrences of the existence phrasing in an L1b context are each ridered or struck.
+Green here means the STRUCTURE is intact. It does NOT mean the sentences are true — see this file's docstring and c1's wrong-direction world.
+============================================================================================

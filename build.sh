@@ -87,13 +87,36 @@
 # one is THERE — the same split as mg-03cf's, and c1 measures it rather than asserting it, with
 # a wrong-direction world in which a pointer is swapped for a different well-formed item id and
 # the gate stays green ON PURPOSE.
+# --- mg-28b6 -------------------------------------------------------------------------------
+# A SIXTH SUITE JOINS THE GATE AND IT IS THE CHEAPEST OF ALL — 0.34 s measured.  THE WHOLE GATE
+# IS MEASURED AT 45.6 s ON THIS HOST WITH IT IN, and as with mg-602d's entry that number is a
+# run and not the addition arithmetic.
+#
+# WHAT IT GATES IS NOT A FILE — IT IS AN APPLIED FINDING.  mg-0e8c established on Daniel's
+# challenge that row 8 stated the programme's central open problem in a form its OWN PROVEN
+# constant discharges, restated the row, and reconciled the sites carrying the old phrasing.
+# Nothing checked that they STAY restated, and the failure mode is specific rather than generic:
+# the discharged phrasing is the SHORTER and more quotable one, so it is what a hurried edit
+# reaches for — and this corpus's own record has it being reached for twice (mg-345e:64,
+# mg-6bd1:200) before Daniel reached it a third time, from STATE.md's own words, unprompted.
+#
+# IT ALSO CLOSES A DECLARED BLIND SPOT RATHER THAN ADDING A NEW ONE.  The twin's proof-chain
+# prose is outside code/rendered_twin_pin_9bc2's coverage BY ITS OWN COVERAGE.md ("Anything
+# outside the ledger table ... its proof-chain prose ... is uncovered ... the historically most
+# common form of this defect is out of scope"), which is exactly where mg-0e8c's enumeration
+# lost a site and where mg-957a had NAMED the same lag a fortnight earlier and left it.  This
+# suite is the first thing in the estate that reads that prose.
+#
+# THE EDIT IS HERE, AGAIN, for the reason this file's header gives: refinery.toml alone would
+# put it on route 1 and leave default discovery reaching a gate list one suite short.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \
     code/state_ratchet_e331/run_all.sh \
     code/alias_agreement_06d1/run_all.sh \
     code/facts_registry_03cf/run_all.sh \
-    code/concepts_gate_602d/run_all.sh
+    code/concepts_gate_602d/run_all.sh \
+    code/l1b_application_28b6/run_all.sh
 do
     echo
     echo "############################################################ $suite"

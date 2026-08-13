@@ -189,7 +189,7 @@ mg-e331 — STATE.md SIZE RATCHET
   N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '21328', not a
   N12  a negative word count                       CAUGHT          verdict() was handed words=-1
   N13  every mutation above actually mutates       CAUGHT          4 of 4 planted values differ from the observ
-  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/pac
+  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/p28
 
   12 of 14 probes CAUGHT; 2 BOUNDARY (a transition, checked but NOT counted as a
   falsification); 0 explained-unfalsifiable; 0 hole(s)/setup failure(s); 0

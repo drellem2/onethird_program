@@ -331,3 +331,75 @@ carries the full enumeration of ways this remedy could have exhibited the defect
 | P5 | frozen class non-empty at `n ≤ 6` and **exactly the chains** | **HIT**, and it settles the disagreement with `mg-7c78`'s *"empty"*: the class is non-empty and carries **zero** posets with an incomparable pair, which is what that prediction meant |
 | P6 | four canonical sites, no fifth | **MISS** — there are **seven**: I missed `STATE.md:31` and `:67`, and `ProofShape` carries **two**, not one. The rendered twin's two cells make **nine**, and I predicted the twin would not be in scope; the merge gate disagreed and was right |
 | P7 | `ProofShape` §4 contradicts itself within 20 lines | **HIT** — nineteen lines at `:276`→`:295`, and a tighter one I did not predict at `:39`→`:46`, seven lines |
+
+---
+
+## 7. APPLICATION AUDIT — mg-28b6, the successor this document required
+
+*Appended by `mg-28b6`, 2026-08-13. The finding above is not re-litigated here: it is merged, it
+is measured over 5,230 posets, and it carries its own pre-correction defect in the record. This
+section records only whether it is APPLIED, where the enumeration in §5 lost a site, and what the
+ceiling-raise process owes.*
+
+### 7.1 The premise of the successor ticket was false, and that is the first finding
+
+`mg-28b6` was filed on the reading that *"the finding is not yet applied to the documents it is
+about."* **It was.** Every one of §5's nine canonical sites was already carrying its rider on
+arrival, in the same commit as the finding (`b364767`), with the ceiling raise banked in the
+commit that caused it (`CEILING.json`, 20,784 → 21,328). The four documents were read site by
+site before a line of `code/l1b_application_28b6/` existed; that table is in that directory's
+`README.md` §0.
+
+What the successor ticket did have to do is the **fourth** item of this document's own VERDICT
+REQUIRED clause — *the list of other sites carrying the same phrasing* — which §5 delivered least
+completely, and which `P6` scored as its only outright **MISS**.
+
+### 7.2 The site §5 missed: `docs/state-of-the-wall.html:385–386`
+
+The twin's **proof-chain** rendering of the very mermaid edge `B → C` and node `C` this work item
+moved at `STATE.md:67` and `:72`. It read *"**L1b** — bad mixing ⟹ λ_std → 1"* over a node
+labelled *"λ_std → 1 · near-ordinal-sum"* — i.e. the **LIMIT** rendering, which row 8's own cell
+calls *"a stronger rendering that happens to be available, not the requirement"*, standing where
+`STATE.md` now leads with the constant and names the **size** as the open content. **Restated by
+`mg-28b6`, old text struck rather than deleted**, in the convention §5 used at `:263` and `:409`.
+
+**§5's own reasoning predicted this miss and stopped one document short of it.** It argued the
+twin had to move *because* *"moving row 8 in `STATE.md` and not moving the twin is itself the
+defect the twin control exists to catch"* — and then took the twin's two **ledger** sites, which
+are the two the control can see. `code/rendered_twin_pin_9bc2/COVERAGE.md` says in its own words
+that proof-chain prose is uncovered and that *"the historically most common form of this defect is
+out of scope"*. `mg-957a` had **named this exact lag a fortnight earlier and left it** (`:249`).
+So the site was: known, recorded, uncovered, and adjacent to a red gate that could not reach it.
+
+**No re-pin.** `STATE.md` is byte-identical to what the pin already names, so re-pinning would
+have been `COVERAGE.md` item 4's *"caller who edits nothing and re-pins anyway"* — performed by
+the work item whose subject is that control's blind spot. The pin is green before and after, and
+**that green says nothing about `:385`**.
+
+### 7.3 The ceiling raise: none is due, and here is the arithmetic rather than the claim
+
+The successor ticket asked that the ceiling-raise process be documented and not bypassed.
+`code/state_ratchet_e331` measures **`STATE.md`** against `words_ceiling = 21328`, and `mg-28b6`
+adds **zero words to `STATE.md`** — the restatement is already there and the site it moved is in
+the rendered twin, which the ratchet does not measure. So the correct disposition is *no raise*,
+and the check is a run of the gate rather than an assertion (`sh build.sh`, exit 0, ratchet arm
+green). Raising the ceiling with nothing to bank would have been growth laundered through a
+process designed to make growth visible.
+
+### 7.4 What now asks the question, and what it cannot answer
+
+`code/l1b_application_28b6/` — two arms, **0.34 s**, wired into `build.sh`. `c0` checks **12**
+anchored sites (§5's nine, with this document's `STATE.md:67` split into the diagram's node and
+its edge, plus the two new twin chain sites) and sweeps the four canonical files for the
+discharged phrasing appearing in an L1b context without a rider or a strike. `c1` runs eight
+planted worlds; **seven fire or refuse, and the eighth stays green on purpose** — the discharged
+phrasing restored as row 8's lead with the rider left in place. The gate is on **STRUCTURE, not
+on truth**, and that world is the measurement of it.
+
+**Sites checked and deliberately left**, beyond §5's archival list: `docs/OneThird-L4-Threshold-eps0-mg-3969.md:500`
+(*"`ε_dem`'s FORM — an absolute constant uniform in `n` — IS reachable without `ε₀`"* — a claim
+about the **demand** side's form, correct in its own scope and not a statement of what L1b leaves
+open); `STATE.md:179–180` (`C₃^(III)` and `(L*)`, two other statements sharing the phrase — the
+reason `c0` requires an L1b token within 240 characters, and the reason `mg-8d63` swept *"for the
+CLAIM and not the phrase"*); and the deliverables that state the operative form with the symbol
+`ε_spec` rather than the existence claim (`mg-05ec`, `mg-409a`, `mg-7564`, `mg-9461`, `mg-145f`).
