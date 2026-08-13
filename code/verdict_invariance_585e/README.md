@@ -208,6 +208,26 @@ stderr**, where the build log keeps it and no tracked file does.  A directory wh
 subject is a transcript that cannot be a fixed point had, on its second run, a transcript that
 was not a fixed point.
 
+**mg-9876's SMELL INDEX COUNTS THIS DIRECTORY TWICE, THE DECISION IT COUNTED WAS REPAIRED, AND
+THE COUNT DID NOT MOVE — WHICH IS THE INTERESTING PART.**  The index goes
+`220 → 222 in 76 of 232 → 77 of 233`, and both sites are this directory's.  One was real:
+`v1` classified a committed version by `RED_MARK in text`, a membership test against a whole
+captured output — mg-9876 §1's smell exactly, in the arm that reads 31 transcripts.  That arm's
+own instruction is that a candidate is not a defect until it is **run both ways**, so it was:
+across all 31 versions the string occurs **0 times outside the `§2` heading**, so the loose form
+is not wrong today.  It is unguarded for tomorrow — one line of prose quoting the heading and
+every version reads RED forever — so the decision is now line-anchored.
+
+**And the index still reads 2, because running a predicate both ways means KEEPING the loose
+form in the file as the control.**  `loose_red` exists only to let `v1` §1 print
+`anchored and loose disagree: 0 of 31`.  mg-9876 §1 counts the site whether it is the decision
+or the control, and it cannot tell them apart — the same shape as `mg-9876`'s other rows that
+cannot read English.  **Reported and not repaired**, because that row belongs to mg-9876 and a
+branch that re-scoped another instrument's detector to make its own number look better would be
+doing the worse thing.  The second site, `lib585e.py`'s `if old not in text:`, is the guarded
+shape: it refuses when a sandbox patch anchor is absent, and its two-way run is `v0`'s `D1` and
+`D2`, which are exactly the worlds in which that anchor is gone.
+
 **Declared blind spots.** The sandboxes hold one watched transcript; nothing measured here says
 what `g0` does when several disagree at once, and `v3`'s claim is that the proposed report does
 not mention them at all — an argument, named as one.  Nothing runs the proposed report inside

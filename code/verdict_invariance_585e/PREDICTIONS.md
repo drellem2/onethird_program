@@ -99,7 +99,7 @@ function of is the tree **before** the repair and the file is committed into the
 | P4 | **CONFIRMED** — the report moves under a widened `N2`, one legible line | `v3` §2 |
 | P5 | **CONFIRMED** — exit 1, and stderr already names the disagreeing transcript | `v3` §3 |
 | P6 | **CONFIRMED, AND UNDERSTATED** — see below | `v3` §4 |
-| P7 | *pending — scored in the landing commit, after `./build.sh` runs on the committed tree* | commit history of this branch |
+| P7 | **CONFIRMED, EXACTLY** — `./build.sh` exit 1, `g0` RED naming `out_a4_sweep.txt` and `out_gate.txt`, second run and second commit required | this branch's own commits |
 | P8 | **CONFIRMED** — *is it repo state* is the wrong test; *does the repair move it* is the right one | `v2` §4 |
 
 **P2 was confirmed the expensive way.**  The prediction was about `g0`'s jitter.  It turned out
@@ -120,3 +120,11 @@ class.  ⚠ The 31 and the 30 are different quantities and their near-equality i
 `"def verdict_for"` is a prefix of `def verdict_for_RENAMED(`.  It did.  The matcher was
 tightened rather than the plant relaxed (README §7), and a plant that fires on its author's own
 construction is the only evidence that the plants are doing anything.
+
+**P7 is the one this branch paid for.**  `./build.sh` on the committed tree exited **1**, and
+`g0` wrote a RED `out_g0_fixed_point.txt` naming `code/control_audit_9876/out_a4_sweep.txt`
+(census `232 → 233`) and `code/control_gate_724a/out_gate.txt` (audit `52431 → 52458` bytes).
+Both are repaired by the landing commit that carries the RED transcript, so a **second**
+`./build.sh` and a **second commit** were needed to turn it green — the 32nd committed version
+is RED and the 33rd is the refresh.  The prediction is not clever; it is what §1 of the README
+says must happen, happening.

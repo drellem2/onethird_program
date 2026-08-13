@@ -70,6 +70,26 @@ def subject(h):
     return p.stdout.strip()
 
 
+def is_red(text):
+    """Is this committed version the RED shape?
+
+    LINE-ANCHORED ON THE §2 HEADING, and the first draft was not.  It read
+    `RED_MARK in text` — a membership test against a WHOLE captured output, which is
+    mg-9876 §1's smell exactly, and that arm counted it the moment this directory landed.
+    Run both ways before changing it, as that arm demands: over all 31 committed versions the
+    string occurs 0 times outside the heading, so the loose form is not wrong TODAY.  It is
+    unguarded for tomorrow — one line of §1 prose quoting the heading and every version reads
+    RED forever — and the anchored form costs nothing, so the candidate is removed rather than
+    filed.  The both-ways count is printed in §1 rather than asserted here.
+    """
+    return any(ln.startswith("§2") and RED_MARK in ln for ln in text.splitlines())
+
+
+def loose_red(text):
+    """The first draft's predicate, kept so §1 can print the disagreement between the two."""
+    return RED_MARK in text
+
+
 def main():
     print("=" * W)
     print("mg-585e v1  THE OSCILLATION IN THE RECORD — 'measured over five runs' re-taken over"
@@ -86,7 +106,8 @@ def main():
             files = touched(h)
             rows.append({
                 "h": h,
-                "red": RED_MARK in text,
+                "red": is_red(text),
+                "red_loose": loose_red(text),
                 "bytes": len(text.encode("utf-8")),
                 "solo": files == [L.F771_TRANSCRIPT],
                 "nfiles": len(files),
@@ -103,6 +124,14 @@ def main():
     print("  path                  %s" % L.F771_TRANSCRIPT)
     print("  Every figure below is a function of that commit and the walk it defines, so this")
     print("  transcript does not go stale when its subject is next touched.")
+    print()
+    disagree = [r for r in rows if r["red"] != r["red_loose"]]
+    print("  THE SHAPE TEST IS LINE-ANCHORED ON THE §2 HEADING, AND THE LOOSE FORM WAS RUN")
+    print("  BESIDE IT rather than reasoned about (mg-9876 §1 asks for exactly that).")
+    print("  versions where the anchored and loose predicates disagree      %d of %d"
+          % (len(disagree), len(rows)))
+    print("  So the loose form — `the string appears anywhere in the file` — is not wrong")
+    print("  today.  It is unguarded for tomorrow, and the anchored form costs nothing.")
     print()
 
     chrono = list(reversed(rows))
