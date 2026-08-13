@@ -1,0 +1,72 @@
+
+==============================================================================
+b2.1  TIER 0 — reads the pair marginals.  FACTORS BY DEFINITION.
+==============================================================================
+  [GREEN] FACTORS (computed): compression2 hypothesis (1) — max flip against L*   both 1/3   [mg-0fc6 a2.2]
+  [GREEN] FACTORS (computed): the distinguished extension L*  [Daniel's candidate 1]   both (0, 1, 2, 3, 4, 5)   [mg-0fc6 a2.3]
+  [GREEN] FACTORS (computed): delta(P) — the balance constant   both 1/3   [STATE.md glossary]
+  [GREEN] FACTORS (computed): the pair-bias multiset  [F8's key]   both 0 0 0 0 0 0 0 0 0 0 0 1/3 1/3 1/3 1/3   [docs/FACTS.md F8]
+       F19 ('at delta = 1/3 every incomparable pair is adjacent in e') and the dyadic merge tree
+       are in this tier too and are not separately evaluated: both are functions of delta and L*.
+
+==============================================================================
+b2.2  TIER 1 — reads the POSET P, or anything built from it.  FACTORS BY C1.
+==============================================================================
+  [GREEN] the two witnesses recover the SAME order relation   this row is C1 itself; every row below is a consequence of it
+  [GREEN] FACTORS (computed): e(P) — the number of linear extensions   both 9
+  [GREEN] FACTORS (computed): L(P) as a SET  [NOT supp(mu) — see b2.3]   both <9 items>
+  [GREEN] FACTORS (computed): the BK graph of L(P)  [DANIEL'S ORIGINAL QUESTION]   both <2 items>
+  [GREEN] FACTORS (computed): height of P   both 4
+  [GREEN] FACTORS (computed): width of P   both 2
+  [GREEN] FACTORS (computed): order dimension of P   both 2
+  [GREEN] FACTORS (computed): jump number of P   both 2
+  [GREEN] FACTORS (computed): number of antichains of P   both 11
+  [GREEN] FACTORS (computed): Mobius function mu(0-hat, 1-hat) — the order complex's reduced Euler characteristic   both -1
+  [GREEN] FACTORS (computed): F17: three mutually adjacent linear extensions of P   both False
+  [GREEN] FACTORS (computed): F22: P has no 3-element antichain   both True
+  [GREEN] FACTORS (computed): L(P) is a weak-order ideal under L*  [Daniel's Bruhat candidate]   both True
+       NOT EVALUATED ONE BY ONE, AND NOT NEEDED: the order polytope, the chain polytope, the
+       order complex's homotopy type, alpha (F8), F13's reversal symmetry, F15's equality set,
+       and the cohomology of the category of posets evaluated at P.  Each has P — or a functor
+       of P — as its ONLY input, so each is a function of pi by C1 and takes one value here.
+       The twelve computed rows above are the vacuity guard on that claim, not a sample of it.
+
+==============================================================================
+b2.3  TIER 2 — reads supp(mu).  DOES NOT FACTOR.  Testable only at b3's witness.
+==============================================================================
+  [GREEN] DOES NOT FACTOR (computed): L* is a member of the support   realizable True / not False
+  [GREEN] DOES NOT FACTOR (computed): |supp| equals e(P(pi))   realizable True / not False
+  [GREEN] DOES NOT FACTOR (computed): supp is a weak-order ideal under L*   realizable True / not False
+  [GREEN] DOES NOT FACTOR (computed): the BK graph of supp(mu)  [the SAME construction on the OTHER object]   realizable <12 edges> / not <0 edges>
+  [GREEN] and the witness really is marginal-equivalent   b3.2's set witness, inside hypothesis (1)
+       THE BK GRAPH APPEARS IN BOTH TIERS AND THAT IS THE ANSWER TO DANIEL'S OPENING QUESTION:
+       read on L(P) it is a function of the pair marginals and injects nothing; read on supp(mu)
+       it is not.  The object was never the issue — which set it is taken on is.
+       F17 IS ALSO A TIER-2 CANDIDATE when read on supp rather than on L(P), and it is BLIND on
+       both witnesses this directory has (b3.4).  Blind is not the same verdict as factors.
+
+==============================================================================
+b2.4  TIER 3 — reads the WEIGHTS.  DOES NOT FACTOR.  a2.3 is the witness.
+==============================================================================
+  [GREEN] DOES NOT FACTOR (computed): H(mu)   realizable 3.169925 / not 3.086049
+  [GREEN] DOES NOT FACTOR (computed): mu is uniform on its support   realizable True / not False
+  [GREEN] DOES NOT FACTOR (computed): max weight / min positive weight   realizable 1 / not 3
+       b4 shows the sharpest member of this tier — gap(mu) = log2 e(P(pi)) - H(mu), zero EXACTLY
+       on the realizable measures — and why it cannot be turned into a bound.
+
+==============================================================================
+b2.5  WHAT THIS ENUMERATION DOES NOT COVER — stated, because completeness was the ask
+==============================================================================
+       1. Functions of pi, P, supp and the weights are ALL of mu, so the tiering is exhaustive OVER
+          FUNCTIONS OF A SINGLE MEASURE.  It says nothing about maps whose input is a FAMILY of
+          measures, a poset TOGETHER with extra combinatorial data not determined by it, or an
+          object outside this category altogether.
+       2. 'Does not factor' is established by exhibiting disagreement, so it is exact.  'Factors' is
+          established for tiers 0 and 1 by PROOF (C1), not by agreement on a witness — but a row
+          whose tier is misassigned inherits the wrong verdict, and tier assignment is a reading of
+          the definition, not a measurement.
+       3. BLIND rows (F17 on supp) are neither: one evaluation, no proof either way.
+       4. n = 6 is ONE poset and n <= 4 is exhaustive.  Every count in this directory names its
+          population; no count here is asserted for general n.
+
+RESULT: GREEN — all checks passed

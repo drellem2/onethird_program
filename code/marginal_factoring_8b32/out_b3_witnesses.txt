@@ -1,0 +1,52 @@
+
+==============================================================================
+b3.1  THE WHOLE MARGINAL FIBER AT THE n = 6 HYPOTHESIS-POPULATION WITNESS
+==============================================================================
+       P has e(P) = 9; the fiber has dimension 4; L* = (0, 1, 2, 3, 4, 5)
+  [GREEN] the fiber is a polytope with more than one vertex   6 vertices, enumerated exactly
+  [GREEN] NOT ONE VERTEX IS REALIZABLE   the only realizable point of this fiber is Unif(L(P)), which is interior
+  [GREEN] every vertex has a SUPPORT STRICTLY SMALLER than L(P)   support sizes [3] against e(P) = 9
+       So a support-level witness INSIDE the hypothesis population exists and there are many:
+       same marginals as Unif(L(P)), different support, not realizable.
+  [GREEN] and at least one of them DOES NOT CONTAIN L*   4 of 6 vertices drop the majority order
+
+==============================================================================
+b3.2  IS THERE A SET-LEVEL WITNESS INSIDE THE HYPOTHESIS POPULATION?
+==============================================================================
+  [GREEN] the meet-in-the-middle finder agrees with NAIVE subset enumeration   207 posets at n = 3 and 4 with |L(P)| <= 12, every subset compared
+  [GREEN] and it agrees on the n = 6 witness too, against all 2^9 subsets naively   12 subsets found by both routes
+  [GREEN] A SET-LEVEL WITNESS EXISTS, AND IT IS INSIDE THE HYPOTHESIS POPULATION   12 proper subsets of L(P) share its marginals exactly; sizes [3, 6] against e(P) = 9; all 512 subsets tested
+  [GREEN] and NOT ONE of them is a linear-extension set   forced: same marginals give the same P, and a proper subset of L(P) is not L(P)
+       This is exactly the object the ticket asked for and expected might not exist — two SETS
+       of permutations with identical pair marginals, one a poset's L(P) and one not — and it
+       sits inside compression2's own hypothesis (1), which the two-atom witness does not.
+       SO EVERY SUPPORT-LEVEL CANDIDATE IS NOW TESTABLE, at a witness the note's own standing
+       assumption admits.
+  [GREEN] n = 3: posets admitting a proper same-marginal subset   1 of 13 (exhaustive over all labelled posets and ALL their subsets)
+  [GREEN] n = 4: posets admitting a proper same-marginal subset   27 of 195 (exhaustive over all labelled posets and ALL their subsets)
+       n = 3 example: L(P) = ((0, 1, 2), (0, 2, 1), (1, 0, 2), (1, 2, 0), (2, 0, 1), (2, 1, 0))   proper subset with identical marginals = ((0, 1, 2), (0, 2, 1), (1, 2, 0), (2, 1, 0))
+  [GREEN] and at n = 3 and 4 NONE of the carriers is in the hypothesis population   so the n = 6 witness above is the first one inside it, not a typical member
+       SCOPE, stated because these counts are the weakest claims in the directory: exhaustive at
+       n = 3 and n = 4 over all labelled posets and ALL their subsets, and exhaustive at the
+       single n = 6 witness poset.  n = 5 is NOT swept and n = 6 is ONE poset — the subset
+       enumeration is 2^|L(P)| and |L(P)| reaches 120 at n = 5.  The EXISTENCE claim above needs
+       only the one poset; the FREQUENCY counts say nothing above n = 4.
+
+==============================================================================
+b3.3  THE SUPPORT-LEVEL CANDIDATES, EVALUATED
+==============================================================================
+  [GREEN] SEPARATES: L* is a member of the support   realizable True / non-realizable False   [b3.1 fiber vertex, n = 6]
+  [GREEN] SEPARATES: the support is a weak-order ideal under L*   realizable True / non-realizable False   [b3.1 fiber vertex, n = 6]
+  [GREEN] SEPARATES: the support is a weak-order ideal under L*  [two-atom]   realizable True / non-realizable False   [two-atom, n = 4]
+  [GREEN] SEPARATES: |support| equals e(P(pi))   realizable True / non-realizable False   [b3.1 fiber vertex, n = 6]
+
+==============================================================================
+b3.4  AND THE CANDIDATES THAT ARE BLIND HERE — reported, not omitted
+==============================================================================
+  [GREEN] BLIND HERE (does not separate): F17: three mutually adjacent members exist   both False — this is ONE evaluation, not a proof that it factors
+  [GREEN] BLIND HERE (does not separate): F17, on the two-atom witness   both False — this is ONE evaluation, not a proof that it factors
+       F17 is TRUE of every linear-extension set (that is what makes it a fact) and is also true
+       of both non-realizable witnesses here, so it excludes nothing they contain.  That is a
+       statement about these witnesses, not a theorem about F17.
+
+RESULT: GREEN — all checks passed

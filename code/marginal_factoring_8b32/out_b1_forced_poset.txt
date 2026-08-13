@@ -1,0 +1,48 @@
+
+==============================================================================
+b1.1  C2 — distinct posets have distinct marginal vectors, and P is read off as {pi = 1}
+==============================================================================
+  [GREEN] n = 3: P = {pi = 1} recovers the poset EXACTLY   all 19 labelled posets
+  [GREEN] n = 3: the marginal vector determines the poset   19 distinct marginal vectors for 19 posets
+  [GREEN] n = 4: P = {pi = 1} recovers the poset EXACTLY   all 219 labelled posets
+  [GREEN] n = 4: the marginal vector determines the poset   219 distinct marginal vectors for 219 posets
+  [GREEN] n = 5: P = {pi = 1} recovers the poset EXACTLY   all 4231 labelled posets
+  [GREEN] n = 5: the marginal vector determines the poset   4231 distinct marginal vectors for 4231 posets
+
+==============================================================================
+b1.2  T1(a) and T1(b) — on measures that are NOT linear-extension measures
+==============================================================================
+  [GREEN] T1(a): {pi = 1} is a strict partial order on every measure tested   5 measures, none of them a poset's except the first
+  [GREEN] T1(b): supp(mu) is contained in L(P(pi)) on every measure tested
+
+==============================================================================
+b1.3  the n = 6 witness — SAME SHAPE AS a2.3, FOUND BY A DIFFERENT SEARCH
+==============================================================================
+  [GREEN] a hypothesis-population poset at n = 6 whose marginal fiber is NOT a point   e(P) = 9, kernel dimension 4
+       the whole n = 6 hypothesis population with L* = identity is 5 posets
+  [GREEN] mu1 and mu2 have IDENTICAL pair marginals
+  [GREEN] mu1 IS a linear-extension measure
+  [GREEN] mu2 is NOT a linear-extension measure   not uniform on its support
+  [GREEN] and they share a SUPPORT   so every predicate reading only the support agrees on them — b3's subject
+       H(mu1) = 3.169925   H(mu2) = 3.086049   log2 e(P) = 3.169925   — b4's subject
+
+==============================================================================
+b1.4  C1 — THE COLLAPSE, on that witness
+==============================================================================
+  [GREEN] P(mu1) = P(mu2) = P, recovered from the marginals alone   so the two measures do not even disagree about WHICH POSET they are about
+  [GREEN] hence L(P) is the same set for both — every SET-level function of L(P) agrees
+  [GREEN] hence L* is the same for both
+       C1: any function whose input is P — or L(P), or anything built from either — is a
+       function of pi, takes ONE value on this pair, and cannot inject realizability.
+
+==============================================================================
+b1.5  VACUITY CONTROL — the recovery does NOT recover the measure
+==============================================================================
+  [GREEN] the two-atom measure and Unif(S_6) have IDENTICAL pair marginals   every pair at 1/2
+  [GREEN] and both recover the SAME poset — the antichain
+  [GREEN] yet one is realizable and the other is not   support is not L(P): |L(P)|=720 vs |supp|=2
+  [GREEN] AND THEIR SUPPORTS DIFFER — 2 against 720   which is what b3 needs and a2.3's witness cannot supply
+       So `pi` determines P and does NOT determine mu.  The whole surplus is in the MEASURE:
+       its support and its weights.  Nothing about the poset is left over to be surplus.
+
+RESULT: GREEN — all checks passed

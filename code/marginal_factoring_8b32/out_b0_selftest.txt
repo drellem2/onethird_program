@@ -1,0 +1,41 @@
+
+==============================================================================
+b0.1  the poset enumerator, against the known labelled counts (OEIS A001035)
+==============================================================================
+  [GREEN] n = 1: labelled strict partial orders   1 (expected 1)
+  [GREEN] n = 2: labelled strict partial orders   3 (expected 3)
+  [GREEN] n = 3: labelled strict partial orders   19 (expected 19)
+  [GREEN] n = 4: labelled strict partial orders   219 (expected 219)
+  [GREEN] n = 5: labelled strict partial orders   4231 (expected 4231)
+
+==============================================================================
+b0.2  the linear-extension enumerator, against brute force over all n! permutations
+==============================================================================
+  [GREEN] L(P) agrees with filtering S_n by the order relation   all 19 posets at n=3, all 219 at n=4
+
+==============================================================================
+b0.3  the marginal map, against a direct count over the support
+==============================================================================
+  [GREEN] pi_xy = (# extensions with x before y) / e(P)   n = 3, 4 exhaustive
+
+==============================================================================
+b0.4  the realizability oracle, against BRUTE FORCE over every poset
+==============================================================================
+  [GREEN] oracle and brute force agree on every case   1002 measures, n = 3 and 4
+
+==============================================================================
+b0.5  NEGATIVE controls — the oracle must be able to say NO
+==============================================================================
+  [GREEN] a non-uniform tilt of Unif(S_4) is REJECTED   not uniform on its support
+  [GREEN] the two-atom measure is REJECTED   support is not L(P): |L(P)|=24 vs |supp|=2
+  [GREEN] Unif(S_4) itself is ACCEPTED   it is L(antichain)
+
+==============================================================================
+b0.6  the majority order L*, and the kernel of the marginal map
+==============================================================================
+  [GREEN] L* of a 4-chain is the chain itself
+  [GREEN] L* of the antichain does not exist   every pair is tied at 1/2
+  [GREEN] every returned kernel vector really moves NO pair marginal   n = 3, 4 exhaustive; kernel dimensions seen: [0, 1, 2, 3, 6, 17]
+  [GREEN] the kernel is non-trivial somewhere   so the fiber over a realizable marginal vector is not always a point
+
+RESULT: GREEN — all checks passed

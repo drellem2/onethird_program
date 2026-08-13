@@ -1,0 +1,40 @@
+
+==============================================================================
+b4.1  T4 — every point of a realizable fiber is supported inside L(P)
+==============================================================================
+  [GREEN] supp(nu) is inside L(P(pi)) for every fiber point tested   192 points, n = 3 and 4 exhaustive over posets and kernel directions
+  [GREEN] at the n = 6 witness no fiber point beats Unif(L(P)) on entropy   best of 8 perturbed points 3.000762 against log2 e(P) = 3.169925
+
+==============================================================================
+b4.2  THE SEPARATOR — explicit, exact, and it does NOT factor through the marginals
+==============================================================================
+  [GREEN] gap = 0.000000   realizable = True   [Unif(L(P)) at the n = 6 witness]
+  [GREEN] gap = 0.083876   realizable = False   [a2.3-shaped WEIGHT witness (same support)]
+  [GREEN] gap = 1.584963   realizable = False   [b3.2 SET witness (proper subset, same marginals)]
+  [GREEN] gap = 8.491853   realizable = False   [the two-atom measure]
+  [GREEN] the gap is zero EXACTLY on the realizable measures   H(mu) <= log2 e(P(pi)) with equality iff uniform on all of L(P(pi)) — T1(b) + T4
+       This is the object the ticket asked for, with ONE correction: it is a function of the
+       MEASURE, not of P.  By C1 no function of P can do this, so no such object exists there.
+
+==============================================================================
+b4.3  C4 — a FINITE set of realizable marginal vectors inside a FULL-DIMENSIONAL body
+==============================================================================
+  [GREEN] n = 4: posets inside hypothesis (1)   72 of 219 labelled posets — a FINITE set of marginal vectors
+  [GREEN] and the marginal vectors REACHABLE inside hypothesis (1) span the full space   affine dimension 6 of a possible 6
+       So M_n's marginal body is full-dimensional and the realizable points inside it are
+       finite in number.  C3 puts the WHOLE slack of the M_n ceiling on the non-realizable ones,
+       and C4 makes characterising that finite set the target — not a compression, and not a
+       function of P.
+
+==============================================================================
+b4.4  THE CAVEAT, MEASURED — the separator cannot become a bound
+==============================================================================
+  [GREEN] every hypothesis-population Unif(L(P)) has gap 0   72 measures
+  [GREEN] and every tilt off it has gap > 0   48 of 48
+       THE COST IS IN THE FORMULA.  gap(mu) = log2 e(P(pi)) - H(mu), and `log2 e(P)` is the very
+       quantity the programme is trying to bound.  So `gap = 0` is a perfect realizability
+       certificate and a circular one: substituting it into the M_n program returns the
+       un-relaxed problem.  A USEFUL constraint has to bound the gap ABOVE by something that is
+       not e(P) — and that is the successor question, stated in the deliverable.
+
+RESULT: GREEN — all checks passed
