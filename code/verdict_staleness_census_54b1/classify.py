@@ -23,6 +23,13 @@ DATE = os.environ.get("SWEEP_DATE", "(date not supplied)")
 HOST_NOTE = os.environ.get("SWEEP_NOTE", "")
 
 
+def _int(x):
+    try:
+        return int(x)
+    except (TypeError, ValueError):
+        return -1
+
+
 def hdr(t):
     print("=" * 78)
     print(t)
@@ -43,6 +50,11 @@ for line in open(tsv, encoding="utf-8"):
     diff = open(dp, encoding="utf-8", errors="replace").read() if os.path.exists(dp) else ""
     if cls == "TIMEOUT":
         verdict, ev = "TIMEOUT", {}
+    elif cls == "REPRODUCES" and (_int(rc) >= 2 or _int(secs) == 0):
+        # NOTHING CHANGED IS NOT THE SAME AS IT REPRODUCED.  A runner that
+        # dies before it writes anything leaves the tree exactly as clean as
+        # one whose transcripts came back byte-identical.  See §6.
+        verdict, ev = "NOT RUN", {}
     else:
         verdict, ev = L.classify_diff(diff)
     foreign = [c for c in changed
@@ -69,7 +81,7 @@ print("""  THE QUESTION mg-20ee's GROUND TRUTH DOES NOT ASK.  Its answer is DIFF
 print()
 
 order = {"VERDICT MOVED": 0, "DEAD": 1, "ADDRESSES ONLY": 2,
-         "REPRODUCES": 3, "TIMEOUT": 4}
+         "REPRODUCES": 3, "NOT RUN": 4, "TIMEOUT": 5}
 counts = {}
 for _r in rows:
     v = _r[1]
@@ -81,7 +93,8 @@ for k in sorted(counts, key=lambda x: order.get(x, 9)):
 print("  %-16s %5d" % ("TOTAL", len(rows)))
 print()
 
-measured = len(rows) - counts.get("TIMEOUT", 0)
+unmeasured = counts.get("TIMEOUT", 0) + counts.get("NOT RUN", 0)
+measured = len(rows) - unmeasured
 strong = counts.get("VERDICT MOVED", 0) + counts.get("DEAD", 0)
 if measured:
     print("  Of %d instruments the sweep could measure, %d are stale in the"
@@ -238,9 +251,41 @@ if to:
         print("      %-46s killed at %ss, host load %s" % (d, s, l or "not recorded"))
     print()
 
+nr = [(d, rc, s) for d, v, rc, s, _n, _e, _f, _l in rows if v == "NOT RUN"]
+if nr:
+    hdr("§6  NOT RUN -- 'NOTHING CHANGED' IS NOT 'IT REPRODUCED'")
+    print("""  A sweep that decides by `did the tree change?` cannot tell a transcript
+  that came back byte-identical from a runner that DIED BEFORE WRITING
+  ANYTHING.  Both leave the tree exactly as clean.  Found in this sample and
+  not reasoned about:""")
+    print()
+    for d, rc, s in nr:
+        print("      %-46s rc=%s in %ss" % (d, rc, s))
+    print("""
+  code/anticorrelation_c50b's run_all.sh has no `cd` to its own directory and
+  names `s0_selftest.py` bare, so run from the repository root it exits
+  immediately with `can't open file`.  That is a finding for its owner -- an
+  instrument nobody can re-take is past stale -- and it is ALSO a defect in
+  this sweep, which recorded it as REPRODUCES until this class existed.
+
+  THE HAZARD IS THE METHOD'S AND NOT THIS INSTRUMENT'S ALONE.
+  mg-20ee's ground_truth.sh decides the same way -- `sh "$d/run_all.sh"` from
+  the repository root, then `git diff -- "$d"` -- so its NINE `REPRODUCES`
+  rows carry the same question, and 13 of the 193 tracked run_all.sh in this
+  repository have no `cd` of their own.  Most of those are meant to be run
+  from the root and are fine; separating the two needs a per-instrument look,
+  which is NOT done here and is named instead.  This arm reports only what it
+  measured in its own sample.
+
+  THE TEST USED IS `nothing changed AND (rc >= 2 OR the run took 0 s)`, and it
+  is deliberately narrow: rc 0 and rc 1 are both normal exits for an audit in
+  this corpus -- mg-20ee's own transcript carries REPRODUCES rows at rc=1 --
+  so a refusal that exits 1 is invisible here and is not claimed otherwise.""")
+    print()
+
 print("=" * 78)
 print("SWEEP TOTAL STRONG: %d of %d measured (%d unmeasured)"
-      % (strong, measured, counts.get("TIMEOUT", 0)))
+      % (strong, measured, unmeasured))
 print("=" * 78)
 print()
 print("""WHY A PARTIAL SWEEP IS STILL A SAMPLE AND NOT A PREFIX.  The work list is the
