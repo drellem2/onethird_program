@@ -5,9 +5,9 @@ mg-e331 — STATE.md SIZE RATCHET
 §1  THE SUBJECT, MEASURED — the WORKING TREE, not a commit
 --------------------------------------------------------------------------------------------
   path              STATE.md
-  words             5099      <- THE GATED QUANTITY (len(text.split()))
-  bytes             34698
-  lines             210
+  words             5199      <- THE GATED QUANTITY (len(text.split()))
+  bytes             35466
+  lines             211
   longest line      4252 chars
   lines over 2000   1
 
@@ -21,10 +21,10 @@ mg-e331 — STATE.md SIZE RATCHET
 §2  THE DECLARED CEILING
 --------------------------------------------------------------------------------------------
   file              code/state_ratchet_e331/CEILING.json
-  words_ceiling     5099
-  tighten_below     4599
-  set_by            mg-5987   at 5099 words
-  observed          5099  (+0 against the ceiling)
+  words_ceiling     5199
+  tighten_below     4699
+  set_by            mg-ea7f   at 5199 words
+  observed          5199  (+0 against the ceiling)
 
   BANKED DOWN 21328 -> 14337 BY mg-14ad, 2026-08-13, AND THE CUT IS THE REMEDY THIS FILE
   ALREADY NAMED RATHER THAN A FRESH JUDGEMENT. out_p1_growth.txt §3 recorded the gap to
@@ -365,21 +365,42 @@ mg-e331 — STATE.md SIZE RATCHET
   6,000-word target STANDS and remains MET, now with 901 words of headroom instead of
   953. What the raise buys is that the growth is 52 words, it is declared, and the
   reason is written down. tighten_below MOVED 4547 -> 4599 WITH THE CEILING, preserving
+  this file's stated 500-word invariant. RAISED 5099 -> 5199 BY mg-ea7f, 2026-08-14, AND
+  THE 100 WORDS ARE ONE TABLE ROW. The row is in `Reference material, linked` and it
+  points at docs/OneThird-Cohomology-Arc-Index-mg-ea7f.md, the index of the
+  cohomological F-series -- F17+F18 (the Pos_n sphere theorem, GREEN and unconditional),
+  F28 (AMBER), F31 (RED, terminal for the Cech-bias route and retracting nothing
+  upstream) -- an arc that lives in the sibling repository one_third_width_three. WHY IT
+  CANNOT LIVE IN docs/state-history/, WHICH IS THE QUESTION THIS FIELD ASKS. That
+  directory is where a passage goes when the reader who needs it is the reader who has
+  already found the row -- per-attempt and per-row history, subordinate to a line in
+  this file. This row has no line above it to be subordinate TO: the F-series is
+  consumed by no ledger row and is not in this repository's chain, so relocating it
+  leaves nothing behind and the file returns to saying nothing about the arc. AND SAYING
+  NOTHING IS THE MEASURED DEFECT: at mg-ea7f this file, EXECUTIVE-SUMMARY.md and
+  README.md contained `cohomolog`, `homolog`, `sphere` and `Cech` 0, 0, 0 and 0 times,
+  and that absence let a GREEN unconditional result be answered as belonging to a
+  different programme and being closed (mg-e768, 2026-08-06). A pointer whose whole
+  purpose is to be hit by a reader who does NOT already know the arc exists cannot be
+  moved out of the summary without being deleted. The CONTENT is in the reference layer,
+  per this ticket's own constraint; only the pointer is here. THE COST IS DECLARED AND
+  NOT LAUNDERED: mg-ea0e's 6,000-word target STANDS and remains MET, with 801 words of
+  headroom instead of 901. tighten_below MOVED 4599 -> 4699 WITH THE CEILING, preserving
   this file's stated 500-word invariant.
 
 §3  CAN THIS RATCHET FAIL, AND CAN IT REFUSE?  Probes against THIS run's values
 --------------------------------------------------------------------------------------------
-  N1   one word past the ceiling                   CAUGHT          5100 words is +1 past the declared ceiling o
-  N2   the ceiling plus another whole file         CAUGHT          10198 words is +5099 past the declared ceili
-  N3   one word under the tighten point            CAUGHT          4598 words is 501 below the declared ceiling
-  N4   half the tighten point                      CAUGHT          2299 words is 2800 below the declared ceilin
-  N5   the ceiling edge is exactly where declared  BOUNDARY        5099 -> GREEN, 5100 -> ABOVE-CEILING
-  N6   the tighten edge is exactly where declared  BOUNDARY        4599 -> GREEN, 4598 -> SLACK-UNRATCHETED
+  N1   one word past the ceiling                   CAUGHT          5200 words is +1 past the declared ceiling o
+  N2   the ceiling plus another whole file         CAUGHT          10398 words is +5199 past the declared ceili
+  N3   one word under the tighten point            CAUGHT          4698 words is 501 below the declared ceiling
+  N4   half the tighten point                      CAUGHT          2349 words is 2850 below the declared ceilin
+  N5   the ceiling edge is exactly where declared  BOUNDARY        5199 -> GREEN, 5200 -> ABOVE-CEILING
+  N6   the tighten edge is exactly where declared  BOUNDARY        4699 -> GREEN, 4698 -> SLACK-UNRATCHETED
   N7   a ceiling with an empty `why`               CAUGHT          <probe N7>: `why` is empty.  See REQUIRED in
   N8   a ceiling missing words_ceiling             CAUGHT          <probe N8> is missing required field(s): wor
-  N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 9 c
-  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (5100) is above w
-  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '5099', not a 
+  N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 10 
+  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (5200) is above w
+  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '5199', not a 
   N12  a negative word count                       CAUGHT          verdict() was handed words=-1
   N13  every mutation above actually mutates       CAUGHT          4 of 4 planted values differ from the observ
   N14  STATE.md absent from the tree               CAUGHT          cannot read STATE.md.absent-by-construction-
@@ -389,7 +410,7 @@ mg-e331 — STATE.md SIZE RATCHET
   UNEXPLAINED unfalsifiable.  0.001s.
 
 ============================================================================================
-RATCHET VERDICT: GREEN — 5099 words, ceiling 5099, tighten below 4599.
+RATCHET VERDICT: GREEN — 5199 words, ceiling 5199, tighten below 4699.
 This ratchet was shown able to fire in both directions and to refuse in 7 worlds,
-on this run, against these values.  0.01s total.
+on this run, against these values.  0.00s total.
 ============================================================================================

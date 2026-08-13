@@ -6,4 +6,6 @@ Canonical, **any-width** state of the spectral / near-ordinal-sum attack on the 
 
 **Then, for the working record → [STATE.md](STATE.md)** — the two axes, the proof chain (proven vs open), the single open lemma (**L1b**), and the attempt index so nothing is re-walked. Rich rendered version: [docs/state-of-the-wall.html](docs/state-of-the-wall.html) — **hand-maintained, not generated, and subordinate to `STATE.md`.** It names the `STATE.md` revision it was last reconciled against, and `python3 code/rendered_twin_pin_9bc2/twin_pin.py` says which ledger rows have moved since. Run that before quoting a row from it.
 
+**Asking about cohomology, the `Pos_n` sphere theorem, or the Čech-bias route? → [docs/OneThird-Cohomology-Arc-Index-mg-ea7f.md](docs/OneThird-Cohomology-Arc-Index-mg-ea7f.md).** That arc lives in the sibling repository `one_third_width_three`, not here, and this index is the only thing about it in this repo: F17+F18 (the sphere theorem) **GREEN and unconditional**, F28 AMBER, F31 **RED for the closure route and retracting nothing upstream**. Read both halves — quoting one alone is how it was answered wrongly (mg-ea7f). The Frankl/union-closed cohomology arc is a **different**, separately closed thing.
+
 Maintained by pm-onethird; updated on every verdict. Deliberately not width-3-specific — the spectral skeleton has no width bound.

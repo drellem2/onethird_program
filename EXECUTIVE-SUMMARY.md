@@ -49,6 +49,20 @@ survives — is also unproven, though it is not the bottleneck. Beneath the wall
 concrete targets, any of which would move it: breaking a wrong-signed covariance, showing
 frozen posets cannot be too dense, and bounding mean displacement.
 
+**A sibling arc, elsewhere, and it is easy to answer wrongly.** A second and quite separate
+attack — cohomological rather than spectral — was pursued in the neighbouring
+`one_third_width_three` repository, and none of it is a link in the chain above. Two things about
+it have to be carried together or not at all. Its **sphere theorem is proven, unconditionally, for
+every size**: the space built from all the partial orders on a fixed set has the cohomology of a
+sphere, and a certain comparison map is injective at every size (F17 and F18). Its **closure route
+is dead**: the intended contradiction, which used local biases glued into a Čech class, was shown
+to have no force, and five routes to that closure are now walled (F31). Neither half licenses the
+other — the route is dead *and* the sphere theorem is alive — and quoting either alone is exactly
+how this got answered wrongly once already. Index and pointers:
+[`docs/OneThird-Cohomology-Arc-Index-mg-ea7f.md`](docs/OneThird-Cohomology-Arc-Index-mg-ea7f.md).
+A third, unrelated cohomological line lives in `union_closed` (Frankl) and is closed; it is **not**
+this one.
+
 **One caution about the record.** Several supporting facts are exhaustive checks over six or
 seven elements. Those can *refute* a universal claim but never establish one, and a
 counterexample's size is unknown and unbounded. Any summary sentence spanning several
@@ -68,3 +82,4 @@ method never will.
 - [`docs/CONCEPTS.md`](docs/CONCEPTS.md) — what the objects mean, in words before symbols.
 - [`docs/FACTS.md`](docs/FACTS.md) — measured facts with no current consumer.
 - [`docs/state-history/`](docs/state-history/) — per-attempt history, verbatim.
+- [`docs/OneThird-Cohomology-Arc-Index-mg-ea7f.md`](docs/OneThird-Cohomology-Arc-Index-mg-ea7f.md) — the cohomological F-series arc: where it lives, what is GREEN, what is walled.
