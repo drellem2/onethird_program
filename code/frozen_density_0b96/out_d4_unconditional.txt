@@ -1,0 +1,88 @@
+====================================================================================================
+mg-0b96  d4  the one unconditional upper bound on d under freezing, and what it is worth
+====================================================================================================
+
+m1  THE LEMMA -- an interchangeable pair forces delta >= 1/2, so it forces NOT FROZEN
+----------------------------------------------------------------------------------------------------
+    x != y with the same strict down-set and up-set: (x y) is an automorphism, so
+    Pr[x < y] = 1/2 exactly.  Verified by computing delta rather than by trusting the
+    symmetry argument -- the argument is the warrant, this is the check on the code.
+
+         n     posets    with a pair    delta < 1/2 verdict
+         2          2              1              0 OK
+         3          5              3              0 OK
+         4         16             10              0 OK
+         5         63             39              0 OK
+         6        318            192              0 OK
+         7       2045           1179              0 OK
+
+m2  THE BOUND -- at most one element comparable to nothing, so d <= 1 - ceil((n-1)/2)/C(n,2)
+----------------------------------------------------------------------------------------------------
+         n bound on d             decimal      measured   max d over posets
+                                               max d      with <= 1 isolated element
+         3 2/3                    0.666667     2/3        OK -- ATTAINED
+         4 2/3                    0.666667     2/3        OK -- ATTAINED
+         5 4/5                    0.800000     4/5        OK -- ATTAINED
+         6 4/5                    0.800000     4/5        OK -- ATTAINED
+         7 6/7                    0.857143     6/7        OK -- ATTAINED
+         8 6/7                    0.857143     6/7        OK -- ATTAINED
+
+    The right column is the SAME class the bound is proved for, measured, and the
+    sharpness verdict is READ OFF IT rather than asserted beside it:
+      attained at 6 of the 6 values of n swept  --  the bound is SHARP on its own class.
+    ⚠️  Sharp ON THIS CLASS is not sharp on the frozen class, which is empty; what is
+    measured is that the elementary argument cannot be tightened without a new idea,
+    not that a frozen poset attains it.
+
+m3  THE PRICE -- what that bound is worth in row 8's own currency
+----------------------------------------------------------------------------------------------------
+    eps_sup = d*n/(n+1), and the wall is down at eps_sup <= eps_dem = 1/50.
+
+          n d bound          eps_sup at it  eps_dem        short by a factor
+          8 0.857143         0.761905       1/50           38.1 x
+         15 0.933333         0.875000       1/50           43.8 x
+         20 0.947368         0.902256       1/50           45.1 x
+         50 0.979592         0.960384       1/50           48.0 x
+         99 0.989899         0.980000       1/50           49.0 x
+        300 0.996656         0.993344       1/50           49.7 x
+
+    AND IT MOVES THE WRONG WAY.  The bound is 1 - Theta(1/n): it improves on the
+    trivial d <= 1 by an amount that SHRINKS as n grows, while what row 8 needs is a
+    constant 2e-2 at every n.  At n = 99 -- the first n at which a primitive poset
+    could even meet the needed ceiling (d2 m3) -- it is short by a factor of ~49.
+
+m4  THE CEILING OF EVERY ARGUMENT OF THIS SHAPE:  max{ d(P) : P rigid }
+----------------------------------------------------------------------------------------------------
+    Peczarski (2017): a poset with a non-trivial automorphism satisfies the conjecture,
+    so a frozen poset is RIGID.  Rigidity is the weakest thing any `this small structure
+    forces a balanced pair' argument can force, so max d over rigid posets is a CEILING
+    on what the whole family of such arguments can ever deliver.
+
+         n     posets          rigid        max d        1 - 2/n
+         3          5              2          2/3            1/3
+         4         16              5          1/2            1/2
+         5         63             19         7/10            3/5
+         6        318            102        11/15            2/3
+         7       2045            730        17/21            5/7
+         8      16999           6857        11/14            3/4
+
+    ⚠️  This is an FP ceiling over the n it reaches and is NOT extrapolated.  What
+    carries past it is d3 m5's explicit family, which is rigid by construction at every
+    n it covers and has d -> 1.
+
+m5  WHAT WOULD HAVE TO BE TRUE, stated as a target and not as a finding
+----------------------------------------------------------------------------------------------------
+    For the density lever to close row 8, some argument would have to rule out every
+    frozen poset of density between 2e-2 and 1 - Theta(1/n).  By d1 that argument IS
+    the (1/3)-(2/3) conjecture on {d > 2e-2}; by d2 it delivers the conjecture at every
+    order below 99; by d3 no class exclusion on the record reaches into that band at
+    all, and there is an explicit poset in it at every n >= 15.
+
+    THE ONE THING THAT WOULD CHANGE THIS VERDICT, named so it can be looked for: a
+    result of the form `delta(P) >= f(d)' with f increasing and f(2e-2) >= 1/3 -- i.e.
+    a DENSITY-TO-BALANCE bound rather than a structure-to-balance one.  Nothing of that
+    shape appears in mg-33f5's survey or in this corpus.  It is not ruled out here.
+
+====================================================================================================
+VERDICT: GREEN
+====================================================================================================

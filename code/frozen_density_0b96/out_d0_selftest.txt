@@ -1,0 +1,97 @@
+====================================================================================================
+mg-0b96  d0  controls -- including the population warning and the must-say-YES control
+====================================================================================================
+
+T1  THE IMPORTED ENUMERATOR, RE-CHECKED HERE  (lib6ff4.all_classes vs OEIS A000112)
+----------------------------------------------------------------------------------------------------
+    The controls on lib6ff4 live in code/boundary_epsilon_6ff4/.  From THIS directory
+    that is an unchecked dependency, and this arm's subject is a claim nobody
+    re-checked, so the import is re-checked rather than trusted.
+
+      n=1        1 classes   A000112=      1   OK
+      n=2        2 classes   A000112=      2   OK
+      n=3        5 classes   A000112=      5   OK
+      n=4       16 classes   A000112=     16   OK
+      n=5       63 classes   A000112=     63   OK
+      n=6      318 classes   A000112=    318   OK
+      n=7     2045 classes   A000112=   2045   OK
+      n=8    16999 classes   A000112=  16999   OK
+
+T2  THE IMPORTED delta, AGAINST BRUTE FORCE OVER EVERY LINEAR EXTENSION
+----------------------------------------------------------------------------------------------------
+    lib6ff4 gets pair biases from a DP over order ideals; this control counts
+    extensions one at a time.  Two implementations, no shared step.
+
+      82 posets with an incomparable pair at n <= 5   disagreements: 0   OK
+
+T3  EACH CLASS PREDICATE AGAINST A HAND-BUILT WITNESS PAIR (one in, one out)
+----------------------------------------------------------------------------------------------------
+    Every predicate in lib0b96 is a LITERATURE CLASS whose DEFINITION is the thing
+    that could be wrong, and none of them existed anywhere in this repository before
+    this directory.  A wrong definition would silently move the residue of arm d3.
+
+      width ≤ 2 holds on the 4-chain                 got True  want True   OK
+      width ≤ 2 fails on the 4-antichain             got False want False  OK
+      height on the 4-chain is 4                     got True  want True   OK
+      height on the 4-antichain is 1                 got True  want True   OK
+      thinness of the 4-antichain is 3               got True  want True   OK
+      thinness of the 4-chain is 0                   got True  want True   OK
+      2+2 is NOT a semiorder                         got False want False  OK
+      3+1 is NOT a semiorder                         got False want False  OK
+      the 4-chain IS a semiorder                     got True  want True   OK
+      the N is NOT N-free                            got False want False  OK
+      the V IS N-free                                got True  want True   OK
+      the diamond's cover graph is no forest         got False want False  OK
+      the 4-chain's cover graph is a forest          got True  want True   OK
+      the 4-antichain is NOT rigid                   got False want False  OK
+      the 4-chain IS rigid                           got True  want True   OK
+
+T4  is_rigid AGAINST A FULL n! AUTOMORPHISM SEARCH, EXHAUSTIVE n <= 6
+----------------------------------------------------------------------------------------------------
+    is_rigid short-circuits on a discrete colour refinement.  That shortcut is exactly
+    the kind that is right on every poset anybody tries by hand and wrong on a class.
+
+      n=2       2 posets   disagreements: 0  OK
+      n=3       5 posets   disagreements: 0  OK
+      n=4      16 posets   disagreements: 0  OK
+      n=5      63 posets   disagreements: 0  OK
+      n=6     318 posets   disagreements: 0  OK
+
+T5  THE FAMILY CONSTRUCTOR'S CLOSURE IS A POSET (transitive, antisymmetric, irreflexive)
+----------------------------------------------------------------------------------------------------
+      F(n) for n = 15..24   axiom violations: 0   OK
+
+T6  WRONG-DIRECTION CONTROL 1 -- THE POPULATION WARNING, MEASURED HERE
+----------------------------------------------------------------------------------------------------
+    delta(P) < 1/3 STRICT is the frozen hypothesis.  If this instrument found one, the
+    (1/3)-(2/3) conjecture would be false and that would be the finding rather than
+    anything in this directory.  It finds none, and the zeros elsewhere in this
+    directory are zeros IN AN EMPTY POPULATION for that reason and no other.
+
+      n=2       2 posets   frozen (delta<1/3): 0   boundary (delta=1/3):   0   OK -- empty as expected
+      n=3       5 posets   frozen (delta<1/3): 0   boundary (delta=1/3):   1   OK -- empty as expected
+      n=4      16 posets   frozen (delta<1/3): 0   boundary (delta=1/3):   2   OK -- empty as expected
+      n=5      63 posets   frozen (delta<1/3): 0   boundary (delta=1/3):   3   OK -- empty as expected
+      n=6     318 posets   frozen (delta<1/3): 0   boundary (delta=1/3):   5   OK -- empty as expected
+      n=7    2045 posets   frozen (delta<1/3): 0   boundary (delta=1/3):   8   OK -- empty as expected
+      n=8   16999 posets   frozen (delta<1/3): 0   boundary (delta=1/3):  12   OK -- empty as expected
+
+T7  WRONG-DIRECTION CONTROL 2 -- THE MACHINERY MUST BE ABLE TO RETURN A YES
+----------------------------------------------------------------------------------------------------
+    Same question, non-empty class: max{ d(P) : delta(P) < 1/2 }, the PSEUDO-FROZEN
+    population.  A number strictly below 1 here is this instrument producing exactly
+    the shape of statement it reports as unavailable for the real hypothesis --
+    which is what makes that report a measurement and not a limitation of the tool.
+
+      n=3  population      1   max d = 2/3     (0.6667)  CEILING < 1
+      n=4  population      3   max d = 1/2     (0.5000)  CEILING < 1
+      n=5  population     16   max d = 7/10    (0.7000)  CEILING < 1
+      n=6  population     88   max d = 11/15   (0.7333)  CEILING < 1
+      n=7  population    671   max d = 17/21   (0.8095)  CEILING < 1
+
+      OK -- a real density ceiling on a real population, so a NO elsewhere in
+            this directory is a fact about the hypothesis, not about the tool.
+
+====================================================================================================
+VERDICT: GREEN
+====================================================================================================
