@@ -73,7 +73,7 @@ def load():
     if not os.path.exists(RECORD):
         return None, []
     header, bydir, heads = None, {}, set()
-    declared, declared_at = None, None
+    declared, declared_at, declared_over = None, None, None
     with open(RECORD, encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
@@ -92,6 +92,13 @@ def load():
                 # this report tells `nobody has declared` from `nothing has looked`.
                 if rec.get("declared") is not None:
                     declared, declared_at = rec["declared"], rec.get("head")
+                    # THE CENSUS'S OWN DENOMINATOR AND NOT THE SWEEP'S.  The first header
+                    # says how many transcripts THE SWEEP walked; a later `--only` header
+                    # says how many the TREE HAD WHEN THE CENSUS WAS TAKEN, and those are
+                    # different numbers the moment anybody adds a file.  Printing the
+                    # sweep's beside the census's date would be a figure about one
+                    # measurement wearing another's units.
+                    declared_over = rec.get("transcripts")
                 # THE FIRST HEADER WINS, and this is not a coin toss.  `--fresh` truncates,
                 # so the first header in the file is the SWEEP's; every later one belongs to
                 # a `--only` re-measurement of one directory and carries `dirs: 1`.  Taking
@@ -110,7 +117,7 @@ def load():
     if header is not None:
         heads.discard(header.get("head"))
         header = dict(header, foreign_heads=sorted(heads), declared=declared,
-                      declared_at=declared_at)
+                      declared_at=declared_at, declared_over=declared_over)
     return header, [bydir[k] for k in sorted(bydir)]
 
 
@@ -451,8 +458,12 @@ def main():
         e("  transcript declaring it cannot reproduce, which then REPRODUCES, is a FALSE")
         e("  DECLARATION and is reported as one.")
         e("")
-        e("  census taken at : %s  (over all %d tracked transcripts, not only the swept dirs)"
-          % ((header.get("declared_at") or "?")[:12], header["transcripts"]))
+        e("  census taken at : %s  over all %s tracked transcript(s) in the tree AT THAT"
+          % ((header.get("declared_at") or "?")[:12], header.get("declared_over")))
+        e("                    COMMIT — the whole tree, not only the swept directories, and")
+        e("                    not the %d this sweep walked.  A `--only` re-measurement of one"
+          % header["transcripts"])
+        e("                    suite still refreshes this census whole.")
         e("")
         e("  %5d  transcript(s) carry the marker" % len(header["declared"]))
         e("  %5d  of them are HONOURED — the marker carries a reason" % len(decl))

@@ -2,12 +2,17 @@
 # A TRUE RECORD WHOSE OWN PRODUCER CAN NO LONGER SEE IT.  DO NOT RE-RUN THIS.
 # =============================================================================
 #
-# NOT-A-FIXED-POINT: the producer pairs commits by subject inside `git log -n 40`
-# and main is hundreds of commits past this record, so a re-run writes a false 0
-# over a true 5.  Regenerating this transcript does not measure the corpus, it
-# measures how far main has moved.  See the note below; added by mg-5491, which
-# is the line `code/verdict_staleness_30bd` reads (lib30bd.DECLARATION) so that
-# a sweep records this rather than grading it.  Nothing else is altered.
+# NOT-A-FIXED-POINT: a re-run writes a false 0 over a true 5, per the note below.
+#
+# The producer pairs commits by subject inside `git log -n 40` and main is
+# hundreds of commits past this record, so regenerating this transcript does not
+# measure the corpus -- it measures how far main has moved.  The line above is
+# the literal `code/verdict_staleness_30bd` reads (lib30bd.DECLARATION), whose
+# sweep was re-running this file and grading the result as a stale verdict about
+# the corpus.  Added by mg-5491.  Nothing else is altered, and the bytes below
+# mg-a71f's end-of-note marker are still byte-identical to the blob at 47e56b3 --
+# `code/census_timeout_a71f`'s A2a' checks that on every run rather than promising
+# it, and its printed byte count above the marker moves with this edit.
 #
 # THE RECORD BELOW IS CORRECT.  `C1a` asserts that mg-132a's 5 commits were
 # REPLAYED onto a larger tree by the refinery's rebase.  They were.  Re-run

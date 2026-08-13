@@ -119,9 +119,32 @@ def grade(header, suites, doc):
             (f["strengthened"] if cls == "token" else f["weakened"]).append(
                 (pth, row["class"], cls))
 
+    # A ROW LEAVES THE STALE LIST FOR THREE DIFFERENT REASONS AND ONLY TWO OF THEM ARE GOOD
+    # NEWS.  mg-937c printed one line for all three — `DELETE this row from OWNERS.json` —
+    # and mg-5491 found the third by using it: re-measuring four suites turned
+    # `code/species_bound_repair_5040/out_r2_wiring.txt` from stale into RETIRED, and the
+    # reason was NOT that anybody repaired it.  The only two suites that had ever graded it
+    # stale stopped rewriting it, and the runner-blind pass that reached it was KILLED AT THE
+    # LIMIT.  So the record now contains no grade for it at all, and deleting its row would
+    # have shrunk the baseline by an UNMEASURED transcript while the arm stayed green.
+    # That is the shape this whole directory exists to catch, inside the remedy for it.
+    # `observed` DELIBERATELY KEEPS THE CLASSIFIER'S REAL ANSWER for a declared transcript —
+    # that is what §3b's false-declaration check reads — so `DECLARED` has to be asked of the
+    # CENSUS and not of the observations.  Asking the observations would classify every
+    # declared row as UNMEASURED, which is the opposite of true.
+    decl = R.honoured(header.get("declared"))
     for pth in sorted(rows):
-        if pth not in stale:
-            f["retired"].append((pth, rows[pth]["class"]))
+        if pth in stale:
+            continue
+        seen = [b for _d, b in observed.get(pth, [])]
+        p2b = (pass2[pth][0].get("bucket") if pth in pass2 else None)
+        if pth in decl:
+            why = "DECLARED"
+        elif any(b in L.BENIGN for b in seen) or p2b in L.BENIGN:
+            why = "REPRODUCES"
+        else:
+            why = "UNMEASURED"
+        f["retired"].append((pth, rows[pth]["class"], why))
 
     # ---- the hand fields that ARE falsifiable ------------------------------------------
     for pth, row in sorted(rows.items()):
@@ -178,7 +201,11 @@ def main():
 
     # ------------------------------------------------------------------ §1
     e(rule("="))
-    e("§1  THE STANDING: WHAT 150 ROWS OF READING CAME TO")
+    # COMPUTED, NOT TYPED.  This heading said `150` and the file said 151 the first time
+    # anybody added a row (mg-5491) — a hand-typed figure in the transcript-producing arm of
+    # the directory that counts hand-typed figures going stale.  mg-2959's own subject, in
+    # mg-937c's own §1 heading.
+    e("§1  THE STANDING: WHAT %d ROWS OF READING CAME TO" % len(doc["rows"]))
     e(rule("="))
     e("")
     by_cause, by_disp, by_read = {}, {}, {}
@@ -190,6 +217,15 @@ def main():
       % (len(rows), len({r["owner"] for r in rows.values()})))
     e("  WHOLE POINT OF THE FILE — a baseline nobody has read is a number that launders")
     e("  whatever was true on the day it was taken, which is why mg-30bd refused to set one.")
+    e("")
+    # THE BASELINE'S OWN SIZE, PRINTED BESIDE THE LIVE ONE (mg-5491).  It was prose until
+    # this line existed: `150` was quoted in this directory's README nine times and in its
+    # run_all.sh twice, and the moment the list actually moved not one transcript printed it
+    # — mg-2959's exact class, in the file mg-2959's arm grades.  Reading the two together
+    # is also the only way anybody can see that the list has BOTH shrunk and grown.
+    e("  DECLARED OVER %d ROW(S) AT %s, AND IT CARRIES %d NOW.  §4 says which rows left and"
+      % (doc.get("declared_rows", len(rows)), doc["corpus_at"], len(rows)))
+    e("  why; §3 says which arrived.  A baseline whose size is prose cannot show either.")
     e("")
     for k in sorted(by_cause, key=lambda k: (-by_cause[k], k)):
         e("  %5d  %-24s %s" % (by_cause[k], k, doc["causes"][k][:52]))
@@ -206,7 +242,8 @@ def main():
     e("         is the one figure here that cannot be overstated.")
     e("")
     e("  " + rule("-")[:86])
-    e("  AND THE STRUCTURAL FACT UNDERNEATH ALL 150, MEASURED RATHER THAN FELT:")
+    e("  AND THE STRUCTURAL FACT UNDERNEATH ALL %d, MEASURED RATHER THAN FELT:"
+      % len(stale))
     e("  " + rule("-")[:86])
     with open(os.path.join(ROOT, "build.sh"), encoding="utf-8") as fh:
         gated = gated_suites(fh.read())
@@ -327,10 +364,34 @@ def main():
     e("")
     if not f["retired"] and not f["weakened"]:
         e("  Nothing.  No row's transcript has left the verdict-stale list.")
-    for pth, cls in f["retired"]:
-        e("  RETIRED  %s  (was %s)" % (pth, cls))
-        e("           No longer verdict-stale in the record.  DELETE this row from")
-        e("           OWNERS.json; the baseline tightens and this arm stays green.")
+    else:
+        e("  A ROW LEAVES FOR THREE REASONS AND ONLY TWO OF THEM ARE GOOD NEWS (mg-5491).")
+        e("  REPRODUCES and DECLARED are decided and the row may go.  UNMEASURED IS NEITHER:")
+        e("  the record no longer contains a GRADE for that transcript — every observation of")
+        e("  it was killed or refused, or the suites that used to rewrite it stopped — so")
+        e("  deleting the row would shrink the baseline by a transcript NOBODY MEASURED.")
+        e("  Unmeasured is not clean, which is §6.3's rule one level in.")
+        e("")
+    unmeasured = [r for r in f["retired"] if r[2] == "UNMEASURED"]
+    for pth, cls, why in f["retired"]:
+        e("  RETIRED/%-10s %s  (was %s)" % (why, pth, cls))
+        if why == "REPRODUCES":
+            e("           The record regenerated it and graded it BENIGN.  A repair.  DELETE")
+            e("           this row from OWNERS.json; the baseline tightens and this stays green.")
+        elif why == "DECLARED":
+            e("           Its own text now declares it is not a fixed point, and §3b of")
+            e("           out_verdict_staleness.txt carries it with the bucket it would have")
+            e("           had.  DELETE this row; the entry has moved, not vanished.")
+        else:
+            e("           *** DO NOT DELETE THIS ROW.  No grade for it survives in the record:")
+            e("           it is UNMEASURED, not repaired.  Re-measure the suite that owns it")
+            e("           (`sweep.py --only <dir> --pass2`), then read the answer.")
+    if unmeasured:
+        e("")
+        e("  %d of the %d retirements above are UNMEASURED and the row STAYS.  Reported and"
+          % (len(unmeasured), len(f["retired"])))
+        e("  NOT graded: nothing here is this directory's defect, and a red would be asking a")
+        e("  branch to re-run somebody else's suite to get green.")
     for pth, was, now in f["weakened"]:
         e("  WEAKENED %s  %s -> %s" % (pth, was, now))
         e("           Amend the row's class.  Not growth and not graded.")
@@ -401,7 +462,8 @@ def main():
     e("     of out_verdict_staleness.txt.  Reported, not repaired — widening the detector")
     e("     moves report.py's annotations and that is a change to the corpus's record.")
     e("")
-    e("  5  AND THE ONE THAT OUTRANKS THEM.  A successor working only these 150 is working")
+    e("  5  AND THE ONE THAT OUTRANKS THEM.  A successor working only these %d is working"
+      % len(stale))
     e("     the list mg-30bd's instrument could see.  §6.6 of out_verdict_staleness.txt is")
     e("     unchanged and still owed: mg-6cb9 was found by a whole-run before/after diff,")
     e("     by accident, and not by any enumeration including this one.  What §1 above adds")
@@ -465,13 +527,17 @@ def plant(header, suites, doc):
     # P2  A ROW WHOSE TRANSCRIPT IS NO LONGER STALE IS RETIRED AND **GREEN**.  This is the
     #     polarity that matters: red here would be mg-e35b's red-on-improvement, and it is
     #     planted rather than promised.
-    d = copy.deepcopy(doc)
-    d["rows"]["code/nowhere_0000/out_repaired.txt"] = dict(
-        d["rows"][victim], cause="CORPUS-COUNT", disposition="PIN-AS-DATED", read="full")
-    f = run(d)
+    # THE EXPECTATION IS A DELTA AND NOT AN ABSOLUTE, AND THAT IS mg-5491's REPAIR TO THIS
+    # CONTROL.  It read `len(f["retired"]) == 1`, which held only while the live record had
+    # ZERO retirements — so the first branch to actually repair one of the 150 would have
+    # made this control fail, i.e. a control that goes red when its own subject improves.
+    # mg-e35b's shape, inside the world planted to demonstrate the opposite polarity.
+    base = run(doc)
+    f = run(_p2_world(doc, copy, victim))
     W_.append(("P2", "a repaired transcript -> RETIRED, and not GROWN",
-               (len(f["retired"]), len(f["grown"])),
-               len(f["retired"]) == 1 and not f["grown"]))
+               (len(f["retired"]) - len(base["retired"]), len(f["grown"])),
+               len(f["retired"]) - len(base["retired"]) == 1
+               and len(f["grown"]) == len(base["grown"])))
 
     # P3  number -> token IS GROWTH; token -> number IS NOT.
     tok = next(p for p, r in doc["rows"].items() if r["class"] == "token")
@@ -501,12 +567,24 @@ def plant(header, suites, doc):
     # P5  `RECORD-DISAGREES` IS CHECKED IN BOTH DIRECTIONS.  Claiming it falsely and
     #     dropping it where the record has one both fire — a one-sided check would let the
     #     harder half be deleted in silence, which is mg-9876's membership smell.
-    dis = next(p for p, r in doc["rows"].items() if r["cause"] == "RECORD-DISAGREES")
+    #
+    #     P5a PLANTS THE DISAGREEMENT INTO A COPY OF THE RECORD RATHER THAN LOOKING FOR ONE,
+    #     AND mg-5491 REWROTE IT FOR A REASON WORTH KEEPING.  It used to pick a live row
+    #     whose cause was already RECORD-DISAGREES — so the day somebody re-measured those
+    #     three suites and the disagreement was RESOLVED, this control had no subject and
+    #     failed.  It failed exactly that way on this branch.  A control that stops working
+    #     when its subject is repaired tests the corpus, not the instrument; this one now
+    #     builds the shape itself, out of a stale row and a synthetic OWNING observation
+    #     saying IDENTICAL, which is precisely the world mg-937c found three of.
+    dis, dis_suites = _plant_disagreement(suites, doc, copy)
     d = copy.deepcopy(doc)
+    d["rows"][dis]["cause"] = "RECORD-DISAGREES"
+    f0 = run(d, dis_suites)
     d["rows"][dis]["cause"] = "CORPUS-COUNT"
-    f = run(d)
+    f = run(d, dis_suites)
     W_.append(("P5a", "a RECORD-DISAGREES row relabelled -> caught",
-               len(f["bad_disagree"]), [x[0] for x in f["bad_disagree"]] == [dis]))
+               (len(f0["bad_disagree"]), [x[0] for x in f["bad_disagree"]]),
+               not f0["bad_disagree"] and [x[0] for x in f["bad_disagree"]] == [dis]))
     d = copy.deepcopy(doc)
     plain = next(p for p, r in doc["rows"].items() if r["cause"] == "SUBJECT-MOVED")
     d["rows"][plain]["cause"] = "RECORD-DISAGREES"
@@ -542,7 +620,7 @@ def plant(header, suites, doc):
     W_.append(("P8", "a row naming THIS arm's own transcript -> graded, not exempt",
                len(f["retired"]),
                "code/verdict_staleness_30bd/out_owners_937c.txt"
-               in [p for p, _c in f["retired"]]))
+               in [r[0] for r in f["retired"]]))
 
     # P9  mg-5491's DECLARATION, PUT TO THIS ARM AND NOT ONLY TO THE REPORT.  A transcript
     #     that declares itself not a fixed point leaves the stale list, so its row RETIRES —
@@ -554,11 +632,12 @@ def plant(header, suites, doc):
                      if p != "code/verdict_staleness_30bd/out_owners_937c.txt")[0]
     h = dict(header, declared={victim2: "planted by P9 — it reads a stream, not a tree"})
     f = grade(h, suites, doc)[0]
-    W_.append(("P9", "a DECLARED transcript -> RETIRED, and no finding",
-               (len(f["retired"]), len(f["grown"])),
-               victim2 in [p for p, _c in f["retired"]]
-               and not any(f[k] for k in ("grown", "strengthened", "bad_read",
-                                          "bad_disagree", "bad_vocab"))))
+    W_.append(("P9", "a DECLARED transcript -> RETIRED/DECLARED, and no NEW finding",
+               [(r[0], r[2]) for r in f["retired"] if r[0] == victim2],
+               (victim2, "DECLARED") in [(r[0], r[2]) for r in f["retired"]]
+               and all(len(f[k]) == len(base[k]) for k in ("grown", "strengthened",
+                                                           "bad_read", "bad_disagree",
+                                                           "bad_vocab"))))
 
     # P10 AND THE HALF THAT STOPS IT BEING AN ESCAPE HATCH.  A marker with NOTHING AFTER IT
     #     is not a declaration: it is honoured by nobody, the row stays stale, and the report
@@ -567,9 +646,59 @@ def plant(header, suites, doc):
     h = dict(header, declared={victim2: ""})
     f = grade(h, suites, doc)[0]
     W_.append(("P10", "a marker with NO REASON -> not honoured, the row stays",
-               len(f["retired"]), victim2 not in [p for p, _c in f["retired"]]))
+               len(f["retired"]), victim2 not in [r[0] for r in f["retired"]]))
+
+    # P11 THE THREE REASONS A ROW LEAVES ARE TOLD APART, AND THE ONE THAT MATTERS IS THE
+    #     THIRD.  P2's planted row names a path THE RECORD HAS NO GRADE FOR, which is the
+    #     exact shape that cost mg-937c a silent baseline shrink: leaving the stale list
+    #     because nobody measured it is NOT leaving because somebody repaired it, and only
+    #     the second may be deleted.  Planted on the same world P2 uses, so the two read the
+    #     same mutation and disagree about nothing except the question asked.
+    got = [r[2] for r in run(_p2_world(doc, copy, victim))["retired"]
+           if r[0] == "code/nowhere_0000/out_repaired.txt"]
+    W_.append(("P11", "a row the record has NO GRADE for -> RETIRED/UNMEASURED, not REPRODUCES",
+               got, got == ["UNMEASURED"]))
 
     return W_, sum(1 for _n, _w, _g, ok in W_ if not ok)
+
+
+def _plant_disagreement(suites, doc, copy):
+    """(path, mutated suites) — a stale row whose OWNING runner reproduces it byte-identically.
+
+    Built rather than found.  Take a stale transcript its own directory observed; flip that
+    observation to IDENTICAL in a COPY of the record, and add a synthetic FOREIGN suite
+    carrying the stale grade the owner just gave up — same hunk, same `dropped`, so the
+    `read` field stays consistent and P5a cannot pass by accidentally firing `bad_read`.
+    The result is the exact shape `report.py`'s `disagreement()` calls THE OWNING RUNNER
+    REPRODUCES THIS BYTE-IDENTICALLY, and it exists whether or not the corpus has one.
+    """
+    s2 = copy.deepcopy(suites)
+    for suite in s2:
+        if "error" in suite or suite.get("timeout") or suite.get("rc") == 2:
+            continue
+        for row in suite.get("rows", []):
+            pth = row["path"]
+            if (row.get("bucket") not in L.VERDICT_STALE or not row.get("rewritten")
+                    or os.path.dirname(pth) != suite["dir"] or pth not in doc["rows"]):
+                continue
+            foreign = {"kind": "suite", "dir": "code/planted_foreign_5491", "rc": 0,
+                       "timeout": False, "secs": 0.0, "owned": [], "rewritten": [pth],
+                       "rows": [dict(row)]}
+            row["bucket"] = L.IDENTICAL
+            row["detail"] = ""
+            row.pop("hunk", None)
+            row.pop("dropped", None)
+            s2.append(foreign)
+            return pth, s2
+    raise AssertionError("no stale transcript observed by its own runner to plant on")
+
+
+def _p2_world(doc, copy, victim):
+    """P2's mutation, built once and used by P2 and P11 so they cannot drift apart."""
+    d = copy.deepcopy(doc)
+    d["rows"]["code/nowhere_0000/out_repaired.txt"] = dict(
+        d["rows"][victim], cause="CORPUS-COUNT", disposition="PIN-AS-DATED", read="full")
+    return d
 
 
 if __name__ == "__main__":
