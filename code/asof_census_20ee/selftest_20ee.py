@@ -195,12 +195,48 @@ check("C4 the exec token may stand on a LATER line",
       "same-line-only rule would have reported half the estate as inert.")
 
 print()
+print("THE CONTROL FOR THE CRASH THAT MADE THIS CENSUS UNUSABLE (mg-4020)")
+print("-" * 78)
+print()
+print("  `git grep` exits 1 for NO MATCH and 2+ for a real error, and this")
+print("  census read every non-zero as fatal.  So a subject script that")
+print("  nothing outside its own directory names -- a library, a numbered")
+print("  step, or ANY run_all.sh, since a shared basename is searched by full")
+print("  path -- took the whole run down.  MEASURED: it died on 23 of the 27")
+print("  instruments still on mg-20ee's pinning work-list, and ran on 4, one")
+print("  of which is the single subject it was built against.  The evidence")
+print("  that it worked came entirely from the one directory where every")
+print("  script happened to be named elsewhere.")
+print()
+
+check("C5 a needle nothing outside the subject names",
+      consumers.git_grep_l("zzz_no_such_script_mg4020.py", ("*.py", "*.sh")),
+      [],
+      "FINDING NOTHING IS AN ANSWER, and it is the ordinary answer for a "
+      "library or a numbered step. Before this it was a crash, after a "
+      "correct-looking header had already printed.")
+
+_narrow = "no SystemExit -- rc>=2 was swallowed"
+try:
+    consumers.git_grep_l("x", (":(bogus)x",))
+except SystemExit:
+    _narrow = "SystemExit"
+
+check("C6 a REAL git error is still fatal",
+      _narrow, "SystemExit",
+      "THE NEGATIVE HALF, AND IT CARRIES THE WEIGHT. Widening the tolerance "
+      "to `any non-zero means empty` would turn a bad pathspec or a broken "
+      "index into a census of nothing that reports `none` in section A -- "
+      "which reads exactly like a subject no instrument consumes. Only rc 1 "
+      "is no-match; rc 2 and above stays fatal.")
+
+print()
 print("=" * 78)
 if FAILED:
     print("RED — %d control(s) failed: %s" % (len(FAILED), ", ".join(FAILED)))
 else:
     print("GREEN — 2 positive, 4 negative and 1 known-defect control on the "
-          "address census, and 3 positive plus 1 known-defect control on the "
-          "consumer census, all land where they must.")
+          "address census, and 3 positive, 1 known-defect and 2 rc-tolerance "
+          "controls on the consumer census, all land where they must.")
 print("=" * 78)
 raise SystemExit(1 if FAILED else 0)

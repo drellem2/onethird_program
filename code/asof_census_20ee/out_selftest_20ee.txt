@@ -45,6 +45,24 @@ CONTROLS ON consumers.py — mg-20ee's THIRD CONDITION (mg-6e4f)
   PASS C4 the exec token may stand on a LATER line          
         a two-line call is the common formatting in this repository and a same-line-only rule would have reported half the estate as inert.
 
+THE CONTROL FOR THE CRASH THAT MADE THIS CENSUS UNUSABLE (mg-4020)
+------------------------------------------------------------------------------
+
+  `git grep` exits 1 for NO MATCH and 2+ for a real error, and this
+  census read every non-zero as fatal.  So a subject script that
+  nothing outside its own directory names -- a library, a numbered
+  step, or ANY run_all.sh, since a shared basename is searched by full
+  path -- took the whole run down.  MEASURED: it died on 23 of the 27
+  instruments still on mg-20ee's pinning work-list, and ran on 4, one
+  of which is the single subject it was built against.  The evidence
+  that it worked came entirely from the one directory where every
+  script happened to be named elsewhere.
+
+  PASS C5 a needle nothing outside the subject names        
+        FINDING NOTHING IS AN ANSWER, and it is the ordinary answer for a library or a numbered step. Before this it was a crash, after a correct-looking header had already printed.
+  PASS C6 a REAL git error is still fatal                   
+        THE NEGATIVE HALF, AND IT CARRIES THE WEIGHT. Widening the tolerance to `any non-zero means empty` would turn a bad pathspec or a broken index into a census of nothing that reports `none` in section A -- which reads exactly like a subject no instrument consumes. Only rc 1 is no-match; rc 2 and above stays fatal.
+
 ==============================================================================
-GREEN — 2 positive, 4 negative and 1 known-defect control on the address census, and 3 positive plus 1 known-defect control on the consumer census, all land where they must.
+GREEN — 2 positive, 4 negative and 1 known-defect control on the address census, and 3 positive, 1 known-defect and 2 rc-tolerance controls on the consumer census, all land where they must.
 ==============================================================================

@@ -124,6 +124,51 @@ def git(*args):
     return got.stdout.decode("utf-8", "surrogateescape")
 
 
+def git_grep_l(needle, globs):
+    """`git grep -l -F` over HEAD, where FINDING NOTHING IS AN ANSWER.
+
+    mg-4020, measured: `git grep` exits 1 for NO MATCH and 2 or more for a
+    real error, and git() above treats every non-zero the same way.  So a
+    subject script that nothing outside its own directory names -- which is
+    the ORDINARY case for a library or a numbered step -- killed this census
+    outright, after it had printed a correct-looking header.
+
+    IT DIED ON 23 OF THE 27 INSTRUMENTS THE PINNING WORK-LIST STILL HOLDS.
+    It ran on 4, one of which is the single subject it was built against, so
+    the whole of its evidence that it worked came from the one directory
+    where every script happened to be named somewhere else.  That is not a
+    rare case reached at last; it is the common case, never reached.
+
+    THE REPAIR THAT MADE THIS CENSUS CORRECT IS WHAT MADE IT FATAL, which is
+    mg-6e4f's `a repair can introduce the defect it repairs` arriving by a
+    second route.  `A BASENAME IS NOT A NAME` searches a SHARED basename by
+    its full repository path, and `code/audit_2c77/run_all.sh` appears in no
+    other tracked file -- so the very rule that stopped this census reporting
+    every README in the estate as a consumer is the rule that guaranteed it
+    would find nothing, and finding nothing was fatal.  Four of the crashes
+    above are that rule and nothing else.
+
+    THE TOLERANCE IS DELIBERATELY NARROW.  rc 1 is `no match` and returns
+    empty; rc 2 and above is a bad glob, a bad revision, a broken index, and
+    stays fatal through git().  Widening this to `any non-zero is empty`
+    would turn a mistyped revision into a silent census of nothing -- and a
+    census that reports `none` because it never looked is the exact failure
+    section A's own wording is written against.
+    """
+    got = subprocess.run(["git", "-C", ROOT, "grep", "-l", "-F", needle,
+                          "HEAD", "--", *globs], capture_output=True)
+    if got.returncode == 1:
+        return []
+    if got.returncode != 0:
+        raise SystemExit("consumers: git grep -F %s failed (rc=%d): %s"
+                         % (needle, got.returncode,
+                            got.stderr.decode("utf-8", "replace").strip()))
+    out = []
+    for path in got.stdout.decode("utf-8", "surrogateescape").splitlines():
+        out.append(path.split(":", 1)[1] if path.startswith("HEAD:") else path)
+    return out
+
+
 def scripts_of(subject):
     """The tracked *.py / *.sh in the subject directory."""
     out = []
@@ -229,17 +274,17 @@ def main(subject):
 
     prose = 0
     by_kind = {"EXEC-NO-ARG": [], "EXEC-EXPLICIT-PATH": [], "MENTION": []}
+    unnamed = []
     for s, needle in needles:
-        for path in git("grep", "-l", "-F", needle, "HEAD", "--",
-                        *CODE_GLOBS).splitlines():
-            path = path.split(":", 1)[1] if path.startswith("HEAD:") else path
+        hits = git_grep_l(needle, CODE_GLOBS)
+        if not hits:
+            unnamed.append(os.path.basename(s))
+        for path in hits:
             if path.startswith(subject + "/") or path.startswith(SELF + "/"):
                 continue
             for kind, lineno, ln in classify(path, needle):
                 by_kind[kind].append((path, os.path.basename(s), lineno, ln))
-        for path in git("grep", "-l", "-F", needle, "HEAD", "--",
-                        *PROSE_GLOBS).splitlines():
-            path = path.split(":", 1)[1] if path.startswith("HEAD:") else path
+        for path in git_grep_l(needle, PROSE_GLOBS):
             if not (path.startswith(subject + "/")
                     or path.startswith(SELF + "/")):
                 prose += 1
@@ -251,6 +296,23 @@ def main(subject):
              if shared else "none"))
     print("  documentation mentions in *.md / *.txt, counted and NOT listed")
     print("  because prose cannot execute anything: %d file(s)" % prose)
+    print()
+    # mg-4020.  THIS LINE IS WHERE THIS CENSUS USED TO DIE.  `git grep` exits
+    # 1 for no match, git() treated every non-zero as fatal, and a subject
+    # script that nothing outside its own directory names took the whole run
+    # down -- on 23 of the 27 instruments still on the pinning work-list.  The
+    # count is PRINTED rather than merely tolerated, because it is the one
+    # number that says how much of the subject this census could say nothing
+    # about, and a repair that turned a crash into a silence would be worse
+    # than the crash.  A HIGH FIGURE HERE IS NOT A CLEAN RESULT: it means most
+    # of the subject's scripts are reached, if at all, by a route section D's
+    # blind-spot list already names.
+    print("  subject scripts NAMED IN NO TRACKED *.py / *.sh OUTSIDE their")
+    print("  own directory: %d of %d%s"
+          % (len(unnamed), len(scripts),
+             (" -- " + ", ".join(unnamed)) if unnamed else ""))
+    print("  For these the census has NO EVIDENCE EITHER WAY.  A pin to one")
+    print("  of them is covered by section D's backstop and by nothing here.")
     print()
 
     print("-" * 78)
