@@ -43,6 +43,14 @@ and grain written into its own name:
   V6c REGENERATED-- controls_output.txt is byte-identical to a fresh run.  RED
                     when the artifact is hand-edited or goes stale, which is the
                     one channel V6b cannot see.
+  V6d REACH      -- V6b's population, split by whether the value actually
+                    reaches the artifact: printed / unreached / discarded.
+                    Same population, same grain, different ROUTE -- it RUNS the
+                    section where V6b reads it.  Added by mg-843d when V6b fired
+                    on `de86fee` and the estate could not say, without forty
+                    minutes of work, whether the 26 new specifiers were printed
+                    content or a `%d` in a branch nobody runs.  RED when the
+                    split moves, and it names the sites.
 
 `forced` is still computed and printed.  It is no longer scored: "3 of my own 12
 rows say FORCED" is a fact about this file and nothing else, and scoring it is
@@ -62,6 +70,7 @@ Exit 0 iff every check passes.
 """
 
 import ast
+import io
 import itertools
 import os
 import re
@@ -170,14 +179,66 @@ TABLE = [
 # grain.  This is a literal, and unlike the one it replaces it is a literal on
 # the WRONG SIDE of the comparison: the measured side comes from another file.
 # Any count added to or removed from the section moves it.
+#
+# --- 184 -> 210, and WHY, because the number moving is the whole event -------
+# THE TRIPWIRE FIRED ON A REAL INPUT AND THIS IS THE ANSWER TO IT (mg-843d).
+# `de86fee` (mg-17aa) rewrote `negative_control_incidence` and measured 210
+# against this declared 184; `de86fee~1` measures 184.  The verifier exited 1
+# from 2026-08-10 to 2026-08-13 with nothing in the estate running it, and the
+# one repair that was NOT available was moving this number on its own -- that
+# is the edit that silences a live disagreement instead of answering it.
+#
+# WHAT WAS ASKED: do the 26 belong in the census?  The population is stated in
+# `census()` and it is LEXICAL -- `%`-format expressions inside the function --
+# so the question is whether `de86fee`'s new expressions are that.  Measured at
+# the SITE grain, not asserted:
+#
+#     184  declared, at de86fee~1                     (34 sites)
+#     -28  five sites REMOVED by mg-17aa               1 + 9 + 1 + 9 + 8
+#     +54  eleven sites ADDED by mg-17aa               4+16+2+1+11+5+2+8+1+2+2
+#     ---
+#     210  measured, at de86fee                       (40 sites)
+#
+# EVERY ONE OF THE FIVE REMOVALS AND ELEVEN ADDITIONS IS mg-17aa's ROW
+# REWRITE: the mg-8a12 routing row and its `DIAGONAL_MOVES` clause left, and
+# the [CANNOT FAIL] row over all four I-rows, the falsifiability check and its
+# per-row planted-worlds lines arrived.  They are inside the function, they are
+# `%`-format expressions, and 194 of the 210 reach the artifact VERBATIM -- so
+# by the population this census declares, they belong, and the DECLARATION is
+# what was stale.  The values are not the defect; `de86fee` not re-declaring
+# was.  The site-level derivation is in README.md ("The census question").
+#
+# WHAT THE COUNT MOVING DID *NOT* SETTLE, and why V6d exists.  Of the 26, only
+# 11 are new PRINTED values; 14 sit in a branch mg-17aa keeps on purpose and
+# the run never reaches (controls.py's "THIS BRANCH IS REACHED ONLY BY A
+# MUTATION SET WITH A PAIR THAT CLEARS BOTH FORCED GATES"), and 2 are a
+# `dict.get` default that Python evaluates eagerly and throws away.  That split
+# is the thing that made this question take forty minutes instead of one look,
+# so it is now MEASURED and scored as V6d rather than written here as prose.
 CENSUS_DECLARED = {
-    "specifiers": 184,          # conversion specifiers, all types
-    "d": 150,                   # of which integer conversions
-    "s": 34,                    # of which string conversions
+    "specifiers": 210,          # conversion specifiers, all types
+    "d": 162,                   # of which integer conversions
+    "s": 48,                    # of which string conversions
     "fstrings": 0,              # channel bound: an f-string is invisible here
     "format_calls": 0,          # channel bound: so is "...".format(...)
     "str_calls": 0,             # channel bound: so is str()/repr()/format()
     "nonliteral_mod": 1,        # `%` sites whose left operand is not a literal
+}
+
+# The census, SPLIT BY WHETHER THE VALUE REACHES THE ARTIFACT.  Measured by
+# `census_reach()`, which runs the section rather than reading it.  Same
+# population as `CENSUS_DECLARED`, finer grain: each specifier is assigned to
+# exactly one of three fates, and the three sum to `specifiers` above -- an
+# identity this file scores, so the split cannot drift into a fourth number.
+#
+# WHY IT IS A SEPARATE DECLARATION AND NOT A FIELD OF THE CENSUS: `census()` is
+# pure-source and `demo_f2_row_can_go_red.py` drives it over MUTATED copies of
+# controls.py without running them.  Running is a different route and it is the
+# route that tells a printed value from a lexical one.
+CENSUS_REACH_DECLARED = {
+    "printed": 194,     # the site's string appears in controls_output.txt
+    "unreached": 14,     # the site is never evaluated (one branch, kept on purpose)
+    "discarded": 2,      # evaluated and thrown away (the MAGNITUDE_MOVES `.get` default)
 }
 
 _SPEC = re.compile(r"%[-#0 +]*[0-9*]*(?:\.[0-9*]+)?([diouxXeEfFgGcrsa%])")
@@ -240,6 +301,118 @@ def regenerate(probe_dir, nmax=5):
     proc = subprocess.run([sys.executable, "controls.py", str(nmax)],
                           cwd=probe_dir, capture_output=True, text=True)
     return proc.stdout
+
+
+def census_reach(probe_dir, nmax=5, fn_name="negative_control_incidence"):
+    """The census SPLIT BY FATE: printed, unreached, or evaluated-and-discarded.
+
+    POPULATION: identical to `census()`'s -- the `%`-format expressions with a
+    string-literal left operand lexically inside `fn_name`.  GRAIN: one
+    conversion specifier, as there.  What is different is the ROUTE: `census()`
+    reads the source, this RUNS it, and the two answers are about different
+    things.  A specifier can be lexically present and never printed, and until
+    mg-843d nothing here could tell those apart -- which is exactly what made
+    "do the 26 values `de86fee` added belong in the census?" expensive.
+
+    Every qualifying `%`-expression is wrapped, in the AST, in a probe that
+    records the string it produced; the section is then run with stdout
+    captured, and each SITE lands in one of three buckets:
+
+      printed    -- the site evaluated and one of its results is a substring of
+                    the artifact.  This is the census's own headline claim
+                    ("every formatted value NEGATIVE CONTROL 4 prints"), and it
+                    is the only bucket that claim was ever about.
+      unreached  -- the site never evaluated.  Nothing is wrong with that: a
+                    branch kept so the routing can put a clause back with no
+                    edit is a branch that should not fire today.  It is counted
+                    rather than exempted, for the reason `census()` gives about
+                    the one non-literal `%`.
+      discarded  -- the site evaluated and its string reached no output.  The
+                    one today is a `dict.get` default, which Python evaluates
+                    before it knows it will not be used.
+
+    A site whose string is FURTHER transformed before printing would be scored
+    `discarded` here.  There is none today; if one arrives, this row goes red
+    and says which site, which is the right outcome for a tripwire.
+
+    Nothing is written to disk and nothing of controls.py's is imported: the
+    module is executed in a private namespace.
+
+    THE PROBE'S OWN OUTPUT IS RETURNED so that the caller can check the wrap
+    changed nothing.  An instrument that perturbs what it measures would report
+    a `printed` count about a document that does not exist, and the whole of
+    V6b/V6c would be measuring one artifact while this row measured another.
+    """
+    src_path = os.path.join(probe_dir, "controls.py")
+    src = open(src_path).read()
+    tree = ast.parse(src)
+    fn = next((f for f in ast.walk(tree)
+               if isinstance(f, ast.FunctionDef) and f.name == fn_name), None)
+    if fn is None:
+        raise ValueError("no function %r in %s" % (fn_name, src_path))
+
+    # KEYED BY A SITE INDEX AND NOT BY A LINE NUMBER.  Two `%`-sites can share
+    # a line -- `ast.unparse` produces exactly that, and so does any hand-edit
+    # that joins two statements -- and keying the probe's records on the line
+    # would silently merge them, so one site's fate would be reported for both.
+    # The demonstration in demo_v6d_row_can_go_red.py found this row doing it,
+    # which is what a demonstration is for.  The line is kept for REPORTING.
+    wanted = {}                       # id(BinOp) -> (site index, lineno, nspecs)
+    for node in ast.walk(fn):
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Mod):
+            left = node.left
+            if isinstance(left, ast.Constant) and isinstance(left.value, str):
+                convs = [c for c in _SPEC.findall(left.value) if c != "%"]
+                if convs:
+                    wanted[id(node)] = (len(wanted), left.lineno, len(convs))
+
+    probe_name = "__census_reach_probe"
+
+    class _Wrap(ast.NodeTransformer):
+        def visit_BinOp(self, node):
+            self.generic_visit(node)
+            if id(node) in wanted:
+                idx, _, _ = wanted[id(node)]
+                return ast.Call(func=ast.Name(id=probe_name, ctx=ast.Load()),
+                                args=[ast.Constant(value=idx), node],
+                                keywords=[])
+            return node
+
+    # `visit` mutates in place, so the ids captured above stay valid.
+    ast.fix_missing_locations(_Wrap().visit(tree))
+
+    seen = {}                                 # site index -> [produced strings]
+
+    def _probe(idx, value):
+        seen.setdefault(idx, []).append(value)
+        return value
+
+    ns = {"__name__": "__main__", "__file__": src_path, probe_name: _probe}
+    argv, stdout = sys.argv, sys.stdout
+    buf = io.StringIO()
+    sys.argv, sys.stdout = ["controls.py", str(nmax)], buf
+    try:
+        exec(compile(tree, src_path, "exec"), ns)
+    except SystemExit:
+        pass
+    finally:
+        sys.argv, sys.stdout = argv, stdout
+    art = buf.getvalue()
+
+    out = {"printed": 0, "unreached": 0, "discarded": 0}
+    where = {"printed": [], "unreached": [], "discarded": []}
+    for idx, lineno, nspecs in wanted.values():
+        if idx not in seen:
+            fate = "unreached"
+        elif any(v in art for v in seen[idx]):
+            fate = "printed"
+        else:
+            fate = "discarded"
+        out[fate] += nspecs
+        where[fate].append(lineno)
+    for k in where:
+        where[k].sort()
+    return out, where, art
 
 
 # ---------------------------------------------------------------------------
@@ -583,14 +756,18 @@ def main():
     # THE HEADING IS NARROWER THAN IT WAS, AND THAT IS THE REPAIR (mg-fcb2's
     # F2, landed by mg-8af0).  It used to read "EVERY COUNT THIS REPAIR PRINTS"
     # while the row beneath it measured the length of the list below.  The
-    # section prints 184 formatted values; this table classifies the ones the
+    # section carries 210 formatted values; this table classifies the ones the
     # repair OFFERS AS EVIDENCE.  Those are two populations and they are now
-    # two rows -- V6a over this table, V6b over the 184.
+    # two rows -- V6a over this table, V6b over the 210.  The number is quoted
+    # from the declaration rather than written in, because it moved once
+    # (mg-843d) and a second copy of it is a second thing to forget.
     print("V6 -- the counts this repair OFFERS AS EVIDENCE, each classified and "
           "each ANCHORED in the artifact.  A count that could not have come out "
           "otherwise is labelled FORCED and is not offered as evidence anywhere "
           "in the repair.  This table is NOT every value the section prints -- "
-          "that population is V6b's, and it is 184.")
+          "that population is V6b's, and it is %d (of which %d are printed; see "
+          "V6d)." % (CENSUS_DECLARED["specifiers"],
+                     CENSUS_REACH_DECLARED["printed"]))
     for what, verdict, why, _ in TABLE:
         print("    %-22s %s  -- %s" % (verdict, what, why))
     forced = sum(1 for _, v, _, _ in TABLE if v.startswith("FORCED"))
@@ -614,6 +791,38 @@ def main():
           "them" % (CENSUS_DECLARED["specifiers"], len(TABLE)),
           got == CENSUS_DECLARED,
           "measured %s; declared %s" % (got, CENSUS_DECLARED))
+
+    # V6d.  THE ROW THAT ANSWERS V6b'S NEXT FIRING (mg-843d).  V6b says the set
+    # of formatted values moved; it has never been able to say WHICH KIND of
+    # value, and that is the whole distance between "the artifact gained a
+    # count nobody classified" -- the thing this instrument exists to catch --
+    # and "a branch nobody runs gained a `%d`".  Both move V6b by the same
+    # amount and they are opposite events.  Here they are separated, and the
+    # separation is checked to PARTITION the census rather than to sit beside
+    # it: the three fates sum to V6b's own declared total, so a specifier
+    # cannot fall out of both rows at once.
+    reach, where, probed_art = census_reach(PROBE)
+    total = sum(reach.values())
+    check("V6d REACH -- of the %d formatted values V6b counts, %d are PRINTED "
+          "in the artifact, %d sit in a branch the run never reaches and %d are "
+          "evaluated and discarded (population: V6b's; grain: one conversion "
+          "specifier, assigned to exactly one fate).  The three sum to V6b's "
+          "declared total, and the probed run is byte-identical to the "
+          "committed artifact -- both scored here and neither assumed, so this "
+          "row cannot report a split of a different number, or of a different "
+          "document, than the one V6b and V6c guard"
+          % (CENSUS_DECLARED["specifiers"], CENSUS_REACH_DECLARED["printed"],
+             CENSUS_REACH_DECLARED["unreached"],
+             CENSUS_REACH_DECLARED["discarded"]),
+          reach == CENSUS_REACH_DECLARED
+          and total == CENSUS_DECLARED["specifiers"]
+          and probed_art == art,
+          "measured %s (sum %d against V6b's %d); declared %s; unreached at "
+          "controls.py line(s) %s, discarded at line(s) %s; probed run %d bytes "
+          "against the artifact's %d"
+          % (reach, total, CENSUS_DECLARED["specifiers"], CENSUS_REACH_DECLARED,
+             where["unreached"] or "none", where["discarded"] or "none",
+             len(probed_art), len(art)))
 
     # -- V7: the count mg-fcb2's F1 was about, re-derived ------------------
     # The site count is asked here of `top_laplacians` directly, not of

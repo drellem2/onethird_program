@@ -1,0 +1,60 @@
+============================================================================================
+mg-f771  PLANTED WORLDS — what this control catches, and what it is declared blind to
+============================================================================================
+
+§1  WORLDS THAT MUST FIRE, AND THREE THAT MUST NOT
+--------------------------------------------------------------------------------------------
+  W1   expect DISAGREES got DISAGREES ok        the defect that opened mg-f771: a stale VERDICT line
+  W2   expect DISAGREES got DISAGREES ok        the same defect one section earlier: a stale count
+  W3   expect NOISE     got NOISE     ok        wall-clock timing, the churn that makes byte-comparison impossible  <- GREEN ON PURPOSE
+  W4   expect NOISE     got NOISE     ok        a foreign worktree's absolute path (N1)  <- GREEN ON PURPOSE
+  W5   expect NOISE     got NOISE     ok        an absolute path TRUNCATED at a column limit mid-worktree-name  <- GREEN ON PURPOSE
+  W6   expect DISAGREES got DISAGREES ok        the TAIL after a normalised path still differs — N1 eats the root only
+  W7   expect DISAGREES got DISAGREES ok        a REPO-RELATIVE path moved — N1 does not touch these at all
+  W8   expect DISAGREES got DISAGREES ok        STATE.md's byte count — a repo-state number, and the declared cost
+  W9   expect DISAGREES got DISAGREES ok        a count that sits next to a timing must not be eaten by N2
+  W10  expect AGREES    got AGREES    ok        the negative control — identical bytes must read AGREES
+  W11  expect NOISE     got NOISE     ok        the refinery's longer clone path — a THIRD checkout shape the first version's enumerated roots did not know (N1a)  <- GREEN ON PURPOSE
+  W12  expect NOISE     got NOISE     ok        the same line CUT at a column limit, so the longer path keeps less tail — the refinery's actual refusal (N3)  <- GREEN ON PURPOSE
+  W13  expect DISAGREES got DISAGREES ok        N3 forgives a SHORTER tail, not a DIFFERENT one — the tail must still diverge before the cut to be caught
+  W14  expect DISAGREES got DISAGREES ok        N3 must not pair lines across an INSERTION — the shape of the defect that opened this ticket
+
+  14 of 14 worlds landed where they must.
+
+§2  THE WATCHED CLASS, AND THE ONE EXEMPTION IN IT
+--------------------------------------------------------------------------------------------
+  An exemption that can widen without a control is not an exemption, it is a hole.
+
+  E1   not       ok        code/gate_fixed_point_f771/out_g0_fixed_point.txt
+       g0's own transcript — the one exemption, and the reason is in lib_f771.SELF_EXCLUDED
+  E2   watched   ok        code/gate_fixed_point_f771/out_g1_controls.txt
+       THIS transcript is watched: the exemption is a file, not this directory
+  E3   not       ok        code/gate_fixed_point_f771/README.md
+       not a transcript at all
+  E4   watched   ok        code/facts_registry_03cf/out_f0_registry_discipline.txt
+       the file that opened mg-f771
+  E5   watched   ok        code/libweak_audit_c4f5/out_a4_census.txt
+       mg-c824's — IN the class, and safe because nothing regenerates it (README §3)
+  E6   not       ok        STATE.md
+       outside the class, so a local STATE.md edit does not trip a transcript control
+  E7   not       ok        docs/FACTS.md
+       outside the class
+
+  7 of 7 membership rows are as declared.
+
+§3  WORLDS IN WHICH NO VERDICT IS AVAILABLE
+--------------------------------------------------------------------------------------------
+  A control that cannot say 'I could not tell' says 'nothing is wrong' instead.
+
+  R1   not a git work tree                REFUSED                  ok
+  R2   no BUILD_SH_RAN_THE_SUITES handshake exit 2                   ok
+
+§4  WHAT IS NOT COVERED HERE
+--------------------------------------------------------------------------------------------
+  The worlds above are hand-authored pairs.  They bound the NORMALISER; they say
+  nothing about whether the watched class is the right class.  A gate suite that
+  writes a tracked file NOT named out_*.txt would be invisible to g0 and to every
+  world above, and nothing in this directory would notice.  Named rather than
+  discovered: no such suite exists today, and that is a fact about today.
+
+VERDICT: GREEN — 14 planted worlds, 7 membership rows and 2 refusals all land where they must; the normaliser's blindness and the one exemption are both the declared ones.  0.04s

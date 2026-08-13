@@ -124,6 +124,162 @@ separately) and the table entry is relabelled **FORCED BY CONSTRUCTION**.
 
 ---
 
+## F3 — the bound is **tight**, and the routine is **watched reporting 3** (mg-36f5)
+
+**Ported from `polecat-z8af0`.** This ticket was **dispatched twice**. `cat-x8af0`'s first
+submit failed at the refinery's `fetch` stage on `Could not resolve host: github.com`; its
+claim was released; `cat-z8af0` was dispatched onto the same item **four seconds later** and
+re-derived the whole repair over 43 minutes and 5 commits, under different filenames. x8af0's
+branch was resubmitted and merged as `2657490`; z8af0 was stopped two seconds after a merge it
+had no part in and **never submitted**. mg-687f audited both strands and established that main
+is **ahead** of that branch on the mathematics — `controls.py` here withdraws the claim for
+`facet_swap01` and the uncorrupted build too, and covers the n = 2 case z8af0's argument does
+not reach. So this is a port of **two named results**, not a merge of the branch. Source:
+branch `polecat-z8af0` at `98a5ff0`, file `code/face_geometry_repair_8af0/forcing_8af0.py`
+(commit `a82acb3`), sections S3 and S4.
+
+`probe_f3_tightness.py` — **10 checks, 0 refuted, 4.7 s.** Two things above are **measured** and
+neither was on main:
+
+### (1) The bound is TIGHT, and **"consecutive" is not the dividing line**
+
+`probe_f3_ridge_multiplicity.py` measures the **premise** (every facet is a chain of masks of
+sizes 1..n−1) and it measures the **bound** (no ridge in ≥ 3 facets). `verify_e35b.py`'s V4c
+measures the same pair at n ≤ 5. **Neither asks whether the premise can be weakened** — so
+"the zero is forced by the premise" sat on main with no measurement of how much of the premise
+it needs, and the obvious generalisation was left looking open.
+
+Swept over **every** level-size profile of length ≥ 2 at n = 3, 4, 5, 6 — **42 profiles** —
+multiplicity ≤ 2 holds on **exactly one profile at each n: the full profile 1..n−1**, which is
+exactly the profile both facet maps produce. At n = 5:
+
+```
+    [1, 2]      consecutive but partial   4       [1, 2, 3]   consecutive but partial   3
+    [1, 3]      gapped                    6       [1, 2, 4]   gapped                    3
+    [1, 4]      gapped                    4       [1, 3, 4]   gapped                    3
+    [2, 3]      consecutive but partial   3       [2, 3, 4]   consecutive but partial   3
+    [2, 4]      gapped                    6       [1, 2, 3, 4] THE FULL PROFILE         2
+    [3, 4]      consecutive but partial   4
+```
+
+**`[1,2]` is consecutive and gives 4. `[2,3]` is consecutive and gives 3.** All **5**
+consecutive-but-partial profiles at n = 5 admit a ridge in ≥ 3 facets. So I4's zero rests on
+**the whole of the premise, not part of it**, and *"the premise can be weakened to consecutive"*
+is **closed** rather than open.
+
+**z8af0's own sweep fired on its author**: its first form predicted the dividing line *was*
+consecutiveness, and the sweep refuted it on its own output; the branch kept the failing
+transcript. That is why the row is stated this way and not more loosely.
+
+### (2) A negative control — the routine is **seen reporting 3**
+
+Main's *"0 families with a ridge in ≥ 3 facets"* was, on main, **the answer of a procedure never
+observed to say anything else**. A routine returning 2 unconditionally prints every number this
+repair prints. A constructed family with profile `[1, 3]` over a 3-element ground set — the
+premise fails on it — reports **3**; the full profile `[1, 2]` over the *same* ground set
+reports **2**.
+
+**The control runs the PUBLISHED routine, and that is not free.** z8af0 ran its control through
+a ridge-multiplicity routine it had written itself, which observes a *private re-implementation*
+reporting 3 and leaves the published zero exactly as unwitnessed as it found it — this repair's
+own defect shape, one level up. So `ridge_multiplicity` here is a thin wrapper over
+**`face_complex.boundary_matrix`, the function `top_laplacians` itself calls**, and **T1
+measures** it against `top_laplacians`'s own `ridge_facets` over all **2424 builds** rather than
+asserting agreement: **0 disagreements on 2020 of them** (five modes), and **exactly 15** under
+`ridge_drop` — **by construction and only downward**, because that mode deletes a ridge row
+*after* the incidence is computed, and on all 15 (every one with |L(P)| = 2) the deleted ridge
+was the only multiplicity-2 ridge there was. The one place the two routines differ **cannot
+manufacture a ≥ 3** — and those 15 are also why T1 is an observation rather than a value
+compared with itself.
+
+The 11 numbers at n = 5 reproduce z8af0's transcript **row for row**. Its routine was
+hand-rolled and this one goes through the library, so **the agreement is evidence**.
+
+### (3) The port is subject to the defect it repairs, so it is checked for it
+
+A negative control is an instrument, and an instrument that cannot fail is what this whole arc
+is about. Three ways this port could have shipped its own defect, each closed by a row rather
+than by an argument:
+
+| the way it could fail | the row |
+|---|---|
+| the control runs a **private** routine, so main's published zero stays unwitnessed | **T1** — the wrapper is `boundary_matrix`, and agreement with `top_laplacians` is measured over 2424 builds |
+| **T1 itself** compares a value with itself and cannot come out otherwise | the **15** `ridge_drop` disagreements — a value compared with itself does not produce them |
+| the sweep passes while measuring **nothing** — an empty family has multiplicity 0, which is ≤ 2 | **T4's second row** — 42 profiles, smallest family 6 facets, no empty family |
+| the tightness and control rows are satisfied by the very instrument they rule out | **T5** — both re-scored against a stub returning 2 for everything; **all three go red** |
+
+**T5 is the load-bearing one.** Run with a routine that can only say 2 — the instrument main's
+zero would come from if the objection were right — **7 of the 10 rows go red and the probe exits
+1.** The three that survive are the ones that *should*: the full profile genuinely reports 2,
+the non-empty-family row does not consult the routine at all, and T5 carries its own stub.
+
+### What did NOT port, and the measurement that replaced it
+
+The branch also carried `out_verify_e35b_F2COMMIT_exit1.txt` — **its** verifier exiting 1 on the
+**real tree** at **its** F2 commit with F1 still present. It does not port: it is a transcript
+of a **different script** on a **different tree**, and shipping it would put a record in this
+tree that nothing in this tree can regenerate — this repair's own defect shape. **Main's
+verifier was run on the real tree instead, at two commits, and the result is not the branch's:**
+
+```sh
+mkdir /tmp/f2 && git archive 0c3a2ba | tar -x -C /tmp/f2          # main's F2 commit, F1 unrepaired
+cd /tmp/f2 && python3 code/face_geometry_repair_e35b/verify_e35b.py; echo $?   # 26 checks, 0 refuted; 0
+```
+
+**At main's F2 commit the verifier exits 0**, so the historical row the branch's transcript
+records has **no counterpart here**: main's V6a/V6b/V6c are green on the real tree with F1
+still present, which is what this README already implies (*"V6b would not have caught F1"* —
+substituting a different expression into an existing `%d` moves no specifier).
+
+**On main's tree today it exits 1, and that is a live finding this port did not create.**
+`verify_e35b.py` on `main` at the time of writing: **28 checks, 1 REFUTED — V6b CENSUS,
+measured 210 specifiers against a declared 184.** Bisected: `de86fee~1` measures 184,
+`de86fee` measures 210. **`de86fee` (mg-17aa) rewrote `negative_control_incidence` and added 26
+formatted values without re-declaring the census.** So V6b **has** been observed firing on a
+real, unconstructed input — *it is firing right now, exactly as designed, and nobody has
+answered it*. A consequence: `demo_f2_row_can_go_red.py` also exits 1 on main today (V6b is red
+on its baseline, hence red in all five constructions), and its committed transcript
+`out_demo_f2.txt` predates that and is **stale**.
+
+**Neither is repaired here, and `out_demo_f2.txt` is deliberately left unregenerated.**
+Re-declaring 184 → 210 is a decision about somebody else's tripwire — the one edit that silences
+a live disagreement without answering it — and it belongs to whoever owns mg-17aa's debt, not to
+a port of two F3 results. It is recorded here rather than left for the next runner to rediscover.
+
+> **ANSWERED by mg-843d, 2026-08-13, and the paragraph above is why it could be.** Filing it
+> rather than fixing it was right: the question was whether the 26 values belong in the census,
+> and it is decided at the **site** level — mg-17aa's rewrite removed 5 sites (28 specifiers) and
+> added 11 (54), all of them its own row rewrite, all of them `%`-format expressions inside the
+> function, which is the population `census()` declares. **They belong; the declaration was the
+> stale side and it moved to 210 with that derivation recorded at the declaration itself.** Two
+> things came out of answering it that moving the number would not have produced: only **11** of
+> the 26 are new *printed* values (14 sit in a branch mg-17aa keeps on purpose and the run never
+> takes, 2 are an eagerly-evaluated `dict.get` default), which is now measured and scored as a
+> new **V6d REACH** row with its own five-construction demonstration; and
+> `code/face_geometry_repair_e35b/run_all.sh` is now **one of `build.sh`'s gated suites**, which is the
+> half of the finding this section named — *nothing ran it.* See
+> `code/face_geometry_repair_e35b/README.md`, "The census question, answered".
+>
+> **`out_demo_f2.txt` needed no regeneration and none was done.** With V6b green again the
+> demonstration reproduces the committed transcript **byte for byte**, 20/20 cells. It was not a
+> stale record; it was a correct record of a tree that had drifted away and has drifted back.
+> Leaving it unregenerated rather than papering over the disagreement is what made that
+> checkable.
+
+### Not shown
+
+- **n > 6.** The sweep is n = 3..6. The argument in the docstring of
+  `probe_f3_ridge_multiplicity.py` is general; the tightness statement here is measured, not
+  proved.
+- **n = 3 carries no separating content** — it has exactly one profile of length ≥ 2 and that
+  profile *is* the full one. The separation is measured at n = 4, 5 and 6.
+- **Tightness is about the level-size profile, not about facet families in general.** Every
+  family swept here is *all* chains with a given profile. A sparser family with a partial
+  profile may well have multiplicity ≤ 2; what is shown is that the profile alone stops
+  guaranteeing it.
+
+---
+
 ## Predictions, scored
 
 `PREDICTIONS.md` was committed at `41bdbfa`, before any script of this repair existed. **Two
@@ -176,7 +332,9 @@ is informative and is kept.
 - **It did not re-audit mg-e35b's mathematics.** The dichotomy (297 = 288 + 9 + 0), the
   gauge/non-similar splits, the vacuity separation and the absorbability routing are untouched
   and re-run green: `code/face_geometry/run_all.sh` exits 0,
-  `code/face_geometry_repair_e35b/run_all.sh` exits 0 with **28 checks, 0 refuted**.
+  `code/face_geometry_repair_e35b/run_all.sh` exits 0 with **28 checks, 0 refuted**. *(Both
+  numbers record the tree this repair shipped on. Since mg-843d that runner has a second step and
+  the verifier has 29 checks; see "Running it" below.)*
 - **It did not touch mg-fcb2's F4** (V6's justification for "NOT-GAUGE on 288 of 297"), which is
   not in this ticket's brief, nor the two findings of the six the brief does not assign.
 - **V6b does not check that the 12 entries are the right ones.** It fires when the set of
@@ -201,10 +359,17 @@ is informative and is kept.
 ## Running it
 
 ```sh
-sh code/face_geometry_repair_8af0/run_all.sh     # ~21 s, exit 0
-sh code/face_geometry_repair_e35b/run_all.sh     # ~5 s,  exit 0, 28 checks
+sh code/face_geometry_repair_8af0/run_all.sh     # 32.0 s, 4 steps since mg-36f5, exit 0 since mg-843d
+python3 code/face_geometry_repair_8af0/probe_f3_tightness.py   # 4.9 s, 8 checks, exit 0
+sh code/face_geometry_repair_e35b/run_all.sh     # 42.3 s, exit 0, 29 checks + the V6d demo (mg-843d)
 sh code/face_geometry/run_all.sh                 # ~20 s, exit 0
 ```
+
+The first line read **`~32 s ... EXIT 1 today, see below`** until mg-843d, and the `1` was
+`demo_f2_row_can_go_red.py` inheriting V6b's red baseline — it is 0 again now that the census is
+answered, with `out_demo_f2.txt` unchanged. The third line read **`~5 s, exit 0, 28 checks`**; it
+is the longer of the two runners now, and unlike every other line here it is **not** hand-invoked
+— it is one of `build.sh`'s gated suites. Both re-measured on 2026-08-13, not carried forward.
 
 The first runner re-raises the **first** non-zero status, not the last, so an early refutation
 cannot be overwritten by a later pass — and that path was tested with a deliberately failing
