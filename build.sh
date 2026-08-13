@@ -204,6 +204,34 @@
 # exempted.  That matters more than usual here: this whole ticket is about a transcript
 # (out_demo_f2.txt) that sat on main disagreeing with the tree, and the suite added to stop that
 # happening again arriving OUTSIDE the control that stops it would have been the joke version.
+# --- mg-479c -------------------------------------------------------------------------------
+# NO SUITE JOINS THE GATE HERE, AND THE GATE LIST BELOW IS UNCHANGED.  A THIRD ARM JOINS
+# code/alias_agreement_06d1/run_all.sh, and the number is stated here for the same reason
+# every entry above states one: 0.02 s measured, because it recomputes no tree.  THE WHOLE
+# GATE IS MEASURED AT 93.4 s ON THIS HOST WITH IT IN, against the 88.4 / 87.1 / 85.2 s
+# mg-843d recorded — and, as mg-602d's entry insists, read that as a measurement of its own
+# run and not as a property of the gate.  What is NOT free is a second effect on the same
+# suite: g1's falsification block went 0.1 s -> 0.63 s, because the new RED message computes
+# the exact Fraction ratio between the two disagreeing columns in order to be able to say
+# "these differ by exactly 2".
+#
+# WHAT THE ARM BUYS.  Until it, the alias-agreement check compared RAW values and had no
+# representation for two names denoting ONE quantity IN DIFFERENT NORMALISATIONS -- so a
+# factor of 2 between two live conventions and a genuine 2x error were THE SAME SIGNAL, in
+# both directions: a FALSE RED on a gate that blocks merges, which is how gates get
+# disabled, and a FALSE PASS in which a real error is waved away as "just a normalisation
+# difference".  This corpus demonstrably carries the shape (eps_spec/eps_c3ca; u1's
+# dialects), so the exposure is real and it is PROSPECTIVE: nothing fires today, and it
+# arrives the moment the check is widened or a new alias is registered.
+#
+# AND THE EXHIBIT THAT PROVES THIS GATE CAN FIRE HAD STOPPED WORKING, silently, for a reason
+# that arrived with mg-f771.  `code/alias_agreement_06d1/x0_exhibit.py` runs THIS FILE twice
+# and was invoked as `python3 x0_exhibit.py > out_x0_exhibit.txt`; f771's control compares
+# every tracked out_*.txt against its committed copy, so the redirect handed it a TRUNCATED,
+# HALF-WRITTEN file, f771 graded it DISAGREES, and the exhibit refused with "the gate is
+# ALREADY RED before anything was planted" -- correctly, about a redness it had caused
+# itself.  The script now writes its own transcript after the last run instead.  Anything
+# else that shells `./build.sh` while writing into `code/**/out_*.txt` has this bug.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \
