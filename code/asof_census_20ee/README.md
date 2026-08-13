@@ -198,9 +198,32 @@ makes about itself, and the same blind spot.
 restored — a state no build path should be in.
 
 **The next tranche should triage before it pins**: run the suite, run `pinnable.py`, and only then
-start conditions 1–3. `landscape_repair_1953` is the ready candidate, and it is a **shared-script**
-pin — its transcript is produced by `landscape_repair_audit_3b51/audit_scope_text.py`, so condition
-3 applies for real, and the repaired `consumers.py` confirms `1953` as the C1 consumer.
+start conditions 1–3.
+
+### The next candidate, diagnosed but **not** pinned — `landscape_repair_audit_3b51`
+
+Triaged here, and left for tranche 4 rather than rushed, because *"a rushed pin is
+indistinguishable from a correct one in the diff"*. What is measured:
+
+* **Condition 0 fires R2 — a partial pin.** `audit_scope_text.py` declares `OLD_REV = 714aceb` and
+  reads **the audited document** through `git show OLD_REV:…`, but D1's *corpus* comes from
+  `grep -rn` over the **live worktree**. The script pins its subject and not its corpus, in the
+  same forty lines. That is the drift, and it **is** pin-reachable — this is mg-20ee's remedy
+  applying as designed, unlike `a4ef` and `b0ae`.
+* **But a verdict moves, so it is not a pinning commit alone.** The R4-slip finding has
+  **relocated**: `docs/roadmap.md:41` → `docs/OneThird-Landscape-Repair-IndependentAudit.md:190`
+  and `:290`, and a `False` → `True` alongside it. Per mg-20ee's own discrimination, **report it;
+  do not absorb it into the pin.** The relocation is live information about the corpus that no
+  transcript currently records.
+* **Condition 3 applies for real, and the repaired `consumers.py` confirms it.**
+  `audit_scope_text.py` is executed by `code/landscape_repair_1953/run_all.sh` — a **C1 confirmed**
+  no-arg consumer, which is also why `1953` appears on the work-list in its own right at `27+/8-`
+  carrying *the same drift*. **One pin, two transcripts**, and the consumer must be re-measured.
+  This is the first C1 hit the consumer census has produced for a subject other than the one it
+  was built for — and it only produced it **after** the crash above was repaired.
+
+So the ready pin is a **three-part** item: pin the corpus read, re-measure `1953`, and file the
+moved verdict separately. Estimating it as one pinning is how it would go wrong.
 
 ---
 
