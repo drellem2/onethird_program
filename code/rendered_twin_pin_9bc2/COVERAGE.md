@@ -300,3 +300,19 @@ its successor; this is that successor.
   not a git repo and three arms were condemned by one line"*) and then mg-3902's first draft of
   this very check. Reading that it exists did not stop it being written again, so it is built
   in — `lib9876.make_sandbox(history=False)` keeps the world reachable.
+
+### One thing mg-7cc3 added that NO arm scores, named rather than left to be found
+
+`reconcile()`'s **choice of which commit to name** is not an arm and cannot be, by this
+lineage's own definition: an arm is a place that can say NO, and choosing a commit says
+nothing. Arm `R5` covers the refusal beside it; the *selection* — prefer the newest
+integration-reachable commit carrying these exact bytes, fall back to `HEAD` with a warning —
+is covered only by a hand-run measurement, recorded in `README.md`'s table of runs.
+
+**Why the sandbox cannot probe it**, stated so the gap is a fact and not an oversight: in
+mg-9876's sandbox `HEAD` *is* `main`, so both branches of the choice return the same commit
+and the two cannot be told apart there. The measurement that does tell them apart builds a
+branch commit on top of `main` by hand. **If that selection silently regressed to
+`rev-parse --short HEAD`, nothing in the gate would say so** — what would eventually say so is
+section 7, on the next reconciling branch, reporting `IN FLIGHT` where it now reports `PASS`.
+That is a real detector and it is one merge too late.

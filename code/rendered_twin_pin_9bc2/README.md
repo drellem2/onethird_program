@@ -174,8 +174,9 @@ ticket's acceptance demonstrations are the third and fourth.
 | an **in-flight** commit: an ancestor of `HEAD`, of no integration ref | `IN FLIGHT — REPORTED, NOT GRADED, AND NOT YET ACCEPTABLE` | **0** |
 | a tree with **no `.git`** | `REPORTED, NOT GRADED — no git work tree` | **0** |
 | `--reconcile --rows 1` with an uncommitted `STATE.md` edit | `REFUSED: STATE.md on disk differs from STATE.md at HEAD`, and the twin was **not** written (checked) | 1 |
+| `--reconcile` on a branch whose `HEAD` (`3c0c275`) is ahead of `main` (`ed7e3a9`) without touching `STATE.md` | `pinning at ed7e3a9, the newest commit reachable from \`main\` whose STATE.md is these bytes` — and section 7 then says `PASS … ancestor of \`main\``, where the old `rev-parse HEAD` would have left it `IN FLIGHT` and an ORPHAN after the rebase | 0 |
 
-**The last three rows are the ones that could have been red for a non-reason and are not.**
+**Rows 7 and 8 are the ones that could have been red for a non-reason and are not.**
 
 ### What is NOT a standing control, named rather than left to be discovered
 
