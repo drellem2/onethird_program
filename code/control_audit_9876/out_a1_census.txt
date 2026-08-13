@@ -182,9 +182,9 @@ census; it is how a check added without registration stops being invisible.
   note  5 registered site(s) resolve to lines the discovery patterns
         do not match — these are arms whose site string is a body line rather than
         the arm's head.  Listed so the difference is not mistaken for coverage:
-        negative_control.py:499  score("landing A planted in a real git repository", EXPECT_HONOURED,
-        negative_control.py:504  score("landing A after its bytes reach `main`", EXPECT_EXPIRED)
-        negative_control.py:508  def unknown_world(tmp, base_state, base_twin, base_report):
+        negative_control.py:594  score("landing A planted in a real git repository",
+        negative_control.py:599  score("landing A after its bytes reach `main`", WORLD_EXPECT_EXPIRED)
+        negative_control.py:603  def unknown_world(tmp, base_state, base_twin, base_report):
         run_all.sh:149  echo "CLEAN — the twin's pinned ledger rows all still match STATE.md."
         twin_pin.py:875  emit("  REPORTED, NOT GRADED, AND NOT HONOURED.  Git cannot be asked h
 

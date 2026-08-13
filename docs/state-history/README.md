@@ -207,6 +207,47 @@ that no row asserts a claim whose retraction has been moved out from under it. T
 mg-34bf's original design constraint and it is the one thing this landing could most easily
 have broken.
 
+
+## Third landing — mg-bdb0, 2026-08-13: the FOUR LEDGER ROWS, and the first use of the two-landing protocol
+
+**This is the landing `docs/STATE-SPLIT-PROPOSAL-mg-14ad.md` §8.3 measured as impossible.**
+Rows 3b, 6, 8 and 11 are essays inside *ledger* cells — not attempt-index cells — and
+`code/rendered_twin_pin_9bc2` digests those rows per row, so moving one turns the gated
+`twin.worklist` red while `reconcile()` refuses to re-pin in the same commit. mg-1344's
+**section 8** breaks that: this is **landing A**, the re-pin is deferred, and
+`code/rendered_twin_pin_9bc2/IN-FLIGHT.json` declares the four rows until landing B.
+
+| row | history file | Result cell before | after | which clauses sent text out |
+|---|---|---|---|---|
+| `STATE.md:118`, row 3b | [`ledger-row-3b-standard-dominance.md`](ledger-row-3b-standard-dominance.md) | 374 w | 107 w | (a), (b), (c), (d) |
+| `STATE.md:121`, row 6 | [`ledger-row-6-theorem-e.md`](ledger-row-6-theorem-e.md) | 299 w | 154 w | (a), (b), (c), (d) |
+| `STATE.md:123`, row 8 | [`ledger-row-8-L1b.md`](ledger-row-8-L1b.md) | 1,328 w | 665 w | (a), (b), (c) |
+| `STATE.md:126`, row 11 | [`ledger-row-11-L4.md`](ledger-row-11-L4.md) *(appended — mg-34bf's file)* | 235 w | 174 w | (a) |
+
+`STATE.md` overall: **5,987 → 4,851 words**, `Full ledger` **2,814 → 1,678**, and
+`code/state_ratchet_e331/CEILING.json` banked to the achieved figure **in the same commit**.
+Per-row reasoning, clause by clause, is in `docs/STATE-SPLIT-PROPOSAL-mg-14ad.md` §8.3b.
+
+**COMPLETENESS IS MECHANICAL HERE AND NOT AN ASSERTION.** Every moved passage is a *literal
+slice* of the cell as it stood at `092a508`; the retained text is the rest of that cell, also
+literal, with only the punctuation seams a removal leaves. **Retained + moved reconstruct each
+old cell character for character**, asserted before the files were written. Each `H`/`S`
+section carries an italic lead-in naming the text that stood either side of it in the row,
+because several slices are mid-sentence fragments and a fragment printed bare cannot be
+checked against the seam it came out of.
+
+**One rule was applied against itself and is worth naming.** `ledger-row-11-L4.md`'s new
+`H1 (continued)` is the *row-side sentence that pointed at `H1`* — a report of a supersession,
+so clause (a) sends it here, even though what it reports is already here. The row keeps the
+trailing pointer and nothing else of it.
+
+**What did NOT move, deliberately:** the `Kind`, `Status` and `Width` columns of all four rows
+are untouched, which is mg-34bf's own convention (`Columns 1 and 2 of every row — unchanged`)
+carried to the ledger. Row 3b's `Kind` cell still carries its struck `FP` and the withdrawal
+sentence, because `lib9bc2.md_kinds()` reads that exact shape and because a withdrawn mark is
+a live fact about the row's warrant.
+
+---
 ---
 
 **`cell before` and `cell after` are measured at `60f4dac` and at the landing `57f962f`**,

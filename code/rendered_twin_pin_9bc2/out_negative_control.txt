@@ -33,9 +33,9 @@ a declaration that is not valid JSON                                  8    CAUGH
 a declaration with an EMPTY row list                                  8    CAUGHT   exit 2; looked for '`rows` is EMPTY' (absent from the baseline)
 a declaration with no `why` and no `landing_b`                        8    CAUGHT   exit 2; looked for 'is missing or empty' (absent from the baseline)
 a declaration at an unreadable schema version                         8    CAUGHT   exit 2; looked for 'this control reads schema 1 only' (absent from the baseline)
-NO MUTATION — the baseline                                            -    CAUGHT   exit 0; worklist is EXACTLY (none) — parsed from section 2, expectation derived from the pin
-landing A planted in a real git repository                            8    CAUGHT   exit 0; looked for 'HONOURED — REPORTED, NOT GRADED' and required 'This is the WORKLIST' to be absent
-landing A after its bytes reach `main`                                8    CAUGHT   exit 2; looked for 'THE DEFERRAL HAS EXPIRED'
+NO MUTATION — the baseline                                            -    CAUGHT   exit 0; worklist is EXACTLY (none) and the declared-in-flight set is EXACTLY 3b 6 8 11 — both parsed from section 2, both expectations derived from the pin and the declaration
+landing A planted in a real git repository                            8    CAUGHT   exit 0; looked for ('HONOURED — REPORTED, NOT GRADED', 'declared in-flight rows: 1') and required 'This is the WORKLIST' to be absent
+landing A after its bytes reach `main`                                8    CAUGHT   exit 2; looked for ('THE DEFERRAL HAS EXPIRED', 'declared in-flight rows: 1')
 a declaration in a checkout with no git at all                        8    CAUGHT   exit 1; the declaration must be neither graded nor honoured, so row 1 must stay in section 2's worklist
 
 26 of 26 caught; 0 hole(s).

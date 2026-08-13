@@ -285,6 +285,13 @@ def m_none(text):
 
 
 _WORKLIST = re.compile(r"since the twin was last reconciled: (.*)$", re.M)
+# THE DECLARED SET IS PARSED TOO, AND THAT IS WHAT KEEPS THE POSITIVE CONTROL FALSIFIABLE
+# ONCE A RELOCATION IS IN FLIGHT (mg-bdb0).  Section 2 subtracts a declared row from the
+# worklist, so in the in-flight world the worklist line is ABSENT and `want_rows` is empty —
+# and a scorer that checked only that would be satisfied by an instrument that had stopped
+# reporting the moved rows at all, which is mg-2f44's `"8 9" in out` arriving by the one
+# route section 8 opened.  The baseline must now match BOTH lines exactly.
+_DECLARED = re.compile(r"moved row\(s\) are DECLARED IN FLIGHT: (.*)$", re.M)
 
 
 def expected_drift(state_text, twin_text, inflight_path=INFLIGHT):
@@ -312,7 +319,31 @@ def expected_drift(state_text, twin_text, inflight_path=INFLIGHT):
             if lbl in pin["rows"] and pin["rows"][lbl] != now[lbl] and lbl not in declared]
 
 
-def score_baseline(code, out, want_rows):
+def declared_and_moved(state_text, twin_text, inflight_path=INFLIGHT):
+    """The rows section 2 must report as DECLARED IN FLIGHT: declared AND actually moved.
+
+    Derived the same way `expected_drift` is — from the pin and the declaration, never typed
+    — and it is the other half of the same subtraction.  `expected_drift` says which rows
+    must still be in the worklist; this says which must have left it and where they must be
+    reported instead.  A row that is declared but has NOT moved is deliberately absent from
+    both: section 8 fails it outright, and `score_baseline` would then see a code it refuses.
+    """
+    pin = L.parse_pin(twin_text)
+    if pin is None:
+        return None
+    now = L.row_digests(state_text)
+    declared = set()
+    if os.path.exists(inflight_path):
+        try:
+            with open(inflight_path, encoding="utf-8") as fh:
+                declared = set(json.load(fh).get("rows") or [])
+        except (ValueError, AttributeError):
+            declared = set()
+    return [lbl for lbl in sorted(now, key=lambda s: (int(re.match(r"\d+", s).group()), s))
+            if lbl in pin["rows"] and pin["rows"][lbl] != now[lbl] and lbl in declared]
+
+
+def score_baseline(code, out, want_rows, want_declared=()):
     """Score the unmutated run.  Returns (ok, detail).
 
     THE ASSERTION THIS REPLACES COULD NOT FAIL, AND IT DID NOT FAIL WHEN IT SHOULD HAVE
@@ -346,8 +377,20 @@ def score_baseline(code, out, want_rows):
     if got != want_rows:
         return False, (f"exit {code}; worklist is {got or '(none)'}, "
                        f"expected exactly {want_rows or '(none)'}")
-    return True, (f"exit {code}; worklist is EXACTLY {' '.join(want_rows) or '(none)'} "
-                  f"— parsed from section 2, expectation derived from the pin")
+    want_declared = list(want_declared)
+    d = _DECLARED.search(out)
+    got_declared = d.group(1).split() if d else []
+    if got_declared != want_declared:
+        return False, (f"exit {code}; declared-in-flight set is "
+                       f"{got_declared or '(none)'}, expected exactly "
+                       f"{want_declared or '(none)'}")
+    if want_declared and code != 0:
+        return False, (f"exit {code}; a wholly declared relocation is `IN FLIGHT` at exit 0, "
+                       f"so any other code is the deferral not being honoured")
+    return True, (f"exit {code}; worklist is EXACTLY {' '.join(want_rows) or '(none)'} and "
+                  f"the declared-in-flight set is EXACTLY "
+                  f"{' '.join(want_declared) or '(none)'} — both parsed from section 2, "
+                  f"both expectations derived from the pin and the declaration")
 
 
 def run(state_path, twin_path, inflight_path=INFLIGHT, root=None):
@@ -388,6 +431,27 @@ EXPECT_HONOURED = "HONOURED — REPORTED, NOT GRADED"
 EXPECT_EXPIRED = "THE DEFERRAL HAS EXPIRED"
 EXPECT_NOT_HONOURED = "REPORTED, NOT GRADED, AND NOT HONOURED"
 EXPECT_WORKLIST = "This is the WORKLIST"
+# THE PLANTED WORLDS DECLARE ROW `1`, AND THAT LINE IS PART OF WHAT EACH ARM LOOKS FOR
+# (mg-bdb0).  Their verdict strings alone stopped discriminating the moment THIS repository
+# went in flight: `HONOURED — REPORTED, NOT GRADED` is in the real tree's own report during
+# landing A, so mg-9876's guard correctly scored world A UNFALSIFIABLE and counted a hole —
+# the guard working, on an arm that had nothing wrong with it.  An arm about a THROWAWAY
+# REPOSITORY must be identifiable as being about that repository, so each now requires its
+# own declaration line as well, and the guard fires only if the WHOLE conjunction is already
+# true of the unmutated report.
+EXPECT_PLANTED_ROWS = "declared in-flight rows: 1"
+
+# THE THREE CONJUNCTIONS, NAMED, BECAUSE a2_discriminate's N27-N29 HAND THEM TO THE BAD SIDE.
+# Those arms exist to show mg-9876's UNFALSIFIABLE guard firing: the bad side gives a world a
+# baseline report that ALREADY CONTAINS what that world looks for, and the world must refuse
+# to score CAUGHT.  With the expect a conjunction, handing one half of it is not that world
+# any more — the guard correctly declines to fire and the arm stops discriminating, which is
+# how mg-bdb0 found this: three arms went LAUNDERED the moment the conjunction landed.  The
+# tuples are exported so the two files cannot drift apart, which is the same reason the
+# strings themselves were named constants.
+WORLD_EXPECT_LANDING_A = (EXPECT_HONOURED, EXPECT_PLANTED_ROWS)
+WORLD_EXPECT_EXPIRED = (EXPECT_EXPIRED, EXPECT_PLANTED_ROWS)
+WORLD_EXPECT_UNKNOWN = (EXPECT_NOT_HONOURED, EXPECT_PLANTED_ROWS)
 
 
 def _git(repo, *args, **kw):
@@ -440,6 +504,36 @@ def build_protocol_repo(tmp, base_state, base_twin, moved_row_from, moved_row_to
                       twin, count=1, flags=re.S)
     if n != 1:
         return None, "could not repoint the visible provenance line"
+
+    # THE FIXTURE MUST BUILD ITS OWN PER-ROW DIGESTS, NOT INHERIT THE SUBJECT'S (mg-bdb0).
+    # This function's contract is `a repository in which landing A has happened ON A BRANCH
+    # AND NOTHING ELSE HAS`, and it already re-derives the whole-file `state-sha256` from
+    # `base_state` for exactly that reason.  It did NOT re-derive the twelve row digests, so
+    # the fixture's ledger was pinned by whatever the SUBJECT's twin happened to say — which
+    # is a clean world only while the subject itself is clean.  The first real landing A made
+    # four of the subject's rows differ from that inherited pin, so the planted repository
+    # contained FIVE drifted rows with ONE of them declared, `This is the WORKLIST` appeared,
+    # and world A scored HOLE: the arm that must pass, failing because of the state of the
+    # tree it was borrowing text from rather than because of anything section 8 did.
+    # A fixture that is only a fixture when its subject is in one particular state is not a
+    # fixture, and this is the fifth time in this arc that one has spelled out the thing that
+    # changes.  Derived, asserted, and the count checked.
+    want_rows = L.row_digests(base_state)
+    seen = []
+
+    def _repoint_row(m):
+        label = m.group(2)
+        if label not in want_rows:
+            return m.group(0)
+        seen.append(label)
+        return m.group(1) + label + m.group(3) + want_rows[label]
+
+    twin, _n = re.subn(r"(?m)^(\s*row\s+)([0-9]+[a-z]?)(\s+)[0-9a-f]{16}\s*$",
+                       _repoint_row, twin)
+    if sorted(seen) != sorted(want_rows):
+        return None, ("re-pointed %d of %d pin row digests; the fixture cannot plant a clean "
+                      "world it does not fully control" % (len(seen), len(want_rows)))
+
     with open(twin_path, "w", encoding="utf-8") as fh:
         fh.write(twin)
     _commit(repo, "c2: point the pin at c1, which survives")
@@ -482,11 +576,12 @@ def protocol_worlds(tmp, base_state, base_twin, base_report):
 
     def score(name, expect, forbid=None):
         code, out = run(state_path, twin_path, inflight, root=repo)
-        if expect in base_report:
+        expect = (expect,) if isinstance(expect, str) else tuple(expect)
+        if all(e in base_report for e in expect):
             rows.append((name, "8", "UNFALSIFIABLE",
-                         "%r is in the UNMUTATED report too" % expect))
+                         "%r is in the UNMUTATED report too" % (expect,)))
             return False
-        ok = expect in out and (forbid is None or forbid not in out)
+        ok = all(e in out for e in expect) and (forbid is None or forbid not in out)
         detail = "exit %d; looked for %r" % (code, expect)
         if forbid is not None:
             detail += " and required %r to be absent" % forbid
@@ -496,12 +591,12 @@ def protocol_worlds(tmp, base_state, base_twin, base_report):
     # WORLD A — landing A on a branch.  HONOURED, exit 0, and the row is OUT of the worklist.
     # This is the only world in this file that must PASS: the point of the protocol is that
     # landing A can merge, and a mechanism that refuses it is the deadlock with more code.
-    score("landing A planted in a real git repository", EXPECT_HONOURED,
-          forbid=EXPECT_WORKLIST)
+    score("landing A planted in a real git repository",
+          WORLD_EXPECT_LANDING_A, forbid=EXPECT_WORKLIST)
 
     # WORLD B — the SAME declaration once its bytes are on `main`.  The excuse has expired.
     _git(repo, "branch", "-f", "main", "landing-a")
-    score("landing A after its bytes reach `main`", EXPECT_EXPIRED)
+    score("landing A after its bytes reach `main`", WORLD_EXPECT_EXPIRED)
     return rows
 
 
@@ -533,12 +628,12 @@ def unknown_world(tmp, base_state, base_twin, base_report):
         json.dump({"schema": 1, "declared_by": "mg-1344 (planted world)", "rows": ["1"],
                    "why": "planted world: no history to check the expiry against",
                    "landing_b": "twin_pin.py --reconcile --rows 1"}, fh, indent=2)
-    expect = EXPECT_NOT_HONOURED
+    expect = WORLD_EXPECT_UNKNOWN
     code, out = run(state_path, twin_path, inflight, root=plain)
-    if expect in base_report:
+    if all(e in base_report for e in expect):
         return [("a declaration in a checkout with no git at all", "8", "UNFALSIFIABLE",
-                 "%r is in the UNMUTATED report too" % expect)]
-    ok = expect in out and EXPECT_WORKLIST in out
+                 "%r is in the UNMUTATED report too" % (expect,))]
+    ok = all(e in out for e in expect) and EXPECT_WORKLIST in out
     return [("a declaration in a checkout with no git at all", "8",
              "CAUGHT" if ok else "HOLE",
              "exit %d; the declaration must be neither graded nor honoured, so row 1 must "
@@ -548,12 +643,16 @@ def unknown_world(tmp, base_state, base_twin, base_report):
 def main():
     base_state = open(STATE, encoding="utf-8").read()
     base_twin = open(TWIN, encoding="utf-8").read()
+    # THE TREE'S OWN DECLARATION IS PART OF THE SUBJECT, not part of the environment.
+    base_inflight = (open(INFLIGHT, encoding="utf-8").read()
+                     if os.path.exists(INFLIGHT) else "")
 
     print("=" * 92)
     print("mg-9bc2 — NEGATIVE CONTROL for twin_pin.py")
     print("=" * 92)
     print()
     want_drift = expected_drift(base_state, base_twin) or []
+    want_declared = declared_and_moved(base_state, base_twin) or []
 
     print("Each mutation is applied to a COPY.  The live tree is never written.")
     if want_drift:
@@ -597,7 +696,20 @@ def main():
             # ABSENCE is this file's normal state — every one of those mutations is a
             # declaration appearing where there was none, so "" is the honest baseline and an
             # empty return is still a no-op that must score SETUP FAILED.
-            inflight_text = fn("") if target == "inflight" else ""
+            #
+            # EVERY OTHER TARGET NOW CARRIES THE TREE'S OWN DECLARATION, AND THE FIRST REAL
+            # LANDING A IS WHAT FOUND THAT IT DID NOT (mg-bdb0).  This line read `else ""`,
+            # so the sandbox was built WITHOUT `IN-FLIGHT.json` while `expected_drift` above
+            # subtracted the declared rows READ FROM THE LIVE ONE — two different worlds
+            # scored against each other.  With no declaration in the repository the two
+            # agreed trivially and nothing said so; the moment one existed, the positive
+            # control reported `worklist is ['3b', '6', '8', '11'], expected exactly (none)`
+            # and took the whole suite, and therefore the merge gate, to REFUSED.  The bug is
+            # not that the instrument was wrong — it was right in both worlds — it is that
+            # this file was mutating a tree the gate does not grade.  A negative control
+            # whose sandbox differs from the subject in a way its expectations depend on is
+            # scoring its own fixture, which is the class this whole directory exists for.
+            inflight_text = fn("") if target == "inflight" else base_inflight
             if target in ("state", "twin", "inflight") and not {
                     "state": state_text != base_state,
                     "twin": twin_text != base_twin,
@@ -617,7 +729,7 @@ def main():
 
             code, out = run(sp, tp, ip)
             if expect is None:
-                ok, detail = score_baseline(code, out, want_drift)
+                ok, detail = score_baseline(code, out, want_drift, want_declared)
                 verdict = "CAUGHT" if ok else "HOLE"
             elif expect in base_report:
                 ok, verdict = False, "UNFALSIFIABLE"

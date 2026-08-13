@@ -22,10 +22,86 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  NO DISAGREEMENTS
+§2  THE DISAGREEMENTS, SHOWN
 --------------------------------------------------------------------------------------------
-  Every watched transcript that moved during this gate run moved only in the two
-  declared families that are not a function of repo state.  No committed
-  transcript asserts anything this tree contradicts.
+  Lines quoted after normalisation, so that this transcript cannot itself
+  smuggle a worktree path into the corpus.
+  `-` is the committed copy, `+` is this tree.
 
-VERDICT: GREEN — 0 disagreements.  0.21s
+  code/control_audit_9876/out_a1_census.txt
+    @@ -185,3 +185,3 @@
+    - negative_control.py:499  score("landing A planted in a real git repository", EXP
+    - negative_control.py:504  score("landing A after its bytes reach `main`", EXPECT_
+    - negative_control.py:508  def unknown_world(tmp, base_state, base_twin, base_repo
+    + negative_control.py:594  score("landing A planted in a real git repository",
+    + negative_control.py:599  score("landing A after its bytes reach `main`", WORLD_E
+    + negative_control.py:603  def unknown_world(tmp, base_state, base_twin, base_repo
+
+  code/control_audit_9876/out_a2_discriminate.txt
+    @@ -12 +12 @@
+    - C1a   pin block present                                           DISCRIMINATES 
+    + C1a   pin block present                                           DISCRIMINATES 
+    @@ -14 +14 @@
+    - C1b   row sets agree                                              DISCRIMINATES 
+    + C1b   row sets agree                                              DISCRIMINATES 
+    @@ -16 +16 @@
+    - C1c   ledger columns are pinned                                   DISCRIMINATES 
+    ... 112 further hunk line(s) not shown
+
+  code/control_audit_9876/out_a4_sweep.txt
+    @@ -13 +13 @@
+    - 222 candidate site(s) in 76 of 223 directories
+    + 220 candidate site(s) in 76 of 223 directories
+    @@ -21,2 +21,2 @@
+    - code/control_audit_9876/a2_discriminate.py:882  return good, bad, lambda rc, tex
+    - code/control_audit_9876/a2_discriminate.py:1096  return good, bad, lambda rc, te
+    + code/control_audit_9876/a2_discriminate.py:896  return good, bad, lambda rc, tex
+    + code/control_audit_9876/a2_discriminate.py:1110  return good, bad, lambda rc, te
+    ... 16 further hunk line(s) not shown
+
+  code/control_gate_724a/out_gate.txt
+    @@ -7,2 +7,2 @@
+    - twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   <t>s  11674 bytes
+    - audit  code/control_audit_9876/run_all.sh         exit 0   <t>s  52441 bytes
+    + twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   <t>s  13325 bytes
+    + audit  code/control_audit_9876/run_all.sh         exit 0   <t>s  52431 bytes
+    @@ -27 +27 @@
+    - audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseli
+    + audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseli
+    ... 6 further hunk line(s) not shown
+
+  code/rendered_twin_pin_9bc2/out_control.txt
+    @@ -22 +22 @@
+    - row 3b   ok       f38bfefb2b7792cd
+    + row 3b   MOVED    pinned f38bfefb2b7792cd  ->  now d8b53cb04a4d8498   [DECLARED 
+    @@ -25 +25 @@
+    - row 6    ok       5b904a7a29c45746
+    + row 6    MOVED    pinned 5b904a7a29c45746  ->  now 003aa784c81584a9   [DECLARED 
+    @@ -27 +27 @@
+    - row 8    ok       b5477c475c557cbb
+    ... 36 further hunk line(s) not shown
+
+  code/rendered_twin_pin_9bc2/out_negative_control.txt
+    @@ -36,3 +36,3 @@
+    - NO MUTATION — the baseline                                            -    CAUGH
+    - landing A planted in a real git repository                            8    CAUGH
+    - landing A after its bytes reach `main`                                8    CAUGH
+    + NO MUTATION — the baseline                                            -    CAUGH
+    + landing A planted in a real git repository                            8    CAUGH
+    + landing A after its bytes reach `main`                                8    CAUGH
+
+  code/state_ratchet_e331/out_ratchet.txt
+    @@ -8,2 +8,2 @@
+    - words             5987      <- THE GATED QUANTITY (len(text.split()))
+    - bytes             40258
+    + words             4851      <- THE GATED QUANTITY (len(text.split()))
+    + bytes             33030
+    @@ -11,2 +11,2 @@
+    - longest line      8192 chars
+    - lines over 2000   3
+    ... 68 further hunk line(s) not shown
+
+  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
+  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
+
+VERDICT: RED — 7 committed transcript(s) disagree with this tree.  0.70s
