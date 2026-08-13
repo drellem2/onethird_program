@@ -1,0 +1,80 @@
+============================================================================================
+mg-585e v3  A TRANSCRIPT OF THE INPUTS — built, run on both verdicts, and priced
+============================================================================================
+
+§1  DOES THE PROPOSED TRANSCRIPT OSCILLATE?
+--------------------------------------------------------------------------------------------
+  the SAME trees v2 ran the real g0 against, and the same one-line difference.
+
+  proposed report on red tree == on green tree                    YES — BYTE-IDENTICAL
+  proposed report on red tree == on noise tree                    YES
+  bytes                                                          1745
+  and no scrubbing was applied to either side: there is no clock in it at all.
+
+  THE PLANT.  The same writer with the outcome appended — today's arrangement —
+  put through the identical comparison.
+  planted writer, red == green                                    no — CAUGHT
+
+§2  IS IT VACUOUS?  — THE WRONG-DIRECTION TEST
+--------------------------------------------------------------------------------------------
+  A constant file never oscillates and never disagrees, so admitting it to the
+  watched class would buy exactly nothing.  The report must still MOVE when the
+  thing it reports moves.  So: widen the normaliser in a sandbox and look.
+
+  mutation      N2 widened to eat integer seconds as well as decimal ones
+  report moved under the mutation                                 YES
+      -  SECONDS      re.compile(r"\b\d+\.\d+\s*s\b")
+      +  SECONDS      re.compile(r"\b\d+(?:\.\d+)?\s*s\b")
+
+  SO THE EXEMPTION BECOMES REMOVABLE AND THE REMOVAL BUYS SOMETHING SPECIFIC.
+  lib_f771's own docstring names its main risk: 'A WIDER NORMALISER IS AN
+  UNFALSIFIABLE ESCAPE HATCH — an operator facing a real disagreement can silence
+  it by widening the rule, and nothing in the machinery tells that edit from a
+  correct one.'  With the report inside the watched class, an operator who widens
+  the rule and does not re-run the gate is caught BY THE CONTROL THEY WIDENED.
+
+§3  WAS ANYTHING LOST?
+--------------------------------------------------------------------------------------------
+  On the red tree, TODAY, with no change to g0 at all:
+    exit status                                                   1
+    stderr names the disagreeing transcript                       YES
+      mg-f771 g0: 1 watched transcript(s) moved — 1 DISAGREES, 0 NOISE
+      mg-f771 g0:   DISAGREES code/sample_suite/out_sample.txt
+
+  The exit status is what `run_all.sh` reads and what `build.sh` folds into the
+  gate verdict — the outcome has never travelled to the merge gate through the
+  transcript.  And the per-file grading is ALREADY on stderr: g0 puts the
+  moved/NOISE census there for exactly this reason (README D4).  The proposal
+  moves ONE more line to a channel that is already carrying its neighbours.
+
+  WHAT IS GENUINELY LOST, STATED RATHER THAN GLOSSED: the committed file stops
+  being quotable for 'was the gate green'.  That is a real cost and mg-f771's own
+  diagnosis is the reply — the file that opened that ticket was stale precisely
+  BECAUSE the quotable part was the verdict, and lib_f771 says so in its first
+  paragraph: 'the part written to be quotable was the wrong half'.
+
+§4  THE OTHER INVARIANT CONTENT — A COUNT — IS THE WORSE TRADE, PRICED
+--------------------------------------------------------------------------------------------
+  window        137bc4ce..0cb0fa4c
+                from the commit that introduced the transcript, to the pin.
+  commits in the window touching code/                            129
+  ... that ADD or DELETE a tracked code/**/out_*.txt               31
+
+  A watched-class CENSUS is invariant under the repair, so it would not oscillate.
+  It moves on each of those 31 commits instead — and a moved census is the file
+  every concurrent branch must regenerate, which is mg-05c6's conflict class in
+  the merge queue rather than an extra commit in a worktree.
+
+  ⚠ commits that moved the MEMBERSHIP          31
+    commits that touched THE TRANSCRIPT        30
+    in BOTH sets                              4
+    These are different quantities over the same window; where they agree in size
+    that is arithmetic and not identity, and the overlap row is what says so.
+
+  THE INVENTORY IN §2 MOVES ON NEITHER.  It is a function of lib_f771.py, which
+  neither the repair nor a new directory under code/ touches — so it is the only
+  one of the three candidates that is invariant under BOTH.
+
+VERDICT: GREEN — a verdict-invariant transcript exists, is not constant, loses only
+  a quotable verdict, and is the only candidate invariant under the repair AND
+  under a new directory landing.

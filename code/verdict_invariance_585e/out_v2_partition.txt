@@ -1,0 +1,53 @@
+============================================================================================
+mg-585e v2  WHERE THE OSCILLATION LIVES — the real g0, run against controlled trees
+============================================================================================
+
+§1  THE THREE TREES AND WHAT g0 SAID ABOUT THEM
+--------------------------------------------------------------------------------------------
+  Identical repositories but for one line of one watched transcript.
+
+  tree     exit   the verdict line g0 printed (seconds scrubbed)
+  green    0      VERDICT: GREEN — 0 disagreements.  <t>s
+  noise    0      VERDICT: GREEN — 0 disagreements.  <t>s
+  red      1      VERDICT: RED — 1 committed transcript(s) disagree with this tree. 
+
+§2  RUN-TO-RUN JITTER ON A FIXED TREE
+--------------------------------------------------------------------------------------------
+  two independent green sandboxes, stdout identical after decimal
+  seconds are scrubbed                                           YES
+
+  This is the control that makes §3 attributable.  Whatever moves between the red
+  and green trees moves BECAUSE of the verdict, not because two runs of anything
+  differ.
+
+§3  RED AGAINST GREEN — WHICH PART OF THE TRANSCRIPT MOVED
+--------------------------------------------------------------------------------------------
+  everything up to the §2 heading is identical                    YES
+  §2 onward is identical                                          NO — this is the oscillation
+
+  head lines 24, and they are identical
+  §2 onward: green 7 line(s), red 18 line(s)
+
+  THE GREEN TREE AND THE NOISE TREE AGREE, WHICH IS THE OTHER HALF.  A watched
+  transcript that moved but says the same thing must produce the same stdout as one
+  that did not move at all, or the file would oscillate on wall-clock too.
+  green stdout == noise stdout (seconds scrubbed)                 YES
+
+§4  WHAT THE PARTITION SAYS
+--------------------------------------------------------------------------------------------
+  The transcript splits cleanly in two and the split is g0's own §-boundary:
+
+    §1  the watched class, the exemption, the two declared noise families
+        — a function of the INSTRUMENT.  Invariant under the repair.
+    §2  the disagreement set and the VERDICT line
+        — a function of the DIFFERENCE between the committed tree and the fresh
+          one, which is exactly what the repair sets to empty.
+
+  So the oscillating part is not 'the part that depends on the verdict' in general;
+  it is the part that reports a quantity THE COMMIT ITSELF ZEROES.  g0's docstring
+  rule — 'only the DISAGREES list, which is repo state, is on stdout' — picks the
+  wrong test: the DISAGREES list IS repo state, of the tree BEFORE the repair, and
+  the file is committed into the tree AFTER it.
+
+VERDICT: GREEN — the oscillation is confined to §2 and the VERDICT line, and the
+  rest of the transcript is already invariant.

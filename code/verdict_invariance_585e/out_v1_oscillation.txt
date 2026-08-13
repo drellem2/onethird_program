@@ -1,0 +1,88 @@
+============================================================================================
+mg-585e v1  THE OSCILLATION IN THE RECORD — 'measured over five runs' re-taken over main
+============================================================================================
+
+§1  THE PIN
+--------------------------------------------------------------------------------------------
+  AS_OF                 0cb0fa4c143f84ffc6d5b4e2284e7dbd780b95ce
+  resolves, and is an ancestor of origin/main — checked, not assumed.
+  path                  code/gate_fixed_point_f771/out_g0_fixed_point.txt
+  Every figure below is a function of that commit and the walk it defines, so this
+  transcript does not go stale when its subject is next touched.
+
+§2  EVERY COMMITTED VERSION, OLDEST FIRST
+--------------------------------------------------------------------------------------------
+  shape    is §2 the RED heading (`THE DISAGREEMENTS, SHOWN`)?
+  alone    did this commit touch that file AND NOTHING ELSE?
+
+  commit     shape  bytes   alone  subject
+  137bc4ce   green  1922    10 files gate: A COMMITTED out_*.txt CAN NO LONGER DI
+  da2f9db6   RED    3883    18 files normalisation: THE ALIAS AGREEMENT CHECK CAN
+  2489681a   RED    2502    7 files exhibit: THE END-TO-END EXHIBIT RUNS AGAIN A
+  f1d0a799   green  1922    ALONE  gate: g0's own transcript says GREEN, which 
+  7eb561e8   green  1728    19 files audit: THE TWIN'S PIN NAMED A COMMIT THAT DO
+  ee382ce0   RED    3384    5 files refresh: FIVE GATE TRANSCRIPTS RECOMMITTED U
+  615e9170   RED    2877    6 files refresh: SIX GATE TRANSCRIPTS RECOMMITTED UN
+  7e1e8d6e   green  1922    4 files refresh: g0's own transcript now says NO DIS
+  1faab191   RED    3955    16 files pin: THE PAIR ON MAIN IS TRUE AND NO RE-PIN 
+  28ad484f   green  1922    3 files refresh: g0's own transcript now says NO DIS
+  9cee8b04   green  1771    27 files fold: mg-3902's PIN-RESOLUTION CHECK IS twin
+  13df87b6   RED    2993    6 files fix: THE SANDBOX'S OWN SHA WAS LEAKING INTO 
+  60f68c73   RED    2652    5 files refresh: GATE TRANSCRIPTS RECOMMITTED UNDER 
+  5d8d3456   green  1922    ALONE  refresh: g0's own transcript now says NO DIS
+  a58d7d87   RED    2482    7 files refresh: SEVEN GATE TRANSCRIPTS RECOMMITTED 
+  1013a951   green  1922    4 files refresh: THE SECOND GATE RUN IS GREEN AND IT
+  8dd301cf   RED    2712    17 files restructure: THE EXECUTIVE SUMMARY IS A NEW 
+  ad3a7697   green  1922    5 files refresh: THE SECOND GATE RUN IS GREEN AND IT
+  88177c84   RED    5697    19 files twin: THE DEADLOCK IS BROKEN AND THE FACT IT
+  a34481b7   RED    3183    7 files fix: A TIMING DIFFERENCE SURVIVED THE NORMAL
+  3faa155e   green  1922    ALONE  refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+  ab5862e3   RED    5886    25 files relocate: LANDING A — THE LEDGER ROW MOVES, 
+  343dc1fb   green  1922    ALONE  refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+  e49b4d70   RED    2482    2 files refresh: THE REBASE MOVED mg-9876's CENSUS A
+  ce5acd41   green  1922    ALONE  refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+  9b1cfeca   RED    3882    8 files discharge: LANDING B — THE DEFERRAL IS DISCH
+  fb12be21   green  1922    ALONE  refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+  aefb2ecd   RED    7261    20 files measure: THE THREE ROWS THE RECORD CONTRADIC
+  160187e3   green  1922    ALONE  refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+  de9709c9   RED    3116    19 files price: mg-9b6b's TEST CANNOT RETURN AN ANSWE
+  cb76884b   green  1922    2 files refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+
+§3  THE THREE FIGURES
+--------------------------------------------------------------------------------------------
+  committed versions                        31
+  RED-shaped                                16
+  shape flips between consecutive versions  24
+  commits touching THAT FILE AND NOTHING ELSE  7
+
+  A flip count near the version count is what 'does not damp' looks like when it is
+  counted instead of described: the shape changes at almost every commit, so almost
+  no commit inherits a transcript that is still true.
+
+§4  ONE SHAPE IS A FIXED POINT AND THE OTHER IS NOT
+--------------------------------------------------------------------------------------------
+  distinct byte sizes among the 15 green versions   1728, 1771, 1922
+  distinct byte sizes among the 16 RED versions     2482, 2502, 2652, 2712, 2877, 2993, 3116, 3183, 3384, 3882, 3883, 3955, 5697, 5886, 7261
+
+  The green versions collapse onto essentially one text; the RED ones do not and
+  cannot, because each names a different set of files.  That asymmetry is the whole
+  mechanism: green is a fixed point of the run, RED is never a fixed point of the
+  commit that carries it, because that commit is the repair.
+
+§5  THE PRICE, IN COMMITS THAT EXIST FOR NOTHING ELSE
+--------------------------------------------------------------------------------------------
+  160187e3   refresh: THE FIXED-POINT TRANSCRIPT SAYS GREEN AND IT IS THE ONLY FILE THIS 
+  fb12be21   refresh: THE FIXED-POINT TRANSCRIPT SAYS GREEN AND IT IS THE ONLY FILE THIS 
+  ce5acd41   refresh: THE FIXED-POINT TRANSCRIPT SAYS GREEN ON THE REBASED TREE AND IT IS
+  343dc1fb   refresh: THE FIXED-POINT TRANSCRIPT SAYS GREEN AND IT IS THE ONLY FILE THIS 
+  3faa155e   refresh: THE FIXED-POINT TRANSCRIPT SAYS GREEN AND IT IS THE ONLY FILE THIS 
+  5d8d3456   refresh: g0's own transcript now says NO DISAGREEMENTS, which is what this t
+  f1d0a799   gate: g0's own transcript says GREEN, which is what this tree says — the com
+
+  7 of 31.  Each is a second `./build.sh` run and a second trip through the merge
+  queue, spent on a file that was red because the tree got fixed.
+
+  A LOWER BOUND AND NOT A TOTAL.  A red run repaired before the author committed
+  leaves nothing in the record, so the oscillation happened at least this often.
+
+VERDICT: REPORTED — 31 versions, 16 RED, 24 flips, 7 commits for nothing else.
