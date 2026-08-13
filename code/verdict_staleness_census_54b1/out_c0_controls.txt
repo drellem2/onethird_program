@@ -57,6 +57,8 @@ mg-54b1 C0  PLANTED WORLDS -- the strong sense, in both directions
 
   D1    expect DEAD           got DEAD           ok  a3_differ_and_placement.py today: the instrument no longer runs
   D2    expect REPRODUCES     got REPRODUCES     ok  an empty diff
+  D3    expect VERDICT MOVED  got VERDICT MOVED  ok  a crash REPAIRED -- a REMOVED traceback.  Calling this DEAD would report a repair as a death, and this branch created the case by committing a traceback into 6cb9's out_a3_differ.txt
+  D4    expect ADDRESSES ONLY got ADDRESSES ONLY ok  a traceback on a CONTEXT line -- six transcripts in this corpus carry one on purpose, one of them demonstrating a gate holding against it
 
 ==============================================================================
 §4  RULE B'S VOCABULARY, PRINTED SO THAT GROWING IT IS VISIBLE

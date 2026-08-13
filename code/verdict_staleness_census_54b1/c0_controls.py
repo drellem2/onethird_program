@@ -139,7 +139,20 @@ for wid, expect, text, why in [
          "diff --git a/%s b/%s\n@@ -1 +1 @@\n-  A3 TOTAL BAD: 1\n+Traceback "
          "(most recent call last):\n" % (P, P),
          "a3_differ_and_placement.py today: the instrument no longer runs"),
-        ("D2", "REPRODUCES", "", "an empty diff")]:
+        ("D2", "REPRODUCES", "", "an empty diff"),
+        ("D3", "VERDICT MOVED",
+         "diff --git a/%s b/%s\n@@ -1,2 +1 @@\n-Traceback (most recent call "
+         "last):\n-  File \"x.py\", line 1\n+A3 TOTAL BAD: 1\n" % (P, P),
+         "a crash REPAIRED -- a REMOVED traceback.  Calling this DEAD would "
+         "report a repair as a death, and this branch created the case by "
+         "committing a traceback into 6cb9's out_a3_differ.txt"),
+        ("D4", "ADDRESSES ONLY",
+         "diff --git a/%s b/%s\n@@ -1,3 +1,3 @@\n Traceback (most recent call "
+         "last):\n-  measured at 5a62e8c\n+  measured at e337f23\n"
+         % (P, P),
+         "a traceback on a CONTEXT line -- six transcripts in this corpus "
+         "carry one on purpose, one of them demonstrating a gate holding "
+         "against it")]:
     got, _ = L.classify_diff(text)
     ok = (got == expect)
     bad += (not ok)

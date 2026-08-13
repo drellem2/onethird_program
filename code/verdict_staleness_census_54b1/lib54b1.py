@@ -223,7 +223,20 @@ def classify_diff(diff_text, fresh_text=""):
 
     `fresh_text` is the concatenated fresh output, used only for DEAD.
     """
-    if TRACEBACK in diff_text or TRACEBACK in fresh_text:
+    # DEAD REQUIRES THE TRACEBACK ON AN **ADDED** LINE, and the narrowing is not
+    # fastidiousness.  Written `TRACEBACK in diff_text` this was a membership
+    # test against a whole captured diff -- mg-9876's §1 smell, in the file
+    # that classifies other people's transcripts -- and a unified diff carries
+    # CONTEXT and REMOVED lines too.  Six transcripts in this corpus already
+    # carry a Traceback on purpose, one of them demonstrating a gate holding
+    # against one.  Worse, a REMOVED traceback is an instrument that used to
+    # crash AND NOW DOES NOT, which is a repair; calling that DEAD is exactly
+    # backwards.  This branch created that case itself: it commits a Traceback
+    # into code/species_extent_audit_6cb9/out_a3_differ.txt, so the day a3 is
+    # re-aimed the diff carries `-Traceback` and nothing else would have
+    # stopped this classifier reporting the repair as a death.  D3 and D4.
+    if any(l.startswith("+") and not l.startswith("+++") and TRACEBACK in l
+           for l in diff_text.splitlines()) or TRACEBACK in fresh_text:
         return "DEAD", {}
     if not diff_text.strip():
         return "REPRODUCES", {}
