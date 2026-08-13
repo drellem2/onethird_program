@@ -65,6 +65,24 @@
 # author's first draft (F8's SCOPE field renamed in passing) and that is recorded in
 # code/facts_registry_03cf/README.md rather than quietly fixed.
 #
+# --- mg-1344 -------------------------------------------------------------------------------
+# NO SUITE JOINS THE GATE HERE, BUT ONE OF THEM ROUGHLY DOUBLED, AND THE NUMBER IS STATED
+# RATHER THAN DISCOVERED BY WHOEVER NEXT WONDERS WHY MERGES GOT SLOWER.  mg-724a's own gate
+# went 54.3 s -> 110.1 s on this host, MEASURED from the committed out_gate.txt on either side
+# of the change rather than from arithmetic (mg-17aa's D4, which this file has already been
+# caught by once): twin 4.9 -> 9.7 s, audit 49.5 -> 100.4 s.
+#
+# WHAT IT BUYS is that a ledger-row relocation can land at all — see code/rendered_twin_pin_9bc2
+# section 8 and docs/STATE-SPLIT-PROPOSAL-mg-14ad.md §8.3a for the deadlock it breaks.  WHAT IT
+# COSTS is fifteen new arms in mg-9876's audit, and a2_discriminate runs every arm TWICE, each
+# side in its own sandbox, so an arm is worth a few seconds by construction.  The avoidable half
+# was removed rather than absorbed: three of the new probes were building a full copy of the
+# estate to hand a builder two strings, and now use a bare temp directory.
+#
+# .pogo/refinery.toml's timeout is 20 minutes.  At 110 s the gate has ~11x headroom, against the
+# ~75x that file recorded at 16 s — stated because the margin is what makes a slow gate a thing
+# somebody reads rather than a queue nobody can explain, and it is now four times smaller.
+
 # --- mg-602d -------------------------------------------------------------------------------
 # A FIFTH SUITE JOINS THE GATE AND IT IS THE CHEAPEST YET — 0.2 s measured.  THE WHOLE GATE IS
 # MEASURED AT 44.8 s ON THIS HOST WITH IT IN.  That is BELOW the 47.5 s mg-03cf recorded for the

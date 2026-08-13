@@ -17,9 +17,9 @@ defect — only running it two ways decides that.
         code/species_gate_audit_d53d/g1_population.py:118  % (rn, rc, E2_SAYS, "yes" if E2_SAYS in out else "no"))
         code/species_gate_audit_d53d/g1_population.py:140  red[rn] = (rc, E2_SAYS in out, others)
     control_audit_9876  (15)
-        code/control_audit_9876/a2_discriminate.py:76  return lambda rc, text: needle in text
-        code/control_audit_9876/a2_discriminate.py:873  return good, bad, lambda rc, text: rc != 0 and "UNFALSIFIABLE" in text
-        code/control_audit_9876/a2_discriminate.py:1080  return good, bad, lambda rc, text: rc == 2 and "STRUCTURAL FAILURE" in text
+        code/control_audit_9876/a2_discriminate.py:77  return lambda rc, text: needle in text
+        code/control_audit_9876/a2_discriminate.py:882  return good, bad, lambda rc, text: rc != 0 and "UNFALSIFIABLE" in text
+        code/control_audit_9876/a2_discriminate.py:1096  return good, bad, lambda rc, text: rc == 2 and "STRUCTURAL FAILURE" in text
     summary_guard_cf83  (15)
         code/summary_guard_cf83/c1_summary_guard.py:193  red += check("no crash", "Traceback" not in out)
         code/summary_guard_cf83/c1_summary_guard.py:200  "all 4 are now checked against the tree" in out)
