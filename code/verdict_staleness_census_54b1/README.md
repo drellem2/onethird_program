@@ -136,6 +136,19 @@ known. The **size** was chosen for a ~40-minute budget before any result was in;
 not choosable. `sweep_54b1.sh` takes its work list from `c1_population.py --sample N`, so the
 population and the sweep cannot drift apart.
 
+**The committed `sweep_54b1.sh` is not byte-for-byte the script that produced `out_sweep_54b1.txt`,
+and the two differences are listed rather than left to be discovered.** The run was driven by a
+scratch copy, and against it the committed file differs in exactly two places:
+
+* **Where the work list comes from.** The run read a precomputed file; the committed script calls
+  `c1_population.py --sample N`. The two lists were compared element-for-element and are
+  **identical**, which is checkable — the sample is a function of the path.
+* **The `load` column**, added *after* that run, which is why every row in the committed
+  transcript reads `not recorded` in it. `classify.py` says so where it prints them.
+
+Nothing about what is executed, timed or measured differs. Saying this is cheaper than a reader
+finding it.
+
 **A `TIMEOUT` is a reported class and not a drop.** An instrument the sweep could not finish
 inside its budget is *unmeasured*, and `classify.py` counts it as unmeasured rather than as
 reproducing. Silently skipping it would read as coverage.
