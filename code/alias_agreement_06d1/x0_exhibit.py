@@ -152,5 +152,41 @@ def main():
     return 1
 
 
+TRANSCRIPT = os.path.join(HERE, "out_x0_exhibit.txt")
+
+
+def run_and_transcribe():
+    """Run, then write `out_x0_exhibit.txt` — LAST, and by this script rather than by a
+    shell redirect.
+
+    mg-479c.  THIS SCRIPT WAS PREVIOUSLY INVOKED AS `python3 x0_exhibit.py > out_x0...txt`
+    AND THAT NO LONGER WORKS, for a reason that did not exist when it was written.  This
+    exhibit runs `./build.sh`, and `./build.sh` now ends with mg-f771's control, which
+    compares every tracked `code/**/out_*.txt` against its committed copy.  Under a shell
+    redirect, `out_x0_exhibit.txt` is TRUNCATED AND HALF-WRITTEN at the moment f771 reads
+    it, so f771 grades the exhibit's own transcript DISAGREES, the gate exits 1, and E0
+    refuses with "the gate is ALREADY RED before anything was planted" — on every run,
+    forever.  The refusal is CORRECT (the gate really was red) and its cause is this
+    invocation.
+
+    So the output is buffered and the file is written after the last `./build.sh` has
+    finished.  During the run the worktree copy is whatever is committed, which is what
+    f771 needs it to be, and the exhibit stops interfering with the gate it is exhibiting.
+    """
+    import io
+    buf = io.StringIO()
+    real = sys.stdout
+    sys.stdout = buf
+    try:
+        rc = main()
+    finally:
+        sys.stdout = real
+    text = buf.getvalue()
+    real.write(text)
+    with open(TRANSCRIPT, "w") as fh:
+        fh.write(text)
+    return rc
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_and_transcribe())
