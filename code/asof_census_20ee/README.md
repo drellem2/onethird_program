@@ -43,6 +43,11 @@ Five instruments, each verified in both directions, one commit each.
 
 All five satisfy `git merge-base --is-ancestor <AS_OF> origin/main`.
 
+> **`anchor_drift_96df` is pinned and drifts again (`mg-e8b0`, tranche 9)** — `5+/5-` re-run by hand
+> at `07a2fd0`. Its `AS_OF` is sound and the new drift is **not an address**: the instrument reads
+> *another repository*, whose remote `main` has moved, and the moved lines are the **verdict** it
+> exists to print. See tranche 9 §5 — **do not "fix" it**.
+
 ## The criterion, as corrected by `pm-onethird` mid-branch
 
 The ticket's stated acceptance — *"reproduces byte-identically against the declared commit"* —
@@ -106,6 +111,15 @@ size of its drift, which is the best available ordering for the next tranche —
 (`species_remainder_f8fa` at `2+/2-`, `species_repair_a4ef` at `2+/4-`) are cheap; the large ones
 (`runner_exit_audit_dee4` at `774+/91-`, `landing_audit_sweep_64cb` at `363+/111-`) are likely
 carrying more than an address defect.
+
+> **Stale, not wrong, and annotated rather than struck (`mg-e8b0`, tranche 9).** Both cheap ones
+> have since been answered and *this sentence went on offering them for four tranches*.
+> `species_remainder_f8fa` was **pinned at `e29ba2a`** — this arc's own tranche 2, `mg-6e4f` — and
+> reproduces byte-identically at `07a2fd0`; `species_repair_a4ef` is `mg-4020`'s R1 instance and is
+> **not pinnable at all**. The count knew about the first (tranche 3's `26 remain` already subtracts
+> it) and **the name did not**, which is the whole of tranche 9: a count is not a record of *which*,
+> and the reader picking the next instrument reads the name. `worklist.py` now prints this sentence
+> beside the row it is wrong about, so the next one cannot be found by reading.
 
 **Cost, measured rather than estimated: about 30 minutes per instrument** done to the acceptance,
 across five. The ticket's *"do not do all 64 in one branch"* is right for a second reason it does
@@ -1029,3 +1043,196 @@ was careless: `consumers.py` reads the **live index** by design, so its figure i
 you ran it* and not of the commit you attach it to, and every rebase re-opens the hole. **The figure
 with the short half-life was the one no `AS_OF` pins** — which is this directory's whole subject,
 arriving on its own transcript twice.
+
+---
+
+# Tranche 9 (`mg-e8b0`) — the work-list is itself a transcript, and nothing re-takes it
+
+`mg-e8b0`'s ticket asks for two things and one of them had already been done. **Item 1 — R3's prose
+over-count — is repaired**: `mg-e5f3` did it at tranche 6, `mg-44da` and `mg-23af` narrowed it twice
+more, and `N18` left `KNOWN_DEFECT` on the way. That was checked before anything was built, because a
+ticket is a claim about the tree at the moment it was filed and this one was filed three tranches ago.
+
+**Item 2 is the live one**: *"the remaining 25 must be SCORED, not eyeballed."* Taking it literally
+means running one, and the cheapest name on the list is the one tranche 1's own §"What remains" hands
+the next tranche:
+
+> the small ones (`species_remainder_f8fa` at `2+/2-`, `species_repair_a4ef` at `2+/4-`) are cheap
+
+`sh code/species_remainder_f8fa/run_all.sh` **reproduces byte-identically** at `07a2fd0`. It is not
+stale, and it is not stale because `e29ba2a` **pinned it** — `pin: w3_scope READS ITS CORPUS AT A
+DECLARED COMMIT` — and **that commit is this arc's own, `mg-6e4f`, tranche 2**, landed one tranche
+after the sentence offering the instrument as cheap remaining work was written. The sentence has
+stood through four tranches since.
+
+**That is not *"somebody moved underneath us"*, which was this tranche's first draft and was wrong.**
+The count knew: tranche 3 reports `26 remain`, which is 32 less tranche 1's five less this one. **The
+name did not.** A count is not a record of *which*, and the reader picking the next instrument reads
+the name.
+
+## 1. `out_ground_truth.txt` has the property every instrument on it is on it for
+
+Its own header says what it is: **one dated run**, ~70 minutes, executing instrument code, against
+*"the working tree at `5a62e8c`"*. `run_all.sh` does not run it and says why. So it is a committed
+transcript whose subject keeps moving underneath it — and **it has had exactly one commit in its
+life**, which `out_worklist.txt` prints rather than this paragraph asserting it. `mg-0e77` published
+*"25 instruments remain"*; `mg-885d` and `mg-e5f3` each restated it *"unchanged"*; `mg-44da` and
+`mg-23af` restated nothing and re-took nothing either. **Unchanged was the claim, and it was
+inherited rather than measured** — four tranches since anybody asked.
+
+`worklist.py` asks the repository instead. Every figure it prints is a function of two commits — the
+sweep's tree, parsed out of the sweep's own header sentence rather than re-typed, and `AS_OF` — read
+through `git show` and `git log`. **`out_worklist.txt` therefore reproduces byte-identically**, which
+is the only honest arrangement for the file whose subject is that `out_ground_truth.txt` cannot, and
+it is in `run_all.sh` for `permuted.py`'s reason: it executes no instrument code and needs no dirty
+tree.
+
+**Measured at `07a2fd0`, `110` commits after the sweep's tree** — and this table is a *reading of
+`out_worklist.txt`*, which is where it is computed. **Moving `AS_OF` moves every number in it**, and
+a successor that moves the pin owes this paragraph a re-take. Saying so is not a formality: the
+figure this tranche was told by is a figure in exactly this position, four tranches old.
+
+| | |
+|---|---|
+| candidate rows recorded | **44** — 32 `DIFFERS`, 9 `REPRODUCES`, 3 `NO_RUN_ALL` |
+| directories moved since the sweep | **12** |
+| of those, a pin landed **by content** | **8** — the verdict |
+| of those, a pin landed **by subject** | **9** — the wide net |
+| rows already declaring a revision at `AS_OF` | **36 of 44** |
+
+## 2. The answer is one-directional, and that is the whole honest statement of it
+
+Repo movement can prove a recorded row **wrong**. It can **never** prove one right: an instrument
+whose directory has not been touched since the sweep may have gone stale anyway, **because what moved
+is its corpus** — which is the defect class this entire arc exists for. So the rows are printed
+`FALSIFIED` / `NOT FALSIFIED` and never `DIFFERS` / `REPRODUCES`, and this file **does not replace**
+`ground_truth.sh`. It is a prefilter with the backstop named at the site, in the form `census.py`
+already states its own.
+
+Two more limits are printed where they are read, rather than kept in a docstring:
+
+- **A pin is not a repair.** Both rules say a revision was *declared*, not that the transcript now
+  reproduces — `pinnable.py`'s `R2` fires on `b0ae`, which is pinned and drifts by design.
+- **The unaccounted count is a low water mark.** `named in this record` is a substring count, so an
+  instrument the record names *for any other reason* reads as accounted for. **`N28` asserts that
+  with its live instance** and joins `KNOWN_DEFECT`: `species_remainder_f8fa` is named exactly once,
+  in the sentence calling it cheap remaining work, so the rule scores the arc as knowing about a pin
+  whose existence its own sentence denies. The instrument prints **the sentence** and not just the
+  count, which is what lets a reader see it at the site.
+
+## 3. Two rules for *"a pin landed"*, and the verdict rests on the narrower
+
+| | rule | fires |
+|---|---|---|
+| **A** | the commit **subject** matches `pin:` | 9 rows |
+| **B** | the commit's **diff to that directory** adds a hex token `git cat-file -e` resolves | 8 rows |
+
+Rule B is `pinnable.py`'s `R2` read across one commit. They are printed side by side because **they
+disagree on real rows here, in both directions** — one `(directory, commit)` pair each, both pinned
+as `P27`:
+
+- **A not B** — `code/species_extent_d633` at `e29ba2a`. The commit calls itself a pin and its diff
+  *there* declares no revision: the pin landed in `code/species_remainder_f8fa`, which the same commit
+  touches. **A subject is a property of a commit, and a commit touches several directories.** The
+  instrument computes *which* directory of a commit's own diff gained the revision and prints it, so
+  the over-count is **attributed** rather than declared.
+- **B not A** — `code/absent_step_7ae5` at `6af53b9`, `fix: REPIN a4_novelty TO A main-REACHABLE
+  COMMIT`. A revision declared under a verb the convention does not cover — and it is `mg-daba`'s own
+  defect being repaired, which is exactly the commit a subject-only rule must not miss.
+
+## 4. `wants an AS_OF`, measured per instrument for all 44 rows
+
+`mg-4020` established that *"drifts"* and *"wants an `AS_OF`"* are different properties and that the
+second must be measured **per instrument**. It measured three, at ~45 minutes each, because
+`pinnable.py` classifies a diff and so needs the suite run and not restored. **`R2`'s half needs no
+diff**, so it can be asked of every row at a commit: **36 of 44 rows already declare a revision that
+resolves**, 27 of them among the recorded `DIFFERS`.
+
+That is not *"36 are pinned"* — it carries `R2`'s declared over-count unchanged, and a declared
+revision may be a **control's** rather than the corpus read's. It means *go and read why*. The number
+a successor wants is the residue: **the recorded-`DIFFERS` rows that declare no revision and that no
+pin has falsified**, which nothing on record has yet given a reason to skip.
+
+## 5. The re-run — the half only running the suites can answer
+
+`worklist.py --rerun` reads a fresh `ground_truth.sh` output beside the recorded one. It is a
+**dated hand-run** in exactly the sense `out_ground_truth.txt` is, and for the same reason: it
+executes instrument code, so no build path may take it. `out_worklist_rerun.txt` is that run, against
+the working tree at `07a2fd0`, and it **names the rows it did not re-run** rather than reporting a
+partial re-take as a complete one.
+
+**Every verdict that moved, moved `DIFFERS` → `REPRODUCES`, and every one is attributed to a pin** —
+five of this arc's own and one, `species_remainder_f8fa`, that the arc's *name* did not know about.
+So the re-run and the git half agree, which is the only cross-check either of them has.
+
+### The one that did not move, and it is the finding
+
+**`code/anchor_drift_96df` was pinned at `c42c221` (tranche 1) and still drifts** — `5+/5-`, re-run
+by hand and restored. Its drift is not an address and no `AS_OF` in this repository can reach it:
+
+```
+-  its origin/main             : 949c43926b6e
++  its origin/main             : bec18a04e34c
+-  is that still the remote main: YES -- the pinned table has not yet gone stale
++  is that still the remote main: NO -- THE PIN HAS MOVED; the ticket's table is stale
+```
+
+The instrument reads **a different repository** — `/Users/daniel/research/one_third_width_three` —
+and reports whether `mg-688c`'s pinned table is still current there. It has stopped being current.
+So:
+
+- **A verdict moved**, and per `mg-20ee`'s own discrimination that is a **finding, reported and not
+  absorbed**. The transcript is restored, not committed: committing it would bank a foreign
+  repository's `HEAD` into this one, which is `anchor_drift_96df`'s own subject.
+- **The instrument is working.** This is the line it exists to print, printing it. `DIFFERS` here is
+  not staleness of the kind this arc repairs, and a tranche that "fixed" it would be **silencing the
+  only alarm on the board**.
+- **It is a third class, and `pinnable.py` has no rule for it.** `R1` is an address in no commit;
+  `R2` is a revision already declared. This is an address in **another repository** — outside the
+  reach of any `AS_OF` for a third distinct reason. Reported, not built: a rule about foreign repos
+  is a change whose false-positive direction nobody has measured, which is the sentence three
+  tranches running have written about their successor's subject.
+
+## 6. What this tranche leaves — reported at the low water mark
+
+**The re-take, over the 43 rows it covers:** `31` were recorded `DIFFERS` and **`25` still are**. Six
+moved, all in the same direction.
+
+> ⚠️ **The two `25`s are different quantities and they are equal by coincidence.** The record's `25`
+> is a count of *work items remaining*, carried forward by hand since `mg-0e77`. This `25` is a count
+> of *rows whose transcripts still fail to reproduce* at `07a2fd0`, over 43 rows. **They are not even
+> the same set**: `anchor_drift_96df` is *in* this one and *out* of that one — tranche 1's table
+> lists it as landed. That is the section above, arriving from the counting side.
+
+- **`census_remainder_f8e5` was not re-run**, for the reason the original sweep gives for the same
+  row: its worker does not terminate in a usable time (killed at 37 minutes there; killed here too).
+  The instrument names it rather than letting a partial re-take read as a complete one.
+- **`ground_truth.sh` restores the candidate, and candidates run *other* suites.** `dee4`'s runner
+  executes `alias_agreement_06d1`; a killed sweep left `face_geometry_audit_f1b2` modified, outside
+  the candidate list and outside the restore. **Restored, not committed**, and *not* reported as a
+  finding about that directory: a transcript from a run somebody killed is not evidence. The
+  side-effect note in `ground_truth.sh`'s header understates its blast radius, and that is worth a
+  successor's attention.
+- **`out_consumers.txt` moves `198` → `200`, and neither `+1` is this branch's.** Both are main's:
+  `code/lever_shape_9b6b/run_all.sh` at `96c38ad` and `code/subset_consumability_99f4/run_all.sh` at
+  `21356d5`. Checked rather than assumed, and the check is the one that mattered: at `828a0fa` the
+  tree held **198** files named `run_all.sh` and tranche 8's transcript said **198**, so — unlike
+  tranches 6 and 7 — **that transcript was *not* stale at its own commit**. The expectation this
+  tranche carried was refuted, and it is recorded as refuted.
+- **`out_census.txt` does not move**, checked rather than assumed, and `out_worklist.txt` is a new
+  `out_*.txt` in a directory `census.py` scans. Its one `RED_TOKEN` is `CAUGHT` inside a **quoted
+  commit subject** at line 133, so `mg-9876`'s arm row is a directory-level membership this directory
+  already had. This branch adds zero whole-output membership sites.
+- **`out_pinnable_3b51.txt` is still a dated hand-run that no suite re-takes**, unchanged in kind
+  since tranche 7 and not re-taken here for the same reason: it needs a dirty tree.
+- **The operator-valued transcripts are still unowned** (`mg-724a` / `mg-f771`), and the `2 353` slip
+  in `docs/OneThird-Landscape-Repair-IndependentAudit.md` still belongs to whoever owns that document.
+
+### `N28` moved off its own instance, deliberately
+
+The live instance — tranche 1's *"the small ones … are cheap"* — **is annotated in this commit**, so
+the trap is closed for the next reader. `N28` therefore asserts **the rule** and not that sentence:
+*accounting* for a pin and *offering the same instrument as remaining work* score identically under a
+substring count, and the two strings it plants are the real ones. Had the control stayed on the
+sentence, closing the trap would have turned it **red**, and a later tranche could have "repaired"
+the control by re-opening the trap. It joins `KNOWN_DEFECT`, which grows `5 → 6`.

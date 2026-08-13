@@ -1,0 +1,38 @@
+==============================================================================
+mg-e8b0 -- THE WORK-LIST RE-TAKEN.  Recorded at AS_OF = 07a2fd0
+==============================================================================
+
+  A DATED HAND-RUN, and it says so in the same words the sweep it
+  compares against uses.  `sh ground_truth.sh <dirs>` re-runs each
+  suite and reports whether its committed transcripts still
+  reproduce; this reads that output beside the recorded one.
+
+      the tree this re-run ran against                     07a2fd0
+        resolves, and is an ancestor of origin/main        CHECKED
+      rows recorded in out_ground_truth.txt                44
+      rows in this re-run                                  43
+
+      rows measurable in both                              43
+      recorded DIFFERS, over those rows                    31
+      re-run  DIFFERS, over those rows                     25
+      rows whose verdict MOVED                             6
+
+  code/absent_step_7ae5                          DIFFERS -> REPRODUCES
+      recorded drift 40 line(s); re-run 0 line(s)
+  code/face_geometry_audit_e720                  DIFFERS -> REPRODUCES
+      recorded drift 22 line(s); re-run 0 line(s)
+  code/landscape_repair_1953                     DIFFERS -> REPRODUCES
+      recorded drift 35 line(s); re-run 0 line(s)
+  code/landscape_repair_audit_3b51               DIFFERS -> REPRODUCES
+      recorded drift 79 line(s); re-run 0 line(s)
+  code/pairbias_indep_audit_6bd1                 DIFFERS -> REPRODUCES
+      recorded drift 8 line(s); re-run 0 line(s)
+  code/species_remainder_f8fa                    DIFFERS -> REPRODUCES
+      recorded drift 4 line(s); re-run 0 line(s)
+
+  NOT RE-RUN HERE, AND NAMED RATHER THAN DROPPED -- a partial
+  re-take that did not say which rows it skipped would read as a
+  complete one:
+      code/census_remainder_f8e5                     recorded DIFFERS
+
+RE-RUN: 6 of 43 rows moved verdict
