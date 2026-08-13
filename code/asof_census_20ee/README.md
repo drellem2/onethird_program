@@ -283,6 +283,153 @@ moved verdict separately. Estimating it as one pinning is how it would go wrong.
 
 ---
 
+# Tranche 4 (`mg-0e77`) — the ready pin, landed; and **one pin does not serve two transcripts**
+
+Tranche 3 diagnosed `landscape_repair_audit_3b51` and left it, calling it *"a three-part item:
+pin the corpus read, re-measure `1953`, and file the moved verdict separately"*. All three are done.
+Two of the three came out differently from the estimate, and both differences are the tranche.
+
+## 1. The pin, and what it cost
+
+`audit_scope_text.py` pinned its **subject** at `OLD_REV = 714aceb` from the first line it was
+written, and never pinned its **corpus**: `read_new()` opened the live worktree and `rg()` shelled
+out to `grep -rn` over it. Both now read at `AS_OF`, through `git show` and `git grep <rev>`.
+
+| transcript | `AS_OF` | rule it came from | effect |
+|---|---|---|---|
+| `3b51/out_scope_text.txt` | `e924590` | **parent of the carrying commit** (rule 2) | 18 of 129 lines permuted, **set-identical** |
+| `1953/out_scope_text_3b51_rerun.txt` | `1db0be9` | **newest ancestor that reproduces** (rule 1) | 30 of 149 permuted, **+1 address, `23` → `24`** |
+
+Both satisfy `git merge-base --is-ancestor <AS_OF> origin/main`. Not one verdict, count or address
+moved in the first; exactly one address and the count it belongs to moved in the second, and both
+are corpus-valued.
+
+**Direction 2, measured rather than asserted.** Running `code/landscape_repair_audit_3b51/run_all.sh`
+end to end leaves **only** `out_scope_text.txt` modified — the suite's other five transcripts
+reproduce byte-identically. The same holds for `landscape_repair_1953`: its own four transcripts
+reproduce, and only the re-run moves. That is condition 3's section-D backstop run for real, and it
+says the pin reaches its one consumer and nothing else.
+
+## 2. **`23` → `24`: the second transcript was taken against a tree that is in no commit**
+
+`1db0be9` is the carrying commit and not its parent, which by rule 2 should be wrong. It is not:
+`358beff`, the parent, is 29 lines away, and `1db0be9` is 3. The residue is
+`docs/OneThird-Branching-Graphs-Where-This-Lives.md:185` — one occurrence of `sharper`, in a document
+belonging to a different arc, **added by `358beff` itself**.
+
+So the tree that transcript was produced against had `mg-aec7`'s document and *not* `mg-af28`'s
+paragraph: it is `mg-aec7`'s branch **before the refinery rebased it**, and no commit contains it.
+That is tranche 1's rule 3 (`absent_step_7ae5`) and `mg-daba`'s defect, arriving on a second
+instrument by the same route. Regenerated at the main-reachable commit with the price published,
+which is what the criterion section says to do when the two conditions conflict.
+
+## 3. **"One pin, two transcripts" was wrong, and the correction is the headline**
+
+Tranche 3 recorded `1953` as *carrying the same drift* — one pin, two transcripts. Measured, the two
+committed transcripts of this one script **disagree with each other by design**:
+
+```
+3b51/out_scope_text.txt            states a CONTACT CRITERION : False
+1953/out_scope_text_3b51_rerun.txt states a CONTACT CRITERION : True
+```
+
+`1953`'s runner header says so in its own voice — the re-run exists as *"evidence that the A1/A3/A4
+landing did not re-open the locating, from the auditor's code rather than this author's"*, and
+`False` → `True` **is its content**. Pinning both at one commit would not repair the second
+transcript; it would delete the comparison, which is `state_relocation_audit_b0ae`'s failure mode
+arriving at the instrument tranche 3 called the clean pinnable case.
+
+So `AS_OF` is a **parameter** (`argv[2]`) with a default, and `1953`'s runner passes its own.
+**The ticket's rule goes one level down**: *"drifts"* and *"wants an `AS_OF`"* are different
+properties per **transcript**, not merely per instrument. The same script, in one repository, has one
+transcript that wants a pin and one that must not have the same one.
+
+## 4. Condition 0 gains **R3**, and it is a rule about **condition 2**
+
+`pinnable.py` was run on the pre-pin drift before any of this was paid for, and
+`out_pinnable_3b51.txt` is that run. It fires R2 (the partial pin tranche 3 diagnosed) **and R3**,
+which is new here and which predicted the shape of the result:
+
+> **R3 UNORDERED WALK** — the subject enumerates the filesystem, so its transcript's **line order**
+> is in no commit.
+
+`grep -rn` emits directory-enumeration order. **Measured on this repository's own tree**: that order
+is a deterministic function of the *set of names* — two trees built from the same 191 paths in
+opposite creation order enumerate identically, and four consecutive runs agree — and it is not
+sorted, not `git ls-files` order, and not derivable from the commit by any portable rule. It is the
+filesystem's, and the filesystem is in no commit.
+
+The consequence is **not** *don't pin*. The only form that reads a corpus at a commit is
+`git grep <rev>`, and git sorts — so a **correct** pin necessarily permutes the transcript, and
+condition 2's *"reproduces byte-identically"* cannot be met by it. **Read condition 2 as set-identity
+plus a declared permutation wherever R3 fires**, or a clean pin scores as a failed one. Both pins
+above are exactly that case.
+
+**Blast radius, measured across the work-list rather than guessed: R3 fires on 17 of the 43
+candidate directories.** Whoever works the remainder will meet it on roughly two in five.
+
+### R3's own over-count, found the way this arc keeps finding them
+
+The first version tested each line on its own, and **fired on both instruments tranche 1 pinned to
+byte-identity** — `absent_step_7ae5` and `anchor_drift_96df` each `os.walk` into a list and
+`return sorted(out)` seven or eight lines below. A per-line rule calls two clean pins defective:
+tranche 3's 94% over-count, inside the rule written from it. It now scans to the end of the
+enclosing block, which is a **syntactic** boundary and deliberately not a line count — a window
+tuned to fit 7 and 8 would be a threshold guessed from the two cases it was built from. That took
+the count from 26 of 43 to 17, and both tranche-1 pins go silent, which is the right answer for them.
+
+**Found by pointing the new rule at subjects it had not seen, not by reading it** — tranche 3's
+sentence, now twice.
+
+### And R3 finds itself, which section 4 said to check for
+
+R3 fires **six times on this directory and every one is false**: once on its own regex source and
+five times on its controls' planted needles. That is section 4's *"a control that planted its own
+probe into the corpus it searched"* for the **fourth** time in this arc — and section 4's remedy
+does not apply, because a detector for a token cannot avoid containing that token. It is printed in
+`pinnable.py`'s own output beside R1's and R2's self-hits, with the distinction that matters:
+**R1's and R2's self-hits are true and R3's are false.** All three read text, not behaviour, which
+is the sharper statement of why none of them is a verdict.
+
+## 5. The moved verdict, reported and not absorbed
+
+`argv[2]` is also what makes the finding reportable: `audit_scope_text.py ../.. HEAD` asks the pinned
+instrument what the corpus says **today**. D7's R4-slip detector:
+
+```
+at e924590 (pinned)   docs/roadmap.md:41                              *** the R4 slip ***
+at HEAD               docs/OneThird-Landscape-Repair-IndependentAudit.md:190   *** the R4 slip ***
+                      docs/OneThird-Landscape-Repair-IndependentAudit.md:290   *** the R4 slip ***
+```
+
+**The slip was not repaired — it migrated, and it doubled.** `docs/roadmap.md` carries no mention of
+`2,353` at all now; the sentence it carried is gone. One of the two new sites is a **verbatim
+quotation of the deleted roadmap line** (`> *"The audit refuted it: 0 disagreements at every one of
+2,353 levels to n≤5"*`). Deleting the sentence from the roadmap looks like a repair, and the sentence
+had already been copied into the audit document, where the same detector still flags it.
+
+This is a finding about `docs/`, not about this instrument, and per the criterion section it is
+**reported rather than folded into a pinning commit**. Nothing in the corpus records it; it is
+recorded here. *(D5's `False` → `True` is not a second finding — it is the known, intended
+difference between `6b1eacf` and `mg-aec7`'s document, and section 3 above is why it survives.)*
+
+## 6. What tranche 4 leaves
+
+**25 instruments remain.** One landed, and the two counted by tranche 3 as separate items were one
+pin with two revisions.
+
+- **R3 will fire on about 17 of them**, so agree what condition 2 means before paying for a pin.
+- `out_pinnable_3b51.txt` is **one dated hand-run and no suite re-takes it** — the same declaration
+  `out_ground_truth.txt` and tranche 3's two make about themselves, and the same blind spot.
+- The `2 353` slip in `docs/OneThird-Landscape-Repair-IndependentAudit.md:190` and `:290` is
+  **unowned** and belongs to whoever owns that document.
+- **Not repaired and not this branch's:** `code/control_gate_724a/out_gate.txt` and
+  `code/gate_fixed_point_f771/out_g1_controls.txt` still carry the absolute worktree path of the
+  polecat that last committed them. Restored, not committed, for the third tranche running — see
+  tranche 3's note; it belongs to `mg-724a` / `mg-f771`.
+
+---
+
 **Two entries in `out_ground_truth.txt` are not independent**, and are marked there:
 `n0_strike_audit_dd8b` reports `REPRODUCES` only because this branch had already pinned it when
 the sweep reached it, and `census_remainder_f8e5` reports `rc=143` because its worker was killed

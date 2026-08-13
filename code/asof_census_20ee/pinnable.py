@@ -147,6 +147,23 @@ ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 PATHTOK = re.compile(r"(?:[A-Za-z0-9_.\-]+/)+[A-Za-z0-9_.\-]+")
 HEXTOK = re.compile(r"\b[0-9a-f]{7,40}\b")
 
+# R3.  An enumeration of the filesystem whose ORDER the repository does not
+# determine.  `grep` is matched with a following short-flag cluster containing
+# r or R, and tolerantly, because a Python subject spells it as a LIST --
+# ["grep", "-rn", "-E", pat] -- with quotes and a comma between the two tokens.
+WALK = re.compile(
+    r"""\bgrep\b[^\n]{0,24}?-[A-Za-z]*[rR]        # grep -r / -rn / "grep", "-rn"
+      | \bos\.(?:walk|listdir|scandir)\s*\(
+      | \.iterdir\s*\(
+      | \bglob\.(?:glob|iglob)\s*\(
+      | \bfind\s+[^\n|]*-(?:type|name)\b          # shelled-out find(1)
+    """, re.X)
+# The negative half.  git sorts its own output, so `git grep` and `git ls-files`
+# are ORDERED READS OF A COMMIT and must never fire; nor may a walk the subject
+# has already ordered itself.  Without this half R3 fires on every correct
+# instrument in the estate, including the repaired form it exists to recommend.
+ORDERED = re.compile(r"git\s+(?:grep|ls-files)|sorted\s*\(|\|\s*sort\b")
+
 
 def git(*args):
     got = subprocess.run(["git", "-C", ROOT, *args], capture_output=True)
@@ -212,6 +229,61 @@ def declared_revs(text, resolves):
     return [t for t in dict.fromkeys(HEXTOK.findall(text)) if resolves(t)]
 
 
+def unordered_walks(text):
+    """Lines that enumerate the filesystem in an order no commit determines.
+
+    MEASURED, NOT REASONED ABOUT (mg-0e77).  `grep -rn` emits hits in
+    directory-enumeration order.  On the filesystem this repository lives on
+    that order is a deterministic function of the SET OF NAMES -- two trees
+    built from the same 191 paths in OPPOSITE creation order enumerate
+    identically, and four consecutive runs agree -- so it is stable, and it is
+    also not sorted, not `git ls-files` order, and not derivable from the
+    commit by any portable rule.  It is the filesystem's, and the filesystem is
+    in no commit.
+
+    THE CONSEQUENCE IS ABOUT CONDITION 2, NOT ABOUT WHETHER TO PIN.  The only
+    form that reads a corpus AT a commit is `git grep <rev>`, and git SORTS.
+    So pinning a `grep -r` corpus necessarily permutes the transcript, and
+    mg-20ee's condition 2 -- "reproduces byte-identically" -- CANNOT be met by
+    a correct pin.  Measured on the pin that produced this rule:
+    landscape_repair_audit_3b51 went 18 of 129 lines permuted and
+    landscape_repair_1953 30 of 149, with the two line SETS identical and not
+    one address, count or verdict moved.  Read byte-identity as SET-identity
+    plus a declared permutation for a subject R3 fires on, or a correct pin
+    reads as a failed one.
+    """
+    lines = text.splitlines()
+    hits = []
+    for i, ln in enumerate(lines):
+        if not WALK.search(ln) or ORDERED.search(ln):
+            continue
+        # THE SORT IS ROUTINELY NOT ON THE WALK'S OWN LINE, and this was
+        # MEASURED rather than allowed for: pointed at the two instruments
+        # mg-20ee's tranche 1 pinned to byte-identity, this rule fired on both
+        # -- absent_step_7ae5 and anchor_drift_96df each `os.walk` into a list
+        # and `return sorted(out)` seven or eight lines below.  A per-line test
+        # would have called two clean pins defective, which is tranche 3's 94%
+        # over-count arriving inside the rule written from it.
+        #
+        # THE WINDOW IS A SYNTACTIC BOUNDARY AND DELIBERATELY NOT A LINE COUNT:
+        # scan to the end of the enclosing block -- the next line at or left of
+        # the walk's own indentation that opens something new.  A number tuned
+        # to fit 7 and 8 would be a threshold guessed from the two cases it was
+        # built from, which is the shape this arc keeps landing commits about.
+        indent = len(ln) - len(ln.lstrip())
+        span = [ln]
+        for nxt in lines[i + 1:]:
+            if nxt.strip():
+                nid = len(nxt) - len(nxt.lstrip())
+                if nid < indent or (nid == indent
+                                    and re.match(r"\s*(def|class)\b", nxt)):
+                    break
+            span.append(nxt)
+        if not any(ORDERED.search(s) for s in span):
+            hits.append(ln.strip())
+    return hits
+
+
 def resolver():
     def resolves(tok):
         got = subprocess.run(["git", "-C", ROOT, "cat-file", "-e",
@@ -247,13 +319,24 @@ def main(subject):
     print("  repeated here; what is repeated is the sentence that matters --")
     print("  THIS IS A PREFILTER AND NOT A VERDICT.  See the residue section.")
     print()
-    print("  THIS INSTRUMENT ANSWERS ITS OWN TWO RULES AND THE ANSWERS ARE")
+    print("  THIS INSTRUMENT ANSWERS ITS OWN THREE RULES AND THE ANSWERS ARE")
     print("  PRINTED RATHER THAN LEFT TO BE FOUND.  R2 fires on its own")
     print("  directory: census.py declares AS_OF = 5a62e8c.  And its OUTPUT")
     print("  carries ignored addresses whenever R1 does, so a committed")
     print("  transcript of this file is itself a document R1 would flag.")
     print("  Neither is a defect; both are the reason the rules are stated as")
     print("  `go and read why` rather than as verdicts.")
+    print()
+    print("  R3 FIRES ON THIS DIRECTORY SIX TIMES AND EVERY ONE IS FALSE, and")
+    print("  that is checked here rather than left for a reader: 1 hit is R3's")
+    print("  OWN REGEX SOURCE and 5 are its controls' planted needles.  This")
+    print("  is the README's section 4 -- a control that plants its own probe")
+    print("  into the corpus it searches -- for the FOURTH time in this arc,")
+    print("  and section 4's remedy DOES NOT APPLY: it says assemble the")
+    print("  needle at runtime, and a DETECTOR FOR A TOKEN CANNOT AVOID")
+    print("  CONTAINING THAT TOKEN.  R1 and R2's self-hits above are TRUE and")
+    print("  R3's are FALSE, which is the sharper statement of why none of the")
+    print("  three is a verdict: they read TEXT, not behaviour.")
     print()
     print("  IT IS ALSO NOT PINNED AND NOT ON A BUILD PATH, DELIBERATELY.  It")
     print("  reads HEAD and the LIVE worktree diff because it must answer")
@@ -318,6 +401,44 @@ def main(subject):
         print("  AND READ WHY, and it does not say the corpus is pinned.")
         print()
 
+    walks = []
+    for s in scripts:
+        for ln in unordered_walks(git("show", "HEAD:%s" % s)):
+            walks.append((s, ln))
+
+    print("-" * 78)
+    print("R3  UNORDERED WALKS -- the subject enumerates the filesystem, so")
+    print("    its transcript's LINE ORDER is in no commit")
+    print("-" * 78)
+    print()
+    for s, ln in walks:
+        print("      %-52s %s" % (s, ln[:60]))
+    if not walks:
+        print("      none.  Every corpus read this rule can see is either an")
+        print("      ordered read of a commit (`git grep`, `git ls-files`) or")
+        print("      sorted by the subject itself.")
+    print()
+    if walks:
+        print("  THIS IS A RULE ABOUT CONDITION 2, NOT ABOUT WHETHER TO PIN.")
+        print("  The only form that reads a corpus AT a commit is")
+        print("  `git grep <rev>`, and git SORTS its output; `grep -r` emits")
+        print("  DIRECTORY-ENUMERATION order, which is a function of the")
+        print("  filesystem and of no commit.  So a CORRECT pin here will")
+        print("  permute the transcript, and mg-20ee's `reproduces")
+        print("  byte-identically` cannot be met by it.")
+        print()
+        print("  READ CONDITION 2 AS SET-IDENTITY PLUS A DECLARED PERMUTATION.")
+        print("  Measured on the pin that produced this rule: 18 of 129 lines")
+        print("  permuted in landscape_repair_audit_3b51 and 30 of 149 in")
+        print("  landscape_repair_1953, the two line SETS identical, and not")
+        print("  one address, count or verdict moved in either.  Scored as a")
+        print("  byte comparison that is a FAILED pin; it was a clean one.")
+        print()
+        print("  AND R3 IS NOT A REASON NOT TO PIN.  The order was never a")
+        print("  function of repo state, so the permutation is the transcript")
+        print("  BECOMING repo-valued -- it is the repair, priced.")
+        print()
+
     print("-" * 78)
     print("RESIDUE -- what a pin is CAPABLE of reaching.  NOT A PROMISE")
     print("-" * 78)
@@ -339,6 +460,11 @@ def main(subject):
         verdict = "ALREADY PINNED -- %d declared revision(s)" % len(pinned)
     else:
         verdict = "NO PRE-CONDITION FIRED -- proceed to conditions 1-3"
+    # R3 never DECIDES the verdict.  It says the acceptance test needs
+    # rewording, not that a pin is the wrong remedy, and folding it into the
+    # headline would make it the third thing here that reads as one.
+    if walks:
+        verdict += "  (+R3: expect a permuted transcript)"
     print("=" * 78)
     print("PINNABLE: %s" % verdict)
     print("=" * 78)

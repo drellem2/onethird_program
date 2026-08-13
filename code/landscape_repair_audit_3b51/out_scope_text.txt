@@ -2,6 +2,13 @@
 mg-3b51 AUDIT 4 -- SCOPE OF THE REPAIR, MEASURED ON THE TEXT
 ==============================================================================
 
+  subject document : docs/OneThird-Landscape-Where-This-Lives.md
+  ORIGINAL text    : 714aceb (pre-repair, pinned since mg-3b51)
+  CORPUS as of     : e924590 (repaired text and every -r walk below)
+  Every number in this transcript is a function of those two commits
+  and of nothing else.  Pass a corpus revision as argv[2] to ask the
+  same questions of a different state of the repository.
+
 ------------------------------------------------------------------------------
 D1  THE BOUND WORD.  Occurrences of 'sharper' in docs/ and STATE.md
 ------------------------------------------------------------------------------
@@ -11,19 +18,19 @@ D1  THE BOUND WORD.  Occurrences of 'sharper' in docs/ and STATE.md
     line 173   QUOTED/REFUTED
     line 348   QUOTED/REFUTED
   elsewhere (unrelated arcs / other documents):
+    STATE.md:136
+    STATE.md:167
+    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md:138
+    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md:213
     docs/OneThird-Hodge-Side-Leverage.md:127
     docs/OneThird-Hodge-Side-Leverage.md:233
     docs/OneThird-Hodge-Side-Leverage.md:887
+    docs/OneThird-Intrinsic-Face-Geometry-Probe.md:787
+    docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md:91
+    docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md:399
     docs/OneThird-L4-Branch-ii-Consumability-IndependentAudit.md:149
     docs/roadmap.md:41
     docs/roadmap.md:126
-    docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md:91
-    docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md:399
-    docs/OneThird-Intrinsic-Face-Geometry-Probe.md:787
-    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md:138
-    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md:213
-    STATE.md:136
-    STATE.md:167
 
 ------------------------------------------------------------------------------
 D2  THE ADOPTION ARGUMENT ('we use a weaker tool; adopt Theorem 2')
@@ -114,14 +121,14 @@ D7  THE SAME SLIP R4 REPAIRS, IN THE FIGURE R3 RESTS ON.
     so the n <= 5 total is 2 588 (2 587 for 2 <= n <= 5) and 2 353
     is the n = 5 ROW.
 ------------------------------------------------------------------------------
+     docs/OneThird-Landscape-Where-This-Lives-IndependentAudit.md:207  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Where-This-Lives-IndependentAudit.md:212  labelled as the n = 5 row -- correct
      docs/OneThird-Landscape-Where-This-Lives.md:102  labelled as the n = 5 row -- correct
      docs/OneThird-Landscape-Where-This-Lives.md:103  labelled as the n = 5 row -- correct
      docs/OneThird-Landscape-Where-This-Lives.md:295  table row, per-n column -- correct
      docs/OneThird-Landscape-Where-This-Lives.md:477  labelled as the n = 5 row -- correct
      docs/OneThird-Landscape-Where-This-Lives.md:478  labelled as the n = 5 row -- correct
      docs/roadmap.md:41   *** quoted as an n <= 5 TOTAL -- the R4 slip ***
-     docs/OneThird-Landscape-Where-This-Lives-IndependentAudit.md:207  labelled as the n = 5 row -- correct
-     docs/OneThird-Landscape-Where-This-Lives-IndependentAudit.md:212  labelled as the n = 5 row -- correct
 
      The repaired document itself is CLEAN here: it writes
      '(4, 24, 206, 2 353, 37 029 by n)' and '1 674 of 2 353 at n = 5'.

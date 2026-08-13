@@ -21,6 +21,11 @@ Mechanical checks on the document itself, run against the ORIGINAL
   D6  BEYOND THE BRIEF.  Every marked repair site, mapped to the item of
       mg-1953's brief that authorises it.  Sites with no authorising
       item are listed.
+
+BOTH SIDES ARE NOW PINNED (mg-0e77).  The original was pinned at OLD_REV from
+the first line of this file; the REPAIRED side and every repository-wide walk
+below read the live worktree, and so measured whatever docs/ happened to hold
+on the day somebody ran this.  Both now read at AS_OF, which is a parameter.
 """
 
 import re
@@ -30,33 +35,77 @@ import sys
 DOC = "docs/OneThird-Landscape-Where-This-Lives.md"
 OLD_REV = "714aceb"
 
-
-def read_old(path):
-    return subprocess.run(["git", "show", "%s:%s" % (OLD_REV, path)],
-                          capture_output=True, text=True, cwd=REPO).stdout
-
-
-def read_new(path):
-    with open("%s/%s" % (REPO, path)) as f:
-        return f.read()
-
+# THE CORPUS SIDE OF THE PIN (mg-0e77).  OLD_REV pinned the SUBJECT -- the
+# pre-repair document -- from the first line this file was written.  It did not
+# pin the CORPUS: read_new() opened the live worktree and rg() shelled out to
+# `grep -rn` over it, so D1, D2, D5, D6 and D7 measured whatever docs/ happened
+# to contain on the day somebody ran this.  That is the drift, and it is
+# reachable: a declared revision fixes it.
+#
+# AS_OF is a CORPUS revision and is deliberately a parameter (argv[2]), because
+# ONE PIN DOES NOT SERVE BOTH TRANSCRIPTS OF THIS SCRIPT.  mg-1953's runner
+# re-runs this file unmodified against the document as mg-aec7 later left it,
+# and the POINT of that transcript is that it DISAGREES with this one -- D5's
+# contact-criterion detector reports False here and True there.  Pinning both at
+# the same commit would not repair mg-1953's transcript, it would delete the
+# comparison it exists to make.  See README section "one pin, two transcripts".
+AS_OF = "e924590"
 
 REPO = "../.."
 
 
+def git(args):
+    return subprocess.run(["git"] + args,
+                          capture_output=True, text=True, cwd=REPO).stdout
+
+
+def read_old(path):
+    return git(["show", "%s:%s" % (OLD_REV, path)])
+
+
+def read_new(path):
+    return git(["show", "%s:%s" % (AS_OF, path)])
+
+
 def rg(pattern, *paths):
-    out = subprocess.run(["grep", "-rn", "-E", pattern] + list(paths),
-                         capture_output=True, text=True, cwd=REPO).stdout
-    return [l for l in out.split("\n") if l.strip() and "/.git/" not in l]
+    # `git grep <rev>` and not `grep -rn`, for two reasons measured rather than
+    # assumed (mg-0e77):
+    #   1. it is the only form that reads the corpus AT A COMMIT at all;
+    #   2. its output is SORTED.  `grep -rn` emits directory-enumeration order,
+    #      which on this repository's own tree is the filesystem's name-hash
+    #      order -- deterministic per filesystem, and in NO COMMIT.  The price
+    #      is that the committed transcripts' LINE ORDER changes once, here; the
+    #      set of lines does not.  Published in the README rather than absorbed.
+    out = git(["grep", "-n", "-E", pattern, AS_OF, "--"] + list(paths))
+    lines = []
+    for l in out.split("\n"):
+        if not l.strip():
+            continue
+        # git prefixes every hit with "<rev>:"; strip exactly that one field so
+        # the rest of this file keeps reading "path:line:text".
+        if l.startswith(AS_OF + ":"):
+            l = l[len(AS_OF) + 1:]
+        lines.append(l)
+    return lines
 
 
 def main():
-    global REPO
+    global REPO, AS_OF
     if len(sys.argv) > 1:
         REPO = sys.argv[1]
+    if len(sys.argv) > 2:
+        AS_OF = sys.argv[2]
     print("=" * 78)
     print("mg-3b51 AUDIT 4 -- SCOPE OF THE REPAIR, MEASURED ON THE TEXT")
     print("=" * 78)
+    print()
+    print("  subject document : %s" % DOC)
+    print("  ORIGINAL text    : %s (pre-repair, pinned since mg-3b51)" % OLD_REV)
+    print("  CORPUS as of     : %s (repaired text and every -r walk below)"
+          % AS_OF)
+    print("  Every number in this transcript is a function of those two commits")
+    print("  and of nothing else.  Pass a corpus revision as argv[2] to ask the")
+    print("  same questions of a different state of the repository.")
     print()
 
     new = read_new(DOC)

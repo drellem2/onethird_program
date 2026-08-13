@@ -21,8 +21,15 @@ python3 negative_control_document.py > out_negative_control_document.txt
 # identical, row Q still enumerates 7 -- and its D5 detector for A4, which
 # reported "states a CONTACT CRITERION: False" against 6b1eacf, now reports
 # True.  ~1 s.
+#
+# THE CORPUS REVISION IS PASSED HERE AND IS DELIBERATELY NOT mg-3b51's OWN
+# (mg-0e77).  This transcript exists to DISAGREE with
+# ../landscape_repair_audit_3b51/out_scope_text.txt -- False -> True on D5 is
+# the whole content of the re-run.  Pinning both at one commit would not repair
+# this transcript, it would delete the comparison.  1db0be9 is the commit that
+# landed mg-aec7's document; e924590 is mg-3b51's.  Two transcripts, two pins.
 ( cd ../landscape_repair_audit_3b51 \
-  && python3 audit_scope_text.py ) > out_scope_text_3b51_rerun.txt
+  && python3 audit_scope_text.py ../.. 1db0be9 ) > out_scope_text_3b51_rerun.txt
 
 tail -3 out_selftest.txt
 tail -1 out_negative_control_document.txt

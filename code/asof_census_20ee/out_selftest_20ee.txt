@@ -86,6 +86,26 @@ CONTROLS ON pinnable.py — mg-20ee's CONDITION 0 (mg-4020)
   PASS N8 a hex-SHAPED english word, not resolvable         
         THE NEGATIVE HALF, AND IT CARRIES THE WEIGHT. `defaced` is seven characters and every one of them is a hex digit. RESOLUTION is what makes R2 a rule rather than a regex: without `git cat-file -e` this rule reports prose as a pin, and R2's whole claim is that SOMEBODY DECLARED A REVISION.
 
+CONTROLS ON R3 — THE UNORDERED WALK (mg-0e77)
+------------------------------------------------------------------------------
+
+  R3 says a subject enumerates the filesystem, so its transcript's
+  LINE ORDER is in no commit and a correct pin will permute it.  The
+  NEGATIVE half is the load-bearing one: `git grep` is the form R3
+  exists to recommend, and a rule that fired on it would tell every
+  repaired instrument in the estate that it is still defective.
+
+  PASS P5 `grep -r` spelled as a Python LIST                
+        landscape_repair_audit_3b51's real line, before this branch. The two tokens are separated by a quote, a comma and a space, so a pattern requiring `grep -r` adjacently sees nothing — and the ONLY subject this rule has ever had is spelled that way.
+  PASS P6 `grep -rn` spelled as a SHELL command             
+        the same read in a run_all.sh. Half this estate's corpus reads are shell and half are Python; a rule that saw one spelling would report `none` for the other and look like a clean subject.
+  PASS N9 `git grep` is an ORDERED READ OF A COMMIT         
+        THE NEGATIVE HALF, AND IT CARRIES THE WEIGHT. This is the repaired line R3 exists to recommend, and it contains the literal `grep` plus a `-n` flag. git SORTS its output and reads a COMMIT, which is the whole point; a rule that fired here would condemn the repair as the defect and there would be nothing left to advise.
+  PASS N10 a walk the subject has already SORTED            
+        an instrument that ordered its own walk has already removed the difference R3 warns about, and the transcript is repo-valued without any pin. Firing here would price a repair that is already paid.
+  PASS N11 the word `grep` in prose                         
+        R3 reads the subject's SCRIPTS, which in this estate carry more commentary than code — every docstring in this directory names its own method. A rule that matched the word rather than the invocation would fire on the file explaining it.
+
 ==============================================================================
-GREEN — 2 positive, 4 negative and 1 known-defect control on the address census, 3 positive, 1 known-defect and 2 rc-tolerance controls on the consumer census, and 2 positive plus 3 negative on the pinnable pre-condition, all land where they must.
+GREEN — 2 positive, 4 negative and 1 known-defect control on the address census, 3 positive, 1 known-defect and 2 rc-tolerance controls on the consumer census, and 4 positive plus 6 negative on the pinnable pre-condition, all land where they must.
 ==============================================================================

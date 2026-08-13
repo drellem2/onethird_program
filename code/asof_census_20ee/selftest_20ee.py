@@ -322,13 +322,66 @@ check("N8 a hex-SHAPED english word, not resolvable",
       "DECLARED A REVISION.")
 
 print()
+print("CONTROLS ON R3 — THE UNORDERED WALK (mg-0e77)")
+print("-" * 78)
+print()
+print("  R3 says a subject enumerates the filesystem, so its transcript's")
+print("  LINE ORDER is in no commit and a correct pin will permute it.  The")
+print("  NEGATIVE half is the load-bearing one: `git grep` is the form R3")
+print("  exists to recommend, and a rule that fired on it would tell every")
+print("  repaired instrument in the estate that it is still defective.")
+print()
+
+check("P5 `grep -r` spelled as a Python LIST",
+      pinnable.unordered_walks(
+          '    out = subprocess.run(["grep", "-rn", "-E", pattern] + paths,'),
+      ['out = subprocess.run(["grep", "-rn", "-E", pattern] + paths,'],
+      "landscape_repair_audit_3b51's real line, before this branch. The two "
+      "tokens are separated by a quote, a comma and a space, so a pattern "
+      "requiring `grep -r` adjacently sees nothing — and the ONLY subject "
+      "this rule has ever had is spelled that way.")
+
+check("P6 `grep -rn` spelled as a SHELL command",
+      pinnable.unordered_walks("grep -rn 'sharper' docs STATE.md"),
+      ["grep -rn 'sharper' docs STATE.md"],
+      "the same read in a run_all.sh. Half this estate's corpus reads are "
+      "shell and half are Python; a rule that saw one spelling would report "
+      "`none` for the other and look like a clean subject.")
+
+check("N9 `git grep` is an ORDERED READ OF A COMMIT",
+      pinnable.unordered_walks(
+          '    out = git(["grep", "-n", "-E", pattern, AS_OF, "--"] + paths)'),
+      [],
+      "THE NEGATIVE HALF, AND IT CARRIES THE WEIGHT. This is the repaired "
+      "line R3 exists to recommend, and it contains the literal `grep` plus "
+      "a `-n` flag. git SORTS its output and reads a COMMIT, which is the "
+      "whole point; a rule that fired here would condemn the repair as the "
+      "defect and there would be nothing left to advise.")
+
+check("N10 a walk the subject has already SORTED",
+      pinnable.unordered_walks("    for p in sorted(os.walk(root)):"),
+      [],
+      "an instrument that ordered its own walk has already removed the "
+      "difference R3 warns about, and the transcript is repo-valued without "
+      "any pin. Firing here would price a repair that is already paid.")
+
+check("N11 the word `grep` in prose",
+      pinnable.unordered_walks(
+          "  # the census greps for a basename rather than a full path"),
+      [],
+      "R3 reads the subject's SCRIPTS, which in this estate carry more "
+      "commentary than code — every docstring in this directory names its "
+      "own method. A rule that matched the word rather than the invocation "
+      "would fire on the file explaining it.")
+
+print()
 print("=" * 78)
 if FAILED:
     print("RED — %d control(s) failed: %s" % (len(FAILED), ", ".join(FAILED)))
 else:
     print("GREEN — 2 positive, 4 negative and 1 known-defect control on the "
           "address census, 3 positive, 1 known-defect and 2 rc-tolerance "
-          "controls on the consumer census, and 2 positive plus 3 negative "
+          "controls on the consumer census, and 4 positive plus 6 negative "
           "on the pinnable pre-condition, all land where they must.")
 print("=" * 78)
 raise SystemExit(1 if FAILED else 0)
