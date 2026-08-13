@@ -8,7 +8,7 @@ mg-585e v3  A TRANSCRIPT OF THE INPUTS — built, run on both verdicts, and pric
 
   proposed report on red tree == on green tree                    YES — BYTE-IDENTICAL
   proposed report on red tree == on noise tree                    YES
-  bytes                                                          1985
+  bytes                                                          1907
   and no scrubbing was applied to either side: there is no clock in it at all.
 
   THE PLANT.  The same writer with the outcome appended — today's arrangement —
@@ -39,6 +39,8 @@ mg-585e v3  A TRANSCRIPT OF THE INPUTS — built, run on both verdicts, and pric
     exit status                                                   1
     stderr names the disagreeing transcript                       YES
       mg-f771 g0: 1 watched transcript(s) moved — 1 red, 0 NOISE, 0 CORPUS
+      mg-f771 g0:   DISAGREES code/sample_suite/out_sample.txt
+      mg-f771 g0: THE DISAGREEMENTS, SHOWN.  Lines are quoted AFTER normalisation, so nothin
       mg-f771 g0:   DISAGREES code/sample_suite/out_sample.txt
 
   The exit status is what `run_all.sh` reads and what `build.sh` folds into the

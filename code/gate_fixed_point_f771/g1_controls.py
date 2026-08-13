@@ -31,8 +31,8 @@ the worlds below are split into two groups that are BOTH required:
                  oscillate and buys NOTHING, so both directions are required: four widenings
                  that must move the inventory, one prose edit that must not, two
                  restructurings that must REFUSE, and the inventory's own immunity to N1/N2.
-                 I2 found a real defect in the candidate this ticket landed and is the reason
-                 the inventory is parsed rather than read by line prefix.
+                 I2 found a real defect in the instrument whose proposal this ticket lands,
+                 and is why this inventory is WRAPPED rather than truncated.
 
   FIXED POINT (§2c)  the claim itself, on the REAL arm, in three miniature repositories: two
                  that reach DIFFERENT verdicts and must produce IDENTICAL transcripts, and one
@@ -302,10 +302,12 @@ INVENTORY_WORLDS = [
      r'SECONDS = re.compile(r"\b\d+(?:\.\d+)?\s*s\b")'),
 
     ("I2", True,
-     "ABS_TO_REPO widened — a MULTI-LINE constant, and the tail of it.  mg-585e's draft read "
-     "constants by line prefix and reported this one as `re.compile(`, so a widening here "
-     "moved neither the printed rule nor the digest (ABS_TO_REPO is inside no deciding "
-     "function).  The inventory is parsed and printed in full because of this world",
+     "ABS_TO_REPO widened — a MULTI-LINE constant, and THE TAIL of it: the edit lands at "
+     "offset 73 of an 86-character value, inside no deciding function, so nothing but the "
+     "printed constant can catch it.  MEASURED ON code/verdict_invariance_585e AS IT STANDS "
+     "ON main rather than asserted: lib585e._flatten cuts at 68 and appends an ellipsis, and "
+     "read_inputs comes back UNMOVED across this widening.  Reported and not repaired — that "
+     "is mg-585e's instrument and its display is its own call — but it is why this one wraps",
      r'(?=/(?:code/|docs/|STATE\.md|build\.sh))',
      r'(?=/(?:code/|docs/|STATE\.md|build\.sh|anything/))'),
 

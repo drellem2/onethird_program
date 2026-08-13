@@ -152,9 +152,14 @@ def refusals():
         os.makedirs(dst)
         for name in ("lib_f771.py", "g0_fixed_point.py"):
             shutil.copyfile(os.path.join(L.F771_DIR, name), os.path.join(dst, name))
-        rc, out_txt, _ = L.run_g0(tmp)
-        out.append(("R1", "sandbox is not a git work tree", "g0 exit %d" % rc,
-                    rc == 2 and "REFUSED" in out_txt))
+        rc, _, err_txt = L.run_g0(tmp)
+        # THE REFUSAL IS READ OFF STDERR AND IT USED TO BE STDOUT (mg-c15e).  g0's stdout is
+        # now inside g0's own watched class, so a refusal printed there would be a committed
+        # transcript that disagrees with every tree where the handshake IS set — this
+        # directory's own subject, arriving on the failure path.  The world is unchanged; only
+        # the channel it reads is.
+        out.append(("R1", "sandbox is not a git work tree", "g0 exit %d, refusal on stderr" % rc,
+                    rc == 2 and "REFUSED" in err_txt))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
@@ -180,8 +185,10 @@ def refusals():
         L.build_sandbox(tmp, "red")
         arm = os.path.join(tmp, "code", "gate_fixed_point_f771", "g0_fixed_point.py")
         p = subprocess.run([sys.executable, arm], capture_output=True, text=True, env=env)
-        out.append(("R3", "no %s handshake" % L.FRESH_ENV, "exit %d" % p.returncode,
-                    p.returncode == 2 and "REFUSED" in p.stdout))
+        # stderr, and not stdout, for the reason given at R1.
+        out.append(("R3", "no %s handshake" % L.FRESH_ENV,
+                    "exit %d, refusal on stderr" % p.returncode,
+                    p.returncode == 2 and "REFUSED" in p.stderr))
     except L.Refused as exc:
         out.append(("R3", "no %s handshake" % L.FRESH_ENV, "setup failed: %s" % exc, None))
     finally:

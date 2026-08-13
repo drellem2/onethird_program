@@ -150,8 +150,20 @@ def main():
                                             lineterm="", n=0))[:12]:
             print("      %s" % ln[:86])
     if tail_same:
-        failures.append("§2 did not move between a red tree and a green one — the sandbox "
-                        "is not exercising the thing this directory is about")
+        # THE SURFACE THIS ARM WAS BUILT TO LOCATE IS GONE, AND THAT IS NOT THIS ARM FAILING.
+        # It used to read an unmoved §2 as proof that the sandbox was vacuous.  It cannot be:
+        # the C-positive check in §1 requires the three trees to return exit 1 / 0 / 0 and
+        # they do, so the VERDICT really did change and the TEXT did not.  mg-c15e deleted
+        # lib_f771.SELF_EXCLUDED and replaced g0's §2 with the normaliser's rule inventory, so
+        # the transcript no longer records the outcome at all.  REPORTED AND NOT GRADED: a
+        # suite that goes red when its own recommendation is adopted is mg-e35b's
+        # red-on-improvement shape wearing this directory's clothes.
+        print("  ⚠ §2 DID NOT MOVE, AND THE SANDBOX IS NOT VACUOUS — the three trees returned")
+        print("    exit 1 / 0 / 0 as §1 requires, so the verdict moved and the text did not.")
+        print("    THE OSCILLATING SURFACE THIS ARM LOCATED HAS BEEN REMOVED: mg-c15e deleted")
+        print("    the self-exemption and made §2 the rule inventory, which is the change")
+        print("    this directory exhibited and priced.  The question §6 put to pm-onethird")
+        print("    is answered, and this line is the measurement that says so.")
     print()
     print("  head lines %d, and they are %s" % (len(g_head.splitlines()),
                                                  "identical" if head_same else "NOT identical"))
@@ -173,6 +185,9 @@ def main():
     print("  The transcript splits cleanly in two and the split is g0's own §-boundary:")
     print()
     print("    §1  the watched class, the exemption, the two declared noise families")
+    print("        (⚠ AS g0 STOOD WHEN THIS WAS MEASURED.  mg-c15e deleted the exemption and")
+    print("         moved the outcome to the exit status, so today BOTH sections are a")
+    print("         function of the instrument and §3 above reports the surface as gone.)")
     print("        — a function of the INSTRUMENT.  Invariant under the repair.")
     print("    §2  the disagreement set and the VERDICT line")
     print("        — a function of the DIFFERENCE between the committed tree and the fresh")
@@ -190,8 +205,18 @@ def main():
         for f in failures:
             print("    %s" % f)
         return 1
-    print("VERDICT: GREEN — the oscillation is confined to §2 and the VERDICT line, and the")
-    print("  rest of the transcript is already invariant.")
+    # THE VERDICT LINE SAYS WHAT THIS RUN MEASURED AND NOT WHAT THE FIRST RUN DID.  It read
+    # `the oscillation is confined to §2 and the VERDICT line` unconditionally, which is a
+    # finding hard-coded as a conclusion — and on a tree where the surface has been removed it
+    # is a sentence about a state of the instrument nobody can reach any more.  mg-2959's
+    # subject, in the directory that quotes mg-2959.
+    if tail_same:
+        print("VERDICT: GREEN — §2 DOES NOT MOVE WITH THE VERDICT ANY MORE.  The surface this")
+        print("  arm located is gone: mg-c15e deleted the self-exemption and made §2 the rule")
+        print("  inventory, and the whole transcript is now invariant under the repair.")
+    else:
+        print("VERDICT: GREEN — the oscillation is confined to §2 and the VERDICT line, and the")
+        print("  rest of the transcript is already invariant.")
     return 0
 
 

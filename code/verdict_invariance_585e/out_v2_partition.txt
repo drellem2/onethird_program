@@ -7,9 +7,9 @@ mg-585e v2  WHERE THE OSCILLATION LIVES — the real g0, run against controlled 
   Identical repositories but for one line of one watched transcript.
 
   tree     exit   the verdict line g0 printed (seconds scrubbed)
-  green    0      VERDICT: GREEN — 0 disagreements.  <t>s
-  noise    0      VERDICT: GREEN — 0 disagreements.  <t>s
-  red      1      VERDICT: RED — 1 committed transcript(s) disagree with this tree. 
+  green    0      (none)
+  noise    0      (none)
+  red      1      (none)
 
 §2  RUN-TO-RUN JITTER ON A FIXED TREE
 --------------------------------------------------------------------------------------------
@@ -23,10 +23,16 @@ mg-585e v2  WHERE THE OSCILLATION LIVES — the real g0, run against controlled 
 §3  RED AGAINST GREEN — WHICH PART OF THE TRANSCRIPT MOVED
 --------------------------------------------------------------------------------------------
   everything up to the §2 heading is identical                    YES
-  §2 onward is identical                                          NO — this is the oscillation
+  §2 onward is identical                                          yes
+  ⚠ §2 DID NOT MOVE, AND THE SANDBOX IS NOT VACUOUS — the three trees returned
+    exit 1 / 0 / 0 as §1 requires, so the verdict moved and the text did not.
+    THE OSCILLATING SURFACE THIS ARM LOCATED HAS BEEN REMOVED: mg-c15e deleted
+    the self-exemption and made §2 the rule inventory, which is the change
+    this directory exhibited and priced.  The question §6 put to pm-onethird
+    is answered, and this line is the measurement that says so.
 
-  head lines 34, and they are identical
-  §2 onward: green 9 line(s), red 18 line(s)
+  head lines 35, and they are identical
+  §2 onward: green 34 line(s), red 34 line(s)
 
   THE GREEN TREE AND THE NOISE TREE AGREE, WHICH IS THE OTHER HALF.  A watched
   transcript that moved but says the same thing must produce the same stdout as one
@@ -38,6 +44,9 @@ mg-585e v2  WHERE THE OSCILLATION LIVES — the real g0, run against controlled 
   The transcript splits cleanly in two and the split is g0's own §-boundary:
 
     §1  the watched class, the exemption, the two declared noise families
+        (⚠ AS g0 STOOD WHEN THIS WAS MEASURED.  mg-c15e deleted the exemption and
+         moved the outcome to the exit status, so today BOTH sections are a
+         function of the instrument and §3 above reports the surface as gone.)
         — a function of the INSTRUMENT.  Invariant under the repair.
     §2  the disagreement set and the VERDICT line
         — a function of the DIFFERENCE between the committed tree and the fresh
@@ -49,5 +58,6 @@ mg-585e v2  WHERE THE OSCILLATION LIVES — the real g0, run against controlled 
   wrong test: the DISAGREES list IS repo state, of the tree BEFORE the repair, and
   the file is committed into the tree AFTER it.
 
-VERDICT: GREEN — the oscillation is confined to §2 and the VERDICT line, and the
-  rest of the transcript is already invariant.
+VERDICT: GREEN — §2 DOES NOT MOVE WITH THE VERDICT ANY MORE.  The surface this
+  arm located is gone: mg-c15e deleted the self-exemption and made §2 the rule
+  inventory, and the whole transcript is now invariant under the repair.

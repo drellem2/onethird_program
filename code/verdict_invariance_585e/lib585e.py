@@ -2,6 +2,15 @@
 
 THE SUBJECT IS ONE FILE AND A PROPERTY THAT IS NOT ABOUT THAT FILE.
 
+⚠ READ THIS DIRECTORY AS A RECORD OF A QUESTION AND ITS ANSWER, NOT AS A DESCRIPTION OF THE
+TREE.  Everything below is written in the present tense about an exemption that mg-c15e has
+since DELETED: `lib_f771.SELF_EXCLUDED` no longer exists, `g0`'s watched class is total, and
+`g0`'s §2 is the rule inventory this directory proposed.  The prose is left as it was written
+because it is the argument that produced the change; the three places where it had to become
+an EDIT rather than a note are INVENTORY below, `v0`'s R1/R3 (the refusal moved to stderr with
+the outcome) and `v2` §3 (the surface it locates is gone).  §6 of the README is where the
+question was put; mg-c15e is the answer.
+
 `code/gate_fixed_point_f771/out_g0_fixed_point.txt` is mg-f771's single self-exemption from
 its own watched class.  `lib_f771.SELF_EXCLUDED` gives the reason as: the transcript is
 written AFTER the measurement and its text depends on the verdict, so a red run's transcript
@@ -255,7 +264,14 @@ DECIDING = ("def normalise(", "def lines_equivalent(", "def texts_equivalent(",
 # yesterday.  Multi-line statements are carried WHOLE (see `_blocks`) rather than by their
 # first line, or `CORPUS_SCOPED = {` would print as `{` and its membership would be invisible
 # in both the inventory and the digest.
-INVENTORY = ("FS_ROOTS", "ABS_TO_REPO", "ABS_ANY", "SECONDS", "SELF_EXCLUDED",
+#
+# `SELF_EXCLUDED` WAS IN THIS TUPLE AND IS NOT ANY MORE (mg-c15e).  It was removed here by the
+# branch that removed the constant, because a list of rules that names one the instrument no
+# longer has is not a shorter list, it is a REFUSAL: `read_inputs` raises, `v3` reaches no
+# verdict and this suite exits 2.  The removal is the answer this directory asked for — §6
+# put "should the exemption go?" to pm-onethird and mg-c15e landed the yes — so the tuple is
+# the one place where the answer had to arrive as an edit rather than as prose.
+INVENTORY = ("FS_ROOTS", "ABS_TO_REPO", "ABS_ANY", "SECONDS",
              "CORPUS_SCOPED", "CORPUS_DRIFT_LIMIT")
 
 

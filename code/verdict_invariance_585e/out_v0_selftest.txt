@@ -32,9 +32,9 @@ mg-585e v0  CONTROLS — what these instruments catch, and what they are blind t
 --------------------------------------------------------------------------------------------
   A control that cannot say 'I could not tell' says 'nothing is wrong' instead.
 
-  R1   sandbox is not a git work tree           g0 exit 2                ok
+  R1   sandbox is not a git work tree           g0 exit 2, refusal on st ok
   R2   an unknown world name                    REFUSED                  ok
-  R3   no BUILD_SH_RAN_THE_SUITES handshake     exit 2                   ok
+  R3   no BUILD_SH_RAN_THE_SUITES handshake     exit 2, refusal on stder ok
 
 §4  THE OWN-OUTPUT SCAN
 --------------------------------------------------------------------------------------------
@@ -42,8 +42,8 @@ mg-585e v0  CONTROLS — what these instruments catch, and what they are blind t
   shipped one while describing it would be the defect it is reporting.
 
   out_v1_oscillation.txt        94 line(s)  ok         clean
-  out_v2_partition.txt          53 line(s)  ok         clean
-  out_v3_invariant.txt          80 line(s)  ok         clean
+  out_v2_partition.txt          63 line(s)  ok         clean
+  out_v3_invariant.txt          82 line(s)  ok         clean
 
   3 transcript(s) actually read.  A scan that found nothing because it read
   nothing must not read as clean, which is why that number is here.

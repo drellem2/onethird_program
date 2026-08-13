@@ -496,13 +496,20 @@ directions are planted in `g1_controls.py` §2b, fed the real `lib_f771.rule_inv
 
 * `I1` — **N2 widened to eat integer seconds**, the exact escape hatch named above. Must move.
 * `I2` — **`ABS_TO_REPO` widened**, and this world found a defect *in the candidate this
-  ticket landed*. mg-585e's draft read constants by **line prefix**, which reads only the
-  first physical line of a bracketed assignment and reported this one as `re.compile(` — so a
-  widening of the regex moved neither the printed rule nor the digest (`ABS_TO_REPO` is inside
-  no deciding function). Measured against mg-585e's own reader rather than asserted: it comes
-  back **unmoved**. The inventory is therefore parsed with `ast` and printed **in full and
-  never truncated**, because a constant cut at a column is a constant whose tail can be
-  widened invisibly, and the tail is where a regex keeps its alternatives.
+  ticket landed*. The edit lands at **offset 73 of an 86-character value**, in a constant that
+  is inside no deciding function, so nothing but the printed constant itself can catch it.
+  **Measured
+  against `code/verdict_invariance_585e` as it stands on `main`, not asserted:**
+  `lib585e._flatten` flattens each constant to one line and then cuts it at **68** with an
+  `…`, and `read_inputs` comes back **unmoved** across that widening — both the inventory and
+  the digest. (An earlier draft of that directory had the same blindness by a different
+  mechanism, reading constants by *line prefix* so this one printed as `re.compile(`; the
+  landed version fixed the prefix read and kept the truncation.) **Reported, not repaired** —
+  that is mg-585e's instrument, its display is its own call, and its own published claim is
+  about `SECONDS`, which is short enough to survive the cut. It is why *this* inventory is
+  parsed with `ast` and **wrapped rather than truncated**: a constant cut at a column is a
+  constant whose tail can be widened invisibly, and the tail is where a regex keeps its
+  alternatives.
 * `I3` — **N3 relaxed to forgive any two lines.** Control flow; only the digest catches it.
 * `I4` — **the exemption reintroduced inside `is_watched`.** The specific regression this
   ticket exists to make loud, and it is why both membership functions are in the digest.
@@ -551,6 +558,28 @@ with an **overlap of 4**, every figure reproducing. Two different
 quantities whose near-equality is arithmetic and not identity — it moves about as often, on a
 nearly disjoint set, and relocates the churn into mg-05c6's conflict class instead of leaving
 it as one extra commit in one worktree. The rule inventory moves on **neither**.
+
+### What the deletion cost one directory over, and it landed 23 minutes before this branch
+
+`code/verdict_invariance_585e` — the directory that *proposed* this change and deliberately
+did not make it — merged to `main` while this branch was being written, and it **consumes the
+constant this branch deletes**. Three sites, all repaired here, because removing a constant
+and leaving its consumer naming it is one change and not two:
+
+* `lib585e.INVENTORY` named `SELF_EXCLUDED`. Its `read_inputs` **refuses** on a constant it
+  cannot find — correctly — so the whole suite exited 2. Dropped from the tuple.
+* `v0`'s `R1` and `R3` asserted `"REFUSED" in stdout`. True of the old `g0` and false of this
+  one; they read **stderr** now. The worlds are unchanged, only the channel is.
+* `v2` graded an unmoved `§2` as *the sandbox is not exercising the thing this directory is
+  about*. It cannot be: that arm's own C-positive check requires the three sandboxes to
+  return exit `1/0/0` and they do, so the **verdict moved and the text did not** — which is
+  this change, observed from outside. It is now **reported and not graded**, because a suite
+  that goes red when its own recommendation is adopted is mg-e35b's red-on-improvement shape.
+  Its verdict line, which hard-coded *the oscillation is confined to §2*, now says which of
+  the two it measured.
+
+Its prose is left as written, with one banner at the top of `lib585e`: it is the argument that
+produced the change, and rewriting an argument into its own conclusion loses the argument.
 
 ### The convergence this branch owes
 
