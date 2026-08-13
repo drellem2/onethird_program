@@ -20,6 +20,7 @@ deliberately: the bias is declared in census.py and in out_ground_truth.txt, and
 a control that quietly passed would hide it.  If somebody teaches the classifier
 to see pinned reads, N4 FAILS and that is the signal to update both declarations.
 """
+import collections
 import os
 import re
 import sys
@@ -365,6 +366,22 @@ check("N10 a walk the subject has already SORTED",
       "difference R3 warns about, and the transcript is repo-valued without "
       "any pin. Firing here would price a repair that is already paid.")
 
+check("N18 prose quoting the INVOCATION, flag and all — FIRES (mg-885d)",
+      bool(pinnable.unordered_walks(
+          "    which is an ordered read of a commit; there is no `grep -r` here")),
+      True,
+      "A KNOWN-DEFECT CONTROL, in the form N4, N5 and C3 already take. N11 "
+      "below plants the BARE word and passes; the rule matches the word plus a "
+      "following short-flag cluster, so a sentence NAMING the invocation is a "
+      "shape N11 does not reach. MEASURED across the estate at 12aa5f8 rather "
+      "than supposed: 3 of R3's 92 hits sit on comment lines, and BOTH hits in "
+      "audit_scope_text.py — THE INSTRUMENT TRANCHE 4 PINNED — are comments "
+      "explaining the defect it already repaired, so condition 0 still tells a "
+      "repaired instrument to expect a permuted transcript. That is N9's own "
+      "rationale failing by PROSE instead of by the git form. Asserted rather "
+      "than repaired, because R3 is mg-0e77's rule: teach it to see prose and "
+      "this control goes RED, which is the signal to update its self-hit count.")
+
 check("N11 the word `grep` in prose",
       pinnable.unordered_walks(
           "  # the census greps for a basename rather than a full path"),
@@ -375,13 +392,105 @@ check("N11 the word `grep` in prose",
       "would fire on the file explaining it.")
 
 print()
+print("CONTROLS ON permuted.py — mg-20ee's CONDITION 2 (mg-885d)")
+print("-" * 78)
+print()
+print("  R3 established that a CORRECT pin permutes its transcript, so")
+print("  condition 2 was re-read as SET-IDENTITY PLUS A DECLARED PERMUTATION.")
+print("  permuted.py is the first thing that can MEASURE that reading, and it")
+print("  amends it: a SET forgets multiplicity, so the test is a BAG.  P11 is")
+print("  the control that carries this whole file's weight — it is the case")
+print("  the wording as written gets WRONG, and it is silent when it does.")
+print()
+
+import permuted  # noqa: E402
+
+check("P11 a line's MULTIPLICITY changed — SET says nothing happened",
+      (permuted.compare(["a", "addr:1", "addr:1", "b"],
+                        ["a", "addr:1", "b"])["set"],
+       permuted.compare(["a", "addr:1", "addr:1", "b"],
+                        ["a", "addr:1", "b"])["bag"]),
+      (True, False),
+      "THE CONTROL THIS INSTRUMENT EXISTS FOR. mg-3b51's own pinned "
+      "transcript prints one address twice and mg-1953's prints one three "
+      "times; a pin that dropped one occurrence moves an ADDRESS and the "
+      "COUNT it belongs to, and `set-identity` — the wording condition 2 was "
+      "amended to — scores it IDENTICAL. 123 tracked transcripts carry a "
+      "repeated line naming a path, so this is a shape the estate has.")
+
+check("P12 a pure PERMUTATION is bag-identical and not byte-identical",
+      [permuted.compare(["a", "b", "c"], ["c", "a", "b"])[k]
+       for k in ("byte", "bag", "moved_min")],
+      [False, True, 1],
+      "the case R3 predicts for every correct pin of a `grep -r` corpus: "
+      "`git grep <rev>` sorts, the walk did not, and no line's content "
+      "changed. Scored byte-wise this is a FAILED pin; it is a clean one.")
+
+check("N15 an unchanged transcript is BYTE-identical",
+      permuted.compare(["a", "b"], ["a", "b"])["byte"],
+      True,
+      "the negative half of P12, and the reason condition 2 is not simply "
+      "loosened: byte-identity still holds where it can, and ./build.sh and "
+      "mg-f771's fixed point are RIGHT to keep comparing bytes. R3's "
+      "permutation appears at the PIN TRANSITION, not run to run.")
+
+check("P13 a MOVED VERDICT is not a permutation and is not hidden by one",
+      sorted((permuted.compare(["hdr", "CRITERION : False", "tail"],
+                               ["tail", "CRITERION : True", "hdr"]
+                               )["only_new"]).elements()),
+      ["CRITERION : True"],
+      "3b51's and 1953's transcripts differ on exactly this line BY DESIGN. "
+      "A comparator that reported `permuted` for a shuffle that also moved a "
+      "verdict would absorb mg-20ee's own discrimination — `if a verdict "
+      "moves, that is a FINDING` — into a pass.")
+
+check("N16 a DECLARED residue is excused",
+      sum(permuted.declared(collections.Counter(["  CORPUS as of : e924590"]),
+                            ["  CORPUS as of : e924590"])[1].values()),
+      0,
+      "a pin ADDS an AS_OF block, and mg-20ee's discrimination expressly "
+      "allows it to move. Without this the correct outcome of every pin "
+      "would print as a finding, and the instrument would be unusable on the "
+      "only case it is for.")
+
+check("P14 a declaration is matched BY OCCURRENCE, not as a set",
+      sum(permuted.declared(collections.Counter({"  total : 23": 2}),
+                            ["  total : 23"])[1].values()),
+      1,
+      "THE NEGATIVE HALF OF N16 AND IT CARRIES THE WEIGHT. Declaring a line "
+      "once must not excuse it twice, or P11's defect returns one level up — "
+      "inside the mechanism built to catch it. A set-shaped declaration "
+      "would pass a pin that dropped one of three identical addresses.")
+
+check("P15 a declaration written from the DIFF traces to nothing",
+      permuted.provenance("    docs/INVENTED.md:99  never published",
+                          ['  subject document : '], "a commit message"),
+      "UNSOURCED",
+      "THIS FILE'S OWN DEFECT, CONTROLLED. `--declare` is an artifact of the "
+      "same kind as the thing it scores: a declaration written by reading "
+      "the diff excuses that diff entirely and turns CONTENT MOVED into a "
+      "silent pass. Provenance is what stops that being invisible, and both "
+      "declarations shipped here are traced to the pin's own source or its "
+      "published record — never to the diff.")
+
+check("N17 an AS_OF header line traces to the pin's own SOURCE",
+      permuted.provenance("  CORPUS as of     : e924590 (repaired text)",
+                          ["  CORPUS as of     : "], ""),
+      "script",
+      "audit_scope_text.py:104 prints exactly this, with the revision as a "
+      "%s. The pin's author wrote the header in CODE before any transcript "
+      "existed, which is why `script` is the strong half of provenance and "
+      "`record` — a token quoted in prose — is declared weak.")
+
+print()
 print("=" * 78)
 if FAILED:
     print("RED — %d control(s) failed: %s" % (len(FAILED), ", ".join(FAILED)))
 else:
     print("GREEN — 2 positive, 4 negative and 1 known-defect control on the "
           "address census, 3 positive, 1 known-defect and 2 rc-tolerance "
-          "controls on the consumer census, and 4 positive plus 6 negative "
-          "on the pinnable pre-condition, all land where they must.")
+          "controls on the consumer census, 4 positive, 6 negative and 1 known-defect "
+          "control on the pinnable pre-condition, and 5 positive plus 2 negative on "
+          "the condition-2 comparator, all land where they must.")
 print("=" * 78)
 raise SystemExit(1 if FAILED else 0)
