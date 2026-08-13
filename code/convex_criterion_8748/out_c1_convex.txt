@@ -1,0 +1,32 @@
+
+==============================================================================
+c1.1  THEOREM A, exhaustively over all partition pairs of a 4- and 5-point space
+==============================================================================
+  [GREEN] N=4: tA+(1−t)B is idempotent IFF A = B, at every pair and every t   15² pairs × 5 values of t, 0 exceptions
+  [GREEN] N=4: and the equality case is non-vacuous   idempotent at 75 (equal) and 0 (distinct)
+  [GREEN] N=4: ⚠️ NESTED-AND-DISTINCT pairs fail too — nestedness does NOT rescue this   225 (pair, t) instances nested, distinct, NOT idempotent
+  [GREEN] N=5: tA+(1−t)B is idempotent IFF A = B, at every pair and every t   52² pairs × 5 values of t, 0 exceptions
+  [GREEN] N=5: and the equality case is non-vacuous   idempotent at 260 (equal) and 0 (distinct)
+  [GREEN] N=5: ⚠️ NESTED-AND-DISTINCT pairs fail too — nestedness does NOT rescue this   1530 (pair, t) instances nested, distinct, NOT idempotent
+
+==============================================================================
+c1.2  compression.tex's (Π_o, Π_e) — reproducing a4.3a's 40 of 40 independently
+==============================================================================
+  [GREEN] (Π_o+Π_e)/2 is NOT idempotent at every poset where the two differ   4018 of 4018 posets, n = 3,4,5 labelled, |L(P)| <= 24; 301 skipped and counted
+
+==============================================================================
+c1.3  THE SAME MEASUREMENT ON compression2's NESTED SCALES — it comes out IDENTICAL
+==============================================================================
+  [GREEN] n=4: a convex combination of two DISTINCT SCALES is never idempotent either   6 (pair, t) instances, 0 idempotent, |L| = 24
+  [GREEN] n=6: a convex combination of two DISTINCT SCALES is never idempotent either   12 (pair, t) instances, 0 idempotent, |L| = 90
+  [GREEN] n=8: a convex combination of two DISTINCT SCALES is never idempotent either   6 (pair, t) instances, 0 idempotent, |L| = 70
+  [GREEN] so the a4.3a row separates NOTHING — the nested family fails it the same way
+
+       R1 CONFIRMED (a REPORT — the proof is in this file's docstring and predates the code).
+       P4's first half CONFIRMED: a4.3a's 40 of 40 is a measurement of DISTINCTNESS.  It is
+       TRUE, it is correctly reported at source, and it does not carry the weight it is
+       quoted for.  ⚠️ THE CONSEQUENCE FOR HOW THE FACT IS WRITTEN DOWN: 'convex combinations
+       of nested compressions are canonical' is FALSE.  What is canonical is a convex
+       combination of the INCREMENTS, and increments are what nestedness buys (c2).
+
+RESULT: GREEN — all checks passed

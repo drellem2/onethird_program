@@ -1,0 +1,38 @@
+
+==============================================================================
+c4.1  THE EXHIBIT, re-derived on an implementation sharing no code with mg-0fc6
+==============================================================================
+  [GREEN] a two-measure exhibit exists
+  [GREEN] mu1 and mu2 have IDENTICAL pair marginals   n = 6, e(P) = 9
+  [GREEN] mu1 IS a linear-extension measure   uniform on the linear extensions of the intersection order
+  [GREEN] mu2 is NOT a linear-extension measure   not uniform on its support
+  [GREEN] and the oracle REFUSES the corpus's two-atom law — it is not a constant True   support is not L(P): |L(P)|=720 vs |supp|=2
+
+==============================================================================
+c4.2  Q2 APPLIED — what compression2's chain reads, and what it cannot
+==============================================================================
+  [GREEN] compression2's input (1) is MARGINAL-BLIND — same value on both   max flip = 1/3 on both
+  [GREEN] WRONG-DIRECTION CONTROL: a support-reading construction is NOT blind   so the filter does not answer 'blind' to everything
+
+==============================================================================
+c4.3  Q1 APPLIED — four families, two of each kind
+==============================================================================
+  [GREEN] compression2 scales, n=4   NESTED — increments exist; Σ λ_l D_l is a Littlewood–Paley multiplier
+  [GREEN] compression2 scales, n=6   NESTED — increments exist; Σ λ_l D_l is a Littlewood–Paley multiplier
+  [GREEN] compression.tex (C_o, C_e), n=4 antichain   NOT NESTED — first failure at level 0→1: transverse
+  [GREEN] planted: prefixes of increasing length, n=4 antichain   NESTED — increments exist; Σ λ_l D_l is a Littlewood–Paley multiplier
+
+       THE FILTER, IN THE FORM THE NEXT PROPOSAL SHOULD MEET IT:
+       
+         Q1  nested?            classify_family(parts)      one pass, no matrix
+         Q2  marginal-blind?    marginal_blind(f, n, mu1, mu2)
+       
+       Q1 = NESTED licenses ONE step: a convex combination of the INCREMENTS is canonical.
+       It licenses nothing else, and in particular it is NOT evidence the construction is
+       going anywhere.  Q2 = blind is the expensive answer: a construction that cannot tell
+       mu1 from mu2 reads the poset only through its pair marginals, and STATE.md:21 says
+       every route below 1 must add a REALIZABILITY fact, which such a construction cannot.
+       compression2 is NESTED and BLIND — mg-0fc6 §2 — which is exactly why the criterion is
+       worth keeping and the route it arrived in is not.
+
+RESULT: GREEN — all checks passed

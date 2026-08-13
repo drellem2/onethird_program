@@ -1,0 +1,48 @@
+
+==============================================================================
+c0.1  CROSS-CHECK — L(P) against mg-0fc6's independent library
+==============================================================================
+  [GREEN] L(P) agrees with lib0fc6 at every labelled poset n <= 5   4469 posets, 0 disagreements
+
+==============================================================================
+c0.2  THE PROJECTION MACHINERY IS WHAT IT SAYS
+==============================================================================
+  [GREEN] every conditional expectation is symmetric   4 partitions
+  [GREEN] every conditional expectation is idempotent — exact rationals
+  [GREEN] and it averages over blocks, checked against a hand-computed value
+  [GREEN] is_projection accepts I and refuses 2I — the predicate is not constant
+
+==============================================================================
+c0.3  PLANTED WORLDS — the detector against six answers known by hand
+==============================================================================
+  [GREEN] nested: halves inside quarters   want a<b, got a<b
+  [GREEN] nested the other way round   want b<a, got b<a
+  [GREEN] equal (relabelled blocks)   want equal, got equal
+  [GREEN] transverse: rows against columns   want transverse, got transverse
+  [GREEN] transverse but nearly nested   want transverse, got transverse
+  [GREEN] point partition under everything   want a<b, got a<b
+  [GREEN] and at least two of the worlds are TRANSVERSE — the suite is not all filtrations   2 of 6
+
+==============================================================================
+c0.4  WRONG-DIRECTION WORLD — a nested family CLAIMED to be transverse
+==============================================================================
+  [GREEN] the detector CONTRADICTS the claim it was handed   claimed transverse, measured a<b
+
+       Without this row the suite cannot distinguish a detector from an echo.  It is the
+       same construction mg-602d's c1 uses for the concepts gate and for the same reason.
+
+==============================================================================
+c0.5  THE CHEAP ROUTE AND THE EXPENSIVE ROUTE AGREE  (PREDICTIONS.md P3)
+==============================================================================
+  [GREEN] N=4: refinement == (Pi_a Pi_b = Pi_b Pi_a = Pi_a) at every ordered pair   225 pairs (15 partitions), 0 disagreements
+  [GREEN] N=4: and the predicate is NOT constant on that population   nested at 60 of 225
+  [GREEN] N=5: refinement == (Pi_a Pi_b = Pi_b Pi_a = Pi_a) at every ordered pair   2704 pairs (52 partitions), 0 disagreements
+  [GREEN] N=5: and the predicate is NOT constant on that population   nested at 358 of 2704
+
+       P3 CONFIRMED at N = 4, 5 EXHAUSTIVE over all set partitions (15 and 52 of them).
+       The criterion can be checked on the PARTITIONS, in one pass, without ever forming a
+       matrix — which is the whole content of the claim that it is cheap.  ⚠️ Nothing above
+       N = 5 is checked here; the equivalence is PROVED (PREDICTIONS.md R2 and c2.4) and
+       these rows are corroboration, not the warrant.
+
+RESULT: GREEN — all checks passed

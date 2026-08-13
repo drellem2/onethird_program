@@ -1,0 +1,57 @@
+
+==============================================================================
+c3.1  IS (C_o, C_e) ACTUALLY TRANSVERSE?  — the number nobody took  (P4, P5)
+==============================================================================
+  n=3:    13 posets with |L| >= 2   transverse     7 · nested-and-distinct    6 · equal     0
+  n=4:   195 posets with |L| >= 2   transverse   153 · nested-and-distinct   42 · equal     0
+  n=5:  4111 posets with |L| >= 2   transverse  3811 · nested-and-distinct  300 · equal     0
+  [GREEN] P4: the pair IS transverse at a majority of posets   3971 of 4319
+  [GREEN] P5: ⚠️ but NOT uniformly — nested-and-distinct instances exist   348 posets; e.g. n=3, b<a, |L| = 2
+  [GREEN] ⚠️ THIS ARM EXPECTED SOME POSETS WHERE THE TWO COINCIDE AND THERE ARE NONE   0 of 4319 — C_o and C_e are DISTINCT at every poset with |L| >= 2, n <= 5
+
+       ⚠️ SO 'compression.tex's TRANSVERSE pair' IS A STATEMENT ABOUT THE TYPICAL POSET AND
+       NOT ABOUT THE FAMILY.  The criterion has to be applied per poset.  This does not touch
+       mg-0fc6's verdict, which does not rest on it; it constrains how the FACT may be quoted.
+
+==============================================================================
+c3.2  ON A TRANSVERSE PAIR, Π_o − Π_e IS NOT A PROJECTION AND NOT EVEN PSD
+==============================================================================
+  [GREEN] Π_o − Π_e is NOT a projection at every transverse poset   3670 of 3670, n = 3,4,5 labelled, |L(P)| <= 24; 301 skipped
+  [GREEN] and it is NOT PSD either — an explicit vector with ⟨f, (Π_o−Π_e) f⟩ < 0 at each   3670 of 3670; first witness n=3, |L|=6, value -1/6
+
+==============================================================================
+c3.3  AND THE VARIANCE DOES NOT SPLIT — the failure is ORTHOGONALITY, precisely
+==============================================================================
+  [GREEN] BOTH Π_o − E and Π_e − E ARE projections — the trivial σ-algebra is under everything   3670 of 3670
+  [GREEN] ⚠️ and at almost all of them (Π_o − E)(Π_e − E) ≠ 0 — the pieces OVERLAP   3640 of 3670
+  [GREEN] ⚠️ BUT NOT AT ALL OF THEM, AND THIS ARM'S OWN EXPECTATION IS REFUTED BY ITS OWN RUN   30 transverse posets have Π_o Π_e = P_0 EXACTLY — INDEPENDENT σ-algebras, mechanism confirmed at 30 of 30; first at n=5, |L|=4
+
+       KEPT RATHER THAN QUIETLY REWRITTEN, because the mistake this arm made is the mistake
+       the CRITERION is at risk of.  'Transverse ⟹ the variance does not split' is FALSE:
+       A·B = Π_o Π_e − P_0, so the cross term vanishes exactly when the two σ-algebras are
+       INDEPENDENT, and independent-but-transverse happens.  ⚠️ THE OPERATIVE PROPERTY IS
+       MUTUAL ORTHOGONALITY OF THE INCREMENTS, NOT NESTEDNESS.  Nestedness is the
+       CONSTRUCTIVE route to it — it gives a whole ORDERED family of orthogonal increments at
+       once, canonically, with the multiplier diagonal in them — and it is the route that is
+       cheap to check.  It is not the only way orthogonality can occur, and the criterion has
+       to be stated that way or it over-claims.
+
+==============================================================================
+c3.4  NON-VACUITY — every failure above, re-run on a NESTED pair, does NOT fail
+==============================================================================
+  [GREEN] the control pair is NESTED and distinct   n=4, |L| = 24
+  [GREEN] there, Π_b − Π_a IS a projection — c3.2's first row inverts
+  [GREEN] and it IS PSD on the SAME witness family c3.2 used — c3.2's second row inverts   24 block indicators; and ⟨f,Df⟩ = ‖Df‖² ≥ 0 for ALL f, D being a projection
+  [GREEN] and the two increments ARE mutually orthogonal — c3.3's second row inverts
+
+==============================================================================
+c3.5  AND ON THAT FAMILY THE CONVEX COMBINATION IS NOT A NEW DEGREE OF FREEDOM
+==============================================================================
+  [GREEN] k·I − Σ Π_i = k·(I − equal-weight convex combination), exactly   n=5, |L| = 60, k = 2
+
+       So on compression.tex's family 'combine the compressions convexly' names an object the
+       closed arc ALREADY priced — FACTS.md F6 and mg-8d66's ceiling, CITED and not re-
+       measured here.  The convex weights are a reparameterisation of that operator, not a
+       new handle on it.
+
+RESULT: GREEN — all checks passed

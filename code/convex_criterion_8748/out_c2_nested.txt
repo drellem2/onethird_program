@@ -1,0 +1,91 @@
+
+==============================================================================
+c2.1  compression2's SCALES ARE NESTED — both routes, at every poset measured
+==============================================================================
+  [GREEN] n=4 (antichain — a4.3b's own poset, reproduced): Π_a Π_b = Π_min(a,b), and refinement agrees   |L| = 24, 3 levels
+  [GREEN] n=4 (one relation): Π_a Π_b = Π_min(a,b), and refinement agrees   |L| = 12, 3 levels
+  [GREEN] n=5 (a 3-chain and 2 free): Π_a Π_b = Π_min(a,b), and refinement agrees   |L| = 20, 4 levels
+  [GREEN] n=6 (two 3-chains): Π_a Π_b = Π_min(a,b), and refinement agrees   |L| = 20, 4 levels
+  [GREEN] n=6 (a 4-chain and 2 free): Π_a Π_b = Π_min(a,b), and refinement agrees   |L| = 30, 4 levels
+  [GREEN] n=7 (a 5-chain and 2 free): Π_a Π_b = Π_min(a,b), and refinement agrees   |L| = 42, 5 levels
+  [GREEN] n=8 (a 6-chain and a 2-chain): Π_a Π_b = Π_min(a,b), and refinement agrees   |L| = 28, 4 levels
+  [GREEN] the FINEST level is the IDENTITY at every poset — losslessness, as an operator   7 posets
+  [GREEN] and the COARSEST level is the trivial partition, so Π_0 f = E f
+
+==============================================================================
+c2.2  THE INCREMENTS ARE MUTUALLY ORTHOGONAL PROJECTIONS  (Theorem B)
+==============================================================================
+  [GREEN] n=4 (antichain — a4.3b's own poset, reproduced): every increment D_l is a PROJECTION   2 increments
+  [GREEN] n=4 (antichain — a4.3b's own poset, reproduced): and D_l D_m = 0 for l ≠ m
+  [GREEN] n=4 (antichain — a4.3b's own poset, reproduced): and Σ_l D_l = I − Π_0
+  [GREEN] n=4 (one relation): every increment D_l is a PROJECTION   2 increments
+  [GREEN] n=4 (one relation): and D_l D_m = 0 for l ≠ m
+  [GREEN] n=4 (one relation): and Σ_l D_l = I − Π_0
+  [GREEN] n=5 (a 3-chain and 2 free): every increment D_l is a PROJECTION   3 increments
+  [GREEN] n=5 (a 3-chain and 2 free): and D_l D_m = 0 for l ≠ m
+  [GREEN] n=5 (a 3-chain and 2 free): and Σ_l D_l = I − Π_0
+  [GREEN] n=6 (two 3-chains): every increment D_l is a PROJECTION   3 increments
+  [GREEN] n=6 (two 3-chains): and D_l D_m = 0 for l ≠ m
+  [GREEN] n=6 (two 3-chains): and Σ_l D_l = I − Π_0
+  [GREEN] n=6 (a 4-chain and 2 free): every increment D_l is a PROJECTION   3 increments
+  [GREEN] n=6 (a 4-chain and 2 free): and D_l D_m = 0 for l ≠ m
+  [GREEN] n=6 (a 4-chain and 2 free): and Σ_l D_l = I − Π_0
+  [GREEN] n=7 (a 5-chain and 2 free): every increment D_l is a PROJECTION   4 increments
+  [GREEN] n=7 (a 5-chain and 2 free): and D_l D_m = 0 for l ≠ m
+  [GREEN] n=7 (a 5-chain and 2 free): and Σ_l D_l = I − Π_0
+  [GREEN] n=8 (a 6-chain and a 2-chain): every increment D_l is a PROJECTION   3 increments
+  [GREEN] n=8 (a 6-chain and a 2-chain): and D_l D_m = 0 for l ≠ m
+  [GREEN] n=8 (a 6-chain and a 2-chain): and Σ_l D_l = I − Π_0
+
+==============================================================================
+c2.3  Var(f) = Σ_l ‖D_l f‖², EXACTLY — random f AND structured f
+==============================================================================
+  [GREEN] n=4 (antichain — a4.3b's own poset, reproduced): exact at all 11 statistics   8 random + inv_e + pos_x0 + disp², max |Var − Σ| = 0
+  [GREEN] n=4 (one relation): exact at all 11 statistics   8 random + inv_e + pos_x0 + disp², max |Var − Σ| = 0
+  [GREEN] n=5 (a 3-chain and 2 free): exact at all 11 statistics   8 random + inv_e + pos_x0 + disp², max |Var − Σ| = 0
+  [GREEN] n=6 (two 3-chains): exact at all 11 statistics   8 random + inv_e + pos_x0 + disp², max |Var − Σ| = 0
+  [GREEN] n=6 (a 4-chain and 2 free): exact at all 11 statistics   8 random + inv_e + pos_x0 + disp², max |Var − Σ| = 0
+  [GREEN] n=7 (a 5-chain and 2 free): exact at all 11 statistics   8 random + inv_e + pos_x0 + disp², max |Var − Σ| = 0
+  [GREEN] n=8 (a 6-chain and a 2-chain): exact at all 11 statistics   8 random + inv_e + pos_x0 + disp², max |Var − Σ| = 0
+
+==============================================================================
+c2.4  THE CONVEX COMBINATION OF INCREMENTS IS A LITTLEWOOD–PALEY MULTIPLIER
+==============================================================================
+  [GREEN] n=4 (antichain — a4.3b's own poset, reproduced): M = Σ λ_l D_l commutes with every Π_k, and M D_l = λ_l D_l   λ = ['3/5', '2/5']
+  [GREEN] n=4 (antichain — a4.3b's own poset, reproduced): and it is NOT idempotent — a multiplier, not a compression
+  [GREEN] n=4 (one relation): M = Σ λ_l D_l commutes with every Π_k, and M D_l = λ_l D_l   λ = ['3/5', '2/5']
+  [GREEN] n=4 (one relation): and it is NOT idempotent — a multiplier, not a compression
+  [GREEN] n=5 (a 3-chain and 2 free): M = Σ λ_l D_l commutes with every Π_k, and M D_l = λ_l D_l   λ = ['6/13', '4/13', '3/13']
+  [GREEN] n=5 (a 3-chain and 2 free): and it is NOT idempotent — a multiplier, not a compression
+  [GREEN] n=6 (two 3-chains): M = Σ λ_l D_l commutes with every Π_k, and M D_l = λ_l D_l   λ = ['6/13', '4/13', '3/13']
+  [GREEN] n=6 (two 3-chains): and it is NOT idempotent — a multiplier, not a compression
+  [GREEN] n=6 (a 4-chain and 2 free): M = Σ λ_l D_l commutes with every Π_k, and M D_l = λ_l D_l   λ = ['6/13', '4/13', '3/13']
+  [GREEN] n=6 (a 4-chain and 2 free): and it is NOT idempotent — a multiplier, not a compression
+  [GREEN] n=7 (a 5-chain and 2 free): M = Σ λ_l D_l commutes with every Π_k, and M D_l = λ_l D_l   λ = ['30/77', '20/77', '15/77', '12/77']
+  [GREEN] n=7 (a 5-chain and 2 free): and it is NOT idempotent — a multiplier, not a compression
+  [GREEN] n=8 (a 6-chain and a 2-chain): M = Σ λ_l D_l commutes with every Π_k, and M D_l = λ_l D_l   λ = ['6/13', '4/13', '3/13']
+  [GREEN] n=8 (a 6-chain and a 2-chain): and it is NOT idempotent — a multiplier, not a compression
+
+       THIS is the object Daniel's instinct is right about, and it is right ONLY here:
+       a convex combination of the INCREMENTS of a NESTED family.  It is diagonal in the
+       scale decomposition, its spectrum is exactly the weights, and it mixes the scales in
+       whatever proportion is asked for — 'one that mixes what we want the right amount',
+       in his words, made precise.  ⚠️ AND THE SCOPING TRAVELS WITH IT: the variance identity
+       is Pythagoras and holds for ANY filtration.  The content is the NESTEDNESS, which for
+       compression2 is by construction of the dyadic tree.
+
+==============================================================================
+c2.5  THEOREM C — 'the increment is a projection' IFF 'nested'  (P6)
+==============================================================================
+  [GREEN] N=4: Π_b − Π_a is a projection IFF Π_a's σ-algebra is coarser   225 ordered pairs (15 partitions), 0 exceptions
+  [GREEN] N=4: and the failing side is the MAJORITY — the criterion discriminates   not a projection at 165 of 225; nested at 60
+  [GREEN] N=5: Π_b − Π_a is a projection IFF Π_a's σ-algebra is coarser   2704 ordered pairs (52 partitions), 0 exceptions
+  [GREEN] N=5: and the failing side is the MAJORITY — the criterion discriminates   not a projection at 2346 of 2704; nested at 358
+
+       P6 CONFIRMED, exhaustive over all set partitions of a 4- and 5-point space.
+       ⚠️ THIS IS THE WHOLE CRITERION, AND IT IS AN IFF, NOT A HEURISTIC: increments exist
+       exactly when the family is nested.  Everything else — orthogonality, Pythagoras, the
+       multiplier — follows from having them.  Nestedness is checkable in one pass over the
+       partitions (c0.5), so the check costs nothing.
+
+RESULT: GREEN — all checks passed
