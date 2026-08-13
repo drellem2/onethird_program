@@ -65,7 +65,9 @@ never flagged.  STATE.md and docs/ are outside the watched set too, so a human e
 with the gate running does not trip a control about transcripts.
 """
 
+import ast
 import difflib
+import hashlib
 import os
 import re
 import subprocess
@@ -278,21 +280,37 @@ def verdict_for(committed, worktree, relpath=None):
 RED_VERDICTS = ("DISAGREES", "STALE")
 
 
-# THE ONE EXEMPTION, AND IT IS ONE FILE RATHER THAN THIS DIRECTORY.
+# THERE IS NO EXEMPTION.  THE WATCHED CLASS IS TOTAL, AND THE FILE THAT USED TO BE OUTSIDE IT
+# IS `g0`'s OWN (mg-c15e, answering mg-585e).
 #
-# `g0` writes its own transcript AFTER taking its measurement, and the transcript's content
-# depends on the verdict.  So committing a red run's transcript necessarily banks the text
-# "RED, N disagreements" alongside the refresh that makes the tree green — and the NEXT run
-# reads that committed copy against a green one and grades it DISAGREES.  An innocent branch
-# then goes red for a non-reason, which is this ticket's own thesis shipped inside its
-# remedy (mg-479c E9).  Measured over five runs, not anticipated: the oscillation is in
-# README D4, and it does not damp, because each run's fix is the next run's disagreement.
+# WHAT THE EXEMPTION SAID.  `g0` writes its transcript AFTER taking its measurement and the
+# text depended on the verdict, so a red run's transcript was committed alongside the refresh
+# that makes the tree green and the next run graded that committed copy DISAGREES — an
+# innocent branch red for a non-reason.  Measured over five runs here and re-measured over
+# the record by mg-585e: 31 committed versions of that file, 16 of them RED, 24 shape flips,
+# and 7 commits of `main` whose entire diff is that one file.
 #
-# `out_g1_controls.txt` is NOT exempt and the difference is the point: its content depends on
-# the planted worlds, i.e. on code, not on tree state.  Committing the output of the run that
-# changed it is stable, so it converges the way every other transcript does.  Verified as
-# worlds E1-E3 in g1_controls.py, so the exemption cannot silently widen to the directory.
-SELF_EXCLUDED = ("code/gate_fixed_point_f771/out_g0_fixed_point.txt",)
+# WHY IT IS GONE.  `depends on the verdict` is the symptom and not the property.  `g0` runs at
+# tree T and its output is committed into T'; the repair that produces T' is `commit the
+# regenerated transcripts`; so D(T') = {} BY DEFINITION OF THE REPAIR.  A transcript cannot
+# record a quantity its own commit sets to zero.  The right test is therefore not `is it repo
+# state` — the docstring rule `g0` used to carry — but `DOES THE REPAIR MOVE IT`, and the two
+# disagree on exactly one item, which was the whole of `g0`'s §2.  Content that is invariant
+# under the repair survives, because the repair rewrites transcript BYTES and nothing else.
+# So `g0`'s §2 is now the RULE INVENTORY below: the constants the verdict is a function of and
+# a digest of the functions that decide, none of which is a transcript byte.  The outcome
+# lives where the merge gate has always read it — the EXIT STATUS — and on stderr beside the
+# rest of this arm's run-dependent detail (README D4).
+#
+# WHAT IT BUYS, and it is this file's own stated main risk: `A WIDER NORMALISER IS AN
+# UNFALSIFIABLE ESCAPE HATCH`.  With `g0`'s transcript inside the watched class, an operator
+# who widens the normaliser and does not re-run the gate is caught BY THE CONTROL THEY
+# WIDENED, because the inventory moves and the committed copy no longer matches.
+#
+# WHAT IT COSTS, one sentence and said rather than glossed: the committed transcript stops
+# being quotable for `was the gate green`.  mg-f771's own first paragraph is the reply — the
+# file that opened this ticket was stale precisely BECAUSE the quotable part was the verdict,
+# and `the part written to be quotable was the wrong half`.
 
 
 def is_transcript(relpath):
@@ -303,9 +321,14 @@ def is_transcript(relpath):
 
 
 def is_watched(relpath):
-    """The watched class: a transcript, less the one file whose self-reference makes the
-    question unanswerable rather than merely awkward."""
-    return is_transcript(relpath) and relpath not in SELF_EXCLUDED
+    """The watched class, which is TOTAL: every transcript, this arm's own included.
+
+    Kept as a separate name from `is_transcript` even though the two now agree, because the
+    difference between them is where an exemption would go, and a reintroduced one lands in
+    a diff at this line rather than inside a caller.  Both names are in DECIDING below, so
+    re-narrowing either moves the digest `g0` prints.
+    """
+    return is_transcript(relpath)
 
 
 def _git(root, *args):
@@ -384,3 +407,180 @@ def first_disagreement(committed, worktree, limit=8):
             rows.append((ln[0], ln[1:].rstrip()))
     dropped = max(0, len(rows) - limit)
     return rows[:limit], dropped
+
+
+# ---- THE RULE INVENTORY — WHAT `g0` PRINTS INSTEAD OF ITS OUTCOME (mg-c15e) ------------
+#
+# THE SELECTION RULE IS ONE LINE: content survives into a tracked transcript if it is
+# INVARIANT UNDER THE REPAIR, and the repair is `commit the regenerated transcripts`, which
+# rewrites transcript bytes and nothing else.  Nothing below is a transcript byte.  All of it
+# is read off THIS FILE'S OWN SOURCE, so `g0`'s stdout is a pure function of the instrument
+# and not of the tree it is run against — which is what makes the file a fixed point rather
+# than a thing every branch rewrites.
+#
+# IT IS TWO INSTRUMENTS AND NOT ONE, AND THE PAIR IS STATED AS A PAIR.  The INVENTORY shows
+# the rules that are spelled as CONSTANTS, so widening one lands in a diff a reader can read;
+# the DIGEST covers the functions that DECIDE, because N3 is spelled as control flow and no
+# constant can show it.  A digest catches a widening it cannot describe and the inventory
+# describes a widening it can.  Neither alone is enough.
+#
+# AND THE INVENTORY IS PRINTED IN FULL RATHER THAN TRUNCATED, which is not formatting.  A
+# constant cut at a column is a constant whose tail can be widened invisibly, and the tail is
+# where a regex keeps its alternatives.  `ABS_TO_REPO` is 110 characters and is NOT the source
+# of any deciding function, so a truncated inventory would have been the only thing standing
+# in front of it and would not have been standing.  Measured on this file rather than argued:
+# world I5 in `g1_controls.py` widens `ABS_TO_REPO` and requires the inventory to move.
+#
+# WHAT IS NOT COVERED, named rather than discovered.  `CORPUS_SCOPED`'s membership is not in
+# the inventory — `g0`'s §1 already prints that list in full, and printing it twice would make
+# a widening move two places and be read as two findings.  `first_disagreement` is not in
+# DECIDING: it writes to stderr now and decides nothing.
+
+DECIDING = ("normalise", "lines_equivalent", "texts_equivalent", "verdict_for",
+            "is_transcript", "is_watched")
+
+# The constants the verdict is a function of, in the order they are printed.  `is_watched`
+# has no constant left to name, and that absence IS the mg-c15e change: there is no
+# exemption tuple here to widen.
+INVENTORY = ("ROOT_MARK", "FS_ROOTS", "ABS_TO_REPO", "ABS_ANY", "SECONDS",
+             "CORPUS_PIN", "PRODUCER_PIN", "CORPUS_DRIFT_LIMIT", "RED_VERDICTS")
+
+
+def lib_source(root=ROOT):
+    """This module's own source, off disk rather than out of `__file__`-relative guesswork,
+    so a sandboxed copy under another root reports on the copy and not on the original."""
+    path = os.path.join(root, "code", "gate_fixed_point_f771", "lib_f771.py")
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            return fh.read()
+    except OSError as exc:
+        raise Refused("cannot read %s: %s — this arm's whole §2 is that file" % (path, exc))
+
+
+def _parse(source):
+    try:
+        return ast.parse(source)
+    except SyntaxError as exc:
+        raise Refused("lib_f771.py does not parse: %s" % exc)
+
+
+def _segment(source, node):
+    seg = ast.get_source_segment(source, node)
+    if seg is None:                                         # pragma: no cover - 3.8+ has it
+        raise Refused("this python cannot recover source segments; the inventory would be "
+                      "a claim about nothing")
+    return seg
+
+
+def _constants(source, tree):
+    """(name, text) for each INVENTORY entry, as the source spells it.
+
+    MATCHED BY AST AND NOT BY LINE PREFIX.  A prefix match reads only the FIRST line of a
+    bracketed assignment — `ABS_TO_REPO = re.compile(` — and reports `re.compile(` as the
+    value, which is a rule inventory that omits the rule.  mg-585e's draft had that shape and
+    world I5 is what found it.
+    """
+    found = {}
+    for node in tree.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        for target in node.targets:
+            if isinstance(target, ast.Name) and target.id in INVENTORY:
+                found[target.id] = _segment(source, node.value)
+    missing = [n for n in INVENTORY if n not in found]
+    if missing:
+        raise Refused("constant(s) %s are not assigned at module level in lib_f771.py — the "
+                      "inventory would be silent about a rule it claims to print"
+                      % ", ".join(missing))
+    return [(n, found[n]) for n in INVENTORY]
+
+
+def _deciding_source(source, tree):
+    """The source of the deciding functions, concatenated in DECIDING order.
+
+    IN DECIDING ORDER AND NOT FILE ORDER, so that moving a function within the file — which
+    changes no behaviour — does not move the digest and send an innocent branch looking for a
+    widening that is not there.  Matched on the function's NAME: `verdict_for_RENAMED` is not
+    `verdict_for`, so a rename REFUSES rather than silently digesting a function that no
+    longer exists under the name it was asked about (world I4).
+    """
+    defs = {}
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in DECIDING:
+            defs[node.name] = _segment(source, node)
+    missing = [n for n in DECIDING if n not in defs]
+    if missing:
+        raise Refused("deciding function(s) %s are not defined at module level in "
+                      "lib_f771.py — the digest is no longer about what it says it is "
+                      "about" % ", ".join(missing))
+    return "\n".join(defs[n] for n in DECIDING)
+
+
+def read_inputs(source):
+    """Everything the verdict is a function of, read off the instrument's source.
+
+    Pure string -> dict, so `g1_controls.py` can put a widened normaliser in front of it
+    without a sandbox or a git repository.
+    """
+    tree = _parse(source)
+    return {"constants": _constants(source, tree),
+            "digest": hashlib.sha256(
+                _deciding_source(source, tree).encode("utf-8")).hexdigest()}
+
+
+def _wrap(text, width):
+    """One logical line, hard-wrapped at `width` — and NO ELLIPSIS ANYWHERE.
+
+    Where the author broke a bracketed assignment across lines is not a rule, so the physical
+    lines are joined; they are joined with a SPACE and not with nothing, because `(foo` and
+    `and bar)` concatenated read as `fooand bar`.  Every other character survives into the
+    transcript: a rule inventory that drops characters is an inventory of the characters
+    somebody has already looked at, which is this ticket's whole subject one level down.
+    """
+    out, line = [], " ".join(text.split())
+    while len(line) > width:
+        out.append(line[:width])
+        line = line[width:]
+    out.append(line)
+    return out
+
+
+def rule_inventory(source, width=92):
+    """`g0`'s §2, as a list of lines.  A pure function of the instrument's source.
+
+    RETURNED RATHER THAN PRINTED so that `g1_controls.py` grades the BYTES `g0` writes and
+    not a re-spelling of them — mg-d2c2's arrangement, which the rest of this directory
+    already obeys for `verdict_for`.
+    """
+    inputs = read_inputs(source)
+    prefix, out = "    %-24s " % "", []
+    out.append("§2  THE INPUTS THE VERDICT IS A FUNCTION OF — AND NOT WHAT IT CAME OUT AS")
+    out.append("-" * width)
+    out.append("  THIS SECTION REPLACED THE DISAGREEMENT SET, AND THE REASON IS NOT TASTE.")
+    out.append("  This arm's transcript is committed by the same act that REPAIRS what it")
+    out.append("  reported — the repair is `commit the regenerated transcripts` — and that")
+    out.append("  act sets the disagreement set to empty.  A transcript naming that set is")
+    out.append("  therefore false about the tree it lands in BECAUSE it landed there, and no")
+    out.append("  exemption is needed for a file that does not try to record one.  What is")
+    out.append("  below is invariant under the repair; the outcome of this run is in the EXIT")
+    out.append("  STATUS and on stderr, which is what the merge gate has always read.")
+    out.append("")
+    out.append("  THE RULES THAT ARE SPELLED AS CONSTANTS, IN FULL AND NEVER TRUNCATED:")
+    for name, text in inputs["constants"]:
+        rows = _wrap(text, width - len(prefix))
+        out.append("    %-24s %s" % (name, rows[0]))
+        for extra in rows[1:]:
+            out.append("%s%s" % (prefix, extra))
+    out.append("")
+    out.append("  AND THE RULES THAT ARE SPELLED AS CONTROL FLOW, WHICH NO CONSTANT CAN SHOW —")
+    out.append("  N3 is a prefix comparison and the corpus-scoped grade is a branch, so the")
+    out.append("  %d functions that decide are covered by a digest of their source:"
+               % len(DECIDING))
+    out.append("    %s" % ", ".join(DECIDING))
+    out.append("    sha256  %s" % inputs["digest"])
+    out.append("")
+    out.append("  A WIDER NORMALISER IS AN UNFALSIFIABLE ESCAPE HATCH — this file's own words")
+    out.append("  about its own main risk.  With this transcript INSIDE the watched class, an")
+    out.append("  operator who widens the rule and does not re-run the gate is caught by the")
+    out.append("  control they widened: the inventory moves and the committed copy does not.")
+    return out

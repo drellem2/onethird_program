@@ -61,16 +61,21 @@ mg-f771  PLANTED WORLDS — what this control catches, and what it is declared b
       not       ok        code/libweak_audit_c4f5/out_a4_census.txt
            mg-c824's, which nothing regenerates — a similar NAME is not a similar subject, and the registry is read by path
 
-§2  THE WATCHED CLASS, AND THE ONE EXEMPTION IN IT
+§2  THE WATCHED CLASS, WHICH IS TOTAL
 --------------------------------------------------------------------------------------------
   An exemption that can widen without a control is not an exemption, it is a hole.
+  There is none left: every row below that is OUT is out because it is not a
+  transcript, and E1 — this arm's sibling, the one file that used to be exempt —
+  is IN.  §2b and §2c are why that became possible.
 
-  E1   not       ok        code/gate_fixed_point_f771/out_g0_fixed_point.txt
-       g0's own transcript — the one exemption, and the reason is in lib_f771.SELF_EXCLUDED
+  E1   watched   ok        code/gate_fixed_point_f771/out_g0_fixed_point.txt
+       g0's OWN transcript, and it is WATCHED — the single exemption this instrument used to carry, deleted at mg-c15e.  It is watchable because §2 no longer records the outcome: g0's stdout is a function of lib_f771.py's source and of nothing else, so the repair that empties the disagreement set does not move it.  Worlds F1-F6 measure that on the real arm rather than asserting it here
   E2   watched   ok        code/gate_fixed_point_f771/out_g1_controls.txt
-       THIS transcript is watched: the exemption is a file, not this directory
+       THIS transcript is watched, and it is no longer the CONTRAST it was — when E1 was the exemption this row said `a file, not this directory`.  Both files in this directory are now in the class on the same terms as every other suite's, which is the whole of the mg-c15e change stated as a membership
   E3   not       ok        code/gate_fixed_point_f771/README.md
        not a transcript at all
+  E8   not       ok        code/gate_fixed_point_f771/.out_g0_fixed_point.txt.partial
+       run_all.sh's atomic-write temp file — outside the class by NAME, which is the only reason the `.partial` + `mv` arrangement is safe now that E1 is watched.  A half-written transcript observed by this arm is mg-479c's defect, and D1 in the README
   E4   watched   ok        code/facts_registry_03cf/out_f0_registry_discipline.txt
        the file that opened mg-f771
   E5   watched   ok        code/libweak_audit_c4f5/out_a4_census.txt
@@ -80,14 +85,52 @@ mg-f771  PLANTED WORLDS — what this control catches, and what it is declared b
   E7   not       ok        docs/FACTS.md
        outside the class
 
-  7 of 7 membership rows are as declared.
+  8 of 8 membership rows are as declared.
+
+§2b  THE RULE INVENTORY g0 PRINTS INSTEAD OF ITS OUTCOME (mg-c15e)
+--------------------------------------------------------------------------------------------
+  A transcript that never moves cannot oscillate and buys nothing, so BOTH
+  directions are here: 4 widenings that must move it, one prose edit that must
+  not, and 2 restructurings that must REFUSE rather than answer about a rule that
+  is no longer there.  Fed the real lib_f771.rule_inventory.
+
+  I1   expect moved    got moved    ok        N2 WIDENED TO EAT INTEGER SECONDS — the exact escape hatch lib_f771's own docstring calls unfalsifiable.  If this does not move, the inventory is decoration
+  I2   expect moved    got moved    ok        ABS_TO_REPO widened — a MULTI-LINE constant, and the tail of it.  mg-585e's draft read constants by line prefix and reported this one as `re.compile(`, so a widening here moved neither the printed rule nor the digest (ABS_TO_REPO is inside no deciding function).  The inventory is parsed and printed in full because of this world
+  I3   expect moved    got moved    ok        N3 relaxed to forgive ANY two lines — a widening spelled as CONTROL FLOW, which no constant can show and which only the digest catches
+  I4   expect moved    got moved    ok        THE EXEMPTION REINTRODUCED inside is_watched — the specific regression this ticket exists to make loud, and it is caught by the digest rather than by a reviewer
+  I5   expect unmoved  got unmoved  ok        PROSE MOVED AND NOTHING ELSE — the wrong-direction world.  A file that moved whenever lib_f771.py moved would put this transcript back in every branch's diff, which is the tax mg-c15e removes.  first_disagreement's docstring is not a rule  <- MUST NOT MOVE
+  I6   expect REFUSED  got REFUSED  ok        a deciding function RENAMED — verdict_for -> verdict_for_RENAMED, whose name STARTS WITH the one being asked about
+  I7   expect REFUSED  got REFUSED  ok        a named constant DELETED from the module — the inventory must refuse rather than print a shorter list that reads as a shorter rule set
+
+  I8   expect clean    got clean    ok        the inventory is a FIXED POINT OF THE NORMALISER
+       itself — no checkout path and no decimal second in it, so it cannot even
+       be forgiven by N1/N2 and has nothing to forgive.
+
+§2c  THE CLAIM ITSELF, ON THE REAL ARM, IN THREE MINIATURE REPOSITORIES
+--------------------------------------------------------------------------------------------
+  Same instrument, two trees differing in one line of one watched transcript,
+  and a third with a defect planted in it.
+  The exemption is removable exactly if the outcome is absent from the bytes.
+
+  F1   ok        the two trees really did reach different verdicts
+       exit 0 green tree, exit 1 red tree
+  F2   ok        AND THE TWO TRANSCRIPTS ARE BYTE-IDENTICAL — no scrubbing on either side, because there is no clock in either
+       4538 bytes vs 4538 bytes, identical
+  F3   ok        the red run's disagreement is on STDERR, so nothing was lost by taking it off stdout
+       834 stderr bytes name out_sample.txt
+  F4   ok        the green run's stderr says GREEN — the wrong-direction half, so F2 is not two identically empty answers
+       VERDICT on stderr: GREEN
+  F5   ok        A CRASH LEAVES THE TRANSCRIPT AT ITS FIXED POINT TOO — planted defect, traceback on stderr, exit 2, and the SAME bytes on stdout as the two runs that reached a verdict.  This is the hazard mg-c15e introduced: the traceback used to go to stdout precisely so it would land in the tracked file
+       exit 2, traceback on stderr, stdout identical
+  F6   ok        and NO SANDBOX PATH reached any of the three transcripts — this directory would otherwise be committing mg-f771's own defect while describing it
+       clean
 
 §3  WORLDS IN WHICH NO VERDICT IS AVAILABLE
 --------------------------------------------------------------------------------------------
   A control that cannot say 'I could not tell' says 'nothing is wrong' instead.
 
   R1   not a git work tree                REFUSED                  ok
-  R2   no BUILD_SH_RAN_THE_SUITES handshake exit 2                   ok
+  R2   no BUILD_SH_RAN_THE_SUITES handshake exit 2, refusal on stderr, transcript intact ok
 
 §4  WHAT IS NOT COVERED HERE
 --------------------------------------------------------------------------------------------
@@ -97,4 +140,4 @@ mg-f771  PLANTED WORLDS — what this control catches, and what it is declared b
   world above, and nothing in this directory would notice.  Named rather than
   discovered: no such suite exists today, and that is a fact about today.
 
-VERDICT: GREEN — 14 planted worlds, 10 corpus worlds, 7 membership rows, 5 registry rows and 2 refusals all land where they must; the normaliser's blindness, the corpus-scoped exemption and the one self-exclusion are all the declared ones.  0.06s
+VERDICT: GREEN — 14 planted worlds, 10 corpus worlds, 8 membership rows, 5 registry rows, 8 inventory worlds, 6 fixed-point worlds and 2 refusals all land where they must; the normaliser's blindness and the corpus-scoped exemption are the declared ones, and there is no self-exclusion left to declare.  0.49s

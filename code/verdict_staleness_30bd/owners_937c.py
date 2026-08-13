@@ -66,22 +66,31 @@ def gated_suites(build_sh):
     return out
 
 
-def f771_verdict():
-    """What mg-f771's committed g0 transcript says, READ rather than quoted from memory.
+def f771_scope():
+    """What mg-f771's committed g0 transcript declares its subject to be, READ rather than
+    quoted from memory.
 
-    §1 makes a claim about another directory's verdict, and a hand-typed quotation of one
-    is a figure backed by nothing — mg-2959's whole finding, in the directory that found
-    it.  So the line is read.  It is a stable line by construction: g0 is mg-f771's single
-    self-exemption and its VERDICT is refreshed on every gate run, so this arm's transcript
-    moves only if that verdict genuinely moves, which is the right time for it to move.
+    §1 makes a claim about another directory's control, and a hand-typed quotation of one is
+    a figure backed by nothing — mg-2959's whole finding, in the directory that found it.  So
+    the line is read.
+
+    IT USED TO READ THE `VERDICT:` LINE AND THERE IS NO LONGER ONE (mg-c15e).  That is not a
+    regression in either directory: g0's transcript was mg-f771's single self-exemption
+    precisely BECAUSE it carried the verdict — the file was committed by the same act that
+    repaired what it reported, so 16 of its 31 committed versions were red and 7 commits of
+    main exist for nothing but flipping it back.  The exemption is gone and the verdict went
+    with it, to the exit status and to stderr.  What this arm was actually using it for is the
+    SCOPE and not the outcome — the sentence below is about which files g0 compares — so the
+    scope line is what is read now, and it is a better citation than the one it replaces: it
+    is invariant under a gate run, where the verdict never was.
     """
     p = os.path.join(ROOT, "code", "gate_fixed_point_f771", "out_g0_fixed_point.txt")
     if not os.path.exists(p):
         return "nothing — its transcript is not in this tree"
     for line in open(p, encoding="utf-8"):
-        if line.startswith("VERDICT:"):
-            return "`%s`" % line.strip().rstrip(".").split("  ")[0]
-    return "no VERDICT line"
+        if line.strip().startswith("every tracked file under code/"):
+            return "`%s`" % line.strip().rstrip(".")
+    return "no watched-class line"
 
 
 def load_owners():
@@ -320,9 +329,12 @@ def main():
     e("  of the %d is in a directory nothing on the merge path ever runs, so no branch has"
       % len(stale))
     e("  ever been told about any of them.  mg-f771's fixed-point control IS the whole-run")
-    e("  before/after diff §6.6 asks for — `every tracked file under code/ named out_*.txt,")
-    e("  compared against HEAD` — and its committed transcript says")
-    e("      %s" % f771_verdict())
+    e("  before/after diff §6.6 asks for, and its committed transcript declares its subject")
+    e("  as")
+    e("      %s" % f771_scope())
+    e("  — READ OFF THAT FILE rather than quoted from memory.  It is the SCOPE line and not")
+    e("  the VERDICT because mg-c15e took the verdict out of that transcript: g0's own file")
+    e("  was mg-f771's single self-exemption for exactly as long as it carried one.")
     e("  THAT IS NOT IN TENSION WITH THESE %d, AND THE RECONCILIATION IS THE COVERAGE READ"
       % len(stale))
     e("  ABOVE RATHER THAN A CAVEAT ABOUT EITHER NUMBER.  g0 can only compare a transcript")

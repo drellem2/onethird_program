@@ -24,15 +24,35 @@ same assertions.  If an instrument is wrong, it is wrong identically in both, an
 is silent.  The gate is on AGREEMENT, not on truth, the same split as mg-03cf's and
 mg-602d's and for the same reason.
 
-THIS TRANSCRIPT RECORDS ONLY WHAT IS A FUNCTION OF REPO STATE, AND THAT RULE WAS LEARNED THE
-HARD WAY ON RUN 2 (README D4).  The first draft printed the whole changed set — how many
-transcripts moved, and which ones were graded NOISE.  That set is NOT repo state: whether
-`out_g1_values.txt` moves depends on whether its wall-clock timing happened to round to the
-same tenth as last run.  So this arm's own transcript changed between two runs of an
-unchanged tree, and the arm graded its own committed copy DISAGREES — the remedy failing the
-invariant it enforces, on its second run, measured rather than anticipated.  The operational
-detail is therefore written to STDERR, where the build log keeps it and no tracked file does.
-Only the DISAGREES list, which is repo state, is on stdout.
+THE WATCHED CLASS IS TOTAL AND INCLUDES THIS ARM'S OWN TRANSCRIPT (mg-c15e).  It did not
+used to.  The exemption was forced by a self-reference: this file was written AFTER the
+measurement and its text named the disagreement set, so a red run's transcript was committed
+alongside the refresh that makes the tree green and the next run graded it DISAGREES.  On the
+record that oscillation cost 7 commits of `main` whose entire diff is this one file, and 16
+of its 31 committed versions were RED (mg-585e).
+
+THE PROPERTY IS NOT `ITS TEXT DEPENDS ON THE VERDICT`, and getting that right is what let the
+exemption go.  This arm runs at tree T and its output is committed into T'; the repair that
+produces T' is `commit the regenerated transcripts`; so the disagreement set at T' is EMPTY
+BY DEFINITION OF THE REPAIR.  A transcript cannot record a quantity its own commit zeroes.
+The old docstring rule here — "only the DISAGREES list, WHICH IS REPO STATE, is on stdout" —
+therefore picked the wrong test: the right one is DOES THE REPAIR MOVE IT, and the two
+disagree on exactly one item, which was the whole of §2.
+
+SO §2 IS NOW THE RULE INVENTORY, and this file's stdout is a pure function of `lib_f771.py`'s
+source: the constants the verdict is a function of, printed in full, and a digest of the six
+functions that decide.  It is not constant — it moves when the normaliser moves — and that is
+what the exemption's removal buys, which is this instrument's own stated main risk: an
+operator who WIDENS the rule and does not re-run the gate is caught by the control they
+widened.  WHAT IT COSTS IS ONE SENTENCE: the committed transcript stops being quotable for
+`was the gate green`.  The file that opened this ticket was stale precisely BECAUSE the
+quotable part was the verdict.
+
+THE OUTCOME GOES TO THE EXIT STATUS AND TO STDERR, which is where the merge gate has always
+read it and where README D4 already put this arm's other run-dependent state — how many
+transcripts moved, and which were graded NOISE.  A REFUSAL AND A CRASH GO THERE TOO, and for
+the same reason rather than for a new one: a traceback on stdout is a transcript whose text
+is a function of the run, which is the defect this section exists to have removed.
 
 ONE CLASS OF TRANSCRIPT IS GRADED AGAINST A PIN AND NOT AGAINST THIS TREE (mg-05c6).  A
 transcript whose subject is the WHOLE corpus has no per-branch fixed point: it moves when
@@ -62,56 +82,43 @@ import lib_f771 as L  # noqa: E402
 
 W = 92
 
+err = sys.stderr
+
 
 def rule(ch="-"):
     print(ch * W)
 
 
-def main():
-    t0 = time.time()
+def transcript():
+    """EVERYTHING THIS ARM WRITES TO STDOUT, and it is a function of `lib_f771.py` and of
+    nothing else — no tree, no clock, no verdict.  Written once and called from the happy
+    path, from the refusal and from the crash handler, because a transcript that is the
+    fixed point only when the run went well is not a fixed point."""
     print("=" * W)
-    print("mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with the tree?")
+    print("mg-f771  THE GATE'S OWN FIXED POINT — what is watched, and by what rule it is judged")
     print("=" * W)
     print()
-
-    if os.environ.get(L.FRESH_ENV) != "1":
-        print("REFUSED — %s is not set." % L.FRESH_ENV)
-        print()
-        print("  This arm reads the side effect of a gate run: `./build.sh` rewrites the")
-        print("  transcripts its suites own, and this arm asks whether the rewritten bytes")
-        print("  still say what the COMMITTED bytes say.  Without a gate run there is nothing")
-        print("  to compare and a green here would mean only 'nobody hand-edited these',")
-        print("  under a heading that claims more.  Run `./build.sh`, which sets the variable,")
-        print("  or set it by hand if you have just run the suites yourself.")
-        return 2
-
-    try:
-        L.require_git()
-        changed = L.changed_transcripts()
-    except L.Refused as exc:
-        print("REFUSED — %s" % exc)
-        return 2
 
     print("§1  THE WATCHED CLASS")
     rule()
     print("  every tracked file under code/ named out_*.txt, compared against HEAD.")
     print("  Nothing is regenerated by this arm; it only reads.  A transcript no suite")
-    print("  rewrites is never modified and therefore never appears below — which is how")
-    print("  mg-c824's out_a4_census.txt stays outside this control by construction.")
+    print("  rewrites is never modified and therefore never appears in the changed set —")
+    print("  which is how mg-c824's out_a4_census.txt stays outside this control by")
+    print("  construction rather than by exemption.")
     print()
-    print("  ONE FILE IS EXEMPT AND IT IS THIS ARM'S OWN TRANSCRIPT, not this directory:")
-    for rel in L.SELF_EXCLUDED:
-        print("      %s" % rel)
-    print("  It is written AFTER the measurement and its text depends on the verdict, so a")
-    print("  red run's transcript is committed alongside the refresh that makes the tree")
-    print("  green and the next run grades it DISAGREES — an innocent branch red for a")
-    print("  non-reason.  Measured over five runs; the oscillation does not damp.  Worlds")
-    print("  E1-E7 in g1 hold the exemption to one file.  out_g1_controls.txt IS watched.")
+    print("  NOTHING IS EXEMPT.  THE CLASS IS TOTAL, AND THIS ARM'S OWN TRANSCRIPT IS IN IT.")
+    print("  It was the one exclusion until mg-c15e, because its text named the disagreement")
+    print("  set and that set is emptied by the very commit that carries the file — so each")
+    print("  run's fix was the next run's disagreement, 16 of 31 committed versions RED and 7")
+    print("  commits of main existing for nothing else.  The exclusion is gone rather than")
+    print("  narrowed: §2 no longer records the outcome, so there is nothing left to oscillate")
+    print("  and no file that needs forgiving.  Worlds E1-E8 in g1 hold the class to that.")
     print()
-    print("  HOW MANY MOVED, AND WHICH ONES WERE GRADED NOISE, ARE ON STDERR AND NOT HERE.")
-    print("  That set is not repo state — whether a transcript moves depends on whether its")
-    print("  wall-clock timing rounded to the same tenth as last run — and putting it in a")
-    print("  tracked file made THIS ARM fail its own invariant on its second run.  README D4.")
+    print("  HOW MANY MOVED, WHICH WERE GRADED NOISE, AND WHAT DISAGREED ARE ON STDERR AND NOT")
+    print("  HERE.  That set is not a fixed point of this arm's own commit, and an earlier")
+    print("  draft that printed it made THIS ARM fail its own invariant on its second run.")
+    print("  The build log keeps stderr and no tracked file does.  README D4.")
     print()
     print("  AND %d TRANSCRIPT(S) ARE GRADED AGAINST A CORPUS PIN RATHER THAN AGAINST THIS"
           % len(L.CORPUS_SCOPED))
@@ -126,14 +133,63 @@ def main():
     print("  HOW FAR EACH HAS DRIFTED IS ON STDERR, for the reason the paragraph above gives:")
     print("  it moves with every landing and this file must not.  lib_f771.CORPUS_SCOPED.")
     print()
+    for line in L.rule_inventory(L.lib_source()):
+        print(line)
 
-    graded = []
+
+def report_disagreements(bad, graded):
+    """The disagreement set, on STDERR.  It is the half of this arm's answer that its own
+    commit destroys, and it is shown rather than merely counted for the reason it always was:
+    a control that asserts a disagreement without quoting one is not readable."""
+    verdicts = dict(graded)
+    err.write("mg-f771 g0: THE DISAGREEMENTS, SHOWN.  Lines are quoted AFTER normalisation, "
+              "so nothing here can smuggle a worktree path into a tracked file.  `-` is the "
+              "committed copy, `+` is this tree.\n")
+    for rel in bad:
+        err.write("mg-f771 g0:   %-9s %s\n" % (verdicts[rel], rel))
+        if verdicts[rel] == "STALE":
+            pin_c = L.corpus_pin(L.committed_text(rel))
+            pin_w = L.corpus_pin(L.worktree_text(rel))
+            err.write("mg-f771 g0:     a corpus-scoped transcript whose population drifted "
+                      "%d -> %d, past the declared bound of %d.  This branch did not cause "
+                      "the drift and the arbitrariness of who pays is the declared cost of "
+                      "the bound — but a pinned report nobody ever refreshes is the defect "
+                      "this whole control exists to find.\n"
+                      % (pin_c[1], pin_w[1], L.CORPUS_DRIFT_LIMIT))
+        rows, dropped = L.first_disagreement(L.committed_text(rel), L.worktree_text(rel))
+        for mark, text in rows:
+            if mark == "@":
+                err.write("mg-f771 g0:     %s\n" % text)
+            else:
+                err.write("mg-f771 g0:     %s %s\n" % (mark, text.strip()[:80]))
+        if dropped:
+            err.write("mg-f771 g0:     ... %d further hunk line(s) not shown\n" % dropped)
+    err.write("mg-f771 g0: THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already "
+              "in the worktree; ./build.sh wrote them.  This arm is not asking for a rerun.\n")
+
+
+def main():
+    t0 = time.time()
+    transcript()
+
+    if os.environ.get(L.FRESH_ENV) != "1":
+        err.write(
+            "mg-f771 g0: REFUSED — %s is not set.  This arm reads the side effect of a gate "
+            "run: `./build.sh` rewrites the transcripts its suites own, and this arm asks "
+            "whether the rewritten bytes still say what the COMMITTED bytes say.  Without a "
+            "gate run there is nothing to compare and a green here would mean only 'nobody "
+            "hand-edited these', under a heading that claims more.  Run `./build.sh`, which "
+            "sets the variable, or set it by hand if you have just run the suites "
+            "yourself.\n" % L.FRESH_ENV)
+        return 2
+
     try:
-        for rel in changed:
-            graded.append((rel, L.verdict_for(L.committed_text(rel),
-                                              L.worktree_text(rel), rel)))
+        L.require_git()
+        changed = L.changed_transcripts()
+        graded = [(rel, L.verdict_for(L.committed_text(rel), L.worktree_text(rel), rel))
+                  for rel in changed]
     except L.Refused as exc:
-        print("REFUSED — %s" % exc)
+        err.write("mg-f771 g0: REFUSED — %s\n" % exc)
         return 2
 
     bad = [r for r, v in graded if v in L.RED_VERDICTS]
@@ -141,7 +197,6 @@ def main():
     corpus = [r for r, v in graded if v == "CORPUS"]
 
     # The jitter channel.  The build log keeps it; no tracked file does.
-    err = sys.stderr
     err.write("mg-f771 g0: %d watched transcript(s) moved — %d red, %d NOISE, %d CORPUS\n"
               % (len(graded), len(bad), len(noise), len(corpus)))
     for rel, v in graded:
@@ -158,64 +213,32 @@ def main():
                   % (rel, pin_c[0], pin_w[0], pin_c[1], pin_w[1], L.CORPUS_DRIFT_LIMIT))
 
     if bad:
-        print("§2  THE DISAGREEMENTS, SHOWN")
-        rule()
-        print("  Lines quoted after normalisation, so that this transcript cannot itself")
-        print("  smuggle a worktree path into the corpus.")
-        print("  `-` is the committed copy, `+` is this tree.")
-        verdicts = dict(graded)
-        for rel in bad:
-            print()
-            print("  %-9s %s" % (verdicts[rel], rel))
-            if verdicts[rel] == "STALE":
-                pin_c = L.corpus_pin(L.committed_text(rel))
-                pin_w = L.corpus_pin(L.worktree_text(rel))
-                print("    a corpus-scoped transcript whose population drifted %d -> %d, past"
-                      % (pin_c[1], pin_w[1]))
-                print("    the declared bound of %d.  This branch did not cause the drift and"
-                      % L.CORPUS_DRIFT_LIMIT)
-                print("    the arbitrariness of who pays is the declared cost of the bound —")
-                print("    but a pinned report nobody ever refreshes is the defect this whole")
-                print("    control exists to find.  lib_f771.CORPUS_SCOPED states the price.")
-            rows, dropped = L.first_disagreement(
-                L.committed_text(rel), L.worktree_text(rel))
-            for mark, text in rows:
-                if mark == "@":
-                    print("    %s" % text)
-                else:
-                    print("    %s %s" % (mark, text.strip()[:80]))
-            if dropped:
-                print("    ... %d further hunk line(s) not shown" % dropped)
-        print()
-        print("  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the")
-        print("  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.")
-        print()
-        print("VERDICT: RED — %d committed transcript(s) disagree with this tree.  %.2fs"
-              % (len(bad), time.time() - t0))
+        report_disagreements(bad, graded)
+        err.write("mg-f771 g0: VERDICT: RED — %d committed transcript(s) disagree with this "
+                  "tree.  %.2fs\n" % (len(bad), time.time() - t0))
         return 1
 
-    print("§2  NO DISAGREEMENTS")
-    rule()
-    print("  Every watched transcript that moved during this gate run moved only in the")
-    print("  declared families that are not a function of THIS BRANCH's repo state: the two")
-    print("  normaliser families, or a corpus-scoped reading whose pin moved and whose drift")
-    print("  is inside the bound.  No committed transcript asserts anything this tree")
-    print("  contradicts that this branch is the author of.")
-    print()
-    print("VERDICT: GREEN — 0 disagreements.  %.2fs" % (time.time() - t0))
+    err.write("mg-f771 g0: VERDICT: GREEN — 0 disagreements.  Every watched transcript that "
+              "moved during this gate run moved only in the declared families that are not a "
+              "function of THIS BRANCH's repo state.  %.2fs\n" % (time.time() - t0))
     return 0
 
 
 if __name__ == "__main__":
-    # A crash must land IN THE TRANSCRIPT and not only on stderr, because stderr is this
-    # arm's jitter channel and is deliberately not tracked.  `could not tell` is exit 2.
+    # A crash goes to STDERR and the transcript is still written, which is the opposite of
+    # what this file did before mg-c15e and is the same rule applied to a case it had got
+    # wrong.  The old arrangement printed the traceback to stdout so it would land in the
+    # tracked file rather than only in the jitter channel — but the tracked file is now
+    # INSIDE the watched class, so a traceback in it is a committed transcript that
+    # disagrees with every tree that does not reproduce the crash.  `could not tell` is exit
+    # 2 and it is never a silent green: stderr is in the build log and the status is what
+    # the gate reads.
     try:
         sys.exit(main())
     except SystemExit:
         raise
     except BaseException:                                   # noqa: BLE001 - deliberate
         import traceback
-        print()
-        print("REFUSED — this arm crashed and therefore reached no verdict:")
-        traceback.print_exc(file=sys.stdout)
+        err.write("mg-f771 g0: REFUSED — this arm crashed and therefore reached no verdict:\n")
+        traceback.print_exc(file=err)
         sys.exit(2)

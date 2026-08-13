@@ -101,7 +101,7 @@ claiming more — a laundered green in the file written to find them. So `build.
 (exit 2) without it. `R2` in `g1` demonstrates the refusal rather than asserting it.
 
 **The watched class** is every tracked file under `code/` whose basename is `out_*.txt`. Not
-a hardcoded list, so a new gate suite is covered the day it lands. Three consequences worth
+a hardcoded list, so a new gate suite is covered the day it lands. Four consequences worth
 stating:
 
 * `code/libweak_audit_c4f5/out_a4_census.txt` (mg-c824) — which must **not** be regenerated,
@@ -112,6 +112,10 @@ stating:
   running does not trip a control about transcripts.
 * A gate suite that wrote a tracked file *not* named `out_*.txt` would be invisible here.
   Named rather than discovered: no such suite exists today, and that is a fact about today.
+* **Nothing is exempt.** `g0`'s own transcript was the single exclusion until mg-c15e and is
+  now in the class on the same terms as everything else; `lib_f771.SELF_EXCLUDED` is deleted
+  rather than narrowed. Every row `g1` grades as *out* is out because it is **not a
+  transcript**. §9.
 
 ## 4. This remedy is an artifact of the same kind as the defect
 
@@ -126,18 +130,16 @@ transcripts. Enumerated before committing, and both hazards are real:
   therefore writes to `.out_<arm>.txt.partial` and `mv`s it into place, with the temp files
   removed from a `trap` armed before the loop. Measured, not anticipated: it is why that line
   is a `mv`.
-* **D2 — `out_g0_fixed_point.txt` is exempt from its own watched class, and the exemption is
-  forced rather than chosen.** `g0` writes its transcript *after* taking its measurement, and
-  the text depends on the verdict. So a red run's transcript is committed alongside the very
-  refresh that makes the tree green, and the next run reads that committed copy against a
-  green one and grades it DISAGREES — **an innocent branch red for a non-reason, which is this
-  ticket's own thesis shipped inside its remedy** (mg-479c's E9). Measured over five runs, and
-  it does not damp: each run's fix is the next run's disagreement. The exemption was preferred
-  to the oscillation, and it is held to **one file** by worlds `E1`–`E7`, not left as a
-  directory-shaped hole. **`out_g1_controls.txt` is NOT exempt**, and the difference is the
-  whole justification: its content depends on the planted worlds — on code, not on tree state
-  — so committing the output of the run that changed it is stable, and it converges the way
-  every other transcript does.
+* **D2 — `out_g0_fixed_point.txt` WAS exempt from its own watched class, and the exemption is
+  gone as of mg-c15e. There is no exemption now.** What it said: `g0` writes its transcript
+  *after* taking its measurement and the text named the disagreement set, so a red run's
+  transcript is committed alongside the very refresh that makes the tree green, and the next
+  run reads that committed copy against a green one and grades it DISAGREES — **an innocent
+  branch red for a non-reason, which is this ticket's own thesis shipped inside its remedy**
+  (mg-479c's E9). Measured over five runs here and re-measured over the record by mg-585e:
+  **31 committed versions, 16 of them RED, 24 shape flips, and 7 commits of `main` whose
+  entire diff is that one file.** See §9 for how it was closed, what that buys and the one
+  sentence it costs.
 * **D4 — THE REMEDY FAILED ITS OWN INVARIANT ON RUN 2, AND IT IS KEPT HERE RATHER THAN
   QUIETLY FIXED.** After the refresh commit the gate was green, so the fixed point looked
   reached. It was not: run 2 came back **RED, 1 disagreement, and the disagreeing file was
@@ -149,10 +151,18 @@ transcripts. Enumerated before committing, and both hazards are real:
   disagreeing. **The instrument caught its author**, which is the only reason it is written
   down; the failure would have been invisible had the convergence been asserted from one green
   run instead of measured over three. The repair: operational detail goes to **stderr**, which
-  the build log keeps and no tracked file does, and only the DISAGREES list — which *is* repo
-  state — reaches stdout. `run_all.sh` therefore drops the `2>&1` every other suite writes,
-  and both arms catch their own exceptions and print the traceback to stdout so a crash is
-  still in the transcript.
+  the build log keeps and no tracked file does. `run_all.sh` therefore drops the `2>&1` every
+  other suite writes.
+
+  **D4's own rule was half right, and mg-c15e supplied the other half.** The repair stopped at
+  "only the DISAGREES list, *which is repo state*, reaches stdout" — and that test is the
+  wrong one. The DISAGREES list *is* a function of repo state; it is a function of the tree at
+  **run** time, and the file is committed into the tree **after** the repair. The right test
+  is **does the repair move it**, the two tests disagree on exactly one item, and that item was
+  the whole of §2. So §2 is now the rule inventory and the outcome is on stderr beside the
+  changed set — D4's own remedy, applied to the half D4 exempted instead. `g0`'s crash and
+  refusal paths went to stderr with it: a traceback on stdout was justified by the transcript
+  being outside the watched class, and it is not outside it any more.
 * **D3 — `g0` cannot check that a transcript is TRUE**, only that the committed bytes and the
   fresh bytes make the same assertions. An instrument that is wrong is wrong identically in
   both and this arm is silent. The gate is on AGREEMENT, not on truth — the same split
@@ -397,7 +407,7 @@ census, and this branch necessarily carries it, because it is the branch that ch
 producer — which is `C9`'s rule applied to its own author. What it shows is the frequency. The
 window between submit and rebase was **under a minute**, and it was enough.
 
-### What this does not do
+### What this does not do (mg-05c6)
 
 It does not touch `out_gate.txt`, `out_ratchet.txt` or `out_control.txt`, whose moves are
 measured above as mostly their own — section 5's STATE.md cost is untouched and `W8` still
@@ -405,3 +415,140 @@ holds it. It does not make the tree stop going dirty. And it does not repair sec
 finding, though it changes its arithmetic: the erosion of `HEAD:out_a4_sweep.txt` becomes *less*
 regular, not more, which is the opposite of what section 7 predicted this ticket's remedy would
 do to it.
+
+## 9. mg-c15e — the exemption is deleted, and the watched class is total
+
+`lib_f771.SELF_EXCLUDED` is gone. `out_g0_fixed_point.txt` is watched like every other
+transcript in the corpus, and `is_watched` now agrees with `is_transcript` on every path.
+
+### What D2 was measuring, and why it was the symptom
+
+D2's reason — *the text depends on the verdict* — is true and is not the operative property.
+mg-585e stated the sharper one and it does not mention verdicts:
+
+> `g0` runs at tree `T` and its output is committed into `T'`. The repair that produces `T'`
+> is **commit the regenerated transcripts**. So `D(T') = {}` **by definition of the repair**.
+
+A transcript cannot record a quantity its own commit sets to zero. That makes it decidable
+which *other* content is safe: content survives if it is **invariant under the repair**, and
+the repair rewrites transcript bytes and nothing else. The membership of the watched class
+survives. The normaliser's rules survive. The disagreement set is exactly what does not — and
+D4's rule, *is it repo state*, is the wrong test, because the repo state the DISAGREES list is
+a function of is the tree **before** the repair. The two tests disagree on one item and that
+item was the whole of §2.
+
+### The oscillation is measured, not described
+
+Over the record, pinned at `AS_OF 0cb0fa4` by mg-585e's `v1_oscillation.py`: **31 committed
+versions of `out_g0_fixed_point.txt`, 16 of them RED, 24 shape flips, and 7 commits of `main`
+whose entire diff is that one file** — five of them titled *refresh: THE FIXED-POINT
+TRANSCRIPT SAYS GREEN AND IT IS THE ONLY FILE THIS RUN COMMITS*. A lower bound rather than a
+total: a red run repaired before its author committed leaves no trace, so this is how often it
+reached `main`. The mechanism is visible in the byte sizes — 15 green versions collapse onto
+**three** distinct sizes and the 16 red ones onto **fifteen**, because green is a fixed point
+of the run and red is never a fixed point of the commit that carries it, that commit *being*
+the repair.
+
+### What replaced §2
+
+The **rule inventory**: the constants the verdict is a function of, printed in full, and a
+`sha256` over the six functions that decide (`normalise`, `lines_equivalent`,
+`texts_equivalent`, `verdict_for`, `is_transcript`, `is_watched`). `g0`'s stdout is now a pure
+function of `lib_f771.py`'s source — no tree, no clock, no outcome. The outcome is in the
+**exit status**, which is the only channel it has ever reached the merge gate through, and on
+**stderr**, beside the moved/NOISE/CORPUS census D4 already put there.
+
+It is **two instruments and not one**, and the pair is load-bearing: the inventory shows the
+rules spelled as *constants*, so a widening lands in a diff a reader can read; the digest
+covers the rules spelled as *control flow*, because N3 is a prefix comparison and no constant
+can show it.
+
+### What the deletion buys, and it is this instrument's own stated main risk
+
+`lib_f771`'s docstring: *a wider normaliser is an unfalsifiable escape hatch — an operator
+facing a real disagreement can silence it by widening the rule, and nothing in the machinery
+tells that edit from a correct one.* With `g0`'s transcript inside the watched class, an
+operator who widens the rule and does not re-run the gate is caught **by the control they
+widened**: the inventory moves, the committed copy does not, and `g0` grades it `DISAGREES`.
+
+### What it costs, one sentence
+
+**The committed transcript stops being quotable for *was the gate green*.** That is the whole
+cost and it is not hidden. mg-f771's own first paragraph is the reply: the file that opened
+this ticket was stale precisely *because* the quotable part was the verdict — *the part
+written to be quotable was the wrong half*. One reader is affected and was repaired in the
+same commit: `code/verdict_staleness_30bd/owners_937c.py` quoted the `VERDICT:` line, and now
+reads the watched-class rule instead, which is the half of that transcript its own sentence
+was actually about.
+
+### Section 4 applied to this remedy
+
+The remedy is a **replacement transcript**, and a replacement's characteristic failure is
+being *constant* — a file that never moves also never oscillates, and buys nothing. So both
+directions are planted in `g1_controls.py` §2b, fed the real `lib_f771.rule_inventory`:
+
+* `I1` — **N2 widened to eat integer seconds**, the exact escape hatch named above. Must move.
+* `I2` — **`ABS_TO_REPO` widened**, and this world found a defect *in the candidate this
+  ticket landed*. mg-585e's draft read constants by **line prefix**, which reads only the
+  first physical line of a bracketed assignment and reported this one as `re.compile(` — so a
+  widening of the regex moved neither the printed rule nor the digest (`ABS_TO_REPO` is inside
+  no deciding function). Measured against mg-585e's own reader rather than asserted: it comes
+  back **unmoved**. The inventory is therefore parsed with `ast` and printed **in full and
+  never truncated**, because a constant cut at a column is a constant whose tail can be
+  widened invisibly, and the tail is where a regex keeps its alternatives.
+* `I3` — **N3 relaxed to forgive any two lines.** Control flow; only the digest catches it.
+* `I4` — **the exemption reintroduced inside `is_watched`.** The specific regression this
+  ticket exists to make loud, and it is why both membership functions are in the digest.
+* `I5` — **prose moved and nothing else.** The wrong-direction world: a transcript that moved
+  whenever `lib_f771.py` moved would put this file back in every branch's diff, which is the
+  tax being removed. Must **not** move.
+* `I6`, `I7` — a deciding function **renamed** and a named constant **deleted**: both must
+  `REFUSE`, not answer. `I6` is mg-585e's `D1`, which fired on that directory's own first
+  draft, where the matcher was a `def <name>` prefix and `def verdict_for_RENAMED(` starts
+  with it. Matching the parsed name closes it by construction; the world stays because a
+  construction that is not run is a claim.
+* `I8` — the inventory is a **fixed point of the normaliser itself**: no checkout path and no
+  decimal second in it, so it has nothing for N1/N2 to forgive.
+
+### And the claim itself is measured on the real arm
+
+`g1` §2c builds **three miniature repositories** — two differing in one line of one watched
+transcript, one with a defect planted in it — copies the real `g0` and `lib_f771` into each,
+and runs them as subprocesses
+(ported from mg-585e; copied rather than imported, because `lib_f771.ROOT` is derived from the
+module's own location, and re-implementing the decision would make every finding a statement
+about the re-implementation — mg-d2c2):
+
+* `F1` — the two trees really do reach **different verdicts**, exit `0` and exit `1`. Without
+  this, `F2` is two identically empty answers.
+* `F2` — **and the two transcripts are byte-identical**, with no scrubbing on either side,
+  because there is no clock in either.
+* `F3` — the red run's disagreement is **on stderr**, naming the file. Nothing was lost by
+  taking it off stdout.
+* `F4` — the green run's stderr says `VERDICT: GREEN`. The wrong direction.
+* `F5` — **a crash leaves the transcript at its fixed point too.** A planted `ValueError`
+  inside `changed_transcripts`: exit 2, traceback on stderr, and stdout **byte-identical to
+  the two runs that reached a verdict**. This is the hazard mg-c15e introduced and it is
+  planted rather than promised — the traceback used to go to *stdout* on purpose, so it would
+  land in the tracked file, and that was correct only while the file was outside the class.
+* `F6` — **no sandbox path reached any of the three transcripts**, or this directory would be
+  committing mg-f771's own defect while describing it.
+
+### What was considered and rejected
+
+A **census** of the watched class — how many transcripts exist, in how many directories — is
+also invariant under the repair, and it is the worse trade. Priced by mg-585e over
+`137bc4ce..0cb0fa4` (129 commits touching `code/`): a census would have moved on **31** of
+them against the **30** that touched this transcript, with an **overlap of 4**. Two different
+quantities whose near-equality is arithmetic and not identity — it moves about as often, on a
+nearly disjoint set, and relocates the churn into mg-05c6's conflict class instead of leaving
+it as one extra commit in one worktree. The rule inventory moves on **neither**.
+
+### The convergence this branch owes
+
+`out_g0_fixed_point.txt` is now watched, so the branch that changes `lib_f771.py` must carry
+its refreshed transcript — `C9`'s rule (*an instrument's owner refreshes the instrument's own
+transcript*) arriving for this file for the first time. That is a **once per instrument
+change** cost and not a per-branch one: a branch that does not touch `lib_f771.py` leaves this
+file byte-identical, which is exactly what the 7 commits counted above were paying for and no
+longer have to.
