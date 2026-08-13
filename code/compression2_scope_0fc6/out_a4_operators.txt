@@ -1,0 +1,67 @@
+
+==============================================================================
+a4.0  CROSS-CHECK against mg-8d66's independent library
+==============================================================================
+  [GREEN] L(P) agrees with lib8d66 at every labelled poset n <= 5   4469 posets, 0 disagreements
+
+==============================================================================
+a4.1  (8)  one BK edge -> ONE word, changed by ONE adjacent AC <-> CA
+==============================================================================
+  [GREEN] n=4: exactly ONE word changes   1800 BK edges
+  [GREEN] n=4: and it changes by ONE adjacent AC<->CA   1800 edges
+  [GREEN] n=4: and that node is the LCA of the swapped pair   1800 edges
+  [GREEN] n=6: exactly ONE word changes   2520 BK edges
+  [GREEN] n=6: and it changes by ONE adjacent AC<->CA   2520 edges
+  [GREEN] n=6: and that node is the LCA of the swapped pair   2520 edges
+  [GREEN] n=8: exactly ONE word changes   193200 BK edges
+  [GREEN] n=8: and it changes by ONE adjacent AC<->CA   193200 edges
+  [GREEN] n=8: and that node is the LCA of the swapped pair   193200 edges
+
+       [finding] P4 CONFIRMED.  (8) is exact.  It is the note's sharpest claim and it
+                 survives contact with the definitions.
+
+==============================================================================
+a4.2  IS THE SCALE PARTITION AN ADMISSIBLE k-FOLIATION?  (it is not)
+==============================================================================
+  [GREEN] the same POSITION carries edges of several SCALES — the partition is not by position   positions with >1 scale: [0, 1, 2, 3, 4, 5, 6]
+  [GREEN] the same SCALE occurs at several POSITIONS   scales spread over positions: {2: [0, 1, 2, 3, 4, 5, 6], 1: [0, 1, 2, 3, 4, 5, 6], 0: [0, 1, 2, 3, 4, 5, 6]}
+  [GREEN] some scale fibers have NON-POWER-OF-2 size, so they are not cubes   14016 of 94656 fibers; sizes seen: [2, 6, 70]
+
+       [finding] P9 CONFIRMED.  mg-8d66's ceiling is about partitions of the n-1 word
+                 POSITIONS into non-adjacent classes, whose fibers are cubes by
+                 construction.  This is a partition of EDGES by the LCA of the swapped
+                 ELEMENTS, and its fibers are monotone-path lattices (the note's own
+                 'median graph').  mg-8d66 DOES NOT apply to it and must not be quoted
+                 at it.
+
+==============================================================================
+a4.3a  compression.tex's C_o, C_e are TRANSVERSE: a convex combination is NOT a projection
+==============================================================================
+  [GREEN] (Pi_o + Pi_e)/2 is NOT idempotent at every poset where the two differ   40 of 40 posets
+       [answer to the ticket's question 2] CORRECT AS SUSPECTED, for compression.tex's
+       family.  A convex combination of transverse conditional expectations is a
+       self-adjoint operator with spectrum in [0,1], not a compression: there is no
+       sigma-algebra it is the conditional expectation of.  That is FINE if what is
+       wanted is the quadratic form — and note that the programme ALREADY uses exactly
+       this object: mg-8d66's kI - sum_i Pi_i is k(I - the equal-weight convex
+       combination), so 'combine compressions convexly' is not a new degree of freedom
+       on that family, it is the one already priced there.
+
+==============================================================================
+a4.3b  compression2's scales are NESTED — a FILTRATION, and Var decomposes exactly
+==============================================================================
+  [GREEN] Pi_a Pi_b = Pi_min(a,b) — the family is a FILTRATION, not a transverse pair   3 levels at n=4
+  [GREEN] the finest level is the IDENTITY — the encoding is lossless as an operator too
+  [GREEN] Var(f) = sum over SCALES of the martingale increments, EXACTLY   5 random f, max |Var - sum| = 0
+  [GREEN] a weighted combination of the SCALE INCREMENTS commutes with every Pi_k   it is a MULTIPLIER, diagonal in the scale decomposition
+  [GREEN] it is still not idempotent unless every weight is 0 or 1 (as expected)
+
+       [answer to the ticket's question 2, second half] ON compression2's FAMILY THE
+       CONVEX-COMBINATION STEP IS SOUND AND CANONICAL.  The increments are mutually
+       ORTHOGONAL projections, so sum_l lambda_l (Pi_{l+1} - Pi_l) is exactly a
+       Littlewood-Paley multiplier: it commutes with the filtration, its spectrum is
+       {lambda_l}, and Var splits across scales with no cross terms.  This is a REAL
+       structural difference from compression.tex's transverse pair, and it is the one
+       place Daniel's stated design is better than the objects the closed arc used.
+
+RESULT: GREEN — all checks passed

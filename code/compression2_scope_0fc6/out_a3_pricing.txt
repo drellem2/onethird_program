@@ -1,0 +1,95 @@
+
+==============================================================================
+a3.1  max { H(mu) : mu in M_n } — the sharp form of the note's theorem
+==============================================================================
+   n   H_max(bits)   log2 n!    H_max/log2 n!   note bound (6)   deficit log2 n! - H_max
+   3      2.34410    2.58496       0.90682        4.46906      0.24086    (max constraint violation 6.10e-12)
+   4      4.12425    4.58496       0.89952        7.51910      0.46072    (max constraint violation 6.93e-12)
+   5      6.16707    6.90689       0.89289       10.91176      0.73982    (max constraint violation 6.80e-12)
+   6      8.42385    9.49185       0.88748       14.57745      1.06800    (max constraint violation 6.07e-12)
+   7     10.85781   12.29921       0.88281       18.47019      1.44140    (max constraint violation 6.57e-12)
+  [GREEN] n=3: the solved measure is FEASIBLE in M_n   violation 6.10e-12
+  [GREEN] n=3: the note's bound (6) HOLDS at the maximiser   2.34410 <= 4.46906
+  [GREEN] n=4: the solved measure is FEASIBLE in M_n   violation 6.93e-12
+  [GREEN] n=4: the note's bound (6) HOLDS at the maximiser   4.12425 <= 7.51910
+  [GREEN] n=5: the solved measure is FEASIBLE in M_n   violation 6.80e-12
+  [GREEN] n=5: the note's bound (6) HOLDS at the maximiser   6.16707 <= 10.91176
+  [GREEN] n=6: the solved measure is FEASIBLE in M_n   violation 6.07e-12
+  [GREEN] n=6: the note's bound (6) HOLDS at the maximiser   8.42385 <= 14.57745
+  [GREEN] n=7: the solved measure is FEASIBLE in M_n   violation 6.57e-12
+  [GREEN] n=7: the note's bound (6) HOLDS at the maximiser   10.85781 <= 18.47019
+
+       [scope] the maximiser is the exponential family mu ∝ exp(−Σ θ_ij 1{flip_ij}),
+               θ >= 0 — the max-entropy measure subject to the note's own hypothesis.
+               It is NOT a linear-extension measure (a2's oracle rejects it), which is
+               the same finding from the other side: M_n is bigger than the posets in it.
+
+       n=3: H_max is  52.5% of the note's ceiling, and  90.7% of log2 n!
+       n=4: H_max is  54.9% of the note's ceiling, and  90.0% of log2 n!
+       n=5: H_max is  56.5% of the note's ceiling, and  89.3% of log2 n!
+       n=6: H_max is  57.8% of the note's ceiling, and  88.7% of log2 n!
+       n=7: H_max is  58.8% of the note's ceiling, and  88.3% of log2 n!
+
+==============================================================================
+a3.1b  the explicit witness (2/3)Unif + (1/3)delta_L*, for comparison
+==============================================================================
+  n=3: H =  2.28104  (0.88243 of log2 n!)
+  n=4: H =  3.83366  (0.83614 of log2 n!)
+  n=5: H =  5.48199  (0.79370 of log2 n!)
+  n=6: H =  7.23700  (0.76244 of log2 n!)
+  n=7: H =  9.11608  (0.74119 of log2 n!)
+
+       [scope] the explicit mixture is BELOW the optimum (0.76 of log2 n! at n=6 against
+               0.887): the max-entropy measure in M_n is NOT a two-atom object, it is a
+               full-support tilt.  Recorded because the obvious witness is the one a
+               reader would reach for and it under-states the set by ~0.13 of log2 n!.
+
+==============================================================================
+a3.2  DIRECTION.  The note proves inversions => entropy.  The slot wants the reverse.
+==============================================================================
+  [GREEN] n=4: the two-atom law sits in M_n   max flip 1/3
+       n=  4:  H = 0.91830 bits (CONSTANT in n)   E[inv_e] = 2   6E[inv]/(n^2-1) = 4/5 = 0.800000   [n/(n+1) = 0.800000]
+  [GREEN] n=4: it attains STATE.md:21's supremum n/(n+1) EXACTLY   4/5
+  [GREEN] n=6: the two-atom law sits in M_n   max flip 1/3
+       n=  6:  H = 0.91830 bits (CONSTANT in n)   E[inv_e] = 5   6E[inv]/(n^2-1) = 6/7 = 0.857143   [n/(n+1) = 0.857143]
+  [GREEN] n=6: it attains STATE.md:21's supremum n/(n+1) EXACTLY   6/7
+  [GREEN] n=8: the two-atom law sits in M_n   max flip 1/3
+       n=  8:  H = 0.91830 bits (CONSTANT in n)   E[inv_e] = 28/3   6E[inv]/(n^2-1) = 8/9 = 0.888889   [n/(n+1) = 0.888889]
+  [GREEN] n=8: it attains STATE.md:21's supremum n/(n+1) EXACTLY   8/9
+  [GREEN] n=12: the two-atom law sits in M_n   max flip 1/3
+       n= 12:  H = 0.91830 bits (CONSTANT in n)   E[inv_e] = 22   6E[inv]/(n^2-1) = 12/13 = 0.923077   [n/(n+1) = 0.923077]
+  [GREEN] n=12: it attains STATE.md:21's supremum n/(n+1) EXACTLY   12/13
+  [GREEN] n=20: the two-atom law sits in M_n   max flip 1/3
+       n= 20:  H = 0.91830 bits (CONSTANT in n)   E[inv_e] = 190/3   6E[inv]/(n^2-1) = 20/21 = 0.952381   [n/(n+1) = 0.952381]
+  [GREEN] n=20: it attains STATE.md:21's supremum n/(n+1) EXACTLY   20/21
+
+       [finding] an ENTROPY bound cannot deliver an INVERSION bound.  This measure has
+                 0.9183 bits of entropy at EVERY n — 8 orders of magnitude below the
+                 note's ceiling at n = 10^6 — and simultaneously the LARGEST E[inv_e]
+                 anything in M_n can have.  Low entropy and maximal inversions coexist,
+                 so `log e(P) -> E[inv_e]` (STATE.md:158's untried slot) does NOT follow
+                 from a bound of the note's shape, in the direction that slot wants.
+
+==============================================================================
+a3.3  max { E[inv_e] : mu in M_n } is EXACT and one line, and it is the corpus's number
+==============================================================================
+  [GREEN] max E[inv_e] over M_n = C(n,2)/3, i.e. eps_spec = n/(n+1), n = 3..59   attained by the two-atom law; the <= is one line from the hypothesis
+
+       [scope] this REPRODUCES `Op-Form` Claim 6.1 / mg-6bc2 Claim 3.1 as recorded at
+               STATE.md:21, by a route that shares no code with them.  The agreement is
+               the point: the note's hypothesis IS that information set, and the value
+               of the wall's currency on it is already known and already at EQUALITY.
+
+==============================================================================
+a3.4  what the wall needs, against what the note supplies
+==============================================================================
+  n =      100:  L1b needs E[inv_e] <=               33.3   pair bias supplies <=             1650.0   factor  49.50
+  n =     1000:  L1b needs E[inv_e] <=             3333.3   pair bias supplies <=           166500.0   factor  49.95
+  n =    10000:  L1b needs E[inv_e] <=           333333.3   pair bias supplies <=         16665000.0   factor  50.00
+  n =  1000000:  L1b needs E[inv_e] <=       3333333333.3   pair bias supplies <=     166666500000.0   factor  50.00
+  [GREEN] the ~50x gap of STATE.md:21 reproduces from the two numbers   50.0x in the n -> infinity limit
+
+       [finding] the note spends the LEFT column and returns an entropy bound.  It moves
+                 nothing in the RIGHT column, which is the one the wall reads.
+
+RESULT: GREEN — all checks passed
