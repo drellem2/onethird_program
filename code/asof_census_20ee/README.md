@@ -143,6 +143,31 @@ and the sentence that the census has **no evidence either way** about them. A re
 crash into a silence would be worse than the crash. The default subject reports **`0 of 6`** —
 which is precisely why this was never seen.
 
+## 1b. And a **94% over-count** in the same instrument, found by pointing it at itself
+
+Condition 3 applied to *this* change — `consumers.py code/asof_census_20ee` — reported fifteen
+instruments as no-arg consumers of `census.py`. They are not. `census.py` is a **unique** basename,
+so it was searched for by basename, and the test was a plain substring: it matched `s1_census.py`,
+`d5_census.py`, `a4_census.py` and every other numbered step in the estate whose name **ends** in
+it. Measured: **76 of 81 occurrences outside its own directory were substrings of a longer
+filename**, 5 were real.
+
+**This is the exact inverse of the repair it sits beside.** *A basename is not a name* fixes a
+basename **shared** by many files, by searching the full path. This is a basename that is a
+**suffix** of other filenames — which that rule cannot see, because `census.py` really is unique
+among tracked paths. Two opposite failure modes, one substring test, and only the first had ever
+been met.
+
+The boundary is on the neighbouring **character**, deliberately not a word regex: `/` must stay
+allowed before the needle, or every full-path (shared-basename) needle would stop matching and the
+loud over-count would become the silent **under-count** section D warns about. `C8` is that
+negative half. After the fix, section A for this directory is **empty**, and
+`out_consumers.txt` for the default subject is **byte-identical** — the fix removes 76 false
+positives elsewhere and moves no verdict where the instrument was validated.
+
+**Both defects in condition 3's instrument were found by *using* it on a subject it had not seen** —
+never by reading it. It had one subject and passed.
+
 ## 2. Condition 0: **is a pin the remedy at all?**
 
 `pinnable.py`. Conditions 1–3 all assume the question is settled; this asks it, by classifying a

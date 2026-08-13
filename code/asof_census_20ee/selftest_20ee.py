@@ -245,6 +245,27 @@ check("C6 a REAL git error is still fatal",
       "which reads exactly like a subject no instrument consumes. Only rc 1 "
       "is no-match; rc 2 and above stays fatal.")
 
+check("C7 a needle that is a SUFFIX of a longer filename",
+      kinds('    python3 s1_census.py 7  > out_s1_census.txt', "census.py"),
+      [],
+      "MEASURED, and found by running condition 3 against the census's OWN "
+      "directory: `census.py` is a UNIQUE basename, so it was searched for "
+      "by basename, and a substring test matched every numbered step in the "
+      "estate whose name ENDS in it. 76 of 81 occurrences were this. THE "
+      "INVERSE OF `A BASENAME IS NOT A NAME`, which fixes a basename SHARED "
+      "by many files -- that rule cannot see this one, because census.py "
+      "really is unique among tracked paths.")
+
+check("C8 a FULL-PATH needle still matches after a slash",
+      kinds('    subprocess.run(["sh", "code/a/w3_scope.py"])',
+            "code/a/w3_scope.py"),
+      ["EXEC-NO-ARG"],
+      "THE NEGATIVE HALF OF C7, AND IT CARRIES THE WEIGHT. `/` must be "
+      "ALLOWED as a preceding character or a full-path needle would never "
+      "match and EVERY SHARED BASENAME would go silent -- converting a loud "
+      "over-count into the exact under-count section D warns about. A "
+      "word-boundary regex would have done that.")
+
 print()
 print("CONTROLS ON pinnable.py — mg-20ee's CONDITION 0 (mg-4020)")
 print("-" * 78)

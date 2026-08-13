@@ -183,6 +183,47 @@ def instrument_of(path):
     return "/".join(parts[:2]) if len(parts) > 2 else os.path.dirname(path)
 
 
+NAME_CHAR = re.compile(r"[A-Za-z0-9_.\-]")
+
+
+def at_name_boundary(line, needle):
+    """True when `needle` occurs in `line` AS A NAME, not as a substring.
+
+    mg-4020, MEASURED, and found by running condition 3 against THIS
+    directory rather than by reading the code.  `census.py` is a UNIQUE
+    basename, so the census searched for it by basename -- and a plain
+    substring test matched `s1_census.py`, `d5_census.py`, `a4_census.py`
+    and every other numbered step in the estate whose name ENDS in it.  Of
+    81 occurrences outside its own directory, 76 WERE SUBSTRINGS OF A
+    LONGER FILENAME and 5 were real.  A 94% over-count, in section A, whose
+    whole job is to name the instruments a pin will disturb.
+
+    THIS IS THE INVERSE OF THE REPAIR IT SITS BESIDE.  `A BASENAME IS NOT A
+    NAME` fixed a basename SHARED by many files by searching the full path.
+    This is a basename that is a SUFFIX of other filenames, which that rule
+    does not see and cannot: `census.py` really is unique among tracked
+    paths.  Two opposite failure modes, one substring test, and only the
+    first had been met before.
+
+    THE BOUNDARY IS ON THE CHARACTER BEFORE AND AFTER, NOT A WORD REGEX.
+    `/` must be ALLOWED before, or a full-path needle would never match and
+    every shared basename would go silent -- which would convert a loud
+    over-count into exactly the under-count section D warns about.  So the
+    rule is: the neighbouring character must not be one a FILENAME can
+    contain.  `.` is disallowed before (it is how `s1_census.py` fails) and
+    ALLOWED after, so a trailing sentence period does not hide a mention.
+    """
+    for m in re.finditer(re.escape(needle), line):
+        before = line[m.start() - 1] if m.start() else ""
+        after = line[m.end()] if m.end() < len(line) else ""
+        if before and NAME_CHAR.match(before):
+            continue
+        if after and re.match(r"[A-Za-z0-9_\-]", after):
+            continue
+        return True
+    return False
+
+
 def classify_text(text, needle):
     """(kind, line-number, line) for every occurrence of `needle` in `text`.
 
@@ -198,7 +239,7 @@ def classify_text(text, needle):
     lines = text.splitlines()
     hits = []
     for i, ln in enumerate(lines):
-        if needle not in ln:
+        if not at_name_boundary(ln, needle):
             continue
         window = "\n".join(lines[i:i + 1 + LOOKAHEAD])
         if not any(tok in window for tok in EXEC_TOKENS):
