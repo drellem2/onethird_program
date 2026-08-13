@@ -1,0 +1,221 @@
+==============================================================================
+mg-2959 -- IS EVERY FIGURE IN THIS DIRECTORY'S PROSE BACKED BY ONE OF ITS
+==============================================================================
+          OWN TRANSCRIPTS?
+==============================================================================
+
+  the question    : `report.py` regenerates every figure in the TRANSCRIPTS
+                    on every run, so none of them can go stale.  NOTHING
+                    regenerates the figures in the PROSE.  This arm is the
+                    thing that reads them.
+  the rule        : mg-7522's, imported and not re-spelled --
+                    `lib7522.figures` and `lib7522.transcript_figures`.
+  the verdict     : mg-7522's own words: a USE is BACKED when every figure
+                    on its line appears in one of this tree's committed
+                    transcripts, and UNBACKED otherwise.
+  produced by     : python3 -B prose_30bd.py, which is what run_all.sh runs
+                    LAST, so it grades the transcripts this run just wrote.
+
+
+==============================================================================
+P1  THE BACKING CORPUS, AND THE ONE FILE IT EXCLUDES BY NAME
+==============================================================================
+
+      backs   out_selftest_30bd.txt
+      backs   out_verdict_staleness.txt
+      EXCLUDED  out_prose_30bd.txt   -- this arm's own transcript
+
+  THIS ARM PRINTS THE UNBACKED FIGURES IT FINDS, so its own transcript is a
+  committed transcript of this directory that prints them.  Left in the
+  corpus, every finding would be BACKED on the next run BY THE REPORT OF ITS
+  BEING UNBACKED, and the arm would go green with the prose still wrong.
+  That is `sweep.py`'s `--only` defect one surface out: a repair operation
+  destroying the thing it repairs.  P4c plants the world that proves the
+  exclusion does work rather than merely reads as though it should.
+
+      126 distinct figure(s) backed by the corpus above
+
+
+==============================================================================
+P2  THE CENSUS
+==============================================================================
+
+     54  line(s) carrying at least one figure
+     48  BACKED                 every figure printed by a transcript above
+      0  UNBACKED/own-voice     outside a fence -- GRADED, and the finding
+      6  UNBACKED/quoted        inside a ``` fence -- REPORTED, NOT GRADED
+
+  A FENCE IS A QUOTATION.  This README fences the ALL-CAPS derivation table
+  §2's token set came from, the gate hunk §4 quotes from a sandbox run, and
+  §7's own figure table.  This arm cannot tell a stale quotation from a
+  faithful one, so it counts them and does not grade them -- the polarity
+  `report.py` gives a run that was killed or refused, for the same reason:
+  UNMEASURED IS NOT CLEAN.  §5 says what it costs.
+
+  BACKED, in full -- a check that reports only failures cannot be told from
+  one that checks nothing:
+
+      file           line  figures            the line
+      ----------------------------------------------------------------------
+      README.md        17  44,32              mg-20ee's 44 candidates**, so it sits outsid
+      README.md        29  19                 | `selftest_30bd.py` / `out_selftest_30bd.tx
+      README.md        32  9                  | `prose_30bd.py` / `out_prose_30bd.txt` | m
+      README.md        45  3                  | 3 | `VERDICT-STALE/token` | a verdict **to
+      README.md        46  3                  | 3 | `VERDICT-STALE/number` | the token mul
+      README.md        47  4                  | 4 | `NON-VERDICT` | differs, but in no ver
+      README.md        52  530,531            mask wide enough to eat `530 markdown file(s
+      README.md        71  1051               1051 tracked transcripts at `f2117f1`, ranke
+      README.md        86  9                  **Both blocks above are quotations of a run 
+      README.md        97  530                * **over-inclusion.** A corpus-size count sh
+      README.md       104  3                  ## 3  The two boundary worlds, and the one t
+      README.md       106  19                 `selftest_30bd.py` plants 19 worlds. **Five 
+      README.md       120  32                 one of mg-20ee's 32 pinnings would be re-rep
+      README.md       122  4                  ## 4  The sandbox had to be faithful, and th
+      README.md       151  5                  outputs are **byte-identical** (both exit 1,
+      README.md       158  22,187,900         * **Killed at the limit.** 22 of 187 suites 
+      README.md       172  7                  sweep was retaken; §7's table is the retaken
+      README.md       178  40,50              `a1_bothways.py` **refused (exit 2) under ho
+      README.md       184  187                **deleted the 187-suite record it was meant 
+      README.md       193  187                its full 187 suites without disturbing any o
+      README.md       195  187                one-directory correction: taking the last on
+      README.md       198  5                  ## 5  The runner-blind pass, and why it exis
+      README.md       212  6                  ## 6  What this method cannot see
+      README.md       214  6                  Printed in full in `out_verdict_staleness.tx
+      README.md       230  7                  ## 7  What this does to the reported numbers
+      README.md       233  54                 54  presumed stale     mg-20ee's original, s   [fence]
+      README.md       234  32                 32  already-stale      the census ground tru   [fence]
+      README.md       235  150                150  verdict-stale      this measurement, ov   [fence]
+      README.md       236  137,103,34,13      = 137 reachable by a runner (103 token, 34 n   [fence]
+      README.md       237  665                bypassing one.  Out of 665 transcripts a run   [fence]
+      README.md       238  314,29,80,105      314 IDENTICAL, 29 BENIGN, 80 NON-VERDICT and   [fence]
+      README.md       241  150,32             **150 does not supersede 32 and it does not 
+      README.md       244  44                 **The two are not nested and must not be add
+      README.md       248  32                 nobody had counted it. Anything quoting 32 a
+      README.md       254  4                  one this directory stands behind. **A differ
+      README.md       266  9                  measurement**, and this directory's whole su
+      README.md       269  8                  ## 8  What this ticket does not do, and who 
+      README.md       272  5,9                open and named rather than left to be found 
+      README.md       274  4,5                1. **Every entry in §4 and §5 needs an owner
+      README.md       282  105,22,900         3. **105 transcripts are UNGRADED and 22 sui
+      README.md       296  9,9                5. **§2's derivation is a quotation of a run
+      README.md       302  9                  ## 9  The prose arm — mg-2959
+      README.md       306  4,4,4              §4's account of the first sweep, §4's suite 
+      README.md       326  7                  still reported as backed, so §7's table is p
+      README.md       338  4,17,187,22        invisible — **measured on the real instance*
+      README.md       339  17                 did **not** fire, because the report prints 
+      run_all.sh        3  19                 #   selftest_30bd  19 planted worlds boundin
+      run_all.sh       17  6,900              #     python3 -B sweep.py --workers 6 --time
+
+
+==============================================================================
+P3  THE FINDINGS
+==============================================================================
+
+      none.  Every figure this README states in its own voice is printed
+      by one of this directory's own transcripts.
+
+  REPORTED AND NOT GRADED -- the quotations:
+
+      README.md        74  3057,225,355,613,1 PASS 3057/225   TOTAL 630/355   FAIL 613/162
+      README.md        75  72,493,246,477,470 FIRES 530/72    VERDICT 493/246 REPRODUCES 4
+      README.md        76  414,119,390,109,36 RED 414/119     FAILS 390/109   FALSE 369/16
+      README.md        79  33                 MISS 33   MISSED 19   FAILED 13   FALSE 8   
+      README.md       139  9455               - twin  …  9455 bytes
+      README.md       140  9482               + twin  …  9482 bytes
+
+
+==============================================================================
+P4  THE CONTROLS -- THIS ARM IS SHOWN TO FIRE, ON THE BYTES THAT SHIPPED
+==============================================================================
+
+  P4a  THE THREE DEFECTS THAT WERE IN THIS DIRECTORY, VERBATIM.  These are
+       not invented lines: each is the exact text that was committed, and
+       the repair is what makes them absent from P3 rather than an
+       assertion that they never happened.
+
+      README.md §4   FIRES    on 156
+      README.md §4   FIRES    on 186
+      run_all.sh     FIRES    on 192
+
+  P4b  DISCRIMINATION.  A figure no transcript can print must come back
+       UNBACKED, or the census is reporting the absence of a check.
+
+      a figure of 176075, which no transcript here prints        ok
+      a figure of 168156, which one of them does                 ok
+
+  P4c  THE SELF-CONFIRMING WORLD.  With this arm's own transcript in the
+       backing corpus, a finding is backed by the report of itself.  Planted
+       rather than asserted: the row THIS ARM WOULD HAVE PRINTED is built in
+       the same format P3 prints, put into the corpus, and the line re-graded.
+
+      the row this arm would print:  run_all.sh        7  192                # re-runs 192 suites in isolated clones, tak
+      the line, against the shipped corpus         UNBACKED on 192
+      the same line, corpus + that row             BACKED  <- the finding erases itself
+      so the exclusion in P1 is load-bearing       ok
+
+       AND THE MULTI-FIGURE ROWS DO NOT CLOSE THE LOOP, WHICH IS AN ACCIDENT
+       OF FORMATTING AND NOT A SECOND DEFENCE.  P3 joins several missing
+       figures with commas, and mg-7522's number rule reads a comma as a
+       thousands separator, so `186,157,156` comes back as one figure:
+           161, 186157156
+       Nothing chose that.  Change the separator and the loop closes for
+       every row, so the exclusion above is the defence and this is not.
+
+  P4d  THE FENCE RULE, ON A PLANTED DOCUMENT rather than on this README,
+       because a boundary measured only on the file it was written for is
+       measured on one point.
+
+      lines inside the fence: expected [2, 3, 4], got [2, 3, 4]        ok
+      an UNCLOSED fence swallows the rest: [2, 3, 4]              ok
+      -- which is the FAIL-QUIET direction and it is named rather than
+      repaired: an unclosed fence moves lines from GRADED to REPORTED, so
+      a malformed README makes this arm quieter and never louder.  §5.3.
+
+
+==============================================================================
+P5  WHAT THIS ARM CANNOT SEE
+==============================================================================
+
+  1  A QUOTATION IS NOT GRADED.  6 unbacked figure(s) sit inside a fence
+     and are listed in P3 rather than counted against the verdict.  §2's
+     ALL-CAPS derivation table is the big one: the frequency counts that
+     chose the token set were produced by a run nobody kept, so THE ONLY
+     JUSTIFICATION FOR THE INSTRUMENT IS ITSELF IN THE CLASS THIS DIRECTORY
+     COUNTS.  Making it backed means re-taking that census and keeping it;
+     that is remainder and it is filed, not absorbed here.
+
+  2  A FIGURE THAT IS RIGHT IN THE SET AND WRONG IN ITS ROLE IS INVISIBLE,
+     AND THE FOURTH DEFECT IN THIS DIRECTORY WAS ONE.  The rule is set
+     MEMBERSHIP: a number printed ANYWHERE in a transcript of this directory
+     backs the same number written ANYWHERE in its prose.  §4 said
+
+         * **Killed at the limit.** 17 of 187 suites hit the 900 s cap. A proce
+
+     where the record says 22 timed out, and THIS ARM DOES NOT FIRE ON IT:
+         figures 17, 187, 900, none of them missing -> BACKED
+
+     The 17 is backed, and by what is worth printing rather than paraphrasing
+     -- a FOREIGN finding quoted inside this directory's own report:
+         out_verdict_staleness.txt:308  - FINDINGS: 0, population: the 17 survivors at or above 
+
+     It was found by reading the record, not by this check.  Role needs a
+     per-figure anchor, an anchor is a hand-typed quotation of the prose,
+     and it rots silently the moment anybody rewords the sentence -- which is
+     why this arm is a membership test and says so instead of pretending.
+
+  3  AN UNCLOSED FENCE MAKES THIS ARM QUIETER, NEVER LOUDER.  P4d measures
+     it.  Nothing here validates the README's markdown.
+
+  4  THE `.py` DOCSTRINGS ARE OUTSIDE THE POPULATION, BY CHOICE AND NOT BY
+     OVERSIGHT.  A docstring is read beside the code it describes, so a
+     figure in one is usually backed by the CODE (`truncated at column 78`
+     beside `text[:78]`), and a rule demanding a transcript for it would
+     report the code as unbacked by itself.  The README is read INSTEAD of
+     the record, so its figures can only be backed by a transcript.  The
+     cost is real: a stale figure in a docstring is invisible here.
+
+==============================================================================
+mg-2959 prose arm: every figure this README states in its own voice is
+printed by one of this directory's own transcripts.  6 quoted figure(s)
+reported and NOT graded -- see P5.1, which is a hole and not a pass.
+==============================================================================

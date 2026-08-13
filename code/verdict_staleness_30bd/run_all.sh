@@ -1,11 +1,14 @@
 #!/bin/sh
-# mg-30bd — the two things in this directory that ARE a fixed point.  Standard library only.
+# mg-30bd — the three things in this directory that ARE a fixed point.  Standard library only.
 #   selftest_30bd  19 planted worlds bounding the classifier: five that must come out BENIGN
 #   report         the count, read off the frozen sweep record.  Pure function of that file.
+#   prose_30bd     mg-2959: every FIGURE in this directory's PROSE, against its own
+#                  transcripts.  RUNS LAST, so it grades the transcripts this run just
+#                  wrote and not the ones that happened to be on disk beforehand.
 #
 # WHAT IS *NOT* HERE IS `sweep.py`, AND THAT IS THE WHOLE SHAPE OF THIS DIRECTORY.  The sweep
-# re-runs 192 suites in isolated clones, takes hours, executes instrument code across the
-# whole corpus, and ITS ANSWER MOVES AS THE CORPUS MOVES — that motion is the property being
+# re-runs every candidate suite in isolated clones, takes hours, executes instrument code
+# across the whole corpus, and ITS ANSWER MOVES AS THE CORPUS MOVES — that motion is the property being
 # measured, so it cannot also be an invariant.  Putting it in a runner would make this
 # directory a member of the population it counts, on its first re-run.  `out_sweep_30bd.txt`
 # and `sweep_30bd.jsonl` are ONE DATED RUN, exactly as mg-20ee's `out_ground_truth.txt` is,
@@ -22,6 +25,12 @@
 # have the standing to declare — mg-30bd is tagged `declares-remainder` and this is one of
 # the things it declares.
 #
+# THE PROSE ARM EXITS 1 ON A FINDING AND `report.py` DOES NOT, AND THE DIFFERENCE IS WHOSE
+# DEFECT IT IS.  `report.py` reports a population of findings ABOUT THE CORPUS, none of which
+# this directory may repair; the prose arm reports figures IN THIS DIRECTORY'S OWN README,
+# every one of which it can repair in the same commit.  A gate on somebody else's work is
+# mg-e35b's red-on-improvement shape; a gate on your own is just a gate.
+#
 # NO PIPELINE ON THE STATUS PATH (mg-c2b3): `python3 x.py | tee out.txt` returns TEE's exit
 # status, so a red arm would be invisible.  Each arm redirects and its status is read
 # directly.  The write is via `.partial` + `mv` for mg-f771's reason: a plain redirect
@@ -31,7 +40,7 @@ d=$(cd "$(dirname "$0")" && pwd)
 TMPS=""
 trap 'rm -f $TMPS' EXIT INT TERM HUP
 STATUS=0
-for arm in selftest_30bd:out_selftest_30bd report:out_verdict_staleness
+for arm in selftest_30bd:out_selftest_30bd report:out_verdict_staleness prose_30bd:out_prose_30bd
 do
     script=${arm%%:*}
     out=${arm##*:}

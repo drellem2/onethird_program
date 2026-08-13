@@ -29,7 +29,8 @@ finding about the corpus and needs an owner per instance, not a batch repair.
 | `selftest_30bd.py` / `out_selftest_30bd.txt` | 19 planted worlds. **Five must come out BENIGN** |
 | `sweep.py` / `sweep_30bd.jsonl` / `out_sweep_30bd.txt` | the measurement. Hours; **not** a fixed point, **not** in `run_all.sh` |
 | `report.py` / `out_verdict_staleness.txt` | the count. A pure function of the frozen record |
-| `run_all.sh` | the selftest and the report. **Not** in `build.sh` — see that file for why |
+| `prose_30bd.py` / `out_prose_30bd.txt` | mg-2959: **the same question asked of this directory's own prose.** See §9 |
+| `run_all.sh` | the three fixed points. **Not** in `build.sh` — see that file for why |
 
 ## 1  The classification, in order
 
@@ -73,12 +74,19 @@ writes graded outcomes in capitals (`*** MISSED ***`, `VERDICT: RED`, `TOTAL BAD
 PASS 3057/225   TOTAL 630/355   FAIL 613/162   GREEN 596/117   BAD 556/294
 FIRES 530/72    VERDICT 493/246 REPRODUCES 492/35  CAUGHT 477/43  REFUTED 470/112
 RED 414/119     FAILS 390/109   FALSE 369/163   DIFFERS 308/40   HELD 3488/39
+
+… plus the `*** … ***` marker census:
+MISS 33   MISSED 19   FAILED 13   FALSE 8   EXTENT WIDER 5   GREEN 5
 ```
 
-plus the `*** … ***` marker census (`MISS` 33, `MISSED` 19, `FAILED` 13, `FALSE` 8,
-`EXTENT WIDER` 5, `GREEN` 5). What was then **dropped by hand** is the half that is only ever
-prose emphasis in these transcripts' headers: `THE`, `AND`, `NOT`, `THIS`, `EVERY`, `STATE`,
-`README`, `HEAD`, `BOTH`, `SAME`, …
+What was then **dropped by hand** is the half that is only ever prose emphasis in these
+transcripts' headers: `THE`, `AND`, `NOT`, `THIS`, `EVERY`, `STATE`, `README`, `HEAD`,
+`BOTH`, `SAME`, …
+
+**Both blocks above are quotations of a run nobody kept**, and §9's arm reports them as
+such rather than grading them. That is not tidiness: §2 is the instrument, this derivation
+is the whole justification for it, and a justification nothing regenerates is in exactly the
+class this directory counts. It is remainder, and it is filed rather than absorbed.
 
 **A transcript is verdict-stale iff the sorted multiset of its verdict lines differs**
 between the committed copy and the regeneration. *Sorted*, so a verdict that only moved down
@@ -147,7 +155,7 @@ outputs are **byte-identical** (both exit 1, both `E2 TOTAL BAD: 5`).
 **A run that did not finish is not evidence.** Two ways that happens, and both were measured
 rather than anticipated:
 
-* **Killed at the limit.** 17 of 187 suites hit the 900 s cap. A process cut off mid-write
+* **Killed at the limit.** 22 of 187 suites hit the 900 s cap. A process cut off mid-write
   leaves a transcript that may be half written, and comparing *that* against the committed
   copy is **the harness accusing the corpus of its own truncation** — mg-479c's defect
   exactly, where a redirect handed mg-f771 a half-written file and f771 correctly graded
@@ -158,8 +166,13 @@ rather than anticipated:
   this class**: in this corpus that means a control *fired*, which is a completed run with a
   finding, and treating it as unusable would discard most of the corpus.
 
-Together these took the first reported figure **186 → 157 → 156**, all downward, before
-anything was committed.
+Together these took the **first sweep's** figure down three times, all downward, before
+anything was committed. **That sweep is not the one this directory ships, and this paragraph
+used to say otherwise.** The `--only` bug two paragraphs below destroyed that record; the
+sweep was retaken; §7's table is the retaken one and every figure in it is a function of
+`sweep_30bd.jsonl`. The superseded chain is deliberately not restated here, because a
+number written in a sentence beside a number written in a transcript is a second copy and
+this is what happened to the first one — see §9.
 
 **And one of the two showed up in the motivating instance itself.** `6cb9`'s
 `a1_bothways.py` **refused (exit 2) under host load 40–50** in the full sweep, so the one
@@ -174,10 +187,10 @@ own recurring shape, and it turned up inside the instrument that counts it. `--f
 the only way to truncate, and the comment on that line says what it cost.
 
 **And the repaired mechanism was then used twice, on the second sweep, which is the only
-evidence that it works.** `code/control_gate_724a` raised `OSError(28, 'No space left on
-device')` mid-sweep — the host filled up under other agents — and one `--only` re-run
-appended a clean row that the report picked up in place of the error, taking the record from
-186 suites to 187 without disturbing the other 186. `report.py` also takes the **first**
+evidence that it works.** `code/control_gate_724a` raised `OSError` — `No space left on
+device`, the host filled up under other agents — mid-sweep, and one `--only` re-run
+appended a clean row that the report picked up in place of the error, taking the record to
+its full 187 suites without disturbing any other row. `report.py` also takes the **first**
 header rather than the last, because `--fresh` truncates and every later header belongs to a
 one-directory correction: taking the last one printed *"187 suites run, of 1 in the
 population"* — an instrument reporting its own denominator from a correction to itself.
@@ -235,10 +248,28 @@ are the transcripts that carry a foreign `path:NNN`; this population is the tran
 nobody had counted it. Anything quoting 32 as "the staleness in the corpus" is quoting one of
 two classes.
 
+### The other misreading, and it already happened (mg-2959)
+
+The figure above is the one `report.py` computes from `sweep_30bd.jsonl`, and it is the only
+one this directory stands behind. **A different figure was in circulation for a day**: §4 of
+this file used to narrate the *first* sweep's arithmetic in the present tense, the sweep the
+`--only` bug destroyed and which was retaken. A ticket was filed off that sentence carrying a
+headline count, a population size and a full six-way bucket breakdown — **none of which
+appears in any committed artifact of this repository**, and all of which look measured
+because they are internally consistent with each other.
+
+Two things follow, and the second is why mg-2959 exists at all:
+
+* **The transcripts could not have done this and the prose could**, because `report.py`
+  regenerates every figure it prints on every run and nothing regenerated §4.
+* **A figure in a sentence beside a figure in a transcript is a second copy of the same
+  measurement**, and this directory's whole subject is what second copies do. §9 is the arm
+  that reads them.
+
 ## 8  What this ticket does not do, and who has to
 
-`mg-30bd` is tagged **`declares-remainder`**. It measures; it repairs nothing. Four things
-are left open and named rather than left to be found:
+`mg-30bd` is tagged **`declares-remainder`**. It measures; it repairs nothing. These are left
+open and named rather than left to be found — item 5 is mg-2959's, added by the arm in §9:
 
 1. **Every entry in §4 and §5 needs an owner, per instance.** A batch repair is exactly what
    mg-20ee's method forbids — *"if a verdict moves, that is a finding; do not absorb it into a
@@ -261,3 +292,51 @@ are left open and named rather than left to be found:
    other directory is measured by. The next sweep will include it. That is the right
    outcome and it is worth stating out loud: this instrument's own transcripts are subject
    to exactly the defect it counts.
+
+5. **§2's derivation is a quotation of a run nobody kept.** mg-2959 added §9 and §9 reports
+   it rather than grading it. The ALL-CAPS frequency table and the marker census are the
+   whole justification for the token set — which §2 itself calls *the instrument* — and no
+   script in this directory regenerates either. Re-taking that census at `f2117f1` and
+   keeping it as a transcript is the repair; it is named here and not done.
+
+## 9  The prose arm — mg-2959
+
+`report.py` regenerates every figure in the **transcripts** on every run, so none of them can
+go stale. Nothing regenerated the figures in the **prose**, and **four** of them were wrong:
+§4's account of the first sweep, §4's suite arithmetic, `run_all.sh`'s own header, and §4's
+timeout count. **This arm catches three of the four**, and which one it misses is the
+interesting part — see the declared hole below. The three are quoted verbatim inside
+`prose_30bd.py` as controls, so the repair is what makes them absent from the findings list
+rather than a claim that they never happened.
+
+**The rule is borrowed and not re-spelled.** `lib7522.figures()` is this estate's rule for
+*is this number a figure, a measurement that must be backed by a transcript?*, and
+`lib7522.transcript_figures()` for *what does a transcript back?*. Both are imported, for the
+same reason `lib30bd` imports `lib_f771.verdict_for` rather than re-implementing "benign".
+mg-7522's verdict is taken word for word — *a USE is BACKED when every figure on its line
+appears in one of this tree's committed transcripts, and UNBACKED otherwise* — and its
+restriction to lines carrying a strength marker is **not** taken, because none of the three
+defects stands on one.
+
+**Two polarities, and the second is `report.py`'s own.** A figure outside a fenced block is
+in the README's own voice and is **graded**; a finding exits 1. A figure inside a fence is a
+**quotation**, this arm cannot tell a stale quotation from a faithful one, and it is counted
+and listed and **not graded** — the polarity `report.py` gives a run that was killed or
+refused, and for the same reason: unmeasured is not clean. A *backed* figure inside a fence is
+still reported as backed, so §7's table is positively checked rather than merely
+un-condemned.
+
+**And the arm excludes its own transcript from its own backing corpus, by name.** It prints
+the figures it finds unbacked; left in the corpus, each finding would be backed on the next
+run by the report of its being unbacked, and the arm would go green with the prose still
+wrong. That is `sweep.py`'s `--only` defect one surface out, and P4c plants it rather than
+asserting it.
+
+**Its declared hole, and it is the more interesting half.** The rule is *set membership*: a
+number printed anywhere in a transcript of this directory backs the same number written
+anywhere in the prose. So a figure that is right in the set and wrong in its role is
+invisible — **measured on the real instance**, §4's `17 of 187 suites` (the record says 22)
+did **not** fire, because the report prints a 17 somewhere else. That one was found by reading
+the record. Role needs a per-figure anchor quoted from the prose, and such an anchor rots
+silently the moment anybody rewords the sentence, which is why this arm is a membership test
+and says so instead.
