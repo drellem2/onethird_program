@@ -344,6 +344,17 @@ W3 = os.path.join(REPO, "code", "species_remainder_f8fa", "w3_scope.py")
 S1 = os.path.join(REPO, "code", "species_repair_a4ef", "s1_extent.py")
 S2 = os.path.join(REPO, "code", "species_repair_a4ef", "s2_seam.py")
 
+# mg-6e4f, on mg-20ee.  D2's METHOD IS AN open() TRACER AND A CHECKER THAT
+# READS A DECLARED COMMIT OPENS NOTHING.  `w3_scope.py` is now AS-OF PINNED, so
+# it reads code/species_7d75 through `git cat-file` instead of `open()`.
+# MEASURED before this line existed: D2's row went `opens 18 file(s), all under
+# code/species_7d75/` -> `opens 0 file(s), all under -`, and `does NOT open: -`
+# -> all eighteen names.  The question D2 asks is about the TREE, so it must
+# ask it OF the tree; the override is w3_scope's own, published for this case.
+# `opened_by` runs the script IN-PROCESS via runpy, so the variable is set
+# around the call rather than passed in an env dict.
+os.environ["W3_SCOPE_AT"] = "WORKTREE"
+
 cd_files, cd_code = opened_by(CD, [CD], [os.path.dirname(CD)])
 w3_files, w3_code = opened_by(W3, [W3], [os.path.dirname(W3)])
 s2_files, s2_code = opened_by(S2, [S2], [os.path.dirname(S2)])

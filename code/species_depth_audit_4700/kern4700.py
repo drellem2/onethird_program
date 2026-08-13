@@ -84,6 +84,18 @@ def sh(args, cwd=None, env=None):
     """(returncode, stdout, stderr).  Never raises on a non-zero exit: the
     exit code is the measurement here, not an error."""
     e = dict(os.environ, PYTHONDONTWRITEBYTECODE="1")
+    # mg-6e4f, on mg-20ee.  A HARNESS THAT PLANTS IN THE WORKTREE MUST RUN
+    # THE CHECKER AGAINST THE WORKTREE.  `w3_scope.py` is now AS-OF PINNED --
+    # its corpus default is read out of git at a declared commit -- so a probe
+    # that writes into code/species_7d75 and then runs it is asking a
+    # checker about a tree the plant is not in.  MEASURED before this line
+    # existed, by running this instrument against the pre-pin and pinned
+    # checker and diffing: 65 lines of q1_depth's output moved.
+    #
+    # The override is w3_scope's own, published for exactly this case.  Every
+    # checker THIS harness spawns reads the live tree, because that is the
+    # premise of the whole instrument.
+    e["W3_SCOPE_AT"] = "WORKTREE"
     if env:
         e.update(env)
     p = subprocess.run(args, cwd=cwd or REPO, capture_output=True, text=True,

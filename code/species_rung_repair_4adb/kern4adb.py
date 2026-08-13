@@ -78,8 +78,21 @@ def hdr(title):
 
 def sh(args, cwd=None):
     """(returncode, stdout+stderr)."""
+    # mg-6e4f, on mg-20ee.  A HARNESS THAT PLANTS IN THE WORKTREE MUST RUN
+    # THE CHECKER AGAINST THE WORKTREE.  `w3_scope.py` is now AS-OF PINNED --
+    # its corpus default is read out of git at a declared commit -- so a probe
+    # that writes into the worktree and then runs it is asking a
+    # checker about a tree the plant is not in.  MEASURED before this line
+    # existed, by running this instrument against the pre-pin and pinned
+    # checker and diffing: 12 rows went `ok` -> `*** FINDING ***`, P3a `1` -> `0`, P3b
+    # `True` -> `False`, and 52 lines of v2_layer2's output moved.
+    #
+    # The override is w3_scope's own, published for exactly this case.  Every
+    # checker THIS harness spawns reads the live tree, because that is the
+    # premise of the whole instrument.
+    env = dict(os.environ, W3_SCOPE_AT="WORKTREE")
     p = subprocess.run(args, cwd=cwd, stdout=subprocess.PIPE,
-                       stderr=subprocess.STDOUT)
+                       stderr=subprocess.STDOUT, env=env)
     return p.returncode, p.stdout.decode("utf-8", "replace")
 
 

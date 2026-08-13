@@ -152,6 +152,18 @@ def run_checker(rel, args=()):
     """Run one checker where it lives, in the real worktree.  (exit, output)."""
     path = os.path.join(REPO, rel)
     env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1")
+    # mg-6e4f, on mg-20ee.  A HARNESS THAT PLANTS IN THE WORKTREE MUST RUN
+    # THE CHECKER AGAINST THE WORKTREE.  `w3_scope.py` is now AS-OF PINNED --
+    # its corpus default is read out of git at a declared commit -- so a probe
+    # that writes into code/species_7d75 and then runs it is asking a
+    # checker about a tree the plant is not in.  MEASURED before this line
+    # existed, by running this instrument against the pre-pin and pinned
+    # checker and diffing: 10 lines of p1_depth's output moved.
+    #
+    # The override is w3_scope's own, published for exactly this case.  Every
+    # checker THIS harness spawns reads the live tree, because that is the
+    # premise of the whole instrument.
+    env["W3_SCOPE_AT"] = "WORKTREE"
     p = subprocess.run([sys.executable, "-B", os.path.basename(path)]
                        + list(args),
                        cwd=os.path.dirname(path), capture_output=True,
