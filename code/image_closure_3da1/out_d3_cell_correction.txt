@@ -1,0 +1,74 @@
+
+==============================================================================
+d3.1  the population restriction is DERIVED, and checked against the full population
+==============================================================================
+   n | all posets | chain subposets | image points IN the cell | cell set inside chain set
+  ---+------------+-----------------+--------------------------+--------------------------
+   3 |         19 |               7 |                        2 | True
+   4 |        219 |              40 |                        3 | True
+   5 |       4231 |             357 |                        4 | True
+  [GREEN] every poset whose image lies in the cell is a subrelation of the identity chain
+       Checked exhaustively against the FULL labelled population at n = 3,4,5, where both
+       routes are affordable.  The restriction is what makes n = 6 reachable (2^15 candidates
+       instead of 3^15) and it is exact, not a sample: a comparable pair the other way puts a
+       coordinate at 0, whose flip is 1, and the cell allows at most 1/3.
+
+==============================================================================
+d3.2  the ceiling on the cell — C(n,2)/3, attained by the two-atom law
+==============================================================================
+   n | C(n,2)/3 | E[inv_e] at (2/3)delta_id + (1/3)delta_rev | in the cell
+  ---+----------+--------------------------------------------+------------
+   3 | 1        | 1                                          | True
+   4 | 2        | 2                                          | True
+   5 | 10/3     | 10/3                                       | True
+   6 | 5        | 5                                          | True
+  [GREEN] the cell ceiling is C(n,2)/3 and the two-atom law attains it, at n = 3..6
+       Every coordinate's flip is capped at 1/3 by the cell and the two-atom law sits at exactly
+       1/3 on all C(n,2) of them, so the bound is ATTAINED and not merely valid.  This is the
+       point mg-6bc2 Claim 3.1 / mg-0fc6 a3.3 carry for all n; it is rebuilt here so the ratio
+       below is this instrument's own quotient rather than two instruments' numbers divided.
+
+==============================================================================
+d3.3  THE IMAGE INSIDE THE CELL — mg-c776 c2.4's table, independently reproduced
+==============================================================================
+   n | ceiling on K | best image point in K | ratio  | m  | d = m/C(n,2) | e(P)
+  ---+--------------+-----------------------+--------+----+--------------+------
+   3 | 1            | 2/3                   | 2/3    |  2 | 2/3          | 3
+   4 | 2            | 2/3                   | 1/3    |  2 | 1/3          | 3
+   5 | 10/3         | 2/3                   | 1/5    |  2 | 1/5          | 3
+   6 | 5            | 4/3                   | 4/15   |  4 | 4/15         | 9
+  [GREEN] the ratios are 2/3, 1/3, 1/5, 4/15 and the maxima 2/3, 2/3, 2/3, 4/3 — term for term
+       mg-c776 c2.4's table, reproduced from an independent poset enumerator, an independent
+       linear-extension routine and an independent marginal.  THE IMAGE CEILING IS STRICTLY
+       BELOW THE BODY'S at every n here, and at n = 5 it is a FIFTH of it.
+  [GREEN] AND THE RATIO IS EXACTLY d, the incomparability density — an identity, not a fit
+       The maximiser sits at flip exactly 1/3 on each of its m incomparable pairs and at 0 on
+       the rest, so its E[inv_e] is m/3 and the quotient with C(n,2)/3 is m/C(n,2) = d.  Both
+       sides are exact rationals and they agree as rationals, at every n measured.
+  [GREEN] the maximum is m/3 exactly, so the whole cell reading is carried by ONE number, m
+       That is what makes the tightening a REDUCTION rather than an improvement: it converts
+       row 8's question into 'how large can m be for a frozen poset', which is residual (R).
+       F23 (mg-6ff4) is the same statement from the boundary side -- every member of the
+       boundary class has every incomparable pair at flip exactly 1/3, so eps_spec = d*n/(n+1)
+       EXACTLY, the supply bound attained with zero slack.
+
+==============================================================================
+d3.4  THE TWO READINGS, SIDE BY SIDE — and which one the work-item title carries
+==============================================================================
+   at n = 5:
+
+   reading                                          | body ceiling | image ceiling | ratio
+  --------------------------------------------------+--------------+---------------+-------
+   A  global, hypothesis (1) read on the POSET      | 10           | 10            | 1
+   B  inside the cell, read on the MEASURE          | 10/3         | 2/3           | 1/5
+  [GREEN] reading A gives ratio 1 and reading B gives ratio 1/5 — BOTH are correct
+       Reading A is the work item's title and it is true: the image reaches the body's ceiling
+       exactly, because the reversal vertex IS an image point.  Reading B is mg-c776 c2.4 and
+       it is also true.  `CANNOT TIGHTEN ANYTHING` is reading A carrying reading B's absence,
+       and the fix is one clause: no inequality separates the image, AND restricting to it
+       inside the cell buys exactly the factor d.
+       WHAT IS ACTUALLY CLOSED is the shape mg-c776's ticket ranked first -- a CUT, hence any
+       LP/SDP/lift-and-project route.  That closure is exact and d1 generalises it to every
+       realizability restriction there will ever be.  What is NOT closed is d, and d is (R).
+
+RESULT: GREEN — all checks passed

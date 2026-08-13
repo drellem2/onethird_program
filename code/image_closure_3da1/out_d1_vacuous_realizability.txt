@@ -1,0 +1,61 @@
+
+==============================================================================
+d1.1  vert(M_n) is inside the image — mg-c776 c2.1, re-measured on independent code
+==============================================================================
+   n | vertices of M_n | |R_n| | vert subset R_n | every vertex is r-FIXED
+  ---+-----------------+-------+-----------------+------------------------
+   3 |               6 |    19 | True            | True
+   4 |              24 |   219 | True            | True
+   5 |             120 |  4231 | True            | True
+  [GREEN] every vertex of M_n is an image point, at n = 3,4,5
+       |R_n| = 19, 219, 4231 reproduces mg-c776 c1's count from a different marginal algorithm;
+       the containment is what gives conv(R_n) = M_n, since a set holding every vertex of a
+       polytope has that polytope as its hull
+
+==============================================================================
+d1.2  THE GENERALISATION — four DIFFERENT realizability restrictions, same obstruction
+==============================================================================
+   restriction                                              | distinct points | holds every vertex
+  ----------------------------------------------------------+-----------------+-------------------
+   (a) pi(Unif(L(P)))            — mg-c776's R_n            |             219 | True
+   (b) pi(mu_P), mu_P ~ 1/(1+inv) — a different canonical mu |             219 | True
+   (c) supp(mu) inside some L(P) — the widest reading        |      all of M_n | True
+   (d) U-id: coords multiples of 1/e(P)                      |    contains R_n | True
+  [GREEN] all four restrictions contain every one of the 24 vertices, so all four have hull M_n
+       (a) and (b) are DIFFERENT sets — 390 of 414 points are in one and not the other — and the
+       obstruction is identical, which is the content of T-3da1: it is not about which
+       canonical measure you pick.
+       (c) is the finding that the widest reading is VACUOUS OUTRIGHT: L(antichain) = S_n, so
+       'supp(mu) inside some L(P)' admits all 24 permutations and is no restriction at all.
+       (d) the arithmetic survivor holds at every vertex too, because a total order has
+       e(P) = 1 and every rational is a multiple of 1/1.
+
+==============================================================================
+d1.3  the one line — a point mass is a measure, and its marginal vector IS a vertex
+==============================================================================
+  [GREEN] pi(delta_sigma) = delta_sigma at all 6 + 24 + 120 point masses
+       This is the whole proof of T-3da1 and it is why the obstruction cannot be engineered
+       around: the vertices are not merely IN the realizable set, they are the realizable set's
+       least interesting members.  Any future proposal of the form 'restrict M_n to the pi that
+       are realizable in sense X' inherits this the moment sense X admits a point mass.
+
+==============================================================================
+d1.4  THE CONTROL — a restriction that DOES tighten, and what distinguishes it
+==============================================================================
+   n | vertices of M_n | surviving the cell | the survivor
+  ---+-----------------+--------------------+--------------
+   3 |               6 |                  1 | (0, 1, 2)
+   4 |              24 |                  1 | (0, 1, 2, 3)
+   5 |             120 |                  1 | (0, 1, 2, 3, 4)
+  [GREEN] hypothesis (1) read on the MEASURE excludes n! - 1 of the n! vertices
+       THIS IS THE DIVIDING LINE, and it is the reason d1.2 is a finding rather than a
+       tautology about every set anyone might write down.  A restriction tightens a linear
+       ceiling exactly when it excludes vertices; realizability excludes none, and hypothesis
+       (1) on the measure excludes all but one.
+       AND IT IS ALSO WHY mg-c776 c2.3 IS NOT A COUNTEREXAMPLE TO THIS: c2.3 reads hypothesis
+       (1) on the POSET -- delta(P) for P = P(pi) -- where a total order has no incomparable
+       pair and its delta is a maximum over the EMPTY set, so all n! vertices survive.  The two
+       readings of the same hypothesis differ by n! - 1 vertices, and d3 measures what the
+       difference is worth.
+
+RESULT: GREEN — all checks passed
