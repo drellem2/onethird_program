@@ -28,6 +28,7 @@ mg-03cf  docs/FACTS.md asked its own question
   F22   No 3-element antichain ⟹ the weak-majority order `e` EXIST PASS
   F23   How dense a `δ = 1/3` poset can be — a NUMBER for residual PASS
   F24   Convex combinations of compressions: the COMPRESSIONS neve PASS
+  F25   No boundary poset below `n = 6` has a non-trivial marginal PASS
 
 §2  VOCABULARY -- every KIND names a STATE.md:99 mark, or says WEAKER in words
 ----------------------------------------------------------------------------------------
@@ -55,18 +56,19 @@ mg-03cf  docs/FACTS.md asked its own question
   F22   `U`+`FP`   PASS
   F23   `U-id`+`FP`   PASS
   F24   `U`+`FP`   PASS
+  F25   `U-id`+`FP`   PASS
 
 §3  COUNT -- STATE.md's pointer must not drift from the registry
 ----------------------------------------------------------------------------------------
-  STATE.md claims 24 entries; docs/FACTS.md has 24   [PASS]
+  STATE.md claims 25 entries; docs/FACTS.md has 25   [PASS]
 
 §4  LINKS -- every relative link in the registry resolves on disk
 ----------------------------------------------------------------------------------------
-  25 relative links checked, 0 broken   [PASS]
+  27 relative links checked, 0 broken   [PASS]
 
 §5  THE POSITIVE CONTROL -- this arm is shown able to fail
 ----------------------------------------------------------------------------------------
   an entry with its SCOPE field renamed is [CAUGHT]
   an entry graded with an invented mark is [CAUGHT]
 
-VERDICT: GREEN — 24 entries
+VERDICT: GREEN — 25 entries

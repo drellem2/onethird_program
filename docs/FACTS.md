@@ -910,6 +910,79 @@ check.** The value is as a **selection criterion for future constructions**, not
 
 ---
 
+# FROM `mg-8b32` — THE MARGINAL FIBER, FILED BY `mg-c776` BECAUSE IT CITES IT
+
+One entry. `p8b32` measured it and declined to file it, because it failed this file's
+**homelessness test** while nothing cited it; `mg-c776` cites it, so it is filed — and it is filed
+by the citing item rather than by its author, which is what the test is for. It is **re-derived**
+at `mg-c776` `c3.4` rather than copied across, by the rank of the marginal map instead of a kernel
+construction, and it gained a *reason* in the process, which a second measurement alone would not
+have given.
+
+`p8b32`'s companion figure — *"the `n = 6` hypothesis population with `L* = identity` is 5 posets"*
+— is **deliberately NOT a second entry**: F23 already carries the class count `Σ_k C(n−2k, k)`, and
+`5` is its value at `n = 6`. Filing a numerical instance of a registered closed form is exactly what
+the admission test forbids, so it is recorded in F25's **SCOPE** as the agreement it is.
+
+## F25 · No boundary poset below `n = 6` has a non-trivial marginal fiber — so `a2.3`'s `n` was FORCED
+
+**STATEMENT.** Let the **boundary population** be `{P : δ(P) ≤ 1/3}`, i.e. hypothesis (1) at
+`η = 0` (F19's and F23's class, plus the total orders). For a poset `P`, call the **marginal fiber**
+the set of measures supported inside `L(P)` carrying `Unif(L(P))`'s pair marginals — a point iff the
+map `R^{L(P)} → R^{C(n,2)+1}` sending a weight vector to its pair marginals and its total mass has
+trivial kernel. Then
+
+> **every boundary poset at `n ≤ 5` has a marginal fiber that is a single point**, and the first
+> boundary poset whose fiber has positive dimension appears at **`n = 6`** — where the fiber
+> dimension is 4, at `e(P) = 9`.
+
+**Consequently `a2.3`-style witnesses — two distinct measures inside hypothesis (1) with identical
+pair marginals, differing only in their weights — CANNOT EXIST BELOW `n = 6`.** `mg-0fc6`'s `a2.3`,
+`mg-8748`'s `c4.1` and `mg-8b32`'s `b1.3` all land on `n = 6`, `e(P) = 9`, max flip `1/3`: that `n`
+was **forced by the population**, not chosen by three searches that happened to agree.
+
+**AND THE REASON, which is the part a re-measurement does not give.** Below `n = 6` every member of
+the boundary population has `e(P) = 3` with exactly `m = 2` incomparable pairs, both at `1/3`
+(F23's rigidity), and the marginal map is injective on a 3-point support carrying 2 independent
+pair coordinates plus the mass constraint. The first `e(P) = 9` member appears at `n = 6`, and that
+is where the fiber first has room.
+
+**KIND.** `FP` — an exhaustive census over the boundary population at `n ≤ 7`, saying **nothing**
+above it. The *reason* paragraph is `U-id` arithmetic **given** F23's rigidity, which is itself
+`FP`, so per `STATE.md:99`'s standing rule **the weakest kind in this entry is `FP`**.
+
+**SCOPE.** Two independent routes, both exhaustive over the population they name.
+`mg-8b32` `b1.3`: kernel of the marginal map by explicit basis construction, `n ≤ 5` exhaustive
+over all labelled posets, `n = 6` over the `2^15` transitive subrelations of the 6-chain.
+`mg-c776` `c3.4`: rank of the same map computed from a different marginal algorithm (a
+forward/backward down-set DP) sharing no code with it — **largest fiber dimension `0, 0, 0, 4, 4` at
+`n = 3,4,5,6,7`**. The two agree at every `n` they share. The population itself is re-derived a
+third time in the same arm: `|B_n| = 1, 2, 3, 5, 8` at `n = 3…7` counting posets with
+`L* = identity`, which **agrees with F23's `Σ_k C(n−2k, k)` at every term** and with `p8b32`'s
+`5` at `n = 6`; and the labelled counts `6, 48, 360, 3600` at `n = 3…6` agree with a full sweep of
+all 134 492 labelled posets (`mg-c776` `c3.1`), whose `n = 4` figure is `mg-8b32` `b4.3`'s
+`72 of 219` minus its 24 total orders.
+
+**FROM.** `mg-8b32` `b1.3`, [`code/marginal_factoring_8b32/`](../code/marginal_factoring_8b32/);
+re-derived and reasoned at `mg-c776` `c3.4`,
+[`docs/OneThird-ImageGeometry-mg-c776.md`](OneThird-ImageGeometry-mg-c776.md) §8.
+
+**NOT.** ⚠️ **NOT a statement about frozen posets.** `δ < 1/3` is the counterexample condition and
+the conjecture is verified to `n = 14` (`mg-33f5`), so the strictly frozen population is **empty at
+every `n` reached** — re-established exhaustively at `n ≤ 6` in `mg-c776` `c3.1`. This is a
+statement about the **closed boundary**, exactly as F19 and F23 are, and it inherits their scope
+limit including that all but one member at `n ≤ 8` is an ordinal sum while a minimal counterexample
+is primitive (`STATE.md:55`).
+⚠️ **NOT a claim that the fiber is a point for a general poset at `n ≤ 5`** — the antichain at
+`n = 4` is outside this population and is not covered. The quantifier is over the boundary
+population and travels with the number.
+⚠️ **NOT evidence that the surplus buys anything.** `mg-8b32`'s `T4` already showed every point of
+a realizable fiber is supported inside `L(P)`, so the fiber's *dimension* is not slack in the `M_n`
+ceiling; `mg-c776` §3 shows the image has no convex shadow at all. A larger fiber at larger `n` is
+not a lever, it is where the `a2.3` exhibit becomes constructible.
+
+---
+
 # Housekeeping
 
 **Adding an entry.** Append it with all five fields. If you cannot write the **SCOPE** line —

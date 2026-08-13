@@ -1,0 +1,64 @@
+
+==============================================================================
+c3.1  THE POPULATION — the strictly frozen set is empty, so this is the boundary; and
+      the chain restriction, VERIFIED on the full population before it is used at n = 7
+==============================================================================
+       n = 3: 6 non-total posets with delta <= 1/3, 6 total orders (mg-8b32 b4.3's count = 12), delta < 1/3: 0
+       n = 4: 48 non-total posets with delta <= 1/3, 24 total orders (mg-8b32 b4.3's count = 72), delta < 1/3: 0
+       n = 5: 360 non-total posets with delta <= 1/3, 120 total orders (mg-8b32 b4.3's count = 480), delta < 1/3: 0
+       n = 6: 3600 non-total posets with delta <= 1/3, 720 total orders (mg-8b32 b4.3's count = 4320), delta < 1/3: 0
+  [GREEN] no poset at n <= 6 is strictly frozen   exhaustive over all 134 492 labelled posets at n = 3,4,5,6
+       The conjecture is verified to n = 14 (mg-33f5, cited), so this is not a gap this
+       instrument could close by going one n further — the population is empty as far as
+       anybody has looked, and every number below is on the CLOSED boundary delta <= 1/3.
+  [GREEN] every boundary poset has a coherent majority order L*   4014 posets
+  [GREEN] and is a subrelation of it — so relabelling L* to the identity loses nothing   which is what makes the n = 7 sweep exhaustive rather than a sample
+
+==============================================================================
+c3.3  T3 — BOUNDARY RIGIDITY, and the table row 8 needs
+==============================================================================
+
+   n | |B_n| | labelled | e(P)   | m       | max m | d_max  | eps_max | ceiling | ratio
+  ---+-------+----------+--------+---------+-------+--------+---------+---------+-------
+   3 |     1 |        6 | 3      | 2       |     2 |    2/3 |     1/2 |     3/4 |   2/3
+   4 |     2 |       48 | 3      | 2       |     2 |    1/3 |    4/15 |     4/5 |   1/3
+   5 |     3 |      360 | 3      | 2       |     2 |    1/5 |     1/6 |     5/6 |   1/5
+   6 |     5 |     3600 | 3,9    | 2,4     |     4 |   4/15 |    8/35 |     6/7 |  4/15
+   7 |     8 |    40320 | 3,9    | 2,4     |     4 |   4/21 |     1/6 |     7/8 |  4/21
+  [GREEN] EVERY incomparable pair of EVERY boundary poset sits at exactly 1/3   n = 3..7, exhaustive; so sum of flips = m/3 and eps_spec = d * n/(n+1) EXACTLY
+  [GREEN] and the `labelled` column agrees with c3.1's independent full sweep   |B_n| * n! against the count of every labelled poset with delta <= 1/3, n = 3..6
+       `|B_n|` counts the posets with L* = the identity; `labelled` is that times n!, and at
+       n = 4 it reads 48, which is mg-8b32 b4.3's `72 of 219` minus its 24 total orders.
+       THE RATIO COLUMN IS d ITSELF, and it is the whole slack of the M_n ceiling at these
+       points: 2/3, 1/3, 1/5, 4/15, 4/21.  eps_sup is ATTAINED here, not merely valid, so no
+       fact about the image can lower eps except by bounding d.
+       AND EVERY ONE OF THOSE FIVE TERMS IS F23's, ALREADY REGISTERED: mg-6ff4 has the closed
+       form 4*floor(n/3)/(n(n-1)) exhaustive over isomorphism classes to n = 9.  This table is
+       a third route agreeing with it, and it is reported as corroboration, not as a finding.
+
+==============================================================================
+c3.4  the two facts mg-8b32 left homeless, re-derived here and given a reason
+==============================================================================
+       n = 3: the hypothesis population with L* = identity is 1 posets
+       n = 4: the hypothesis population with L* = identity is 2 posets
+       n = 5: the hypothesis population with L* = identity is 3 posets
+       n = 6: the hypothesis population with L* = identity is 5 posets   [mg-8b32 b1.3 reports 5 at n = 6]
+       n = 7: the hypothesis population with L* = identity is 8 posets
+  [GREEN] n = 6: 5 posets — mg-8b32's figure, reached by a different enumeration   full labelled extension sweep and the chain restriction agree
+  [GREEN] and |B_n| agrees with mg-6ff4's class count sum_k C(n-2k, k) at n = 3..7   1, 2, 3, 5, 8 — two enumerations agreeing on the size of the population
+       The sequence runs 1, 2, 3, 5, 8 at n = 3..7 — which is mg-6ff4's class count
+       sum_k C(n-2k, k) at every one of those n, so the two enumerations agree on the SIZE of
+       the population as well as on its extremes.  The closed form is F23's and is cited, not
+       re-derived: this arm measures five terms and mg-6ff4 measured seven.
+       n = 3: largest marginal-fiber dimension over the hypothesis population = 0
+       n = 4: largest marginal-fiber dimension over the hypothesis population = 0
+       n = 5: largest marginal-fiber dimension over the hypothesis population = 0
+       n = 6: largest marginal-fiber dimension over the hypothesis population = 4
+       n = 7: largest marginal-fiber dimension over the hypothesis population = 4
+  [GREEN] no hypothesis-population poset below n = 6 has a non-trivial marginal fiber   so a2.3-style weight witnesses cannot exist below n = 6 — its n was forced
+       AND THE REASON, which a re-measurement alone would not give: below n = 6 every poset in
+       the population has e(P) = 3 with m = 2 pairs at 1/3, and the marginal map is injective
+       on a 3-point support with 2 independent pair coordinates.  The first e(P) = 9 poset
+       appears at n = 6, and that is where the fiber first has room.
+
+RESULT: GREEN — all checks passed

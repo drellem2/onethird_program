@@ -1,0 +1,38 @@
+
+==============================================================================
+c2.1  T2 — every vertex of M_n is an image point, so conv(R_n) = M_n
+==============================================================================
+       n = 3: 6 vertices of M_n, all in R_n; |R_n| = 19; non-extreme image points 13 (68.4%)
+       n = 4: 24 vertices of M_n, all in R_n; |R_n| = 219; non-extreme image points 195 (89.0%)
+       n = 5: 120 vertices of M_n, all in R_n; |R_n| = 4231; non-extreme image points 4111 (97.2%)
+  [GREEN] vert(M_n) is a subset of R_n at n = 3,4,5   hence conv(R_n) = M_n and no inequality valid on the image cuts anything off
+
+==============================================================================
+c2.2  the consequence, measured — no linear functional separates
+==============================================================================
+  [GREEN] max over R_n = max over M_n for every sampled linear functional   300 seeded integer directions at n = 3,4, 0 separations found
+       A separating condition for the image therefore CANNOT be an inequality.  What is left is
+       non-convex: the fixed-point condition of c1, or an arithmetic one (every coordinate of an
+       image point is a multiple of 1/e(P)) — neither of which an optimisation can consume.
+
+==============================================================================
+c2.3  and imposing hypothesis (1) first does not repair it
+==============================================================================
+  [GREEN] every total order has delta = 0 — no incomparable pair to flip   so all n! vertices survive hypothesis (1) at every eta, and conv(R_n ∩ H) = M_n too
+
+==============================================================================
+c2.4  THE CELL — where the comparison is not vacuous, and what it says
+==============================================================================
+
+   n | ceiling on K   | best image point in K | ratio  | attained by
+  ---+----------------+-----------------------+--------+---------------------------
+   3 |              1 |                   2/3 |    2/3 | m = 2 incomparable pairs, e(P) = 3
+   4 |              2 |                   2/3 |    1/3 | m = 2 incomparable pairs, e(P) = 3
+   5 |           10/3 |                   2/3 |    1/5 | m = 2 incomparable pairs, e(P) = 3
+   6 |              5 |                   4/3 |   4/15 | m = 4 incomparable pairs, e(P) = 9
+  [GREEN] inside the cell the image reaches only a d-fraction of the ceiling   and the ratio IS the incomparability density d = m / C(n,2) — c3 explains why
+       The two-atom point that attains the ceiling has m = C(n,2) in that ratio's place: it
+       behaves like a poset with EVERY pair incomparable and every one flipped at 1/3, and c3
+       measures that no realizable point can do that above n = 3.
+
+RESULT: GREEN — all checks passed

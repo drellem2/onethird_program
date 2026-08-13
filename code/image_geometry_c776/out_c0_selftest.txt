@@ -1,0 +1,44 @@
+
+==============================================================================
+c0.1  the poset enumerator against OEIS A001035
+==============================================================================
+       n = 1: 1 labelled posets   published 1   [ok]
+       n = 2: 3 labelled posets   published 3   [ok]
+       n = 3: 19 labelled posets   published 19   [ok]
+       n = 4: 219 labelled posets   published 219   [ok]
+       n = 5: 4231 labelled posets   published 4231   [ok]
+       n = 6: 130023 labelled posets   published 130023   [ok]
+  [GREEN] labelled strict orders reproduce A001035 at n = 1..6   extension-by-a-new-element, not filtering — the route that reaches n = 6
+  [GREEN] and every enumerated relation is irreflexive, asymmetric and transitive
+
+==============================================================================
+c0.2  L(P) against filtering all of S_n, and the marginal DP against counting L(P)
+==============================================================================
+  [GREEN] L(P) agrees with the S_n filter   638 posets, 0 mismatches
+  [GREEN] the down-set DP agrees with counting L(P) directly   638 posets, every ordered pair compared exactly, 0 mismatches
+
+==============================================================================
+c0.3  NEGATIVE CONTROL — the comparison in c0.2 can fail
+==============================================================================
+  [GREEN] a planted defect in the marginal map is caught by c0.2's comparison   200 of 219 posets at n = 4 detect it
+
+==============================================================================
+c0.4  against lib8b32 — two implementations that share no algorithm
+==============================================================================
+  [GREEN] poset sets, L(P), the marginal vector and P(pi) all agree with lib8b32   238 posets at n = 3,4, 0 disagreements
+
+==============================================================================
+c0.5  the capped delta against the uncapped one, and the chain restriction
+==============================================================================
+  [GREEN] the early abort decides `delta <= 1/3` exactly as the full scan does   and returns identical values wherever it does not abort
+       n = 3: 7 posets compatible with the identity order
+       n = 4: 40 posets compatible with the identity order
+       n = 5: 357 posets compatible with the identity order
+  [GREEN] chain_subrelations is exactly {P : x <_P y implies x < y} from the full enumeration   n = 3,4,5
+
+==============================================================================
+c0.6  every marginal vector produced here lies in the linear ordering polytope
+==============================================================================
+  [GREEN] pi_xy + pi_yx = 1 and 1 <= pi_xy + pi_yz + pi_zx <= 2   438 image points, 0 violations
+
+RESULT: GREEN — all checks passed
