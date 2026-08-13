@@ -1,0 +1,225 @@
+==============================================================================
+s1.1  compression2's OWN TAPE, READ AS A CODE — the two P-blind readings, at n = 6..12
+==============================================================================
+   n | ceil(log2 n!) | MERGE-IDX exact-index | MERGE-TAPE fixed-width | verdict
+  ---+---------------+-----------------------+------------------------+---------------
+   6 |            10 |     9.4919  = log2 n!|     16  LOSES by 6   | NEITHER READING BEATS THE FREE BOUND
+   7 |            13 |    12.2992  = log2 n!|     20  LOSES by 7   | NEITHER READING BEATS THE FREE BOUND
+   8 |            16 |    15.2992  = log2 n!|     24  LOSES by 8   | NEITHER READING BEATS THE FREE BOUND
+   9 |            19 |    18.4691  = log2 n!|     29  LOSES by 10  | NEITHER READING BEATS THE FREE BOUND
+  10 |            22 |    21.7911  = log2 n!|     34  LOSES by 12  | NEITHER READING BEATS THE FREE BOUND
+  11 |            26 |    25.2505  = log2 n!|     39  LOSES by 13  | NEITHER READING BEATS THE FREE BOUND
+  12 |            29 |    28.8355  = log2 n!|     44  LOSES by 15  | NEITHER READING BEATS THE FREE BOUND
+  [GREEN] P1 and P2 hold at every n = 6..12   exact-index TIES log2 n! exactly; fixed-width LOSES at every n
+       THIS IS THE ANSWER FOR THE CONSTRUCTION THE TICKET NAMED, AND IT IS NOT A MEASUREMENT
+       OF A CONSTANT.  The tape is a bijection S_n -> (merge words) -- s0.3, 0 collisions at
+       n = 4..8 -- and the binomials telescope to n! -- s0.4, every n <= 16.  So the exact-index
+       reading IS the free code, re-coordinatised, at every poset and every n.  mg-0fc6's own
+       sentence says as much from the other side: `compression2's encoding forgets NOTHING --
+       it is a re-coordinatisation`.  A re-coordinatisation of the free code is the free code.
+       s0's D5 makes the same point from the plant side: the telescoping holds for ANY binary
+       tree, so no repair to the TREE can rescue this reading.
+
+       What compression2 actually bounds is therefore not this code's length.  It is the
+       ENTROPY of the merge words under Unif(L(P)) -- a statement about the MEASURE, bounded
+       node by node.  s1.6 measures those per-node entropies where they can be instantiated.
+==============================================================================
+s1.2  THE FULL TEST — every code, every family, n = 6..12  (bits, expected under Unif(L(P)))
+==============================================================================
+
+  FAMILY: chain
+     n |  e(P) | log2 e |  FREE | M-TAPE | M-IDX | MERGE-P | MINIMALS | LEHMER | how
+    ---+-------+--------+-------+--------+-------+---------+----------+--------+-----
+     6 |     1 |  0.000 |  9.49 |  16.00 |  9.49 |    0.00 |     0.00 |   6.00 | exact
+     7 |     1 |  0.000 | 12.30 |  20.00 | 12.30 |    0.00 |     0.00 |   7.00 | exact
+     8 |     1 |  0.000 | 15.30 |  24.00 | 15.30 |    0.00 |     0.00 |   8.00 | exact
+     9 |     1 |  0.000 | 18.47 |  29.00 | 18.47 |    0.00 |     0.00 |   9.00 | exact
+    10 |     1 |  0.000 | 21.79 |  34.00 | 21.79 |    0.00 |     0.00 |  10.00 | exact
+    11 |     1 |  0.000 | 25.25 |  39.00 | 25.25 |    0.00 |     0.00 |  11.00 | exact
+    12 |     1 |  0.000 | 28.84 |  44.00 | 28.84 |    0.00 |     0.00 |  12.00 | exact
+
+  FAMILY: boundary  (V-sum, delta = 1/3)
+     n |  e(P) | log2 e |  FREE | M-TAPE | M-IDX | MERGE-P | MINIMALS | LEHMER | how
+    ---+-------+--------+-------+--------+-------+---------+----------+--------+-----
+     6 |     9 |  3.170 |  9.49 |  16.00 |  9.49 |    3.33 |     3.33 |   8.67 | exact
+     7 |     9 |  3.170 | 12.30 |  20.00 | 12.30 |    3.33 |     3.33 |   9.67 | exact
+     8 |     9 |  3.170 | 15.30 |  24.00 | 15.30 |    3.33 |     3.33 |  10.67 | exact
+     9 |    27 |  4.755 | 18.47 |  29.00 | 18.47 |    5.00 |     5.00 |  13.00 | exact
+    10 |    27 |  4.755 | 21.79 |  34.00 | 21.79 |    5.00 |     5.00 |  14.00 | exact
+    11 |    27 |  4.755 | 25.25 |  39.00 | 25.25 |    5.00 |     5.00 |  15.00 | exact
+    12 |    81 |  6.340 | 28.84 |  44.00 | 28.84 |    6.67 |     6.67 |  17.33 | exact
+
+  FAMILY: chain + point
+     n |  e(P) | log2 e |  FREE | M-TAPE | M-IDX | MERGE-P | MINIMALS | LEHMER | how
+    ---+-------+--------+-------+--------+-------+---------+----------+--------+-----
+     6 |     6 |  2.585 |  9.49 |  16.00 |  9.49 |    3.17 |     3.33 |   n/a  | exact
+     7 |     7 |  2.807 | 12.30 |  20.00 | 12.30 |    2.82 |     3.86 |   9.86 | exact
+     8 |     8 |  3.000 | 15.30 |  24.00 | 15.30 |    3.84 |     4.38 |   n/a  | exact
+     9 |     9 |  3.170 | 18.47 |  29.00 | 18.47 |    3.18 |     4.89 |  12.56 | exact
+    10 |    10 |  3.322 | 21.79 |  34.00 | 21.79 |    4.72 |     5.40 |   n/a  | exact
+    11 |    11 |  3.459 | 25.25 |  39.00 | 25.25 |    3.72 |     5.91 |  15.18 | exact
+    12 |    12 |  3.585 | 28.84 |  44.00 | 28.84 |    5.22 |     6.42 |   n/a  | exact
+
+  FAMILY: 2-antichain sum (delta = 1/2)
+     n |  e(P) | log2 e |  FREE | M-TAPE | M-IDX | MERGE-P | MINIMALS | LEHMER | how
+    ---+-------+--------+-------+--------+-------+---------+----------+--------+-----
+     6 |     8 |  3.000 |  9.49 |  16.00 |  9.49 |    3.00 |     3.00 |   n/a  | exact
+     7 |     8 |  3.000 | 12.30 |  20.00 | 12.30 |    3.00 |     3.00 |   n/a  | exact
+     8 |    16 |  4.000 | 15.30 |  24.00 | 15.30 |    4.00 |     4.00 |   n/a  | exact
+     9 |    16 |  4.000 | 18.47 |  29.00 | 18.47 |    4.00 |     4.00 |   n/a  | exact
+    10 |    32 |  5.000 | 21.79 |  34.00 | 21.79 |    5.00 |     5.00 |   n/a  | exact
+    11 |    32 |  5.000 | 25.25 |  39.00 | 25.25 |    5.00 |     5.00 |   n/a  | exact
+    12 |    64 |  6.000 | 28.84 |  44.00 | 28.84 |    6.00 |     6.00 |   n/a  | exact
+
+  FAMILY: two chains
+     n |  e(P) | log2 e |  FREE | M-TAPE | M-IDX | MERGE-P | MINIMALS | LEHMER | how
+    ---+-------+--------+-------+--------+-------+---------+----------+--------+-----
+     6 |    20 |  4.322 |  9.49 |  16.00 |  9.49 |    4.32 |     4.50 |   n/a  | exact
+     7 |    35 |  5.129 | 12.30 |  20.00 | 12.30 |    5.64 |     5.40 |  11.46 | exact
+     8 |    70 |  6.129 | 15.30 |  24.00 | 15.30 |    6.13 |     6.40 |   n/a  | exact
+     9 |   126 |  6.977 | 18.47 |  29.00 | 18.47 |    7.66 |     7.33 |  15.29 | exact
+    10 |   252 |  7.977 | 21.79 |  34.00 | 21.79 |    7.98 |     8.33 |   n/a  | exact
+    11 |   462 |  8.852 | 25.25 |  39.00 | 25.25 |    9.70 |     9.29 |  19.26 | exact
+    12 |   924 |  9.852 | 28.84 |  44.00 | 28.84 |    9.85 |    10.29 |   n/a  | exact
+
+  FAMILY: antichain (delta = 1/2)
+     n |  e(P) | log2 e |  FREE | M-TAPE | M-IDX | MERGE-P | MINIMALS | LEHMER | how
+    ---+-------+--------+-------+--------+-------+---------+----------+--------+-----
+     6 |   720 |  9.492 |  9.49 |  16.00 |  9.49 |    9.49 |     9.49 |   n/a  | exact
+     7 |  5040 | 12.299 | 12.30 |  20.00 | 12.30 |   12.30 |    12.30 |   n/a  | exact
+     8 | 40320 | 15.299 | 15.30 |  24.00 | 15.30 |   15.30 |    15.30 |   n/a  | exact
+     9 |362880 | 18.469 | 18.47 |  29.00 | 18.47 |   18.47 |    18.47 |   n/a  | sampled(1500)
+    10 |3628800 | 21.791 | 21.79 |  34.00 | 21.79 |   21.79 |    21.79 |   n/a  | sampled(1500)
+    11 |39916800 | 25.250 | 25.25 |  39.00 | 25.25 |   25.25 |    25.25 |   n/a  | sampled(1500)
+    12 |479001600 | 28.835 | 28.84 |  44.00 | 28.84 |   28.84 |    28.84 |   n/a  | sampled(1500)
+
+       `how = exact` enumerates L(P); `sampled(N)` draws N uniform extensions with the LCG.
+       Which one produced a row is PRINTED and not inferred -- they are different kinds of
+       number.  Note where the sampling happens: only at the ANTICHAIN, which is exactly the
+       family where every code is CONSTANT and the sample cannot be wrong.
+==============================================================================
+s1.3  THE TEST'S VERDICT — AND THE TEST AS LITERALLY WORDED IS PASSED BY THE CODE IT COMPARES AGAINST
+==============================================================================
+   `beat ceil(log2 n!)` is not the same test as `beat log2 n!`, and the gap between
+   them is the rounding.  The FREE code -- the one the test names as the thing to beat
+   -- has ideal length log2 n!, so it beats its OWN ceiling at every n where n! is not
+   a power of two:
+
+     n |  log2 n! | ceil | FREE beats its own ceiling by
+    ---+----------+------+------------------------------
+     6 |   9.4919 |   10 | 0.5081 bits
+     7 |  12.2992 |   13 | 0.7008 bits
+     8 |  15.2992 |   16 | 0.7008 bits
+     9 |  18.4691 |   19 | 0.5309 bits
+    10 |  21.7911 |   22 | 0.2089 bits
+    11 |  25.2505 |   26 | 0.7495 bits
+    12 |  28.8355 |   29 | 0.1645 bits
+  [GREEN] the reference code passes the test that names it, at every n = 6..12   so the literal wording cannot be the screen; the margin is what carries
+
+   Read against log2 n! instead.  YES = beats it; ROUND = beats only ceil(log2 n!), on
+   the rounding alone, by under one bit; NO = does not beat even that.
+
+   family                          | MERGE-P at n = 6..12          | margin at n = 12
+  --------------------------------+-------------------------------+-----------------
+   chain                           | YES   YES   YES   YES   YES   YES   YES   |  +28.835 bits
+   boundary  (V-sum, delta = 1/3)  | YES   YES   YES   YES   YES   YES   YES   |  +22.169 bits
+   chain + point                   | YES   YES   YES   YES   YES   YES   YES   |  +23.614 bits
+   2-antichain sum (delta = 1/2)   | YES   YES   YES   YES   YES   YES   YES   |  +22.835 bits
+   two chains                      | YES   YES   YES   YES   YES   YES   YES   |  +18.984 bits
+   antichain (delta = 1/2)         | ROUND ROUND ROUND ROUND ROUND ROUND ROUND |   +0.000 bits
+  [GREEN] P3: MERGE-P beats log2 n! at every non-antichain family, every n = 6..12
+  [GREEN] P3: MERGE-P TIES log2 n! EXACTLY at the antichain, every n = 6..12   so its ROUND row passes the literal test on the rounding and on nothing else
+       The antichain row is not a limitation of this code.  e(antichain) = n!, so log2 e(P) is
+       log2 n! there and Gibbs forbids ANY code from doing better.  s2 turns that into the
+       statement it is: a shape-B constant c < 1 valid at every P does not exist, for any code
+       that will ever be written.
+==============================================================================
+s1.4  THE ONE POPULATION THE BOUND IS ABOUT — the boundary family, priced in both shapes
+==============================================================================
+   The class hypothesis (1) names is FROZEN, delta < 1/3, and it is EMPTY at every n
+   below 15 (s0.9 here; the corpus has it empty to n = 8 and the conjecture verified
+   to n = 14).  The closest INSTANTIABLE population is the boundary, delta = 1/3.
+
+     n | log2 n! | log2 e(P) | MERGE-P | shape-A c = E/(n log2 n) | shape-B c = E/log2 n!
+    ---+---------+-----------+---------+--------------------------+----------------------
+     6 |   9.492 |     3.170 |   3.333 |                   0.2149 |                0.3512
+     7 |  12.299 |     3.170 |   3.333 |                   0.1696 |                0.2710
+     8 |  15.299 |     3.170 |   3.333 |                   0.1389 |                0.2179
+     9 |  18.469 |     4.755 |   5.000 |                   0.1753 |                0.2707
+    10 |  21.791 |     4.755 |   5.000 |                   0.1505 |                0.2295
+    11 |  25.250 |     4.755 |   5.000 |                   0.1314 |                0.1980
+    12 |  28.835 |     6.340 |   6.667 |                   0.1550 |                0.2312
+
+       BOTH CONSTANTS FALL WITH n AND KEEP FALLING.  That is not the code being good; it is
+       the population having log2 e(P) = Theta(n) against a free bound of Theta(n log n).
+       On this population EVERY code that reads P at all wins by a margin that GROWS, so
+       PASSING THE TEST HERE CARRIES NO INFORMATION ABOUT THE CODE.  compression2's own
+       0.9399 is 30x above what a four-line code delivers at n = 12.
+==============================================================================
+s1.5  IS `L*` DOING THE WORK?  — the L*-free code, side by side
+==============================================================================
+   family                          |  n | MERGE-P (uses L*) | MINIMALS (does not) | who wins
+  --------------------------------+----+-------------------+---------------------+---------
+   chain                           |  6 |             0.000 |               0.000 | tie
+   chain                           | 12 |             0.000 |               0.000 | tie
+   boundary  (V-sum, delta = 1/3)  |  6 |             3.333 |               3.333 | tie
+   boundary  (V-sum, delta = 1/3)  | 12 |             6.667 |               6.667 | tie
+   chain + point                   |  6 |             3.167 |               3.333 | MERGE-P
+   chain + point                   | 12 |             5.221 |               6.417 | MERGE-P
+   2-antichain sum (delta = 1/2)   |  6 |             3.000 |               3.000 | tie
+   2-antichain sum (delta = 1/2)   | 12 |             6.000 |               6.000 | tie
+   two chains                      |  6 |             4.322 |               4.500 | MERGE-P
+   two chains                      | 12 |             9.852 |              10.286 | MERGE-P
+   antichain (delta = 1/2)         |  6 |             9.492 |               9.492 | tie
+   antichain (delta = 1/2)         | 12 |            28.835 |              28.835 | tie
+
+   over all 42 (family, n) cells:  MERGE-P 11   MINIMALS 3   tie 28
+       MINIMALS reads P and NEVER reads L*.  It is four lines long.  Whatever the split, the
+       conclusion is the same one: the win over the free bound is bought by reading P, not by
+       reading L*, and L* is the half mg-0fc6 measured the poset-dependence washing out at.
+==============================================================================
+s1.6  compression2's REAL OBJECT — the PER-NODE conditional entropies, on the boundary family
+==============================================================================
+       The note bounds `H(W_v | earlier words) <= (1-c)(a+b)` at each node and sums over the
+       n log2 n total word length.  The chain rule makes the sum EXACTLY log2 e(P), which is
+       this table's own control -- if the entropies did not sum to log2 e(P) the decomposition
+       would not be the note's.
+
+     n | node size a+b | H(word | earlier) | note's ceiling 0.9399(a+b) | overpay
+    ---+---------------+-------------------+----------------------------+---------
+     6 |             2 |            1.8366 |                     3.7596 | 2x
+     6 |             3 |            1.3333 |                     5.6394 | 4x
+     6 |             6 |            0.0000 |                     5.6394 | INFINITE (H = 0)
+       |   5 nodes    | sum =   3.1699    | log2 e(P) =   3.1699       | chain rule EXACT
+
+     9 |             2 |            2.7549 |                     7.5192 | 3x
+     9 |             3 |            0.6667 |                     2.8197 | 4x
+     9 |             4 |            0.6667 |                     3.7596 | 6x
+     9 |             5 |            0.0000 |                     4.6995 | INFINITE (H = 0)
+     9 |             9 |            0.6667 |                     8.4591 | 13x
+       |   8 nodes    | sum =   4.7549    | log2 e(P) =   4.7549       | chain rule EXACT
+
+    12 |             2 |            3.6732 |                     7.5192 | 2x
+    12 |             3 |            2.6667 |                    11.2788 | 4x
+    12 |             6 |            0.0000 |                    11.2788 | INFINITE (H = 0)
+    12 |            12 |            0.0000 |                    11.2788 | INFINITE (H = 0)
+       |   11 nodes    | sum =   6.3399    | log2 e(P) =   6.3399       | chain rule EXACT
+
+  [GREEN] the per-node entropies sum to log2 e(P) EXACTLY at n = 6, 9, 12   so this IS the note's decomposition and not a different one
+       A NODE WHOSE SPLIT FALLS ON A BLOCK BOUNDARY CARRIES ZERO CONDITIONAL ENTROPY, because
+       the boundary family is an ordinal sum and a block's elements are consecutive in L*: the
+       merge word there is FORCED.  The note's ceiling pays 0.9399(a+b) bits for a word that
+       carries none, so the overpayment at those nodes is not a factor -- it is infinite.
+       P10 holds AS WRITTEN, and the run adds the clause the prediction did not have:
+       ⚠️ WHICH NODES THOSE ARE DEPENDS ON n, AND AT n = 9 THE ROOT IS NOT ONE OF THEM.  Nine
+       elements bisect 4|5 while the blocks are 3|3|3, so the root straddles a block and
+       carries 0.6667 bits.  At n = 6 and n = 12 the bisection lands on block boundaries and
+       the top TWO levels are free.  THE TREE IS BUILT FROM L* AND L* KNOWS NOTHING ABOUT THE
+       BLOCK STRUCTURE -- so whether the expensive nodes are free is an ARITHMETIC ACCIDENT of
+       n against the block size, which is the sharpest form of mg-0fc6's wash-out this arm
+       reaches: the one place the poset could have entered the construction, it did not.
+       ⚠️ This prices the note's PER-NODE LEMMA on one family; it is not a refutation of the
+       note's theorem, which is a worst-case statement and is allowed to be loose anywhere in
+       particular.  What it shows is where the slack is, and it is at the top of the tree.
+
+arm exit: 0   (0 green, 0 red row(s))

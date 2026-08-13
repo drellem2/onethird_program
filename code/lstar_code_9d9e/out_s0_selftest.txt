@@ -1,0 +1,119 @@
+==============================================================================
+s0.1  THE ENUMERATOR AGAINST A001035 — and by a DIFFERENT ALGORITHM from lib99f4's
+==============================================================================
+  [GREEN] labelled posets on [1]   1   (A001035: 1)
+  [GREEN] labelled posets on [2]   3   (A001035: 3)
+  [GREEN] labelled posets on [3]   19   (A001035: 19)
+  [GREEN] labelled posets on [4]   219   (A001035: 219)
+  [GREEN] labelled posets on [5]   4231   (A001035: 4231)
+  [GREEN] labelled posets on [6]   130023   (A001035: 130023)
+       lib99f4 brute-forces the 3^C(n,2) orientations and keeps the transitive ones; this
+       library INSERTS an element into every poset on [n-1] as a (down-set, up-set) pair.
+       Agreement is therefore a second route to A001035 rather than the same route twice --
+       and the insertion route reaches n = 6, which brute force does not.
+==============================================================================
+s0.2  e(P) BY THREE ROUTES — recursion, down-set DP, and a filter of S_n
+==============================================================================
+  [GREEN] recursion agrees with the down-set DP at every poset, n = 2..5
+  [GREEN] recursion agrees with a FILTER of S_n at every poset, n = 2..5   the DP never enumerates a permutation, so this is the route it is checked on
+==============================================================================
+s0.3  THE TAPE IS A BIJECTION — mg-0fc6 a1.1 reproduced on code sharing nothing with it
+==============================================================================
+  [GREEN] n = 4: 24 distinct tapes over 24 permutations   0 collisions
+  [GREEN] n = 5: 120 distinct tapes over 120 permutations   0 collisions
+  [GREEN] n = 6: 720 distinct tapes over 720 permutations   0 collisions
+  [GREEN] n = 7: 5040 distinct tapes over 5040 permutations   0 collisions
+  [GREEN] n = 8: 40320 distinct tapes over 40320 permutations   0 collisions
+       This is what makes the MERGE-IDX row a CODE rather than a lossy summary, and it is also
+       mg-0fc6's own statement that compression2's encoding forgets nothing.  Checked here at
+       n = 4..8 (40 320 permutations at the top) on an independent implementation.
+==============================================================================
+s0.4  THE BINOMIALS TELESCOPE — prod C(a+b,a) over the tree = n!
+==============================================================================
+  [GREEN] prod over internal nodes of C(a+b,a) = n! at every n = 1..16
+       So the exact-index reading of the tape has a codelength of exactly log2 n! at EVERY
+       permutation.  P1 is a consequence of this line; s1 measures it rather than deriving it.
+==============================================================================
+s0.5  L* IS A LINEAR EXTENSION WHEREVER IT EXISTS — the defining property, with a vacuity guard
+==============================================================================
+  [GREEN] L* in L(P) at all 2150 posets where L* exists, n = 2..5
+  [GREEN] L* exists SOMEWHERE — the vacuity guard   2150 posets
+==============================================================================
+s0.6  KRAFT, EXACTLY — every code is a code, TWO are TIGHT, and the L* merge code IS NOT
+==============================================================================
+  [GREEN] FREE        max Kraft sum over L(P)   1
+  [GREEN] LEHMER-L*   max Kraft sum over L(P)   1/4
+  [GREEN] MERGE-IDX   max Kraft sum over L(P)   1
+  [GREEN] MERGE-P     max Kraft sum over L(P)   1
+  [GREEN] MERGE-TAPE  max Kraft sum over L(P)   1/2
+  [GREEN] MINIMALS    max Kraft sum over L(P)   1
+  [GREEN] OPT         max Kraft sum over L(P)   1
+  [GREEN] MINIMALS    Kraft sum = 1 EXACTLY at every poset
+  [GREEN] OPT         Kraft sum = 1 EXACTLY at every poset
+       Exact Fractions, so `= 1` is an equality and not a rounding.  MINIMALS and OPT are
+       TIGHT: their leaves are exactly L(P), every feasible choice tuple is a linear extension
+       and every linear extension is one.  FREE and MERGE-IDX sum to e(P)/n! < 1 BECAUSE they
+       code all of S_n -- that slack IS the free bound's waste, in one number.
+
+  THE `L*` MERGE CODE IS **NOT** TIGHT, AND THIS ROW IS WHY THE FIRST DRAFT WENT RED.
+    n = 2      0 of     3 posets leak   worst Kraft sum 1
+    n = 3      0 of    19 posets leak   worst Kraft sum 1
+    n = 4      4 of   219 posets leak   worst Kraft sum 3/4
+    n = 5     96 of  4231 posets leak   worst Kraft sum 2/3
+       Feasibility is checked LOCALLY, against the two sequences at hand.  Two locally valid
+       halves need not be interleavable at all, so the bottom-up code can reach a node with
+       ZERO feasible merges and mass leaks into dead branches.  THE FIRST WITNESS, EXHIBITED:
+            P = {1<3, 2<0}   halves (0, 1) | (2, 3)  ->  1 feasible merges
+            P = {1<3, 2<0}   halves (0, 1) | (3, 2)  ->  0 feasible merges
+            P = {1<3, 2<0}   halves (1, 0) | (2, 3)  ->  4 feasible merges
+            P = {1<3, 2<0}   halves (1, 0) | (3, 2)  ->  1 feasible merges
+           `(0,1)` and `(3,2)` are each valid on their own set; together with P they close the
+           4-cycle  2 < 0 < 1 < 3 < 2.  Mass 1/4 dies there, Kraft = 3/4.
+  [GREEN] the exhibited witness has Kraft sum 3/4   3/4
+  [GREEN] MERGE-P is still a CODE at every poset (Kraft <= 1), so every bound it gives stands   s0.7 checks the bound itself
+==============================================================================
+s0.7  GIBBS — every code's expected length is at or above log2 e(P), at every poset
+==============================================================================
+  [GREEN] E[len] >= log2 e(P) for all 7 codes at all 4472 posets, n = 2..5   smallest gap -1.07e-14 (attained by OPT, which is the equality case)
+==============================================================================
+s0.8  THE BOUNDARY FAMILY — delta = 1/3 EXACTLY at n = 3..12, and e(P) = 3^floor(n/3)
+==============================================================================
+  [GREEN] n =  3   delta = 1/3    e(P) = 3       log2 e =  1.5850   vs   log2 n! =   2.5850
+  [GREEN] n =  4   delta = 1/3    e(P) = 3       log2 e =  1.5850   vs   log2 n! =   4.5850
+  [GREEN] n =  5   delta = 1/3    e(P) = 3       log2 e =  1.5850   vs   log2 n! =   6.9069
+  [GREEN] n =  6   delta = 1/3    e(P) = 9       log2 e =  3.1699   vs   log2 n! =   9.4919
+  [GREEN] n =  7   delta = 1/3    e(P) = 9       log2 e =  3.1699   vs   log2 n! =  12.2992
+  [GREEN] n =  8   delta = 1/3    e(P) = 9       log2 e =  3.1699   vs   log2 n! =  15.2992
+  [GREEN] n =  9   delta = 1/3    e(P) = 27      log2 e =  4.7549   vs   log2 n! =  18.4691
+  [GREEN] n = 10   delta = 1/3    e(P) = 27      log2 e =  4.7549   vs   log2 n! =  21.7911
+  [GREEN] n = 11   delta = 1/3    e(P) = 27      log2 e =  4.7549   vs   log2 n! =  25.2505
+  [GREEN] n = 12   delta = 1/3    e(P) = 81      log2 e =  6.3399   vs   log2 n! =  28.8355
+       mg-9b6b's explicit family, rebuilt here and re-verified rather than quoted.  It is the
+       closest INSTANTIABLE population to hypothesis (1): frozen is delta < 1/3 and is empty
+       at every n this or any other instrument can reach -- see s0.9 and s2.
+==============================================================================
+s0.9  THE FROZEN CLASS IS EMPTY AT n <= 5 — re-established here, not cited
+==============================================================================
+  [GREEN] n = 3   min delta over NON-CHAINS = 1/3   so {delta < 1/3} is EMPTY and {delta = 1/3} is the boundary
+  [GREEN] n = 4   min delta over NON-CHAINS = 1/3   so {delta < 1/3} is EMPTY and {delta = 1/3} is the boundary
+  [GREEN] n = 5   min delta over NON-CHAINS = 1/3   so {delta < 1/3} is EMPTY and {delta = 1/3} is the boundary
+==============================================================================
+s0.10  THE UNIFORM SAMPLER — used only above the enumeration cap, checked below it
+==============================================================================
+  [GREEN] sampled pair marginals match the exact ones at two_chains(8)   20000 draws, e(P) = 70, worst |deviation| = 0.0098
+  [GREEN] every one of the 70 extensions was drawn
+==============================================================================
+s0.11  FIVE PLANTED DEFECTS — four live, ONE INERT AND PRINTED RATHER THAN SWAPPED OUT
+==============================================================================
+  [GREEN] D1  feasible_merges ignores P  ->  MERGE-P stops beating the free bound   CAUGHT
+  [GREEN] D2  feasibility +1  ->  Kraft sum 49/648, no longer 1   CAUGHT BY THE EQUALITY ROW ONLY -- Kraft <= 1 still holds, so a `<= 1` check misses it
+  [GREEN] D3  feasibility -1  ->  Kraft sum 9 > 1, so it is not a code at all   CAUGHT
+  [GREEN] D4  the tape drops its root word  ->  1 distinct tapes for 720 permutations   CAUGHT
+  [GREEN] D5  the tree bisects the OTHER way  ->  MERGE-IDX is STILL exactly log2 n!   INERT, and printed rather than swapped out
+       D5 is inert because the telescoping is a property of ANY binary tree over the elements,
+       not of the balanced bisection.  That is worth more than a live plant here: it says P1
+       does not depend on compression2's choice of tree, so no repair to the tree can rescue
+       the exact-index reading.  A plant has to be a defect the claim can EXPRESS, and this
+       claim cannot express a change of tree.
+
+arm exit: 0   (0 green, 0 red row(s))

@@ -1,0 +1,685 @@
+"""lib9d9e — PREFIX CODES ON `L(P)`, and the one quantity the ticket asks for.
+
+mg-9d9e.  The predecessor (`mg-99f4`) closed the arbitrary-subset class and, in the same pass,
+stated the acceptance condition for the prefix-code branch as ONE LINE:
+
+    does the code's expected length beat  ceil(log2 n!)  -- the code that indexes L into all of
+    S_n and ignores P entirely -- AT THE n YOU CLAIM IT?
+
+and observed that a code answers that BY CONSTRUCTION: run it.  This library is what running it
+needs.  Its organising object is therefore not a poset and not a subset but a CODE, and every
+code here is presented in one shape:
+
+    a sub-probability  q  on the permutations,  Sum q <= 1  (KRAFT),
+
+from which the codelength is `-log2 q` (the ideal length, which an arithmetic coder attains to
+within 2 bits on the whole message) and `ceil(-log2 q)` (the SHANNON code, which is an actual
+prefix code with integer lengths and satisfies Kraft on the nose).  Both are reported, always,
+because the difference between them is under one bit and every comparison this ticket makes is
+between quantities an order apart -- saying so with the integer code in hand costs nothing and
+removes the one objection a reader could raise for free.
+
+Shannon's source-coding theorem is what makes a code an upper bound on the target:
+
+    log2 e(P)  =  H(Unif(L(P)))  <=  E_{L ~ Unif(L(P))} [ len(L) ]     for every code.
+
+So EVERY row in this directory's tables is a valid upper bound on `log2 e(P)`, and the question
+is only ever how far above the truth it sits.  `s0` checks that inequality on every code at
+every poset it can reach, because a "code" that violated it would not be a code and every number
+here would be meaningless.
+
+IMPORTS NOTHING FROM `code/`.  Not `lib99f4`, whose crossover table is this directory's starting
+point; not `lib0fc6`, whose merge tree is the object under study; not `lib8b32`, `lib6ff4` or
+`lib_c776`.  The predecessor's reason applies verbatim one step along: a shared enumerator would
+move the code reading and the poset reading together.  What is shared with the estate is OEIS
+A001035, the definitions, and two PUBLISHED NUMBERS that `s0` and `s2` check against.
+
+EXACT ARITHMETIC WHERE THE ANSWER IS RATIONAL.  Pair marginals, `delta`, and every Kraft sum are
+`Fraction`s -- a Kraft sum is an equality claim (`= 1`) and a float would turn it into
+`approximately 1`, which is the one thing a code's defining property cannot afford.  Bit lengths
+are floats, because `log2` of an integer is not rational.
+"""
+
+import math
+from fractions import Fraction
+from itertools import combinations, permutations
+
+# --------------------------------------------------------------------------- posets
+
+# A poset on [n] is a frozenset of STRICT pairs (x, y) meaning x < y.  Transitively closed.
+
+
+def is_transitive(rel, n):
+    for x, y in rel:
+        for z in range(n):
+            if (y, z) in rel and (x, z) not in rel:
+                return False
+    return True
+
+
+def all_posets(n):
+    """Every LABELLED poset on [n], by ELEMENT INSERTION.
+
+    A labelled poset on [n] is a labelled poset `Q` on [n-1] together with a down-set `D` and an
+    up-set `U` of `Q`, disjoint, with every `d in D` below every `u in U` -- `D` is what the new
+    element covers below, `U` what sits above it.  Those three conditions are exactly
+    transitivity of the extension, so nothing has to be filtered afterwards.
+
+    A DIFFERENT ALGORITHM from `lib99f4.all_posets`, which brute-forces the `3^C(n,2)`
+    orientations and keeps the transitive ones.  Deliberately: this directory re-checks A001035
+    rather than inheriting it, and re-checking it by the same route would not be a check.  The
+    insertion route also reaches `n = 6` (130 023 posets), which brute force does not.
+    """
+    if n == 0:
+        return [frozenset()]
+    out = []
+    for q in all_posets(n - 1):
+        m = n - 1
+        below = [{x for x, y in q if y == e} for e in range(m)]
+        above = [{y for x, y in q if x == e} for e in range(m)]
+        elems = range(m)
+        for dmask in range(1 << m):
+            D = {e for e in elems if (dmask >> e) & 1}
+            # D must be a down-set of Q
+            if any(below[e] - D for e in D):
+                continue
+            cand = [e for e in elems if e not in D]
+            # U must be an up-set of Q, disjoint from D, with D entirely below U
+            for umask in range(1 << len(cand)):
+                U = {cand[i] for i in range(len(cand)) if (umask >> i) & 1}
+                if any(above[e] - U for e in U):
+                    continue
+                if any(not (D <= below[u]) for u in U):
+                    continue
+                rel = set(q)
+                for d in D:
+                    rel.add((d, m))
+                for u in U:
+                    rel.add((m, u))
+                out.append(frozenset(rel))
+    return out
+
+
+def linear_extensions(rel, n):
+    """`L(P)` as a SORTED TUPLE of permutations, generated by the minimal-element recursion.
+
+    Never filters `S_n`, so it is usable where `n!` is not -- the boundary family at `n = 12`
+    has `e(P) = 81` and `12!` is 479 001 600.  `s0` checks it against a filter of `S_n` at
+    `n <= 6` and against an independent down-set count at every poset it enumerates.
+    """
+    below = [{x for x, y in rel if y == e} for e in range(n)]
+    out = []
+
+    def rec(placed, seq):
+        if len(seq) == n:
+            out.append(tuple(seq))
+            return
+        for e in range(n):
+            if e in placed:
+                continue
+            if below[e] - placed:
+                continue
+            seq.append(e)
+            placed.add(e)
+            rec(placed, seq)
+            placed.discard(e)
+            seq.pop()
+
+    rec(set(), [])
+    return tuple(sorted(out))
+
+
+def count_extensions_dp(rel, n):
+    """`e(P)` by a down-set DP that never enumerates a permutation."""
+    below = [{x for x, y in rel if y == e} for e in range(n)]
+    memo = {}
+
+    def f(placed):
+        if placed == (1 << n) - 1:
+            return 1
+        if placed in memo:
+            return memo[placed]
+        t = 0
+        for e in range(n):
+            if not (placed >> e) & 1 and all((placed >> b) & 1 for b in below[e]):
+                t += f(placed | (1 << e))
+        memo[placed] = t
+        return t
+
+    return f(0)
+
+
+def relation_from(LEs, n):
+    """`P = intersection of L(P)`."""
+    rel = set()
+    for x, y in permutations(range(n), 2):
+        if all(p.index(x) < p.index(y) for p in LEs):
+            rel.add((x, y))
+    return frozenset(rel)
+
+
+# --------------------------------------------------------------------------- marginals, delta, L*
+
+
+def pair_marginals(S, n):
+    """`pi_xy = Pr[x before y]` under the uniform measure on `S`."""
+    m = len(S)
+    pos = [{v: i for i, v in enumerate(p)} for p in S]
+    out = {}
+    for x, y in permutations(range(n), 2):
+        out[(x, y)] = Fraction(sum(1 for d in pos if d[x] < d[y]), m)
+    return out
+
+
+def delta(rel, LEs, n):
+    """`delta(P) = max over INCOMPARABLE pairs of min(pi_xy, pi_yx)`; `0` at a chain, where the
+    max is over the empty set."""
+    pi = pair_marginals(LEs, n)
+    best = Fraction(0)
+    for x, y in combinations(range(n), 2):
+        if (x, y) in rel or (y, x) in rel:
+            continue
+        best = max(best, min(pi[(x, y)], pi[(y, x)]))
+    return best
+
+
+def lstar(pi, n):
+    """The distinguished / majority order `L*`, or `None` if the majority tournament is not a
+    total order.  Same definition as `lib99f4.lstar`, `lib8b32.lstar` and `lib0fc6`'s coherent
+    order -- re-written rather than imported, and `s0` checks the property that defines it."""
+    half = Fraction(1, 2)
+    wins = [0] * n
+    for x, y in combinations(range(n), 2):
+        if pi[(x, y)] > half:
+            wins[x] += 1
+        elif pi[(x, y)] < half:
+            wins[y] += 1
+        else:
+            return None
+    order = sorted(range(n), key=lambda x: -wins[x])
+    for i in range(n):
+        for j in range(i + 1, n):
+            if pi[(order[i], order[j])] <= half:
+                return None
+    return tuple(order)
+
+
+# --------------------------------------------------------------------------- named families
+
+# Each returns `(rel, n)`.  The families are chosen so that `e(P)` is reachable at `n = 12` --
+# which is not a convenience: the population where `e(P)` is NOT reachable is exactly the
+# population where the free bound is already tight, and s2 handles it by theorem instead.
+
+
+def chain(n):
+    return frozenset((x, y) for x in range(n) for y in range(n) if x < y)
+
+
+def antichain(n):
+    return frozenset()
+
+
+def ordinal_sum(blocks, n):
+    """Ordinal sum of `blocks`, each a list `(size, internal_rel)` on its own `[0, size)`."""
+    rel = set()
+    off = 0
+    starts = []
+    for size, internal in blocks:
+        starts.append((off, size))
+        for x, y in internal:
+            rel.add((off + x, off + y))
+        off += size
+    assert off == n, (off, n)
+    for i, (o1, s1) in enumerate(starts):
+        for o2, s2 in starts[i + 1:]:
+            for x in range(o1, o1 + s1):
+                for y in range(o2, o2 + s2):
+                    rel.add((x, y))
+    return frozenset(rel)
+
+
+def vsum(n):
+    """THE BOUNDARY FAMILY: `floor(n/3)` ordinal-summed copies of `V = {a < b, c}`, remainder as
+    a chain on top.  `delta = 1/3` EXACTLY at every `n >= 3` -- the explicit family `mg-9b6b`
+    refuted the density escape hatch with, re-built here and re-verified in `s0` rather than
+    quoted.  `e(P) = 3^floor(n/3)`."""
+    k, r = divmod(n, 3)
+    blocks = [(3, [(0, 1)]) for _ in range(k)] + [(1, [])] * r
+    return ordinal_sum(blocks, n)
+
+
+def antichain2_sum(n):
+    """Ordinal sum of `floor(n/2)` 2-element ANTICHAINS.  `delta = 1/2`, so it is OUTSIDE
+    hypothesis (1) -- the control that says the boundary family's numbers are about `delta` and
+    not about ordinal-sum-ness."""
+    k, r = divmod(n, 2)
+    blocks = [(2, [])] * k + [(1, [])] * r
+    return ordinal_sum(blocks, n)
+
+
+def chain_point(n):
+    """A chain on `n-1` elements plus one isolated point -- `mg-c50b`'s family."""
+    return frozenset((x, y) for x in range(n - 1) for y in range(n - 1) if x < y)
+
+
+def two_chains(n):
+    """Two disjoint chains of sizes `ceil(n/2)`, `floor(n/2)`.  `e(P) = C(n, floor(n/2))`."""
+    a = (n + 1) // 2
+    rel = set()
+    for x in range(a):
+        for y in range(x + 1, a):
+            rel.add((x, y))
+    for x in range(a, n):
+        for y in range(x + 1, n):
+            rel.add((x, y))
+    return frozenset(rel)
+
+
+FAMILIES = [
+    ("chain", chain),
+    ("boundary  (V-sum, delta = 1/3)", vsum),
+    ("chain + point", chain_point),
+    ("2-antichain sum (delta = 1/2)", antichain2_sum),
+    ("two chains", two_chains),
+    ("antichain (delta = 1/2)", antichain),
+]
+
+
+# --------------------------------------------------------------------------- the merge tree
+
+
+def merge_tree(order):
+    """The dyadic bisection tree over `order`, as nested tuples; leaves are 1-element tuples.
+
+    `compression2`'s tree verbatim: put the elements in the order of `L*` and bisect recursively.
+    """
+    if len(order) == 1:
+        return (tuple(order), None, None)
+    h = len(order) // 2
+    left = merge_tree(order[:h])
+    right = merge_tree(order[h:])
+    return (tuple(order), left, right)
+
+
+def tree_nodes(t):
+    """Internal nodes in POST-ORDER -- children before parents, which is the order the decoder
+    must use, because a node's word is read against the sequences its children produced."""
+    elems, l, r = t
+    if l is None:
+        return []
+    return tree_nodes(l) + tree_nodes(r) + [t]
+
+
+def node_sequences(t, perm_pos):
+    """For each internal node, the two sub-sequences it merges, in `L`-order.
+
+    A node's output sequence is exactly `L` restricted to the node's element set -- that is what
+    makes the tape a bijection, and `s0` checks the bijection rather than assuming it.
+    """
+    out = {}
+    for node in tree_nodes(t):
+        elems, l, r = node
+        left = tuple(sorted(l[0], key=lambda e: perm_pos[e]))
+        right = tuple(sorted(r[0], key=lambda e: perm_pos[e]))
+        out[elems] = (left, right)
+    return out
+
+
+def merge_word(left, right, perm_pos):
+    """The merge word: `0` for each element taken from `left`, `1` from `right`."""
+    i = j = 0
+    w = []
+    while i < len(left) or j < len(right):
+        if j >= len(right) or (i < len(left) and perm_pos[left[i]] < perm_pos[right[j]]):
+            w.append(0)
+            i += 1
+        else:
+            w.append(1)
+            j += 1
+    return tuple(w)
+
+
+def tape(t, perm):
+    """The whole recording tape of `perm` against the tree `t`: one word per internal node, in
+    post-order."""
+    pos = {v: i for i, v in enumerate(perm)}
+    seqs = node_sequences(t, pos)
+    return tuple(merge_word(*seqs[node[0]], perm_pos=pos) for node in tree_nodes(t))
+
+
+def feasible_merges(left, right, rel):
+    """How many interleavings of `left` and `right` respect `P`.
+
+    A 2-D DP, `O(a*b)`.  THIS IS THE COST CLAIM: the `P`-conditioned code reads `P` at every node
+    in quadratic time and NEVER enumerates `L(P)`, which is `mg-99f4`'s Q2 asked of a code.
+
+    Correctness rests on one fact about the bisection tree: every pair of elements is separated
+    at exactly one node -- their least common ancestor -- and merging preserves the order inside
+    each side.  So a pair's relative order in the final permutation is decided by that node's
+    word alone, and `L` extends `P` iff EVERY node's word orders its cross-pairs consistently.
+
+    ⚠️ THAT MAKES IT A CODE.  IT DOES NOT MAKE IT A TIGHT ONE, and the first draft of this
+    docstring said it did -- `s0.6` went RED on it.  Feasibility is checked LOCALLY, against the
+    two sequences at hand, and two locally valid halves need not be interleavable at all: at
+    `P = {1 < 3, 2 < 0}` with halves `(0,1)` and `(3,2)` the union of the two orders with `P`
+    closes a 4-cycle and there are ZERO feasible merges.  The bottom-up code can therefore paint
+    itself into a corner, mass leaks into dead branches, and the Kraft sum comes out BELOW 1 --
+    `3/4` at that witness, worst `2/3` over `n <= 5`.  It is still a code (Kraft `<= 1` is
+    checked exactly) and every bound it gives is still valid (Gibbs is checked at every poset);
+    it is simply not optimal, and `s0.6` reports the leak rather than hiding it.
+    """
+    a, b = len(left), len(right)
+    # after[e] = the set of elements that must come after e
+    memo = {}
+
+    def f(i, j):
+        if i == a and j == b:
+            return 1
+        key = (i, j)
+        if key in memo:
+            return memo[key]
+        t = 0
+        if i < a:
+            e = left[i]
+            if not any((v, e) in rel for v in right[j:]):
+                t += f(i + 1, j)
+        if j < b:
+            e = right[j]
+            if not any((u, e) in rel for u in left[i:]):
+                t += f(i, j + 1)
+        memo[key] = t
+        return t
+
+    return f(0, 0)
+
+
+# --------------------------------------------------------------------------- the codes
+
+# Every code is `q(L)`, an exact `Fraction` (or a power of two), with `Sum_L q(L) <= 1`.
+# `s0` checks Kraft for all of them at every poset in its population.
+
+
+def log2_factorial(n):
+    """`log2 n!` by summation of `lgamma` -- no Stirling, because two of this directory's
+    comparisons are DIFFERENCES of nearly equal quantities."""
+    return math.lgamma(n + 1) / math.log(2.0)
+
+
+def tape_width(n):
+    """`T(n) = T(ceil(n/2)) + T(floor(n/2)) + n` -- the fixed-width reading of the tape, one bit
+    per element per level."""
+    if n <= 1:
+        return 0
+    h = n // 2
+    return tape_width(h) + tape_width(n - h) + n
+
+
+def q_free(L, ctx):
+    """FREE -- index `L` into all of `S_n`, ignore `P`.  The reference the ticket names."""
+    return Fraction(1, ctx["nfact"])
+
+
+def q_merge_idx(L, ctx):
+    """MERGE-IDX -- index each node's word among the `C(a+b, a)` words of its shape.
+
+    P1's subject.  The binomials telescope to `n!`, so this is `q_free` written in another
+    coordinate system.  Computed the long way here, per node, so that the claim is a MEASUREMENT
+    of the tape and not an appeal to the telescoping identity.
+    """
+    prod = 1
+    for node in ctx["nodes"]:
+        _, l, r = node
+        prod *= math.comb(len(l[0]) + len(r[0]), len(l[0]))
+    return Fraction(1, prod)
+
+
+def q_merge_tape(L, ctx):
+    """MERGE-TAPE -- the fixed-width reading: `T(n)` bits, whatever `L` is."""
+    return Fraction(1, 1 << ctx["T"])
+
+
+def q_merge_p(L, ctx):
+    """MERGE-P -- THE `L*` CODE, `P`-CONDITIONED.  At each node, index the word among those
+    consistent with `P` given the two sequences the children produced."""
+    pos = {v: i for i, v in enumerate(L)}
+    seqs = node_sequences(ctx["tree"], pos)
+    q = Fraction(1)
+    for node in ctx["nodes"]:
+        left, right = seqs[node[0]]
+        q *= Fraction(1, feasible_merges(left, right, ctx["rel"]))
+    return q
+
+
+def q_minimals(L, ctx):
+    """MINIMALS -- at each step, index the next element among the currently minimal ones.  Reads
+    `P` and does NOT read `L*`: the control that says whether `L*` is doing any work."""
+    rel = ctx["rel"]
+    n = ctx["n"]
+    below = ctx["below"]
+    placed = set()
+    q = Fraction(1)
+    for e in L:
+        m = sum(1 for c in range(n) if c not in placed and not (below[c] - placed))
+        q *= Fraction(1, m)
+        placed.add(e)
+    del rel
+    return q
+
+
+def q_opt(L, ctx):
+    """OPT -- the optimal code, `log2 e(P)` bits flat.  Not consumable (it IS `e(P)`); present as
+    the floor every other row is measured against."""
+    return Fraction(1, ctx["e"])
+
+
+def elias_gamma_len(k):
+    """Length of the Elias gamma code of the non-negative integer `k` (encoding `k+1`).
+    `Sum_{k>=0} 2^-gamma(k) = 1` exactly, so any concatenation of gamma codes is a prefix code."""
+    return 2 * (k + 1).bit_length() - 1
+
+
+def q_lehmer_lstar(L, ctx):
+    """LEHMER-L* -- the inversion table of `L` against `L*`, each entry Elias-gamma coded.
+    The code that bets on `L` being CLOSE to `L*`.  Undefined where `L*` is."""
+    star = ctx["star"]
+    if star is None:
+        return None
+    pos = {v: i for i, v in enumerate(L)}
+    n = ctx["n"]
+    bits = 0
+    for i in range(n):
+        c = sum(1 for j in range(i + 1, n) if pos[star[j]] < pos[star[i]])
+        bits += elias_gamma_len(c)
+    return Fraction(1, 1 << bits)
+
+
+CODES = [
+    ("FREE        ceil(log2 n!), ignores P", q_free),
+    ("MERGE-TAPE  one bit per element per level", q_merge_tape),
+    ("MERGE-IDX   word indexed among C(a+b,a)", q_merge_idx),
+    ("MERGE-P     word indexed among P-feasible", q_merge_p),
+    ("MINIMALS    next element among the minimals", q_minimals),
+    ("LEHMER-L*   inversion table vs L*, gamma", q_lehmer_lstar),
+    ("OPT         log2 e(P) flat  (NOT consumable)", q_opt),
+]
+
+
+def context(rel, n, LEs=None, star=None):
+    """Everything a code needs that does not depend on the particular `L`."""
+    e = count_extensions_dp(rel, n)
+    if star is None:
+        if LEs is None:
+            LEs = linear_extensions(rel, n)
+        star = lstar(pair_marginals(LEs, n), n)
+    base = star if star is not None else tuple(range(n))
+    tree = merge_tree(base)
+    return {
+        "rel": rel, "n": n, "e": e, "star": star, "tree": tree,
+        "nodes": tree_nodes(tree), "T": tape_width(n),
+        "nfact": math.factorial(n),
+        "below": [{x for x, y in rel if y == c} for c in range(n)],
+    }
+
+
+def ideal_bits(q):
+    """`-log2 q` in floats, from an exact `Fraction`.  `Fraction.numerator/denominator` can
+    overflow a float at `n = 12`, so the logarithm is taken on the integers."""
+    if q is None:
+        return None
+    return math.log2(q.denominator) - math.log2(q.numerator)
+
+
+# --------------------------------------------------------------------------- uniform sampling
+
+
+class LCG:
+    """A hand-written 64-bit LCG rather than `random.seed`, so the stream cannot drift between
+    hosts or Python versions (`mg-3da1`'s reason, kept)."""
+
+    def __init__(self, seed=0x9d9e9d9e9d9e9d9e):
+        self.s = seed & ((1 << 64) - 1)
+
+    def next(self):
+        self.s = (6364136223846793005 * self.s + 1442695040888963407) & ((1 << 64) - 1)
+        return self.s >> 11
+
+    def below(self, m):
+        return self.next() % m
+
+
+class Sampler:
+    """UNIFORM linear extensions, by walking the down-set DP counts.  Exact, not Metropolis: at
+    each step element `e` is chosen with probability proportional to the number of completions
+    after placing it.
+
+    A CLASS rather than a function because the DP memo has to be built ONCE per poset.  The
+    first draft rebuilt a 2^12-state table per draw, which is the difference between this arm
+    taking seconds and taking minutes -- and the sampled rows are exactly the rows where the
+    population is too big to enumerate, so the sampler is on the hot path by construction.
+    """
+
+    def __init__(self, rel, n):
+        self.n = n
+        self.below = [{x for x, y in rel if y == c} for c in range(n)]
+        self.memo = {}
+
+    def count(self, placed):
+        if placed == (1 << self.n) - 1:
+            return 1
+        if placed in self.memo:
+            return self.memo[placed]
+        t = 0
+        for c in range(self.n):
+            if not (placed >> c) & 1 and all((placed >> b) & 1 for b in self.below[c]):
+                t += self.count(placed | (1 << c))
+        self.memo[placed] = t
+        return t
+
+    def draw(self, rng):
+        placed = 0
+        seq = []
+        for _ in range(self.n):
+            opts = []
+            for c in range(self.n):
+                if not (placed >> c) & 1 and all((placed >> b) & 1 for b in self.below[c]):
+                    opts.append((c, self.count(placed | (1 << c))))
+            tot = sum(w for _, w in opts)
+            r = rng.below(tot)
+            acc = 0
+            for c, w in opts:
+                acc += w
+                if r < acc:
+                    placed |= 1 << c
+                    seq.append(c)
+                    break
+        return tuple(seq)
+
+
+def sample_extension(rel, n, rng):
+    """One uniform draw, building its own sampler.  For one-off use only -- see `Sampler`."""
+    return Sampler(rel, n).draw(rng)
+
+
+# --------------------------------------------------------------------------- measuring a code
+
+
+def measure(rel, n, cap=50000, nsample=1500, rng=None):
+    """Expected codelengths of every code at one poset.
+
+    Returns `(ctx, rows, how)` where `rows[name] = (ideal, shannon)` in bits and `how` is
+    `exact` or `sampled(N)`.  `exact` enumerates `L(P)`; above `cap` extensions it samples
+    uniformly with the LCG.  WHICH ONE WAS USED IS RETURNED, not inferred, because a sampled row
+    and an exact row are different kinds of number and the tables say which each is.
+    """
+    e = count_extensions_dp(rel, n)
+    if e <= cap:
+        LEs = linear_extensions(rel, n)
+        ctx = context(rel, n, LEs=LEs)
+        pop, how = LEs, "exact"
+    else:
+        # `L*` needs the marginals, which need the measure.  Above the cap it is taken from the
+        # SAMPLE and the row says so.
+        rng = rng or LCG()
+        smp = Sampler(rel, n)
+        pop = [smp.draw(rng) for _ in range(nsample)]
+        ctx = context(rel, n, LEs=pop)
+        how = "sampled(%d)" % nsample
+    rows = {}
+    for name, fn in CODES:
+        tot_i = 0.0
+        tot_s = 0.0
+        ok = True
+        for L in pop:
+            q = fn(L, ctx)
+            if q is None:
+                ok = False
+                break
+            b = ideal_bits(q)
+            tot_i += b
+            tot_s += math.ceil(b)
+        rows[name] = (tot_i / len(pop), tot_s / len(pop)) if ok else (None, None)
+    return ctx, rows, how
+
+
+def kraft(rel, n, LEs, ctx, fn):
+    """The exact Kraft sum of one code over `L(P)` -- a `Fraction`, so `= 1` is an equality."""
+    tot = Fraction(0)
+    for L in LEs:
+        q = fn(L, ctx)
+        if q is None:
+            return None
+        tot += q
+    return tot
+
+
+# --------------------------------------------------------------------------- transcript
+
+
+class Report:
+    """Minimal transcript writer.  `bad` counts RED rows and becomes the arm's exit code, so a
+    red row cannot be printed and walked past."""
+
+    def __init__(self):
+        self.bad = 0
+
+    def banner(self, s):
+        print("=" * 78)
+        print(s)
+        print("=" * 78)
+
+    def note(self, s):
+        print("       " + s)
+
+    def line(self, s=""):
+        print(s)
+
+    def verdict(self, ok, label, detail=""):
+        if not ok:
+            self.bad += 1
+        print("  [%s] %s%s" % ("GREEN" if ok else "RED  ", label,
+                               ("   " + detail) if detail else ""))
+
+    def done(self):
+        print()
+        print("arm exit: %d   (0 green, %d red row(s))" % (1 if self.bad else 0, self.bad))
+        return 1 if self.bad else 0

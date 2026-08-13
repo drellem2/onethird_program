@@ -1,0 +1,73 @@
+==============================================================================
+s3.0  THE PARAMETER SPACE HAS TWO NAMED AXES AND THE THIRD IS STILL UNNAMED
+==============================================================================
+       Daniel, 20:20Z: `compressions trade off between preservation of linear stats, entropy
+       preservation, and one other metric iirc.`  Two of the three are named.  The third is
+       not, and WITHOUT IT THE PARAMETER SPACE HAS NO COORDINATES -- which is a statement about
+       the proposal's readiness and not about its merit.  This arm therefore measures the
+       object the two NAMED axes are functions of (the scale profile) rather than guessing the
+       third, and reports what a screen can and cannot say without it.
+==============================================================================
+s3.1  THE VARIANCE IDENTITY, EXACTLY — F24 (B) re-measured on this arm's own code
+==============================================================================
+  [GREEN] Var(f) = sum_l ||D_l f||^2 EXACTLY at 595 posets, n = 4 and 5   exact Fractions, 0 deviation -- F24 (B) reproduced on code sharing nothing with mg-8748's
+       ⚠️ This is CORROBORATION and not news.  F24's own honest scoping, which the registry
+       requires to travel with the entry, says it in as many words: the variance identity is
+       PYTHAGORAS and holds for ANY filtration.  It is carried here so that this arm's Q1
+       number is read against a profile that is known to be the right object.
+==============================================================================
+s3.2  Q1 RESOLUTION — is the scale profile non-constant on the CONSUMABLE inputs?
+==============================================================================
+       mg-99f4's screen, definition for definition: `res(Phi)` is the number of distinct values
+       `Phi` takes over `LL_n = {L(P)}`, and the sharpest bound derivable is
+       `B_Phi(v) = max{e(P) : Phi(L(P)) = v}`, worth `log2(free bound) - E[log2 B]` bits.
+
+     n | posets | distinct profiles | res | bits vs the free bound
+    ---+--------+-------------------+-----+-----------------------
+     4 |    195 |                23 |  23 | 2.4152 bits
+     5 |   4111 |               387 | 387 | 3.8724 bits
+  [GREEN] P9 first half: the profile PASSES Q1 -- it is far from constant on LL_n   unlike 3 of mg-99f4's 4 TIER-2 rows, which came back res = 1 and 0.0000 bits
+       ⚠️ PASSING Q1 IS THE CHEAP HALF AND IT IS NOT EVIDENCE OF ANYTHING.  A profile is a
+       VECTOR of rationals, so it resolves for the same reason `e(P)` itself resolves: it
+       carries a lot of information about the poset.  mg-99f4's `|E|` row passed Q1 too --
+       indeed it was a near-oracle -- and failed anyway.  Q1 is a floor, not a signal.
+==============================================================================
+s3.3  Q2 COST — and this is where it stands or falls
+==============================================================================
+       `prof(P, f) = (||D_l f||^2)_l` is a variance decomposition OF THE MEASURE Unif(L(P)).
+       Every entry is a conditional expectation under that measure.  So computing it needs the
+       measure, and the measure IS L(P).  On the definitions:
+
+     object                                   | needs L(P)? | Q1  | Q2  | verdict
+    -----------------------------------------+-------------+-----+-----+---------
+     mg-99f4 T2a  L* in S                     | no          | NO  |  -  | NO -- Q1
+     mg-99f4 T2b  |S| = e(P(pi(S)))           | no          | NO  |  -  | NO -- Q1
+     mg-99f4 T2c  weak-order ideal under L*   | no          | NO  |  -  | NO -- Q1
+     mg-99f4 T2d  BK edge count on S          | YES         | yes | NO  | NO -- Q2
+     THIS ARM      F24 scale profile of inv_e | YES         | yes | NO  | NO -- Q2
+     (this ticket) MERGE-P / MINIMALS length  | no          | yes | yes | see s2.5
+  [GREEN] P9 second half: the profile FAILS Q2, and fails it the same way T2d does   it is a sum over L(P), so it bounds what we cannot compute by a thing we can compute only by computing it
+       THE MULTIPLIER'S WEIGHTS DO NOT CHANGE THIS AND THAT IS THE SCOPING POINT.  `M` is
+       `Sum_l lambda_l D_l`; choosing `lambda` picks out a LINEAR COMBINATION of the profile's
+       entries.  A linear combination of entries that individually need L(P) still needs L(P),
+       at every point of the parameter space, so NO CHOICE OF WEIGHTS repairs Q2.  What could
+       repair it is an a-priori BOUND on the profile computable from P -- and that is a
+       different object from a weight, and nobody has proposed one.
+==============================================================================
+s3.4  WHAT IS NOT MEASURED HERE, STATED SO IT CANNOT BE READ AS MEASURED
+==============================================================================
+       1. THE THIRD AXIS.  Unnamed, so unmeasured.  If it is a functional of the measure it
+          inherits s3.3 verbatim; if it is a functional of P alone it is closed already by
+          mg-8b32's C1.  Those two cases are exhaustive over what the phrase can mean, which
+          is the strongest thing that can be said without the name.
+       2. WHETHER SOME lambda FORCES A BOUND.  Not tested, and it cannot be tested against an
+          unnamed third axis.  s3.3 says only that no lambda repairs the COST, which is a
+          necessary condition and not the question Daniel asked.
+       3. REALIZABILITY.  Not tested here.  mg-0fc6 a2 already measured that compression2's
+          whole chain runs verbatim on a non-realizable measure with the same marginals; the
+          profile is a functional of the MEASURE rather than of the marginals, so that wash-out
+          argument does NOT transfer to it, and saying so is worth more than a number here.
+          ⚠️ NOT transferring is not the same as separating: mg-99f4's dichotomy applies, and
+          whatever the profile does at a non-realizable measure is worth ZERO toward a bound.
+
+arm exit: 0   (0 green, 0 red row(s))

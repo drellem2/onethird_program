@@ -1,0 +1,145 @@
+==============================================================================
+s2.1  NO CODE BEATS THE FREE BOUND AT THE ANTICHAIN — a theorem, measured exhaustively at n <= 5
+==============================================================================
+       e(antichain) = n!, so log2 e(P) = log2 n! there, and Gibbs says E[len] >= log2 e(P) for
+       EVERY code.  Hence max over P of E[len] >= log2 n! for every FAMILY of codes {C_P}, and
+       a shape-B bound  log2 e(P) <= c log2 n!  with c < 1 valid at every P DOES NOT EXIST.
+       Not `no code found`: no code exists.  This is the one-line half the ticket asked for.
+
+    n | code        | max_P E[len] | log2 n!  | argmax is the antichain?
+   ---+-------------+--------------+----------+-------------------------
+    4 | FREE        |       4.5850 |   4.5850 | yes
+    4 | LEHMER-L*   |       6.0000 |   4.5850 | no  (ties elsewhere too)
+    4 | MERGE-IDX   |       4.5850 |   4.5850 | yes
+    4 | MERGE-P     |       4.5850 |   4.5850 | yes
+    4 | MERGE-TAPE  |       8.0000 |   4.5850 | yes
+    4 | MINIMALS    |       4.5850 |   4.5850 | yes
+    4 | OPT         |       4.5850 |   4.5850 | yes
+    5 | FREE        |       6.9069 |   6.9069 | yes
+    5 | LEHMER-L*   |       8.6000 |   6.9069 | no  (ties elsewhere too)
+    5 | MERGE-IDX   |       6.9069 |   6.9069 | yes
+    5 | MERGE-P     |       6.9069 |   6.9069 | yes
+    5 | MERGE-TAPE  |      12.0000 |   6.9069 | yes
+    5 | MINIMALS    |       6.9069 |   6.9069 | yes
+    5 | OPT         |       6.9069 |   6.9069 | yes
+  [GREEN] P6: every code's worst case is at or above log2 n!, at n = 4 and n = 5   7 codes x 219 and x 4231 posets
+       LEHMER-L* is the one row whose argmax is NOT the antichain, and the reason is that L*
+       DOES NOT EXIST at the antichain -- every marginal is 1/2, so the majority tournament is
+       a tie at every pair.  A code that reads L* is UNDEFINED at the single poset that decides
+       the worst case, which is worth stating on its own: the L*-reading codes are blind
+       exactly where the bound is tight.
+==============================================================================
+s2.2  THE SHAPE-A CEILING, AND WHY 16,777,063 IS TWO STATEMENTS AND ONE NUMBER
+==============================================================================
+   The best shape-A constant ANY code can deliver over all P at a given n is
+   log2 n! / (n log2 n) -- the free bound at the antichain, divided by n log2 n:
+
+             n | log2 n!/(n log2 n)
+     ----------+--------------------
+            10 |            0.655976
+           100 |            0.789850
+          1000 |            0.855868
+        100000 |            0.913147
+      10000000 |            0.937958
+      16777063 |            0.939888
+     1000000000 |            0.951745
+       It RISES to 1.  So a shape-A constant c < 1 valid at every P is refuted at the antichain
+       for every n above 2^(log2 e / (1-c)) -- which is the predecessor's own crossover law
+       read from the other end.
+
+  [GREEN] mg-0fc6 a1.6's crossover reproduced TO THE UNIT on this directory's own code   c = 1 - 1/(24 ln 2) = 0.9398877  ->  n* = 16777063
+     the PRINTED constant 0.9399 gives n* = 16834249 -- a difference of 57186, which is
+     mg-99f4's finding about four printed digits and is CITED here, not rediscovered.
+
+   P8 -- THE TWO READINGS.  Below n*, `0.9399 n log2 n >= log2 n!`, so the bound is
+   IMPLIED BY THE FREE BOUND and says nothing.  Above n*, `0.9399 n log2 n < log2 n!`,
+   so the bound is FALSE at the antichain and can only hold under a hypothesis that
+   excludes it.  Same n.  There is no n at which the theorem is both non-vacuous and
+   hypothesis-free.
+
+     n =  16777062   c*n log2 n = 378445095.0333   log2 n! = 378445095.0036   -> VACUOUS (implied by free)
+     n =  16777063   c*n log2 n = 378445118.9466   log2 n! = 378445119.0036   -> NEEDS ITS HYPOTHESIS (false at the antichain)
+  [GREEN] and hypothesis (1) DOES exclude the antichain   delta(antichain) = 1/2 > 1/3
+==============================================================================
+s2.3  `AT THE n YOU CLAIM IT` NAMES AN n AT WHICH THE POPULATION IS EMPTY
+==============================================================================
+   n | frozen posets (delta < 1/3, non-chain) reachable | source
+  ---+-------------------------------------------------+--------------------------
+   3 |                                               0 | exhaustive, THIS directory (s0.9)
+   4 |                                               0 | exhaustive, THIS directory (s0.9)
+   5 |                                               0 | exhaustive, THIS directory (s0.9)
+   6 |                                               0 | mg-9b6b, exhaustive over iso classes
+   7 |                                               0 | mg-9b6b, exhaustive over iso classes
+   8 |                                               0 | mg-9b6b, exhaustive over iso classes
+   9 |                                               0 | the conjecture is VERIFIED to n = 14
+  10 |                                               0 | the conjecture is VERIFIED to n = 14
+  11 |                                               0 | the conjecture is VERIFIED to n = 14
+  12 |                                               0 | the conjecture is VERIFIED to n = 14
+  13 |                                               0 | the conjecture is VERIFIED to n = 14
+  14 |                                               0 | the conjecture is VERIFIED to n = 14
+  15+|                                         unknown | OPEN -- and this is the only place a
+     |                                                 | frozen poset can be
+  [GREEN] the target class is EMPTY at every n = 6..12 -- the whole range the ticket names   so a run on it is a fact about the population's SIZE, not about the code
+       This is mg-0b96's population trap arriving one arm along, and it is why s1 runs on the
+       BOUNDARY (delta = 1/3) instead and says so in its own header.  ⚠️ n = 6..8 and n <= 14
+       are CITED, not re-measured here; n <= 5 is this directory's own exhaustive count.
+==============================================================================
+s2.4  WHY PASSING IS FREE WHERE IT CAN BE RUN — what hypothesis (1) buys, cumulatively
+==============================================================================
+   n = 5, all non-chain posets, bucketed by delta:
+
+     delta | posets | max e(P) | CUMULATIVE max e over {delta <= this} | as % of free
+    -------+--------+----------+--------------------------------------+--------------
+       1/3 |    360 |        3 |                                    3 |  22.9%
+      4/11 |    120 |       11 |                                   11 |  50.1%
+       3/8 |    120 |        8 |                                   11 |  50.1%
+       2/5 |    600 |       25 |                                   25 |  67.2%
+       3/7 |    240 |        7 |                                   25 |  67.2%
+       4/9 |    240 |        9 |                                   25 |  67.2%
+      7/15 |    240 |       15 |                                   25 |  67.2%
+       1/2 |   2191 |      120 |                                  120 | 100.0%
+       THE COLUMN THAT MATTERS IS THE CUMULATIVE ONE, because a hypothesis is `delta <= t` and
+       what it buys is the max over everything at or below t.  It runs 3 -> 120, i.e. 22.9% of
+       the free bound at hypothesis (1)'s own threshold and 100% at 1/2.
+       ⚠️ THE PER-BUCKET COLUMN IS **NOT** MONOTONE AND THAT IS PRINTED RATHER THAN SMOOTHED:
+       delta = 2/5 carries e(P) = 25 while delta = 3/7 above it carries 7.  So `smaller delta
+       means smaller e(P)` is FALSE bucket by bucket; what is true is the cumulative statement,
+       and it is the cumulative statement a hypothesis consumes.
+       Hypothesis (1) therefore buys exactly the regime where the free bound is already loose
+       by an order -- which is why every code passes there, and why passing carries no
+       information.  The test discriminates only in the regime where it is impossible to pass.
+==============================================================================
+s2.5  ONE CODE PUT TO THE PREDECESSOR'S Q2 — and it comes back with a real bound
+==============================================================================
+       Q2 COST: is the bound obtainable without enumerating L(P)?  For MINIMALS it is, and the
+       argument is one line: at every step the available minimals form an ANTICHAIN, so there
+       are at most w(P) of them, so
+              log2 e(P)  <=  E[len]  <=  max_L len(L)  <=  n log2 w(P),
+       and w(P) is computable from P in polynomial time.  UNCONDITIONAL, consumable, and it
+       beats the free bound exactly when  w(P) < n / e = n / 2.7183:
+
+   family                          |  n | w(P) | n log2 w | log2 n! | log2 e(P) | beats free?
+  --------------------------------+----+------+----------+---------+-----------+------------
+   chain                           |  6 |    1 |    0.000 |   9.492 |     0.000 | YES
+   chain                           | 12 |    1 |    0.000 |  28.835 |     0.000 | YES
+   boundary  (V-sum, delta = 1/3)  |  6 |    2 |    6.000 |   9.492 |     3.170 | YES
+   boundary  (V-sum, delta = 1/3)  | 12 |    2 |   12.000 |  28.835 |     6.340 | YES
+   chain + point                   |  6 |    2 |    6.000 |   9.492 |     2.585 | YES
+   chain + point                   | 12 |    2 |   12.000 |  28.835 |     3.585 | YES
+   2-antichain sum (delta = 1/2)   |  6 |    2 |    6.000 |   9.492 |     3.000 | YES
+   2-antichain sum (delta = 1/2)   | 12 |    2 |   12.000 |  28.835 |     6.000 | YES
+   two chains                      |  6 |    2 |    6.000 |   9.492 |     4.322 | YES
+   two chains                      | 12 |    2 |   12.000 |  28.835 |     9.852 | YES
+   antichain (delta = 1/2)         |  6 |    6 |   15.510 |   9.492 |     9.492 | no
+   antichain (delta = 1/2)         | 12 |   12 |   43.020 |  28.835 |    28.835 | no
+  [GREEN] log2 e(P) <= n log2 w(P) holds at every family and n tested   the bound is checked, not asserted
+
+   the threshold, exactly:  n log2 w < log2 n!  <=>  w < n/e   (n = 6: w < 2.21)   (n = 12: w < 4.41)   (n = 100: w < 36.79)
+       So a consumable, unconditional, order-beating bound DOES exist -- and it is vacuous
+       exactly where the programme needs it, since a frozen poset is a DENSE one (mg-0b96's
+       open region is d >~ 2e-2 and WIDENING) and dense means wide.  THE SAME DICHOTOMY A
+       THIRD TIME: the bound is real, cheap, and worth nothing on the target class.
+       ⚠️ `dense means wide` is stated as the reason the bound is expected to be vacuous
+       there; it is NOT measured on the frozen class, because the frozen class is empty.
+
+arm exit: 0   (0 green, 0 red row(s))
