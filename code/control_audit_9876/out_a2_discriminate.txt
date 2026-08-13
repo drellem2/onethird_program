@@ -39,6 +39,16 @@ C7b   the pinned commit is one this repository INTEGRATES         DISCRIMINATES 
       known-bad input: the pin names a REAL commit that is an ancestor of nothing this repository integrates — and whose STATE.md is BYTE-IDENTICAL to the digest
 C7c   the named revision carries the digested STATE.md            DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the pin names a real, main-reachable commit whose STATE.md is not the one it digests — the pin the old reconcile() wrote
+C8a   the declaration is readable as one                          DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the in-flight declaration cannot be parsed
+C8b   declared rows exist and are pinned                          DISCRIMINATES  good exit 2 silent / bad exit 2 RED
+      known-bad input: the declaration names a row the ledger does not have
+C8c   declared rows have actually MOVED                           DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the declaration names a row nobody has relocated
+C8d   THE DEFERRAL EXPIRES                                        DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the declared relocation's bytes have reached `main` and it is still declared
+C8e   an unverifiable deferral is not honoured                    DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: there is no history to evaluate the expiry against
 R1    --reconcile requires --rows                                 DISCRIMINATES  good exit 0 silent / bad exit 1 RED
       known-bad input: a re-pin is requested without naming any row
 R2    refuse unknown row labels                                   DISCRIMINATES  good exit 0 silent / bad exit 1 RED
@@ -97,6 +107,24 @@ N18   mutation: two commits in the visible line                   DISCRIMINATES 
       known-bad input: the mutation `visible provenance names the pinned commit AND a second one` is applied
 N20   mutation: BOTH provenance copies name a nonexistent commit  DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `BOTH copies of the pinned commit name a revision that does not exist` is applied
+N21   mutation: a row declared that has not moved                 DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the mutation `a declaration for a row that has NOT moved` is applied
+N22   mutation: a row declared that does not exist                DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the mutation `a declaration for a row that is not in the ledger` is applied
+N23   mutation: the declaration is not valid JSON                 DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the mutation `a declaration that is not valid JSON` is applied
+N24   mutation: the declaration names no rows                     DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the mutation `a declaration with an EMPTY row list` is applied
+N25   mutation: the declaration carries no reason                 DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the mutation `a declaration with no `why` and no `landing_b`` is applied
+N26   mutation: the declaration is at another schema              DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the mutation `a declaration at an unreadable schema version` is applied
+N27   world: landing A on a branch is HONOURED                    DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the world's expect string is already in the unmutated report
+N28   world: the same declaration once main has it                DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the world's expect string is already in the unmutated report
+N29   world: a declaration with no history to check               DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the world's expect string is already in the unmutated report
 N19   the baseline-absence guard                                  DISCRIMINATES  good exit 0 silent / bad exit 1 RED
       known-bad input: a mutation's expect string is one the UNMUTATED report already prints
 N11   the positive control (baseline)                             DISCRIMINATES  good exit 0 silent / bad exit 1 RED
@@ -119,9 +147,11 @@ H6    a drift report names a non-empty worklist                   DISCRIMINATES 
       known-bad input: the control reports DRIFT with no row in section 2's worklist
 H7    an unknown exit code is BROKEN, not CLEAN                   DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the control exits with a code that is not one of its three verdicts
+H8    section 8 produced a reading at all                         DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: section 8 printed no `declared in-flight rows:` line at all
 
-PART A TALLY over 55 arms of 55 registered:
-    DISCRIMINATES  55
+PART A TALLY over 70 arms of 70 registered:
+    DISCRIMINATES  70
     LAUNDERED      0
     UNFALSIFIABLE  0
     SETUP FAILED   0
@@ -209,5 +239,5 @@ only ever print CONFIRMED is a list of accusations, and one that prints only CLO
 is a list of assertions; both halves are on disk.
 
 ============================================================================================
-VERDICT: 55 arms probed, 55 shown to discriminate, 0 not; 0 demonstrated holes in arms that do.
+VERDICT: 70 arms probed, 70 shown to discriminate, 0 not; 0 demonstrated holes in arms that do.
 ============================================================================================

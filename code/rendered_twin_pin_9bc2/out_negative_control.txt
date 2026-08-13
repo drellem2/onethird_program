@@ -27,9 +27,18 @@ the pin's `columns` field is deleted outright                         1    CAUGH
 `Generated <date>` re-introduced BEHIND an HTML comment opener        5    CAUGHT   exit 2; looked for 'matches /\\bGenerated\\b' (absent from the baseline)
 visible provenance names the pinned commit AND a second one           6    CAUGHT   exit 2; looked for 'does not name exactly the pinned commit' (absent from the baseline)
 BOTH copies of the pinned commit name a revision that does not exist  7    CAUGHT   exit 2; looked for 'the pinned commit DOES NOT RESOLVE in this repository' (absent from the baseline)
+a declaration for a row that has NOT moved                            8    CAUGHT   exit 2; looked for 'declares row(s) that have NOT moved' (absent from the baseline)
+a declaration for a row that is not in the ledger                     8    CAUGHT   exit 2; looked for "declares row(s) that are not in STATE.md's ledger" (absent from the baseline)
+a declaration that is not valid JSON                                  8    CAUGHT   exit 2; looked for 'is not valid JSON' (absent from the baseline)
+a declaration with an EMPTY row list                                  8    CAUGHT   exit 2; looked for '`rows` is EMPTY' (absent from the baseline)
+a declaration with no `why` and no `landing_b`                        8    CAUGHT   exit 2; looked for 'is missing or empty' (absent from the baseline)
+a declaration at an unreadable schema version                         8    CAUGHT   exit 2; looked for 'this control reads schema 1 only' (absent from the baseline)
 NO MUTATION — the baseline                                            -    CAUGHT   exit 0; worklist is EXACTLY (none) — parsed from section 2, expectation derived from the pin
+landing A planted in a real git repository                            8    CAUGHT   exit 0; looked for 'HONOURED — REPORTED, NOT GRADED' and required 'This is the WORKLIST' to be absent
+landing A after its bytes reach `main`                                8    CAUGHT   exit 2; looked for 'THE DEFERRAL HAS EXPIRED'
+a declaration in a checkout with no git at all                        8    CAUGHT   exit 1; the declaration must be neither graded nor honoured, so row 1 must stay in section 2's worklist
 
-17 of 17 caught; 0 hole(s).
+26 of 26 caught; 0 hole(s).
 0 row(s) UNFALSIFIABLE — expect string present in the unmutated report (mg-9876's guard).
 
 Every mutation was caught by the section that claimed it.

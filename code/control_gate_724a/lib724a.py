@@ -77,6 +77,22 @@ _FIELDS = [
     ("twin.worklist", "twin",
      r"^The worklist, READ OUT OF SECTION 2 rather than typed here: (?P<v>.*)$",
      lambda s: [] if s.strip() == "(none)" else sorted(s.split())),
+    # THIS FIELD IS THE OTHER HALF OF THE ONE ABOVE (mg-1344), AND IT IS GATED FOR THE REASON
+    # THAT ONE IS.  Since section 8, `twin.worklist` reads the UNDECLARED drift: a ledger row
+    # can now leave it by being declared in `IN-FLIGHT.json` for one landing.  That
+    # subtraction is the whole risk of the mechanism, so the declared set is a gated field in
+    # its own right and the SUM of the two is what `twin.worklist` alone used to be.  A
+    # branch that moves a row and declares it moves THIS value and says so in BASELINE.json;
+    # a branch that moves one and does not still moves `twin.worklist` exactly as before.
+    #
+    # WHAT MAKES THE DECLARED SIDE DIFFERENT FROM EDITING `twin.worklist` BY HAND is not this
+    # gate — it is that twin_pin.py section 8 grades the declaration RED the moment those
+    # bytes reach an integration ref.  A value moved here comes back on its own or the gate
+    # stays red; a value moved there stays moved forever and nothing ever asks again.
+    ("twin.inflight", "twin",
+     r"^The DECLARED IN-FLIGHT relocations, READ OUT OF SECTION 8 rather than typed here: "
+     r"(?P<v>.*)$",
+     lambda s: [] if s.strip() == "(none)" else sorted(s.split())),
     ("twin.mutations_caught", "twin",
      r"^(?P<v>\d+) of \d+ caught; \d+ hole\(s\)\.$", int),
     ("twin.mutations_total", "twin",

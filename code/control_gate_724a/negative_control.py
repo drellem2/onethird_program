@@ -73,6 +73,8 @@ def _set_str(text, pattern, new):
 
 
 WORKLIST_PAT = r"^The worklist, READ OUT OF SECTION 2 rather than typed here: (?P<v>.*)$"
+INFLIGHT_PAT = (r"^The DECLARED IN-FLIGHT relocations, READ OUT OF SECTION 8 rather than "
+                r"typed here: (?P<v>.*)$")
 CONTROL_EXIT_PAT = r"^control exit\s+:\s+(?P<v>\d+)\s"
 VERDICT_PAT = r"^control verdict: VERDICT: (?P<v>[A-Z ]+?) —"
 CAUGHT_PAT = r"^(?P<v>\d+) of \d+ caught; \d+ hole\(s\)\.$"
@@ -90,6 +92,13 @@ def _grow_worklist(text):
     if not m:
         return text
     return _set_str(text, WORKLIST_PAT, m.group("v") + " 99")
+
+
+def _grow_inflight(text):
+    m = re.search(INFLIGHT_PAT, text, re.M)
+    if not m:
+        return text
+    return _set_str(text, INFLIGHT_PAT, m.group("v") + " 99")
 
 
 def _flip_verdict(text):
@@ -152,6 +161,17 @@ TEXT_MUTATIONS = [
      "twin", lambda t: _drop_line(t, WORKLIST_PAT), ("refuse", "twin.worklist")),
     ("T12", "the audit's VERDICT line appears twice and the two readings could disagree",
      "audit", lambda t: _duplicate_line(t, A2_VERDICT_LINE), ("refuse", "audit.arms_probed")),
+    # T13/T14 ARE T1/T11 AIMED AT mg-1344's NEW FIELD, AND THEY ARE HERE FOR THE REASON T1
+    # EXISTS.  `twin.inflight` is what lets a moved ledger row out of `twin.worklist`, so it
+    # is now the second field carrying that event — and a gated field with no probe showing
+    # this gate can SEE it move is mg-9876's UNFALSIFIABLE class landing in the arm added to
+    # keep a subtraction honest.  T14 is the exactly-once half: a declaration set that is
+    # observable only while something is in flight would REFUSE on every ordinary run, which
+    # is the failure mg-188d measured one field over.
+    ("T13", "the twin's DECLARED in-flight set gains a row (a subtraction nobody declared)",
+     "twin", _grow_inflight, ("diverged", "twin.inflight")),
+    ("T14", "the twin runner never prints its in-flight line (section 8 did not decide)",
+     "twin", lambda t: _drop_line(t, INFLIGHT_PAT), ("refuse", "twin.inflight")),
 ]
 
 # Mutations of the captured EXIT STATUS rather than of the transcript.  Both runners map some
@@ -272,8 +292,23 @@ def run_synthetic_worlds(baseline, observed):
         try:
             fn()
         except L.Refusal as exc:
+            # THE DETAIL IS PRINTED REPOSITORY-RELATIVE, AND THAT IS A REPAIR RATHER THAN
+            # COSMETICS (mg-1344, on mg-4020's finding).  S1 refuses over an ABSOLUTE path,
+            # so this table's committed copy carried `/Users/daniel/.pogo/polecats/p927a/...`
+            # — the worktree of whichever polecat last committed it.  A transcript that can
+            # only reproduce for ONE OPERATOR is exactly the defect mg-20ee's tranche 1 named
+            # in anchor_drift_96df, and mg-f771's own fixed-point check is GREEN across it
+            # because its normaliser strips worktree roots before comparing.
+            #
+            # mg-4020 found it here, declined to commit the file, and named it as belonging
+            # to mg-724a / mg-f771.  Nobody took it, and mg-1344 CANNOT decline: this branch
+            # genuinely changes out_gate.txt's content, so committing it would have replaced
+            # p927a with p1344 and re-planted the defect on behalf of every later operator.
+            # The choice was to repair the one file this branch is forced to rewrite; the
+            # other operator-valued transcripts on this tree were RESTORED, not committed.
+            detail = str(exc).splitlines()[0].replace(L.ROOT + os.sep, "")
             worlds.append((wid, what, "CAUGHT" if marker in str(exc) else "HOLE",
-                           str(exc).splitlines()[0][:104]))
+                           detail[:104]))
             return
         worlds.append((wid, what, "HOLE", "no refusal — this world was accepted"))
 

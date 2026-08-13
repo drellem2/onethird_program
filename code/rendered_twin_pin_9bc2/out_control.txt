@@ -96,6 +96,18 @@ SECTION 7 — the pin RESOLVES against git (reachability first, then byte-identi
         DIGESTED against — the two provenance fields agree with GIT,
         not merely with each other.
 
+SECTION 8 — DECLARED IN-FLIGHT RELOCATIONS, and whether the deferral has EXPIRED
+--------------------------------------------------------------------------------------
+  Section 2 subtracts a DECLARED row from its worklist.  That subtraction is the
+  only thing here that could be laundering, so this section is where it is paid
+  for: a declared row must have actually moved, and the declaration is honoured
+  ONLY while `--reconcile` could not produce a main-reachable pin anyway.
+
+  declared in-flight rows: (none)
+
+  PASS  no IN-FLIGHT.json — no relocation is in flight, which
+        is the normal state.  Nothing is subtracted from section 2's worklist.
+
 ======================================================================================
 VERDICT: CLEAN — the twin is pinned and its ledger rows have not moved.
 ======================================================================================

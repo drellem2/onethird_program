@@ -33,6 +33,7 @@ never a suspicion.
 
 import hashlib
 import io
+import json
 import os
 import re
 import shutil
@@ -744,6 +745,14 @@ _NC_BY_ARM = {
     "N17": "`Generated <date>` re-introduced BEHIND an HTML comment opener",
     "N18": "visible provenance names the pinned commit AND a second one",
     "N20": "BOTH copies of the pinned commit name a revision that does not exist",
+    # mg-1344's section-8 mutations.  Their target is `inflight`, whose base is the EMPTY
+    # STRING rather than a file's text — absence is that file's normal state.
+    "N21": "a declaration for a row that has NOT moved",
+    "N22": "a declaration for a row that is not in the ledger",
+    "N23": "a declaration that is not valid JSON",
+    "N24": "a declaration with an EMPTY row list",
+    "N25": "a declaration with no `why` and no `landing_b`",
+    "N26": "a declaration at an unreadable schema version",
 }
 
 
@@ -755,17 +764,25 @@ def _nc_probe(arm_id):
         name, section, expect, target, fn = next(m for m in NC.MUTATIONS if m[0] == mut_name)
         base_s, base_t = L.read(sp), L.read(tp)
 
+        # An `inflight` mutation's GOOD side is a path that does not exist, because absence
+        # is that file's normal state — the mutation IS the file appearing (mg-1344).
+        absent = os.path.join(box, "no-such-IN-FLIGHT.json")
+        planted = os.path.join(box, "IN-FLIGHT.json")
+
         def good():
-            return L.run_control(sp, tp, _ctl(box))
+            return L.run_control(sp, tp, _ctl(box), absent)
 
         def bad():
             s = fn(base_s) if target == "state" else base_s
             t = fn(base_t) if target == "twin" else base_t
-            if (s, t) == (base_s, base_t):
+            i = fn("") if target == "inflight" else ""
+            if (s, t, i) == (base_s, base_t, ""):
                 raise RuntimeError("mutation was a no-op — the fixture has rotted")
             L.write(sp, s)
             L.write(tp, t)
-            return L.run_control(sp, tp, _ctl(box))
+            if i:
+                L.write(planted, i)
+            return L.run_control(sp, tp, _ctl(box), planted if i else absent)
 
         return good, bad, has(expect)
     return build
@@ -773,6 +790,47 @@ def _nc_probe(arm_id):
 
 for _aid in _NC_BY_ARM:
     PROBES.append((_aid, f"the mutation `{_NC_BY_ARM[_aid]}` is applied", _nc_probe(_aid)))
+
+
+# ------------------------------------- the three worlds that need a real git (mg-1344)
+#
+# N27-N29 PROBE THE SCORING, NOT THE SECTION.  C8b/C8d/C8e already probe what section 8 does;
+# what these three arms are FOR is that negative_control's own worlds report honestly, and the
+# way one of them could stop doing so is mg-9876's own UNFALSIFIABLE class — an expect string
+# that was already in the unmutated report, so the row could never have failed.  So the good
+# side scores against an empty baseline report and must reach CAUGHT; the bad side hands the
+# same world a baseline report that already contains its expect string, and it must refuse to
+# score CAUGHT.  That is the guard being exercised rather than promised.
+
+def _world_probe(builder, index, expect):
+    def build(box):
+        def run(base_report):
+            tmp = L.make_sandbox(history=False)
+            sp, tp = _pair(tmp)
+            rows = builder(tmp, L.read(sp), L.read(tp), base_report)
+            if index >= len(rows):
+                raise RuntimeError("the world builder returned no row %d" % index)
+            name, _sec, verdict, detail = rows[index]
+            return (0 if verdict == "CAUGHT" else 1), f"{name}: {verdict}  {detail}"
+
+        good = lambda: run("")                                             # noqa: E731
+
+        # The baseline the bad side hands the world already CONTAINS what that world looks
+        # for, so its own guard must refuse to score CAUGHT.  The string is imported from
+        # negative_control rather than repeated here: a second copy would agree today and
+        # rot the moment either side is reworded, leaving a probe looking for nothing.
+        bad = lambda: run(expect)                                          # noqa: E731
+
+        return good, bad, lambda rc, text: rc != 0
+    return build
+
+
+PROBES.append(("N27", "the world's expect string is already in the unmutated report",
+               _world_probe(NC.protocol_worlds, 0, NC.EXPECT_HONOURED)))
+PROBES.append(("N28", "the world's expect string is already in the unmutated report",
+               _world_probe(NC.protocol_worlds, 1, NC.EXPECT_EXPIRED)))
+PROBES.append(("N29", "the world's expect string is already in the unmutated report",
+               _world_probe(NC.unknown_world, 0, NC.EXPECT_NOT_HONOURED)))
 
 
 @probe("N11", "the drift worklist is NOT the one derived from the pin")
@@ -850,6 +908,136 @@ def p_n13(box):
     return good, bad, lambda rc, text: rc != 0
 
 
+# ------------------------------------------------- twin_pin.py section 8 (mg-1344)
+#
+# THE SANDBOX IS ALREADY A REAL GIT REPOSITORY ON A BRANCH CALLED `main`, which is what makes
+# these probes possible at all: section 8's whole load is REACHABILITY, and reachability is
+# not a property of any file's text.  `make_sandbox()` was built for section 7 and is reused
+# here rather than re-created — its `history=False` mode is what C8e's bad side needs.
+
+_ROW1 = "| 1 | `λ_std = 1 ⟺ ordinal sum` | `U` | **proven** | any |"
+_ROW1_MOVED = ("| 1 | `λ_std = 1 ⟺ ordinal sum` | `U` | **proven** | "
+               "see docs/state-history/ledger-row-1.md |")
+
+
+def _declare(box, rows, **over):
+    """Write an in-flight declaration into the sandbox and return its path."""
+    path = os.path.join(box, "IN-FLIGHT.json")
+    body = {"schema": 1, "declared_by": "a2 probe", "rows": rows,
+            "why": "a2's planted world", "landing_b": "twin_pin.py --reconcile"}
+    body.update(over)
+    L.write(path, json.dumps(body, indent=2))
+    return path
+
+
+def _relocate_row1(box):
+    """Move row 1's Width cell in the sandbox's STATE.md.  Returns True if it took."""
+    sp, _tp = _pair(box)
+    text = L.read(sp)
+    # EXACTLY ONCE.  `_ROW1 not in text` is a membership test standing in for a fact — a2's
+    # own §1 smell — and if two lines matched, `replace(..., 1)` would relocate whichever
+    # came first and the probe would be about a row nobody named.
+    if text.count(_ROW1) != 1:
+        return False
+    L.write(sp, text.replace(_ROW1, _ROW1_MOVED, 1))
+    return True
+
+
+def _sbx_git(box, *args):
+    return subprocess.run(["git", "-C", box] + list(args), capture_output=True, text=True)
+
+
+@probe("C8a", "the in-flight declaration cannot be parsed")
+def p_c8a(box):
+    sp, tp = _pair(box)
+    good = lambda: L.run_control(sp, tp, _ctl(box),                        # noqa: E731
+                                 os.path.join(box, "absent.json"))
+
+    def bad():
+        path = os.path.join(box, "IN-FLIGHT.json")
+        L.write(path, '{"schema": 1, "rows": ["1"],,,')
+        return L.run_control(sp, tp, _ctl(box), path)
+
+    return good, bad, has("the in-flight declaration is not readable as one")
+
+
+@probe("C8b", "the declaration names a row the ledger does not have")
+def p_c8b(box):
+    sp, tp = _pair(box)
+    good = lambda: L.run_control(sp, tp, _ctl(box), _declare(box, ["1"]))  # noqa: E731
+    bad = lambda: L.run_control(sp, tp, _ctl(box), _declare(box, ["99z"]))  # noqa: E731
+    return good, bad, has("declares row(s) that are not in STATE.md's ledger")
+
+
+@probe("C8c", "the declaration names a row nobody has relocated")
+def p_c8c(box):
+    sp, tp = _pair(box)
+    if not _relocate_row1(box):
+        raise RuntimeError("row 1's ledger line is not the text this fixture relocates")
+    moved = L.read(sp)
+    unmoved = moved.replace(_ROW1_MOVED, _ROW1, 1)
+
+    def good():
+        L.write(sp, moved)
+        return L.run_control(sp, tp, _ctl(box), _declare(box, ["1"]))
+
+    def bad():
+        L.write(sp, unmoved)
+        return L.run_control(sp, tp, _ctl(box), _declare(box, ["1"]))
+
+    return good, bad, has("declares row(s) that have NOT moved")
+
+
+@probe("C8d", "the declared relocation's bytes have reached `main` and it is still declared")
+def p_c8d(box):
+    """THE ARM THAT MAKES THE WHOLE PROTOCOL HONEST, PROBED AGAINST A REAL HISTORY.
+
+    Good and bad differ ONLY in whether the sandbox's `main` carries the relocated STATE.md.
+    Nothing about the declaration, the twin or the ledger changes between the two sides — the
+    excuse expires because the world moved, which is the property that distinguishes this
+    from moving a value in BASELINE.json and calling it declared.
+    """
+    sp, tp = _pair(box)
+    if not _relocate_row1(box):
+        raise RuntimeError("row 1's ledger line is not the text this fixture relocates")
+    path = _declare(box, ["1"])
+
+    def good():
+        return L.run_control(sp, tp, _ctl(box), path)
+
+    def bad():
+        _sbx_git(box, "add", "STATE.md")
+        _sbx_git(box, "-c", "user.email=a2@mg-9876", "-c", "user.name=a2",
+                 "-c", "commit.gpgsign=false", "commit", "-q", "-m", "landing A merged")
+        return L.run_control(sp, tp, _ctl(box), path)
+
+    return good, bad, has("THE DEFERRAL HAS EXPIRED")
+
+
+@probe("C8e", "there is no history to evaluate the expiry against")
+def p_c8e(box):
+    """The FAIL-OPEN direction, and the one this section shipped in its first draft.
+
+    Section 7 answers `unknown` by reporting and not grading — correct there, because grading
+    would condemn a pin the checkout cannot check.  Copied here it would mean an export, a
+    tarball or a shallow clone silently honours ANY declaration, since the effect of a
+    declaration is to REMOVE a row from the merge gate's worklist.  The bad side is a sandbox
+    with no history at all, and it must say NOT HONOURED.
+    """
+    sp, tp = _pair(box)
+    if not _relocate_row1(box):
+        raise RuntimeError("row 1's ledger line is not the text this fixture relocates")
+    path = _declare(box, ["1"])
+    plain = L.make_sandbox(history=False)
+    psp, ptp = _pair(plain)
+    L.write(psp, L.read(sp))
+    ppath = _declare(plain, ["1"])
+
+    good = lambda: L.run_control(sp, tp, _ctl(box), path)                  # noqa: E731
+    bad = lambda: L.run_control(psp, ptp, _ctl(plain), ppath)              # noqa: E731
+    return good, bad, has("REPORTED, NOT GRADED, AND NOT HONOURED")
+
+
 # ------------------------------------------------------------------ run_all.sh arms
 #
 # The runner's four branches classify four WORLDS, so the probe substitutes the two producers
@@ -862,7 +1050,16 @@ _STUB = ("#!/usr/bin/env python3\n"
          "sys.exit({code})\n")
 
 
-_VERDICT_STUB = "VERDICT: DRIFT — see section 2's worklist.\nsince the twin was last reconciled: 8"
+# THE STUB BODIES CARRY SECTION 8's FIELD LINE TOO (mg-1344).  The runner refuses when
+# section 8 produced no `declared in-flight rows:` reading — arm H8, and it is the right
+# refusal — so a stub control that prints only a VERDICT line takes every world below to
+# exit 2 and LAUNDERS H3, H4, H6 and H7 into "good exit 2 and bad exit 2".  Measured, not
+# predicted: that is exactly what happened on mg-1344's first run of this suite.  The
+# stub is the twin control's CONTRACT with its runner, and the contract grew a line.
+_INFLIGHT_LINE = "  declared in-flight rows: (none)"
+_VERDICT_STUB = ("VERDICT: DRIFT — see section 2's worklist.\n"
+                 "since the twin was last reconciled: 8\n" + _INFLIGHT_LINE)
+_CLEAN_STUB = "VERDICT: CLEAN\n" + _INFLIGHT_LINE
 
 
 def _runner(box, control_code, negative_code, control_body="(stub control output)"):
@@ -892,7 +1089,7 @@ def p_h2(box):
 
 @probe("H3", "the control reports drift (exit 1)")
 def p_h3(box):
-    good = lambda: _runner(box, 0, 0, "VERDICT: CLEAN")                    # noqa: E731
+    good = lambda: _runner(box, 0, 0, _CLEAN_STUB)                    # noqa: E731
     bad = lambda: _runner(box, 1, 0, _VERDICT_STUB)                        # noqa: E731
     return good, bad, has("DRIFT, and the instrument demonstrably fails")
 
@@ -908,20 +1105,34 @@ def p_h5(box):
 @probe("H6", "the control reports DRIFT with no row in section 2's worklist")
 def p_h6(box):
     good = lambda: _runner(box, 1, 0, _VERDICT_STUB)                       # noqa: E731
-    bad = lambda: _runner(box, 1, 0, "VERDICT: DRIFT — see section 2's worklist.")
+    bad = lambda: _runner(box, 1, 0,                                       # noqa: E731
+                          "VERDICT: DRIFT — see section 2's worklist.\n" + _INFLIGHT_LINE)
     return good, bad, lambda rc, text: rc == 2 and "section 2 named no drifted row" in text
 
 
 @probe("H7", "the control exits with a code that is not one of its three verdicts")
 def p_h7(box):
-    good = lambda: _runner(box, 0, 0, "VERDICT: CLEAN")                    # noqa: E731
-    bad = lambda: _runner(box, 3, 0, "VERDICT: CLEAN")                     # noqa: E731
+    good = lambda: _runner(box, 0, 0, _CLEAN_STUB)                    # noqa: E731
+    bad = lambda: _runner(box, 3, 0, _CLEAN_STUB)                     # noqa: E731
     return good, bad, lambda rc, text: rc == 2 and "not one of its three verdicts" in text
+
+
+@probe("H8", "section 8 printed no `declared in-flight rows:` line at all")
+def p_h8(box):
+    """An ABSENT field line and a declaration of NOTHING are different facts (mg-1344).
+
+    mg-724a's gate reads `twin.inflight` by exactly-once anchored match, so an absent line is
+    a REFUSAL — the gate saying the GATE is broken.  This is mg-188d's measured failure one
+    field over, and the runner refuses first so the message names the twin instead.
+    """
+    good = lambda: _runner(box, 0, 0, _CLEAN_STUB)                         # noqa: E731
+    bad = lambda: _runner(box, 0, 0, "VERDICT: CLEAN")                     # noqa: E731
+    return good, bad, lambda rc, text: rc == 2 and "section 8 printed no" in text
 
 
 @probe("H4", "the control NEVER RAN — the runner's green must not mean 'found nothing'")
 def p_h4(box):
-    good = lambda: _runner(box, 0, 0, "VERDICT: CLEAN")                    # noqa: E731
+    good = lambda: _runner(box, 0, 0, _CLEAN_STUB)                    # noqa: E731
     bad = lambda: _runner(box, 127, 0,                                     # noqa: E731
                           control_body="sh: python3: command not found")
     return good, bad, lambda rc, text: rc != 0 or "CLEAN" not in text

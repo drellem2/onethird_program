@@ -142,7 +142,10 @@ ARMS = [
         "FAIL  the ledger's column set has changed since the pin"], 2),
     _a("C2", "twin_pin.py", "2", "per-row digests",
        "no STATE.md ledger row has moved since the twin was reconciled against it",
-       ['DRIFT  {len(moved)} of', 'PASS  all {len(unmoved)} pinned rows'], 1),
+       # `{len(moved)}` -> `{len(undeclared)}` at mg-1344: the worklist section 2 grades is
+       # now the UNDECLARED half of the moved set.  The arm did not change — the same event
+       # (a ledger row moving with nobody accounting for it) is still what it reports.
+       ['DRIFT  {len(undeclared)} of', 'PASS  all {len(unmoved)} pinned rows'], 1),
     _a("C3", "twin_pin.py", "3", "whole-file digest",
        "STATE.md is byte-identical to the revision recorded in the pin",
        ['PASS  STATE.md is byte-identical', 'DIFFERS  STATE.md has changed since the pin'], 1),
@@ -190,6 +193,36 @@ ARMS = [
        ['emit("  FAIL  the pinned commit carries no STATE.md, so it cannot be the")',
         'emit("  FAIL  THE PIN NAMES ONE REVISION AND DIGESTS ANOTHER.")',
         'emit("  PASS  the commit the page NAMES carries the STATE.md the page was")'], 2),
+
+    # ----------------------------------------- twin_pin.py section 8 (mg-1344's protocol)
+    # SECTION 8 IS FIVE ARMS AND NOT ONE, BY THIS REGISTRY'S OWN DEFINITION: each names a
+    # different way an IN-FLIGHT declaration could buy a subtraction it has not earned, and
+    # each could stop holding without the others noticing.  C8d is the one carrying the
+    # weight — it is the EXPIRY, and without it the other four describe a permanent excuse
+    # with good paperwork.
+    _a("C8a", "twin_pin.py", "8", "the declaration is readable as one",
+       "a file whose only power is to make this gate accept a moved row is well-formed, so "
+       "the weakening it buys can be audited at all",
+       ['emit("  FAIL  the in-flight declaration is not readable as one:")',
+        'emit(f"  PASS  no {os.path.basename(inflight_path)}'], 2),
+    _a("C8b", "twin_pin.py", "8", "declared rows exist and are pinned",
+       "a declared relocation names a real ledger row that the pin actually carries, as "
+       "opposed to a label that subtracts nothing and hides that it subtracts nothing",
+       ["emit(f\"  FAIL  declares row(s) that are not in STATE.md's ledger: \"",
+        'emit(f"  FAIL  declares row(s) the pin does not carry:'], 2),
+    _a("C8c", "twin_pin.py", "8", "declared rows have actually MOVED",
+       "a row is declared in flight because it was relocated, not in advance of being "
+       "relocated — the same act R3 refuses one function over",
+       ['emit(f"  FAIL  declares row(s) that have NOT moved:',
+        'emit(f"  PASS  every declared row is a pinned ledger row that has actu'], 2),
+    _a("C8d", "twin_pin.py", "8", "THE DEFERRAL EXPIRES",
+       "the excuse for not re-pinning — that no integration-reachable commit carries these "
+       "STATE.md bytes — is still TRUE, as opposed to having been true when it was written",
+       ['emit("  FAIL  THE DEFERRAL HAS EXPIRED.'], 2),
+    _a("C8e", "twin_pin.py", "8", "an unverifiable deferral is not honoured",
+       "a checkout that cannot evaluate the expiry declines to apply the subtraction, so "
+       "an export or a shallow clone cannot be where a declaration goes unchecked",
+       ['emit("  REPORTED, NOT GRADED, AND NOT HONOURED.'], 0),
 
     # ------------------------------------------------- twin_pin.py --reconcile refusals
     _a("R1", "twin_pin.py", "reconcile", "--reconcile requires --rows",
@@ -291,6 +324,46 @@ ARMS = [
        "nonexistent commit",
        "C7a fires on the input that left the six-section control CLEAN at exit 0",
        ['@mutation("BOTH copies of the pinned commit name a revision that does not exist"'], 1),
+    # ------------------------------------------- negative_control.py, mg-1344's section 8
+    _a("N21", "negative_control.py", "8", "mutation: a row declared that has not moved",
+       "C8c fires on the cheapest way to abuse a declaration — buying a standing "
+       "subtraction for a row that is fine",
+       ['@mutation("a declaration for a row that has NOT moved"'], 1),
+    _a("N22", "negative_control.py", "8", "mutation: a row declared that does not exist",
+       "C8b fires when a declaration names a label the ledger does not have",
+       ['@mutation("a declaration for a row that is not in the ledger"'], 1),
+    _a("N23", "negative_control.py", "8", "mutation: the declaration is not valid JSON",
+       "C8a fires rather than reading an unparseable declaration as an absent one",
+       ['@mutation("a declaration that is not valid JSON"'], 1),
+    _a("N24", "negative_control.py", "8", "mutation: the declaration names no rows",
+       "C8a fires on a declaration that can only weaken this section and let nothing "
+       "through",
+       ['@mutation("a declaration with an EMPTY row list"'], 1),
+    _a("N25", "negative_control.py", "8", "mutation: the declaration carries no reason",
+       "C8a fires on an unauditable declaration, and on one that strands whoever meets its "
+       "expiry with no instruction",
+       ['@mutation("a declaration with no `why` and no `landing_b`"'], 1),
+    _a("N26", "negative_control.py", "8", "mutation: the declaration is at another schema",
+       "C8a fires rather than reading fields it does not understand",
+       ['@mutation("a declaration at an unreadable schema version"'], 1),
+    # THE THREE WORLDS THAT NEED A REAL GIT.  Reachability is not a property of any file's
+    # text, so these are not `@mutation`s: they build a throwaway repository with a real
+    # `main` and run the instrument inside it with `--root`.  A stub git returning what this
+    # file expects would be a control scoring its own expectations, which is the class a2
+    # calls UNFALSIFIABLE two directories over.
+    _a("N27", "negative_control.py", "8", "world: landing A on a branch is HONOURED",
+       "the protocol's whole point holds — a declared relocation whose bytes are on no "
+       "integration ref MERGES, and the row leaves section 2's worklist",
+       ['score("landing A planted in a real git repository"'], 1),
+    _a("N28", "negative_control.py", "8", "world: the same declaration once main has it",
+       "C8d fires against a REAL history, so the expiry is a fact about git rather than a "
+       "sentence in a docstring",
+       ['score("landing A after its bytes reach `main`"'], 1),
+    _a("N29", "negative_control.py", "8", "world: a declaration with no history to check",
+       "C8e fires — the subtraction is declined where it cannot be verified, which is the "
+       "fail-open direction this whole section had in its first draft",
+       ['def unknown_world('], 1),
+
     _a("N19", "negative_control.py", "-", "the baseline-absence guard",
        "a mutation's expect string is absent from the UNMUTATED report, so a CAUGHT means "
        "the mutation caused it",
@@ -327,6 +400,14 @@ ARMS = [
     _a("H7", "run_all.sh", "runner", "an unknown exit code is BROKEN, not CLEAN",
        "the control's exit code is one of its three declared verdicts",
        ['if [ "$CONTROL" -ne 0 ]'], 2),
+    # H8 IS H6 FOR mg-1344's SECOND FIELD, AND IT IS AN ARM FOR mg-188d's MEASURED REASON:
+    # mg-724a's gate reads `twin.inflight` by exactly-once anchored match, so an absent line
+    # is a REFUSAL and not an empty set.  Without this branch the runner would hand the gate
+    # a missing field and the gate would say the GATE was broken.
+    _a("H8", "run_all.sh", "runner", "section 8 produced a reading at all",
+       "the declared-in-flight set is a fact this run reached, as opposed to a line that "
+       "vanished because section 8 never ran",
+       ['if [ -z "$INFLIGHT" ]'], 2),
 ]
 
 ARMS_BY_ID = {a.id: a for a in ARMS}
@@ -494,11 +575,18 @@ def assert_sandboxed(*paths):
             raise AssertionError(f"REFUSED: probe would write the working tree at {p}")
 
 
-def run_control(state_path, twin_path, target_dir=TARGET):
-    """Run twin_pin.py over the given pair.  Returns (exit_code, combined_output)."""
+def run_control(state_path, twin_path, target_dir=TARGET, inflight_path=None):
+    """Run twin_pin.py over the given pair.  Returns (exit_code, combined_output).
+
+    `inflight_path` is passed ALWAYS, defaulting to a path inside the sandbox that does not
+    exist (mg-1344).  Leaving it off would let section 8 fall back to the REAL repository's
+    IN-FLIGHT.json, so a declaration on the working tree would silently reach every probe in
+    this harness — a sandbox that reads one file out of the tree it is isolating.
+    """
+    inflight_path = inflight_path or os.path.join(target_dir, "IN-FLIGHT.json")
     proc = subprocess.run(
         [sys.executable, os.path.join(target_dir, "twin_pin.py"),
-         "--state", state_path, "--twin", twin_path],
+         "--state", state_path, "--twin", twin_path, "--inflight", inflight_path],
         capture_output=True, text=True)
     return proc.returncode, proc.stdout + proc.stderr
 

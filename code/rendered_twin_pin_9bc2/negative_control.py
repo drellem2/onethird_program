@@ -12,6 +12,8 @@ a temporary directory, with the section that is supposed to catch it named in ad
 READ THE LAST COLUMN.  A mutation that exits 0 is a hole in the instrument, not a pass.
 """
 
+import hashlib
+import json
 import os
 import re
 import shutil
@@ -23,6 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 STATE = os.path.join(ROOT, "STATE.md")
 TWIN = os.path.join(ROOT, "docs", "state-of-the-wall.html")
+INFLIGHT = os.path.join(HERE, "IN-FLIGHT.json")
 
 sys.path.insert(0, HERE)
 import lib9bc2 as L  # noqa: E402
@@ -205,6 +208,75 @@ def m_pin_unresolvable(text):
     return _VISIBLE_AT.sub(lambda m: m.group(1) + "deadbee", text, count=1)
 
 
+# ------------------------------------------------- arms added by mg-1344's section 8
+# THE DECLARATION IS THE ONE FILE IN THIS DIRECTORY WHOSE ONLY POWER IS TO MAKE THE GATE
+# ACCEPT SOMETHING IT WOULD OTHERWISE REFUSE.  Every arm below is a way of writing one that
+# buys a subtraction it has not earned, and each names the check that must refuse it.  The
+# target is `inflight`: the base text is the EMPTY STRING, because absence is the normal
+# state and every one of these is a file appearing where there was none.
+
+@mutation("a declaration for a row that has NOT moved", "8",
+          "declares row(s) that have NOT moved", "inflight")
+def m_declare_unmoved(_text):
+    """THE MOVE THIS SECTION IS MOST LIKELY TO BE USED FOR, AND IT IS REFUSED.
+
+    Nothing in the ledger has moved on an ordinary tree, so a declaration naming any row at
+    all is a standing subtraction bought for a row that is fine — COVERAGE.md item 4's
+    "re-pinning a row nobody reconciled", one level up.  Row 1 is a literal here and cannot
+    rot in the way this file's header warns about: the fixture asserts the row is NOT moved,
+    which is the ordinary state, rather than asserting which rows ARE.
+    """
+    return json.dumps({"schema": 1, "declared_by": "mg-1344 (planted)", "rows": ["1"],
+                       "why": "planted world: this row has not moved",
+                       "landing_b": "twin_pin.py --reconcile --rows 1"}, indent=2)
+
+
+@mutation("a declaration for a row that is not in the ledger", "8",
+          "declares row(s) that are not in STATE.md's ledger", "inflight")
+def m_declare_phantom(_text):
+    return json.dumps({"schema": 1, "declared_by": "mg-1344 (planted)", "rows": ["99z"],
+                       "why": "planted world: no such row",
+                       "landing_b": "twin_pin.py --reconcile --rows 99z"}, indent=2)
+
+
+@mutation("a declaration that is not valid JSON", "8",
+          "is not valid JSON", "inflight")
+def m_declare_malformed(_text):
+    """A MALFORMED DECLARATION MUST BE RED, NOT ABSENT.
+
+    The fail-open reading is the tempting one — "unreadable, so nothing is declared, so
+    nothing is subtracted, so carry on" — and it is wrong in the direction that matters: it
+    makes a file whose whole job is to weaken a check unauditable and silent at once.
+    """
+    return '{"schema": 1, "rows": ["1"],,,'
+
+
+@mutation("a declaration with an EMPTY row list", "8",
+          "`rows` is EMPTY", "inflight")
+def m_declare_no_rows(_text):
+    return json.dumps({"schema": 1, "declared_by": "mg-1344 (planted)", "rows": [],
+                       "why": "planted world: declares nothing",
+                       "landing_b": "n/a"}, indent=2)
+
+
+@mutation("a declaration with no `why` and no `landing_b`", "8",
+          "is missing or empty", "inflight")
+def m_declare_no_reason(_text):
+    """BASELINE.json's OWN RULE, APPLIED HERE: a value in a declaration with no reason beside
+    it is an assertion nobody can audit, and writing one costs nothing.  `landing_b` is
+    required for a second reason specific to this file — the expiry is enforced against
+    WHOEVER MEETS IT, who is often not the author, and an expiry with no instruction attached
+    strands them."""
+    return json.dumps({"schema": 1, "rows": ["1"]}, indent=2)
+
+
+@mutation("a declaration at an unreadable schema version", "8",
+          "this control reads schema 1 only", "inflight")
+def m_declare_bad_schema(_text):
+    return json.dumps({"schema": 2, "declared_by": "x", "rows": ["1"],
+                       "why": "x", "landing_b": "x"}, indent=2)
+
+
 # ---------------------------------------------------------------------- positive control
 @mutation("NO MUTATION — the baseline", "-",
           None, "none")
@@ -215,14 +287,29 @@ def m_none(text):
 _WORKLIST = re.compile(r"since the twin was last reconciled: (.*)$", re.M)
 
 
-def expected_drift(state_text, twin_text):
-    """The drift worklist the baseline MUST report, derived from the pin, not hardcoded."""
+def expected_drift(state_text, twin_text, inflight_path=INFLIGHT):
+    """The drift worklist the baseline MUST report, derived from the pin, not hardcoded.
+
+    THE DECLARED SET IS SUBTRACTED HERE TOO (mg-1344), because section 2 subtracts it and an
+    expectation that does not would go wrong on the first landing A this repository makes —
+    i.e. exactly when the mechanism is used.  What is NOT reproduced here is the DISCHARGE
+    test: if the declaration has expired, twin_pin exits 2 and `score_baseline` refuses on
+    `STRUCTURAL` anyway, which is the right answer and is reached without a second copy of
+    the predicate living in the scoring code.
+    """
     pin = L.parse_pin(twin_text)
     if pin is None:
         return None
     now = L.row_digests(state_text)
+    declared = set()
+    if os.path.exists(inflight_path):
+        try:
+            with open(inflight_path, encoding="utf-8") as fh:
+                declared = set(json.load(fh).get("rows") or [])
+        except (ValueError, AttributeError):
+            declared = set()
     return [lbl for lbl in sorted(now, key=lambda s: (int(re.match(r"\d+", s).group()), s))
-            if lbl in pin["rows"] and pin["rows"][lbl] != now[lbl]]
+            if lbl in pin["rows"] and pin["rows"][lbl] != now[lbl] and lbl not in declared]
 
 
 def score_baseline(code, out, want_rows):
@@ -263,12 +350,199 @@ def score_baseline(code, out, want_rows):
                   f"— parsed from section 2, expectation derived from the pin")
 
 
-def run(state_path, twin_path):
-    proc = subprocess.run(
-        [sys.executable, os.path.join(HERE, "twin_pin.py"),
-         "--state", state_path, "--twin", twin_path],
-        capture_output=True, text=True)
+def run(state_path, twin_path, inflight_path=INFLIGHT, root=None):
+    argv = [sys.executable, os.path.join(HERE, "twin_pin.py"),
+            "--state", state_path, "--twin", twin_path, "--inflight", inflight_path]
+    if root is not None:
+        argv += ["--root", root]
+    proc = subprocess.run(argv, capture_output=True, text=True)
     return proc.returncode, proc.stdout + proc.stderr
+
+
+# ---------------------------------------------------------------------------------------
+# mg-1344 — the two worlds that CANNOT be planted by editing a file
+# ---------------------------------------------------------------------------------------
+#
+# Section 8's whole load is carried by REACHABILITY: a declaration is honoured while no
+# integration-reachable commit carries these STATE.md bytes, and red once one does.  Neither
+# state can be produced by mutating text, so these two worlds build a THROWAWAY GIT
+# REPOSITORY with a real `main` and run the instrument inside it with `--root`.
+#
+# A FAKE GIT WOULD HAVE BEEN CHEAPER AND WORTH LESS.  The thing under test is what `git
+# rev-list`, `git cat-file` and `git merge-base` actually answer about a real history; a stub
+# that returns what this file expects is a control scoring its own expectations, which is
+# mg-9876's UNFALSIFIABLE class and the reason section 7 exists at all.
+#
+# THE FIXTURE HAS TO BE TWO COMMITS AND THAT IS THE TICKET'S OWN PROBLEM IN MINIATURE: the
+# pin must name a commit that CARRIES the STATE.md it digests, so the pin cannot be written
+# into the commit it names.  C1 carries STATE.md and the old pin; C2 rewrites the pin to name
+# C1.  Amending C1 instead would rewrite the very hash the pin had just recorded — which is
+# the rebase hazard this whole protocol is about, met while building the fixture for it.
+
+# THE EXPECT STRINGS ARE NAMED CONSTANTS BECAUSE TWO FILES READ THEM.  a2_discriminate's
+# probes for N27-N29 hand these worlds a baseline report that already contains their expect
+# string, to demonstrate that the UNFALSIFIABLE guard fires — and a second copy of the
+# string over there would agree today and rot the moment either side is reworded, leaving a
+# probe that passes because it is looking for nothing.
+EXPECT_HONOURED = "HONOURED — REPORTED, NOT GRADED"
+EXPECT_EXPIRED = "THE DEFERRAL HAS EXPIRED"
+EXPECT_NOT_HONOURED = "REPORTED, NOT GRADED, AND NOT HONOURED"
+EXPECT_WORKLIST = "This is the WORKLIST"
+
+
+def _git(repo, *args, **kw):
+    return subprocess.run(["git", "-C", repo] + list(args),
+                          capture_output=True, text=True, **kw)
+
+
+def _commit(repo, message):
+    _git(repo, "add", "-A")
+    _git(repo, "-c", "user.email=nc@mg-9bc2", "-c", "user.name=negative-control",
+         "-c", "commit.gpgsign=false", "commit", "-q", "-m", message)
+    return _git(repo, "rev-parse", "--short", "HEAD").stdout.strip()
+
+
+_PIN_FIELD_SUB = {
+    "commit": r"(\n\s*commit:\s*)[0-9a-f]{7,40}",
+    "commit-date": r"(\n\s*commit-date:\s*)\S+",
+    "state-sha256": r"(\n\s*state-sha256:\s*)[0-9a-f]{64}",
+}
+
+
+def build_protocol_repo(tmp, base_state, base_twin, moved_row_from, moved_row_to):
+    """A repository in which landing A has happened on a branch and nothing else has.
+
+    Returns (repo_path, inflight_path) or (None, reason).
+    """
+    repo = os.path.join(tmp, "protocol")
+    os.makedirs(os.path.join(repo, "docs"))
+    with open(os.path.join(repo, "STATE.md"), "w", encoding="utf-8") as fh:
+        fh.write(base_state)
+    twin_path = os.path.join(repo, "docs", "state-of-the-wall.html")
+    with open(twin_path, "w", encoding="utf-8") as fh:
+        fh.write(base_twin)
+    if _git(repo, "-c", "init.defaultBranch=main", "init", "-q", ".").returncode != 0:
+        return None, "git init failed"
+    c1 = _commit(repo, "c1: STATE.md and the twin")
+    if not c1:
+        return None, "the fixture's first commit did not land"
+    date = _git(repo, "log", "-1", "--format=%cs").stdout.strip()
+    sha = hashlib.sha256(base_state.encode("utf-8")).hexdigest()
+    twin = base_twin
+    for value, pattern in ((c1, _PIN_FIELD_SUB["commit"]),
+                           (date, _PIN_FIELD_SUB["commit-date"]),
+                           (sha, _PIN_FIELD_SUB["state-sha256"])):
+        twin, n = re.subn(pattern, lambda m, v=value: m.group(1) + v, twin, count=1)
+        if n != 1:
+            return None, "could not repoint the pin's %r field" % pattern
+    twin, n = re.subn(r'(<span id="provenance">.*?@ )[0-9a-f]{7,40}( \()[^)]*(\))',
+                      lambda m: m.group(1) + c1 + m.group(2) + date + m.group(3),
+                      twin, count=1, flags=re.S)
+    if n != 1:
+        return None, "could not repoint the visible provenance line"
+    with open(twin_path, "w", encoding="utf-8") as fh:
+        fh.write(twin)
+    _commit(repo, "c2: point the pin at c1, which survives")
+
+    # LANDING A, on a branch: the row's text moves out and the row is DECLARED.
+    _git(repo, "switch", "-q", "-c", "landing-a")
+    with open(os.path.join(repo, "STATE.md"), "w", encoding="utf-8") as fh:
+        fh.write(base_state.replace(moved_row_from, moved_row_to, 1))
+    inflight = os.path.join(repo, "code", "rendered_twin_pin_9bc2", "IN-FLIGHT.json")
+    os.makedirs(os.path.dirname(inflight))
+    with open(inflight, "w", encoding="utf-8") as fh:
+        json.dump({"schema": 1, "declared_by": "mg-1344 (planted world)", "rows": ["1"],
+                   "why": "landing A: row 1's text relocated, twin cell reconciled, re-pin "
+                          "deferred because no integration-reachable commit carries it yet",
+                   "landing_b": "twin_pin.py --reconcile --rows 1"}, fh, indent=2)
+    _commit(repo, "c3: landing A")
+    return repo, inflight
+
+
+def protocol_worlds(tmp, base_state, base_twin, base_report):
+    """The two graded worlds, plus the one that must NOT be honoured.  Returns table rows."""
+    moved_from = "| 1 | `λ_std = 1 ⟺ ordinal sum` | `U` | **proven** | any |"
+    moved_to = ("| 1 | `λ_std = 1 ⟺ ordinal sum` | `U` | **proven** | "
+                "see docs/state-history/ledger-row-1.md |")
+    # EXACTLY ONCE, NOT `in` — mg-9876's smell #1 is a membership test standing in for a
+    # fact, and a fixture that relocates "the" row when TWO lines match it is a fixture that
+    # relocates an arbitrary one.  A count is the fact; a membership test is a guess at it.
+    if base_state.count(moved_from) != 1:
+        why = ("row 1's ledger line occurs %d time(s) in STATE.md; this fixture relocates "
+               "exactly one" % base_state.count(moved_from))
+        return [("landing A planted in a real git repository", "8", "SETUP FAILED", why),
+                ("landing A after its bytes reach `main`", "8", "SETUP FAILED", why)]
+    repo, inflight = build_protocol_repo(tmp, base_state, base_twin, moved_from, moved_to)
+    if repo is None:
+        return [("landing A planted in a real git repository", "8", "SETUP FAILED", inflight),
+                ("landing A after its bytes reach `main`", "8", "SETUP FAILED", inflight)]
+    state_path = os.path.join(repo, "STATE.md")
+    twin_path = os.path.join(repo, "docs", "state-of-the-wall.html")
+    rows = []
+
+    def score(name, expect, forbid=None):
+        code, out = run(state_path, twin_path, inflight, root=repo)
+        if expect in base_report:
+            rows.append((name, "8", "UNFALSIFIABLE",
+                         "%r is in the UNMUTATED report too" % expect))
+            return False
+        ok = expect in out and (forbid is None or forbid not in out)
+        detail = "exit %d; looked for %r" % (code, expect)
+        if forbid is not None:
+            detail += " and required %r to be absent" % forbid
+        rows.append((name, "8", "CAUGHT" if ok else "HOLE", detail))
+        return ok
+
+    # WORLD A — landing A on a branch.  HONOURED, exit 0, and the row is OUT of the worklist.
+    # This is the only world in this file that must PASS: the point of the protocol is that
+    # landing A can merge, and a mechanism that refuses it is the deadlock with more code.
+    score("landing A planted in a real git repository", EXPECT_HONOURED,
+          forbid=EXPECT_WORKLIST)
+
+    # WORLD B — the SAME declaration once its bytes are on `main`.  The excuse has expired.
+    _git(repo, "branch", "-f", "main", "landing-a")
+    score("landing A after its bytes reach `main`", EXPECT_EXPIRED)
+    return rows
+
+
+def unknown_world(tmp, base_state, base_twin, base_report):
+    """A declaration in a checkout git cannot be asked about is NOT honoured.
+
+    THE DIRECTION THIS ARM DEFENDS IS THE FAIL-OPEN ONE.  Section 7 answers `unknown` by
+    reporting and not grading, and the first draft of section 8 copied that verbatim — which,
+    for a check whose effect is to REMOVE a row from the merge gate's worklist, means an
+    export, a tarball or a shallow clone silently honours any declaration at all.  Not
+    grading and not honouring are the same doctrine at opposite signs, and this world is the
+    half that could otherwise have gone quiet.
+    """
+    plain = os.path.join(tmp, "no-git")
+    os.makedirs(os.path.join(plain, "docs"))
+    state_path = os.path.join(plain, "STATE.md")
+    twin_path = os.path.join(plain, "docs", "state-of-the-wall.html")
+    moved_from = "| 1 | `λ_std = 1 ⟺ ordinal sum` | `U` | **proven** | any |"
+    if base_state.count(moved_from) != 1:
+        return [("a declaration in a checkout with no git at all", "8", "SETUP FAILED",
+                 "row 1's ledger line occurs %d time(s) in STATE.md; this fixture relocates "
+                 "exactly one" % base_state.count(moved_from))]
+    with open(state_path, "w", encoding="utf-8") as fh:
+        fh.write(base_state.replace(moved_from, moved_from.replace("any |", "elsewhere |"), 1))
+    with open(twin_path, "w", encoding="utf-8") as fh:
+        fh.write(base_twin)
+    inflight = os.path.join(plain, "IN-FLIGHT.json")
+    with open(inflight, "w", encoding="utf-8") as fh:
+        json.dump({"schema": 1, "declared_by": "mg-1344 (planted world)", "rows": ["1"],
+                   "why": "planted world: no history to check the expiry against",
+                   "landing_b": "twin_pin.py --reconcile --rows 1"}, fh, indent=2)
+    expect = EXPECT_NOT_HONOURED
+    code, out = run(state_path, twin_path, inflight, root=plain)
+    if expect in base_report:
+        return [("a declaration in a checkout with no git at all", "8", "UNFALSIFIABLE",
+                 "%r is in the UNMUTATED report too" % expect)]
+    ok = expect in out and EXPECT_WORKLIST in out
+    return [("a declaration in a checkout with no git at all", "8",
+             "CAUGHT" if ok else "HOLE",
+             "exit %d; the declaration must be neither graded nor honoured, so row 1 must "
+             "stay in section 2's worklist" % code)]
 
 
 def main():
@@ -316,13 +590,18 @@ def main():
         for name, section, expect, target, fn in MUTATIONS:
             sp = os.path.join(tmp, "STATE.md")
             tp = os.path.join(tmp, "twin.html")
+            ip = os.path.join(tmp, "IN-FLIGHT.json")
             state_text = fn(base_state) if target == "state" else base_state
             twin_text = fn(base_twin) if target == "twin" else base_twin
-            if target == "state" and state_text == base_state:
-                rows.append((name, section, "SETUP FAILED", "mutation was a no-op"))
-                holes += 1
-                continue
-            if target == "twin" and twin_text == base_twin:
+            # THE `inflight` TARGET's BASE IS THE EMPTY STRING, not a file's contents, because
+            # ABSENCE is this file's normal state — every one of those mutations is a
+            # declaration appearing where there was none, so "" is the honest baseline and an
+            # empty return is still a no-op that must score SETUP FAILED.
+            inflight_text = fn("") if target == "inflight" else ""
+            if target in ("state", "twin", "inflight") and not {
+                    "state": state_text != base_state,
+                    "twin": twin_text != base_twin,
+                    "inflight": bool(inflight_text)}[target]:
                 rows.append((name, section, "SETUP FAILED", "mutation was a no-op"))
                 holes += 1
                 continue
@@ -330,8 +609,13 @@ def main():
                 fh.write(state_text)
             with open(tp, "w", encoding="utf-8") as fh:
                 fh.write(twin_text)
+            if inflight_text:
+                with open(ip, "w", encoding="utf-8") as fh:
+                    fh.write(inflight_text)
+            elif os.path.exists(ip):
+                os.remove(ip)
 
-            code, out = run(sp, tp)
+            code, out = run(sp, tp, ip)
             if expect is None:
                 ok, detail = score_baseline(code, out, want_drift)
                 verdict = "CAUGHT" if ok else "HOLE"
@@ -346,6 +630,13 @@ def main():
             if not ok:
                 holes += 1
             rows.append((name, section, verdict, detail))
+
+        # The three worlds that need a REAL git history rather than a mutated file.
+        for row in (protocol_worlds(tmp, base_state, base_twin, base_report)
+                    + unknown_world(tmp, base_state, base_twin, base_report)):
+            rows.append(row)
+            if row[2] != "CAUGHT":
+                holes += 1
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 

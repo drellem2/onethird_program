@@ -142,12 +142,28 @@ def p4(box):
 # ----------------------------------------------------------------------------------- P5
 @planted("P5", "an unregistered arm-shaped site added to a source copy", "CENSUS REFUSES")
 def p5(box):
+    """THE INJECTION POINT IS DERIVED, NOT TYPED, AND THAT IS A REPAIR (mg-1344).
+
+    This read `src.replace('    emit("=" * 86)\\n    emit({0: "VERDICT: CLEAN', …)` — two
+    consecutive lines of the target quoted verbatim.  mg-1344 put a fourth verdict word
+    between them (`IN FLIGHT`, for a declared in-flight relocation) and the string stopped
+    existing, so this world scored SETUP FAILED and the auditor's selftest went 5 of 6.
+    THE HARNESS WORKED: a rotted fixture is reported and not scored as a pass, which is P4's
+    whole subject one row above.  But it is the SAME defect this arc has now recorded four
+    times — a fixture spelling out the thing that changes — sitting in the file that exists
+    to prove the auditor can fail.
+
+    The anchor is now the LAST closing banner in `check()`, found by position rather than by
+    quoting its neighbour.  What P5 needs is an arm-shaped line the registry does not claim,
+    anywhere in a source the census walks; WHERE it sits was never load-bearing, and the old
+    fixture bound itself to a neighbour it did not care about.
+    """
     ctl = os.path.join(box, A2.DIR_REL)
     src = L.read(os.path.join(ctl, "twin_pin.py"))
-    injected = src.replace(
-        '    emit("=" * 86)\n    emit({0: "VERDICT: CLEAN',
-        '    emit("  PASS  a seventh check nobody registered")\n'
-        '    emit("=" * 86)\n    emit({0: "VERDICT: CLEAN', 1)
+    banner = '    emit("=" * 86)\n'
+    at = src.rfind(banner)
+    injected = src if at == -1 else (
+        src[:at] + '    emit("  PASS  a seventh check nobody registered")\n' + src[at:])
     if injected == src:
         return "SETUP FAILED"
     L.write(os.path.join(ctl, "twin_pin.py"), injected)
