@@ -17,7 +17,6 @@ be asking the next branch to repair 1051 transcripts to get green.
 
 import json
 import os
-import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -107,7 +106,6 @@ def main():
     e = out.append
 
     # ------------------------------------------------------------------ the population
-    all_tx = set()
     owned_by_candidate = set()
     rewritten = {}                       # path -> set of dirs that rewrote it
     buckets = {}                         # path -> (bucket, detail, hunk, dropped)
@@ -145,9 +143,14 @@ def main():
                            bucket=UNUSABLE)
             pass2_rows[row["path"]] = (row, s["dir"])
 
-    p = subprocess.run(["git", "-C", ROOT, "ls-files", "code"],
-                       capture_output=True, text=True)
-    all_tx = {r for r in p.stdout.splitlines() if L.lib_f771.is_transcript(r)}
+    # THE POPULATION SIZE COMES FROM THE FROZEN RECORD AND NOT FROM `git ls-files`, AND THIS
+    # LINE IS THIS INSTRUMENT CATCHING ITS OWN DISEASE.  It WAS a live `git ls-files code`,
+    # which meant this transcript's own §1 moved every time anybody added a file to the
+    # corpus — a committed report drifting away from the tree it describes, which is exactly
+    # what mg-f771 exists to stop and exactly what this directory exists to count.  Caught by
+    # rebasing onto a main three commits newer and watching `1051` move.  Everything below is
+    # now arithmetic on the header, so the report is a fixed point given the record.
+    n_tx = header["transcripts"]
 
     e(rule("="))
     e("mg-30bd — VERDICT-STALENESS: how many committed transcripts still say something this")
@@ -181,11 +184,11 @@ def main():
     errored = [s for s in suites if "error" in s]
     timed_out = [s for s in ran if s.get("timeout")]
     not_rewritten = sorted(owned_by_candidate - set(rewritten))
-    outside = sorted(all_tx - owned_by_candidate)
+    n_outside = n_tx - len(owned_by_candidate)
     foreign = sorted(pth for pth, ds in rewritten.items()
                      if all(os.path.dirname(pth) != d for d in ds))
     e("")
-    e("  %5d  tracked out_*.txt under code/ at this HEAD" % len(all_tx))
+    e("  %5d  tracked out_*.txt under code/ at the swept commit" % n_tx)
     e("  %5d  of them sit in a directory that has a run_all.sh  (the candidates)"
       % len(owned_by_candidate))
     e("  %5d  candidate suite(s) run, of %d in the population" % (len(ran), header["dirs"]))
@@ -203,7 +206,7 @@ def main():
     e("  %5d  transcript(s) a runner ACTUALLY REWROTE — the measured population"
       % len(rewritten))
     e("  %5d  transcript(s) in a candidate directory that NO RUNNER TOUCHED" % len(not_rewritten))
-    e("  %5d  transcript(s) in a directory with no run_all.sh at all" % len(outside))
+    e("  %5d  transcript(s) in a directory with no run_all.sh at all" % n_outside)
     e("  %5d  transcript(s) rewritten by a suite that does not own them" % len(foreign))
     e("")
     e("  A TRANSCRIPT ITS OWN RUNNER DOES NOT REWRITE IS NOT EVIDENCE OF ANYTHING.  It is")
@@ -355,7 +358,7 @@ def main():
     e("§6  WHAT THIS METHOD CANNOT SEE — stated per the mayor's instruction to p6e4f")
     e(rule("="))
     e("")
-    e("  1  A TRANSCRIPT NO SUITE REGENERATES CANNOT BE CHECKED THIS WAY.  %d tracked" % len(outside))
+    e("  1  A TRANSCRIPT NO SUITE REGENERATES CANNOT BE CHECKED THIS WAY.  %d tracked" % n_outside)
     e("     transcripts sit in a directory with no run_all.sh; nothing here regenerates them,")
     e("     so nothing here compares them, and they are outside every number above.  This is")
     e("     mg-f771's own declared hole (its §1: \"a transcript no suite rewrites is never")
