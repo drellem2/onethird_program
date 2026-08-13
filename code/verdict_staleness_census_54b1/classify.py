@@ -37,6 +37,7 @@ for line in open(tsv, encoding="utf-8"):
     if len(f) < 5:
         continue
     d, cls, rc, secs, n = f[0], f[1], f[2], f[3], f[4]
+    changed = [c for c in (f[5].split(",") if len(f) > 5 else []) if c]
     slug = d.replace("/", "_")
     dp = os.path.join(OUT, "diffs", slug + ".diff")
     diff = open(dp, encoding="utf-8", errors="replace").read() if os.path.exists(dp) else ""
@@ -44,7 +45,9 @@ for line in open(tsv, encoding="utf-8"):
         verdict, ev = "TIMEOUT", {}
     else:
         verdict, ev = L.classify_diff(diff)
-    rows.append((d, verdict, rc, secs, n, ev))
+    foreign = [c for c in changed
+               if L.TRANSCRIPT.match(c) and not c.startswith(d + "/")]
+    rows.append((d, verdict, rc, secs, n, ev, foreign))
 
 hdr("mg-54b1  IS IT STALE IN THE STRONG SENSE?  A SWEEP OF THE BLIND SPOT")
 
@@ -67,7 +70,8 @@ print()
 order = {"VERDICT MOVED": 0, "DEAD": 1, "ADDRESSES ONLY": 2,
          "REPRODUCES": 3, "TIMEOUT": 4}
 counts = {}
-for _d, v, _rc, _s, _n, _e in rows:
+for _r in rows:
+    v = _r[1]
     counts[v] = counts.get(v, 0) + 1
 
 print("  %-16s %5s" % ("class", "n"))
@@ -87,7 +91,7 @@ print()
 
 hdr("§2  EVERY INSTRUMENT, WITH ITS CLASS")
 
-for d, v, rc, secs, n, _e in sorted(rows, key=lambda r: (order.get(r[1], 9), r[0])):
+for d, v, rc, secs, n, _e, _f in sorted(rows, key=lambda r: (order.get(r[1], 9), r[0])):
     print("  %-46s %-14s rc=%-4s %4ss %s" % (d, v, rc, secs, n))
 print()
 
@@ -97,7 +101,7 @@ print("""  Quoted so this number can be checked rather than believed.  c0's R3 i
   real diff this classifier over-counts, so a reader who wants the catch and
   not the net should read these.  At most three lines per file.""")
 print()
-for d, v, _rc, _s, _n, ev in sorted(rows):
+for d, v, _rc, _s, _n, ev, _f in sorted(rows):
     if v != "VERDICT MOVED":
         continue
     print("  --- %s" % d)
@@ -125,7 +129,7 @@ print("""  The sweep runs in a clone of the branch that carries it, so this bran
 print()
 OWN = ("54b1", "verdict_staleness_census")
 hits = 0
-for d, v, _rc, _s, _n, ev in sorted(rows):
+for d, v, _rc, _s, _n, ev, _f in sorted(rows):
     if v != "VERDICT MOVED":
         continue
     for path, evs in sorted(ev.items()):
@@ -139,7 +143,27 @@ if not hits:
     print("  0 of the quoted evidence lines name this ticket or its directory.")
 print()
 
-dead = [d for d, v, _r, _s, _n, _e in rows if v == "DEAD"]
+hdr("§3c  DID ANY INSTRUMENT REWRITE SOMEBODY ELSE'S TRANSCRIPT?")
+
+print("""  The sweep keeps the WHOLE-REPO diff a run produced, not just the diff of
+  its own directory, because a runner that writes outside itself is exactly
+  the kind of thing this sweep should not hide.  But it also means a
+  transcript could be attributed to the run that touched it rather than to
+  the instrument that owns it, which would inflate the count.  So the two are
+  separated and printed.""")
+print()
+foreign_rows = [(d, f) for d, _v, _rc, _s, _n, _e, f in sorted(rows) if f]
+if not foreign_rows:
+    print("  0 instruments changed a transcript outside their own directory,")
+    print("  so every class above is attributed to the instrument that owns it.")
+else:
+    for d, f in foreign_rows:
+        print("  %s wrote %d transcript(s) outside its own directory:" % (d, len(f)))
+        for c in f:
+            print("      %s" % c)
+print()
+
+dead = [d for d, v, _r, _s, _n, _e, _f in rows if v == "DEAD"]
 if dead:
     hdr("§4  DEAD -- THE INSTRUMENT RAISED AND PRODUCED NO COMPARABLE TRANSCRIPT")
     print("  A transcript whose instrument no longer RUNS is worse than a stale")
@@ -151,7 +175,7 @@ if dead:
         print("      %s" % d)
     print()
 
-to = [(d, s) for d, v, _r, s, _n, _e in rows if v == "TIMEOUT"]
+to = [(d, s) for d, v, _r, s, _n, _e, _f in rows if v == "TIMEOUT"]
 if to:
     hdr("§5  TIMEOUT -- NOT MEASURED, AND NOT COUNTED AS REPRODUCING")
     print("  Killed at the sweep's budget, mid-run.  These are UNMEASURED; the")

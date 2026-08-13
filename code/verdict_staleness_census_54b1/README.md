@@ -159,7 +159,18 @@ expensive arm's `out_sweep_54b1.txt` is exactly what this ticket is about: a tra
 records one dated run and that no runner re-takes. `mg-20ee`'s `out_ground_truth.txt` has the same
 property and says so in its own header — *"It is NOT a fixed point and does not claim to be"*.
 
-The two cheap arms **are** re-taken by `run_all.sh` and are fixed points.
+The two cheap arms **are** re-taken by `run_all.sh` and are fixed points — byte-identical across
+two consecutive runs, measured.
+
+**They are still not added to `./build.sh`, and the reason is not cost.** Under 2 seconds against
+an 88-second gate would be affordable. But `c1`'s numbers move the moment **any** branch adds a
+directory under `code/`, so putting it in the loop would create a **third** generated census that
+every such branch must refresh — and `417a789`'s own commit message is the record of what that
+costs: *"every branch that adds a directory under `code/` must refresh this same generated census,
+and two such branches conflict on content neither wrote by hand"*, a conflict it hit **twice**.
+Manufacturing a third of those to watch a population nothing was watching would be paying for the
+measurement in merge conflicts on generated files. `mg-d72e`'s warning — that adding a suite to the
+loop is exactly the operation that created that bug — applies to the cheap arms too.
 
 **And this instrument was red until its own transcripts were committed**, which is worth writing
 down because it is the third time this arc has met it: `git ls-files` does not show an instrument
