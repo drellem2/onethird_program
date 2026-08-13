@@ -22,31 +22,10 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   wall-clock timing rounded to the same tenth as last run — and putting it in a
   tracked file made THIS ARM fail its own invariant on its second run.  README D4.
 
-§2  THE DISAGREEMENTS, SHOWN
+§2  NO DISAGREEMENTS
 --------------------------------------------------------------------------------------------
-  Lines quoted after normalisation, so that this transcript cannot itself
-  smuggle a worktree path into the corpus.
-  `-` is the committed copy, `+` is this tree.
+  Every watched transcript that moved during this gate run moved only in the two
+  declared families that are not a function of repo state.  No committed
+  transcript asserts anything this tree contradicts.
 
-  code/control_audit_9876/out_a4_sweep.txt
-    @@ -20,3 +20,3 @@
-    - code/control_audit_9876/a2_discriminate.py:76  return lambda rc, text: needle in
-    - code/control_audit_9876/a2_discriminate.py:873  return good, bad, lambda rc, tex
-    - code/control_audit_9876/a2_discriminate.py:1080  return good, bad, lambda rc, te
-    + code/control_audit_9876/a2_discriminate.py:77  return lambda rc, text: needle in
-    + code/control_audit_9876/a2_discriminate.py:882  return good, bad, lambda rc, tex
-    + code/control_audit_9876/a2_discriminate.py:1096  return good, bad, lambda rc, te
-
-  code/control_gate_724a/out_gate.txt
-    @@ -7,3 +7,3 @@
-    - twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      <t>s  11674 bytes
-    - audit  code/control_audit_9876/run_all.sh         exit 0     <t>s  52441 bytes
-    - (both suites)                                    <t>s total
-    + twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   <t>s  11674 bytes
-    + audit  code/control_audit_9876/run_all.sh         exit 0   <t>s  52441 bytes
-    + (both suites)                                   <t>s total
-
-  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
-  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
-
-VERDICT: RED — 2 committed transcript(s) disagree with this tree.  0.30s
+VERDICT: GREEN — 0 disagreements.  0.21s
