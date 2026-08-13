@@ -608,6 +608,28 @@ must now be **scored** rather than eyeballed.
   `ground_truth.sh` — because it needs no dirty tree. That is the one blind spot in this directory
   this file does **not** inherit.
 
+### The backstop ran, and mg-9876's arm census does **not** move
+
+`./build.sh` is green — `worst suite exit: 0`, `VERDICT: GREEN — 0 disagreements` — and left **five**
+tracked transcripts modified. Four are `mg-f771`'s declared `W3` timing noise, and the byte counts
+beside them — `9455` and `45349` — are **unchanged**, which is the repo-state half.
+
+**And the census that moved for tranche 4 is unchanged here**: `144 of 223` shipping a control and
+`145 of 223` recording a demonstrated failure, both still. This branch adds **files to a directory
+already counted in both arms** — not a directory, and not a first control — so neither numerator nor
+denominator moves. Checked rather than assumed, because tranche 4's `+1` came from exactly this arm
+and looked like noise until it was attributed.
+
+The fifth is the operator-valued path again, and it now reads a **third** value:
+
+    S1  ... /Users/daniel/.pogo/polecats/p927a/code/control_gate_724a/BASELINE.json.no-such-file
+
+`p54b1` at tranche 3, `p14ad` at tranche 4, **`p927a` now** — in a transcript neither of those
+branches committed. Tranche 3's prediction that *"each recommit re-points them at a new polecat"* is
+now confirmed three times over on one file. **All five restored, not committed**, for the reason
+tranche 3 gives: committing them would replace `p927a` with `p885d` and plant the defect on behalf of
+every later operator.
+
 ---
 
 **Two entries in `out_ground_truth.txt` are not independent**, and are marked there:
