@@ -153,13 +153,34 @@ HEXTOK = re.compile(r"\b[0-9a-f]{7,40}\b")
 # determine.  `grep` is matched with a following short-flag cluster containing
 # r or R, and tolerantly, because a Python subject spells it as a LIST --
 # ["grep", "-rn", "-E", pat] -- with quotes and a comma between the two tokens.
-WALK = re.compile(
-    r"""\bgrep\b[^\n]{0,24}?-[A-Za-z]*[rR]        # grep -r / -rn / "grep", "-rn"
+#
+# A FLAG'S DASH SITS AT A WORD BOUNDARY, AND SAYING SO IS THE WHOLE OF mg-44da.
+# Tolerance for the list spelling is bought with a 24-character window, and any
+# dash inside that window used to do -- so a HYPHENATED WORD in the argument
+# read as a flag cluster: `grep 'STANDING UN-STRUCK'` matched on `-STR`, and
+# `grep over run_all.sh @%s re-derives` on `-der`.  The guard is a fact about
+# the shell's own tokenising rather than a judgement about the word: `-r` is a
+# flag when the dash STARTS a word, and `UN-STRUCK` is one word.  `--recursive`
+# is unaffected -- its second dash is preceded by a dash, which is not a word
+# character -- and that is a control (P24) rather than a claim.
+_DASH = r"(?<![A-Za-z0-9_])"
+
+
+def _walk_re(dash):
+    return re.compile(r"""
+        \bgrep\b[^\n]{0,24}?%(d)s-[A-Za-z]*[rR]   # grep -r / -rn / "grep", "-rn"
       | \bos\.(?:walk|listdir|scandir)\s*\(
       | \.iterdir\s*\(
       | \bglob\.(?:glob|iglob)\s*\(
-      | \bfind\s+[^\n|]*-(?:type|name)\b          # shelled-out find(1)
-    """, re.X)
+      | \bfind\s+[^\n|]*%(d)s-(?:type|name)\b     # shelled-out find(1)
+    """ % {"d": dash}, re.X)
+
+
+# BOTH SPELLINGS ARE KEPT, which is the arrangement `prose` already has: a
+# repair whose BEFORE is not printed beside its AFTER is an assertion, and
+# permuted.py's section 4 counts them side by side.
+WALK_LOOSE = _walk_re("")      # mg-0e77's rule, character for character
+WALK = _walk_re(_DASH)         # the rule
 # The negative half.  git sorts its own output, so `git grep` and `git ls-files`
 # are ORDERED READS OF A COMMIT and must never fire; nor may a walk the subject
 # has already ordered itself.  Without this half R3 fires on every correct
@@ -343,8 +364,15 @@ def declared_revs(text, resolves):
     return [t for t in dict.fromkeys(HEXTOK.findall(text)) if resolves(t)]
 
 
-def unordered_walks(text, path=None, prose="none"):
+def unordered_walks(text, path=None, prose="none", flags="boundary"):
     """Lines that enumerate the filesystem in an order no commit determines.
+
+    `flags` selects the FLAG HALF the same way and for the same reason:
+
+        "loose"     mg-0e77's rule, character for character.  Any dash inside
+                    the tolerance window opens a flag cluster, so a HYPHENATED
+                    WORD is one.
+        "boundary"  the rule.  A flag's dash starts a word.
 
     `prose` selects WHICH OF THREE RULES is being asked, so that all three can
     be counted SIDE BY SIDE the way permuted.py prints `set` beside `bag` -- a
@@ -395,6 +423,23 @@ def unordered_walks(text, path=None, prose="none"):
     and un-silences a line no operator could act on.  A repair introducing the
     defect it repairs, in the half nobody would have looked at.  Blanking
     comments AND docstrings: 92 -> 83 hits, 9 removed, ZERO ADDED.
+
+    AND A FLAG'S DASH STARTS A WORD (mg-44da).  The tolerance that buys the
+    LIST spelling is a 24-character window, and every dash in it used to open a
+    flag cluster -- so `grep 'STANDING UN-STRUCK'` fired on `-STR`.  That is
+    the residue tranche 7 named and declined, and it is repaired here: 83 -> 80
+    hits, 3 removed, ZERO ADDED, all three PRINTED by permuted.py's section 4
+    and all three sentences.  TWO DIRECTORIES GO SILENT AND ONE OF THEM STILL
+    CONTAINS A REAL `os.walk` -- runner_exit_c2b3's libc2b3.py -- which is
+    correct and is the check that matters: that walk collects into a list and
+    `return sorted(found)` five lines below, so ORDERED suppresses it under
+    BOTH rules and the silence is not a lost true positive.
+
+    THE SAME GUARD IS PUT ON find(1)'s `-type`/`-name` AND IT MOVES NOTHING --
+    0 hits at 12aa5f8, measured and declared rather than left to look like it
+    contributed.  It is applied anyway because it is the same defect in the
+    same rule, and a guard that waits for its first false positive is one
+    somebody has to find twice.
     """
     raw = text.splitlines()
     if prose == "read":
@@ -404,9 +449,10 @@ def unordered_walks(text, path=None, prose="none"):
                                 ).splitlines()
     else:
         lines = code_only(text, path)[0].splitlines()
+    walk = WALK_LOOSE if flags == "loose" else WALK
     hits = []
     for i, ln in enumerate(lines):
-        if not WALK.search(ln) or ORDERED.search(ln):
+        if not walk.search(ln) or ORDERED.search(ln):
             continue
         # THE SORT IS ROUTINELY NOT ON THE WALK'S OWN LINE, and this was
         # MEASURED rather than allowed for: pointed at the two instruments

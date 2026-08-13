@@ -141,7 +141,8 @@ mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
 
       mg-0e77's rule -- prose read as code           92 hits,  71 file(s),  47 dir(s)
       comments blanked ONLY -- THE HALF-REPAIR       90 hits,  69 file(s),  46 dir(s)
-      comments AND docstrings -- THE RULE            83 hits,  63 file(s),  45 dir(s)
+      comments AND docstrings -- tranche 7           83 hits,  63 file(s),  45 dir(s)
+      ...AND a flag's dash starts a word -- THE RULE   80 hits,  60 file(s),  43 dir(s)
 
   BOTH DIRECTIONS, AND THE SECOND IS THE ONE THAT DECIDED THE
   DESIGN.  Blanking comments ALONE removes 3 and ADDS 1:
@@ -180,9 +181,11 @@ mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
       code/runner_exit_repair_7522/lib7522.py
           ticket's bare grep, re-derived here from this file's own rule.
 
-  2 DIRECTORIES GO SILENT, AND ONE OF THEM IS THE HEADLINE:
+  4 DIRECTORIES GO SILENT, AND ONE OF THEM IS THE HEADLINE:
       code/corpus_universe_1d6c
       code/landscape_repair_audit_3b51
+      code/runner_exit_c2b3
+      code/runner_exit_repair_7522
 
   audit_scope_text.py IS THE INSTRUMENT TRANCHE 4 REPAIRED AND
   PINNED.  Its only two R3 hits were comments EXPLAINING THE DEFECT
@@ -200,21 +203,107 @@ mg-885d -- CONDITION 2's INSTRUMENT.  Estate scan at AS_OF = 12aa5f8
   repair that silenced a true hit would look exactly like this one
   from the counts alone.
 
-  WHAT IS LEFT, REPORTED AT THE LOW WATER MARK.  2 of the 83
-  surviving hits are still prose -- sentences inside a print(...):
+  WHAT IS LEFT, REPORTED AT THE LOW WATER MARK -- prose surviving
+  inside a print(...), 1 of the 80 hits:
 
-      code/runner_exit_c2b3/k3_retro.py
-          print("          echo \"$E2OUT\" | grep 'STANDING UN-STRUCK' || true
       code/species_extent_audit_6cb9/a1_bothways.py
           print("  `os.listdir(root)` and `continue` past anything that is not
 
   They stay because the boundary above is a fact about the
-  language rather than a judgement about a callee.  One of them
-  shows a SECOND over-count in R3 that this branch does not touch:
-  the short-flag cluster fires on a HYPHENATED WORD, so
-  `grep 'STANDING UN-STRUCK'` matches on `-STR`.  Reported, not
-  repaired; R3's flag half is mg-0e77's rule and one rule change
-  measured in both directions is this tranche's whole claim.
+  language rather than a judgement about a callee.
+
+  THIS COUNT MOVED, 2 -> 1, AND IT IS ATTRIBUTED RATHER THAN LEFT
+  AS DRIFT: tranche 7 published 2 here, and the one that is gone is
+  THIS TRANCHE'S OWN SUBJECT -- the `UN-STRUCK` line below was in
+  this list because R3 fired on it, and it is out of the list
+  because R3 no longer does.  A residue shrinking because the rule
+  got better looks identical, from the count alone, to a residue
+  shrinking because the report got quieter.
+
+------------------------------------------------------------------------------
+  AND A FLAG'S DASH STARTS A WORD (mg-44da).  Tranche 7 printed the
+  line above and named the SECOND over-count it shows, then declined
+  it: `R3's flag half is mg-0e77's rule and one rule change measured
+  in both directions is this tranche's whole claim`.  This is that
+  change.  THE SUBJECT CAME OUT OF THE PREDECESSOR'S OWN RESIDUE --
+  a tranche reported what it would not fix, and the next one was
+  told by that list rather than by a person.
+
+  The 24-character window that buys the LIST spelling let ANY dash
+  inside it open a flag cluster, so a HYPHENATED WORD was one:
+  `grep 'STANDING UN-STRUCK'` matched on `-STR`.  The guard is a
+  fact about the shell's own tokenising rather than a judgement
+  about the word -- a flag's dash STARTS a word, and `UN-STRUCK` is
+  one word.  `--recursive` is unaffected because its second dash is
+  preceded by a dash, which is not a word character (P22).
+
+  BOTH DIRECTIONS.  The repair removes 3 and ADDS 0:
+
+      REMOVED  code/runner_exit_c2b3/k3_retro.py
+               print("          echo \"$E2OUT\" | grep 'STANDING UN-STRUCK' || tr
+      REMOVED  code/runner_exit_repair_7522/s3_figure.py
+               "bare grep over run_all.sh @%s re-derives %d" % (L.PINNED, bare)),
+      REMOVED  code/species_depth_audit_4700/kern4700.py
+               '    echo "$E2OUT" | grep \'STANDING UN-STRUCK\' || true\n'
+
+  2 DIRECTORIES GO SILENT, AND THE CHECK THAT MATTERS IS THE OTHER
+  DIRECTION -- every one of them was READ:
+      code/runner_exit_c2b3
+      code/runner_exit_repair_7522
+
+  EVERY ENUMERATION SITE IN THOSE DIRECTORIES, RE-SCANNED, WITH THE
+  REASON IT IS NOT A HIT -- and the reasons are NOT all this repair.
+  THE FIRST DRAFT OF THIS PARAGRAPH SAID THEY WERE, and computing it
+  is what said otherwise: a directory going silent at this tranche
+  can be silent for something the PREVIOUS tranche did.
+
+      k3_retro.py                                    HYPHENATED WORD -- THIS REPAIR
+          print("          echo \"$E2OUT\" | grep 'STANDING UN-STRUCK' || 
+      libc2b3.py                                     SORTED in the enclosing block
+          for root, dirs, files in os.walk(REPO):
+      run_all.sh                                     PROSE, blanked (mg-e5f3)
+          #       63/23/1 becomes 64 / 23-by-bare-grep / 17-by-parse / 1.
+      lib7522.py                                     PROSE, blanked (mg-e5f3)
+          ticket's bare grep, re-derived here from this file's own rule.
+      s2_status.py                                   SORTED on this line
+          return [os.path.join(d, f) for f in sorted(os.listdir(d))
+      s3_figure.py                                   HYPHENATED WORD -- THIS REPAIR
+          "bare grep over run_all.sh @%s re-derives %d" % (L.PINNED, bare)
+      s5_self.py                                     SORTED on this line
+          MINE_PY = sorted(f for f in os.listdir(HERE) if f.endswith(".py"
+      s5_self.py                                     SORTED on this line
+          MINE_SH = sorted(f for f in os.listdir(HERE) if f.endswith(".sh"
+      s5_self.py                                     SORTED on this line
+          MINE_MD = sorted(f for f in os.listdir(HERE) if f.endswith(".md"
+      selftest7522.py                                SORTED on this line
+          allpy = [f for f in sorted(os.listdir(HERE)) if f.endswith(".py"
+
+       2  HYPHENATED WORD -- THIS REPAIR
+       2  PROSE, blanked (mg-e5f3)
+       1  SORTED in the enclosing block
+       5  SORTED on this line
+
+  SO THE TWO DIRECTORIES DO NOT GO SILENT FOR ONE REASON, AND SAYING
+  SO IS THE POINT: only 2 of these sites are this tranche's doing.
+  The rest were already silent and the directories stayed lit
+  because of the ones that were not.  NO SITE IS LEFT UNEXPLAINED --
+  the one real `os.walk` here, libc2b3.py's, collects into a list and
+  `return sorted(found)` five lines below, which is the window rule
+  doing its job rather than this repair hiding a true positive.  A
+  repair that DID hide one would look identical FROM THE COUNTS
+  ALONE, so the counts are not what this rests on.
+
+  THE find(1) HALF TAKES THE SAME GUARD AND IT MOVES NOTHING -- 0
+  hits at 12aa5f8, measured separately and declared rather than left to
+  look like it contributed to the 3.  N24 is that measurement; N25
+  is what writing N24 turned up, an UNDER-count in the same half:
+  R3's `find` requires a following SPACE, so the LIST spelling that
+  P5 exists for is invisible to it.  Reported, NOT repaired, for the
+  reason tranche 7 gave for declining this tranche's own subject --
+  `find` is an ordinary English verb where `grep` is not, so
+  widening it is a second change whose false-positive direction
+  nobody has measured.  Two tranches running, the residue named at
+  the low water mark is where the next subject came from.
 
 ==============================================================================
 CONDITION 2: instrument GREEN -- 2 of 2 tranche-4 pins survive the stricter test; 1010 of 1061 transcripts are ones on which SET and BAG can disagree

@@ -777,3 +777,136 @@ regenerated at `820ade4`; the tree has gained `code/verdict_staleness_30bd` sinc
 directory. **This branch adds zero files** (`git diff --name-only --diff-filter=A main..HEAD` is
 empty), which is what makes the attribution a measurement rather than an inference. Regenerating it
 is the gate's own instruction; leaving it stale would be the drift this directory exists to count.
+
+---
+
+# Tranche 7 (`mg-44da`) — a flag's dash **starts a word**
+
+Tranche 6 printed the line `grep 'STANDING UN-STRUCK'` in its own residue list, named the second
+over-count that line shows, and declined it: *"R3's flag half is mg-0e77's rule and one rule change
+measured in both directions is this tranche's whole claim."* This tranche is that change.
+
+**The subject came out of the predecessor's own residue.** Tranche 6 was told what to do by `N18`, a
+control that said what would make it wrong. Tranche 7 was told by a *printed remainder* — a list of
+what the previous tranche would not fix, published at its low water mark. Neither was told by a
+person, and that is the same mechanism twice in a row.
+
+## 1. The defect — tolerance bought with a window, spent on a hyphen
+
+R3 matches `grep` plus a following short-flag cluster containing `r` or `R`. The tolerance is a
+24-character window, and it is there for a reason `P5` states: the only subject R3 has ever had
+spells its corpus read as a **Python list** — `["grep", "-rn", "-E", pat]` — with a quote, a comma
+and a space between the two tokens, so a pattern requiring `grep -r` adjacently sees nothing.
+
+Every dash inside that window opened a cluster. So a **hyphenated word in the argument** was one:
+
+| line | matched on |
+|---|---|
+| `grep 'STANDING UN-STRUCK'` | `-STR` |
+| `bare grep over run_all.sh @%s re-derives %d` | `-der` |
+
+**The guard is a fact about the shell's own tokenising, not a judgement about the word.** A flag's
+dash *starts* a word; `UN-STRUCK` is one word. The repair is a lookbehind for a word character, and
+the two spellings are kept side by side — `flags="loose"` is mg-0e77's rule character for character,
+`flags="boundary"` is the rule — which is the arrangement `prose` already has, for the same reason: a
+repair whose *before* is not printed beside its *after* is an assertion.
+
+## 2. Both directions, and the second is the one that had to be ruled out
+
+`83 → 80` hits, `63 → 60` files, `45 → 43` directories. **3 removed, ZERO added**, every removed hit
+printed in `out_permuted.txt` §4 — because a repair that removes hits without showing which ones is
+indistinguishable from one that broke the rule. All three are sentences; **no code line changed
+status**.
+
+**Two directories go silent, and they do not go silent for one reason.** Every enumeration site in
+them is re-scanned and printed with the reason it is not a hit — **computed, not asserted**:
+
+| sites | reason it is not a hit |
+|---|---|
+| 5 | `sorted(...)` on the line itself |
+| 2 | prose, blanked by tranche 6 |
+| 2 | **hyphenated word — this repair** |
+| 1 | sorted in the **enclosing block** |
+
+**The first draft of that paragraph asserted all of them were this repair's doing, and computing it
+is what said otherwise.** Only 2 of the 10 are; the rest were already silent, and the directories
+stayed lit because of the ones that were not. That distinction is invisible in the counts — a
+directory going silent at this tranche can be silent for something the previous tranche did.
+
+**No site is left unexplained, and one of them is a real `os.walk`** — `runner_exit_c2b3`'s
+`libc2b3.py`, which collects into a list and `return sorted(found)` sits five lines below it. That is
+the window rule doing its job, not this repair hiding a true positive. **A repair that did hide one
+would look identical from the counts alone**, which is why the reason column exists rather than a
+sentence claiming the files were read.
+
+## 3. `--recursive` still fires, and that is why the guard is a *word* boundary
+
+A guard written as "preceded by whitespace" would have silenced `grep --recursive` — its second dash
+is preceded by a **dash**, which is not a word character. No such line exists in the estate at
+`12aa5f8`, so the counts would not have said so. `P22` plants it. `P23` plants the other half: a line
+carrying **both** a hyphenated word and a real `-r` still fires, because the engine backtracks over
+the lazy window and tries each dash — asserting that from the pattern would be reading a regex rather
+than running it.
+
+## 4. Three figures that would have moved silently, and did not
+
+- **Tranche 6's published `92 / 90 / 83` measure mg-0e77's *flag* half by definition.** The prose
+  change is the only thing they are allowed to vary, so `permuted.py` §4 now pins `flags="loose"` on
+  all three. Reading them at the repaired flag half would have moved three published figures while
+  claiming to measure something else — this file's own subject arriving in the edit that measures it.
+- **The prose delta is still measured against the prose rule alone.** Folding `mg-44da`'s 3 into
+  `mg-e5f3`'s 9 would publish `12` as the prose over-count: a figure no tranche ever measured.
+- **The residue count moved `2 → 1`, and it is attributed rather than left as drift.** The hit that
+  left the list is *this tranche's own subject*. A residue shrinking because the rule got better looks
+  identical, from the count alone, to a residue shrinking because the report got quieter.
+
+## 5. What this tranche leaves — reported at the low water mark
+
+- **`find(1)`'s half takes the same guard and it moves NOTHING** — 0 hits at `12aa5f8`, measured
+  separately and **declared** rather than left to look like it contributed to the 3. It is applied
+  anyway because it is the same defect in the same rule, and a guard that waits for its first false
+  positive is one somebody has to find twice. `N24` is that measurement.
+- **`find(1)` in the LIST spelling is invisible to R3** — `N25`, a known-defect control, **found by
+  writing `N24` and getting the wrong answer**. R3's `find` half requires a following *space*, so
+  `["find", root, "-type", "f"]` is not seen at all: the exact blind spot `P5` exists for, one
+  alternative along, and an **under-count** rather than an over-count. Not repaired here, for the
+  reason tranche 6 gave for declining *this* tranche's subject — `find` is an ordinary English verb
+  where `grep` is not, so widening it is a second change whose false-positive direction nobody has
+  measured. The control fires the day somebody does it.
+- **1 of the 80 surviving hits is still prose** inside a `print(...)`, unchanged in kind from
+  tranche 6: nothing here can tell `print("os.listdir(root)")` from the call itself without knowing
+  which callee executes.
+- **`out_pinnable_3b51.txt` still says `R3 FIRES ON THIS DIRECTORY SIX TIMES`** — a literal tranche 6
+  replaced with a computed count in `pinnable.py`. It is a dated hand-run that **no suite re-takes**,
+  which `run_all.sh` already declares; it was stale before this branch and this branch does not
+  re-take it, because doing so needs a dirty tree and a subject suite run.
+
+### The backstop ran, and mg-9876's arm census does **not** move
+
+Checked rather than assumed, because tranche 4's `+1` came from exactly that arm and looked like
+noise until somebody attributed it. **This branch adds no directory and no file** — it modifies four
+that were already there, in a directory already counted in both arms — so neither numerator nor
+denominator *can* move, and naming *why* is the half that distinguishes this from tranche 4.
+
+**`out_gate.txt` and `alias_agreement_06d1`'s two moved on wall-clock alone and were restored, not
+committed** (`mg-4020`) — the byte counts beside them, `11818` and `52431`, are **unchanged**, which
+is the repo-state half. `out_a4_sweep.txt` is not modified at all: mg-9876's arm census reproduces
+**byte-identically**, `145 of 224` and `146 of 224`, denominator still `224`.
+
+### `out_consumers.txt` moves `194 → 196`, and only **one** of those is main's
+
+The other one is **tranche 6's own transcript having shipped stale at its own commit**, which is the
+class this directory exists to count, found in it:
+
+- `+1` is main's — `code/image_geometry_c776/run_all.sh` arrived at `aaf78e8` (`mg-c776`) after
+  tranche 6 landed.
+- `+1` is tranche 6's — at `93ead80`, the commit that regenerated `out_consumers.txt`, **the tree
+  held 195 files named `run_all.sh` and the transcript said 194**. It was measured on the pre-rebase
+  tree and committed against the post-rebase one.
+
+That is exactly the failure `aaf78e8`'s own message warns about one directory over — *"a census
+regenerated on the pre-rebase tree would have attributed main's own movement to this branch"* — and
+tranche 6 applied that discipline to `out_a4_sweep.txt` while missing it on `out_consumers.txt`, which
+`consumers.py` computes from the **live index** rather than from a commit. **This branch adds zero
+files** (`git diff --name-only --diff-filter=A origin/main...HEAD` is empty), which is what makes the
+split a measurement rather than an inference. Regenerating it here is the repair.
