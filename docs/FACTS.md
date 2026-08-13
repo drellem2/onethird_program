@@ -983,6 +983,59 @@ not a lever, it is where the `a2.3` exhibit becomes constructible.
 
 ---
 
+# FROM `mg-0b96` — THE FIRST UPPER BOUND ON `d` UNDER FREEZING, AND IT IS FILED BECAUSE IT IS TOO WEAK TO CONSUME
+
+One entry. `mg-345e`'s P5 grep reports **zero** frozen-conditional **upper** bounds on the
+incomparability density anywhere in this corpus, and every density fact on record is a lower bound.
+This is an upper bound, it is elementary, it is `U`, and it is worth `1 − Θ(1/n)` — which is why it
+has no consumer and belongs here rather than at a ledger row. Filing it is what stops the next arc
+either reading that zero as *"none can exist"* or re-deriving this one and mistaking it for a door.
+
+## F26 · A frozen poset has at most one element comparable to nothing — so `d ≤ 1 − ⌈(n−1)/2⌉/C(n,2)`
+
+**STATEMENT.** Two clauses; the second is the first applied to the emptiest case.
+
+> **(A)** If `x ≠ y` have the same strict down-set and the same strict up-set, the transposition
+> `(x y)` is an automorphism of `P`, so `Pr[x < y] = 1/2` exactly and **`δ(P) ≥ 1/2`**. Hence a
+> **frozen** poset (`δ < 1/3`, strict) contains no such pair.
+>
+> **(B)** Two elements comparable to nothing have equal (empty) up- and down-sets, so a frozen
+> poset has **at most one** of them; at least `n − 1` elements carry a comparability, so `P` has at
+> least `⌈(n−1)/2⌉` comparable pairs and
+>
+> > **`d(P) ≤ 1 − ⌈(n−1)/2⌉ / C(n,2)  =  1 − Θ(1/n)`.**
+
+**KIND.** `U` — proved for every finite poset; no census in the statement and no conjecture in it.
+The **sharpness** figure and every population number below are `FP` and nothing more, so per
+`STATE.md:99`'s standing rule the weakest kind in this entry is **`FP`**.
+
+**SCOPE.** The two clauses are **proved**. Corroboration, with its caps: (A) checked by *computing*
+`δ` rather than trusting the symmetry, over every isomorphism class at `n ≤ 7` — **1 179 posets
+with an interchangeable pair at `n = 7`, 0 with `δ < 1/2`**. (B) checked against `max{d(P) : P has
+at most one isolated element}`, exhaustive `n = 3…8`: the bound **holds at every `n` and is
+ATTAINED at every `n`**, so it is sharp on the class it is proved for. ⚠️ Sharp on **that** class is
+not sharp on the frozen class, which is **empty at every `n` reached** (re-established exhaustively
+here to `n = 8`).
+
+**FROM.** `mg-0b96` §5 and arm `d4`,
+[`OneThird-FrozenDensity-mg-0b96.md`](OneThird-FrozenDensity-mg-0b96.md), instrument
+[`code/frozen_density_0b96/`](../code/frozen_density_0b96/).
+
+**NOT.** ⚠️ **NOT a lever on `STATE.md` row 8, and the arithmetic is here so it is not re-hoped.**
+`ε_sup = d·n/(n+1)`, so this bound gives `ε_sup ≤ 0.98` at `n = 99` against `ε_dem ≈ 2×10⁻²` — short
+by a factor of **49**, and the shortfall **widens** with `n` because the bound's improvement on the
+trivial `d ≤ 1` is `Θ(1/n)` while row 8 needs a constant.
+⚠️ **NOT evidence that a stronger bound is available.** `mg-0b96` §2 shows any frozen-class ceiling
+`d ≤ D` is the (1/3)–(2/3) conjecture on `{d > D}` by contraposition, at every `D`; this entry is
+the `D = 1 − Θ(1/n)` end of that family, where the restricted class is small enough to be handled
+by an automorphism argument.
+⚠️ **NOT the same statement as "a counterexample is rigid" (Peczarski 2017).** That is a stronger
+hypothesis and a literature result; (A) is the special case an automorphism argument gives for free
+and is proved here rather than cited. `max{d : P rigid}` is `11/14` at `n = 8` (`FP`), so even the
+full rigidity hypothesis stays in the same `1 − Θ(1/n)` regime.
+
+---
+
 # Housekeeping
 
 **Adding an entry.** Append it with all five fields. If you cannot write the **SCOPE** line —

@@ -1,0 +1,105 @@
+====================================================================================================
+mg-0b96  d3  what the literature's class exclusions deliver about d -- measured
+====================================================================================================
+
+m1  THE CLASSES, FROM mg-33f5 §2's TABLE
+----------------------------------------------------------------------------------------------------
+      width ≤ 2                          Linial 1984
+      semiorder                          Brightwell
+      height ≤ 2                         mg-33f5 §2 lists NO source
+      N-free                             Zaguia, EJC 19(2) #P29
+      cover graph a forest               Zaguia, arXiv:1610.00809
+      6-thin                             Peczarski, Order 25 (2008)
+      has a non-trivial automorphism     Peczarski 2017
+
+    Each is a class on which the conjecture (or Peczarski's GPC, which implies it) is
+    PROVED, so a frozen poset lies outside all of them.
+
+m2  max{ d(P) : P NOT IN C } -- the best upper bound on d each exclusion can deliver
+----------------------------------------------------------------------------------------------------
+      class C                                  n=3        n=4        n=5        n=6        n=7        n=8        n=9
+      width ≤ 2                                  1          1          1          1          1          1          1
+      semiorder                            C = all        2/3        4/5      13/15      19/21      13/14      17/18
+      height ≤ 2                                 0        1/2       7/10        4/5        6/7      25/28      11/12
+      N-free                               C = all        1/2       7/10        4/5        6/7      25/28      11/12
+      cover graph a forest                 C = all        1/3        3/5      11/15      17/21        6/7        8/9
+      6-thin                               C = all    C = all    C = all    C = all    C = all          1          1
+      has a non-trivial automorphism           2/3        1/2       7/10      11/15      17/21      11/14        5/6
+
+    A cell of 1 says the exclusion delivers NO density bound at all: a poset of density
+    1 -- the antichain -- already lies outside the class.  `C = all' says every poset at
+    that n is in the class, so the exclusion decides everything and bounds nothing.
+
+m3  THE JOINT RESIDUE -- outside every listed class at once
+----------------------------------------------------------------------------------------------------
+         n     posets      residue    max d in it    decimal   decided by the n<=14 census?
+         3          5            0    -- empty --              yes (n <= 14)
+         4         16            0    -- empty --              yes (n <= 14)
+         5         63            0    -- empty --              yes (n <= 14)
+         6        318            0    -- empty --              yes (n <= 14)
+         7       2045            0    -- empty --              yes (n <= 14)
+         8      16999          452            3/4     0.7500   yes (n <= 14)
+         9     183231        28611            7/9     0.7778   yes (n <= 14)
+
+    THE RESIDUE IS THE STRONGEST DENSITY STATEMENT THE STRUCTURAL LITERATURE SUPPORTS.
+    Its maximum is the largest density a poset can have while lying outside every
+    class the record proves the conjecture on.
+
+    AND THE MAXIMUM HAS A CLOSED FORM AT BOTH n WHERE IT EXISTS:
+      n=8   max d in the residue = 3/4      1 - 2/n = 3/4      EQUAL   (the extremal
+            member has exactly n-1 = 7 comparable pairs)
+      n=9   max d in the residue = 7/9      1 - 2/n = 7/9      EQUAL   (the extremal
+            member has exactly n-1 = 8 comparable pairs)
+    ⚠️  Two values of n is a pattern, not a law, and it is not extrapolated here -- what
+    carries past n = 9 is the EXPLICIT FAMILY of m5, which is a construction.
+
+m4  WHY NOTHING BELOW n = 8, AND WHY AN INSTRUMENT STOPPING AT 7 WOULD HAVE LIED
+----------------------------------------------------------------------------------------------------
+      first n with a non-empty residue: 8   OK
+
+    Every poset on n <= 7 elements is 6-thin, because an element cannot be incomparable
+    with more than n-1 <= 6 others.  So Peczarski's 6-thin exclusion covers the whole
+    population below n = 8 ON ITS OWN, and `the literature decides everything' is what
+    an exhaustive sweep to n = 7 would have reported -- a fact about the population's
+    size, read as a fact about the literature's reach.
+      max incomparability degree over every poset at n = 7:  6  (<= 6, as the argument
+      says -- measured, not assumed)
+
+m5  AN EXPLICIT LITERATURE-IMMUNE FAMILY AT EVERY n >= 15, VERIFIED
+----------------------------------------------------------------------------------------------------
+    lib0b96.family(n): the incidence poset of an asymmetric unicyclic graph, plus one
+    element above one edge-element, plus one isolated element when the parity needs it.
+    Comparabilities are Theta(n), so d = 1 - Theta(1/n).
+
+         n    comps            d    decimal   classes containing it
+        15       17       88/105     0.8381   NONE -- immune
+        16       17      103/120     0.8583   NONE -- immune
+        17       19      117/136     0.8603   NONE -- immune
+        18       19      134/153     0.8758   NONE -- immune
+        19       21        50/57     0.8772   NONE -- immune
+        20       21      169/190     0.8895   NONE -- immune
+        25       27       91/100     0.9100   NONE -- immune
+        30       31      404/435     0.9287   NONE -- immune
+        35       37      558/595     0.9378   NONE -- immune
+        40       41      739/780     0.9474   NONE -- immune
+
+      0 of 26 family members lie inside some class   OK -- none do
+
+    ⚠️  THE FAMILY IS `FP' OVER n = 15..40.  What it establishes at those n it
+    establishes exhaustively -- each membership is computed, not argued -- and the
+    construction is uniform in n, but this arm does not prove asymmetry for general n.
+    THE RANGE IS THE POINT: the census reaches 14, the family starts at 15, so at every
+    n it covers there is a NAMED poset of density above 0.83 that no census and no
+    class exclusion on the record decides either way.
+
+====================================================================================================
+    THE SURVEY VERDICT.  Of the 7 class exclusions the record carries, 5 deliver any
+    upper bound on d at all at n = 9, the strongest of them 5/6 = 0.8333 -- and 0 deliver
+    one anywhere near the 2e-2 row 8 needs (d2 m1).  Jointly they leave a residue whose
+    density reaches 7/9 at n = 9 and, on the explicit family, 739/780 at n = 40.
+    The literature bounds delta from BELOW and the exclusions cut the SPARSE side;
+    cutting the sparse side of a class yields a LOWER bound on d, never an upper one,
+    which is mg-345e's finding reproduced from the literature side instead of a grep.
+====================================================================================================
+VERDICT: GREEN
+====================================================================================================
