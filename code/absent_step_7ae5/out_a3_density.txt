@@ -1,0 +1,111 @@
+==============================================================================
+mg-7ae5 / A3 — THE SPARSE READING, PRICED
+==============================================================================
+
+A. mg-d3c7's FAMILY AGAINST THE CLOSURE REQUIREMENT, AT ITS OWN DENSITY
+
+   The family (mg-d3c7 §4): chain c_1<...<c_{n-1} plus one isolated z,
+   n = 2k+1, A = {z, c_1..c_{k-1}}.  Exactly:
+
+       Delta_1 = (k+1)/((2k+1)k) = (n+1)/(n(n-1))        d = 2/n
+
+   Closure at density d needs eps_0 >= eps_sup/2 = d*n/(2(n+1))  [mg-7564 §4's
+   chain-free cap, so this binds ANY chain, including one nobody has written].
+   At d = 2/n that requirement is exactly 1/(n+1).
+
+   So at the family's own density the two bounds are:
+
+       REQUIRED   eps_0 >= 1/(n+1)                    (closure, at THIS n)
+       CEILING    eps_0 <= (n+1)/(n(n-1))             (the family refutes above)
+
+   n      d = 2/n   required >=    family ceiling margin         window
+   7      2/7       1/8            4/21           1.523810       open
+   9      2/9       1/10           5/36           1.388889       open
+   15     2/15      1/16           8/105          1.219048       open
+   21     2/21      1/22           11/210         1.152381       open
+   51     2/51      1/52           26/1275        1.060392       open
+   101    2/101     1/102          51/5050        1.030099       open
+   1001   2/1001    1/1002         501/500500     1.003001       open
+
+   THE MARGIN IS (n+1)^2 / (n^2 - n) AND IT TENDS TO 1.
+   The refuting family is calibrated, to leading order, EXACTLY to the closure
+   requirement at its own density: both are ~ d/2.  Restricting to the dense
+   regime raises the ceiling and the requirement by the same factor.
+
+   ⚠ AND THE ONE PLACE THE FAMILY IS SILENT: it has a member only at
+   d = 2/n <= 2/7, so for a density floor above 2/7 it imposes NOTHING and the
+   ceiling there comes from other witnesses — mg-3969's Cl. 6.1 witness sits at
+   d = 7/15 with Delta_1 = 17/78.  §B measures that region exhaustively.
+
+   IS THE REFUTING FAMILY ITSELF EXCLUDED BY MINIMALITY? — checked, not assumed:
+      k=3 (n=7):  min Delta_1 over prefixes = 1/7  -> INDECOMPOSABLE
+      k=4 (n=9):  min Delta_1 over prefixes = 1/9  -> INDECOMPOSABLE
+      k=5 (n=11):  min Delta_1 over prefixes = 1/11  -> INDECOMPOSABLE
+      So NO: the family is indecomposable at every k, minimality does not
+      touch it, and the refutation it carries is not an artefact of the
+      population minimality removes.  (§B shows the restriction DOES move the
+      n <= 6 ceiling, 1/6 -> 17/78 — but not this family.)
+
+   Against mg-0e8c's line: the family is below d ~ 2e-2 — the regime where the
+   wall is ALREADY DOWN, proven, L4-free — only for n >= 100 (2/n <= 1/50).
+   At every 15 <= n < 100, i.e. at every size a minimal counterexample can
+   currently have below 100, the family sits in the DENSE, still-open regime.
+   So 'the refutation lives where the wall is already down' is FALSE as stated;
+   it is true only asymptotically, and the crossing point is n = 100 — the same
+   arithmetic as row 8's primitive n >= 100 threshold (mg-0e8c §4).
+
+B. THE EXHAUSTIVE SWEEP — real failures, stratified by density (n <= 6)
+
+   Population: EVERY prefix cut of every poset on n <= 6 at which at least one
+   side is non-chain — the ARCHITECTURALLY REQUIRED scope (mg-d3c7 §4), not the
+   both-sides-non-chain restriction mg-3969 §6's 17/78 is measured on.
+   A cut FAILS U_either when some side supplies a pair balanced inside it and
+   NO such pair survives in P.
+
+   cuts swept                          25682
+   in the required scope               25570
+   U_either FAILURES                   256
+   thinnest failure                    Delta_1 = 1/6  at n = 6, d = 1/5
+   ceiling on a UNIVERSAL eps_0 (n <= 6)  eps_0 <= 1/6 = 0.166667
+
+   THE CEILING AS A FUNCTION OF A DENSITY FLOOR (P5):
+
+   floor d >=   failures  ceiling        required at d    window
+   0            256       1/6 = 0.1667   0 = 0.0000       open
+   1/10         256       1/6 = 0.1667   1/20 = 0.0500    open x3.33
+   1/5          256       1/6 = 0.1667   1/10 = 0.1000    open x1.67
+   2/7          236       17/78 = 0.2179 1/7 = 0.1429     open x1.53
+   1/3          228       17/78 = 0.2179 1/6 = 0.1667     open x1.31
+   2/5          204       17/78 = 0.2179 1/5 = 0.2000     open x1.09
+   1/2          83        1/4 = 0.2500   1/4 = 0.2500     EMPTY
+   3/5          25        1/3 = 0.3333   3/10 = 0.3000    open x1.11
+   4/5          0         — none —                        unrefuted
+
+   ceiling monotone in the density floor?   True
+
+   THE SAME SWEEP, RESTRICTED TO INDECOMPOSABLE POSETS
+   (minimality forbids a decomposable counterexample — a0 §B4 —
+    so a failure at a decomposable poset cannot bind Step 6)
+
+   failures at INDECOMPOSABLE posets   192 of 256
+   thinnest such failure               Delta_1 = 17/78 at n = 6, d = 7/15
+
+C. VERDICT ON THE SPARSE READING
+
+   1. THE REFUTATION IS SPARSE — but only in the sense that its family's
+      density is 2/n.  It has a member at EVERY density 2/n <= 2/7, so it
+      refutes inside the dense regime too, and it is below mg-0e8c's 2e-2 line
+      only at n >= 100.
+
+   2. RESTRICTING TO THE DENSE REGIME DOES NOT OPEN A WINDOW, because the
+      closure REQUIREMENT is linear in d for exactly the same reason the supply
+      is: eps_0 >= d*n/(2(n+1)).  Both walls move together and the margin
+      (n+1)^2/(n^2-n) tends to 1.
+
+   3. AND THE THING THAT MUST NOT BE READ OFF ANY OF THIS.  Every number in
+      this section is a CEILING — an upper bound established by exhibiting a
+      failure.  A ceiling that rises when a density floor is imposed does not
+      supply a positive eps_0; it removes a refutation.  (T) needs a LOWER
+      bound, and no measurement can produce one: mg-3969 Cl. 5.1/5.2.  The
+      sparse reading changes what is REFUTED.  It does not change what is
+      ABSENT.

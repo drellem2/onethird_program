@@ -1,0 +1,105 @@
+==============================================================================
+mg-7ae5 / A1 — THE ABSENT STEP, AND THE CHAIN'S CURRENCY CROSSINGS
+==============================================================================
+
+A. THE 25 ROWS, EACH WITH THE TWO ENDS OF ITS CURRENCY DECLARED
+   (rows are mg-ac0c §1 verbatim; the currency columns are new here)
+
+   #    step        quantity                               status    currency
+   00   L1b out     1-lambda_std <= eps_spec               ABSENT    SPECTRAL -> SPECTRAL
+   01   supply      eps_sup = d*n/(n+1)                    PROVED    PAIR     -> SPECTRAL <<<
+   02   Step 3      L2 as a disjunction                    ASSUMED   SPECTRAL -> CUT      <<<
+   03   Step 3      L2's first disjunct (eigenvector)      REFUTED   SPECTRAL -> CUT      <<<
+   04   Step 4      Cheeger square (Phi*)^2/2 <= 1-lambda_ PROVED    SPECTRAL -> CUT      <<<
+   05   Step 3      K on L2's second disjunct              ABSENT    SPECTRAL -> CUT      <<<
+   06   L3/Step 4   C_3^(III) in Phi_pref <= sqrt(2 C_3 ep PROVED*   SPECTRAL -> CUT      <<<
+   07   L3          C_3^gap                                EMPIRICAL SPECTRAL -> CUT      <<<
+   08   L3          C_3^cut = Phi*_pref / Phi*             EMPIRICAL CUT      -> CUT     
+   09   L3 (row 10) best-cut-is-a-prefix                   EMPIRICAL CUT      -> CUT     
+   10   chain IV    c, the capture fraction                EMPIRICAL CUT      -> CUT     
+   11   Step 5      Phi_P(A) = Delta_1(A,B)                PROVED    CUT      -> CUT     
+   12   Step 5 out  Delta_1(A_k,A_k^c) <= eps_leak         EMPIRICAL CUT      -> CUT     
+   13   Step 6/L4   eps_0^cons — the consumable threshold  ABSENT    CUT      -> PAIR     <<<
+   14   Step 6/L4   eps_0^unif(U_either), restricted scope PROVED    CUT      -> PAIR     <<<
+   15   Step 6/L4   the same, required scope               REFUTED   CUT      -> PAIR     <<<
+   16   Step 6/L4   F, L4 modulus                          ABSENT    CUT      -> PAIR     <<<
+   17   Step 6/L4   branch (i): P has a 1/3-balanced pair  PROVED    PAIR     -> PAIR    
+   18   Step 6/L4   branch (ii): modify <= F(eps)n interfa REFUTED   CUT      -> PAIR     <<<
+   19   Step 6/L4   branch (iii) as literally stated       REFUTED   CUT      -> PAIR     <<<
+   20   minimality  delta(P[A]), delta(P[B]) >= 1/3        PROVED    PAIR     -> PAIR    
+   21   minimality  both-sides-chain escape                PROVED    PAIR     -> PAIR    
+   22   contradiction a balanced pair contradicts delta(P) < PROVED    PAIR     -> PAIR    
+   23   demand      eps_dem on chain (I)=(III)             PROVED*   CUT      -> CUT     
+   24   demand      eps_dem <= 2 eps_leak (the cap)        PROVED*   CUT      -> CUT     
+
+B. THE CROSSINGS
+   13 of 25 rows change currency.
+
+   CUT -> PAIR : rows 13 14 15 16 18 19
+      13  ABSENT     *** THE CROSSING THAT IS ABSENT: hypothesis Delta_1 <= eps_0 is a CUT number, conclusion "P has a pair in [1/3,2/3]" is a PAIR number ***
+      14  PROVED     the same crossing, made refutable by dropping disjunct (i); CEILING only
+      15  REFUTED    the same crossing, REFUTED at every positive eps by mg-d3c7
+      16  ABSENT     would be the same crossing; UNCONSUMED, so it does not gate (mg-345e)
+      18  REFUTED    the same crossing by a structural route; unconsumable at every F>0 (mg-3af9)
+      19  REFUTED    the same crossing with an endpoint gap; no contradiction at any F>0
+
+   PAIR -> SPECTRAL : rows 01
+      01  PROVED     CROSSING, and it is the PROVED one: frozen (a PAIR hypothesis, every pair flips w.p. < 1/3) -> E[inv] < m/3 -> spectral, via Op-Form Cl. 6.1 and mg-210d's master bound
+
+   SPECTRAL -> CUT : rows 02 03 04 05 06 07
+      02  ASSUMED    CROSSING: spectral smallness -> a structural statement about a prefix
+      03  REFUTED    same crossing, refuted at n=6
+      04  PROVED     CROSSING, and it is the OTHER proved one: the spectral->cut conversion, a theorem at every poset
+      05  ABSENT     the live half of row 02; unquantified at all 5 source occurrences
+      06  PROVED*    conditional on row 03, which is FP-refuted
+      07  EMPIRICAL  same conversion, gap form
+
+C. P1, SCORED
+   CUT -> PAIR crossings          : 13 14 15 16 18 19
+   of which REFUTED               : 15 18 19
+   of which CEILING-ONLY (no value): 14
+   of which UNCONSUMED            : 16
+   LEFT LIVE                      : 13
+
+   P1 said 'the currency crosses exactly once, at the absent row'.
+   SCORED AS A PARTIAL LOSS, and the correction is sharper than the prediction:
+
+     - the chain crosses currency in THREE places, not one:
+         PAIR -> SPECTRAL   row 01           the SUPPLY, and it is PROVED
+         SPECTRAL -> CUT    rows 02-07       Cheeger (row 04) is PROVED
+         CUT -> PAIR        rows 13,14,15,16,18,19   *** the transfer ***
+     - within the CUT -> PAIR family every member is REFUTED, ceiling-only,
+       or unconsumed EXCEPT row 13.  So the sentence that survives is:
+
+       THE CHAIN CONVERTS PAIR-CURRENCY INTO SPECTRAL-CURRENCY BY A THEOREM
+       (row 01, one line, unconditional) AND MUST CONVERT IT BACK ACROSS
+       ROW 13, WHERE THERE IS NO THEOREM, NO VALUE AND NO CANDIDATE LEFT
+       STANDING.  The architecture is a loop (mg-3af8) and the loop has
+       exactly one open joint.
+
+D. THE ABSENT STEP, STATED
+
+   Between row 12 (Step 5's output, EMPIRICAL, pinned at eps_leak = 1/5) and
+   rows 20/22 (minimality and the contradiction, both PROVED), the chain needs:
+
+     (T)  There is eps_0 > 0 such that for EVERY finite poset P with
+          delta(P) < 1/3 and EVERY prefix cut (A_k, A_k^c) with
+          Delta_1(A_k, A_k^c) <= eps_0, P has an incomparable pair {x,y}
+          with p^P_xy in [1/3, 2/3].
+
+   IN  : Delta_1 — an expected displacement per element of a CUT      (row 12)
+   OUT : p_xy in [1/3,2/3] — a probability of a PAIR                  (row 20/22)
+   BETWEEN: row 12 and row 20.  Nothing else sits there.
+
+   Three readings of (T) are already dead and mg-ac0c records each:
+     via branch (ii)              REFUTED unconditionally      row 18
+     via branch (iii) as stated   REFUTED, endpoint gap        row 19
+     via a UNIVERSAL (i)-free surrogate  REFUTED at every eps>0 row 15
+   and one is alive but vacuous:
+     via branch (i)               true at eps=1 on every exhibitable poset,
+                                  FALSE BY HYPOTHESIS at a counterexample  row 17
+
+   So (T) must be proved FROZEN-CONDITIONALLY — it must consume
+   delta(P) < 1/3 — which is mg-dcae's rule, and it is what mg-ac0c §4 reached
+   from the demand side.  A2 prices what that hypothesis is worth; A3 asks
+   whether mg-0e8c's density restatement changes the answer.
