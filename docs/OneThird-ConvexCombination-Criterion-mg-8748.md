@@ -140,7 +140,30 @@ of.
 
 ---
 
-## 4. Where it is filed
+## 4. How the pre-registration scored
+
+[`PREDICTIONS.md`](../code/convex_criterion_8748/PREDICTIONS.md), committed at `f901435` before
+one line of the instrument existed.
+
+| | | outcome |
+|---|---|---|
+| `R1` | `tA+(1−t)B` idempotent iff `A = B` | **REPORT, zero credit.** Derived on paper before the code, and disclosed as such rather than filed as a bet. It is the statement that made the fact's usual phrasing false. |
+| `R2` | `B − A` a projection iff `Ran A ⊆ Ran B` | **REPORT, zero credit**, same derivation. |
+| `P3` | cheap route ≡ expensive route, 0 disagreements | **CONFIRMED**, exhaustive at 225 and 2 704 ordered partition pairs. |
+| `P4` | `a4.3a`'s row measures distinctness; the pair is transverse at a large majority | **CONFIRMED**, both halves — 3 971 of 4 319. |
+| `P5` | *and* nested-and-distinct instances exist, so the word is not uniform | **CONFIRMED** — 348 of 4 319. This was the bet I was least sure of (`p = 0.60`). |
+| `P6` | the `iff` holds with 0 exceptions and the failing side is a majority | **CONFIRMED** — 0 exceptions; not a projection at 165/225 and 2 346/2 704. |
+| `P7` | `Var = Σ‖D_l f‖²` at every poset measured and for structured `f` | **CONFIRMED** — 7 posets, 11 statistics each, deviation 0. |
+| `P8` | the two-measure exhibit separates, and the planted non-blind control does not read blind | **CONFIRMED**, onto `mg-0fc6`'s own witness. |
+
+**Eight of eight live bets confirmed, and that is a weaker result than it looks**, because two of
+them (`R1`, `R2`) were paper-derived first and the rest are close to them. **The instrument's own
+uncontracted expectations did worse and that is where the information is:** two rows were refuted
+by their own run — the foliations never coincide (`c3.1`), and the cross term vanishes at 30
+transverse posets (`c3.3`). Both are kept in the arm rather than rewritten, and the second one
+changed the criterion's statement.
+
+## 5. Where it is filed
 
 [`docs/FACTS.md`](FACTS.md) **F24**, with its kind and its exact scope. It is registered there
 rather than in `STATE.md` for `FACTS.md`'s own three reasons, and the second is the operative one
