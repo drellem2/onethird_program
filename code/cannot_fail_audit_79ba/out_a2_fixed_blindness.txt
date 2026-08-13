@@ -1,0 +1,95 @@
+==============================================================================
+mg-79ba A2 -- FIXED-BLINDNESS WORLDS, RUN AGAINST THE BATTERY
+==============================================================================
+  [HOLDS] baseline: the shipped battery exits 0 with 45 scored rows
+  [HOLDS] and the artifact states the blindness this section is about: row I4's 25 vacuous posets are ALL `applied-but-unseen`, 0 `did-not-apply`, while I1/I2/I3 have none
+        so the fix has somewhere to bite in exactly one row
+
+==============================================================================
+A2.0 -- MY OWN FIRST INJECTION WAS UNFAITHFUL, AND mg-17aa's OWN AGREEMENT CHECK IS WHAT CAUGHT IT.  KEPT, NOT SMOOTHED AWAY
+==============================================================================
+  The first version of this file patched `L_mut` inside the sweep
+  and nowhere else.  `negative_control_incidence` computes its five
+  counters TWICE -- once in that loop and once through
+  `nc4_row_stats`, the second route mg-17aa added -- so the patch
+  moved one route and not the other.  That is not a fixed pipeline,
+  it is a corrupted instrument, and I reported it as an mg-17aa
+  finding for as long as it took to run the faithful version.
+
+  [HOLDS] the unfaithful injection lands
+  exit 1; 1 row verdict change(s), 1 of them to FAIL
+    [PASS] -> [FAIL] : falsifiability check, replacing the mg-8a12 routing row: every o   <== the row mg-17aa ADDED, replacing the wrong-direction routing row
+    ROW TEXT CHANGED (was [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 297 
+    ROW TEXT CHANGED (now [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 318 
+  [HOLDS] the UNFAITHFUL world turns mg-17aa's falsifiability row RED, and it is RIGHT to: that row requires `nc4_row_stats` to reproduce the sweep's own counters on the real input before any exhibit is believed, and here it cannot.  mg-17aa's own docstring says why the check is there -- 'two procedures computing one quantity is how this lineage got a gate name that was not the code's' -- and this is that check firing on a live example
+        mg-17aa rows red: ['falsifiability check, replacing the mg-8a12 routing row: eve']
+  [HOLDS] and the ROW SAYS WHICH HALF FAILED rather than only that it did -- the agreement count is printed in the row itself, so a reader can tell 'my second route disagrees' from 'no falsifying input exists'
+        does on 3/4 rows. AND THE SECTION-WIDE MEASUREMENTS THE OLD 
+
+==============================================================================
+A2.1 -- FAITHFUL FIXED-BLINDNESS WORLD FB-diag
+==============================================================================
+  [HOLDS] FB-diag: every anchor matched exactly once
+        ok
+  exit 0; 0 row verdict change(s), 0 of them to FAIL
+    ROW TEXT CHANGED (was [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 297 
+    ROW TEXT CHANGED (now [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 318 
+  [HOLDS] FB-diag: the fix reached row I4's blind posets -- the artifact's own vacuity line moved off `I4 25 vacuous`
+        I4 4 vacuous = 0 did-not-apply + 4 applied-but-unseen.  A row that scored 'the s
+
+==============================================================================
+A2.1 -- FAITHFUL FIXED-BLINDNESS WORLD FB-mag
+==============================================================================
+  [HOLDS] FB-mag: every anchor matched exactly once
+        ok
+  exit 0; 0 row verdict change(s), 0 of them to FAIL
+    ROW TEXT CHANGED (was [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 297 
+    ROW TEXT CHANGED (now [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 318 
+  [HOLDS] FB-mag: the fix reached row I4's blind posets -- the artifact's own vacuity line moved off `I4 25 vacuous`
+        I4 4 vacuous = 0 did-not-apply + 4 applied-but-unseen.  A row that scored 'the s
+
+==============================================================================
+A2.1 -- FAITHFUL FIXED-BLINDNESS WORLD FB-sign
+==============================================================================
+  [HOLDS] FB-sign: every anchor matched exactly once
+        ok
+  exit 0; 0 row verdict change(s), 0 of them to FAIL
+    ROW TEXT CHANGED (was [CANNOT FAIL]): PROVEN PROPERTY, not a control row -- the corruptions I1, I2, I3
+    ROW TEXT CHANGED (was [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 297 
+    ROW TEXT CHANGED (now [CANNOT FAIL]): PROVEN PROPERTY, not a control row -- the corruptions I1, I2, I3
+    ROW TEXT CHANGED (now [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 307 
+  [HOLDS] FB-sign: the fix reached row I4's blind posets -- the artifact's own vacuity line moved off `I4 25 vacuous`
+        I4 15 vacuous = 0 did-not-apply + 15 applied-but-unseen.  A row that scored 'the
+
+==============================================================================
+A2.1 -- FAITHFUL FIXED-BLINDNESS WORLD FB-gauge
+==============================================================================
+  [HOLDS] FB-gauge: every anchor matched exactly once
+        ok
+  exit 1; 2 row verdict change(s), 2 of them to FAIL
+    [PASS] -> [FAIL] : I4 the facet enumeration le_to_facet (mis-indexed by one) -- the
+    [PASS] -> [FAIL] : falsifiability check, replacing the mg-8a12 routing row: every o   <== the row mg-17aa ADDED, replacing the wrong-direction routing row
+    ROW TEXT CHANGED (was [CANNOT FAIL]): PROVEN PROPERTY, not a control row -- the corruptions I1, I2, I3
+    ROW TEXT CHANGED (was [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 297 
+    ROW TEXT CHANGED (now [CANNOT FAIL]): PROVEN PROPERTY, not a control row -- the corruptions I1, I2, I3
+    ROW TEXT CHANGED (now [PASS]): the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- 318 
+  [HOLDS] FB-gauge: the fix reached row I4's blind posets -- the artifact's own vacuity line moved off `I4 25 vacuous`
+        I4 4 vacuous = 0 did-not-apply + 4 applied-but-unseen.  A row that scored 'the s
+
+==============================================================================
+A2 -- THE ANSWER TO THE TICKET AS ASKED
+==============================================================================
+  [HOLDS] FB-diag -- the pipeline now SEES the corruption on the blind posets and each newly-seen pair moves a diagonal entry, so forced gate 1 blocks it.  Row I4 stays forced, and NO row mg-17aa added or re-conditioned goes red: exit 0
+        mg-17aa rows red: none
+  [HOLDS] FB-mag -- the pipeline now SEES the corruption on the blind posets and each newly-seen pair moves an off-diagonal MAGNITUDE with the diagonal intact, so forced gate 2 blocks it.  Row I4 stays forced, and NO row mg-17aa added or re-conditioned goes red: exit 0
+        mg-17aa rows red: none
+  [HOLDS] FB-sign -- THE SHARPEST WORLD, AND THE ONE THE DESIGN IS FOR.  The newly-seen pairs CLEAR BOTH FORCED GATES (same diagonal, same magnitudes) and are still NOT absorbable -- the flip is chosen by asking the shipped predicate, not by guessing.  So the routing correctly returns row I4 to a SCORED absorbability decision, `absorb == 0` comes back into its condition and is TRUE, the [CANNOT FAIL] row covers the other three, and the battery exits 0 with nothing red.  This is mg-17aa's `forced = (blocked == app)` doing the job its comment claims: 'a corruption that CAN be absorbed puts the clause back with no edit'
+        mg-17aa rows red: none
+  [HOLDS] FB-gauge -- the newly-seen pairs are a genuine diagonal +-1 conjugation, so they clear both gates AND are absorbable.  Row I4 routes back to scored, `absorb == 0` is FALSE, and row I4 plus mg-17aa's falsifiability row both go red (exit 1).  READ THE DIRECTION BEFORE READING THE RED: what reddens is the section reporting that its own corruption is a GAUGE on those posets -- the question NEGATIVE CONTROL 4 exists to answer.  A control that reddens because the corruption turned out to be absorbable points the RIGHT way; it is not mg-e35b's shape
+        mg-17aa rows red: ['falsifiability check, replacing the mg-8a12 routing row: eve']
+  [HOLDS] SO THE TICKET'S HEADLINE QUESTION IS ANSWERED NO.  In three of four fixed-blindness worlds -- including the two where the routing has to make a different decision than it makes today -- NO row mg-17aa added goes red.  In the fourth it does, and the cause is what the fix REVEALED about the corruption and not the fix.  The two are separated by running four fixes that reveal different things, which is why one world would not have been an answer
+        and the reason the [CANNOT FAIL] row survives all four is NOT the reason its own prose gives -- see a1_cannot_fail.py
+
+==============================================================================
+18 claim(s) scored; 0 BROKEN.
+==============================================================================
