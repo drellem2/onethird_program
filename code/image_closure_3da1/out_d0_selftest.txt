@@ -1,0 +1,42 @@
+
+==============================================================================
+d0.1  the poset enumerator against OEIS A001035 — an EXTERNAL anchor
+==============================================================================
+  [GREEN] labelled poset counts match A001035 at n = 1..5
+       measured [1, 3, 19, 219, 4231], A001035 [1, 3, 19, 219, 4231]
+
+==============================================================================
+d0.2  is_poset is not vacuously true — the two ways it must refuse
+==============================================================================
+  [GREEN] a cycle, a non-transitive relation and a symmetric pair are all REFUSED
+       if any of these passed, d0.1's count would be an over-count and would not match A001035
+  [GREEN] the antichain and the 3-chain are ACCEPTED
+       the refusals above are therefore not a predicate that refuses everything
+
+==============================================================================
+d0.3  linear extensions against a second route, and the marginal against a third
+==============================================================================
+  [GREEN] e(P) agrees with a minimal-element recursion at all 219 posets, n = 4
+       the filter-over-S_n route and the recursion share no code
+  [GREEN] the image point agrees with an average of vertex vectors at all 219
+       so `marginal`'s accumulation is not carrying the arms on its own
+
+==============================================================================
+d0.4  PLANTED DEFECTS — each control above, put to a library that has the defect
+==============================================================================
+  [GREEN] an enumerator with the transitivity filter removed FAILS d0.1
+       it returns 729 at n = 4 against A001035's 219 — d0.1 can go red
+  [GREEN] an extension list one short moves the marginal — d0.3's third route can go red
+       e(P) = 12 at P = {0 < 1}, n = 4; dropping one moves pi
+  [GREEN] the n! vertex vectors are DISTINCT, and a labels-for-positions slip collapses them
+       6 distinct points with `<` on positions, 1 with `<` on labels — the plant leaves ONE point, so d1 would have no subject left
+  [GREEN] AND THE INERT PLANT IS REPORTED, NOT HIDDEN: `<=` for `<` changes nothing
+       6 distinct, same as the 6 the library gives — i != j on every coordinate, so positions never tie and the two comparisons agree on this domain
+
+==============================================================================
+d0.5  the retraction is idempotent — cited from mg-c776 T1, RE-CHECKED not assumed
+==============================================================================
+  [GREEN] r(r(pi)) = r(pi) and P(r(pi)) = P at all 219 posets, n = 4
+       so `R_n = Fix(r)` and the cells are a partition — this directory's arms may use both
+
+RESULT: GREEN — all controls passed

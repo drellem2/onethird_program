@@ -1,0 +1,55 @@
+
+==============================================================================
+d2.1  the sweep as mg-c776 ran it — reproduced on independent code
+==============================================================================
+   n | directions | separations found
+  ---+------------+------------------
+   3 |        300 |                 0
+   4 |        300 |                 0
+  [GREEN] 0 separations over 300 integer directions at n = 3,4
+       the same reading mg-c776 c2.2 reports, from a different library and a different PRNG
+
+==============================================================================
+d2.2  and it could not have been otherwise — the sweep tests nothing beyond c2.1
+==============================================================================
+  [GREEN] every one of the 300 maxima over R_n is attained at a vertex of M_n
+       So `0 separations` is a RESTATEMENT of vert(M_n) subset R_n, not independent evidence for
+       it.  A linear functional is maximised over a polytope at a vertex; every vertex is in the
+       image; therefore no direction can separate, at any sample size.  The sweep has no power
+       against its own hypothesis -- which is what `vacuity guard` should be read to mean.
+
+==============================================================================
+d2.3  THE POWER MEASUREMENT — the same sweep put to a world with a real separation
+==============================================================================
+   Plant: the image with ONE vertex removed.  Its hull is strictly smaller than M_n, so a
+   separation EXISTS.  The question is how often 300 random directions notice.
+
+   n | n! | directions with a UNIQUE argmax | detects delta_id removed | pooled rate | 1/n!
+  ---+----+---------------------------------+--------------------------+-------------+-------
+   3 |  6 |                             265 |                       56 |      0.1472 | 0.1667
+   4 | 24 |                             256 |                       14 |      0.0356 | 0.0417
+   5 | 120 |                             232 |                        2 |      0.0064 | 0.0083
+  [GREEN] a single removed vertex is invisible to the overwhelming majority of directions
+       The pooled rate is the chance that a uniformly chosen one of the n! single-vertex
+       removals is caught by a uniformly chosen direction, and it tracks 1/n! -- a direction
+       catches a removal only when it is maximised UNIQUELY at the removed point.
+       CONSEQUENCE FOR THE ESTATE, and it is the reason this arm is not a footnote: a direction
+       sweep returning 0 separations is near-zero evidence that a subset of M_n is convexly
+       large.  Where a claim of that shape is load-bearing it needs the containment argument,
+       which is what mg-c776 has and what this directory re-proves at d1.
+
+==============================================================================
+d2.4  the separation IS there — a chosen direction finds it every time
+==============================================================================
+   n | max over M_n | max over R_n minus delta_id | strictly smaller
+  ---+--------------+-----------------------------+-----------------
+   3 | 3            | 5/2                         | True
+   4 | 6            | 11/2                        | True
+   5 | 10           | 19/2                        | True
+  [GREEN] the all-ones direction separates the planted set at every n, exactly
+       So d2.3's low rate is a property of the SWEEP and not of the planted world: the
+       separation is real, exact, and found instantly by one direction chosen with the
+       removed point in mind.  Random directions are the wrong instrument for this question,
+       and that is the finding rather than a caveat about sample size.
+
+RESULT: GREEN — all checks passed
