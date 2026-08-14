@@ -1,0 +1,273 @@
+==============================================================================
+mg-3ebf -- A CORPUS ROOT OUTSIDE THIS REPOSITORY.  Read at AS_OF = 07a2fd0
+==============================================================================
+
+  R1 is an address in no commit, R2 a revision already declared, R3
+  an unordered walk.  THIS IS AN ADDRESS IN NO COMMIT OF THIS
+  REPOSITORY AT ALL -- another repository's tree, or the `mg` store
+  under ~/.macguffin.  mg-e8b0 reported the class on ONE PINNED
+  instrument and declined to build a rule because the false-positive
+  direction was unmeasured; sections 4 and 5 are that measurement.
+  METHOD AND BLIND SPOTS are in this file's docstring and are not
+  repeated.  THE SENTENCE THAT MATTERS: R4 FIRING IS `GO AND READ
+  WHY', NOT `DO NOT PIN'.  R4 NOT FIRING PROVES NOTHING.
+
+------------------------------------------------------------------------------
+1  THE RESIDUE, RE-TRIAGED.  R4 OVER out_worklist.txt SECTION 4
+------------------------------------------------------------------------------
+
+  These are the rows recorded DIFFERS that declare no revision and
+  are not falsified by a pin -- `the rows nothing on record has yet
+  given a reason to skip'.  R4 IS A REASON, AND IT LANDS ON MOST OF
+  THEM.  Every one below was ALSO triaged BY HAND for this file:
+  suite run, worktree diff read, scripts read at AS_OF.
+
+  code/eps_spec_sweep_372e
+      -> R4 does not fire.  A pinning candidate, and this is
+         a PREFILTER passing rather than a verdict.
+
+  code/landing_audit_sweep_64cb
+      HOME     code/landing_audit_sweep_64cb/lib64cb.py:49
+               ~/.macguffin/work
+      HOME     code/landing_audit_sweep_64cb/lib64cb.py:50
+               ~/.macguffin/events.jsonl
+      -> OUTSIDE THIS REPOSITORY.  No AS_OF here reaches it.
+
+  code/summary_guard_audit_407f
+      ABSOLUTE code/summary_guard_audit_407f/a1_arms.py:62
+               /Users/daniel/research/one_third_width_three
+      -> OUTSIDE THIS REPOSITORY.  No AS_OF here reaches it.
+
+  code/superseded_descent_688c
+      ABSOLUTE code/superseded_descent_688c/lib688c.py:36
+               /Users/daniel/research/one_third_width_three
+      HOME     code/superseded_descent_688c/lib688c.py:39
+               ~/.macguffin
+      -> OUTSIDE THIS REPOSITORY.  No AS_OF here reaches it.
+
+  code/verdict_delivery_bf3f
+      HOME     code/verdict_delivery_bf3f/d2_cause.py:37
+               ~/.pogo
+      HOME     code/verdict_delivery_bf3f/d3_fire.py:33
+               ~/go/bin/mg
+      HOME     code/verdict_delivery_bf3f/lib_bf3f.py:38
+               ~/.macguffin
+      -> OUTSIDE THIS REPOSITORY.  No AS_OF here reaches it.
+
+      residue rows                                     5
+        R4 fires -- a root outside this repository      4
+        R4 silent -- conditions 1-3 are worth starting  1
+
+------------------------------------------------------------------------------
+2  THE SAME RULE OVER ALL 44 ROWS OF THE WORK-LIST
+------------------------------------------------------------------------------
+
+  code/anchor_drift_96df                         DIFFERS    HOME
+      ~/research/
+  code/census_audit_4d3b                         DIFFERS    ABSOLUTE,HOME
+      /Users/daniel/research/one_third_width_three
+      /Users/daniel/research/onethird_program
+      ~/.macguffin/work
+  code/landing_audit_sweep_64cb                  DIFFERS    HOME
+      ~/.macguffin/events.jsonl
+      ~/.macguffin/work
+  code/mirror_staleness_cdd5                     DIFFERS    HOME
+      ~/research/one_third_width_three
+  code/runner_exit_audit_dee4                    DIFFERS    ABSOLUTE
+      /bin/sh
+  code/runner_exit_c2b3                          DIFFERS    ABSOLUTE
+      /%s/
+      /bin/sh
+  code/summary_guard_audit_407f                  DIFFERS    ABSOLUTE
+      /Users/daniel/research/one_third_width_three
+  code/superseded_descent_688c                   DIFFERS    ABSOLUTE,HOME
+      /Users/daniel/research/one_third_width_three
+      ~/.macguffin
+  code/verdict_delivery_bf3f                     DIFFERS    HOME
+      ~/.macguffin
+      ~/.pogo
+      ~/go/bin/mg
+
+      rows scored                                      44
+        R4 fires                                       9
+        of the rows recorded DIFFERS                   9
+        of the rows recorded REPRODUCES                0
+      scripts that did not parse (reported, not skipped) 0
+
+------------------------------------------------------------------------------
+3  THE FALSE-POSITIVE DIRECTION 1 -- EXPOSURE, FOUR DESIGNS
+------------------------------------------------------------------------------
+
+  mg-23af's method: the design is chosen on what each SHAPE ADMITS,
+  not on the delta between their verdicts, because three designs
+  agreeing on today's corpus cannot be told apart by today's counts.
+
+      shape                                  literals   rows   pinned
+      naive LINE match (comments included)        120        -        -
+      ast, ANY outside literal + arena            65       28        3
+        + docstrings excluded                     65       28        3
+        + arena excluded                          29       13        2
+        + bound to a module constant (RULE)       16        9        1
+
+  THE `pinned` COLUMN IS THE ONE THAT DECIDED THE DESIGN, and it is
+  the direction that would matter if it went wrong: those are rows a
+  pin HAS landed on, so a rule firing there is telling operators not
+  to do work that demonstrably succeeded.  The wide shapes fire on
+  three of the eight, INCLUDING landscape_repair_1953 -- which is
+  pinnable.py's OWN named example of the shape mg-20ee's remedy was
+  built for.  A rule that waves off the estate's model pinning is
+  not a conservative rule, it is a wrong one.
+
+  WHAT EACH NARROWING BOUGHT, AND THE DOCSTRING GUARD BOUGHT NOTHING:
+  the docstring column is IDENTICAL to the one above it on this
+  corpus -- 0 literals removed -- so it is REQUIRED-INERT here and
+  is kept for the shape and not for the delta.  Saying so is the
+  point: a guard reported as load-bearing because it was reasonable,
+  rather than because it moved a number, is a figure nothing stands
+  behind, which is what permuted.py found under its own `18 of 129`.
+
+  AND THE GUARD THAT DID THE WORK WAS FITTED TO THIS CORPUS.  The
+  `bound` rule was chosen AFTER reading three false positives by
+  hand (`/docs/`, `/**/mg-*.md`, `/bin/sh`), so the row counts above
+  are NOT independent evidence for it -- they are the sample it was
+  fitted to.  What is independent is the DIRECTION, which P47 pins:
+  every literal the guard removes was adjudicated first, and the six
+  named true positives must survive it.
+
+------------------------------------------------------------------------------
+4  THE FALSE-POSITIVE DIRECTION 2 -- THE ROWS A PIN LANDED ON
+------------------------------------------------------------------------------
+
+  This is the direction that would matter if it went wrong: a rule
+  firing freely on rows that were SUCCESSFULLY PINNED would be
+  telling operators not to do work that demonstrably succeeded.
+
+      code/absent_step_7ae5
+          silent
+      code/anchor_drift_96df
+          R4 FIRES   ~/research/
+      code/face_geometry_audit_e720
+          silent -- 1 literal(s) a wider design would have fired on: mkdtemp()
+      code/landscape_repair_1953
+          silent -- 1 literal(s) a wider design would have fired on: /docs/
+      code/landscape_repair_audit_3b51
+          silent
+      code/n0_strike_audit_dd8b
+          silent
+      code/pairbias_indep_audit_6bd1
+          silent
+      code/species_remainder_f8fa
+          silent
+
+      rows a pin has landed on                         8
+        R4 fires on                                    1
+
+  THE ONE THAT SURVIVES IS THE TICKET'S OWN INSTANCE, and it is the
+  sharpest thing here: anchor_drift_96df is PINNED, R4 fires on it,
+  and it is the pinned row WHOSE TRANSCRIPT STILL DRIFTS -- which is
+  what mg-e8b0's tranche 10 reported by hand and declined to build.
+  n = 1, SAID PLAINLY: it is the instance the rule was aimed at, so
+  it demonstrates that the rule fires where it was aimed and is NOT
+  independent evidence about the rule.
+
+------------------------------------------------------------------------------
+5  THE PRECISION, ADJUDICATED BY HAND AT BOTH GRAINS
+------------------------------------------------------------------------------
+
+  Sections 3 and 4 measure where the rule FIRES and where it must
+  NOT.  Neither says whether a firing is RIGHT, and that is a
+  judgement no rule here can make: every literal below was read at
+  AS_OF and graded, and the grades are DATA in this file's source
+  so P48 can check they still cover what the rule does.
+
+      CORPUS    /Users/daniel/research/one_third_width_three   x3
+      CORPUS    ~/.macguffin                                   x2
+      CORPUS    ~/.macguffin/events.jsonl                      x1
+      CORPUS    ~/.macguffin/work                              x2
+      CORPUS    ~/.pogo                                        x1
+      CORPUS    ~/research/                                    x1
+      CORPUS    ~/research/one_third_width_three               x1
+      FORMAT    /%s/                                           x1
+      SELF      /Users/daniel/research/onethird_program        x1
+      TOOL      /bin/sh                                        x2
+      TOOL      ~/go/bin/mg                                    x1
+
+      literals the rule fires on                       16
+        CORPUS -- a true foreign corpus root           11
+        SELF -- this repository, absolutely spelled    1
+        TOOL / FORMAT -- the declared over-count       4
+        UNADJUDICATED                                  0
+
+      rows the rule fires on                           9
+        with at least one CORPUS root                  7
+        with at least one CORPUS or SELF root          7
+        on the over-count ALONE -- a FALSE row         2
+
+  THE TWO FALSE ROWS ARE NAMED AND ARE BOTH THE SAME SHAPE:
+      code/runner_exit_audit_dee4                    /bin/sh
+      code/runner_exit_c2b3                          /%s/, /bin/sh
+
+  `/bin/sh` IS OUTSIDE THIS REPOSITORY AND THAT IS TRUE AND USELESS.
+  The rule proves what it claims -- a root outside this repository
+  is named as a module constant -- and `is that root the CORPUS or
+  the INTERPRETER' is the difference between what an instrument
+  READS and what it RUNS.  pinnable.py has already recorded that as
+  not decidable from the token, where R2 declines to tell a
+  control's revision from a corpus pin, and a fourth guard fitted to
+  a ten-literal sample would be the fourth thing chosen after seeing
+  the answer.  SO IT IS DECLARED AND NOT TUNED AWAY, and the
+  ADJUDICATED table above is what a reader gets instead.
+
+------------------------------------------------------------------------------
+6  THIS FILE ON ITS OWN RULE -- THE READING IS ON STDERR
+------------------------------------------------------------------------------
+
+  A remedy is an artifact of the same kind as the defect, so it is
+  subject to it, and R4 FIRES ON foreign.py.  Every hit is the
+  ADJUDICATED table -- a GRADE SHEET, not a corpus read -- so THE
+  DETECTOR CONTAINS THE TOKENS IT DETECTS.  That is the README's
+  section 4 for the FIFTH time in this arc, and section 4's remedy
+  DOES NOT APPLY: it says assemble the needle at runtime, and A TABLE
+  OF ADJUDICATED LITERALS CANNOT AVOID CONTAINING THOSE LITERALS.
+  pinnable.py's R3 makes the same argument about its own regex.
+
+  THE COUNT IS NOT PRINTED HERE, AND THAT IS THE RULE ARRIVING IN THE
+  DIRECTORY WHOSE SUBJECT IT IS.  foreign.py does not exist at AS_OF,
+  so there is no commit to read it at and the grading must read the
+  WORKTREE -- a branch-dependent figure, which on stdout would make
+  this transcript a function of the tree instead of of one commit.
+  It is on STDERR (README D4, liveindex.py's arrangement) and P50
+  asserts it, so it is a run rather than a paragraph.
+
+  AND THIS FILE IS OUTSIDE ITS OWN POPULATION BY ARITHMETIC RATHER
+  THAN BY RULE, which is pathlist.py's declared shape: the AS_OF is
+  older than foreign.py, so it is not tracked at the commit it
+  reports on and cannot appear in the 44 -- an exemption nobody wrote
+  and nobody should rely on.  Were this directory ever nominated onto
+  the work-list, R4 would fire on it, and the reason would be its own
+  grade sheet.
+
+------------------------------------------------------------------------------
+7  WHAT THIS SECTION CANNOT SAY, RESTATED WHERE IT IS READ
+------------------------------------------------------------------------------
+
+  * R4 FIRING IS NOT `DO NOT PIN'.  It proves a root outside this
+    repository is NAMED in a tracked script; it does not prove the
+    drift is caused by it.  Read the line and decide.
+  * R4 NOT FIRING PROVES NOTHING.  An environment variable, a
+    relative `../..`, or a path assembled from parts reaches a
+    foreign corpus with no literal for R4 to see.  The count is
+    therefore A LOW WATER MARK, in this arc's usual direction.
+  * R1 IS NOT THIS RULE AND ITS ONE HIT ON THIS CLASS IS AN
+    ACCIDENT.  `git check-ignore` answers NO for every root in
+    section 1; it fired on summary_guard_audit_407f only because
+    `.git/info/exclude` carries `.pogo/`, which matched a path
+    OUTSIDE the repository as though it were inside it.  Right
+    answer, wrong mechanism, and it generalises to nothing.
+  * THE REMEDY FOR A FIRING ROW IS NOT IN THIS REPOSITORY.  688c
+    and 64cb read a repository and a store that HAVE revisions;
+    pinning against those is a real and much larger change, and
+    mg-688c's own table is tranche 10's open alarm.  DO NOT COMMIT
+    A FOREIGN REPOSITORY'S HEAD INTO THIS ONE.
+
+CONDITION 0 (foreign): 9 of 44 rows name a root outside this repository (7 adjudicated CORPUS, 2 FALSE), 4 of 5 residue rows, at 07a2fd0

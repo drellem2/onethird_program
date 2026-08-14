@@ -102,7 +102,7 @@ RAN = []
 # the branch and RENUMBERED ON LANDING: mg-ede8's N31 merged first and a number
 # in this directory is never reissued, which is what BURNED is for.
 KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30", "N31",
-                "N32", "N33")
+                "N32", "N33", "N34")
 
 
 def check(name, got, want, why):
@@ -1463,6 +1463,196 @@ check("N33 the pattern is a SPELLING MATCHER and its residue is one-directional"
       "than asserted and is in section 4 of its own transcript: 270 "
       "transcripts have no producer under the naming convention and are NOT "
       "counted as clean.")
+
+print()
+print("=" * 78)
+print("CONTROLS ON foreign.py — A CORPUS ROOT OUTSIDE THIS REPOSITORY (mg-3ebf)")
+print("=" * 78)
+print("  mg-e8b0 reported a THIRD class pinnable.py has no rule for — an")
+print("  address in ANOTHER REPOSITORY — and declined to build one because the")
+print("  false-positive direction was unmeasured. foreign.py measures it and")
+print("  builds it, and the finding is that FOUR of the five residue rows read")
+print("  a corpus no AS_OF of this repository reaches. So the controls that")
+print("  matter are the ones bounding a rule whose whole value is a NARROWING:")
+print("  P49 requires the guard to be load-bearing, P47 requires it not to have")
+print("  narrowed away the finding, and P46 is the defect this file's own first")
+print("  draft exhibited — reading a tree outside the repository to decide")
+print("  which trees are outside the repository.")
+print()
+
+import foreign  # noqa: E402
+
+# THE FIRST CONTROL IS ABOUT worklist.py AND NOT ABOUT foreign.py, and it is
+# first because everything below rests on it.  mg-3ebf extracted section 4's
+# three-clause prefilter into `worklist.residue_rows` so that foreign.py could
+# call it instead of re-spelling it -- a second spelling would let the two files
+# publish different residues with no reader able to tell which was wrong
+# (mg-1344's P5).  A PURE EXTRACTION IS A CLAIM, so it is run rather than
+# asserted: both spellings over the same rows, and out_worklist.txt is
+# byte-identical across the change.
+_wl_rows = worklist.parse_rows(worklist.read_rev(worklist.AS_OF,
+                                                 worklist.SWEEP_TRANSCRIPT))
+for _r in _wl_rows:
+    _r.setdefault("declares", [])
+    _r.setdefault("by_content", [])
+_inline = [_r for _r in _wl_rows
+           if _r["verdict"] == "DIFFERS" and not _r["declares"]
+           and not _r["by_content"]]
+check("P45 residue_rows is the predicate section 4 already printed",
+      [_r["dir"] for _r in worklist.residue_rows(_wl_rows)],
+      [_r["dir"] for _r in _inline],
+      "THE EXTRACTION IS THE CLAIM. foreign.py's headline is `the residue is 1 "
+      "row and not 5', which is a statement about out_worklist.txt's section 4 "
+      "— so the two files must not be able to disagree about which rows the "
+      "residue IS. Re-spelling a three-clause predicate in a second file is "
+      "exactly the drift mg-1344's P5 forbids, so worklist.py now exposes it "
+      "as a function and BOTH callers use it. This arm runs the inline "
+      "spelling beside the function over the same rows; the transcript itself "
+      "is unmoved, which is checked by the build path rather than here.")
+
+# R4 READS NO FILESYSTEM, AND THE FIRST DRAFT DID.  classify_root called
+# os.path.realpath on every literal and compared against this worktree and the
+# repository's common git dir -- so exactly one literal came back SELF
+# (`/Users/daniel/research/onethird_program`) FOR NO REASON BUT THAT THIS
+# CHECKOUT HAPPENS TO LIVE THERE, and out_foreign.txt would have been a
+# function of where the repository is on disk while its docstring claimed every
+# figure was a function of one commit.  A transcript that reproduces for exactly
+# one operator is tranche 1's third class, arriving inside the instrument built
+# to find addresses outside the repository.
+check("P46 an absolute path to THIS repository is graded, not excluded",
+      (foreign.classify_root("/Users/daniel/research/onethird_program"),
+       foreign.classify_root("/Users/daniel/research/one_third_width_three"),
+       foreign.classify_root("~/.macguffin"),
+       foreign.ADJUDICATED.get("/Users/daniel/research/onethird_program"),
+       hasattr(foreign, "SELF_ROOTS")),
+      ("OUTSIDE", "OUTSIDE", "OUTSIDE", "SELF", False),
+      "THE REPAIR WAS TO DELETE THE QUESTION RATHER THAN TO COMPARE BETTER. An "
+      "absolute path naming this repository's own checkout is NOT reachable by "
+      "an AS_OF either — the transcript still prints an operator-specific "
+      "absolute path — so excluding it was never right, it merely looked tidy. "
+      "classify_root now touches no filesystem at all and that literal is "
+      "carried in ADJUDICATED under its own grade, whose remedy is "
+      "RELATIVISATION and not a pin. The last element asserts the removal "
+      "rather than the behaviour: a reintroduced SELF_ROOTS would make this "
+      "file's figures depend on the machine again, and a control that only "
+      "checked the three verdicts would not see it.")
+
+# THE DIRECTION THE FITTED GUARD CANNOT BE FITTED ON.  The `bound` guard was
+# chosen AFTER reading three false positives by hand, so the 44-row counts are
+# the sample it was fitted to.  What is NOT fitted is that the named true
+# positives survive it -- those roots were read at AS_OF before any rule
+# existed, and a guard that dropped them would have narrowed the rule into
+# uselessness while every headline count improved.
+_res = {d: foreign.score_dir(d, foreign.AS_OF)
+        for d in ("code/summary_guard_audit_407f",
+                  "code/superseded_descent_688c",
+                  "code/verdict_delivery_bf3f",
+                  "code/landing_audit_sweep_64cb",
+                  "code/eps_spec_sweep_372e")}
+check("P47 the four hand-read foreign rows survive the fitted guard",
+      tuple(sorted(set(h["val"] for h in _res[d]["hits"])) and True or False
+            for d in ("code/summary_guard_audit_407f",
+                      "code/superseded_descent_688c",
+                      "code/verdict_delivery_bf3f",
+                      "code/landing_audit_sweep_64cb")) +
+      (bool(_res["code/eps_spec_sweep_372e"]["hits"]),),
+      (True, True, True, True, False),
+      "A NARROWING THAT IMPROVED EVERY HEADLINE COUNT AND DROPPED THE FINDING "
+      "WOULD LOOK IDENTICAL TO A GOOD ONE. The four roots — SRC2, MIRROR_REPO "
+      "with MG_ROOT, MG_DEFAULT, STORE with EVENTS — were read at AS_OF by "
+      "hand BEFORE the guard existed, so requiring them to survive is the one "
+      "direction the fitting cannot reach. The fifth element is the negative "
+      "half and is why this is not a rule that fires on everything: "
+      "eps_spec_sweep_372e is the residue row with no foreign root, and it "
+      "must stay silent.")
+
+# THE HAND ADJUDICATION MUST KEEP COVERING WHAT THE RULE DOES, IN BOTH
+# DIRECTIONS.  A grade table that silently stops covering the firing set is a
+# judgement about a corpus that has moved underneath it, which is this arc's own
+# subject; a table carrying entries for literals that no longer fire is a
+# reader sent to check something that is not there, which is mg-23af's dead
+# pointer one file along.
+_all_hits = [h for _r in _wl_rows
+             for h in foreign.score_dir(_r["dir"], foreign.AS_OF)["hits"]]
+_fired = set(h["val"] for h in _all_hits)
+check("P48 ADJUDICATED covers the firing set exactly, both ways",
+      (sorted(_fired - set(foreign.ADJUDICATED)),
+       sorted(set(foreign.ADJUDICATED) - _fired)),
+      ([], []),
+      "THE PRECISION FIGURE IS A HAND JUDGEMENT AND THIS IS WHAT KEEPS IT "
+      "HONEST. 11 of 16 literals are graded CORPUS and section 5 publishes "
+      "that as the rule's precision — a number that means nothing if the table "
+      "and the corpus have drifted apart. The first list is the dangerous "
+      "direction: an ungraded literal would be counted UNADJUDICATED and "
+      "silently shrink the denominator nobody re-derives. The second is "
+      "mg-23af's: an entry for a literal that no longer fires is a grade for "
+      "something that is not there.")
+
+# THE GUARD IS LOAD-BEARING, PLANTED RATHER THAN PROMISED.  Section 3's column
+# claims that without `bound` the rule fires on rows a pin has ALREADY LANDED
+# on. A column is a claim; this runs it.
+_lr = foreign.score_dir("code/landscape_repair_1953", foreign.AS_OF)
+check("P49 amputate the guard and the rule waves off a LANDED pin",
+      (bool(_lr["hits"]),
+       sorted(set(h["val"] for h in _lr["all"]
+                  if h["where"] == "OUTSIDE" and not h["docstring"]
+                  and h["kind"] != "ARENA"))),
+      (False, ["/docs/"]),
+      "THE NEGATIVE HALF IS THE ONE THAT CARRIES SECTION 3. Its `pinned` "
+      "column says the wide shapes fire on 3 of the 8 rows a pin HAS landed "
+      "on, landscape_repair_1953 among them — which is pinnable.py's OWN named "
+      "example of the shape mg-20ee's remedy was built for, so a rule waving "
+      "it off is not conservative but wrong. This arm requires BOTH halves: "
+      "the rule is silent there, AND the wider shape really does fire, on "
+      "`/docs/` — a join fragment and not a root. Without the second half a "
+      "guard that had quietly stopped mattering would pass identically, and "
+      "the column would be a number nothing stands behind.")
+
+# THE INSTRUMENT ON ITS OWN RULE.  R4 fires on foreign.py and every hit is the
+# ADJUDICATED grade sheet -- the detector containing the tokens it detects,
+# which is the README's section 4 for the fifth time in this arc and whose
+# remedy (assemble the needle at runtime) cannot apply to a table of adjudicated
+# literals.  The split is what makes the self-hit harmless: a hit in
+# foreign.py's grade sheet is expected, and a hit ANYWHERE ELSE in this
+# directory would be a real corpus read.
+_self = {}
+for _name in ("foreign.py", "selftest_20ee.py", "worklist.py"):
+    with open(os.path.join(HERE, _name), encoding="utf-8") as _fh:
+        _hs, _ = foreign.scan_source(_fh.read(), _name)
+    _self[_name] = [h for h in _hs if foreign.is_rule(h)]
+check("P50 the self-hit is the grade sheet and nothing else is",
+      (sorted(h["val"] for h in _self["foreign.py"])
+       == sorted(foreign.ADJUDICATED),
+       len(_self["selftest_20ee.py"]), len(_self["worklist.py"])),
+      (True, 0, 0),
+      "R4 FIRES ON THE FILE THAT DEFINES IT, and the useful question is not "
+      "whether it does but WHERE. The first element requires foreign.py's "
+      "self-hits to be EXACTLY the ADJUDICATED keys — a set equality, so a "
+      "literal added to the table shows up here and a foreign root introduced "
+      "OUTSIDE the table breaks it. The other two require the rest of this "
+      "directory to be clean, which is what keeps the self-hit from being an "
+      "excuse: if selftest_20ee.py or worklist.py ever names a foreign root, "
+      "this arm goes red rather than being absorbed into `well, it always "
+      "fires on itself`. The reading is off the WORKTREE because foreign.py "
+      "does not exist at AS_OF, which is why the transcript keeps it on "
+      "stderr and this control keeps it on the build path instead.")
+
+check("N34 the population is the work-list, and R4 is a LITERAL matcher",
+      (len(_wl_rows),
+       foreign.score_dir("code/asof_census_20ee", foreign.AS_OF)["scripts"] > 0),
+      (44, True),
+      "TWO KNOWN DEFECTS, ASSERTED RATHER THAN REPAIRED. (1) THE POPULATION IS "
+      "THE 44 WORK-LIST ROWS AND NOTHING SCANS code/ FOR THE REST: a directory "
+      "reading another repository that was never nominated by census.py is "
+      "invisible here BY CONSTRUCTION, which is N30's shape on a new subject — "
+      "and the second element shows the machinery would happily score any "
+      "directory, so what bounds the census is the LIST and not the rule. (2) "
+      "R4 MATCHES LITERALS: an instrument reaching a foreign root through an "
+      "environment variable, a relative `../..`, or a path assembled from "
+      "parts carries no literal to see. Both errors run in the SAFE direction "
+      "— they make the foreign class look SMALLER — so the published 9 and the "
+      "published `4 of 5 residue rows` are LOW WATER MARKS, and the headline "
+      "`the residue is 1 row' can only get smaller, never larger.")
 
 print()
 

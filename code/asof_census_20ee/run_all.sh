@@ -90,6 +90,18 @@
 # moved by the commit that adds its own controls.  Its one-row mode is the
 # hand-run half:
 #     python3 code/asof_census_20ee/semantic.py --row R2
+# mg-3ebf: foreign.py IS run here, and it is the one file in this directory
+# that answers the complaint the header above has been making for four
+# tranches.  pinnable.py is off the build path because it classifies a WORKTREE
+# DIFF and so requires a suite to have been run and not restored; that is why
+# out_pinnable_3b51.txt, out_pinnable_a4ef.txt and out_pinnable_b0ae.txt are one
+# dated hand-run each that NO SUITE RE-TAKES.  R4 needs no diff: it reads the
+# subject's tracked scripts at a DECLARED COMMIT through `git ls-tree` and `git
+# show`, touches no filesystem at all, and so is a function of ONE COMMIT --
+# which is why out_foreign.txt reproduces BYTE-IDENTICALLY and why this one CAN
+# be on a build path when its neighbour cannot.  Its one-subject mode is the
+# hand-run half:
+#     python3 code/asof_census_20ee/foreign.py --dir code/superseded_descent_688c
 set -e
 cd "$(dirname "$0")"
 python3 selftest_20ee.py > out_selftest_20ee.txt
@@ -100,6 +112,7 @@ python3 permuted.py      > out_permuted.txt
 python3 worklist.py      > out_worklist.txt
 python3 exemplars.py     > out_exemplars.txt
 python3 semantic.py      > out_semantic.txt
+python3 foreign.py       > out_foreign.txt
 echo "mg-20ee census: $(sed -n '/transcripts carry/p' out_census.txt | tr -s ' ')"
 echo "mg-6e4f consumers: $(sed -n '/^CONSUMERS:/p' out_consumers.txt)"
 echo "mg-ede8 live-index: $(sed -n '/^LIVE-INDEX:/p' out_liveindex.txt)"
@@ -107,3 +120,4 @@ echo "mg-885d condition 2: $(sed -n '/^CONDITION 2:/p' out_permuted.txt)"
 echo "mg-e8b0 work-list: $(sed -n '/^CONDITION 0 (work-list):/p' out_worklist.txt)"
 echo "mg-0bf1 exemplars: $(sed -n '/^CONDITION 0 (exemplars):/p' out_exemplars.txt)"
 echo "mg-5058 semantic: $(sed -n '/^CONDITION 0 (semantic):/p' out_semantic.txt)"
+echo "mg-3ebf foreign: $(sed -n '/^CONDITION 0 (foreign):/p' out_foreign.txt)"

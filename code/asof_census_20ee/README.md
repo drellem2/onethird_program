@@ -1679,3 +1679,215 @@ membership sites (`semantic.py` and the new controls contribute none), **zero** 
 negative-control basenames, and the `RED_TOKEN` membership this directory already had — `CAUGHT`
 inside a quoted commit subject in `out_worklist.txt` — is unchanged, so `out_semantic.txt` carrying
 `REFUTED` adds nothing the row counts.
+
+---
+
+# Tranche 13 (`mg-3ebf`) — the residue was **1 row and not 5**, and the two things the ticket asked for turned out to be one thing
+
+`mg-e8b0`'s tranche 10 handed a successor two items in priority order. **Item 1** was the residue:
+`out_worklist.txt` section 4's five rows, *"the rows nothing on record has yet given a reason to
+skip"*. **Item 2** was one observation about one **pinned** instrument, `anchor_drift_96df`, whose
+transcript still drifts because its address is in **another repository** — filed as a third class
+`pinnable.py` has no rule for, and expressly **not built**:
+
+> Reported, not built — a rule about foreign repos is a change whose false-positive direction nobody
+> has measured.
+
+**They are the same item.** Working item 1 by hand produced item 2's class, four more times, inside
+the residue.
+
+## 1. Four of the five residue rows read a corpus **no `AS_OF` of this repository reaches**
+
+All five suites were run, their worktree diffs read, `pinnable.py` run on each, and their scripts
+read at `AS_OF`. Every foreign root below was found **by hand, before any rule existed**:
+
+| row | root | |
+|---|---|---|
+| `summary_guard_audit_407f` | `SRC2 = "/Users/daniel/research/one_third_width_three"` | another repository |
+| `superseded_descent_688c` | `MIRROR_REPO` = the same, and `MG_ROOT = ~/.macguffin` | both |
+| `verdict_delivery_bf3f` | `MG_DEFAULT = ~/.macguffin` | the `mg` store |
+| `landing_audit_sweep_64cb` | `STORE = ~/.macguffin/work`, `EVENTS = …/events.jsonl` | the `mg` store |
+| `eps_spec_sweep_372e` | — **nothing** | **the one clean row** |
+
+So the sentence the record has carried forward is **true about the prefilter and false about the
+work**. Conditions 1–3 cost about forty-five minutes each and on those four they **cannot succeed**:
+there is no commit here whose content decides what those transcripts print. `407f` is the sharpest —
+its committed transcript records six `[FINDING]`s about `census_repair_f3ff` that the re-run does not
+reproduce, and `census_repair_f3ff` **has had no commit since the sweep**. The verdict moved because
+the *foreign* repository did.
+
+**The residue is `code/eps_spec_sweep_372e`.** That is the deliverable, and it is a
+subtraction rather than an addition.
+
+## 2. `R4`, and the guard is where the measurement went
+
+> **R4 A CORPUS ROOT OUTSIDE THIS REPOSITORY.** A tracked script in the subject **binds a
+> module-level constant** to a string literal naming an absolute or home-relative filesystem root.
+
+R4 is **decidable, not heuristic**, which is why it is worth having beside `R1`'s `check-ignore` and
+`R2`'s `cat-file -e`: `~/.macguffin` is not in this repository, and that is a fact about where the
+path points rather than a guess about intent.
+
+**The `bound` guard is not cosmetic and its absence is what the ticket was worried about.** Without
+it R4 fires on **28 of 44** rows and on **3 of the 8 rows a pin has already landed on** — including
+`landscape_repair_1953`, which is `pinnable.py`'s **own** named example of the shape `mg-20ee`'s
+remedy was built for. A rule waving off the estate's model pinning is not conservative, it is wrong.
+With it: **9 rows**, and the one pinned row left is **`anchor_drift_96df`** — the ticket's own
+instance, and the pinned row whose transcript still drifts. `P49` plants the amputation and requires
+both halves.
+
+**The argument for the guard, so it can be argued with:** a corpus root is bound to a name because
+the instrument refers to it repeatedly; an inline path is an argument to one call. Every true
+positive is a named constant; the three false positives read by hand first are all inline —
+`"/docs/"`, `"/**/mg-*.md"`, `"/bin/sh"`.
+
+**And it was fitted to this corpus, which is said out loud rather than glossed.** It was chosen
+*after* reading those three, so the 44-row counts are the sample it was fitted to and **not
+independent evidence for it**. What is independent is the direction, and `P47` pins it: the four
+hand-read roots must survive, and `372e` must stay silent.
+
+## 3. The false-positive direction, which is what the ticket said nobody had
+
+Four designs, scored from **one walk** so the comparison cannot be about four slightly different
+walkers:
+
+| shape | literals | rows | **pinned rows** |
+|---|---|---|---|
+| naive line match (comments included) | 120 | — | — |
+| ast, any outside literal + arena | 65 | 28 | **3** |
+| + docstrings excluded | 65 | 28 | 3 |
+| + arena excluded | 29 | 13 | 2 |
+| **+ bound to a module constant (the rule)** | **16** | **9** | **1** |
+
+**One column bought nothing and it says so.** Excluding docstrings removes **0** literals on this
+corpus — `REQUIRED-INERT`, kept for the shape and not for a number it did not move. Reporting it as
+load-bearing because it is *reasonable* would be the defect `permuted.py` found under its own
+`18 of 129`.
+
+**`tempfile.mkdtemp` is counted and is not in the rule.** An arena path is in no commit *by
+construction*, but **its content is written by the instrument itself**, so it is not a foreign
+corpus. It drifts only when the path is **printed** — `407f`'s transcript does carry its arena path —
+and that is a property of the transcript, which `R1` reads and this file does not. It is **half of
+all the firing**.
+
+### The precision, adjudicated by hand at both grains
+
+Every literal the rule fires on was read at `AS_OF` and graded, as **data** in `foreign.py`'s source
+so `P48` can check the grades still cover what the rule does, in both directions:
+
+- **11 of 16 literals** and **7 of 9 rows** are `CORPUS` — a true foreign corpus root.
+- **1** is `SELF`: `/Users/daniel/research/onethird_program`, this repository spelled absolutely. No
+  `AS_OF` reaches it either, but its remedy is **relativisation, not a pin**, so it is counted apart.
+- **4** are the declared over-count, and **the 2 false rows are named**: `runner_exit_audit_dee4` and
+  `runner_exit_c2b3`, both on `/bin/sh` (and one `/%s/`).
+
+**The over-count stops there and is declared rather than tuned away.** `/bin/sh` is outside this
+repository and that is true and useless — but telling the **corpus** an instrument reads from the
+**tool** it runs is the difference between an instrument's subject and its evidence, which
+`pinnable.py` already records as not decidable from the token. A fourth guard fitted to a
+sixteen-literal sample would be the fourth thing chosen after seeing the answer.
+
+## 4. Why this is not already `R1`, measured rather than asserted
+
+`git check-ignore` answers **no** for every root in §1 — `var/folders/…`, `…/one_third_width_three`,
+`…/.macguffin/work`. `R1` *did* fire on `407f`, and that is exactly why it must not be read as
+coverage: it matched `Users/daniel/.pogo/polecats/<name>/…` against **`.pogo/` in
+`.git/info/exclude`** — this repository's ignore configuration accidentally matching a path *outside*
+the repository. Right answer, wrong mechanism; change one line of that file and the only hit
+disappears while the class does not. On the other three foreign rows `R1` printed `none`, and **`none`
+reads to its reader as residue**, which is how four unreachable rows got onto a work-list.
+
+## 5. The remedy exhibited the defect it remedies, and it was found by running it
+
+`classify_root`'s **first draft called `os.path.realpath`** on each literal and compared against this
+worktree and the repository's common git dir. Both halves read the machine — so `out_foreign.txt`
+would have been a **function of where the repository is on disk** while its docstring claimed every
+figure was a function of one commit. A transcript that reproduces for exactly one operator is tranche
+1's third class, arriving inside the instrument built to find addresses outside the repository.
+
+Found by **running it**: exactly **one** literal in the 44 rows came back `SELF`, and only because
+this checkout happens to live there. **The repair was to delete the question, not to compare better**
+— an absolute path to your own checkout is not reachable by an `AS_OF` either, so excluding it was
+never right, it merely looked tidy. `classify_root` now touches **no filesystem at all** and that
+literal is carried in `ADJUDICATED` under its own grade. `P46` asserts both the three verdicts **and
+the removal**, because a reintroduced `SELF_ROOTS` would make these figures machine-dependent again
+and an arm checking only the verdicts would not see it.
+
+### And it fails its own rule: `R4` fires on `foreign.py`, **11 times**
+
+Every hit is the `ADJUDICATED` table — a **grade sheet**, not a corpus read. **The detector contains
+the tokens it detects**, which is the README's §4 for the *fifth* time in this arc, and §4's remedy
+does not apply: it says assemble the needle at runtime, and a table of adjudicated literals cannot
+avoid containing those literals (`pinnable.py`'s `R3` makes the same argument about its own regex).
+
+**The count is on `stderr`, and that is the rule arriving in the directory whose subject it is.**
+`foreign.py` does not exist at `AS_OF`, so there is no commit to read it at and the grading must read
+the **worktree** — a branch-dependent figure, which on stdout would make `out_foreign.txt` a function
+of the tree rather than of one commit. That is `README D4` and `liveindex.py`'s arrangement.
+`P50` keeps it on the build path instead, and asserts the **split**: `foreign.py`'s self-hits must be
+*exactly* the `ADJUDICATED` keys, and `selftest_20ee.py` and `worklist.py` must be at **0** — so a
+foreign root introduced anywhere else here goes red rather than being absorbed into *"it always fires
+on itself"*.
+
+`foreign.py` is also **outside its own population by arithmetic rather than by rule** — the `AS_OF`
+predates it, so it is not tracked at the commit it reports on and cannot appear in the 44. That is
+`pathlist.py`'s declared shape: an exemption nobody wrote and nobody should rely on.
+
+## 6. `foreign.py` is **on the build path**, which is the four-tranche complaint answered
+
+`pinnable.py` cannot be, because it classifies a **worktree diff** and so requires a suite to have
+been run and not restored — which is why `out_pinnable_3b51.txt`, `out_pinnable_a4ef.txt` and
+`out_pinnable_b0ae.txt` are one dated hand-run each that **no suite re-takes**, declared in the same
+words since tranche 7. R4 needs no diff: it reads tracked scripts at a declared commit through
+`git ls-tree` and `git show`. Every figure is a function of **one commit**, so `out_foreign.txt`
+reproduces **byte-identically** and the file is in `run_all.sh` — `worklist.py`'s, `exemplars.py`'s
+and `semantic.py`'s arrangement, arriving on the class that was carrying the complaint.
+
+`worklist.py` gains **`residue_rows`** and nothing else: section 4's three-clause prefilter extracted
+to a function so `foreign.py` calls it instead of re-spelling it, because two spellings could publish
+different residues with no reader able to tell which was wrong (`mg-1344`'s `P5`). **A pure
+extraction is a claim**, so `P45` runs both spellings and `out_worklist.txt` is byte-identical across
+the change.
+
+## 7. What tranche 13 leaves
+
+- **`eps_spec_sweep_372e` is the residue**, and conditions 1–3 on it are the next tranche's cheapest
+  real work. `pinnable.py` fires **no** pre-condition on it and R4 is silent.
+- **The four foreign rows are a different question and a bigger one.** `688c` and `64cb` read a
+  repository and a store that **have** revisions; pinning against those is a real remedy this arc has
+  never attempted. **Do not commit a foreign repository's `HEAD` into this one.**
+- **`anchor_drift_96df` is still unowned and its alarm is still ringing** — `mg-688c`'s pinned table
+  needs re-deriving, which is that directory's work. Unchanged from tranche 10.
+- **`N34`** is the declared limit and runs in the **safe** direction: the population is the 44
+  work-list rows and nothing scans `code/` for the rest, and R4 matches **literals**, so an
+  environment variable or an assembled path is invisible. Both errors make the foreign class look
+  **smaller**, so `9` and `4 of 5` are **low water marks** and *"the residue is 1 row"* can only
+  shrink.
+- **`census_remainder_f8e5` was not re-run**, for the reason the original sweep gives: its worker
+  does not terminate in a usable time. Unchanged, and restated because any tranche quoting the
+  re-run's counts must quote them over the rows it covers.
+- **`KNOWN_DEFECT` grows `11` → `12` and the suite `73` → `80` controls**, all green — 41 positive,
+  31 negative. `STATE.md` is untouched so the ratchet is untouched and no twin re-pin is owed;
+  `docs/FACTS.md` gets **no** entry (`mg-3da1`'s homelessness test an eighth time — every measurement
+  here is consumed by this landing) and `docs/CONCEPTS.md` no row.
+
+### It bit again: `out_consumers.txt` moves `205` → `209`, and **not one of the four is this branch's**
+
+The tree at `HEAD` holds **209** files named `run_all.sh` and the transcript committed at `d94de4f`
+says **205**. The four are `code/empty_vs_zero_3c92/run_all.sh` (`mg-3c92`),
+`code/label_vs_computation_68ef/run_all.sh` (`mg-68ef`),
+`code/oscillation_discharge_365a/run_all.sh` (`mg-365a`) and
+`code/prerebase_reading_cd8d/run_all.sh` (`mg-cd8d`) — all **main's own** landings whose consumers
+refresh main did not take — **attributed by diffing the `run_all.sh` list at both commits rather than
+assumed**. This branch adds **no** `run_all.sh`.
+
+**Two of the four arrived during the rebase, which is the mechanism rather than an anecdote.** The
+figure read `207` before `git rebase origin/main` and `209` after, because `mg-3c92` and `mg-68ef`
+landed while this branch was open. That diagnosis is unchanged and is still declined for scope:
+`consumers.py` reads the **live index** by design, so its figure is a function of *when you ran it*,
+and **this branch's own `209` will be wrong the moment another `run_all.sh` lands before it merges** —
+the refinery's rebase happening after the last moment anything on the branch can run.
+
+`out_census.txt`, `out_permuted.txt`, `out_worklist.txt`, `out_exemplars.txt`, `out_liveindex.txt`
+and `out_pathlist.txt` do **not** move, checked against the dirty worktree rather than assumed,
+because all of them are pinned.

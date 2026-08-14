@@ -322,6 +322,23 @@ def scan():
     }
 
 
+def residue_rows(rows):
+    """Section 4's prefilter, AS A FUNCTION, so that exactly one spelling of it
+    exists in this estate.
+
+    mg-3ebf's foreign.py re-triages this list and must not be able to disagree
+    with out_worklist.txt about WHICH rows it is -- a second spelling of a
+    three-clause predicate is the drift mg-1344's P5 is about, and the two
+    files would then publish different residues with no reader able to tell
+    which was wrong.  THIS IS A PURE EXTRACTION: main() below calls it and the
+    printed transcript does not move, which P45 asserts by running both
+    spellings rather than by claiming it.
+    """
+    return [r for r in rows
+            if r["verdict"] == "DIFFERS" and not r["declares"]
+            and not r["by_content"]]
+
+
 def main(argv):
     if len(argv) > 1 and argv[1] == "--rerun":
         tree = argv[argv.index("--tree") + 1] if "--tree" in argv else None
@@ -478,8 +495,7 @@ def main(argv):
     print()
     dec = [r for r in rows if r["declares"]]
     diff_rows = [r for r in rows if r["verdict"] == "DIFFERS"]
-    open_rows = [r for r in diff_rows
-                 if not r["declares"] and not r["by_content"]]
+    open_rows = residue_rows(rows)
     print("      %-52s %d of %d" % ("rows declaring a revision at AS_OF",
                                     len(dec), len(rows)))
     print("      %-52s %d" % ("  of the recorded DIFFERS rows",
