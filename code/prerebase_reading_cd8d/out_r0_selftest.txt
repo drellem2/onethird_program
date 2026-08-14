@@ -1,0 +1,24 @@
+============================================================================================
+mg-cd8d r0 — CONTROLS ON THE HARNESS THAT ANSWERS r1's QUESTION
+============================================================================================
+
+--------------------------------------------------------------------------------------------
+  [PASS  ]  D1  positive: two identical readings must come back AGREES — without this world the harness cannot say the discipline is rewarded
+  [PASS  ]  D1' positive: the population of a real world must be plausible, and it is printed beside every verdict in r1 for the reason D2 gives
+             population 236
+  [CAUGHT]  D2  NEGATIVE: with the corpus never extracted, the two readings are identical and the verdict is AGREES — a green that means `read nothing`.  CAUGHT by the population, which is implausible, and not by the verdict, which is indistinguishable from the discipline being followed
+             verdict AGREES at population 2
+  [CAUGHT]  D3  NEGATIVE: with each tree running its OWN producer, a corpus older than mg-05c6 prints no corpus pin, so the verdict is DISAGREES — red for the instrument's age and not for when the reading was taken.  CAUGHT
+             corpus pin None, verdict DISAGREES
+  [PASS  ]  D4  which verdicts fail the gate is read from lib_f771.RED_VERDICTS: STALE and DISAGREES are red, AGREES and NOISE and CORPUS are not
+             RED_VERDICTS = ('DISAGREES', 'STALE')
+  [PASS  ]  D5  REQUIRED-INERT: the simulated branch's own new directory must not change the verdict — verdict_for takes no argument for WHO wrote the committed copy, so this world firing would mean the harness had found a provenance channel that the instrument does not have
+             with own directory CORPUS, without CORPUS
+  [PASS  ]  D6  this directory adds 0 membership candidate(s) to mg-9876's §1, counted with a4's own SMELL_MEMBERSHIP over this directory's own .py — and the same detector fires on instance 3's spelling, so the count is a measurement rather than a detector that never looked.  The first run of this control returned 1: the fixture below, which is a CONTROL and not a site, and is now assembled rather than written out (mg-05c6's own neutralisation, one directory over)
+             fixture: if "8 9" in out:
+--------------------------------------------------------------------------------------------
+
+============================================================================================
+HARNESS OK — the four two-sided worlds answer both ways, the required-inert one is inert,
+and this directory adds nothing to the census it measures.  r1's answers are readable.
+============================================================================================

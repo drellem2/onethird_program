@@ -1,0 +1,43 @@
+============================================================================================
+mg-cd8d r2 — WHAT THE ROW `a committed transcript records a demonstrated failure`
+            IS ACTUALLY COUNTING, AT A PINNED COMMIT
+============================================================================================
+
+  AS_OF b5d8a75, population 235 directories under code/
+--------------------------------------------------------------------------------------------
+  on the row (any tracked .txt/.md carries a RED_TOKEN)  : 156 of 235
+    of those, at least one out_*.txt carries one         : 137
+    of those, NO out_*.txt does — the row counts it and  :  19
+    its wording does not describe why
+
+  THE DIRECTORIES THE ROW'S WORDING DOES NOT DESCRIBE:
+      adjudication_audit_a0d6             branching_bound_d075                c3_audit_a94c3                    
+      compression_audit_8bc7              contradiction_repair_d19f           dual_certificate_131e             
+      dual_certificate_audit_eaa1         eleak_repair_8311                   face_geometry                     
+      frozen_density_0b96                 gate_fixed_point_f771               libweak_audit_c4f5                
+      lstar_reaudit_5e82                  n0_audit_3e06                       row3b_audit_eba7                  
+      self_red_sweep_502f                 subset_consumability_99f4           summary_guard_audit_407f          
+      suppression_polarity_audit_40e4   
+
+  AND THIS DOES NOT CONTRADICT THE COMMITTED CENSUS, which at b5d8a75 reads
+      a committed transcript records a demonstrated failure  : 153 of 232
+  against the 156 of 235 above.  The committed copy is a reading at an older
+  population and mg-05c6's rule is that nobody refreshes it until the bound trips —
+  which is r1's subject and is quantified there.  Two readings of one row at two
+  trees are not a disagreement; taking them as one would be this ticket's own defect.
+
+  mg-99f4's OWN DIRECTORY IS IN THAT LIST: yes
+
+  WHAT THIS IS AND IS NOT.  It is a split of one row by which file supplied the
+  token, using a4's own detector and a4's own extension pair.  It is NOT a claim
+  that any of these directories lacks evidence its instrument can fail — several
+  ship a negative control and are counted on the row ABOVE it — and it is not a
+  claim the row is wrong.  The row measures `a tracked .txt or .md records a
+  demonstrated failure`, which is a weaker and still useful thing than what it
+  says.  REPORTED AND NOT REPAIRED: the row is mg-9876's, its wording is mg-9876's
+  call, and re-scoping another instrument's detector from here is the worse thing
+  even when the re-scoping would be right.
+
+============================================================================================
+MEASURED — 19 of 156 members of that row are not backed by a transcript at b5d8a75.
+============================================================================================
