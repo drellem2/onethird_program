@@ -1,0 +1,126 @@
+========================================================================================
+mg-7c32  c3 -- step 2 exhaustive, and what the average cyclic bias reduces to
+========================================================================================
+
+§1  STEP 2 -- the 2/3-relation is ACYCLIC and CONSISTENT WITH P, exhaustive n = 3..8
+----------------------------------------------------------------------------------------
+  posets swept: 19446
+  2/3-relation CYCLIC on: 0   [PASS]     inconsistent with P on: 0   [PASS]
+  2/3-relation TOTAL on: 6 of 19446 posets -- the chains only
+  pairs oriented at threshold 2/3: 398254 of 524428
+  weak (1/2) majority tournament CYCLIC on: 0 of 19446
+
+  THE ZEROS ABOVE ARE NOT EVIDENCE FOR STEP 2 AND MUST NOT BE QUOTED AS IF THEY WERE.
+  Step 2's conclusion -- that the majority relation is a TOTAL order and hence a linear
+  extension -- needs the counterexample hypothesis to make the relation total, and no
+  counterexample is enumerable at any n reachable here (the conjecture is verified to
+  n = 14, mg-33f5).  What §1 does check is the half that is unconditional: acyclicity,
+  which follows from the triangle inequalities alone (BASIC-FACTS fact 1 -> fact 2), and
+  consistency with P.  `cyclic weak tournament: 0` likewise repeats mg-24a3's sweep to
+  n = 7 one order further and MUST NOT be read as general transitivity: mg-24a3 exhibits
+  a majority cycle at n = 11 with margins near 0.50014, far inside the 2/3 band.
+  most frozen poset found, by n (smallest delta(P) = max over incomparable pairs
+  of min(p,1-p); the counterexample hypothesis is delta(P) < 1/3):
+    n = 3   delta = 1/3       at or above 1/3
+    n = 4   delta = 1/3       at or above 1/3
+    n = 5   delta = 1/3       at or above 1/3
+    n = 6   delta = 1/3       at or above 1/3
+    n = 7   delta = 1/3       at or above 1/3
+    n = 8   delta = 1/3       at or above 1/3
+
+§2  WHAT `avg db` IS -- the exact gap to the mean consecutive bias, exhaustive
+----------------------------------------------------------------------------------------
+  posets n = 4..8: 19441
+  avg db - A  ==  (A - b(x_1,x_n)) / (n-2)   AND   |avg db - A| <= 1/(n-2):
+    violations: 0   [PASS]
+  largest gap observed: |avg db - A| = 7/36 at n = 4 (ceiling there is 1/2)
+
+  THE AVERAGE CYCLIC BIAS IS THE AVERAGE PAIR BIAS PLUS O(1/n).  It is not a new
+  quantity with its own theory, and dividing D by n-2 does not make it one: no step of
+  the argument ever bounds an INDIVIDUAL db.  Steps 3 and 4 are a lower and an upper
+  bound on the SAME scalar D, reached through the same two inputs -- SUM consec and the
+  single bias b(x_1,x_n).
+
+§3  IS STEP 4'S TARGET REACHABLE?  Best base point against 1/6, exhaustive
+----------------------------------------------------------------------------------------
+  posets n = 5..8: 19425      best-base-point avg db < 1/6 on 18526 of them (95.4%)
+  smallest best-base avg db seen: -1/5   largest: 1/2
+  the largest is attained e.g. at n = 5 on Poset(5, [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)])
+
+  A LARGE FRACTION BELOW 1/6 IS NOT EVIDENCE FOR STEP 4 AND IS THE TRAP THIS SECTION
+  EXISTS TO DISARM.  Every poset here SATISFIES the conjecture, so every one of them has
+  a balanced pair and a small mean consecutive bias is exactly what that produces.  The
+  target has to hold on the counterexample class, which is empty on this population, so
+  the percentage above measures the conjecture holding and nothing else.  The line that
+  DOES carry information is the largest value: the target is false outright wherever the
+  chain is comparability-rich, and a chain reaches 1/2 (c1 §3, c2 §3).
+
+§4  THE NEAREST AVAILABLE PROXY FOR THE COUNTEREXAMPLE CLASS -- most frozen first
+----------------------------------------------------------------------------------------
+  ranked by delta(P) ASCENDING at n = 8; the counterexample hypothesis is
+  delta < 1/3, so these are the posets closest to it that exist.
+
+  delta(P)  avg db      best base   mean b consec max db    min db   
+  1/3       5/18        7/30        13/42         1/2       -1/6     
+  1/3       5/18        7/30        13/42         1/2       -1/6     
+  1/3       5/18        7/30        13/42         1/2       0        
+  1/3       5/18        7/30        13/42         1/2       -1/6     
+  1/3       5/18        7/30        13/42         1/2       0        
+  1/3       5/18        7/30        13/42         1/2       0        
+  1/3       7/18        11/30       17/42         1/2       -1/6     
+  1/3       7/18        11/30       17/42         1/2       0        
+  ...
+  1/2       5/12        2/5         3/7           1/2       0        
+  1/2       5/12        2/5         3/7           1/2       0        
+  1/2       5/12        2/5         3/7           1/2       0        
+
+  posets at n = 8 attaining delta(P) = 1/3 exactly -- the tightest the conjecture
+  gets, and the closest thing to the counterexample class that exists: 12
+  smallest avg db over them, base = x_1 : 5/18 = 0.277778
+  smallest over them with the base point SPENT WELL: 7/30 = 0.233333
+  step 3's floor  (n-4)/(6(n-2)) = 1/9 = 0.111111      slack = 11/90 = 0.122222
+  step 4's target 1/6 = 0.166667, which 0 of these 12 posets sit below even at
+  their best base point
+
+  MY OWN PREDICTION FOR THIS SECTION WAS THAT THE SLACK WOULD BE 1/(n-2)-SIZED AND THE
+  MEASUREMENT REFUTED IT (PREDICTIONS.md P6); the paragraph is rewritten to what ran.
+  The extremal class does NOT sit near step 3's floor -- it sits well above 1/6, and not
+  one of these posets reaches step 4's target at any base point.  That is a stronger
+  result against step 4 than a tight slack would have been, and it is the direct one: on
+  the closest population to the counterexample class that exists, the quantity step 4
+  needs below 1/6 is not below 1/6, and the base-point freedom does not move it there.
+  It is NOT evidence about the counterexample class itself, which is empty -- see §3's
+  warning, which applies with the sign reversed here.
+
+§5  THE VERDICT ON STEP 4, AS AN INEQUALITY RATHER THAN AN OPINION
+----------------------------------------------------------------------------------------
+
+  Write A for the mean consecutive bias along L* and take the base point at the end,
+  which §1 of c2 shows is the best choice.  Then EXACTLY
+
+      avg db  =  ( (n-1) A  -  b(x_1, x_n) )  /  (n-2)
+
+  Under the counterexample hypothesis every consecutive pair has b > 1/6, so A > 1/6,
+  and b(x_1,x_n) <= 1/2, so
+
+      avg db  >  ( (n-1)/6 - 1/2 ) / (n-2)  =  1/6  -  1/(3(n-2))
+
+  which is step 3 divided by n-2.  Step 4 asks for  avg db < 1/6 - eps  with eps fixed.
+  For n > 2 + 1/(3 eps) the two are incompatible -- which is the intended contradiction,
+  and it is sound.  WHAT IT IS NOT IS A REDUCTION.  Proving  avg db < 1/6 - eps  UNDER
+  the hypothesis means proving the hypothesis inconsistent, i.e. proving the conjecture;
+  and proving it WITHOUT the hypothesis is impossible, since a chain gives avg db = 1/2.
+  There is no third reading: the target is the conjecture wearing the star's coordinates.
+
+  WHAT SURVIVES, AND IT IS NOT NOTHING.  A PER-TRIPLE bound is a genuinely different and
+  strictly stronger statement than a bound on the average, and nothing above touches it:
+
+      does the counterexample hypothesis force  db(x_1, x_{k-1}, x_k) <= 1/6 - eps
+      for EVERY k, or is only the aggregate controlled?
+
+  The aggregate is D and D is already known from step 3; an individual db is not, and
+  db IS the cyclic-orientation bias by c1, an object correlation inequalities can speak
+  about.  That is where a successor should start, and §4's max/min db columns are the
+  first data on it.
+
+VERDICT: PASS

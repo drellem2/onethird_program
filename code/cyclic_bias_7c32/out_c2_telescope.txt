@@ -1,0 +1,59 @@
+========================================================================================
+mg-7c32  c2 -- the step-3 telescope: every base point, two bracketings, degenerate cases
+========================================================================================
+
+§1  THE IDENTITY, EXHAUSTIVE OVER EVERY BASE POINT (majority chain, n = 3..8)
+----------------------------------------------------------------------------------------
+  (poset, base point) telescopes checked: 152609
+  D  ==  SUM consec  -  b(base, x_n)  +  b(base, x_1)    disagreements: 0   [PASS]
+  live (non-degenerate) term count == n-2 at an END point, n-3 inside: 0 wrong   [PASS]
+  the ticket's form  b(x_1,x_n) = SUM consec - D  at base = x_1: 0 wrong   [PASS]
+
+  AN END POINT IS THE RIGHT BASE FOR THE LOWER BOUND, AND IT IS NOT A CONVENTION.
+  The identity at a general base reads  D = SUM consec - b(base,x_n) + b(base,x_1),
+  so with base = x_1 the second correction VANISHES and only one bias is spent:
+  D > (n-1)/6 - 1/2 = (n-4)/6.  An interior base spends TWO, giving only (n-7)/6 over
+  one fewer term.  The base point is free but it is not free in this direction.
+
+§2  BRACKETING -- the star against the balanced tree, and what the freedom buys
+----------------------------------------------------------------------------------------
+  posets n = 4..8 with both bracketings run: 19441
+  balanced tree reproduces b(x_1,x_n) and spends exactly n-2 triples: 0 failures   [PASS]
+  the two bracketings visit a DIFFERENT multiset of db values on 19392 of 19441 posets,
+  and nonetheless reach the same total D on 19441 of 19441.
+
+  BOTH HALVES ARE THE FINDING AND THE SECOND IS THE ONE THAT COSTS SOMETHING.
+  D is b(x_1,x_n) subtracted from a sum that does not mention the bracketing, so D is
+  bracketing-INVARIANT by construction -- rebracketing redistributes the defect over
+  different triples and cannot change its total.  So the ticket's "bracketing is free"
+  is free for choosing WHICH triples an argument must bound, and buys NOTHING at all
+  against the aggregate D.  Only the BASE POINT moves D, and §1 says which way.
+
+§3  THE DEGENERATE CASES THE TICKET ASKS ABOUT, RUN RATHER THAN REASONED
+----------------------------------------------------------------------------------------
+  n = 3:  the step-3 bound (n-4)/6 = -1/6    -- NEGATIVE -- step 3 says nothing, and there is no triple to bound anyway
+  n = 4:  the step-3 bound (n-4)/6 = 0       -- ZERO -- the bound is D > 0, true of the star's two live terms for free
+  n = 5:  the step-3 bound (n-4)/6 = 1/6     -- the first n at which (n-4)/6 exceeds a single db's own floor of -1/6
+  chain_5      e(P) = 1     delta(P) = n/a     SUM consec = 2       D = 3/2     avg db = 1/2
+               identity holds: True   b(x_1,x_5) = 1/2
+  antichain_5  e(P) = 120   delta(P) = 1/2     SUM consec = 0       D = 0       avg db = 0
+               identity holds: True   b(x_1,x_5) = 0
+
+  NEITHER DEGENERATE CASE BREAKS THE TELESCOPE AND NEITHER IS A COUNTEREXAMPLE.
+  The CHAIN has no incomparable pair, so the counterexample hypothesis is vacuously
+  true of it and step 3's conclusion D > (n-4)/6 is CORRECT for it -- D = 3/2 > 1/6 at
+  n = 5 -- with average db = 1/2.  It is excluded as a counterexample by the conjecture's
+  own statement (it has no incomparable pair to balance), NOT by anything in step 3.
+  The ANTICHAIN has b == 0 at every pair, so it fails the hypothesis at every pair, and
+  D = 0 with every db = 0: it is the exact case where the bias IS a coboundary, which
+  BASIC-FACTS fact 3 says forces the conjecture -- and it satisfies it.
+
+§4  EVERY CHAIN, NOT ONLY THE MAJORITY ONE (exhaustive, n <= 5)
+----------------------------------------------------------------------------------------
+  (poset, chain, base) telescopes checked: 39426   disagreements: 0   [PASS]
+  The identity is an algebraic tautology in `b` and does NOT use that the chain is
+  a linear extension, or even that it is sorted by anything.  What step 3 needs the
+  MAJORITY chain for is only the per-step bound b(x_i, x_{i+1}) >= 1/6 -- that is a
+  property of the chain, not of the identity, and c3 is where it is measured.
+
+VERDICT: PASS

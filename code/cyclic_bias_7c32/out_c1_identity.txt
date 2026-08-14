@@ -1,0 +1,46 @@
+========================================================================================
+mg-7c32  c1 -- the coboundary of the pair bias IS the cyclic-orientation bias
+========================================================================================
+
+§0  SELF-TEST -- the generator and the marginals, before either may count anything
+----------------------------------------------------------------------------------------
+  unlabelled posets n = 1..8   [1, 2, 5, 16, 63, 318, 2045, 16999]
+  OEIS A000112                  [1, 2, 5, 16, 63, 318, 2045, 16999]   [PASS]
+  canonical_key vs unrestricted relabelling, every LABELLED poset n <= 5:
+    key STRINGS differ on 82 posets -- expected, the cut moves the representative
+    induced PARTITIONS differ on 0 of 5 orders, and extension- vs brute-force
+    enumeration populations differ on 0   [PASS]
+  down-set DP marginals vs brute-force L(P), all posets n <= 7: 0/96916 ordered pairs disagree   [PASS]
+
+§1  N IN {1,2} -- the triangle inequalities, restated as a count (BASIC-FACTS fact 1)
+----------------------------------------------------------------------------------------
+  N = #{x<y, y<z, z<x} over every word of every L(P), all posets n = 3..7
+  values of N observed: [1, 2] over 78634 unordered triples   [PASS]
+  N = 0 would be a 3-antichain-cycle and N = 3 a 3-cycle; a linear order admits
+  neither, so `1 <= p(x,y) + p(y,z) + p(z,x) <= 2` is this line and not a second fact.
+
+§2  STEP 1 -- (db)(x,y,z) = Pr[cyclic class is (x,y,z)] - 1/2, two routes, exhaustive
+----------------------------------------------------------------------------------------
+  route A  b(x,y)+b(y,z)+b(z,x) from the pair marginals, no linear extension built
+  route B  |{w in L(P) : induced order rotates (x,y,z)}| / e(P)  -  1/2
+  ordered triples checked: 471804   route disagreements: 0   [PASS]
+  |db| > 1/2 instances: 0   [PASS]   (the ceiling is N in {1,2}, i.e. §1)
+  observed range of db: [-1/2, 1/2]
+
+§3  WHERE THE CEILING IS ATTAINED -- and why step 4 has to survive it
+----------------------------------------------------------------------------------------
+  ordered triples with db = +1/2 : 43644      with db = -1/2 : 43644
+  of the +1/2 triples, 14548 have x <_P y <_P z; 43644 / 3 = 14548, and each cyclic class
+  is counted once per rotation, so ON THIS POPULATION db = 1/2 HOLDS EXACTLY AT THE
+  CHAIN TRIPLES: True   [PASS]
+
+  THIS IS THE OBSERVATION STEP 4 HAS TO SURVIVE, AND IT IS NOT A DEFECT IN THE ARITHMETIC.
+  If x <_P y <_P z then all three marginals are 1, so db = 1/2 -- the ceiling, and THREE
+  TIMES the 1/6 that step 4 wants the AVERAGE to sit below.  No theorem can push the mean
+  of db below 1/6 over an arbitrary star: a chain refutes it outright, and a chain is a
+  poset.  Step 4 is therefore irreducibly a statement about the COUNTEREXAMPLE class and
+  about a CHOSEN base point; an attempt that drops either hypothesis is attacking something
+  this section has already refuted.  c3 measures how far the real population sits from that
+  target once the base point is spent well.
+
+VERDICT: PASS
