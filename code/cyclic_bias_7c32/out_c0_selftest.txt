@@ -1,0 +1,42 @@
+========================================================================================
+mg-7c32  c0 -- planted defects: every check in this directory, run broken
+========================================================================================
+
+§0  THE UNPATCHED LIBRARY -- every arm must be GREEN before any plant means anything
+----------------------------------------------------------------------------------------
+  two-route db identity  (c1 §2)     PASS
+  marginal DP vs L(P)    (c1 §0)     PASS
+  star telescope         (c2 §1)     PASS
+  acyclicity, positive   (c3 §1)     PASS
+  2/3-relation acyclic   (c3 §1)     PASS
+
+§1  THE PLANTS
+----------------------------------------------------------------------------------------
+  D1  b(z,x) written b(x,z) in the coboundary        CAUGHT             two-route db identity, star telescope
+  D2  linear-extension DP drops the maximality test  CAUGHT             two-route db identity, marginal DP vs L, star telescope
+  D3  the star drops its last triple                 CAUGHT             star telescope
+  D4  b(x,x) returned as -1/2 rather than 0          CAUGHT             star telescope
+  D5  the cycle detector always says acyclic         CAUGHT             acyclicity, positive
+  D6  2/3 threshold relaxed to 1/2 (WRONG DIRECTION) INERT (required)   -
+
+§2  D6 IS THE FINDING, NOT THE FILLER
+----------------------------------------------------------------------------------------
+
+  D6 relaxes the majority threshold from 2/3 to 1/2 and NOTHING NOTICES.  That is the
+  required answer here and it is also the reason c3 §1 carries the paragraph it does:
+  there is no majority cycle anywhere in this population, so an arm that reports
+  `0 cyclic` at threshold 2/3 would report `0 cyclic` at threshold 1/2 as well, and its
+  zero is therefore NOT evidence that the 2/3 band is what closes the composition.
+  mg-24a3 supplies the instance the population cannot -- a majority cycle at n = 11 with
+  margins near 0.50014 -- and BASIC-FACTS fact 2 supplies the argument.  An arm whose
+  zero survives its own hypothesis being deleted has to say so, and this is that line.
+
+§3  RESTORED
+----------------------------------------------------------------------------------------
+  two-route db identity  (c1 §2)     PASS
+  marginal DP vs L(P)    (c1 §0)     PASS
+  star telescope         (c2 §1)     PASS
+  acyclicity, positive   (c3 §1)     PASS
+  2/3-relation acyclic   (c3 §1)     PASS
+
+VERDICT: PASS
