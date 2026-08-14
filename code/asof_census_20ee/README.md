@@ -1679,3 +1679,236 @@ membership sites (`semantic.py` and the new controls contribute none), **zero** 
 negative-control basenames, and the `RED_TOKEN` membership this directory already had — `CAUGHT`
 inside a quoted commit subject in `out_worklist.txt` — is unchanged, so `out_semantic.txt` carrying
 `REFUTED` adds nothing the row counts.
+
+
+---
+
+# Tranche 13 (`mg-6b2d`) — the transcripts nothing re-takes, and the one this arc was filed about **cannot be re-taken at all**
+
+**The ticket's first remainder was already discharged before this branch opened, and that is checked
+rather than assumed.** `mg-6b2d` carries `mg-44da`'s remainder and names `N25` — *R3's `find` half
+requires a following SPACE, so `["find", root, "-type", "f"]` is invisible to it* — as the item worth
+taking first. **`mg-23af` took it**, four tranches ago and under this README's own tranche-8 heading:
+`selftest_20ee.py` runs `N25 find(1) in the LIST spelling — WAS INVISIBLE, NOW SEEN`, it is green,
+`N25` has left `KNOWN_DEFECT`, and `N27` took its place carrying the under-count the repair left
+behind. So the ticket's item 1 is closed and item 2 — *1 of the 80 surviving hits is prose inside a
+`print(...)`* — is `pinnable.code_only`'s own declared limit, unchanged in kind and still declared in
+its docstring. **What is left is item 3, and it turned out not to be a refresh.**
+
+## 1. The remainder that was real, and what happened when it was taken
+
+> `out_pinnable_3b51.txt` still says `R3 FIRES ON THIS DIRECTORY SIX TIMES` — a literal tranche 6
+> replaced with a computed count in `pinnable.py`. It is a dated hand-run that **no suite re-takes**.
+
+All three of this directory's `out_pinnable_*.txt` were re-taken by hand during this tranche. **Each
+failed for a different reason and not one of them is *nobody got round to it*.**
+
+| transcript | what happened when it was re-taken |
+|---|---|
+| `out_pinnable_3b51.txt` | **CANNOT BE RE-TAKEN AT ANY REVISION.** `sh code/landscape_repair_audit_3b51/run_all.sh` ran to exit 0 in 63 s and left `git status` **empty**, so `pinnable.py` refused with *"is EMPTY, and this instrument classifies a drift it is given rather than one it produces"* (exit 1). **The pin tranche 4 landed on that subject worked.** |
+| `out_pinnable_a4ef.txt` | **Re-takeable, and its input is not repo state.** The `a4ef` suite's whole drift is `__pycache__` residue — files git is configured never to track, which `R1` exists to name. |
+| `out_pinnable_b0ae.txt` | **Re-takeable, its input *is* repo state, and still declined.** `bash code/state_relocation_audit_b0ae/run_all.sh` ran to exit 0 in 25 s and moved `out_b8_findability.txt`, whose `B8.2` is *"about the repo as it stands"* by declaration. Its value is a function of `HEAD`, and `HEAD` moves under the refinery's rebase **after the last moment anything on this branch can run**. |
+
+The first row is the finding. `out_pinnable_3b51.txt` is not stale-and-refreshable; it is a record of
+a state the repository **no longer has**, because the instrument's own recommendation was adopted.
+A rule that reported it as work to do would be sending its reader to a run that refuses.
+
+### The `a4ef` row is measured by construction, not argued
+
+On a clean checkout the `a4ef` suite's `out_s1_extent.txt` declines **6** entries. Creating **three
+empty directories** by hand —
+
+```
+code/species_7d75/__pycache__   code/species_repair_6f61/__pycache__   code/species_remainder_f8fa/__pycache__
+```
+
+— makes that transcript **byte-identical to the committed one** at **9**. So this suite has *no*
+repository-caused drift at `AS_OF`: the entire drift `out_pinnable_a4ef.txt` classifies is three
+directories that exist because somebody once ran three other suites in the same worktree. Re-taking
+the page would publish one operator's execution history in place of another's.
+
+**This confirms a sentence this README already carried and never demonstrated.** Tranche 9's
+annotation says `species_repair_a4ef` *"is `mg-4020`'s R1 instance and is **not pinnable at all**"* —
+which is true, and the reason is now a construction rather than a reading: no `AS_OF` can reach a
+directory git is configured never to track, so there is nothing for a pin to fix. The record was
+right; what it did not have is the three-directory experiment.
+
+### What all three agree on, and no committed transcript says
+
+**Every committed `pinnable` transcript in this directory describes a TWO-RULE instrument.**
+`pinnable.py` has had **three** since tranche 6 (`mg-e5f3` added `R3`). Both re-takes that *could* be
+taken print `THIS INSTRUMENT ANSWERS ITS OWN THREE RULES` and a whole `R3 UNORDERED WALKS` section —
+**26 diff lines each, measured**. Section 4 of `out_overtaken.txt` sees that from the **source alone**,
+without running anything, and those two files are the ground truth it was checked against.
+
+## 2. One file names the class, so the instrument answers about the class
+
+`out_pinnable_3b51.txt` is one member of a property nothing measures: **a committed transcript whose
+producer has moved since the transcript was written.** `mg-f771`'s `g0` sees a watched transcript
+*move*; it cannot see one that never gets the chance. `mg-ede8`'s `liveindex.py` asks whether a
+figure was already wrong at its own commit, and `mg-bdc0`'s `pathlist.py` then measured that method
+free on **0 of 840**. This is the neighbouring question and it is cheaper than either: not *is this
+figure wrong*, but **has the thing that computes it moved since**.
+
+`overtaken.py` ships in `run_all.sh` — `exemplars.py`'s reason exactly, and **not** `pinnable.py`'s or
+`pathlist.py`'s: it executes no instrument code and needs no dirty tree, so its transcript reproduces
+byte-identically and costs about 3 s.
+
+```
+ 3263  tracked path(s) at AS_OF 637b046
+  854  paired to a producer by pathlist.py's convention — IMPORTED, not re-spelled
+  270  transcript(s) that convention does NOT reach
+   30  recovered by the trailing-segment widening
+   29  adjudicated TRUE by hand;  1 adjudicated FALSE
+  883  pairs examined
+   30  OVERTAKEN — the producer's source at AS_OF differs from its source at
+        the commit that last wrote the transcript
+    6  ARCHIVAL BY NAME — preserved on purpose
+   24  LIVE:  21 where the producer's CODE moved,  3 PROSE-ONLY
+```
+
+## 3. The strict rule cannot see the file this arm was filed from
+
+`out_pinnable_3b51.txt` is `pinnable.py` **with an argument**, so `pinnable_3b51.py` does not exist
+and the pair is in `pathlist.py`'s **270 unreached** rather than in its 854. **The widening is not an
+enhancement — it is the difference between answering the ticket and reporting a number about somebody
+else.** It strips trailing `_`-separated segments until a producer of that name exists in the same
+directory, and its 30 candidates are adjudicated in a **hand table the arm refuses over** if it is
+incomplete or names a pair the matcher did not find.
+
+**One of the 30 is false, and it is excluded by the table and not by the matcher.**
+`code/state_suppression_repair_5f7c/out_run_all_a74f_PRE5f7c.txt` is paired to that directory's own
+`run_all.sh`; its README says in so many words that it is
+`code/state_delegation_repair_a74f/out_run_all.txt` **as it stood before this repair** — a *foreign*
+directory's transcript, copied in. No rule over basenames can read a sentence. `P47` asserts that the
+matcher **still produces** that candidate, because a matcher tightened until its output is clean
+proves nothing.
+
+## 4. Two directions that are not the same direction, and both are printed
+
+`OVERTAKEN` is a proof **about the producer** and not about the transcript, and the two ways of
+over-reading it are separated on the page rather than in a sentence.
+
+- **`PROSE-ONLY` is a column, not a filter.** A producer whose docstring grew cannot print anything
+  different. That it is only **3 of 24** is the measurement; a page that dropped them silently would
+  publish the same **21** with no way to check it. The split is `pinnable.code_only`'s, **imported**,
+  so this arm cannot disagree with `permuted.py` section 4 about what prose is.
+- **`ARCHIVAL BY NAME` is `OVERTAKEN` by design and is not a finding.** This estate preserves
+  transcripts of a past state on purpose — `_PREREPAIR`, `_FIRSTFORM`, `_FIRSTRUN`, `_before` — and
+  those go `OVERTAKEN` the moment the repair they precede lands. `P49` measures the marker in **both**
+  directions, and the halves that matter are the negative ones: `out_pinnable_3b51.txt` and
+  `out_a1_vacuity_n7.txt` carry a trailing segment that is an **argument**, and a marker wide enough
+  to eat those would make `24` an artifact of the marker.
+
+## 5. The witness — the only half of *"is it actually stale"* that costs nothing
+
+For each `OVERTAKEN` row with a Python producer: how many long single-line string literals exist in
+the producer at `AS_OF`, did **not** exist at the transcript's own commit, and do **not** appear
+anywhere in the committed transcript. **19 of 30** are positive.
+
+**It is a witness and not a proof, in both directions, and that is stated at the section.** A regex, a
+dict key and an unreachable branch's message all count, so a positive **over**-states; and a zero is
+not evidence of freshness, because a producer can change what it prints without adding a literal at
+all. `P50` asserts the half that makes it a witness rather than a count of edits: a new literal that
+is **already in the transcript** must contribute nothing.
+
+**And a positive witness does not mean re-takeable.** `out_pinnable_3b51.txt` scores 34 and cannot be
+re-taken at any revision. Both facts are on the page.
+
+## 6. What this tranche leaves — reported at the low water mark
+
+`N34` joins `KNOWN_DEFECT` and **nothing leaves** (11 → 12), and it is `N31`'s limit arriving on a
+different rule. **`NOT OVERTAKEN` proves nothing at all**: a transcript goes stale when its **corpus**
+moves and its producer does not, which is exactly how `out_consumers.txt` has shipped stale at its own
+commit in 5 of its 8 versions, and no rule here can see one of those. The direction is what makes the
+published figure safe — every error of this kind makes `OVERTAKEN` look **smaller** — so **30 of 883
+is a low water mark**.
+
+**The 240 still outside the pairing after the widening are counted, not dropped.** They are the
+convention's residue, and a census that reports a number because it never looked is this directory's
+oldest named defect.
+
+**This file is outside its own population, by arithmetic and not by rule**, and section 6 of the
+transcript says so rather than leaving it to be found: `AS_OF` is older than `overtaken.py`, so
+`out_overtaken.txt` is not tracked at the commit it reports on and cannot appear in the 883. Graded
+by hand it is **not** `OVERTAKEN` and cannot become so — it is in `run_all.sh`, which is the whole
+difference between this page and the three in section 1.
+
+**Its own witness is a whole-output membership test — `mg-9876` section 1's smell — and it is kept.**
+Found with `a4_sweep.py`'s *own* detector run over this branch's files rather than by eye: exactly one
+site, `if v not in text` in `grade()`. It is not harmless (a literal that appears in the transcript
+for an unrelated reason suppresses a real witness), there is no line-structured alternative that is
+correct because a literal is printed *inside* a longer line, and its error direction is the one
+already declared — the witness **under**-states. Renaming the variable so the detector misses it,
+with the semantics unchanged, is precisely what a census that gates teaches its subjects to do.
+
+**Reflexively, `R3` fires on `overtaken.py` zero times** — checked by running
+`pinnable.unordered_walks` over it rather than by reading — and this branch adds **zero** planted
+needles to `selftest_20ee.py`'s 19.
+
+### `out_consumers.txt` moves `205` → `209`, all four are main's, and **this time the committed figure was right at its own commit**
+
+`liveindex.py` fired on this branch before its refresh — *"said `run_all.sh` (205 files), index holds
+`run_all.sh` (209 files) (STALE)"* — which is the instrument `mg-ede8` built working on its own
+directory. The `+4` is attributed by **diffing the `run_all.sh` list at both commits** rather than
+assumed: `code/empty_vs_zero_3c92`, `code/label_vs_computation_68ef`,
+`code/oscillation_discharge_365a` and `code/prerebase_reading_cd8d`, every one of them main's own
+landing between `d94de4f` and `637b046`. **This branch adds zero `run_all.sh`.**
+
+**And the running story does not fit this one, so it is corrected rather than repeated.** Four of the
+last five tranches found `out_consumers.txt` *already wrong at its own commit*. `mg-bdc0`'s was not:
+`d94de4f` holds **205** `run_all.sh` and its transcript says **205**. What made it stale is the four
+landings in the four commits since — the ordinary consequence of a live-index figure, and not the
+pre-rebase mechanism the earlier tranches were describing. **This branch's own `209` carries exactly
+the same property** and will be wrong the moment a `run_all.sh` lands on main before it merges.
+
+### The `a4` census moves `222` → `223` in `77` → `78`, and the delta is **mine**
+
+Attributed by running `a4_sweep.py` **with and without** this branch's new file rather than by eye
+(`mg-c15e`'s method). The whole delta is `asof_census_20ee:1` — the membership site declared above —
+and `220 → 222` in `76 → 77`, plus the population `232 → 239` directories, is main's own movement
+whose census refresh main did not take. The `| tee` count stands still at **30**, `NEITHER, though the
+directory ships code` stands still at **27**, and `ships a file named for negative/self/positive-control`
+does not move: `overtaken.py` is not such a name and this directory already qualifies through
+`selftest_20ee.py`.
+
+`out_gate.txt`'s audit byte count moves `55076` → `55096` beside the twin's **unchanged** `11818`,
+and the `+20` is attributed by measurement rather than assumed: `a4_sweep.py`'s own output is
+**16045** bytes without this branch's file and **16065** with it, the same twenty. `./build.sh` was
+run, `g0` graded the six moved transcripts itself — `2 NOISE` (`alias_agreement`'s two, wall-clock
+only), `1 CORPUS` (`out_a4_sweep.txt`, with `g0` printing *"Restore it rather than committing it — the
+refresh is owed by whoever trips the bound, not by this branch"*, an instruction followed rather than
+second-guessed) and `3 DISAGREES`, all three of which this branch commits. `out_g1_controls.txt`
+differs only in `1.11s` → `1.17s` and is restored on the same grading.
+
+`STATE.md` is untouched so the ratchet is untouched and no twin re-pin is owed; `docs/FACTS.md` gets
+**no** entry (`mg-3da1`'s homelessness test — every measurement here is consumed by this landing) and
+`docs/CONCEPTS.md` no row. This directory is **not** in `build.sh` and this tranche does not put it
+there: nothing here is a property the estate must hold, and a measurement that gates is one its
+subjects learn to spell around — the first thing they would spell around being the pairing
+convention, which is only worth having while nobody is scored on it.
+
+**Nothing in the 24 live rows is repaired.** Each belongs to the directory that wrote it, twenty-one
+of them are somebody else's, and a refresh here would move twenty-one committed transcripts for a
+measurement nobody asked to be binding.
+
+### `pathlist.py` was named **zero** times in this README until this paragraph, and that is `N30`'s shape inside the directory that issued it
+
+`mg-bdc0` landed a whole instrument — `pathlist.py`, five controls, `N33`, its own transcript — with
+**no tranche section**. So this heading is *tranche 13* because 12 is the last number this file used,
+**not** because it is the thirteenth landing: the numbering is hand-typed and nothing checks it.
+
+At `637b046`, `grep -c pathlist code/asof_census_20ee/README.md` returned **0**. `exemplars.py`'s
+whole rule is that *a record's newest mention of an instrument is its last word about it* — and an
+instrument no record mentions has **no last word** and is invisible to that rule at every revision,
+which is precisely what `N30` says. `N30`'s published instance was `code/summary_guard_audit_407f`, a
+directory elsewhere in the estate; **here is a second one, and it is in the README of the directory
+that issued the control.**
+
+**The count is not 0 any more and this paragraph is why**, which is worth saying rather than leaving
+to be found: writing the observation down *is* a mention, so the zero is a fact about `637b046` and
+about no later commit, and `exemplars.py` now has a last word for `pathlist.py` — this sentence,
+which is an accounting of nothing but its own absence. That is the smallest possible instance of
+`N29`: a younger sentence **may** be an accounting and need not be one. Reported and not repaired
+beyond it — writing `mg-bdc0`'s tranche section is `mg-bdc0`'s to write, and a section invented by
+somebody who did not do the work is a record of nothing.

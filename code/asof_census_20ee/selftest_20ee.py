@@ -101,8 +101,18 @@ RAN = []
 # repository has and disagree only in that sentence.  It was issued as N31 on
 # the branch and RENUMBERED ON LANDING: mg-ede8's N31 merged first and a number
 # in this directory is never reissued, which is what BURNED is for.
+# N34 JOINS AT mg-6b2d AND NOTHING LEAVES, so this tuple GROWS AGAIN (11 -> 12),
+# and it is the SAME LIMIT N31 declared, arriving on a different rule.  N31 says
+# `was this transcript already stale at its own commit` is answerable only for
+# figures a path list determines; N34 says the neighbouring rule -- `has the
+# producer moved since` -- is blind in exactly the complementary place, because
+# a transcript goes stale when its CORPUS moves and its producer does not.
+# THAT IS THE SHAPE out_consumers.txt HAS SHIPPED IN 5 OF ITS 8 VERSIONS, so the
+# defect is not hypothetical and the control plants it.  ITS DIRECTION IS WHY
+# THE PUBLISHED FIGURE IS SAFE: every error of this kind makes OVERTAKEN look
+# SMALLER, so 30 of 883 is a LOW WATER MARK and cannot be an over-count.
 KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30", "N31",
-                "N32", "N33")
+                "N32", "N33", "N34")
 
 
 def check(name, got, want, why):
@@ -1466,6 +1476,145 @@ check("N33 the pattern is a SPELLING MATCHER and its residue is one-directional"
 
 print()
 
+print("=" * 78)
+print("CONTROLS ON overtaken.py — HAS THE PRODUCER MOVED SINCE (mg-6b2d)")
+print("=" * 78)
+print()
+print("  OVERTAKEN is a proof about the PRODUCER and not about the transcript,")
+print("  and its headline is a SMALL NUMBER — 30 of 883 — which is what a")
+print("  narrowed pairing, a widening that recovered nothing, or a rule that")
+print("  can no longer fire all return for free. So P45 runs first and")
+print("  establishes that the rule can fire at all, and every other arm here")
+print("  fires overtaken.grade itself rather than a re-statement of it.")
+print()
+
+import overtaken  # noqa: E402
+
+_PROD = "code/plant/p.py"
+_BASE = ('"""A docstring."""\n'
+         'def main():\n'
+         '    print("the population is %d file(s)" % n)\n')
+
+
+def _grade(before, after, text="", producer=_PROD):
+    got = overtaken.grade("code/plant/out_p.txt", producer, before, after, text)
+    return None if got is None else got["grade"]
+
+
+check("P45 the rule fires when the producer moved, and NOT when it did not",
+      (_grade(_BASE, _BASE.replace("%d file(s)", "%d directory(ies)")),
+       _grade(_BASE, _BASE)),
+      ("CODE", None),
+      "THE ARM THAT MAKES THE HEADLINE FALSIFIABLE, and it runs first for the "
+      "reason D0 runs first next door: out_overtaken.txt reports 30 of 883, "
+      "and a pairing that reached nothing, a widening that recovered nothing "
+      "or a comparison that could no longer see a difference would each "
+      "publish a SMALLER number and read as the same finding. The second half "
+      "is the one that keeps it honest — an identical producer must return "
+      "None and not a grade, because a rule that flagged every pair would look "
+      "thorough and accuse 883 transcripts of nothing.")
+
+check("P46 a PROSE-only edit and a CODE edit are told apart",
+      (_grade(_BASE, _BASE.replace("A docstring.", "A much longer docstring.")),
+       _grade(_BASE, _BASE.replace("# nothing", "# nothing")
+              .replace("def main():", "def main(argv):"))),
+      ("PROSE-ONLY", "CODE"),
+      "BOTH DIRECTIONS, BECAUSE THE SPLIT IS THE ONLY THING STANDING BETWEEN "
+      "`30 OVERTAKEN` AND `30 STALE`. A producer whose docstring grew cannot "
+      "print anything different, and out_overtaken.txt reports 3 of 24 live "
+      "rows in that class — a page that filtered them out silently would "
+      "publish the same 21 with no way to check it. The separator is "
+      "pinnable.code_only, IMPORTED, so this arm cannot disagree with "
+      "permuted.py's section 4 about what prose is; if the two ever disagree "
+      "it is because somebody re-spelled one of them, which is the defect "
+      "mg-d2c2 named.")
+
+check("P47 the widening still FINDS the pair the hand table refuses",
+      (("code/state_suppression_repair_5f7c/out_run_all_a74f_PRE5f7c.txt",
+        "code/state_suppression_repair_5f7c/run_all.sh")
+       in overtaken.widen(
+           ["code/state_suppression_repair_5f7c/out_run_all_a74f_PRE5f7c.txt"],
+           {"code/state_suppression_repair_5f7c/run_all.sh"}),
+       overtaken.WIDENED_VERDICT[
+           "code/state_suppression_repair_5f7c/out_run_all_a74f_PRE5f7c.txt"]),
+      (True, False),
+      "A MATCHER TIGHTENED UNTIL ITS OUTPUT IS CLEAN PROVES NOTHING, so this "
+      "asserts that the matcher STILL PRODUCES the one candidate a person had "
+      "to refuse and that the refusal lives in the TABLE. "
+      "out_run_all_a74f_PRE5f7c.txt is "
+      "code/state_delegation_repair_a74f/out_run_all.txt copied in before a "
+      "repair — its own README says so in a sentence — and no rule over "
+      "basenames can read a sentence. If the first half ever goes False "
+      "somebody narrowed the widening to hide a false positive, and section "
+      "3's `1 adjudicated FALSE` would then be a fact about the matcher rather "
+      "than about the estate.")
+
+check("P48 the widening reaches ONLY what the strict rule missed",
+      overtaken.widen(["code/d/out_a.txt"],
+                      {"code/d/a.py", "code/d/out_a.txt", "code/d/o.py"}),
+      [],
+      "THE OVER-REACH GUARD, AND IT IS THE DIRECTION THAT WOULD BE SILENT. "
+      "`widen` strips trailing `_`-separated segments, and a transcript with no "
+      "`_` left to strip must yield NOTHING rather than falling through to some "
+      "other producer in the directory — otherwise a strictly-paired "
+      "transcript could be re-pointed at a producer it has nothing to do with "
+      "and the row would still look exactly like a finding. scan() only ever "
+      "offers it pathlist.pairs_at's MISSED list, so this is the guard on the "
+      "function and not on the call.")
+
+check("P49 the archival marker fires on the convention and NOT on an argument",
+      (overtaken.is_archival("code/d/out_a4_sweep_PREREPAIR.txt"),
+       overtaken.is_archival("code/d/out_r1_sweep_FIRSTRUN_2FAIL.txt"),
+       overtaken.is_archival("code/asof_census_20ee/out_pinnable_3b51.txt"),
+       overtaken.is_archival("code/d/out_a1_vacuity_n7.txt")),
+      (True, True, False, False),
+      "THE HEADLINE SPLITS 30 INTO 24 LIVE AND 6 ARCHIVAL, so a marker wide "
+      "enough to eat the live rows would make `24` an artifact of this list "
+      "and not a measurement. The last two halves are the ones that matter: "
+      "out_pinnable_3b51.txt and out_a1_vacuity_n7.txt carry a trailing "
+      "segment that is an ARGUMENT — a directory hash and a parameter — and "
+      "those are exactly the rows this tranche was filed about. If either ever "
+      "goes True the three files section 5 is about have been quietly "
+      "reclassified as `preserved on purpose` and the page reports nothing.")
+
+check("P50 the witness reads the TRANSCRIPT and not only the two sources",
+      (len(overtaken.grade("t", _PROD, _BASE,
+                           _BASE + '    print("a wholly new banner line")\n',
+                           "")["witness"]),
+       len(overtaken.grade("t", _PROD, _BASE,
+                           _BASE + '    print("a wholly new banner line")\n',
+                           "... a wholly new banner line ...")["witness"])),
+      (1, 0),
+      "SECTION 4 IS A WITNESS AND NOT A COUNT OF EDITS, and this is the half "
+      "that makes the difference. A new literal ALREADY PRESENT in the "
+      "committed transcript is evidence of nothing — the transcript already "
+      "says it — so it must not be counted, and a witness that skipped the "
+      "membership test would report a positive number for every producer that "
+      "grew a string. 19 of 30 rows are positive with the test in place. The "
+      "residue is declared in section 4 and is deliberately in the weakening "
+      "direction: a regex and an unreachable branch's message both count, so a "
+      "positive OVER-states and a zero proves nothing at all.")
+
+check("N34 NOT OVERTAKEN PROVES NOTHING — the corpus is invisible here",
+      _grade(_BASE, _BASE, text="the population is 194 file(s)"),
+      None,
+      "A KNOWN DEFECT, ASSERTED RATHER THAN REPAIRED, and it is the silent "
+      "direction. This plants the exact shape out_consumers.txt has shipped in "
+      "5 of its 8 committed versions — a producer nobody touched, a CORPUS "
+      "that moved underneath it, and a printed figure that was already wrong "
+      "at its own commit — and requires the answer NOT OVERTAKEN. The repair "
+      "is not available at this cost: knowing whether the corpus moved means "
+      "knowing what the producer reads, which is pathlist.py's question, and "
+      "pathlist.py's answer is that the free method applies to ZERO of 840. So "
+      "the direction is what makes the published 30 safe: every error of this "
+      "kind makes OVERTAKEN look SMALLER, and 30 is therefore a LOW WATER MARK "
+      "for `committed transcripts nothing re-takes`. Turning this green would "
+      "mean somebody found a way to re-derive a content-valued figure at an "
+      "old commit, which is the thing mg-ede8, mg-bdc0 and this tranche have "
+      "each declined for the same measured reason.")
+
+print()
+
 # EVERY `SEE CONTROL X` IN THIS DIRECTORY RESOLVES, AND IT IS CHECKED PER SITE.
 # mg-23af found two that did not: pinnable.py said `--recursive` staying lit was
 # "a control (P24) rather than a claim" and no P24 has ever existed, and
@@ -1562,8 +1711,9 @@ else:
           "negative and %d on the consumer census's three-way classification, "
           "across the address census, the consumer census, the pinnable "
           "pre-condition, the condition-2 comparator, the work-list's own "
-          "re-take, the record's last word about an instrument and the "
-          "registry of declared limits.  %s confirm a KNOWN "
+          "re-take, the record's last word about an instrument, the "
+          "registry of declared limits and whether a transcript's producer "
+          "has moved since it was taken.  %s confirm a KNOWN "
           "DEFECT or a DECLARED LIMIT rather than a repair, and each says in "
           "its own text what turning it green would mean."
           % (len(RAN), sum(1 for n in RAN if n[0] == "P"),

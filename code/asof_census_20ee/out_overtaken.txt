@@ -1,0 +1,364 @@
+==============================================================================
+mg-6b2d -- HAS THE PRODUCER MOVED SINCE THE TRANSCRIPT WAS TAKEN?
+==============================================================================
+
+  AS_OF = 637b046 (637b046f4f83)
+
+  OVERTAKEN is a proof ABOUT THE PRODUCER: the thing that would run
+  today is not the thing that ran.  It is NOT a proof that the
+  transcript is wrong, and NOT OVERTAKEN proves NOTHING AT ALL -- a
+  transcript goes stale when its CORPUS moves with no producer edit,
+  and no rule on this page can see that (N34).  Read section 6.
+
+------------------------------------------------------------------------------
+1  THE FUNNEL -- every loss counted where it happens
+------------------------------------------------------------------------------
+
+       3263  tracked path(s) at AS_OF
+       1124  committed transcript(s) under code/ -- `out_*.txt`
+        854  paired to a producer by pathlist.py's convention,
+             IMPORTED from pathlist.pairs_at and not re-spelled
+        270  transcript(s) that convention does NOT reach
+         30  of those recovered by the trailing-segment widening
+         29  of the recovered ones adjudicated TRUE by hand (section 3)
+        883  pairs examined
+
+         30  OVERTAKEN -- the producer's source at AS_OF differs from
+             its source at the commit that last wrote the transcript
+          6  of those ARCHIVAL BY NAME -- preserved on purpose, and
+             OVERTAKEN the moment the repair they precede lands
+         24  LIVE -- 21 where the producer's CODE moved, 3 PROSE-ONLY
+
+------------------------------------------------------------------------------
+2  THE LIVE ROWS -- the producer's CODE moved
+------------------------------------------------------------------------------
+
+  PROSE-ONLY IS A SEPARATE COLUMN AND NOT A FILTER.  The split is
+  pinnable.code_only's, imported, so this arm cannot disagree with
+  permuted.py section 4 about what prose is.  A prose-only edit
+  cannot change what the producer prints; that it is only 3 of 24
+  is the measurement, and a page that filtered them out silently
+  would be publishing the same number with no way to check it.
+
+           code/alias_agreement_06d1/out_g3_normalisation.txt
+           <- code/alias_agreement_06d1/g3_normalisation.py
+           code/alias_agreement_06d1/out_x0_exhibit.txt
+           <- code/alias_agreement_06d1/x0_exhibit.py
+      WIDE code/asof_census_20ee/out_pinnable_3b51.txt
+           <- code/asof_census_20ee/pinnable.py
+      WIDE code/asof_census_20ee/out_pinnable_a4ef.txt
+           <- code/asof_census_20ee/pinnable.py
+      WIDE code/asof_census_20ee/out_pinnable_b0ae.txt
+           <- code/asof_census_20ee/pinnable.py
+           code/branching_audit_a218/out_c1_branching.txt
+           <- code/branching_audit_a218/c1_branching.py
+           code/branching_audit_a218/out_c2_vertexsets.txt
+           <- code/branching_audit_a218/c2_vertexsets.py
+           code/branching_audit_e34a/out_k2_five.txt
+           <- code/branching_audit_e34a/k2_five.py
+           code/branching_audit_e34a/out_k4_cancel.txt
+           <- code/branching_audit_e34a/k4_cancel.py
+           code/census_repair_f3ff/out_s1_rows.txt
+           <- code/census_repair_f3ff/s1_rows.py
+           code/census_repair_f3ff/out_s2_controls.txt
+           <- code/census_repair_f3ff/s2_controls.py
+           code/census_repair_f3ff/out_s3_graph.txt
+           <- code/census_repair_f3ff/s3_graph.py
+           code/census_repair_f3ff/out_s4_crosscheck.txt
+           <- code/census_repair_f3ff/s4_crosscheck.py
+           code/control_audit_9876/out_a3_auditor_selftest.txt
+           <- code/control_audit_9876/a3_auditor_selftest.py
+           code/face_geometry_instr_5f9a/out_d1_trace.txt
+           <- code/face_geometry_instr_5f9a/d1_trace.py
+           code/grain_axis_audit_03d1/out_a3_ledger.txt
+           <- code/grain_axis_audit_03d1/a3_ledger.py
+           code/hodge_leverage_audit_7e39/out_audit_7e39.txt
+           <- code/hodge_leverage_audit_7e39/audit_7e39.py
+           code/hodge_leverage_audit_ec07/out_audit_ec07.txt
+           <- code/hodge_leverage_audit_ec07/audit_ec07.py
+           code/species_audit_7dd3/out_d2_extent.txt
+           <- code/species_audit_7dd3/d2_extent.py
+           code/species_extent_d633/out_e1_extents.txt
+           <- code/species_extent_d633/e1_extents.py
+           code/species_extent_d633/out_e3_bothways.txt
+           <- code/species_extent_d633/e3_bothways.py
+
+  PROSE-ONLY -- the producer moved and its code did not:
+
+           code/dual_certificate_131e/out_d3_refutation.txt
+           <- code/dual_certificate_131e/d3_refutation.py
+           code/species_7d75/out_t4_one_operation.txt
+           <- code/species_7d75/t4_one_operation.py
+           code/species_repair_6f61/out_r2_columns.txt
+           <- code/species_repair_6f61/r2_columns.py
+
+  ARCHIVAL BY NAME -- OVERTAKEN AND NOT A FINDING.  These preserve a
+  PAST state on purpose and their producers were repaired afterwards,
+  which is what OVERTAKEN says about them and is exactly right.  They
+  are PRINTED rather than dropped, because a class removed silently
+  and a class that was never found look the same on the page:
+
+      WIDE CODE        code/branching_bound_audit_aaf4/out_a3_criticism_FIRSTFORM_exit1.txt
+           <- code/branching_bound_audit_aaf4/a3_criticism.py
+      WIDE CODE        code/control_audit_9876/out_a2_discriminate_PREREPAIR.txt
+           <- code/control_audit_9876/a2_discriminate.py
+      WIDE CODE        code/control_audit_9876/out_a3_auditor_selftest_PREREPAIR.txt
+           <- code/control_audit_9876/a3_auditor_selftest.py
+      WIDE CODE        code/control_audit_9876/out_a4_sweep_PREREPAIR.txt
+           <- code/control_audit_9876/a4_sweep.py
+      WIDE CODE        code/sibling_sweep_7085/out_r1_sweep_FIRSTRUN_2FAIL.txt
+           <- code/sibling_sweep_7085/r1_sweep.py
+      WIDE CODE        code/species_remainder_f8fa/out_w3_scope_before.txt
+           <- code/species_remainder_f8fa/w3_scope.py
+
+------------------------------------------------------------------------------
+3  THE WIDENING, AND THE ONE PAIR A PERSON HAD TO REFUSE
+------------------------------------------------------------------------------
+
+  The strict convention cannot see a transcript whose producer takes
+  an ARGUMENT, which is every file this arm was filed about:
+  out_pinnable_3b51.txt is `pinnable.py code/landscape_repair_audit_3b51`
+  and there is no pinnable_3b51.py.  So the widening is the
+  difference between answering the ticket and reporting a number
+  about somebody else.
+
+         30  candidate(s) produced by the matcher
+         29  adjudicated TRUE
+          1  adjudicated FALSE -- excluded BY THE TABLE, not by the
+             matcher, which still finds them (P47)
+
+      TRUE  code/anchor_population_audit_0ba7/out_a4_labels_FIRSTFORM_miss3.txt
+            <- code/anchor_population_audit_0ba7/a4_labels.py
+      TRUE  code/asof_census_20ee/out_pinnable_3b51.txt
+            <- code/asof_census_20ee/pinnable.py
+      TRUE  code/asof_census_20ee/out_pinnable_a4ef.txt
+            <- code/asof_census_20ee/pinnable.py
+      TRUE  code/asof_census_20ee/out_pinnable_b0ae.txt
+            <- code/asof_census_20ee/pinnable.py
+      TRUE  code/asof_census_20ee/out_worklist_rerun.txt
+            <- code/asof_census_20ee/worklist.py
+      TRUE  code/branching_bound_audit_aaf4/out_a3_criticism_FIRSTFORM_exit1.txt
+            <- code/branching_bound_audit_aaf4/a3_criticism.py
+      TRUE  code/branching_bound_audit_aaf4/out_selftest_aaf4_FIRSTFORM_exit1.txt
+            <- code/branching_bound_audit_aaf4/selftest_aaf4.py
+      TRUE  code/branching_bound_d075/out_s3_bound_FIRSTFORM_exit1.txt
+            <- code/branching_bound_d075/s3_bound.py
+      TRUE  code/branching_bound_d075/out_s5_own_criticism_FIRSTRUN_exit1.txt
+            <- code/branching_bound_d075/s5_own_criticism.py
+      TRUE  code/control_audit_9876/out_a1_census_PREREPAIR.txt
+            <- code/control_audit_9876/a1_census.py
+      TRUE  code/control_audit_9876/out_a2_discriminate_PREREPAIR.txt
+            <- code/control_audit_9876/a2_discriminate.py
+      TRUE  code/control_audit_9876/out_a3_auditor_selftest_PREREPAIR.txt
+            <- code/control_audit_9876/a3_auditor_selftest.py
+      TRUE  code/control_audit_9876/out_a4_sweep_PREREPAIR.txt
+            <- code/control_audit_9876/a4_sweep.py
+      TRUE  code/corpus_universe_1d6c/out_p4_selfcheck_FIRSTFORM_exit1.txt
+            <- code/corpus_universe_1d6c/p4_selfcheck.py
+      TRUE  code/corpus_universe_1d6c/out_selftest1d6c_FIRSTFORM_exit1.txt
+            <- code/corpus_universe_1d6c/selftest1d6c.py
+      TRUE  code/dual_certificate_audit_eaa1/out_a3_n6_deep.txt
+            <- code/dual_certificate_audit_eaa1/a3_n6.py
+      TRUE  code/eps0_threshold_3969/out_a1_vacuity_n7.txt
+            <- code/eps0_threshold_3969/a1_vacuity.py
+      TRUE  code/eps0_threshold_3969/out_a2_uniform_n7.txt
+            <- code/eps0_threshold_3969/a2_uniform.py
+      TRUE  code/hash_population_6e58/out_p3_unrestricted_FIRSTFORM_selferr.txt
+            <- code/hash_population_6e58/p3_unrestricted.py
+      TRUE  code/hash_population_6e58/out_selftest_6e58_FIRSTFORM_exit1.txt
+            <- code/hash_population_6e58/selftest_6e58.py
+      TRUE  code/pairbias_audit_a832f/out_a2_realizable_n7.txt
+            <- code/pairbias_audit_a832f/a2_realizable.py
+      TRUE  code/pairbias_audit_a832f/out_a4_boundary_structure_n7.txt
+            <- code/pairbias_audit_a832f/a4_boundary_structure.py
+      TRUE  code/sibling_sweep_7085/out_r1_sweep_FIRSTRUN_2FAIL.txt
+            <- code/sibling_sweep_7085/r1_sweep.py
+      TRUE  code/species_gate_audit_d53d/out_run_all_d53d.txt
+            <- code/species_gate_audit_d53d/run_all.sh
+      TRUE  code/species_remainder_f8fa/out_w3_scope_before.txt
+            <- code/species_remainder_f8fa/w3_scope.py
+      TRUE  code/state_claims_repair_0120/out_anchors0120_HEAD.txt
+            <- code/state_claims_repair_0120/anchors0120.py
+      FALSE code/state_suppression_repair_5f7c/out_run_all_a74f_PRE5f7c.txt
+            <- code/state_suppression_repair_5f7c/run_all.sh
+      TRUE  code/state_visibility_audit_65eb/out_anchor65eb_bd24efc.txt
+            <- code/state_visibility_audit_65eb/anchor65eb.py
+      TRUE  code/verdict_delivery_bf3f/out_d4_live_BEFOREMAIL_DROPPED.txt
+            <- code/verdict_delivery_bf3f/d4_live.py
+      TRUE  code/verdict_path_repair_1d26/out_run_all_1d26.txt
+            <- code/verdict_path_repair_1d26/run_all.sh
+
+------------------------------------------------------------------------------
+4  THE WITNESS -- what a reader can check WITHOUT running anything
+------------------------------------------------------------------------------
+
+  For each OVERTAKEN row whose producer is Python: how many long
+  single-line string literals exist in the producer at AS_OF, did
+  NOT exist at the transcript's own commit, and do NOT appear
+  anywhere in the committed transcript.
+
+  IT IS A WITNESS AND NOT A PROOF, IN BOTH DIRECTIONS.  A regex, a
+  dict key and an unreachable branch's message all count, so a
+  positive number OVER-states; and a ZERO is not evidence of
+  freshness, because a producer can change what it prints without
+  adding a literal at all.  It is here because it is the only half
+  of `is this transcript actually stale` that costs nothing.
+
+         30  OVERTAKEN row(s) with a Python producer
+         19  with at least one new literal absent from the transcript
+
+        73  code/species_remainder_f8fa/out_w3_scope_before.txt
+            '#     regular file at any depth and those entries are not in it.'
+            '#   ^ NOT STATED is a FINDING.  The extent line below claims every'
+        60  code/asof_census_20ee/out_pinnable_a4ef.txt
+            '%d SCRIPT(S) COULD NOT BE SEPARATED FROM THEIR PROSE -- Python'
+            '(+R3: expect a permuted transcript)'
+        60  code/asof_census_20ee/out_pinnable_b0ae.txt
+            '%d SCRIPT(S) COULD NOT BE SEPARATED FROM THEIR PROSE -- Python'
+            '(+R3: expect a permuted transcript)'
+        59  code/census_repair_f3ff/out_s2_controls.txt
+            'A prediction of `0` that a broken run would satisfy by default'
+            'Every control that ranges over them reports UNMEASURED below.'
+        57  code/control_audit_9876/out_a2_discriminate_PREREPAIR.txt
+            '(<span id="provenance">.*?@ )[0-9a-f]{7,40}'
+            '(\\n  state-sha256:\\s*)[0-9a-f]{64}'
+        45  code/control_audit_9876/out_a4_sweep_PREREPAIR.txt
+            '(the .py and .sh of code/'
+            "/, which the corpus pin excludes — a moved one is this instrument'"
+        35  code/census_repair_f3ff/out_s1_rows.txt
+            '*** UNMEASURED -- the row could not be read, so this is NOT a miss'
+            '<-- UNMEASURED'
+        34  code/asof_census_20ee/out_pinnable_3b51.txt
+            '%d SCRIPT(S) COULD NOT BE SEPARATED FROM THEIR PROSE -- Python'
+            '(?<![A-Za-z0-9_])'
+        19  code/census_repair_f3ff/out_s3_graph.txt
+            '.  A repo they range over could'
+            'HOW MANY of the rows it flags are counts, and this run did not'
+        19  code/grain_axis_audit_03d1/out_a3_ledger.txt
+            "A3f  O4's DEFECT -- CLOSED BY mg-5035, and this section says so"
+            'Confirmed here rather than repeated:'
+        12  code/census_repair_f3ff/out_s4_crosscheck.txt
+            '== s4 exit: 1 (the chain could not be measured; a low score would '
+            'A reader that read nothing misses the whole ground truth, and'
+        11  code/branching_audit_a218/out_c2_vertexsets.txt
+            "'# irreducibles at n = 1...6'; mg-13b2 replaced it with the set.)"
+            'Form found: %s.  (The audit found a COUNT, headed'
+         8  code/branching_audit_a218/out_c1_branching.txt
+            'FINDINGS: %d, population: the %d vertex cells (read as %s), %d ver'
+            'I cannot read a vertex cell for beta=%d n=%d out of the target in '
+         8  code/sibling_sweep_7085/out_r1_sweep_FIRSTRUN_2FAIL.txt
+            '(files this ticket touched, per git diff:'
+            ': UNMODIFIED by this ticket (per git diff) and its ENTIRE stdout i'
+         2  code/alias_agreement_06d1/out_x0_exhibit.txt
+            'self_red_sweep_502f'
+            'x0_exhibit.py'
+         2  code/control_audit_9876/out_a3_auditor_selftest.txt
+            'emit("  PASS  a seventh check nobody registered")'
+            'emit("=" * 86)'
+         2  code/control_audit_9876/out_a3_auditor_selftest_PREREPAIR.txt
+            'emit("  PASS  a seventh check nobody registered")'
+            'emit("=" * 86)'
+         1  code/branching_audit_e34a/out_k2_five.txt
+            'PRE_7E58_REV'
+         1  code/species_extent_d633/out_e3_bothways.txt
+            '%r does not appear in %s'
+
+------------------------------------------------------------------------------
+5  THIS DIRECTORY'S OWN, RE-TAKEN BY HAND AND NOT REFRESHED
+------------------------------------------------------------------------------
+
+  Three transcripts, three DIFFERENT reasons, and not one of them is
+  `nobody got round to it`.  Each was re-taken by hand during
+  mg-6b2d on a dirty tree, which is a state no build path may be in,
+  so these are DATED MEASUREMENTS this file cannot recompute --
+  out_ground_truth.txt's arrangement and the same declared blind
+  spot.  The table above REFUSES if it stops naming exactly these.
+
+      code/asof_census_20ee/out_pinnable_3b51.txt
+          CANNOT BE RE-TAKEN AT ALL
+              `sh code/landscape_repair_audit_3b51/run_all.sh` ran to exit 0 in
+              63 s and left `git status` EMPTY, so pinnable.py refused with `is
+              EMPTY, and this instrument classifies a drift it is given rather
+              than one it produces` (exit 1). The subject stopped drifting
+              because THE PIN TRANCHE 4 LANDED ON IT WORKED. The instrument's
+              own recommendation destroyed its subject, so this transcript is
+              not stale-and-refreshable, it is a record of a state the
+              repository no longer has.
+
+      code/asof_census_20ee/out_pinnable_a4ef.txt
+          RE-TAKEABLE, AND THE INPUT IS NOT REPO STATE
+              The a4ef suite's whole drift is `__pycache__` residue -- files git
+              is configured never to track, which R1 exists to name. MEASURED BY
+              CONSTRUCTION rather than argued: on a clean checkout its s1_extent
+              transcript declines 6 entries, and creating THREE EMPTY
+              DIRECTORIES by hand (`code/species_7d75/__pycache__`,
+              `code/species_repair_6f61/__pycache__`,
+              `code/species_remainder_f8fa/__pycache__`) makes it BYTE-IDENTICAL
+              to the committed one at 9. So this suite has NO repository-caused
+              drift at AS_OF, and re-taking the page would publish one
+              operator's execution history in place of another's.
+
+      code/asof_census_20ee/out_pinnable_b0ae.txt
+          RE-TAKEABLE, INPUT IS REPO STATE, AND STILL DECLINED
+              `bash code/state_relocation_audit_b0ae/run_all.sh` ran to exit 0
+              in 25 s and moved out_b8_findability.txt, whose B8.2 is `about the
+              repo as it stands` BY DECLARATION -- so this is the one of the
+              three whose drift really is repo state. Its value is a function of
+              HEAD, and HEAD moves under the refinery's rebase AFTER the last
+              moment anything on this branch can run. Committing it would be
+              mg-ede8's `stale at its own commit` mechanism, chosen
+              deliberately, in the directory that measures it.
+
+  AND ALL THREE AGREE ON ONE THING.  Every committed pinnable
+  transcript in this directory describes a TWO-RULE instrument.
+  pinnable.py has had THREE since tranche 6, and both re-takes that
+  COULD be taken print a whole `R3 UNORDERED WALKS` section no
+  committed transcript contains -- 26 diff lines each, measured.
+  Section 4's witness sees that from the SOURCE ALONE, and those two
+  files are the ground truth it was checked against.
+
+------------------------------------------------------------------------------
+6  WHAT THIS RULE CANNOT DO
+------------------------------------------------------------------------------
+
+  1.  NOT OVERTAKEN PROVES NOTHING.  A transcript goes stale when
+      its CORPUS moves and its producer does not, which is how
+      out_consumers.txt shipped stale at its own commit in 5 of 8
+      versions.  This rule is blind to every one of those.  N34.
+
+  2.  OVERTAKEN IS NOT `WRONG`.  The producer's code moved; whether
+      it reaches the printed figure is a question about the figure,
+      and section 4 is a witness rather than an answer.
+
+  3.  THE PAIRING IS A CONVENTION.  240 transcript(s) are outside it
+      even after the widening, and they are counted rather than
+      dropped -- a census that reports a number because it never
+      looked is this directory's oldest named defect.
+
+  4.  OVERTAKEN DOES NOT MEAN RE-TAKEABLE.  Section 5's first row is
+      a transcript with a positive witness that CANNOT be re-taken
+      at any revision, because the pin it recommended landed and its
+      subject stopped drifting.  A rule that reported it as work to
+      do would be sending its reader to a run that refuses.
+
+  5.  THIS FILE IS OUTSIDE ITS OWN POPULATION, BY ARITHMETIC AND NOT
+      BY RULE.  AS_OF is older than overtaken.py, so out_overtaken.txt
+      is not tracked at the commit it reports on and cannot appear in
+      the 883.  Graded by hand it is NOT OVERTAKEN and cannot become
+      so: it is in run_all.sh, which is the whole difference between
+      this page and the three in section 5.
+
+  6.  ITS OWN WITNESS IS A WHOLE-OUTPUT MEMBERSHIP TEST, which is
+      mg-9876 section 1's smell, found with a4_sweep.py's OWN
+      detector over this file rather than by eye: `if v not in text`
+      in grade().  IT IS KEPT, and the reason is not that it is
+      harmless -- a literal that appears anywhere in the transcript
+      for an unrelated reason suppresses a real witness.  There is no
+      line-structured alternative that is correct, because a literal
+      is printed INSIDE a longer line; the error direction is the one
+      already declared above (the witness UNDER-states); and renaming
+      the variable to miss the detector while keeping the semantics
+      is exactly what a census that gates teaches its subjects to do.
+
+==============================================================================
+OVERTAKEN: 30 of 883 paired transcript(s) at AS_OF 637b046 -- 24 LIVE (21 CODE, 3 PROSE-ONLY) and 6 ARCHIVAL BY DESIGN.
