@@ -32,29 +32,12 @@ mg-f771  THE GATE'S OWN FIXED POINT — can a committed transcript disagree with
   HOW FAR EACH HAS DRIFTED IS ON STDERR, for the reason the paragraph above gives:
   it moves with every landing and this file must not.  lib_f771.CORPUS_SCOPED.
 
-§2  THE DISAGREEMENTS, SHOWN
+§2  NO DISAGREEMENTS
 --------------------------------------------------------------------------------------------
-  Lines quoted after normalisation, so that this transcript cannot itself
-  smuggle a worktree path into the corpus.
-  `-` is the committed copy, `+` is this tree.
+  Every watched transcript that moved during this gate run moved only in the
+  declared families that are not a function of THIS BRANCH's repo state: the two
+  normaliser families, or a corpus-scoped reading whose pin moved and whose drift
+  is inside the bound.  No committed transcript asserts anything this tree
+  contradicts that this branch is the author of.
 
-  DISAGREES code/asof_census_20ee/out_consumers.txt
-    @@ -30 +30 @@
-    - basename is shared -- run_all.sh (202 files)
-    + basename is shared -- run_all.sh (203 files)
-
-  DISAGREES code/asof_census_20ee/out_selftest_20ee.txt
-    @@ -229,0 +230,23 @@
-    + CONTROLS ON semantic.py — IS THE LIMIT A DATE QUESTION (mg-5058)
-    + ------------------------------------------------------------------------------
-    + 
-    + mg-0bf1 closed by asking whether any REMAINING `read what the
-    + sentence says` rule in this estate is likewise a date question.  The
-    + answer is worth nothing without both directions: a file that
-    + returned COLLIDES on every row would be indistinguishable from one
-    ... 27 further hunk line(s) not shown
-
-  THE REPAIR IS TO COMMIT THE REGENERATED FILES.  They are already in the
-  worktree; `./build.sh` wrote them.  This arm is not asking for a rerun.
-
-VERDICT: RED — 2 committed transcript(s) disagree with this tree.  0.17s
+VERDICT: GREEN — 0 disagreements.  0.14s
