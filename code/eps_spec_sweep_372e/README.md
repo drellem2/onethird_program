@@ -255,6 +255,20 @@ instruments tranche 1 pinned to byte-identity are each `os.walk` + `sorted(out)`
 few lines below, which is the shape the guard was written for and is genuinely
 ordered.
 
+### `pinnable.py` now REFUSES on this directory, and that is the pin working
+
+Condition 0 is a **diff reader**. Run it here after the pin and it answers
+
+> `REFUSED — the worktree diff for this subject is empty.` … *"a suite that
+> reproduces and a suite you forgot to run look the same from here"*
+
+which is `mg-54b1`'s *"NOTHING CHANGED is not IT REPRODUCED"* arriving as a
+consequence rather than as a warning: a pinned instrument is **outside the reach of
+the pre-condition that screened it**, by construction. Nothing is broken; that
+refusal is the correct answer and the evidence is a clean `git status` after
+`sh run_all.sh`. The condition-0 reading quoted above was taken **before** the pin
+landed, when there was still a diff to read.
+
 ### What this pin does NOT establish
 
 * It does not re-take the classification. `s2`'s `LEDGER` and `ALLOWLIST` are the
