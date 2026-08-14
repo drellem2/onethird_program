@@ -1891,3 +1891,129 @@ the refinery's rebase happening after the last moment anything on the branch can
 `out_census.txt`, `out_permuted.txt`, `out_worklist.txt`, `out_exemplars.txt`, `out_liveindex.txt`
 and `out_pathlist.txt` do **not** move, checked against the dirty worktree rather than assumed,
 because all of them are pinned.
+
+---
+
+# Tranche 14 (`mg-528e`) — the residue is pinned, and the pre-condition that cleared it was wrong about it
+
+Tranche 13 subtracted four rows from the work-list's residue and left **one**:
+`code/eps_spec_sweep_372e`, the row with no foreign corpus root, on which
+`pinnable.py` fires nothing and `R4` is silent. **Conditions 1–3 are paid on it
+here**, which is the first time this arc has closed a residue to zero rather than
+reporting one — and working it produced a defect in the instrument that had
+screened it, which is the same shape tranche 13's own §1 has.
+
+## 1. The pin, and the residue is TWELVE FILES
+
+`AS_OF = dafe759` — `mg-372e`'s own landing, an ancestor of `origin/main`
+(condition 1), and the commit that carries all three scripts and all three
+transcripts. **Not its parent**, which is worth saying because AS_OF rule 2 says
+otherwise for the general case: this sweep **edits the documents it sweeps**, so the
+state it read is the post-edit one.
+
+**Condition 2, scored by `permuted.py --declare` against declarations committed
+BEFORE the transcripts were regenerated:** `PERMUTATION + DECLARED RESIDUE` on all
+three, **0 undeclared** on each. `out_s2_classify.txt` and `out_s3_control.txt`
+permute by **0** and their entire residue is the **six-line `AS_OF` block** — the
+cleanest condition 2 has come back on this arc, and both were **byte-identical** at
+`AS_OF` before the header existed.
+
+**And `s1`'s census reproduced FILE FOR FILE, 50 of 50.** Every file the committed
+transcript lists carries exactly its committed count at `AS_OF`. The whole
+`288 → 406` gap is **twelve files that were not in the tree the sweep read**:
+eleven are `mg-eaa1`'s landing (117 hits) which landed **three commits earlier**
+while `mg-372e`'s branch was open and which the refinery's rebase put underneath;
+the twelfth is `out_s1_census.txt` itself, **the census counting its own
+not-yet-written transcript** — tranche 1's third defect, still live in a row four
+tranches of prefiltering had left standing.
+
+So `mg-188d`'s *"the population is the whole repository"* is confirmed **and
+sharpened**: at HEAD the drift is 87 files and unbounded, at the carrying commit it
+is twelve and eleven of them are one other ticket's landing.
+
+**Condition 3:** `0 CONFIRMED, 1 UNCONFIRMED` — `code/rendered_twin_pin_9bc2`, which
+names those scripts in a **docstring** and does not run them. The census's own
+backstop was run rather than reasoned about: `9bc2`'s suite across this change
+leaves its committed transcripts **byte-identical**.
+
+**And condition 3 missed a real consumer, in a shape `consumers.py` has no rule
+for.** `code/rate_sweep_910c/out_mg372e_rerun.txt` is a **committed copy of `s1`'s
+page**, taken by hand at `mg-910c`'s own time and reading `423` — a *third* dated
+value beside the committed `288` and the pinned `406`. No script in `910c` produces
+it (`run_all.sh` there runs `r1`/`r2`/`r3` and nothing else), so there is no
+execution to find and no filename to grep: **it is a consumer by COPY.** That is
+`consumers.py`'s section D limit in a new shape, and it runs in the *unsafe*
+direction for a reader, because the copy carries no `AS_OF` and nothing will ever
+re-take it. **Reported, not repaired** — the file is `mg-910c`'s.
+
+## 2. `N36` — `R3` printed `none` about a walk that really is unordered
+
+`pinnable.py` cleared this row with *"every corpus read this rule can see is either
+an ordered read of a commit or sorted by the subject itself."* **It was wrong**, and
+the transcript the instrument produced proves it: the committed `COLLISION` list is
+in **directory-enumeration order**, and the pinned read permutes 11 of 85 core
+positions.
+
+`R3` finds the `os.walk`; the `ORDERED` guard suppresses it because
+`sorted(filenames)` is in the enclosing block. That sorts files **within** a
+directory and says nothing about the order the **directories** are visited in.
+Amputate `ORDERED` and the rule finds it at once — which is `N36`'s second element
+rather than an assertion.
+
+**The direction is the unsafe one**, and that is why it is `N` and not a repair:
+`R3`'s misses read to their reader as *nothing to declare*, so a transcript with no
+fixed point looks pinnable. **Not repaired here** — widening `ORDERED` is a rule
+change whose false-positive direction nobody has measured, and the two instruments
+tranche 1 pinned to byte-identity are each `os.walk` + `sorted(out)` a few lines
+below, which is exactly the shape the guard was written for.
+
+## 3. A pin can delete the question a section asks, and this one nearly did
+
+`s2` and `s3` are **checks**, not censuses. Pinning their corpus freezes their
+verdict at `AS_OF`, so a `~~` deleted from a repaired document tomorrow would stop
+being caught — `pinnable.py`'s own `state_relocation_audit_b0ae` finding arriving
+inside a pin this arc chose to land. **Paid rather than glossed**: the pinned reading
+is on **stdout** (the committed transcript) and the same check re-run against the
+**working tree** is on **stderr** and in the **exit code** (`mg-724a`'s
+recorded/gated split, `liveindex.py`'s and `foreign.py`'s arrangement).
+
+That made the exit code load-bearing, which forced a repair `mg-188d` had recorded
+and left: `run_all.sh` piped every script through **`tee`**, whose exit status is
+`tee`'s, so every alarm was swallowed by the runner. It writes-then-moves now.
+**Two things retire with it** — the README's *"do NOT use `sh run_all.sh` to look,
+it destroys the dated readings"* warning (a successful run is byte-identical and
+leaves `git status` clean), and its *"WHAT WOULD CHANGE THIS"* hand instruction,
+which now runs on every invocation.
+
+## 4. What this tranche does not do
+
+- **The four foreign rows are still not pinned against their foreign revisions.**
+  Unchanged from tranche 13, and still a decision rather than a task: it needs a
+  second repository, which is a second work item and not a polecat's to reach into.
+- **`anchor_drift_96df` is still unowned and its alarm still rings.**
+- **`N34`'s estate-wide population is still unmeasured** — nothing scans `code/` for
+  foreign roots outside the 44 work-list rows.
+- **`out_pinnable_*.txt` are still dated hand-runs no suite re-takes**, but the
+  complaint is now answered for one more class: `P56` re-takes **this pin's own
+  condition 2** on the build path, with the shipped declarations, at every gate.
+- `consumers.py` is still unpinned and its index/HEAD mixture unrepaired.
+
+## 5. The one census figure this branch really moves, and the residue it leaves
+
+`| tee` sites: **30 → 27** in **11 → 10** directories, and all three removed lines
+are this branch's own — `code/eps_spec_sweep_372e/run_all.sh:5`, `:6` and `:7`,
+read off the sweep's diff rather than assumed. `out_gate.txt` carries the new
+`audit.sweep_tee_sites observed=27` and is committed on `g0`'s own `DISAGREES`
+grading; its wall-clock half (`48.0s → 106.8s`) is a reading of a **loaded box**
+and is not a claim about anything.
+
+**`out_a4_sweep.txt` is RESTORED and not committed, and that leaves a residue that
+is said out loud rather than left to be found.** `g0` grades it `CORPUS` — its pin
+moved `dca19cc6a31f → 338f086294f9` and its population `232 → 239`, which is main's
+drift and not this branch's — and its standing instruction is *"restore it rather
+than committing it; the refresh is owed by whoever trips the bound."* Instruction
+followed. **The cost:** a4's committed transcript goes on listing three `| tee`
+sites at lines that no longer contain one, which is `mg-23af`'s dead-pointer shape
+in a transcript. Committing it instead would bank main's `232 → 239` inside a
+pinning commit, which is the error the rule exists to prevent. The smaller wrong
+was chosen; whoever trips a4's bound clears both in one run.

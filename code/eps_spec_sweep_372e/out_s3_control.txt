@@ -1,6 +1,12 @@
 mg-372e NEGATIVE CONTROL — does the s2 detector fire when the repair is undone?
 ==============================================================================
 
+-- corpus, PINNED (mg-528e) --
+   AS_OF : dafe759  -- an ancestor of origin/main (condition 1)
+   read  : git ls-tree -r --full-tree + git cat-file, an ordered read
+           of ONE COMMIT.  The working tree is not read for this
+           transcript; the live re-check is on stderr.
+
 M0  strip only the `~~` glyphs from mg-6bc2 (PRE-DECLARED: NO FIRE)
     unmutated: 0   mutated: 0   -> DID NOT FIRE   (pre-declared NO FIRE: ok)
 

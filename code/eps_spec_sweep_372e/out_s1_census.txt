@@ -1,20 +1,28 @@
 mg-372e CENSUS — occurrences of the refuted per-slot constant, by spelling
 ==============================================================================
 
+-- corpus, PINNED (mg-528e) --
+   AS_OF : dafe759  -- an ancestor of origin/main (condition 1)
+   read  : git ls-tree -r --full-tree + git cat-file, an ordered read
+           of ONE COMMIT.  The working tree is not read for this
+           transcript; the live re-check is on stderr.
+
 What this is a count of: TEXTUAL OCCURRENCES of one of six spellings,
 one row per (file, line, form).  A line matching two forms counts twice,
 once per form.  It is NOT a count of defects.
 
 -- by spelling --
-   EPS     136
-   EINV    142
+   EPS     164
+   EINV    231
    DQ        4
-   PROSE     6
-   TOTAL   288
+   PROSE     7
+   TOTAL   406
 
 -- flagged COLLISION (different quantity, same expression): 16 --
    STATE.md:167  [EPS]
    STATE.md:167  [EINV]
+   code/counterexample_audit_a7b4/check_spectral.py:378  [EINV]
+   code/counterexample_audit_a7b4/out_spectral.txt:110  [EINV]
    code/counterexample_probe_24a3/probe.py:1465  [EINV]
    code/counterexample_probe_24a3/probe_output.txt:997  [EINV]
    code/eps_spec_sweep_372e/README.md:44  [EPS]
@@ -24,8 +32,6 @@ once per form.  It is NOT a count of defects.
    code/eps_spec_sweep_372e/s1_census.py:17  [EPS]
    code/eps_spec_sweep_372e/s2_classify.py:59  [EPS]
    code/eps_spec_sweep_372e/s2_classify.py:63  [EINV]
-   code/counterexample_audit_a7b4/check_spectral.py:378  [EINV]
-   code/counterexample_audit_a7b4/out_spectral.txt:110  [EINV]
    docs/OneThird-Counterexample-Under-The-Action.md:624  [EINV]
    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:268  [EPS]
    docs/state-history/attempt-mg-88bd.md:64  [EPS]
@@ -35,6 +41,7 @@ once per form.  It is NOT a count of defects.
       2  docs/OneThird-C3-PrefixCapture-mg-76b2.md   (EPS)
      10  docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md   (EPS)
       1  docs/OneThird-Counterexample-Under-The-Action.md   (EINV)
+     12  docs/OneThird-DualCertificate-Audit-mg-eaa1.md   (EINV+EPS)
      13  docs/OneThird-DualCertificate-mg-131e.md   (EINV+EPS)
      10  docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md   (EPS)
      30  docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md   (DQ+EINV+EPS)
@@ -64,7 +71,18 @@ once per form.  It is NOT a count of defects.
      14  code/dual_certificate_131e/out_d3_refutation.txt   (EINV+EPS)
       5  code/dual_certificate_131e/out_selftest131e.txt   (EINV)
       1  code/dual_certificate_131e/selftest131e.py   (EINV)
+      3  code/dual_certificate_audit_eaa1/OUTCOMES.md   (EINV+EPS)
+     12  code/dual_certificate_audit_eaa1/PREDICTIONS.md   (EINV+EPS)
+      1  code/dual_certificate_audit_eaa1/README.md   (EINV)
+      5  code/dual_certificate_audit_eaa1/a1_program.py   (EINV+EPS)
+      2  code/dual_certificate_audit_eaa1/a2_certificates.py   (EINV)
+      8  code/dual_certificate_audit_eaa1/a3_n6.py   (EINV+EPS)
+     19  code/dual_certificate_audit_eaa1/out_a1_program.txt   (EINV+EPS)
+      3  code/dual_certificate_audit_eaa1/out_a2_certificates.txt   (EINV)
+     26  code/dual_certificate_audit_eaa1/out_a3_n6.txt   (EINV+EPS)
+     26  code/dual_certificate_audit_eaa1/out_a3_n6_deep.txt   (EINV+EPS)
      11  code/eps_spec_sweep_372e/README.md   (DQ+EINV+EPS+PROSE)
+      1  code/eps_spec_sweep_372e/out_s1_census.txt   (PROSE)
       2  code/eps_spec_sweep_372e/out_s2_classify.txt   (EINV+EPS)
       6  code/eps_spec_sweep_372e/out_s3_control.txt   (EPS)
       9  code/eps_spec_sweep_372e/s1_census.py   (DQ+EINV+EPS+PROSE)
@@ -82,9 +100,9 @@ once per form.  It is NOT a count of defects.
       2  code/state_audit_2eed/out_a1_n6_witness.txt   (EINV+EPS)
       5  code/state_audit_2eed/out_a2_fence.txt   (EINV)
 
-files carrying at least one spelling: 50
-  of which docs/: 9
-  of which code/: 40
+files carrying at least one spelling: 62
+  of which docs/: 10
+  of which code/: 51
 
 -- the HTML twin, checked by name --
    docs/state-of-the-wall.html: 0 occurrences of any swept spelling

@@ -7,6 +7,7 @@ so there is no independent audit and the reportable count is the control instead
 
 | script | what it does |
 |---|---|
+| `lib372e.py` | the corpus, read at **one commit** (`AS_OF = dafe759`). Added by `mg-528e`; see the pin section at the foot of this file |
 | `s1_census.py` | sweeps **six spellings** across the whole repo and prints the distribution by spelling and by file. Names what the count is a count of. |
 | `s2_classify.py` | carries the hand classification of every `docs/` occurrence and **checks** that in the two repaired documents every occurrence is either marked with the refutation or on an explicit leave-alone allowlist. Exits non-zero if not. |
 | `s3_control.py` | mutates the repaired documents **in memory** and asserts the `s2` detector fires. Nothing on disk is touched. |
@@ -82,6 +83,16 @@ and pre-registration artefacts (`mg-ba78` set the precedent of leaving `PREDICTI
 byte-identical), and they are counted but deliberately not repaired. And a classification is a
 **judgement**: `s2` checks that each site is marked or allowlisted, not that the class is right.
 
+## ⛔ ~~THE COMMITTED `out_s*.txt` ARE STALE AT HEAD, AND THEY ARE DELIBERATELY NOT REGENERATED~~ — SUPERSEDED BY THE PIN (`mg-528e`, `2026-08-14`)
+
+**The section below is kept whole and is not retracted.** Its three reasons were
+arguments against a *bare refresh* and every one of them still holds against one.
+`mg-528e` did not refresh; it **pinned**, and a pin is a different act — see
+*"THE PIN"* at the foot of this file for what changed, what it cost and what it
+did not answer. In one line: reason 3 asked that the only **dated** reading not be
+overwritten by an undated one, and the reading is now dated *in the transcript*,
+to `dafe759` — the very commit the hand classification was made at.
+
 ## ⛔ THE COMMITTED `out_s*.txt` ARE STALE AT HEAD, AND THEY ARE DELIBERATELY NOT REGENERATED (`mg-188d`, `2026-08-10`)
 
 `mg-2f44` measured that the staleness is not its doing — a run with its two files reverted
@@ -144,3 +155,112 @@ non-zero script stops the run, so the staleness verdict above does not depend on
 that adding it changes neither the census it reports on nor `s2`'s classification — a note about
 a stale count that moved the count would be this file's own subject wearing a footnote. Verified:
 `README.md`'s own form-hits are unchanged by this edit.
+
+## THE PIN (`mg-528e`, `2026-08-14`) — `AS_OF = dafe759`, and the residue is TWELVE FILES
+
+`mg-20ee`'s arc worked its way down a 44-row work-list for thirteen tranches. This
+directory is what was left: **the residue was one row and it was this one.**
+`pinnable.py` fires no pre-condition on it (condition 0: `NO PRE-CONDITION FIRED
+— proceed to conditions 1-3`) and `foreign.py`'s `R4` is silent — it reads no
+corpus outside this repository, which is what took the other four residue rows off
+the list. So conditions 1–3 were owed and had never been paid. They are paid here.
+
+**Condition 1.** `git merge-base --is-ancestor dafe759 origin/main` → **YES**.
+`dafe759` is `mg-372e`'s own landing, the commit that carries all three scripts and
+all three transcripts. *Not* its parent, which is the arc's other AS_OF rule: this
+sweep **edited the documents it sweeps**, so the corpus it read is the post-edit
+one and that is this commit's tree.
+
+**Condition 2**, scored by `permuted.py --declare` against declarations written and
+**committed before** the transcripts were regenerated (a declaration read off the
+diff excuses that diff entirely):
+
+| transcript | verdict | permutation | exclusive lines | undeclared |
+|---|---|---|---|---|
+| `out_s1_census.txt` | PERMUTATION + DECLARED RESIDUE | 11 of 85 | 32 | **0** |
+| `out_s2_classify.txt` | PERMUTATION + DECLARED RESIDUE | 0 of 30 | 6 | **0** |
+| `out_s3_control.txt` | PERMUTATION + DECLARED RESIDUE | 0 of 25 | 6 | **0** |
+
+`s2` and `s3`'s whole residue is the **six-line `AS_OF` block** — pure header, which
+is the cleanest form condition 2 has come back in on this arc. Both were **byte-identical**
+at `dafe759` before the header was added, measured by extracting that tree and running
+the pre-pin scripts in it.
+
+**THE CENSUS REPRODUCED FILE FOR FILE, 50 OF 50.** Every one of the 50 files the
+committed transcript lists carries **exactly** its committed count at `dafe759`.
+The entire `288 → 406` difference is **twelve files that were not in the tree the
+sweep actually read**, and both reasons are structural rather than mysterious:
+
+* **eleven of them are `mg-eaa1`'s landing** (`code/dual_certificate_audit_eaa1/`
+  and `docs/OneThird-DualCertificate-Audit-mg-eaa1.md`, 117 hits), which landed at
+  `35edad7` — *three commits before* `dafe759` — while `mg-372e`'s branch was open.
+  The refinery's rebase put it underneath. This is the staleness mechanism the
+  `mg-ede8` arc names, arriving from the other side: the transcript was correct
+  about the tree its author had and was already stale at its own commit.
+* **the twelfth is `out_s1_census.txt` itself** (1 hit, `PROSE`). The census counted
+  its own **not-yet-written** transcript — which is tranche 1's third defect
+  (`a2` counting its own transcript, `483/22`), and it is why a pinned reading is
+  stable where a live one is not: at `dafe759` that file is frozen.
+
+So `mg-188d`'s *"the sweep's population is the whole repository, and `STATE.md` is
+0.24% of the drift"* is confirmed and sharpened. At **HEAD** the drift is 87 files
+and unbounded; at the **carrying commit** it is twelve, and eleven of those are one
+other ticket's landing. The count did not drift because the sweep was careless; it
+drifted because it was a function of *when you ran it*, and it is not any more.
+
+**Condition 3.** `consumers.py code/eps_spec_sweep_372e` → `0 CONFIRMED, 1
+UNCONFIRMED`: `code/rendered_twin_pin_9bc2`, which names these scripts in a
+**docstring** (*"the three scripts that mention it by name"*) and does not run them.
+The census's own backstop was run rather than reasoned about — `9bc2`'s suite
+re-taken across this change leaves its committed transcripts **byte-identical**.
+
+### What the pin cost, and it is paid rather than glossed
+
+`s2` and `s3` are not censuses, they are **checks**, and a check pinned to a commit
+stops being a check on the repository you have — `pinnable.py`'s own
+`state_relocation_audit_b0ae` lesson, *"a pin there would not repair the section; it
+would DELETE THE QUESTION THE SECTION ASKS."* So both keep their live half:
+
+* **stdout** is the pinned reading and is the committed transcript;
+* **stderr** re-runs the same check against the **working tree**, and the **exit
+  code** carries it. Delete a `~~` in either repaired document today and
+  `run_all.sh` still exits non-zero.
+
+That is `mg-724a`'s recorded/gated split. It is also why `run_all.sh` no longer
+pipes through `tee`: a pipeline's exit status is `tee`'s, so the alarm would be
+swallowed by the runner — the defect `mg-188d` recorded in this file and left, made
+load-bearing by this change and therefore repaired by it. **The section above's
+"WHAT WOULD CHANGE THIS" instruction now runs on every invocation** instead of
+being a thing a reader was asked to do by hand, and the warning beside it retires:
+a successful `sh run_all.sh` is byte-identical and leaves `git status` clean.
+
+### The pin found a defect in the pre-condition that screened it — `N36`
+
+`pinnable.py`'s `R3` printed **`none`** for this directory: *"every corpus read this
+rule can see is either an ordered read of a commit or sorted by the subject
+itself."* It is wrong here, and the transcript this instrument produced proves it —
+the committed `COLLISION` list is in **directory-enumeration order**, and re-reading
+the same corpus through a sorted read permutes 11 of 85 core positions.
+
+The mechanism: `R3` finds the `os.walk` and its `ORDERED` guard suppresses it,
+because `sorted(filenames)` sits in the enclosing block. That call orders the files
+**within** a directory and says nothing whatever about the order the **directories**
+are visited in. Amputate `ORDERED` and `R3` finds the walk immediately.
+
+The direction is the **unsafe** one, which is why it is `N36` and not a repair:
+`R3`'s misses read to their reader as *nothing to declare*, so a transcript with no
+fixed point looks pinnable. It is **asserted, not repaired** — widening `ORDERED` is
+a rule change whose false-positive direction nobody has measured, and the two
+instruments tranche 1 pinned to byte-identity are each `os.walk` + `sorted(out)` a
+few lines below, which is the shape the guard was written for and is genuinely
+ordered.
+
+### What this pin does NOT establish
+
+* It does not re-take the classification. `s2`'s `LEDGER` and `ALLOWLIST` are the
+  same hand judgements; the pin froze the corpus, not the judgement.
+* The `⛔` section above it — *"one allowlist entry is now wrong"* — is **unchanged
+  and still owed** to whoever owns `mg-200d`'s headline.
+* It says nothing about `STATE.md`'s growth, the ratchet, or any other directory.
+* `AS_OF` will need advancing the day somebody wants these counts to be about a
+  newer tree. That is a decision with a price, and the price is this table.

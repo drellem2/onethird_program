@@ -1,6 +1,12 @@
 mg-372e CLASSIFICATION — every occurrence in docs/, with its class
 ==============================================================================
 
+-- corpus, PINNED (mg-528e) --
+   AS_OF : dafe759  -- an ancestor of origin/main (condition 1)
+   read  : git ls-tree -r --full-tree + git cat-file, an ordered read
+           of ONE COMMIT.  The working tree is not read for this
+           transcript; the live re-check is on stderr.
+
 [REPAIRED ] docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md
              10 lines / 10 form-hits — 5 LIVE struck in place + 1 left (`:320`, scoped to n=3,4,5 and TRUE)
              allowlist: 3 site(s) left deliberately, true as written

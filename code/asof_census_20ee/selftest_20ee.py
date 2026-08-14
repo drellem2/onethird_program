@@ -121,8 +121,29 @@ RAN = []
 # and a number in this directory is NEVER REISSUED (that is what BURNED is for
 # and P25 enforces it).  So figures.py's six became P51, P52, P53, P54, P55 and
 # N35, in that order, and not one word of the argument moved.
+# N36 JOINS AT mg-528e AND NOTHING LEAVES, so this tuple GROWS AGAIN.  It is a
+# defect in the PRE-CONDITION rather than in a rule this directory publishes a
+# count from: R3's ORDERED suppressor reads `sorted(...)` anywhere in the walk's
+# enclosing block, and `sorted(filenames)` inside an `os.walk` orders the files
+# WITHIN a directory while saying nothing about the order the DIRECTORIES are
+# visited in.  So pinnable.py printed `R3 none` about code/eps_spec_sweep_372e
+# and the transcript that instrument produced carries directory-enumeration
+# order on its face.  Found by WORKING the row, not by reading the rule, and
+# asserted rather than repaired: widening ORDERED is a change whose
+# false-positive direction nobody has measured, and the two instruments tranche
+# 1 pinned to byte-identity are both `os.walk` + `sorted(out)` seven lines below,
+# which is the shape the guard was written for and is genuinely ordered.
+#
+# ISSUED AS N35 ON THE BRANCH AND RENUMBERED ON LANDING, which is the FOURTH
+# collision in this namespace in four landings and is a fact about the
+# namespace rather than about any branch: mg-6219's figures.py landed P51-P55
+# and N35 while this branch sat in the merge queue.  This branch's P51, P52,
+# P53 and N35 became P56, P57, P58 and N36, in that order, and NOT ONE WORD OF
+# THE ARGUMENT MOVED.  A number in this directory is never reissued (that is
+# what BURNED is for and P25 enforces it), and the map is here so a reader
+# holding the pre-rebase commit message can follow it.
 KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30", "N31",
-                "N32", "N33", "N34", "N35")
+                "N32", "N33", "N34", "N35", "N36")
 
 
 def check(name, got, want, why):
@@ -1832,8 +1853,172 @@ check("N35 a global filled inside a function is invisible outside it — and "
       "as the part liveindex.py's method actually reaches. Turning either row "
       "green would mean the rule had stopped being pathlist.py's.")
 
-print()
+# ------------------------------------------------------------------------
+# mg-528e -- THE RESIDUE ROW, PINNED.  `code/eps_spec_sweep_372e` is what four
+# tranches of prefiltering left standing: condition 0 fires nothing on it and R4
+# is silent, so conditions 1-3 were owed and had never been paid.  These four
+# arms are the pin's own acceptance, on the build path rather than in a dated
+# hand-run -- which is the complaint out_pinnable_*.txt has been carrying since
+# tranche 7, answered here for one more instrument.
+#
+# THE COUPLING IS DECLARED: this section imports another directory's modules, so
+# an edit over there turns this suite red.  That is the intended direction -- the
+# pin is only worth its acceptance -- and it is the same cross-directory read
+# mg-bdc0 measured on a1_controls.py rather than a new practice.
+import subprocess  # noqa: E402
 
+_S372 = os.path.join(ROOT, "code", "eps_spec_sweep_372e")
+sys.path.insert(0, _S372)
+import lib372e  # noqa: E402
+import s2_classify as _s2  # noqa: E402
+import s3_control as _s3  # noqa: E402
+
+# CONDITION 2, RE-TAKEN BY THE COMPARATOR AND NOT BY EYE.  For each of the three
+# transcripts: the committed version AT dafe759 against the one in the tree, with
+# the declaration file the pin shipped.  `bad` must be empty -- every exclusive
+# line accounted for by a line the operator wrote down BEFORE regenerating.
+_c2 = {}
+for _t, _d in (("out_s1_census.txt", "declare_372e_s1.txt"),
+               ("out_s2_classify.txt", "declare_372e_s2.txt"),
+               ("out_s3_control.txt", "declare_372e_s3.txt")):
+    _rel = "code/eps_spec_sweep_372e/" + _t
+    _r = permuted.compare(permuted.read_rev(lib372e.AS_OF, _rel),
+                          permuted.read_worktree(_rel))
+    with open(os.path.join(_S372, _d), encoding="utf-8") as _fh:
+        _decl = _fh.read().splitlines()
+    _ok, _bad = permuted.declared(_r["only_old"] + _r["only_new"], _decl)
+    _c2[_t] = (sum(_bad.values()), _r["bag"], _r["moved"])
+
+check("P56 the residue row's condition 2 scores, and the declaration covers it",
+      (_c2["out_s1_census.txt"][0], _c2["out_s2_classify.txt"][0],
+       _c2["out_s3_control.txt"][0],
+       _c2["out_s1_census.txt"][2] > 0,
+       _c2["out_s2_classify.txt"][2], _c2["out_s3_control.txt"][2]),
+      (0, 0, 0, True, 0, 0),
+      "CONDITION 2 FOR THE ONE ROW FOUR TRANCHES LEFT STANDING, scored by "
+      "permuted.py against the declarations the pin shipped — which were "
+      "WRITTEN AND COMMITTED BEFORE the transcripts were regenerated, because a "
+      "declaration read off the diff excuses that diff entirely (permuted.py's "
+      "own provenance section). The first three elements are the load-bearing "
+      "ones: ZERO undeclared exclusive occurrences on each transcript. The "
+      "fourth is the half a byte comparison cannot state — s1's core really IS "
+      "permuted (11 of 85 positions), because `os.walk` emits "
+      "DIRECTORY-ENUMERATION order and git sorts, so this pin is mg-0e77's R3 "
+      "met on real data rather than planted. s2 and s3 permute by 0 and their "
+      "whole residue is the six-line AS_OF block, which is the cleanest form "
+      "condition 2 has ever come back in here.")
+
+# THE EXTRACTION IS A CLAIM (mg-1344's P5, and P45's shape one directory over).
+# s3 used to carry its own copy of s2's marked-or-allowlisted loop, so the
+# control proving the detector can fire proved it about a RE-STATEMENT of the
+# detector.  It calls s2_classify.unmarked now.  This arm re-spells the
+# PRE-EXTRACTION loop and requires the two to agree world for world.
+def _pre_extraction(rel, lines):
+    """s3's loop as it stood before mg-528e, character for character."""
+    blk = _s2.blocks(lines)
+    allow = _s2.ALLOWLIST.get(rel, [])
+    bad = []
+    for i, line in enumerate(lines, 1):
+        if not any(p.search(line) for _, p in _s2.ALL):
+            continue
+        if _s2.MARKED.search(blk.get(i, line)):
+            continue
+        if any(a in line for a in allow):
+            continue
+        bad.append((i, line.strip()[:80]))
+    return bad
+
+
+_ext_same, _ext_fired = [], []
+for _name, _rel, _mutate, _expect in _s3.MUTATIONS:
+    _base = _s3.load(_rel)
+    for _lines in (_base, _mutate(_base)):
+        _ext_same.append(_s3.check(_rel, _lines) == _pre_extraction(_rel, _lines))
+    _ext_fired.append(len(_s3.check(_rel, _mutate(_base)))
+                      > len(_s3.check(_rel, _base)))
+
+check("P57 s3's detector is s2's detector, and the extraction moved nothing",
+      (all(_ext_same), len(_ext_same), _ext_fired),
+      (True, 8, [False, True, True, True]),
+      "A PURE EXTRACTION IS A CLAIM AND THIS IS THE CLAIM. Before mg-528e, "
+      "s3_control.py carried its own copy of the marked-or-allowlisted loop "
+      "under a docstring saying it was s2's — so the negative control that "
+      "proves the detector CAN fire was proving it about a second spelling, and "
+      "the two could drift with no reader able to tell which was wrong. Both "
+      "spellings are run here over all four worlds in both their clean and "
+      "mutated states, 8 comparisons, and must agree exactly. The second half "
+      "is why agreement alone is not enough: the four outcomes must still be "
+      "M0-silent and M1/M2/M3-firing, since two identically BROKEN detectors "
+      "also agree on everything.")
+
+# THE READ IS ANCHORED AND FULL-TREE, AND THE AMPUTATION IS RUN (mg-68ef).
+# `run_all.sh` used to `cd` into that directory, and `git ls-tree -r` from a
+# subdirectory lists ONLY that subtree -- so the census would have measured
+# itself instead of the estate, silently, and returned a small clean number.
+_cwd = os.getcwd()
+try:
+    os.chdir(ROOT)
+    _from_root = lib372e.blobs()
+    os.chdir(_S372)
+    _from_here = lib372e.blobs()
+finally:
+    os.chdir(_cwd)
+_unanchored = subprocess.run(
+    ["git", "ls-tree", "-r", "--name-only", lib372e.AS_OF],
+    cwd=_S372, capture_output=True).stdout.decode().splitlines()
+
+check("P58 the corpus read is anchored, and unanchored it loses the estate",
+      (_from_here == _from_root,
+       len(_unanchored) < len(_from_root),
+       sorted(_unanchored) == sorted(
+           p.split("/")[-1] for p, _s, _n in _from_root
+           if p.startswith("code/eps_spec_sweep_372e/"))),
+      (True, True, True),
+      "BOTH HALVES, BECAUSE ONLY THE SECOND MAKES THE FIRST MEAN ANYTHING. "
+      "Element 1 really changes directory and re-reads: the corpus lib372e "
+      "returns from inside 372e must be the SAME LIST it returns from the "
+      "repository root, since `run_all.sh` does `cd` and every figure in three "
+      "committed transcripts is that list. Elements 2 and 3 are the "
+      "amputation, and they are the reason element 1 is not decoration: drop "
+      "`-C ROOT` and `--full-tree` and the same command run from that "
+      "directory answers with THAT SUBTREE ALONE, its paths relative to it — "
+      "and it does so WITHOUT COMPLAINING, so a census would come back small, "
+      "clean and wrong. mg-68ef lost 1252 files to exactly this the moment its "
+      "runner did a `cd`; the counts are not written down here because a "
+      "threshold picked after seeing the answer is not a control.")
+
+# N36.  R3 SAID `none` ABOUT A REAL UNORDERED WALK, AND THE TRANSCRIPT IT
+# PRODUCED PROVES IT WAS THERE.
+_src372 = permuted.text(permuted.git("show", "%s:code/eps_spec_sweep_372e/s1_census.py"
+                                    % lib372e.AS_OF))
+_r3_guarded = pinnable.unordered_walks(
+    _src372, "code/eps_spec_sweep_372e/s1_census.py", prose="read")
+_saved_ordered = pinnable.ORDERED
+pinnable.ORDERED = re.compile(r"(?!x)x")          # matches nothing
+_r3_amputated = pinnable.unordered_walks(
+    _src372, "code/eps_spec_sweep_372e/s1_census.py", prose="read")
+pinnable.ORDERED = _saved_ordered
+
+check("N36 R3's ORDERED guard suppressed a walk that really was unordered",
+      (_r3_guarded, len(_r3_amputated), _c2["out_s1_census.txt"][2] > 0),
+      ([], 1, True),
+      "A KNOWN DEFECT IN THE PRE-CONDITION, FOUND BY WORKING THE ROW IT WAS "
+      "SILENT ABOUT. pinnable.py printed `R3 none — every corpus read this rule "
+      "can see is either an ordered read of a commit or sorted by the subject "
+      "itself` for code/eps_spec_sweep_372e, and it was WRONG: the walk is "
+      "there (element 2 — amputate ORDERED and the rule finds it), and what "
+      "suppressed it is `sorted(filenames)` in the same block, which orders the "
+      "files WITHIN a directory and says nothing about the order the "
+      "DIRECTORIES are visited in. Element 3 is the proof from the other side, "
+      "and it is not an argument: the pin's own condition-2 score comes back "
+      "PERMUTED, so the committed transcript demonstrably carried "
+      "directory-enumeration order all along. THE DIRECTION IS THE UNSAFE ONE "
+      "and that is why this is N and not P — R3's misses read to their reader "
+      "as `nothing to declare`, which is how a transcript with no fixed point "
+      "looks pinnable. Repairing ORDERED is a rule change whose "
+      "false-positive direction nobody has measured; it is NOT made here.")
+
+print()
 
 # EVERY `SEE CONTROL X` IN THIS DIRECTORY RESOLVES, AND IT IS CHECKED PER SITE.
 # mg-23af found two that did not: pinnable.py said `--recursive` staying lit was

@@ -1,0 +1,6 @@
+-- corpus, PINNED (mg-528e) --
+   AS_OF : dafe759  -- an ancestor of origin/main (condition 1)
+   read  : git ls-tree -r --full-tree + git cat-file, an ordered read
+           of ONE COMMIT.  The working tree is not read for this
+           transcript; the live re-check is on stderr.
+

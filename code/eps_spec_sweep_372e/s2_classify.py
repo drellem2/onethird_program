@@ -20,12 +20,22 @@ CLASSES
   CITED     named as the refuted formula, or as historical/superseded
   DERIVED   inside mg-131e's or mg-94c3's own argument ABOUT it
   COLLISION the same expression, a DIFFERENT quantity -- not a site at all
+
+PINNED AT ONE COMMIT SINCE mg-528e, AND THE CHECK IS NOT PINNED WITH IT.  The
+per-file counts on STDOUT are read at `lib372e.AS_OF`, so this transcript has a
+fixed point.  But claim 2 is a CHECK, and a check pinned to a commit stops being
+a check on the repository you have -- `pinnable.py`'s own `b0ae` lesson, that a
+pin can DELETE THE QUESTION A SECTION ASKS rather than repair it.  So the same
+check is re-run against the WORKING TREE and reported on STDERR, and the EXIT
+CODE carries both halves.  Delete a `~~` today and this still exits 1; the
+transcript still reproduces byte-for-byte.
 """
-import os
 import re
 import sys
 
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+import lib372e
+
+ROOT = lib372e.ROOT
 
 EPS = re.compile(r"2\s*/\s*\(\s*n\s*[+]\s*1\s*\)|\\[dt]?frac\{2\}\{n\s*[+]\s*1\}")
 EINV = re.compile(r"\(\s*n\s*[-−]\s*1\s*\)\s*/\s*3")
@@ -110,10 +120,15 @@ def blocks(lines):
     return out
 
 
-def scan(rel):
-    path = os.path.join(ROOT, rel)
-    with open(path, encoding="utf-8") as fh:
-        lines = fh.read().splitlines()
+def scan(rel, lines=None):
+    """Every line of `rel` carrying a spelling, with its enclosing block.
+
+    `lines` defaults to the file AT AS_OF.  Pass the working tree's lines to ask
+    the same question of the repository as it stands -- which is what the live
+    half on stderr does, and the reason this takes an argument at all.
+    """
+    if lines is None:
+        lines = lib372e.read_lines(rel)
     blk = blocks(lines)
     out = []
     for i, line in enumerate(lines, 1):
@@ -123,10 +138,76 @@ def scan(rel):
     return out
 
 
+def unmarked(rel, lines=None):
+    """Claim 2, computed: the sites in `rel` that are NEITHER marked NOR allowed.
+
+    ONE SPELLING OF THE CHECK, AND THAT IS THE POINT OF EXTRACTING IT.  `s3` used
+    to carry its own copy of this loop under the docstring "s2's
+    marked-or-allowlisted check, run against supplied lines" -- so the control
+    that proves the detector can fire was proving it about a RE-STATEMENT of the
+    detector, and the two could drift with no reader able to tell which was
+    wrong (mg-1344's P5).  `s3` calls this now.  A pure extraction is a claim,
+    so `P57` asserts that `s3`'s four pre-declared mutations score identically
+    across the change.
+    """
+    allow = ALLOWLIST.get(rel, [])
+    bad = []
+    for ln, _forms, line, block in scan(rel, lines):
+        if MARKED.search(block):
+            continue
+        if any(a in line for a in allow):
+            continue
+        bad.append((ln, line))
+    return bad
+
+
+def live_recheck():
+    """The same check, against the WORKING TREE, on stderr.  Returns a count.
+
+    THE PIN MUST NOT DELETE THE QUESTION.  Everything on stdout is a function of
+    one commit and therefore says nothing whatever about the documents as they
+    stand today; before mg-528e this file's stdout was the only thing that did.
+    This is `mg-724a`'s recorded/gated split: the RECORD is pinned, the GATE is
+    live, and they are on different channels so neither can be mistaken for the
+    other.  Its verdict is in the exit code, which is why `run_all.sh` no longer
+    pipes any of this through `tee`.
+    """
+    say = lambda s: print(s, file=sys.stderr)
+    bad, missing = [], []
+    for rel, cls, _note in LEDGER:
+        if cls != "REPAIRED":
+            continue
+        try:
+            lines = lib372e.read_worktree(rel)
+        except OSError:
+            missing.append(rel)
+            continue
+        bad += ["%s:%d %s" % (rel, ln, line.strip()[:80])
+                for ln, line in unmarked(rel, lines)]
+    twin = "docs/state-of-the-wall.html"
+    try:
+        twin_hits = sum(len(f) for _, f, _, _ in
+                        scan(twin, lib372e.read_worktree(twin)))
+    except OSError:
+        missing.append(twin)
+        twin_hits = 0
+    say("[live] s2 re-checked against the WORKING TREE (not part of the transcript)")
+    say("[live]   unmarked site(s) in the two repaired documents : %d" % len(bad))
+    say("[live]   occurrences in %s : %d" % (twin, twin_hits))
+    for b in bad:
+        say("[live]   UNMARKED  " + b)
+    for m in missing:
+        say("[live]   ABSENT FROM THE WORKING TREE  " + m)
+    if not bad and not missing and not twin_hits:
+        say("[live]   -> the repair still holds at the tree as it stands.")
+    return len(bad) + len(missing) + twin_hits
+
+
 def main():
     print("mg-372e CLASSIFICATION — every occurrence in docs/, with its class")
     print("=" * 78)
     print()
+    lib372e.banner()
     failures = []
     totals = {"occurrences": 0, "lines": 0}
     for rel, cls, note in LEDGER:
@@ -139,11 +220,7 @@ def main():
         if cls != "REPAIRED":
             continue
         allow = ALLOWLIST.get(rel, [])
-        for ln, forms, line, block in hits:
-            if MARKED.search(block):
-                continue
-            if any(a in line for a in allow):
-                continue
+        for ln, line in unmarked(rel):
             failures.append(f"{rel}:{ln} UNMARKED and not on the allowlist: {line.strip()[:90]}")
         print(f"             allowlist: {len(allow)} site(s) left deliberately, true as written")
     print()
@@ -153,8 +230,7 @@ def main():
 
     # the HTML twin, checked by name -- it has been stale before (mg-9bc2)
     twin = "docs/state-of-the-wall.html"
-    tp = os.path.join(ROOT, twin)
-    if not os.path.exists(tp):
+    if not lib372e.exists(twin):
         failures.append(f"{twin} ABSENT — the twin check could not run")
     else:
         n = sum(len(f) for _, f, _, _ in scan(twin))
@@ -164,14 +240,20 @@ def main():
             failures.append(f"{twin} carries {n} occurrences and was not repaired")
 
     print()
+    rc = 0
     if failures:
         print(f"FAIL — {len(failures)} unmarked site(s):")
         for f in failures:
             print("   " + f)
-        return 1
-    print("PASS — every occurrence in the two repaired documents is either marked with the")
-    print("       refutation or on the explicit leave-alone allowlist, and the twin is clean.")
-    return 0
+        rc = 1
+    else:
+        print("PASS — every occurrence in the two repaired documents is either marked with the")
+        print("       refutation or on the explicit leave-alone allowlist, and the twin is clean.")
+
+    # THE LIVE HALF, AND IT IS DELIBERATELY AFTER THE VERDICT: the transcript is
+    # finished before anything touches the working tree, so no ordering accident
+    # can put a live figure on stdout.
+    return 1 if live_recheck() else rc
 
 
 if __name__ == "__main__":

@@ -1,0 +1,32 @@
+-- corpus, PINNED (mg-528e) --
+   AS_OF : dafe759  -- an ancestor of origin/main (condition 1)
+   read  : git ls-tree -r --full-tree + git cat-file, an ordered read
+           of ONE COMMIT.  The working tree is not read for this
+           transcript; the live re-check is on stderr.
+
+   EPS     136
+   EINV    142
+   PROSE     6
+   TOTAL   288
+   EPS     164
+   EINV    231
+   PROSE     7
+   TOTAL   406
+      3  code/dual_certificate_audit_eaa1/OUTCOMES.md   (EINV+EPS)
+     12  code/dual_certificate_audit_eaa1/PREDICTIONS.md   (EINV+EPS)
+      1  code/dual_certificate_audit_eaa1/README.md   (EINV)
+      5  code/dual_certificate_audit_eaa1/a1_program.py   (EINV+EPS)
+      2  code/dual_certificate_audit_eaa1/a2_certificates.py   (EINV)
+      8  code/dual_certificate_audit_eaa1/a3_n6.py   (EINV+EPS)
+     19  code/dual_certificate_audit_eaa1/out_a1_program.txt   (EINV+EPS)
+      3  code/dual_certificate_audit_eaa1/out_a2_certificates.txt   (EINV)
+     26  code/dual_certificate_audit_eaa1/out_a3_n6.txt   (EINV+EPS)
+     26  code/dual_certificate_audit_eaa1/out_a3_n6_deep.txt   (EINV+EPS)
+      1  code/eps_spec_sweep_372e/out_s1_census.txt   (PROSE)
+     12  docs/OneThird-DualCertificate-Audit-mg-eaa1.md   (EINV+EPS)
+files carrying at least one spelling: 50
+  of which docs/: 9
+  of which code/: 40
+files carrying at least one spelling: 62
+  of which docs/: 10
+  of which code/: 51
