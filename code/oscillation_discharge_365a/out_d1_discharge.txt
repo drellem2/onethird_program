@@ -1,0 +1,180 @@
+============================================================================================
+mg-365a d1  THE OSCILLATION AFTER THE DELETION — owed against paid
+============================================================================================
+
+§0  THE TWO PINS, CHECKED RATHER THAN DECLARED
+--------------------------------------------------------------------------------------------
+  AS_OF_365A   b5d8a757441d   every figure below is a function of it
+  DELETION     bd07d705a2fc   `delete: THE SELF-EXEMPTION IS GONE` (mg-c15e)
+  AS_OF_585E   0cb0fa4c143f   mg-585e's pin, imported from lib585e not re-typed
+
+  Both resolve and both are ancestors of origin/main.  This transcript therefore
+  does not go stale when its subject is next touched, and does not conflict on a
+  rebase — which is mg-585e's own recorded fact about pins, inherited here.
+
+§1  THE PREMISE THIS TICKET IS WRITTEN ON  (P1)
+--------------------------------------------------------------------------------------------
+  The ticket says, in the present tense:
+      `out_g0_fixed_point.txt` IS mg-f771's single self-exemption.
+
+  `SELF_EXCLUDED` present in lib_f771.py at DELETION~1   True
+  `SELF_EXCLUDED` present in lib_f771.py at AS_OF_365A   False
+
+  BOTH DIRECTIONS ARE ASSERTED AND NOT ONE.  An arm that only checked the constant
+  is absent today would pass identically against a repository that never had it,
+  and would be reporting on its own inability to find a string.
+
+  THE PREMISE IS STALE.  The exemption was deleted at bd07d705, 19 minutes after the
+  commit this ticket was written from.  The mayor's own caution of 00:22Z is on
+  the ticket and is exactly this: a successor carrier filed while its cause was
+  live can outlive the cause.  It did.
+
+§2  THE COUNT, RE-WALKED RATHER THAN INCREMENTED  (P7)
+--------------------------------------------------------------------------------------------
+                                                  at 585e  at 365a
+  committed versions of the transcript                 31       38
+  commits whose ENTIRE diff is that one file            7       10
+
+  mg-585e published 7 at its pin.  Three more landed after it published.
+  RE-DERIVED AT ITS OWN PIN AND IT AGREES: 7.  That agreement is what makes the
+  disagreement below a finding about the METHOD rather than about the walker.
+
+  THE POPULATION, CHRONOLOGICAL, NUMBERED BY WALKING:
+
+    #    commit     ticket    landed
+    1    f1d0a799   mg-d3f3   08-13 09:17
+    2    5d8d3456   mg-6e4f   08-13 12:36
+    3    3faa155e   mg-1344   08-13 16:58
+    4    343dc1fb   mg-bdb0   08-13 18:37
+    5    ce5acd41   mg-bdb0   08-13 18:54
+    6    fb12be21   -         08-13 19:12
+    7    160187e3   mg-5491   08-13 21:24
+    8    65c647bf   mg-05c6   08-14 00:06  <-- landed after mg-585e's pin, and was skipped
+    9    15af11d3   mg-585e   08-14 00:22  <-- called 'the 8th' by its own message AND by this ticket
+    10   b050840b   mg-ea7f   08-14 00:45
+
+  mg-585e's own refresh is #9, NOT the 8th.
+
+  THE MECHANISM IS THE PIN AND NOT A TYPO, WHICH IS WHY IT IS WORTH A SECTION.
+  'the 8th' is 7 + 1: mg-585e's figure AT ITS PIN, incremented, rather than
+  re-walked.  The arithmetic is right.  What is wrong is that the pinned figure
+  stopped being current the moment something landed between the pin and the
+  claim — and 65c647bf did, mg-05c6, sixteen minutes earlier.
+
+  A COUNT DERIVED BY INCREMENTING A PINNED FIGURE IS WRONG EXACTLY WHEN
+  SOMETHING LANDED IN BETWEEN, AND IT IS WRONG SILENTLY.  That is the general
+  defect here, and it is not specific to this file or to this count.
+
+§3  THE FIGURE A READER WILL REACH FOR, AND WHY IT MEASURES NOTHING  (P2)
+--------------------------------------------------------------------------------------------
+  mg-585e's headline was `16 of 31 RED`.  Its predicate — IMPORTED HERE, NOT
+  RE-SPELLED — tests for the string `DISAGREEMENTS, SHOWN` on a line starting §2.
+
+  commit     format   anchored  loose     subject
+  8b169b12   old §2   RED       RED       fix: THE FENCE DID NOT HOLD ON THE BRANCH TH
+  65c647bf   old §2   green     green     refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+  b94903f9   old §2   RED       RED       amend: mg-05c6 LANDED WHILE THIS BRANCH SAT 
+  15af11d3   old §2   green     green     refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+  69013830   old §2   RED       RED       index: THE COHOMOLOGICAL ARC IS NOW IN THE R
+  b050840b   old §2   green     green     refresh: THE FIXED-POINT TRANSCRIPT SAYS GRE
+  bd07d705   NEW §2   green     green     delete: THE SELF-EXEMPTION IS GONE AND THE W
+
+  versions added since mg-585e's pin                     7
+    written under the OLD §2                             6, of which 3 RED
+    written under the NEW §2                             1, of which 0 RED
+  anchored and loose predicates disagreeing              0  (mg-9876 §1: run it
+                                                            BOTH ways, not reason)
+
+  ⚠ MY OWN PREDICTION P2 IS REFUTED IN ITS STATED FORM, AND IS CORRECTED HERE
+  RATHER THAN GLOSSED.  P2 said re-running mg-585e's predicate at this pin would
+  report 0 RED among the new versions.  IT REPORTS 3.  The reason is that 6 of
+  the 7 new versions PRE-DATE the format change: they still carry the old §2 and
+  the predicate reads them exactly as mg-585e intended.  The prediction confused
+  `since mg-585e's pin` with `since the deletion`, and they are 6 versions apart.
+
+  THE TRAP IS REAL AND IS LATENT RATHER THAN EXHIBITED, WHICH IS A WEAKER CLAIM
+  THAN P2 MADE AND IS THE ONE THE RECORD SUPPORTS.  Exactly 1 version has been
+  written under the new §2 — `bd07d70` itself, the commit that rewrote it — and it
+  reads green.  n = 1 is not evidence about a predicate.  What IS certain is
+  structural: §2 is the normaliser's rule inventory now, so NO version written
+  after the deletion can contain `DISAGREEMENTS, SHOWN` on a §2 line whatever the
+  gate did.  The predicate reports on a string, and the string was removed.
+
+  SO THE ZERO IS OWED TO THE NEXT READER, NOT TO THIS ONE.  The moment a version
+  lands after `bd07d70`, re-taking mg-585e's headline figure at that pin returns a
+  zero that measures the deletion of a marker and reads as `it stopped`.  It is
+  printed here rather than omitted precisely because it is re-derivable by anyone
+  in one command, and an omitted trap is a trap the next reader walks into alone.
+
+§4  WHAT CARRIES THE FINDING: OWED AGAINST PAID  (P5)
+--------------------------------------------------------------------------------------------
+  `./build.sh` regenerates transcripts into the worktree and THEN g0 compares the
+  worktree against HEAD.  So the old §2's disagreement set D(T) CONTAINS every
+  watched transcript the landing went on to commit: a landing that committed one
+  PROVABLY had D(T) != {}, would have carried a RED §2, and would have owed a
+  refresh.  Transcripts graded NOISE or CORPUS are restored rather than committed,
+  so they never appear here — this is a LOWER BOUND, which is the safe direction
+  for a claim that the toll was owed and not paid.
+
+  The watched class is `lib_f771.is_watched`, IMPORTED.  The corpus-scoped registry
+  is `lib_f771.CORPUS_SCOPED`, imported for the same reason: a hand-typed glob or a
+  hard-coded exemption path is a re-statement, and a re-statement drifts.
+
+  commit     owed?   paid?  watched transcripts committed
+  2c7367da   -       -      none
+  29019969   OWED    -      out_g1_controls.txt, out_v0_selftest.txt, ou
+  73af2f36   OWED    -      out_f0_registry_discipline.txt
+  3f6d8d60   OWED    -      out_consumers.txt, out_liveindex.txt, out_se
+  d2d74375   OWED    -      out_c0_selftest.txt, out_c1_identity.txt, ou
+  f2171b94   -       -      none
+  745771ed   OWED    -      out_w0_selftest.txt, out_w1_witnesses.txt
+  b5d8a757   OWED    -      out_consumers.txt, out_selftest_20ee.txt, ou
+
+  main landings since the deletion                        8
+  of those, that would have OWED a refresh                6
+  of those, that TOUCHED the transcript at all            0
+  of those, that PAID a solo refresh commit               0
+
+  6 OWED, 0 PAID.
+
+  ⚠ AND `0 OF 8 QUIET` WOULD NOT HAVE BEEN ENOUGH ON ITS OWN  (P4).  mg-585e
+  priced the pre-deletion rate at 30 touches over 129 code/ commits.
+  At that rate, 8 quiet landings has probability 0.12 — NOT significant.
+  A directory that rested on the zero would be reporting a quiet window as a
+  repair.  What makes it a repair is that 6 of those landings had a provably
+  non-empty disagreement set and paid nothing for it.
+
+§5  DISCHARGED — BUT NOT BY WHAT THE TICKET ASKS ABOUT  (P6)
+--------------------------------------------------------------------------------------------
+  Carry-forward item 2 asks whether this is 'already discharged by mg-05c6'.
+
+  mg-05c6 IS IN THE POPULATION.  65c647bf, solo commit #8 above, is mg-05c6's own
+  refresh.  It PAID the toll; it did not remove it.
+  The discharge is bd07d705 — mg-c15e's deletion of the exemption.
+
+  The distinction is not pedantry.  An instrument answering 'yes, discharged'
+  without saying BY WHAT would have confirmed the ticket's question while getting
+  its subject wrong, and the next reader would credit the corpus-pin work with a
+  repair it did not make — and would look for the mechanism in the wrong file.
+
+§6  THE SELF-INCLUSION QUESTION, ANSWERED BY MEASUREMENT  (P8)
+--------------------------------------------------------------------------------------------
+  Question 1 asks whether a self-inclusive count is a defect or the only truthful
+  arrangement.  It was NEITHER: it was a property of the exemption, and it is gone.
+
+  The counting directory joined the population it counted because COUNTING
+  REQUIRED A ./build.sh RUN AND A ./build.sh RUN MOVED THAT TRANSCRIPT.  Nothing
+  about counting made the count self-inclusive; the oscillation did, and it
+  captured every branch equally — mg-585e was not special, it was the 9th.
+
+  With the exemption deleted the transcript is a function of lib_f771.py's source,
+  so a landing that does not touch that file does not move it.  A directory can
+  now count the population without entering it.
+
+  WHETHER THIS DIRECTORY DID SO IS A PROPERTY OF THIS BRANCH AND NOT OF THE PIN,
+  so it is ON STDERR and not here (README D4).  A branch-dependent reading in a
+  pinned transcript is the defect this whole arc is about, arriving one file over.
+
+VERDICT: REPORTED — premise STALE; 38 versions and 10 solo commits at the new pin (was 31/7);
+         8 landings since the deletion, 6 OWED a refresh, 0 PAID; discharged by bd07d705 (mg-c15e),
+         NOT by mg-05c6, which is #8 in the population it was asked to have removed.
