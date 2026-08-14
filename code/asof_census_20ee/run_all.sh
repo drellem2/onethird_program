@@ -62,6 +62,18 @@
 # cannot move the transcript.  Its one-pair mode is the hand-run half, and it
 # is what P30 calls:
 #     python3 code/asof_census_20ee/exemplars.py --pair <record> <name> [<rev>]
+#
+# mg-5058: semantic.py IS run here, for exemplars.py's reason exactly and with
+# one more of its own.  It executes no instrument code, needs no dirty tree, and
+# every figure -- the estate-wide population of declared limits, the four
+# registry rows, the blame behind each witness, the pre-registration census --
+# is read at a declared commit, so out_semantic.txt reproduces BYTE-IDENTICALLY.
+# THE ONE OF ITS OWN: two of its four rows read their declaration out of
+# selftest_20ee.py, which THIS BRANCH EDITS, and one of its population figures
+# counts that same file -- so a version reading off disk would have its numbers
+# moved by the commit that adds its own controls.  Its one-row mode is the
+# hand-run half:
+#     python3 code/asof_census_20ee/semantic.py --row R2
 set -e
 cd "$(dirname "$0")"
 python3 selftest_20ee.py > out_selftest_20ee.txt
@@ -71,9 +83,11 @@ python3 liveindex.py     > out_liveindex.txt
 python3 permuted.py      > out_permuted.txt
 python3 worklist.py      > out_worklist.txt
 python3 exemplars.py     > out_exemplars.txt
+python3 semantic.py      > out_semantic.txt
 echo "mg-20ee census: $(sed -n '/transcripts carry/p' out_census.txt | tr -s ' ')"
 echo "mg-6e4f consumers: $(sed -n '/^CONSUMERS:/p' out_consumers.txt)"
 echo "mg-ede8 live-index: $(sed -n '/^LIVE-INDEX:/p' out_liveindex.txt)"
 echo "mg-885d condition 2: $(sed -n '/^CONDITION 2:/p' out_permuted.txt)"
 echo "mg-e8b0 work-list: $(sed -n '/^CONDITION 0 (work-list):/p' out_worklist.txt)"
 echo "mg-0bf1 exemplars: $(sed -n '/^CONDITION 0 (exemplars):/p' out_exemplars.txt)"
+echo "mg-5058 semantic: $(sed -n '/^CONDITION 0 (semantic):/p' out_semantic.txt)"

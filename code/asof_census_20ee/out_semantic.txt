@@ -1,0 +1,276 @@
+==============================================================================
+mg-5058 -- WHICH DECLARED LIMITS ARE DATE QUESTIONS
+==============================================================================
+
+  AS_OF 182d93bbcaa4  (ancestor of origin/main: yes)
+
+  mg-0bf1 closed with one question: is any remaining `read what the sentence
+  says` rule in this estate likewise a date question wearing semantic
+  clothes? Every figure below is a function of that one commit, so THIS
+  BRANCH'S OWN EDITS TO selftest_20ee.py -- a file section 1 counts and
+  section 2 reads two declarations out of -- CANNOT MOVE THIS TRANSCRIPT.
+
+==============================================================================
+1.  THE POPULATION -- HOW OFTEN THIS ESTATE DECLARES A LIMIT
+==============================================================================
+
+  `cannot tell` / `cannot distinguish` / `cannot separate`
+
+    in tracked .py / .md / .sh                       :  209
+    in tracked .txt, EXCLUDED as an echo of the .py  :   77
+    of the first, PROSE-SCOPED by their own words    :   43 in 37 files
+
+  The narrowing keeps a declaration whose own words say its subject is text
+  somebody wrote -- sentence, prose, English, wording, says, claim,
+  paragraph, within 160 characters of the declaration on the flattened text.
+  It is a grep and it is printed beside the loose count rather than instead
+  of it. FOUR of these are tested in section 2 and 39 ARE NOT, which is the
+  residue this tranche leaves and is listed in section 5.
+
+  THE FILES THAT DECLARE ONE (prose-scoped)
+    code/alias_index_0d1b/x2_index.py                              1
+    code/asof_census_20ee/exemplars.py                             2
+    code/asof_census_20ee/selftest_20ee.py                         3
+    code/audit_2c77/q2_bound_edge.py                               1
+    code/branching_audit_19ec/e5_population.py                     1
+    code/branching_audit_58da/PREDICTIONS.md                       1
+    code/branching_bound_audit_aaf4/PREDICTIONS.md                 1
+    code/branching_bound_audit_aaf4/README.md                      1
+    code/census_audit_4d3b/README.md                               2
+    code/compression2_scope_0fc6/a2_realizability.py               1
+    code/control_audit_9876/a1_census.py                           1
+    code/control_audit_9876/lib9876.py                             1
+    code/convex_criterion_8748/c0_selftest.py                      2
+    code/convex_criterion_8748/c4_filter.py                        1
+    code/corpus_fixedpoint_fd9c/PREDICTIONS.md                     1
+    code/counterexample_probe_24a3/check_doc.py                    1
+    code/face_geometry_audit_0b07/p2_units.py                      1
+    code/face_geometry_audit_0b07/p3_grain.py                      1
+    code/face_geometry_audit_6653/attack_banner.py                 1
+    code/face_geometry_landing_da45/demo_t3_unfrozen.py            1
+    code/hodge_leverage_audit_97fb/README.md                       1
+    code/hodge_leverage_landing_e1d0/verify_landing.py             1
+    code/lstar_reaudit_5e82/README.md                              1
+    code/lstar_reaudit_5e82/a0_selftest.py                         1
+    code/rendered_twin_pin_9bc2/COVERAGE.md                        1
+    code/rendered_twin_pin_9bc2/twin_pin.py                        2
+    code/repair_69d1/p1_bound.py                                   1
+    code/runner_exit_c2b3/libc2b3.py                               1
+    code/species_audit_7dd3/d3_seam.py                             1
+    code/species_extent_d633/kernd633.py                           1
+    code/state_relocation_audit_b0ae/README.md                     1
+    code/truncate_sweep_ec63/run_all.sh                            1
+    code/verdict_invariance_585e/README.md                         1
+    docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md       1
+    docs/OneThird-Bratteli-Path-Algebras-Mg13b2Repair-IndependentAudit.md 1
+    docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md 1
+    docs/OneThird-RunnerExit-ArcWideSweep.md                       1
+
+==============================================================================
+2.  THE FOUR ROWS -- IS THE DISTINCTION A DATE QUESTION?
+==============================================================================
+
+  COLLIDES is the direction that PROVES: two readings written by one commit
+  share every commit-level field, so no rule reading any of them can
+  separate the pair. SEPARATED proves only that the row's field decides
+  these two.
+
+------------------------------------------------------------------------------
+  R1  ACCOUNTING vs OFFERING -- N28, the one mg-0bf1 closed
+------------------------------------------------------------------------------
+    declared at : code/asof_census_20ee/selftest_20ee.py:861
+        | "a SUBSTRING COUNT, so a sentence ACCOUNTING for a pin and a
+        sentence "
+    field       : commit order against the pin on the named instrument
+
+    code/asof_census_20ee/README.md:111   f26d5be   order 104
+      reading : OFFERING -- tranche 1 names it as remaining work
+        | (`species_remainder_f8fa` at `2+/2-`, `species_repair_a4ef` at
+        `2+/4-`) are cheap; the large ones
+
+    code/asof_census_20ee/README.md:117   0cb0fa4   order 10
+      reading : ACCOUNTING -- tranche 9 annotates it with the pin
+        | > `species_remainder_f8fa` was **pinned at `e29ba2a`** — this
+        arc's own tranche 2, `mg-6e4f` — and
+
+    VERDICT: SEPARATED -- the pin e29ba2a on code/species_remainder_f8fa lies strictly between them
+
+    THE CALIBRATION, AND IT IS THE WRONG-DIRECTION CONTROL FOR THIS WHOLE
+    FILE. A file every row of which read COLLIDES would be indistinguishable
+    from a file that cannot separate anything, so the row already known to
+    be a date question is asked by the same machinery and must come back
+    SEPARATED.
+
+------------------------------------------------------------------------------
+  R2  a YOUNGER mention: ACCOUNTING vs A QUOTATION OF THE OFFER -- N29, the limit mg-0bf1 left
+------------------------------------------------------------------------------
+    declared at : code/asof_census_20ee/selftest_20ee.py:965
+        | check("N29 a YOUNGER mention closes the pair whatever it says — A
+        LIMIT",
+    field       : commit order against the pin on the named instrument
+
+    code/asof_census_20ee/README.md:117   0cb0fa4   order 10
+      reading : ACCOUNTING -- it names the pin
+        | > `species_remainder_f8fa` was **pinned at `e29ba2a`** — this
+        arc's own tranche 2, `mg-6e4f` — and
+
+    code/asof_census_20ee/README.md:1060   0cb0fa4   order 10
+      reading : NOT AN ACCOUNTING -- it is tranche 1's offer, quoted
+        | > the small ones (`species_remainder_f8fa` at `2+/2-`,
+        `species_repair_a4ef` at `2+/4-`) are cheap
+
+    VERDICT: COLLIDES -- both readings were written by 0cb0fa4, so every commit-level field is identical across them
+
+    AND THE SECOND WITNESS IS THE FIRST ROW'S FIRST WITNESS, QUOTED. The
+    same English sentence appears twice in this one record: once as tranche
+    1 wrote it, where the date decides it, and once inside tranche 9's
+    quotation of it, where the date is tranche 9's and decides nothing. A
+    QUOTATION MOVES THE SENTENCE WITHOUT MOVING THE EVENT, which is `blame
+    is the last touch and not the origin` arriving from the other side:
+    there a reflow re-dates a sentence nobody changed, here a quotation
+    re-dates one somebody deliberately reproduced.
+
+------------------------------------------------------------------------------
+  R3  a strike marker USED vs MENTIONED -- mg-aaf4 section 7
+------------------------------------------------------------------------------
+    declared at : code/branching_bound_audit_aaf4/README.md:268
+        | **THE LIVENESS RULE CANNOT TELL USE FROM MENTION, AND WHAT IT
+        REMOVES IS NEVER PRINTED.**
+    field       : commit order (there is no second event to straddle)
+
+    docs/OneThird-Counterexample-Under-The-Action.md:139   522c1f3   order 669
+      reading : USE -- the marker strikes the paragraph it opens
+        | > **STRUCK (mg-dea5, landing mg-a7b4 finding 3).** This paragraph
+        previously read: *"Found by random
+
+    docs/OneThird-Counterexample-Under-The-Action-Repair.md:495   522c1f3   order 669
+      reading : MENTION -- the marker is quoted as the thing a check looks for
+        | affected entries: the string must be present **and every
+        occurrence must lie inside a `> **STRUCK`
+
+    VERDICT: COLLIDES -- both readings were written by 522c1f3, so every commit-level field is identical across them
+
+    THE ROW WITH NO EVENT IN IT AT ALL, which is why it collides rather than
+    merely failing to separate. A pin is a commit and an arm is a commit;
+    `what this marker is FOR` is not an event in the repository, so there is
+    no pair of dates to order. The two witnesses land in one commit because
+    the author wrote a strike and a description of strikes in one landing,
+    and nothing about the repository distinguishes them.
+
+------------------------------------------------------------------------------
+  R4  a TRANSCRIPT recording a failure vs a PRE-REGISTRATION recording a refuted prediction -- mg-9876's a4 section 3
+------------------------------------------------------------------------------
+    declared at : commit 07a2fd0
+        | a predictions file recording refuted predictions joins a class the
+        row calls
+    field       : is the file older than every arm in its own directory
+
+    code/c3_audit_a94c3/PREDICTIONS.md:61   72fbcfa   order 344
+      reading : PRE-REGISTRATION -- the only red token in that whole directory, and it is in a sentence forbidding the word
+      field   : older than every arm = True
+        | | **P10** | **I mistake a framing correction for a refutation, or
+        soften one into the other.** The ticket forbids both directions
+        explicitly. The risk is real because P4, if it fires, gives me a
+        true statement (`C₃^gap > 1` under L2) that does **not** touch the
+        ticket's relation — the relation uses
+
+    code/lever_shape_9b6b/out_e1_collapse.txt:57   96c38ad   order 19
+      reading : TRANSCRIPT -- printed by an arm that already existed
+      field   : older than every arm = False
+        | 3 2/3 2/75 yes REFUTED
+
+    VERDICT: SEPARATED -- the field takes True on the first and False on the second
+
+    THE NEW ONE, AND IT IS THE ANSWER TO THE QUESTION mg-0bf1 CLOSED WITH.
+    `does this file record a demonstrated failure` reads like a question
+    about what the file IS; a suite's transcript is written by an arm and
+    therefore CANNOT pre-date every arm, so a file that does is not one --
+    the same impossibility as `an older sentence cannot be an accounting`,
+    on a different subject, with no English read anywhere. Section 3
+    measures it over the whole estate rather than over these two lines.
+
+------------------------------------------------------------------------------
+  SUMMARY
+    R1   SEPARATED      ACCOUNTING vs OFFERING -- N28, the one mg-0bf1 close
+    R2   COLLIDES       a YOUNGER mention: ACCOUNTING vs A QUOTATION OF THE 
+    R3   COLLIDES       a strike marker USED vs MENTIONED -- mg-aaf4 section
+    R4   SEPARATED      a TRANSCRIPT recording a failure vs a PRE-REGISTRATI
+
+    2 SEPARATED (R1, R4), 2 COLLIDES (R2, R3)
+
+==============================================================================
+3.  THE NEW DATE ROW, MEASURED OVER THE ESTATE AND NOT OVER TWO LINES
+==============================================================================
+
+  R4's field is an impossibility of exactly mg-0bf1's shape: a suite's
+  transcript is written by an arm, so it cannot pre-date every arm of its
+  own directory. Below is how far that reaches at AS_OF.
+
+    PREDICTIONS.md in the tree                        :  129
+      of those, PROVABLY pre-registered               :   90
+      born with an arm, so not provable here          :   39
+
+    directories under code/                           :  233
+      where a4's red-token row fires                  :  154
+      where it fires ONLY through a PREDICTIONS.md    :    5
+        of those, the date PROVES it is not a         :    3
+        transcript
+
+      PROVED  code/c3_audit_a94c3
+      PROVED  code/eleak_repair_8311
+        --    code/frozen_density_0b96
+      PROVED  code/n0_audit_3e06
+        --    code/subset_consumability_99f4
+
+  ONE-DIRECTIONAL AGAIN. `older than every arm` proves the file is not that
+  suite's transcript. BORN WITH AN ARM PROVES NOTHING -- a pre-registration
+  committed in the same landing as the first arm is indistinguishable here,
+  and 39 of the 129 are in that state. REPORTED AND NOT REPAIRED: the row
+  belongs to mg-9876, and a branch that re-scoped another instrument's
+  detector to make its own number read better would be doing the worse
+  thing.
+
+==============================================================================
+4.  WHAT THE FOUR ROWS SAY TOGETHER
+==============================================================================
+
+  THE ANSWER TO mg-0bf1'S QUESTION IS YES FOR ONE MORE AND PROVABLY NO FOR
+  TWO, and the criterion that falls out of the four is one sentence:
+
+    A SEMANTIC-LOOKING DISTINCTION IS A DATE QUESTION EXACTLY WHEN THE TWO
+    READINGS PUT THE TEXT ON OPPOSITE SIDES OF AN EVENT THAT IS ITSELF A
+    COMMIT.
+
+  R1 has one -- the pin. R4 has one -- the first commit of an arm. R3 has
+  none: `what this marker is FOR` is not an event in the repository at all,
+  so there are not two dates to order. R2 has an event and still collides,
+  and that is the sharpest row here: the event exists, the rule that used it
+  works on the sentence's FIRST utterance, and a QUOTATION of the same
+  sentence carries the quoting commit's date. The date is a property of the
+  touch and the reading is a property of the words, and a quotation is where
+  those two come apart on purpose.
+
+==============================================================================
+5.  WHAT THIS FILE CANNOT DO
+==============================================================================
+
+  N32 -- THE REGISTRY IS A HAND JUDGEMENT AND THIS FILE CANNOT DECIDE IT.
+  Which of the 43 prose-scoped declarations are about reading a sentence,
+  and which reading each witness carries, are read by a person. The remedy
+  is the one N28 named and it is the reason every witness is printed with
+  its line: THE INSTRUMENT PRINTS THE SENTENCE. A reader who disagrees with
+  a label disagrees with text on the page.
+
+  A COLLISION IS ABOUT THE WITNESSES AND NOT ABOUT THE WHOLE LIMIT. It
+  proves no commit-level field separates THESE two readings, which is enough
+  to kill a proposed rule and is not a proof that the limit is unclosable by
+  any means -- a rule reading document structure, as exemplars' section 3
+  does, is not a rule reading a commit.
+
+  39 OF THE 43 PROSE-SCOPED DECLARATIONS ARE UNTESTED. Four carry witnesses
+  here because a witness pair is a hand judgement and this tranche affords
+  four. The other sites are listed in section 1 for a successor to pick
+  from; the one worth naming is mg-9876's own `a regex cannot tell an arm
+  from a print`, whose two readings sit in one directory and two commits.
+
+CONDITION 0 (semantic): 4 rows, 2 SEPARATED, 2 COLLIDES, 43 prose-scoped declarations in 37 files, 39 untested
