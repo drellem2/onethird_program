@@ -59,6 +59,20 @@ RAN = []
 # for four tranches -- and the control was moved ONTO THE RULE rather than
 # dropped, because a control that goes red when somebody closes its instance
 # invites the next tranche to `repair` it by re-opening the trap.
+# N33 JOINS AT mg-bdc0 AND NOTHING LEAVES, so this tuple GROWS AGAIN (10 -> 11).
+# RENUMBERED ON LANDING AND THE MAP IS PRINTED: this branch issued P35-P39 and
+# N32, mg-5058's semantic.py landed first with the same six names, and a number
+# in this directory is NEVER REISSUED -- so pathlist.py's six became P40, P41,
+# P42, P43, P44 and N33, in that order, and not one word of the argument moved.
+# That is mg-5058's own resolution one branch later, and the second time in two
+# landings that two instruments picked the same six names out of one namespace.
+# WHAT N33 ASSERTS: pathlist.py decides what a producer reads by matching
+# SPELLINGS, so a read spelled a way its pattern does not name grades that
+# producer a PROOF.  It is asserted rather than repaired because the repair is
+# unbounded -- there is no closed set of ways to spell a read -- and because its
+# DIRECTION is what makes the published figure safe: every error of this kind
+# can only make the PATH-LIST-ONLY class look BIGGER, and that class is EMPTY,
+# so the 0 in out_pathlist.txt cannot be an over-count.
 # N29 AND N30 JOIN AT mg-0bf1 AND NOTHING LEAVES, so this tuple GROWS AGAIN --
 # and N28 STAYS, which is the load-bearing part.  mg-0bf1 gives the question a
 # mechanical answer that reads no English (a sentence accounting for a pin is
@@ -88,7 +102,7 @@ RAN = []
 # the branch and RENUMBERED ON LANDING: mg-ede8's N31 merged first and a number
 # in this directory is never reissued, which is what BURNED is for.
 KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30", "N31",
-                "N32")
+                "N32", "N33")
 
 
 def check(name, got, want, why):
@@ -1323,6 +1337,132 @@ check("N32 the registry's readings are HAND JUDGEMENTS — A LIMIT",
       "supplied — so the remedy is the one N28 named and it is why every "
       "witness prints with its line: THE INSTRUMENT PRINTS THE SENTENCE. A "
       "reader who disagrees with a label disagrees with text on the page.")
+
+print()
+
+print("=" * 78)
+print("CONTROLS ON pathlist.py — IS THE METHOD FREE ON ANYTHING (mg-bdc0)")
+print("=" * 78)
+print()
+print("  liveindex.py's method re-derives a figure at an old commit from the")
+print("  tracked path list alone. pathlist.py asks how many committed")
+print("  transcripts that is free on, and the answer is NONE — which is")
+print("  exactly the answer a BROKEN detector prints too. So the controls that")
+print("  matter here are the ones that make the empty class falsifiable.")
+print()
+
+import pathlist  # noqa: E402
+
+
+def _grade(producer_src, extra=None):
+    """pathlist's real grader over a planted corpus, through its real closure.
+
+    A RE-STATEMENT WOULD DRIFT (P34's rule one instrument along), so the
+    patterns and the closure are the module's own; only `source_at`'s cache is
+    pre-loaded, which is how a corpus gets planted without a repository.
+    """
+    files = dict(extra or {})
+    files["code/plant/p.py"] = producer_src
+    for path, body in files.items():
+        pathlist._SRC[("PLANT", path)] = body
+    index = pathlist.module_index(set(files))
+    closed = pathlist.closure("PLANT", "code/plant/p.py", index)
+    body = "\n".join(pathlist.source_at("PLANT", f) for f in closed)
+    reads_paths = bool(pathlist.PATHLIST.search(body))
+    return ("PATH-LIST-ONLY" if reads_paths and not pathlist.OTHER.search(body)
+            else "MIXED" if reads_paths else "NO PATH-LIST READ")
+
+
+check("P40 a producer reading ONLY a path list is PATH-LIST-ONLY",
+      _grade('out = git("ls-tree", "-r", "--name-only", rev)\n'),
+      "PATH-LIST-ONLY",
+      "THE ONLY CONTROL THAT KEEPS SECTION 3'S EMPTY LIST WORTH PRINTING. "
+      "out_pathlist.txt reports 0 of 840, and a rule that had stopped being "
+      "able to say PATH-LIST-ONLY at all would report the same 0 and read as "
+      "the same finding. This arm fires the REAL grader on the shape the class "
+      "is defined by, so `the class is empty` is a fact about the corpus and "
+      "not about the detector. If it ever goes red, section 3 is measuring "
+      "nothing and its 0 must not be quoted.")
+
+check("P41 a path-list read beside a content read is MIXED",
+      _grade('paths = git("ls-tree", "-r", "--name-only", rev)\n'
+             'text = open(paths[0]).read()\n'),
+      "MIXED",
+      "the wrong-direction half of P40: the grade must turn on WHAT ELSE is "
+      "read and not merely on the path-list read being present. MIXED is not a "
+      "refutation — consumers.py is MIXED and three of its figures are "
+      "path-list-valued — it means a reader per figure is still owed.")
+
+check("P42 running a NON-git binary is a content read",
+      (_grade('paths = os.walk(root)\n'
+              'subprocess.run([MG_BIN, "show", "mg-1"], capture_output=True)\n'),
+       _grade('paths = os.walk(root)\n'
+              'subprocess.run(["git", "ls-tree", "-r", rev])\n')),
+      ("MIXED", "PATH-LIST-ONLY"),
+      "BOTH HALVES, BECAUSE THE CLAUSE IS INERT ON THE LIVE CORPUS AND AN "
+      "INERT CLAUSE IS INDISTINGUISHABLE FROM A BROKEN ONE. Re-grading all 840 "
+      "paired producers with the exec clause amputated moves 0 of them — "
+      "a1_controls.py, the producer that shells out to the real `mg`, is "
+      "already MIXED through the foreign lib P44's closure follows — so "
+      "nothing in out_pathlist.txt would move if this clause silently stopped "
+      "matching. The second half is the over-reach guard: a producer whose "
+      "only subprocess is `git` must NOT be dragged out of the class, or the "
+      "clause would empty it by construction and section 3's 0 would be an "
+      "artifact of this control's own patch.")
+
+check("P43 the walk is SORTED, so the page is a function of the commit",
+      (pathlist.pairs_at("PLANT", {"code/d/out_a.txt", "code/d/a.py",
+                                   "code/d/out_b.txt", "code/d/b.py",
+                                   "code/d/out_z.txt"})[0],
+       pathlist.pairs_at("PLANT", {"code/d/out_z.txt", "code/d/b.py",
+                                   "code/d/out_b.txt", "code/d/a.py",
+                                   "code/d/out_a.txt"})[0]),
+      ([("code/d/out_a.txt", "code/d/a.py"),
+        ("code/d/out_b.txt", "code/d/b.py")],
+       [("code/d/out_a.txt", "code/d/a.py"),
+        ("code/d/out_b.txt", "code/d/b.py")]),
+      "THIS FILE FAILED ITS OWN HEADLINE CLAIM ON ITS FIRST RE-RUN AND THIS IS "
+      "THE PIN. out_pathlist.txt prints `this transcript has a fixed point`; "
+      "it did not have one, because `tracked` is a SET, section 4's "
+      "per-directory table inherited hash order through most_common's "
+      "insertion-order tie-break, and three runs at ONE commit produced three "
+      "different tables. A transcript whose subject is figures that were "
+      "already wrong at their own commit, published as a function of "
+      "PYTHONHASHSEED, is this directory's subject arriving inside the file "
+      "that measures it. Both spellings of the same set are asserted so that a "
+      "walk which is merely LUCKY is not mistaken for one that is ordered.")
+
+check("P44 the closure does NOT stop at the directory boundary",
+      _grade('import lib_far\npaths = os.walk(root)\n',
+             {"code/far/lib_far.py": 'text = open(p).read()\n'}),
+      "MIXED",
+      "THE REPAIR THAT EMPTIED THE CLASS, PINNED AS THE SHAPE THAT DEFEATED "
+      "THE DRAFT BEFORE IT. Both survivors of the 2-transcript class — "
+      "code/verdict_audit_f911/a1_controls.py and "
+      "code/verdict_staleness_30bd/prose_30bd.py — `sys.path.insert` a FOREIGN "
+      "directory and import a content-reading lib out of it, so a "
+      "same-directory closure read neither and graded both a PROOF. The "
+      "previous draft had DECLARED that stopping at the boundary would make "
+      "the class look bigger than it is; it did, by the whole class. 6 of the "
+      "6 candidates ever adjudicated by hand have been false positives.")
+
+check("N33 the pattern is a SPELLING MATCHER and its residue is one-directional",
+      (_grade('paths = os.walk(root)\ntext = read_it_some_other_way(paths[0])\n'),
+       "PATH-LIST-ONLY"),
+      ("PATH-LIST-ONLY", "PATH-LIST-ONLY"),
+      "A KNOWN DEFECT, ASSERTED RATHER THAN REPAIRED. pathlist.py decides what "
+      "a producer reads by matching SPELLINGS, so a read spelled a way the "
+      "pattern does not name is invisible and grades the producer a PROOF — "
+      "this arm plants exactly that and requires the WRONG answer, so the "
+      "limit is a run and not a paragraph. Its direction is the load-bearing "
+      "part and it is one-directional: every error of this kind makes "
+      "PATH-LIST-ONLY look BIGGER, and the class is already EMPTY, so the "
+      "published 0 cannot be an over-count and the residue is a class that "
+      "cannot be smaller than it is. Turning this green would mean pathlist.py "
+      "had stopped deciding from source. The other limit is counted rather "
+      "than asserted and is in section 4 of its own transcript: 270 "
+      "transcripts have no producer under the naming convention and are NOT "
+      "counted as clean.")
 
 print()
 

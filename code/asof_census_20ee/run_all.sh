@@ -19,6 +19,22 @@
 # and NO SUITE RE-TAKES THEM -- the declaration out_ground_truth.txt already
 # makes about itself, and the same blind spot.
 #
+# mg-bdc0: pathlist.py is NOT run here, and the reason is neither cost nor a
+# dirty tree.  It is PINNED at a declared AS_OF, so running it on a build path
+# would re-take at every gate a page that cannot move until somebody re-pins it
+# -- 15 s of git for a byte-identical file, and a transcript nobody re-reads.
+# It answers mg-bdc0's carry-forward once: how many committed transcripts are
+# functions of the tracked path list alone, and so already checkable by
+# liveindex.py's method at zero execution cost.  NONE of 840 paired, which is
+# why the FIGURE is not the deliverable and the empty LIST is.  Its controls
+# ARE on the build path, in selftest_20ee.py (P40-P44, N33), and P40 is the one
+# that matters: an empty class and a detector that can no longer fire print the
+# same page.
+#     python3 code/asof_census_20ee/pathlist.py         # at AS_OF
+#     python3 code/asof_census_20ee/pathlist.py <rev>   # anywhere else
+# out_pathlist.txt is one dated hand-run, which is pinnable.py's arrangement
+# above and the same declared blind spot: NO SUITE RE-TAKES IT.
+#
 # mg-885d: permuted.py IS run here, and unlike pinnable.py it can be, because
 # it needs no dirty tree: its estate scan reads a DECLARED COMMIT through
 # `git ls-tree` and `git cat-file`.  That is also why its own transcript
