@@ -78,7 +78,17 @@ RAN = []
 # transcript that has many.  It is asserted on the RULE for N28's reason -- its
 # live instances are the content-valued figures, and a control sitting on one of
 # those would go red the day somebody found a way to re-derive it.
-KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30", "N31")
+# N32 JOINS AT mg-5058 AND NOTHING LEAVES, so this tuple GROWS AGAIN.  It is the
+# limit of the registry in semantic.py: a row proves that no commit-level rule
+# separates its two witnesses BECAUSE they share a commit, and the READINGS the
+# two witnesses are given are hand judgements a person wrote into REGISTRY --
+# derived from nothing the repository holds.  Asserted on the row that is its
+# own instance (R2), because that row's two witnesses agree on every field the
+# repository has and disagree only in that sentence.  It was issued as N31 on
+# the branch and RENUMBERED ON LANDING: mg-ede8's N31 merged first and a number
+# in this directory is never reissued, which is what BURNED is for.
+KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30", "N31",
+                "N32")
 
 
 def check(name, got, want, why):
@@ -1154,6 +1164,167 @@ check("N31 AGREES is one-directional — the class this census cannot see",
       "there, and that is a different rule and not a wider one.")
 
 print()
+print("CONTROLS ON semantic.py — IS THE LIMIT A DATE QUESTION (mg-5058)")
+print("-" * 78)
+print()
+print("  mg-0bf1 closed by asking whether any REMAINING `read what the")
+print("  sentence says` rule in this estate is likewise a date question.  The")
+print("  answer is worth nothing without both directions: a file that")
+print("  returned COLLIDES on every row would be indistinguishable from one")
+print("  that cannot separate anything (P36), a registry whose declarations")
+print("  have been deleted underneath it would stand as a claim about a")
+print("  document that no longer says it (P37), and a prefilter narrower than")
+print("  the rule it feeds would drop sites in silence (P38).")
+print()
+
+import semantic  # noqa: E402
+
+# ONE SCAN, SHARED, and `open` is replaced for ALL of it -- including the estate
+# census in section 3, which is by far the largest reader here.  Leaving the
+# biggest reader outside the watch would be the gap this arc reports.
+_SEM_OPENED = []
+
+
+def _watched_open_sem(file, *a, **kw):
+    try:
+        p = os.path.abspath(file if isinstance(file, str) else str(file))
+    except Exception:                                   # a file descriptor
+        p = ""
+    if p.startswith(ROOT + os.sep):
+        _SEM_OPENED.append(os.path.relpath(p, ROOT))
+    return _real_open(file, *a, **kw)
+
+
+try:
+    builtins.open = _watched_open_sem
+    _POP = semantic.declarations(semantic.AS_OF)
+    _ROWS = [semantic.resolve(r, semantic.AS_OF) for r in semantic.REGISTRY]
+    _PREREG = semantic.prereg_census(semantic.AS_OF)
+finally:
+    builtins.open = _real_open
+
+check("P35 semantic reads the estate AT A COMMIT, never off disk",
+      (_SEM_OPENED, len(_POP["prose"]), len(_PREREG["preds"])),
+      ([], 43, 129),
+      "P26's defect and P29's subject, on the widest reader yet: this file "
+      "greps every tracked source in the estate and then reads every "
+      "candidate, and THIS BRANCH EDITS TWO OF ITS SUBJECTS — selftest_20ee.py "
+      "is one of the 37 files section 1 counts and the site of the two "
+      "declarations R1 and R2 check. If any of that came off disk the "
+      "transcript would be a statement about the worktree it was run in, and "
+      "the edit would move the numbers it is about. RUN rather than promised: "
+      "`open` is replaced for the whole scan, the census included. The two "
+      "population figures sit beside the empty list because a scan that read "
+      "nothing because it did nothing would otherwise pass.")
+
+_V = {r["id"]: r["verdict"] for r in _ROWS}
+check("P36 the four verdicts — and TWO of them must SEPARATE",
+      (_V, len(_PREREG["proved"]), len(_PREREG["only_pred"])),
+      ({"R1": "SEPARATED", "R2": "COLLIDES", "R3": "COLLIDES",
+        "R4": "SEPARATED"}, 3, 5),
+      "THE WRONG-DIRECTION CONTROL, AND IT IS WHAT MAKES THE TWO `NO` ROWS "
+      "WORTH READING. COLLIDES is the direction that PROVES — two readings "
+      "written by one commit share every commit-level field, so no rule "
+      "reading one of them can separate the pair — which means a file "
+      "returning COLLIDES everywhere would prove nothing and look identical "
+      "to a file that sees nothing. R1 IS THE CALIBRATION: the limit mg-0bf1 "
+      "ALREADY closed, asked by this file's machinery, and it must come back "
+      "SEPARATED naming the pin. R4 is the new one and it is asserted twice — "
+      "on its two witnesses and on the estate, where the row fires through a "
+      "PREDICTIONS.md alone in 5 directories and the date proves 3 of them "
+      "are not transcripts. Turning any one of the four green alone means the "
+      "machinery stopped depending on the repository.")
+
+_PLANT_GONE = dict(semantic.REGISTRY[0], id="X1", declared=(
+    "file", "code/asof_census_20ee/selftest_20ee.py",
+    "a declaration that has never been written in this file"))
+_PLANT_AMBIG = dict(semantic.REGISTRY[0], id="X2", witnesses=[
+    ("code/asof_census_20ee/README.md", "the", "a needle that matches often"),
+    ("code/asof_census_20ee/README.md", "and", "and so does this one")])
+_G = semantic.resolve(_PLANT_GONE, semantic.AS_OF)
+_A = semantic.resolve(_PLANT_AMBIG, semantic.AS_OF)
+check("P37 a row whose declaration or witness has moved SAYS SO",
+      (_G["declared"][0], bool(_G["errors"]), _G["verdict"],
+       _A["verdict"], len(_A["errors"])),
+      ("GONE", True, "SEPARATED", "UNRESOLVED", 2),
+      "THE DELETION TEST ON THE ROT GUARD, BOTH HALVES. A registry of other "
+      "people's declared limits is a set of claims about documents this "
+      "branch does not own, and the failure mode is SILENCE: the declaration "
+      "is deleted, the row keeps printing, and a reader is told a file says "
+      "something it no longer says. So the declaration is located at AS_OF "
+      "and a row that cannot find it reads GONE — AND KEEPS ITS VERDICT, "
+      "which is deliberate: what the witnesses do is a fact about the "
+      "repository whether or not anyone still declares it, and collapsing the "
+      "row would hide that. The second half is the witness locator: a needle "
+      "matching TWO lines is a witness a reader cannot check, and it is a "
+      "self-error rather than a silent first-match — the same rule pinnable.py "
+      "applies to an empty diff.")
+
+_STRICT_D, _LOOSE_D = semantic.DECLARES, re.compile(semantic.GREP, re.I)
+_RED = semantic.red_tokens(semantic.AS_OF)
+_LOOSE_R = re.compile("(%s)" % _RED.pattern.replace(r"\b", ""))
+_PROBES = ["cannot tell a use from a mention", "CANNOT DISTINGUISH two things",
+           "cannot telling", "it cannot separately"]
+check("P38 both prefilters are WIDER than the rules they feed",
+      (all(bool(_LOOSE_D.search(s)) for s in _PROBES if _STRICT_D.search(s)),
+       bool(_STRICT_D.search("cannot telling")),
+       bool(_LOOSE_D.search("cannot telling")),
+       bool(_RED.search("REFUTEDLY")), bool(_LOOSE_R.search("REFUTEDLY"))),
+      (True, False, True, False, True),
+      "`git grep` speaks POSIX ERE and has neither `(?:` nor `\\b`, so both "
+      "prefilters in that file are the rule with those dropped. THE DIRECTION "
+      "IS THE WHOLE SAFETY ARGUMENT: a prefilter WIDER than the rule may hand "
+      "over files the rule then rejects and CANNOT hide one, while a narrower "
+      "one drops sites in silence and the count still looks like a count. "
+      "Both halves are asserted, because a prefilter that were merely EQUAL "
+      "to the rule would pass the first half and would be a second spelling "
+      "of the rule — the thing mg-1344's P5 forbids — so a string the loose "
+      "form takes and the strict one refuses is exhibited for each. The "
+      "measured confirmation is one level up: section 3's census was run BOTH "
+      "ways at AS_OF, prefiltered and reading every tracked .txt/.md in the "
+      "estate, and the two transcripts are byte-identical.")
+
+_ABSENT_SEM = "mg5058_" + "absent_" + "declaration_needle"
+check("P39 a prefilter that matches NOTHING returns nothing, and does not die",
+      (semantic.grep_files(semantic.AS_OF, _ABSENT_SEM, ("*.py", "*.md")),
+       len(semantic.grep_files(semantic.AS_OF, semantic.GREP,
+                               ("*.py", "*.md", "*.sh", "*.txt"))) > 50),
+      ([], True),
+      "mg-4020'S CRASH, ONE FILE ALONG AND REACHED BY A THIRD ROUTE. `git "
+      "grep` exits 1 for NO MATCH and 2+ for a real error, and worklist's "
+      "`git()` — which semantic.py IMPORTS — treats every non-zero as fatal, "
+      "so both prefilters in that file would have died on the day their "
+      "pattern stopped matching. For the red-token one that is a day somebody "
+      "could bring about by tidying the estate, and the failure would arrive "
+      "AFTER a correct-looking header. The tolerance is consumers.git_grep_l's "
+      "and is deliberately narrow: rc 1 is empty, rc 2 and above stays fatal, "
+      "because a mistyped revision returning `none` is a census that reports "
+      "nothing because it never looked. THE NEEDLE IS ASSEMBLED FROM PIECES "
+      "for C5's reason — spelled as one literal it would be a tracked *.py "
+      "line and would find itself — and the live pattern's count sits beside "
+      "it so a prefilter that had silently stopped matching anything could "
+      "not pass this control by returning the empty list twice.")
+
+_R2ROW = next(r for r in _ROWS if r["id"] == "R2")
+check("N32 the registry's readings are HAND JUDGEMENTS — A LIMIT",
+      (_R2ROW["verdict"],
+       _R2ROW["witnesses"][0]["sha"] == _R2ROW["witnesses"][1]["sha"],
+       _R2ROW["witnesses"][0]["reading"] != _R2ROW["witnesses"][1]["reading"]),
+      ("COLLIDES", True, True),
+      "A DECLARED LIMIT, ASSERTED ON THE ROW THAT IS ITS OWN INSTANCE. This "
+      "control says in three fields what the whole file cannot do: R2's two "
+      "witnesses AGREE on every field the repository has — one commit, one "
+      "author, one date, one order index — and DISAGREE only in a sentence a "
+      "person wrote into REGISTRY. That is exactly why the row is a proof "
+      "that no commit-level rule separates them, and exactly why the labels "
+      "themselves are not derived from anything. WHAT TURNING THIS GREEN "
+      "WOULD MEAN: somebody derived the readings mechanically, which is the "
+      "rule about English N28 declared and mg-0bf1 avoided rather than "
+      "supplied — so the remedy is the one N28 named and it is why every "
+      "witness prints with its line: THE INSTRUMENT PRINTS THE SENTENCE. A "
+      "reader who disagrees with a label disagrees with text on the page.")
+
+print()
 
 # EVERY `SEE CONTROL X` IN THIS DIRECTORY RESOLVES, AND IT IS CHECKED PER SITE.
 # mg-23af found two that did not: pinnable.py said `--recursive` staying lit was
@@ -1171,7 +1342,10 @@ print()
 # FOREIGN references are legal and DECLARED, and the declaration is MEASURED:
 # the owning directory must really run a control by that name, or this control
 # is a way to excuse any pointer at all -- P15's shape, one file over.
-FOREIGN = {("README.md", "N14"): "code/state_ratchet_e331"}
+FOREIGN = {("README.md", "N14"): "code/state_ratchet_e331",
+           # R4's witness line is a94c3's own P4, quoted verbatim so a
+           # reader can check the label; the pointer is foreign and backed.
+           ("semantic.py", "P4"): "code/c3_audit_a94c3"}
 # BURNED numbers are never issued to a new control.  P24 is burned because
 # pinnable.py's dead pointer named it: issuing it would make that pointer
 # RESOLVE, to a control about something else, which is strictly worse than
@@ -1247,8 +1421,9 @@ else:
     print("GREEN — %d control(s) land where they must: %d positive, %d "
           "negative and %d on the consumer census's three-way classification, "
           "across the address census, the consumer census, the pinnable "
-          "pre-condition, the condition-2 comparator and the work-list's own "
-          "re-take.  %s confirm a KNOWN "
+          "pre-condition, the condition-2 comparator, the work-list's own "
+          "re-take, the record's last word about an instrument and the "
+          "registry of declared limits.  %s confirm a KNOWN "
           "DEFECT or a DECLARED LIMIT rather than a repair, and each says in "
           "its own text what turning it green would mean."
           % (len(RAN), sum(1 for n in RAN if n[0] == "P"),
