@@ -1,0 +1,264 @@
+============================================================================================
+mg-fa83  RULES THAT PASS THE CONTROL AND ARE WRONG
+============================================================================================
+
+The general form of mg-cda7's finding, tested by construction on the arms that
+block a merge.  Every line below is a real arm, executed.
+
+§0  THE POPULATION — the arms ./build.sh runs, and which of them are here
+--------------------------------------------------------------------------------------------
+  A control that nothing invokes has never told anybody anything (mg-937c measured
+  that: 0 of 150 stale transcripts sit in a directory the gate runs).  So the
+  population is the gate's own suites, and the four below are the ones whose
+  SUBJECT IS A DOCUMENT — the rest read posets, and a mutated markdown file is not
+  a fact about them.  That restriction is this arm's own coarse unit and §5 says so.
+
+  e331   code/state_ratchet_e331/ratchet.py                   subject: STATE.md
+  03cf   code/facts_registry_03cf/f0_registry_discipline.py   subject: docs/FACTS.md
+  602d   code/concepts_gate_602d/c0_concept_discipline.py     subject: docs/CONCEPTS.md
+  9bc2   code/rendered_twin_pin_9bc2/twin_pin.py              subject: STATE.md
+
+  NOT EXERCISED, AND NAMED RATHER THAN OMITTED:
+    code/control_gate_724a/gate.py — its decision is a comparison against
+    BASELINE.json's gated fields, and reaching it needs the twin suite's git-valued
+    sections.  This sandbox carries no .git BY CONSTRUCTION, so gate.py REFUSES
+    here (measured: exit 2, `field twin.worklist matched its pattern 0 time(s)`).
+    Its two count-valued fields are read in §6 and are NOT claimed as witnesses.
+
+§1  BASE FIDELITY — the sandbox reproduces every arm's real decision
+--------------------------------------------------------------------------------------------
+  e331   real tree exit 0 / GREEN     sandbox exit 0 / GREEN     AGREES
+         RATCHET VERDICT: GREEN — 5199 words, ceiling 5199, tighten below 4699.
+  03cf   real tree exit 0 / GREEN     sandbox exit 0 / GREEN     AGREES
+         VERDICT: GREEN — 26 entries
+  602d   real tree exit 0 / green     sandbox exit 0 / green     AGREES
+         VERDICT: green.  Every claim row points somewhere, every belief is marked as one,
+  9bc2   real tree exit 0 / CLEAN     sandbox exit 0 / CLEAN     AGREES
+         VERDICT: CLEAN — the twin is pinned and its ledger rows have not moved.
+
+  4 of 4 agree.  Every `unmoved` below is measured against these.
+
+§2  THE WORLDS — each recipe run past ALL FOUR arms
+--------------------------------------------------------------------------------------------
+  TARGET is the arm whose own subject is the mutated document.  CROSS is the other
+  three: a fire there is the ESTATE catching what the target could not, and it is
+  why `witness of the target` and `witness of the gate` are two different findings.
+
+  R1   witness   target e331   STATE.md at the same token COUNT with every token 2 000 characters
+         words:                             5199 -> 5199
+         bytes:                             35466 -> 10403199  (x293)
+         longest token, chars:              150 -> 2000
+         original words surviving:          0.0%
+         arms:                              e331 still  *  03cf MOVED     602d MOVED     9bc2 CRASH   
+         READS:                             WITNESS of e331, CAUGHT by 03cf,602d
+                                            9bc2 CRASHED — blocks, detects nothing, not counted as a catch
+
+  R1'  must-fire target e331   STATE.md plus one word
+         words:                             5199 -> 5200
+         arms:                              e331 MOVED  *  03cf still     602d still     9bc2 still   
+         READS:                             FIRED
+
+  R2a  probe     target 9bc2   every non-LEDGER line's words replaced, ledger table byte-identical
+         words:                             5199 -> 5199
+         lines held byte-identical:         26 of 211
+         original words surviving:          36.0%
+         arms:                              e331 still     03cf MOVED     602d still     9bc2 still  *
+         READS:                             CAUGHT by 03cf
+
+  R2b  witness   target 9bc2   the same, plus the hand-built preserved set §4 prints
+         words:                             5199 -> 5199
+         lines held byte-identical:         28 of 211
+         original words surviving:          39.4%
+         arms:                              e331 still     03cf still     602d still     9bc2 still  *
+         READS:                             WITNESS — nothing in this population caught it
+
+  R3   witness   target 03cf   F1's SCOPE body replaced by `n/a` — the field is present and says nothing
+         F1 SCOPE, characters:              702 -> 14
+         occurrences of `exhaustive` in the file: 28 -> 26
+         the field is still present:        yes — which is what the arm checks
+         arms:                              e331 still     03cf still  *  602d still     9bc2 still   
+         READS:                             WITNESS — nothing in this population caught it
+
+  R3'  must-fire target 03cf   F1's SCOPE field RENAMED
+         entries carrying **SCOPE.**:       26 -> 25
+         arms:                              e331 still     03cf MOVED  *  602d still     9bc2 still   
+         READS:                             FIRED
+
+  R4   witness   target 03cf   one entry deleted and one fabricated entry added — the count is unmoved
+         entries:                           26 -> 26
+         removed:                           F26
+         added:                             F99
+         arms:                              e331 still     03cf still  *  602d still     9bc2 still   
+         READS:                             WITNESS — nothing in this population caught it
+
+  R4'  must-fire target 03cf   one entry deleted and nothing added
+         entries:                           26 -> 25
+         arms:                              e331 still     03cf MOVED  *  602d still     9bc2 still   
+         READS:                             FIRED
+
+  R5   witness   target 602d   the `alpha(P)` row points at `mg-0000`, an id no work item has had
+         the row's pointer:                 F6-F7 + two work items -> `mg-0000`
+         occurrences of mg-0000 in STATE.md and this file: 0
+         it matches the arm's POINTER_RE:   yes — [0-9a-f]{4} is what the rule asks for
+         arms:                              e331 still     03cf still     602d still  *  9bc2 still   
+         READS:                             WITNESS — nothing in this population caught it
+
+  R5'  must-fire target 602d   the `alpha(P)` row's pointer cell emptied
+         the row's pointer cell:            populated -> empty
+         arms:                              e331 still     03cf still     602d MOVED  *  9bc2 still   
+         READS:                             FIRED
+
+  R6   witness   target 602d   CONCEPTS.md at the same token COUNT with every token 2 000 characters
+         words:                             3310 -> 3310
+         bytes:                             20156 -> 6623310  (x329)
+         longest token, chars:              66 -> 2000
+         original words surviving:          0.0%
+         arms:                              e331 still     03cf still     602d REFUSED*  9bc2 still   
+         READS:                             CAUGHT by the target
+                                            602d REFUSED — a designed default-deny, and it blocks
+
+  R6'  must-fire target 602d   CONCEPTS.md plus 400 words
+         words:                             3310 -> 3710
+         arms:                              e331 still     03cf still     602d MOVED  *  9bc2 still   
+         READS:                             FIRED
+
+  R7   witness   target 03cf   F1 re-graded `U` (proved) -> `OPEN` — a recognised mark, and the wrong one
+         F1's KIND mark:                    `U` (proved) -> `OPEN`
+         still a mark the arm recognises:   yes — that is exactly §2's check
+         entries whose mark this changes:   1
+         arms:                              e331 still     03cf still  *  602d still     9bc2 still   
+         READS:                             WITNESS — nothing in this population caught it
+
+  R7'  must-fire target 03cf   F1 graded with an invented mark
+         F1's KIND mark:                    `U` -> `ULTRA`, which is in no vocabulary
+         arms:                              e331 still     03cf MOVED  *  602d still     9bc2 still   
+         READS:                             FIRED
+
+§3  THE VERDICT, AND THE BASE RATE IT IS READ AGAINST
+--------------------------------------------------------------------------------------------
+    R1   e331  STATE.md at the same token COUNT with every  passes e331, caught by 03cf,602d
+    R2b  9bc2  the same, plus the hand-built preserved set  PASSES EVERY ARM
+    R3   03cf  F1's SCOPE body replaced by `n/a` — the fiel PASSES EVERY ARM
+    R4   03cf  one entry deleted and one fabricated entry a PASSES EVERY ARM
+    R5   602d  the `alpha(P)` row points at `mg-0000`, an i PASSES EVERY ARM
+    R6   602d  CONCEPTS.md at the same token COUNT with eve CAUGHT by its target (602d)
+    R7   03cf  F1 re-graded `U` (proved) -> `OPEN` — a reco PASSES EVERY ARM
+
+  7 candidate witnesses were built, over 3 documents and 4 independently written
+  arms.  6 PASS their target arm: its own decision is unmoved and the tree is wrong
+  by the numbers §2 prints.  1 was CAUGHT BY ITS TARGET, and that number is why the
+  others are worth reading — a search that found a witness everywhere would be
+  measuring its own permissiveness, which is mg-cda7's `6 of the 13 gain nothing at
+  all` doing the same job for the same reason.
+
+  5 pass EVERY arm in this population.  For those, no control the merge gate runs
+  over these documents distinguishes the mutated tree from the real one.
+
+  6 of 6 must-fire pairs FIRED on their target.  A pair that did not fire would
+  mean the sandbox is not exercising that arm and its witness is worth nothing.
+
+§3b  THE ONE THAT WAS CAUGHT IS THE REMEDY, AND IT COSTS NOTHING TO COPY
+--------------------------------------------------------------------------------------------
+  R1 and R6 ARE THE SAME RECIPE on two documents — same token count, every token
+  2 000 characters — and they come back opposite ways.  `ratchet.py` is GREEN;
+  `c0_concept_discipline.py` REFUSES at exit 2 and blocks the merge.
+
+  The difference is one design decision, and it is already written down in the arm
+  that has it.  c0 locates its sections by ANCHOR PHRASES and says:
+
+      "If a heading is reworded the anchor is not found and this arm REFUSES
+       (exit 2) rather than passing -- a rename must be LOUD.  It cannot be
+       silent-green, because a gate that quietly stops checking is worse than no
+       gate: it is a gate people believe in."
+
+  THAT IS A DEFAULT-DENY ON THE DOCUMENT'S SHAPE, and it is what turns a
+  count-valued control into one that cannot be passed by a document that is no
+  longer the document.  The ratchet has no such check: `measure()` computes
+  `bytes`, `lines`, `max_line_chars` and `lines_over_2000` and `verdict()` reads
+  ONLY `words`, so the four finer numbers are on the transcript and gate nothing.
+
+  So the remedy this branch would propose is not new machinery: it is c0's rule at
+  e331's site.  IT IS NOT MADE HERE — that is a rewrite of another directory's arm,
+  its transcript and its PREDICTIONS, and a demonstration binding by the back door
+  is not a demonstration (mg-585e).  It is exhibited, priced at one predicate, and
+  handed to that arm's owner.
+
+§4  WHAT THE MERGE GATE ACTUALLY HOLDS IN STATE.md, AS A NUMBER
+--------------------------------------------------------------------------------------------
+  R2b is the recipe that says this, and the preserved set is the answer: it is the
+  set of lines that had to be held byte-identical for every arm to stay green.
+
+  STATE.md                       211 lines, 5199 words
+  the ledger table               26 lines
+  any line naming docs/FACTS.md  2 lines
+  any line naming docs/CONCEPTS. 2 lines
+  PRESERVED SET, total           28 lines of 211  (13.3%)
+  words inside it                2048 of 5199  (39.4%)
+
+  So 3151 of STATE.md's 5199 words are outside every fine-unit check the merge gate
+  performs, and R2b is a tree in which all of them are the word `lorem`.
+  The ratchet sees the COUNT and the twin sees the LEDGER ROWS; the complement is
+  guarded by neither, and that complement is the majority of the document.
+
+§5  WHAT THIS ARM CANNOT SEE — its own coarser unit
+--------------------------------------------------------------------------------------------
+  1  THE POPULATION IS FOUR ARMS, chosen because their subject is a document.  A
+     gated arm that reads one of these files incidentally is invisible here.  That
+     is the same proxy-over-a-coarser-unit this arm is about, in this arm.
+  2  NO .git, so every git-valued decision is out of reach: twin_pin section 7
+     grades itself REPORTED, NOT GRADED here, and gate.py refuses outright.  A
+     witness that a git-valued section would catch would still read as a witness.
+  3  `WRONG` IS THIS BRANCH'S READING.  §3's damage columns are numbers, but that
+     an emptied SCOPE or an `mg-0000` pointer is a DEFECT is a judgement — the same
+     one OWNERS.json makes about `cause`, and it declares that nothing checks it.
+  4  A recipe that no arm catches may still be caught by a person reading the diff.
+     Every witness here is loud in `git diff`.  What it is not is BLOCKED, and the
+     difference is mg-be37's: a detector with no addressee and one that never fired
+     are indistinguishable, and so are a reviewer who reads and one who does not.
+  5  THIS TRANSCRIPT'S OWN HEADLINE IS A COUNT, which is §6's defect in §3.  `6 of
+     7 pass` is unmoved by a recipe DELETED and a weaker one ADDED, exactly as
+     `twin.mutations_total` is.  What stops it here is that the table above prints
+     the SET — every recipe by id, headline and verdict — so the count is a summary
+     of something a reader can re-read rather than the record itself.  That is the
+     only remedy this directory found for a count, and it is not a check.
+  6  A MUST-FIRE PAIR PROVES THE ARM RUNS, NOT THAT IT IS SENSITIVE TO THE WITNESS'S
+     KIND OF CHANGE.  Each pair moves a check of the same arm; none of them is
+     evidence that the arm could in principle have seen its partner.  It closes
+     `the sandbox is not exercising this arm` and nothing wider.
+
+§6  THE ONE THE ESTATE ALREADY NAMED, READ AND NOT WITNESSED
+--------------------------------------------------------------------------------------------
+  code/control_gate_724a/BASELINE.json gates two INTEGERS over the twin's negative
+  control — `twin.mutations_caught` and `twin.mutations_total` — and the second
+  exists because of this exact shape.  Its own `why`, quoted:
+
+      "Gated because a mutation quietly deleted is coverage quietly removed, and
+       it would otherwise be invisible: 16 of 16 caught reads exactly like 17 of 17."
+
+  THE REMEDY IS THE SAME KIND OF ARTIFACT AS THE DEFECT: a count was guarded by
+  adding a second count, so a mutation DELETED and a different one ADDED moves
+  neither field.  That is mg-cda7's `gains lines, OUT unmoved` letter for letter,
+  on the file that gates the gate.
+
+  IT IS READ AND NOT WITNESSED, AND THE DIFFERENCE IS THE WHOLE POINT OF THIS
+  DIRECTORY, so it is labelled rather than dressed up as a result: exercising it
+  needs gate.py, gate.py needs the twin suite's git-valued sections, and this
+  sandbox has no git.  It is the sharpest instance in the estate and it is the one
+  this arm could not build.  Filed forward rather than claimed.
+
+§7  THE REAL WORKING TREE, BEFORE AND AFTER
+--------------------------------------------------------------------------------------------
+  Every arm above ran against a tree of symlinks into the corpus, so an arm that
+  WROTE would write the real file.  The claim that none did is checked here rather
+  than intended (`w0` D9 checks the same thing over its own worlds).
+
+  STATE.md                           fc12604ba098b424 -> fc12604ba098b424   UNMOVED
+  docs/FACTS.md                      41af0d8370a4b24c -> 41af0d8370a4b24c   UNMOVED
+  docs/CONCEPTS.md                   153fe831bb4a7000 -> 153fe831bb4a7000   UNMOVED
+  docs/state-of-the-wall.html        3987392d9d616f5f -> 3987392d9d616f5f   UNMOVED
+
+============================================================================================
+VERDICT: 6 of 7 candidate witnesses PASS their target arm; 1 caught by its
+own target, and 5 pass EVERY document arm the merge gate runs.  `The control did
+not move` is necessary and is not sufficient, on this estate, by construction.
+============================================================================================

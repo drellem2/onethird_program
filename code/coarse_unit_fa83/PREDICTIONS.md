@@ -61,6 +61,30 @@ measurement. `CAUGHT` = the arm's decision moved.
   asserted here so that the arm which checks it (`w0`) is checking a published claim.
 - **It will not join `build.sh`.** Its subject is a claim about controls, not a control.
 
+## §2b OUTCOMES — added after the run, with §1 left exactly as it was written
+
+Three of the ten came back other than predicted, and all three are recorded as refuted rather
+than reworded. `out_w1_witnesses.txt` and `out_w0_selftest.txt` are the evidence.
+
+| id | outcome |
+|---|---|
+| **P1** | **HALF REFUTED.** `ratchet.py` is unmoved — `WITNESS` of `e331` — but `03cf` and `602d` both **moved**, because each reads STATE.md for a pointer of its own. So it is a witness of the ratchet and **not** of the gate, which is a distinction P1 did not make and §2 of the arm now prints per recipe. `9bc2` CRASHED, which is reported and **not** counted as a catch. |
+| **P2** | **CONFIRMED — the one I expected to fall.** R2b passes all four. R2a, which keeps the ledger *alone*, is **CAUGHT by `03cf`**, so the preserved set is doing real work and §4 reports its size. |
+| **P3** | CONFIRMED. |
+| **P4** | CONFIRMED. |
+| **P5** | CONFIRMED. `POINTER_RE` is `mg-[0-9a-f]{4}`, and `mg-0000` matches it. |
+| **P6** | **REFUTED, and it is the most useful line in the run.** `c0` **REFUSES at exit 2** — its section anchors are gone, and its own rule is that *a rename must be LOUD*. The same recipe passes the ratchet and is blocked by the concepts gate, and the difference is one default-deny predicate that already exists one directory over. §3b of the arm and §3 of the README carry it. |
+| **P7** | CONFIRMED. |
+| **P8** | CONFIRMED — 6 of 6 pairs fired. |
+| **P9** | **REFUTED ON ITS NUMBER.** The preserved set is **28** lines, not under 20 — the ledger table alone is 26. The claim it was standing in for survives and is larger than predicted: 3 151 of 5 199 words are outside every fine-unit check. |
+| **P10** | CONFIRMED, by P6. One of the seven was caught by its target, and it is the base rate the other six are read against. |
+
+**One prediction was not written down and should have been.** Nothing in §1 predicted that an
+arm could reach **no decision at all**. Two worlds do — one by a designed refusal and one by an
+uncaught `ValueError` — and the two had to be separated after the fact, because folding a crash
+into `caught` credits a control with coverage it does not have. That distinction is in the
+shipped classifier (`lib_fa83.run_arm`) and is checked by `w0` D3b.
+
 ## §3 The two ways this instrument can be worthless, and the arms that must exist for them
 
 1. **A sandbox that does not exercise the arm.** Every witness ships a paired mutation the arm

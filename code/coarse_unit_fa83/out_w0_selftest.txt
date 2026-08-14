@@ -1,0 +1,74 @@
+============================================================================================
+mg-fa83  THE WITNESS MACHINERY, BROKEN ON PURPOSE
+============================================================================================
+
+D1-D2  THE SANDBOX CARRIES THE MUTATION, AND ONLY THE MUTATION
+--------------------------------------------------------------------------------------------
+  D1   the mutated file in the tree is the mutant             CAUGHT   STATE.md
+  D2   every other file is the corpus, byte for byte          CAUGHT   docs/FACTS.md via symlink
+  D2b  a second tree does not carry the first tree's mutation CAUGHT   no leakage between worlds
+
+D3  THE DECISION CLASSIFIER IS EXERCISED IN EVERY CLASS IT HAS
+--------------------------------------------------------------------------------------------
+  A classifier only ever observed in one state is a constant.  Each class below is
+  reached by a REAL arm on a REAL tree, not by a stub returning what is expected.
+      a grade word           03cf   exit 0 / GREEN
+      a moved grade          03cf   exit 1 / RED
+      REFUSED, by design     602d   exit 2 / REFUSED
+      CRASH, uncaught        9bc2   exit 1 / CRASH
+  D3   at least 3 distinct decision classes observed          CAUGHT   CRASH|GREEN|RED|REFUSED
+  D3b  REFUSED and CRASH are told apart                       CAUGHT   designed vs traceback
+
+D4  THE WRONG DIRECTION — a change no arm reads must move nothing
+--------------------------------------------------------------------------------------------
+  A sandbox in which everything moves is a broken sandbox, not a finding.
+  D4   a new file no arm reads moves 0 of 4 arms              CAUGHT   moved: none
+
+D5  A WORLD THAT PLANTS NOTHING IS REFUSED, NOT GRADED
+--------------------------------------------------------------------------------------------
+  mg-e331's N13 and mg-9876's unfalsifiable-row guard: a probe whose mutation is
+  absent from the tree scores its own expectations.
+  D5   a no-op recipe raises rather than reading WITNESS      CAUGHT   Refusal on an unchanged fi
+
+D6  THE COARSE UNIT THIS INSTRUMENT NEARLY SHIPPED
+--------------------------------------------------------------------------------------------
+  A tree that GAINS a valid registry entry, with STATE.md's pointer moved to match:
+  f0 stays GREEN and its own sentence moves 26 -> 27 entries.  Compared as
+  (exit, grade) that is UNMOVED — a control passing over a change it can see, which
+  is this directory's subject arriving in this directory.
+
+      base    exit 0 / GREEN  VERDICT: GREEN — 26 entries
+      mutant  exit 0 / GREEN  VERDICT: GREEN — 27 entries
+  D6   the (exit, grade) unit is BLIND to it                  CAUGHT   the unit not shipped
+  D6b  the shipped unit — with the decision line — is not     CAUGHT   the unit lib_fa83 uses
+      So the finer unit is what `lib_fa83.decision` returns, and it was made finer
+      because a witness was built against it — not because it looked safer.
+
+D7  THE MUTATORS DO WHAT THEIR NAMES SAY
+--------------------------------------------------------------------------------------------
+  D7   inflate preserves the token count exactly              CAUGHT   5199 tokens
+  D7b  and replaces every token                               CAUGHT   0.0% survive
+  D7c  surviving_word_share is 1.0 on the identity            CAUGHT   the wrong direction
+  D7d  the ledger block really is held byte-identical         CAUGHT   26 lines held
+  D7e  and the total token count is unmoved by the swap       CAUGHT   per-line preservation
+
+D8  THE TRANSCRIPT CARRIES NO OPERATOR AND NO CLOCK
+--------------------------------------------------------------------------------------------
+  A transcript naming somebody's temp directory reproduces for exactly one operator
+  and for nobody else, ever (mg-bdb0, on mg-4020's finding).
+  D8   the sandbox path is scrubbed                           CAUGHT   <sandbox>
+  D8b  the repository root is scrubbed                        CAUGHT   <repo>
+  D8c  wall-clock is scrubbed                                 CAUGHT   <t>s
+
+D9  THE REAL WORKING TREE IS UNMOVED BY EVERYTHING ABOVE
+--------------------------------------------------------------------------------------------
+  STATE.md                           fc12604ba098b424   unmoved
+  docs/FACTS.md                      41af0d8370a4b24c   unmoved
+  docs/CONCEPTS.md                   153fe831bb4a7000   unmoved
+  docs/state-of-the-wall.html        3987392d9d616f5f   unmoved
+  D9   no sandbox wrote through a symlink into the corpus     CAUGHT   4 documents digested
+
+============================================================================================
+18 of 18 plants CAUGHT; 0 hole(s).
+SELFTEST VERDICT: GREEN
+============================================================================================
