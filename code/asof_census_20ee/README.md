@@ -1998,7 +1998,26 @@ which now runs on every invocation.
   condition 2** on the build path, with the shipped declarations, at every gate.
 - `consumers.py` is still unpinned and its index/HEAD mixture unrepaired.
 
-## 5. The one census figure this branch really moves, and the residue it leaves
+## 5. Renumbered on landing, and the map is printed — the FOURTH collision in four landings
+
+This branch issued `P51`, `P52`, `P53` and `N35`. **`mg-6219`'s `figures.py` landed
+those same four names while this branch sat in the merge queue**, so they became
+
+| issued on the branch | landed as |
+|---|---|
+| `P51` the residue row's condition 2 | **`P56`** |
+| `P52` s3's detector is s2's detector | **`P57`** |
+| `P53` the corpus read is anchored | **`P58`** |
+| `N35` R3's `ORDERED` suppressed a real walk | **`N36`** |
+
+and **not one word of the argument moved**. A number in this directory is never
+reissued — that is what `BURNED` is for and `P25` enforces it. The map is also in
+the `KNOWN_DEFECT` comment beside `N36`, so a reader holding this branch's
+pre-rebase commit message (which names the old numbers) can follow it. That is
+`mg-bdc0`'s and `mg-6219`'s own resolution a third and fourth time, and it is a
+fact about the namespace rather than about any branch.
+
+## 6. The one census figure this branch really moves, and the residue it leaves
 
 `| tee` sites: **30 → 27** in **11 → 10** directories, and all three removed lines
 are this branch's own — `code/eps_spec_sweep_372e/run_all.sh:5`, `:6` and `:7`,
