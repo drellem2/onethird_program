@@ -1386,3 +1386,179 @@ a claim about something else. **This branch's own `202` carries exactly the same
 will be wrong the moment a `run_all.sh` lands on main before it merges. `out_exemplars.txt` cannot
 go stale that way and `out_consumers.txt` can, in one directory, which is the whole difference an
 `AS_OF` makes.
+
+---
+
+# Tranche 11 (`mg-5058`) — which declared limits are **date questions**, and the two that provably are not
+
+Tranche 10 closed with one question, and it is the whole of this tranche:
+
+> is **any** remaining *"read what the sentence says"* rule in this estate likewise a date question
+> wearing semantic clothes?
+
+**The answer is yes for one more and provably no for two, and the interesting half is the no.** A
+limit is not shown to need English by nobody having found a rule — that is an absence of evidence,
+and this arc does not publish those. It is shown by a **collision witness**: two real lines whose
+readings are opposite and whose **commit is the same**. Every commit-level field — sha, date, author,
+order index, what landed before and after — is then literally identical across the two readings, so
+**no** rule reading any of them can separate the pair. That is an impossibility rather than a failure
+to find something, which is the only thing a rule can have.
+
+The instrument is `semantic.py`, it ships in `run_all.sh`, and its transcript reproduces
+byte-identically for `exemplars.py`'s reason with one of its own on top: **two of its four rows read
+their declaration out of `selftest_20ee.py`, which this branch edits**, and one of its population
+figures counts that same file — so a version reading off disk would have its numbers moved by the
+commit that adds its own controls. `P32` replaces `open` for the entire scan, the estate census
+included.
+
+## 1. One rule, four rows
+
+Every row is the same question asked of a different declared limit:
+
+> Given two witnesses whose readings are opposite, and an **event** in the repository that one
+> reading puts before them and the other after — does the event lie **strictly between** them in
+> commit order?
+
+| | |
+|---|---|
+| the witnesses share a commit | **COLLIDES** — no event can lie between them. **Proved.** |
+| the row's field separates them | **SEPARATED** — this field decides *these two*. A candidate rule, not a theorem. |
+| neither | **NOT SEPARATED**, which proves nothing |
+
+**One-directional, and the direction is the opposite of `exemplars.py`'s.** There the rule *firing*
+was the informative answer; here it is the rule *failing to separate*. Both files publish the
+direction their evidence can actually carry.
+
+**Where the class labels come from, which is not from me.** A collision witness is worth nothing if
+the two readings are the author's opinion, so each row's labels are taken from the record that
+*declared* the limit — `mg-aaf4`'s §7 names its own MENTION unit, this directory's `N28` names its
+own two sentences — and the declaration is **checked present at `AS_OF`**, printed with its file, so
+a row whose declaration has been deleted reads `GONE` rather than standing as a claim about a
+document that no longer says it (`P34`, both halves deletion-tested).
+
+## 2. The verdict
+
+At `AS_OF = 182d93b`, over **43** prose-scoped declarations of *"cannot tell / distinguish /
+separate"* in **37** tracked files (**209** loose in `.py`/`.md`/`.sh`, and **77** more in `.txt`
+excluded as echoes of the `.py` that printed them):
+
+| row | limit | verdict |
+|---|---|---|
+| `R1` | ACCOUNTING vs OFFERING — `N28`, the one tranche 10 closed | **SEPARATED** by the pin `e29ba2a` |
+| `R2` | a **younger** mention: ACCOUNTING vs a **quotation of the offer** — `N29` | **COLLIDES** at `0cb0fa4` |
+| `R3` | a strike marker **USED** vs **MENTIONED** — `mg-aaf4` §7 | **COLLIDES** at `522c1f3` |
+| `R4` | a **transcript** recording a failure vs a **pre-registration** recording a refuted prediction — `mg-9876`'s `a4` §3 | **SEPARATED** by the arm's first commit |
+
+The criterion that falls out of the four is one sentence:
+
+> **A semantic-looking distinction is a date question exactly when the two readings put the text on
+> opposite sides of an event that is itself a commit.**
+
+`R1` has one — the pin. `R4` has one — the first commit of an arm. `R3` has **none**: *what this
+marker is for* is not an event in the repository at all, so there are not two dates to order, which
+is why it collides rather than merely failing to separate.
+
+## 3. `R2` is the sharpest row, and it is this record's own
+
+`R2` **has** an event and collides anyway. Its two witnesses are `README.md:117` and `README.md:1060`,
+943 lines apart, both written by `0cb0fa4`:
+
+| line | reading |
+|---|---|
+| 117 | *"`species_remainder_f8fa` was **pinned at `e29ba2a`**"* — an **accounting** |
+| 1060 | *"the small ones (`species_remainder_f8fa` at `2+/2-` …) are cheap"* — **not** one: it is tranche 1's offer, **quoted** |
+
+**And line 1060 is the same English sentence as line 111**, which is `R1`'s first witness and which
+the date decides correctly. Tranche 9 quoted it while annotating it.
+
+> **A quotation moves the sentence without moving the event.** The date is a property of the touch
+> and the reading is a property of the words, and a quotation is where those two come apart on
+> purpose. This is *"blame is the last touch, not the origin"* — tranche 10's own declared limit —
+> arriving from the other side: there a reflow re-dates a sentence nobody changed, here a quotation
+> re-dates one somebody deliberately reproduced.
+
+## 4. The new date row, measured over the estate and not over two lines
+
+`R4`'s field is an impossibility of exactly tranche 10's shape: **a suite's transcript is written by
+an arm, so it cannot pre-date every arm of its own directory.** A file that does is not that suite's
+transcript, whatever tokens it contains — and no English is read anywhere.
+
+| | |
+|---|---|
+| `PREDICTIONS.md` in the tree | **129** |
+| … **provably** pre-registered (older than every arm) | **90** |
+| … born with an arm, so not provable here | 39 |
+| directories where `a4`'s red-token row fires | **154** of 233 |
+| … where it fires **only** through a `PREDICTIONS.md` | **5** |
+| … of those, the date **proves** it is not a transcript | **3** |
+
+The five are named in the transcript. `code/c3_audit_a94c3` is the witness, and its single red token
+is a sentence *forbidding* the word: *"Reporting `P4` as `REFUTED` would be wrong"*. **Reported and
+not repaired** — the row is `mg-9876`'s, and a branch that re-scoped another instrument's detector to
+make its own number read better would be doing the worse thing (`mg-99f4`'s shape, whose `+1` was a
+`PREDICTIONS.md`).
+
+**One-directional again**: *older than every arm* proves it is not a transcript; **born with an arm
+proves nothing**, and 39 of the 129 are in that state.
+
+## 5. What this tranche leaves — reported at the low water mark
+
+- **`N31` — the registry is a hand judgement, and this file cannot decide it.** Which of the 43
+  declarations are about reading a sentence, and which reading each witness carries, are read by a
+  person. The control is asserted on the row that is its own instance: `R2`'s two witnesses **agree
+  on every field the repository has** and **disagree only in a sentence somebody wrote into
+  `REGISTRY`**. That is precisely why the row proves what it proves, and precisely why the labels are
+  derived from nothing. The remedy is the one `N28` named: **the instrument prints the sentence.**
+- **A label could be derived from the field it is tested against, and `R4`'s first draft was.** The
+  pre-registration witness was labelled *"committed before any arm of its directory"* — the field
+  verbatim — so the row would have asserted that the field separates two labels the field had
+  assigned. **A circle that passes.** The label is now what a reader can check in the file (it is that
+  directory's only red token and it sits in a sentence forbidding the word) and the date is the only
+  thing measured. Found by the rule this directory applies to itself: *a remedy is an artifact of the
+  same kind as the defect.*
+- **A collision is about the witnesses, not about the whole limit.** It kills a *proposed rule* —
+  every rule reading commit-level metadata — and is not a proof that the limit is unclosable by any
+  means. A rule reading **document structure**, as `exemplars.py` §3 does, is not a rule reading a
+  commit.
+- **39 of the 43 are untested**, because a witness pair is a hand judgement and this tranche affords
+  four. Section 1 of the transcript lists every site. The one worth naming is `mg-9876`'s own *"a
+  regex cannot tell an arm from a `print`"*, whose two readings — `mg-585e`'s `loose_red` control and
+  `lib585e.py`'s guarded `if old not in text:` — sit in one directory and **two** commits, so that row
+  needs a witness pair this tranche did not have.
+- **Both `git grep` prefilters are wider than the rules they feed**, which is the only safe direction
+  and is asserted in both (`P35`): a wider prefilter may hand over files the rule then rejects and
+  **cannot hide one**. The measured confirmation is a level up — the estate census was run *both
+  ways* at `AS_OF`, prefiltered and reading every tracked `.txt`/`.md`, and the two transcripts are
+  byte-identical.
+- **`P25` fired on this branch, and on exactly what it is for.** `semantic.py`'s `grep_files`
+  docstring said *"`P36` runs it"* before any `P36` existed — a sentence whose entire content is *go
+  and check*, naming somewhere with nothing at it, which is the defect `mg-23af` built that control
+  from. It was caught by running the suite, not by reading, and the repair is the control rather than
+  the sentence: `P36` now runs the tolerance, on a needle assembled from pieces so it cannot find
+  itself (`C5`'s rule).
+- **`KNOWN_DEFECT` grows `8` → `9` and the suite `57` → `63` controls**, all green. `STATE.md` is
+  untouched so the ratchet is untouched and no twin re-pin is owed; `docs/FACTS.md` and
+  `docs/CONCEPTS.md` get no entry for `mg-3da1`'s reason a fifth time, every measurement here being
+  consumed by this landing.
+
+### It bit a fourth time: `out_consumers.txt` moves `202` → `203`, and the `+1` is **main's**
+
+The tree at `182d93b` holds **203** files named `run_all.sh` and the transcript committed there says
+**202**. The `+1` is `code/verdict_invariance_585e/run_all.sh` at `83a33c4` — `mg-585e`'s landing,
+which merged while tranche 10's branch was open. Checked rather than assumed: this branch adds **no**
+`run_all.sh`.
+
+That is the fourth tranche in five whose consumers transcript shipped stale at its own commit. The
+diagnosis has not changed: `consumers.py` reads the **live index** by design, so its figure is a
+function of *when you ran it* rather than of the commit you attach it to. **Reported and not
+repaired, and this is the third tranche to decline it** — the reason is unchanged and is scope rather
+than difficulty, and **this branch's own `203` carries exactly the same property**. `out_census.txt`,
+`out_permuted.txt`, `out_worklist.txt` and `out_exemplars.txt` do **not** move, checked against the
+dirty worktree rather than assumed, because all four are pinned.
+
+`mg-9876`'s arm census does not move either, and all three numerators were checked with `a4`'s own
+predicates rather than inferred: this branch adds **zero** directories, **zero** whole-output
+membership sites (`semantic.py` and the new controls contribute none), **zero** new
+negative-control basenames, and the `RED_TOKEN` membership this directory already had — `CAUGHT`
+inside a quoted commit subject in `out_worklist.txt` — is unchanged, so `out_semantic.txt` carrying
+`REFUTED` adds nothing the row counts.
