@@ -1386,3 +1386,111 @@ a claim about something else. **This branch's own `202` carries exactly the same
 will be wrong the moment a `run_all.sh` lands on main before it merges. `out_exemplars.txt` cannot
 go stale that way and `out_consumers.txt` can, in one directory, which is the whole difference an
 `AS_OF` makes.
+
+---
+
+# Tranche 11 (`mg-ede8`) — the transcript that has no fixed point, and **5 of its 8 committed versions were already wrong when they were written**
+
+Three tranches wrote the diagnosis and none acted on it. Tranche 10's own words:
+
+> `consumers.py` reads the **live index** by design, so its figure is a function of *when you ran it*
+> and not of the commit you attach it to, and every rebase re-opens the hole. […] **This branch's own
+> `202` carries exactly the same property.**
+
+It did. **`182d93b`, the commit carrying that paragraph, holds `202` in its transcript and `203` in
+its tree** — so the sentence declining the repair shipped inside the fifth instance of the thing it
+was declining. That is not carelessness and being careful will not close it, which tranche 7 had
+already demonstrated by diagnosing the drift in the commit message of the commit that was carrying
+it.
+
+**What this tranche does is not the `AS_OF` the last three declined.** Pinning `consumers.py` would
+change what its figure *means* — live tree → declared commit — and the reason it is unpinned is
+good: it must answer about *the tree you are about to change*. What was missing is not a pin. It is
+**an instrument that can tell whether a committed transcript was already wrong at its own commit**,
+and there was none: `mg-f771`'s `g0` sees the transcript *move*, and cannot see that the committed
+one was stale to begin with.
+
+`liveindex.py`, in `run_all.sh`, `out_liveindex.txt`.
+
+## 1. The measurement, and it needs no instrument execution at all
+
+A figure is re-derivable at an arbitrary commit **exactly when it is a function of the tracked path
+list alone**. Then the number the transcript printed can be compared with the number the tree
+*carrying that transcript* implies — `git ls-tree -r --name-only`, and nothing else. No suite is
+run, no worktree is touched, and **today's rule is never run against an old tree**, which is the
+comparison that would conflate *the corpus moved* with *the instrument changed*.
+
+Four of `out_consumers.txt`'s figures are in that class: `subject scripts`, the two halves of the
+unique/shared split, and the shared-basename counts. Every version of the transcript, at `AS_OF
+2901996`:
+
+| commit | tranche | said | tree | |
+|---|---|---|---|---|
+| `182d93b` | 10 `mg-0bf1` | 202 | 203 | **STALE** −1 |
+| `0cb0fa4` | 9 `mg-e8b0` | 200 | 202 | **STALE** −2 |
+| `828a0fa` | 8 `mg-23af` | 198 | 198 | agrees |
+| `ccd925c` | 7 `mg-44da` | 196 | 197 | **STALE** −1 |
+| `93ead80` | 6 `mg-e5f3` | 194 | 195 | **STALE** −1 |
+| `820ade4` | 3 `mg-4020` | 193 | 193 | agrees |
+| `d3dd664` | 2 `mg-6e4f` | 192 | 192 | agrees |
+| `3d9ad71` | 2 `mg-6e4f` | 193 | 192 | **STALE** +1 |
+
+**Every claim the record already made about this reproduces**, which is the only reason the two it
+did *not* make are worth anything: tranche 10 said `mg-e5f3`'s and `mg-44da`'s went stale and
+`mg-23af`'s did not, and all three come back exactly that way.
+
+## 2. The drift goes **both ways**, and only one direction had ever been looked for
+
+`3d9ad71` — **the commit that created this transcript** — printed `193` into a tree holding `192`.
+Its count was too **high**: the census was taken on a tree carrying *more* of the named file than the
+commit that carries the answer. `consumers.py`'s own header describes the event in prose —
+
+> `run_all.sh (193 files)` became `(192)` the day main folded one suite into another
+
+— and the transcript beside that sentence is the one carrying the stale `193`. Reporting only the
+low direction would have made this a census of *"main landed something while I was open"*, which is a
+smaller claim than the true one: **the figure is a function of when it was taken, in whichever
+direction the estate happened to move.**
+
+## 3. Why the live half is on **stderr** and gates nothing
+
+The staleness is created by the **merge queue**. The refinery rebases the branch onto a main that has
+landed directories since the run, and that rebase happens *after the last moment anything on the
+branch can run*. So no instrument on the branch can prevent it, and a gate here would be red for
+reasons the author cannot act on — `mg-724a`'s recorded/gated split, arriving on a live-index figure.
+
+`liveindex.py` therefore prints its live check on **stderr**: *the committed transcript is stale for
+this tree right now*. It reads the **committed** copy and not the worktree one, and that is the whole
+design — `run_all.sh` regenerates `out_consumers.txt` two lines earlier, so a comparison against the
+worktree copy would be a figure compared with itself and would pass on every run. It fires today, on
+this branch, before this branch's own refresh.
+
+**What would actually close it, none of which is done here:** a refinery that re-runs the producer and
+amends after the rebase; or a figure that stops being live-index-valued, which contradicts the reason
+`consumers.py` is unpinned.
+
+## 4. What this tranche leaves — reported at the low water mark
+
+- **`N31` — `AGREES` is one-directional**, and it is `worklist.py`'s `FALSIFIED` / `NOT FALSIFIED`
+  discipline one subject along. `STALE` is a proof; `AGREES` covers four figures out of a transcript
+  that has many. The prose count, the named-in-no-tracked-file count and the whole of sections A, B
+  and C are **content**-valued and are invisible here — re-deriving those means running today's rule
+  against an old tree. `N31` joins `KNOWN_DEFECT` (8 → 9) and **nothing leaves**.
+- **The registry is one row, and that is a statement about this directory and not the estate.** One
+  transcript *here* reads the live index; nothing scans `code/` for the others, so a live-index
+  producer one directory over is invisible at every revision. That is `N30`'s shape on a new subject.
+- **The remedy exhibited the defect it remedies, on its own first run** — and `P34` is what caught it.
+  With the shared-basename line emptied, the first reader returned *zero pairs* and the comparison
+  graded it **STALE**: a census reporting a finding about a figure it had failed to read, which is
+  `git_grep_l`'s original defect one file over. The reader was tightened rather than the plant
+  relaxed, and it took **two** clauses, because an empty payload reconstructs exactly.
+- **A second mixture, reported and not repaired.** `consumers.py` builds its frequency table from
+  `git ls-files` — the **index** — and runs its section A/B/C greps against **HEAD**. On a clean tree
+  those are one tree; on a dirty one the counts and the listings answer about different trees with
+  nothing saying so. It belongs to `consumers.py`.
+- **`out_pinnable_3b51.txt`** is still a dated hand-run that no suite re-takes, **1 of the 80
+  surviving hits is still prose inside a `print(...)`**, `N27`'s 24-character `find(1)` window is
+  still open, and **`P24` is burned** and must never be issued.
+- **This branch's own `out_consumers.txt` carries the same property** and will be wrong the moment a
+  `run_all.sh` lands on main before it merges — which is now a *measurable* claim rather than a
+  warning, because `liveindex.py` will say so at the next commit that writes the file.

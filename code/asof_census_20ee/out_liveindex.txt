@@ -1,0 +1,105 @@
+==============================================================================
+mg-ede8 -- WAS THE TRANSCRIPT ALREADY STALE AT ITS OWN COMMIT?
+==============================================================================
+
+  AS_OF = 2901996.  Every figure on this page is a function of that one
+  commit, read through `git log`, `git show` and `git ls-tree`, so
+  THIS transcript has a fixed point where its subject has none.
+
+------------------------------------------------------------------------------
+1  THE RULE, AND THE CLASS IT CAN ANSWER ABOUT
+------------------------------------------------------------------------------
+
+  A figure is re-derivable at an arbitrary commit exactly when it is
+  a function of the TRACKED PATH LIST ALONE.  Then the transcript's
+  own printed number can be compared with the number the tree that
+  CARRIES that transcript implies -- no instrument is executed, no
+  worktree is touched, and today's rule is never run against an old
+  tree.  The four figures below are that class for this subject:
+
+      subject scripts
+      unique-basename scripts
+      shared-basename scripts
+      shared basename counts
+
+  EVERYTHING ELSE IN out_consumers.txt IS CONTENT-VALUED and is NOT
+  checked here: the prose count, the named-in-no-tracked-file count,
+  and the whole of sections A, B and C.  So STALE is a proof and
+  AGREES is not -- N31, and it is asserted on the rule.
+
+------------------------------------------------------------------------------
+2  code/asof_census_20ee/out_consumers.txt
+------------------------------------------------------------------------------
+
+  Produced by code/asof_census_20ee/consumers.py, which reads the live index.
+  One line per commit that WROTE this file, newest first.  `said`
+  is what the committed copy printed; `tree` is what the commit
+  carrying it actually held.
+
+  182d93b   STALE
+      shared basename counts     said run_all.sh (202 files) tree run_all.sh (203 files)
+  0cb0fa4   STALE
+      shared basename counts     said run_all.sh (200 files) tree run_all.sh (202 files)
+  828a0fa   AGREES
+  ccd925c   STALE
+      shared basename counts     said run_all.sh (196 files) tree run_all.sh (197 files)
+  93ead80   STALE
+      shared basename counts     said run_all.sh (194 files) tree run_all.sh (195 files)
+  820ade4   AGREES   (this commit also changed the producer)
+  d3dd664   AGREES   (this commit also changed the producer)
+  3d9ad71   STALE   (this commit also changed the producer)
+      shared basename counts     said run_all.sh (193 files) tree run_all.sh (192 files)
+
+  5 of 8 committed versions were ALREADY WRONG when they were
+  written; 3 agreed and 0 could not be read.
+
+  THE DRIFT GOES BOTH WAYS, and only one of the two directions
+  had been looked for.  4 version(s) UNDER-COUNT a shared
+  basename and 1 OVER-COUNT one:
+
+      182d93b  run_all.sh     said 202   tree 203    -1
+      0cb0fa4  run_all.sh     said 200   tree 202    -2
+      ccd925c  run_all.sh     said 196   tree 197    -1
+      93ead80  run_all.sh     said 194   tree 195    -1
+      3d9ad71  run_all.sh     said 193   tree 192    +1
+
+------------------------------------------------------------------------------
+3  WHY BEING CAREFUL DOES NOT CLOSE THIS
+------------------------------------------------------------------------------
+
+  The figure is read at time T and committed at time T+d.  The
+  reliable value of d is THE MERGE QUEUE: the refinery rebases the
+  branch onto a main that has landed directories since the run, and
+  the rebase happens AFTER the last moment any instrument on the
+  branch can run.  So this cannot be repaired by an author being
+  careful, and tranche 7 is the proof -- it diagnosed the drift in
+  the commit message of the commit whose transcript was carrying it.
+
+  WHAT WOULD ACTUALLY CLOSE IT, and none of it is done here:
+      * the refinery re-runs the producer and amends AFTER rebase;
+      * or the figure stops being live-index-valued, which contradicts
+        the reason consumers.py is unpinned and would be a change to
+        what it MEASURES rather than to how it is recorded;
+      * or the gate refuses, which is mg-724a's `a gate that fails
+        for reasons the author cannot act on` and is why the live
+        half below is on STDERR and gates nothing.
+
+------------------------------------------------------------------------------
+4  A SECOND MIXTURE, REPORTED AND NOT REPAIRED
+------------------------------------------------------------------------------
+
+  consumers.py builds its frequency table from `git ls-files`, which
+  is the INDEX, and runs its section A/B/C greps against HEAD.  On a
+  clean tree those are the same tree and the census is coherent; on a
+  dirty one they are not, and the counts and the listings answer
+  about different trees with nothing saying so.  Every figure in
+  section 2 is taken from `git ls-tree` at a COMMIT, so this file is
+  not exposed to it -- which is also why it cannot measure it.
+  It belongs to consumers.py and is left there.
+
+==============================================================================
+LIVE-INDEX: 5 of 8 committed version(s) of 1 watched transcript(s)
+            were ALREADY STALE at their own commit, at AS_OF 2901996.
+            AGREES is one-directional: it covers the path-list-valued
+            figures and nothing else (N31).
+==============================================================================
