@@ -26,6 +26,12 @@ it. It is not a verdict store: the compression arc's four verdicts live in their
 citation cannot. And it is not a place to record that something *might* be true. **An entry is
 a statement someone has either proved or measured, carrying the frame that makes it true.**
 
+**AND IT IS NOT [`BASIC-FACTS.md`](BASIC-FACTS.md), WHICH IS THE OTHER WAY ROUND (mg-3e5e).** That
+file holds four *elementary* properties of the problem — the ones an agent should know before
+opening any archive, each one line from the definitions. They are the opposite of homeless: they are
+what everything else is built on, so they fail this file's admission test (2) and are not entries
+here. Read that file first; read this one when you want a measured fact with no consumer yet.
+
 ---
 
 ## THE ONE RULE THIS FILE EXISTS TO ENFORCE

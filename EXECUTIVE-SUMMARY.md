@@ -78,6 +78,7 @@ method never will.
 
 ### Reference
 
+- [`docs/BASIC-FACTS.md`](docs/BASIC-FACTS.md) — **read first, and before the archive**: four elementary facts about the problem itself, each with its one-line derivation. One screen, on purpose.
 - [`STATE.md`](STATE.md) — internal working record: the full ledger, warrant kinds, open targets, attempt index.
 - [`docs/CONCEPTS.md`](docs/CONCEPTS.md) — what the objects mean, in words before symbols.
 - [`docs/FACTS.md`](docs/FACTS.md) — measured facts with no current consumer.
