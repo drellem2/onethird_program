@@ -1,0 +1,201 @@
+================================================================================================
+m1  THE REACH OF THE ONLY CHECK THAT IS BUILDABLE -- a funnel over every tracked .py at one commit
+================================================================================================
+
+   AS_OF = 5ffb22e558b185f20628873848c549eed78a9780
+
+
+------------------------------------------------------------------------------------------------
+m1.0  THE INSTRUMENT SEES THE CORPUS.  This runs FIRST because every figure below is a small number and a broken walk returns one for free
+------------------------------------------------------------------------------------------------
+
+   tracked .py at AS_OF                : 1252
+   ... parsed without SyntaxError      : 1252
+   OK      the walk reaches four figures of tracked .py
+       1252 files -- a narrowed class or an unresolvable pin would show up here and not in a verdict
+   OK      and every one of them parses
+       so no population below is short by a file the instrument could not open
+
+------------------------------------------------------------------------------------------------
+m1.1  THE POPULATION -- tables, and the segmentation that finds their columns
+------------------------------------------------------------------------------------------------
+
+   tables (a rule line WITH a header above it)           : 65 in 25 file(s)
+   ... with a %-format row template of matching arity   : 25
+   ... where naive `|` splitting disagrees with the rule : 9
+   ... needing a nonzero alignment shift                 : 8
+
+     shift | tables
+    -------+-------
+        -1 | 2
+         0 | 57
+         1 | 6
+
+       THE SHIFT SEARCH IS NOT COSMETIC.  A rule line that sits one character left of its header
+       is written that way in the source AND rendered that way in the committed transcript, so a
+       segmenter taking the `+` columns literally hands every label in those tables a stray
+       leading `|` and mis-segments a real table WITHOUT COMPLAINING.
+
+   the 9 table(s) the naive splitter gets wrong:
+      code/compression_kfoliation_8d66/k3_monotone.py:108
+          naive 9 field(s): ['n', 'poset', '', 'L(P)', '', 'gap_BK', '((n-1)/2)gap', 'alpha_finest', 'alpha_(k=2)']
+          rule  7 column(s): ['n', 'poset', '|L(P)|', 'gap_BK', '((n-1)/2)gap', 'alpha_finest', 'alpha_(k=2)']
+      code/image_closure_3da1/d1_vacuous_realizability.py:65
+          naive 7 field(s): ['n', 'vertices of M_n', '', 'R_n', '', 'vert subset R_n', 'every vertex is r-FIXED']
+          rule  5 column(s): ['n', 'vertices of M_n', '|R_n|', 'vert subset R_n', 'every vertex is r-FIXED']
+      code/image_geometry_c776/c3_boundary.py:119
+          naive 12 field(s): ['n', '', 'B_n', '', 'labelled', 'e(P)', 'm', 'max m', 'd_max', 'eps_max', 'ceiling', 'ratio']
+          rule  10 column(s): ['n', '|B_n|', 'labelled', 'e(P)', 'm', 'max m', 'd_max', 'eps_max', 'ceiling', 'ratio']
+      code/lever_test_5987/g1_step1.py:64
+          naive 6 field(s): ['n', 'A_n: max_x', 'h − rank_e', '', 'A_n: Σ C_x / E[inv_e]', 'checked against profile()']
+          rule  4 column(s): ['n', 'A_n: max_x |h − rank_e|', 'A_n: Σ C_x / E[inv_e]', 'checked against profile()']
+      code/lever_test_5987/g2_step2.py:76
+          naive 7 field(s): ['n', 'primitives', 'floor of max', 'h−rank', '', 'floor of Σ C_x / E[inv]', 'floor of d = 2/n']
+          rule  5 column(s): ['n', 'primitives', 'floor of max|h−rank|', 'floor of Σ C_x / E[inv]', 'floor of d = 2/n']
+      code/lever_test_5987/g2_step2.py:99
+          naive 6 field(s): ['n', 'non-chain', 'floor of max', 'h−rank', '', 'floor of Σ C_x / E[inv]']
+          rule  4 column(s): ['n', 'non-chain', 'floor of max|h−rank|', 'floor of Σ C_x / E[inv]']
+      code/lever_test_5987/g3_dial.py:67
+          naive 8 field(s): ['n', '', 'L(Z_n)', '', 'max_x', 'h − rank_e', '', 'Σ C_x / E[inv_e]']
+          rule  4 column(s): ['n', '|L(Z_n)|', 'max_x |h − rank_e|', 'Σ C_x / E[inv_e]']
+      code/lstar_code_9d9e/s1_run_the_test.py:224
+          naive 6 field(s): ['n', 'node size a+b', 'H(word', 'earlier)', "note's ceiling 0.9399(a+b)", 'overpay']
+          rule  5 column(s): ['n', 'node size a+b', 'H(word | earlier)', "note's ceiling 0.9399(a+b)", 'overpay']
+      code/sweep_loss_51f4/s4_combined.py:23
+          naive 4 field(s): ['n', 'gamma      D       c#      f*      min     floor', '(F) fails?', '(M#) fails?']
+          rule  9 column(s): ['n', '| gamma', 'D', 'c#', 'f*', 'min', 'floor', '(F) fails?', '(M#) fails?']
+   OK      no table needs |shift| > 2
+       a search that wanted a larger offset would be matching noise rather than alignment
+
+------------------------------------------------------------------------------------------------
+m1.2  THE FUNNEL -- and the answer to `is this worth a lint` is in the last two rows
+------------------------------------------------------------------------------------------------
+
+     stage                                            | count
+    --------------------------------------------------+------
+    tables in the corpus                              | 65
+    ... paired to a row template                      | 25
+    column labels in paired tables                    | 128
+    ... FORMULA-SHAPED                                | 20
+    ... ... ADJUDICABLE (the label names a literal)   | 4
+    ... ... ... DISAGREE                              | 1
+
+   formula-shaped column labels in ALL tables (paired or not): 55
+   ... of which paired                                       : 20  (36.4%)
+
+       ⚠️ `NOT ADJUDICABLE` IS A VERDICT AND NOT A PASS, and it is the overwhelming majority:
+       16 of the 20 paired formula labels name no numeric literal at all, so the rule has
+       nothing to compare.  `a+b`, `log2 n!`, `E/(n log2 n)` are formulas in SYMBOLS, and the
+       symbols are not the arm's variable names -- `a+b` labels a column filled by `size`.
+       Deciding those needs a reader who knows what the symbols mean, which is the same reader
+       the ticket says found both exhibits.
+
+   the 4 ADJUDICABLE label(s), in full:
+      AGREE    code/lstar_code_9d9e/s1_run_the_test.py:224  column 3
+               label "note's ceiling 0.9399(a+b)" names [0.9399]
+               computation `ceil_` names [0.9399]
+      AGREE    code/pairbias_audit_a832f/a1_unitmap.py:26  column 1
+               label 'n(n-1)/6' names [1.0, 6.0]
+               computation `T` names [1.0, 6.0]
+      AGREE    code/pairbias_audit_a832f/a3_perslot.py:111  column 2
+               label '(n-1)/3' names [1.0, 3.0]
+               computation `F(n2 - 1, 3)` names [1.0, 3.0]
+      DISAGREE code/pairbias_audit_a832f/a4_boundary_structure.py:117  column 4
+               label 'n=6   (non-chain posets with delta <= threshold)' names [6.0]
+               computation `row[3]` names [3.0]
+
+------------------------------------------------------------------------------------------------
+m1.3  THE SWEEP -- what the check actually finds at AS_OF
+------------------------------------------------------------------------------------------------
+
+   DISAGREE   : 1
+   AGREE      : 3
+   NOT ADJUD. : 16
+
+   THE DISAGREEMENTS, SHOWN:
+      code/pairbias_audit_a832f/a4_boundary_structure.py:117 column 4  'n=6   (non-chain posets with delta <= threshold)'  label [6.0] vs computation [3.0]
+       A nonzero result here would be a finding and is printed in full rather than summarised.
+
+   THE HAND VERDICT ON EACH -- a rule and a judgement in one column are
+   indistinguishable, so they are in two:
+      FALSE POSITIVE  code/pairbias_audit_a832f/a4_boundary_structure.py:117 column 4
+                      the label is `n=6   (non-chain posets with delta <= threshold)` -- a column heading whos
+                      e PADDING sits before a parenthesis, which `\d\s*\(` reads as a juxtaposed product.  Its
+                       `6` is the value of n and the computation's `3` is `row[3]`, the fourth entry.  Both ar
+                      e right; there is no formula and nothing is mislabelled.
+
+   OK      0 REAL mislabelled columns in the estate, and the check's precision at its only firing is 0 of 1
+       the one thing a label-vs-computation check finds in 1252 tracked .py is its own matcher misreading column padding
+
+       THE SAME SWEEP UNDER THE TIGHTER JUXTAPOSITION RULE, printed rather than substituted:
+     spelling                 | formula-shaped | adjudicable | DISAGREE
+    --------------------------+----------------+-------------+---------
+    `\d\s*\(`  (as shipped)   |             20 |           4 | 1
+    `\d\s?\(`  (the repair)   |             19 |           3 | 0
+   OK      the repair removes the false positive and removes nothing else
+       the two spellings agree on every other label in the estate, so the bound really is the padding clause and not a wider narrowing of the class
+       ⚠️ THE REPAIR WAS WRITTEN AFTER SEEING THE HIT, which is why the instance above carries a
+       HAND verdict rather than being quietly matched away.  A matcher tightened until its
+       output is empty proves nothing about the corpus; what carries the 0 is the reading.
+       ⚠️ AND A ZERO IS NOT A CLEAN BILL OF HEALTH: it is the count of disagreements among 4
+       adjudicable labels, out of 55 formula-shaped ones, out of 128 column labels.
+       The number that matters is the DENOMINATOR, and m0 D1 is what says the zero is a
+       measurement rather than a detector that cannot fire.
+
+------------------------------------------------------------------------------------------------
+m1.4  THE OTHER HALF -- `O(...)` claims, and how often the only available proxy agrees
+------------------------------------------------------------------------------------------------
+
+   `O(...)` claims in docstrings                : 43 in 30 file(s)
+   ... a polynomial nesting claim (rankable)    : 33
+   ... NOT rankable (O(n!), O(2^n), O(1/n), ...): 10
+   ... where loop depth EQUALS the claimed rank : 11  (33.3% of rankable)
+
+     claimed rank | loop depth | count
+    --------------+------------+------
+                0 |          1 | 1
+                0 |          2 | 2
+                0 |          3 | 2
+                1 |          1 | 3
+                1 |          2 | 1
+                1 |          3 | 3
+                1 |          4 | 1
+                1 |          5 | 4
+                2 |          2 | 2
+                2 |          3 | 4
+                2 |          4 | 1
+                3 |          1 | 1
+                3 |          2 | 1
+                3 |          3 | 6
+                3 |          4 | 1
+
+   OK      the proxy agrees with fewer than half the rankable claims (11 of 33)
+       so it is not a check on them -- it is a second, worse opinion, and m2.3 shows it is wrong in the LICENSING direction on the one claim this estate is known to have got wrong
+       ⚠️ DISAGREEMENT HERE IS NOT AN ACCUSATION and no arm uses it as one.  A `for` loop over a
+       constant-size list is not a dimension, a memoised recursion has dimensions in no loop at
+       all, and both are ordinary.  What the column measures is that the proxy and the claim are
+       MEASURING DIFFERENT THINGS, which is the whole of why the class is a reading problem.
+
+------------------------------------------------------------------------------------------------
+m1.5  REQUIRED-INERT -- the wrong direction.  Prose must not move a table count
+------------------------------------------------------------------------------------------------
+
+   OK      rewording a non-header note moves NO table and NO column
+       7 tables and the same column lists before and after -- without this the funnel would be measuring the corpus's English rather than its tables
+
+------------------------------------------------------------------------------------------------
+m1.6  REFLEXIVE -- this directory prints tables of the shape it measures
+------------------------------------------------------------------------------------------------
+
+       ⚠️ THIS SECTION READS THE WORKTREE AND NOT THE PIN, because this directory is younger
+       than AS_OF and is in no tree at that commit.  AN EXEMPTION BY ARITHMETIC AND NOT BY RULE.
+
+   this directory's own .py files : lib68ef.py, m0_selftest.py, m1_reach.py, m2_exhibits.py
+   tables in them                 : 8
+   flagged by this directory's own check : 0
+   OK      this directory's own tables are not flagged by its own check
+       printed by the same function that printed every other count above, so no arm here can report a zero for one population while computing another
+
+================================================================================================
+   8 check(s), 0 failed
+================================================================================================

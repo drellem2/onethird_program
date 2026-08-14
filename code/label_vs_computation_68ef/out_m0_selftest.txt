@@ -1,0 +1,68 @@
+================================================================================================
+m0  TEN WORLDS FOR A HEADLINE THAT IS A ZERO -- six CAUGHT, three REQUIRED-INERT, and one that DOES NOT BIND HERE
+================================================================================================
+
+   baseline: 0 flag(s) on the clean table, 0 on the real exhibit at PRE, 6 paired tables in it
+
+   OK      D0  THE CLEAN LIBRARY IS GREEN AND THE INSTRUMENT SEES THE EXHIBIT
+       0 flags on a correctly-labelled table, 0 on the real exhibit (its mislabel is in PROSE, which m2.1 measures), and 6 paired tables found -- a run where the last number were 0 would make every world below a statement about an empty class
+   OK      D0b THE BATCH READER AGREES WITH `git show` BYTE FOR BYTE
+       every population above is read through `cat-file --batch` for speed, and a reader that silently truncated a blob would shrink a census without failing -- checked on 3 file(s) rather than assumed
+
+------------------------------------------------------------------------------------------------
+PLANTS THAT MUST BE CAUGHT
+------------------------------------------------------------------------------------------------
+
+   CAUGHT  D1  A MISLABELLED COLUMN IS CAUGHT -- label `(1-c)(a+b)`, computation `0.9399 * size`
+       this is the world m1.3's zero is a measurement in: without it, `0 disagreements` and `a detector that cannot fire` print the same page.  Got [(4, 3, 'ceiling  (1-c)(a+b)', [1.0], [0.9399])]
+
+       D2 IS A COUNTERFACTUAL AND IS LABELLED ONE.  The ticket says `s1.6's HEADER labelled the
+       per-node ceiling (1-c)(a+b)`; m2.1 measures that the header it means is the section's
+       PROSE and that the column header was right at both revisions.  D2 asks the question the
+       ticket's wording suggests: IF the mislabel had been in the column, would the check have
+       caught it?  The exhibit is read out of the tree and ONE substitution is made on the
+       column header line -- the file is never re-typed (mg-d2c2).
+   CAUGHT  D2  AND IT WOULD HAVE BEEN CAUGHT IN THE REAL FILE, had it been in the column
+       one substitution on line [219, 247] of the exhibit read at PRE, and the check flags exactly that column: [(220, 3, "note's ceiling  (1-c)(a+b)", [1.0], [0.9399])]
+
+       MY FIRST TWO DRAFTS OF D3 WERE WRONG AND THE CONTROL WAS FIXED RATHER THAN THE CLAIM,
+       TWICE.  It asserted NUMLIT's identifier guard was load-bearing on the exhibit -- it is
+       not -- and then over the corpus, and it is not there either.  D3 now measures BOTH halves
+       and one of them is a recorded non-binding rather than a pass.
+
+     label                       | with the guard | without it
+    -----------------------------+----------------+-----------
+    log2 n!                      |             [] | [2.0]
+    shape-A c = E/(n log2 n)     |             [] | [2.0]
+
+   CAUGHT  D3  THE GUARD DOES WHAT IT CLAIMS: without it, `log2` contributes a literal 2
+       so a label naming a base-2 logarithm would claim a `2` that its computation, which spells `math.log2(x)` and no literal, does not have
+
+       ⚠️ AND IT DOES NOT BIND ON THIS CORPUS, WHICH IS RECORDED RATHER THAN CLAIMED AS A PASS.
+   OK      D3b  removing the guard moves the corpus figure NOT AT ALL: 1 -> 1 over 25 table-bearing file(s)
+       because `log2 n!` carries NO OPERATOR and so is not formula-shaped -- the funnel's earlier stage already excludes every label the guard protects.  That is a fact about THIS corpus and not about the guard, and a directory resting on it would be reporting a quiet window as a repair
+   CAUGHT  D4  FORCING shift = 0 MIS-SEGMENTS 2 REAL TABLE(S) WITHOUT COMPLAINING
+       every label in them gains a stray leading `|`, e.g. '| MERGE-P at n = 6..12' -- a segmenter that took the rule line's `+` columns literally would publish those as column names
+   CAUGHT  D5  NAIVE `|` SPLITTING LOSES THE EXHIBIT'S OWN TABLE ENTIRELY
+       the header contains the delimiter inside `H(word | earlier)`, so it splits into 6 fields against the row template's 5 placeholders and the table goes UNPAIRED -- the obvious implementation is blind exactly where the class was found
+   CAUGHT  D6  A claimed_rank THAT ANSWERS FOR EVERYTHING RANKS `O(n!)` AND `O(2^n)` TOO
+       m1.4 splits 43 claims into 33 rankable and 10 not, and a rank function with no refusal would fold the 10 in and report a proxy agreement rate over a population that includes claims the proxy cannot be about
+
+------------------------------------------------------------------------------------------------
+WORLDS THAT MUST NOT MOVE -- the wrong direction
+------------------------------------------------------------------------------------------------
+
+
+   OK      D7  REWORDING A NOTE MOVES NO TABLE, NO COLUMN AND NO VERDICT
+       7 tables before and after -- without this the funnel would be measuring the corpus's English rather than its tables
+   OK      D8  A COLUMN WITH NO FORMULA IN ITS LABEL IS NEVER FLAGGED
+       the computation still spells 0.9399 and the label no longer makes a claim about it, so there is nothing to disagree with.  Without this the check would be flagging every column whose heading is prose
+   OK      D9  AND A FORMULA IN PROSE IS INVISIBLE TO IT, WHICH IS THE WHOLE FINDING
+       the exhibit's actual defect is edited HERE, in the string the correction deleted, and the check does not move -- a column check cannot reach a sentence, and that is why m2 concludes the class is a reading problem rather than a lint
+
+   OK      THE CLEAN LIBRARY IS GREEN AFTER THE LAST WORLD TOO, RE-MEASURED
+       (0, 0, 6) -- asserted before and after every plant rather than at the end alone
+
+================================================================================================
+   13 check(s), 0 failed
+================================================================================================

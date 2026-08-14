@@ -1,0 +1,120 @@
+================================================================================================
+m2  THE TWO EXHIBITS -- P6 REFUTED: THE MISLABELLED COLUMN IS NOT A COLUMN, AND THE OTHER EXHIBIT FAILS SAFE-LOOKING
+================================================================================================
+
+   AS_OF          = 5ffb22e558b185f20628873848c549eed78a9780
+   PRE_CORRECTION = 3561300f3d87c34440730e9de27574a48b9da326   (p9d9e's own commit; the correction landed at e9432cd)
+   exhibit B      = code/lstar_code_9d9e/s1_run_the_test.py
+   exhibit A      = code/lstar_code_9d9e/lib9d9e.py
+
+       Both revisions are resolved through `git rev-parse --verify`, which REFUSES rather than
+       answering about a commit it cannot find -- every figure here is a small number and an
+       unresolvable pin returns a small number for free.
+
+------------------------------------------------------------------------------------------------
+m2.1  EXHIBIT B IS NOT A MISLABELLED COLUMN.  The column header is byte-identical at both revisions and AGREES with its computation at both
+------------------------------------------------------------------------------------------------
+
+       The ticket says: `s1.6's header labelled compression2's per-node ceiling (1-c)(a+b) where
+       the arm computes and the note means c(a+b)`.  Read at the two commits, the word `header`
+       means the SECTION'S PROSE and not the table's column header.  That distinction is the
+       whole of what is buildable here, so it is measured rather than glossed.
+
+   PRE   column 3 of the s1.6 table
+        label       "note's ceiling 0.9399(a+b)"
+        computation `ceil_`  ->  `0.9399 * size * k`
+        literals    label [0.9399]     computation [0.9399]       VERDICT AGREE
+   AS_OF  column 3 of the s1.6 table
+        label       "note's ceiling 0.9399(a+b)"
+        computation `ceil_`  ->  `0.9399 * size * k`
+        literals    label [0.9399]     computation [0.9399]       VERDICT AGREE
+
+   OK      THE COLUMN LABEL IS BYTE-IDENTICAL ACROSS THE CORRECTION
+       "note's ceiling 0.9399(a+b)" at both -- so no check on the column could have fired, whatever it did
+   OK      and it AGREES with its computation at BOTH revisions
+       0.9399 in the label and 0.9399 in `0.9399 * size * k`; the column was right the whole time and the number it printed was right the whole time
+
+       SO WHERE WAS THE DEFECT?  In the section's introductory prose, and the diff is one hunk:
+      PRE   'The note bounds `H(W_v | earlier words) <= (1-c)(a+b)` at each node and sums over the'
+      AS_OF (none -- the string is gone)
+   OK      the wrong formula lived in exactly ONE prose string and the correction deleted it
+       a sentence with NO positional link to any expression -- there is no row template beneath it, no rule line above it, and nothing that says which computation it is about
+
+------------------------------------------------------------------------------------------------
+m2.2  AND THE PROSE FORM IS NOT REACHABLE EITHER, MEASURED RATHER THAN ASSERTED -- the wrong label's only literal is 1, and 1 is in the section's own arithmetic
+------------------------------------------------------------------------------------------------
+
+       Suppose the check is widened from `the column beside the number` to `any formula in any
+       string, against the arithmetic of the section it sits in`.  That is the loosest form that
+       could still be called a check.  It does not reach this exhibit, and the reason is
+       arithmetic rather than engineering.
+
+     label            | numeric literals it names
+    ------------------+--------------------------
+    (1-c)(a+b)        | [1.0]
+    0.9399 (a+b)      | [0.9399]
+
+   the s1.6 section's own numeric literals (lineno >= 185, PRE): [0.0, 1e-09, 0.9399, 1.0, 6.0, 9.0, 12.0]
+   OK      1 IS ONE OF THEM -- so `(1-c)` is fully covered by the section's arithmetic
+       the literal rule returns AGREE on the WRONG label, and it is right to: nothing about the literal 1 distinguishes a coefficient from a loop bound
+
+   tracked .py under code/ at AS_OF                      : 1252
+   ... containing the numeric literal 1 somewhere        : 1233  (98.5%)
+   OK      AND THAT IS NOT A PROPERTY OF THIS SECTION: 98.5% of the estate's arms compute with 1
+       so a literal-agreement rule is blind to every mislabel whose only literal is 1 -- and `(1-c)`, `1/n`, `n-1` and `1 - eps` are how coefficients are spelled
+
+------------------------------------------------------------------------------------------------
+m2.3  EXHIBIT A -- THE MISLABELLED COMPLEXITY.  Nothing syntactic reaches it, and the proxy fails in the direction that LICENSES the wrong claim
+------------------------------------------------------------------------------------------------
+
+       `feasible_merges` was documented `O(a*b)`; as written it rescans the remaining opposite
+       side at every step, so it is `O(a*b*(a+b))`.  The COST CLAIM survives unchanged --
+       polynomial is what mg-99f4's Q2 asks and enumerating L(P) is what it forbids -- so this is
+       a documentation defect with no consequence for the result, which is exactly why nothing
+       would have caught it.
+
+     revision | docstring claim   | factors claimed | loop-nesting depth the proxy sees
+    ----------+-------------------+-----------------+----------------------------------
+    PRE       | O(a*b)            |               2 | 1
+    AS_OF     | O(a*b*(a+b))      |               3 | 1
+
+   OK      the two claims are read out of the tree and differ exactly as the commit says
+       O(a*b) -> O(a*b*(a+b)), neither re-typed here
+   OK      THE BODY DID NOT CHANGE -- the proxy sees the SAME 1 at both revisions
+       the correction was to the docstring alone, so any instrument reading the body returns one number for two different claims and cannot be a check on either
+   OK      the proxy matches NEITHER the wrong claim (2) nor the right one (3)
+       so it does not adjudicate; it disagrees with both
+   OK      AND IT FAILS IN THE DANGEROUS DIRECTION: 1 < 2
+       a check reading `the body has fewer loops than the docstring claims` treats the claim as CONSERVATIVE and passes it -- so applied as a lint the proxy would have LICENSED `O(a*b)` rather than flagged it
+
+       THE MECHANISM IS NOT A WEAK REGEX AND WIDENING IT DOES NOT HELP.  The two dimensions of
+       this DP are in the MEMO KEY `(i, j)` and in the recursion, not in any `for`; the one
+       comprehension a walker CAN see -- `any((v, e) in rel for v in right[j:])` -- is the
+       rescan that the corrected claim's THIRD factor is about.  So the proxy sees exactly the
+       factor that was MISSING from the wrong claim and still cannot report it, because it has
+       no way to know the other two exist.  Cost is a property of the recursion's state space
+       and a syntactic depth is not a bound on it in either direction.
+
+------------------------------------------------------------------------------------------------
+m2.4  THE ANSWER TO THE CARRY-FORWARD, IN ONE TABLE
+------------------------------------------------------------------------------------------------
+
+     exhibit                    | where the label lives | check reaches it? | why
+    ----------------------------+-----------------------+-------------------+-----------
+    B  the (1-c)(a+b) note      | a prose sentence      | NO                | no positional link to any expression; its only literal is 1
+    A  feasible_merges O(a*b)   | a docstring           | NO                | the claim is about a recursion's state space, not its loops
+    -- the column check that IS | a column header       | YES               | the value it labels is an expression in the same scope
+
+       NEITHER OF THE TICKET'S TWO EXHIBITS IS A MISLABELLED COLUMN.  A label-vs-computation
+       check IS buildable -- m1 builds it and measures how far it reaches -- but the class it
+       reaches does not contain either instance the ticket was filed from.  The estate's own
+       sentence, `a mislabelled column that prints the right number`, names a shape that is
+       checkable; what it was written about is two shapes that are not.
+       ⚠️ THIS IS THE HONEST FORM OF THE CARRY-FORWARD'S OWN SECOND OPTION, and the ticket named
+       it in advance: the class is irreducibly a reading problem, and saying so is the
+       deliverable.  What this directory adds is that it is a reading problem FOR A REASON that
+       can be stated and measured, rather than because nobody has tried.
+
+================================================================================================
+   9 check(s), 0 failed
+================================================================================================
