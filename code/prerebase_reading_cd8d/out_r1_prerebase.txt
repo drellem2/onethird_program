@@ -1,0 +1,113 @@
+============================================================================================
+mg-cd8d — A CENSUS READING TAKEN BEFORE THE REBASE, GRADED BY THE REAL INSTRUMENT
+============================================================================================
+
+§0  THE WORLDS, AND WHAT IS REAL IN THEM
+--------------------------------------------------------------------------------------------
+  Each world is a COMMITTED reading and a WORKTREE reading.  The worktree side is
+  always the reading the gate takes on the MERGED tree, because `./build.sh` runs
+  after the refinery has rebased; the committed side is what the branch carried in.
+  The corpus at each commit is the real one, `git archive`d; today's producer is
+  overlaid on both sides so the PRODUCER pin cannot move (r0 D3); the only synthetic
+  object is the simulated branch's own new directory, one file holding VALUE = 1.
+
+  merge base        3f6d8d6   population 233
+  + the branch's own directory            population 234   <- the pre-rebase tree
+  merged tree       b5d8a75   population 236   <- the tree being merged
+  far behind        c4190b5   population 225   <- 11 directories of drift, bound 10
+
+  corpus pin  pre-rebase vs merged: MOVED        producer pin: same
+  The digests themselves are NOT printed.  A corpus pin covers the content of every
+  .py and .sh under code/, so a digest in this transcript would move whenever
+  anybody edited anything — which is the defect this directory is about, one file
+  over.  Populations are counts at fixed commits and cannot move.
+
+§1  THE VERDICTS
+--------------------------------------------------------------------------------------------
+  W1  CORPUS     (as scoped)
+      THE TICKET'S EVENT. The branch took its reading on the PRE-REBASE tree and committed
+      it; the refinery rebased onto a main that had gained 2 directories.
+
+  W2  AGREES     (as scoped)
+      THE DISCIPLINE FOLLOWED. The same branch takes the reading AFTER the rebase. This
+      world is why W1's answer means something: the two are distinguishable.
+
+  W3  CORPUS     (as scoped)
+      THE INNOCENT BRANCH. It published nothing; the committed copy is main's own older
+      reading and the drift is somebody else's. SAME GRADE AS W1.
+
+  W4  STALE      (as scoped)
+      THE BOUND. A committed reading 11 directories behind the merged tree, past the
+      declared limit of 10.
+
+  W5  DISAGREES  (as scoped)
+      THE FENCE. The merged tree's own reading with one figure tampered, so the pin is
+      UNCHANGED beside a text that moved: the instrument changed its answer on an unchanged
+      corpus.
+
+  W6  CORPUS     (as scoped)
+      THE STALE REFRESH. W4's branch is told to refresh and refreshes with a PRE-REBASE
+      reading. The red clears.
+
+  W7  DISAGREES  (as scoped)
+      THE EXEMPTION IS A DECLARED LIST AND NOT A SHAPE. W1's two texts at a path that is not
+      in CORPUS_SCOPED.
+
+§2  WHAT THE ANSWER IS, AND WHAT IT LEAVES
+--------------------------------------------------------------------------------------------
+  STEP 1'S ANSWER IS `CORPUS`, WHICH IS NOT `AGREES`.
+  So the after-the-rebase rule is already an INSTRUMENT and not only a discipline:
+  mg-05c6's pin sees the pre-rebase reading, and W2 shows it grades the same branch
+  differently when the reading is taken after the rebase.  The ticket's carry
+  forward — `refuse to emit a figure computed on a tree that is not the tree being
+  merged` — is DETECTED at gate time by a mechanism that already shipped.
+
+  R1  IT IS DETECTED AND NOT REFUSED, AND THE GRADE IS SHARED WITH THE INNOCENT
+      CASE.  CORPUS is not in RED_VERDICTS (r0 D4), and W1 and W3 are the same word
+      in the same build log beside the same instruction: restore, the refresh is
+      somebody else's.  In W3 that is correct.  In W1 the committed copy is this
+      branch's own pre-rebase reading, and restoring keeps it.  Nothing inside
+      verdict_for can separate them — it is handed two texts and a path, and who
+      WROTE the committed copy is not among its arguments (r0 D5).  What could
+      separate them is outside it: whether THIS BRANCH modified the file, which is
+      a question about the diff against the merge base and not about HEAD.
+
+  R2  THE BOUND IS DISCHARGED BY A READING THAT NEED NOT BE THE MERGED TREE'S.
+      W4 -> W6 is the whole of it: the one branch that mg-05c6 does ask for a
+      census is the branch whose gate went STALE, and a pre-rebase refresh clears
+      that red as surely as a correct one.  The figure that lands is then wrong for
+      the tree it lands in, which is the defect mg-f771 exists to find, arriving
+      through the exemption mg-05c6 added to it.
+      AND IT BUYS PARTIAL CREDIT, WHICH IS ARITHMETIC RATHER THAN A WORRY.  The
+      drift that decides the next STALE is measured against the COMMITTED figure,
+      so on these worlds' own numbers: 11 directories before any refresh, 2 after
+      a PRE-rebase refresh, 0 after a post-rebase one.  A wrong refresh does not
+      only clear the red; it postpones the next honest reading by the distance it
+      happens to be right about.
+
+§3  HOW OFTEN THIS CAN HAPPEN, MEASURED ON THE RECORD AND PINNED AT b5d8a75
+--------------------------------------------------------------------------------------------
+  commits on main since mg-05c6 landed (8b169b1..b5d8a75)  :  19
+  of those, commits that touched the census           :   0
+  of the 200 commits at b5d8a75, commits touching it  :  36
+  COUNTED AS AN INTERSECTION and not as `git log -200 -- <path>`, which limits to
+  200 MATCHING commits and answers a different question; taking it the loose way
+  during scoping returned 38.
+
+  the census as COMMITTED at b5d8a75 says population       : 232
+  the tree at b5d8a75 actually holds                       : 235
+  so the live drift is 3 of a bound of 10, headroom 7 directories
+
+  THESE ARE THIS ARM'S OWN NUMBERS AND NOT mg-05c6's.  mg-05c6 priced its bound at
+  34 refreshes over 200 commits becoming 6; the 36 above is re-derived at a later
+  AS_OF and is a different window, so it neither confirms nor contradicts that.
+  WHAT IT DOES SAY IS THE STRONGER HALF: 0 of the 19 commits since the pin landed
+  have carried a census at all, because the bound has not been tripped yet.  So the
+  population of branches exposed to R1 and R2 today is small, and the hazard is
+  unchanged per occurrence — an argument about scheduling, which is pm-onethird's
+  own reading of the 82% figure and is repeated here rather than re-decided.
+
+============================================================================================
+MEASURED — step 1 answers CORPUS.  The carry forward is discharged as a DETECTOR; R1
+and R2 are what is left, and they are the successor's, not this arm's to build.
+============================================================================================
