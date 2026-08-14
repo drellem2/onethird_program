@@ -1,0 +1,36 @@
+============================================================================================
+mg-365a d0  THE CONTROLS — d1's finding is a zero, and a zero is what a broken arm returns
+============================================================================================
+
+§0  THE CLEAN LIBRARY IS GREEN BEFORE ANY PLANT
+--------------------------------------------------------------------------------------------
+  solo population        10
+  landings since deletion 8, OWED 6, PAID 0
+  Non-empty on all three, so the plants below have something to break.
+
+§1  THE WORLDS
+--------------------------------------------------------------------------------------------
+  D1   CAUGHT   ok      an empty history REFUSES rather than reporting 0
+       the walk of code/gate_fixed_point_f771/no_such_transcript.txt at b5d8a757 return
+  D2   CAUGHT   ok      a pin that does not resolve REFUSES
+       PLANTED 00000000 does not resolve in this repository
+  D3   CAUGHT   ok      a resolvable non-ancestor pin REFUSES
+       PLANTED 4b5158e1 is not an ancestor of origin/main — a pin to a commit that may 
+  D4   CAUGHT   ok      is_watched narrowed to nothing collapses the OWED count
+       OWED 6 -> 0.  This is d1's headline arriving from a broken predicate rather than from the record.
+  D5   INERT    ok      widening is_watched cannot REMOVE a commit from OWED
+       OWED 6, widened 8, real set is a subset: True
+  D6   CAUGHT   ok      the solo predicate loosened to `>= 1 file` inflates the count
+       solo 10 -> 38.  `entire diff is that one file` is doing real work; it is not a restatement of `touched it`.
+  D7   CAUGHT   ok      the corpus-scoped filter is exercised, or its silence is named
+       OWED with filter 6, without 6 — the filter DOES NOT BIND in this window, which is a fact about the window.  Recorded, not claimed as a pass.
+  D8   INERT    ok      two consecutive d1 runs are BYTE-IDENTICAL on stdout
+       exit 0/0, 10684 vs 10684 bytes — no clock, no randomness, and every figure a function of the pin.
+
+§2  THE CLEAN LIBRARY IS GREEN AFTER EVERY PLANT
+--------------------------------------------------------------------------------------------
+  solo population 10 -> 10, OWED 6 -> 6, unchanged: True
+  No plant here mutates a module — each passes a predicate as an argument — and
+  this re-measurement is what says so rather than the design saying so.
+
+VERDICT: GREEN — 8 worlds, 6 CAUGHT, 2 required-INERT.
