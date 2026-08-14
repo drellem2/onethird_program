@@ -1,0 +1,323 @@
+==============================================================================
+z1 -- EMPTY IS NOT ZERO: the census
+mg-3c92, carrying mg-9b6b's rule for the whole estate
+==============================================================================
+
+1.  THE PIN, THE POPULATION, AND THE FUNNEL
+-------------------------------------------
+    AS_OF                       179da0a091f8
+    ancestor of origin/main     yes
+    tracked .py under code/     1249
+    parsed                      1249
+    would not parse             0
+
+    Unparseable files are COUNTED and named rather than dropped.  A
+    census that reports a number because it never looked is this
+    estate's oldest defect, and it is the same defect this whole
+    directory is about, one layer down.
+
+2.  THE FIVE CLASSES
+--------------------
+    class                       sites  what a site proves
+    GUARDED_COLLAPSE               93  a NUMBER was chosen for the empty case
+    GUARDED_PRESERVING            734  something that is NOT a number was
+    AGGREGATE_DEFAULT              16  the same as the first, linter-visible
+    AGGREGATE_DEFAULT_NONE        101  the same as the second, linter-visible
+    UNGUARDED_SUM                1004  NOTHING -- see section 9
+
+    ⚠️  ONE-DIRECTIONAL.  A site is a PROOF that a number was chosen
+    for the empty case.  ABSENCE of a site proves nothing at all:
+    the collapse can live in a helper, in a `dict.get(k, 0)`, or in
+    `sum([])`, where there is no fallback in the source to match on.
+
+3.  COMPLIANCE -- THE RULE THE ESTATE ALREADY FOLLOWS
+-----------------------------------------------------
+    The carry-forward asks for a fallback a reader cannot mistake
+    for a computed answer.  That is decidable: `None` and a string
+    are not numbers.  TWO DISJOINT SPELLINGS ANSWER IT SEPARATELY.
+
+    spelling                            keeps  loses  keeps %
+    f(X) if X else <fallback>             734     93    88.8%
+    max/min/next(..., default=...)        101     16    86.3%
+
+    of the 734 preserving ternaries: 184 use `None`, 550 a string
+    of the 101 preserving defaults:  89 use `None`, 12 a string
+
+    THE TWO NUMBERS AGREE TO ONE PART IN FORTY OVER SPELLINGS THAT
+    SHARE NO SYNTAX AND NO POPULATION, WHICH IS THE FINDING.  The
+    rule mg-9b6b proposes is not a reform: it is a DESCRIPTION of
+    what this estate already does about nine times in ten, arrived
+    at without the rule ever being written down.  A proposal that
+    is already practice is worth proposing for one reason only --
+    to make the one-in-ten visible -- and that is sections 5 to 7.
+
+    ⚠️  THE 550 STRING FALLBACKS ARE COUNTED AND ARE NOT A CLAIM OF
+    INTENT.  Most are display defaults (`" %s" % x if x else ""`)
+    that satisfy the criterion incidentally.  The criterion is
+    about what a READER can recover, not about what an author
+    meant, and it is stated that way everywhere in this directory.
+    The `default=` row carries no such doubt: 89 of its 101 are
+    `None`, on the same call, by the same author, in the same line.
+
+4.  THE GUARDED CLASS BY OPERATION, BY REACH, BY FALLBACK
+---------------------------------------------------------
+    op        sites  printed     zero
+    DIV          28       17       27
+    MAXMIN       23        4       21
+    SUM           5        0        5
+    LEN          14        3       14
+    OTHER        23        5       17
+    TOTAL        93       29       84
+
+    PRINTED is SYNTACTIC CONTAINMENT in a `print`, a `%`-format, an
+    f-string or a `.write`, and it is a DECLARED UNDER-COUNT: a site
+    assigned to a name on one line and printed on the next is not
+    counted.  `code/audit_330a/s1_anchors.py:160` is exactly that
+    and it is in this census as NOT printed, one line above a
+    `print` that renders it.  The direction is the safe one --
+    PRINTED is a proof, NOT-PRINTED is not.
+
+5.  THE VERDICT RULE, COMPUTED FROM THE OPERATION ALONE
+-------------------------------------------------------
+    Is the fallback the operation's OWN VALUE on the empty input,
+    or a CHOICE made because the operation has no value there?
+
+        sum(∅) = 0   len(∅) = 0        DEFINITIONS   -> SOUND
+        max(∅)  min(∅)  x/0            NO VALUE      -> COLLAPSE
+        anything else                  NOT DECIDABLE -> section 6
+
+    ⚠️  COLLAPSE IS NOT AN ACCUSATION.  It says the printed value
+    cannot be inverted by a reader -- EMPTY and 0 arrive as one
+    number.  Whether that matters is a question about the reader,
+    and mg-9b6b is the one case in this estate where it is known to.
+
+    computed SOUND        19
+    computed COLLAPSE     51
+    computed UNDECIDED    23
+
+6.  THE HAND TABLE -- THE 23 THE RULE CANNOT DECIDE
+---------------------------------------------------
+    COLLAPSE  code/audit_330a/s1_anchors.py:160
+              a non-ancestor has no distance; the next line prints `0 commit(s)`
+              d = L.distance(prop, hist) if L.is_ancestor(prop, hist) else 0
+    COLLAPSE  code/audit_c067/selftest_c067.py:81
+              a file that does not exist has no size, and 0 is a size
+              disk_len = self_disk.stat().st_size if self_disk.exists() else 0
+    SOUND     code/branching_af28/core_af28.py:372
+              the largest part of the empty partition IS 0
+              rec(0, lam[0] if lam else 0, [])
+    SOUND     code/branching_audit_a218/kern_a218.py:499
+              the rank of the zero space is 0, by definition and not by choice
+              return rank(self.gram(p)) if self.dim_V(p) else 0
+    SOUND     code/compression_audit_8bc7/a1_fibers.py:108
+              the guard only avoids 2**-1; the product is 0 at d = 0 either way
+              if len(cube) != d * (2 ** (d - 1) if d else 0):
+    SOUND     code/counterexample_repair_dea5/controls.py:96
+              n = 0 has exactly one poset with one labelling, and 1 is the count
+              tot += fact[n] // automorphisms(P) if n else 1
+    SOUND     code/face_geometry_audit_e0ce/audit_rebuild.py:543
+              the rank of a matrix with no rows is 0, by definition
+              ranks[k] = matrank(rows) if rows else 0
+    COLLAPSE  code/face_geometry_audit_e7bc/g3_differs_under.py:111
+              the regex did not match; `0 claim(s) scored` is not what that means
+              c = int(m.group(1)) if m else 0
+    COLLAPSE  code/face_geometry_instr_5f9a/d2_deletion.py:1399
+              no matching row is printed into the message as the row's value 0
+              % (MERGED_REF, mrows[0][3] if mrows else 0),
+    SOUND     code/face_geometry_landing_7d5a/verify_landing.py:397
+              the unified-diff format OMITS a hunk count of 1; 1 is the spec
+              span = int(newn) if newn else 1
+    SOUND     code/grain_axis_audit_03d1/a2_blindspot.py:236
+              at 0 disagreements the repaired row count is 0 on both readings
+              pub, rep, summed = 1, (d - 1 if d else 0), d
+    COLLAPSE  code/image_geometry_c776/c2_no_inequality.py:125
+              no argmax poset was found, and `e(P) = 1` is printed for it
+              f"m = {m} incomparable pairs, e(P) = {L.e_and_marginals(arg, n)[0] if arg else 1}")
+    SOUND     code/landscape_repair_audit_3b51/audit_r3_r4.py:64
+              outside M0 the closed form's own value IS 0 -- a definition
+              cf = closed_form(X) if in_M0(n, up, X) else 0
+    SOUND     code/lstar_789d/s0_selftest.py:43
+              the down-set below the bottom element is empty, i.e. the mask 0
+              c = P789(tuple(1 << (i - 1) if i else 0 for i in range(4)), 4) # chain
+    SOUND     code/runner_exit_repair_bf79/p1_grain.py:345
+              at 0 disagreements the repaired version has 0 blind-spot rows
+              % (disagree - 1 if disagree else 0))
+    COLLAPSE  code/runner_exit_repair_bf79/p3_ruleset.py:120
+              the regex did not match; the figure is absent rather than zero
+              dee4_self = int(m_self.group(1)) if m_self else 0
+    COLLAPSE  code/runner_exit_repair_bf79/p3_ruleset.py:121
+              the regex did not match; the figure is absent rather than zero
+              dee4_subj = int(m_subj.group(1)) if m_subj else 0
+    COLLAPSE  code/species_audit_7dd3/kern7dd3.py:93
+              no line map means the line number is unknown, and 1 is a line
+              hits.add(lmap[m.start()] if lmap else 1)
+    SOUND     code/species_audit_a61f/a1_headline.py:221
+              the rank of an empty integer matrix is 0, by definition
+              dim_radG = rank_q(ints, len(B)) if ints else 0
+    COLLAPSE  code/species_extent_d633/e1_extents.py:453
+              an empty `under` has no first passage to name; 1 is a sentinel
+              named = OUT["s2_seam.py"].count("lines %d-%d:" % (under[0][0], under[0][1])) \
+    SOUND     code/species_extent_d633/trace_open.py:79
+              `SystemExit(None)` IS exit 0 -- the language defines it, not the arm
+              code = e.code if isinstance(e.code, int) else 0
+    COLLAPSE  code/um_frontier_b417/b4_certify.py:78
+              a missing lower bound prints as 0.000000 beside genuine ones
+              % (nn, c["float_J"], lo, r["u_M_lo"] if r["u_M_lo"] else 0.0,
+    SOUND     code/unified_gate_8fd1/quotient_symmetry.py:262
+              the chain C_0 has exactly one antichain, the empty one
+              % (n, len(acc), 2 ** (n - 1) if n else 1, n, len(Gc),
+
+    hand  SOUND       13
+    hand  COLLAPSE    10
+
+    TOTAL COLLAPSE    61   (51 computed + 10 judged)
+    TOTAL SOUND       32   (19 computed + 13 judged)
+
+7.  THE HEADLINE -- COLLAPSES WHOSE VALUE REACHES A PAGE
+--------------------------------------------------------
+    24 of 61 collapses are rendered into text at the site itself.
+
+    THIS IS THE FAMILY mg-9b6b's FINDING IS ABOUT.  Each of these
+    prints a number for a question that has no answer, onto a page
+    a later reader takes figures off.  A `0.0%` printed for an EMPTY
+    population is not wrong arithmetic -- it is a reading of the
+    population that the population does not support.
+
+    DIV    code/anticorrelation_c50b/s2_theory.py:130
+           100.0 * h2r / h2 if h2 else 0.0, nf, nm))
+    MAXMIN code/asof_census_20ee/exemplars.py:513
+           % (max(p["record_commits"] for p in co) if co else 0,
+    MAXMIN code/asof_census_20ee/exemplars.py:514
+           min(p["record_commits"] for p in co) if co else 0))
+    DIV    code/branching_bound_d075/s1_census.py:262
+           % (tot - totb, 100.0 * (tot - totb) / tot if tot else 0), file=OUT)
+    DIV    code/c3_audit_a94c3/a1_algebra.py:179
+           f"{good / bad if bad else 0:>8.3f}")
+    DIV    code/counterexample_probe_24a3/probe.py:853
+           100.0 * len(ext) / len(sat) if sat else 0.0))
+    DIV    code/face_geometry_audit_fcb2/a3_standard_elsewhere.py:148
+           % (name, round(100 * g / a) if a else 0, a,
+    OTHER  code/face_geometry_instr_5f9a/d2_deletion.py:1399
+           % (MERGED_REF, mrows[0][3] if mrows else 0),
+    DIV    code/grain_arity_9160/s1_reproduce.py:232
+           % (off, tot, 100.0 * off / tot if tot else 0))
+    DIV    code/grain_arity_9160/s1_reproduce.py:234
+           % (stages.get("-", 0), tot, 100.0 * stages.get("-", 0) / tot if tot
+    OTHER  code/image_geometry_c776/c2_no_inequality.py:125
+           f"m = {m} incomparable pairs, e(P) = {L.e_and_marginals(arg, n)[0] if arg else 1}")
+    DIV    code/species_audit_7dd3/d2_extent.py:534
+           % (over, total, 100.0 * over / total if total else 0))
+    DIV    code/state_ratchet_e331/p1_growth.py:187
+           % (new_ch, len(newk), new_ch // len(newk) if newk else 0))
+    DIV    code/transcript_census_1abe/t2_census.py:400
+           100.0 * counts["DIFFERS"] / attempted if attempted else 0))
+    DIV    code/transcript_census_1abe/t2_census.py:447
+           % (len(reader), 100.0 * len(reader) / tot if tot else 0))
+    DIV    code/transcript_census_1abe/t2_census.py:449
+           % (len(pure), 100.0 * len(pure) / tot if tot else 0))
+    DIV    code/transcript_census_1abe/t5_control.py:314
+           100.0 * len(differ) / len(names) if names else 0, rate))
+    DIV    code/transcript_census_1abe/t6_caps.py:292
+           100.0 * len(live) / total_caps if total_caps else 0))
+    DIV    code/um_frontier_b417/b3_trend.py:139
+           t["u_M"] / t["v_L"] * 0 + (t["v_L"] * t["gamma"] / t["mu"] if t["mu"] else 0),
+    DIV    code/um_frontier_b417/b3_trend.py:181
+           % (t0_["v_L"], t1_["v_L"], dlv, 100.0 * dlv / dlu if dlu else 0.0))
+    DIV    code/um_frontier_b417/b3_trend.py:183
+           % (t0_["D"], t1_["D"], dld, 100.0 * dld / dlu if dlu else 0.0))
+    OTHER  code/um_frontier_b417/b4_certify.py:78
+           % (nn, c["float_J"], lo, r["u_M_lo"] if r["u_M_lo"] else 0.0,
+    MAXMIN code/verdict_staleness_30bd/prose_30bd.py:321
+           probe2 = "the population is %d transcripts" % (sorted(corpus)[-1] if corpus else 0)
+    MAXMIN code/verdict_staleness_30bd/prose_30bd.py:325
+           % (sorted(corpus)[-1] if corpus else 0, "ok" if ok2 else "*** UNBACKED ***"))
+
+8.  WRONG-DIRECTION CONTROL -- IS THE REQUIREMENT LOAD-BEARING?
+---------------------------------------------------------------
+    strict (guard named in the true branch)      93
+    loose  (requirement dropped)                520
+    ratio                                      5.6x
+
+    Without the requirement, every `sys.exit(1 if bad else 0)` and
+    every matrix indicator `(deg[i] if i == j else 0)` joins the
+    class.  A requirement whose removal changed nothing would be
+    decoration and this census would be a grep wearing an AST.
+
+9.  THE FAMILY NO MATCHER CAN JUDGE
+-----------------------------------
+    sum(<comprehension with an `if`>)          1004 sites
+    ... of which rendered into text             254
+
+    `sum([]) == 0` IS THE LANGUAGE'S COLLAPSE AND NOT THE AUTHOR'S.
+    There is no fallback in the source, no guard to find, and the
+    printed 0 is byte-identical whether the selection was empty or
+    genuinely summed to nothing.  NONE OF THESE 1004 IS A DEFECT AND
+    THIS ARM DOES NOT SAY THEY ARE.  They are the measurement of
+    what a matcher cannot reach: a rule enforced by looking would
+    be silent on a class 11x the size of the one it can see.
+
+    THE LINTER'S OWN SPELLING, AND THE GREP THAT MISSED IT
+    max/min/next with a numeric fallback         16 sites
+        code/chain_iv_audit_00b3/a2_reversal.py:86                 worst = max((b[2] - a[2] for a, b in v)…
+        code/coarse_unit_fa83/lib_fa83.py:230                      "max_line_chars": max((len(l) for l in …
+        code/coarse_unit_fa83/lib_fa83.py:231                      "max_token_chars": max((len(t) for t in…
+        code/counterexample_probe_24a3/probe.py:234                r.height = max((len(_longest_chain(P, x…
+        code/face_geometry_repair_8af0/probe_f3_ridge_multiplicity.py:86 mult = max((len(v) for v in td["ridge_f…
+        code/face_geometry_repair_8af0/probe_f3_tightness.py:106   return max((len(row) for row in M.value…
+        code/face_geometry_repair_8af0/probe_f3_tightness.py:167   published = max((len(v) for v in td["ri…
+        code/face_geometry_repair_e35b/verify_e35b.py:792          max_mult = max(max_mult, max((len(v) fo…
+        code/hodge_leverage_audit_3c24/audit_join.py:321           dev = max((abs(a - b) for a, b in zip(p…
+        code/hodge_leverage_join/verify_join.py:245                dev = max((abs(a - b) for a, b in zip(p…
+        code/primitivity_f5be/p2_primitive.py:150                  f"max n = {max((r['n'] for r in any_lit…
+        code/search_reach_abe8/s4_reach.py:91                      lo = max([k for k in ks if k <= n], def…
+        code/state_audit_6a2f/relocation_check.py:167              smin = min((L for _,L in runs), default…
+        code/state_audit_6a2f/relocation_check.py:209              smin = min((L for _,L in runs), default…
+        code/state_ratchet_e331/lib_e331.py:54                     "max_line_chars": max((len(l) for l in …
+        code/state_restructure_34bf/verify_relocation.py:161       shortest = min((b - a for a, b in runs)…
+
+    PREDICTIONS.md §0.1 SAID THIS CLASS WAS EMPTY.  IT IS NOT, AND
+    THE MECHANISM IS THIS DIRECTORY'S OWN SUBJECT ARRIVING IN ITS
+    OWN PRE-REGISTRATION.  The scoping probe was
+
+        git grep -E '\b(max|min)\([^)]*default=' -- 'code/**.py'
+
+    and it fails TWICE, independently, in the same direction:
+
+      (a) `\b` IS NOT A WORD BOUNDARY IN git grep's POSIX ERE.  It
+          matches nothing and does not complain -- `git grep -c -E
+          '\bmax\(' code/search_reach_abe8/s4_reach.py` returns no
+          lines where `max\(` returns 3.  THIS is what made the
+          probe return the literal 0.
+      (b) `[^)]*` cannot cross the `)` in `max((len(l) for l in
+          lines), default=0)`, which is how 12 of the 16 are
+          written.  Repairing (a) alone gives 3 of 16 -- a number
+          small enough to be believed and wrong by a factor of 5.
+
+    So (a) produced the zero and (b) would have kept the count
+    wrong after it was fixed.  P1 IS REFUTED, and it is refuted by
+    exactly the confusion the ticket is about: a tool returned
+    NOTHING AT ALL, `nothing at all` was read as `0 sites exist`,
+    and the pre-registration published it as a measured fact.
+    That is mg-9b6b's sentence about `G` with the nouns changed.
+
+10. THE REFLEXIVE SCAN -- THIS DIRECTORY BY ITS OWN RULE
+--------------------------------------------------------
+    ⚠️  READ FROM THE WORKTREE AND NOT FROM THE PIN, AND THAT IS AN
+    EXEMPTION BY ARITHMETIC RATHER THAN BY RULE: this directory is
+    younger than 179da0a091f8 and is in no tree the pin can name.  It is the
+    one figure on this page that is not a function of one commit.
+
+    files scanned                                 3
+    GUARDED_COLLAPSE                              0
+    AGGREGATE_DEFAULT                             0
+    GUARDED_PRESERVING                            3
+    UNGUARDED_SUM                                14
+
+    `0` HERE MEANS I LOOKED AND THERE WERE NONE.  `EMPTY` would
+    mean there was nothing to look at.  They are printed by one
+    function (`lib3c92.count_or_empty`) so that no arm in this
+    directory can print one for the other by accident -- which is
+    the rule this directory is about, applied to itself.
+
+==============================================================================
+z1: GREEN -- 61 collapses, 24 of them reaching a page, over 1249 files

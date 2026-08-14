@@ -1,0 +1,122 @@
+==============================================================================
+z0 -- EMPTY IS NOT ZERO: the controls
+mg-3c92, run before any arm prints a count
+==============================================================================
+
+D0.  THE INSTRUMENT CAN SEE THE CORPUS  (before any zero is printed)
+--------------------------------------------------------------------
+    [PASS] the pin resolves   179da0a091f8
+    [PASS] the pin is an ancestor of origin/main
+    [PASS] the corpus is large enough to be the corpus   1249 tracked .py under code/
+    [PASS] every file parsed   0 unparseable
+    [PASS] the class this directory is about is NOT empty   93 guarded site(s)
+
+    A zero is what a broken walk returns for free, so the walk is
+    asserted non-trivial before z1 prints a zero over it.
+
+D1.  MUST FIRE -- mg-9b6b's OWN COLLAPSE, RECONSTRUCTED  (P4)
+-------------------------------------------------------------
+    [PASS] the reconstructed spelling is flagged
+    [PASS] its operation is MAXMIN   MAXMIN
+    [PASS] its computed verdict is COLLAPSE   COLLAPSE
+
+    `max(∅)` has no value.  Whatever is printed for it is a choice,
+    and 0 is the choice that cannot be told from an answer.
+
+D2.  MUST NOT FIRE -- THE SPELLING THAT SHIPPED  (P4)
+-----------------------------------------------------
+    [PASS] the shipped spelling is still in the tree at the pin   code/lever_shape_9b6b/e2_frontier.py:95
+    [PASS] it is NOT in the collapsing class
+    [PASS] it is in NO class at all   no site
+
+    The shipped line is
+        mx if mx is not None else "EMPTY"
+    and it is out on TWO INDEPENDENT GROUNDS: the guard is a
+    COMPARISON rather than a bare emptiness test, and the fallback
+    is a STRING rather than a number.  `no class at all` is a
+    weaker statement than `preserving`, and it is the true one.
+
+    WHICH GROUND DOES THE WORK IS MEASURED RATHER THAN ASSERTED,
+    and both variants below are DERIVED FROM THE SHIPPED LINE BY
+    SUBSTITUTION rather than re-typed:
+    [PASS]     mx if mx else "EMPTY"                          -> PRESERVING   GUARDED_PRESERVING
+    [PASS]     mx if mx else 0                                -> COLLAPSE   GUARDED_COLLAPSE
+
+    So the guard alone keeps it out of BOTH classes, and the
+    fallback alone decides which class it would land in once the
+    guard is bare.  Neither ground is doing the other's work.
+
+D3.  MUST NOT FIRE -- THE TWO SHAPES THAT FLOOD A `else 0` GREP
+---------------------------------------------------------------
+    [PASS] a matrix indicator is not flagged
+    [PASS] an exit-code ternary is not flagged
+    [PASS] ...and it IS in the loose class, so it is the requirement that excludes it
+
+    The third row is what makes the first two mean something.  A
+    shape excluded by ACCIDENT -- by a parse failure, by a typo in
+    the matcher -- looks identical to one excluded on purpose.
+
+D4.  THE EXACT-RATIONAL FALLBACK IS RECOGNISED
+----------------------------------------------
+    [PASS] `Fraction(0)` counts as a numeric zero
+
+    This corpus does exact rationals on every verdict path, so the
+    literal zero an author writes is very often a CALL.  A matcher
+    that only knew `0` would report a smaller class for a reason
+    that is about Python and not about this estate.
+
+D5.  PLANTED -- THE GUARD TEST IS DISABLED  (must CATCH)
+--------------------------------------------------------
+    [PASS] clean library: the indicator is not flagged
+    [PASS] CAUGHT: with the guard test disabled it IS flagged
+    [PASS] clean library restored, and re-measured rather than assumed
+
+D6.  PLANTED -- THE DIVISION SHAPE IS BLINDED  (must CATCH)
+-----------------------------------------------------------
+    [PASS] clean library: a rate is COLLAPSE
+    [PASS] CAUGHT: blinded, the same site becomes UNDECIDED
+    [PASS] clean library restored
+
+    An UNDECIDED site goes to z1's hand table, and a hand table
+    with a site missing REFUSES.  So this plant is caught twice:
+    once here, and once as a refusal in the arm that consumes it.
+
+D7.  PLANTED -- `None` IS TREATED AS A NUMBER  (must CATCH)
+-----------------------------------------------------------
+    [PASS] clean library: `else None` is PRESERVING
+    [PASS] CAUGHT: with `None` no longer preserving, the site leaves the compliant class
+    [PASS] clean library restored
+
+    z1 §3's 88.8%% and 86.3%% are the two figures this directory
+    would most like to be true, so the predicate they rest on is
+    the one most worth breaking on purpose.
+
+D8.  REQUIRED-INERT -- PROSE DOES NOT MOVE THE COUNT
+----------------------------------------------------
+    [PASS] a reworded comment and a renamed local move NOTHING
+
+    This is the wrong direction and it MUST NOT MOVE.  A detector
+    that answers differently when the prose changes is measuring
+    text, and every figure in z1 would be about the writing.
+
+D9.  REQUIRED-INERT -- THE `%` OF A NON-STRING IS NOT A PRINT
+-------------------------------------------------------------
+    [PASS] an arithmetic `%` does not make a site PRINTED
+    [PASS] ...and a real format string does
+
+    z1 §7's headline is `24 of 61 reach a page`.  If `%` alone
+    counted, that numerator would be a fact about modular
+    arithmetic in a corpus that does a great deal of it.
+
+D10. THE HAND TABLE IS COMPLETE, AND ITS REFUSAL WORKS
+------------------------------------------------------
+    [PASS] every undecided site carries a hand verdict   23 undecided, 23 judged
+    [PASS] no hand verdict names a site the census did not find
+    [PASS] CAUGHT: with one verdict removed, the completeness test fails
+
+    The refusal is checked here as well as in z1 because z1's
+    refusal path is the one that never runs on a green day, and a
+    refusal nobody has seen fire is a promise.
+
+==============================================================================
+z0: GREEN   (0 control(s) failed)

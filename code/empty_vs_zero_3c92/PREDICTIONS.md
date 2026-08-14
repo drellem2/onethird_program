@@ -52,10 +52,16 @@ tracked `out_*.txt` transcripts.
 
 | | outcome |
 |---|---|
-| **P1** | |
-| **P2** | |
-| **P3** | |
-| **P4** | |
-| **P5** | |
-| **P6** | |
-| **P7** | |
+| **P1** | **REFUTED — 16 sites, not 0**, and refuted by this directory's own subject. §0.1 read a probe's `0` as *"there are none"* when it meant *"this probe could not look"*. Two independent failures: `\b` is **not a word boundary in `git grep`'s POSIX ERE** — it matches nothing and does not complain, which is what produced the literal `0` — and `[^)]*` cannot cross the `)` in `max((len(l) for l in lines), default=0)`, which is how 12 of the 16 are written, so repairing the first alone would have given `3 of 16`. (`z1` §9.) |
+| **P2** | **REFUTED on the upper side — 93 sites**, against a predicted ceiling of 40. The class is non-empty, so the directory has a subject; it is 2.3× wider than I allowed. The stated cost did **not** fall due: full adjudication survived, because §5's verdict turned out to be **computable from the operation** for 70 of the 93 and only 23 needed a hand. (`z1` §2, §5, §6.) |
+| **P3** | **REFUTED — 61 of 93 (66%)**, against a predicted *strictly fewer than half*. **AND THE CRITERION MOVED, WHICH IS DISCLOSED RATHER THAN LEFT TO BE NOTICED**: the arm judges *invertibility* — is the fallback the operation's own value on the empty input, or a choice? — which is **narrower** than P3's *"is a defect"*. It never asks whether anyone reads the number. Judged against the criterion the arm actually applies. (`z1` §5–6.) |
+| **P4** | **HELD, and by more than it asked.** The reconstructed collapse fires (`MAXMIN`, `COLLAPSE`); the shipped spelling is in **no class at all** — out on two independent grounds, guard and fallback — and **which ground does the work is measured**, by substituting on the line read from the tree rather than by argument. (`z0` D1, D2.) |
+| **P5** | **HELD, at 1 004 sites — 11× the class a matcher can see.** `sum([]) == 0` is the language's collapse: no fallback in the source, no guard to find, nothing to match on. **This is the prediction that decides the shape of the remedy** and it says the rule cannot be a lint. (`z1` §9.) |
+| **P6** | **HELD — 0.** This directory's arms contain no collapsing site. They contain 13 `UNGUARDED_SUM` sites, which §9 says of the other 1 004 are not defects and says of these too. |
+| **P7** | **REFUTED — 5.6×, not the ≥10× predicted** (520 loose against 93 strict). The requirement is still load-bearing — it removes 82% of the class, and `z0` D3 shows it is what excludes the exit-code shape rather than some accident — but **the number I named was wrong and the paragraph is not rewritten to fit it.** (`z1` §8.) |
+
+**Four of the seven are refuted, and the one I would keep is P1** — because it is refuted by the exact confusion the ticket exists to describe, inside the pre-registration of the directory measuring it. A tool returned *nothing at all*, *nothing at all* was read as *zero*, and it was published as a measured fact.
+
+**THE LANDING'S HEADLINE FIGURE WAS NOT PREDICTED AT ALL, AND THAT IS SAID HERE RATHER THAN IN THE README.** `z1` §3 — the estate already keeps EMPTY out of the number system in **88.8%** of guarded ternaries and **86.3%** of `default=` aggregates, two disjoint spellings agreeing to one part in forty — rests on a class (`GUARDED_PRESERVING`, `AGGREGATE_DEFAULT_NONE`) that **did not exist when these predictions were written**. It was added after the first census run, when the `default=None` sites turned up beside the `default=0` ones in P1's post-mortem. It is the strongest thing here and it is **not** evidence that anything was predicted well; a figure invented after the measurement is a figure whose exposure was never stated.
+
+**One thing came out differently and is not a prediction:** the verdict was to be entirely by hand, and it is not. Writing the 93 rows made it clear the question — *is the fallback a definition or a choice?* — is decidable from the operation alone for `sum`, `len`, `max`, `min` and division, so those 70 are **computed** and only the 23 remaining are judged. A rule and a judgement in one column would have been indistinguishable, so they are in two.
