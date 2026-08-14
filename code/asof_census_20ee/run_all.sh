@@ -42,6 +42,18 @@
 # about a second — unlike ground_truth.sh it executes no instrument code and
 # writes nothing outside this directory.  Its default subject is the instrument
 # mg-6e4f pinned; pass any directory to ask about another.
+# mg-ede8: liveindex.py IS run here, and it is the one file in this directory
+# whose subject is another file in it.  consumers.py reads the LIVE INDEX by
+# design, so out_consumers.txt is a function of WHEN IT WAS RUN and not of the
+# commit it is attached to — and 5 of its 8 committed versions were already
+# wrong when they were written.  liveindex.py re-derives the path-list-valued
+# figures AT THE COMMIT THAT CARRIES EACH VERSION, which needs no instrument
+# execution and no dirty tree, so ITS OWN transcript reproduces BYTE-IDENTICALLY
+# at a declared AS_OF while its subject cannot.  ITS LIVE HALF IS ON STDERR AND
+# GATES NOTHING: the staleness is created by the refinery's rebase, after the
+# last moment anything on the branch can run, so a gate here would be red for
+# reasons the author cannot act on (mg-724a's recorded/gated split).
+#
 # mg-0bf1: exemplars.py IS run here, for worklist.py's reason exactly: it
 # executes no instrument code and needs no dirty tree, because every figure --
 # the work-list, the 572 markdown records, the blame, the diffs -- is read at a
@@ -55,11 +67,13 @@ cd "$(dirname "$0")"
 python3 selftest_20ee.py > out_selftest_20ee.txt
 python3 census.py        > out_census.txt
 python3 consumers.py     > out_consumers.txt
+python3 liveindex.py     > out_liveindex.txt
 python3 permuted.py      > out_permuted.txt
 python3 worklist.py      > out_worklist.txt
 python3 exemplars.py     > out_exemplars.txt
 echo "mg-20ee census: $(sed -n '/transcripts carry/p' out_census.txt | tr -s ' ')"
 echo "mg-6e4f consumers: $(sed -n '/^CONSUMERS:/p' out_consumers.txt)"
+echo "mg-ede8 live-index: $(sed -n '/^LIVE-INDEX:/p' out_liveindex.txt)"
 echo "mg-885d condition 2: $(sed -n '/^CONDITION 2:/p' out_permuted.txt)"
 echo "mg-e8b0 work-list: $(sed -n '/^CONDITION 0 (work-list):/p' out_worklist.txt)"
 echo "mg-0bf1 exemplars: $(sed -n '/^CONDITION 0 (exemplars):/p' out_exemplars.txt)"

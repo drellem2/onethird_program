@@ -70,7 +70,15 @@ RAN = []
 # an accounting and need not be, so N28's remedy (THE INSTRUMENT PRINTS THE
 # SENTENCE) survives unchanged.  N30 is the complement: an instrument no record
 # names at all has no last word and is invisible to the rule at every revision.
-KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30")
+# N31 JOINS AT mg-ede8 AND NOTHING LEAVES, so this tuple GROWS AGAIN.  It is the
+# limit of the census that answers `was this transcript already stale when it
+# was written`: only figures that are a function of the TRACKED PATH LIST can be
+# re-derived at a commit without running the instrument there, so a STALE
+# verdict is a proof and an AGREES verdict covers four figures out of a
+# transcript that has many.  It is asserted on the RULE for N28's reason -- its
+# live instances are the content-valued figures, and a control sitting on one of
+# those would go red the day somebody found a way to re-derive it.
+KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30", "N31")
 
 
 def check(name, got, want, why):
@@ -992,6 +1000,158 @@ check("N30 zero mentions is zero pairs — the population it cannot see",
       "GROWS WHEN THE CORPUS GETS WORSE, which is why it is pinned: a "
       "successor that widens the record population must move this number or "
       "explain why not.")
+
+print()
+print("CONTROLS ON liveindex.py — WAS IT STALE AT ITS OWN COMMIT (mg-ede8)")
+print("-" * 78)
+print()
+print("  consumers.py reads the LIVE INDEX by design, so out_consumers.txt is a")
+print("  function of WHEN it was run and not of the commit it is attached to.")
+print("  These are the ways a census of that could be worth nothing: it could")
+print("  fire on everything it looks at (P32), it could read its subject off")
+print("  disk and become a statement about somebody's worktree (P33), its")
+print("  re-derivation could have drifted from the rule it re-states or its")
+print("  reader could report `clean` for a line it never found (P34) -- and it")
+print("  answers about four figures out of a transcript that has many (N31).")
+print()
+
+import io  # noqa: E402
+import contextlib  # noqa: E402
+
+import liveindex  # noqa: E402
+
+# ONE SCAN, SHARED, for P26's reason two files along.
+_LI_OPENED = []
+
+
+def _watched_open_li(file, *a, **kw):
+    try:
+        p = os.path.abspath(file if isinstance(file, str) else str(file))
+    except Exception:                                   # a file descriptor
+        p = ""
+    if p.startswith(ROOT + os.sep):
+        _LI_OPENED.append(os.path.relpath(p, ROOT))
+    return _real_open(file, *a, **kw)
+
+
+try:
+    builtins.open = _watched_open_li
+    _LI = liveindex.scan()
+finally:
+    builtins.open = _real_open
+
+_LIV = _LI["watched"][0]["versions"]
+_LIBY = {v["commit"][:7]: v["verdict"] for v in _LIV}
+
+
+def _said_tree(short, label):
+    for v in _LIV:
+        if v["commit"][:7] != short:
+            continue
+        for lab, was, now, _grade in v["rows"]:
+            if lab == label:
+                return was, now
+    return None
+
+
+check("P32 the census fires, and DOES NOT fire, on real committed history",
+      (_LIBY.get("ccd925c"), _LIBY.get("3d9ad71"), _LIBY.get("828a0fa"),
+       _said_tree("ccd925c", "shared basename counts"),
+       _said_tree("3d9ad71", "shared basename counts"),
+       sorted(set(g for v in _LIV for _l, _w, _n, g in v["rows"]
+                  if _l != "shared basename counts"))),
+      ("STALE", "STALE", "AGREES",
+       ([("run_all.sh", 196)], [("run_all.sh", 197)]),
+       ([("run_all.sh", 193)], [("run_all.sh", 192)]),
+       ["AGREES"]),
+      "THE WRONG-DIRECTION HALF IS TWO DIFFERENT THINGS HERE AND BOTH ARE "
+      "REQUIRED. First, a version that AGREES: 828a0fa is mg-e8b0's own "
+      "recorded expectation — tranche 8's transcript was NOT stale at its own "
+      "commit — so a census that graded every version STALE would be caught by "
+      "a commit whose answer was already published. Second, the OTHER THREE "
+      "FIGURES MUST STAND STILL AT EVERY VERSION: `subject scripts`, the "
+      "unique/shared split and the shared count are read by the same reader "
+      "and re-derived by the same rule, and only ONE of them has ever drifted. "
+      "A census whose every figure moved would be measuring its own reader. "
+      "AND THE DRIFT GOES BOTH WAYS: ccd925c under-counts by 1 (the ticket's "
+      "own finding) and 3d9ad71 OVER-counts by 1 — a figure taken on a tree "
+      "holding MORE of the named file than the commit that carries it, which "
+      "is consumers.py's own header sentence about the day main folded one "
+      "suite into another, and which nobody had looked for.")
+
+check("P33 liveindex reads its subject AT A COMMIT, never off disk",
+      (_LI_OPENED, len(_LIV), len(liveindex.FIELDS)),
+      ([], 8, 4),
+      "THE SAME DEFECT P26 AND P29 ARE FOR, ON THE FILE WHOSE WHOLE SUBJECT IS "
+      "A FIGURE THAT DEPENDS ON WHEN IT WAS TAKEN. A single `open` here would "
+      "make a census of `was this transcript stale at its own commit` into a "
+      "statement about the reader's worktree, which is the defect it reports "
+      "wearing the remedy's clothes. RUN rather than promised: `open` is "
+      "replaced for the entire scan and every path under the repository root "
+      "is recorded. The version count and the figure count sit beside it so a "
+      "scan that read nothing because it did nothing cannot pass.")
+
+_CONS = io.StringIO()
+with contextlib.redirect_stdout(_CONS):
+    consumers.main(os.path.join("code", "species_remainder_f8fa"))
+_REAL = liveindex.figures_from_transcript(_CONS.getvalue())
+_MINE = liveindex.figures_from_paths(_REAL["subject"],
+                                     liveindex.paths_at(None))
+_PAGE = liveindex.git("show", "%s:%s"
+                      % (liveindex.AS_OF, liveindex.WATCHED[0][0]))
+_BLIND = liveindex.SHARED_LINE.sub("  basename is shared -- ", _PAGE)
+_GONE = liveindex.figures_from_transcript(_BLIND)
+check("P34 the re-derivation AGREES with the real consumers.py, and the "
+      "reader refuses",
+      ((_REAL["n_scripts"], _REAL["n_unique"], _REAL["n_shared"],
+        _REAL["shared"]) ==
+       (_MINE["n_scripts"], _MINE["n_unique"], _MINE["n_shared"],
+        _MINE["shared"]),
+       _REAL["subject"], _MINE["n_shared"],
+       _GONE["shared"] is liveindex.UNREADABLE,
+       [g for _l, _w, _n, g in liveindex.compare(_GONE, _MINE)
+        if g == "UNREADABLE"]),
+      (True, "code/species_remainder_f8fa", 1, True, ["UNREADABLE"]),
+      "liveindex.figures_from_paths IS A RE-STATEMENT of consumers.main's freq "
+      "loop and its unique/shared split, not an import — consumers.main is one "
+      "function that prints as it goes, and the figures have to be computable "
+      "for a tree that is not checked out. A re-statement DRIFTS, so the REAL "
+      "consumers.py is run here and its printed page is fed to the same reader "
+      "the census uses: the two must agree on all four figures at the live "
+      "index, and the subject name is asserted beside them so a run that "
+      "compared two empty answers cannot pass. THE SECOND HALF IS THE ONE THAT "
+      "KEEPS `AGREES` HONEST — with the shared-basename line emptied, the "
+      "reader must return UNREADABLE and the comparison must GRADE it "
+      "UNREADABLE — and THIS CONTROL FIRED ON ITS OWN FILE THE FIRST TIME IT "
+      "RAN. liveindex's first reader took the emptied line as ZERO PAIRS and "
+      "the comparison graded it STALE: a census reporting a FINDING about a "
+      "figure it had failed to read, which is git_grep_l's original defect one "
+      "file over — reporting a number because it never looked — arriving "
+      "inside the remedy for it. The reader was tightened rather than the "
+      "plant relaxed: the payload must be `none` or must reconstruct EXACTLY "
+      "in consumers.py's own spelling.")
+
+check("N31 AGREES is one-directional — the class this census cannot see",
+      (sorted(l for l, _k in liveindex.FIELDS), len(liveindex.WATCHED)),
+      (["shared basename counts", "shared-basename scripts",
+        "subject scripts", "unique-basename scripts"], 1),
+      "A DECLARED LIMIT, ASSERTED ON THE RULE AND NOT ON AN INSTANCE, AND IT "
+      "IS worklist.py's FALSIFIED / NOT FALSIFIED DISCIPLINE ONE SUBJECT "
+      "ALONG. A figure is re-derivable at an arbitrary commit exactly when it "
+      "is a function of the TRACKED PATH LIST ALONE; the four above are, and "
+      "everything else in out_consumers.txt — the prose count, the "
+      "named-in-no-tracked-file count, and the whole of sections A, B and C — "
+      "is a function of FILE CONTENT, and re-deriving those means running "
+      "TODAY'S rule against an OLD tree and calling the difference staleness, "
+      "which conflates the corpus moving with the instrument changing. So "
+      "STALE is a proof and AGREES is not. THE SECOND HALF IS THE POPULATION: "
+      "the registry is ONE transcript because one transcript IN THIS DIRECTORY "
+      "reads the live index, and nothing scans code/ for the others — a "
+      "live-index producer one directory over is invisible here at every "
+      "revision, which is N30's shape on a new subject. What turning this "
+      "green would mean is that somebody found a way to re-derive a "
+      "content-valued figure at a commit without re-running the instrument "
+      "there, and that is a different rule and not a wider one.")
 
 print()
 
