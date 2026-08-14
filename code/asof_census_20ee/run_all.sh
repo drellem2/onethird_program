@@ -35,6 +35,24 @@
 # out_pathlist.txt is one dated hand-run, which is pinnable.py's arrangement
 # above and the same declared blind spot: NO SUITE RE-TAKES IT.
 #
+# mg-6219: figures.py is NOT run here, for pathlist.py's reason exactly and
+# with one of its own.  It is PINNED -- it IMPORTS pathlist.AS_OF rather than
+# re-typing a hash, so the two files cannot disagree about which 305
+# transcripts are in question -- and a build path would re-take a byte-
+# identical page at every gate.  ITS OWN REASON IS COST: it parses every
+# tracked module in 840 closures and runs a slice to a fixed point over each,
+# which is ~4 min against a gate measured at 47.5 s.  It answers mg-bdc0's
+# remainder: pathlist.py leaves 305 transcripts MIXED, meaning `a reader per
+# figure is still owed`, and this file asks whether that reader can be written
+# by machine.  Per FIGURE rather than per transcript, which is the whole
+# change.  Its controls ARE on the build path, in selftest_20ee.py (P51-P55,
+# N35), and P51 is the one that matters: a slice that followed values without
+# control dependence grades consumers.py's own prose count a path-list PROOF.
+#     python3 code/asof_census_20ee/figures.py         # at pathlist.py's AS_OF
+#     python3 code/asof_census_20ee/figures.py <rev>   # anywhere else
+# out_figures.txt is one dated hand-run, which is pathlist.py's arrangement
+# two files up and the same declared blind spot: NO SUITE RE-TAKES IT.
+#
 # mg-885d: permuted.py IS run here, and unlike pinnable.py it can be, because
 # it needs no dirty tree: its estate scan reads a DECLARED COMMIT through
 # `git ls-tree` and `git cat-file`.  That is also why its own transcript

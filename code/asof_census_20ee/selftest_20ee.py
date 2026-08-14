@@ -101,8 +101,28 @@ RAN = []
 # repository has and disagree only in that sentence.  It was issued as N31 on
 # the branch and RENUMBERED ON LANDING: mg-ede8's N31 merged first and a number
 # in this directory is never reissued, which is what BURNED is for.
+# N35 JOINS AT mg-6219 AND NOTHING LEAVES, so this tuple GROWS AGAIN (12 -> 13).
+# WHAT N35 ASSERTS: figures.py slices backwards from a print statement, and an
+# assignment is recorded in the scope it is WRITTEN in -- so a global filled by
+# `X.append(...)` INSIDE a function is invisible to a use at module level,
+# which sees `X = []` and reads a literal.  A figure whose real slice runs
+# through such a global comes back a PATH-LIST-VALUED PROOF.  That is the ONE
+# residue of figures.py which is not of the shape `every failure lands in
+# UNDECIDED`, it CONTRADICTS that file's own section 1, and it is planted
+# rather than described.  Its second row is not a defect at all and must also
+# come back `wrong`: `os.walk` is a WORKTREE read that pathlist.PATHLIST calls
+# a path list, so the figure IS path-list-valued -- for somebody's checkout and
+# for no commit -- which is why out_figures.txt splits its class by SPELLING.
+#
+# RENUMBERED ON LANDING AND THE MAP IS PRINTED, which is mg-bdc0's own
+# resolution one branch later and the THIRD collision in this namespace in
+# three landings: this branch issued P45-P49 and N34, mg-3ebf's foreign.py
+# landed those same names plus P50 while this branch sat in the merge queue,
+# and a number in this directory is NEVER REISSUED (that is what BURNED is for
+# and P25 enforces it).  So figures.py's six became P51, P52, P53, P54, P55 and
+# N35, in that order, and not one word of the argument moved.
 KNOWN_DEFECT = ("N4", "N5", "C3", "N21", "N27", "N28", "N29", "N30", "N31",
-                "N32", "N33", "N34")
+                "N32", "N33", "N34", "N35")
 
 
 def check(name, got, want, why):
@@ -1655,6 +1675,165 @@ check("N34 the population is the work-list, and R4 is a LITERAL matcher",
       "`the residue is 1 row' can only get smaller, never larger.")
 
 print()
+
+print("=" * 78)
+print("CONTROLS ON figures.py — CAN THE READER BE PAID BY MACHINE (mg-6219)")
+print("=" * 78)
+print()
+print("  pathlist.py leaves 305 transcripts MIXED, meaning `owes a reader per")
+print("  figure`. figures.py answers per FIGURE by slicing backwards from each")
+print("  print statement. PATH-LIST-VALUED is a PROOF, so the controls that")
+print("  matter are the ones that keep a defect from manufacturing one: the")
+print("  slice must see control dependence (P51), must not carry a later")
+print("  rebinding backwards (P52), must narrow rather than widen where it")
+print("  splits pathlist's rule (P53), must report an anchor it cannot locate")
+print("  (P54), and must not read a paragraph as an argv (P55).")
+print()
+
+import figures  # noqa: E402
+
+_PLANT = [0]
+
+
+def _figures(producer_src, extra=None):
+    """figures.py's real slice over a planted corpus, through its real Unit.
+
+    A RE-STATEMENT WOULD DRIFT (P34's rule, and _grade's above), so the
+    patterns, the closure, the scope index and the fixed point are the
+    module's own; only pathlist's source cache is pre-loaded, and each plant
+    gets its OWN revision tag so the shared module cache cannot serve one
+    plant's AST to the next.
+    """
+    _PLANT[0] += 1
+    rev = "PLANTF%d" % _PLANT[0]
+    files = dict(extra or {})
+    files["code/plantf/q.py"] = producer_src
+    for path, body in files.items():
+        pathlist._SRC[(rev, path)] = body
+    unit = figures.Unit(rev, "code/plantf/q.py", sorted(files))
+    return [(f["grade"], figures.normalise(f["text"]))
+            for f in figures.figures_of(unit)]
+
+
+check("P51 a counter incremented by a LITERAL inside a content loop",
+      _figures('n = 0\n'
+               'for path in git("grep", "-l", needle):\n'
+               '    n += 1\n'
+               'print("hits: %d" % n)\n'),
+      [("CONTENT-VALUED", "n")],
+      "THE ONE THE NAIVE VERSION GETS WRONG, AND IT IS NOT HYPOTHETICAL — it "
+      "is consumers.py's own prose count, `prose += 1` inside `for path in "
+      "git_grep_l(...)`, one of the four figures mg-ede8 adjudicated by hand. "
+      "A slice that followed VALUES only sees the literal 1 and grades the "
+      "figure a function of a constant, which is a false PATH-LIST proof "
+      "published about the single worked example this method has. Every "
+      "assignment therefore inherits the loop iterables and `if` tests it sits "
+      "inside. If this goes red, section 3's anchor is the next thing to read.")
+
+check("P52 a LATER rebinding does not travel backwards — both directions",
+      _figures('REV = "d2d7437"\n'
+               'paths = git("ls-tree", "-r", "--name-only", REV)\n'
+               'base = paths[0]\n'
+               'print("first: %s" % base)\n'
+               'for base in git("grep", "-l", needle):\n'
+               '    print("hit: %s" % base)\n'),
+      [("PATH-LIST-VALUED", "base"), ("CONTENT-VALUED", "base")],
+      "BOTH HALVES, BECAUSE THE FIRST DRAFT WAS FLOW-INSENSITIVE AND GOT THE "
+      "ANCHOR WRONG. consumers.main binds `base` off the path list at the top "
+      "and rebinds it sixty lines later to a field of a `git grep` hit; "
+      "unioning every assignment to a name in a scope graded three of "
+      "mg-ede8's four PATH-LIST figures CONTENT-VALUED — not a conservative "
+      "answer but a WRONG one, since CONTENT-VALUED is a proof of the other "
+      "thing. The second half is the over-reach guard: the later use must "
+      "STILL be content-valued, or the fix would have been to stop looking.")
+
+check("P53 the tree/index split is INSIDE pathlist's rule, not beside it",
+      sorted(set(
+          bool(pathlist.PATHLIST.search(t))
+          for t in ('git("ls-tree", "-r", REV)', 'x = git("ls-files")',
+                    "run(['git', 'ls-tree', '-r'])", "sh('git ls-files')")
+          if figures.TREE_SPELLING.search(t)
+          or figures.INDEX_SPELLING.search(t))),
+      [True],
+      "A NARROWING THAT DRIFTS OUT OF THE RULE IT NARROWS REPORTS ON A RULE "
+      "NOBODY RUNS. figures.py splits pathlist.PATHLIST into `ls-tree` (a "
+      "COMMIT), `ls-files` (the INDEX) and everything else (a WORKTREE), "
+      "because only the first can be re-derived at the commit that carries a "
+      "transcript — which is mg-ede8's own section 4, that consumers.py mixes "
+      "the index with HEAD. This is mg-5058's `both prefilters are WIDER than "
+      "the rules they feed` inverted: here the sub-patterns must be NARROWER, "
+      "so every string either of them matches must match pathlist's too.")
+
+check("P54 an anchor row that does not LOCATE is reported, not passed",
+      [row[4] for row in figures.anchor_rows(
+          {"producers": [{"producer": figures.ANCHOR_PRODUCER,
+                          "figures": []}]})][:2],
+      ["UNLOCATED", "UNLOCATED"],
+      "THE ANCHOR IS THE ONLY PLACE THIS FILE MEETS A HUMAN, AND A PATTERN "
+      "THAT MATCHES NOTHING AGREES WITH EVERYTHING. mg-ede8's seven hand "
+      "verdicts are located by the literal each print emits and the source "
+      "text of the figure, never by line number; the day somebody reflows "
+      "consumers.py those patterns stop matching, and the failure mode that "
+      "matters is the silent one. git_grep_l's original defect, one file over: "
+      "a census reporting `clean` because it never looked.")
+
+check("P55 a paragraph is not an argv, and a rule is not a figure",
+      _figures('def label(tag, text):\n'
+               '    return "%s %s" % (tag, text)\n'
+               'print(label("<a label>", "a provenance query whose scope was '
+               'find . -name and returned my auditor artifacts as mine"))\n'
+               'print("=" * 78)\n'
+               'print("subject scripts: %d" % len(git("ls-files")))\n'),
+      [("CONSTANT", 'label("<a label>", "a provenance query whose scope was find . '
+                    '-name and returned my auditor artifacts as mine")'),
+       ("PATH-LIST-VALUED", 'len(git("ls-files"))')],
+      "THREE PRINTS AND TWO ROWS, WHICH IS THE CLAIM: THE POPULATION IS "
+      "FIGURES AND NOT LINES. The first row is REAL and was found running — "
+      "code/runner_exit_repair_bf79/p5_self.py prints a paragraph containing "
+      "the words `find .`, pathlist.PATHLIST matched INSIDE THE STRING, and a "
+      "printed constant was graded a path-list PROOF. String arguments longer "
+      "than %d characters are blanked before the PATH-LIST test and NEVER "
+      "before the content test, so only the class that is a claim of proof is "
+      "narrowed. `print(\"=\" * 78)` yields NO ROW AT ALL, which is why the "
+      "transcript can report its CONSTANT count as a measured line rather "
+      "than calling every printed line a figure. The last row is the "
+      "non-vacuity half: a grader that had stopped finding figures entirely "
+      "would satisfy the first row by returning nothing." % figures.PROSE_ARG)
+
+check("N35 a global filled inside a function is invisible outside it — and "
+      "that direction MAKES A PROOF",
+      (_figures('SEEN = []\n'
+                'def fill():\n'
+                '    for line in git("show", "HEAD:f").splitlines():\n'
+                '        SEEN.append(line)\n'
+                'REV = "d2d7437"\n'
+                'paths = git("ls-tree", "-r", "--name-only", REV)\n'
+                'fill()\n'
+                'print("n: %d" % (len(paths) + len(SEEN)))\n'),
+       _figures('root = "."\n'
+                'paths = list(os.walk(root))\n'
+                'print("n: %d" % len(paths))\n')),
+      ([("PATH-LIST-VALUED", "len(paths) + len(SEEN)")],
+       [("PATH-LIST-VALUED", "len(paths)")]),
+      "TWO RESIDUES, BOTH REQUIRED TO COME BACK WRONG, AND THE FIRST BREAKS "
+      "figures.py's OWN HEADLINE. Section 1 says every failure of the analysis "
+      "lands in UNDECIDED; this is the exception, and it is planted rather "
+      "than described. An assignment is recorded in the scope it is WRITTEN "
+      "in, so a global filled by `SEEN.append(...)` inside a function is "
+      "invisible to a use at module level — the use sees `SEEN = []` alone, "
+      "reads it as a literal, and the figure comes back a PROOF with a `git "
+      "show` in its real slice. EXHIBITED HERE AND LATENT IN THE CORPUS: "
+      "nothing counts how many PATH-LIST-VALUED figures have this shape, and "
+      "saying so is the honest half. The second row is not a defect of the "
+      "matcher at all — `os.walk` is a WORKTREE read, pathlist.PATHLIST calls "
+      "it a path list, and the figure IS path-list-valued for somebody's "
+      "checkout and for no commit. That is why the transcript splits its "
+      "PATH-LIST-VALUED class by SPELLING and quotes the `ls-tree` sub-count "
+      "as the part liveindex.py's method actually reaches. Turning either row "
+      "green would mean the rule had stopped being pathlist.py's.")
+
+print()
+
 
 # EVERY `SEE CONTROL X` IN THIS DIRECTORY RESOLVES, AND IT IS CHECKED PER SITE.
 # mg-23af found two that did not: pinnable.py said `--recursive` staying lit was

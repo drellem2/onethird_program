@@ -1,0 +1,238 @@
+==============================================================================
+mg-6219 -- CAN `A READER PER FIGURE` BE PAID BY MACHINE?
+==============================================================================
+
+  AS_OF = d2d7437, imported from pathlist.py and not re-typed.  Every
+  figure on this page is a function of that one commit, read through
+  `git ls-tree` and `git show`, so this transcript has a fixed
+  point.  NO INSTRUMENT IS EXECUTED and no worktree is touched.
+
+------------------------------------------------------------------------------
+1  THE UNIT IS A FIGURE, AND THAT IS THE WHOLE CHANGE
+------------------------------------------------------------------------------
+
+  pathlist.py grades a PRODUCER by what it reads and stops there:
+  305 transcripts came back MIXED, meaning `reads a path list AND
+  content`, with nothing said about WHICH of their figures is
+  which.  A figure is an interpolated value on a printed line, so
+  it is an expression in the producer's source, and `is this
+  expression a function of the tracked path list` is a BACKWARD
+  SLICE over that source.
+
+      PATH-LIST-VALUED  the slice CLOSES and every root of it is a
+                        tracked-path-list read, a literal, or a
+                        non-repository input.  A PROOF: the figure
+                        is re-derivable at any commit by
+                        liveindex.py's method.
+      CONTENT-VALUED    a content, history or blame read is in the
+                        slice.  Also a proof, of the other thing.
+      UNDECIDED         the slice does not close -- an unresolved
+                        name, an unresolved call, or a parameter
+                        with no visible caller.  CLAIMS NOTHING.
+      CONSTANT          no repository input at all: a rule, a
+                        heading, a number this file computed from
+                        literals.  Not a figure about the corpus.
+
+  ALMOST EVERY FAILURE OF THIS ANALYSIS LANDS IN UNDECIDED, AND
+  THE EXCEPTION IS NAMED RATHER THAN GLOSSED.  An unresolved name,
+  call or parameter cannot manufacture a PATH-LIST-VALUED verdict,
+  so the class that is a claim of proof is only ever made SMALLER
+  by a defect of that kind.  N35 plants the one shape that escapes
+  it: an assignment is recorded in the scope it is WRITTEN in, so a
+  global filled by `X.append(...)` INSIDE a function is invisible
+  to a use at module level, which reads `X = []` and sees a
+  literal.  A figure whose real slice runs through such a global
+  can come back a PROOF.  EXHIBITED IN A PLANT, LATENT HERE:
+  nothing below counts how many of the PATH-LIST-VALUED figures
+  have that shape, and that is the next reader's measurement.
+
+------------------------------------------------------------------------------
+2  THE ANSWER, OVER pathlist.py's 305 MIXED TRANSCRIPTS
+------------------------------------------------------------------------------
+
+    305  MIXED transcripts at this commit (pathlist.py section 2)
+    303  of them have a Python producer this file can parse
+      2  do NOT -- a shell producer has no AST and is out of reach,
+         counted here rather than dropped
+
+   9458  printed expressions in those producers
+   1974  of them are CONSTANT -- rules, headings, arithmetic over
+         literals -- and are not figures about the corpus at all
+
+   7484  FIGURES, i.e. printed expressions with a repository input.
+         Of those:
+
+      PATH-LIST-VALUED      142     1.9%
+      CONTENT-VALUED       4869    65.1%
+      UNDECIDED            2473    33.0%
+
+  AND WHICH PATH LIST, WHICH IS WHAT DECIDES WHETHER liveindex.py's
+  METHOD ACTUALLY REACHES THE FIGURE.  `ls-tree` names a COMMIT;
+  `ls-files` is the INDEX and a walk is somebody's WORKTREE, and
+  neither can be re-derived at the commit that carries a transcript:
+
+      reads a path list by tree         77 figure(s)
+      reads a path list by index        52 figure(s)
+      reads a path list by worktree     50 figure(s)
+
+         47 of the 142 PATH-LIST-VALUED figures read `ls-tree` AND
+            NOTHING ELSE, spread over 14 transcript(s), and those
+            are the ones liveindex.py's method re-derives at an
+            arbitrary commit for free.  pathlist.py's answer was 0
+            TRANSCRIPTS; per figure the same corpus yields 47.
+
+          code/audit_c067/out_c5_vocab.txt
+          code/branching_bound_d075/out_s1_census.txt
+          code/idiom_sweep_audit_18dc/out_v1_population.txt
+          code/idiom_sweep_audit_18dc/out_v2_truncation.txt
+          code/idiom_sweep_audit_18dc/out_v3_bite.txt
+          code/landing_audit_sweep_64cb/out_s4_survival.txt
+          code/pinned_ref_durability_223d/out_r1_population.txt
+          code/runner_exit_audit_05eb/out_j2_retro.txt
+          code/species_bound_audit_6ef4/out_t3_census.txt
+          code/species_extent_audit_6cb9/out_a2_crosssection.txt
+          code/state_claims_repair_0120/out_anchors0120.txt
+          code/state_claims_repair_0120/out_rests0120.txt
+          code/state_ratchet_e331/out_p1_growth.txt
+          code/transcript_census_1abe/out_t6_caps.txt
+
+  consumers.py's own six are INDEX-valued, which is mg-ede8's
+  section 4 arriving from the other side: it declared that census a
+  mixture of the index and HEAD and left the repair to consumers.py.
+  This file did not know that and re-derived it from the source.
+
+  SO THE READER CAN BE PAID BY MACHINE FOR 67.0% OF THE FIGURES
+  MIXED OWES, and the remaining 33.0% is where a human still has
+  to look.  `The population is 2 forever` is REFUTED; `it is
+  mechanical` is not established either, and the split is the
+  answer rather than a step towards one.
+
+  BY TRANSCRIPT, WHICH IS THE UNIT THE WORK IS ACTUALLY DONE IN:
+
+      some figure UNDECIDED                        215
+      every figure CONTENT-VALUED                   69
+      no figure at all                              12
+      decided, and MIXED figure by figure            7
+
+  The 76 transcripts with no UNDECIDED figure are the ones a
+  reader could be generated for outright.  Nothing here generates
+  one: this file says WHICH figures are in reach and stops, because
+  a reader also has to recover the figure from a committed page,
+  which is a second problem and is liveindex.py's regex half.
+
+------------------------------------------------------------------------------
+3  THE ANCHOR -- AGAINST THE ONE ADJUDICATION A HUMAN MADE
+------------------------------------------------------------------------------
+
+  mg-ede8 read out_consumers.txt by hand and liveindex.py carries
+  the verdict.  Each row below is located MECHANICALLY, by the
+  literal its print emits and the source text of the figure --
+  never by line number, which rots on the first edit above it.
+
+      AGREES     len(scripts)
+                 hand PATH-LIST-VALUED machine PATH-LIST-VALUED
+                 liveindex.FIELDS row 1, `subject scripts`
+      AGREES     len(scripts) - len(shared)
+                 hand PATH-LIST-VALUED machine PATH-LIST-VALUED
+                 liveindex.FIELDS row 2, `unique-basename scripts`
+      AGREES     len(shared)
+                 hand PATH-LIST-VALUED machine PATH-LIST-VALUED
+                 liveindex.FIELDS row 3, `shared-basename scripts`
+      AGREES     ", ".join("%s (%d files)" % (b, n) for b, n in shared) i
+                 hand PATH-LIST-VALUED machine PATH-LIST-VALUED
+                 liveindex.FIELDS row 4, `shared basename counts`
+      AGREES     prose
+                 hand CONTENT-VALUED   machine CONTENT-VALUED
+                 liveindex section 1, `the prose count` -- NOT checked there
+      AGREES     len(unnamed)
+                 hand CONTENT-VALUED   machine CONTENT-VALUED
+                 liveindex section 1, `the named-in-no-tracked-file count`
+      AGREES     len(scripts)
+                 hand PATH-LIST-VALUED machine PATH-LIST-VALUED
+                 THE REFINEMENT: same expression as row 1, on the line mg-ede8's LINE-granular reader excluded whole
+
+  7 of 7 agree, 0 disagree, 0 could not be located.
+
+  A ROW THAT CANNOT BE LOCATED IS PRINTED AND IS NOT A PASS.  An
+  anchor that silently matched nothing would agree with everything,
+  which is git_grep_l's defect one file over: a census reporting
+  `clean` because it never looked.
+
+  WHERE THEY DISAGREE THE HAND READER IS NOT WRONG -- IT IS
+  COARSER.  liveindex.py's readers are REGEXES OVER A COMMITTED
+  PAGE, so its unit is a LINE, and it excluded `%d of %d%s` whole
+  because the first of those three numbers is content-valued.  The
+  second is `subject scripts` again, already checked two sections
+  earlier and re-derivable here.  That is what per-FIGURE buys over
+  per-LINE, and it is the only thing this file claims to buy.
+
+------------------------------------------------------------------------------
+4  THE CHECK THAT NEEDS NO HUMAN -- A CROSS-INSTRUMENT INVARIANT
+------------------------------------------------------------------------------
+
+  pathlist.py grades 535 producers NO PATH-LIST READ.  By its own
+  rule not one figure of any of them can be a function of the path
+  list, because their closures never read one.  So this file's
+  PATH-LIST-VALUED count over that class must be EXACTLY 0, and it
+  is a number this file does not get to choose.
+
+        520  NO PATH-LIST READ producers parsed
+          0  figures graded PATH-LIST-VALUED among them
+
+  NO VIOLATIONS.  That is a real constraint and not a tautology:
+  the two instruments share the PATTERNS -- this file imports
+  pathlist.PATHLIST and pathlist.OTHER rather than re-spelling
+  them -- but NOT the unit, the traversal or the closure walk.
+  pathlist.py matches its patterns against the whole flattened
+  closure; this file matches them at individual CALL SITES that
+  a slice from a print statement actually reaches.  A figure
+  could be graded PATH-LIST-VALUED here out of a producer whose
+  flattened body never matched PATHLIST at all -- that is
+  precisely the disagreement this arm would catch.
+
+------------------------------------------------------------------------------
+5  WHERE THE SLICE STOPS, COUNTED RATHER THAN DECLARED
+------------------------------------------------------------------------------
+
+  Every UNDECIDED figure is undecided for a NAMED reason, and one
+  figure can have several.  By reason, largest first:
+
+      call                             7690
+      name                              654
+      unbound                           229
+      depth                             124
+      parameter                          50
+
+  `call` and `name` are the same wall from two sides: a function
+  or a value defined outside the closure pathlist.py computed.
+  `parameter` is a function whose caller this file could not find,
+  and `unbound` a call that did not supply the parameter the return
+  depends on.  NONE of them is a claim that the figure is content-
+  valued; they are the measured size of what a per-figure reader
+  would still have to be told by hand.
+
+  2 MIXED transcript(s) have a producer with no AST at all:
+      code/audit_successor_consolidation_9134/p2_who_runs_it.sh
+      code/verdict_staleness_census_54b1/sweep_54b1.sh
+
+  AND THIS FILE IS OUTSIDE ITS OWN POPULATION, FOR pathlist.py's
+  REASON AND BY THE SAME ARITHMETIC: the pin it imports is older
+  than figures.py, so out_figures.txt is not tracked at the commit
+  it reports on.  Graded by hand it is MIXED like its subject, and
+  its own figures are mostly UNDECIDED by its own rule -- the slice
+  from `print(counts[name])` runs back into `pathlist.scan`, whose
+  return is a dict this analysis does not model.  The instrument
+  that decides which figures are in reach is not in reach itself,
+  which is the answer pathlist.py already gave about liveindex.py
+  and this file gives about pathlist.py.
+
+==============================================================================
+FIGURES: 5011 of 7484 figures in 305 MIXED transcripts are decidable by
+         machine -- 142 PATH-LIST-VALUED and 4869 CONTENT-VALUED --
+         and 2473 are UNDECIDED.  The hand adjudication agrees on 7
+         of 7 anchor rows.  47 figure(s) in 14 transcript(s) are
+         `ls-tree`-valued and so free to liveindex.py's method,
+         where pathlist.py's per-TRANSCRIPT answer was 0.  The
+         cross-instrument invariant holds
+         with 0 violation(s), at AS_OF d2d7437.
+==============================================================================
