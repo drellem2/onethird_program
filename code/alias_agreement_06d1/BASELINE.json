@@ -121,9 +121,65 @@
      "leak_pref(1)"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:leak(1)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "audit_5cba:LK[1]/LE": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "c3_audit_a94c3:delta1(A_1)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "c3_audit_a94c3:leak(A_1)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "c3_prefix_capture_76b2:leak(A_1)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "direct_prefix_audit_2de0:E_leak(A_1)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "direct_prefix_audit_2de0:delta_1_prefix(1)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "eleak_repair_8311:E_leak(A_1,def)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "l2_audit_29fe:leak[1]": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "l2_conditionality_28ff:leak(A_1)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "l2_underclaim_audit_3bb9:leak[0]": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:LK[1]/LE": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    },
+    "sweep_loss_51f4:leak_pref(1)": {
+     "convention": "leak(A_1)",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 0.0,
    "population": "POP-PRIM",
    "tolerance": 0.0,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 13 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[0].max_spread (mg-0d1b)"
   },
   {
@@ -189,9 +245,49 @@
      "gap_float"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:gamma_float": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    },
+    "audit_5cba:gamma_float": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    },
+    "c3_audit_a94c3:spectral_gap": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    },
+    "chain_iv_c_81ff:lambda2_bracket": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    },
+    "l2_audit_29fe:bracket_gap": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    },
+    "l2_conditionality_28ff:gap_exact_bounds": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    },
+    "l2_underclaim_audit_3bb9:gap_float": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:gamma_float": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    },
+    "sweep_loss_51f4:gap_float": {
+     "convention": "gamma",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 4.665707820095122e-10,
    "population": "POP-PRIM",
    "tolerance": 4.665707820095122e-10,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 9 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[1].max_spread (mg-0d1b)"
   },
   {
@@ -245,9 +341,41 @@
      "delta_max"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:Delta": {
+     "convention": "Delta_P",
+     "to_canonical": "1/1"
+    },
+    "audit_5cba:Delta": {
+     "convention": "Delta_P",
+     "to_canonical": "1/1"
+    },
+    "l2_audit_29fe:Delta": {
+     "convention": "Delta_P",
+     "to_canonical": "1/1"
+    },
+    "l2_conditionality_28ff:delta_max": {
+     "convention": "Delta_P",
+     "to_canonical": "1/1"
+    },
+    "l2_underclaim_audit_3bb9:Delta": {
+     "convention": "Delta_P",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:Delta": {
+     "convention": "Delta_P",
+     "to_canonical": "1/1"
+    },
+    "sweep_loss_51f4:delta_max": {
+     "convention": "Delta_P",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 0.0,
    "population": "POP-PRIM",
    "tolerance": 0.0,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 7 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[2].max_spread (mg-0d1b)"
   },
   {
@@ -301,9 +429,41 @@
      "phi_star_pref"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:Phi_star": {
+     "convention": "Phi*_pref",
+     "to_canonical": "1/1"
+    },
+    "c3_prefix_capture_76b2:phi_star_prefix": {
+     "convention": "Phi*_pref",
+     "to_canonical": "1/1"
+    },
+    "eleak_repair_8311:prefix_min": {
+     "convention": "Phi*_pref",
+     "to_canonical": "1/1"
+    },
+    "l2_audit_29fe:Phi_star_pref": {
+     "convention": "Phi*_pref",
+     "to_canonical": "1/1"
+    },
+    "l2_conditionality_28ff:phi_star_prefix": {
+     "convention": "Phi*_pref",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:Phi_star": {
+     "convention": "Phi*_pref",
+     "to_canonical": "1/1"
+    },
+    "sweep_loss_51f4:phi_star_pref": {
+     "convention": "Phi*_pref",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 0.0,
    "population": "POP-PRIM",
    "tolerance": 0.0,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 7 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[3].max_spread (mg-0d1b)"
   },
   {
@@ -357,9 +517,41 @@
      "cone_min"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:mu_exhaustive": {
+     "convention": "mu_pref",
+     "to_canonical": "1/1"
+    },
+    "audit_5cba:mu_pref_float": {
+     "convention": "mu_pref",
+     "to_canonical": "1/1"
+    },
+    "l2_audit_29fe:bracket_mu_pref": {
+     "convention": "mu_pref",
+     "to_canonical": "1/1"
+    },
+    "l2_conditionality_28ff:cone_min": {
+     "convention": "mu_pref",
+     "to_canonical": "1/1"
+    },
+    "l2_underclaim_audit_3bb9:mu_pref_float": {
+     "convention": "mu_pref",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:mu_faces": {
+     "convention": "mu_pref",
+     "to_canonical": "1/1"
+    },
+    "sweep_loss_51f4:cone_min": {
+     "convention": "mu_pref",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 9.097167463778533e-13,
    "population": "POP-PRIM",
    "tolerance": 9.097167463778533e-13,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 7 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[4].max_spread (mg-0d1b)"
   },
   {
@@ -407,9 +599,37 @@
      "rho*Delta"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:rho*Delta": {
+     "convention": "rho*Delta_P",
+     "to_canonical": "1/1"
+    },
+    "audit_5cba:v_L": {
+     "convention": "rho*Delta_P",
+     "to_canonical": "1/1"
+    },
+    "l2_audit_29fe:V10": {
+     "convention": "rho*Delta_P",
+     "to_canonical": "1/1"
+    },
+    "l2_conditionality_28ff:V10": {
+     "convention": "rho*Delta_P",
+     "to_canonical": "1/1"
+    },
+    "l2_underclaim_audit_3bb9:V10": {
+     "convention": "rho*Delta_P",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:rho*Delta": {
+     "convention": "rho*Delta_P",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 7.310374527946806e-12,
    "population": "POP-PRIM",
    "tolerance": 7.310374527946806e-12,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 6 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[5].max_spread (mg-0d1b)"
   },
   {
@@ -457,9 +677,37 @@
      "phi_star"
     ]
    ],
+   "normalisation": {
+    "c3_prefix_capture_76b2:phi_star": {
+     "convention": "Phi*_all",
+     "to_canonical": "1/1"
+    },
+    "direct_prefix_audit_2de0:phi_star": {
+     "convention": "Phi*_all",
+     "to_canonical": "1/1"
+    },
+    "eleak_repair_8311:phi_star(def)": {
+     "convention": "Phi*_all",
+     "to_canonical": "1/1"
+    },
+    "eleak_repair_8311:phi_star(inv)": {
+     "convention": "Phi*_all",
+     "to_canonical": "1/1"
+    },
+    "l2_audit_29fe:Phi_star_all": {
+     "convention": "Phi*_all",
+     "to_canonical": "1/1"
+    },
+    "l2_conditionality_28ff:phi_star": {
+     "convention": "Phi*_all",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 0.0,
    "population": "POP-PRIM",
    "tolerance": 0.0,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 6 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[6].max_spread (mg-0d1b)"
   },
   {
@@ -495,9 +743,29 @@
      "E_footrule"
     ]
    ],
+   "normalisation": {
+    "direct_prefix_audit_2de0:E_footrule": {
+     "convention": "E_footrule",
+     "to_canonical": "1/1"
+    },
+    "l2_audit_29fe:EDF": {
+     "convention": "E_footrule",
+     "to_canonical": "1/1"
+    },
+    "l2_conditionality_28ff:E_footrule": {
+     "convention": "E_footrule",
+     "to_canonical": "1/1"
+    },
+    "sweep_loss_51f4:E_footrule": {
+     "convention": "E_footrule",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 0.0,
    "population": "POP-PRIM",
    "tolerance": 0.0,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 4 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[7].max_spread (mg-0d1b)"
   },
   {
@@ -533,9 +801,29 @@
      "M_mean"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:M": {
+     "convention": "M",
+     "to_canonical": "1/1"
+    },
+    "audit_5cba:M": {
+     "convention": "M",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:M": {
+     "convention": "M",
+     "to_canonical": "1/1"
+    },
+    "sweep_loss_51f4:M_mean": {
+     "convention": "M",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 0.0,
    "population": "POP-PRIM",
    "tolerance": 0.0,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 4 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[8].max_spread (mg-0d1b)"
   },
   {
@@ -565,9 +853,25 @@
      "rho_float"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:rho": {
+     "convention": "rho",
+     "to_canonical": "1/1"
+    },
+    "l2_underclaim_audit_3bb9:V00": {
+     "convention": "rho",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:rho_float": {
+     "convention": "rho",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 4.440892098500626e-15,
    "population": "POP-PRIM",
    "tolerance": 4.440892098500626e-15,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 3 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[9].max_spread (mg-0d1b)"
   },
   {
@@ -597,9 +901,25 @@
      "prefix_Q(1)"
     ]
    ],
+   "normalisation": {
+    "c3_audit_a94c3:one_minus_rho(1)": {
+     "convention": "1 - rho(A_1)",
+     "to_canonical": "1/1"
+    },
+    "c3_prefix_capture_76b2:rho_prefix(1)": {
+     "convention": "1 - rho(A_1)",
+     "to_canonical": "1/1"
+    },
+    "chain_iv_c_81ff:prefix_Q(1)": {
+     "convention": "1 - rho(A_1)",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 0.0,
    "population": "POP-PRIM",
    "tolerance": 0.0,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 3 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[10].max_spread (mg-0d1b)"
   },
   {
@@ -623,12 +943,25 @@
      "mu_ub_float"
     ]
    ],
+   "normalisation": {
+    "anticorrelation_c50b:mu_upper": {
+     "convention": "mu_pref (upper bound)",
+     "to_canonical": "1/1"
+    },
+    "lstar_789d:mu_ub_float": {
+     "convention": "mu_pref (upper bound)",
+     "to_canonical": "1/1"
+    }
+   },
    "observed_at_baseline": 1.1078788481055923e-07,
    "population": "POP-PRIM",
    "tolerance": 1.1078788481055923e-07,
+   "tolerance_frame": "IDENTITY",
+   "tolerance_frame_why": "all 2 members in the identity normalisation",
    "tolerance_source": "alias_groups.json groups[11].max_spread (mg-0d1b)"
   }
  ],
+ "normalisation_digest": "72c53bae3d00e68d",
  "note": "Pinned from mg-0d1b's alias_groups.json.  Regenerated by hand only; see mkbaseline.py.  A disagreement is a finding and gets a ticket, not an edit to this file.",
  "predicate": {
   "n_posets": 404,

@@ -49,6 +49,13 @@ host:
 |---|---|---|
 | `./build.sh` | **12.96 s** | **44.8 s** |
 
+**mg-479c re-measured this on the same host** and added to it: g3 is **0.03 s** (it does no
+recompute at all) and g1's six added arms **0.1 s**, because they reuse the same captured
+matrix the W arms do. This suite ran **31.0 s** before mg-479c and **30.2 s** after, in one
+session — the addition is below this host's run-to-run variance. `./build.sh` measured
+**42.8 s** and **44.5 s** on two runs against the **44.8 s** recorded above; both samples are
+quoted rather than the better one. See §7.
+
 ### What was gated, and the subsets that were costed and rejected
 
 **GATED: all 12 groups, all 71 names, all 12 trees, the full 306-poset POP-PRIM.** The two
@@ -202,6 +209,9 @@ across g1 (6 CAUGHT, 2 REFUSED-CORRECTLY) and g2 (5 CAUGHT, 2 REFUSED-CORRECTLY)
 satisfactory; the mutations are **derived** from values the trees actually produced — one
 ULP, a multiple of the pinned tolerance — never typed as known-bad literals.
 
+> **As of mg-479c the suite carries `31 of 31` arms** — 21 CAUGHT, 10 REFUSED-CORRECTLY, 0
+> unsatisfactory: g1's 8 W-arms plus 6 N-arms, g2's 7, and g3's 10. §7.
+
 **A remedy is an artifact of the same kind as the defect, so it is subject to it.** Five
 defects of my own, all kept:
 
@@ -246,6 +256,206 @@ defects of my own, all kept:
 * It does not cover the **172 trees** no adapter reaches, of which mg-0d1b's `x1` classifies
   59 as doing the arc's mathematics with no adapter.
 
+## §7 mg-479c — THE NORMALISATION FIELD
+
+> **THE ALIAS AGREEMENT CHECK CANNOT TELL A NORMALISATION FROM A DISAGREEMENT: a factor of 2
+> between two live conventions and a genuine 2× error are the same signal, and this corpus
+> demonstrably carries both.**
+
+§2–§5 above describe a check that compares **values** across the names of one quantity. It
+had no representation for two names denoting the same quantity **in different
+normalisations**, and both directions of that hole are live:
+
+* **FALSE RED** — two conventions that agree modulo a factor report as a disagreement. On a
+  gate that blocks merges, a red for a non-reason is how gates get disabled.
+* **FALSE PASS** — a genuine 2× error becomes dismissable as *"just a normalisation
+  difference"*, because the check gave an operator no way to tell them apart.
+
+They are the **same missing bit** read from opposite ends: the index could not state whether
+two names share a convention.
+
+### §7.1 The representation, and why it is not a constant
+
+`NORMALISATION.json` declares, **per name and not per quantity**:
+
+```json
+"chain_iv_c_81ff:lambda2_bracket": {
+  "convention": "gamma",
+  "to_canonical": {"num": [1], "den": [1]},
+  "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to …"
+}
+```
+
+`to_canonical` is `num(n)/den(n)` — integer coefficients, low order first, evaluated in
+exact `Fraction` arithmetic. **A per-name constant would have been unable to say what this
+corpus already knows.** `code/c3_audit_a94c3/a1_algebra.py:18` states
+
+> `eps_spec / eps_c3ca = 6 n^2 / (n^2 - 1) -> 6`
+
+and `code/unitmap_audit_9f91/out_m1_map.txt` tabulates both quantities as exact rationals
+under the heading *"DIRECTION OF APPROACH (what a flat factor of 6 gets wrong at small n)"*.
+Arm **N14** re-derives the declared factor at **all 11 rows** of that table and **N15**
+measures what a flat 6 gets wrong (`+0.0833` at n=3). The eps pair is one of the ticket's
+own three examples and it is **n-dependent**; a constant field would have shipped unable to
+represent it.
+
+The eps pair lives in `worked_examples`, **not** in `declarations`: no adapter produces
+either name, so an entry in the live namespace would be a statement the gate can never
+check.
+
+### §7.2 The three refusals, and why they are exit 2 and not exit 1
+
+| refusal | when |
+|---|---|
+| `UNDECLARED-NORMALISATION` | a pinned name has no entry. **Never defaulted to "same"** — ticket item 3, and c9876's/cb417's lesson (a missing value must be loud, never blank) applied to a field rather than a cell. |
+| `TOLERANCE-FRAME` | a group carries a non-identity factor while its tolerance is mg-0d1b's max spread of **raw** values. Not rescalable — members with different factors admit no single multiplier — so the registrant must record a canonical-frame tolerance with its own source. |
+| digest moved | the declarations for the 71 pinned names no longer hash to what `BASELINE.json` was cut against. **Restricted to the pinned members**, so declaring a normalisation for a name this gate does not pin does *not* redden it (that would be this ticket's own thesis, shipped inside its remedy). |
+
+An undeclared field means the comparison **could not be made**, which is a different fact
+from two numbers disagreeing, and this suite's exit convention already separates them
+(`1` a control fired, `2` refused/broken). `Scoreboard.arm_outcome` exists because a
+two-valued arm cannot express it.
+
+**The refusal is in `mkbaseline.py` AND in the gate, and that is not belt-and-braces.**
+`mkbaseline` is where a new name is registered; the gate reads pinned members out of
+`BASELINE.json`. A refusal in the first alone is bypassed by a hand-edit to that file; a
+refusal in the second alone lets a bad baseline be written and only fails at the next merge.
+
+### §7.3 The convention label is load-bearing, not a comment
+
+Two names declaring the **same** convention must declare **equal** factors; two declaring
+**different** conventions must declare **different** factors. Both are hard refusals
+(**N8**, **N9**), scoped **per quantity**. That rule is what makes the RED message's sentence
+worth anything:
+
+```
+DISAGREE — c3_audit_a94c3:spectral_gap  vs  chain_iv_c_81ff:lambda2_bracket
+  spread 1.000000e+00 > tolerance 4.665708e-10 at poset #31 (IDENTITY frame)
+  c3_audit_a94c3:spectral_gap = 0.99999999999999956   vs   … = 1.9999999990686774
+  normalisation: … in convention 'gamma' (x 1/1);  … in convention 'gamma' (x 1/1)
+  raw ratio … = 0.500000000233  = 1/2
+  THESE TWO NAMES ARE DECLARED TO BE IN THE SAME CONVENTION ('gamma'), so this is a
+  DEFECT and not a normalisation difference.
+```
+
+That is ticket item 2 as output rather than as intent: *"an operator seeing `these differ by
+exactly 2, and the index says these two names share a convention` knows it is a real defect;
+seeing a bare inequality, they do not."*
+
+### §7.4 IT IS INERT TODAY, AND THAT IS MEASURED
+
+The twelve pinned groups contain **no normalisation pair** — the ticket's own `WHY NOT HIGH`.
+All 71 names are declared in the identity normalisation, which is **derived from mg-0d1b's
+measurement and not asserted**: names agreeing to ≤ `max_spread` over 306 posets are in one
+normalisation, and each entry's `source` quotes the spread it is derived from. The
+declaration is **redundant for these 71 names**; it exists so the 72nd cannot be added
+silently.
+
+* **N1** — the identity is a **pass-through**, not a multiply by `1.0`: **71 of 71 columns
+  returned as the same list object, 71 of 71 bit-identical.** `v * 1.0 == v` for every finite
+  float, and routing the identity through a multiply would make seven exact-equality rows
+  depend on that staying true of whatever a tree returns next.
+* **N2** — the pre-479c raw comparison and the canonical one give **identical verdicts on the
+  real input**: 12/12 spreads identical, both 0 red, 0 refusals.
+* `bit-reproducibility: 12 of 12` is unchanged, and `BASELINE.json`'s diff is **333
+  insertions, 0 deletions**.
+
+### §7.5 THE WRONG WAY, RUN RATHER THAN ARGUED
+
+`x1_wrongway.py` (off the gate) loads `libagree.py` **as it is on `main`, by blob sha**, and
+runs *its* `check_groups` on the same input. Not a flag of mine — the code that has been on
+`build.sh` since mg-06d1 landed:
+
+| input | pre-479c | mg-479c |
+|---|---|---|
+| a legitimate normalisation pair (doubled **and declared** doubled) | **1 red** | 0 red, 0 refused |
+| a genuine 2× error (doubled, **not** declared) | **1 red** | **1 red**, naming the ratio and the shared convention |
+
+**The pre-479c gate gives the same answer to both.** That is the ticket in one line.
+
+### §7.6 WHAT THIS DOES NOT CLOSE — and it is the important paragraph
+
+**A DECLARED FACTOR IS AN ESCAPE HATCH AND THIS MACHINERY CANNOT CLOSE IT.** An operator
+facing a real 2× disagreement can silence it by declaring a factor of 2, and nothing here
+tells that edit from a correct one. It was filed in advance as **P6 at 0.70** and it did not
+improve on contact. The two mitigations are both *reporting*, not enforcement:
+
+1. every non-identity factor is printed on **every** run, green as well as red — g3's
+   inventory and g1's `norm …` column. A factor that only becomes visible when something
+   breaks is invisible;
+2. the RED message states whether the two names **share a convention**, so a clean ratio
+   inside one convention reads as a defect and not as units.
+
+The declaration file is committed, so the edit is a diff with an author. **That is the whole
+of the protection**, and stating it here is not a disclaimer — it is the reason `mknorm.py`
+refuses to run twice and the reason the digest is pinned into `BASELINE.json`.
+
+### §7.7 ITEM 4 — NOTHING IS RESOLVED, AND THE ABSENCE IS CHECKABLE
+
+Ticket item 4: *"DO NOT RESOLVE ANY EXISTING AMBIGUITY AS PART OF THIS."* `STATE.md:172`
+says *"the gap between `(L*)` and `(M♯)` is exactly `μ_pref²`"*; in the normalisation that row
+itself uses (`μ·Δ ≤ γ`) it is `μ_pref²/2`, and it is `μ_pref²` in the doubled form
+`2μ·Δ ≤ 2γ`. **Both readings are in the corpus.** That is mg-5e82's business and a
+mathematical question.
+
+An absence is a weak thing to claim, so **N7** makes it checkable: no declaration may mention
+the gap and **no pinned name may carry a non-identity factor**. It reads `0` and `0` today
+and goes RED the day either stops being true. `STATE.md` is not edited, `alias_groups.json`
+is not rewritten, no tolerance is invented, and no alias group is added — **mg-a397 owns the
+widening** and registering a group to have something to demonstrate on would have been doing
+its work badly instead of mine.
+
+### §7.8 FIVE DEFECTS OF MY OWN, ALL KEPT
+
+* **D1 — I wrote the consistency rule GLOBALLY and it rejected the very file this ticket
+  exists to write.** "Different convention labels must declare different factors" is correct
+  *within one quantity* and nonsense across the corpus: twelve groups whose members are all
+  in the identity normalisation are twelve different conventions sharing one factor. My first
+  version refused all 71 seeded declarations. The rule is now scoped per group, and the
+  scoping is stated in `libnorm.check_consistency`'s docstring rather than being a silent
+  parameter.
+* **D2 — MY OWN REFUSAL INTERCEPTED THE TICKET'S HEADLINE CASE, and my own scoreboard scored
+  it FALSE-POSITIVE.** Arm N3 — a legitimate normalisation pair going GREEN, the whole point
+  of the ticket — came back `expected GREEN, got REFUSAL`, because declaring a non-identity
+  factor puts the group in a canonical frame and the `TOLERANCE-FRAME` refusal fires first.
+  Both behaviours are right; what was wrong was my model of registration, which is a **two-part
+  act** (a factor *and* a canonical-frame tolerance) and which I had written as one. N3 now
+  plants both halves and N6 plants the first alone. Caught by an arm and not by reading.
+* **D3 — my N4 assertion was stricter than my own message and would have failed for the right
+  reason.** The arm looked for the ratio reported as `EXACTLY 2/1`; `lambda2_bracket` is a
+  bracket midpoint, so the real ratio is `0.500000000233` and the message correctly prints
+  `= 1/2` without `EXACTLY`. The *message* was right and the *arm* was wrong — the opposite
+  of the usual direction, and worth writing down for that reason.
+* **D4 — this field is checked for CONSISTENCY, never for TRUTH.** §7.6. It is D4 of §5
+  arriving one level up: that gate checks agreement and not correctness, and this one checks
+  that the declarations do not contradict each other and not that any of them is right.
+* **D5 — running `./build.sh` rewrote three transcripts in three directories that are not
+  mine**, which is mg-724a's D5 arriving by the same road it always does. They are restored
+  and `0 files outside this directory differ`. Two of the three were **already stale on
+  `main`** — `control_audit_9876`'s sweep reads `188 directories` where the tree now has 192,
+  and `724a`'s gate records `208` membership candidates where it now observes `209`, both from
+  suites that landed after those transcripts were cut. That is **not this ticket's finding to
+  act on** and it is written down rather than fixed.
+
+### §7.9 THE PREDICTIONS
+
+`PREDICTIONS-mg-479c.md` was committed **before one line of the instrument existed**, with
+two exposures disclosed (H2: I had already found the n-dependent eps factor, so **P4 is a
+report and not a bet**).
+
+| | claim | outcome |
+|---|---|---|
+| **P1** 0.95 | the twelve verdicts are unchanged bit-for-bit | **HIT** — 12/12 spreads, 71/71 columns |
+| **P2** 0.80 | both false directions plantable on real columns | **HIT** — N3/N4, a doubled real column |
+| **P3** 0.75 | convention ↔ factor must be made to agree | **HIT, and it cost me D1** |
+| **P5** 0.60 | the carried tolerance does not survive, and I refuse rather than rescale | **HIT** — `TOLERANCE-FRAME` |
+| **P6** 0.70 | the declared factor is an unfalsifiable escape hatch I cannot close | **HIT, unhappily** — §7.6 |
+| **P7** 0.65 | added runtime under 1 s | **HIT by a wide margin** — g3 is **0.03 s**, g1's six arms **0.1 s** |
+| **P8** 0.55 | I can prove I did not decide mg-5e82's question | **HIT** — N7 |
+| **P9** 0.50 | I put the refusal in only one of the two places at first | **HIT** — I wrote the gate's copy first |
+
+---
+
 ## Files
 
 | file | what it is |
@@ -257,4 +467,10 @@ defects of my own, all kept:
 | `g1_values.py` | the float arm — 12 groups over POP-PRIM, + 8 planted worlds. **30 s** |
 | `g2_predicate.py` | the predicate arm — 10 names over POP-ALL, + 7 planted worlds. **0.2 s** |
 | `x0_exhibit.py` | the end-to-end control: a real edit to a real tree, `./build.sh`, verified restore. **Not run by the gate** |
-| `run_all.sh` | what `build.sh` invokes. g2 first, then g1; worst exit wins |
+| `run_all.sh` | what `build.sh` invokes. g2, then g3, then g1; worst exit wins |
+| `NORMALISATION.json` | **mg-479c** — the normalisation declared **per name**: convention, `to_canonical` factor as `num(n)/den(n)`, and a source. Plus the eps worked example, and what is deliberately **not** declared |
+| `mknorm.py` | seeded that file **once** from mg-0d1b's measured agreement. **Refuses to run again.** Never run by the gate |
+| `libnorm.py` | the factor (exact `Fraction`, rational function of `n`), the declaration loader and its refusals, canonicalisation, and the RED message's normalisation sentence |
+| `g3_normalisation.py` | the declaration arm — inventory, representation unit checks, the eps worked example re-derived from mg-9f91's table, + 10 planted worlds. **0.03 s** |
+| `x1_wrongway.py` | the wrong-way exhibit: the **blob-pinned pre-479c `libagree.py`** run on a legitimate normalisation pair. **Not run by the gate** |
+| `PREDICTIONS-mg-479c.md` | mg-479c's predictions, committed before one line of it existed |

@@ -40,12 +40,33 @@ which.  Per the ticket: a disagreement is a FINDING and gets a ticket, not a qui
 reconciliation — there is no `--refresh`, no `--accept`, and no rule that prefers the more
 recently edited tree.  Rewriting the expectation to match the observation is the laundering
 this arc keeps paying for.
+
+--- mg-479c -------------------------------------------------------------------------------
+THE COMPARISON NOW HAPPENS IN THE CANONICAL FRAME, AND A THIRD OUTCOME EXISTS.
+
+mg-06d1's check could not tell a NORMALISATION from a DISAGREEMENT: a factor of 2 between
+two live conventions and a genuine 2x error were the same signal.  `check_groups` therefore
+canonicalises every pinned column through `libnorm` BEFORE comparing, reports the factor it
+applied in the RED message, and adds a third outcome beside GREEN and RED:
+
+    REFUSE   a pinned name has no declared normalisation, or a group carries a non-identity
+             factor against a tolerance measured in the raw frame.  Exit 2, not 1 — an
+             undeclared field means the comparison could not be made, which is a different
+             fact from two numbers disagreeing, and this suite's exit convention already
+             distinguishes them.
+
+`check_groups` therefore returns `(verdicts, n_red, refusals)` where it returned a pair.
+Nothing about the twelve pinned groups changes today: all 71 names are in the identity
+normalisation, the identity is a PASS-THROUGH and not a multiply by 1.0, and arm N1 measures
+the bit-identity of all 71 canonical columns against the raw ones rather than arguing it.
 """
 
 import json
 import math
 import os
 import sys
+
+import libnorm as NORM                                                # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 INDEX_DIR = os.path.join(os.path.dirname(HERE), "alias_index_0d1b")
@@ -160,20 +181,41 @@ def selfcheck_spread(cols, groups):
     return bad
 
 
-def check_groups(cols, broken, baseline, tol_override=None):
-    """Every pinned group against its recorded tolerance.  Returns (verdicts, n_red).
+def check_groups(cols, broken, baseline, tol_override=None,
+                 decls=None, ns=None, normalise=True):
+    """Every pinned group in its CANONICAL frame.  Returns (verdicts, n_red, refusals).
 
     Four ways a group goes RED, and only the first is a "disagreement" in the everyday
     sense.  The other three are the shapes silence actually takes:
 
-      DISAGREE           two pinned names differ by more than the recorded tolerance.
+      DISAGREE           two pinned names differ, AFTER NORMALISING, by more than the
+                         recorded tolerance.
       MEMBERSHIP-LOST    a pinned name is no longer produced at all.
       TREE-BROKEN        the tree that owns a pinned name no longer loads or runs.
       COMPARABILITY      a pinned name is still produced but is None/NaN/inf at a
                          different number of posets than when the tolerance was measured,
                          so the agreement is now being asserted over a different set.
+
+    And two ways it REFUSES, which are not reds (mg-479c):
+
+      UNDECLARED-NORMALISATION   a pinned name has no entry in NORMALISATION.json.  Never
+                                 defaulted to "same": defaulting is the FALSE PASS direction
+                                 of mg-479c with the volume turned all the way down.
+      TOLERANCE-FRAME            the group carries a non-identity factor and the tolerance
+                                 it is being checked against was measured in the raw frame.
+
+    `normalise=False` is the PRE-mg-479c comparison — raw values, no declarations consulted.
+    It is not a strawman: arm N2 measures that on the real input the two paths produce
+    identical verdicts, and `x1_wrongway.py` runs the blob-pinned pre-479c `libagree.py`
+    itself.  It exists so the wrong-way demonstration is a demonstration and not an argument.
     """
-    verdicts, red = [], 0
+    if normalise and decls is None:
+        raise NORM.NormError(
+            "check_groups was asked to compare in the canonical frame with no declarations.  "
+            "Refusing rather than falling back to the raw comparison: a caller that silently "
+            "got the pre-479c behaviour when it asked for the canonical one is the FALSE PASS "
+            "direction of mg-479c, in this module's own call signature.")
+    verdicts, red, refusals = [], 0, []
     for g in baseline["groups"]:
         pinned = [tuple(m) for m in g["members"]]
         tol = g["tolerance"] if tol_override is None else tol_override
@@ -195,28 +237,90 @@ def check_groups(cols, broken, baseline, tol_override=None):
                                  "comparable at %d posets, baseline recorded %d"
                                  % (got, want)))
 
-        sp, a, b, idx, va, vb = worst_pair(cols, present) if len(present) > 1 \
+        # ---- mg-479c: into the canonical frame, or refuse to compare at all
+        frame, why, applied, ccols = "RAW (pre-479c path)", "", {}, cols
+        if normalise:
+            try:
+                ccols, applied = NORM.canonicalise(cols, present, decls, ns)
+                frame, why = NORM.tolerance_frame(present, decls)
+            except NORM.NormError as exc:
+                refusals.append(("UNDECLARED-NORMALISATION", g["label"], str(exc)))
+                verdicts.append({"label": g["label"], "tolerance": tol, "spread": None,
+                                 "n_pinned": len(pinned), "n_present": len(present),
+                                 "problems": problems, "frame": "REFUSED", "why": str(exc),
+                                 "applied": {}, "refused": True})
+                if problems:
+                    red += 1
+                continue
+            if frame == "CANONICAL" and tol_override is None:
+                ct = decls.canonical_tolerance(g["label"])
+                if ct is None:
+                    refusals.append((
+                        "TOLERANCE-FRAME", g["label"],
+                        "%s, but the tolerance %.6e is mg-0d1b's max spread of RAW values.  "
+                        "It is not rescalable — members with different factors admit no "
+                        "single multiplier — so it is not stated in the frame this "
+                        "comparison happens in.  Record a canonical-frame tolerance for "
+                        "this group in NORMALISATION.json with its measured source."
+                        % (why, tol)))
+                    verdicts.append({"label": g["label"], "tolerance": tol, "spread": None,
+                                     "n_pinned": len(pinned), "n_present": len(present),
+                                     "problems": problems, "frame": "REFUSED", "why": why,
+                                     "applied": applied, "refused": True})
+                    if problems:
+                        red += 1
+                    continue
+                tol = ct["tolerance"]
+
+        sp, a, b, idx, va, vb = worst_pair(ccols, present) if len(present) > 1 \
             else (0.0, None, None, None, None, None)
         if len(present) > 1 and sp > tol:
-            problems.append(("DISAGREE", (a, b),
-                             "spread %.6e > tolerance %.6e at poset #%d: "
-                             "%s:%s = %.17g   vs   %s:%s = %.17g"
-                             % (sp, tol, idx, a[0], a[1], va, b[0], b[1], vb)))
+            detail = ["spread %.6e > tolerance %.6e at poset #%d (%s frame)"
+                      % (sp, tol, idx, frame),
+                      "%s:%s = %.17g   vs   %s:%s = %.17g"
+                      % (a[0], a[1], va, b[0], b[1], vb)]
+            if normalise:
+                ra, rb = cols[a][idx], cols[b][idx]
+                if (ra, rb) != (va, vb):
+                    detail.append("raw (before normalising): %.17g   vs   %.17g" % (ra, rb))
+                detail.extend(NORM.describe_pair(a, b, ra, rb, decls))
+            problems.append(("DISAGREE", (a, b), "\n             ".join(detail)))
 
         verdicts.append({"label": g["label"], "tolerance": tol, "spread": sp,
                          "n_pinned": len(pinned), "n_present": len(present),
-                         "problems": problems})
+                         "problems": problems, "frame": frame, "why": why,
+                         "applied": applied, "refused": False})
         if problems:
             red += 1
-    return verdicts, red
+    return verdicts, red, refusals
+
+
+def norm_summary(v):
+    """The normalisation column, printed on EVERY row, green as well as red.
+
+    A factor that only becomes visible when something breaks is invisible, and a declared
+    factor is the one thing in this gate an operator can use to silence a real disagreement
+    (README §7).  So it is on the green lines too.
+    """
+    if not v.get("applied"):
+        return ""
+    non_id = [(m, f) for m, f in sorted(v["applied"].items()) if not f.is_identity()]
+    if not non_id:
+        return "  norm identity x%d" % len(v["applied"])
+    return "  norm %s" % ", ".join("%s:%s x%s" % (m[0], m[1], f.as_text())
+                                   for m, f in non_id)
 
 
 def report(verdicts, quiet=False):
     for v in verdicts:
+        if v.get("refused"):
+            print("  REFUSE %-24s %2d/%2d names   %s"
+                  % (v["label"], v["n_present"], v["n_pinned"], v["why"]))
         if v["problems"]:
-            print("  RED    %-24s %2d/%2d names   spread %.3e   tol %.3e"
-                  % (v["label"], v["n_present"], v["n_pinned"], v["spread"],
-                     v["tolerance"]))
+            print("  RED    %-24s %2d/%2d names   spread %s   tol %.3e%s"
+                  % (v["label"], v["n_present"], v["n_pinned"],
+                     "n/a" if v["spread"] is None else "%.3e" % v["spread"],
+                     v["tolerance"], norm_summary(v)))
             for kindname, who, detail in v["problems"]:
                 if kindname == "DISAGREE":
                     a, b = who
@@ -226,9 +330,10 @@ def report(verdicts, quiet=False):
                 else:
                     print("           %s — %s:%s" % (kindname, who[0], who[1]))
                     print("             %s" % detail)
-        elif not quiet:
-            print("  agree  %-24s %2d names   spread %.3e   tol %.3e"
-                  % (v["label"], v["n_present"], v["spread"], v["tolerance"]))
+        elif not v.get("refused") and not quiet:
+            print("  agree  %-24s %2d names   spread %.3e   tol %.3e%s"
+                  % (v["label"], v["n_present"], v["spread"], v["tolerance"],
+                     norm_summary(v)))
 
 
 # ------------------------------------------------------------------ planted worlds
@@ -295,6 +400,30 @@ class Scoreboard(object):
     def __init__(self, base_red):
         self.base_red = base_red
         self.rows = []
+
+    def arm_outcome(self, name, expect, got, note=""):
+        """Three-valued arms — GREEN / RED / REFUSAL (mg-479c).
+
+        `arm()` below can only ask "did it go red?", and mg-479c adds a world where the
+        correct answer is neither: an undeclared normalisation must make the gate REFUSE
+        (exit 2), and a two-valued arm would score that as CAUGHT for a red it never got, or
+        as MISSED for a refusal that is exactly right.  The distinction is the ticket's own
+        — a control firing and an instrument declining to answer are different facts and
+        this suite's exit convention already separates them.
+        """
+        if self.base_red and expect != "GREEN":
+            out = "UNFALSIFIABLE"
+        elif got == expect == "GREEN":
+            out = "REFUSED-CORRECTLY"
+        elif got == expect:
+            out = "CAUGHT"
+        elif expect == "GREEN":
+            out = "FALSE-POSITIVE"
+        else:
+            out = "MISSED"
+        detail = "expected %s, got %s" % (expect, got)
+        self.rows.append((name, out, detail + ("  ·  " + note if note else "")))
+        return out
 
     def arm(self, name, expect_red, red, note=""):
         if self.base_red and expect_red:

@@ -1,4 +1,4 @@
-/Users/daniel/.pogo/polecats/c06d1/code/alias_agreement_06d1/x0_exhibit.py:132: SyntaxWarning: 'return' in a 'finally' block
+/Users/daniel/.pogo/polecats/c479c/code/alias_agreement_06d1/x0_exhibit.py:132: SyntaxWarning: 'return' in a 'finally' block
   return 2
 x0  THE EXHIBIT — a real edit to a real tree, and the real gate command
 
@@ -24,10 +24,10 @@ E2  THE GATE ON THE PLANTED TREE
   ./build.sh  exit 1
 
   the finding, as the gate printed it:
-      RED    E_footrule                4/ 4 names   spread 1.000e-09   tol 0.000e+00
+      RED    E_footrule                4/ 4 names   spread 1.000e-09   tol 0.000e+00  norm identity x4
                DISAGREE — direct_prefix_audit_2de0:E_footrule  vs  sweep_loss_51f4:E_footrule
-                 spread 1.000000e-09 > tolerance 0.000000e+00 at poset #0: direct_prefix_audit_2de0:E_footrule = 2.6666666666666665   vs   sweep_loss_51f4:E_footrule = 2.6666666676666666
-      agree  M                         4 names   spread 0.000e+00   tol 0.000e+00
+                 spread 1.000000e-09 > tolerance 0.000000e+00 at poset #0 (IDENTITY frame)
+                 direct_prefix_audit_2de0:E_footrule = 2.6666666666666665   vs   sweep_loss_51f4:E_footrule = 2.6666666676666666
 
   exit non-zero                      : True
   names the perturbed alias          : True

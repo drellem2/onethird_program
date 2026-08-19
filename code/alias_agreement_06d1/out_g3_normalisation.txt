@@ -1,0 +1,101 @@
+g3  THE NORMALISATION FIELD — mg-479c
+
+
+==============================================================================
+G3a  THE INVENTORY — every declaration, and every non-identity factor, always
+==============================================================================
+
+  71 declarations   71 pinned names   2 worked-example names
+  convention <-> factor consistency over 12 groups: OK
+
+  group                    names  frame       conventions / factors
+  leak(A_1)                13     IDENTITY    1 convention, identity throughout
+  gamma                    9      IDENTITY    1 convention, identity throughout
+  Delta_P                  7      IDENTITY    1 convention, identity throughout
+  Phi*_pref                7      IDENTITY    1 convention, identity throughout
+  mu_pref                  7      IDENTITY    1 convention, identity throughout
+  rho*Delta_P              6      IDENTITY    1 convention, identity throughout
+  Phi*_all                 6      IDENTITY    1 convention, identity throughout
+  E_footrule               4      IDENTITY    1 convention, identity throughout
+  M                        4      IDENTITY    1 convention, identity throughout
+  rho                      3      IDENTITY    1 convention, identity throughout
+  1 - rho(A_1)             3      IDENTITY    1 convention, identity throughout
+  mu_pref (upper bound)    2      IDENTITY    1 convention, identity throughout
+
+  pinned-restricted declaration digest: 72c53bae3d00e68d   baseline recorded: 72c53bae3d00e68d   MATCH
+
+==============================================================================
+G3b  THE REPRESENTATION — exact, and the refusals are part of it
+==============================================================================
+
+  identity [1]/[1] is the identity                               ok
+  [2]/[2] is the identity (reduced, not compared literally)      ok
+  [0,2]/[0,2] is the identity (a common n cancels)               ok
+  6n^2/(n^2-1) is NOT the identity                               ok
+  6n^2/(n^2-1) at n=3 is exactly 27/4                            ok
+  the value is a Fraction and not a float                        ok
+  x2 and x1/2 are different factors                              ok
+
+==============================================================================
+G3c  THE WORKED EXAMPLE — eps_spec / eps_c3ca, re-derived from mg-9f91's table
+==============================================================================
+
+  THE TICKET'S OWN SECOND EXAMPLE, and the reason the factor is a rational function of n and
+  not a constant.  code/c3_audit_a94c3/a1_algebra.py states
+  `eps_spec / eps_c3ca = 6 n^2 / (n^2 - 1) -> 6`, and mg-9f91 tabulates both quantities as
+  exact rationals.  The declared factor is checked against that table at every n in it.
+
+  the identity 'eps_spec / eps_c3ca = 6 n^2 / (n^2 - 1)' is still in c3_audit_a94c3/a1_algebra.py: True
+  declared: eps_spec x1/1 (canonical);  eps_c3ca x6n^2/(n^2 - 1)
+
+      n       eps_c3ca       eps_spec  declared factor    c3ca x factor  exact
+      3            1/9            3/4             27/4              3/4    yes
+      4            1/8            4/5             32/5              4/5    yes
+      5           2/15            5/6             25/4              5/6    yes
+      6           5/36            6/7           216/35              6/7    yes
+      7            1/7            7/8             49/8              7/8    yes
+      8           7/48            8/9           128/21              8/9    yes
+     10           3/20          10/11           200/33            10/11    yes
+     12          11/72          12/13          864/143            12/13    yes
+  ... 11 rows in the table, 11 checked, 0 mismatches
+
+  WHAT A CONSTANT FACTOR WOULD HAVE GOT WRONG — re-derived here, and it is why a
+  per-name constant field would have been unable to say what this corpus knows:
+      n=3    eps_c3ca x 6  is wrong by +0.0833
+      n=4    eps_c3ca x 6  is wrong by +0.0500
+      n=5    eps_c3ca x 6  is wrong by +0.0333
+      n=6    eps_c3ca x 6  is wrong by +0.0238
+      n=7    eps_c3ca x 6  is wrong by +0.0179
+
+==============================================================================
+G3d  PLANTED WORLDS — including the one that scores ticket item 4
+==============================================================================
+
+
+    CAUGHT            N11 a factor equal to 1 at every n in POP-PRIM but not identically 1
+                      expected RED, got RED  ·  value at n=3,4,5 = ['1', '1', '1'], at n=6 = 7; is_identity() = False
+    CAUGHT            N12 a float coefficient in a factor
+                      expected REFUSAL, got REFUSAL  ·  factor num coefficient 1.5 is not an integer — a float coefficient would make the factor inexact
+    CAUGHT            N13 a denominator vanishing at an n in the population
+                      expected REFUSAL, got REFUSAL  ·  factor denominator vanishes at n=3
+    REFUSED-CORRECTLY N14 the declared n-dependent factor reproduces mg-9f91's table exactly
+                      expected GREEN, got GREEN  ·  11 of 11 rows exact in Fraction arithmetic
+    CAUGHT            N15 a CONSTANT factor of 6 does NOT reproduce the table
+                      expected RED, got RED  ·  largest error among the smallest n printed above: +0.0833
+    REFUSED-CORRECTLY N7 mg-479c registers NOTHING about the (L*)/(M#) mu_pref^2 gap (item 4)
+                      expected GREEN, got GREEN  ·  0 declaration(s) mention it, 0 pinned name(s) carry a non-identity factor — STATE.md:172 is mg-5e82's and is untouched
+    CAUGHT            N8 one name in a shared convention re-declared x2 — the label and the factor now contradict
+                      expected REFUSAL, got REFUSAL  ·  group leak(A_1): convention 'leak(A_1)' is declared by 13 names with 2 DIFFERENT factors (anticorrelation_c50b:leak(1) -
+    CAUGHT            N9 a second convention LABEL declaring the same factor
+                      expected REFUSAL, got REFUSAL  ·  group leak(A_1): conventions 'a second name for the same frame' and 'leak(A_1)' declare the SAME factor 1/1.  Two labels
+    REFUSED-CORRECTLY N10 an UNPINNED name gains a declaration — the pinned digest must NOT move
+                      expected GREEN, got GREEN  ·  digest 72c53bae3d00e68d before, 72c53bae3d00e68d after
+    CAUGHT            N16 a declaration with no `source`
+                      expected REFUSAL, got REFUSAL  ·  declarations[anticorrelation_c50b:leak(1)] has no 'source'.  A declaration without a source is a number somebody typed.
+
+    7 CAUGHT · 3 REFUSED-CORRECTLY · 0 unsatisfactory, of 10 arms
+
+==============================================================================
+g3 RESULT
+==============================================================================
+  71 declarations over 71 pinned names in 12 groups, 0 in a non-identity frame; 0 problem(s), 0 arm(s) unsatisfactory.

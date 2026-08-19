@@ -7,25 +7,25 @@ g1  THE AGREEMENT CHECK — mg-0d1b's 12 measured groups, compared
 G1a  RECOMPUTE — every scalar by the tree that owns it, through its own entry point
 ==============================================================================
 
-  80 columns from 12 trees in 30.6s
+  80 columns from 12 trees in 33.0s
   spread self-check against lib0d1b.spread on every pinned pair: 0 mismatches
 
 ==============================================================================
-G1b  THE COMPARISON — pinned membership, mg-0d1b's tolerances, unmodified
+G1b  THE COMPARISON — pinned membership, mg-0d1b's tolerances, canonical frame
 ==============================================================================
 
-  agree  leak(A_1)                13 names   spread 0.000e+00   tol 0.000e+00
-  agree  gamma                     9 names   spread 4.666e-10   tol 4.666e-10
-  agree  Delta_P                   7 names   spread 0.000e+00   tol 0.000e+00
-  agree  Phi*_pref                 7 names   spread 0.000e+00   tol 0.000e+00
-  agree  mu_pref                   7 names   spread 9.097e-13   tol 9.097e-13
-  agree  rho*Delta_P               6 names   spread 7.310e-12   tol 7.310e-12
-  agree  Phi*_all                  6 names   spread 0.000e+00   tol 0.000e+00
-  agree  E_footrule                4 names   spread 0.000e+00   tol 0.000e+00
-  agree  M                         4 names   spread 0.000e+00   tol 0.000e+00
-  agree  rho                       3 names   spread 4.441e-15   tol 4.441e-15
-  agree  1 - rho(A_1)              3 names   spread 0.000e+00   tol 0.000e+00
-  agree  mu_pref (upper bound)     2 names   spread 1.108e-07   tol 1.108e-07
+  agree  leak(A_1)                13 names   spread 0.000e+00   tol 0.000e+00  norm identity x13
+  agree  gamma                     9 names   spread 4.666e-10   tol 4.666e-10  norm identity x9
+  agree  Delta_P                   7 names   spread 0.000e+00   tol 0.000e+00  norm identity x7
+  agree  Phi*_pref                 7 names   spread 0.000e+00   tol 0.000e+00  norm identity x7
+  agree  mu_pref                   7 names   spread 9.097e-13   tol 9.097e-13  norm identity x7
+  agree  rho*Delta_P               6 names   spread 7.310e-12   tol 7.310e-12  norm identity x6
+  agree  Phi*_all                  6 names   spread 0.000e+00   tol 0.000e+00  norm identity x6
+  agree  E_footrule                4 names   spread 0.000e+00   tol 0.000e+00  norm identity x4
+  agree  M                         4 names   spread 0.000e+00   tol 0.000e+00  norm identity x4
+  agree  rho                       3 names   spread 4.441e-15   tol 4.441e-15  norm identity x3
+  agree  1 - rho(A_1)              3 names   spread 0.000e+00   tol 0.000e+00  norm identity x3
+  agree  mu_pref (upper bound)     2 names   spread 1.108e-07   tol 1.108e-07  norm identity x2
 
   bit-reproducibility: 12 of 12 groups reproduce the baseline's observed spread exactly (7 of them are exact-equality rows)
 
@@ -57,7 +57,32 @@ G1c  POSITIVE CONTROL — eight planted worlds, and the good input scored first
     6 CAUGHT · 2 REFUSED-CORRECTLY · 0 unsatisfactory, of 8 arms
 
 ==============================================================================
+G1d  mg-479c — THE NORMALISATION ARMS.  Six worlds, and the identity measured
+==============================================================================
+
+  The twelve pinned groups contain NO normalisation pair today: all 71 names are declared in
+  the identity normalisation and this ticket is inert on them, which is the ticket's own
+  `WHY NOT HIGH`.  So the machinery is falsified here against declarations planted in copies
+  of the real declaration table, in both directions — a factor that is REAL and must not go
+  red, and a factor that is ABSENT where the values differ and must.
+
+    REFUSED-CORRECTLY N1 identity canonicalisation is a PASS-THROUGH on all 71 pinned columns
+                      expected GREEN, got GREEN  ·  71 of 71 columns returned as the SAME LIST OBJECT, 71 of 71 bit-identical; 0 group(s) in a non-identity frame
+    REFUSED-CORRECTLY N2 the pre-479c raw comparison and the canonical one agree on the REAL input
+                      expected GREEN, got GREEN  ·  12/12 spreads identical, both 0 red, 0 refusals — so N3's wrong-way demonstration is of the shipped behaviour and not of a strawman
+    REFUSED-CORRECTLY N3 chain_iv_c_81ff:lambda2_bracket DOUBLED, DECLARED x1/2 and given a canonical-frame tolerance — two live conventions, must be GREEN
+                      expected GREEN, got GREEN  ·  THE FALSE RED THE TICKET IS ABOUT: the SAME input through the pre-479c raw comparison is RED at 1 group(s), spread 1.000e+00 against a tolerance of 4.666e-10; after normalising the spread is 4.666e-10, back at the group's measured agreement.  On a gate that blocks merges, a red for a non-reason is how gates get disabled.
+    CAUGHT            N4 the SAME doubled column with NO factor declared — a genuine 2x error, must be RED
+                      expected RED, got RED  ·  message names the ratio as a simple rational (2/1 or 1/2): True;  says the two names are in the SAME declared convention: True  <-- the sentence that tells an operator this is a defect and not units
+    CAUGHT            N5 chain_iv_c_81ff:lambda2_bracket loses its declaration — must REFUSE, not default to `same`
+                      expected REFUSAL, got REFUSAL  ·  reported as UNDECLARED-NORMALISATION
+    CAUGHT            N6 a non-identity factor against mg-0d1b's RAW-frame tolerance — must REFUSE
+                      expected REFUSAL, got REFUSAL  ·  reported as TOLERANCE-FRAME
+
+    3 CAUGHT · 3 REFUSED-CORRECTLY · 0 unsatisfactory, of 6 arms
+
+==============================================================================
 g1 RESULT
 ==============================================================================
   12 groups agree at mg-0d1b's measured tolerances; 0 falsification arms unsatisfactory.
-  recompute 30.6s · falsification 0.55s · total 31.2s
+  recompute 33.0s · falsification 0.67s · total 33.7s

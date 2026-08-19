@@ -48,6 +48,22 @@
 # THE EDIT IS HERE, AGAIN, for the reason the header above already gives: refinery.toml
 # alone would put this on route 1 and leave default discovery — the route that survives
 # that file being deleted — reaching a gate list one suite short.
+#
+# --- mg-479c -------------------------------------------------------------------------------
+# NO SUITE JOINS, AND THE GATE'S THIRD SUITE GAINS AN ARM AND A THIRD OUTCOME.  mg-06d1's
+# check compared VALUES and had no representation for two names denoting one quantity in
+# DIFFERENT NORMALISATIONS, so a factor of 2 between two live conventions and a genuine 2x
+# error were the same signal.  The comparison now happens in a CANONICAL frame declared per
+# NAME in code/alias_agreement_06d1/NORMALISATION.json, the RED message reports the factor
+# applied and whether the two names share a convention, and an UNDECLARED normalisation is
+# REFUSED (exit 2) rather than defaulted to `same`.
+#
+# THE COST IS BELOW THIS HOST'S RUN-TO-RUN VARIANCE and is stated here rather than left to
+# be discovered: the new g3 arm is 0.03 s (no recompute at all) and g1's six added arms are
+# 0.1 s, because they reuse the capture that already dominates.  `time sh build.sh` measures
+# 42.8 s and 44.5 s on two runs against the 44.8 s recorded above for mg-06d1 — the same
+# number to within this host's variance, and BOTH samples are quoted rather than the better
+# one.  Nothing was dropped to pay for it and nothing was deferred.
 STATUS=0
 for suite in \
     code/control_gate_724a/run_all.sh \

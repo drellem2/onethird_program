@@ -1,0 +1,65 @@
+
+==============================================================================
+x1  THE WRONG WAY — the pre-479c gate on a legitimate normalisation pair
+==============================================================================
+
+  reference:  main:code/alias_agreement_06d1/libagree.py
+  blob sha:   5dac8b3e502c48f7c31d69e25c8e2d2a682b9d6f
+  it returns a 2-tuple from check_groups; mg-479c's returns a 3-tuple (the third is REFUSALS)
+
+  capturing 12 trees over 306 primitive posets ...
+
+==============================================================================
+x1a  THE GOOD INPUT, on both instruments
+==============================================================================
+
+  pre-479c   0 of 12 groups red
+  mg-479c    0 of 12 groups red, 0 refusals
+  all twelve spreads identical between the two instruments: True
+
+==============================================================================
+x1b  chain_iv_c_81ff:lambda2_bracket DOUBLED, and DECLARED doubled
+==============================================================================
+
+  PRE-479c — the gate that has been on build.sh since mg-06d1 landed:
+  RED    gamma                     9/ 9 names   spread 1.000e+00   tol 4.666e-10
+           DISAGREE — c3_audit_a94c3:spectral_gap  vs  chain_iv_c_81ff:lambda2_bracket
+             spread 1.000000e+00 > tolerance 4.665708e-10 at poset #31: c3_audit_a94c3:spectral_gap = 0.99999999999999956   vs   chain_iv_c_81ff:lambda2_bracket = 1.9999999990686774
+      1 of 12 groups RED
+
+  mg-479c — the same input, the same baseline, the declaration read:
+      0 of 12 groups RED, 0 refusals; `gamma` spread 4.666e-10 against tolerance 4.666e-10 in the CANONICAL frame
+
+==============================================================================
+x1c  THE SAME DOUBLING WITH NO DECLARATION — both instruments must be RED
+==============================================================================
+
+  pre-479c   1 of 12 groups red
+  mg-479c    1 of 12 groups red, 0 refusals
+
+      spread 1.000000e+00 > tolerance 4.665708e-10 at poset #31 (IDENTITY frame)
+      c3_audit_a94c3:spectral_gap = 0.99999999999999956   vs   chain_iv_c_81ff:lambda2_bracket = 1.9999999990686774
+      normalisation: c3_audit_a94c3:spectral_gap in convention 'gamma' (x 1/1);  chain_iv_c_81ff:lambda2_bracket in convention 'gamma' (x 1/1)
+      raw ratio c3_audit_a94c3:spectral_gap / chain_iv_c_81ff:lambda2_bracket = 0.500000000233  = 1/2
+      THESE TWO NAMES ARE DECLARED TO BE IN THE SAME CONVENTION ('gamma'), so this is a DEFECT and not a normalisation difference.  A ratio near a simple rational here means one side is scaled wrong; it does not mean the two are in different units.
+
+==============================================================================
+x1 RESULT
+==============================================================================
+
+  THE FALSE RED, MEASURED AGAINST THE SHIPPED CODE AND NOT AGAINST A FLAG.
+
+    a legitimate normalisation pair   pre-479c 1 red   ·   mg-479c 0 red, 0 refused
+    a genuine 2x error                pre-479c 1 red   ·   mg-479c 1 red, 0 refused
+
+  The pre-479c gate gives the SAME ANSWER to both, which is the ticket in one line: "a
+  factor of 2 between two live conventions and a genuine 2x error are the same signal".
+  mg-479c separates them, and the RED message above names the ratio and says whether the two
+  names share a convention.
+
+  WHAT THIS DOES NOT SHOW.  It does not show that the declaration in the first case is TRUE.
+  Nothing here can: a declared factor is an escape hatch and this machinery cannot close it
+  (README §7).  What changed is that the factor is now written down, in a committed file,
+  with a source and an author, and printed on every run.
+
+  x1 as expected

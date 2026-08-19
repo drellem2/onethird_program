@@ -1,0 +1,901 @@
+{
+ "canonical_tolerances": {},
+ "canonical_tolerances_note": "EMPTY, AND THAT IS THE CORRECT STATE TODAY.  mg-0d1b measured every tolerance as the max spread of RAW values.  While every member of a group is in the identity normalisation the canonical frame IS the raw frame and the carried number governs what it always governed.  The moment a group gains a member with a non-identity factor, the carried number is stated in a frame the comparison no longer happens in, and it is NOT rescalable \u2014 members with different factors admit no single multiplier.  The gate then REFUSES until the registrant records a canonical-frame tolerance here with its own measured source.  Rescaling the frame while keeping the number that governs it would be mg-479c's own defect one level up.",
+ "declarations": {
+  "anticorrelation_c50b:Delta": {
+   "convention": "Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[2].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "anticorrelation_c50b:M": {
+   "convention": "M",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 4 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[8].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "anticorrelation_c50b:Phi_star": {
+   "convention": "Phi*_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[3].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "anticorrelation_c50b:gamma_float": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "anticorrelation_c50b:leak(1)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "anticorrelation_c50b:mu_exhaustive": {
+   "convention": "mu_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 9.097167e-13 over 306 primitive posets (alias_groups.json groups[4].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "anticorrelation_c50b:mu_upper": {
+   "convention": "mu_pref (upper bound)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 2 names agreeing to max_spread 1.107879e-07 over 306 primitive posets (alias_groups.json groups[11].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "anticorrelation_c50b:rho": {
+   "convention": "rho",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 3 names agreeing to max_spread 4.440892e-15 over 306 primitive posets (alias_groups.json groups[9].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "anticorrelation_c50b:rho*Delta": {
+   "convention": "rho*Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 7.310375e-12 over 306 primitive posets (alias_groups.json groups[5].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "audit_5cba:Delta": {
+   "convention": "Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[2].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "audit_5cba:LK[1]/LE": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "audit_5cba:M": {
+   "convention": "M",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 4 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[8].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "audit_5cba:gamma_float": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "audit_5cba:mu_pref_float": {
+   "convention": "mu_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 9.097167e-13 over 306 primitive posets (alias_groups.json groups[4].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "audit_5cba:v_L": {
+   "convention": "rho*Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 7.310375e-12 over 306 primitive posets (alias_groups.json groups[5].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "c3_audit_a94c3:delta1(A_1)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "c3_audit_a94c3:leak(A_1)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "c3_audit_a94c3:one_minus_rho(1)": {
+   "convention": "1 - rho(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 3 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[10].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "c3_audit_a94c3:spectral_gap": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "c3_prefix_capture_76b2:leak(A_1)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "c3_prefix_capture_76b2:phi_star": {
+   "convention": "Phi*_all",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[6].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "c3_prefix_capture_76b2:phi_star_prefix": {
+   "convention": "Phi*_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[3].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "c3_prefix_capture_76b2:rho_prefix(1)": {
+   "convention": "1 - rho(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 3 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[10].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "chain_iv_c_81ff:lambda2_bracket": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "chain_iv_c_81ff:prefix_Q(1)": {
+   "convention": "1 - rho(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 3 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[10].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "direct_prefix_audit_2de0:E_footrule": {
+   "convention": "E_footrule",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 4 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[7].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "direct_prefix_audit_2de0:E_leak(A_1)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "direct_prefix_audit_2de0:delta_1_prefix(1)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "direct_prefix_audit_2de0:phi_star": {
+   "convention": "Phi*_all",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[6].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "eleak_repair_8311:E_leak(A_1,def)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "eleak_repair_8311:phi_star(def)": {
+   "convention": "Phi*_all",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[6].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "eleak_repair_8311:phi_star(inv)": {
+   "convention": "Phi*_all",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[6].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "eleak_repair_8311:prefix_min": {
+   "convention": "Phi*_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[3].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_audit_29fe:Delta": {
+   "convention": "Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[2].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_audit_29fe:EDF": {
+   "convention": "E_footrule",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 4 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[7].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_audit_29fe:Phi_star_all": {
+   "convention": "Phi*_all",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[6].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_audit_29fe:Phi_star_pref": {
+   "convention": "Phi*_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[3].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_audit_29fe:V10": {
+   "convention": "rho*Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 7.310375e-12 over 306 primitive posets (alias_groups.json groups[5].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_audit_29fe:bracket_gap": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_audit_29fe:bracket_mu_pref": {
+   "convention": "mu_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 9.097167e-13 over 306 primitive posets (alias_groups.json groups[4].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_audit_29fe:leak[1]": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_conditionality_28ff:E_footrule": {
+   "convention": "E_footrule",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 4 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[7].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_conditionality_28ff:V10": {
+   "convention": "rho*Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 7.310375e-12 over 306 primitive posets (alias_groups.json groups[5].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_conditionality_28ff:cone_min": {
+   "convention": "mu_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 9.097167e-13 over 306 primitive posets (alias_groups.json groups[4].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_conditionality_28ff:delta_max": {
+   "convention": "Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[2].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_conditionality_28ff:gap_exact_bounds": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_conditionality_28ff:leak(A_1)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_conditionality_28ff:phi_star": {
+   "convention": "Phi*_all",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[6].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_conditionality_28ff:phi_star_prefix": {
+   "convention": "Phi*_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[3].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_underclaim_audit_3bb9:Delta": {
+   "convention": "Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[2].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_underclaim_audit_3bb9:V00": {
+   "convention": "rho",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 3 names agreeing to max_spread 4.440892e-15 over 306 primitive posets (alias_groups.json groups[9].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_underclaim_audit_3bb9:V10": {
+   "convention": "rho*Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 7.310375e-12 over 306 primitive posets (alias_groups.json groups[5].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_underclaim_audit_3bb9:gap_float": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_underclaim_audit_3bb9:leak[0]": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "l2_underclaim_audit_3bb9:mu_pref_float": {
+   "convention": "mu_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 9.097167e-13 over 306 primitive posets (alias_groups.json groups[4].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:Delta": {
+   "convention": "Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[2].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:LK[1]/LE": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:M": {
+   "convention": "M",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 4 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[8].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:Phi_star": {
+   "convention": "Phi*_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[3].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:gamma_float": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:mu_faces": {
+   "convention": "mu_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 9.097167e-13 over 306 primitive posets (alias_groups.json groups[4].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:mu_ub_float": {
+   "convention": "mu_pref (upper bound)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 2 names agreeing to max_spread 1.107879e-07 over 306 primitive posets (alias_groups.json groups[11].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:rho*Delta": {
+   "convention": "rho*Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 6 names agreeing to max_spread 7.310375e-12 over 306 primitive posets (alias_groups.json groups[5].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "lstar_789d:rho_float": {
+   "convention": "rho",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 3 names agreeing to max_spread 4.440892e-15 over 306 primitive posets (alias_groups.json groups[9].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "sweep_loss_51f4:E_footrule": {
+   "convention": "E_footrule",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 4 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[7].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "sweep_loss_51f4:M_mean": {
+   "convention": "M",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 4 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[8].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "sweep_loss_51f4:cone_min": {
+   "convention": "mu_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 9.097167e-13 over 306 primitive posets (alias_groups.json groups[4].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "sweep_loss_51f4:delta_max": {
+   "convention": "Delta_P",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[2].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "sweep_loss_51f4:gap_float": {
+   "convention": "gamma",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 9 names agreeing to max_spread 4.665708e-10 over 306 primitive posets (alias_groups.json groups[1].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "sweep_loss_51f4:leak_pref(1)": {
+   "convention": "leak(A_1)",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 13 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[0].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  },
+  "sweep_loss_51f4:phi_star_pref": {
+   "convention": "Phi*_pref",
+   "source": "DERIVED, not asserted: mg-0d1b measured this group's 7 names agreeing to max_spread 0.000000e+00 over 306 primitive posets (alias_groups.json groups[3].max_spread), which is what it means for them to be in ONE normalisation.  Redundant for this name; present so that the next name added to this group cannot be added without one.",
+   "to_canonical": {
+    "den": [
+     1
+    ],
+    "num": [
+     1
+    ]
+   }
+  }
+ },
+ "not_declared": {
+  "names": [
+   "mu_pref^2 gap (L*) vs (M#)  \u2014 STATE.md:172, owned by mg-5e82"
+  ],
+  "note": "mg-479c REGISTERS NOTHING ABOUT THE (L*)/(M#) GAP, DELIBERATELY.  STATE.md:172 says `the gap between (L*) and (M#) is exactly mu_pref^2`; in the normalisation that row itself uses (mu*Delta <= gamma) it is mu_pref^2/2, and it is mu_pref^2 in the doubled form 2*mu*Delta <= 2*gamma.  BOTH READINGS ARE IN THE CORPUS.  Ticket item 4: this ticket builds the machinery to REPRESENT the answer and does not decide it \u2014 that is mg-5e82's business and a mathematical question.  Registering a factor of 1 or of 2 for either name would decide it under this ticket's cover, so neither is registered, and g3's arm N7 goes RED if one ever appears in this file without the arm being updated."
+ },
+ "note": "mg-479c \u2014 THE NORMALISATION FIELD, per NAME and not per quantity.  Two names for one quantity may legitimately differ by a stated factor and this file is where that is SAID.  THE DIRECTION IS STATED AND NOT LEFT TO BE READ OFF THE NAME, because a field whose direction is ambiguous is this ticket's own defect wearing the remedy's clothes: canonical_value = raw_value * num(n)/den(n).  A name whose values are TWICE the group's canonical ones declares num=[1], den=[2].  Integer coefficients, low order first, evaluated in exact Fraction arithmetic; the identity is [1]/[1] and is applied as a pass-through, never as a multiply by 1.0.  An UNDECLARED name is REFUSED by the gate (exit 2), never defaulted to `same`.  The 71 seeded entries are DERIVED from mg-0d1b's measured agreement and are redundant; they exist so the 72nd cannot be added silently.  A declared factor is an escape hatch this machinery cannot close \u2014 see README \u00a77 \u2014 which is why every non-identity factor is printed on every run, green as well as red.",
+ "seeded_by": "mknorm.py (one-shot; it refuses to run once this file exists)",
+ "worked_examples": {
+  "eps": {
+   "names": {
+    "a94c3-doc:eps_c3ca": {
+     "convention": "eps_c3ca  =   E[inv_e] / n^2",
+     "source": "OneThird-LIBweak-mg-c3ca.md:172, cited at code/c3_audit_a94c3/a1_algebra.py:17; the factor is that file's own line 18, `eps_spec / eps_c3ca = 6 n^2 / (n^2 - 1)`, checked by g3 against the eleven exact rationals in code/unitmap_audit_9f91/out_m1_map.txt.",
+     "to_canonical": {
+      "den": [
+       -1,
+       0,
+       1
+      ],
+      "num": [
+       0,
+       0,
+       6
+      ]
+     }
+    },
+    "a94c3-doc:eps_spec": {
+     "convention": "eps_spec  = 6 E[inv_e] / (n^2 - 1)",
+     "source": "Op-Form :437, STATE.md:15, cited at code/c3_audit_a94c3/a1_algebra.py:16.  Canonical frame for this worked example by choice of presentation only; no claim is made that it is the right one.",
+     "to_canonical": {
+      "den": [
+       1
+      ],
+      "num": [
+       1
+      ]
+     }
+    }
+   },
+   "note": "TWO LIVE NORMALISATIONS OF ONE QUANTITY, and the ticket's own second example.  NOT pinned by BASELINE.json, NOT produced by any adapter, and NOT consulted by the comparison: an entry in `declarations` for a name nothing computes would be a statement the gate can never check.  It is here because it is the corpus's proof that a per-name CONSTANT factor would have been the wrong representation \u2014 the factor is n-DEPENDENT, and code/unitmap_audit_9f91/out_m1_map.txt tabulates what a flat 6 gets wrong at small n (+0.0833 at n=3).  g3 re-derives it at every n in that table rather than asserting it."
+  }
+ }
+}

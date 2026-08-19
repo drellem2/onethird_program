@@ -42,6 +42,7 @@ import sys
 import time
 
 import libagree as A
+import libnorm as N
 import predicates as PR
 
 L = A.L
@@ -120,6 +121,45 @@ def main():
                            for m in members},
         })
 
+    # ---- mg-479c.  THE REFUSAL LIVES IN BOTH PLACES, AND THAT IS NOT BELT-AND-BRACES.
+    #
+    # This script is where a NEW NAME is registered, so this is where "registered without a
+    # normalisation" is a thing that can happen.  The gate checks it too, over the pinned
+    # members it reads out of BASELINE.json, because a refusal here alone is bypassed by a
+    # hand-edit to that file and a refusal there alone lets a bad baseline be written and
+    # only fails at the next merge.  Filed in advance as P9, and I did in fact write the
+    # gate's copy first.
+    decls = N.load()
+    undeclared = [m for g in groups for m in
+                  [tuple(x) for x in g["members"]] if not decls.has(m)]
+    if undeclared:
+        raise SystemExit(
+            "mkbaseline: %d pinned name(s) have NO declared normalisation: %s.\n"
+            "            Refusing to write a baseline the gate would have to guess at.  Add "
+            "an entry to NORMALISATION.json naming the convention, the factor to this "
+            "group's canonical frame, and the source it is carried from."
+            % (len(undeclared), ", ".join("%s:%s" % m for m in undeclared)))
+    N.check_consistency(decls.decls,
+                        [(g["label"], ["%s:%s" % tuple(m) for m in g["members"]])
+                         for g in groups])
+    for g in groups:
+        members = [tuple(m) for m in g["members"]]
+        frame, why = N.tolerance_frame(members, decls)
+        g["tolerance_frame"] = frame
+        g["tolerance_frame_why"] = why
+        g["normalisation"] = {"%s:%s" % m: {
+            "convention": decls.decls["%s:%s" % m]["convention"],
+            "to_canonical": "%s" % decls.decls["%s:%s" % m]["factor"].as_text()}
+            for m in members}
+        if frame == "CANONICAL" and decls.canonical_tolerance(g["label"]) is None:
+            raise SystemExit(
+                "mkbaseline: %s — %s, but its tolerance %.6e is mg-0d1b's max spread of RAW "
+                "values and is not stated in the frame the comparison now happens in.  It "
+                "is NOT rescalable (members with different factors admit no single "
+                "multiplier).  Record a canonical-frame tolerance for this group in "
+                "NORMALISATION.json with its measured source."
+                % (g["label"], why, g["tolerance"]))
+
     vecs, types = PR.vectors(POP_ALL)
     pred = {
         "population": "POP-ALL",
@@ -144,6 +184,13 @@ def main():
         },
         "groups": groups,
         "predicate": pred,
+        # RESTRICTED TO THE PINNED MEMBERS, deliberately.  A digest over the whole of
+        # NORMALISATION.json would send the gate RED the day somebody declares a
+        # normalisation for a name this gate does not pin — say while preparing mg-a397's
+        # widening — and a red for a non-reason is mg-479c's own thesis about how gates get
+        # disabled, shipped inside its remedy.  Filed in advance as E9.
+        "normalisation_digest": decls.digest_over(
+            [tuple(m) for g in groups for m in g["members"]]),
     }
     with open(A.BASELINE_PATH, "w") as fh:
         json.dump(out, fh, indent=1, sort_keys=True)
