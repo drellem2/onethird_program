@@ -1,0 +1,178 @@
+============================================================================================
+mg-a397 a3 — THE `NO FALSIFICATION ATTEMPT` DIRECTORIES, ADJUDICATED
+============================================================================================
+
+population: 25 directories in the bucket today (the ticket was filed on 24)
+  MY OWN DIRECTORY (candidate_adjudication_a397) IS NOT IN THE BUCKET, AND W4 BELOW IS WHY.
+    It left by SHIPPING A FILE WHOSE NAME MATCHES c9876's first proxy —
+    `a5_selftest.py`.  The file does contain real planted worlds, so the
+    answer happens to be right; the point is that the PROXY never looked.  W4
+    plants an EMPTY file of that name and shows the proxy calling it covered,
+    and this directory is the same construction arriving for real, in the arm
+    written to measure it.
+
+§1  THE TWO QUESTIONS, PER DIRECTORY
+--------------------------------------------------------------------------------------------
+    directory                            verdict                attempt (src/out)  can say NO
+    counterexample_audit_0a11            ATTEMPT-FOUND          4/2                assert, printed verdict token
+    counterexample_audit_a7b4            HOLE                   2/0                assert, non-zero exit, printed verdict token
+    eps0_threshold_3969                  ATTEMPT-FOUND          3/1                assert, printed verdict token
+    face_geometry_audit_5630             HOLE                   6/0                printed verdict token
+    face_geometry_audit_d0e2             ATTEMPT-FOUND          7/3                non-zero exit, computed exit, printed verdict token
+    face_geometry_audit_e0ce             ATTEMPT-FOUND          6/1                assert, printed verdict token
+    face_geometry_audit_f7bc             NO-CONTROL-TO-FALSIFY  0/0                (nothing)
+    hodge_leverage_audit_3c24            HOLE                   2/0                printed verdict token
+    hodge_leverage_audit_d39d            HOLE                   1/0                assert
+    hodge_leverage_join                  NO-CONTROL-TO-FALSIFY  1/0                (nothing)
+    l2_underclaim_audit_3bb9             ATTEMPT-FOUND          2/2                printed verdict token
+    landscape_audit_d673                 HOLE                   3/0                assert, printed verdict token
+    landscape_ebd8                       HOLE                   1/0                printed verdict token
+    lstar_landing_8d63                   ATTEMPT-FOUND          1/3                printed verdict token
+    semigroup_note                       HOLE                   2/0                assert, printed verdict token
+    semigroup_note_audit_66a6            ATTEMPT-FOUND          2/1                assert, non-zero exit, computed exit, printed verdict token
+    sibling_sweep_7085                   ATTEMPT-FOUND          2/3                printed verdict token
+    state_audit_2eed                     HOLE                   0/0                assert
+    state_delegation_audit_16eb          ATTEMPT-FOUND          13/4               printed verdict token, SystemExit
+    state_delegation_audit_5644          ATTEMPT-FOUND          7/4                printed verdict token, SystemExit
+    state_delegation_repair_0049         ATTEMPT-FOUND          9/5                printed verdict token, SystemExit
+    state_restructure_34bf               HOLE                   4/0                assert, printed verdict token, SystemExit
+    unified_gate_8fd1                    NO-CONTROL-TO-FALSIFY  1/0                (nothing)
+    unified_gate_audit_446b              HOLE                   2/0                assert, printed verdict token
+    unitmap_audit_9f91                   NO-CONTROL-TO-FALSIFY  2/1                (nothing)
+
+    ATTEMPT-FOUND=11   HOLE=10   NO-CONTROL-TO-FALSIFY=4
+
+§2  WHY THE INDEX PUT THEM HERE — THE DISAGREEMENT, WITH THE SITE
+--------------------------------------------------------------------------------------------
+    Every directory below is in the bucket because BOTH of c9876's proxies said
+    no.  For the ATTEMPT-FOUND ones this arm says yes, so exactly one of the two
+    is wrong about it, and the evidence is printed rather than described.
+
+    counterexample_audit_0a11
+        construction in source : MUTATIONS, falsifiable, mutation, mutations
+        outcome in transcript  : caught, mutation
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    eps0_threshold_3969
+        construction in source : mutations, negative control, two ways
+        outcome in transcript  : mutation
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    face_geometry_audit_d0e2
+        construction in source : MUTATION, MUTATIONS, NEGATIVE CONTROL, corruption, mutated, mutation
+        outcome in transcript  : caught, mutant, mutation
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    face_geometry_audit_e0ce
+        construction in source : corrupt, corruption, mutation, mutations, negative control, perturb
+        outcome in transcript  : negative control
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    l2_underclaim_audit_3bb9
+        construction in source : counterfactual, mutations
+        outcome in transcript  : caught, counterfactual
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    lstar_landing_8d63
+        construction in source : counterfactual
+        outcome in transcript  : REFUSED, caught, counterfactual
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    semigroup_note_audit_66a6
+        construction in source : mutations, perturbed
+        outcome in transcript  : mutation
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    sibling_sweep_7085
+        construction in source : MUTATION, mutation
+        outcome in transcript  : MUTATION, caught, mutation
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    state_delegation_audit_16eb
+        construction in source : MUTATE, MUTATED, MUTATION, MUTATIONS, mutate, mutated
+        outcome in transcript  : MUTATION, Mutation, caught, mutation
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    state_delegation_audit_5644
+        construction in source : MUTATE, MUTATION, MUTATIONS, mutate, mutated, mutation
+        outcome in transcript  : MUTATION, Mutation, caught, mutation
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+    state_delegation_repair_0049
+        construction in source : MUTATE, MUTATED, MUTATIONS, mutate, mutated, mutation
+        outcome in transcript  : MUTATION, Mutation, caught, mutation, negative control
+        c9876 proxy 1 (a filename matching (negative|selftest|self_test|positive|control|falsif)) : none
+        c9876 proxy 2 (a transcript token) : none
+
+§3  THE ONES THAT ARE NOT INSTRUMENTS
+--------------------------------------------------------------------------------------------
+    No assert, no non-zero exit, no printed verdict token — nothing in them can
+    say NO, so there is no control to have failed to falsify.  A directory that
+    derives and prints is not a defect for not shipping a negative control.
+      face_geometry_audit_f7bc              2 source file(s), 2 transcript(s)
+      hodge_leverage_join                   2 source file(s), 1 transcript(s)
+      unified_gate_8fd1                     2 source file(s), 2 transcript(s)
+      unitmap_audit_9f91                    4 source file(s), 6 transcript(s)
+
+§4  THE RESIDUAL — SHIPS A CHECK THAT CAN SAY NO, NOTHING HAS TRIED TO MAKE IT
+--------------------------------------------------------------------------------------------
+    THIS IS THE ONLY BUCKET THAT IS A FINDING, and it is a finding of ABSENCE:
+    the check may well work.  What is established is that the tree contains no
+    record of anyone having asked it to fail — which is the population where a
+    laundered green would never have been noticed.
+
+      counterexample_audit_a7b4
+          can say NO via : assert, non-zero exit, printed verdict token
+          attempt evidence: source=['mutations', 'two ways'] transcript=(none)
+      face_geometry_audit_5630
+          can say NO via : printed verdict token
+          attempt evidence: source=['CORRUPTED', 'CORRUPTION', 'NEGATIVE CONTROL', 'corrupt', 'corruption', 'mutations'] transcript=(none)
+      hodge_leverage_audit_3c24
+          can say NO via : printed verdict token
+          attempt evidence: source=['mutation', 'mutations'] transcript=(none)
+      hodge_leverage_audit_d39d
+          can say NO via : assert
+          attempt evidence: source=['mutations'] transcript=(none)
+      landscape_audit_d673
+          can say NO via : assert, printed verdict token
+          attempt evidence: source=['TWO ways', 'mutations', 'two ways'] transcript=(none)
+      landscape_ebd8
+          can say NO via : printed verdict token
+          attempt evidence: source=['mutations'] transcript=(none)
+      semigroup_note
+          can say NO via : assert, printed verdict token
+          attempt evidence: source=['mutation', 'mutations'] transcript=(none)
+      state_audit_2eed
+          can say NO via : assert
+          attempt evidence: source=(none) transcript=(none)
+      state_restructure_34bf
+          can say NO via : assert, printed verdict token, SystemExit
+          attempt evidence: source=['corruption', 'falsify', 'mutations', 'perturbed'] transcript=(none)
+      unified_gate_audit_446b
+          can say NO via : assert, printed verdict token
+          attempt evidence: source=['mutation', 'mutations'] transcript=(none)
+
+§5  THIS ARM'S OWN CONTROL — FIVE PLANTED DIRECTORIES
+--------------------------------------------------------------------------------------------
+    A classifier that has only ever been run on the tree it was written from has
+    not been shown to discriminate.  Each world below has exactly one answer.
+
+      ok   W1 check + mutation harness + transcript outcome               -> ATTEMPT-FOUND (want ATTEMPT-FOUND)
+      ok   W2 check, no attempt anywhere                                  -> HOLE (want HOLE)
+      ok   W3 derivation only, nothing can say NO                         -> NO-CONTROL-TO-FALSIFY (want NO-CONTROL-TO-FALSIFY)
+      ok   W4 an EMPTY file named selftest.py — c9876's proxy 1 says COVERED -> HOLE (want HOLE)
+            c9876 proxy 1 on the same world: ['selftest.py']  <- a filename is not an attempt
+      ok   W5 the word `mutation` in a comment and nothing else           -> HOLE (want HOLE)
+
+
+§6  VERDICT
+--------------------------------------------------------------------------------------------
+    ATTEMPT-FOUND            11  the index's two proxies missed a real one
+    NO-CONTROL-TO-FALSIFY     4  nothing in them can say NO
+    HOLE                     10  a check nothing has ever tried to break
+                            ---
+                             25
+
+    THE BUCKET IS NOT A DEFECT COUNT AND WAS NEVER OFFERED AS ONE.  What this
+    arm establishes is the split, and that the largest part of it is an artefact
+    of two proxies c9876 named as proxies in its own docstring.

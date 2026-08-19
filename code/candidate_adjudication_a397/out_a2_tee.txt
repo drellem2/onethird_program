@@ -1,0 +1,145 @@
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+============================================================================================
+mg-a397 a2 — THE `| tee` SITES, ADJUDICATED BY RUNNING THEM TWO WAYS
+============================================================================================
+
+population: 19 tee sites in 5 directories (the ticket was filed on 18 in 4)
+
+§1  THE SITES, AND THE PRODUCER EACH ONE PIPES
+--------------------------------------------------------------------------------------------
+    eps_spec_sweep_372e
+        code/eps_spec_sweep_372e/run_all.sh:5  python3 "$here/s1_census.py"    | tee "$here/out_s1_census.txt"
+            producer: s1_census.py
+        code/eps_spec_sweep_372e/run_all.sh:6  python3 "$here/s2_classify.py"  | tee "$here/out_s2_classify.txt"
+            producer: s2_classify.py
+        code/eps_spec_sweep_372e/run_all.sh:7  cd "$here" && python3 s3_control.py | tee out_s3_control.txt
+            producer: s3_control.py
+    l2_conditionality_28ff
+        code/l2_conditionality_28ff/run_all.sh:6  python3 -u selftest28ff.py  | tee out_selftest28ff.txt
+            producer: selftest28ff.py
+        code/l2_conditionality_28ff/run_all.sh:7  python3 -u b1_footrule.py   | tee out_b1_footrule.txt
+            producer: b1_footrule.py
+        code/l2_conditionality_28ff/run_all.sh:8  python3 -u b2_census.py     | tee out_b2_census.txt
+            producer: b2_census.py
+        code/l2_conditionality_28ff/run_all.sh:9  python3 -u b3_routes.py     | tee out_b3_routes.txt
+            producer: b3_routes.py
+        code/l2_conditionality_28ff/run_all.sh:10  python3 -u b4_ruled_out.py  | tee out_b4_ruled_out.txt
+            producer: b4_ruled_out.py
+        code/l2_conditionality_28ff/run_all.sh:11  python3 -u b5_trend.py      | tee out_b5_trend.txt
+            producer: b5_trend.py
+    lstar_789d
+        code/lstar_789d/run_all.sh:5  python3 s0_selftest.py   | tee out_s0_selftest.txt
+            producer: s0_selftest.py
+        code/lstar_789d/run_all.sh:6  python3 s1_hunt.py       | tee out_s1_hunt.txt
+            producer: s1_hunt.py
+        code/lstar_789d/run_all.sh:7  python3 s2_reduce.py     | tee out_s2_reduce.txt
+            producer: s2_reduce.py
+        code/lstar_789d/run_all.sh:8  python3 s3_depth.py      | tee out_s3_depth.txt
+            producer: s3_depth.py
+        code/lstar_789d/run_all.sh:9  python3 s4_theoremA.py   | tee out_s4_theoremA.txt
+            producer: s4_theoremA.py
+        code/lstar_789d/run_all.sh:10  python3 s5_certify.py    | tee out_s5_certify.txt
+            producer: s5_certify.py
+        code/lstar_789d/run_all.sh:11  python3 s6_aftermath.py  | tee out_s6_aftermath.txt
+            producer: s6_aftermath.py
+    lstar_landing_8d63
+        code/lstar_landing_8d63/run_all.sh:6  python3 s1_onset.py | tee out_s1_onset.txt
+            producer: s1_onset.py
+    state_restructure_ea0e
+        code/state_restructure_ea0e/run_all.sh:19  python3 code/state_restructure_ea0e/verify_relocation_ea0e.py "${BASE}" 2>&1 |
+            producer: verify_relocation_ea0e.py
+        code/state_restructure_ea0e/run_all.sh:21  echo "exit ${rc}" | tee -a "${OUT}"
+            producer: (none — nothing to fail)
+
+§2  THE TWO-WAY RUNS
+--------------------------------------------------------------------------------------------
+    T1 budget per run: 300s.  T2 is the runner verbatim over stubs.
+
+    eps_spec_sweep_372e
+        T1 (real suite)  LAUNDERED         sh code/eps_spec_sweep_372e/run_all.sh: good exit 0 (0.9s), known-bad exit 0 (0.9s); mutated s1_census.py
+        T2 (stub arms)   LAUNDERED         sh, stubs: all-good exit 0, s1_census.py exiting 1 -> runner exit 0
+        both arms agree
+        consumer: code/census_remainder_f8e5/d5_timeout.py:165  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/face_geometry_audit_fcb2/a5_standing.py:167  (cwd is not a literal — a population, or a module constant)  r = subprocess.run(["sh", "run_all.sh"], cwd=L.FACE_GEOM
+        consumer: code/species_depth_audit_4700/kern4700.py:254  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=d, capture_
+        consumer: code/species_sites_821e/kern821e.py:171  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=os.path.dir
+        consumer: code/transcript_census_1abe/t2_census.py:128  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/transcript_census_1abe/t7_sightings.py:92  (cwd is not a literal — a population, or a module constant)  rc = subprocess.run(["sh", "run_all.sh"], cwd=target,
+
+    l2_conditionality_28ff
+        T1 (real suite)  TIMED-OUT         the unmutated suite did not finish in 300s (300.0s spent); a kill is not a verdict, so this directory is UNMEASURED by T1
+        T2 (stub arms)   LAUNDERED         sh, stubs: all-good exit 0, selftest28ff.py exiting 1 -> runner exit 0
+        T1 did not reach a scorable answer; T2's answer is what this
+        directory has, and it is the weaker of the two.
+        consumer: code/census_remainder_f8e5/d5_timeout.py:165  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/face_geometry_audit_fcb2/a5_standing.py:167  (cwd is not a literal — a population, or a module constant)  r = subprocess.run(["sh", "run_all.sh"], cwd=L.FACE_GEOM
+        consumer: code/species_depth_audit_4700/kern4700.py:254  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=d, capture_
+        consumer: code/species_sites_821e/kern821e.py:171  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=os.path.dir
+        consumer: code/transcript_census_1abe/t2_census.py:128  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/transcript_census_1abe/t7_sightings.py:92  (cwd is not a literal — a population, or a module constant)  rc = subprocess.run(["sh", "run_all.sh"], cwd=target,
+
+    lstar_789d
+        T1 (real suite)  TIMED-OUT         the unmutated suite did not finish in 300s (300.0s spent); a kill is not a verdict, so this directory is UNMEASURED by T1
+        T2 (stub arms)   LAUNDERED         sh, stubs: all-good exit 0, s0_selftest.py exiting 1 -> runner exit 0
+        T1 did not reach a scorable answer; T2's answer is what this
+        directory has, and it is the weaker of the two.
+        consumer: code/census_remainder_f8e5/d5_timeout.py:165  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/face_geometry_audit_fcb2/a5_standing.py:167  (cwd is not a literal — a population, or a module constant)  r = subprocess.run(["sh", "run_all.sh"], cwd=L.FACE_GEOM
+        consumer: code/species_depth_audit_4700/kern4700.py:254  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=d, capture_
+        consumer: code/species_sites_821e/kern821e.py:171  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=os.path.dir
+        consumer: code/transcript_census_1abe/t2_census.py:128  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/transcript_census_1abe/t7_sightings.py:92  (cwd is not a literal — a population, or a module constant)  rc = subprocess.run(["sh", "run_all.sh"], cwd=target,
+
+    lstar_landing_8d63
+        T1 (real suite)  LAUNDERED         sh code/lstar_landing_8d63/run_all.sh: good exit 0 (64.5s), known-bad exit 0 (64.2s); mutated s1_onset.py
+        T2 (stub arms)   LAUNDERED         sh, stubs: all-good exit 0, s1_onset.py exiting 1 -> runner exit 0
+        both arms agree
+        consumer: code/census_remainder_f8e5/d5_timeout.py:165  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/face_geometry_audit_fcb2/a5_standing.py:167  (cwd is not a literal — a population, or a module constant)  r = subprocess.run(["sh", "run_all.sh"], cwd=L.FACE_GEOM
+        consumer: code/species_depth_audit_4700/kern4700.py:254  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=d, capture_
+        consumer: code/species_sites_821e/kern821e.py:171  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=os.path.dir
+        consumer: code/transcript_census_1abe/t2_census.py:128  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/transcript_census_1abe/t7_sightings.py:92  (cwd is not a literal — a population, or a module constant)  rc = subprocess.run(["sh", "run_all.sh"], cwd=target,
+
+    state_restructure_ea0e
+        T1 (real suite)  RED-ON-ARRIVAL    the unmutated suite exits 1, so a non-zero on the known-bad world would not be attributable to the mutation
+        T2 (stub arms)   DISCRIMINATES     bash, stubs: all-good exit 0, verify_relocation_ea0e.py exiting 1 -> runner exit 1
+        T1 did not reach a scorable answer; T2's answer is what this
+        directory has, and it is the weaker of the two.
+        consumer: code/census_remainder_f8e5/d5_timeout.py:165  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/face_geometry_audit_fcb2/a5_standing.py:167  (cwd is not a literal — a population, or a module constant)  r = subprocess.run(["sh", "run_all.sh"], cwd=L.FACE_GEOM
+        consumer: code/species_depth_audit_4700/kern4700.py:254  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=d, capture_
+        consumer: code/species_sites_821e/kern821e.py:171  (cwd is not a literal — a population, or a module constant)  p = subprocess.run(["sh", "run_all.sh"], cwd=os.path.dir
+        consumer: code/transcript_census_1abe/t2_census.py:128  (cwd is not a literal — a population, or a module constant)  proc = subprocess.Popen(["sh", "run_all.sh"], cwd=d,
+        consumer: code/transcript_census_1abe/t7_sightings.py:92  (cwd is not a literal — a population, or a module constant)  rc = subprocess.run(["sh", "run_all.sh"], cwd=target,
+
+§3  T2's OWN TWO-SIDED CONTROL
+--------------------------------------------------------------------------------------------
+    A harness that only ever answers LAUNDERED has not been shown to discriminate.
+    Two synthetic runners, identical but for the construction under test:
+
+      ok   `| tee` under set -e                                       good=0 bad=0 -> LAUNDERED (want LAUNDERED)
+      ok   `> file` under set -e                                      good=0 bad=1 -> DISCRIMINATES (want DISCRIMINATES)
+      ok   `| tee` with PIPESTATUS, as state_restructure_ea0e writes it good=0 bad=1 -> DISCRIMINATES (want DISCRIMINATES)
+
+
+§4  THE TREE IS AS IT WAS
+--------------------------------------------------------------------------------------------
+    tracked files differing outside this directory: 0
+
+§5  VERDICT
+--------------------------------------------------------------------------------------------
+    LAUNDERED      4 directories, 17 sites: eps_spec_sweep_372e, l2_conditionality_28ff, lstar_789d, lstar_landing_8d63
+    DISCRIMINATES  1 directories, 2 sites: state_restructure_ea0e
+    T1-UNMEASURED  3 directories fell back to T2 — named in §2 with the reason
+
+    THE INDEX SAID 19 CANDIDATES.  IT IS NOT 19 DEFECTS AND IT IS NOT 0.

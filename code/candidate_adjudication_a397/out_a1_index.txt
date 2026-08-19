@@ -1,0 +1,53 @@
+============================================================================================
+mg-a397 a1 — THE INDEX, RE-MEASURED WITH mg-9876's DETECTOR
+============================================================================================
+
+§1  THE DETECTOR IS c9876's, AND THE CLAIM IS CHECKED RATHER THAN MADE
+--------------------------------------------------------------------------------------------
+    detector : code/control_audit_9876/a4_sweep.py
+    sha256   : 5869291aed9507021aaec51bde713b8623fdeb856241ad7e861552657f301fdd
+    membership pattern : (?<!\w)(?:not\s+)?in\s+(?:out|output|stdout|text|txt|report|blob|body|content|contents|combined)\s*(?:[)\],:]|$|\band\b|\bor\b|\belse\b)
+    for-binding veto   : \bfor\b[^\n]*?\bin\s+(?:out|output|stdout|text|txt|report|blob|body|content|contents|combined)
+    tee pattern        : \|\s*tee\b
+
+    The two constructions c9876's own repair distinguishes are named in its
+    docstring: `X in out` is membership, `for line in out.splitlines()` is
+    ITERATION, and counting the second is how its first sweep reported 597.
+    Both are exercised here against the loaded patterns, so a regression in the
+    detector is visible in THIS transcript and not only in c9876's:
+      ok   membership=True  expected=True   if "8 9" in out:
+      ok   membership=False expected=False  for line in out.splitlines():
+      ok   membership=False expected=False  for name, text in contents.items():
+      ok   membership=True  expected=True   red += check("no crash", "Traceback" not in out)
+
+§2  TODAY'S POPULATION, AND THE DRIFT AGAINST THE TICKET'S FIGURES
+--------------------------------------------------------------------------------------------
+    population: 191 directories under code/ (the ticket was filed over 178)
+
+    quantity                                       today  ticket   drift
+    membership candidate sites                       218     202     +16
+    … in directories                                  69      66      +3
+    live `| tee` sites                                19      18      +1
+    … in directories                                   5       4      +1
+    dirs with code, no falsification evidence         25      24      +1
+
+    WHAT ARRIVED SINCE THE TICKET WAS FILED (directories, not sites):
+      tee directories today : eps_spec_sweep_372e, l2_conditionality_28ff, lstar_789d, lstar_landing_8d63, state_restructure_ea0e
+      the ticket names four : eps_spec_sweep_372e, l2_conditionality_28ff,
+                              lstar_789d, state_restructure_ea0e
+      not in the ticket     : lstar_landing_8d63
+
+    A DRIFT HERE IS NOT A FINDING AGAINST c9876.  It is the same fact mg-724a's
+    gate split RECORDED from GATED fields over: a count whose population is the
+    whole corpus is a dated reading and is expected to go stale.  What would be a
+    finding is the detector changing, and §1 is where that would show.
+
+§3  WHAT a2/a3/a4 WILL ADJUDICATE
+--------------------------------------------------------------------------------------------
+    a2  the 19 tee sites in 5 directories — run two ways
+    a3  the 25 directories with no falsification evidence
+    a4  the 218 membership candidates in 69 directories
+
+    ORDER IS THE TICKET'S: smallest population and highest prior first.
+
+a1 RESULT: index re-measured, detector identity checked by digest.

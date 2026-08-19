@@ -1,0 +1,44 @@
+============================================================================================
+mg-a397 a5 — HOW THIS INSTRUMENT CAN FAIL, DEMONSTRATED
+============================================================================================
+
+§1  THE ANATOMY CLASSIFIER, ON FIVE PLANTED FILES
+--------------------------------------------------------------------------------------------
+    ok   W1 a live membership test in an if                   -> SITE/branch  (want SITE/branch)
+    BROKEN  W2 the same test spread over two lines — the SECOND line -> SITE/assigned-used  (want SECOND-LINE-OF/None)
+    ok   W3 the construction QUOTED inside a docstring        -> NOT-A-MEMBERSHIP-TEST/unplaced  (want NOT-A-MEMBERSHIP-TEST/None)
+    ok   W4 the answer reaches a print and stops              -> SITE/print  (want SITE/print)
+    ok   W5 an assert                                         -> SITE/assert  (want SITE/assert)
+
+§2  THE RECORDER, ON A PLANTED DIRECTORY a4 RUNS FOR ITSELF
+--------------------------------------------------------------------------------------------
+    probe.py holds three membership tests whose answers are known: one TRUE on
+    the healthy world, one FALSE, and one inside a branch that cannot be entered.
+    measure_dir note: ok (baseline 0.0s exit 0, instrumented 0.0s)
+      ok   probe.py:4 answered (true,false)=(1, 0) (want (1, 0))
+      ok   probe.py:5 answered (true,false)=(0, 1) (want (0, 1))
+      ok   probe.py:7 NEVER-REACHED (want NEVER-REACHED)
+
+§3  THE WORLD WHERE INSTRUMENTING CHANGES THE RUN
+--------------------------------------------------------------------------------------------
+    A probe that notices it has been rewritten.  The instrumented run exits 3
+    where the baseline exits 0, and a4 must count NOTHING from that directory —
+    including the one answer the recorder collected before the probe exited.
+      ok   note: instrumentation changed the run (baseline exit 0, instrumented exit 3) — nothing counted
+              answers counted: 0 (want 0)
+
+§4  WHAT THIS DIRECTORY DOES NOT ESTABLISH
+--------------------------------------------------------------------------------------------
+    (1) a4 measures the check's answer on the HEALTHY world only.  FALSE-ON-GOOD
+        says the check is not already satisfied; it does NOT say the check would
+        fire.  Only a2 runs its subject both ways, and only over 19 sites.
+    (2) POLARITY is read off the needle by a regex over words like FAIL and
+        Traceback.  A negative-control expectation whose marker is an ordinary
+        English phrase is read as POSITIVE and lands in CANNOT-TELL.  That is a
+        conservative error and it is the reason CANNOT-TELL is large.
+    (3) THE REGISTRY'S SUBJECT SENTENCES ARE NOT TOUCHED, for the reason c9876
+        gives: a probe is written FROM the subject, so a subject that misdescribes
+        its arm yields a probe that agrees with it.  Nothing here claims to
+        settle that and nothing here should be read as having tried.
+
+a5 RESULT: AT LEAST ONE WORLD DID NOT ANSWER — see above

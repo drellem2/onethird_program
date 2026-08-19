@@ -1,0 +1,226 @@
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+============================================================================================
+mg-a397 a4 — THE MEMBERSHIP CANDIDATES, ADJUDICATED
+============================================================================================
+
+population: 218 candidate sites in 69 directories (the ticket was filed on 202 in 66)
+
+§1  ANATOMY — WHAT IS ACTUALLY AT EACH SITE
+--------------------------------------------------------------------------------------------
+    NOT-A-MEMBERSHIP-TEST      18
+    SECOND-LINE-OF              2
+    SITE                      198
+
+    NOT-A-MEMBERSHIP-TEST (18):
+      code/candidate_adjudication_a397/a1_index.py:54
+          ('red += check("no crash", "Traceback" not in out)', True)]:
+      code/candidate_adjudication_a397/a4_membership.py:16
+          `if "8 9" in out:` as a string, and this file's §4 quotes it again.  A count that
+      code/candidate_adjudication_a397/a5_selftest.py:48
+          'def f(out):\n    if "8 9" in out:\n        return 1\n    return 0\n',
+      code/candidate_adjudication_a397/a5_selftest.py:51
+          'def f(out):\n    ok = ("8 9" in out\n          and "X" not in out)\n    return ok
+      code/candidate_adjudication_a397/a5_selftest.py:54
+          'def f(out):\n    """the old line read: if "8 9" in out:"""\n    return 0\n',
+      code/candidate_adjudication_a397/a5_selftest.py:57
+          'def f(out):\n    print("marker present:", "8 9" in out)\n    return 0\n',
+      code/candidate_adjudication_a397/a5_selftest.py:85
+          hit_true = "8 9" in out
+      code/candidate_adjudication_a397/a5_selftest.py:86
+          hit_false = "IMPOSSIBLE-NEEDLE-a397" in out
+      code/candidate_adjudication_a397/a5_selftest.py:88
+          unreachable = "never" in out
+      code/candidate_adjudication_a397/a5_selftest.py:103
+          ok = "report" in out
+      code/control_audit_9876/a4_sweep.py:208
+          ("membership: must fire on `if \"8 9\" in out:` — instance 3 itself",
+      code/control_audit_9876/a4_sweep.py:209
+          bool(SMELL_MEMBERSHIP.search('if "8 9" in out:'))
+      code/control_audit_9876/a4_sweep.py:210
+          and not _FOR_BINDING.search('if "8 9" in out:')),
+      code/rendered_twin_pin_9bc2/negative_control.py:205
+          ok = (code == 1 and "rows 8 and 9" not in out and "8 9" in out
+      code/rendered_twin_pin_9bc2/negative_control.py:206
+          and "STRUCTURAL" not in out)
+      code/species_depth_audit_4700/q2_wiring.py:124
+          print("  0 of these 3 runners.  The difference is visible in stdout, which is")
+      code/species_gate_audit_d53d/g3_layer2.py:229
+          R.note("    e2 exit %s; Traceback in output: %s; prints %s: %s"
+      code/summary_guard_audit_407f/a1_arms.py:15
+          the summary header is PRESENT in stdout, (c) that stdout continues past
+
+    SECOND-LINE-OF (2):
+      code/hodge_leverage_audit_835f/audit_a318_repair.py:932 (expression starts at line 931)
+          in out)
+      code/summary_guard_cf83/c1_summary_guard.py:271 (expression starts at line 270)
+          in out)
+
+    of the 198 real, distinct membership expressions:
+      verdict-bearing       196  (assert/branch/return/lambda/argument/accumulated/used)
+      NOT verdict-bearing     2  (the answer reaches a print and stops)
+      by role: assert=1  assigned-unused=1  assigned-used=55  branch=56  call-arg=58  collected=9  lambda=9  print=1  return=8
+      needle typed as a literal : 110   derived from a value : 88
+
+§2  THE MEASUREMENT — WHAT DID EACH CHECK ANSWER ON THE HEALTHY TREE?
+--------------------------------------------------------------------------------------------
+    budget: 45s per directory, twice (baseline + instrumented).
+    directories holding a real site: 67
+
+      species_gate_audit_d53d              ok (baseline 6.9s exit 1, instrumented 6.9s)
+      summary_guard_cf83                   ok (baseline 17.5s exit 0, instrumented 15.6s)
+      control_audit_9876                   ok (baseline 11.5s exit 0, instrumented 11.8s)
+      species_depth_audit_4700             ok (baseline 0.0s exit 1, instrumented 0.1s)
+      species_sites_821e                   ok (baseline 0.3s exit 1, instrumented 0.3s)
+      species_bound_repair_5040            baseline: over 45s budget
+      census_audit_4d3b                    baseline: over 45s budget
+      census_remainder_f8e5                baseline: over 45s budget
+      species_rung_repair_4adb             baseline WROTE OUTSIDE ITS DIRECTORY: ['code/species_remainder_f8fa/out_w3_scope.txt', 'code/species_repair_6f61/out_r2_columns.txt', 'code/species_repair_a4ef/out_s1_extent.txt'] — not counted
+      verdict_path_repair_1d26             ok (baseline 2.4s exit 1, instrumented 2.5s)
+      branching_audit_19ec                 ok (baseline 20.5s exit 1, instrumented 20.6s)
+      face_geometry_instr_5f9a             baseline: over 45s budget
+      species_bound_audit_6ef4             baseline WROTE OUTSIDE ITS DIRECTORY: ['code/species_remainder_f8fa/out_w3_scope.txt', 'code/species_repair_6f61/out_r2_columns.txt', 'code/species_repair_a4ef/out_s1_extent.txt'] — not counted
+      hodge_leverage_audit_7e39            ok (baseline 7.1s exit 1, instrumented 6.9s)
+      state_layer_audit_218d               ok (baseline 0.2s exit 1, instrumented 0.2s)
+      branching_warrant_dffa               ok (baseline 4.6s exit 0, instrumented 4.6s)
+      runner_exit_audit_05eb               baseline WROTE OUTSIDE ITS DIRECTORY: ['code/branching_audit_2060/b0_repro.sh', 'code/branching_audit_2060/out_b0_repro.txt'] — not counted
+      truncate_sweep_ec63                  baseline: over 45s budget
+      branching_audit_58da                 baseline: over 45s budget
+      branching_audit_957f                 baseline: over 45s budget
+      census_repair_f3ff                   baseline: over 45s budget
+      counterexample_audit_0a11            baseline: over 45s budget
+      face_geometry_audit_0b07             baseline: over 45s budget
+      face_geometry_landing_da45           ok (baseline 8.4s exit 0, instrumented 8.4s)
+      face_geometry_repair_e35b            ok (baseline 4.0s exit 0, instrumented 4.0s)
+      grain_axis_audit_03d1                baseline: over 45s budget
+      hash_population_6e58                 ok (baseline 12.3s exit 1, instrumented 12.0s)
+      hodge_leverage_audit_97fb            baseline WROTE OUTSIDE ITS DIRECTORY: ['code/hodge_leverage_landing_e1d0/verify_landing.py'] — not counted
+      landscape_repair_audit_3b51          baseline: over 45s budget
+      rendered_twin_pin_9bc2               ok (baseline 1.0s exit 0, instrumented 1.0s)
+      repair_b2af                          baseline: over 45s budget
+      runner_exit_repair_70c7              baseline: over 45s budget
+      species_extent_audit_6cb9            ok (baseline 16.1s exit 1, instrumented 15.9s)
+      transcript_census_1abe               baseline: over 45s budget
+      audit_c067                           baseline: over 45s budget
+      branching_audit_321d                 baseline: over 45s budget
+      branching_bound_audit_aaf4           ok (baseline 3.8s exit 1, instrumented 3.7s)
+      branching_locate_db09                baseline: over 45s budget
+      branching_repair_7e58                baseline: over 45s budget
+      census_timeout_a71f                  baseline: over 45s budget
+      counterexample_audit_c6bc            baseline: over 45s budget
+      counterexample_probe_24a3            baseline: over 45s budget
+      dated_population_2ff6                baseline WROTE OUTSIDE ITS DIRECTORY: ['code/grain_arity_9160/out_s1_reproduce.txt', 'code/grain_arity_9160/out_s2_arity.txt', 'code/grain_arity_9160/out_s3_population.txt', 'code/grain_arity_9160/out_selftest_9160.txt'] — not counted
+      face_geometry_audit_fcb2             baseline WROTE OUTSIDE ITS DIRECTORY: ['code/face_geometry/probe_output_n6.txt'] — not counted
+      face_geometry_landing_7d5a           ok (baseline 0.3s exit 1, instrumented 0.4s)
+      hodge_leverage_audit_835f            ok (baseline 0.1s exit 1, instrumented 0.1s)
+      hodge_leverage_audit_8aae            baseline WROTE OUTSIDE ITS DIRECTORY: ['docs/state-history/attempt-mg-a3d4.md'] — not counted
+
+    reached 47 of 67 directories in 1540s.
+    THE TAIL THE BUDGET COST, NAMED (20 directories, 20 sites):
+      hodge_leverage_audit_9207           hodge_leverage_repair_8916          hodge_leverage_repair_ff3e        
+      pairbias_indep_audit_6bd1           repair_69d1                         repair_8d5e                       
+      runner_exit_repair_7522             sibling_sweep_7085                  species_audit_73df                
+      state_claims_repair_0120            state_control_audit_2216            state_control_audit_babf          
+      state_delegation_audit_16eb         state_delegation_repair_a74f        state_delegation_repair_bee1      
+      state_landing_control_2da3          state_ordering_audit_1df8           state_restructure_34bf            
+      state_restructure_ea0e              unified_gate_audit_446b           
+
+    ALWAYS-FALSE=11   ALWAYS-TRUE=38   BOTH-WAYS=8   NEVER-REACHED=44   NOT-REACHED-BY-a4=97
+
+§3  THE SPLIT THE TICKET ASKED FOR
+--------------------------------------------------------------------------------------------
+    CANNOT-LAUNDER-A-GREEN           22  structural, no run needed
+    DISCRIMINATES                    19  measured: answered the way a
+                                         working check answers on a healthy tree
+    LAUNDERED (candidate)             3  measured TRUE on the good
+                                         world while naming a bad-world marker
+    CANNOT-TELL-WITHOUT-RUNNING     174  NOT rounded to clean
+                                   ----
+                                    218
+
+    THE LAUNDERED CANDIDATES, NAMED, WITH THEIR EVALUATION COUNTS:
+      code/hodge_leverage_audit_7e39/audit_7e39.py:867  [assigned-used]  true 3x / false 0x  needle='REFUSED'
+          refused = "REFUSED" in out
+      code/summary_guard_cf83/c1_summary_guard.py:260  [call-arg]  true 2x / false 0x  needle='all 4 are now checked against the tree'
+          "all 4 are now checked against the tree" not in out)
+      code/summary_guard_cf83/c1_summary_guard.py:284  [call-arg]  true 2x / false 0x  needle='MISSES on row'
+          "MISSES on row" not in out and "*** MISS ***" not in blk)
+
+    OF THE 19 `DISCRIMINATES`, 8 ANSWERED BOTH WAYS INSIDE ONE
+    HEALTHY RUN — the directory's own harness ran its subject two ways and the
+    site answered differently.  That is a demonstration, not an inference, and it
+    needed no mutation of mine.  The remaining ones answered FALSE every time,
+    which is the weaker claim: the check is not ALREADY satisfied by the good
+    world (mg-9876's own guard, and what kills instance 3) — it is NOT a
+    demonstration that the check would fire.
+
+    AND THE LIMITATION THAT PUTS A FLOOR UNDER `CANNOT-TELL`: this arm sees every
+    evaluation the runner performs, including the ones a two-way harness makes
+    against ITS OWN known-bad world.  A site evaluated exactly once, TRUE, may be
+    a laundered green or may be a correct predicate applied to a planted world.
+    Those are counted CANNOT-TELL and the evaluation counts are printed above so
+    the distinction is visible rather than assumed.
+
+    A NOTE ON `NEVER-REACHED`, WHICH IS THE CELL A PATTERN SIEVE CANNOT HAVE:
+    44 sites are in a directory whose own runner completed and did not
+    execute them.  A check that does not run on the healthy tree has never been
+    asked anything.
+      code/branching_bound_audit_aaf4/selftest_aaf4.py:42  assert old in text, "mutation target absent: %r" % old[:60]
+      code/control_audit_9876/a2_discriminate.py:902  laundered = proc.returncode == 0 and "DRIFT, and the instrument demons
+      code/hodge_leverage_audit_7e39/audit_7e39.py:912  ok = rc == 1 and "REFUSED" in out and before == after
+      code/hodge_leverage_audit_7e39/audit_7e39.py:916  f"exit {rc}, {'REFUSED' if 'REFUSED' in out else 'BLESSED'}, "
+      code/hodge_leverage_audit_835f/audit_a318_repair.py:930  gate_ok = ("AND THE GATE HOLDS IN THIS TREE" in out)
+      code/species_depth_audit_4700/q2_wiring.py:158  named = "STANDING UN-STRUCK" in out
+      code/species_depth_audit_4700/q2_wiring.py:159  msg = "E2 CROSS-SECTION FAILED" in out
+      code/species_depth_audit_4700/q2_wiring.py:227  named = "E2 CROSS-SECTION FAILED" in out
+      code/species_depth_audit_4700/q2_wiring.py:288  claims = "a struck claim stands un-struck elsewhere" in out
+      code/species_depth_audit_4700/q2_wiring.py:289  names = "STANDING UN-STRUCK" in out
+      code/species_depth_audit_4700/q2_wiring.py:290  trace = "RuntimeError" in out
+      code/species_depth_audit_4700/q2_wiring.py:324  saw = "*** FAILED ***" in out
+      code/species_depth_audit_4700/q3_sites.py:221  named = "NO SUCH SECTION" in out
+      code/species_extent_audit_6cb9/a3_differ_and_placement.py:264  "present" if n in text else "*** ABSENT"))
+      code/species_gate_audit_d53d/g1_population.py:116  clean[rn] = (rc, E2_SAYS in out)
+      … and 29 more
+
+§4  THE POSITIVE CONTROL — THE KNOWN INSTANCE, OUT OF GIT BY BLOB
+--------------------------------------------------------------------------------------------
+    (a) THE KNOWN INSTANCE, by blob and not by path on a moving ref
+        9efb3df:code/rendered_twin_pin_9bc2/negative_control.py:168
+        and "8 9" in out and "STRUCTURAL" not in out)
+        the UNMUTATED report committed in the same tree contains `8 9` 2 times:
+          line 12: PASS  all three row sets agree: 1 2 3a 3b 4 5 6 7 8 9 10 11
+          line 30: STATE.md since the twin was last reconciled: 8 9
+        -> answer on the GOOD world: TRUE-ON-GOOD  (want TRUE-ON-GOOD)
+        the arm is NEGATIVE polarity — a positive control expecting a DRIFT
+        worklist — so TRUE-ON-GOOD is mg-2f44's finding, re-measured.  The two
+        occurrences are the whole defect: one is the worklist it meant, the
+        other is section 1's row-set listing, printed on every healthy run.
+    (b) THE SAME NEEDLE, AGAINST A REPORT WITHOUT THE UNCONDITIONAL LINE
+        occurrences: 0 -> FALSE-ON-GOOD  (want FALSE-ON-GOOD)
+    (c) THE REPAIRED FILE AT HEAD QUOTES THE DEFECT — a sieve counts the quote
+        line 205: c9876's regex says CANDIDATE, this arm says NOT-A-MEMBERSHIP-TEST
+    THE FIXTURE IS A HISTORICAL BLOB, so it survives its own subject being
+    repaired — the question mg-188d D3 says to score.  Read from the live tree
+    it would have died at cdec2e8, when c9876 rewrote the line.
+
+§5  THE TREE IS AS IT WAS — AND WHAT RUNNING 44 SUITES LEFT BEHIND
+--------------------------------------------------------------------------------------------
+    D7, KEPT: the first version of this section counted `git status --porcelain`
+    lines and called all of them `tracked files differing`.  Seven of them were
+    `??` — UNTRACKED files that the suites this arm ran created in OTHER people's
+    directories, which `git checkout --` cannot undo because git was never told
+    about them.  A restoration check that reports untracked litter as a tracked
+    modification is wrong in both directions: it fails a clean tree and it would
+    have passed a dirty one had the litter been the only difference.  The two are
+    now separated, and the litter is REMOVED rather than described.
+
+    tracked files still MODIFIED outside this directory: 0  (must be 0)
+    UNTRACKED files created by the suites this arm ran: 7
+      removed  code/branching_audit_a218/_mg70c7_arm.sh
+      removed  code/branching_bound_audit_aaf4/.selftest_tmp/
+      removed  code/corpus_fixedpoint_fd9c/out_s0_selftest.txt.new
+      removed  code/grain_arity_9160/out_s4_open.txt.new
+      removed  code/grain_axis_audit_03d1/out_a4_sweep.txt.new
+      removed  code/species_7d75/leak6ef4.py
+      removed  code/species_rung_repair_4adb/probe_strike_4adb.md
+    removed 7 of 7
