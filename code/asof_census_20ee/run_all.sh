@@ -120,6 +120,25 @@
 # be on a build path when its neighbour cannot.  Its one-subject mode is the
 # hand-run half:
 #     python3 code/asof_census_20ee/foreign.py --dir code/superseded_descent_688c
+#
+# mg-6b2d: overtaken.py IS run here, for exemplars.py's reason exactly and NOT
+# for pinnable.py's or pathlist.py's.  It executes no instrument code and needs
+# no dirty tree -- one `git log --name-only` walk and two `git show` per
+# candidate, all at a declared commit -- so out_overtaken.txt reproduces
+# BYTE-IDENTICALLY and costs about 3 s.  Its subject is the class the three
+# comments above belong to: THE TRANSCRIPTS NO SUITE RE-TAKES.  It asks whether
+# a committed transcript's PRODUCER has moved since the transcript was written,
+# which needs neither the instrument nor its corpus, and it is one-directional
+# in both places that matter -- OVERTAKEN is a proof about the producer and NOT
+# about the transcript, and NOT OVERTAKEN proves nothing at all (N34).
+# WHAT IT DOES NOT DO IS REFRESH ANYTHING.  Its section 5 records the three
+# hand re-takes this tranche took of THIS DIRECTORY'S OWN flagged transcripts,
+# each of which failed for a different reason, and the first of those is that
+# out_pinnable_3b51.txt CANNOT be re-taken at any revision: the pin tranche 4
+# landed on its subject worked, so the suite reproduces, and pinnable.py refuses
+# an empty diff.
+#     python3 code/asof_census_20ee/overtaken.py         # at AS_OF
+#     python3 code/asof_census_20ee/overtaken.py <rev>   # anywhere else
 set -e
 cd "$(dirname "$0")"
 python3 selftest_20ee.py > out_selftest_20ee.txt
@@ -131,6 +150,7 @@ python3 worklist.py      > out_worklist.txt
 python3 exemplars.py     > out_exemplars.txt
 python3 semantic.py      > out_semantic.txt
 python3 foreign.py       > out_foreign.txt
+python3 overtaken.py     > out_overtaken.txt
 echo "mg-20ee census: $(sed -n '/transcripts carry/p' out_census.txt | tr -s ' ')"
 echo "mg-6e4f consumers: $(sed -n '/^CONSUMERS:/p' out_consumers.txt)"
 echo "mg-ede8 live-index: $(sed -n '/^LIVE-INDEX:/p' out_liveindex.txt)"
@@ -139,3 +159,4 @@ echo "mg-e8b0 work-list: $(sed -n '/^CONDITION 0 (work-list):/p' out_worklist.tx
 echo "mg-0bf1 exemplars: $(sed -n '/^CONDITION 0 (exemplars):/p' out_exemplars.txt)"
 echo "mg-5058 semantic: $(sed -n '/^CONDITION 0 (semantic):/p' out_semantic.txt)"
 echo "mg-3ebf foreign: $(sed -n '/^CONDITION 0 (foreign):/p' out_foreign.txt)"
+echo "mg-6b2d overtaken: $(sed -n '/^OVERTAKEN:/p' out_overtaken.txt)"
