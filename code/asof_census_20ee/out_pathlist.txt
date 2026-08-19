@@ -1,0 +1,105 @@
+==============================================================================
+mg-bdc0 -- HOW MANY TRANSCRIPTS IS liveindex.py's METHOD FREE ON?
+==============================================================================
+
+  AS_OF = 3f6d8d6.  Every figure on this page is a function of that one
+  commit, read through `git ls-tree` and `git show`, so this
+  transcript has a fixed point.  NO INSTRUMENT IS EXECUTED.
+
+------------------------------------------------------------------------------
+1  THE RULE, AND WHY IT IS DECIDABLE FROM SOURCE
+------------------------------------------------------------------------------
+
+  liveindex.py is cheap because a PATH-LIST-VALUED figure can be
+  re-derived at an old commit by a short re-statement over
+  `git ls-tree` output.  A CONTENT-VALUED figure cannot: re-deriving
+  it means running the instrument at that commit, which is today's
+  rule against an old tree.  So the question `is this transcript
+  already checkable` is a question about WHAT ITS PRODUCER READS,
+  and that is in the source.
+
+      PATH-LIST-ONLY  reads a tracked path list and NOTHING ELSE.
+                      A PROOF: the transcript is a function of the
+                      path list, so the method applies for free.
+      MIXED           reads a path list AND content/history/blame.
+                      NOT a refutation -- consumers.py is MIXED and
+                      three of its figures are path-list-valued
+                      anyway.  It means A READER PER FIGURE IS
+                      STILL OWED, which is the cost mg-ede8 paid
+                      by hand for one transcript.
+
+------------------------------------------------------------------------------
+2  THE FUNNEL, WITH THE DROP MEASURED AT EVERY STAGE
+------------------------------------------------------------------------------
+
+   3203  tracked paths at this commit
+   1106  committed transcripts under code/ (out_*.txt)
+    836  paired to a producer by the out_X.txt <-> X.py|X.sh rule
+    270  NOT paired -- the convention does not reach them, and they
+         are COUNTED here rather than dropped (see section 4)
+
+  Of the 836 paired, by what the producer and its same-directory
+  imports read:
+
+      PATH-LIST-ONLY           2
+      MIXED                  272
+      NO PATH-LIST READ      562
+
+------------------------------------------------------------------------------
+3  THE PATH-LIST-ONLY CLASS, IN FULL
+------------------------------------------------------------------------------
+
+      code/verdict_audit_f911/out_a1_controls.txt
+          producer code/verdict_audit_f911/a1_controls.py  (closure: a1_controls.py)
+      code/verdict_staleness_30bd/out_prose_30bd.txt
+          producer code/verdict_staleness_30bd/prose_30bd.py  (closure: prose_30bd.py)
+
+  THE ANSWER TO THE TICKET'S QUESTION IS THIS LIST AND NOT ITS
+  LENGTH.  `Already checkable at zero execution cost` is 2
+  transcript(s) out of 836 paired -- so the population mg-ede8's
+  method is FREE on is not a population, and the cost it does not
+  remove is the reader.  A MIXED transcript is still checkable for
+  its path-list-valued figures; somebody has to say WHICH, per
+  figure, per transcript, which is what mg-ede8 did once by hand.
+
+  liveindex.py's own subject is in the MIXED class, and that is the
+  non-vacuity check: the one worked example of this method is a case
+  where the reader had to be written.  If consumers.py had come back
+  PATH-LIST-ONLY, this file would be measuring its own pattern.
+
+------------------------------------------------------------------------------
+4  WHAT THIS FILE CANNOT SEE, COUNTED RATHER THAN DECLARED
+------------------------------------------------------------------------------
+
+  270 transcript(s) have no producer under the naming convention.
+  They are not classified and are NOT counted as clean.  By
+  directory, largest first:
+
+      code/perslot_audit_a41b7                                    11
+      code/hodge_leverage_audit_86a3                               9
+      code/counterexample_audit_a7b4                               8
+      code/unified_gate_audit_446b                                 7
+      code/counterexample_audit_0a11                               7
+      code/state_suppression_repair_5f7c                           6
+      code/face_geometry_audit_1c80                                6
+      code/state_delegation_audit_5644                             5
+      code/mirror_staleness_cdd5/prerepair                         5
+      code/state_delegation_audit_16eb                             5
+      code/state_delegation_repair_bee1                            5
+      code/state_delegation_repair_0049                            5
+      ... and 98 more directory/ies
+
+  THE OTHER LIMIT IS THE PATTERN ITSELF AND ITS DIRECTION IS
+  DECLARED: every error this file can make -- a read spelled a way
+  the pattern misses, an import reaching outside its directory --
+  makes PATH-LIST-ONLY look BIGGER than it is.  The first draft
+  reported 32 and 4 of the first 4 adjudicated by hand were false
+  positives; following imports and adding `blame` took it to 2.
+
+==============================================================================
+PATH-LIST: 2 of 836 paired transcript(s) are PATH-LIST-ONLY and so
+           already checkable by liveindex.py's method at zero
+           execution cost; 272 are MIXED and owe a reader per figure;
+           562 read no path list at all.  270 transcript(s) are
+           unpaired and unclassified, at AS_OF 3f6d8d6.
+==============================================================================
