@@ -1,0 +1,21 @@
+records (non-chain, n>=3): 2534; NB failures 0
+  with >=1 non-nested pair: 523; price of nesting delta-deltaN > 0 on 169, max 0.09487
+  records with delta < 0.36: 160, of which with a non-nested pair: 35, price>0: 16
+  smallest deltaN on the records:
+    n=3 range=2 delta=0.33333 deltaN=0.33333 nnon=0 | 3 0 0 2
+    n=8 range=4 delta=0.40476 deltaN=0.33333 nnon=1 | 8 0 0 2 6 3 e 17 5f
+    n=10 range=3 delta=0.42623 deltaN=0.33607 nnon=2 | 10 0 0 2 6 3 17 f 5f 3f 17f
+    n=10 range=4 delta=0.41176 deltaN=0.33824 nnon=2 | 10 0 0 2 6 3 17 f 4f 37 17f
+    n=10 range=4 delta=0.41176 deltaN=0.33824 nnon=2 | 10 0 0 2 6 3 e 13 3f 5f 17f
+    n=12 range=4 delta=0.43333 deltaN=0.33846 nnon=3 | 12 0 0 2 6 3 17 f 37 5f 17f ff 5ff
+  largest price of nesting on the records:
+    n=12 range=4 delta=0.43333 deltaN=0.33846 nnon=3 | 12 0 0 2 6 3 17 f 37 5f 17f ff 5ff
+    n=10 range=3 delta=0.42623 deltaN=0.33607 nnon=2 | 10 0 0 2 6 3 17 f 5f 3f 17f
+    n=10 range=4 delta=0.41176 deltaN=0.33824 nnon=2 | 10 0 0 2 6 3 17 f 4f 37 17f
+    n=10 range=4 delta=0.41176 deltaN=0.33824 nnon=2 | 10 0 0 2 6 3 e 13 3f 5f 17f
+  PRIMAL-only nested balance (down-set comparability only) fails on 0 records
+  interval orders (no induced 2+2) among the records: 1023 / 2534; among records with delta < 0.36: 7 / 160
+    delta < 0.34: 1 records, 1 interval orders
+    delta < 0.35: 44 records, 1 interval orders
+    delta < 0.37: 262 records, 24 interval orders
+    delta < 0.4: 610 records, 65 interval orders
