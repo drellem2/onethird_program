@@ -1,0 +1,32 @@
+control: C_m ⊔ C_m at x=u_1, i=2 gives 1 + 1/(2m-1) exactly for m=2..5 — OK
+(a) C_p ⊔ C_q, range max(p,q): min strict deficit
+  D=2: min over p<=D of min deficit = 1/3 = 0.33333 (p=2)
+  D=3: min over p<=D of min deficit = 1/8 = 0.12500 (p=2)
+  D=4: min over p<=D of min deficit = 1/15 = 0.06667 (p=2)
+  D=5: min over p<=D of min deficit = 1/24 = 0.04167 (p=2)
+  D=6: min over p<=D of min deficit = 1/35 = 0.02857 (p=2)
+(b) Fibonacci Z_m (range 2)
+  m=4: 1 = 1.000000 at x=1, i=2
+  m=6: 2/3 = 0.666667 at x=1, i=2
+  m=8: 5/8 = 0.625000 at x=1, i=2
+  m=10: 13/21 = 0.619048 at x=1, i=2
+  m=12: 34/55 = 0.618182 at x=1, i=2
+  m=14: 89/144 = 0.618056 at x=1, i=2
+(c) seeded random banded posets, range <= D, per n: min strict deficit
+  D=2 n= 8 kept= 150: min deficit = 1/3 = 0.333333
+  D=2 n=10 kept= 150: min deficit = 1/3 = 0.333333
+  D=2 n=12 kept= 150: min deficit = 1/3 = 0.333333
+  D=2 n=14 kept= 150: min deficit = 1/3 = 0.333333
+  D=2 n=16 kept= 150: min deficit = 1/3 = 0.333333
+  D=3 n= 8 kept= 150: min deficit = 1/8 = 0.125000
+  D=3 n=10 kept= 150: min deficit = 1/8 = 0.125000
+  D=3 n=12 kept= 150: min deficit = 1/8 = 0.125000
+  D=3 n=14 kept= 150: min deficit = 1/8 = 0.125000
+  D=3 n=16 kept= 150: min deficit = 1/8 = 0.125000
+  D=4 n= 8 kept= 150: min deficit = 1/18 = 0.055556
+  D=4 n=10 kept= 150: min deficit = 1/15 = 0.066667
+  D=4 n=12 kept= 150: min deficit = 1/15 = 0.066667
+  D=4 n=14 kept= 150: min deficit = 1/15 = 0.066667
+  D=4 n=16 kept= 150: min deficit = 1/15 = 0.066667
+interior equalities seen: 3969, of which NOT flat: 0 (Ma-Shenfeld k=1 as quoted by mg-48ab predicts 0)
+negative control: planted floors kappa(2)>=1/2, kappa(3)>=1/7, kappa(4)>=1/14 violated in 15 of 15 (D,n) cells -> CAUGHT

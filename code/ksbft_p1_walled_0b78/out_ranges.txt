@@ -1,0 +1,43 @@
+C_m ⊔ C_m (mg-dcae stability refuter)
+  C_m ⊔ C_m                              n=  4 range=  2 width=  2 delta=0.500000
+  C_m ⊔ C_m                              n=  6 range=  3 width=  2 delta=0.500000
+  C_m ⊔ C_m                              n=  8 range=  4 width=  2 delta=0.500000
+  C_m ⊔ C_m                              n= 12 range=  6 width=  2 delta=0.500000
+  C_m ⊔ C_m                              n= 16 range=  8 width=  2
+C_m ⊔ C_1 (block-crosser, W_m)
+  C_m ⊔ C_1                              n=  3 range=  2 width=  2 delta=0.333333
+  C_m ⊔ C_1                              n=  4 range=  3 width=  2 delta=0.500000
+  C_m ⊔ C_1                              n=  5 range=  4 width=  2 delta=0.400000
+  C_m ⊔ C_1                              n=  7 range=  6 width=  2 delta=0.428571
+  C_m ⊔ C_1                              n=  9 range=  8 width=  2 delta=0.444444
+C_m ⊔ A_m (mg-c4f5)
+  C_m ⊔ A_m                              n=  4 range=  3 width=  3 delta=0.500000
+  C_m ⊔ A_m                              n=  6 range=  5 width=  4 delta=0.500000
+  C_m ⊔ A_m                              n=  8 range=  7 width=  5 delta=0.500000
+  C_m ⊔ A_m                              n= 12 range= 11 width=  7 delta=0.500000
+  C_m ⊔ A_m                              n= 16 range= 15 width=  9
+antichain A_m
+  antichain A_m                          n=  2 range=  1 width=  2 delta=0.500000
+  antichain A_m                          n=  3 range=  2 width=  3 delta=0.500000
+  antichain A_m                          n=  4 range=  3 width=  4 delta=0.500000
+  antichain A_m                          n=  6 range=  5 width=  6 delta=0.500000
+  antichain A_m                          n=  8 range=  7 width=  8 delta=0.500000
+Z_m = F_m Fibonacci
+  Z_m = F_m Fibonacci                    n=  2 range=  1 width=  2 delta=0.500000
+  Z_m = F_m Fibonacci                    n=  3 range=  2 width=  2 delta=0.333333
+  Z_m = F_m Fibonacci                    n=  4 range=  2 width=  2 delta=0.400000
+  Z_m = F_m Fibonacci                    n=  6 range=  2 width=  2 delta=0.384615
+  Z_m = F_m Fibonacci                    n=  8 range=  2 width=  2 delta=0.382353
+(2+1)^{⊕m} (872c boundary, s=0)
+  (2+1)^{⊕m}                             n=  6 range=  2 width=  2 delta=0.333333
+  (2+1)^{⊕m}                             n=  9 range=  2 width=  2 delta=0.333333
+  (2+1)^{⊕m}                             n= 12 range=  2 width=  2 delta=0.333333
+  (2+1)^{⊕m}                             n= 18 range=  2 width=  2
+  (2+1)^{⊕m}                             n= 24 range=  2 width=  2
+W*_2(4, m)
+  W*_2(4, m)                             n=  7 range=  3 width=  2 delta=0.500000
+  W*_2(4, m)                             n=  7 range=  3 width=  2 delta=0.500000
+  W*_2(4, m)                             n=  8 range=  3 width=  2 delta=0.500000
+  W*_2(4, m)                             n= 10 range=  3 width=  2 delta=0.500000
+  W*_2(4, m)                             n= 12 range=  3 width=  2 delta=0.500000
+controls: antichain range 8 width 9, Z_9 range 2 width 2, delta(2+1)=1/3 — OK
