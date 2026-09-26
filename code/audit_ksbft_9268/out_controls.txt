@@ -1,0 +1,46 @@
+== target [34/100, 66/100]: expect exactly the 2+1 forms [0,0,1],[0,0,2], and termination
+-- D=3 tree.c
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,2]
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,1]
+RESULT FOUND-VIOLATION D=3
+-- D=3 aud
+VIOLATION n=3 [0,0,1]
+VIOLATION n=3 [0,0,2]
+RESULT VIOLATION D=3
+-- D=4 tree.c
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,2]
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,1]
+RESULT FOUND-VIOLATION D=4
+-- D=4 aud
+VIOLATION n=3 [0,0,1]
+VIOLATION n=3 [0,0,2]
+RESULT VIOLATION D=4
+-- D=5 tree.c
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,2]
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,1]
+RESULT FOUND-VIOLATION D=5
+-- D=5 aud
+VIOLATION n=3 [0,0,1]
+VIOLATION n=3 [0,0,2]
+RESULT VIOLATION D=5
+== target [39/100, 61/100], D=3, cap 20: expect violations AND a non-empty frontier
+4201
+depth 20 nodes        17984 cert         4832 lp        588 cut       8310 front 12564
+RESULT VIOLATION D=3
+== MUTANT tree.c with certifying cut + 1: expect FOUND-VIOLATION
+RESULT FOUND-VIOLATION D=3
+RESULT FOUND-VIOLATION D=4
+RESULT FOUND-VIOLATION D=5
+== MUTANT aud badcut: search alone stays CLEAN (only the probes can see it)
+RESULT CLEAN D=3
+RESULT CLEAN D=4
+RESULT CLEAN D=5
+== MUTANT aud badcut through the end-to-end probe: expect failures
+D=3 seed=1: 1000 random indecomposable posets (n<= 30), outcomes {'CERT': 995, 'LP': 5}, min delta 5/14 = 0.3571, failures 259
+D=5 seed=1: 1000 random indecomposable posets (n<= 30), outcomes {'CERT': 989, 'LP': 11}, min delta 2/5 = 0.4000, failures 457
+D=7 seed=1: 1000 random indecomposable posets (n<= 30), outcomes {'CERT': 948, 'LP': 52}, min delta 329684/760821 = 0.4333, failures 438
+== the smallest badcut failure, dissected (D=3): P=[0,0,1,1,7,11]
+FOLLOW n=6 depth=5 CERT k=4 1,2
+FOLLOW n=6 depth=6 ENDED complete-check ok
+== MUTANT aud badcut through the sample probe: expect SAFE CUT FAILS
+14

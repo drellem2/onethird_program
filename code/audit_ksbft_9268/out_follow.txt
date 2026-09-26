@@ -1,0 +1,14 @@
+D=2 EXHAUSTIVE n<=10: 233 labelled indecomposable posets -> 19 canonical forms, outcomes {'ENDED': 7, 'CERT': 12}, min delta 1/3 = 0.3333, failures 0
+D=3 EXHAUSTIVE n<=9: 26318 labelled indecomposable posets -> 1450 canonical forms, outcomes {'ENDED': 77, 'CERT': 1333, 'LP': 40}, min delta 1/3 = 0.3333, failures 0
+D=4 EXHAUSTIVE n<=8: 108537 labelled indecomposable posets -> 6785 canonical forms, outcomes {'ENDED': 1168, 'CERT': 5414, 'LP': 203}, min delta 1/3 = 0.3333, failures 0
+D=5 EXHAUSTIVE n<=8: 722204 labelled indecomposable posets -> 33151 canonical forms, outcomes {'ENDED': 11897, 'CERT': 20350, 'LP': 904}, min delta 1/3 = 0.3333, failures 0
+D=6 EXHAUSTIVE n<=8: 2037137 labelled indecomposable posets -> 82878 canonical forms, outcomes {'ENDED': 44233, 'CERT': 36962, 'LP': 1683}, min delta 1/3 = 0.3333, failures 0
+D=7 EXHAUSTIVE n<=8: 2691024 labelled indecomposable posets -> 114927 canonical forms, outcomes {'ENDED': 68093, 'CERT': 44965, 'LP': 1869}, min delta 1/3 = 0.3333, failures 0
+D=3 seed=103: 3000 random indecomposable posets (n<= 45), outcomes {'CERT': 2704, 'ENDED': 284, 'LP': 12}, min delta 5/14 = 0.3571, failures 0
+D=4 seed=104: 3000 random indecomposable posets (n<= 45), outcomes {'CERT': 2981, 'LP': 9, 'ENDED': 10}, min delta 61/169 = 0.3609, failures 0
+D=5 seed=105: 3000 random indecomposable posets (n<= 45), outcomes {'CERT': 2929, 'LP': 68, 'ENDED': 3}, min delta 116/299 = 0.3880, failures 0
+D=6 seed=106: 3000 random indecomposable posets (n<= 45), outcomes {'CERT': 2954, 'LP': 46}, min delta 745/1797 = 0.4146, failures 0
+D=7 seed=107: 3000 random indecomposable posets (n<= 45), outcomes {'CERT': 2834, 'LP': 166}, min delta 98257/234094 = 0.4197, failures 0
+D=3 seed=203: 1000 random indecomposable posets (n<= 30), outcomes {'ENDED': 623, 'CERT': 375, 'LP': 2}, min delta 1/3 = 0.3333, failures 0
+D=5 seed=205: 1000 random indecomposable posets (n<= 30), outcomes {'ENDED': 597, 'CERT': 402, 'LP': 1}, min delta 1/3 = 0.3333, failures 0
+D=7 seed=207: 1000 random indecomposable posets (n<= 30), outcomes {'ENDED': 539, 'CERT': 454, 'LP': 7}, min delta 1/3 = 0.3333, failures 0
