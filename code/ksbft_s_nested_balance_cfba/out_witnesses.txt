@@ -1,0 +1,34 @@
+OK   T8: e = 42
+OK   T8: deltaN = 1/3 (best nested pair)
+OK   T8: delta = 17/42 (best pair overall)
+OK   T8: indecomposable (incomparability graph connected)
+OK   T8: prime = True
+OK   T8: range = 4
+OK   T8: CONTROL open-window nested balance FAILS (no nested pair strictly inside), while 1 non-nested pair(s) are strictly inside: [(3, 4, '17/42')]
+OK   T13: e = 588
+OK   T13: deltaN = 1/3 (best nested pair)
+OK   T13: delta = 17/42 (best pair overall)
+OK   T13: indecomposable (incomparability graph connected)
+OK   T13: prime = True
+OK   T13: range = 6
+OK   T13: CONTROL open-window nested balance FAILS (no nested pair strictly inside), while 2 non-nested pair(s) are strictly inside: [(3, 4, '17/42'), (8, 10, '25/42')]
+OK   T14: e = 1395
+OK   T14: deltaN = 1/3 (best nested pair)
+OK   T14: delta = 656/1395 (best pair overall)
+OK   T14: indecomposable (incomparability graph connected)
+OK   T14: prime = False
+OK   T14: range = 5
+OK   T14: CONTROL open-window nested balance FAILS (no nested pair strictly inside), while 4 non-nested pair(s) are strictly inside: [(2, 7, '739/1395'), (3, 6, '4/9'), (5, 8, '656/1395'), (9, 12, '5/9')]
+OK   T8 mechanism: P[0<1] = 1/3 (t0), P[0<2] = 2/3 = 2*t0 (Doubling Lemma 1.5)
+OK   T8 mechanism: down(0)=down(1)=empty, up(0) subset up(1) (Doubling hypotheses)
+OK   T8 mechanism: up(1)-up(0) = {2<3<5}, a chain (Zaguia good pair)
+OK   N12: e = 1564
+OK   N12: deltaN = 261/782 (best nested pair)
+OK   N12: delta = 1/2 (best pair overall)
+OK   N12: indecomposable (incomparability graph connected)
+OK   N12: prime = False
+OK   N12: range = 7
+OK   N12: deltaN - 1/3 = 1/2346
+OK   N12 mechanism: P[0<1] = 2 P[0<2] = 521/782 (Doubling, t0 = 521/1564 just below 1/3)
+OK   N12: no firing full-chain good pair (primal or dual)
+OK   T8: HAS a firing full-chain good pair (control for the detector)
