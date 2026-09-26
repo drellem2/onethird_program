@@ -1,0 +1,32 @@
+# D=8 projection (mg-c493).  EMPIRICAL extrapolation from D=4..7; not a bound.
+# 1. tree node totals (mg-e8b4 transcripts)
+   D=4  nodes           4758
+   D=5  nodes         235851   growth x49.6
+   D=6  nodes       18169307   growth x77.0
+   D=7  nodes     2181780336   growth x120.1
+   quadratic fit log10(nodes) = -1.1810 +0.8304 D +0.0961 D^2 ; residuals -0.000 +0.000 -0.000 +0.000
+   -> D=8 tree nodes ~ 4.07e+11  (growth x187 over D=7)
+   ratio-of-ratios rule (x1.56 per step, mg-e8b4's method) -> 4.08e+11
+# 2. share of nodes at depth <= 2D-1 (PROVEN floor for any window-keyed merge: the window is the whole prefix there)
+   D=4  0.302
+   D=5  0.305
+   D=6  0.335
+   D=7  0.381
+   -> D=8 share: quadratic 0.451, linear from D=6,7 0.427; used: min = 0.427
+# 3. distinct future keys / tree nodes (full trees; keystat)
+   D=3  nodes        152  M 0.7368  S 0.9342  X 1.0000   (max merge speed-up: M x1.357, S x1.070, X x1.000)
+   D=4  nodes       4758  M 0.7039  S 0.9136  X 0.9975   (max merge speed-up: M x1.421, S x1.095, X x1.003)
+   D=5  nodes     235851  M 0.7278  S 0.9114  X 0.9882   (max merge speed-up: M x1.374, S x1.097, X x1.012)
+   D=6  nodes   18169307  M 0.7637  S 0.9237  X 0.9781   (max merge speed-up: M x1.309, S x1.083, X x1.022)
+#    per-slice (distinct counted inside one slice only: over-states the fractions)
+   D=6 slice  nodes     669706  M 0.9939  S 0.9992  X 1.0000
+   D=6 slice  nodes     653400  M 0.9940  S 0.9998  X 1.0000
+   D=7 slice  nodes   18777449  M 0.9992  S 1.0000  X 1.0000
+   D=7 slice  nodes   19445198  M 0.9993  S 1.0000  X 1.0000
+# 4. D=8 cost lines (per-node cost: see doc §4; 9.0 us at D=7 measured by mg-e8b4, taken as a floor for D=8)
+   tree (mg-e8b4)                                             nodes 4.07e+11   core-hours    1019
+   exact-key memo DP (X, D=6 share)                           nodes 3.99e+11   core-hours     996
+   ideal structural merge (S, D=6 share)                      nodes 3.76e+11   core-hours     941
+   any window-keyed merge, M floor (D=6 share)                nodes 3.11e+11   core-hours     778
+   any window-keyed merge, PROVEN floor (depth<=2D-1 share)   nodes 1.74e+11   core-hours     435
+   target: 20 core-hours = 8.0e+09 nodes at 9.0 us

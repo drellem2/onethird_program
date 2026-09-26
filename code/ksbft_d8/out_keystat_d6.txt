@@ -1,0 +1,46 @@
+# D=6 MAXDEPTH=58 threshold=[1/3, 1-1/3] 
+# depth nodes certified cutpruned frontier
+depth  0  nodes            1  certified            0  lpcert          0  cutpruned          0  frontier 0
+depth  1  nodes            1  certified            0  lpcert          0  cutpruned          0  frontier 0
+depth  2  nodes            1  certified            0  lpcert          0  cutpruned          1  frontier 0
+depth  3  nodes            3  certified            0  lpcert          0  cutpruned          1  frontier 0
+depth  4  nodes           14  certified            0  lpcert          0  cutpruned          3  frontier 0
+depth  5  nodes           89  certified           12  lpcert          0  cutpruned         14  frontier 0
+depth  6  nodes          695  certified          135  lpcert          4  cutpruned         77  frontier 0
+depth  7  nodes         7000  certified         1780  lpcert         40  cutpruned        556  frontier 0
+depth  8  nodes        60436  certified        20645  lpcert       1389  cutpruned       5180  frontier 0
+depth  9  nodes       389353  certified       190556  lpcert      20094  cutpruned      38402  frontier 0
+depth 10  nodes      1628365  certified      1053389  lpcert     116856  cutpruned     178703  frontier 0
+depth 11  nodes      4008536  certified      3055541  lpcert     323714  cutpruned     458120  frontier 0
+depth 12  nodes      5386065  certified      4429673  lpcert     459447  cutpruned     629281  frontier 0
+depth 13  nodes      4128437  certified      3544134  lpcert     325392  cutpruned     496945  frontier 0
+depth 14  nodes      2078261  certified      1889332  lpcert     120756  cutpruned     258911  frontier 0
+depth 15  nodes       429668  certified       399586  lpcert      21910  cutpruned      68173  frontier 0
+depth 16  nodes        48264  certified        45042  lpcert       2340  cutpruned       8172  frontier 0
+depth 17  nodes         4052  certified         3978  lpcert         48  cutpruned        882  frontier 0
+depth 18  nodes           66  certified           66  lpcert          0  cutpruned         26  frontier 0
+# keystat: depth nodes newM newS newX (cumulative distinct M, S, X)
+keys  0            1            1            1            1             1            1            1
+keys  1            1            1            1            1             2            2            2
+keys  2            1            1            1            1             3            3            3
+keys  3            3            3            3            3             6            6            6
+keys  4           14           14           14           14            20           20           20
+keys  5           89           89           89           89           109          109          109
+keys  6          695          695          695          695           804          804          804
+keys  7         7000         7000         7000         7000          7804         7804         7804
+keys  8        60436        60436        60436        60436         68240        68240        68240
+keys  9       389353       389353       389353       389353        457593       457593       457593
+keys 10      1628365      1628365      1628365      1628365       2085958      2085958      2085958
+keys 11      4008536      4008536      4008536      4008536       6094494      6094494      6094494
+keys 12      5386065      4836843      5386065      5386065      10931337     11480559     11480559
+keys 13      4128437      1837272      4055376      4128437      12768609     15535935     15608996
+keys 14      2078261       934569      1018183      1751172      13703178     16554118     17360168
+keys 15       429668       156002       207927       364669      13859180     16762045     17724837
+keys 16        48264        16388        19099        43801      13875568     16781144     17768638
+keys 17         4052          711         1392         3338      13876279     16782536     17771976
+keys 18           66            0           13           46      13876279     16782549     17772022
+# distinct keys: M (floor) 13876279, structural S 16782549, exact X 17772022
+# LP attempts 3260414
+# total nodes 18169307, max layer 35 states, max tracked pairs 38
+# counterexamples-to-threshold found: 0
+RESULT TERMINATED-CLEAN D=6
