@@ -1,0 +1,6 @@
+S0                                                           eps* = 0.013333333333333364
+S0 + PT(containment steps, pointwise)                        eps* = 0.009009009009009042
+S0 + PT(every pair, pointwise)                               eps* = -0.10427968655817005
+S0 + SW(steps, W={s,t})                                      eps* = 0.013333333333333253
+S0 + SW(all pairs, |W|=1)                                    eps* = 0.013333333333332434
+S0 + SW(all pairs, |W|=2)                                    eps* = -0.011130302791478159

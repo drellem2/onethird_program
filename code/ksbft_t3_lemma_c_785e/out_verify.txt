@@ -1,0 +1,18 @@
+VALID  S0         window=None  e(P)= 19837  sum(lambda)/min G = 2875000/999999 = 2.875003 < 3  [4 charged pairs, 9 identity rows]  P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 7], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 8]]
+VALID  S0+SW2st   window=None  e(P)=  2765  sum(lambda)/min G = 497169/166666 = 2.983026 < 3  [6 charged pairs, 166 identity rows]  P=[[1, 1], [1, 2], [2, 3], [2, 5], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID  S0         window=None  e(P)= 40778  sum(lambda)/min G = 2791667/1000000 = 2.791667 < 3  [4 charged pairs, 7 identity rows]  P=[[1, 1], [1, 2], [1, 4], [2, 3], [2, 8], [3, 4], [4, 5], [4, 9], [5, 6], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID  S0         window=None  e(P)= 30911  sum(lambda)/min G = 2875000/999999 = 2.875003 < 3  [4 charged pairs, 9 identity rows]  P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 7], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID  S0         window=None  e(P)= 34512  sum(lambda)/min G = 23/8 = 2.875000 < 3  [4 charged pairs, 8 identity rows]  P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 8], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID  S0         window=None  e(P)= 41855  sum(lambda)/min G = 23/8 = 2.875000 < 3  [4 charged pairs, 6 identity rows]  P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 8], [3, 4], [4, 5], [5, 6], [5, 9], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID  S0         window=None  e(P)= 39111  sum(lambda)/min G = 2875000/999999 = 2.875003 < 3  [4 charged pairs, 9 identity rows]  P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 9], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID  S0         window=None  e(P)= 48620  sum(lambda)/min G = 11/4 = 2.750000 < 3  [2 charged pairs, 6 identity rows]  P=[[1, 1], [1, 2], [1, 6], [2, 3], [2, 8], [3, 4], [4, 5], [5, 6], [5, 9], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID  S0         window=None  e(P)= 40778  sum(lambda)/min G = 2791667/1000000 = 2.791667 < 3  [4 charged pairs, 7 identity rows]  P=[[1, 1], [1, 2], [1, 6], [2, 3], [2, 8], [3, 4], [4, 5], [5, 6], [6, 7], [6, 9], [7, 8], [8, 9], [9, 9]]
+VALID  S0         window=None  e(P)= 31024  sum(lambda)/min G = 23/8 = 2.875000 < 3  [4 charged pairs, 6 identity rows]  P=[[1, 1], [1, 2], [2, 3], [2, 6], [3, 4], [3, 8], [4, 5], [5, 6], [6, 7], [6, 9], [7, 8], [8, 9], [9, 9]]
+VALID  S0+SW2st   window=None  e(P)=  5237  sum(lambda)/min G = 2984768/999995 = 2.984783 < 3  [6 charged pairs, 202 identity rows]  P=[[1, 1], [1, 2], [2, 3], [2, 5], [3, 4], [4, 5], [5, 6], [5, 9], [6, 7], [7, 8], [8, 9], [9, 10], [10, 10]]
+VALID  S0+SW2st   window=None  e(P)=  6294  sum(lambda)/min G = 2786554/999993 = 2.786574 < 3  [6 charged pairs, 214 identity rows]  P=[[1, 1], [1, 2], [2, 3], [2, 6], [3, 4], [4, 5], [5, 6], [5, 9], [6, 7], [7, 8], [8, 9], [9, 10], [10, 10]]
+VALID  S0+SW2st   window=None  e(P)=  5237  sum(lambda)/min G = 2984768/999995 = 2.984783 < 3  [6 charged pairs, 204 identity rows]  P=[[1, 1], [1, 2], [2, 3], [2, 6], [3, 4], [4, 5], [5, 6], [6, 7], [6, 9], [7, 8], [8, 9], [9, 10], [10, 10]]
+VALID  S0+SW2all  window=[2, 5]  e(P)=  2765  sum(lambda)/min G = 2987053/999994 = 2.987071 < 3  [2 charged pairs, 271 identity rows]  P=[[1, 1], [1, 2], [2, 3], [2, 5], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+control c1 (lambda x 9/10): CAUGHT
+control c2 (identities dropped): CAUGHT
+control c3 (one-orientation row sum = 807): CAUGHT
+certificates: 14 valid, 0 invalid
