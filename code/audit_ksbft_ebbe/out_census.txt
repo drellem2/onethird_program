@@ -1,0 +1,55 @@
+census counts n=1..9:  1 2 5 16 63 318 2045 16999 183231 (= OEIS A000112)
+        posets n=1: 1
+    dbl_tested n=2: 0
+      nonchain n=2: 1
+        posets n=2: 2
+    dbl_tested n=3: 1
+      nonchain n=3: 4
+open_1323_fail n=3: 1
+        posets n=3: 5
+    dbl_tested n=4: 8
+      nonchain n=4: 15
+open_1323_fail n=4: 2
+        posets n=4: 16
+PNB_nontrivial(dP<dN) n=5: 1
+    dbl_tested n=5: 53
+      nonchain n=5: 62
+open_1323_fail n=5: 3
+        posets n=5: 63
+PNB_nontrivial(dP<dN) n=6: 10
+    dbl_tested n=6: 347
+ has_nonnested n=6: 3
+      nonchain n=6: 317
+open_1323_fail n=6: 5
+        posets n=6: 318
+PNB_nontrivial(dP<dN) n=7: 118
+    dbl_tested n=7: 2570
+ has_nonnested n=7: 68
+      nonchain n=7: 2044
+open_1323_fail n=7: 8
+        posets n=7: 2045
+PNB_nontrivial(dP<dN) n=8: 1478
+    dbl_tested n=8: 22635
+ has_nonnested n=8: 1444
+      nonchain n=8: 16998
+open_1323_fail n=8: 12
+        posets n=8: 16999
+PNB_nontrivial(dP<dN) n=9: 21926
+    dbl_tested n=9: 245295
+ has_nonnested n=9: 31131
+      nonchain n=9: 183230
+open_1323_fail n=9: 18
+        posets n=9: 183231
+OPEN-window NB fails (no nested pair strictly inside (1/3,2/3)), non-chain:
+  n=8 8 0 0 2 6 3 e 17 5f  e=42 d=17 dN=14 indecomp prime=True range=4 Bopen=1
+  count n=3 indecomposable=False prime=False: 1
+  count n=4 indecomposable=False prime=False: 2
+  count n=5 indecomposable=False prime=False: 3
+  count n=6 indecomposable=False prime=False: 5
+  count n=7 indecomposable=False prime=False: 8
+  count n=8 indecomposable=False prime=False: 12
+  count n=8 indecomposable=True prime=True: 1
+  count n=9 indecomposable=False prime=False: 20
+deltaN = 1/3 exactly: 52 posets; indecomposable ones: 1
+CONTROL (planted: top-only trap rule, tripling) n=7 posets flagged: trap 1031  dbl 1356
+census n<=9 failures (NB/PNB/DNB/Lemma1.1/Doubling): 0

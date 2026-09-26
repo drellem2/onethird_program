@@ -1,0 +1,78 @@
+OK   T8: e=42 delta=17/42 deltaN=1/3 (doc: 42, 17/42, 1/3)
+OK   T8: indecomposable, prime=True, range=4
+OK   T8: open-window nested balance FAILS, open-window balance holds
+OK   T8: closed NB, PNB and dual-PNB hold
+OK   T8: contains an induced 2+2 (not an interval order)
+OK   T8: P[0<1]=1/3, P[0<2]=2/3, (5,6)=1/3, (5,7)=2/3
+OK   T8: the interior pair is (3,4) at 17/42
+OK   T13: e=588 delta=17/42 deltaN=1/3 (doc: 588, 17/42, 1/3)
+OK   T13: indecomposable, prime=True, range=6
+OK   T13: open-window nested balance FAILS, open-window balance holds
+OK   T13: closed NB, PNB and dual-PNB hold
+OK   T13: contains an induced 2+2 (not an interval order)
+OK   T14: e=1395 delta=656/1395 deltaN=1/3 (doc: 1395, 656/1395, 1/3)
+OK   T14: indecomposable, prime=False, range=5
+OK   T14: open-window nested balance FAILS, open-window balance holds
+OK   T14: closed NB, PNB and dual-PNB hold
+OK   T14: contains an induced 2+2 (not an interval order)
+OK   N12: e=1564 delta=1/2 deltaN=261/782 (doc: 1564, 1/2, 261/782)
+OK   N12: indecomposable, prime=False, range=7
+OK   N12: closed NB, PNB and dual-PNB hold
+OK   N12: contains an induced 2+2 (not an interval order)
+OK   N12: P[0<2]=521/1564, P[0<1]=2*P[0<2]=521/782
+OK   CONTROL: 2+2 detector fires on 2+2
+--- named families (constructed by the author's fam.py; checked here) ---
+OK   P9                     n= 9 range= 5 interval_order=True nonnested=0 delta=0.40102 deltaN=0.40102 NB=1
+OK   rec11                  n=11 range= 6 interval_order=True nonnested=0 delta=0.35733 deltaN=0.35733 NB=1
+OK   W8                     n= 8 range= 6 interval_order=False nonnested=0 delta=0.45408 deltaN=0.45408 NB=1
+OK   Q_m0                   n=18 range= 5 interval_order=True nonnested=0 delta=0.39359 deltaN=0.39359 NB=1
+OK   Q_m1                   n=20 range= 5 interval_order=True nonnested=0 delta=0.39403 deltaN=0.39403 NB=1
+OK   Q_m2                   n=22 range= 5 interval_order=True nonnested=0 delta=0.39409 deltaN=0.39409 NB=1
+     Q_m3                   n=24 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m4                   n=26 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m5                   n=28 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m6                   n=30 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m7                   n=32 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m8                   n=34 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m9                   n=36 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m10                  n=38 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m11                  n=40 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m12                  n=42 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m13                  n=44 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     Q_m14                  n=46 range= 5 interval_order=True nonnested=0 (laws not recomputed: n>22)
+OK   B7tail_r1              n=19 range= 5 interval_order=True nonnested=0 delta=0.49742 deltaN=0.49742 NB=1
+OK   B7tail_r2              n=19 range= 5 interval_order=False nonnested=0 delta=0.42923 deltaN=0.42923 NB=1
+OK   B7tail_r3              n=19 range= 6 interval_order=False nonnested=0 delta=0.49252 deltaN=0.49252 NB=1
+OK   F_5                    n= 5 range= 2 interval_order=True nonnested=0 delta=0.37500 deltaN=0.37500 NB=1
+OK   F_6                    n= 6 range= 2 interval_order=True nonnested=0 delta=0.38462 deltaN=0.38462 NB=1
+OK   F_7                    n= 7 range= 2 interval_order=True nonnested=0 delta=0.38095 deltaN=0.38095 NB=1
+OK   F_8                    n= 8 range= 2 interval_order=True nonnested=0 delta=0.38235 deltaN=0.38235 NB=1
+OK   F_9                    n= 9 range= 2 interval_order=True nonnested=0 delta=0.38182 deltaN=0.38182 NB=1
+OK   F_10                   n=10 range= 2 interval_order=True nonnested=0 delta=0.38202 deltaN=0.38202 NB=1
+OK   F_11                   n=11 range= 2 interval_order=True nonnested=0 delta=0.38194 deltaN=0.38194 NB=1
+OK   F_12                   n=12 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_13                   n=13 range= 2 interval_order=True nonnested=0 delta=0.38196 deltaN=0.38196 NB=1
+OK   F_14                   n=14 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_15                   n=15 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_16                   n=16 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_17                   n=17 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_18                   n=18 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_19                   n=19 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_20                   n=20 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_21                   n=21 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+OK   F_22                   n=22 range= 2 interval_order=True nonnested=0 delta=0.38197 deltaN=0.38197 NB=1
+     F_23                   n=23 range= 2 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     F_24                   n=24 range= 2 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     F_25                   n=25 range= 2 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     F_26                   n=26 range= 2 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     F_27                   n=27 range= 2 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     F_28                   n=28 range= 2 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     F_29                   n=29 range= 2 interval_order=True nonnested=0 (laws not recomputed: n>22)
+     F_30                   n=30 range= 2 interval_order=True nonnested=0 (laws not recomputed: n>22)
+OK   attach_both_F20_8      n=22 range= 8 interval_order=True nonnested=0 delta=0.45605 deltaN=0.45605 NB=1
+OK   attach_both_F16_6      n=18 range= 6 interval_order=True nonnested=0 delta=0.45438 deltaN=0.45438 NB=1
+     attach_both_F24_8      n=26 range= 8 interval_order=True nonnested=0 (laws not recomputed: n>22)
+OK   attach_low_F12_3       n=13 range= 3 interval_order=True nonnested=0 delta=0.50000 deltaN=0.50000 NB=1
+OK   attach_low_F16_5       n=17 range= 5 interval_order=True nonnested=0 delta=0.46591 deltaN=0.46591 NB=1
+OK   attach_low_F20_8       n=21 range= 8 interval_order=True nonnested=0 delta=0.45608 deltaN=0.45608 NB=1
+OK   hub_2+2_8              n=12 range=10 interval_order=False nonnested=0 delta=0.49359 deltaN=0.49359 NB=1
