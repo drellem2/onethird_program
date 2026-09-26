@@ -1,0 +1,91 @@
+§1 EXACT PADDINGS (Lemma 1.1): W-internal pair laws under +, ⊕, substitution
+  ok    F_7  in W + C_8        n=15 range=10 G-conn=True comp-conn=False : every W-pair law EXACTLY preserved
+  ok    F_7  in W ⊕ A_9        n=16 range=8 G-conn=False comp-conn=True : every W-pair law EXACTLY preserved
+  ok    F_7  in F_9[x_4 <- W]  n=15 range=8 G-conn=True comp-conn=True : every W-pair law EXACTLY preserved
+  ok    P_9  in W + C_8        n=17 range=13 G-conn=True comp-conn=False : every W-pair law EXACTLY preserved
+  ok    P_9  in W ⊕ A_9        n=18 range=8 G-conn=False comp-conn=True : every W-pair law EXACTLY preserved
+  ok    P_9  in F_9[x_4 <- W]  n=17 range=10 G-conn=True comp-conn=True : every W-pair law EXACTLY preserved
+  ok    2+2  in W + C_8        n=12 range=10 G-conn=True comp-conn=False : every W-pair law EXACTLY preserved
+  ok    2+2  in W ⊕ A_9        n=13 range=8 G-conn=False comp-conn=True : every W-pair law EXACTLY preserved
+  ok    2+2  in F_9[x_4 <- W]  n=12 range=5 G-conn=True comp-conn=True : every W-pair law EXACTLY preserved
+  ok    F_7 + C_8 has a proper NON-CHAIN module containing F_7 (so it is not a minimal-cex shape)
+  ok    F_7 ⊕ A_9 has a proper NON-CHAIN module containing F_7 (so it is not a minimal-cex shape)
+  ok    NEGATIVE CONTROL: attach_low(F_7,3) (not a module embedding) changes 6 of 6 pair laws -> exactness claim CAUGHT when the hypothesis fails
+
+§2 FIBONACCI INSULATION (Thm 2.1): F_N with z || x_1..x_R, z < x_{R+1}..x_N
+   centre pair B = {x_i,x_{i+1}}, i = N//2 (1-indexed); P(B) = F_i F_{N-i}/F_{N+1} in F_N
+      N   R          F_N         padded    closed form    |diff|  shape
+     14   5  0.277049180    0.271919771          EQUAL  5.13e-03  n=15 range=5 G-conn=True comp-conn=True prime=True  |diff|<=4u^a/((1-u^a)^2 R)=8.0e-01 ok
+     20   8  0.276356660    0.273012881          EQUAL  3.34e-03  n=21 range=8 G-conn=True comp-conn=True prime=True  |diff|<=4u^a/((1-u^a)^2 R)=5.0e-01 ok
+     30   8  0.276393499    0.276420687          EQUAL  2.72e-05  n=31 range=8 G-conn=True comp-conn=True prime=True  |diff|<=4u^a/((1-u^a)^2 R)=1.6e-03 ok
+     41   8  0.276393202    0.276392980          EQUAL  2.21e-07  n=42 range=8 G-conn=True comp-conn=True prime=None  |diff|<=4u^a/((1-u^a)^2 R)=1.3e-05 ok
+     41  12  0.276393202    0.276386079          EQUAL  7.12e-06  n=42 range=12 G-conn=True comp-conn=True prime=None  |diff|<=4u^a/((1-u^a)^2 R)=4.0e-04 ok
+     61   8  0.276393202    0.276393202          EQUAL  1.46e-11  n=62 range=8 G-conn=True comp-conn=True prime=None  |diff|<=4u^a/((1-u^a)^2 R)=8.4e-10 ok
+     81   8  0.276393202    0.276393202          EQUAL  9.66e-16  n=82 range=8 G-conn=True comp-conn=True prime=None  |diff|<=4u^a/((1-u^a)^2 R)=5.5e-14 ok
+     81  20  0.276393202    0.276393202          EQUAL  4.22e-11  n=82 range=20 G-conn=True comp-conn=True prime=None  |diff|<=4u^a/((1-u^a)^2 R)=2.3e-09 ok
+   C_BFT = (5-sqrt5)/10 = 0.276393202; limit of F_i F_{N-i}/F_{N+1} is 1/(sqrt5*phi) = 0.276393202
+  ok    attach_low(F_N,R) is prime for every N in {8,12,20,30}, 5 <= R < min(N-2,12) (EMPIRICAL)
+  ok    CONTROL: attach_low(F_12,3) is NOT prime (module [1, 12]) -> primality test CAUGHT a module
+
+§3 W*, W*_t: the Step-6 witnesses are ordinal-DECOMPOSABLE
+  ok    W*_2(4,4): n=8 range=3 G-conn=False comp-conn=True  p_xy=1/4  -> not in the minimal-cex class
+  ok    W*_3(4,8): n=12 range=4 G-conn=False comp-conn=True  p_xy=1/5  -> not in the minimal-cex class
+  ok    W*_7(9,9): n=18 range=8 G-conn=False comp-conn=True  p_xy=1/9  -> not in the minimal-cex class
+  ok    W*_8(9,10): n=19 range=9 G-conn=False comp-conn=True  p_xy=1/10  -> not in the minimal-cex class
+  ok    core {x,y,b_1,b_2} of W*(4,4,2) is the star C_1 + C_3 with p_xy = 1/4 (as in W*)
+
+   (T_E) on INSULATED W*: base F_M replaces C_{a-2}; top F_s replaces the chain B
+   f_0..f_{M-1} = F_M; x,y above f_0..f_{M-2}, || f_{M-1}; b_1..b_s = F_s above all f and y;
+   x < b_j iff j >= t+2 (so x || b_1..b_{t+1}). Cut A = F_M + {x,y}.
+   M= 8 t=2 s= 8 n=18 range=5 G-conn=True comp-conn=True prime=True Delta_1=0.0618; P[A] balanced pairs [(0, 1, '47/76'), (7, 8, '89/152'), (7, 9, '89/152'), (8, 9, '1/2')]; balanced in P too: [(0, 1, '1581/2557'), (7, 9, '3077/5114')]
+  ok    insulated W* (M=8,t=2): p_xy = 646/2557 is unbalanced as in W*, but a base pair far from the cut survives -> (T_E) HOLDS on this indecomposable padding
+   M=12 t=3 s=12 n=26 range=6 G-conn=True comp-conn=True prime=True Delta_1=0.0479; P[A] balanced pairs [(0, 1, '322/521'), (11, 12, '305/521'), (11, 13, '305/521'), (12, 13, '1/2')]; balanced in P too: [(0, 1, '352529/570399'), (11, 13, '114869/190133')]
+  ok    insulated W* (M=12,t=3): p_xy = 121393/570399 is unbalanced as in W*, but a base pair far from the cut survives -> (T_E) HOLDS on this indecomposable padding
+   M=16 t=6 s=16 n=34 range=9 G-conn=True comp-conn=True prime=True Delta_1=0.0443; P[A] balanced pairs [(0, 1, '2207/3571'), (15, 16, '4181/7142'), (15, 17, '4181/7142'), (16, 17, '1/2')]; balanced in P too: [(0, 1, '24196147/39150182'), (15, 17, '11912023/19575091')]
+  ok    insulated W* (M=16,t=6): p_xy = 5702887/39150182 is unbalanced as in W*, but a base pair far from the cut survives -> (T_E) HOLDS on this indecomposable padding
+
+§4 PROBE B (diagonal capacity, mg-92e6): max over incomparable pairs and slots of
+   1/2 (T[x,k]+T[x,k+1]+T[y,k]+T[y,k+1]-1)^+ ; certifies delta >= 1/3 iff >= 1/3
+   F_12                 n=12 range=2 G-conn=True comp-conn=True prime=True delta=0.3820  max cert=0.3820 at (0, 1)  -> CERTIFIES
+   attach_low(F_12,8)   n=13 range=8 G-conn=True comp-conn=True prime=True delta=0.4558  max cert=0.3835 at (10, 11)  -> CERTIFIES
+   attach_low(F_16,8)   n=17 range=8 G-conn=True comp-conn=True prime=True delta=0.4561  max cert=0.3820 at (14, 15)  -> CERTIFIES
+   attach_low(F_16,10)  n=17 range=10 G-conn=True comp-conn=True prime=True delta=0.4670  max cert=0.3821 at (14, 15)  -> CERTIFIES
+   attach_both(F_16,7)  n=18 range=7 G-conn=True comp-conn=True prime=True delta=0.4851  max cert=0.2830 at (0, 1)  -> does NOT certify
+   attach_both(F_20,8)  n=22 range=8 G-conn=True comp-conn=True prime=True delta=0.4561  max cert=0.2944 at (0, 1)  -> does NOT certify
+  ok    attach_both(F_20,8): prime, range 8, delta >= 1/3, and NO probe-B certificate (max 13627/46282 < 1/3) -> probe B incomplete on a prime window poset
+   attach_both(F_24,8)  n=26 range=8 G-conn=True comp-conn=True prime=None delta=0.4561  max cert=0.2944 at (0, 1)  -> does NOT certify
+  ok    probe-B bound <= min(p,1-p) on every pair of F_12 (soundness, consistency check)
+  ok    probe-B bound <= min(p,1-p) on every pair of attach_low(F_12,8) (soundness, consistency check)
+
+§5 PROBE D blindness (mg-e2de n=6 pair, same incomparability graph, delta 4/9 vs 1/2)
+   bare: delta(A)=4/9 delta(B)=1/2  e=18,18
+   + C_3: n=9 range=8 G-conn=True comp-conn=False | delta(A+C)=1/2=0.5000  delta(B+C)=1/2=0.5000
+   + C_4: n=10 range=9 G-conn=True comp-conn=False | delta(A+C)=25/54=0.4630  delta(B+C)=1/2=0.5000
+   + C_8: n=14 range=13 G-conn=True comp-conn=False | delta(A+C)=1918/3861=0.4968  delta(B+C)=1/2=0.5000
+   A ⊕ attach_low(F_20,8): n=27 range=8 G-conn=False comp-conn=True delta=0.4561
+   B ⊕ attach_low(F_20,8): n=27 range=8 G-conn=False comp-conn=True delta=0.5000
+  ok    delta(attach_low(F_20,8)) = 0.4561 lies in (4/9, 1/2): the two ⊕-paddings keep different delta
+
+§6 HUB PADDING (Lemma 1.3): W + C_k with c_k above a down-set U of W
+   2+2: P[b2 before a1] = 1/6, separating number (comparable to exactly one) = 2
+   single hub hub(2+2,{a1,a2,b2},k) leaves the NON-chain module {a2,b2,c_1..c_{k-1}}:
+  ok    CONTROL: module test finds it: [[2, 3, 4, 5, 6, 7, 8, 9, 10]]
+   double hub: add a second chain d_1<..<d_k with d_k > a2 only (splits that module)
+   k= 8 n=20 range=18 G-conn=True comp-conn=True only chain modules=True ; P[b2 before a1] = 5336/27441 = 0.19445 ; separating number 2 ; delta(P) = 0.4937
+  ok    double hub(2+2,k=8): minimal-cex shape (G-conn, comp-conn, only chain modules), range 18, pair keeps separating number 2 and balance 0.1945 < 1/3
+   k=16 n=36 range=34 G-conn=True comp-conn=True only chain modules=True ; P[b2 before a1] = 9236/50429 = 0.18315 ; separating number 2 ; delta(P) = 0.4982
+  ok    double hub(2+2,k=16): minimal-cex shape (G-conn, comp-conn, only chain modules), range 34, pair keeps separating number 2 and balance 0.1831 < 1/3
+   k=30 n=64 range=62 G-conn=True comp-conn=True only chain modules=True ; P[b2 before a1] = 1233235/6992259 = 0.17637 ; separating number 2 ; delta(P) = 0.4995
+  ok    double hub(2+2,k=30): minimal-cex shape (G-conn, comp-conn, only chain modules), range 62, pair keeps separating number 2 and balance 0.1764 < 1/3
+  ok    CONTROL: hub(2+2,8) law is NOT exactly the W law (5/26 != 1/6) -> padding is approximate, as stated
+
+§7 FINITE WITNESSES OF A28 (bitmasks as in ksbft_p1_walled_0b78/ranges2.py): already in the window?
+   (L*) n=9 #1 (mg-5cba)      n=9 range=8 G-conn=True comp-conn=False  non-chain proper modules: 4
+   (L*) n=9 #2 (mg-5cba)      n=9 range=8 G-conn=True comp-conn=False  non-chain proper modules: 9
+   (L*) n=10 (mg-789d)        n=10 range=6 G-conn=True comp-conn=True  non-chain proper modules: 0
+   (L*) n=11 (mg-789d)        n=11 range=9 G-conn=True comp-conn=True  non-chain proper modules: 4
+   (F)&(M#) n=10 a            n=10 range=5 G-conn=True comp-conn=True  non-chain proper modules: 4
+   (F)&(M#) n=12 (mg-5e82)    n=12 range=7 G-conn=True comp-conn=True  non-chain proper modules: 2
+  ok    exactly the three (L*) refuters n=9 #1, n=9 #2, n=11 have range >= 8 and connected G: ['(L*) n=9 #1 (mg-5cba)', '(L*) n=9 #2 (mg-5cba)', '(L*) n=11 (mg-789d)']
+
+SUMMARY: 0 failed checks
