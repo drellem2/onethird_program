@@ -1,0 +1,109 @@
+## all classes n=3 (every range)
+LOW pi=2 margin=0/1 = 0.000000 P=3 0 0 2
+AGG LT 2 2 1 0 9 3 0 0 2
+## all classes n=4 (every range)
+AGG LT 2 2 0 1 15 4 0 0 2 3
+AGG LT 3 5 0 12 72 4 0 0 0 0
+## all classes n=5 (every range)
+AGG LT 2 1 0 1 24 5 0 0 2 3 7
+AGG LT 3 14 0 1 33 5 0 0 2 2 b
+AGG LT 4 16 0 5 75 5 0 0 0 4 6
+## all classes n=6 (every range)
+AGG LT 2 1 0 2 39 6 0 0 2 3 7 f
+AGG LT 3 31 0 1 42 6 0 0 2 6 3 17
+AGG LT 4 89 0 3 45 6 0 0 1 2 a 1a
+AGG LT 5 63 0 12 126 6 0 0 0 4 6 16
+## all classes n=7 (every range)
+AGG LT 2 1 0 3 63 7 0 0 2 3 7 f 1f
+AGG LT 3 58 0 2 75 7 0 0 2 6 3 13 1f
+AGG LT 4 358 0 3 117 7 0 0 2 2 b b 2f
+AGG LT 5 616 0 5 84 7 0 0 2 2 3 1b 3b
+AGG LT 6 318 0 9 189 7 0 0 0 4 e e 2e
+## all classes n=8 (every range)
+AGG LT 2 1 0 5 102 8 0 0 2 3 7 f 1f 3f
+AGG LT 3 130 0 3 135 8 0 0 2 6 3 13 f 3f
+AGG LT 4 1212 0 5 138 8 0 0 2 6 3 e 13 5f
+AGG LT 5 4035 0 7 150 8 0 0 1 2 a 1b 1b 5f
+AGG LT 6 5101 0 12 180 8 0 0 0 4 e 1e 1e 5f
+AGG LT 7 2045 0 114 1224 8 0 0 0 0 8 e 1c 5c
+## D=3 n=3
+AGG LT 2 2 0 0 9 3 0 0 2
+## D=3 n=4
+AGG LT 2 2 0 1 15 4 0 0 2 3
+AGG LT 3 5 0 12 72 4 0 0 0 0
+## D=3 n=5
+AGG LT 2 1 0 1 24 5 0 0 2 3 7
+AGG LT 3 14 0 1 33 5 0 0 2 2 b
+## D=3 n=6
+AGG LT 2 1 0 2 39 6 0 0 2 3 7 f
+AGG LT 3 31 0 1 42 6 0 0 2 6 3 17
+## D=3 n=7
+AGG LT 2 1 0 3 63 7 0 0 2 3 7 f 1f
+AGG LT 3 58 0 2 75 7 0 0 2 6 3 13 1f
+## D=3 n=8
+AGG LT 2 1 0 5 102 8 0 0 2 3 7 f 1f 3f
+AGG LT 3 130 0 3 135 8 0 0 2 6 3 13 f 3f
+## D=3 n=9
+AGG LT 2 1 0 8 165 9 0 0 2 3 7 f 1f 3f 7f
+AGG LT 3 288 0 9 198 9 0 0 2 6 3 13 1f 3f 7f
+## D=3 n=10
+AGG LT 2 1 0 13 267 10 0 0 2 3 7 f 1f 3f 7f ff
+AGG LT 3 642 0 5 318 10 0 0 2 6 3 17 1f 5f 3f 17f
+## D=3 n=11
+AGG LT 2 1 0 21 432 11 0 0 2 3 7 f 1f 3f 7f ff 1ff
+AGG LT 3 1403 0 9 513 11 0 0 2 6 3 17 1f 3f bf 7f 2ff
+## D=4 n=3
+AGG LT 2 2 0 0 9 3 0 0 2
+## D=4 n=4
+AGG LT 2 2 0 1 15 4 0 0 2 3
+AGG LT 3 5 0 12 72 4 0 0 0 0
+## D=4 n=5
+AGG LT 2 1 0 1 24 5 0 0 2 3 7
+AGG LT 3 14 0 1 33 5 0 0 2 2 b
+AGG LT 4 16 0 5 75 5 0 0 0 4 6
+## D=4 n=6
+AGG LT 2 1 0 2 39 6 0 0 2 3 7 f
+AGG LT 3 31 0 1 42 6 0 0 2 6 3 17
+AGG LT 4 89 0 3 45 6 0 0 1 2 a 1a
+## D=4 n=7
+AGG LT 2 1 0 3 63 7 0 0 2 3 7 f 1f
+AGG LT 3 58 0 2 75 7 0 0 2 6 3 13 1f
+AGG LT 4 358 0 3 117 7 0 0 2 2 b b 2f
+## D=4 n=8
+AGG LT 2 1 0 5 102 8 0 0 2 3 7 f 1f 3f
+AGG LT 3 130 0 3 135 8 0 0 2 6 3 13 f 3f
+AGG LT 4 1212 0 5 138 8 0 0 2 6 3 e 13 5f
+## D=4 n=9
+AGG LT 2 1 0 8 165 9 0 0 2 3 7 f 1f 3f 7f
+AGG LT 3 288 0 9 198 9 0 0 2 6 3 13 1f 3f 7f
+AGG LT 4 4038 0 5 255 9 0 0 2 6 3 e 13 53 7f
+## D=4 n=10
+AGG LT 2 1 0 13 267 10 0 0 2 3 7 f 1f 3f 7f ff
+AGG LT 3 642 0 5 318 10 0 0 2 6 3 17 1f 5f 3f 17f
+AGG LT 4 14076 0 10 438 10 0 0 2 6 3 13 f 37 5f ff
+## D=4 n=11
+AGG LT 2 1 0 21 432 11 0 0 2 3 7 f 1f 3f 7f ff 1ff
+AGG LT 3 1403 0 9 513 11 0 0 2 6 3 17 1f 3f bf 7f 2ff
+AGG LT 4 49506 0 19 789 11 0 0 2 6 3 13 f 37 5f bf 1ff
+## D=4 n=12
+AGG LT 2 1 0 34 699 12 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff
+AGG LT 3 3075 0 14 831 12 0 0 2 6 3 17 1f 3f 7f 17f ff 5ff
+AGG LT 4 173690 0 19 906 12 0 0 2 6 3 17 37 1f bf 1bf ff 5ff
+## D=4 n=13
+AGG LT 2 1 0 55 1131 13 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff 7ff
+AGG LT 3 6735 0 23 1344 13 0 0 2 6 3 17 1f 3f 7f ff 2ff 1ff bff
+AGG LT 4 605267 0 32 1614 13 0 0 2 6 3 17 37 1f 9f ff 2ff 1ff bff
+## D=4 n=14
+AGG LT 2 1 0 89 1830 14 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff 7ff fff
+AGG LT 3 14791 0 37 2175 14 0 0 2 6 3 17 1f 3f 7f ff 1ff 5ff 3ff 17ff
+AGG LT 4 2091885 0 51 2628 14 0 0 2 6 3 17 37 1f 9f ff 1ff 5ff 3ff 17ff
+## D=4 n=15
+AGG LT 2 1 0 144 2961 15 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff 7ff fff 1fff
+AGG LT 3 32454 0 69 4275 15 0 0 2 6 3 17 1f 5f 3f 13f 1ff 3ff bff 7ff 2fff
+AGG LT 4 7206385 0 83 4242 15 0 0 2 6 3 17 37 1f 9f ff 1ff 3ff bff 7ff 2fff
+## range<=3 (full census) n=12, threshold 1/60
+AGG LT 2 1 0 34 699 12 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff
+AGG LT 3 3075 0 14 831 12 0 0 2 6 3 17 1f 3f 7f 17f ff 5ff
+## range<=3 (full census) n=13, threshold 1/60
+AGG LT 2 1 0 55 1131 13 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff 7ff
+AGG LT 3 6735 0 23 1344 13 0 0 2 6 3 17 1f 3f 7f ff 2ff 1ff bff

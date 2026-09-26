@@ -1,0 +1,34 @@
+== counter controls inherited from mg-eedd (onept.c, included verbatim)
+fib M=2 e=2 (f(M+1)=2)  #(x2 before x1)=1 (f(M-1)=1)  p=0.500000  MATCH
+fib M=5 e=8 (f(M+1)=8)  #(x2 before x1)=3 (f(M-1)=3)  p=0.375000  MATCH
+fib M=10 e=89 (f(M+1)=89)  #(x2 before x1)=34 (f(M-1)=34)  p=0.382022  MATCH
+fib M=20 e=10946 (f(M+1)=10946)  #(x2 before x1)=4181 (f(M-1)=4181)  p=0.381966  MATCH
+brute N=7 samples=100 (each with all 7 deletions): mismatches=0 MATCH
+brute N=8 samples=20 (each with all 8 deletions): mismatches=0 MATCH
+== CUT filter + pruned generator: full range<=3 census filtered by CUT must equal gencut counts
+t=9 full-census
+AGG CT 9 2942 2004 13 117
+t=10 full-census
+AGG CT 10 8362 6361 4 130
+t=11 full-census
+AGG CT 11 23701 19477 0 134
+t=12 full-census
+AGG CT 12 67116 57809 0 134
+t=13 full-census
+AGG CT 13 190035 169576 0 134
+   (AGG CT t total CUT fail failCUT: total - CUT must equal the gencut count in out_gen.txt)
+== e2e (Theorem 2.3 end to end, every indecomposable P in range<=3, n = 12, 13, every size-11 ideal Q)
+   AGG E #P #Q #pairs bracket-violations #certified certified-but-unbalanced-in-P #uncertified
+AGG E 3076 6937 48840 0 6937 0 0
+AGG E 6736 17413 122280 0 17413 0 0
+== e2e FIRING control: s = t-D+1 violates Lemma 2.2; bracket violations and bad certificates MUST appear
+AGG E 3076 6937 58359 7178 6937 8 0
+AGG E 6736 17413 147546 17877 17413 28 0
+== e2e range<=4 (P = indecomposable members of the D=4 n=13 non-CUT list, t = 11), then its firing control
+AGG E 612003 1882087 12126488 0 1865310 0 16777
+AGG E 612003 1882087 15263228 517886 1880192 87 1895
+== cert FIRING control: interval narrowed to [2/5,3/5] and [7/20,13/20]; failures MUST appear at D=3, t=13
+AGG CT 13 20459 0 1265 0
+AGG CW 13 -27 505 13 0 0 2 6 3 17 1f 5f 3f 13f ff 3ff 7ff
+AGG CT 13 20459 0 64 0
+AGG CW 13 -7 2020 13 0 0 2 6 3 17 1f 5f 3f 13f ff 3ff 7ff

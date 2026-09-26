@@ -1,0 +1,152 @@
+FAIL (no certificate, not CUT) Q=5 0 0 0 0 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 0 4 3 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 0 4 7 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 0 4 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 0 6 5 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 0 6 7 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 0 6 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 0 7 7 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 0 7 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 2 1 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 1 3 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 1 2 a best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 1 b best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 1 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 2 3 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 2 b best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 2 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 3 3 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 6 3 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=5 0 0 2 3 7 best rm=-1.000000
+AGG CT 5 47 0 42 0
+AGG CW 5 -1000000 1 5 0 0 0 0 f
+AGG CS 5 2 5 1 6
+AGG CB 5 2 5
+FAIL (no certificate, not CUT) Q=6 0 0 0 0 f f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 0 f 1f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 4 3 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 4 3 1f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 4 7 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 4 7 1f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 4 f f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 4 f 1f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 6 5 3 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 6 5 7 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 6 5 17 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 0 6 5 1f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 2 2 1 1f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 2 1 6 9 best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 2 1 6 b best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 1 2 a f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 1 2 a 1f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 2 2 3 f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 2 2 3 1f best rm=-1.000000
+FAIL (no certificate, not CUT) Q=6 0 0 2 2 b 7 best rm=-1.000000
+AGG CT 6 87 0 36 0
+AGG CW 6 -1000000 1 6 0 0 0 0 f f
+AGG CS 6 2 16 1 6
+AGG CS 6 3 51 0 9
+AGG CB 6 3 51
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 1 1f 1f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 1 1f 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 1 6 9 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 1 6 b 1f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 1 6 b 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 1 2 a f 1f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 1 2 a f 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 1 2 a 1f 1f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 1 2 a 1f 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 3 f 1f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 3 f 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 3 1f 1f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 3 1f 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 b 7 f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 b 7 2f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 2 b 7 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 6 3 3 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 6 3 7 1f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 6 3 7 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=7 0 0 2 6 3 13 f best rm=-0.083333
+AGG CT 7 188 0 29 0
+AGG CW 7 -2 24 7 0 0 2 2 1 1f 1f
+AGG CS 7 3 103 0 9
+AGG CS 7 4 159 -2 24
+AGG CB 7 4 159
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 7 1f 3f best rm=-0.047619
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 7 1f 7f best rm=-0.047619
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 7 3f 3f best rm=-0.047619
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 7 3f 7f best rm=-0.047619
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 13 f 3f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 13 f 7f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 17 f 1f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 f 17 5f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 17 f 5f best rm=-0.083333
+FAIL (no certificate, not CUT) Q=8 0 0 2 6 3 17 f 7f best rm=-0.083333
+AGG CT 8 441 0 10 0
+AGG CW 8 -1 12 8 0 0 2 6 3 13 f 3f
+AGG CS 8 3 203 0 9
+AGG CS 8 4 368 -2 24
+AGG CS 8 5 431 -1 12
+AGG CB 8 5 431
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 13 f 3f 7f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 13 f 3f ff best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 13 f 7f 7f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 13 f 7f ff best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 17 f 1f 7f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 17 f 1f ff best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 17 f 5f 3f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 f 17 5f 7f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 f 17 5f ff best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 17 f 5f 7f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 17 f 5f ff best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 17 f 7f 7f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=9 0 0 2 6 3 17 f 7f ff best rm=-0.025641
+AGG CT 9 938 0 13 0
+AGG CW 9 -1 39 9 0 0 2 6 3 13 f 3f 7f
+AGG CS 9 3 439 0 9
+AGG CS 9 4 732 -2 24
+AGG CS 9 5 914 -1 12
+AGG CS 9 6 925 -1 39
+AGG CB 9 6 925
+FAIL (no certificate, not CUT) Q=10 0 0 2 6 3 17 f 5f 3f 7f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=10 0 0 2 6 3 f 17 5f 3f 17f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=10 0 0 2 6 3 17 f 5f 3f 17f best rm=-0.025641
+FAIL (no certificate, not CUT) Q=10 0 0 2 6 3 17 f 5f 3f 1ff best rm=-0.025641
+AGG CT 10 2001 0 4 0
+AGG CW 10 -1 39 10 0 0 2 6 3 17 f 5f 3f 7f
+AGG CS 10 3 968 0 9
+AGG CS 10 4 1575 -1 12
+AGG CS 10 5 1932 -1 12
+AGG CS 10 6 1965 -1 39
+AGG CS 10 7 1997 -1 39
+AGG CB 10 7 1997
+AGG CT 11 4224 0 0 0
+AGG CW 11 2 192 11 0 0 2 6 3 17 1f 1f 3f ff 1ff
+AGG CS 11 3 2158 0 9
+AGG CS 11 4 3462 -1 12
+AGG CS 11 5 4069 -1 12
+AGG CS 11 6 4121 -1 39
+AGG CS 11 7 4215 -1 39
+AGG CS 11 8 4224 2 192
+AGG CB 11 8 4224
+AGG CT 12 9307 0 0 0
+AGG CW 12 1 96 12 0 0 2 6 3 17 1f 5f 3f 13f ff 3ff
+AGG CS 12 3 4723 0 9
+AGG CS 12 4 7646 -1 12
+AGG CS 12 5 8993 -1 12
+AGG CS 12 6 9093 -1 39
+AGG CS 12 7 9282 -1 39
+AGG CS 12 8 9307 2 192
+AGG CS 12 9 9307 1 96
+AGG CB 12 9 9307
+AGG CT 13 20459 0 0 0
+AGG CW 13 4 303 13 0 0 2 6 3 17 1f 5f 3f 13f ff 3ff 7ff
+AGG CS 13 3 10332 0 9
+AGG CS 13 4 16774 -1 12
+AGG CS 13 5 19801 -1 12
+AGG CS 13 6 20037 -1 39
+AGG CS 13 7 20389 -1 39
+AGG CS 13 8 20459 2 192
+AGG CS 13 9 20459 1 96
+AGG CS 13 10 20459 4 303
+AGG CB 13 10 20459

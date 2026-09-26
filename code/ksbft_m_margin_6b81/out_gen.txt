@@ -1,0 +1,55 @@
+gen n=1 D=-1 from 1 classes: candidates=1 leaves=1 classes=1
+gen n=2 D=-1 from 1 classes: candidates=2 leaves=3 classes=2
+gen n=3 D=-1 from 2 classes: candidates=7 leaves=14 classes=5
+gen n=4 D=-1 from 5 classes: candidates=28 leaves=78 classes=16
+gen n=5 D=-1 from 16 classes: candidates=135 leaves=495 classes=63
+gen n=6 D=-1 from 63 classes: candidates=766 leaves=3475 classes=318
+gen n=7 D=-1 from 318 classes: candidates=5439 leaves=27318 classes=2045
+gen n=8 D=-1 from 2045 classes: candidates=48346 leaves=239836 classes=16999
+gen n=9 D=3 from 16999 classes: candidates=550338 leaves=30872 classes=2942
+gen n=10 D=3 from 2942 classes: candidates=55020 leaves=105297 classes=8362
+gen n=11 D=3 from 8362 classes: candidates=174068 leaves=363001 classes=23701
+gen n=12 D=3 from 23701 classes: candidates=542884 leaves=1259984 classes=67116
+gen n=13 D=3 from 67116 classes: candidates=1677261 leaves=4325997 classes=190035
+A000112 (n=1..8): 1 2 5 16 63 318 2045 16999
+gencut n=1 D=3 from 1 classes: candidates=1 nonCUT-classes=1
+gencut n=2 D=3 from 1 classes: candidates=2 nonCUT-classes=2
+gencut n=3 D=3 from 2 classes: candidates=7 nonCUT-classes=5
+gencut n=4 D=3 from 5 classes: candidates=28 nonCUT-classes=16
+gencut n=5 D=3 from 16 classes: candidates=135 nonCUT-classes=47
+gencut n=6 D=3 from 47 classes: candidates=496 nonCUT-classes=87
+gencut n=7 D=3 from 87 classes: candidates=1141 nonCUT-classes=188
+gencut n=8 D=3 from 188 classes: candidates=2897 nonCUT-classes=441
+gencut n=9 D=3 from 441 classes: candidates=7852 nonCUT-classes=938
+gencut n=10 D=3 from 938 classes: candidates=18758 nonCUT-classes=2001
+gencut n=11 D=3 from 2001 classes: candidates=44630 nonCUT-classes=4224
+gencut n=12 D=3 from 4224 classes: candidates=103916 nonCUT-classes=9307
+gencut n=13 D=3 from 9307 classes: candidates=250841 nonCUT-classes=20459
+gencut n=1 D=4 from 1 classes: candidates=1 nonCUT-classes=1
+gencut n=2 D=4 from 1 classes: candidates=2 nonCUT-classes=2
+gencut n=3 D=4 from 2 classes: candidates=7 nonCUT-classes=5
+gencut n=4 D=4 from 5 classes: candidates=28 nonCUT-classes=16
+gencut n=5 D=4 from 16 classes: candidates=135 nonCUT-classes=63
+gencut n=6 D=4 from 63 classes: candidates=766 nonCUT-classes=255
+gencut n=7 D=4 from 255 classes: candidates=3907 nonCUT-classes=985
+gencut n=8 D=4 from 985 classes: candidates=17754 nonCUT-classes=2650
+gencut n=9 D=4 from 2650 classes: candidates=55823 nonCUT-classes=8556
+gencut n=10 D=4 from 8556 classes: candidates=204076 nonCUT-classes=29491
+gencut n=11 D=4 from 29491 classes: candidates=787787 nonCUT-classes=103198
+gencut n=12 D=4 from 103198 classes: candidates=3058772 nonCUT-classes=357363
+gencut n=13 D=4 from 357363 classes: candidates=11617760 nonCUT-classes=1224360
+gencut n=14 D=4 from 1224360 classes: candidates=43298992 nonCUT-classes=4177332
+gencut n=15 D=4 from 4177332 classes: candidates=159628195 nonCUT-classes=14298595
+gencut n=1 D=5 from 1 classes: candidates=1 nonCUT-classes=1
+gencut n=2 D=5 from 1 classes: candidates=2 nonCUT-classes=2
+gencut n=3 D=5 from 2 classes: candidates=7 nonCUT-classes=5
+gencut n=4 D=5 from 5 classes: candidates=28 nonCUT-classes=16
+gencut n=5 D=5 from 16 classes: candidates=135 nonCUT-classes=63
+gencut n=6 D=5 from 63 classes: candidates=766 nonCUT-classes=318
+gencut n=7 D=5 from 318 classes: candidates=5439 nonCUT-classes=1727
+gencut n=8 D=5 from 1727 classes: candidates=37468 nonCUT-classes=9217
+gencut n=9 D=5 from 9217 classes: candidates=236003 nonCUT-classes=46421
+gencut n=10 D=5 from 46421 classes: candidates=1343890 nonCUT-classes=178180
+gencut n=11 D=5 from 178180 classes: candidates=5819427 nonCUT-classes=798563
+gencut n=12 D=5 from 798563 classes: candidates=28813496 nonCUT-classes=3740359
+gencut n=13 D=5 from 3740359 classes: candidates=148102917 nonCUT-classes=17890772
