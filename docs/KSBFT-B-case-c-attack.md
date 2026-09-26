@@ -4,6 +4,8 @@ Subject: Aires–Chan–Pak–Panova, *Breaking the Infinite Barrier in the 1/3�
 
 Labels: **PROVEN** means the proof is in this file. **PROVEN-mod-paper** means the proof is here but it consumes lemmas of the paper; each consumed lemma is named, and marked either *re-derived here* or *read only*. **EMPIRICAL** comes with its instrument and range. **CONJECTURED** is a guess.
 
+**Errata (mg-f71c, per audit mg-3a14, `docs/AUDIT-mg-d707.md` §7 (a)–(g)).** No mathematical result is retracted: Props A, B, C and Theorem 1.3′ all HOLD. Two side-sentences were BROKEN and are corrected: (1) Lemma W with a constant window does **not** by itself give a D-uniform improvement; it gives C_BFT + Θ(1/D) unless a D-uniform lower bound on M is also proved (§3). (2) K(D) with B_{K(D)} ≥ 1/3 **implies** the conjecture for range ≤ D; it is not equivalent to it (§4.2). Several claims were OVERSTATED and are scoped: the linear conversion (Prop C) is not load-bearing for Theorem 1.3′, since Prop B with the paper's printed M²/441 already suffices (§2.3); Prop D is vacuous given Theorem 1.3′ (§4.1); "the price of 1/3 is M ≥ 1/3" holds only under Lemma 3.2's structure (§0.2, §1.4); Lemma 3.2(iii) is the only *exponential* obstruction, and the witness term is a second, polynomial one (§0.5, §3); "Lemma 3.1's shape is right" is replaced by "exponential decay is necessary" (§2.1); the B₄/B₅ search quotes and the even-n Fibonacci wording are fixed (§0.6, §1.5, §4.2). One claim was UNDER-CLAIMED: μ*(1/3) = 1/3 is PROVEN, not only EMPIRICAL (§1.4). Two paper errata are recorded in §1.6: the (4.9) typo and the sign of the F_m displacement formula.
+
 KSBFT-A (the per-range minimum-M/minimum-δ census) had not merged when this was written (`git fetch` at 2026-09-26 ~02:10 showed `origin/main` at 0943437). Everything here was computed independently.
 
 ---
@@ -11,11 +13,11 @@ KSBFT-A (the per-range minimum-M/minimum-δ census) had not merged when this was
 ## 0. Verdict in six lines
 
 1. **The route as printed cannot reach 1/3 at any M.** With 441, 1/3 needs M ≥ √(441·(1/3 − C_BFT)) ≈ 5.01. But whenever Lemma 4.2's hypotheses hold, **M ≤ max(p, p′) ≤ 1/2** (Prop A, PROVEN-mod-paper). Inside its own regime the gain is capped at 0.2764²/441 ≈ 1.7·10⁻⁴.
-2. **With the best conversion available from the paper's own inputs, the price of 1/3 is M ≥ 1/3 exactly, not 5.** The triple's balance is at least M (Prop A), and in the relaxation the proof uses, the threshold is exactly 1/3 (EMPIRICAL grid, sharp at the 2+1 configuration).
+2. **With the best conversion available from the paper's own inputs, the price of 1/3 is M ≥ 1/3 exactly, not 5 — but only at a triple with Lemma 3.2's structure.** The triple's balance is at least M (Prop A), and in the relaxation the proof uses, the threshold is exactly 1/3 (PROVEN, §1.4; sharp at the 2+1 configuration, not attained). The paper derives that structure only for δ ≤ C_BFT + η_D (here θ = q₃/12), so "M ≥ 1/3 would give 1/3" is a statement about a hypothetical Lemma 3.2 valid up to 1/3.
 3. **The witness half fails that price on specific small posets.** M ≥ 1/3 is false: there is an explicit 6-element poset with M = 4/13 ≈ 0.3077 (δ = 5/13). The exhaustive minimum over connected posets with n ≤ 8 is 0.3008, and annealing finds 0.2866 at n = 18. EMPIRICAL (exact rationals for n ≤ 8). The Fibonacci F_m is **not** the obstruction: M(F_m) → (3−√5)/2 ≈ 0.382 ≥ 1/3.
 4. **Better witness (PROVEN): d₁ ≥ 1/(D+1)**, by a one-page swap injection. This replaces the paper's d₁ ≥ q₂ = (D+1)^(−2(D+1)), and it is tight for d₁. **Better conversion (PROVEN-mod-paper): max δ over the triple ≥ C_BFT + M/24.5**. It is linear in M, replacing M²/441.
-5. **Consequence (PROVEN-mod-paper):** Theorem 1.3 holds with η′_D = (D+1)^(−3(D+1))/12 in place of η_D = (D+1)^(−4(D+1))/4096. After the two repairs, **the only D-exponential loss left in case (c) is Lemma 3.2(iii)**, i.e. Lemma 3.1 applied with |S| = 3. That is the precise obstruction to a range-uniform bound along this route. The generic Lemma-3.1 estimate cannot be made polynomial: P[u<v] = 1/70 = 1/C(8,4) at n = 8, D = 4 (two parallel 4-chains, EMPIRICAL exact). So a polynomial window has to use the BFT-triple setting, not a generic event bound.
-6. **Boundary witness (EMPIRICAL, weak).** Every searched poset has a 1/3-balanced pair among its first or last K elements in h-order. K = 4 suffices for D ≤ 4, 5 for D ≤ 6, and 6 for D ≤ 9 (n ≤ 18–20). K = 4 fails at D = 5 (0.309), and K = 5 fails at D = 7 (0.309). The window grows with D. **PROVEN-mod-paper:** in the near-C_BFT regime no BFT triple can sit near either end, via a golden-ratio Diophantine bound (Prop D).
+5. **Consequence (PROVEN-mod-paper):** Theorem 1.3 holds with η′_D = (D+1)^(−3(D+1))/12 in place of η_D = (D+1)^(−4(D+1))/4096. Prop B alone suffices for this (with the paper's printed M²/441 it gives the same window, §2.3); Prop C is a redundant, higher-assurance second conversion. After Prop B, **the only D-exponential loss left in case (c) is Lemma 3.2(iii)**, i.e. Lemma 3.1 applied with |S| = 3. That is the only *exponential* obstruction to a range-uniform bound along this route; the witness term 1/(D+1) is a second, polynomial one (§3). The generic Lemma-3.1 estimate cannot be made polynomial: P[u<v] = 1/70 = 1/C(8,4) at n = 8, D = 4 (two parallel 4-chains, EMPIRICAL exact). So a polynomial window has to use the BFT-triple setting, not a generic event bound.
+6. **Boundary witness (EMPIRICAL, weak).** Every searched poset has a 1/3-balanced pair among its first or last K elements in h-order. K = 4 suffices for D ≤ 4, 5 for D ≤ 6, and 6 for D ≤ 9 (n ≤ 18–20). K = 4 fails at D = 5 (0.313), D = 6 (0.309) and D = 7 (0.300), and K = 5 fails at D = 7 (0.309), D = 8 (0.321) and D = 9 (0.323). The window grows with D. **PROVEN-mod-paper:** in the near-C_BFT regime no BFT triple can sit near either end, via a golden-ratio Diophantine bound (Prop D). Prop D is vacuous, since Theorem 1.3′ shows that regime is empty (§4.1).
 
 Nothing here proves case (c) for any new D, and nothing is uniform in D. Section 6 lists what was not done.
 
@@ -69,7 +71,7 @@ By Lemma 4.1, M = max(|d_m|, |d_{m+2}|) ≤ max(p, p′). Finally p, p′ ≤ 1/
 
 `local_model.py` check C2 tests |d| ≤ a on 152 623 feasible points of the relaxation and finds 0 violations. Check C5 shows the bound is attained (g(μ) ≈ μ for μ ≥ 0.35), so a weaker claim such as |d| ≤ 0.9a *would* fire. That is the positive control.
 
-### 1.4 The exact price with the paper's inputs: M ≥ 1/3 (EMPIRICAL, sharp)
+### 1.4 The exact price with the paper's inputs: M ≥ 1/3 (PROVEN-mod-paper, sharp; conditional on Lemma 3.2's structure)
 
 The relaxation Lemma 4.2's proof actually uses is: r, s ∈ [0,1], t ≥ 1−r, u ≥ 1−s, (1+s)t + (1+r)u ≤ r + s. Over it, define g(μ) = min{ a : max|d| ≥ μ }. From `out_local_model.txt` C5 and `out_threshold.txt`:
 
@@ -80,7 +82,9 @@ The relaxation Lemma 4.2's proof actually uses is: r, s ∈ [0,1], t ≥ 1−r, 
 
 The threshold μ*(1/3) = max{ max|d| : a < 1/3 } is **1/3**, approached at r = s → 1: 0.33333139 at r = s = 0.999997. That is the 2+1 configuration L′ = {x}, U′ = {z}. Sharpness can be checked by hand: with r = s = 1 − η, t = η, u = η, both a and max|d| tend to 1/3 from below.
 
-**So the route's price, using everything the paper proves about the triple, is M ≥ 1/3.** The printed 441 inflates it to 5.01.
+*Proof that μ*(1/3) = 1/3 (PROVEN; from audit mg-3a14 §2.3).* Upper bound: by Prop A, a < 1/3 forces max|d| ≤ a < 1/3, so μ* ≤ 1/3. Lower bound: r = s = 1 − η, t = u = η is feasible for small η, since 2(2−η)η ≤ 2 − 2η; there a = (1−η)/(3−2η) ↑ 1/3 and d_m = (1 − η − (2−η)η)/(3−2η) → 1/3. So the supremum is 1/3 and it is not attained. The grid values above are consistent with this but are no longer needed.
+
+**So the route's price, using everything the paper proves about the triple, is M ≥ 1/3.** The printed 441 inflates it to 5.01. This price exists only at a triple with Lemma 3.2's structure, which the paper derives only for δ ≤ C_BFT + η_D. At δ just under 1/3 there is no structure (Case C triples are ruled out only below 0.2764, via Lemma 2.3), so the price is conditional on a hypothetical Lemma 3.2 valid up to 1/3 (see also the end of §1.5).
 
 ### 1.5 Is the witness M ≥ 1/3 true? No, and the failure is specific small posets (EMPIRICAL)
 
@@ -95,13 +99,18 @@ The threshold μ*(1/3) = max{ max|d| : a < 1/3 } is **1/3**, approached at r = s
 
 Annealing (`census search`, `out_search_summary.txt`) found min M values of 0.2995 (n=10), 0.2869 (n=14, D=5) and 0.2866 (n=18, D=8). Annealing only gives **upper bounds** on the infimum, and it is noisy: seeds disagree, and larger D sometimes does worse than smaller D, which is impossible for the true infimum. No run found M below 0.28, and there is **no sign of M → 0** with n. CONJECTURED: inf M over finite connected non-chain posets is a positive constant ≈ 0.28–0.30.
 
-**Fibonacci.** `out_fib.txt` gives M(F_m) = F_{2m}/F_{2m+2}: 1/3, 3/8, 8/21, … → (3−√5)/2 = 0.381966. This matches the paper's |d| formula (p.13) at m = 1, 2, 3, 5, 8, which is the second positive control. The π = 2 rows of the census reproduce exactly these values, so for n ≤ 8 the Fibonacci posets are the range-2 minimisers.
+**Fibonacci.** `out_fib.txt` gives M(F_m) = F_{2m}/F_{2m+2}: 1/3, 3/8, 8/21, … → (3−√5)/2 = 0.381966. This matches the paper's |d| formula (p.13) at m = 1, 2, 3, 5, 8, which is the second positive control. The π = 2 rows of the census give min M = 1/3, 2/5, 3/8, 5/13, 8/21, 13/34 for n = 3..8. At odd n = 2m + 1 these are exactly the F_m values F_{2m}/F_{2m+2}. At even n they are F_{n−1}/F_{n+1} (2/5, 5/13, 13/34), the even-length Fibonacci truncations, which are not F_m values. Both lie on the same Fibonacci-ratio sequence converging to 0.382.
 
-*Erratum (EMPIRICAL at m = 1..8; follows from Σ d_i = 0):* the paper prints h(x_i) − (m+i+1) = F_{2|i|}/F_{2m+2} with no sign. The displacements actually alternate: +0.3810, −0.1429, +0.0476, 0, −0.0476, … at m = 3. The formula is right in absolute value only. This does not affect the paper's argument, which only needs |d|.
+The sign of the paper's displacement formula is wrong; see §1.6.
 
 **Verdict of Part 1.** Both halves fail. The *conversion as printed* (M²/441) cannot reach 1/3 inside its own regime (Prop A). With the sharp conversion from the same inputs, the *witness* would have to be M ≥ 1/3, which is false unconditionally, fails by about 10%, and first fails on a 6-element poset. So an unconditional witness plus this conversion cannot give 1/3 at any constant. A witness conditional on δ < 1/3 would be needed, and inside the window that is circular: Prop A gives M ≤ a ≤ C_BFT + θ there.
 
 And even that is not the binding constraint. The conversion exists only inside Lemma 3.2's window (§3).
+
+### 1.6 Paper errata (KSBFT_v7)
+
+- **Sign of the F_m displacement (p.13; PROVEN).** The paper prints h(x_i) − (m+i+1) = F_{2|i|}/F_{2m+2} with no sign. F_m is self-dual under x_i ↦ x_{−i}, so h(x_{−i}) = n + 1 − h(x_i) and d(x_{−i}) = −d(x_i); the unsigned formula is positive at both ±i, so it cannot be right as printed. Exact values at m = 3 are 8/21, −1/7, 1/21, 0, −1/21, 1/7, −8/21: they alternate, and the magnitudes match the paper's formula (exact for m = 1..6 in the audit, `code/audit_ksbft_3a14/`; to m = 8 in `out_fib.txt`). The formula is right in absolute value only. This does not affect the paper's argument, which only needs |d|.
+- **Typo in (4.9) (Lemma 4.2's proof, pp.14–17).** It prints "(11ε + 50ε)/2 ≤ 5√ε". It should read (11ε + √(50ε))/2 ≤ 5√ε, which holds for ε ≤ 0.07, since (r − s)² ≤ 50ε bounds |r − s| by √(50ε). The conclusion |d| ≤ 20√ε + 11ε ≤ 21√ε (for ε ≤ 1/121) is unaffected (audit mg-3a14 §3 checked Lemma 4.2 and found it HOLDS).
 
 ---
 
@@ -124,7 +133,7 @@ And even that is not the binding constraint. The conversion exists only inside L
 
 **Why the paper's bound is (D+1)^(−2(D+1)).** Lemma 3.1 bounds *any* S-dependent event by comparing e(Q) with e(P). It pays (D+1) for every element of T = S ∪ (all elements incomparable to S), and |T| ≤ |S|(D+1) = 2(D+1). The bound is uniform over all events and exponential by construction. The single-pair event {v_j before v₁} in (4.11) only needs the injection above.
 
-**Is exponential ever necessary?** For *generic* 2-element events, yes. Two parallel k-chains have P[top of A before bottom of B] = 1/C(2k,k) ≈ 4^(−k) with range k. At n = 8, `out_census_all.txt` records min P[u<v] = 0.014286 = 1/70 at π = 4. So Lemma 3.1's shape is right for arbitrary events, and the gain in Prop B comes from the event being about the *minimum-height* element.
+**Is exponential ever necessary?** For *generic* 2-element events, yes. Two parallel k-chains have P[top of A before bottom of B] = 1/C(2k,k) ≈ 4^(−k) with range k. At n = 8, `out_census_all.txt` records min P[u<v] = 0.014286 = 1/70 at π = 4. So exponential decay in D is necessary for a bound over arbitrary events. This does **not** show that Lemma 3.1's order (D+1)^(−2(D+1)) = e^(−2(D+1)ln(D+1)) is right: parallel chains only exhibit ≈ 4^(−D). The gain in Prop B comes from the event being about the *minimum-height* element.
 
 ### 2.2 Prop C (PROVEN-mod-paper): linear conversion. Under Lemma 3.2's structure, at Lemma 4.1's triple, a := max(δ(P;x,y), δ(P;y,z)) ≥ C_BFT + M/24.5.
 
@@ -150,13 +159,15 @@ And even that is not the binding constraint. The conversion exists only inside L
 
 **Comparison.** η_D = (D+1)^(−4(D+1))/4096 becomes η′_D = (D+1)^(−3(D+1))/12. At D = 6 that is about 10^(−18.8) instead of 10^(−27.3). The window θ is now the whole loss. The witness term 1/(24.5(D+1)) is polynomial and slack.
 
+**Prop B alone yields Theorem 1.3′; Prop C is not load-bearing (per audit mg-3a14 §2.7).** Step 3 also goes through with the paper's printed Lemma 4.2 in place of Prop C: a ≥ C_BFT + M²/441 ≥ C_BFT + d₁²/441 ≥ C_BFT + 1/(441(D+1)²), still far larger than θ. Lemma 4.2's proof uses its δ-hypothesis only to get a ≤ 0.2764 and ε < 10⁻⁵, and both hold under θ. The paper's own bottleneck was its witness: q₂²/441 = q₄/441 is below the window q₃/11.7. So the improvement from η_D to η′_D is bought by Prop B. Prop C is a redundant, higher-assurance second conversion: it removes the dependence on Lemma 4.2's constant 441, and either conversion suffices.
+
 For D = 2 alone, Prop A suffices without Prop C: M ≥ 1/3 > 0.2764. That rules out the regime, but it only reproduces what the paper already covers at D = 2.
 
 ---
 
-## 3. The precise obstruction left: Lemma 3.2(iii)'s window
+## 3. The only exponential obstruction left: Lemma 3.2(iii)'s window
 
-After §2, every D-exponential factor in case (c) comes from one line. Lemma 3.2(iii) needs R < q₃ in order to rule out an extension with y < w < x. It gets that from Lemma 3.1 with S = {x, y, w}, i.e. P[E] ≥ (D+1)^(−3(D+1)), plugged into R ≥ P[f(x) − f(y) ≥ 2] (2.5).
+After §2, every D-exponential factor in case (c) comes from one line. It is the only *exponential* obstruction; it is not the only obstruction to range-uniformity, because the witness term 1/(24.5(D+1)) is a second, polynomial one (see the last bullet). Lemma 3.2(iii) needs R < q₃ in order to rule out an extension with y < w < x. It gets that from Lemma 3.1 with S = {x, y, w}, i.e. P[E] ≥ (D+1)^(−3(D+1)), plugged into R ≥ P[f(x) − f(y) ≥ 2] (2.5).
 
 A range-uniform (or polynomial) η along this route needs:
 
@@ -166,7 +177,7 @@ Evidence and limits:
 
 - **Generic versions of Lemma W are false with polynomial c.** `census` records min over incomparable ordered pairs of P[f(x) − f(y) ≥ 2] when that probability is positive. For n = 8 the minima by π = 2..7 are 0.235, 0.0556, 0.0143, 0.00595, 0.00446, 0.00357. With parallel chains, events of this kind decay exponentially in D (§2.1). EMPIRICAL, exact for n ≤ 8.
 - **What Lemma W must use.** It has to use the BFT-triple hypotheses: h(x) ≤ h(y) ≤ h(z) ≤ h(x) + 2, together with max(p, p′) ≤ 0.2764 near C_BFT. It cannot use generic event bounds. I did **not** prove or refute it. It is the named next target.
-- **Lemma W is the whole remaining gap only for this route.** With Lemma W at polynomial c(D), Theorem 1.3′ becomes δ > C_BFT + poly(D)⁻¹. With c constant, it becomes a D-uniform improvement C_BFT + c′. Neither reaches 1/3, by §1.
+- **Lemma W removes only the exponential part of the gap.** With Lemma W at polynomial c(D), Theorem 1.3′ becomes δ > C_BFT + poly(D)⁻¹. With c constant it does **not** become D-uniform (corrected per audit mg-3a14 §2.8): if the window were a constant θ_c, the contradiction would need 1/(24.5(D+1)) > θ_c, which fails for D > 1/(24.5θ_c), so the conclusion is δ > C_BFT + min(θ_c, 1/(24.5(D+1))) = C_BFT + Θ(1/D). Prop B is tight for d₁, so a D-uniform improvement also needs a **D-uniform lower bound on M** (not on d₁) for posets in the window. The only evidence for one is the §1.5 CONJECTURE (inf M ≈ 0.28), which is not proved. None of these reaches 1/3, by §1.
 
 ---
 
@@ -183,7 +194,9 @@ Assume the §2.3 setting (δ ≤ C_BFT + θ, so Lemma 3.2's structure holds for 
 
 In particular, (v₁, v₂, v₃) is never a BFT triple in the regime: it would have e(L′) = 1 and r = 1, which gives a ≥ 1/(2+s) ≥ 1/3. This is exactly where F_m's endpoint pairs (≈ 0.382) live.
 
-**What would close case (c) this way (CONJECTURED shape).** One would need a lemma saying every finite connected poset of range ≤ D has a BFT triple (or a Case A/B/C triple) within the first or last K elements of h-order, with K growing slower than log(1/θ)/log(D+1). Combined with Prop D, that contradicts the regime. It still lives inside Lemma 3.2's window, because Prop D consumes the structure, so it improves the *witness* side and not the window. I did not find such a lemma. The obstacle is that the non-BFT condition d_{k+2} > d_k on a long prefix does not contradict |d| ≤ 24.5θ by itself.
+**Prop D is vacuous (per audit mg-3a14 §2.9).** Its hypothesis δ ≤ C_BFT + θ with θ = q₃/12 is exactly the regime Theorem 1.3′ proves empty: no finite poset satisfies it. So Prop D is a true statement about an empty class. It would acquire content only together with a larger window (Lemma W), and then its depth bound shrinks with that window.
+
+**What would close case (c) this way (CONJECTURED shape; adds nothing without Lemma W).** One would need a lemma saying every finite connected poset of range ≤ D has a BFT triple (or a Case A/B/C triple) within the first or last K elements of h-order, with K growing slower than log(1/θ)/log(D+1). Combined with Prop D, that contradicts the regime. It still lives inside Lemma 3.2's window, because Prop D consumes the structure, so it improves the *witness* side and not the window. As stated, though, this adds nothing: the regime is already contradicted by Theorem 1.3′, and the witness side is not binding (§2.3). It certainly would not close case (c), i.e. reach 1/3. It could matter only combined with a larger window from Lemma W. I did not find such a lemma. The obstacle is that the non-BFT condition d_{k+2} > d_k on a long prefix does not contradict |d| ≤ 24.5θ by itself.
 
 ### 4.2 Direct boundary balance (EMPIRICAL)
 
@@ -191,12 +204,12 @@ Let B_K be the best balance over incomparable pairs lying inside the first K or 
 
 - **Exhaustive, n ≤ 8** (`out_census_all.txt`): B₄ ≥ 1/3 in every row. It equals exactly 1/3 at π = 4, 5, 7, and B₄ < δ in some rows. B₃ reaches 0.2807 (n=7, π=4) and 0.2857 (n=8, π=5). B₂ can be 0.
 - **Annealing, n = 10, 14, 18 and D = 3..9** (`out_search_summary.txt`; earlier ad-hoc runs at n = 16, 20 agreed):
-  - B₄ min is exactly 1/3 for D ≤ 4, but **0.309** at D = 5, 6 and **0** at D ≥ 8. For B₄ = 0, the first and last four elements are chains.
-  - B₅ min ≥ 1/3 for D ≤ 6 (0.3337 at n=14, D=6), but 0.3094 at n=18, D=7.
+  - B₄ min is exactly 1/3 for D ≤ 4, but **0.3131** at D = 5 (n=18), **0.3093** at D = 6 (n=18), **0.300** at D = 7 (n=10), and **0** at D ≥ 8. For B₄ = 0, the first and last four elements are chains.
+  - B₅ min ≥ 1/3 for D ≤ 6 (0.3337 at n=14, D=6), but 0.3094 at n=18, D=7, and also at D = 8 (0.3209 at n=18; 0.3287 at n=14) and D = 9 (0.3234 at n=14).
   - B₆ min ≥ 0.3333 for all D ≤ 9 searched.
 - These are upper bounds on true minima, from a search started at F_m. They are **weak evidence**: seeds disagree by up to 0.04.
 
-CONJECTURED: for each D there is K(D) with B_{K(D)} ≥ 1/3 for all finite connected posets of range ≤ D. Observed K = 4, 5, 6 for D ≤ 4, 6, 9, consistent with K(D) ≈ D/2 + 2. This is equivalent to the conjecture itself for range ≤ D. Its interest is that it is a *local* statement.
+CONJECTURED: for each D there is K(D) with B_{K(D)} ≥ 1/3 for all finite connected posets of range ≤ D. Observed K = 4, 5, 6 for D ≤ 4, 6, 9, consistent with K(D) ≈ D/2 + 2. This **implies** the conjecture for range ≤ D (a balanced pair in the window is a balanced pair). It is not equivalent: the converse would need every balanced pair to be locatable within a window independent of n, which does not follow from the conjecture. So it is strictly stronger a priori, and a refutation of K(D) would **not** refute the conjecture. Its interest is that it is a *local* statement.
 
 ---
 
@@ -218,11 +231,11 @@ I did not read Brightwell–Wright 1992 or Peczarski 2008, so I cannot say wheth
 ## 6. What I did not do (negatives and gaps)
 
 - **Lemma 3.2 was not re-derived**; it is read only. Theorem 1.3′ inherits it and Lemmas 2.3/2.4 (BFT95 Case C/D inequalities).
-- **Lemma W (§3) is neither proved nor refuted.** It is the precise open step.
+- **Lemma W (§3) is neither proved nor refuted.** It is the open step for the window; a D-uniform bound would additionally need a D-uniform lower bound on M (§3).
 - **No new range D is closed**, and no D-uniform positive improvement over C_BFT was found. The best is η′_D = (D+1)^(−3(D+1))/12.
 - **Candidates tried and their outcome:**
-  - (i) Summing Lemma 3.1 over the boundary: superseded by Prop B's injection. Summation cannot beat the generic exponential, since per-event probabilities can be ~4^(−D).
-  - (i′) A D-uniform bound on M: EMPIRICAL inf ≈ 0.28–0.30, **not proved**. It would not change Theorem 1.3′, which is window-bound.
+  - (i) Summing Lemma 3.1 over the boundary: superseded by Prop B's injection. Summation cannot beat the generic exponential: d₁ is a sum of at most D terms, each lower-bounded by Lemma 3.1 only by q₂ (and per-event probabilities can be ~4^(−D)).
+  - (i′) A D-uniform bound on M: EMPIRICAL inf ≈ 0.28–0.30, **not proved**. It would not change Theorem 1.3′ while the window is exponential, but it becomes necessary for a D-uniform result as soon as Lemma W lands (§3).
   - (ii) Boundary BFT-triple existence: Prop D is proved; the existence lemma is not found.
   - (ii′) Boundary pair balance B_K: EMPIRICAL only, and K grows with D.
   - (iii) Compactness: heuristic only.
