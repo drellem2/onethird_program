@@ -1,0 +1,173 @@
+== file d5_9.txt LO 1/3
+AGG ALL 25540
+AGG BR_bottom False 45
+AGG BR_bottom True 25495
+AGG BR_bottom_fail_has_isolated False 45
+AGG BR_either_end False 1
+AGG BR_either_end True 25539
+AGG BR_fail_has_isolated False 1
+AGG LL_or_BR_either_end False 1
+AGG LL_or_BR_either_end True 25539
+AGG LLq_any False 9902
+AGG LLq_any True 15638
+AGG LLq_bottom False 15875
+AGG LLq_bottom True 9665
+AGG LLs_any False 12187
+AGG LLs_any True 13353
+AGG WIN_either_end False 1
+AGG WIN_either_end True 25539
+AGG WIN_fail_has_isolated False 1
+AGG nmin>=3_bal_touching_min True 11373
+AGG nmin>=3_balmin True 11373
+AGG nmin>=3_noLL_balmin True 7043
+AGG noLL nmin=2 nmax=2 776
+AGG noLL nmin=2 nmax>=3 2083
+AGG noLL nmin>=3 nmax=2 2083
+AGG noLL nmin>=3 nmax>=3 4960
+AGG noLL_bal_touching_min_or_max False 41
+AGG noLL_bal_touching_min_or_max True 9861
+AGG noLL_balmin_or_balmax False 776
+AGG noLL_balmin_or_balmax True 9126
+WIT BR_bottom False range 5 | 9 0 0 2 2 a 3 b 27 7f
+WIT BR_bottom False range 5 | 9 0 0 2 2 a 3 1e 2b af
+WIT BR_bottom False range 5 | 9 0 0 2 2 a 3 2b 1f 6f
+WIT BR_bottom_fail_has_isolated False range 5 | 9 0 0 2 2 a 3 b 27 7f
+WIT BR_bottom_fail_has_isolated False range 5 | 9 0 0 2 2 a 3 1e 2b af
+WIT BR_bottom_fail_has_isolated False range 5 | 9 0 0 2 2 a 3 2b 1f 6f
+WIT BR_either_end False range 5 | 9 0 0 2 2 3 b 2b 2f 7f
+WIT BR_fail_has_isolated False range 5 | 9 0 0 2 2 3 b 2b 2f 7f
+WIT WIN_either_end False range 5 | 9 0 0 2 2 3 b 2b 2f 7f
+WIT WIN_fail_has_isolated False range 5 | 9 0 0 2 2 3 b 2b 2f 7f
+WIT noLL nmin=2 nmax=2 range 5 | 9 0 0 2 1 2 12 6 1b 7f
+WIT noLL nmin=2 nmax=2 range 5 | 9 0 0 1 2 2 12 a 1f 7f
+WIT noLL nmin=2 nmax=2 range 5 | 9 0 0 1 2 2 12 1a f 7f
+WIT noLL nmin=2 nmax>=3 range 5 | 9 0 0 2 2 2 1 13 2f 3f
+WIT noLL nmin=2 nmax>=3 range 5 | 9 0 0 2 2 1 2 23 3f 3f
+WIT noLL nmin=2 nmax>=3 range 5 | 9 0 0 2 2 2 1 1a 27 3f
+WIT noLL nmin>=3 nmax=2 range 5 | 9 0 0 0 0 0 18 7 1f 7f
+WIT noLL nmin>=3 nmax=2 range 5 | 9 0 0 0 0 0 18 7 1f bf
+WIT noLL nmin>=3 nmax=2 range 5 | 9 0 0 0 0 0 18 17 f bf
+WIT noLL nmin>=3 nmax>=3 range 5 | 9 0 0 0 0 0 10 f 3f 3f
+WIT noLL nmin>=3 nmax>=3 range 5 | 9 0 0 0 0 0 10 1f 3f 3f
+WIT noLL nmin>=3 nmax>=3 range 5 | 9 0 0 0 0 0 18 7 1f 3f
+WIT noLL_bal_touching_min_or_max False range 5 | 9 0 0 2 1 2 12 6 1b 7f
+WIT noLL_bal_touching_min_or_max False range 5 | 9 0 0 1 2 2 12 a 1f 7f
+WIT noLL_bal_touching_min_or_max False range 5 | 9 0 0 1 2 2 12 1b 1f 7f
+WIT noLL_balmin_or_balmax False range 5 | 9 0 0 2 1 2 12 6 1b 7f
+WIT noLL_balmin_or_balmax False range 5 | 9 0 0 1 2 2 12 a 1f 7f
+WIT noLL_balmin_or_balmax False range 5 | 9 0 0 1 2 2 12 1a f 7f
+== file d5_10.txt LO 1/3
+AGG ALL 116925
+AGG BR_bottom False 192
+AGG BR_bottom True 116733
+AGG BR_bottom_fail_has_isolated False 192
+AGG BR_either_end False 4
+AGG BR_either_end True 116921
+AGG BR_fail_has_isolated False 4
+AGG LL_or_BR_either_end False 4
+AGG LL_or_BR_either_end True 116921
+AGG LLq_any False 43299
+AGG LLq_any True 73626
+AGG LLq_bottom False 71415
+AGG LLq_bottom True 45510
+AGG LLs_any False 53474
+AGG LLs_any True 63451
+AGG WIN_either_end False 4
+AGG WIN_either_end True 116921
+AGG WIN_fail_has_isolated False 4
+AGG nmin>=3_bal_touching_min True 50601
+AGG nmin>=3_balmin True 50601
+AGG nmin>=3_noLL_balmin True 30469
+AGG noLL nmin=2 nmax=2 3857
+AGG noLL nmin=2 nmax>=3 8973
+AGG noLL nmin>=3 nmax=2 8973
+AGG noLL nmin>=3 nmax>=3 21496
+AGG noLL_bal_touching_min_or_max False 255
+AGG noLL_bal_touching_min_or_max True 43044
+AGG noLL_balmin_or_balmax False 3857
+AGG noLL_balmin_or_balmax True 39442
+WIT BR_bottom False range 5 | 10 0 0 2 2 a 3 b 27 3f 7f
+WIT BR_bottom False range 5 | 10 0 0 2 2 a 3 b 27 3f 17f
+WIT BR_bottom False range 5 | 10 0 0 2 2 a 3 b 27 5f ff
+WIT BR_bottom_fail_has_isolated False range 5 | 10 0 0 2 2 a 3 b 27 3f 7f
+WIT BR_bottom_fail_has_isolated False range 5 | 10 0 0 2 2 a 3 b 27 3f 17f
+WIT BR_bottom_fail_has_isolated False range 5 | 10 0 0 2 2 a 3 b 27 5f ff
+WIT BR_either_end False range 5 | 10 0 0 2 2 a 3 b 2f 3f ff
+WIT BR_either_end False range 5 | 10 0 0 2 2 3 b b 4f 1f 17f
+WIT BR_either_end False range 5 | 10 0 0 2 2 3 b b 1f 5f ff
+WIT BR_fail_has_isolated False range 5 | 10 0 0 2 2 a 3 b 2f 3f ff
+WIT BR_fail_has_isolated False range 5 | 10 0 0 2 2 3 b b 4f 1f 17f
+WIT BR_fail_has_isolated False range 5 | 10 0 0 2 2 3 b b 1f 5f ff
+WIT WIN_either_end False range 5 | 10 0 0 2 2 a 3 b 2f 3f ff
+WIT WIN_either_end False range 5 | 10 0 0 2 2 3 b b 4f 1f 17f
+WIT WIN_either_end False range 5 | 10 0 0 2 2 3 b b 1f 5f ff
+WIT WIN_fail_has_isolated False range 5 | 10 0 0 2 2 a 3 b 2f 3f ff
+WIT WIN_fail_has_isolated False range 5 | 10 0 0 2 2 3 b b 4f 1f 17f
+WIT WIN_fail_has_isolated False range 5 | 10 0 0 2 2 3 b b 1f 5f ff
+WIT noLL nmin=2 nmax=2 range 5 | 10 0 0 2 2 2 1 13 2f 3f ff
+WIT noLL nmin=2 nmax=2 range 5 | 10 0 0 2 2 2 1 13 2f 3f 17f
+WIT noLL nmin=2 nmax=2 range 5 | 10 0 0 2 2 1 2 23 3f 3f 17f
+WIT noLL nmin=2 nmax>=3 range 5 | 10 0 0 2 2 2 1 12 2f 7f 7f
+WIT noLL nmin=2 nmax>=3 range 5 | 10 0 0 2 2 1 2 22 3f 7f 7f
+WIT noLL nmin=2 nmax>=3 range 5 | 10 0 0 2 2 2 1 13 2f 3f 7f
+WIT noLL nmin>=3 nmax=2 range 5 | 10 0 0 0 0 0 10 f 3f 3f 17f
+WIT noLL nmin>=3 nmax=2 range 5 | 10 0 0 0 0 0 10 f 3f 3f 1bf
+WIT noLL nmin>=3 nmax=2 range 5 | 10 0 0 0 0 0 10 1f 3f 3f 17f
+WIT noLL nmin>=3 nmax>=3 range 5 | 10 0 0 0 0 0 10 f 3f 3f 3f
+WIT noLL nmin>=3 nmax>=3 range 5 | 10 0 0 0 0 0 10 f 3f 3f 7f
+WIT noLL nmin>=3 nmax>=3 range 5 | 10 0 0 0 0 0 10 f 3f 3f 13f
+WIT noLL_bal_touching_min_or_max False range 5 | 10 0 0 2 2 2 1 1a 27 3f ff
+WIT noLL_bal_touching_min_or_max False range 5 | 10 0 0 2 2 1 2 2e 33 3f ff
+WIT noLL_bal_touching_min_or_max False range 5 | 10 0 0 2 1 2 12 16 f 3b ff
+WIT noLL_balmin_or_balmax False range 5 | 10 0 0 2 2 2 1 13 2f 3f ff
+WIT noLL_balmin_or_balmax False range 5 | 10 0 0 2 2 2 1 13 2f 3f 17f
+WIT noLL_balmin_or_balmax False range 5 | 10 0 0 2 2 1 2 23 3f 3f 17f
+== file d5_11.txt LO 1/3
+AGG ALL 535167
+AGG BR_bottom False 940
+AGG BR_bottom True 534227
+AGG BR_bottom_fail_has_isolated False 940
+AGG BR_either_end True 535167
+AGG LL_or_BR_either_end True 535167
+AGG LLq_any False 195844
+AGG LLq_any True 339323
+AGG LLq_bottom False 324688
+AGG LLq_bottom True 210479
+AGG LLs_any False 239473
+AGG LLs_any True 295694
+AGG WIN_either_end True 535167
+AGG nmin>=3_bal_touching_min True 230763
+AGG nmin>=3_balmin True 230763
+AGG nmin>=3_noLL_balmin True 139355
+AGG noLL nmin=2 nmax=2 16489
+AGG noLL nmin=2 nmax>=3 40000
+AGG noLL nmin>=3 nmax=2 40000
+AGG noLL nmin>=3 nmax>=3 99355
+AGG noLL_bal_touching_min_or_max False 916
+AGG noLL_bal_touching_min_or_max True 194928
+AGG noLL_balmin_or_balmax False 16489
+AGG noLL_balmin_or_balmax True 179355
+WIT BR_bottom False range 5 | 11 0 0 2 2 a 3 b 27 5f 3f ff
+WIT BR_bottom False range 5 | 11 0 0 2 2 a 3 b 27 3f 7f ff
+WIT BR_bottom False range 5 | 11 0 0 2 2 a 3 b 27 3f 7f 1ff
+WIT BR_bottom_fail_has_isolated False range 5 | 11 0 0 2 2 a 3 b 27 5f 3f ff
+WIT BR_bottom_fail_has_isolated False range 5 | 11 0 0 2 2 a 3 b 27 3f 7f ff
+WIT BR_bottom_fail_has_isolated False range 5 | 11 0 0 2 2 a 3 b 27 3f 7f 1ff
+WIT noLL nmin=2 nmax=2 range 5 | 11 0 0 2 2 2 1 12 2f 7f 7f 2ff
+WIT noLL nmin=2 nmax=2 range 5 | 11 0 0 2 2 2 1 12 2f 7f 7f 37f
+WIT noLL nmin=2 nmax=2 range 5 | 11 0 0 2 2 1 2 22 3f 7f 7f 2ff
+WIT noLL nmin=2 nmax>=3 range 5 | 11 0 0 2 2 2 1 12 2f 7f 7f 7f
+WIT noLL nmin=2 nmax>=3 range 5 | 11 0 0 2 2 2 1 12 2f 7f 7f ff
+WIT noLL nmin=2 nmax>=3 range 5 | 11 0 0 2 2 2 1 12 2f 7f 7f 27f
+WIT noLL nmin>=3 nmax=2 range 5 | 11 0 0 0 0 0 10 f 3f 3f 3f 37f
+WIT noLL nmin>=3 nmax=2 range 5 | 11 0 0 0 0 0 10 f 3f 3f 7f 1ff
+WIT noLL nmin>=3 nmax=2 range 5 | 11 0 0 0 0 0 10 f 3f 3f 7f 37f
+WIT noLL nmin>=3 nmax>=3 range 5 | 11 0 0 0 0 0 10 f 3f 3f 3f 7f
+WIT noLL nmin>=3 nmax>=3 range 5 | 11 0 0 0 0 0 10 f 3f 3f 3f 27f
+WIT noLL nmin>=3 nmax>=3 range 5 | 11 0 0 0 0 0 10 f 3f 3f 7f 7f
+WIT noLL_bal_touching_min_or_max False range 5 | 11 0 0 2 2 2 1 13 2f 3f 7f 1ff
+WIT noLL_bal_touching_min_or_max False range 5 | 11 0 0 2 2 1 2 23 3f 3f 7f 1ff
+WIT noLL_bal_touching_min_or_max False range 5 | 11 0 0 2 2 2 1 1a 27 3f 7f 1ff
+WIT noLL_balmin_or_balmax False range 5 | 11 0 0 2 2 2 1 12 2f 7f 7f 2ff
+WIT noLL_balmin_or_balmax False range 5 | 11 0 0 2 2 2 1 12 2f 7f 7f 37f
+WIT noLL_balmin_or_balmax False range 5 | 11 0 0 2 2 1 2 22 3f 7f 7f 2ff

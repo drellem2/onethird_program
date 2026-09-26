@@ -1,0 +1,317 @@
+== file p3.txt LO 1/3
+AGG ALL 2
+AGG BR_bottom True 2
+AGG BR_either_end True 2
+AGG LL_or_BR_either_end True 2
+AGG LLq_any False 1
+AGG LLq_any True 1
+AGG LLq_bottom False 1
+AGG LLq_bottom True 1
+AGG LLs_any False 1
+AGG LLs_any True 1
+AGG WIN_either_end True 2
+AGG nmin>=3_bal_touching_min True 1
+AGG nmin>=3_balmin True 1
+AGG nmin>=3_noLL_balmin True 1
+AGG noLL nmin>=3 nmax>=3 1
+AGG noLL_bal_touching_min_or_max True 1
+AGG noLL_balmin_or_balmax True 1
+WIT noLL nmin>=3 nmax>=3 range 2 | 3 0 0 0
+== file p4.txt LO 1/3
+AGG ALL 7
+AGG BR_bottom True 7
+AGG BR_either_end True 7
+AGG LL_or_BR_either_end True 7
+AGG LLq_any False 4
+AGG LLq_any True 3
+AGG LLq_bottom False 4
+AGG LLq_bottom True 3
+AGG LLs_any False 4
+AGG LLs_any True 3
+AGG WIN_either_end True 7
+AGG nmin>=3_bal_touching_min True 3
+AGG nmin>=3_balmin True 3
+AGG nmin>=3_noLL_balmin True 3
+AGG noLL nmin=2 nmax>=3 1
+AGG noLL nmin>=3 nmax=2 1
+AGG noLL nmin>=3 nmax>=3 2
+AGG noLL_bal_touching_min_or_max True 4
+AGG noLL_balmin_or_balmax True 4
+WIT noLL nmin=2 nmax>=3 range 3 | 4 0 0 2 2
+WIT noLL nmin>=3 nmax=2 range 3 | 4 0 0 0 6
+WIT noLL nmin>=3 nmax>=3 range 3 | 4 0 0 0 0
+WIT noLL nmin>=3 nmax>=3 range 3 | 4 0 0 0 4
+== file p5.txt LO 1/3
+AGG ALL 31
+AGG BR_bottom True 31
+AGG BR_either_end True 31
+AGG LL_or_BR_either_end True 31
+AGG LLq_any False 14
+AGG LLq_any True 17
+AGG LLq_bottom False 19
+AGG LLq_bottom True 12
+AGG LLs_any False 18
+AGG LLs_any True 13
+AGG WIN_either_end True 31
+AGG nmin>=3_bal_touching_min True 15
+AGG nmin>=3_balmin True 15
+AGG nmin>=3_noLL_balmin True 10
+AGG noLL nmin=2 nmax=2 2
+AGG noLL nmin=2 nmax>=3 2
+AGG noLL nmin>=3 nmax=2 2
+AGG noLL nmin>=3 nmax>=3 8
+AGG noLL_bal_touching_min_or_max True 14
+AGG noLL_balmin_or_balmax False 2
+AGG noLL_balmin_or_balmax True 12
+WIT noLL nmin=2 nmax=2 range 3 | 5 0 0 2 2 b
+WIT noLL nmin=2 nmax=2 range 4 | 5 0 0 2 2 e
+WIT noLL nmin=2 nmax>=3 range 4 | 5 0 0 2 2 2
+WIT noLL nmin=2 nmax>=3 range 4 | 5 0 0 2 2 a
+WIT noLL nmin>=3 nmax=2 range 4 | 5 0 0 0 0 e
+WIT noLL nmin>=3 nmax=2 range 4 | 5 0 0 0 4 e
+WIT noLL nmin>=3 nmax>=3 range 4 | 5 0 0 0 0 0
+WIT noLL nmin>=3 nmax>=3 range 4 | 5 0 0 0 0 8
+WIT noLL nmin>=3 nmax>=3 range 4 | 5 0 0 0 0 c
+WIT noLL_balmin_or_balmax False range 3 | 5 0 0 2 2 b
+WIT noLL_balmin_or_balmax False range 4 | 5 0 0 2 2 e
+== file p6.txt LO 1/3
+AGG ALL 184
+AGG BR_bottom True 184
+AGG BR_either_end True 184
+AGG LL_or_BR_either_end True 184
+AGG LLq_any False 85
+AGG LLq_any True 99
+AGG LLq_bottom False 123
+AGG LLq_bottom True 61
+AGG LLs_any False 110
+AGG LLs_any True 74
+AGG WIN_either_end True 184
+AGG nmin>=3_bal_touching_min True 95
+AGG nmin>=3_balmin True 95
+AGG nmin>=3_noLL_balmin True 66
+AGG noLL nmin=2 nmax=2 5
+AGG noLL nmin=2 nmax>=3 14
+AGG noLL nmin>=3 nmax=2 14
+AGG noLL nmin>=3 nmax>=3 52
+AGG noLL_bal_touching_min_or_max False 1
+AGG noLL_bal_touching_min_or_max True 84
+AGG noLL_balmin_or_balmax False 5
+AGG noLL_balmin_or_balmax True 80
+WIT noLL nmin=2 nmax=2 range 4 | 6 0 0 2 2 2 1b
+WIT noLL nmin=2 nmax=2 range 5 | 6 0 0 2 2 2 1e
+WIT noLL nmin=2 nmax=2 range 3 | 6 0 0 2 2 3 f
+WIT noLL nmin=2 nmax>=3 range 5 | 6 0 0 2 2 2 2
+WIT noLL nmin=2 nmax>=3 range 4 | 6 0 0 2 2 2 3
+WIT noLL nmin=2 nmax>=3 range 5 | 6 0 0 2 2 2 12
+WIT noLL nmin>=3 nmax=2 range 5 | 6 0 0 0 0 0 1e
+WIT noLL nmin>=3 nmax=2 range 4 | 6 0 0 0 0 8 f
+WIT noLL nmin>=3 nmax=2 range 5 | 6 0 0 0 0 8 1e
+WIT noLL nmin>=3 nmax>=3 range 5 | 6 0 0 0 0 0 0
+WIT noLL nmin>=3 nmax>=3 range 5 | 6 0 0 0 0 0 10
+WIT noLL nmin>=3 nmax>=3 range 5 | 6 0 0 0 0 0 18
+WIT noLL_bal_touching_min_or_max False range 3 | 6 0 0 2 2 3 f
+WIT noLL_balmin_or_balmax False range 4 | 6 0 0 2 2 2 1b
+WIT noLL_balmin_or_balmax False range 5 | 6 0 0 2 2 2 1e
+WIT noLL_balmin_or_balmax False range 3 | 6 0 0 2 2 3 f
+== file p7.txt LO 1/3
+AGG ALL 1351
+AGG BR_bottom False 11
+AGG BR_bottom True 1340
+AGG BR_bottom_fail_has_isolated False 3
+AGG BR_bottom_fail_has_isolated True 8
+AGG BR_either_end False 3
+AGG BR_either_end True 1348
+AGG BR_fail_has_isolated True 3
+AGG LL_or_BR_either_end False 3
+AGG LL_or_BR_either_end True 1348
+AGG LLq_any False 737
+AGG LLq_any True 614
+AGG LLq_bottom False 985
+AGG LLq_bottom True 366
+AGG LLs_any False 900
+AGG LLs_any True 451
+AGG WIN_either_end True 1351
+AGG nmin>=3_bal_touching_min True 757
+AGG nmin>=3_balmin False 8
+AGG nmin>=3_balmin True 749
+AGG nmin>=3_noLL_balmin False 8
+AGG nmin>=3_noLL_balmin True 559
+AGG noLL nmin=2 nmax=2 42
+AGG noLL nmin=2 nmax>=3 128
+AGG noLL nmin>=3 nmax=2 128
+AGG noLL nmin>=3 nmax>=3 439
+AGG noLL_bal_touching_min_or_max False 6
+AGG noLL_bal_touching_min_or_max True 731
+AGG noLL_balmin_or_balmax False 47
+AGG noLL_balmin_or_balmax True 690
+WIT BR_bottom False range 6 | 7 0 0 0 4 4 6 16
+WIT BR_bottom False range 6 | 7 0 0 0 4 4 6 1e
+WIT BR_bottom False range 6 | 7 0 0 0 4 4 16 16
+WIT BR_bottom_fail_has_isolated False range 5 | 7 0 0 2 2 a 3 2b
+WIT BR_bottom_fail_has_isolated False range 5 | 7 0 0 2 2 3 b b
+WIT BR_bottom_fail_has_isolated False range 5 | 7 0 0 2 2 3 b 2b
+WIT BR_either_end False range 6 | 7 0 0 0 4 4 6 1e
+WIT BR_either_end False range 6 | 7 0 0 0 4 6 c 2e
+WIT BR_either_end False range 6 | 7 0 0 0 4 c e 2e
+WIT nmin>=3_balmin False range 6 | 7 0 0 0 4 4 6 16
+WIT nmin>=3_balmin False range 6 | 7 0 0 0 4 4 6 1e
+WIT nmin>=3_balmin False range 6 | 7 0 0 0 4 4 16 16
+WIT nmin>=3_noLL_balmin False range 6 | 7 0 0 0 4 4 6 16
+WIT nmin>=3_noLL_balmin False range 6 | 7 0 0 0 4 4 6 1e
+WIT nmin>=3_noLL_balmin False range 6 | 7 0 0 0 4 4 16 16
+WIT noLL nmin=2 nmax=2 range 5 | 7 0 0 1 2 2 2 3a
+WIT noLL nmin=2 nmax=2 range 5 | 7 0 0 1 2 2 2 3b
+WIT noLL nmin=2 nmax=2 range 5 | 7 0 0 1 2 2 12 3a
+WIT noLL nmin=2 nmax>=3 range 5 | 7 0 0 2 2 2 2 1
+WIT noLL nmin=2 nmax>=3 range 5 | 7 0 0 2 2 1 2 22
+WIT noLL nmin=2 nmax>=3 range 5 | 7 0 0 2 2 1 2 23
+WIT noLL nmin>=3 nmax=2 range 6 | 7 0 0 0 0 0 0 3e
+WIT noLL nmin>=3 nmax=2 range 5 | 7 0 0 0 0 0 10 f
+WIT noLL nmin>=3 nmax=2 range 5 | 7 0 0 0 0 0 10 1f
+WIT noLL nmin>=3 nmax>=3 range 6 | 7 0 0 0 0 0 0 0
+WIT noLL nmin>=3 nmax>=3 range 6 | 7 0 0 0 0 0 0 20
+WIT noLL nmin>=3 nmax>=3 range 6 | 7 0 0 0 0 0 0 30
+WIT noLL_bal_touching_min_or_max False range 5 | 7 0 0 1 2 2 2 3a
+WIT noLL_bal_touching_min_or_max False range 5 | 7 0 0 1 2 2 2 3b
+WIT noLL_bal_touching_min_or_max False range 5 | 7 0 0 2 2 2 3 1e
+WIT noLL_balmin_or_balmax False range 6 | 7 0 0 0 4 4 6 1e
+WIT noLL_balmin_or_balmax False range 6 | 7 0 0 0 4 6 c 2e
+WIT noLL_balmin_or_balmax False range 6 | 7 0 0 0 4 c e 2e
+== file p8.txt LO 1/3
+AGG ALL 12524
+AGG BR_bottom False 185
+AGG BR_bottom True 12339
+AGG BR_bottom_fail_has_isolated False 43
+AGG BR_bottom_fail_has_isolated True 142
+AGG BR_either_end False 14
+AGG BR_either_end True 12510
+AGG BR_fail_has_isolated True 14
+AGG LL_or_BR_either_end False 14
+AGG LL_or_BR_either_end True 12510
+AGG LLq_any False 7538
+AGG LLq_any True 4986
+AGG LLq_bottom False 9654
+AGG LLq_bottom True 2870
+AGG LLs_any False 9215
+AGG LLs_any True 3309
+AGG WIN_either_end True 12524
+AGG nmin>=3_bal_touching_min True 7563
+AGG nmin>=3_balmin False 155
+AGG nmin>=3_balmin True 7408
+AGG nmin>=3_noLL_balmin False 150
+AGG nmin>=3_noLL_balmin True 5775
+AGG noLL nmin=2 nmax=2 384
+AGG noLL nmin=2 nmax>=3 1229
+AGG noLL nmin>=3 nmax=2 1229
+AGG noLL nmin>=3 nmax>=3 4696
+AGG noLL_bal_touching_min_or_max False 20
+AGG noLL_bal_touching_min_or_max True 7518
+AGG noLL_balmin_or_balmax False 460
+AGG noLL_balmin_or_balmax True 7078
+WIT BR_bottom False range 7 | 8 0 0 0 4 4 2 4 46
+WIT BR_bottom False range 7 | 8 0 0 0 4 2 4 4 66
+WIT BR_bottom False range 7 | 8 0 0 0 2 4 4 4 76
+WIT BR_bottom_fail_has_isolated False range 6 | 8 0 0 0 4 4 6 16 2f
+WIT BR_bottom_fail_has_isolated False range 6 | 8 0 0 0 4 4 6 16 3f
+WIT BR_bottom_fail_has_isolated False range 6 | 8 0 0 0 4 4 6 16 57
+WIT BR_either_end False range 7 | 8 0 0 0 4 4 4 6 3e
+WIT BR_either_end False range 7 | 8 0 0 0 4 4 6 14 5e
+WIT BR_either_end False range 7 | 8 0 0 0 4 4 14 6 5e
+WIT nmin>=3_balmin False range 7 | 8 0 0 0 4 4 2 4 46
+WIT nmin>=3_balmin False range 7 | 8 0 0 0 4 2 4 4 66
+WIT nmin>=3_balmin False range 7 | 8 0 0 0 2 4 4 4 76
+WIT nmin>=3_noLL_balmin False range 7 | 8 0 0 0 4 4 2 4 46
+WIT nmin>=3_noLL_balmin False range 7 | 8 0 0 0 4 2 4 4 66
+WIT nmin>=3_noLL_balmin False range 7 | 8 0 0 0 2 4 4 4 76
+WIT noLL nmin=2 nmax=2 range 6 | 8 0 0 1 2 2 2 2 7a
+WIT noLL nmin=2 nmax=2 range 6 | 8 0 0 1 2 2 2 2 7b
+WIT noLL nmin=2 nmax=2 range 6 | 8 0 0 2 2 2 2 1 7b
+WIT noLL nmin=2 nmax>=3 range 6 | 8 0 0 2 2 2 2 2 1
+WIT noLL nmin=2 nmax>=3 range 6 | 8 0 0 2 2 2 1 2 42
+WIT noLL nmin=2 nmax>=3 range 6 | 8 0 0 2 2 2 1 2 43
+WIT noLL nmin>=3 nmax=2 range 7 | 8 0 0 0 0 0 0 0 7e
+WIT noLL nmin>=3 nmax=2 range 6 | 8 0 0 0 0 0 0 20 1f
+WIT noLL nmin>=3 nmax=2 range 6 | 8 0 0 0 0 0 0 20 3f
+WIT noLL nmin>=3 nmax>=3 range 7 | 8 0 0 0 0 0 0 0 0
+WIT noLL nmin>=3 nmax>=3 range 7 | 8 0 0 0 0 0 0 0 40
+WIT noLL nmin>=3 nmax>=3 range 7 | 8 0 0 0 0 0 0 0 60
+WIT noLL_bal_touching_min_or_max False range 6 | 8 0 0 1 2 2 2 2 7a
+WIT noLL_bal_touching_min_or_max False range 6 | 8 0 0 1 2 2 2 2 7b
+WIT noLL_bal_touching_min_or_max False range 5 | 8 0 0 2 2 2 1 12 2f
+WIT noLL_balmin_or_balmax False range 7 | 8 0 0 0 4 4 4 6 3e
+WIT noLL_balmin_or_balmax False range 7 | 8 0 0 0 4 4 4 6 7e
+WIT noLL_balmin_or_balmax False range 7 | 8 0 0 0 4 4 6 14 5e
+== file p9.txt LO 1/3
+AGG ALL 146468
+AGG BR_bottom False 3018
+AGG BR_bottom True 143450
+AGG BR_bottom_fail_has_isolated False 1256
+AGG BR_bottom_fail_has_isolated True 1762
+AGG BR_either_end False 224
+AGG BR_either_end True 146244
+AGG BR_fail_has_isolated False 18
+AGG BR_fail_has_isolated True 206
+AGG LL_or_BR_either_end False 224
+AGG LL_or_BR_either_end True 146244
+AGG LLq_any False 96301
+AGG LLq_any True 50167
+AGG LLq_bottom False 118341
+AGG LLq_bottom True 28127
+AGG LLs_any False 117029
+AGG LLs_any True 29439
+AGG WIN_either_end False 2
+AGG WIN_either_end True 146466
+AGG WIN_fail_has_isolated False 2
+AGG nmin>=3_bal_touching_min True 95056
+AGG nmin>=3_balmin False 2622
+AGG nmin>=3_balmin True 92434
+AGG nmin>=3_noLL_balmin False 2338
+AGG nmin>=3_noLL_balmin True 75433
+AGG noLL nmin=2 nmax=2 3823
+AGG noLL nmin=2 nmax>=3 14707
+AGG noLL nmin>=3 nmax=2 14707
+AGG noLL nmin>=3 nmax>=3 63064
+AGG noLL_bal_touching_min_or_max False 111
+AGG noLL_bal_touching_min_or_max True 96190
+AGG noLL_balmin_or_balmax False 4953
+AGG noLL_balmin_or_balmax True 91348
+WIT BR_bottom False range 8 | 9 0 0 0 4 4 4 2 4 86
+WIT BR_bottom False range 8 | 9 0 0 0 4 4 2 4 4 c6
+WIT BR_bottom False range 8 | 9 0 0 0 4 2 4 4 4 e6
+WIT BR_bottom_fail_has_isolated False range 7 | 9 0 0 0 4 4 4 2 26 5f
+WIT BR_bottom_fail_has_isolated False range 7 | 9 0 0 0 4 4 2 4 46 7f
+WIT BR_bottom_fail_has_isolated False range 7 | 9 0 0 0 4 4 2 4 46 c7
+WIT BR_either_end False range 8 | 9 0 0 0 4 4 4 2 24 5e
+WIT BR_either_end False range 8 | 9 0 0 0 4 4 2 4 44 7e
+WIT BR_either_end False range 8 | 9 0 0 0 4 4 4 2 26 5e
+WIT BR_fail_has_isolated False range 7 | 9 0 0 0 4 4 4 6 26 77
+WIT BR_fail_has_isolated False range 7 | 9 0 0 0 4 4 4 6 46 77
+WIT BR_fail_has_isolated False range 7 | 9 0 0 0 4 4 14 6 46 77
+WIT WIN_either_end False range 5 | 9 0 0 2 2 3 b 2b 2f 7f
+WIT WIN_either_end False range 6 | 9 0 0 2 2 3 b 2b 3b 7f
+WIT WIN_fail_has_isolated False range 5 | 9 0 0 2 2 3 b 2b 2f 7f
+WIT WIN_fail_has_isolated False range 6 | 9 0 0 2 2 3 b 2b 3b 7f
+WIT nmin>=3_balmin False range 8 | 9 0 0 0 4 4 4 2 4 86
+WIT nmin>=3_balmin False range 8 | 9 0 0 0 4 4 2 4 4 c6
+WIT nmin>=3_balmin False range 8 | 9 0 0 0 4 2 4 4 4 e6
+WIT nmin>=3_noLL_balmin False range 8 | 9 0 0 0 4 4 4 2 4 86
+WIT nmin>=3_noLL_balmin False range 8 | 9 0 0 0 4 4 2 4 4 c6
+WIT nmin>=3_noLL_balmin False range 8 | 9 0 0 0 4 2 4 4 4 e6
+WIT noLL nmin=2 nmax=2 range 7 | 9 0 0 1 2 2 2 2 2 fa
+WIT noLL nmin=2 nmax=2 range 7 | 9 0 0 1 2 2 2 2 2 fb
+WIT noLL nmin=2 nmax=2 range 7 | 9 0 0 2 2 2 2 2 1 fb
+WIT noLL nmin=2 nmax>=3 range 7 | 9 0 0 2 2 2 2 2 2 1
+WIT noLL nmin=2 nmax>=3 range 7 | 9 0 0 2 2 2 2 2 1 3
+WIT noLL nmin=2 nmax>=3 range 7 | 9 0 0 2 2 2 2 1 2 82
+WIT noLL nmin>=3 nmax=2 range 8 | 9 0 0 0 0 0 0 0 0 fe
+WIT noLL nmin>=3 nmax=2 range 7 | 9 0 0 0 0 0 0 0 40 3f
+WIT noLL nmin>=3 nmax=2 range 7 | 9 0 0 0 0 0 0 0 40 7f
+WIT noLL nmin>=3 nmax>=3 range 8 | 9 0 0 0 0 0 0 0 0 0
+WIT noLL nmin>=3 nmax>=3 range 8 | 9 0 0 0 0 0 0 0 0 80
+WIT noLL nmin>=3 nmax>=3 range 8 | 9 0 0 0 0 0 0 0 0 c0
+WIT noLL_bal_touching_min_or_max False range 7 | 9 0 0 1 2 2 2 2 2 fa
+WIT noLL_bal_touching_min_or_max False range 7 | 9 0 0 1 2 2 2 2 2 fb
+WIT noLL_bal_touching_min_or_max False range 6 | 9 0 0 2 2 2 2 1 22 5f
+WIT noLL_balmin_or_balmax False range 8 | 9 0 0 0 4 4 4 4 2 fe
+WIT noLL_balmin_or_balmax False range 8 | 9 0 0 0 4 4 4 2 24 5e
+WIT noLL_balmin_or_balmax False range 8 | 9 0 0 0 4 4 2 4 44 7e
