@@ -1,0 +1,18 @@
+records with delta < 9/25 (= 0.3600): 157
+  w        {2: 147, 3: 10}
+  end_all  {False: 46, True: 111}
+  end_any  {False: 35, True: 122}
+  uniq     {True: 157}
+  dM       {False: 35, True: 122}
+  anti     {False: 61, True: 96}
+  struct   {False: 126, True: 31}
+  by (pi, width): {(2, 2): 1, (3, 2): 67, (4, 2): 73, (4, 3): 8, (5, 2): 6, (5, 3): 1, (6, 3): 1}
+records with delta < 7/20 (= 0.3500): 44
+  w        {2: 44}
+  end_all  {False: 4, True: 40}
+  end_any  {True: 44}
+  uniq     {True: 44}
+  dM       {True: 44}
+  anti     {False: 8, True: 36}
+  struct   {False: 41, True: 3}
+  by (pi, width): {(2, 2): 1, (3, 2): 11, (4, 2): 32}
