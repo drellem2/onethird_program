@@ -1,0 +1,10 @@
+n=4: non-chain 14; posets with a K-bad dominance L: 0; K-bad L: 0; first-match kill {}; kill-sets {}; survivors 0
+n=5: non-chain 52; posets with a K-bad dominance L: 0; K-bad L: 0; first-match kill {}; kill-sets {}; survivors 0
+n=6: non-chain 216; posets with a K-bad dominance L: 0; K-bad L: 0; first-match kill {}; kill-sets {}; survivors 0
+n=7: non-chain 1013; posets with a K-bad dominance L: 0; K-bad L: 0; first-match kill {}; kill-sets {}; survivors 0
+n=8: non-chain 5334; posets with a K-bad dominance L: 0; K-bad L: 0; first-match kill {}; kill-sets {}; survivors 0
+n=9: non-chain 31239; posets with a K-bad dominance L: 2; K-bad L: 2; first-match kill {'TS': 2}; kill-sets {('3.1*', 'TS'): 2}; survivors 0
+   P = [1,1] [1,2] [1,5] [2,3] [2,6] [3,4] [4,5] [5,6] [6,6]
+   L = [1,1] [1,2] [2,3] [1,5] [3,4] [2,6] [4,5] [5,6] [6,6]  kills=['3.1*', 'TS']
+   P = [1,1] [1,2] [2,3] [2,6] [3,4] [4,5] [5,6] [6,7] [7,7]
+   L = [1,1] [1,2] [2,3] [3,4] [2,6] [4,5] [5,6] [6,7] [7,7]  kills=['3.1*', 'TS']

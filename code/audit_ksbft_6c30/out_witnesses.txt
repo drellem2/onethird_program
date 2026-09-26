@@ -1,0 +1,27 @@
+== P5 no-go (sec 2.1) ==
+ e = 11  A = [(3, 3)]  B = [(1, 1)]  dominance: True
+  P[(1, 1)<(1, 2)] = 8/11
+  P[(1, 2)<(2, 3)] = 8/11
+  P[(2, 3)<(3, 3)] = 8/11
+  comparable in X: [((1, 1), (2, 3)), ((1, 1), (3, 3)), ((1, 2), (3, 3))]
+  (L1, L2, L3)(a,a') = (3, 5, 3)  (L1,L2,L3)(a',a) = (3, 0, 8)
+  2/3-order restricted to X is w < a < a' < s, a,a' adjacent in it: True
+== AA dominance LCC witness at n=7 (out_localcc.txt, first AA row) ==
+ A = [(3, 4), (4, 4)] B = [] dominance a->a': True
+  P[(1, 2)<(1, 4)] = 25/37 (0.6757)
+  P[(1, 4)<(3, 4)] = 180/259 (0.6950)
+  P[(1, 4)<(4, 4)] = 30/37 (0.8108)
+  P[(3, 4)<(4, 4)] = 25/37 (0.6757)
+  every law in X outside [1/3,2/3]: True
+  no X element between a and a' in the 2/3-order: True
+== T11 (sec 2.3) ==
+  A(a,a') = [(4, 4), (4, 5)]  Z = [(4, 4), (4, 5)]
+  P[a<a']=2/3 P[s<a']=1/3 P[t<a']=1/5 P[s<t]=43/60
+  D_s = [(1, 2), (3, 3)] ; Prop 2.4 equality P[a<a'] = 2P[s<a']: True
+== O9a certificate triple (sec 3.1) ==
+  A(a,c) = [(5, 6), (6, 6)]  B(a,c) = []  A(b,c) = [(6, 6)]  B(c,a) = [(1, 2)]
+  B(c,b) = [(1, 2), (2, 3)]  A(c,b) = []  counted k-events: [((5, 6), 'after', (2, 6)), ((2, 3), 'before', (2, 6))]
+== sec 5 general n=9 survivor ==
+  dominance-respecting: True  linear ext: True  K-bad: True  kills: []
+  steps (|A|,|B|, dominance either way): [(2, 0, False), (1, 1, False), (1, 1, False), (1, 1, False), (1, 1, False), (1, 1, False), (1, 1, False), (0, 2, False)]
+  delta(P) = 1/45
