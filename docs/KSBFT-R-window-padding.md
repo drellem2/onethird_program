@@ -5,12 +5,51 @@ audit mg-af00 pending). P1 listed "padding finite witnesses into the window" as 
 does it. **Nothing in `STATE.md` was edited, and no ticket was closed or re-opened. The verdicts are
 recommendations to pm-onethird.**
 
+**Errata (mg-ef5b, per audit mg-244e, `docs/AUDIT-mg-7bfc.md`).** Every exhibit was reproduced
+exactly by independent code, so no exhibit changes. Corrected:
+- **BROKEN: "mg-b447 Thm 4.1 refutes only the continuity form" (§4.2, Rec 2).** mg-b447's (T) is
+  **existential** ("some balanced pair of `P[A]` or `P[B]` stays balanced", KSBFT-F §1). `W*`
+  refutes that existential form, because `{x,y}` is the only incomparable pair of either side.
+  The correct statement: Thm 4.1 refutes the existential (T) **on decomposable posets only**, and
+  the refutation does not reach `𝒦_min`.
+- **BROKEN at an edge case, harmless: Lemma 1.3(2) needs `U ⊊ W`.** At `U = W` the element `c_k` is
+  comparable to everything, so it is isolated in `G`. Every use here has `U ≠ W`.
+- **OVERSTATED: "padding kills every δ-direct route inside the minimal-counterexample shape".** The
+  hosts satisfy (M1)+(M2) (and O1 at both ends), but not (M3): they have δ ≥ 0.45. So each
+  "dead" verdict kills the route's lemma **as a class lemma on (M1)+(M2)**. A route that uses
+  counterexample-only hypotheses (no balanced pair, `n`-minimality) is not touched. §4's preamble
+  already said this; the headline, verdict 3 and Rec 1 now say it too. A24 stays undecided.
+- **OVERSTATED: "exactly three exact paddings" and "inside `𝒦_min` the witness can only appear
+  reweighted".** A prime, both-connected 5-poset `{z1<u, z2<v, z1<w, z2<w}` keeps the law of the
+  2-antichain `{u,v}` exactly (`P[u<v] = 1/2`, by the automorphism `(z1 z2)(u v)`), although
+  `{u,v}` is not a module. What is true, and all that is used: a **module** padding of a non-chain
+  witness is never `𝒦_min`-shaped. For `2+2` no such prime host was found (EMPIRICAL, 4000
+  random hosts, `n ≤ 8`).
+- **(T_cont): the labels were swapped.** `Δ₁ → 0` is **PROVEN** (KSBFT-F Lemma 2.1). That `p_xy`
+  stays away from 1/2 is **EMPIRICAL**: the audit's `(M,6,M)` family, `M = 16, 20, 24, 30`
+  (range 9), has `p_xy = 0.1457` at every size while `Δ₁` falls 0.044 → 0.024. Primality was
+  checked at `M ≤ 16` only.
+- **(T∃)'s survival on insulated `W*` is an exact computation, not insulation.** Thm 2.3's
+  guarantee needs depth `h(5, 0.05) ≈ 1.8·10⁹`; `M = 8, 16` are nowhere near it.
+- **Cor 5.3 is vacuous for `n < h(D,μ)`** (`≳ 10¹⁶` at `D = 8`), so "a least counterexample is
+  *exactly* a poset in which this happens at every cut" characterises nothing at feasible sizes.
+- **Cor 5.4 is off by one and cites the wrong theorem.** Its proof needs `n ≥ 2h(D,μ)+2D+1`. It
+  must use Thm 2.3's symmetric bound (`P → P−v`), not Thm 5.2 (`P[A] → P`). It presupposes a
+  robust balanced pair in `P`, so it is vacuous on a counterexample.
+- **(T∃^any) must read "ideal or filter".** In the ideal-only form it fails on any poset whose
+  only balanced pair is two maximal elements; the V poset is the control, and it fires. mg-b447
+  used "`P[A]` or `P[B]`". Prop 5.1 holds for the corrected form (CONDITIONAL on [H]+[D≤7]).
+- **UPGRADE: `attach_low(F_N,R)` is PROVEN prime for every `R ≥ 4`, `N ≥ R+2`** (audit §2; `R = 3`
+  is sharp, the module `{x_2, z}`). So the A5 exhibit is prime for every `R ∈ [8, L*]`.
+- **[D≤7] HOLDS** (audit mg-9268, `docs/AUDIT-mg-e8b4.md`). "audit mg-9268 pending" is stale.
+
 **Conditionality.** Two different hypotheses are used, and each result says which one it needs.
 
 - **[H]** A counterexample has range `π(P) ≤ L*`. This is conditional on AK25a/AK25b/Haq26
   (KSBFT-C §1.1; audited).
 - **[D≤7]** Every poset of range `≤ 7` satisfies 1/3–2/3. This is mg-e8b4's computer proof
-  (`docs/KSBFT-I-finite-state.md`, audit mg-9268 **pending**).
+  (`docs/KSBFT-I-finite-state.md`; audit mg-9268 **HOLDS**, `docs/AUDIT-mg-e8b4.md`). Still
+  marked conditional here.
 
 The window is `𝒲 := {P : 8 ≤ π(P) ≤ L*}`. "A counterexample lies in 𝒲" needs **both** [H] and
 [D≤7], and every sentence below that says "in the window" inherits that. **The padding
@@ -44,25 +83,30 @@ or an explicit padding of one. No census and no search were run or extended.
 > Call this shape `𝒦_min`. The first three follow from one exact lemma: a module's internal law is
 > exactly its own (Lemma 1.1). They also use n-minimality and Linial's width-2 theorem.
 >
-> **2. The padding dichotomy (§1, PROVEN).** There are exactly three *exact* paddings, which leave
+> **2. The padding dichotomy (§1, PROVEN).** There are three *module* paddings, which leave
 > every internal law of the witness `W` unchanged: `W ⊕ Q`, `W + Q` and substitution `Q[q ← W]`.
-> In all three `W` is a proper non-chain module, so **exact padding never produces `𝒦_min`**.
-> Inside `𝒦_min` the witness can only appear **reweighted**, with law ∝ `ext_P(τ)`. So the real
-> question is whether the violation survives that reweighting. Two tools answer it:
+> In all three `W` is a proper non-chain module, so **module padding never produces `𝒦_min`**.
+> *(Erratum: these are not the only exact paddings. A prime 5-poset keeps a 2-antichain's law
+> exactly without it being a module; see the errata above.)* Inside `𝒦_min` the witness generically
+> appears **reweighted**, with law ∝ `ext_P(τ)`. So the real question is whether the violation
+> survives that reweighting. Two tools answer it:
 > - **Insulation (Thm 2.1, Thm 2.3):** in bounded range, the influence of a far modification on a
 >   pair's law decays geometrically. For `F_N` this is proved in closed form, at rate `φ⁻²`.
 > - **Hub padding (Lemma 1.3):** attach a long chain through one hub element. The reweighting's
 >   relative spread is `≤ m/(m+k)`.
 >
 > **3. Per-route verdicts (§4, the table).** Every walled δ-direct route whose killer is thin or
-> finite was examined.
+> finite was examined. *"Survives into `𝒦_min`" below means into the (M1)+(M2) shape: the hosts
+> have δ ≥ 0.45, so they violate (M3), and each "dead" is dead as a **class lemma on (M1)+(M2)**
+> (erratum, audit mg-244e).*
 > - **Structural (every `P`), confirmed dead and excluded:** A13 (probe A), A15 (probe C), B1–B5
 >   (F-series, Čech-bias), C1-blindness, C5/f5be (α ≤ 1), 5987's Step 2, 8748/8b32/7c32/7c78/9461.
 > - **Thin witness survives INTO `𝒦_min ∩ 𝒲` (PROVEN):**
 >   - **A5 (Kahn–Saks/KL):** the Fibonacci centre pair stays within `4φ^{−2a}/((1−φ^{−2a})²R)`
 >     of `F_N`'s value, inside a comparability- and incomparability-connected poset of range
->     **exactly `R`** for every `R ≥ 3` (Thm 2.1, closed form). It is prime for `5 ≤ R ≤ 11` and
->     `N ≤ 30` (EMPIRICAL). So realised centre pairs tend to `C_BFT` inside `𝒲`.
+>     **exactly `R`** for every `R ≥ 3` (Thm 2.1, closed form). It is prime for every `R ≥ 4`,
+>     `N ≥ R+2` (PROVEN by audit mg-244e §2; first recorded here as EMPIRICAL for `N ≤ 30`). So
+>     realised centre pairs tend to `C_BFT` inside `𝒲`.
 >   - **A14 (probe B, diagonal capacity):** `attach_both(F_20, 8)` is prime, has range 8 and
 >     δ = 0.456, and **no pair certifies**: the maximum is 13627/46282 ≈ 0.294 < 1/3 (exact).
 >   - **A16 (probe D, co-degree):** a double-hub padding of `2+2` has only chain modules, is
@@ -70,8 +114,9 @@ or an explicit padding of one. No census and no search were run or extended.
 >     5336/27441 ≈ 0.194 < 1/3 (exact). *Caveat:* the source never defines "co-degree"; I read it as
 >     "the number of elements comparable to exactly one of the two".
 >   - **Continuity form of Step 6 (T) (A20/A21):** on an indecomposable, prime, insulated `W*`,
->     `p_xy` falls from 1/2 to 0.146 while `Δ₁ = 0.044` (exact). Refuted inside `𝒦_min`-shape
->     posets too.
+>     `p_xy` falls from 1/2 to 0.146 while `Δ₁ = 0.044` (exact). A single point cannot refute a
+>     modulus statement. The `(M,6,M)` family to `M = 30` keeps `p_xy = 0.1457` while `Δ₁ → 0`
+>     (0.024 at `M = 30`). So (T_cont) fails on (M1)+(M2)-shape posets, EMPIRICAL (erratum).
 > - **Not decided:** A24 (Hodge Thm G). There is no transfer lemma for link spectra, and the data
 >   stop at `n ≤ 8`. It targets `λ₂(Δ_AT)`, not δ.
 > - **Finite killers (A8, A9, A25, A27, A28):** all on moot/auto routes. The (L*) refuters at
@@ -84,8 +129,9 @@ or an explicit padding of one. No census and no search were run or extended.
 > existential Step-6 transfer:
 > > **(T∃)** some balanced pair of `P[A]` is balanced in `P`.
 >
-> It does so at every size computed, with `Δ₁` down to 0.044, because a base pair far from the cut
-> survives (exact). **Best candidate: (T∃) on `𝒦_min`.** By minimality it implies the conjecture at
+> It does so at every size computed, with `Δ₁` down to 0.044: a base pair far from the cut
+> survives (exact computation; the sizes are far below Thm 2.3's depth, so this is not insulation
+> at work). **Best candidate (CONJECTURED): (T∃) on `𝒦_min`, with "ideal or filter".** By minimality it implies the conjecture at
 > *any* proper ideal `A` with `P[A]` a non-chain, so the `Δ₁`-hypothesis is not even needed (§5.1).
 >
 > **5. Deep dive (§5).**
@@ -95,9 +141,11 @@ or an explicit padding of one. No census and no search were run or extended.
 > - **Corollary 5.3 (PROVEN, relevant under [H]+[D≤7]).** In a least counterexample, for **every**
 >   proper non-chain ideal `A`, every `μ`-robust balanced pair of `P[A]` lies within `h(D,μ)` of
 >   the cut; dually for filters. **Balance in every truncation is created at the truncation.** `W*`
->   is the decomposable toy model of exactly this.
-> - **Corollary 5.4 (PROVEN).** "Some extreme `v` works" (KSBFT-J's ONE-PT at an extreme element)
->   holds for every `P ∈ Π_D` with `n ≥ 2h(D,μ)+2D` that has a `μ`-robust balanced pair.
+>   is the decomposable toy model of exactly this. *(Vacuous for `n < h(D,μ)`, which is `≳ 10¹⁶`
+>   at `D = 8`.)*
+> - **Corollary 5.4 (PROVEN, repaired).** "Some extreme `v` works" (KSBFT-J's ONE-PT at an extreme
+>   element) holds for every `P ∈ Π_D` with `n ≥ 2h(D,μ)+2D+1` that has a `μ`-robust balanced
+>   pair. It presupposes that pair, so it is vacuous on a counterexample.
 > - **The precise obstruction (§5.4):**
 >   1. **Margin.** Nothing bounds `μ` below. `p − 1/3` is a *signed* quantity, which is P1 §5.5's
 >      wall again, and closed-interval ties at 1/3 do occur.
@@ -108,8 +156,10 @@ or an explicit padding of one. No census and no search were run or extended.
 >      record. KSBFT-Q (balance forced off the ends into the middle, `P_9`) is the only evidence on
 >      where truncation balance sits, and it is compatible with the obstruction.
 >
-> **Net.** Padding kills every δ-direct route except the existential Step-6 transfer, and kills it
-> **inside the minimal-counterexample shape**, not merely inside the window. The survivor is
+> **Net.** Padding kills, as a class lemma on (M1)+(M2), every δ-direct route examined except the
+> existential Step-6 transfer (A24 undecided). The hosts are connected both ways, have only chain
+> modules and lie in the window, but they are not counterexample-shaped (M3), so a route using
+> counterexample-only hypotheses is untouched. The survivor is
 > reduced to a two-ended statement about truncation boundaries, modulo margin. No proof is given,
 > and the obstruction is stated.
 
@@ -130,7 +180,8 @@ constraint `z < m` with `z ∉ M` holds because `z < m'` for every `m' ∈ M`, s
 `S`; dually for `z > m`. Incomparable `z` carry no constraint. So `L(P)` is in bijection with
 `{σ restricted off M, with the set S} × L(M)`, and the restriction map has fibres of equal size. □
 
-**Corollary 1.2 (the three exact paddings) — PROVEN.** In `W ⊕ Q`, `Q ⊕ W`, `W + Q` (disjoint union)
+**Corollary 1.2 (the three module paddings) — PROVEN.** *(Erratum: they are exact, but they are
+not the only exact paddings; audit mg-244e §3.)* In `W ⊕ Q`, `Q ⊕ W`, `W + Q` (disjoint union)
 and `Q[q ← W]` (lexicographic substitution), `W` is a module. So every relative-order event of `W`
 keeps **exactly** its `W`-probability. The ranges are:
 
@@ -147,12 +198,14 @@ incomparable pair.** Positions shift: exactly (by `|Q|`) under `⊕`, and by a r
 keep every pair law exactly. The non-module embedding `attach_low(F_7,3)` changes 6 of 6 pair
 laws: that is the NEGATIVE CONTROL, and it is CAUGHT.)*
 
-**Lemma 1.3 (hub padding) — PROVEN.** Let `|W| = m`, `U ⊆ W` a non-empty down-set, and let
+**Lemma 1.3 (hub padding) — PROVEN.** Let `|W| = m`, `U ⊊ W` a non-empty proper down-set
+(erratum: at `U = W`, `c_k` is isolated in `G` and (2) fails), and let
 `H_k(W,U)` be `W + (c_1 < … < c_k)` with `c_k > u` for every `u ∈ U`. Then:
 
 1. For `τ ∈ L(W)`, `ext(τ) = C(m+k, k) − C(p_τ − 1 + k, k)`, where `p_τ` is the position in `τ` of
    the last element of `U`. Hence `μ_{H,W}(E) ∈ [P_W(E)·k/(m+k), P_W(E)·(m+k)/k]`.
-2. `G(H_k)` is connected, since `c_1` is incomparable to all of `W`. The comparability graph is
+2. `G(H_k)` is connected, since `c_1` is incomparable to all of `W` and `c_k` is incomparable to
+   `W ∖ U ≠ ∅`. The comparability graph is
    connected, since `c_k` touches `U` and the chain.
 3. `π(c_j) = m` for `j < k`, `π(c_k) = m − |U|`, and `π(w) = π_W(w) + k − [w ∈ U]`.
 4. `{c_1, …, c_{k−1}}` is a module and is a chain. That is allowed in `𝒦_min` (§3).
@@ -220,14 +273,17 @@ dominoes `A` and `B` are disjoint and non-adjacent (`a ≥ 1`), so
 *Exact check (`out_pad.txt` §2):* the closed form (2) matches the DP **exactly** at every tested
 `(N,R) ∈ {(14,5), (20,8), (30,8), (41,8), (41,12), (61,8), (81,8), (81,20)}`. The bound (3) holds with
 room. At `(81, 8)`, the padded centre pair is `C_BFT + O(10⁻¹⁵)` in a range-8 poset.
-**Primality (EMPIRICAL):** `attach_low(F_N,R)` is prime for `N ∈ {8,12,20,30}` and
-`5 ≤ R < min(N−2,12)`. The CONTROL `attach_low(F_12,3)` has the module `{x_2, z}`, and the test
-CAUGHT it. The theorem needs only the two connectivities, which are proven. Primality is extra.
+**Primality (EMPIRICAL here; PROVEN by audit mg-244e §2):** `attach_low(F_N,R)` is prime for
+`N ∈ {8,12,20,30}` and `5 ≤ R < min(N−2,12)`. The CONTROL `attach_low(F_12,3)` has the module
+`{x_2, z}`, and the test CAUGHT it. The audit proves primality for every `R ≥ 4`, `N ≥ R+2` (a
+module containing `z` meets `F_N` in one `x_j`, which cannot be incomparable to all of
+`x_1..x_R` for `R ≥ 4`), with `R = 3` sharp. The theorem needs only the two connectivities.
 
 ### 2.2 The general insulation lemma (bounded range, any witness)
 
 **Lemma 2.2 (cited, re-derived).** These are KSBFT-I Proposition 1, Lemma 3 and Lemma 6
-(`docs/KSBFT-I-finite-state.md` §2–§3.5; audit mg-9268 pending). Let `π(P) ≤ D` and let `e` be a
+(`docs/KSBFT-I-finite-state.md` §2–§3.5; audit mg-9268 HOLDS, Lemma 6 re-derived in
+`docs/AUDIT-mg-e8b4.md` row 10). Let `π(P) ≤ D` and let `e` be a
 linear extension.
 
 - **(i)** Every ideal `J` of size `k` satisfies `{e ≤ k−D} ⊆ J ⊆ {e ≤ k+D}`.
@@ -273,7 +329,7 @@ Linial's theorem gives a balanced pair. □
 | (M3) no balanced pair; every `P − v` (non-chain) has one | definition, n-minimality | PROVEN |
 | (M4) a low 3-antichain at **both** ends (O1: ≥ 3 minimal; O2: a Y-gadget below the Linial crossing, `3k < π(x)+1`) | KSBFT-Q Thm 3.1 (audited, mg-3345) | PROVEN (cited) |
 | (M5) `δ ≥ C_BFT + min(θ₀, C_BFT/((5+3√5)(D+1)+1))`; `d₁ ≥ 1/(D+1)` | Lemma W, KSBFT-A §3.1 | PROVEN (cited) |
-| (M6) balance in every truncation is created at the cut (Cor 5.3) | §5 | PROVEN |
+| (M6) balance in every truncation is created at the cut (Cor 5.3) | §5 | PROVEN (vacuous for `n < h(D,μ)`) |
 | (M7) *a wide element (π ≥ 8) within a bounded distance of each end* | would follow from a localised KSBFT-I Thm 5 | **CONJECTURED** (below) |
 
 *(M7), stated precisely as a conjecture.* KSBFT-I certifies every range-≤7 indecomposable poset within
@@ -285,8 +341,9 @@ is range-free, and the `N−D` part is not. A localisation would need the elemen
 certificates close at `k ≤ d(e_N)`. **Not examined further.** If (M7) holds, a counterexample must
 be wide at both ends, which is where Local Linial (KSBFT-Q) also points.
 
-**Consequence for padding (PROVEN, Cor 1.2 + Prop 3.1).** An exact padding of a non-chain witness is
-never of shape `𝒦_min`. A witness refutes a lemma **on the class that matters** only if its
+**Consequence for padding (PROVEN, Cor 1.2 + Prop 3.1).** A module padding of a non-chain witness is
+never of shape `𝒦_min`. (Erratum: "exact" was written here; a non-module exact embedding into a
+prime host exists, audit mg-244e §3.) A witness refutes a lemma **on the class that matters** only if its
 violation survives the reweighting `μ_{P,W}` of some `𝒦_min`-shaped host. §2 and Lemma 1.3 are
 the tools for that.
 
@@ -297,13 +354,15 @@ both ways, has only chain modules, and has range `≥ 8`. That is everything in 
 being a counterexample. The hosts are **not** counterexamples: all have δ ≥ 0.45. For a **sound**
 certificate (a proven lower bound `δ ≥ B(data)`) that is exactly the right test. On a counterexample
 `B < 1/3` automatically, so the route needs *completeness* (`max B ≥ 1/3`) on every
-`𝒦_min`-shaped non-chain, and a complete-but-for-one host kills it.
+`𝒦_min`-shaped non-chain, and a complete-but-for-one host kills it. **So every "dead" below is dead
+as a class lemma on (M1)+(M2)** (and O1 at both ends for A14, A16). A route that also uses (M3)
+(no balanced pair, `n`-minimality) is not refuted by these hosts.
 
 ### 4.1 δ-direct routes killed by thin witnesses
 
 | row | route and key lemma (source) | witness, and how it violates | padding decision | verdict |
 |---|---|---|---|---|
-| **A5** | Kahn–Saks / KL relaxation (mg-a1ec, sib `EntropyDiscontinuity-Mechanism.md:155-170`). **Lemma:** δ ≥ inf δ over `𝓡` (log-concave slot data + pairwise consistency, not realised). The inf is `C_BFT`, at the geometric ray `r = 1/φ`. The route needs the inf over *realised* data ≥ 1/3 | `F_N` centre pair, `F_iF_{N−i}/F_{N+1} → C_BFT` (Lemma 2.0), range 2 | **Survives into `𝒦_min ∩ 𝒲` (PROVEN, Thm 2.1):** range exactly `R` for any `R ∈ [8,L*]`, both connectivities, prime for `R ≤ 11, N ≤ 30` (EMPIRICAL). The window constraint is **global** (some element is wide), and the relaxation is **pair-local**, so it cannot see it | **dead** |
+| **A5** | Kahn–Saks / KL relaxation (mg-a1ec, sib `EntropyDiscontinuity-Mechanism.md:155-170`). **Lemma:** δ ≥ inf δ over `𝓡` (log-concave slot data + pairwise consistency, not realised). The inf is `C_BFT`, at the geometric ray `r = 1/φ`. The route needs the inf over *realised* data ≥ 1/3 | `F_N` centre pair, `F_iF_{N−i}/F_{N+1} → C_BFT` (Lemma 2.0), range 2 | **Survives into `𝒦_min ∩ 𝒲` (PROVEN, Thm 2.1):** range exactly `R` for any `R ∈ [8,L*]`, both connectivities, prime for every `R ≥ 4` (PROVEN, audit mg-244e §2). The window constraint is **global** (some element is wide), and the relaxation is **pair-local**, so it cannot see it | **dead** |
 | **A13** | probe A (mg-61bb, attempt-index:30): coherence adds nothing; subadditivity is upper bounds only | none (logical; the "β ≡ 10⁻¹⁰⁰" in P1 is not in the source) | structural: an upper-bound system forces no lower bound on any class | **structural — excluded** |
 | **A14** | probe B (mg-92e6, attempt-index:31). **Lemma (sound):** `δ ≥ ½(T[x,k]+T[x,k+1]+T[y,k]+T[y,k+1]−1)⁺`. The route needs some pair and slot to reach 1/3 | the source says only "dies as the pair spreads". **P1's "spread 4 / range 3" is not in the source** | **Survives into `𝒦_min ∩ 𝒲` (PROVEN, exact):** `attach_both(F_20,8)` (bottom `z ∥ x_1..x_8`, top dual `z'`) is prime, range 8, δ = 0.4561, max certificate 13627/46282 = 0.2944 < 1/3. One-sided padding is *certified* at its free end (0.382). So the certificate lives at ends, and capping both ends removes it | **dead** |
 | **A15** | probe C (mg-f82f, attempt-index:32). **Lemma (sound):** `δ ≥ (1−1/e(P))/s`, `s` = free slots of the coherent order. It proves the conjecture for `s ≤ 2` | "extremal posets have s ≥ 4" (no poset named; P1's `n=6` witness is not in the source) | structural: every counterexample has `s ≥ 3` (by the probe's own theorem), where the bound is `< 1/s ≤ 1/3`. No poset can revive it | **structural — excluded** |
@@ -323,12 +382,17 @@ certificate (a proven lower bound `δ ≥ B(data)`) that is exactly the right te
 (PROVEN: `c_{a−2}` is below everything else and `b_{t+1}` is above everything else. Checked for
 `(t,a,b) = (2,4,4), (3,4,8), (7,9,9), (8,9,10)`: `G`-disconnected, with `p_xy = 1/(t+2)`). So
 `W*_t ∉ 𝒦_min`, and mg-b447's Thm 4.1 ("(T) refuted in every range window") is a statement about
-decomposable posets. KSBFT-J already noted that `W*` is decomposable.
+decomposable posets. KSBFT-J already noted that `W*` is decomposable. **Erratum (audit mg-244e
+§4):** mg-b447's (T) is the *existential* form, and `W*` refutes it, because `{x,y}` is the only
+incomparable pair of either side. Thm 4.1 refutes the existential (T) **on decomposable posets
+only**; it does not reach `𝒦_min`. The section title's "continuity form dies" is this note's own
+separate finding, below.
 
 Two forms of (T) must be separated:
 
 - **(T_cont)** (mg-3af9's modulus form): `Δ₁ ≤ ε ⟹ |p^P − p^{P[A]}| ≤ F(ε)` for pairs of `P[A]`.
-- **(T∃)**: `Δ₁ ≤ ε` and `P[A]` a non-chain ⟹ **some** balanced pair of `P[A]` is balanced in `P`.
+- **(T∃)**: `Δ₁ ≤ ε` and `P[A]` a non-chain ⟹ **some** balanced pair of `P[A]` (or, dually, of
+  `P[B]`, as mg-b447 states it) is balanced in `P`.
 
 **Insulated `W*` (PROVEN, exact, `out_pad.txt` §3).** Replace the bottom chain by `F_M`, with `x, y`
 above `f_1..f_{M−1}` and `∥ f_M`. Replace the top chain by `F_s`, with `x < b_j` iff `j ≥ t+2`. The
@@ -340,16 +404,20 @@ cut is `A = F_M ∪ {x,y}`. Every instance is prime and connected both ways:
 | (12, 3, 12) | 6 | 0.0479 | 1/2 → 0.213 | 4 | `(f_0,f_1)`, `(f_11, y)` |
 | (16, 6, 16) | **9** | 0.0443 | 1/2 → 0.146 | 4 | `(f_0,f_1)` 0.618, `(f_15, y)` 0.609 |
 
-- **(T_cont) is refuted inside `𝒦_min`-shaped window posets.** At range 9 the interface pair moves
-  by 0.354 while `Δ₁ = 0.044`. `Δ₁ → 0` as `M, s → ∞` at fixed `t`, by Lemma 2.1 of KSBFT-F, since
-  `E K ≤ D`. That limit is EMPIRICAL beyond the rows shown.
-- **(T∃) holds on every instance.** The bottom pair `(f_0,f_1)` of the base is far from the cut and
-  survives (Thm 2.3). What made `W*` a counterexample to (T∃) was that its base was a **chain**,
+- **(T_cont) fails on (M1)+(M2)-shaped window posets (EMPIRICAL).** At range 9 the interface pair
+  moves by 0.354 while `Δ₁ = 0.044`. `Δ₁ → 0` as `M, s → ∞` at fixed `t` is **PROVEN**, by Lemma
+  2.1 of KSBFT-F, since `E K ≤ D`. That `p_xy` stays away from 1/2 is **EMPIRICAL** (erratum: the
+  labels were swapped). Audit mg-244e computed `(M,6,M)` for `M = 16, 20, 24, 30`: `p_xy = 0.1457`
+  at every size (to 4 dp) while `Δ₁` falls 0.044 → 0.024. Primality was checked at `M ≤ 16` only.
+- **(T∃) holds on every instance (exact computation).** The bottom pair `(f_0,f_1)` of the base is
+  far from the cut and survives. (Erratum: this is **not** Thm 2.3 at work. Its guarantee needs
+  depth `h(5, 0.05) ≈ 1.8·10⁹`, and `M = 8, 16` are nowhere near it. The table's `f_0` is
+  0-indexed; the text is 1-indexed.) What made `W*` a counterexample to (T∃) was that its base was a **chain**,
   which has no pair to transfer. In an indecomposable host the base must carry incomparabilities,
   and pairs far from the cut are insulated.
 
 So (T∃) is the one δ-direct lemma whose killer does not pad into `𝒦_min`. That makes it **the best
-candidate**. §5 takes it up.
+candidate** (a judgement, CONJECTURED). §5 takes it up.
 
 ### 4.3 The finite killers
 
@@ -366,8 +434,15 @@ candidate**. §5 takes it up.
 ### 5.1 What the route needs
 
 **Proposition 5.1 — PROVEN.** Suppose **(T∃^any)** holds: *for every `P ∈ 𝒦_min ∩ 𝒲` and some
-proper ideal `A` with `P[A]` a non-chain, some balanced pair of `P[A]` is balanced in `P`*. Then,
-conditional on [H] and [D≤7], the conjecture holds.
+proper ideal **or filter** `A` with `P[A]` a non-chain, some balanced pair of `P[A]` is balanced in
+`P`*. Then, conditional on [H] and [D≤7], the conjecture holds.
+
+*(Erratum, audit mg-244e §5: as first written, with ideals only, (T∃^any) fails on any poset whose
+only balanced pair is two maximal elements — no proper ideal contains both. The V poset (two
+elements over one) is such a case, and the audit's control fires on it. Allowing filters, as
+mg-b447's "`P[A]` or `P[B]`" did, repairs this; the proof below is unchanged. On 158 random prime,
+both-connected hosts with `n ≤ 8` neither form failed, EMPIRICAL. The hypothesis may be strictly
+stronger than the conjecture on `𝒦_min ∩ 𝒲`; see §5.4(3).)*
 
 *Proof.* A least counterexample is in `𝒦_min ∩ 𝒲` (Prop 3.1, [H], [D≤7]). It has width `≥ 3`
 (Linial), so it has a 3-antichain. For any maximal `v`, `A = P − v` is a proper ideal containing
@@ -402,17 +477,28 @@ any cut. The two extreme choices of `A` are:
 
 *Proof.* Otherwise Thm 5.2 gives `P` a balanced pair. □
 
-> **Corollary 5.4 (ONE-PT at an extreme, for long posets) — PROVEN.** If `P ∈ Π_D` has a balanced
-> pair of margin `μ > 0` and `n ≥ 2h(D,μ) + 2D`, then some extreme `v` works for ONE-PT. More
-> precisely: either every maximal `v`, or every minimal `v`, keeps that pair balanced in `P − v`.
+*(Erratum: Cor 5.3 is vacuous whenever `n < h(D,μ)`, and `h(D,μ) ≳ 10¹⁶` at `D = 8`. So it
+constrains nothing at the sizes a counterexample might have.)*
 
-*Proof.* By F2 (`|e(a) − e(b)| ≤ 2D − 1`), the pair lies within `h(D,μ)` of the top or of the
-bottom, but not both. If it lies `h(D,μ)` or more below the top, apply Thm 5.2 to `A = P − v`
-(an ideal, listed first by an `e` that puts `v` last). Otherwise use the dual (filters, `v` minimal). □
+> **Corollary 5.4 (ONE-PT at an extreme, for long posets) — PROVEN (repaired).** If `P ∈ Π_D` has a
+> balanced pair of margin `μ > 0` and `n ≥ 2h(D,μ) + 2D + 1`, then some extreme `v` works for
+> ONE-PT. More precisely: either every maximal `v`, or every minimal `v`, keeps that pair balanced
+> in `P − v`.
+
+*Proof (repaired per audit mg-244e §5).* By the cross-extension window of KSBFT-F Lemma 2.0
+(`e₁(b) − e₂(a) ≤ π(a)+π(b)−1 ≤ 2D − 1`, valid across different extensions), the pair cannot lie
+within `h(D,μ)` of both the top and the bottom once `n ≥ 2h(D,μ)+2D+1`. If it lies `h(D,μ)` or more
+below the top, apply **Thm 2.3** (whose bound is symmetric in `P` and `P[A]`) to `A = P − v`, an
+ideal listed first by an `e` that puts `v` last, to transfer the balance from `P` to `P − v`.
+Otherwise use the dual (filters, `v` minimal). (As first written, the bound was `2h+2D`, one too
+small, and the proof cited Thm 5.2, which transfers `P[A] → P`, the wrong direction.) The corollary
+presupposes a robust balanced pair in `P`, so it contributes nothing toward the conjecture and is
+vacuous on a counterexample. □
 
 So **everything far from a cut transfers**, uniformly in `n`, at every range. (T∃) can fail only
-through pairs within `h(D,μ)` of the cut or with small margin. By Cor 5.3, a least counterexample
-is exactly a poset in which this happens at **every** cut simultaneously.
+through pairs within `h(D,μ)` of the cut or with small margin. By Cor 5.3, in a least counterexample
+this happens at **every** cut simultaneously. (Erratum: "exactly" was OVERSTATED — for
+`n < h(D,μ)` Cor 5.3 is vacuous and characterises nothing.)
 
 ### 5.3 What is consistent with the obstruction
 
@@ -463,8 +549,8 @@ given.
   Not decided.
 - **(M7):** the localisation of KSBFT-I Thm 5 is stated as a conjecture, with the exact step that
   fails (the `N − D` complete cut). I did not re-read `tree.c`.
-- **Primality of `attach_low(F_N,R)`** is EMPIRICAL (`N ≤ 30`). The theorems use only the
-  connectivities, which are proven.
+- **Primality of `attach_low(F_N,R)`** was EMPIRICAL here (`N ≤ 30`). It is now PROVEN for every
+  `R ≥ 4`, `N ≥ R+2` by audit mg-244e §2. The theorems use only the connectivities.
 - **Probe D's "co-degree"** has no definition in any source: the probes have no documents, and the
   sub-agent confirmed that from the index rows. I use "the number of elements comparable to exactly
   one of the pair", reconstructed from "1/6 at co-degree 2 via `C_p ⊔ C_q`". Under a different
@@ -490,19 +576,21 @@ given.
 2. A13, A15, B1–B5, C1, C5, f5be, 5987, E4: structural.
 3. 9b6b (density lever): its witness lapses on `𝒦_min`, but [H] turns the lever into a finite-`n`
    statement, so it is not a route.
-4. (T_cont): refuted on prime window-range posets (§4.2).
+4. (T_cont): fails on prime window-range posets (§4.2; the family is EMPIRICAL, `Δ₁ → 0` PROVEN).
 
 **Recommendations to pm-onethird (no edits made):**
 
-1. Record that the thin-witness walls of A5, A14 and A16 hold **inside the minimal-counterexample
-   shape** (Thm 2.1, exact exhibits), not merely inside `Π_D`. P1's "survives" becomes
-   "survives in `𝒦_min ∩ 𝒲`".
-2. Correct the record on Step 6: mg-b447 Thm 4.1's refutation is of the continuity form and uses
-   decomposable posets. The existential form (T∃^any) is **unrefuted** on `𝒦_min`. Its far-field is
+1. Record that the thin-witness walls of A5, A14 and A16 hold **as class lemmas on (M1)+(M2)**
+   (Thm 2.1, exact exhibits), not merely inside `Π_D`. P1's "survives" becomes "survives on the
+   (M1)+(M2) shape". The hosts are not counterexample-shaped (M3), so routes using
+   counterexample-only hypotheses are not refuted (erratum).
+2. Correct the record on Step 6: mg-b447 Thm 4.1 refutes the existential (T) **on decomposable
+   posets only**; the refutation does not reach `𝒦_min` (erratum: "is of the continuity form" was
+   BROKEN). The existential form (T∃^any), with "ideal or filter", is **unrefuted** on `𝒦_min`. Its far-field is
    proven here, and its near-field is the §5.4 obstruction. That makes it the natural home for the
    ONE-PT line (KSBFT-J) and the end analysis (KSBFT-Q).
 3. Audit targets:
    - Lemma 1.1, Lemma 1.3(1), Lemma 2.0 and Thm 2.1(2)–(3) (closed forms, re-derivable by hand);
-   - Thm 2.3 (its use of KSBFT-I Prop 1/Lemma 6, whose own audit mg-9268 is pending);
+   - Thm 2.3 (its use of KSBFT-I Prop 1/Lemma 6; audit mg-9268 HOLDS);
    - Prop 3.1 (uses Linial);
    - the three exact exhibits (`attach_both(F_20,8)`, double hub `k = 8`, insulated `W*` (16,6,16)).
