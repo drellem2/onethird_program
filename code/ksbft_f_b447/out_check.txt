@@ -1,0 +1,48 @@
+== c(D): the Lemma 2.3 flip constant, against 2^(1-2D) and KSBFT's q2 = (D+1)^(-2(D+1))
+  D=1: c(D)=1/2  2^(1-2D)=1/2  q2=1/16
+  D=2: c(D)=1/7  2^(1-2D)=1/8  q2=1/729
+  D=3: c(D)=1/26  2^(1-2D)=1/32  q2=1/65536
+  D=4: c(D)=1/99  2^(1-2D)=1/128  q2=1/9765625
+  D=5: c(D)=1/382  2^(1-2D)=1/512  q2=1/2176782336
+  D=6: c(D)=1/1486  2^(1-2D)=1/2048  q2=1/678223072849
+  D=1..20: c(D) >= 2^(1-2D) violations: 0
+== W: witness ranges (range pi(P) = max_x #incomparables of x)
+W*_t a=3 b=3 t=2: n=6 #LE=4 range=3 pi(x)=3 p_xy^P=1/4 p_xy^P[A]=1/2 EK=1/2 Delta1=1/6 Delta1*n=1 tau=1 delta(P)=1/2
+W*_t a=4 b=4 t=2: n=8 #LE=4 range=3 pi(x)=3 p_xy^P=1/4 p_xy^P[A]=1/2 EK=1/2 Delta1=1/8 Delta1*n=1 tau=1 delta(P)=1/2
+W*_t a=4 b=28 t=2: n=32 #LE=4 range=3 pi(x)=3 p_xy^P=1/4 p_xy^P[A]=1/2 EK=1/2 Delta1=1/8 Delta1*n=4 tau=1 delta(P)=1/2
+W*_t a=5 b=9 t=2: n=14 #LE=4 range=3 pi(x)=3 p_xy^P=1/4 p_xy^P[A]=1/2 EK=1/2 Delta1=1/10 Delta1*n=7/5 tau=1 delta(P)=1/2
+W*_t a=4 b=8 t=3: n=12 #LE=5 range=4 pi(x)=4 p_xy^P=1/5 p_xy^P[A]=1/2 EK=3/5 Delta1=3/20 Delta1*n=9/5 tau=1 delta(P)=2/5
+W*_t a=4 b=9 t=6: n=13 #LE=8 range=7 pi(x)=7 p_xy^P=1/8 p_xy^P[A]=1/2 EK=3/4 Delta1=3/16 Delta1*n=39/16 tau=1 delta(P)=1/2
+W*_t a=4 b=10 t=7: n=14 #LE=9 range=8 pi(x)=8 p_xy^P=1/9 p_xy^P[A]=1/2 EK=7/9 Delta1=7/36 Delta1*n=49/18 tau=1 delta(P)=4/9
+2+2 {0<1,2<3}: range=2 delta=1/2
+N-poset {0<2,0<3,1<3}: range=2 delta=2/5
+fence n=8 (mg-f5be argmax): range=2 equals Fibonacci Z_8 (i<j iff j-i>=2): True
+  Z_4: range=2  Z_5: range=2  Z_6: range=2  Z_7: range=2  Z_8: range=2  Z_9: range=2  Z_10: range=2  Z_11: range=2  Z_12: range=2
+C_a+C_a minus t crosses a=4 t=1: range=1 (expect t)
+C_a+C_a minus t crosses a=4 t=2: range=2 (expect t)
+C_a+C_a minus t crosses a=5 t=3: range=3 (expect t)
+== X: exhaustive over naturally labelled posets, n <= 6; e = identity, every prefix cut
+  posets with pi>=1 (labelled, natural): 5225   prefix cuts: 25669
+  X1: checked 25669, violations 0
+  X2: checked 25669, violations 0
+  X3: checked 25669, violations 0
+  X4: checked 86340, violations 0
+  X5: checked 30894, violations 0
+  max tau/(2D-1) observed: 1
+== T: one-point transport on W*(a=4,b=4,t=2): delete v; does SOME balanced pair of P-v stay balanced in P?
+  v=c1: balanced pairs of P-v: [('x', 'b1')] -> balanced in P: [('x', 'b1')]
+  v=c2: balanced pairs of P-v: [('x', 'b1')] -> balanced in P: [('x', 'b1')]
+  v=x: balanced pairs of P-v: [] -> balanced in P: []
+  v=y: balanced pairs of P-v: [('x', 'b1'), ('x', 'b2')] -> balanced in P: [('x', 'b1')]
+  v=b1: balanced pairs of P-v: [('x', 'y'), ('x', 'b2')] -> balanced in P: []
+  v=b2: balanced pairs of P-v: [('x', 'y'), ('x', 'b1')] -> balanced in P: [('x', 'b1')]
+  v=b3: balanced pairs of P-v: [('x', 'b1')] -> balanced in P: [('x', 'b1')]
+  v=b4: balanced pairs of P-v: [('x', 'b1')] -> balanced in P: [('x', 'b1')]
+== S: one-point persistence, exhaustive over naturally labelled posets, 3 <= n <= 6
+  non-chains checked (labelled): 5224   with NO persistent pair: 0
+== C: firing controls (each swaps in a bound that is FALSE; each must report violations > 0)
+== X: exhaustive over naturally labelled posets, n <= 6; e = identity, every prefix cut
+  control X1: violations 137 -> FIRES
+  control X2: violations 18272 -> FIRES
+  control X3: violations 47 -> FIRES
+  control X4: violations 37588 -> FIRES
