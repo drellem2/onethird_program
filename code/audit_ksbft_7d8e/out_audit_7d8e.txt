@@ -1,0 +1,41 @@
+== 1. census, all labeled posets n<=5 ==
+  pairs: 28722
+  viol_E1: 0
+  viol_ge2: 0
+  viol_middle: 2568
+  viol_propB: 0
+  posets: 4472
+  middle_example: (4, [(0, 1), (0, 2), (1, 2)], 2, 3, 1, Fraction(1, 4), Fraction(3, 4))
+  NEG CONTROL (the note's displayed middle inequality, which is false): viol_middle = 2568 FIRES
+  poset count n=2..5 = 4472 (A001035: 3+19+219+4231 = 4472) OK
+== 2. explicit counterexample to the displayed middle inequality P[f(x)=f(y)+2] >= P[y<x]/(pi_N+1) ==
+  chain of 1 below x, y isolated: pi_N=1, P[>=2]/p=1/2, P[E2]/p=1/2, claimed >= 1/2 -> middle holds, (b) main holds
+  chain of 2 below x, y isolated: pi_N=1, P[>=2]/p=2/3, P[E2]/p=1/3, claimed >= 1/2 -> middle FAILS, (b) main holds
+  chain of 3 below x, y isolated: pi_N=1, P[>=2]/p=3/4, P[E2]/p=1/4, claimed >= 1/2 -> middle FAILS, (b) main holds
+  chain of 4 below x, y isolated: pi_N=1, P[>=2]/p=4/5, P[E2]/p=1/5, claimed >= 1/2 -> middle FAILS, (b) main holds
+== 3. sharpness families ==
+  generic D=2: pi(P)=2, N=[2], pi_N=2, ratio=1/3 (1/(D+1)=1/3)
+  generic D=3: pi(P)=3, N=[3], pi_N=3, ratio=1/4 (1/(D+1)=1/4)
+  generic D=4: pi(P)=4, N=[4], pi_N=4, ratio=1/5 (1/(D+1)=1/5)
+  generic D=5: pi(P)=5, N=[5], pi_N=5, ratio=1/6 (1/(D+1)=1/6)
+  generic D=6: pi(P)=6, N=[6], pi_N=6, ratio=1/7 (1/(D+1)=1/7)
+  generic D=7: pi(P)=7, N=[7], pi_N=7, ratio=1/8 (1/(D+1)=1/8)
+  CaseD P_k k=0: D=3, pi(P)=3, N=[3], h=(5/3,5/2,10/3), BFT=True, ratio=1/4 (1/(D+1)=1/4)
+  CaseD P_k k=1: D=4, pi(P)=4, N=[3], h=(8/5,12/5,16/5), BFT=True, ratio=1/5 (1/(D+1)=1/5)
+  CaseD P_k k=2: D=5, pi(P)=5, N=[3], h=(14/9,7/3,28/9), BFT=True, ratio=1/6 (1/(D+1)=1/6)
+  CaseD P_k k=3: D=6, pi(P)=6, N=[3], h=(32/21,16/7,64/21), BFT=True, ratio=1/7 (1/(D+1)=1/7)
+  CaseD P_k k=4: D=7, pi(P)=7, N=[3], h=(3/2,9/4,3), BFT=True, ratio=1/8 (1/(D+1)=1/8)
+  pi_N=1 example (y<w, x isolated): pi(w)=1, ratio=1/2 (1/2)
+== 4. Lemma 2.4(a): 7b1+3b2+3b3 <= F(s) and chord, random sampling ==
+  max violation (should be <= ~1e-12): -2.295e-07
+  7/(2(9+c))=0.276393202250 C_BFT=0.276393202250; (c-1.5)/(2(9+c))=0.085410196625 1/(5+3sqrt5)=0.085410196625
+== 5. Prop C: sample (r,s,alpha*,beta*) in the admissible region, check M <= (20+2sqrt5) eps ==
+  samples=152214, max M/eps = 5.8029  vs 20+2sqrt5 = 24.4721
+== 6. constants ==
+  theta0=6.797749979e-06; thW(3471)=6.799025646e-06; thW(3472)=6.797068014e-06; D0=3471
+  gain D=1e4: 2.3604e-06; D=1e6: 2.3607e-08; C/(5+3sqrt5)=0.023607; 1/(20+2sqrt5)=0.040863
+  M^2/441 with M>=1/(D+1) beats theta0 up to D=17
+  67/242=0.2768595; theta0'=4.6630e-04; thW>=theta0' up to D=49; 67/242<1-1/sqrt2=True; <e^-1=True
+  final-line threshold: 5-11T+1/22 = 2.0 (=2 exactly at T=67/242); first-branch 37/132=0.28030; 32/9=3.5556 < 1/T=3.6119; 29/9 < 1/T: True
+  v_q: q=0.3 -> 0.5650; q=0.2764 -> 0.6180; q=6/11-0.2764 -> 0.6360; q=65/242 -> 0.6371; q=67/242 -> 0.6169
+  5-11*0.2764+1/22 = 2.00505
