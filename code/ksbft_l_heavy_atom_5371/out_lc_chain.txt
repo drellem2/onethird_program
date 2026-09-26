@@ -1,0 +1,6 @@
+{'posets': 400, 'chainpairs': 37081, 'chainfail': 3390, 'chainunimodalfail': 465, 'fxfail': 0, 'antipairs': 55237, 'antifail': 8521}
+first chain failure: (8, [38, 0, 32, 0, 2, 0, 32, 0], 3, 5, [1088, 624, 528])
+positive control f(x) (Stanley): PASS
+negative control antichain count: FIRES
+chain statistic N_C(x) log-concave: FAILS
+chain statistic N_C(x) unimodal: FAILS

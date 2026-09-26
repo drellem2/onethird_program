@@ -1,0 +1,53 @@
+== brute-force controls (exact DP)
+  m=1 k=2 j=1: atom=1/3 F1=1/3 uniform f(x)=True same-chain gap=1/3 F4=True -> MATCH
+  m=2 k=2 j=1: atom=2/15 F1=2/15 uniform f(x)=True same-chain gap=1/3 F4=True -> MATCH
+  m=3 k=2 j=1: atom=2/35 F1=2/35 uniform f(x)=True same-chain gap=1/3 F4=True -> MATCH
+  m=4 k=2 j=1: atom=8/315 F1=8/315 uniform f(x)=True same-chain gap=1/3 F4=True -> MATCH
+  m=5 k=2 j=1: atom=8/693 F1=8/693 uniform f(x)=True same-chain gap=1/3 F4=True -> MATCH
+  m=2 k=4 j=2: atom=2/35 F1=2/35 uniform f(x)=True same-chain gap=1/5 F4=True -> MATCH
+  m=3 k=4 j=2: atom=18/1001 F1=18/1001 uniform f(x)=True same-chain gap=1/5 F4=True -> MATCH
+  m=2 k=6 j=3: atom=100/3003 F1=100/3003 uniform f(x)=True same-chain gap=1/7 F4=True -> MATCH
+  m=3 k=3 j=1: atom=9/280 F1=9/280 uniform f(x)=True same-chain gap=1/4 F4=True -> MATCH
+  positive control (F1-F4 vs DP): PASS
+  negative control (F1 without (mk+1)): FIRES
+
+== (F3) cross-chain gap P(a_i<x<b_l), i != l, vs 1/(k+1)
+  k=2 j=1: cross = 11/30 = 0.36667  >= 1/(k+1) = 0.33333 : True
+  k=4 j=2: cross = 17/70 = 0.24286  >= 1/(k+1) = 0.20000 : True
+  k=6 j=3: cross = 1129/6006 = 0.18798  >= 1/(k+1) = 0.14286 : True
+  k=8 j=4: cross = 6841/43758 = 0.15634  >= 1/(k+1) = 0.11111 : True
+
+== exponents: log(1/atom) vs Thm 2.6's w^2 log(1/eps4), w = |A| = |B| = m, width m+1
+  k  j   eps4      m    atom          q(x)=1/(mk+1)   log(1/atom)/(m log(1/eps4))   AK25b bound eps4^(m^2)
+  2  1  0.3333      5  1.154e-02  9.091e-02      0.8122                        1e-11.9
+  2  1  0.3333     10  2.639e-04  4.762e-02      0.7500                        1e-47.7
+  2  1  0.3333     20  1.855e-07  2.439e-02      0.7054                        1e-190.8
+  2  1  0.3333     50  1.105e-16  9.901e-03      0.6689                        1e-1192.8
+  2  1  0.3333    100  6.965e-32  4.975e-03      0.6530                        1e-4771.2
+  2  1  0.3333   1000  2.614e-303  4.998e-04      0.6342                        1e-477121.3
+  4  2  0.2000      5  2.004e-03  4.762e-02      0.7720                        1e-17.5
+  4  2  0.2000     10  1.070e-05  2.439e-02      0.7111                        1e-69.9
+  4  2  0.2000     20  4.199e-10  1.235e-02      0.6708                        1e-279.6
+  4  2  0.2000     50  4.441e-23  4.975e-03      0.6396                        1e-1747.4
+  4  2  0.2000    100  1.583e-44  2.494e-03      0.6266                        1e-6989.7
+  4  2  0.2000   1000  0.000e+00  2.499e-04      0.6119                        1e-698970.0
+  8  4  0.1111      5  2.974e-04  2.439e-02      0.7392                        1e-23.9
+  8  4  0.1111     10  3.244e-07  1.235e-02      0.6800                        1e-95.4
+  8  4  0.1111     20  5.384e-13  6.211e-03      0.6429                        1e-381.7
+  8  4  0.1111     50  4.356e-30  2.494e-03      0.6154                        1e-2385.6
+  8  4  0.1111    100  2.147e-58  1.248e-03      0.6043                        1e-9542.4
+  8  4  0.1111   1000  0.000e+00  1.250e-04      0.5921                        1e-954242.5
+  16 8  0.0588      5  4.055e-05  1.235e-02      0.7139                        1e-30.8
+  16 8  0.0588     10  8.413e-09  6.211e-03      0.6563                        1e-123.0
+  16 8  0.0588     20  5.087e-16  3.115e-03      0.6215                        1e-492.2
+  16 8  0.0588     50  2.000e-37  1.248e-03      0.5965                        1e-3076.1
+  16 8  0.0588    100  6.392e-73  6.246e-04      0.5867                        1e-12304.5
+  16 8  0.0588   1000  0.000e+00  6.250e-05      0.5761                        1e-1230448.9
+
+  asymptotic: log(1/atom)/m -> log(2^(k H(j/k)) / C(k,j)) ; per unit of log(1/eps4):
+  k=2     rate=0.6931  rate/log(k+1)=0.6309
+  k=4     rate=0.9808  rate/log(k+1)=0.6094
+  k=8     rate=1.2967  rate/log(k+1)=0.5901
+  k=16    rate=1.6277  rate/log(k+1)=0.5745
+  k=64    rate=2.3091  rate/log(k+1)=0.5532
+  k=1024  rate=3.6918  rate/log(k+1)=0.5325

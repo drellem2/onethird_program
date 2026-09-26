@@ -1,0 +1,31 @@
+== control: reproduce mg-b852
+   log10 L(4,1/6) = 119.107 (mg-b852: 119.1) -> MATCH
+   log10 L*       = 1.0500e+29 (mg-b852: 1.050e29) -> MATCH
+   negative control: exponent w instead of w^2 gives 8.07031e+14 -> FIRES (differs)
+
+== table: K0 = 1.30112e+14 (counterexample width, mg-c929), K12 = 1.94406e+12 (Thm 1.2 case (a))
+   Thm 1.2 eps via mg-f218 Thm 1.3'': eps = min(6.8e-6, 0.0236/(L12+1)); L12 = L(width K12, 1/2 - C_BFT)
+  * AK25b Thm 2.6 as printed: (2e)^(w^2)
+      width<=3 : log10(1/q0) = 4.29409    log10 L(4,1/6) = 119.107
+      width<=K0: log10(1/q0) = 8.0773e+27 log10 L*       = 1.0500e+29
+      Thm 1.2  : log10(1/q0) = 1.3208e+24 log10 L12      = 1.7171e+25 log10 eps(Thm 1.2) = -1.7171e+25
+  * best ANY bound on Thm 2.6's atom could give at eps=1/6 (F(m,2), sec 2): (2e)^(0.6309 w)  [Thm 1.2 line: extrapolated]
+      width<=3 : log10(1/q0) = 0.903047   log10 L(4,1/6) = 74.7053
+      width<=K0: log10(1/q0) = 3.91658e+13 log10 L*       = 5.09156e+14
+      Thm 1.2  : log10(1/q0) = 4.28646e+11 log10 L12      = 5.57239e+12 log10 eps(Thm 1.2) = -5.57239e+12
+  * hypothetical linear exponent: (2e)^w
+      width<=3 : log10(1/q0) = 1.43136    log10 L(4,1/6) = 81.6308
+      width<=K0: log10(1/q0) = 6.20793e+13 log10 L*       = 8.07031e+14
+      Thm 1.2  : log10(1/q0) = 6.79419e+11 log10 L12      = 8.83245e+12 log10 eps(Thm 1.2) = -8.83245e+12
+  * hypothetical w log w exponent: (2e/w)^w
+      width<=3 : log10(1/q0) = 2.86273    log10 L(4,1/6) = 100.378
+      width<=K0: log10(1/q0) = 1.8985e+15 log10 L*       = 2.4681e+16
+      Thm 1.2  : log10(1/q0) = 2.45694e+13 log10 L12      = 3.19402e+14 log10 eps(Thm 1.2) = -3.19402e+14
+  * hypothetical poly, cubic: (2e/w)^3
+      width<=3 : log10(1/q0) = 2.86273    log10 L(4,1/6) = 100.378
+      width<=K0: log10(1/q0) = 43.7743    log10 L*       = 633.67
+      Thm 1.2  : log10(1/q0) = 37.9146    log10 L12      = 557.387    log10 eps(Thm 1.2) = -559.014
+  * hypothetical poly, best possible shape: 2e/w  (ceiling, sec 2.3)
+      width<=3 : log10(1/q0) = 0.954243   log10 L(4,1/6) = 75.3763
+      width<=K0: log10(1/q0) = 14.5914    log10 L*       = 253.544
+      Thm 1.2  : log10(1/q0) = 12.6382    log10 L12      = 228.069    log10 eps(Thm 1.2) = -229.696
