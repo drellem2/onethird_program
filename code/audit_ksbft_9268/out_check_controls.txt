@@ -1,0 +1,7 @@
+NEGATIVE CONTROL CAUGHT: target [0.34,0.66] flags exactly the 2+1 forms (tree.c and aud, D=3,4,5)
+NEGATIVE CONTROL CAUGHT: target [0.39,0.61] violates and does not terminate (D=3)
+NEGATIVE CONTROL CAUGHT: tree.c mutant cut+1 reports FOUND-VIOLATION at D=3,4,5
+NEGATIVE CONTROL CAUGHT: aud badcut caught by end-to-end probe at D=3,5,7
+NEGATIVE CONTROL CAUGHT: aud badcut: P=[0,0,1,1,7,11] falsely certified at depth 5, k=4
+NEGATIVE CONTROL CAUGHT: aud badcut caught by sample probe (SAFE CUT FAILS count > 0)
+ALL CONTROLS FIRED

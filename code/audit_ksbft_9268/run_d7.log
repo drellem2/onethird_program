@@ -1,0 +1,27 @@
+# aud D=7: 30 slices of 30, split at depth 9
+# depth        nodes         cert           lp          cut  frontier
+depth  0            1            0            0            0         0
+depth  1            1            0            0            0         0
+depth  2            1            0            0            1         0
+depth  3            3            0            0            1         0
+depth  4           14            0            0            3         0
+depth  5           89           12            0           14         0
+depth  6          695          135            4           77         0
+depth  7         7000         1780           40          556         0
+depth  8        90538        26713         1563         5180         0
+depth  9      1089299       392314        40276        62262         0
+depth 10     10218035      4905370       690447       656709         0
+depth 11     64056502     40281406      5452901      4622218         0
+depth 12    240941476    181301733     20185671     18322195         0
+depth 13    515193720    428605459     39174612     39454072         0
+depth 14    619351270    541979240     41221163     47413649         0
+depth 15    462190628    418294530     26617909     36150867         0
+depth 16    209500600    195118090      9917974     17278189         0
+depth 17     47874457     44979879      1974946      4464536         0
+depth 18     10150988      9751730       279648       919632         0
+depth 19       795750       783586         9540       119610         0
+depth 20        10348        10324           24         2624         0
+# total nodes 2181471415; deepest 20; LP attempts 300774016; max cut-layer states 50; max pairs 51; violations 0
+# slices complete: True; all CLEAN: True
+VERDICT D=7: CLEAN
+sh run_d7.sh  17991.07s user 27.47s system 254% cpu 1:57:59.25 total

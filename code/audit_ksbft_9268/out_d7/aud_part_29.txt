@@ -1,0 +1,24 @@
+# aud D=7 MAXDEPTH=47 lo=1/3 split=29/30@9
+depth  0 nodes            1 cert            0 lp          0 cut          0 front 0
+depth  1 nodes            1 cert            0 lp          0 cut          0 front 0
+depth  2 nodes            1 cert            0 lp          0 cut          1 front 0
+depth  3 nodes            3 cert            0 lp          0 cut          1 front 0
+depth  4 nodes           14 cert            0 lp          0 cut          3 front 0
+depth  5 nodes           89 cert           12 lp          0 cut         14 front 0
+depth  6 nodes          695 cert          135 lp          4 cut         77 front 0
+depth  7 nodes         7000 cert         1780 lp         40 cut        556 front 0
+depth  8 nodes        90538 cert        26713 lp       1563 cut       5180 front 0
+depth  9 nodes        36309 cert        13087 lp       1296 cut      62262 front 0
+depth 10 nodes       342064 cert       164499 lp      22827 cut      21926 front 0
+depth 11 nodes      2143624 cert      1349813 lp     179185 cut     154738 front 0
+depth 12 nodes      8108277 cert      6094828 lp     673424 cut     614626 front 0
+depth 13 nodes     17434651 cert     14468138 lp    1339112 cut    1340025 front 0
+depth 14 nodes     20995266 cert     18307037 lp    1446186 cut    1627401 front 0
+depth 15 nodes     15797629 cert     14277598 lp     938186 cut    1242043 front 0
+depth 16 nodes      6957211 cert      6501777 lp     321358 cut     581845 front 0
+depth 17 nodes      1325029 cert      1260054 lp      46356 cut     134076 front 0
+depth 18 nodes       159748 cert       151446 lp       6456 cut      18619 front 0
+depth 19 nodes         9869 cert         9804 lp         60 cut       1846 front 0
+depth 20 nodes           13 cert           13 lp          0 cut          5 front 0
+# total 73408032 lptry 10242830 maxstates 50 maxpairs 51 violations 0
+RESULT CLEAN D=7
