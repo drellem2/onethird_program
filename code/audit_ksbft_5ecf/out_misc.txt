@@ -1,0 +1,3 @@
+1. Doubling in interval form: 11533 down-twin pairs n <= 8, violations = 0; CONTROL (l(x) < l(y)) failures = 9022 (must be > 0)
+2. separation-count vs prefix: 8792 (P, L) with n <= 6; A holds but B fails in 4583; example (((1, 1), (1, 2), (2, 2)), [(1, 2), (1, 1), (2, 2)])
+   restricted to dominance-respecting L: A holds but B fails in 292; example (((1, 1), (1, 3), (2, 2), (3, 3)), [(1, 1), (1, 3), (2, 2), (3, 3)])

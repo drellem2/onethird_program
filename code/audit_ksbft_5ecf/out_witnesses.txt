@@ -1,0 +1,20 @@
+T8: n=8 interval order=False semiorder=False delta=17/42 (0.40476); Thm2.1(b) injection: 20 ordered inc pairs, violations=0
+T13: n=13 interval order=False semiorder=False delta=17/42 (0.40476); Thm2.1(b) injection: 36 ordered inc pairs, violations=0
+T14: n=14 interval order=False semiorder=False delta=656/1395 (0.47025); Thm2.1(b) injection: 46 ordered inc pairs, violations=0
+N12: n=12 interval order=False semiorder=False delta=1/2 (0.50000); Thm2.1(b) injection: 50 ordered inc pairs, violations=0
+P9: n=9 interval order=True semiorder=False delta=79/197 (0.40102); Thm2.1(b) injection: 26 ordered inc pairs, violations=0
+Q_0: n=18 interval order=True semiorder=False delta=11224/28517 (0.39359); Thm2.1(b) injection: 54 ordered inc pairs, violations=0
+Q_4: n=26 interval order=True semiorder=False delta=1053599/2673421 (0.39410); Thm2.1(b) injection: 70 ordered inc pairs, violations=0
+Q_14: n=46 interval order=True semiorder=False delta=15937785289/40440798401 (0.39410); Thm2.1(b) injection: 110 ordered inc pairs, violations=0
+A14 = attach_both(F_20,8): n=22 interval order=True semiorder=False delta=21107/46282 (0.45605); Thm2.1(b) injection: 70 ordered inc pairs, violations=0
+attach_low(F_12,8): n=13 interval order=True semiorder=False delta=103/226 (0.45575); Thm2.1(b) injection: 38 ordered inc pairs, violations=0
+attach_low(F_16,10): n=17 interval order=True semiorder=False delta=2666/5709 (0.46698); Thm2.1(b) injection: 50 ordered inc pairs, violations=0
+double hub(2+2,k=4) (A16 shape): n=12 interval order=False semiorder=False delta=6151/12819 (0.47983); Thm2.1(b) injection: 96 ordered inc pairs, violations=0
+double hub(2+2,k=8) (A16 shape): n=20 interval order=False semiorder=False delta=204713/414664 (0.49368); Thm2.1(b) injection: 256 ordered inc pairs, violations=0
+F_12: n=12 interval order=True semiorder=True delta=89/233 (0.38197); Thm2.1(b) injection: 22 ordered inc pairs, violations=0
+O9a: n=9 interval order=True semiorder=False delta=228/515 (0.44272); Thm2.1(b) injection: 38 ordered inc pairs, violations=0
+O9b: n=9 interval order=True semiorder=False delta=22/53 (0.41509); Thm2.1(b) injection: 26 ordered inc pairs, violations=0
+O9a: P[[1,1]<[1,2]] = 135/206 = 0.6553; S([2,3],[1,5]) = [(4, 5), (5, 6)]
+random interval orders (400, n=10..24): 15864 ordered inc pairs, Thm2.1(b) violations = 0
+CONTROL (S = above-separators only), interval orders n=3..6: violations = 653 (must be > 0)
+RESULT Thm 2.1(b) never violated; control fires

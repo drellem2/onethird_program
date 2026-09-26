@@ -1,0 +1,7 @@
+1. laws vs brute: 694 posets, mismatches = 0
+   CONTROL planted +1 in N[0][1] detected: True
+2. badL vs brute, every interval order 2 <= n <= 7: mismatches = 0; bad(any) = 6, bad(dom) = 6
+   CONTROL general poset (2+2: True): badL found = True; author's L valid = True, bad = True
+3. Prop 3.1 formula vs cover count: 143990 ordered incomparable pairs, n <= 8: mismatches = 0
+4. Cor 3.2 (strict dominance step has |S| >= 2): violations = 0
+RESULT all controls pass

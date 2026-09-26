@@ -1,0 +1,15 @@
+n=2: 1 non-chain interval orders; bad L (any) = 0; bad L (dominance) = 0
+n=3: 4 non-chain interval orders; bad L (any) = 0; bad L (dominance) = 0
+n=4: 14 non-chain interval orders; bad L (any) = 0; bad L (dominance) = 0
+n=5: 52 non-chain interval orders; bad L (any) = 0; bad L (dominance) = 0
+n=6: 216 non-chain interval orders; bad L (any) = 0; bad L (dominance) = 0
+n=7: 1013 non-chain interval orders; bad L (any) = 0; bad L (dominance) = 0
+n=8: 5334 non-chain interval orders; bad L (any) = 0; bad L (dominance) = 0
+n=9: 31239 non-chain interval orders; bad L (any) = 2; bad L (dominance) = 2
+   [1,1] [1,2] [1,5] [2,3] [2,6] [3,4] [4,5] [5,6] [6,6]  dominance=True  3+1=True
+      witness L = [1,1] [1,2] [2,3] [1,5] [3,4] [2,6] [4,5] [5,6] [6,6]
+   [1,1] [1,2] [2,3] [2,6] [3,4] [4,5] [5,6] [6,7] [7,7]  dominance=True  3+1=True
+      witness L = [1,1] [1,2] [2,3] [3,4] [2,6] [4,5] [5,6] [6,7] [7,7]
+   all contain 3+1: True; #intervals with r-l >= 2 per bad poset: [1, 2]
+n=10: 201607 non-chain interval orders; bad L (any) = 26; bad L (dominance) = 24
+   all contain 3+1: True; #intervals with r-l >= 2 per bad poset: [1, 2, 3]

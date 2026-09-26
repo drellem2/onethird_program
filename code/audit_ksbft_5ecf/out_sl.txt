@@ -1,0 +1,6 @@
+n=9: posets with a bad dominance-L: 2, bad dominance-L total: 2; surviving SL1/SL2 + duals: 2 posets, 2 L
+   [1,1][1,2][1,5][2,3][2,6][3,4][4,5][5,6][6,6]: bad L 1, surviving 1; e.g. [1,1] [1,2] [2,3] [1,5] [3,4] [2,6] [4,5] [5,6] [6,6]
+      CONTROL planted SL2 violation rejected: True
+   [1,1][1,2][2,3][2,6][3,4][4,5][5,6][6,7][7,7]: bad L 1, surviving 1; e.g. [1,1] [1,2] [2,3] [3,4] [2,6] [4,5] [5,6] [6,7] [7,7]
+      CONTROL planted SL2 violation rejected: True
+n=10: posets with a bad dominance-L: 24, bad dominance-L total: 29; surviving SL1/SL2 + duals: 16 posets, 20 L
