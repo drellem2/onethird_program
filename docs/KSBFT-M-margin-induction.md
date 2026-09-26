@@ -1,6 +1,12 @@
-# KSBFT-M: margin-carrying induction on bounded range. The deletion induction cannot sustain a fixed margin (PROVEN for Lemma R alone, EMPIRICAL with decay). An exact ideal-mixture "prefix certificate" replaces it and re-proves D = 3 (base n ≤ 11) and D = 4 (base n ≤ 15). Its cost rules out D ≥ 5, so D = 7 is not reached (mg-6b81)
+# KSBFT-M: margin-carrying induction on bounded range. The deletion induction cannot sustain a fixed margin (PROVEN for Lemma R alone, EMPIRICAL with decay). An exact ideal-mixture "prefix certificate" replaces it and re-proves D = 3 (base n ≤ 11) and D = 4 (base n ≤ 15). Its cost puts D ≥ 5 beyond exhaustive enumeration here, so D = 7 is not reached by this search (mg-6b81)
 
 Builds on mg-eedd (`docs/KSBFT-J-one-pt.md`: Lemma R, the decomposable reduction, the (ONE-PT) census and its margins) and on mg-2912's margin observation. Instruments are in `code/ksbft_m_margin_6b81/`. `sh code/ksbft_m_margin_6b81/run_all.sh` regenerates every transcript quoted here. It runs serially (one process), takes ~15 min, and needs ~2 GB of RAM.
+
+**Errata (mg-8dde, per audit mg-f889, `docs/AUDIT-mg-6b81.md`).** No theorem changes: Prop 3.1, Lemmas 2.1–2.5, Thm 2.4, Thms 5.1/5.2 and Cor 2.6 (`1/96`, `1/150`) all HOLD. Four corrections:
+1. **`μ_4 = 5/318` is BROKEN as a value.** mg-2912's annealing witness (`docs/KSBFT-A-range-probe.md` Table 1; `code/ksbft_range_probe/out/searchtab.txt`, `D=4 n=21 pi=4 w=2 … delta=5402/15485`) is an indecomposable range-4 poset on 21 elements with `δ − 1/3 = 721/46455 ≈ 0.015520 < 5/318 ≈ 0.015723` (re-computed by the audit, `code/audit_ksbft_f889/out_witness.txt`; I did not re-derive it). So `μ_4 ≤ 721/46455`, and `5/318` is only the minimum over `n ≤ 15`. Cor 2.6's `1/150` is below the witness and is unaffected. `μ_3 = 5/318` stands (EMPIRICAL, `n ≤ 15`; mg-2912 reports it exhaustively to `n = 18`).
+2. **`1/3 + 5/318 = 37/106` is not new.** It is Gupta's least value of δ above 1/3 through `n = 14` (arXiv:2607.23926 §1.1, "inherited from a ten-element poset"). The `n ≤ 14` part of §1's minimum is therefore a cross-check against the literature, not a finding.
+3. **"Its cost rules out D ≥ 5" (old title) was OVERSTATED.** The cost claim is EMPIRICAL at `t ≤ 13` plus a two-point extrapolation (`t(D) = 4D − 1` from `D = 3, 4`), which §7 itself labels CONJECTURED. It puts `D ≥ 5` beyond *exhaustive class enumeration* in this search; it rules out nothing else. mg-e8b4 (`docs/KSBFT-I-finite-state.md`, merged later, not yet audited) uses the same reduction (its Lemma 3 / Proposition 1 are Lemmas 2.2–2.4 here) with an adaptive search and reports settling range `D ≤ 7`, with 4 758 tree nodes at `D = 4` against the 14 298 595 classes here.
+4. **Novelty of the method is UNVERIFIABLE**, not merely unchecked: the audit could not obtain BW92, Pec08 or Brightwell's 1999 survey in full text either. Lemma 2.3 is the ideal-lattice cut `e(P) = Σ_J e(J) e(P∖J)` (folklore; the forward/backward recursion Gup26 attributes to De Loof–De Meyer–De Baets), and Lemma 2.1 is elementary.
 
 Labels, as in KSBFT-J:
 - **PROVEN**: the proof is in this file.
@@ -18,7 +24,8 @@ Conventions are those of KSBFT-J. `π(v)` is the number of elements incomparable
 
 2. **Exceptional list (item 1, EMPIRICAL).** Among the indecomposable non-chains of every class computed (all `n ≤ 8`; `Π_3` and `Π_4` for `n ≤ 15`), exactly one has `δ = 1/3`: `2+1` (`A₁ + C₂`, `n = 3`). The other members of "the (2+1) family" that sit at exactly 1/3 are ordinal sums, so they are decomposable and are disposed of by the decomposable reduction. **So the exceptional list for H(D, μ) is `{2+1}`.** The largest μ consistent with the data is:
    - `μ_2 = 1/24` (`F_5`, exact; `inf` over `F_m` is attained at `m = 5`);
-   - `μ_3 = μ_4 = 5/318 ≈ 0.01572` (one `n = 10`, `π = 3` poset). For `n = 11..15` the per-`n` minima are 0.0161–0.0175, with no trend (§1).
+   - `μ_3 = 5/318 ≈ 0.01572` (one `n = 10`, `π = 3` poset; `1/3 + 5/318 = 37/106` is Gup26's least value above 1/3, so not new). For `n = 11..15` the per-`n` minima are 0.0161–0.0175, with no trend (§1).
+   - `μ_4`: **not** `5/318` (BROKEN, errata 1). Over `n ≤ 15` the minimum is `5/318`, but mg-2912's `n = 21` range-4 witness has `δ − 1/3 = 721/46455 ≈ 0.015520`, so `μ_4 ≤ 721/46455`.
 
 3. **H(D, μ) ⇒ H(D, μ) by deletion does not close (item 2).**
    - (a) **PROVEN (Prop 3.1).** Lemma R alone transports *no* margin at all. For every `μ > 0` and every `v` with `π(v) ≥ 1`, which is every `v` of an indecomposable `P` with `n ≥ 2`, Lemma R's window around any `p' ∈ [1/3+μ, 2/3−μ]` leaves `[1/3+μ, 2/3−μ]`. So with Lemma R alone, **no μ > 0 is self-sustaining**, for any D.
@@ -35,7 +42,7 @@ Conventions are those of KSBFT-J. `π(v)` is the number of elements incomparable
 
 6. **Theorem 5.2 (D = 4, PROVEN (computer)).** The same holds on `Π_4`. It consumes base `n ≤ 15` (7 238 840 indecomposable posets at `n = 15`) and **14 298 595** non-CUT classes at `t = 15`, each with a certificate (worst robust margin `1/150`, 0 failures). At `t = 14` there are still 14 failures.
 
-7. **D = 5 and D = 7 are not reached (EMPIRICAL cost).** The needed prefix length grows by 4 per unit of `D`: `t(3) = 11`, `t(4) = 15`. At `D = 5`, `t = 12` and `t = 13` still leave 127 288 of 3 740 359 and 141 882 of 17 890 772 classes uncertified. The non-CUT class count grows ×3.4 per step at `D = 4` and ×4.7 at `D = 5`. By extrapolation (CONJECTURED), `D = 5` needs `t ≈ 19` and ~10¹¹ classes, and `D = 7` needs `t ≈ 27`, far beyond exhaustive class enumeration. The method is **sound and D-uniform, but its verification cost is not**. §7 lists what would have to change.
+7. **D = 5 and D = 7 are not reached by this search (EMPIRICAL cost).** The needed prefix length grows by 4 per unit of `D`: `t(3) = 11`, `t(4) = 15`. At `D = 5`, `t = 12` and `t = 13` still leave 127 288 of 3 740 359 and 141 882 of 17 890 772 classes uncertified. The non-CUT class count grows ×3.4 per step at `D = 4` and ×4.7 at `D = 5`. By extrapolation (CONJECTURED), `D = 5` needs `t ≈ 19` and ~10¹¹ classes, and `D = 7` needs `t ≈ 27`, far beyond exhaustive class enumeration. The method is **sound and D-uniform, but its verification cost by exhaustive class enumeration is not**. This is a cost measurement plus a CONJECTURED extrapolation, not an impossibility result. §7 lists what would have to change; mg-e8b4 (`docs/KSBFT-I-finite-state.md`, not yet audited) later applied the same reduction with an adaptive search and reports `D ≤ 7`.
 
 8. **Covariance decay (item 4, EMPIRICAL).** The worst `|Cov_{P−v}(w_v, 1{x<y})| / E[w_v] = |p_P − p_{P−v}|` decays geometrically in the `G(P)`-distance `d` between `v` and the pair. The rate is ≈ 0.38–0.41 per step, which is close to `1/φ² ≈ 0.382` (the Fibonacci rate). The rate is flat in `n` (`n = 10` and `n = 13` agree to 2–3 significant digits wherever both are defined) and roughly flat in `π(v)` (§4).
 
@@ -77,9 +84,10 @@ Generated by `code/ksbft_m_margin_6b81/table_base.py` from `out_base.txt` (the `
 Reading:
 - `δ = 1/3` exactly occurs **only** for `2+1`. No other indecomposable poset in these classes is within `5/318` of 1/3.
 - The minimisers at `π = 3` from `n = 10` on are the single family `0 0 2 6 3 17 1f …` that mg-eedd found for the ONE-PT margin. That fits the elementary inequality `ONE-PT margin ≤ δ − 1/3`, which holds because the ONE-PT pair is balanced in `P`.
-- The margin is flat in `n` (0.0157–0.0175 for `n = 10..15`). This matches mg-2912's "flat in `n`". **I did not recompute mg-2912's 0.3489 at `n = 21`.**
+- The margin is flat in `n` (0.0157–0.0175 for `n = 10..15`). This matches mg-2912's "flat in `n`". **I did not recompute mg-2912's 0.3489 at `n = 21`.** I should have compared it: `0.3489 < 37/106 = 0.34906`, and the audit's recomputation (`721/46455` above 1/3 at range 4) breaks `μ_4 = 5/318` (errata 1).
+- `1/3 + 5/318 = 37/106` is Gupta's least value of δ above 1/3 for `n ≤ 14` (arXiv:2607.23926), from a ten-element poset. The `n ≤ 14` minima here agree with that computation; they are not new.
 
-**Formulation (H(D, μ)).** Every indecomposable non-chain `P ∈ Π_D` other than `2+1` has `δ(P) ≥ 1/3 + μ`. The data fit `μ = 5/318` for `D = 3, 4` (EMPIRICAL, `n ≤ 15`). Theorems 5.1 and 5.2 prove only `δ ≥ 1/3` (μ = 0); §2.4 explains why the certificate also yields a positive μ **for all sufficiently long P**, but not for all `P`.
+**Formulation (H(D, μ)).** Every indecomposable non-chain `P ∈ Π_D` other than `2+1` has `δ(P) ≥ 1/3 + μ`. The data fit `μ = 5/318` for `D = 3` (EMPIRICAL, `n ≤ 15`). For `D = 4` it fits only `n ≤ 15`: mg-2912's `n = 21` witness gives `μ_4 ≤ 721/46455 < 5/318` (errata 1). Theorems 5.1 and 5.2 prove only `δ ≥ 1/3` (μ = 0); §2.4 explains why the certificate also yields a positive μ **for all sufficiently long P**, but not for all `P`.
 
 ---
 
@@ -219,7 +227,7 @@ What these theorems consume: Lemmas 2.1–2.5 (proven here), KSBFT-J Lemma 1.1 (
 ## 6. Novelty and what the result is worth
 
 - `D ≤ 6` is **known** (BW92 `D ≤ 5`, Peczarski `D ≤ 6`, the latter with extensive computation). Theorems 5.1 and 5.2 are **re-proofs**, and their value is as a **test of the method**, as the ticket specifies.
-- I have not read BW92 or Peczarski. The prefix/ideal-mixture argument is elementary. It is plausible that BW92, and certainly a computer search like Peczarski's, uses a bottom-of-the-poset argument of this shape. **Novelty: UNCHECKED.** An auditor with the papers should compare them.
+- I have not read BW92 or Peczarski. The prefix/ideal-mixture argument is elementary. It is plausible that BW92, and certainly a computer search like Peczarski's, uses a bottom-of-the-poset argument of this shape. **Novelty: UNVERIFIABLE** (audit mg-f889 §5: BW92, Pec08 and Bri99 could not be obtained in full text there either). The ingredients are standard (Lemma 2.3 is the ideal-lattice cut; Lemma 2.1 is elementary); only the combination was not found in the sources that could be read, which is weak evidence.
 - What the method **does** buy over the KSBFT-J line: exact transport (no Lemma-R loss), no decay estimate, a base case of `n ≤ 11` instead of 16, and a positive margin `1/96` for all long indecomposable `P ∈ Π_3`. That last is a statement of H(3, μ) type that the ticket asked for. (For `D ≤ 6` a positive margin is not implied by `δ ≥ 1/3` results unless they prove one. I did not check whether BW92 or Peczarski do.)
 
 ## 7. Where D = 7 stands, and what would have to change
@@ -229,13 +237,13 @@ What these theorems consume: Lemmas 2.1–2.5 (proven here), KSBFT-J Lemma 1.1 (
   1. A sharper bracket. The weights `w_J ∝ e(J)·e(P∖J)`, with `e(J)` known from `Q`, and `e(P∖J)/e(P∖J')` constrained by Lemma-R-type insertion ratios, give an LP bracket strictly inside `[min p_J, max p_J]`. This might lower `t` by a little.
   2. Replacing enumeration of whole prefixes by propagating interval brackets through the finite automaton of `2D`-windows (abstract interpretation of the ratio vectors `a_E/a` over ideal states). This would make the cost polynomial in the number of window types rather than in the number of prefix classes.
   3. Using the dual (suffix) certificate for the prefixes that fail. This requires pairing prefixes with suffixes, and I did not pursue it.
-- Neither lever is PROVEN to suffice. **D = 7 is open. This ticket did not settle it.**
+- Neither lever is PROVEN to suffice. **This ticket did not settle D = 7.** (Later: mg-e8b4, `docs/KSBFT-I-finite-state.md`, reports settling `D ≤ 7` with the same reduction plus an adaptive search, a canonical-order cut and a joint LP certificate, far more cheaply than the enumeration here; it is not yet audited.)
 
 ## 8. What I did not do, and the negatives
 
 **Not done:**
-- Read BW92, Peczarski or Gup26. The novelty of §2 is unchecked (§6).
-- Recompute mg-2912's `n = 21` value 0.3489.
+- Read BW92, Peczarski or Gup26. The novelty of §2 is UNVERIFIABLE (§6; audit mg-f889 §5).
+- Recompute mg-2912's `n = 21` value 0.3489. (The audit did: `721/46455`, which breaks `μ_4 = 5/318`; errata 1.)
 - Any proof of covariance decay (§4 is measurement only), or any Birkhoff-contraction bound.
 - `D = 5` certification (stopped at `t = 13`: 141 882 uncertified), and `D ≥ 6` at all.
 - `Π_3` census past `n = 13` of my own. For `n = 14, 15` the base tables use the `c3`/`c4` lists, which contain every indecomposable poset (Lemma 2.5(c)). mg-eedd's `n = 16` range-3 census was not re-run, because Theorem 5.1 does not need it.
