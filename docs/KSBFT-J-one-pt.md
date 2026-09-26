@@ -2,6 +2,8 @@
 
 Builds on mg-b447 (`docs/KSBFT-F-L4-step6-under-bounded-range.md`, §8, which names (ONE-PT_D)) and its audit mg-de37, and on mg-1911 (`docs/KSBFT-C-programme-repricing.md`, F1/F2). Instruments are in `code/ksbft_one_pt/`. `sh code/ksbft_one_pt/run_all.sh` regenerates every transcript quoted here. It is deterministic (two consecutive runs are byte-identical on every census file), takes ~11 min, and runs at most 3 processes.
 
+**Errata (mg-34c8, per audit mg-95d3, `docs/AUDIT-mg-eedd.md`).** The margin headline (§0 item 3, §2.3) was wrong. The margin is 0 at small indecomposable posets and at decomposable ones, it is 5/318 < 1/51 at `n = 10`, and the canonical margin is 0 at `n = 5, 6, 8`. The Fibonacci `μ₂ = 1/φ² − 1/3` is a limit, not a bound. "A proof needs" in §0 item 5 now reads "the natural route needs". Sharpness of Lemma R at `π(v) = 1` was inferred from census values; it is now PROVEN (Prop 1.5, the audit's two-chain family). No other result changes.
+
 Labels:
 - **PROVEN**: the proof is in this file.
 - **PROVEN (computer)**: an exhaustive, exact-integer computation over a finite class, with its instrument and its positive controls. It is a proof about that class only.
@@ -21,12 +23,12 @@ Conventions. `P` is a finite poset. A pair `{x,y}` is *balanced* if `x ∥ y` an
 
 1. **"Exists v" never fails (EMPIRICAL, exact).** There are 0 failures on **every** non-chain isomorphism class with `3 ≤ n ≤ 10`. That is 2 769 953 posets, of which 2 567 283 have `n = 10` (§2). There are also 0 failures on every indecomposable class of range `≤ 3` for `n = 11..16` (129 683 posets), and of range `≤ 4` for `n = 11..13` (839 679 posets). mg-b447's census reached `n ≤ 6` (5 224 naturally labelled posets, i.e. 398 classes). Since (ONE-PT) is an isomorphism invariant, this census covers every labelled poset in its range.
 2. **A canonical v exists in the data: every element of minimal range works (EMPIRICAL).** Over all 2 769 953 non-chains with `n ≤ 10`, the rule "**every** `v` with `π(v) = min_u π(u)` works" fails on exactly one poset: `A₁ + C₃` (a point beside a 3-chain, `n = 4`, with `v` the middle of the chain). It has 0 failures in every range-restricted class. The weaker "some minimal element works" and "some maximal element works" also have 0 failures on indecomposable posets. The h-order endpoint rule ("some h-first element works") fails once (`n = 9`, §3). **"Every v"** is FALSE and stays false (287 failures at `n = 10`). But among **indecomposable** posets of range `≤ 3` it fails only for `n ≤ 8` and at one `n = 12` poset. For `n = 13..16` it has 0 failures (§3).
-3. **Margin.** Define `margin(P)` = max over `(v, pair)` of min(distance of `p_P`, distance of `p_{P−v}`) to the boundary of `[1/3, 2/3]`. It stays bounded away from 0 in every class computed: **≥ 1/51 ≈ 0.0196** for all `n ≤ 10`, and **0.0161–0.0175** at range 3 for `n = 11..16`, with no downward trend (§2.3). The canonical rule (worst over the minimal-range `v`) has a smaller margin, down to 1/159 ≈ 0.0063 (`n = 9`). The Fibonacci poset's margin converges to `1/φ² − 1/3 ≈ 0.04863`.
+3. **Margin (corrected per audit mg-95d3).** Define `margin(P)` = max over `(v, pair)` of min(distance of `p_P`, distance of `p_{P−v}`) to the boundary of `[1/3, 2/3]`. It is **not** bounded away from 0. It is exactly **0** at indecomposable `n = 3, 4` (`F₃ = A₁ + C₂` and `2+2`: closed-interval ties at 1/3), and 0 for decomposable posets at every `n`. Among indecomposable posets with `5 ≤ n ≤ 10` the worst margin is `5/318 ≈ 0.0157` (`n = 10`), and at range 3 for `n = 11..16` it is **0.0161–0.0175**, with no downward trend (§2.3). The canonical rule (worst over the minimal-range `v`) has worst margin **0** at indecomposable `n = 5, 6, 8`, including range `≤ 3` at `n = 6`. (At `n = 4` it is negative, which is the `A₁ + C₃` failure.) What survives is narrower (EMPIRICAL): for indecomposable range `≤ 3` with `7 ≤ n ≤ 16`, the worst margin is `≥ 5/318` and the canonical margin is `≥ 1/84 ≈ 0.0119`. The zeros are ties at 1/3, so (ONE-PT) still holds there. Any margin hypothesis has to exclude small base cases. The Fibonacci poset's margin **converges** to `1/φ² − 1/3 ≈ 0.04863`. This is a limit, not a lower bound: odd `m` approach it from below, `F₅` has margin `1/24`, and `F₃` has margin 0.
 4. **PROVEN.**
    - (a) **Decomposable reduction** (Prop 1.2): for decomposable `P`, (ONE-PT)(P) ⟺ δ(P) ≥ 1/3. So (ONE-PT_D) ⟺ [the conjecture on `Π_D`] ∧ [(ONE-PT) on indecomposable members of `Π_D`], and only the indecomposable case has content.
-   - (b) **Reweighting lemma R** (Lemma 1.3): the uniform measure on `L(P)` is the uniform measure on `L(P−v)` reweighted by the slot count `w_v ∈ [1, π(v)+1]` (mg-1911's F1 window, read as a density). Consequently `|p_P − p_{P−v}| ≤ (√(π(v)+1) − 1)/(√(π(v)+1) + 1)`. This is sharp at `π(v) = 1`: the census reaches 0.1715729 against the bound `3 − 2√2 = 0.1715729`, and 0 of 408 million exact checks violate it.
+   - (b) **Reweighting lemma R** (Lemma 1.3): the uniform measure on `L(P)` is the uniform measure on `L(P−v)` reweighted by the slot count `w_v ∈ [1, π(v)+1]` (mg-1911's F1 window, read as a density). Consequently `|p_P − p_{P−v}| ≤ (√(π(v)+1) − 1)/(√(π(v)+1) + 1)`. This is sharp at `π(v) = 1` (**PROVEN**, Prop 1.5; the proof is from audit mg-95d3 §2.2): the bound `3 − 2√2` is the supremum, and it is not attained. The census reaches 0.1715729, and 0 of 408 million exact checks violate the bound.
    - (c) **(ONE-PT_1) and (ONE-PT_2), in the canonical form** (Thms 4.1, 4.3): for every non-chain `P ∈ Π_2` with `n ≥ 3`, **every** element of minimal range works. The proof classifies the indecomposable members of `Π_2` (Lemma 4.2: `A₃`, `2+2`, and the Fibonacci posets `F_m`) and computes `F_m` exactly.
-5. **Range 3: PROVEN (computer) for `n ≤ 16`, open for `n ≥ 17`.** The obstruction is quantitative and measured (§5). The only exact transport available, Lemma R, moves `p` by up to 0.1716 even when `π(v) = 1`. The pairs that actually transport have margins of about 0.016. So a proof needs the covariance `Cov_{P−v}(w_v, 1{x<y})` to be about 10× smaller than its worst case, for some pair located away from `v`. That is correlation decay along the window (mg-1911 §3.2, CONJECTURED there), and it has to be **exact enough to beat a 0.016 margin**, not asymptotic. The interface bound `τ ≤ 2D − 1` (sharpened to `τ ≤ D` by mg-de37) was **not** used and does not bear on this obstruction (§5.2).
+5. **Range 3: PROVEN (computer) for `n ≤ 16`, open for `n ≥ 17`.** The obstruction is quantitative and measured (§5). The only exact transport available, Lemma R, moves `p` by up to 0.1716 even when `π(v) = 1`. The pairs that actually transport have margins of about 0.016 (for `n ≥ 7`; margins are 0 at small `n`, item 3). So the natural route (canonical `v`, a pair from the induction hypothesis on `P − v`, transport by Lemma R) needs the covariance `Cov_{P−v}(w_v, 1{x<y})` to be about 10× smaller than its worst case, for some pair located away from `v`. That is correlation decay along the window (mg-1911 §3.2, CONJECTURED there), and it has to be **exact enough to beat a 0.016 margin**, not asymptotic. The interface bound `τ ≤ 2D − 1` (sharpened to `τ ≤ D` by mg-de37) was **not** used and does not bear on this obstruction (§5.2).
 6. **Item 4 (ε-transport) is moot.** "Exists v" never failed, so the fallback was not needed. The maximum over `P` of the ε such that some pair balanced in `P − v` lies within ε of `[1/3,2/3]` in `P` is exactly 0 in every class computed. Lemma R is the PROVEN universal ε-transport, with `ε(π(v))` as in 4(b).
 
 ---
@@ -58,9 +60,19 @@ So on decomposable posets (ONE-PT) *is* the conjecture. A minimal counterexample
 
 This is F1 (mg-1911: `v` sits in a window of `π(v)+1` slots) read as a density rather than as a support bound.
 
-*Checks (EMPIRICAL, exact).* Every `(P, v, pair)` in every scanned class is tested against the two-sided window in item 3, by integer cross-multiplication: 408 million checks at `n = 10` and 124 million at range `≤ 4`, `n = 13`. There are 0 violations. The **control**, the same window with `r = π(v)` in place of `π(v)+1`, is violated millions of times (`FIRES`), so the `+1` is needed. The worst `|p − p'|` at `π(v) = 1` is `6930/40391 = 0.17157288` (`n = 10`) and `40391/235416 = 0.17157288` (range 3, `n = 16`), against `3 − 2√2 = 0.17157288`. These are Pell-type approximants, so the bound is the supremum. For `π(v) ≥ 2` the observed maximum stays well below the bound (0.2107 vs 0.2679 at `π(v) = 2`, `n = 10`).
+*Checks (EMPIRICAL, exact).* Every `(P, v, pair)` in every scanned class is tested against the two-sided window in item 3, by integer cross-multiplication: 408 million checks at `n = 10` and 124 million at range `≤ 4`, `n = 13`. There are 0 violations. The **control**, the same window with `r = π(v)` in place of `π(v)+1`, is violated millions of times (`FIRES`), so the `+1` is needed. The worst `|p − p'|` at `π(v) = 1` is `6930/40391 = 0.17157288` (`n = 10`) and `40391/235416 = 0.17157288` (range 3, `n = 16`), against `3 − 2√2 = 0.17157288`. These are Pell-type approximants. The census values alone do not prove that the bound is the supremum, but Prop 1.5 below does. For `π(v) ≥ 2` the observed maximum stays well below the bound (0.2107 vs 0.2679 at `π(v) = 2`, `n = 10`).
 
 **Corollary 1.4 (PROVEN).** If `π(v) ≤ 1` and `p_{P−v}(x<y) = 1/2`, then `{x,y}` is balanced in `P`. (`r = 2`, `p' = 1/2` gives `p ∈ [1/3, 2/3]` exactly.) For `r ≥ 3`, or for `p' ≠ 1/2`, Lemma R alone certifies nothing on the closed interval.
+
+**Prop 1.5 (sharpness of Lemma R at π(v) = 1, PROVEN; proof from audit mg-95d3 §2.2, `docs/AUDIT-mg-eedd.md`).** Let `Q(a,b)` be the disjoint union of a chain `A` of `a` elements with top `x` and a chain `B` of `b` elements with top `z`. Let `P(a,b) = Q(a,b) ∪ {v}` with `v > q` for every `q ≠ z`, and `v ∥ z`. Then `π(v) = 1`, `P − v = Q(a,b)`, and with `p' = P_Q[x before z]` and `p = P_P[x before z]`:
+
+`p' = b/(a+b)`,  `p = 2p'/(1+p')`,  `p − p' = p'(1−p')/(1+p')`.
+
+Taking `b/(a+b) → √2 − 1` gives `p − p' → 3 − 2√2`. So the bound of Lemma R(3) at `r = 2` is the supremum. It is not attained, since `√2 − 1` is irrational.
+
+*Proof.* `v` is comparable to everything except `z`, so `π(v) = 1`. In `L' ∈ L(Q)` the last element is maximal, so it is `x` or `z`. Since `down(v) = Q ∖ {z}` and `up(v) = ∅`, `w_v(L') = 2` if `z` is last and `1` otherwise. `z` is last iff `x` precedes `z`. So `w_v = 1 + 1{x before z}`, and Lemma R(2) gives `p = 2p'/(2p' + 1 − p') = 2p'/(1+p')`. The last element of a uniform interleaving of the two chains comes from `B` with probability `b/(a+b)`, so `p' = b/(a+b)`. Then `p − p' = g(p')` at `r = 2`, and `g(√2 − 1) = 3 − 2√2`. Rationals `b/(a+b)` are dense in `(0,1)`. □
+
+With `b/(a+b)` equal to the Pell convergents, the gaps are 6/35, 35/204, 204/1189, 1189/6930, 6930/40391, 40391/235416. These are exactly the census maxima above. The audit checks this with exact fractions (`code/audit_ksbft_95d3/out_sharp_95d3.txt`). Sharpness for `π(v) ≥ 2` is not claimed.
 
 ---
 
@@ -99,14 +111,19 @@ The number of working `v` is almost always all of them. At `n = 10`, 2 566 996 o
 
 | class | worst margin | at | worst canonical margin |
 |---|---|---|---|
-| indec n=8 | 1/45 (π=3) | `8 0 0 2 6 3 13 f 3f` | 1/69 |
+| indec n=3 | 0 (π=2) | `3 0 0 2` (`F₃`) | 0 |
+| indec n=4 | 0 (π=2, 3) | `4 0 0 2 1` (`2+2`), `4 0 0 2 6` | −1/12 (π=3, the `A₁ + C₃` failure) |
+| indec n=5 | 1/33 (π=3) | `5 0 0 2 2 b` | 0 (π=4, `5 2 0 8 0 0`) |
+| indec n=6 | 1/42 (π=3) | `6 0 0 2 6 3 17` | 0 (π=3, 4, 5; π=3 is `6 36 24 0 30 20 0`) |
+| indec n=7 | 1/39 (π=4) | `7 0 0 2 2 b b 2f` | 1/69 (π=3) |
+| indec n=8 | 1/45 (π=3) | `8 0 0 2 6 3 13 f 3f` | 0 (π=7, `8 76 74 70 70 20 0 0`); 1/69 over π ≤ 6 |
 | indec n=9 | 1/51 (π=4) | `9 0 0 2 6 3 e 13 53 7f` | 1/159 (π=5) |
 | indec n=10 | 5/318 (π=3) | `10 0 0 2 6 3 17 1f 5f 3f 17f` | 1/81 (π=8) |
 | range ≤3, n=11..16 | 1/57, 14/831, 23/1344, 37/2175, 23/1425, 97/5694 | family `0 0 2 6 3 17 1f …` | 8/525, 1/84, 2/129, 11/687, 7/435, 4/249 |
 | range ≤4, n=11..13 | 19/789, 19/906, 16/807 (π=4) | | 5/318, 2/129, 29/1893 |
-| Fibonacci `F_m` (π=2) | → `1/φ² − 1/3 = 0.048633` | `F_n` | same |
+| Fibonacci `F_m` (π=2) | 0 at `m = 3`, 1/24 at `m = 5`; → `1/φ² − 1/3 = 0.048633` (limit, not a bound: odd `m` approach from below) | `F_n` | same |
 
-(Posets are printed as `n` followed by the strict down-sets in hex, in canonical labelling.) At range 3 the worst margin oscillates in `[0.0161, 0.0175]` for `n = 11..16`, with no trend towards 0. The minimisers are a single family: a fixed gadget `0 0 2 6 3 17` followed by a Fibonacci-like tail. That is consistent with a limit margin near 0.016 **(CONJECTURED)**.
+(Posets are printed as `n` followed by the strict down-sets in hex, in canonical labelling. The `n = 3..8` rows were added per audit mg-95d3 from `out_census_indec.txt`; an earlier version of this note quoted only `n ≥ 8`, and listed 1/69 as the `n = 8` canonical margin.) **Correction (mg-95d3):** the margin is **not** bounded away from 0 in every class. It is 0 at indecomposable `n = 3, 4` and for decomposable posets at every `n` (`out_census_all.txt`). The canonical margin is 0 at indecomposable `n = 5, 6, 8`. These zeros are closed-interval ties at 1/3, so (ONE-PT) holds there. At range 3 the worst margin oscillates in `[0.0161, 0.0175]` for `n = 11..16`, with no trend towards 0. The minimisers are a single family: a fixed gadget `0 0 2 6 3 17` followed by a Fibonacci-like tail. That is consistent with a limit margin near 0.016 **(CONJECTURED)**.
 
 ---
 
@@ -192,14 +209,14 @@ The natural argument is:
 
 Step 2 is the induction hypothesis. Step 3 is exact transport. Lemma R gives step 3 **only if** `p_{P−v}` is at distance `≥ (√r−1)/(√r+1)` from the boundary: `0.1716` for `π(v) = 1`, `0.268` for `π(v) = 2`, `0.333` for `π(v) = 3`. At `π(v) ≥ 3` this is impossible, since the interval has half-width `1/6`. At `π(v) = 1` the window of Lemma R stays inside `[1/3, 2/3]` only for `p' = 1/2` exactly: `p'/(p'+2(1−p')) ≥ 1/3` needs `p' ≥ 1/2`, and the upper bound needs `p' ≤ 1/2` (Cor 1.4). The pairs that actually transport in the census have `margin ≈ 0.016` at range 3 (§2.3). **So the crude transport is off by a factor of about 10 even in the best case.**
 
-The gap is exactly the covariance term. By Lemma R, `p − p' = Cov_{P−v}(w_v, 1{x<y}) / E'[w_v]`. The worst case (0.1716) is when `w_v` is a function of `1{x<y}`, i.e. the pair sits in `v`'s window. A proof must instead choose the pair **away from `v`** and show `|Cov(w_v, 1{x<y})| ≤ 0.016·E'[w_v]`. `w_v` depends only on the order of the `≤ π(v)` elements of `v`'s window relative to `down(v)` and `up(v)`, which is F1/F2 locality. So what is needed is a decay-of-correlations statement along the window (mg-1911 §3.2, CONJECTURED there). It must be
+The gap is exactly the covariance term. By Lemma R, `p − p' = Cov_{P−v}(w_v, 1{x<y}) / E'[w_v]`. The worst case (0.1716) is when `w_v` is a function of `1{x<y}`, i.e. the pair sits in `v`'s window. This route must instead choose the pair **away from `v`** and show `|Cov(w_v, 1{x<y})| ≤ 0.016·E'[w_v]`. `w_v` depends only on the order of the `≤ π(v)` elements of `v`'s window relative to `down(v)` and `up(v)`, which is F1/F2 locality. So what is needed is a decay-of-correlations statement along the window (mg-1911 §3.2, CONJECTURED there). It must be
 
 - (a) **explicit** at a distance of a few windows, not merely `→ 0`;
 - (b) combined with a **margin statement**: a pair of `P − v` balanced with margin `μ(D) > 0`, which the induction hypothesis (δ ≥ 1/3) does not supply.
 
-Point (b) is the real wall. The induction hypothesis gives `δ(P − v) ≥ 1/3`, **with no margin**. So step 3 must be exact at the boundary, and no decay estimate delivers exactness. This is mg-b447 §8's last bullet, made quantitative. The census says that the margin *exists* (≥ 0.016 at range 3, EMPIRICAL). But proving it means proving `δ ≥ 1/3 + μ` on `Π_3`, which the known `π ≤ 5` result (BW92) does not imply, so the induction does not reduce the problem.
+Point (b) is the real wall. The induction hypothesis gives `δ(P − v) ≥ 1/3`, **with no margin**. So step 3 must be exact at the boundary, and no decay estimate delivers exactness. This is mg-b447 §8's last bullet, made quantitative. The census says that the margin *exists* for `n ≥ 7` (≥ 0.016 at range 3, EMPIRICAL). It is 0 at small `n` (§2.3), so a margin-carrying induction would also need a finite base checked separately; the census supplies that base up to `n = 16`. But proving it means proving `δ ≥ 1/3 + μ` on `Π_3`, which the known `π ≤ 5` result (BW92) does not imply, so the induction does not reduce the problem.
 
-**CONJECTURED (route).** An induction would have to carry the stronger hypothesis "every non-chain in `Π_D` of size `< n` has a pair with margin `≥ μ_D` located near each end of the h-order". Lemma R plus decay would then transport a pair from the *far* end. `F_m` satisfies this with `μ₂ = 1/φ² − 1/3`, and it is how Thm 4.3's `F_m` case works (`v = x_m`, pair at `x₁x₂`). This was not attempted beyond `D = 2`.
+**CONJECTURED (route).** An induction would have to carry the stronger hypothesis "every non-chain in `Π_D` of size `< n` has a pair with margin `≥ μ_D` located near each end of the h-order". Lemma R plus decay would then transport a pair from the *far* end. `F_m` satisfies this for `m ≥ 4` with `μ₂ = 1/24` (the `F₅` value; `1/φ² − 1/3` is only the limit as `m → ∞`, approached from below along odd `m`), and fails it at `m = 3` (margin 0). This is how Thm 4.3's `F_m` case works (`v = x_m`, pair at `x₁x₂`). This was not attempted beyond `D = 2`.
 
 ### 5.2 The interface bound
 
@@ -209,7 +226,7 @@ mg-b447's `τ ≤ 2D − 1` (sharpened by mg-de37 to `τ ≤ D`) bounds the bran
 
 ## 6. Item 4
 
-"Exists v" never failed, so the weaker transport was not needed. Measured: the maximum over `P` of [the minimum over `(v, pair balanced in P−v)` of the distance of `p_P` outside `[1/3,2/3]`] is **exactly 0** in every class (EMPIRICAL). The universal ε-transport that holds for **every** pair and every `v` is Lemma R, `ε = (√(π(v)+1) − 1)/(√(π(v)+1) + 1)`. It is sharp at `π(v) = 1` (PROVEN bound, sup attained in the limit, EMPIRICAL). So "within ε of balanced" holds with `ε = 3 − 2√2` whenever `v` has `π(v) = 1`, which every indecomposable `F_m`-like end supplies.
+"Exists v" never failed, so the weaker transport was not needed. Measured: the maximum over `P` of [the minimum over `(v, pair balanced in P−v)` of the distance of `p_P` outside `[1/3,2/3]`] is **exactly 0** in every class (EMPIRICAL). The universal ε-transport that holds for **every** pair and every `v` is Lemma R, `ε = (√(π(v)+1) − 1)/(√(π(v)+1) + 1)`. It is sharp at `π(v) = 1`: the bound is PROVEN, and so is the fact that it is the supremum, attained in the limit (Prop 1.5). So "within ε of balanced" holds with `ε = 3 − 2√2` whenever `v` has `π(v) = 1`, which every indecomposable `F_m`-like end supplies.
 
 ---
 
