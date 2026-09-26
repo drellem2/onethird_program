@@ -1,0 +1,6 @@
+n=4: tried 64; bad L found: False
+n=5: tried 1024; bad L found: False
+n=6: tried 3000; bad L found: False
+n=7: tried 243; bad L found: True  L=[0, 3, 2, 1, 4, 5, 6] relations=[(0, 1), (0, 5), (0, 6), (1, 6), (2, 5), (3, 4), (3, 6)] interval_order=False
+n=8: tried 800; bad L found: False
+n=9: tried 38; bad L found: True  L=[1, 0, 3, 2, 4, 5, 8, 6, 7] relations=[(0, 2), (0, 5), (0, 6), (0, 7), (0, 8), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (2, 8), (3, 5), (3, 6), (3, 7), (4, 6), (4, 7), (5, 6), (5, 7), (6, 7)] interval_order=False
