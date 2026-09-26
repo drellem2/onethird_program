@@ -1,0 +1,44 @@
+== W*_t witnesses, independent construction (a, b, t)
+  a=3 b=3 t=2: n=6 #LE=4 range=3 pi(x)=3 others<=1:True p_xy=1/4 (1/(t+2)=1/4) EK=1/2 (t/(t+2)=1/2) Delta1=1/6 tau=1 sideA=[('x', 'y')] sideB=[]
+  a=4 b=4 t=2: n=8 #LE=4 range=3 pi(x)=3 others<=1:True p_xy=1/4 (1/(t+2)=1/4) EK=1/2 (t/(t+2)=1/2) Delta1=1/8 tau=1 sideA=[('x', 'y')] sideB=[]
+  a=4 b=28 t=2: n=32 #LE=4 range=3 pi(x)=3 others<=1:True p_xy=1/4 (1/(t+2)=1/4) EK=1/2 (t/(t+2)=1/2) Delta1=1/8 tau=1 sideA=[('x', 'y')] sideB=[]
+  a=5 b=9 t=2: n=14 #LE=4 range=3 pi(x)=3 others<=1:True p_xy=1/4 (1/(t+2)=1/4) EK=1/2 (t/(t+2)=1/2) Delta1=1/10 tau=1 sideA=[('x', 'y')] sideB=[]
+  a=4 b=8 t=3: n=12 #LE=5 range=4 pi(x)=4 others<=1:True p_xy=1/5 (1/(t+2)=1/5) EK=3/5 (t/(t+2)=3/5) Delta1=3/20 tau=1 sideA=[('x', 'y')] sideB=[]
+  a=4 b=9 t=6: n=13 #LE=8 range=7 pi(x)=7 others<=1:True p_xy=1/8 (1/(t+2)=1/8) EK=3/4 (t/(t+2)=3/4) Delta1=3/16 tau=1 sideA=[('x', 'y')] sideB=[]
+  a=4 b=10 t=7: n=14 #LE=9 range=8 pi(x)=8 others<=1:True p_xy=1/9 (1/(t+2)=1/9) EK=7/9 (t/(t+2)=7/9) Delta1=7/36 tau=1 sideA=[('x', 'y')] sideB=[]
+  a=4 b=12 t=9: n=16 #LE=11 range=10 pi(x)=10 others<=1:True p_xy=1/11 (1/(t+2)=1/11) EK=9/11 (t/(t+2)=9/11) Delta1=9/44 tau=1 sideA=[('x', 'y')] sideB=[]
+  a=6 b=20 t=12: n=26 #LE=14 range=13 pi(x)=13 others<=1:True p_xy=1/14 (1/(t+2)=1/14) EK=6/7 (t/(t+2)=6/7) Delta1=1/7 tau=1 sideA=[('x', 'y')] sideB=[]
+== W*(4,4,2) delete b1
+  P: {('x', 'y'): Fraction(1, 4), ('x', 'b1'): Fraction(1, 2), ('x', 'b2'): Fraction(3, 4)}
+  delete c1: balanced in P-v [('x', 'b1')] -> survive in P [('x', 'b1')]
+  delete c2: balanced in P-v [('x', 'b1')] -> survive in P [('x', 'b1')]
+  delete x: balanced in P-v [] -> survive in P []
+  delete y: balanced in P-v [('x', 'b1'), ('x', 'b2')] -> survive in P [('x', 'b1')]
+  delete b1: balanced in P-v [('x', 'y'), ('x', 'b2')] -> survive in P []
+  delete b2: balanced in P-v [('x', 'y'), ('x', 'b1')] -> survive in P [('x', 'b1')]
+  delete b3: balanced in P-v [('x', 'b1')] -> survive in P [('x', 'b1')]
+  delete b4: balanced in P-v [('x', 'b1')] -> survive in P [('x', 'b1')]
+== other witness ranges
+  Z_m ranges m=3..14: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+  2+2: 2  N-poset: 2
+== staircase S_m: tau = D attained for every D (refutes nothing; shows the audit's tau <= D is sharp)
+  m=1: range D=1 tau=1 2D-1=1 tau==D:True
+  m=2: range D=2 tau=2 2D-1=3 tau==D:True
+  m=3: range D=3 tau=3 2D-1=5 tau==D:True
+  m=4: range D=4 tau=4 2D-1=7 tau==D:True
+  m=5: range D=5 tau=5 2D-1=9 tau==D:True
+  m=6: range D=6 tau=6 2D-1=11 tau==D:True
+== c(D) and f(D) recomputed
+  D=1 f=1 c=1/2 2^(1-2D)=1/2 ok=True
+  D=2 f=6 c=1/7 2^(1-2D)=1/8 ok=True
+  D=3 f=25 c=1/26 2^(1-2D)=1/32 ok=True
+  D=4 f=98 c=1/99 2^(1-2D)=1/128 ok=True
+  D=5 f=381 c=1/382 2^(1-2D)=1/512 ok=True
+  D=6 f=1485 c=1/1486 2^(1-2D)=1/2048 ok=True
+  D<=30 c(D)>=2^(1-2D): True
+== naturally labelled poset counts (A006455: 1,1,2,7,40,357,4824,96428): {1: 1, 2: 2, 3: 7, 4: 40, 5: 357, 6: 4824}
+  non-chains with n>=3: 5224
+== violations (each must be 0): {'K': 0, 'flip': 0, 'thm31': 0, 'uid': 0, 'bw': 0, 'onept': 0}
+== firing controls (each must be > 0): {'Kminus': (47, 'FIRES'), 'flip_half': (37588, 'FIRES'), 'tau_D': (137, 'FIRES'), 'onept_every': (113, 'FIRES')}
+== max tau per range D (against 2D-1): {1: (1, 1), 2: (2, 3), 3: (3, 5), 4: (3, 7), 5: (3, 9)}
+== #cuts with tau > D, per D: {}
