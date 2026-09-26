@@ -55,3 +55,15 @@ assert Dm("4.66e-4") < th67 < Dm("4.67e-4") and D67 == 49
 Dw = min(D for D in range(2, 100000) if witC(D) <= th0)
 print(f"witness 1/(24.5(D+1)) <= theta_0 from D = {Dw}")
 assert Dw == 6004
+# sec. 1.2 table, hypothetical row c = D^(-k): theta_0 binds while D^(-k)/(5+3sqrt5) >= theta_0,
+# i.e. D^k <= 1/((5+3sqrt5) theta_0) = 1.2564e4 (errata mg-9694, audit mg-e60e item 6a: was 8.6e3)
+Dk = 1 / (K * th0)
+print(f"D^(-k) row: theta_0 binds for D^k <= 1/((5+3sqrt5) theta_0) = {Dk:.4e}")
+assert Dm("1.256e4") < Dk < Dm("1.257e4")
+for k in (1, 2, 3):
+    Dmax = max(D for D in range(2, 20000) if Dm(D) ** -k / K >= th0)
+    print(f"  k={k}: largest D with D^(-k)/(5+3sqrt5) >= theta_0 is {Dmax}  (~(1.26e4)^(1/k) = {float(Dk) ** (1 / k):.1f})")
+    assert Dm(Dmax) ** k <= Dk < Dm(Dmax + 1) ** k
+# if c multiplies p (as Lemma W's does, p >= C_BFT - theta_0), the threshold is ~3.47e3
+print(f"  (c*p reading: 1/((5+3sqrt5) theta_0) * (C_BFT - theta_0) = {Dk * (C - th0):.4e})")
+assert Dm("3.47e3") < Dk * (C - th0) < Dm("3.48e3")

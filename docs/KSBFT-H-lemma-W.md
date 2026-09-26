@@ -17,7 +17,7 @@ Labels:
    - **or** P[f(x) − f(y) ≥ 2] ≥ P[f(y) < f(x)] / (π_N + 1), where π_N = max over w ∈ N(x,y) of π(w), which is ≤ π(P).
 
    The proof is a one-page injection (§2). It needs no BFT hypothesis at all. The BFT-triple structure enters only to bound the numerator: inside the paper's window p = P[f(y) < f(x)] ≥ C_BFT − θ (§3.1). So in the setting of Lemma 3.2(iii), **P[f(x) − f(y) ≥ 2] ≥ (C_BFT − θ)/(D+1)** replaces q₃ = (D+1)^(−3(D+1)).
-2. **The constant 1/(π_N + 1) is sharp (EMPIRICAL, exact integer counts).** The exhaustive census of every poset on n ≤ 8 elements (2 800 472 at n = 8) finds that the minimum of P[gap ≥ 2]/p equals 1/(π+1) exactly, for every π = 2..7. It is attained by pairs that are the first two elements of a Case-D BFT triple. So no version of Lemma W that uses only "Case-D BFT triple + range ≤ D" can beat 1/(D+1). This does **not** show the loss is intrinsic inside the paper's window, which is empty (item 3).
+2. **The constant 1/(π_N + 1) is sharp (PROVEN for every D ≥ 3; upgraded from EMPIRICAL by audit mg-e60e §3).** The exhaustive census of every poset on n ≤ 8 elements (2 800 472 at n = 8) finds that the minimum of P[gap ≥ 2]/p equals 1/(π+1) exactly, for every π = 2..7. It is attained by pairs that are the first two elements of a Case-D BFT triple. The audit's explicit family P_k = (({x ≺ z} ⊔ {y}) ⊕ chain of k) ⊔ {w}, w isolated, has π = D = k+3, (x, y, z) a Case-D BFT triple, N(x,y) = {w}, and ratio exactly 1/(D+1), for every k ≥ 0 (see §2.1). So no version of Lemma W that uses only "Case-D BFT triple + range ≤ D" can beat 1/(D+1), for any D ≥ 3. This does **not** show the loss is intrinsic inside the paper's window, which is empty (item 3).
 3. **Theorem 1.3″ (PROVEN-mod-paper).** Let P be a finite non-chain poset with π(P) ≤ D (D ≥ 2). Then
 
    > δ(P) ≥ C_BFT + min(θ₀, θ_W(D)),  θ₀ := 0.2764 − C_BFT ≈ 6.7978·10⁻⁶,  θ_W(D) := C_BFT/((5+3√5)(D+1) + 1).
@@ -57,11 +57,13 @@ After Lemma 3.2 the contradiction also needs θ < m(D)/24.5, where m(D) is a low
 | strength of Lemma W | resulting bound, witness m(D) = 1/(D+1) (Prop B, PROVEN) | with a D-uniform witness m(D) ≥ μ (open) |
 |---|---|---|
 | c = q₃ (paper, Lemma 3.1) | (D+1)^(−3(D+1))/12 (KSBFT-B Thm 1.3′) | same: window-bound |
-| c = D^(−k), k ≥ 1 | min(θ₀, ~D^(−k)/11.7) = θ₀ for D up to ~(8.6·10³)^(1/k), then Θ(D^(−k)) | same |
+| c = D^(−k), k ≥ 1 | min(θ₀, ~D^(−k)/11.7) = θ₀ for D^k ≤ 1/((5+3√5)θ₀) ≈ 1.26·10⁴, i.e. D up to ~(1.26·10⁴)^(1/k), then Θ(D^(−k)) (errata mg-9694: was (8.6·10³)^(1/k)) | same |
 | **c = (C_BFT − θ)/(D+1) (PROVEN here)** | **min(θ₀, θ_W(D)) = θ₀ for D ≤ 3471, then ≈ 0.0236/(D+1)** | same, because θ_W < 1/(24.5(D+1)) at every D |
 | c = absolute constant c₀ | min(θ₀, c₀/11.7, 1/(24.5(D+1))) = θ₀ for D ≤ 6003 (if c₀ ≥ 11.7θ₀), then 1/(24.5(D+1)) | min(θ₀, c₀/11.7, μ/24.5): **D-uniform**, but ≤ θ₀ ≈ 6.8·10⁻⁶ |
 
 The rows are PROVEN arithmetic (`window.py`, asserts included), given Lemma 3.2's other steps. The only strength actually established is the bold row.
+
+*Errata (mg-9694, per audit mg-e60e item 6a).* The D^(−k) row previously read (8.6·10³)^(1/k), and was not in fact asserted in `window.py`. The correct threshold is D^k ≤ 1/((5+3√5)θ₀) = 1.2564·10⁴; it is now printed and asserted in `window.py`. If instead c multiplies p, as Lemma W's does, the threshold is ≈ 1.2564·10⁴·(C_BFT − θ₀) ≈ 3.47·10³ (the audit's second reading). The row is hypothetical and nothing downstream uses it.
 
 **Verification of the ticket's claim** ("proving Lemma W upgrades Thm 1.3′ from exponential to C_BFT + Θ(1/D)"): **HOLDS for D > 3471. It is an understatement for D ≤ 3471**, where the bound is the D-uniform constant θ₀. The audit's "constant Lemma W ⇒ Θ(1/D)" (mg-3a14 §2.8) is right in form, but it missed the θ₀ cap. Its hypothetical "constant window θ_c" can never exceed 6.8·10⁻⁶, so the witness 1/(24.5(D+1)) starts to bind only at D ≥ 6004.
 
@@ -110,7 +112,7 @@ The two runs are **disjoint** sets of elements incomparable to w, so a_R + a_L �
 - The injection is the same kind as mg-d707's Prop B. The difference from Lemma 3.1 is that we lower-bound the *ratio* P[gap ≥ 2]/P[y before x], not the probability of an event. The ratio is polynomial even when both probabilities are exponentially small. mg-d707's generic counterexample (P[u<v] = 1/70) is a small *denominator*, not a small ratio.
 - For (y, z) apply the lemma to the ordered pair (z, y): P[f(y) − f(z) ≥ 2] ≥ p′/(π_{N′} + 1) when N′ = {w : w ⊀ z, y ⊀ w} ≠ ∅.
 
-### 2.1 Machine check and sharpness (EMPIRICAL, exact integer counts)
+### 2.1 Machine check and sharpness (census EMPIRICAL, exact integer counts; sharpness PROVEN for every D ≥ 3 by audit mg-e60e §3)
 
 `lemw.c` enumerates every naturally labelled poset on N elements. Control: the counts equal OEIS A006455, i.e. 7, 40, 357, 4824, 96428, 2800472 for N = 3..8. For each poset it enumerates every linear extension and, for every ordered incomparable pair, counts |E₁|, |E₂|, #{y before x} and #{gap ≥ 2} as integers.
 
@@ -124,6 +126,8 @@ The transcripts are `out_lemw_3to7.txt` and `out_lemw_8.txt`. At N = 8 there are
 | **K1m (negative control)** | the FALSE \|E₁\| ≤ (π_N − 1)\|E₂\| | **5 025 852 at N = 8** (fires at every N) |
 
 **Sharpness.** For every π = 2..7 (N = 8), max |E₁|/|E₂| = π exactly and min P[gap≥2]/p = 1/(π+1) exactly. The minimum is attained *on pairs that are the first two members of a Case-D BFT triple* (column "BFT-D"). For example, at π = 4 the witness is down-sets [0,0,0,0,3,13,31,127] with (x,y,z) = (4,5,6), p = 3/11, p′ = 4/11. Witnesses for every π are printed in the transcript.
+
+**Sharpness for every D (PROVEN, audit mg-e60e §3; errata mg-9694).** For k ≥ 0 let Q_k = ({x ≺ z} ⊔ {y}) ⊕ (c₁ ≺ ⋯ ≺ c_k) and P_k = Q_k ⊔ {w}, w incomparable to everything; put D = k+3. Then π(P_k) = π(w) = D, (x, y, z) is a Case-D BFT triple, N(x,y) = {w}, and P[f(x) − f(y) ≥ 2]/P[f(y) < f(x)] = 1/(D+1) exactly: in Q_k, y before x forces y immediately before x, and of the |Q_k| + 1 = D + 1 slots for w exactly one (between y and x) gives gap 2. The audit's `code/audit_ksbft_e60e/family_e60e.py` checks it exactly for D = 3..13, with a negative control (delete w). The census sharpness above is the n ≤ 8 instance; the family makes it unconditional in D. The examples have p = 1/3, outside the paper's window, so this still does **not** show the loss is intrinsic inside the window.
 
 **Near-balanced triples (weak).** Restricted to Case-D BFT triples with max(p, p′) ≤ 0.30, the census finds:
 - π = 3: min ratio 1/4 = 1/(π+1), still tight. Witness at n = 8: [0,0,1,3,5,15,63,63], (x,y,z) = (1,2,3), p = p′ = 2/7.

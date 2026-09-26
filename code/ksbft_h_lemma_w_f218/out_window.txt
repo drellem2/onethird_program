@@ -23,3 +23,8 @@ p >= 2*C_BFT - (C_BFT + theta_0) = 0.276386405
 
 conditional (Lemma 2.3 at 67/242, unchecked): theta_0' = 4.6630e-4; constant regime up to D = 49
 witness 1/(24.5(D+1)) <= theta_0 from D = 6004
+D^(-k) row: theta_0 binds for D^k <= 1/((5+3sqrt5) theta_0) = 1.2564e+4
+  k=1: largest D with D^(-k)/(5+3sqrt5) >= theta_0 is 12564  (~(1.26e4)^(1/k) = 12564.5)
+  k=2: largest D with D^(-k)/(5+3sqrt5) >= theta_0 is 112  (~(1.26e4)^(1/k) = 112.1)
+  k=3: largest D with D^(-k)/(5+3sqrt5) >= theta_0 is 23  (~(1.26e4)^(1/k) = 23.2)
+  (c*p reading: 1/((5+3sqrt5) theta_0) * (C_BFT - theta_0) = 3.4727e+3)
