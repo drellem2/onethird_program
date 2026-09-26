@@ -1,0 +1,57 @@
+coverage: n -> largest D with every pi<=D bucket enumerated: 1:all, 2:all, 3:all, 4:all, 5:all, 6:all, 7:all, 8:all, 9:all, 10:all, 11:all, 12:6, 13:5, 14:4, 15:4, 16:3, 17:3, 18:3
+
+TABLE 1  min delta over connected-G posets with pi = D exactly, per n  (EMPIRICAL)
+  D \ n          1         2         3         4         5         6         7         8         9        10        11        12        13        14        15        16        17        18
+      1          .  0.500000         .         .         .         .         .         .         .         .         .         .         .         .         .         .         .         .
+      2          -         .  0.333333  0.400000  0.375000  0.384615  0.380952  0.382353  0.381818  0.382022  0.381944  0.381974  0.381963  0.381967  0.381966  0.381966  0.381966  0.381966
+      3          -         -         .  0.500000  0.363636  0.357143  0.360000  0.355556  0.378788  0.349057  0.350877  0.350181  0.350446  0.350345  0.349474  0.350369  0.350242  0.350127
+      4          -         -         -         .  0.400000  0.400000  0.358974  0.369565  0.352941  0.356164  0.357414  0.354305  0.353160  0.352740  0.352900         -         -         -
+      5          -         -         -         -         .  0.428571  0.392857  0.380000  0.377419  0.352941  0.357401  0.360258  0.359823         -         -         -         -         -
+      6          -         -         -         -         -         .  0.380952  0.400000  0.375000  0.369668  0.357333  0.366537         -         -         -         -         -         -
+      7          -         -         -         -         -         -         .  0.426471  0.391667  0.380952  0.377358         -         -         -         -         -         -         -
+      8          -         -         -         -         -         -         -         .  0.400000  0.391304  0.369830         -         -         -         -         -         -         -
+      9          -         -         -         -         -         -         -         -         .  0.424490  0.400000         -         -         -         -         -         -         -
+     10          -         -         -         -         -         -         -         -         -         .  0.400000         -         -         -         -         -         -         -
+  ('.' = enumerated, no connected-G poset with that range; '-' = not enumerated)
+
+TABLE 1b  min delta over pi = D, cumulative over n <= N (exact), and margin above 1/3
+  D= 1: min delta = 1/2 = 0.500000 at n=2  margin over 1/3 = +0.166667  over C_BFT = +0.223607  (n <= 18)
+  D= 2: min delta = 1/3 = 0.333333 at n=3  margin over 1/3 = +0.000000  over C_BFT = +0.056940  (n <= 18)
+  D= 3: min delta = 37/106 = 0.349057 at n=10  margin over 1/3 = +0.015723  over C_BFT = +0.072663  (n <= 18)
+  D= 4: min delta = 103/292 = 0.352740 at n=14  margin over 1/3 = +0.019406  over C_BFT = +0.076347  (n <= 15)
+  D= 5: min delta = 6/17 = 0.352941 at n=10  margin over 1/3 = +0.019608  over C_BFT = +0.076548  (n <= 13)
+  D= 6: min delta = 134/375 = 0.357333 at n=11  margin over 1/3 = +0.024000  over C_BFT = +0.080940  (n <= 12)
+  D= 7: min delta = 20/53 = 0.377358 at n=11  margin over 1/3 = +0.044025  over C_BFT = +0.100965  (n <= 11)
+  D= 8: min delta = 152/411 = 0.369830 at n=11  margin over 1/3 = +0.036496  over C_BFT = +0.093436  (n <= 11)
+  D= 9: min delta = 2/5 = 0.400000 at n=11  margin over 1/3 = +0.066667  over C_BFT = +0.123607  (n <= 11)
+  D=10: min delta = 2/5 = 0.400000 at n=11  margin over 1/3 = +0.066667  over C_BFT = +0.123607  (n <= 11)
+
+TABLE 2  min M over connected-G posets with pi <= D, per n  (EMPIRICAL)
+  D \ n          1         2         3         4         5         6         7         8         9        10        11        12        13        14        15        16        17        18
+      1          .  0.500000         .         .         .         .         .         .         .         .         .         .         .         .         .         .         .         .
+      2          .  0.500000  0.333333  0.400000  0.375000  0.384615  0.380952  0.382353  0.381818  0.382022  0.381944  0.381974  0.381963  0.381967  0.381966  0.381966  0.381966  0.381966
+      3          .  0.500000  0.333333  0.400000  0.363636  0.307692  0.360000  0.341463  0.378788  0.336066  0.350877  0.348243  0.350446  0.338378  0.339394  0.339004  0.339153  0.338499
+      4          .  0.500000  0.333333  0.400000  0.363636  0.307692  0.307692  0.300813  0.303571  0.311377  0.298507  0.302905  0.299301  0.302083  0.299176         -         -         -
+      5          .  0.500000  0.333333  0.400000  0.363636  0.307692  0.307692  0.300813  0.303571  0.299465  0.288889  0.302905  0.293054         -         -         -         -         -
+      6          .  0.500000  0.333333  0.400000  0.363636  0.307692  0.307692  0.300813  0.303571  0.299465  0.288889  0.298507         -         -         -         -         -         -
+      7          .  0.500000  0.333333  0.400000  0.363636  0.307692  0.307692  0.300813  0.303571  0.299465  0.288889         -         -         -         -         -         -         -
+      8          .  0.500000  0.333333  0.400000  0.363636  0.307692  0.307692  0.300813  0.303571  0.299465  0.288889         -         -         -         -         -         -         -
+      9          .  0.500000  0.333333  0.400000  0.363636  0.307692  0.307692  0.300813  0.303571  0.299465  0.288889         -         -         -         -         -         -         -
+     10          .  0.500000  0.333333  0.400000  0.363636  0.307692  0.307692  0.300813  0.303571  0.299465  0.288889         -         -         -         -         -         -         -
+  global min M in the data: 13/45 = 0.288889 at n=11, pi=5
+
+TABLE 3  Lemma 4.2 numerics  (EMPIRICAL; see README for why the lemma's hypothesis is never met)
+  (bucket, poset) records: 86146388   [a poset in two runs is counted twice only if its bucket is]
+  delta < C_BFT + M^2/441           : 0
+  Lemma-4.1 triple a < C + M^2/441  : 0
+  posets with a Lemma-4.1 candidate that is NOT a BFT triple (or none): 1
+  pi= 1: best c in delta>=C+cM^2: 0.894427 (n=2); Lemma-4.1 triple: nan; structured (Lemma 3.2 shape) triples: posets=0, best c=nan
+  pi= 2: best c in delta>=C+cM^2: 0.223607 (n=3); Lemma-4.1 triple: 0.223607; structured (Lemma 3.2 shape) triples: posets=16, best c=0.512461
+  pi= 3: best c in delta>=C+cM^2: 0.099381 (n=4); Lemma-4.1 triple: 0.099381; structured (Lemma 3.2 shape) triples: posets=288654, best c=0.659776
+  pi= 4: best c in delta>=C+cM^2: 0.055902 (n=5); Lemma-4.1 triple: 0.055902; structured (Lemma 3.2 shape) triples: posets=1498416, best c=0.633077
+  pi= 5: best c in delta>=C+cM^2: 0.035777 (n=6); Lemma-4.1 triple: 0.035777; structured (Lemma 3.2 shape) triples: posets=939243, best c=0.614510
+  pi= 6: best c in delta>=C+cM^2: 0.024845 (n=7); Lemma-4.1 triple: 0.024845; structured (Lemma 3.2 shape) triples: posets=620033, best c=0.600872
+  pi= 7: best c in delta>=C+cM^2: 0.018254 (n=8); Lemma-4.1 triple: 0.018254; structured (Lemma 3.2 shape) triples: posets=60106, best c=0.590437
+  pi= 8: best c in delta>=C+cM^2: 0.013975 (n=9); Lemma-4.1 triple: 0.013975; structured (Lemma 3.2 shape) triples: posets=18160, best c=0.582200
+  pi= 9: best c in delta>=C+cM^2: 0.011042 (n=10); Lemma-4.1 triple: 0.011042; structured (Lemma 3.2 shape) triples: posets=0, best c=nan
+  pi=10: best c in delta>=C+cM^2: 0.008944 (n=11); Lemma-4.1 triple: 0.008944; structured (Lemma 3.2 shape) triples: posets=0, best c=nan

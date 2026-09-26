@@ -1,0 +1,56 @@
+n=1 posets(pi<=5)=1 connected-G=0
+n=2 posets(pi<=5)=2 connected-G=1
+  pi=1 count=1 min_delta=1/2 (0.500000) n_delta=1/3:0 min_M=1/2 (0.500000) min_c=0.894427 min_trip_c=NA viol441=0 trip_viol441=0 not_bft=1 with_struct=0 min_struct_c=NA
+n=3 posets(pi<=5)=5 connected-G=2
+  pi=2 count=2 min_delta=1/3 (0.333333) n_delta=1/3:1 min_M=1/3 (0.333333) min_c=0.223607 min_trip_c=0.223607 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.512461
+n=4 posets(pi<=5)=16 connected-G=7
+  pi=2 count=2 min_delta=2/5 (0.400000) n_delta=1/3:0 min_M=2/5 (0.400000) min_c=0.503115 min_trip_c=0.503115 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.772542
+  pi=3 count=5 min_delta=12/24 (0.500000) n_delta=1/3:0 min_M=2/4 (0.500000) min_c=0.099381 min_trip_c=0.099381 viol441=0 trip_viol441=0 not_bft=0 with_struct=0 min_struct_c=NA
+n=5 posets(pi<=5)=63 connected-G=31
+  pi=2 count=1 min_delta=3/8 (0.375000) n_delta=1/3:0 min_M=3/8 (0.375000) min_c=0.701204 min_trip_c=0.701204 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.701204
+  pi=3 count=14 min_delta=4/11 (0.363636) n_delta=1/3:0 min_M=4/11 (0.363636) min_c=0.223607 min_trip_c=0.223607 viol441=0 trip_viol441=0 not_bft=0 with_struct=0 min_struct_c=NA
+  pi=4 count=16 min_delta=10/25 (0.400000) n_delta=1/3:0 min_M=2/5 (0.400000) min_c=0.055902 min_trip_c=0.055902 viol441=0 trip_viol441=0 not_bft=0 with_struct=0 min_struct_c=NA
+n=6 posets(pi<=5)=318 connected-G=184
+  pi=2 count=1 min_delta=5/13 (0.384615) n_delta=1/3:0 min_M=5/13 (0.384615) min_c=0.731582 min_trip_c=0.731582 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.731582
+  pi=3 count=31 min_delta=5/14 (0.357143) n_delta=1/3:0 min_M=4/13 (0.307692) min_c=0.190529 min_trip_c=0.190529 viol441=0 trip_viol441=0 not_bft=0 with_struct=8 min_struct_c=0.659776
+  pi=4 count=89 min_delta=6/15 (0.400000) n_delta=1/3:0 min_M=6/15 (0.400000) min_c=0.084679 min_trip_c=0.084679 viol441=0 trip_viol441=0 not_bft=0 with_struct=0 min_struct_c=NA
+  pi=5 count=63 min_delta=18/42 (0.428571) n_delta=1/3:0 min_M=3/6 (0.500000) min_c=0.035777 min_trip_c=0.035777 viol441=0 trip_viol441=0 not_bft=0 with_struct=0 min_struct_c=NA
+n=7 posets(pi<=5)=1727 connected-G=1033
+  pi=2 count=1 min_delta=8/21 (0.380952) n_delta=1/3:0 min_M=8/21 (0.380952) min_c=0.720478 min_trip_c=0.720478 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.720478
+  pi=3 count=58 min_delta=9/25 (0.360000) n_delta=1/3:0 min_M=9/25 (0.360000) min_c=0.250687 min_trip_c=0.250687 viol441=0 trip_viol441=0 not_bft=0 with_struct=24 min_struct_c=0.671456
+  pi=4 count=358 min_delta=14/39 (0.358974) n_delta=1/3:0 min_M=12/39 (0.307692) min_c=0.087768 min_trip_c=0.087768 viol441=0 trip_viol441=0 not_bft=0 with_struct=18 min_struct_c=0.633077
+  pi=5 count=616 min_delta=11/28 (0.392857) n_delta=1/3:0 min_M=8/18 (0.444444) min_c=0.055902 min_trip_c=0.055902 viol441=0 trip_viol441=0 not_bft=0 with_struct=0 min_struct_c=NA
+n=8 posets(pi<=5)=9217 connected-G=5378
+  pi=2 count=1 min_delta=13/34 (0.382353) n_delta=1/3:0 min_M=13/34 (0.382353) min_c=0.724790 min_trip_c=0.724790 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.724790
+  pi=3 count=130 min_delta=16/45 (0.355556) n_delta=1/3:0 min_M=14/41 (0.341463) min_c=0.249437 min_trip_c=0.249437 viol441=0 trip_viol441=0 not_bft=0 with_struct=44 min_struct_c=0.666573
+  pi=4 count=1212 min_delta=17/46 (0.369565) n_delta=1/3:0 min_M=37/123 (0.300813) min_c=0.084679 min_trip_c=0.084679 viol441=0 trip_viol441=0 not_bft=0 with_struct=142 min_struct_c=0.638813
+  pi=5 count=4035 min_delta=19/50 (0.380000) n_delta=1/3:0 min_M=10/28 (0.357143) min_c=0.051684 min_trip_c=0.051684 viol441=0 trip_viol441=0 not_bft=0 with_struct=74 min_struct_c=0.614510
+n=9 posets(pi<=5)=46421 connected-G=25540
+  pi=2 count=1 min_delta=21/55 (0.381818) n_delta=1/3:0 min_M=21/55 (0.381818) min_c=0.723153 min_trip_c=0.723153 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.723153
+  pi=3 count=288 min_delta=25/66 (0.378788) n_delta=1/3:0 min_M=25/66 (0.378788) min_c=0.247531 min_trip_c=0.247531 viol441=0 trip_viol441=0 not_bft=0 with_struct=96 min_struct_c=0.664569
+  pi=4 count=4038 min_delta=30/85 (0.352941) n_delta=1/3:0 min_M=17/56 (0.303571) min_c=0.084679 min_trip_c=0.084679 viol441=0 trip_viol441=0 not_bft=0 with_struct=542 min_struct_c=0.636290
+  pi=5 count=21213 min_delta=117/310 (0.377419) n_delta=1/3:0 min_M=28/79 (0.354430) min_c=0.051277 min_trip_c=0.051277 viol441=0 trip_viol441=0 not_bft=0 with_struct=824 min_struct_c=0.617755
+n=10 posets(pi<=5)=224601 connected-G=116925
+  pi=2 count=1 min_delta=34/89 (0.382022) n_delta=1/3:0 min_M=34/89 (0.382022) min_c=0.723780 min_trip_c=0.723780 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.723780
+  pi=3 count=642 min_delta=37/106 (0.349057) n_delta=1/3:0 min_M=41/122 (0.336066) min_c=0.248520 min_trip_c=0.248520 viol441=0 trip_viol441=0 not_bft=0 with_struct=220 min_struct_c=0.665091
+  pi=4 count=14076 min_delta=52/146 (0.356164) n_delta=1/3:0 min_M=52/167 (0.311377) min_c=0.084679 min_trip_c=0.084679 viol441=0 trip_viol441=0 not_bft=0 with_struct=1902 min_struct_c=0.635309
+  pi=5 count=102206 min_delta=66/187 (0.352941) n_delta=1/3:0 min_M=56/187 (0.299465) min_c=0.050172 min_trip_c=0.050172 viol441=0 trip_viol441=0 not_bft=0 with_struct=5667 min_struct_c=0.616288
+n=11 posets(pi<=5)=1069585 connected-G=535167
+  pi=2 count=1 min_delta=55/144 (0.381944) n_delta=1/3:0 min_M=55/144 (0.381944) min_c=0.723541 min_trip_c=0.723541 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.723541
+  pi=3 count=1403 min_delta=60/171 (0.350877) n_delta=1/3:0 min_M=60/171 (0.350877) min_c=0.248102 min_trip_c=0.248102 viol441=0 trip_viol441=0 not_bft=0 with_struct=511 min_struct_c=0.664869
+  pi=4 count=49506 min_delta=94/263 (0.357414) n_delta=1/3:0 min_M=60/201 (0.298507) min_c=0.084679 min_trip_c=0.084679 viol441=0 trip_viol441=0 not_bft=0 with_struct=6584 min_struct_c=0.634786
+  pi=5 count=484257 min_delta=99/277 (0.357401) n_delta=1/3:0 min_M=156/540 (0.288889) min_c=0.050574 min_trip_c=0.050574 viol441=0 trip_viol441=0 not_bft=0 with_struct=31222 min_struct_c=0.615734
+n=12 posets(pi<=5)=5127387 connected-G=2515947
+  pi=2 count=1 min_delta=89/233 (0.381974) n_delta=1/3:0 min_M=89/233 (0.381974) min_c=0.723632 min_trip_c=0.723632 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.723632
+  pi=3 count=3075 min_delta=97/277 (0.350181) n_delta=1/3:0 min_M=109/313 (0.348243) min_c=0.247932 min_trip_c=0.247932 viol441=0 trip_viol441=0 not_bft=0 with_struct=1173 min_struct_c=0.664780
+  pi=4 count=173690 min_delta=107/302 (0.354305) n_delta=1/3:0 min_M=73/241 (0.302905) min_c=0.084679 min_trip_c=0.084679 viol441=0 trip_viol441=0 not_bft=0 with_struct=23369 min_struct_c=0.634893
+  pi=5 count=2339181 min_delta=223/619 (0.360258) n_delta=1/3:0 min_M=86/281 (0.306050) min_c=0.050172 min_trip_c=0.050172 viol441=0 trip_viol441=0 not_bft=0 with_struct=155500 min_struct_c=0.615444
+n=13 posets(pi<=5)=24861893 connected-G=12040423
+  pi=2 count=1 min_delta=144/377 (0.381963) n_delta=1/3:0 min_M=144/377 (0.381963) min_c=0.723597 min_trip_c=0.723597 viol441=0 trip_viol441=0 not_bft=0 with_struct=1 min_struct_c=0.723597
+  pi=3 count=6735 min_delta=157/448 (0.350446) n_delta=1/3:0 min_M=157/448 (0.350446) min_c=0.247976 min_trip_c=0.247976 viol441=0 trip_viol441=0 not_bft=0 with_struct=2723 min_struct_c=0.664803
+  pi=4 count=605267 min_delta=190/538 (0.353160) n_delta=1/3:0 min_M=214/715 (0.299301) min_c=0.084679 min_trip_c=0.084679 viol441=0 trip_viol441=0 not_bft=0 with_struct=84369 min_struct_c=0.634846
+  pi=5 count=11428420 min_delta=326/906 (0.359823) n_delta=1/3:0 min_M=616/2102 (0.293054) min_c=0.050172 min_trip_c=0.050172 viol441=0 trip_viol441=0 not_bft=0 with_struct=745956 min_struct_c=0.615265
+
+real	6m27.595s
+user	5m59.863s
+sys	0m1.320s
