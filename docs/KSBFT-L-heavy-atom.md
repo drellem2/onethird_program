@@ -24,12 +24,16 @@ Marks: **PROVEN** (the proof is here), **EMPIRICAL** (instrument and range named
 >    Yet `P(A≺x≺B) = 2^m m!²/(2m+1)! < 2^{−m}`. More generally, with chains of length `k` and
 >    `ε = 1/(k+1)`, `P(A≺x≺B) ≤ (πk/2)^{−m/2}·√(2/(mk))`. So any bound `P(A≺x≺B) ≥ g(w, ε)` has
 >    `g(w, 1/3) < 2^{−w}`, and `log(1/g) ≥ (w/2)·log(1/ε)·(1 − o(1))`. **The true exponent of
->    Thm 2.6 lies between `≈0.53–0.63·w·log(1/ε)` and AK25b's `w²·log(1/ε)`.**
+>    Thm 2.6 lies between `c_ε·w·log(1/ε)` and AK25b's `w²·log(1/ε)`, where the family's
+>    coefficient `c_ε ∈ (1/2, 0.631]` (0.631 at `ε = 1/3`) and `c_ε → 1/2` as `ε → 0`.** Scope: the
+>    family meets (4) only for `ε ≤ 1/3`, i.e. `ε_δ ≤ 1/6` in the application (audit mg-2198, 1c).
 > 2. **(PROVEN, §2.3) On the same family the quantity `L*` actually consumes is polynomial:**
->    `q(x) = 1/(mk+1) = Θ(ε/w)`. The family also shows that **`q₀ ≤ 1/((w−1)(1/(2ε)−1)+1) ≈ 2ε/w` is a
->    ceiling** for any lower bound under AK25b's hypotheses (`δ_x ≤ 1/2−ε`, width `≤ w`), at
->    `ε = 1/(2(k+1))` with `k` even. So `poly(ε/w)` is the best shape one could hope for, and it is
->    not refuted.
+>    `q(x) = 1/(mk+1) = Θ(ε/w)`. The family also shows that **`q₀ ≤ 1/((w−1)(1/(2ε)−1)+1)` is a
+>    ceiling** for any lower bound under AK25b's hypotheses (`δ_x ≤ 1/2−ε`, width `≤ w`), exactly at
+>    `ε = 1/(2(k+1))` with `k` even, hence for every `ε ≤ 1/6`. It is `Θ(ε/w)` but not `≈ 2ε/w`: it is
+>    `≥ 2ε/w` always, and at `ε = 1/6` it is `1/(2w−1)`, `1.5×` larger (audit mg-2198, 2b). So
+>    `poly(ε/w)` is the best shape one could hope for, and it is not refuted. For `ε ∈ (1/6, 1/2)`
+>    no member exists and no ceiling is proven.
 > 3. **(PROVEN, §1) Where `w²` enters, and the two separate exponential losses in AK25b's proof.**
 >    - **(L1)** It lower-bounds `q(x)` by the single joint event `{A≺x≺B} ⊊ {f(x)=|D|+1}`. On the
 >      family this alone loses a factor `C(2m,m)/2^m ≈ 2^m/√(πm)`.
@@ -38,11 +42,13 @@ Marks: **PROVEN** (the proof is here), **EMPIRICAL** (instrument and range named
 >
 >    (L1) is unavoidable for any proof that goes through `{A≺x≺B}` (item 1). (L2) is what separates
 >    AK25b's `w²` from the true linear exponent of that event.
-> 4. **(EMPIRICAL, §3.3) The natural chain-by-chain route to `poly` has a missing ingredient.** The
->    route is `f(x) − 1 = Σ_i N_i` over a Dilworth partition of `Π(x)`, with Minkowski on `sd(N_i)`.
->    It would need each per-chain count `N_i = #{c ∈ C_i : c ≺ x}` to be log-concave, like Stanley's
->    `f(x)`. It is not: it fails for 855 of 8,207 (x, Dilworth-chain) pairs, and unimodality fails
->    for 85, at `n ≤ 9`. The Stanley control has 0 failures.
+> 4. **(PROVEN by an exact instance; frequencies EMPIRICAL, §3.3) The natural chain-by-chain route
+>    to `poly` has a missing ingredient.** The route is `f(x) − 1 = Σ_i N_i` over a Dilworth
+>    partition of `Π(x)`, with Minkowski on `sd(N_i)`. It would need each per-chain count
+>    `N_i = #{c ∈ C_i : c ≺ x}` to be log-concave, like Stanley's `f(x)`. It is not: the exact
+>    instance with counts `[20,120,114,138]` proves it. Log-concavity fails for 855 of 8,207
+>    (x, Dilworth-chain) pairs, and unimodality for 85, at `n ≤ 9`. The Stanley control has 0
+>    failures.
 > 5. **(PROVEN given mg-b852's chain, §4) What each exponent buys.** Rows marked with `*` below are
 >    hypothetical: no such theorem exists.
 >
@@ -53,12 +59,14 @@ Marks: **PROVEN** (the proof is here), **EMPIRICAL** (instrument and range named
 > | `(2ε)^{w}` | * | `8.07×10¹⁴` | 81.6 | `−8.83×10¹²` |
 > | `(2ε/w)^{w}` (a `w log w` exponent) | * | `2.47×10¹⁶` | 100.4 | `−3.19×10¹⁴` |
 > | `(2ε/w)³` | * | 633.7 | 100.4 | `−559.0` |
-> | `2ε/w` (the §2.3 ceiling) | *; best possible | **253.5** | 75.4 | **`−229.7`** |
+> | `2ε/w` | *; `1.5×` below the §2.3 ceiling at `ε = 1/6` | 253.5 | 75.4 | `−229.7` |
+> | `1/((w−1)(1/(2ε)−1)+1)` = `1/(2w−1)` at `ε = 1/6` (the §2.3 ceiling) | *; best possible for `ε ≤ 1/6` | **251.2** | **72.0** | — (not covered: Thm 1.2's `ε_δ ≈ 0.224 > 1/6`, no ceiling proven) |
 >
 > **So even a perfect linear-exponent Thm 2.6 leaves `L*` doubly exponential in size
 > (`10^{8×10¹⁴}`). Only a `poly` bound on the maximal atom, which cannot come from Thm 2.6, gives
-> `L* = poly(K₀)`. At the ceiling `q₀ = 2ε/w` that is `L* ≈ 10^{253.5} ≈ 10^{69}·K₀^{13}`, and
-> Thm 1.2's `ε ≈ 10^{−230}`.**
+> `L* = poly(K₀)`. At the ceiling `q₀ = 1/(2w−1)` (`ε = 1/6`) that is `L* ≈ 10^{251.2} ≈
+> 10^{67.8}·K₀^{13}`.** No ceiling is proven at Thm 1.2's `ε_δ ≈ 0.224`; the hypothetical shape
+> `2ε/w` would give Thm 1.2's `ε ≈ 10^{−230}` there, but that is not a best-possible value.
 
 ---
 
@@ -141,8 +149,13 @@ whenever (4) holds with `|A|, |B| ≤ w`. Then:
 - For `ε = 1/(k+1)`, `k` even: `g(w, ε) ≤ (π(1−ε)/(2ε))^{−w/2}·√(2/(wk))`.
 - `log(1/g) ≥ (w/2)·log(1/ε)·(1 − o(1))` as `ε → 0`.
 
-**No `poly(ε/w)` and no `exp(−o(w))` version of Thm 2.6 exists.** The `w²` might still be reducible
-to `Θ(w)` (§3.1).
+**No `poly(ε/w)` and no `exp(−o(w))` version of Thm 2.6 exists**, as a statement uniform in `ε`, or
+at any fixed `ε ≤ 1/3` in (4) (`ε_δ ≤ 1/6` in the application). **Scope:** `F(m,k)` has no member
+with (4) at `ε > 1/3`, so an `ε`-dependent claim "exponent `o(w)` for `ε_δ > 1/6`" is not refuted
+here; that range contains Thm 1.2's `ε_δ = 1/2 − C_BFT ≈ 0.224` (audit mg-2198, 1c). The family's
+exponent coefficient `log(1/atom)/(m log(k+1)) → (k log 2 − log C(k,k/2))/log(k+1)` is 0.6309 at
+`k = 2`, 0.6094 at `k = 4`, 0.5484 at `k = 100`, and tends to `1/2` (audit's `out_audit_2198.txt`
+[B]). The `w²` might still be reducible to `Θ(w)` (§3.1).
 
 **The same family in AK25b's application (PROVEN).**
 - `F(m,k)` with `k` even satisfies `δ_x = 1/2 − 1/(2(k+1))` by (F4) (the closest level is
@@ -156,8 +169,14 @@ So at the very `ε` used for `L*`, the atom `P(A≺x≺B)` is `< 2^{−(w−1)}`
 
 `F(m,k)` has width `w = m+1`, `δ_x = 1/2 − ε` with `ε = 1/(2(k+1))`, and `q(x) = 1/(mk+1)`. Hence
 **no theorem "`width ≤ w` and `δ_x ≤ 1/2−ε` ⟹ `q(x) ≥ g(w,ε)`" can have
-`g(w,ε) > 1/((w−1)(1/(2ε)−1)+1) ≈ 2ε/w`** (for these `ε`). The maximal-atom question has answer
-between `2ε/w` (ceiling) and AK25b's `(2ε)^{w²}`.
+`g(w,ε) > 1/((w−1)(1/(2ε)−1)+1)`** at these `ε`. The hypotheses are monotone in `ε`, so for any
+`ε ≤ 1/6` the largest admissible even `k` gives a ceiling that is still `Θ(ε/w)`. For
+`ε ∈ (1/6, 1/2)` there is no member (odd `k` gives `δ_x = 1/2`) and no ceiling is proven.
+
+The ceiling is `≥ 2ε/w`, since `(w−1)(1/(2ε)−1)+1 ≤ w/(2ε)`. The ratio to `2ε/w` is 1.8 at `w = 3`
+and `→ 1.5` as `w → ∞` at `ε = 1/6`, where the ceiling is `1/(2w−1)`; it tends to 1 as `ε → 0`
+(audit mg-2198, 2b). The maximal-atom question has answer between this ceiling and AK25b's
+`(2ε)^{w²}`.
 
 **Caveat: this ceiling does not bind the application.** `F(m,k)` has `δ(P) = 1/2`, since two `a_i`
 are exactly balanced. `L*` needs the bound only under the global hypothesis `δ(P) ≤ 1/2−ε`, where
@@ -178,10 +197,11 @@ the truth could be better still.
     *joint* conditioning `x ≺ B`.
   - **CONJECTURED:** Thm 2.6 holds with exponent `O(w log(w/ε))`. The §4 table gives
     `log₁₀ L* ≈ 2.5×10¹⁶` for that shape.
-- **Attempt 2.** Pair-correlation: `P(A≺x≺B) ≥ c·P(A≺x)·P(x≺B)`. **FALSE on `F(m,2)`.** There
-  `P(A≺x)` and `P(x≺B)` are each `≈ √π/(2√m)`, polynomial (heuristic integral
-  `∫₀¹(1−s²)^m ds ≈ √(π/4m)`), while the joint event is `< 2^{−m}`. The negative correlation
-  between "`x` above all of `D`" and "`x` below all of `U`" is exponentially strong. No
+- **Attempt 2.** Pair-correlation: `P(A≺x≺B) ≥ c·P(A≺x)·P(x≺B)`. **FALSE on `F(m,2)` (PROVEN).**
+  There `P(A≺x) ≥ P(x last) = 1/(2m+1)` and `P(x≺B) ≥ P(x first) = 1/(2m+1)` by (F2), so the product
+  is `≥ (2m+1)^{−2}`, polynomial, while the joint event is `< 2^{−m}` (audit mg-2198 §4). (The true
+  size is `≈ √π/(2√m)` each, by the heuristic integral `∫₀¹(1−s²)^m ds ≈ √(π/4m)`; not needed.)
+  The negative correlation between "`x` above all of `D`" and "`x` below all of `U`" is exponentially strong. No
   FKG/XYZ-type product bound can hold for the two-sided event.
 - **Attempt 3.** The insertion identity. Removing `x` gives
   `P(A≺x≺B) = e(D)e(U)/e(P) = P_{P−x}(D before U) / E_{P−x}[s]`, where `s = #slots for x`. PROVEN,
@@ -195,7 +215,7 @@ XYZ, and dually. A log-concave isoperimetric bound gives `P(Z=0) ≳ min(P(Z≥0
 `σ(x) ≍ 1/q(x)`, so this returns `q ≳ (1/2+ε)^w·q`. **No information, and not a proof of anything:**
 the whole question is equivalent to `σ(x) ≤ poly(w/ε)`, by Cor 2.4 and Prop 2.3 (mg-b852 §3.2).
 
-### 3.3 The chain route and its missing ingredient — EMPIRICAL
+### 3.3 The chain route and its missing ingredient — PROVEN by an exact instance; frequencies EMPIRICAL
 
 Partition `Π(x)` into `≤ w−1` chains `C_i` (Dilworth). Then `f(x) − 1 = |{y<x}| + Σ_i N_i`, with
 `N_i = #{c ∈ C_i : c ≺ x}`. `D ∩ C_i` is an initial segment of length `k_i`.
@@ -214,8 +234,11 @@ log-concave:
 
 Explicit non-unimodal Dilworth-type case: `n = 9`, predecessor masks
 `[112,113,272,115,0,0,0,115,0]`, `x = 2`, `C = {1,3,5}` (mask 42). The distribution of `N_C(x)` is
-`[20,120,114,138]`. A trivial non-unimodal case for a non-saturated chain: `v < c₁ < c₂ < u < c₃`
-with `x` isolated and `C = {c₁,c₂,c₃}` gives `[2,1,2,1]`.
+`[20,120,114,138]` out of `e(P) = 392`, exact. It is not unimodal (`120 > 114 < 138`), hence not
+log-concave (`114² < 120·138`), so **this instance PROVES** that per-chain counts of Dilworth type
+need not be log-concave or even unimodal (re-verified independently by audit mg-2198 §4). Only the
+failure frequencies in the table are EMPIRICAL. A trivial non-unimodal case for a non-saturated
+chain: `v < c₁ < c₂ < u < c₃` with `x` isolated and `C = {c₁,c₂,c₃}` gives `[2,1,2,1]`.
 
 **What this does and does not show.**
 - **Does:** Minkowski-plus-per-chain-log-concavity is dead as stated.
@@ -250,12 +273,12 @@ exist.**
 | candidate | outcome |
 |---|---|
 | `poly(ε/w)` version of Thm 2.6 (atom `P(A≺x≺B)`) | **REFUTED** (§2) |
-| `(2ε)^{o(w)}` version of Thm 2.6 | **REFUTED** (§2) |
+| `(2ε)^{o(w)}` version of Thm 2.6 | **REFUTED** for `ε_δ ≤ 1/6` (`ε ≤ 1/3` in (4)) (§2); at Thm 1.2's `ε_δ ≈ 0.224` no member of `F(m,k)` applies |
 | `(2ε)^{O(w)}` or `exp(−O(w log(w/ε)))` version of Thm 2.6 | open, CONJECTURED true (§3.1) |
 | product lower bound `P(A≺x≺B) ≳ P(A≺x)P(x≺B)` | **REFUTED** (§3.1) |
 | `q(x) ≥ poly(ε/w)` via Stanley + quantiles | circular (§3.2) |
-| `q(x) ≥ cε/w` via per-chain log-concavity + Minkowski | missing ingredient is false (§3.3, EMPIRICAL counterexamples, exact) |
-| `q(x) ≥ poly(ε/w)` under `δ_x ≤ 1/2−ε`, width `≤ w` | **OPEN**; ceiling `2ε/w` PROVEN (§2.3) |
+| `q(x) ≥ cε/w` via per-chain log-concavity + Minkowski | missing ingredient is false (§3.3, PROVEN by an exact instance) |
+| `q(x) ≥ poly(ε/w)` under `δ_x ≤ 1/2−ε`, width `≤ w` | **OPEN**; ceiling `1/((w−1)(1/(2ε)−1)+1)` PROVEN for `ε ≤ 1/6` (§2.3) |
 | same under global `δ(P) ≤ 1/2−ε` | **OPEN** |
 
 ---
@@ -277,13 +300,18 @@ re-parametrised by `log₁₀ q₀`.
 The numbers are in the §0 table. Additional notes:
 
 - **The Thm 1.3 half costs `L ≈ c·q₀^{−13}` with `c ≈ 10^{63}`.** That is why the `poly` rows still
-  show `L(4,1/6) ≈ 10^{75}` and `L* ≈ 10^{253}`. The degree-13 bookkeeping is mg-b852's §3.4, not
-  re-derived here. mg-b852 §3.7 lists loosenesses there that are independent of this ticket.
+  show `L(4,1/6) ≈ 10^{72}–10^{75}` and `L* ≈ 10^{251}–10^{253}`. The degree-13 bookkeeping is
+  mg-b852's §3.4, not re-derived here. mg-b852 §3.7 lists loosenesses there that are independent of this ticket.
 - **The "floor" row** uses the exact `F(m,2)` bound `g(w, 1/3) < 2^{−w}`, which is valid at `ε = 1/6`
   (so for `L*`). Its Thm 1.2 line applies the same exponent `0.6309w` at base
   `2ε = 1 − 2C_BFT ≈ 0.447`, where `F(m,k)` has no member. That line is an extrapolation.
+- **The ceiling row** evaluates the exact ceiling `1/(2w−1)` at `ε = 1/6`, at `w = L*` and at
+  `w = L(4,1/6)`; the values 251.2479 and 72.0291 are computed in the audit instrument
+  (`code/audit_ksbft_2198/out_audit_2198.txt`, [E]), not by `consequences.py`. Its Thm 1.2 entry is
+  left blank: `F(m,k)` has no member at `ε_δ ≈ 0.224`, so no best-possible value is proven there.
+  The `2ε/w` row's `−229.7` is a hypothetical shape, like the other `*` rows.
 - **Answer to the ticket's premise.** "Poly would give `L* = poly(1.3e14)`" is right: at the
-  ceiling shape `2ε/w`, `L* ≈ 10^{63}·(3K₀)^{13} ≈ 10^{69}·K₀^{13} = 10^{253.5}`. But **that poly
+  ceiling `1/(2w−1)`, `L* ≈ 10^{63.8}·(2K₀)^{13} ≈ 10^{67.8}·K₀^{13} = 10^{251.2}`. But **that poly
   cannot be obtained by improving Thm 2.6**; only a new heavy-atom statement about `max_k` could give
   it.
 
