@@ -1,0 +1,44 @@
+== A. K (printed closed form, p.25)
+   eps=1e-100      : log10 K  = 411.3374   (doc: 411.337)  PASS
+   eps=1/e-1/3     : K0       = 1.3011e+14 (doc: 1.301e14) PASS
+   eps=1/e-C_BFT   : K12      = 1.9441e+12 (doc: 1.944e12) PASS
+   monotone: width(e) decreasing on (0, 1/e-C_BFT] -> K12 is the least width case (a) can use: PASS
+
+== B. L_AK(w, eps), leading order in x = 1/eta (audit s2.3)
+   L(4,1/6) w<=3                log10(1/q0)=4.29409  log10 L=119.1067  (doc 119.107)  rel.diff 2.7e-06
+   L(3,1/6) w<=2                log10(1/q0)=1.90849  log10 L=87.88251  (doc 87.8825)  rel.diff 1.4e-07
+   L* w<=K0                     log10(1/q0)=8.07728e+27  log10 L=1.050046e+29  (doc 1.050046e+29)  rel.diff 4.6e-08
+   Thm1.2 w<=K12,eps=1/2-CBFT   log10(1/q0)=1.32083e+24  log10 L=1.717081e+25  (doc 1.717081e+25)  rel.diff 8.4e-08
+   L*: log10 L*/K0^2 = 6.2026 ; bracket [2 log10 3, 13 log10 3] = [0.9542, 6.2026]
+   degree in 1/eta at w=10      : 13.656255
+   degree in 1/eta at w=1000    : 13.000086
+   degree in 1/eta at w=1e+06   : 13.000000
+   degree in 1/eta at w=1e+14   : 13.000000
+   route floor log3 L >= 2 w^2 log3(1/2eps') at K12 : 5.5367e+24  (doc: 5.5e24)
+   weaker floor (q0 alone, no squaring)  w^2 log3(1/2eps'): 2.7683e+24
+   trace (this route)  log3 L at K12 : 3.5988e+25  (doc 3.6e25)
+
+== C. eq (1.5): eps = 3^-3^(1.6e19)
+   (1.5) valid via Thm 1.3 at D=L  <=>  log3(L+1) <= 1.6000000000e+19  (= p - 0.00)
+   width needed, eps'=1/6        : floor coef 2: 2.8284e+09 ; q0 alone (coef 1): 4.0000e+09
+   width needed, eps'=1/2-C_BFT  : floor coef 2: 3.3048e+09 ; q0 alone (coef 1): 4.6737e+09
+   deficit at which p.25's formula gives 4.0e9: 0.3743  (> 1/e - C_BFT = 0.0915: not usable for Thm 1.2 PASS)
+
+== D. Thm 1.2 eps via Thm 1.3'' at D = L12
+   theta_0 = 6.7977e-06 ; theta_W(L12) = 10^-1.717081e+25  -> eps = min = 10^-1.717e+25
+   0.0236/(L+1) check: log10 = -1.717081e+25 (doc: -1.717081e25)
+   same at L* (1/3 statement): 10^-1.050046e+29 (doc -1.050046e29)
+   paper Thm 1.3 at L12: log10 log10(1/eta) = 1.717081e+25
+
+== E. EMPIRICAL: Thm 2.6 as used, all posets n <= 6
+   n=2:      0 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(|A||B|        ): violations     0 ; max bound/q 0.0000  no cases
+   n=2:      0 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(max(|A|,1)max(|B|,1)): violations     0 ; max bound/q 0.0000  PASS
+   n=3:      9 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(|A||B|        ): violations     6 ; max bound/q 1.5000  literal exponent fails as predicted (all violations have A or B empty)
+   n=3:      9 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(max(|A|,1)max(|B|,1)): violations     0 ; max bound/q 1.0000  PASS
+   n=4:     74 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(|A||B|        ): violations    44 ; max bound/q 2.0000  literal exponent fails as predicted (all violations have A or B empty)
+   n=4:     74 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(max(|A|,1)max(|B|,1)): violations     0 ; max bound/q 1.0000  PASS
+   n=5:   1074 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(|A||B|        ): violations   488 ; max bound/q 2.6667  literal exponent fails as predicted (all violations have A or B empty)
+   n=5:   1074 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(max(|A|,1)max(|B|,1)): violations     0 ; max bound/q 1.0000  PASS
+   n=6:  19610 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(|A||B|        ): violations  7454 ; max bound/q 3.5000  literal exponent fails as predicted (all violations have A or B empty)
+   n=6:  19610 (poset,x) cases, delta_x<1/2 ; q>=(2eps)^(max(|A|,1)max(|B|,1)): violations     0 ; max bound/q 1.0000  PASS
+   negative control q>=(2eps)^(1/2) at n=6: violations = 10810  FIRES
