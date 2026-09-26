@@ -25,4 +25,5 @@ sh run_all.sh      # ~15 min, 1 process, ~2 GB RAM; poset lists live in a temp d
 | `out_cert_d3.txt`, `out_cert_d4.txt`, `out_cert_d5.txt` | the certificate tables (`AGG CT t total CUT fail failCUT`) |
 | `out_base.txt` | delta-1/3 minima (`AGG LT pi count below num den n poset`) — the base cases and the exceptional list |
 | `out_decay.txt` | `AGG DM pi_v d count num den` (max transport error), `AGG DT d count num den` (worst transport margin) |
+| `check_controls.py` → `out_check_controls.txt` | asserts every control: positive checks hold, every NEGATIVE CONTROL fires (prints CAUGHT); exits 1 otherwise. Its planted-defect test (a zeroed firing count) turns it RED |
 | `out_timing.txt` | wall-clock of the big steps (the only non-deterministic file) |

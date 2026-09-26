@@ -206,6 +206,8 @@ What these theorems consume: Lemmas 2.1–2.5 (proven here), KSBFT-J Lemma 1.1 (
 
 ### 5.1 Controls (`out_controls.txt`)
 
+`check_controls.py` asserts every line below. Its transcript is `out_check_controls.txt` (VERDICT: GREEN), and it exits 1 if any negative control stays silent (tested by planting a zeroed firing count, which turns it RED).
+
 - **Counter.** Inherited from mg-eedd and re-run: Fibonacci closed form (MATCH) and brute-force permutation counts on random posets with all their deletions (MATCH).
 - **Generator.** Pruned counts equal the filtered full census at `t = 9..13` (§2.3). The full census's own positive control is OEIS A000112 for `n ≤ 8` (`out_gen.txt`).
 - **Theorem 2.4 end to end (e2e).** For every indecomposable `P ∈ Π_3` with `n = 12, 13` (3 076 + 6 736), every size-11 ideal `Q` of `P`, and every pair in `K`, the program checks the bracket `min_J p_J ≤ p_P ≤ max_J p_J` against the **directly counted** `p_P`, and checks that the certifying pair is balanced in `P`. Result: **0** bracket violations over 48 840 + 122 280 pair checks, and 0 unbalanced certificates. The same holds for `Π_4` at `t = 11` on 612 003 indecomposable posets (0 of 12 126 488).

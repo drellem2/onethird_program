@@ -58,3 +58,6 @@ w out_base.txt sh -c "
 
 # 4. transport error against distance (covariance decay), range <= 3, n = 10..13
 w out_decay.txt sh -c "for k in 10 11 12 13; do echo \"## range<=3 indecomposable n=\$k\"; $B decay $T/d3_\$k.txt 0 1; done"
+
+# 5. assert every control above (positive checks hold, every NEGATIVE CONTROL fires); exit 1 if not
+w out_check_controls.txt python3 check_controls.py

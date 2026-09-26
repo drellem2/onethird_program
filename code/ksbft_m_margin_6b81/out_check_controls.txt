@@ -1,0 +1,19 @@
+  ok      counter controls (fib, brute) all MATCH
+  ok      t=9: full census 2942 - CUT 2004 = 938 equals gencut 938
+  ok      t=10: full census 8362 - CUT 6361 = 2001 equals gencut 2001
+  ok      t=11: full census 23701 - CUT 19477 = 4224 equals gencut 4224
+  ok      t=12: full census 67116 - CUT 57809 = 9307 equals gencut 9307
+  ok      t=13: full census 190035 - CUT 169576 = 20459 equals gencut 20459
+  ok      six e2e lines present
+  ok      e2e (Lemma 2.2 s): 0 bracket violations, 0 certified-but-unbalanced (must be 0,0)
+  ok      e2e (Lemma 2.2 s): 0 bracket violations, 0 certified-but-unbalanced (must be 0,0)
+  ok      e2e (Lemma 2.2 s): 0 bracket violations, 0 certified-but-unbalanced (must be 0,0)
+  ok      NEGATIVE CONTROL e2e with s = t-D+1: 7178 bracket violations, 8 bad certificates -- CAUGHT
+  ok      NEGATIVE CONTROL e2e with s = t-D+1: 17877 bracket violations, 28 bad certificates -- CAUGHT
+  ok      NEGATIVE CONTROL e2e with s = t-D+1: 517886 bracket violations, 87 bad certificates -- CAUGHT
+  ok      NEGATIVE CONTROL e2e range<=3: a "certified" pair unbalanced in P appears -- CAUGHT
+  ok      NEGATIVE CONTROL narrowed interval: uncertified [1265, 64] -- CAUGHT
+  ok      out_cert_d3.txt: t=11 4224 non-CUT classes, 0 uncertified
+  ok      out_cert_d4.txt: t=15 14298595 non-CUT classes, 0 uncertified
+  ok      out_base.txt: exactly one LOW line, 2+1 at delta = 1/3; no negative margin
+VERDICT: GREEN
