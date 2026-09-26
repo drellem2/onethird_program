@@ -14,10 +14,10 @@ which §3 reads including this very file.  Both exclusions are fixed points: a p
 moved on every gate run would make the same-pin clause unreachable, and a change made
 here must never buy the exemption.  a4_sweep.py names the one dependency left out.
 
-corpus pin: e9428962fb21  (258 directories, 3132 files, excluding code/control_audit_9876/)
+corpus pin: ce37605e5090  (264 directories, 3341 files, excluding code/control_audit_9876/)
 producer pin: 2b1b86a662fc  (the .py and .sh of code/control_audit_9876/, which the corpus pin excludes — a moved one is this instrument's owner's to refresh)
 
-population: 258 directories under code/
+population: 264 directories under code/
 
 §1  MEMBERSHIP TESTS AGAINST A WHOLE CAPTURED OUTPUT
 --------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ The shape of instance 3: `"8 9" in out` where `out` is the entire report, so a
 line printed unconditionally elsewhere satisfies it forever.  A candidate is not a
 defect — only running it two ways decides that.
 
-  222 candidate site(s) in 77 of 258 directories
+  222 candidate site(s) in 77 of 264 directories
 
     species_gate_audit_d53d  (20)
         code/species_gate_audit_d53d/g1_population.py:116  clean[rn] = (rc, E2_SAYS in out)
@@ -125,9 +125,9 @@ control at all, and whether any committed transcript records a demonstrated
 failure.  A directory with neither has no evidence its instrument can fail; that is
 weaker than saying it cannot.
 
-  ships a file named for negative/self/positive-control : 161 of 258
-  a committed transcript records a demonstrated failure  : 164 of 258
-  NEITHER, though the directory ships code               : 42 of 258
+  ships a file named for negative/self/positive-control : 164 of 264
+  a committed transcript records a demonstrated failure  : 168 of 264
+  NEITHER, though the directory ships code               : 43 of 264
 
   directories with code and no evidence of a falsification attempt:
       audit_ksbft_2198                    audit_ksbft_3a14                    audit_ksbft_5562                  
@@ -138,12 +138,13 @@ weaker than saying it cannot.
       face_geometry_audit_f7bc            hodge_leverage_audit_3c24           hodge_leverage_audit_d39d         
       hodge_leverage_join                 ksbft_case_c_d707                   ksbft_f_b447                      
       ksbft_g_constants_b852              ksbft_h_lemma_w_f218                ksbft_k_3c5b                      
-      ksbft_l_heavy_atom_5371             ksbft_one_pt                        ksbft_sec6_c929                   
-      l2_underclaim_audit_3bb9            landscape_audit_d673                landscape_ebd8                    
-      lstar_landing_8d63                  semigroup_note                      semigroup_note_audit_66a6         
-      sibling_sweep_7085                  state_audit_2eed                    state_delegation_audit_16eb       
-      state_delegation_audit_5644         state_delegation_repair_0049        state_restructure_34bf            
-      unified_gate_8fd1                   unified_gate_audit_446b             unitmap_audit_9f91                
+      ksbft_l_heavy_atom_5371             ksbft_one_pt                        ksbft_q_local_width2_5f14         
+      ksbft_sec6_c929                     l2_underclaim_audit_3bb9            landscape_audit_d673              
+      landscape_ebd8                      lstar_landing_8d63                  semigroup_note                    
+      semigroup_note_audit_66a6           sibling_sweep_7085                  state_audit_2eed                  
+      state_delegation_audit_16eb         state_delegation_audit_5644         state_delegation_repair_0049      
+      state_restructure_34bf              unified_gate_8fd1                   unified_gate_audit_446b           
+      unitmap_audit_9f91                
 
 §4  THE SWEEP'S OWN TWO-SIDED CONTROL
 --------------------------------------------------------------------------------------------
@@ -177,5 +178,5 @@ unreachable.  Planted here so it cannot come back quietly.
     [PASS]  pin: MUST move when a DIRECTORY is added — the ticket's own case
 
 ============================================================================================
-SWEEP OK — 222 membership candidates, 27 tee sites, 42 directories with no falsification evidence.  All CANDIDATES.
+SWEEP OK — 222 membership candidates, 27 tee sites, 43 directories with no falsification evidence.  All CANDIDATES.
 ============================================================================================
