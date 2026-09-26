@@ -8,7 +8,7 @@ Verdict scale:
 - **OVERSTATED**: the true content is weaker than the words, or the sourcing is weaker than the words claim.
 - **UNVERIFIABLE**: not checkable with what I had.
 
-Instrument: `code/audit_ksbft_e60e/`. Run it with `sh run_all.sh`. It takes about 10 s, runs one process at a time, and is deterministic. `FULL=1 sh run_all.sh` adds N = 8. It shares **no code** with `lemw.c`. I wrote it before reading `lemw.c` beyond its `pi` variable and its output format.
+Instrument: `code/audit_ksbft_e60e/`. Run it with `sh run_all.sh`. It takes about 10 s, runs one process at a time, and is deterministic. `FULL=1 sh run_all.sh` adds N = 8 (about 5 min on one core). It shares **no code** with `lemw.c`. I wrote it before reading `lemw.c` beyond its `pi` variable and its output format.
 
 - **`indep_e60e.c`**
   - Different generator: every transitive upper-triangular relation mask on N labels. The A006455 counts 7, 40, 357, 4824, 96428 are the positive control.
@@ -25,7 +25,7 @@ Instrument: `code/audit_ksbft_e60e/`. Run it with `sh run_all.sh`. It takes abou
 
 | # | claim (doc §) | label in doc | verdict |
 |---|---|---|---|
-| 1 | Lemma W: P[f(x)−f(y) ≥ 2] ≥ P[y<x]/(π_N+1) when N(x,y) ≠ ∅; no BFT hypothesis (§2) | PROVEN | **HOLDS**. I checked the injection line by line: it is well-defined, lands in E₂, and each image has at most a_R + a_L ≤ π(w) ≤ π_N preimages. I re-computed it with exact counts, 0 violations for N ≤ 7 (and N = 8, §2.3). |
+| 1 | Lemma W: P[f(x)−f(y) ≥ 2] ≥ P[y<x]/(π_N+1) when N(x,y) ≠ ∅; no BFT hypothesis (§2) | PROVEN | **HOLDS**. I checked the injection line by line: it is well-defined, lands in E₂, and each image has at most a_R + a_L ≤ π(w) ≤ π_N preimages. I re-computed it with exact counts: 0 violations for N ≤ 8 (2 800 472 posets and 91 740 332 ordered pairs at N = 8). |
 | 1′ | Lemma W (a): gap ≥ 2 possible ⇔ N ≠ ∅ | PROVEN | **HOLDS** |
 | 1″ | "the earlier generic counterexample (1/70) is a small denominator, not a small ratio" | remark | **HOLDS**. The 1/70 and the "generic Lemma W is false" line in KSBFT-B §3 are both about the *absolute* probability. Lemma W is about the *ratio*. The two are consistent (§1.4). KSBFT-B's "it has to use the BFT-triple hypotheses" is superseded: the ratio lemma is generic, and the BFT structure enters only through the denominator. |
 | 2 | Thm 1.3″: δ ≥ C_BFT + min(θ₀, C_BFT/((5+3√5)(D+1)+1)); δ > 0.2764 for every D ≤ 3471 (§3) | PROVEN-mod-paper | **HOLDS** (§4). Every step was re-derived against the PDF. The consumed paper facts are Cor 2.2, Lemma 2.3, (2.1)–(2.2), and Lemma 3.2(i)–(v) with the hypothesis weakened. Prop C was re-derived here in full (§4.4). |
@@ -34,7 +34,7 @@ Instrument: `code/audit_ksbft_e60e/`. Run it with `sh run_all.sh`. It takes abou
 | 2‴ | D₀ = 3471; 10⁴ → 2.36·10⁻⁶; 10⁶ → 2.36·10⁻⁸ | arithmetic | **HOLDS**. Recomputed: θ_W(3471) = 6.79903·10⁻⁶ > θ₀ > θ_W(3472) = 6.79707·10⁻⁶. |
 | 3a | "the M-witness 1/(24.5(D+1)) never binds once Lemma W is linear" | PROVEN | **HOLDS**. θ_W(D) < C_BFT/((5+3√5)(D+1)) = 0.02361/(D+1) < 0.04082/(D+1). |
 | 3b | "Prop C is load-bearing again: with the printed 441 the D-uniform range stops at D = 17" | PROVEN | **HOLDS**. 1/(441·18²) = 6.9987·10⁻⁶ > θ₀ > 1/(441·19²) = 6.2814·10⁻⁶. Prop A (a ≥ M) cannot substitute, since it helps only for D ≤ 2. This correctly reverses audit mg-3a14 item 14, which was right only for the exponential window. |
-| 4 | 1/(π+1) is sharp at every π = 2..7 on Case-D BFT triples (EMPIRICAL, n ≤ 8) | EMPIRICAL | **HOLDS**, reproduced for π = 2..6 at N ≤ 7 with my own generator, with the minimum attained on the (x,y) side of a Case-D triple. **Strengthened**: I prove it for every D ≥ 3 with an explicit family (§3). The doc's §0.2 sentence "no version of Lemma W that uses only 'Case-D BFT triple + range ≤ D' can beat 1/(D+1)" had support only for D ≤ 7 in the doc. It is now PROVEN for all D (§3). |
+| 4 | 1/(π+1) is sharp at every π = 2..7 on Case-D BFT triples (EMPIRICAL, n ≤ 8) | EMPIRICAL | **HOLDS**, reproduced for π = 2..7 at N ≤ 8 with my own generator, with the minimum attained on the (x,y) side of a Case-D triple. **Strengthened**: I prove it for every D ≥ 3 with an explicit family (§3). The doc's §0.2 sentence "no version of Lemma W that uses only 'Case-D BFT triple + range ≤ D' can beat 1/(D+1)" had support only for D ≤ 7 in the doc. It is now PROVEN for all D (§3). |
 | 5 | "no new D at 1/3; the route is capped below 0.2764 by Case C" (§4, §6) | PROVEN-mod-paper | **HOLDS** as a statement about this route (§5). |
 | 6a | §1.2 table row "c = D^(−k): θ₀ for D up to ~(8.6·10³)^(1/k)" | "PROVEN arithmetic (window.py, asserts included)" | **BROKEN (minor number)**. The row is not in `window.py`. The correct threshold is D^k ≤ 1/((5+3√5)θ₀) = 1.256·10⁴, or 3.47·10³ if c multiplies p as in Lemma W. Neither value is 8.6·10³. Nothing downstream uses it. |
 | 6b | 67/242 conditional: θ₀′ = 4.663·10⁻⁴, constant regime to D = 49 (§4) | conditional | **HOLDS** as arithmetic. The appendix claim itself is UNVERIFIABLE (not checked by the doc or by me). Cor 2.2 still works at 0.27686 < 1/e, and Lemma 2.4 uses δ only through Cor 2.2. |
@@ -120,6 +120,8 @@ KSBFT-B §3's sentence "What Lemma W must use: … It cannot use generic event b
 
 The negative-control counts coincide exactly with `lemw.c`'s K1m. That is two independent generators and two independent counting methods agreeing on 5 numbers.
 
+**N = 8** (`out_indep_8.txt`, 4 min 40 s on one core): there are 2 800 472 posets (A006455) and 91 740 332 ordered pairs, the same as the doc. K0, K1 and K2 have 0 violations. The negative control gives 5 025 852, identical to `lemw.c`.
+
 ---
 
 ## 2. The window chain (claim 2′, HOLDS)
@@ -133,13 +135,20 @@ From the PDF, pp. 7–9: p := P[f(y) < f(x)] and p′ := P[f(z) < f(y)]. This is
 2. **The p′ bound.** Cor 2.2 with h(y) ≤ h(z) gives p′ ≤ 0.2764 < 1/2, so δ(P;y,z) = p′ ≤ δ(P) ≤ C_BFT + θ. Cor 2.2 needs δ ≤ 0.2764, which θ ≤ θ₀ gives.
 3. **Conclusion.** With R ≥ 0: p ≥ 2C_BFT − p′ ≥ C_BFT − θ, and symmetrically p′ ≥ C_BFT − θ. ✔
 
-**Machine check.** `indep_e60e.c` computes S, a₁ = p(1,1), a₂ = p(1,2) + p(2,1) and R for every Case-D BFT triple, using exact integer counts via consecutive-pattern DP. It checks (F-b) and (2.5). There are 3 + 64 + 554 + 6894 + 97199 triples for N = 3..7, with **0 violations** of each. This is a check of the paper's BFT95-derived inequality on small posets, not a proof of it.
+**Machine check.** `indep_e60e.c` computes S, a₁ = p(1,1), a₂ = p(1,2) + p(2,1) and R for every Case-D BFT triple, using exact integer counts via consecutive-pattern DP. It checks (F-b) and (2.5). There are 3 + 64 + 554 + 6894 + 97199 triples for N = 3..7, and 2 092 966 at N = 8, with **0 violations** of each. This is a check of the paper's BFT95-derived inequality on small posets, not a proof of it.
 
 ---
 
 ## 3. Sharpness for every D: an explicit family (claim 4, HOLDS and strengthened)
 
-**Reproduction (EMPIRICAL, exact).** In `out_indep_3to7_xy.txt` I restrict to the (x,y) side of Case-D BFT triples. For N = 7, the minimum of P[gap ≥ 2]/p equals 1/(π+1) exactly for every π(P) = 2, 3, 4, 5, 6: 6/18, 3/12, 2/10, 8/48 and 8/56. The minimum over *all* ordered pairs is also exactly 1/(π+1) at every π. Within max(p, p′) ≤ 0.30, N ≤ 7 has triples only at π = 3, and the minimum there is 1/4. This matches the doc's N ≤ 7 lines. I did not reproduce π = 7 or the doc's N = 8 window-restricted lines, except as stated in §2.3.
+**Reproduction (EMPIRICAL, exact).** In `out_indep_3to7_xy.txt` I restrict to the (x,y) side of Case-D BFT triples. For N = 7, the minimum of P[gap ≥ 2]/p equals 1/(π+1) exactly for every π(P) = 2, 3, 4, 5, 6: 6/18, 3/12, 2/10, 8/48 and 8/56. The minimum over *all* ordered pairs is also exactly 1/(π+1) at every π. Within max(p, p′) ≤ 0.30, N ≤ 7 has triples only at π = 3, and the minimum there is 1/4. This matches the doc's N ≤ 7 lines.
+
+At **N = 8** (`out_indep_8.txt`), the minimum is again exactly 1/(π+1) for π = 2..7, attained on the (x,y) side of a Case-D triple; π = 7 gives 40/320. Within max(p, p′) ≤ 0.30:
+- π = 3: 1/4;
+- π = 4: 1/4 > 1/5;
+- no qualifying triple at π ≥ 5.
+
+All three match the doc's §2.1. The (F-b) and (2.5) checks have 0 violations on all 2 092 966 Case-D triples at N = 8.
 
 **Proposition (PROVEN here).** For k ≥ 0, let Q_k = ({x ≺ z} ⊔ {y}) ⊕ (c₁ ≺ ⋯ ≺ c_k), with every c_i above x, y, z. Let P_k = Q_k ⊔ {w}, where w is incomparable to everything. Put D := k + 3. Then:
 1. π(P_k) = π(w) = D.
@@ -275,7 +284,7 @@ The conditionality of Thm 1.4 on AK25a and Haq26 is unchanged. In the programme'
 
 ## 8. What I did not do, and negatives
 
-- **Census range**: my own census is exhaustive for N ≤ 7. N = 8 ran as a separate single-core job (`out_indep_8.txt`, if present; see §9). The doc's π = 7 sharpness and its N = 8 window-restricted lines ("π = 4: 1/4 > 1/5", "π ≥ 5: none") are covered only by that run.
+- **Census range**: my own census is exhaustive for N ≤ 8. N = 8 is run only with `FULL=1`: it is one core, about 5 min, and its transcript is committed.
 - **Not re-run**: `lemw.c`, `fibw.py`, and the G(m,a,b) family (§5 of the doc). I recomputed the Fibonacci control values by hand. I did not run the doc's `run_all.sh`.
 - **Not checked**: Lemma 2.3 / Appendix A (including 67/242), BFT95, Lemma 2.1, Peczarski and Brightwell–Wright, and eq (1.5)'s derivation (omitted by the paper). Also the literature status of "δ > 0.2764 for 7 ≤ D ≤ 3471 is new": I did no search.
 - **Counterexample hunt, negative**:

@@ -1,0 +1,17 @@
+N=8 posets=2800472 (A006455: 3->7 4->40 5->357 6->4824 7->96428) ordered_incomparable_pairs=91740332 caseD_BFT_triples=2092966
+  K0 (gap>=2 possible <=> N nonempty) viol=0 | K1 c1<=piN*c2 viol=0 | K2 p<=(piN+1)P[gap>=2] viol=0 | NEG CONTROL c1<=(piN-1)*c2 viol=5025852 FIRES
+  BFT (F-b) S/2>=C_BFT+R/(5+3sqrt5) viol=0 | (2.5) R>=gap(x,y)+gap(y,z) viol=0
+  pi(P)=2  all pairs min P[gap>=2]/p = 12/36 = 0.333333   1/(pi+1)=0.333333  EQUAL
+           Case-D pairs (n=2522) min = 6/18 = 0.333333 EQUAL 1/(pi+1)  witness (x,y,z)=(1,2,4) side=(x,y) pred-masks=[0,1,1,5,3,31,31,31]
+  pi(P)=3  all pairs min P[gap>=2]/p = 24/96 = 0.250000   1/(pi+1)=0.250000  EQUAL
+           Case-D pairs (n=31516) min = 24/96 = 0.250000 EQUAL 1/(pi+1)  witness (x,y,z)=(0,2,1) side=(x,y) pred-masks=[0,1,0,0,15,15,15,15]
+           Case-D with max(p,p')<=0.30: min = 2/8 = 0.250000
+  pi(P)=4  all pairs min P[gap>=2]/p = 12/60 = 0.200000   1/(pi+1)=0.200000  EQUAL
+           Case-D pairs (n=197556) min = 6/30 = 0.200000 EQUAL 1/(pi+1)  witness (x,y,z)=(3,6,4) side=(x,y) pred-masks=[0,0,0,7,15,31,7,7]
+           Case-D with max(p,p')<=0.30: min = 6/24 = 0.250000
+  pi(P)=5  all pairs min P[gap>=2]/p = 24/144 = 0.166667   1/(pi+1)=0.166667  EQUAL
+           Case-D pairs (n=632390) min = 8/48 = 0.166667 EQUAL 1/(pi+1)  witness (x,y,z)=(1,3,2) side=(x,y) pred-masks=[0,1,3,1,9,7,7,3]
+  pi(P)=6  all pairs min P[gap>=2]/p = 120/840 = 0.142857   1/(pi+1)=0.142857  EQUAL
+           Case-D pairs (n=845702) min = 40/280 = 0.142857 EQUAL 1/(pi+1)  witness (x,y,z)=(0,2,1) side=(x,y) pred-masks=[0,1,0,4,3,3,1,1]
+  pi(P)=7  all pairs min P[gap>=2]/p = 120/960 = 0.125000   1/(pi+1)=0.125000  EQUAL
+           Case-D pairs (n=383280) min = 40/320 = 0.125000 EQUAL 1/(pi+1)  witness (x,y,z)=(0,2,1) side=(x,y) pred-masks=[0,1,0,5,3,3,1,0]
