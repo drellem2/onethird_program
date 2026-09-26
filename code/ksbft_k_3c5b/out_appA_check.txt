@@ -1,0 +1,25 @@
+P1 #packed solutions per (q,u) histogram: {1: 3481}
+P1 max |H(def) - H(A.2)| = 3.268e-13;  max spread of H among multiple solutions = 0.000e+00
+P1 existence (no (q,u) without a packed pair): ok
+P1 formula (A.2) matches definition: ok
+P1 H well defined (multiple solutions agree = boundary cases): ok
+P2 H(q,1) >= (5-11q)/2 on (0,0.2764]  (min slack -2.220e-16): ok
+P2 [spot check of import BFT95 Lem 2.3] H(q,u) >= H(q,1)  (min slack 0.000e+00): ok
+P3[0.2764] p,p' in [0.26905,0.27640] subset (1/5,3/10); v_q in [0.6180,0.6360] subset (3/5,1): ok
+P3[0.2764] (A.5) (-3v^2+6v-2)/(2v(1+v)(1+2v)) >= 1/12 on [1/2,1]  (min 0.083333, 1/12=0.083333): ok
+P3[0.2764] (A.5) identity via definition (max err 5.27e-16): ok
+P4[0.2764] (A.6) H(p,t)-H(p,1) >= p(1-t)/2 for t > v_p  (min slack 0.000e+00): ok
+P3[67/242] p,p' in [0.26860,0.27686] subset (1/5,3/10); v_q in [0.6169,0.6371] subset (3/5,1): ok
+P3[67/242] (A.5) (-3v^2+6v-2)/(2v(1+v)(1+2v)) >= 1/12 on [1/2,1]  (min 0.083333, 1/12=0.083333): ok
+P3[67/242] (A.5) identity via definition (max err 5.00e-16): ok
+P4[67/242] (A.6) H(p,t)-H(p,1) >= p(1-t)/2 for t > v_p  (min slack 0.000e+00): ok
+P5 EXACT 5 - 11*(67/242) + 1/22 == 2: ok
+P5 EXACT 5 - 11*T + 1/22 > 2 at T = 0.2764 (value 2.0050545454545454): ok
+P5 EXACT first branch threshold: 5 - 11T + 1/12 > 2 iff T < 37/132 (37/132 = 0.28030): ok
+P5 67/242 < 37/132 and 67/242 < 1-1/sqrt2 and 67/242 < 1/e: ok
+NEG CONTROL T=0.2770: 5-11T+1/22 = 1.99845 <= 2 -> FIRES
+TH theta_0 = 6.797750e-06;  D_0 = 3471  (theta_W(D_0) = 6.799026e-06, theta_W(D_0+1) = 6.797068e-06)
+TH theta_0' = 4.663019e-04;  D_0 = 49  (theta_W(D_0) = 4.713308e-04, theta_W(D_0+1) = 4.621045e-04)
+TH C_BFT = 0.276393202;  C_BFT/(5+3sqrt5) = 0.023607;  1/(20+2sqrt5) = 0.040863
+TH theta_W(D) < 1/((20+2sqrt5)(D+1)) for all D in 2..10^5: ok
+ALL OK

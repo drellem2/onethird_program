@@ -1,0 +1,460 @@
+\documentclass[10pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}{Imported fact}
+\renewcommand{\thefact}{I\arabic{fact}}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\inc}{\parallel}
+\newcommand{\CB}{C_{\mathrm{BFT}}}
+\newcommand{\tW}{\theta_W}
+
+\title{A gap-two inequality for linear extensions and a polynomial\\ bound for the balance constant of posets of bounded range}
+\author{onethird\_program (internal note, work items mg-f218, mg-e60e, mg-3c5b)}
+\date{26 September 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $f$ be a uniformly random linear extension of a finite poset $P$, and let $x\inc y$.
+We show that $\PP[f(x)-f(y)\ge 2]\ge \PP[f(y)<f(x)]/(\pi_N+1)$ whenever some element can lie between $y$ and $x$.
+Here $\pi_N$ is the largest number of elements incomparable to such an element.
+The constant is sharp for every value of $\pi_N$.
+We use this to replace the only exponentially small quantity in the proof of Theorem~1.3 of Aires, Chan, Pak and Panova~\cite{KSBFT}.
+The result: every finite non-chain poset $P$ of range $\pi(P)\le D$ satisfies
+\[
+\delta(P)\;\ge\;\CB+\min\Bigl(\theta_0,\ \frac{\CB}{(5+3\sqrt5)(D+1)+1}\Bigr),
+\qquad \CB=\tfrac{5-\sqrt5}{10},\quad \theta_0=0.2764-\CB\approx 6.80\cdot10^{-6}.
+\]
+This replaces the bound $\CB+(D+1)^{-4(D+1)}/4096$ of~\cite{KSBFT}.
+In particular $\delta(P)>0.2764$ for every $D\le 3471$.
+\end{abstract}
+
+\maketitle
+
+\section{Statements}
+
+Throughout, $P=(X,\prec)$ is a finite poset with $n=|X|$, and $f$ is a uniformly random linear extension, viewed as a bijection $X\to[n]$.
+We write $u\inc v$ when $u,v$ are incomparable, $\pi(u)=\#\{v: v\inc u\}$, and $\pi(P)=\max_u\pi(u)$ (the \emph{range}).
+We set $h(u)=\EE f(u)$, $\delta(P;u,v)=\min(\PP[f(u)<f(v)],\PP[f(v)<f(u)])$, and $\delta(P)=\max_{u\ne v}\delta(P;u,v)$.
+
+\begin{definition}
+For $x\inc y$ put $N(x,y)=\{w\in X\setminus\{x,y\}:\ w\not\prec y\text{ and }x\not\prec w\}$ and $\pi_N=\max_{w\in N(x,y)}\pi(w)$.
+\end{definition}
+
+\begin{theorem}[Lemma W]\label{thm:W}
+Let $x\inc y$ in a finite poset.
+\begin{enumerate}[label=(\alph*)]
+\item Some linear extension $g$ has $g(y)<g(w)<g(x)$ if and only if $w\in N(x,y)$. Hence $\PP[f(x)-f(y)\ge2]>0$ if and only if $N(x,y)\ne\emptyset$.
+\item If $N(x,y)\neq\emptyset$, then $\#\{g: g(x)=g(y)+1\}\le \pi_N\cdot\#\{g:g(x)=g(y)+2\}$, and consequently
+\[
+\PP[f(x)-f(y)\ge 2]\;\ge\;\PP[f(x)=f(y)+2]\;\ge\;\frac{\PP[f(y)<f(x)]}{\pi_N+1}\;\ge\;\frac{\PP[f(y)<f(x)]}{\pi(P)+1}.
+\]
+\item The constant is sharp: for every $D\ge2$ there are posets with $\pi_N=\pi(P)=D$ and equality in (b). For $D\ge3$ this holds even when $(x,y,z)$ is a Case~D BFT triple (Example~\ref{ex:sharp}).
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Theorem 1.3$''$]\label{thm:main}
+Let $D\ge 2$ and let $P$ be a finite poset that is not a chain, with $\pi(P)\le D$. Put
+\[
+\theta_0:=0.2764-\CB=6.79775\ldots\cdot10^{-6},\qquad
+\tW(D):=\frac{\CB}{(5+3\sqrt5)(D+1)+1}.
+\]
+If $0\le\theta\le\theta_0$ and $\theta<\tW(D)$, then $\delta(P)>\CB+\theta$. Consequently
+\[
+\delta(P)\ \ge\ \CB+\min\bigl(\theta_0,\tW(D)\bigr),
+\]
+with strict inequality when $\tW(D)>\theta_0$, which happens exactly for $D\le D_0=3471$. For those $D$ the bound reads $\delta(P)>0.2764$. For $D>3471$ it reads $\delta(P)\ge \CB+\tW(D)\approx \CB+0.02361/(D+1)$.
+\end{theorem}
+
+For comparison, \cite[Thm.~1.3]{KSBFT} gives $\delta(P)>\CB+(D+1)^{-4(D+1)}/4096$.
+
+\subsection*{What is imported}
+Theorem~\ref{thm:W} is self-contained.
+Theorem~\ref{thm:main} uses exactly the following four results from the literature, and nothing else.
+We state them in the form used.
+A BFT triple is a triple $(x,y,z)$ of distinct elements, not forming a chain, with $h(x)\le h(y)\le h(z)\le h(x)+2$.
+Since $u\prec v$ implies $h(u)<h(v)$, the only possible comparabilities are $x\prec y$, $x\prec z$ and $y\prec z$.
+Up to duality and reversal of the triple, one of the following holds~\cite[\S4]{BFT95}:
+Case A ($x\prec z$, $y\prec z$, $x\inc y$);
+Case B ($y\prec z$, $x\inc y$, $x\inc z$);
+Case C (pairwise incomparable);
+Case D ($x\prec z$, $x\inc y$, $y\inc z$).
+
+\begin{fact}[Kahn--Linial {\cite[p.~365]{KL91}}; general form {\cite[Cor.~5.1(b)]{AK25a}}; {\cite[Lemma~2.1]{KSBFT}}]\label{I:KL}
+If $h(x)\le h(y)$ then $\PP[f(y)<f(x)]\le 1-e^{-1}$.
+\end{fact}
+\begin{fact}[{\cite[Thms.~4.1, 4.2]{BFT95}}]\label{I:AB}
+In Cases A and B, $\PP[f(y)<f(x)]\ge 1/3$.
+\end{fact}
+\begin{fact}[{\cite[Lemma~2.3 and Appendix~A]{KSBFT}}, from {\cite[\S6]{BFT95}}]\label{I:C}
+In Case C, $\max(\delta(P;x,y),\delta(P;y,z))>0.2764$.
+\end{fact}
+\begin{fact}[{\cite[(5.2), (5.5), (5.7), (5.8)]{BFT95}}, as {\cite[(2.1)--(2.2)]{KSBFT}}]\label{I:D}
+In Case D, put $p(i,j)=\PP[f(y)-f(x)=i,\ f(z)-f(y)=j]$, $p=\PP[f(y)<f(x)]$, $p'=\PP[f(z)<f(y)]$, $S=p+p'$, $a_1=p(1,1)$, $a_2=p(1,2)+p(2,1)$, $a_3=p(2,2)$. Then
+\[
+2a_1+a_2\le S,\qquad 2a_2+2a_3\le S,\qquad 4a_1a_3\le a_2^2,\qquad 7\le 9S+7a_1+3a_2+3a_3 .
+\]
+\end{fact}
+
+Everything else from \cite{KSBFT} that we use is reproved below: Cor.~2.2, Lemma~2.4, Lemma~3.2 (with a weaker hypothesis and a new proof of (iii)), Lemma~4.1, and the identities (4.2)--(4.7).
+Neither Lemma~3.1 (the $q_m=(D+1)^{-m(D+1)}$ bound) nor Lemma~4.2 (the $M^2/441$ conversion) of~\cite{KSBFT} is used.
+Lemma~4.2 is replaced by a linear conversion (Proposition~\ref{prop:C}), and the lower bound (4.11) on $M$ by Proposition~\ref{prop:B}.
+Section~\ref{sec:appA} records our check of the proof of Fact~\ref{I:C}.
+
+\section{Proof of Lemma W}
+
+\begin{proof}[Proof of Theorem~\ref{thm:W}(a)]
+If $g(y)<g(w)<g(x)$ then $w\not\prec y$ and $x\not\prec w$, so $w\in N(x,y)$.
+Conversely, let $w\in N(x,y)$. Adding the relations $y<w<x$ to $\prec$ creates a cycle only if $w\preceq y$, $x\preceq w$ or $x\preceq y$, and none of these holds.
+So the transitive closure is a partial order, and any of its linear extensions will do.
+Finally, $f(x)-f(y)\ge2$ means some element sits strictly between $y$ and $x$, and that element lies in $N(x,y)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:W}(b)]
+Let $E_k=\{g: g(x)=g(y)+k\}$ and $N=N(x,y)\ne\emptyset$. We define $\Phi:E_1\to E_2$.
+Fix $g\in E_1$, with $y$ at position $i$ and $x$ at position $i+1$.
+Every element of $N$ lies before $y$ or after $x$.
+Put $A=\{w\in N: g(w)>g(x)\}$.
+
+\emph{Case $A\ne\emptyset$.} Let $w$ be the first element of $A$ in $g$, say $g(w)=i+1+j$ with $j\ge1$.
+Let $t_0=x,t_1,\dots,t_{j-1}$ be the elements in positions $i+1,\dots,i+j$.
+We claim that each $t_k$ is incomparable to $w$.
+First, $w\not\prec t_k$ because $t_k$ precedes $w$ in $g$.
+Suppose $t_k\prec w$. Then $k\ne0$, because $x\not\prec w$.
+Also $t_k\not\prec y$, because $t_k$ comes after $y$ in $g$; and $x\not\prec t_k$, since otherwise $x\prec t_k\prec w$.
+Hence $t_k\in N$ and $t_k$ lies after $x$ and before $w$, which contradicts the choice of $w$.
+Moving $w$ to position $i+1$ changes the relative order only of the incomparable pairs $\{w,t_k\}$.
+The result is therefore a linear extension, with $y,w,x$ in positions $i,i+1,i+2$. Let $\Phi(g)$ be this extension.
+
+\emph{Case $A=\emptyset$.} Then $N$ lies entirely before $y$. Let $w$ be the last element of $N$ in $g$, and let $s_1,\dots,s_{j-1},s_j=y$ be the elements after $w$ up to and including $y$.
+Again each $s_k$ is incomparable to $w$.
+First, $s_k\not\prec w$ by position.
+Next, $w\not\prec y$ because $w\in N$.
+Finally, suppose $w\prec s_k$ with $k<j$. Then $s_k\not\prec y$, since otherwise $w\prec y$; $x\not\prec s_k$, because $s_k$ precedes $x$; and $s_k\ne x,y$.
+So $s_k\in N$ lies after $w$, which contradicts maximality.
+Moving $w$ to just after $y$ gives a linear extension in which $y,w,x$ are consecutive. Let $\Phi(g)$ be this extension.
+The case split matters: if we moved the last $N$-element before $y$ even when $A\ne\emptyset$, then $\Phi$ would not be a function of $g$.
+
+\emph{Multiplicity.} Fix $g'\in E_2$ and let $w$ be its middle element, so $w\in N$.
+Any $\Phi$-preimage of $g'$ is obtained from $g'$ by moving $w$ in one of two ways:
+\begin{itemize}
+\item right by $j$ places, past $x$ and $j-1$ further elements (the case $A\neq\emptyset$);
+\item left by $j$ places, past $y$ and $j-1$ further elements (the case $A=\emptyset$).
+\end{itemize}
+So a preimage is determined by the side and by $j$.
+We showed above that in a preimage all $j$ elements that $w$ passes are incomparable to $w$.
+Let $a_R$ and $a_L$ be the lengths of the maximal runs of elements incomparable to $w$ immediately to the right and to the left of $w$ in $g'$.
+Then $j\le a_R$ on the right side and $j\le a_L$ on the left side.
+If $y\prec w$, then $a_L=0$, which only helps.
+The two runs are disjoint sets of elements incomparable to $w$, so
+\[
+|\Phi^{-1}(g')|\ \le\ a_R+a_L\ \le\ \pi(w)\ \le\ \pi_N .
+\]
+Hence $|E_1|\le\pi_N|E_2|$, and
+\[
+\PP[f(y)<f(x)]=\PP[E_1]+\PP[f(x)-f(y)\ge2]\le \pi_N\PP[E_2]+\PP[f(x)-f(y)\ge2]\le(\pi_N+1)\,\PP[f(x)-f(y)\ge2].
+\]
+Note that $\pi_N\ge1$: an element $w\in N$ with $y\prec w\prec x$ would force $y\prec x$.
+\end{proof}
+
+\begin{example}[sharpness, Theorem~\ref{thm:W}(c)]\label{ex:sharp}
+\emph{Generic family, $D\ge2$.} Take a chain $x=c_1\prec\dots\prec c_{D-1}$ and two further elements $y,w$ incomparable to everything.
+Then $\pi(y)=\pi(w)=D=\pi(P)$ and $N(x,y)=\{w\}$.
+The event $f(y)<f(x)$ says that $y$ is first among $\{y\}\cup\{c_i\}$, and then $w$ can occupy any of $D+1$ slots. Exactly one of these slots lies between $y$ and $x$. So the ratio in (b) is $1/(D+1)$.
+
+\emph{Case~D BFT triple, $D\ge3$ (from the audit mg-e60e).} Let $Q_k$ be the 2+1 poset $\{x\prec z\}\sqcup\{y\}$ with a chain $c_1\prec\dots\prec c_k$ placed above all of it.
+Let $P_k=Q_k\sqcup\{w\}$ with $w$ incomparable to everything, and put $D=k+3$.
+Then $\pi(P_k)=\pi(w)=D$.
+In $Q_k$ the heights are $(h(x),h(y),h(z))=(4/3,2,8/3)$.
+Inserting $w$ uniformly into the $D+1$ slots multiplies every height by $(D+2)/(D+1)\le 5/4$.
+So $(x,y,z)$ is a Case~D BFT triple: $h(z)-h(x)\le 5/3$.
+Moreover $N(x,y)=\{w\}$, since $z$ and every $c_i$ lie above $x$.
+In $Q_k$, $y$ before $x$ forces $y$ immediately before $x$. Hence $\PP[f(y)<f(x)]=1/3$ and $\PP[f(x)-f(y)\ge2]=1/(3(D+1))$, and the ratio is $1/(D+1)$.
+\end{example}
+
+\begin{remark}[relation to known inequalities]
+Let $a_i=\PP[f(y)-f(x)=i]$ and $b_i=\PP[f(x)-f(y)=i]$. Kahn and Saks~\cite{KS84} (as restated in \cite[Lemma~2.1]{BFT95}) prove $a_1=b_1$ and the two-sided inequality $a_2+b_2\ge a_1+b_1$.
+Lemma~W is one-sided: $b_1\le\pi_N b_2$. It carries a range factor, which Example~\ref{ex:sharp} shows cannot be replaced by an absolute constant.
+In the notation of \cite{BFT95} it says $\epsilon=b_1/B\le\pi_N/(\pi_N+1)$, where $B=\sum_i b_i$.
+We have not found Lemma~W in the literature (see the accompanying search log).
+\end{remark}
+
+\begin{remark}
+Lemma W bounds a \emph{ratio}. Absolute probabilities of such events can be exponentially small in the range.
+For example, for two parallel $k$-chains the probability that the top of one precedes the bottom of the other is $\binom{2k}{k}^{-1}$.
+This is why \cite[Lemma~3.1]{KSBFT}, which bounds absolute probabilities, loses $(D+1)^{-m(D+1)}$.
+In the application below the denominator $\PP[f(y)<f(x)]$ is bounded below by a constant (Lemma~\ref{lem:window}), so the ratio bound is all that is needed.
+\end{remark}
+
+\section{\texorpdfstring{Case D near $\CB$}{Case D near C\_BFT}}
+
+\begin{lemma}[{\cite[Cor.~2.2]{KSBFT}}]\label{lem:cor22}
+If $\delta(P)\le 0.2764$ and $h(x)\le h(y)$, then $\PP[f(y)<f(x)]\le 0.2764$.
+\end{lemma}
+\begin{proof}
+If $x\prec y$ the probability is $0$.
+Otherwise suppose $\PP[f(y)<f(x)]>0.2764$. By Fact~\ref{I:KL}, $\PP[f(x)<f(y)]\ge e^{-1}>0.2764$.
+Then $\delta(P;x,y)>0.2764$, which is a contradiction.
+\end{proof}
+
+\begin{lemma}[{\cite[Lemma~2.4]{KSBFT}}]\label{lem:24}
+In Case D, with the notation of Fact~\ref{I:D} and $R:=S-2a_1-a_2\ \ (\ge0)$:
+\begin{enumerate}[label=(\alph*)]
+\item $S/2\ge \CB+R/(5+3\sqrt5)$. This part needs no hypothesis on $\delta(P)$.
+\item $R\ge \PP[f(x)-f(y)\ge2]+\PP[f(y)-f(z)\ge2]$.
+\item If $\delta(P)\le0.2764$, then $\delta(P;x,y)=p$, $\delta(P;y,z)=p'$, and $\max(p,p')\ge\CB+R/(5+3\sqrt5)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) Since $S>0$, put $b_i=a_i/S$ and $s=1-R/S=2b_1+b_2\in[0,1]$. Fact~\ref{I:D} gives $b_2+b_3\le\frac12$ and $4b_1b_3\le b_2^2$.
+Let $F(s)=\max\bigl(\tfrac72s,\ \tfrac72\sqrt{s^2+1/4}-\tfrac14\bigr)$. We claim $7b_1+3b_2+3b_3\le F(s)$.
+If $b_1=0$, the left side is $3(b_2+b_3)\le 3/2\le F(s)$.
+If $u:=b_1>0$, then $u\le s/2$ and $b_2+b_3\le b_2+b_2^2/(4u)=s^2/(4u)-u$, so the left side is at most $7u+3\min(\frac12, s^2/(4u)-u)$.
+The two terms in the minimum are equal at $u_0=(\sqrt{1+4s^2}-1)/4\le s/2$.
+On $(0,u_0]$ the bound is $7u+\frac32$, which is increasing, with value $\frac72\sqrt{s^2+1/4}-\frac14$ at $u_0$.
+On $[u_0,s/2]$ it is $4u+3s^2/(4u)$, which is convex, so its maximum is at an endpoint; the value at $s/2$ is $\frac72 s$.
+Since $F$ is convex with $F(0)=\frac32$ and $F(1)=c:=(7\sqrt5-1)/4$, we get $F(s)\le c-(c-\frac32)(1-s)$.
+Hence
+\[
+7\le 9S+S(7b_1+3b_2+3b_3)\le S(9+F(s))\le(9+c)S-(c-\tfrac32)R .
+\]
+The claim follows from $7/(2(9+c))=\CB$ and $(c-\frac32)/(2(9+c))=1/(5+3\sqrt5)$.
+
+(b) Swapping adjacent incomparable elements gives $p(-1,j)=p(1,j-1)$ and $p(j,-1)=p(j-1,1)$ for $j\ge2$.
+Hence $2a_1+a_2=p(-1,2)+p(-1,3)+p(2,-1)+p(3,-1)$.
+Since $x\prec z$, the event $\{f(x)=f(y)+1\}$ forces $f(z)-f(y)\ge2$, so $\{f(x)=f(y)+1\}=\bigsqcup_{j\ge2}\{f(y)-f(x)=-1,\,f(z)-f(y)=j\}$.
+Therefore $p-\PP[f(x)-f(y)\ge2]\ge p(-1,2)+p(-1,3)$.
+Symmetrically, $p'-\PP[f(y)-f(z)\ge2]\ge p(2,-1)+p(3,-1)$. Adding the two gives (b).
+
+(c) By Lemma~\ref{lem:cor22}, $p,p'\le0.2764<\frac12$. So $\delta(P;x,y)=p$, $\delta(P;y,z)=p'$, and $\max(p,p')\ge S/2$. Now apply (a).
+\end{proof}
+
+\begin{lemma}[the window forces balance]\label{lem:window}
+In Case D, if $\delta(P)\le\CB+\theta$ with $0\le\theta\le\theta_0$, then $p\ge\CB-\theta$ and $p'\ge\CB-\theta$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:24}(a), $S\ge 2\CB$. By Lemma~\ref{lem:24}(c), $p'\le\delta(P)\le\CB+\theta$. Hence $p\ge 2\CB-p'\ge\CB-\theta$, and symmetrically for $p'$.
+\end{proof}
+
+\section{Structure of BFT triples in the window}
+
+\begin{lemma}[{\cite[Lemma~3.2]{KSBFT}} under a weaker hypothesis]\label{lem:struct}
+Let $\pi(P)\le D$ and $\delta(P)\le\CB+\theta$, where $0\le\theta\le\theta_0$ and $\theta<\tW(D)$. Let $(x,y,z)$ be any BFT triple. Then:
+(i) it is in Case D;
+(ii) $z$ covers $x$;
+(iii) $y$ is incomparable only to $x$ and $z$;
+(iv) with $L=\{w:w\prec y\}$ and $U=\{w:y\prec w\}$, we have $X=L\sqcup\{x,y,z\}\sqcup U$, and $L\prec z$, $x\prec U$, $L\prec U$.
+\end{lemma}
+\begin{proof}
+(i) We have $\delta(P)\le\CB+\theta_0=0.2764$.
+Cases A and B, and their duals, give a pair with $\delta\ge 1/3$, by Facts~\ref{I:AB} and~\ref{I:KL} (note $1-e^{-1}<2/3$).
+Case C gives a pair with $\delta>0.2764$ by Fact~\ref{I:C}.
+Both contradict $\delta(P)\le 0.2764$.
+
+(ii) Suppose $x\prec w\prec z$. Then $g(z)-g(x)\ge2$ for every $g$.
+The event $f(x)<f(y)<f(z)$ has positive probability, since adding $x<y<z$ creates no cycle. On that event $g(z)-g(x)\ge3$.
+So $h(z)-h(x)>2$, which is a contradiction.
+
+(iii) By Lemma~\ref{lem:24}(c) and the hypothesis, $R\le(5+3\sqrt5)\theta$.
+Suppose some $g$ has $g(y)<g(w)<g(x)$. Then $N(x,y)\ne\emptyset$ by Theorem~\ref{thm:W}(a).
+Theorem~\ref{thm:W}(b), Lemma~\ref{lem:window} and Lemma~\ref{lem:24}(b) then give
+\[
+\frac{\CB-\theta}{D+1}\ \le\ \frac{p}{\pi_N+1}\ \le\ \PP[f(x)-f(y)\ge2]\ \le\ R\ \le\ (5+3\sqrt5)\theta .
+\]
+This is equivalent to $\theta\ge\tW(D)$, a contradiction.
+The same argument applies to the ordered pair $(y,z)$: use Theorem~\ref{thm:W} with $(x,y)$ replaced by $(y,z)$, whose denominator is $p'=\PP[f(z)<f(y)]\ge\CB-\theta$, together with the second summand of Lemma~\ref{lem:24}(b).
+Hence every $g$ satisfies
+\begin{equation}\label{eq:37}
+g(y)<g(x)\Rightarrow g(x)=g(y)+1,\qquad g(z)<g(y)\Rightarrow g(y)=g(z)+1 .
+\end{equation}
+By Theorem~\ref{thm:W}(a), \eqref{eq:37} says $N(x,y)=N(y,z)=\emptyset$. In other words, every $w\ne x,y$ has $w\prec y$ or $x\prec w$, and every $w\ne y,z$ has $w\prec z$ or $y\prec w$.
+If some $w\notin\{x,y,z\}$ were incomparable to $y$, this would give $x\prec w\prec z$, contradicting (ii).
+
+(iv) The partition follows from (iii). For $w\in L$, since $w\not\succ y$, we get $w\prec z$. For $w\in U$, $x\prec w$. Finally, $L\prec U$ holds through $y$.
+\end{proof}
+
+\begin{remark}
+In \cite[Lemma~3.2(iii)]{KSBFT} the chain is $q_3\le\PP[E]\le\PP[f(x)-f(y)\ge2]\le R$, with $E=\{f(y)<f(w)<f(x)\}$ and $q_3=(D+1)^{-3(D+1)}$ from their Lemma~3.1.
+The proof above bounds the \emph{same} middle term, for the same ordered pair, in the same orientation and for the same event as in Lemma~\ref{lem:24}(b), and it does so directly.
+So $q_3$ and $\PP[E]$ disappear. This is the only point where the exponential loss entered.
+\end{remark}
+
+\section{The displacement argument with linear losses}
+
+Let $v_1,\dots,v_n$ list $X$ in non-decreasing order of $h$, let $d_i=h(v_i)-i$, and let $M=\max_i|d_i|$.
+
+\begin{lemma}[{\cite[Lemma~4.1]{KSBFT}}]\label{lem:41}
+Suppose $G(P)$, the incomparability graph, is connected and $n\ge3$. Then some $k$ has $(v_k,v_{k+1},v_{k+2})$ a BFT triple with $\max(|d_k|,|d_{k+2}|)=M$.
+\end{lemma}
+\begin{proof}
+Positions are distinct integers, so $d_1\ge0$, $d_1+d_2\ge0$, $d_n\le0$ and $d_{n-1}+d_n\le0$.
+Hence either $d_i=M$ for some $i\le n-2$, or $d_j=-M$ for some $j\ge3$. Take $k=i$ in the first case and $k=j-2$ in the second.
+Then $h(v_{k+2})-h(v_k)=2+d_{k+2}-d_k\le2$.
+Suppose the triple were a chain $x\prec y\prec z$. Then $g(z)-g(x)=2$ for every $g$.
+Any $w$ incomparable to one of $x,y,z$ satisfies $w\not\prec x$ and $z\not\prec w$, so some $g$ has $g(x)<g(w)<g(z)$, which gives $g(z)-g(x)\ge 3$. That is a contradiction.
+So the triple would be an isolated set in $G(P)$, which contradicts connectedness.
+\end{proof}
+
+\begin{proposition}[mg-d707, Prop.~B]\label{prop:B}
+If $G(P)$ is connected, $n\ge2$ and $\pi(P)\le D$, then $M\ge d_1\ge 1/(D+1)$. This is sharp for a $D$-chain plus one isolated point.
+\end{proposition}
+\begin{proof}
+The element $a=v_1$ is minimal, since $w\prec a$ would give $h(w)<h(a)$.
+Because $G(P)$ is connected, $a$ has an incomparable element.
+For $g$ with $g(a)=1$, let $c$ be the first element incomparable to $a$, at position $t\ge2$.
+Each element $u$ in positions $2,\dots,t-1$ satisfies $a\prec u$. Then $u\not\prec c$, since otherwise $a\prec c$; and $c\not\prec u$ by position. So $u\inc c$.
+Moving $c$ to the front therefore gives an extension with $c,a$ in positions $1,2$.
+The original $g$ is recovered from the image and from $t$. Since $c$ passed $t-1$ elements incomparable to it, $t-1\le\pi(c)\le D$.
+Hence $\#\{g(a)=1\}\le D\,\#\{g(a)=2\}$. This gives $\PP[f(a)=1]\le D/(D+1)$ and $d_1=\EE f(a)-1\ge\PP[f(a)\ge2]\ge1/(D+1)$.
+\end{proof}
+
+\begin{proposition}[mg-d707, Prop.~C; replaces {\cite[Lemma~4.2]{KSBFT}}]\label{prop:C}
+Assume the conclusions of Lemma~\ref{lem:struct} for the triple $(x,y,z)=(v_k,v_{k+1},v_{k+2})$ of Lemma~\ref{lem:41}. Then
+\[
+a:=\max(\delta(P;x,y),\delta(P;y,z))\ \ge\ \CB+\frac{M}{20+2\sqrt5}.
+\]
+\end{proposition}
+\begin{proof}
+\emph{Height identities (after \cite[(4.2)--(4.7)]{KSBFT}).}
+Let $L'=L\cup\{x\}$ and $U'=U\cup\{z\}$. Then $L'\prec U'$.
+Every $w\in L$ has $h(w)<h(y)$ and $w\ne x$, so it precedes $x$ in the $h$-order; symmetrically for $U$. Hence $x=v_m$ with $m=|L'|$ (so $k=m$).
+In every linear extension, $L'$ occupies the first $m$ positions (except that $y$ may interleave) and $U'$ the last.
+The element $y$ sits between the two blocks, or immediately before $x$ when $x$ is last in the $L'$-block, or immediately after $z$ when $z$ is first in the $U'$-block.
+
+Let $f_{L'}$ and $f_{U'}$ be independent uniform extensions of $P[L']$ and $P[U']$. Put $r=\PP[f_{L'}(x)=m]$, $s=\PP[f_{U'}(z)=1]$, $v=r+s$ and $Z=1+v$.
+Then $e(P)=e(L')e(U')Z$, so $p=r/Z$ and $p'=s/Z$, both at most $\frac12$. Hence $a=\max(r,s)/Z$.
+
+Let $\alpha$ be the expected number of elements of $L$ after $x$, and $\beta$ the expected number of elements of $U$ before $z$.
+Counting the positions of $y$ gives $\alpha=(1+s)t/Z$ with $t=\EE[m-f_{L'}(x)]\ge 1-r$, and similarly $\beta=(1+r)u/Z$ with $u\ge 1-s$.
+Counting the elements below $x$ and $z$ gives $h(x)=m+p-\alpha$ and $h(z)=m+2+\beta-p'$.
+Hence $d_m=p-\alpha$ and $d_{m+2}=\beta-p'$.
+The condition $h(z)-h(x)\le2$ gives $\alpha+\beta\le v/Z$.
+Put $\alpha_*=\alpha-(1+s)(1-r)/Z\ge0$ and $\beta_*=\beta-(1+r)(1-s)/Z\ge0$. Then
+\[
+0\le\alpha_*+\beta_*\le g/Z,\qquad g:=v+2rs-2\ \ (\ge 0).
+\]
+
+\emph{Linear conversion.} Let $\rho=(\sqrt5-1)/2$, so $\rho^2=1-\rho$, $1+2\rho=\sqrt5$ and $\CB=\rho/\sqrt5$.
+Write $r=\rho+X$ and $s=\rho+Y$. Since $r,s\in[0,1]$, we have $|X|,|Y|\le\rho$. Put $W=|X|+|Y|$ and $\varepsilon=a-\CB$.
+\begin{enumerate}[label=(\arabic*)]
+\item $r/Z-\CB=A/(\sqrt5 Z)$ with $A=(1+\rho)X-\rho Y$. Symmetrically $s/Z-\CB=B/(\sqrt5Z)$ with $B=(1+\rho)Y-\rho X$. So $\sqrt5Z\varepsilon=\max(A,B)$, with $A+B=X+Y$ and $A-B=\sqrt5(X-Y)$.
+\item $g=\sqrt5(X+Y)+2XY$, using $2\rho+2\rho^2=2$. We show $X+Y\ge0$. Suppose $X+Y<0$. If $XY\le0$, then $g<0$. If $XY>0$, both are negative and $2|X||Y|\le2\rho|Y|<\sqrt5 W$, so again $g<0$. Either way this contradicts $g\ge0$.
+\item $\max(A,B)=\frac{X+Y}2+\frac{\sqrt5|X-Y|}2\ge\max(X,Y)\ge W/2$, where the last step uses $X+Y\ge0$. Hence $W\le 2\sqrt5 Z\varepsilon$, and in particular $\varepsilon\ge0$.
+\item We have $d_m=F/Z-\alpha_*$ and $d_{m+2}=G/Z+\beta_*$, where
+\begin{itemize}
+\item $F=r-(1+s)(1-r)=(2+\rho)X-(1-\rho)Y+XY$;
+\item $G=(1+r)(1-s)-s=(1-\rho)X-(2+\rho)Y-XY$.
+\end{itemize}
+Using $|XY|\le\rho\min(|X|,|Y|)$, both satisfy $|F|,|G|\le(2+\rho)W$. Also $2|X||Y|\le\rho W$ gives $g\le(\sqrt5+\rho)W$.
+Hence $|d_m|,|d_{m+2}|\le(2+2\rho+\sqrt5)W/Z=(1+2\sqrt5)W/Z\le(20+2\sqrt5)\varepsilon$.
+\end{enumerate}
+By the choice of the triple, $M=\max(|d_m|,|d_{m+2}|)\le(20+2\sqrt5)\,\varepsilon$.
+\end{proof}
+
+\section{\texorpdfstring{Proof of Theorem~\ref{thm:main}}{Proof of Theorem 1.2}}
+
+The components of $G(P)$ are totally ordered by $\prec$. Indeed, if $a\prec b$ lie in different components and $a'\inc a$, then $a'$ is comparable to $b$, and $b\prec a'$ would give $a\prec a'$; so $a'\prec b$, and connectedness propagates this.
+So each component $K$ is an interval of every linear extension, and probabilities of events inside $K$ are the same in $P$ and in $P[K]$.
+Hence $\delta(P)\ge\delta(P[K])$, and $\pi(P[K])\le D$.
+Since $P$ is not a chain, some $K$ has $|K|\ge2$. If $|K|=2$, then $\delta(P)\ge\frac12$.
+So we may assume that $G(P)$ is connected and $n\ge3$.
+
+Suppose $\delta(P)\le\CB+\theta$, with $0\le\theta\le\theta_0$ and $\theta<\tW(D)$.
+Lemma~\ref{lem:41} gives a BFT triple with $\max(|d_k|,|d_{k+2}|)=M$.
+Lemma~\ref{lem:struct} applies to it, and Propositions~\ref{prop:C} and~\ref{prop:B} give
+\[
+\delta(P)\ \ge\ a\ \ge\ \CB+\frac{M}{20+2\sqrt5}\ \ge\ \CB+\frac{1}{(20+2\sqrt5)(D+1)} .
+\]
+But $\theta<\tW(D)<\frac{\CB}{(5+3\sqrt5)(D+1)}=\frac{0.02360\ldots}{D+1}<\frac{0.04086\ldots}{D+1}=\frac1{(20+2\sqrt5)(D+1)}$, which contradicts $\delta(P)\le\CB+\theta$.
+If $\tW(D)>\theta_0$, take $\theta=\theta_0$. Otherwise let $\theta\uparrow\tW(D)$. \qed
+
+\medskip
+\noindent\emph{Numbers} (from \texttt{code/ksbft\_k\_3c5b/appA\_check.py}):
+\begin{itemize}
+\item $\theta_0=6.797750\cdot10^{-6}$;
+\item $\tW(3471)=6.799026\cdot10^{-6}>\theta_0>\tW(3472)=6.797068\cdot10^{-6}$, so $D_0=3471$;
+\item at $D=10^4$ the gain is $2.36\cdot10^{-6}$, and at $D=10^6$ it is $2.36\cdot10^{-8}$.
+\end{itemize}
+
+\begin{remark}[which constraint binds]
+Three constraints appear in the proof:
+\begin{itemize}
+\item the cap $\theta_0$, which comes only from Case~C (Fact~\ref{I:C}) via Lemma~\ref{lem:struct}(i) and Lemma~\ref{lem:cor22};
+\item Lemma~W's $\tW(D)$;
+\item the witness term $1/((20+2\sqrt5)(D+1))$.
+\end{itemize}
+The witness term never binds. The cap $\theta_0$ is independent of $D$ and no strengthening of Lemma W removes it.
+By Example~\ref{ex:sharp}, the constant $1/(D+1)$ cannot be improved using only "Case-D BFT triple + range $\le D$". Whether it improves under the global hypothesis $\delta(P)\le\CB+\theta$ is open. That hypothesis is vacuous for $D\le3471$ by the theorem itself.
+If Lemma~4.2's $M^2/441$ were used in place of Proposition~\ref{prop:C}, the $D$-uniform range would end at $D=17$.
+\end{remark}
+
+\begin{remark}[where finiteness enters]
+The bound cannot hold for infinite posets. \cite[Thm.~1.4]{BFT95} gives thin infinite posets of range~2 (for example the Fibonacci poset, $x_i\prec x_j$ iff $j-i\ge2$) whose balance constant is exactly $\CB$.
+Lemma~W and Lemma~\ref{lem:struct} pass to such limits. At the central triples of $F_m$ we have $N(x,y)=\emptyset$ and the bridged $2+1$ structure holds.
+Finiteness is used only in the witness step. Lemma~\ref{lem:41} needs the boundary relations $d_1\ge0$, $d_1+d_2\ge0$, $d_{n-1}+d_n\le0$, and Proposition~\ref{prop:B} needs a bottom element $v_1$ with $d_1\ge1/(D+1)$.
+In $F_m$ the displacement $M$ is attained at the ends and stays bounded away from $0$, while every fixed central displacement tends to $0$.
+\end{remark}
+
+\begin{corollary}[effect on {\cite[Thm.~1.2]{KSBFT}}]
+In \cite{KSBFT}, Theorem~1.2 ($\delta(P)\ge\CB+\epsilon$ for all finite non-chains) is obtained by combining Thm.~1.3 at $D=L$ with Thms.~1.4 and~1.5, where $L$ is the range threshold of Thm.~1.5 from~\cite{AK25b}.
+Using Theorem~\ref{thm:main} in place of Thm.~1.3 gives $\epsilon=\min(\theta_0,\tW(L))$, which is about $0.0236/(L+1)$ once $L>3471$.
+The double exponential in $L$ disappears, and the size of $\epsilon$ is governed by $L$ alone.
+The paper does not print $L$ \cite[p.~5]{KSBFT}, and it omits the derivation of its (1.5), so we give no numerical value.
+The conditionality of Thm.~1.4 on~\cite{AK25a} and Haqi's preprint is unchanged.
+\end{corollary}
+
+\section{\texorpdfstring{On Fact~\ref{I:C}: Appendix A of \cite{KSBFT} and the value $67/242$}{On Fact I3: Appendix A and the value 67/242}}\label{sec:appA}
+
+We checked the proof of \cite[Lemma~2.3]{KSBFT} (Appendix~A) against the preprint of~\cite{BFT95}.
+It imports four results:
+\begin{itemize}
+\item Fact~\ref{I:KL};
+\item \cite[Lemma~2.2]{BFT95}, the packing lemma, which gives $h(y)-h(x)\ge H(p,t)$ for the packed height function $H$;
+\item \cite[Lemma~2.3]{BFT95}, the monotonicity lemma: $H(B,\epsilon)$ is decreasing in $\epsilon$ for $B\le1/3$, except in case (ii) with $k=1$ and $\epsilon\le1/\sqrt2$, which occurs only when $B\ge 1-1/\sqrt2\approx0.293$;
+\item \cite[Lemma~6.2]{BFT95} (via Lemma~6.1): if $x,y,z$ are pairwise incomparable and $h(z)\le h(x)+2$, then $\PP[f(x)-f(y)\ge2]+\PP[f(y)-f(z)\ge2]\ge1/11$. This needs no bound on $p$ or $p'$.
+\end{itemize}
+Everything else in the appendix is algebra, which we re-derived by hand and checked numerically:
+\begin{itemize}
+\item the closed forms (A.2) for $H$, which agree with the definition of packed sequences to $3\cdot10^{-13}$ on a grid;
+\item Claim~A.1;
+\item the boundary identity and bound (A.5);
+\item both sub-cases of Claim~A.2, including the packed-case conditions $1+2t+2t^2\lessgtr 1/p\le(1+t)(1+2t)$;
+\item the final inequality, $5-11\cdot0.2764+\tfrac1{22}=2.00505>2$.
+\end{itemize}
+One stated justification is too weak but the conclusion holds. Appendix~A derives $3/5<v_q<1$ from $q\in(1/5,3/10)$, which is false near $q=3/10$ ($v_{3/10}\approx0.565$). The bound does hold on the range actually established, $q\in[6/11-0.2764,\,0.2764]$, where $v_q\in[0.618,0.636]$.
+
+\emph{The value $67/242$.} The last line of the appendix reads $5-\frac{11}{2}(p+p')+\frac1{22}>2$, and it holds for every threshold $T<67/242$.
+Every other step (Claim~A.1's use of $T<1-1/\sqrt2$, the range of $v_q$, Claim~A.2's $32/9<1/T$, and the first branch, which needs $T<37/132$) remains valid at $T=67/242$.
+So the argument proves $\max(\delta(P;x,y),\delta(P;y,z))\ge 67/242\approx0.276860$, with a non-strict inequality: at $T=67/242$ the chain gives exactly $h(z)-h(x)\ge2$.
+The appendix's claim that it ``yields the stronger lower bound $67/242$'' is therefore correct, modulo the same imports.
+With it, Lemma~\ref{lem:struct}(i) holds for every $\theta<\theta_0':=67/242-\CB=4.663\cdot10^{-4}$. Lemma~\ref{lem:cor22} and Lemma~\ref{lem:24}(c) hold at threshold $67/242<e^{-1}$ verbatim.
+Theorem~\ref{thm:main} then improves to
+\[
+\delta(P)\ \ge\ \CB+\min(\theta_0',\tW(D)),
+\]
+which is $\ge 67/242$ for $D\le49$.
+
+\begin{thebibliography}{KSBFT}
+\bibitem[KSBFT]{KSBFT} M.~Aires, S.~H.~Chan, I.~Pak, G.~Panova, \emph{Breaking the infinite barrier in the $\frac13$--$\frac23$ conjecture}, preprint, version of 25 September 2026.
+\bibitem[AK25a]{AK25a} M.~Aires, J.~Kahn, arXiv:2509.11549.
+\bibitem[AK25b]{AK25b} M.~Aires, J.~Kahn, arXiv:2510.26134.
+\bibitem[BFT95]{BFT95} G.~Brightwell, S.~Felsner, W.~T.~Trotter, \emph{Balancing pairs and the cross product conjecture}, Order \textbf{12} (1995), 327--349. (Checked against the authors' preprint of 30 May 1995.)
+\bibitem[KL91]{KL91} J.~Kahn, N.~Linial, \emph{Balancing extensions via Brunn--Minkowski}, Combinatorica \textbf{11} (1991), 363--368.
+\bibitem[KS84]{KS84} J.~Kahn, M.~Saks, \emph{Balancing poset extensions}, Order \textbf{1} (1984), 113--126.
+\end{thebibliography}
+
+\end{document}
