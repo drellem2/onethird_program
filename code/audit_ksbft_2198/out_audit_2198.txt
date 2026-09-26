@@ -1,0 +1,117 @@
+== [A] F(m,k) brute force (own DP)
+ m=1 k=2 j=1: struct=True min(4)=1/3 (1/(k+1)=1/3) atom=1/3 closed=1/3 q=1/3 uniform=True
+  F(1,2) j=1: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  F(1,2): atom <= (pi k/2)^(-m/2) sqrt(2/mk) = 0.5642                      PASS
+  F(1,2): delta_x = 1/2 - 1/(2(k+1)) and AK25b's D,U (p.5) = this D,U      PASS
+ m=2 k=2 j=1: struct=True min(4)=1/3 (1/(k+1)=1/3) atom=2/15 closed=2/15 q=1/5 uniform=True
+  F(2,2) j=1: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  F(2,2): atom <= (pi k/2)^(-m/2) sqrt(2/mk) = 0.2251                      PASS
+  F(2,2): delta_x = 1/2 - 1/(2(k+1)) and AK25b's D,U (p.5) = this D,U      PASS
+ m=3 k=2 j=1: struct=True min(4)=1/3 (1/(k+1)=1/3) atom=2/35 closed=2/35 q=1/7 uniform=True
+  F(3,2) j=1: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  F(3,2): atom <= (pi k/2)^(-m/2) sqrt(2/mk) = 0.1037                      PASS
+  F(3,2): delta_x = 1/2 - 1/(2(k+1)) and AK25b's D,U (p.5) = this D,U      PASS
+ m=4 k=2 j=1: struct=True min(4)=1/3 (1/(k+1)=1/3) atom=8/315 closed=8/315 q=1/9 uniform=True
+  F(4,2) j=1: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  F(4,2): atom <= (pi k/2)^(-m/2) sqrt(2/mk) = 0.05066                     PASS
+  F(4,2): delta_x = 1/2 - 1/(2(k+1)) and AK25b's D,U (p.5) = this D,U      PASS
+ m=5 k=2 j=1: struct=True min(4)=1/3 (1/(k+1)=1/3) atom=8/693 closed=8/693 q=1/11 uniform=True
+  F(5,2) j=1: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  F(5,2): atom <= (pi k/2)^(-m/2) sqrt(2/mk) = 0.02556                     PASS
+  F(5,2): delta_x = 1/2 - 1/(2(k+1)) and AK25b's D,U (p.5) = this D,U      PASS
+ m=2 k=4 j=2: struct=True min(4)=1/5 (1/(k+1)=1/5) atom=2/35 closed=2/35 q=1/9 uniform=True
+  F(2,4) j=2: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  F(2,4): atom <= (pi k/2)^(-m/2) sqrt(2/mk) = 0.07958                     PASS
+  F(2,4): delta_x = 1/2 - 1/(2(k+1)) and AK25b's D,U (p.5) = this D,U      PASS
+ m=3 k=4 j=2: struct=True min(4)=1/5 (1/(k+1)=1/5) atom=18/1001 closed=18/1001 q=1/13 uniform=True
+  F(3,4) j=2: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  F(3,4): atom <= (pi k/2)^(-m/2) sqrt(2/mk) = 0.02592                     PASS
+  F(3,4): delta_x = 1/2 - 1/(2(k+1)) and AK25b's D,U (p.5) = this D,U      PASS
+ m=2 k=6 j=3: struct=True min(4)=1/7 (1/(k+1)=1/7) atom=100/3003 closed=100/3003 q=1/13 uniform=True
+  F(2,6) j=3: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  F(2,6): atom <= (pi k/2)^(-m/2) sqrt(2/mk) = 0.04332                     PASS
+  F(2,6): delta_x = 1/2 - 1/(2(k+1)) and AK25b's D,U (p.5) = this D,U      PASS
+ m=2 k=3 j=1: struct=True min(4)=1/4 (1/(k+1)=1/4) atom=3/35 closed=3/35 q=1/7 uniform=True
+  F(2,3) j=1: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+ m=2 k=5 j=2: struct=True min(4)=1/6 (1/(k+1)=1/6) atom=10/231 closed=10/231 q=1/11 uniform=True
+  F(2,5) j=2: hypotheses of Thm 2.6 + (4)>=1/(k+1) + closed form + q=1/(mk+1) PASS
+  negative control, closed form without (mk+1): FIRES
+  negative control, (4) with b=c_{l,j} (not j+1) gives P=2/15 < 1/3: FIRES
+
+== [A''] (F3) cross-chain values P(c_{1,j}<x<c_{2,j+1}) in F(2,k)
+   k=2: 11/30 (doc: 11/30, 17/70, 1129/6006, 6841/43758) >= 1/(k+1): True
+   k=4: 17/70 (doc: 11/30, 17/70, 1129/6006, 6841/43758) >= 1/(k+1): True
+   k=6: 1129/6006 (doc: 11/30, 17/70, 1129/6006, 6841/43758) >= 1/(k+1): True
+   k=8: 6841/43758 (doc: 11/30, 17/70, 1129/6006, 6841/43758) >= 1/(k+1): True
+
+== [A'] k=2 bound atom < 2^-m, exact, m=1..200
+  2^m/(C(2m,m)(2m+1)) < 2^-m for m=1..200                                  PASS
+  identity 2^m m!^2/(2m+1)! == 2^m/(C(2m,m)(2m+1)), m=1..50                PASS
+  (pi k/2)^(-m/2)sqrt(2/mk) bound, k even 2..20, m 1..60 (log-space)       PASS
+
+== [B] exponent coefficient c(k) = lim log(1/atom)/(m log(1/eps4)), eps4 = 1/(k+1), at m=2000
+   k=  2 eps4=1/3: log(1/atom)/(m log(k+1)) = 0.6327   (m->inf limit (k log2 - log C(k,k/2))/log(k+1) = 0.6309)
+   k=  4 eps4=1/5: log(1/atom)/(m log(k+1)) = 0.6107   (m->inf limit (k log2 - log C(k,k/2))/log(k+1) = 0.6094)
+   k=  6 eps4=1/7: log(1/atom)/(m log(k+1)) = 0.5989   (m->inf limit (k log2 - log C(k,k/2))/log(k+1) = 0.5977)
+   k=  8 eps4=1/9: log(1/atom)/(m log(k+1)) = 0.5912   (m->inf limit (k log2 - log C(k,k/2))/log(k+1) = 0.5901)
+   k= 10 eps4=1/11: log(1/atom)/(m log(k+1)) = 0.5857   (m->inf limit (k log2 - log C(k,k/2))/log(k+1) = 0.5847)
+   k= 20 eps4=1/21: log(1/atom)/(m log(k+1)) = 0.5711   (m->inf limit (k log2 - log C(k,k/2))/log(k+1) = 0.5703)
+   k= 50 eps4=1/51: log(1/atom)/(m log(k+1)) = 0.5569   (m->inf limit (k log2 - log C(k,k/2))/log(k+1) = 0.5562)
+   k=100 eps4=1/101: log(1/atom)/(m log(k+1)) = 0.5490   (m->inf limit (k log2 - log C(k,k/2))/log(k+1) = 0.5484)
+
+== [C] the ceiling: delta_x and q(x) of F(m,k), k even and odd (exact DP)
+   F(2,2) width 3: delta_x=1/3 eps=1/6 q(x)=1/5 ceiling formula 1/((w-1)(1/(2eps)-1)+1)=1/5
+  F(2,2) ceiling formula == q(x)                                           PASS
+   F(2,3) width 3: delta_x=1/2 eps=0 q(x)=1/7 ceiling formula 1/((w-1)(1/(2eps)-1)+1)=None
+  F(2,3) k odd: delta_x = 1/2 (odd k gives NO ceiling point)               PASS
+   F(2,4) width 3: delta_x=2/5 eps=1/10 q(x)=1/9 ceiling formula 1/((w-1)(1/(2eps)-1)+1)=1/9
+  F(2,4) ceiling formula == q(x)                                           PASS
+   F(2,5) width 3: delta_x=1/2 eps=0 q(x)=1/11 ceiling formula 1/((w-1)(1/(2eps)-1)+1)=None
+  F(2,5) k odd: delta_x = 1/2 (odd k gives NO ceiling point)               PASS
+   F(3,2) width 4: delta_x=1/3 eps=1/6 q(x)=1/7 ceiling formula 1/((w-1)(1/(2eps)-1)+1)=1/7
+  F(3,2) ceiling formula == q(x)                                           PASS
+   F(3,3) width 4: delta_x=1/2 eps=0 q(x)=1/10 ceiling formula 1/((w-1)(1/(2eps)-1)+1)=None
+  F(3,3) k odd: delta_x = 1/2 (odd k gives NO ceiling point)               PASS
+   eps=1/6 w=3: ceiling=0.2, 2eps/w=0.1111, ratio ceiling/(2eps/w)=1.8000
+   eps=1/6 w=10: ceiling=0.05263, 2eps/w=0.03333, ratio ceiling/(2eps/w)=1.5789
+   eps=1/6 w=1000000: ceiling=5e-07, 2eps/w=3.333e-07, ratio ceiling/(2eps/w)=1.5000
+
+== [D] sec 3.3 explicit non-unimodal instance
+   transitively closed as given: True
+   C chain=True C in Pi(x)=True Pi(x)=[0, 1, 3, 5, 6, 7] w(Pi)=2 w(Pi-C)=1 e(P)=392
+   N_C(x) distribution (counts) = [20, 120, 114, 138], /gcd = [10, 60, 57, 69]
+  instance: C Dilworth-type chain, N_C distribution proportional to [20,120,114,138], non-unimodal PASS
+  control: Stanley f(x) log-concave on the same instance                   PASS
+  trivial example v<c1<c2<u<c3 + isolated x gives [2,1,2,1]                PASS
+
+== [E] q0 -> L chain, re-implemented from mg-b852 DOC sec 3.2-3.4 formulas (log10 space)
+   K0 = 1.3011e+14 (mg-b852: 1.301e14)  K12 = 1.9441e+12 (mg-b852: 1.944e12)
+   (2e)^(w^2)       log10 L* = 1.05e+29    (doc 1.05e+29 ) log10 L(4,1/6) = 119.1    (doc 119.1) log10 eps12 = -1.7171e+25 (doc -1.717e+25)
+  row (2e)^(w^2) reproduced                                                PASS
+   (2e)^(0.6309w)   log10 L* = 5.0916e+14  (doc 5.09e+14 ) log10 L(4,1/6) = 74.71    (doc None) log10 eps12 = -5.5724e+12 (doc -5.6e+12)
+  row (2e)^(0.6309w) reproduced                                            PASS
+   (2e)^w           log10 L* = 8.0703e+14  (doc 8.07e+14 ) log10 L(4,1/6) = 81.63    (doc 81.6) log10 eps12 = -8.8325e+12 (doc -8.83e+12)
+  row (2e)^w reproduced                                                    PASS
+   (2e/w)^w         log10 L* = 2.4681e+16  (doc 2.47e+16 ) log10 L(4,1/6) = 100.4    (doc 100.4) log10 eps12 = -3.194e+14  (doc -3.19e+14)
+  row (2e/w)^w reproduced                                                  PASS
+   (2e/w)^3         log10 L* = 633.67      (doc 633.7    ) log10 L(4,1/6) = 100.4    (doc 100.4) log10 eps12 = -559.01     (doc -559)
+  row (2e/w)^3 reproduced                                                  PASS
+   2e/w             log10 L* = 253.54      (doc 253.5    ) log10 L(4,1/6) = 75.38    (doc 75.4) log10 eps12 = -229.7      (doc -229.7)
+  row 2e/w reproduced                                                      PASS
+   negative control: 12/13 of the w^2 row = 9.693e+28 vs doc 1.050e29 -> FIRES
+   exact ceiling 1/((w-1)(1/(2eps)-1)+1) at eps=1/6, w=L*: log10 L = 251.2479 (row '2e/w' gives 253.5442)
+   exact ceiling 1/((w-1)(1/(2eps)-1)+1) at eps=1/6, w=L(4,1/6): log10 L = 72.0291 (row '2e/w' gives 75.3763)
+   degree check: d log10 L / d log10(1/q0) near ceiling row = 13.033
+
+ALL: PASS
+
+== [F] sec 3.1 Attempt 2: P(A<x<B) vs P(A<x)P(x<B) on F(m,2), exact DP
+   m=1 P(A<x)=0.6667 P(x<B)=0.6667  sqrt(pi)/(2sqrt m)=0.8862  joint=3.333e-01  joint/(product)=0.7500
+   m=2 P(A<x)=0.5333 P(x<B)=0.5333  sqrt(pi)/(2sqrt m)=0.6267  joint=1.333e-01  joint/(product)=0.4688
+   m=3 P(A<x)=0.4571 P(x<B)=0.4571  sqrt(pi)/(2sqrt m)=0.5117  joint=5.714e-02  joint/(product)=0.2734
+   m=4 P(A<x)=0.4063 P(x<B)=0.4063  sqrt(pi)/(2sqrt m)=0.4431  joint=2.540e-02  joint/(product)=0.1538
+   m=5 P(A<x)=0.3694 P(x<B)=0.3694  sqrt(pi)/(2sqrt m)=0.3963  joint=1.154e-02  joint/(product)=0.0846
+   m=6 P(A<x)=0.3410 P(x<B)=0.3410  sqrt(pi)/(2sqrt m)=0.3618  joint=5.328e-03  joint/(product)=0.0458
+  joint/product strictly decreasing in m=1..6 (consistent with exponential decay) PASS
+
+ALL (after [F]): PASS
