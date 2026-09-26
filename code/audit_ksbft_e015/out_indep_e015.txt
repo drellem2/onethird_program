@@ -1,0 +1,58 @@
+== K: constants (floats; nothing below is near a threshold)
+  eps0 = 1/e - 1/3   G1=1.801e+06 A=7.743e+08 G2=1.298e+12 step(L>log4+2logL: 20.468 > 7.424)=True
+                     width (6.5)*G = 1.301e+14 ; paper display = 1.301e+14 ; C = 2sqrt3 e G/eps^3 = 2.964e+17
+                     6Cn/(n^2-1) <= 1         from n >= 1.778e+18
+                     6Cn/(n^2-1) <= 0.1667    from n >= 1.067e+19
+                     6Cn/(n^2-1) <= 0.02      from n >= 8.891e+19
+  illustrative 1/6   G1=1.604e+04 A=6.896e+06 G2=6.839e+09 step(L>log4+2logL: 15.746 > 6.900)=True
+                     width (6.5)*G = 1.422e+11 ; paper display = 1.422e+11 ; C = 2sqrt3 e G/eps^3 = 1.391e+13
+                     6Cn/(n^2-1) <= 1         from n >= 8.346e+13
+                     6Cn/(n^2-1) <= 0.1667    from n >= 5.008e+14
+                     6Cn/(n^2-1) <= 0.02      from n >= 4.173e+15
+  paper eps=1e-100: log10(width display) = 411.337
+  (6.12) prefactor at eps0, gap=1e6: 2e(1+sqrt3 gap/eps)(5/eps^2) = 1.142e+12 ; paper 10e(1+sqrt3)gap/eps^3 = 1.801e+12 ; '/eps^2' version = 6.223e+10
+== A: two-atom law mu_t = (1-t) delta_id + t delta_rev, n=5, t=1/10
+  pair marginals take values [Fraction(1, 10), Fraction(9, 10)] (all in (0,1): every pair 'incomparable', width n)
+  delta = 1/10 ; heights [Fraction(7, 5), Fraction(11, 5), Fraction(3, 1), Fraction(19, 5), Fraction(23, 5)] ; adjacent Delta [Fraction(4, 5)] (<1)
+  E[inv_h] = 1 = t*C(n,2) = 1 ; in M_n(eta) for eta <= 1/3 - t: True
+== D: d is not a function of pair marginals (S_3)
+  kernel vector (-1, 0, 1, 0, 1, -1) ; mu2 = ['1/12', '1/6', '1/4', '1/6', '1/4', '1/12'] (nonneg True) ; same pair marginals: True
+  Var(f(0)-f(1)): uniform 2 vs mu2 2
+  Var(f(0)-f(2)): uniform 2 vs mu2 3/2
+  Var(f(1)-f(2)): uniform 2 vs mu2 5/2
+== W: two parallel chains
+  m=1 brute W=1 (2m^2/(m+1)=1) I*=0.500000 exact-formula I*=0.500000 ok
+  m=2 brute W=8/3 (2m^2/(m+1)=8/3) I*=1.333333 exact-formula I*=1.333333 ok
+  m=3 brute W=9/2 (2m^2/(m+1)=9/2) I*=2.400000 exact-formula I*=2.400000 ok
+  m=4 brute W=32/5 (2m^2/(m+1)=32/5) I*=3.657143 exact-formula I*=3.657143 ok
+  m=5 brute W=25/3 (2m^2/(m+1)=25/3) I*=5.079365 exact-formula I*=5.079365 ok
+  m=6 brute W=72/7 (2m^2/(m+1)=72/7) I*=6.649351 exact-formula I*=6.649351 ok
+  m=7 brute W=49/4 (2m^2/(m+1)=49/4) I*=8.354312 exact-formula I*=8.354312 ok
+  m=   2  I*=1.3333 >= sum_{N<=m} E|S_N|/2=0.8333 >= proof bound 0.2464  ok ; proof bound/W = 0.0924
+  m=   5  I*=5.0794 >= sum_{N<=m} E|S_N|/2=2.8968 >= proof bound 0.6091  ok ; proof bound/W = 0.0731
+  m=  11  I*=16.3507 >= sum_{N<=m} E|S_N|/2=8.6705 >= proof bound 1.7761  ok ; proof bound/W = 0.0881
+  m=  50  I*=157.0564 >= sum_{N<=m} E|S_N|/2=79.5181 >= proof bound 16.1668  ok ; proof bound/W = 0.1649
+  m= 200  I*=1254.0977 >= sum_{N<=m} E|S_N|/2=629.0398 >= proof bound 125.6406  ok ; proof bound/W = 0.3157
+  m=   11  I*/n^1.5 = 0.15845  I*/W = 0.811  I*/(W*sqrt m) = 0.24446
+  m=   50  I*/n^1.5 = 0.15706  I*/W = 1.602  I*/(W*sqrt m) = 0.22655
+  m=  200  I*/n^1.5 = 0.15676  I*/W = 3.151  I*/(W*sqrt m) = 0.22280
+  m=  800  I*/n^1.5 = 0.15669  I*/W = 6.275  I*/(W*sqrt m) = 0.22187
+  m= 3000  I*/n^1.5 = 0.15667  I*/W = 12.140  I*/(W*sqrt m) = 0.22164
+== P: census n = 2..6 (A006455: 1,2,7,40,357,4824,63565)
+  n=2  2 posets  (A006455 2)  ok
+  n=3  7 posets  (A006455 7)  ok
+  n=4  40 posets  (A006455 40)  ok
+  n=5  357 posets  (A006455 357)  ok
+  n=6  4824 posets  (A006455 4824)  ok
+  total 5230 ; delta<=1/3 population 39 ; delta<1/e population 86
+  S1   worst slack +0.646721 ok
+  S3   worst slack +2.31935 ok
+  S5   worst slack +913582 ok
+  S6   worst slack +0 ok
+  S1e  worst slack +0.633914 ok
+  S3e  worst slack +2.31935 ok
+  S5e  worst slack +913582 ok
+  S6e  worst slack +0 ok
+  F21 exact mismatches on delta<=1/3: 0
+  max E[inv_h]/n on delta<=1/3 population: 0.222222 (vs C = 2.96e17)
+  NEGATIVE CONTROL S1 on ALL posets (hypothesis dropped): worst -0.0199452 FIRES
