@@ -1,4 +1,14 @@
-# KSBFT-S: Nested Balance, i.e. "every non-chain poset has a balanced pair with comparable down-sets or up-sets". It is not in the literature. It holds on everything tested. It is boundary-tight on a prime 8-element poset, it contains the open interval-order case of 1/3–2/3 exactly, and it forfeits the bounded-range environment. Not a better target than 1/3–2/3 (mg-cfba)
+# KSBFT-S: Nested Balance, i.e. "every non-chain poset has a balanced pair with comparable down-sets or up-sets". It is not in the literature. It holds on everything tested. It is boundary-tight on a prime 8-element poset, it contains the interval-order case of 1/3–2/3 (not found proven in the literature) exactly, and it forfeits the bounded-range environment. Not a better target than 1/3–2/3 (mg-cfba)
+
+**Errata (mg-555c, per audit mg-ebbe, `docs/AUDIT-mg-cfba.md`).** No proof of (NB) is claimed, and every PROVEN lemma HOLDS on re-derivation. The verdict ("(NB) is not a better target than 1/3–2/3") **HOLDS**; it follows from Prop 1.2, T8 and §3.1–3.4 alone and does not need any of the overstated claims below. Corrected in place:
+- **OVERSTATED (partly false): "the mg-7bfc hosts are interval orders" (§0.4a, §2.1, §4a).** `hub(2+2,{0,1,2},8)`, in this doc's own table, contains an induced `2+2`; so do `W8` and `B7`+tail r = 2, 3 (and T8). The `attach_both`/`attach_low` hosts, `P_9`, `rec11`, all `Q_m` and all `F_m` are interval orders. What is true, and what the argument needs: all **54** named family members (audit's list) have **0 non-nested pairs** (untrapped), so on every one of them (NB) ⟺ 1/3–2/3 still holds (Prop 1.2).
+- **OVERSTATED: "zero margin ⟹ no margin or robustness argument can prove (NB)" (§0.2, §0.4, §3.3, §4).** T8 kills exactly one schema: a **uniform** margin `δ_N ≥ 1/3 + μ` on indecomposable posets. It does not kill margin arguments on another statistic, or arguments that treat exact ties separately (1/3–2/3 itself has zero margin at 2+1). ONE-PT's 5/318 is a different comparison quantity on a different class (range ≤ 3; T8 has range 4), so it is not "a better margin than T8's 0" for the same statement.
+- **OVERSTATED: "the search's floor is a real barrier" (§2.4).** Lemma 2.1 binds only posets that **have a Doubling pair** (`down(x) = down(b_0)`, `up(x) ⊆ up(b_0)`, either orientation). A poset with no such pair is untouched by it.
+- **OVERSTATED: the §3.4 table's "NO"** reads **"not known to"**, matching the prose. Whether AK25a/b's or Haq26's balanced pair can be chosen nested is UNVERIFIABLE without the preprints.
+- **OVERSTATED (coverage): §2.1's "`Q_m`, m = 0…14" and "Fibonacci `F_5 … F_30`".** Laws were computed here for **6** `Q_m` (m ∈ {0,2,4,6,10,14}) and **5** Fibonacci members. The audit checked all 15 `Q_m` and all `F_5..F_30` structurally (interval order, 0 non-nested pairs) and recomputed exact laws for n ≤ 22.
+- **UPGRADE: T8 is the UNIQUE indecomposable poset with `δ_N = 1/3` for n ≤ 9** (audit, full census, EMPIRICAL). The other 51 ties with n ≤ 9 are decomposable. This settles §5's "minimality of T8 not checked", and T8 is also the only indecomposable open-window (NB) failure at n ≤ 9. The audit also found T13 and T14's ties are Doubling at `t_0 = 1/3`.
+- **UPGRADE: the full n ≤ 9 census has 0 failures of (NB), (PNB) and dual-(PNB)** (audit, EMPIRICAL; also 0 failures of Lemma 1.1 and of the Doubling identity over 270 909 Doubling configurations). (PNB) is non-trivial there: `δ_P < δ_N` on 21 926 posets at n = 9.
+- **"1/3–2/3 for interval orders is open" (§0.1, §1.2, §4a):** "not found" **HOLDS** (the audit's own literature pass also found no proof); "open" is **UNVERIFIABLE** (Brightwell 1999 and citers of Brightwell 1989 unread). Read every "open" below as "not found proven".
 
 Gated on audit mg-6e7c (`docs/AUDIT-mg-6e7c.md`), which I read first. That audit showed the SL-conjecture of mg-ce69 is **equivalent** to Nested Balance, and that the "(L3)-gap" is a strengthening of 1/3–2/3, not a reduction. Nothing here uses a claim that audit breaks. From mg-ce69 (`docs/KSBFT-Q2-both-ends.md`) I use only what the audit HOLDS: Thm 1.4 (Swap Ladder), Lemma 1.5 (Doubling), Thm 4.1.
 
@@ -29,9 +39,9 @@ Computation was used only as an instrument (ticket rule): to cross-check, to pro
    - Every proof of 1/3–2/3 in the good-pair lineage produces a nested balanced pair. That covers Linial (width 2), Zaguia 2012 (N-free), Zaguia 2019 (forest cover graphs; semiorders via Brightwell's pair) and Olson–Sagan 2018 (Young-diagram posets).
    - Height ≤ 2 (Trotter–Gehrlein–Fishburn) gives (NB) for free, because there every pair is nested.
    - Nobody states (NB) or the chain-bottom form of the ladder. Zaguia's step lemma needs the whole private up-set to be a chain.
-   - **Cost: (NB) is exactly 1/3–2/3 on interval orders (Prop 1.2), and 1/3–2/3 for interval orders is not proven anywhere we could find.** So (NB) contains an open case of the conjecture verbatim.
+   - **Cost: (NB) is exactly 1/3–2/3 on interval orders (Prop 1.2), and 1/3–2/3 for interval orders is not proven anywhere we could find.** So (NB) contains verbatim a case of the conjecture we found no proof of ("open" is unverifiable; errata).
 2. **Plausibility: 0 failures everywhere (EMPIRICAL), but with zero margin (§2).**
-   - Named extremal families: 24 posets (`Q_m` to n = 46, the mg-7bfc hosts, Fibonacci to n = 30, `P_9`, `rec11`, `W8`).
+   - Named extremal families: 24 posets here (`Q_m` to n = 46, the mg-7bfc hosts, Fibonacci to n = 30, `P_9`, `rec11`, `W8`).
    - 1 600 random prime indecomposable posets of range 8–14, n = 14–26. 1 449 of them have non-nested pairs, so (NB) is non-trivial there.
    - All 2 534 mg-2912 records.
    - 11 456 random indecomposable posets with n ≤ 10.
@@ -39,7 +49,7 @@ Computation was used only as an instrument (ticket rule): to cross-check, to pro
    - **But (NB) is tight on a prime poset.** `T8 = 8 0 0 2 6 3 e 17 5f` (n = 8, range 4, prime, `e = 42`) has `δ = 17/42` and `δ_N = 1/3` exactly. Every nested balanced pair sits on the boundary (1/3 or 2/3). The only interior balanced pair, `(3,4)` at 17/42, is non-nested.
    - Consequences:
      - **(NB) with the open interval is FALSE at n = 8 on a prime poset**, whereas for 1/3–2/3 the boundary is attained (EMPIRICAL) only by the decomposable 2+1 family.
-     - **"`δ_N ≥ 1/3 + μ` on indecomposable posets" is false for every μ > 0.** The corresponding margin for `δ` is 0.3489 − 1/3 ≈ 0.016 (mg-2912, EMPIRICAL).
+     - **"`δ_N ≥ 1/3 + μ` on indecomposable posets" is false for every μ > 0** (a uniform margin; errata). The corresponding margin for `δ` is 0.3489 − 1/3 ≈ 0.016 (mg-2912, EMPIRICAL).
      - The adversarial search found more exact ties: `T13` (prime, range 6) and `T14`.
      - Where no full-chain good pair fires, it found `N12` (range 7) at `δ_N = 1/3 + 1/2346` while `δ = 1/2`.
    - Every tie and near-miss is **explained by a PROVEN ladder mechanism at equality**: Zaguia's good pair plus the Doubling Lemma, with `t_0 = 1/3` or just below it. None is an accident of search.
@@ -55,11 +65,11 @@ Computation was used only as an instrument (ticket rule): to cross-check, to pro
    - A ladder proof of (NB) in a new class: I found none. Range ≤ 2 is PROVEN (Cor 3.4), but only by the existing exact computation.
 4. **Verdict: (NB) is NOT a better target than 1/3–2/3. As a replacement target it is a dead end.**
    - It is strictly stronger and contains an open case verbatim.
-   - It has zero slack on prime posets, so no margin or robustness argument can prove it.
+   - It has zero slack on a prime poset, so no argument through a uniform `δ_N` margin on indecomposables can prove it (errata: other margin schemas are not excluded).
    - It gains nothing inductively, and it gives up the bounded-range environment.
    - Its one real attraction: the swap and ladder tools reach exactly the nested pairs. But that attraction is already fully cashed out by the end theory, which transfers unchanged to both problems.
    - **Two by-products are worth keeping (§4):**
-     - **(a)** The programme's hand-built extremal witnesses (`P_9`, `rec11`, `Q_m`, `F_m`, the mg-7bfc hosts) are all **interval orders**, where every pair is nested and every pair carries a Swap Ladder. "1/3–2/3 for interval orders" is an open, natural, ladder-friendly subproblem.
+     - **(a)** The programme's hand-built extremal witnesses all have **0 non-nested pairs** (untrapped), and most (`P_9`, `rec11`, `Q_m`, `F_m`, the `attach_both`/`attach_low` hosts) are **interval orders**, where every pair is nested and every pair carries a Swap Ladder. `hub`, `W8` and `B7`+tail r = 2, 3 contain `2+2` (errata). "1/3–2/3 for interval orders" is a natural, ladder-friendly subproblem with no proof found.
      - **(b)** (PNB) is **prefix-determined**: down-sets and pair laws are both fixed by the bottom window. So KSBFT-I's finite-state machine could certify it at small D with no new theory. That is the one cheap computation that would show whether nested balance is bottom-local.
 
 ---
@@ -115,7 +125,7 @@ The literature sub-agent read Zaguia 1610.00809 v3, Zaguia 1107.5626, Olson–Sa
 **Consequences.**
 - **(NB) for height ≤ 2 is KNOWN** (TGF 1992; which pair TGF find is irrelevant).
 - **(NB) for semiorders is KNOWN** (Brightwell 1989, which is Zaguia's very good pair).
-- **(NB) for interval orders is exactly 1/3–2/3 for interval orders.** Neither the sub-agent nor I found a proof of that: it is absent from Wikipedia's list of known cases and from every citation list read. I treat it as **OPEN (not found)**. So (NB) is at least as hard as an open special case of the conjecture.
+- **(NB) for interval orders is exactly 1/3–2/3 for interval orders.** Neither the sub-agent nor I found a proof of that: it is absent from Wikipedia's list of known cases and from every citation list read. I treat it as **not found** ("open" is UNVERIFIABLE, audit mg-ebbe). So (NB) is at least as hard as a special case of the conjecture with no known proof.
 
 ---
 
@@ -131,15 +141,15 @@ All figures are exact per poset, from `nb.c`.
 | family | n | range | δ | δ_N | non-nested pairs |
 |---|---|---|---|---|---|
 | `P_9`, `rec11`, `W8` | 9, 11, 8 | 5, 6, 6 | 0.4010, 0.3573, 0.4541 | same | 0, 0, 0 |
-| `Q_m`, m = 0…14 | 18–46 | 5 | 0.3936–0.3941 | same | **0** |
+| `Q_m`, m ∈ {0,2,4,6,10,14} computed here (all 15 structurally by the audit) | 18–46 | 5 | 0.3936–0.3941 | same | **0** |
 | `B7` + tail(12), r = 1, 2, 3 | 19 | 5–6 | 0.497, 0.429, 0.493 | same | 0 |
-| Fibonacci `F_5 … F_30` | 5–30 | 2 | → 0.38197 | same | 0 |
+| Fibonacci, 5 members of `F_5 … F_30` computed here (all structurally by the audit) | 5–30 | 2 | → 0.38197 | same | 0 |
 | `attach_both(F_N, R)`, `attach_low(F_N, R)`, `hub` | 13–26 | 3–10 | 0.456–0.500 | same | 0 |
 
 **Finding (EMPIRICAL, `io.py`, `out_io.txt`).**
-- `P_9`, `rec11`, `Q_m`, `F_m` and the mg-7bfc hosts are **interval orders**: no induced `2+2`, and the positive control finds `2+2` in `2+2`.
-- So on the programme's hand-built extremal witnesses, (NB) **is** 1/3–2/3. They cannot distinguish the two statements.
-- `W8` and `T8` do contain `2+2`, but `W8` still has no doubly trapped pair.
+- `P_9`, `rec11`, `Q_m`, `F_m` and the `attach_both`/`attach_low` hosts are **interval orders**: no induced `2+2`, and the positive control finds `2+2` in `2+2`.
+- **Errata:** the mg-7bfc `hub(2+2,{0,1,2},8)`, `W8`, `B7`+tail r = 2, 3 (and `T8`) **contain** `2+2`. All 54 named family members nevertheless have **0 non-nested pairs** (audit mg-ebbe, `code/audit_ksbft_ebbe/out_witnesses.txt`).
+- So on the programme's hand-built extremal witnesses, (NB) **is** 1/3–2/3 (untrapped, Prop 1.2). They cannot distinguish the two statements.
 
 The mg-2912 records are different. Only 1 of the 44 records with `δ < 0.35` is an interval order; they are width 2, where Linial gives (NB) anyway. Overall, 1 023 of the 2 534 records are interval orders (`out_records.txt`).
 
@@ -180,7 +190,7 @@ Starts: random posets, `T13`, `Q_0` and `rec11`. n = 9–22.
 | **no firing full-chain good pair** | **1/3 + 1/2346** (`N12`, range 7) | **1/2** | |
 | `δ_P` (primal only) | 1/3 exactly (n = 6, n = 8) | | |
 
-**No counterexample: `δ_N ≥ 1/3` in every run, and `δ_P ≥ 1/3` too.** The mg-2912 records already contain the smallest tie: `T8` (n = 8) is in the n ≤ 9 census, which audit mg-6e7c found NB-clean, at **equality**.
+**No counterexample: `δ_N ≥ 1/3` in every run, and `δ_P ≥ 1/3` too.** The mg-2912 records already contain the smallest tie: `T8` (n = 8) is in the n ≤ 9 census, which audit mg-6e7c found NB-clean, at **equality**. Audit mg-ebbe's full census shows T8 is the **unique** indecomposable `δ_N = 1/3` tie with n ≤ 9 (the other 51 ties are decomposable), and 0 (NB)/(PNB)/dual-(PNB) failures.
 
 ### 2.4 The ties are ladder equalities, not accidents (PROVEN mechanism; values exact, `witnesses.py`)
 
@@ -203,7 +213,7 @@ Starts: random posets, `T13`, `Q_0` and `rec11`. n = 9–22.
 - If `t_0 ∈ [1/6, 1/3)`, then `P[x<b_1] = 2t_0 ∈ [1/3, 2/3)`, so `(x, b_1)` is balanced.
 - Both pairs are nested. □
 
-So the search's floor is a real barrier. To escape it, a counterexample must move every Doubling pair's `t_0` from about 1/3 to below 1/6, and must break every good pair's chain. Local moves cannot do that, and nothing says it is impossible.
+So, **for posets with a Doubling pair**, the search's floor is a barrier (errata: a poset with no Doubling pair in either orientation is untouched by Lemma 2.1). To escape it, a counterexample must move every Doubling pair's `t_0` from about 1/3 to below 1/6, and must break every good pair's chain. Local moves cannot do that, and nothing says it is impossible.
 
 **Reading.**
 - (NB) is attained with equality inside prime posets, by the very mechanism (good pairs, doubling) that proves it in the known classes.
@@ -240,16 +250,16 @@ So **every structural statement the programme has about the ends of a counterexa
 
 - If `v` is **maximal**, `down_{P−v} = down_P` on `P − v`, so primal nesting in `P − v` ⟺ primal nesting in `P`. If `v` is **minimal**, a pair primal-nested in `P − v` need not be primal-nested in `P`. Up-sets behave dually.
 - The **law** transport is unchanged: it is mg-eedd's Lemma R (`|p_P − p_{P−v}| ≤ (√r−1)/(√r+1)`, sharp 0.1716 at `π(v) = 1`).
-- So an (NB)-analogue of ONE-PT ("some maximal `v` and a primal-nested pair balanced in both `P` and `P − v`") faces **exactly** ONE-PT's obstruction: the transport moves `p` by up to 0.17. It also faces a **worse** margin: 0 at the prime `T8`, against ONE-PT's 5/318 on indecomposable posets with `7 ≤ n ≤ 16` at range ≤ 3.
-- A margin-based induction (mg-6b81's robust margin, mg-eedd's ε-transport) cannot prove (NB), because (NB) has no margin (§2.4). I did not test the (NB)-ONE-PT statement itself.
+- So an (NB)-analogue of ONE-PT ("some maximal `v` and a primal-nested pair balanced in both `P` and `P − v`") faces **exactly** ONE-PT's obstruction: the transport moves `p` by up to 0.17. Its uniform `δ_N` margin on indecomposables is 0 (the prime `T8`, range 4). ONE-PT's 5/318 is a different comparison quantity on a different class (indecomposable, `7 ≤ n ≤ 16`, range ≤ 3, where T8 does not live), so the two numbers are not the same margin compared (errata).
+- A margin-based induction that needs a **uniform** `δ_N ≥ 1/3 + μ` on indecomposables cannot prove (NB), because that margin is 0 (§2.4). Margins on other statistics, or schemes that handle exact ties separately, are not excluded (errata). I did not test the (NB)-ONE-PT statement itself.
 
 ### 3.4 What is lost
 
 | environment fact | transfers to (NB)? | why |
 |---|---|---|
-| Bounded range `π ≤ L*`, width `≤ L*+1` (AK25a/b, Haq26, KSBFT Thms 1.4/1.5) | **NO** | They bound `δ`, not `δ_N`. Large range forces some near-1/2 pair, whose nesting is uncontrolled. |
-| D ≤ 7 finite-state proof (KSBFT-I, audit mg-9268) | **NO** as it stands | Its certificates are arbitrary pairs and Gordan/LP combinations. It could be re-run with primal-nested certificates (§4b). |
-| Lemma W, Thm 1.3'', `δ ≤ 1/e − ε` consequences | NO | They are statements about `δ`. |
+| Bounded range `π ≤ L*`, width `≤ L*+1` (AK25a/b, Haq26, KSBFT Thms 1.4/1.5) | **not known to** | They bound `δ`, not `δ_N`. Large range forces some near-1/2 pair, whose nesting is uncontrolled. |
+| D ≤ 7 finite-state proof (KSBFT-I, audit mg-9268) | **not known to**, as it stands | Its certificates are arbitrary pairs and Gordan/LP combinations. It could be re-run with primal-nested certificates (§4b). |
+| Lemma W, Thm 1.3'', `δ ≤ 1/e − ε` consequences | not known to | They are statements about `δ`. |
 | F1/F2 windows, prefix certificate (mg-6b81 Thm 2.4) | YES | They are statements about positions and laws, pair-agnostic. |
 | Chain-modules-only, indecomposable (Lemma 3.1) | YES | |
 | Both-ends gadget structure (§3.2) | YES | |
@@ -273,15 +283,15 @@ I found no averaging identity over nested ladders that forces a first rung ≤ 2
 ## 4. Verdict and recommendations
 
 **Nested Balance is plausible but it is the wrong target.**
-- It is strictly stronger than 1/3–2/3. It contains the open interval-order case **verbatim** (Prop 1.2).
-- It is **boundary-tight on a prime 8-element poset** (`T8`), so its strict form is false and no margin method can reach it.
+- It is strictly stronger than 1/3–2/3. It contains the interval-order case (no proof found) **verbatim** (Prop 1.2).
+- It is **boundary-tight on a prime 8-element poset** (`T8`), so its strict form is false and no uniform-`δ_N`-margin method on indecomposables can reach it.
 - It keeps every pair-local reduction and all of the end theory. But it adds nothing to them (§3.2) and loses the bounded-range environment (§3.4).
 - Proving it is at least as hard as the conjecture, and in the one respect that matters for this programme, bounded range, it is harder.
 
 It is not a dead end *as a fact*: I expect it is true (CONJECTURED, on §2's evidence). It is a dead end **as a replacement target**.
 
 **By-products worth a ticket.**
-- **(a) 1/3–2/3 for interval orders.** In an interval order, every incomparable pair is nested (Prop 1.2) and so starts a Swap Ladder. The programme's hand-built witnesses (`P_9`, `rec11`, `Q_m`, `F_m`, mg-7bfc hosts) all live there (§2.1). The case is not proven in the literature we found, and it is the natural class where the ladder machinery applies to **every** pair. Semiorders are KNOWN (Brightwell), so the gap is "interval but not unit interval".
+- **(a) 1/3–2/3 for interval orders.** In an interval order, every incomparable pair is nested (Prop 1.2) and so starts a Swap Ladder. Most of the programme's hand-built witnesses (`P_9`, `rec11`, `Q_m`, `F_m`, the `attach_*` hosts) live there; `hub`, `W8`, `B7`+tail r = 2, 3 do not, though all are untrapped (§2.1, errata). The case is not proven in the literature we found, and it is the natural class where the ladder machinery applies to **every** pair. Semiorders are KNOWN (Brightwell), so the gap is "interval but not unit interval".
 - **(b) (PNB) under the KSBFT-I machine.** Primal nesting of a pair, like its law certificate, is determined by the bottom prefix. So KSBFT-I's tree, with certificates restricted to primal-nested pairs (single-pair and LP), would decide "(PNB) for range ≤ D" for small D with no new theory. This is the one cheap test of whether nested balance is bottom-local. **Not run** (ticket rule; it is a pm call).
 
 ---
@@ -290,8 +300,8 @@ It is not a dead end *as a fact*: I expect it is true (CONJECTURED, on §2's evi
 
 - I did not read Zaguia's papers myself. The sub-agent read 1610.00809 and 1107.5626 in full, and I re-derived the step lemma it quotes (it is mg-ce69 Thm 1.4 with a full chain, audited). Brightwell 1989/1999, Linial 1984, TGF 1992 and Peczarski 2008 were **not read** (paywalled). "1/3–2/3 for interval orders is open" means **not found**, not verified.
 - I did not prove (NB) in any class beyond those it inherits (Prop 1.2, Cor 3.4). I did not attempt range ≤ 3.
-- I did not check minimality of `T8`: whether a smaller poset attains `δ_N = 1/3` with every nested balanced pair on the boundary, beyond the `2+1` family. The n ≤ 7 census would decide it; it was not re-run.
-- I did not re-run the n ≤ 9 census for (NB). Audit mg-6e7c did (`EQV = 0`, NESTBAL on all). I did not run (PNB) on the census; only on 11 456 random posets with n ≤ 10, the records and the search populations.
+- I did not check minimality of `T8`: whether a smaller poset attains `δ_N = 1/3` with every nested balanced pair on the boundary, beyond the `2+1` family. The n ≤ 7 census would decide it; it was not re-run. **Settled by audit mg-ebbe:** T8 is the unique indecomposable `δ_N = 1/3` poset with n ≤ 9.
+- I did not re-run the n ≤ 9 census for (NB). Audit mg-6e7c did (`EQV = 0`, NESTBAL on all). I did not run (PNB) on the census; only on 11 456 random posets with n ≤ 10, the records and the search populations. **Audit mg-ebbe ran it:** 0 failures of (NB), (PNB) and dual-(PNB) over the full n ≤ 9 census (and 270 909 Doubling configurations).
 - I did not test the (NB)-ONE-PT analogue (§3.3), or re-run KSBFT-I with nested certificates (§4b).
 - The random and adversarial searches are instruments. Their negatives say nothing beyond the posets visited. The searches start from few seeds, the local moves cannot leave the `Q_0` basin, and `n ≤ 22`.
 - `nb.c` uses `__int128` counts with an overflow guard (`e < 4·10³⁷`). It never triggered on the posets here, all with `e ≤ 10¹¹`.
