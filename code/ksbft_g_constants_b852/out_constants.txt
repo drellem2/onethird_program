@@ -1,0 +1,72 @@
+== 1. K (KSBFT Thm 1.4 / sec 6.4)
+   eps = 1e-100          : w <= 10^411.337401   (log10 = 411.337)
+   eps0 = 1/e - 1/3      : w <= 1.30112e+14   (mg-c929's number, recomputed)
+   eps = 1/e - C_BFT     : w <= 1.94406e+12   (best deficit usable for Thm 1.2)
+   printed formula check : (442368/e^4) log^2(18432 sqrt3/e^3) at 1e-100 = 10^411.337401
+
+== 2. L(K, eps) = L_AK(width <= K-1, eps)
+   L(4,1/6)         : width <= 3, eps = 0.166667
+     log10_eta  = -6.73677
+     K44        = 2.638239e+15
+     TD         = 1.055295e+16
+     Dw         = 6.61972e+11
+     C          = 4.768947e+31
+     t          = 5.369173e+17
+     K32        = 1.787770e+59
+     K31        = 3.575541e+59
+     log10(1/q0) = 4.29409 ;  log10 L = 119.107
+   L(3,1/6) (w<=2)  : width <= 2, eps = 0.166667
+     log10_eta  = -4.35117
+     K44        = 4.46796e+10
+     TD         = 1.78718e+11
+     Dw         = 1.74755e+08
+     C          = 2.132103e+23
+     t          = 7.12948e+12
+     K32        = 4.367588e+43
+     K31        = 8.735176e+43
+     log10(1/q0) = 1.90849 ;  log10 L = 87.8825
+   L* with K=K0     : width <= 1.30112e+14, eps = 0.166667
+     log10_eta  = -8.077277e+27
+     log10_C    = 2.827047e+28
+     log10_t    = 1.615455e+28
+     log10_K32  = 5.250230e+28
+     log10(1/q0) = 8.077277e+27 ;  log10 L = 1.050046e+29
+   L* with K=K_1e-100: width <= 10^411.337401, eps = 0.166667
+     log10_eta  = -10^822.353432
+     log10_C    = 10^822.897500
+     log10_t    = 10^822.654462
+     log10_K32  = 10^823.166345
+     log10(1/q0) = 10^822.353432 ;  log10 L = 10^823.467375
+   Thm 1.2 case (b) : width <= K12, eps=1/2-C_BFT: width <= 1.94406e+12, eps = 0.223607
+     log10_eta  = -1.320831e+24
+     log10_C    = 4.622910e+24
+     log10_t    = 2.641663e+24
+     log10_K32  = 8.585404e+24
+     log10(1/q0) = 1.320831e+24 ;  log10 L = 1.717081e+25
+
+== 3. consequences
+   [K0] n0 = 50 L* + 1 : log10 n0 = 1.050046e+29
+   [K0] n L*/2 vs C n (C = 2.964e17, mg-c929): log10(L*/2 / C) = 1.050046e+29
+   [K0] mg-f218 eps = 0.0236/(L*+1): log10 eps = -1.050046e+29
+   [K0] mg-d707 eps at D=L*: log10 log10 (1/eps) = 1.050046e+29
+   [K0] paper Thm 1.3 eps at D=L*: log10 log10 (1/eps) = 1.050046e+29
+   [K_1e-100] n0 = 50 L* + 1 : log10 n0 = 10^823.467375
+   [K_1e-100] n L*/2 vs C n (C = 2.964e17, mg-c929): log10(L*/2 / C) = 10^823.467375
+   [K_1e-100] mg-f218 eps = 0.0236/(L*+1): log10 eps = -10^823.467375
+   [K_1e-100] mg-d707 eps at D=L*: log10 log10 (1/eps) = 10^823.467375
+   [K_1e-100] paper Thm 1.3 eps at D=L*: log10 log10 (1/eps) = 10^823.467375
+   [Thm1.2-optimal] L = L_AK(K12, 1/2-C_BFT): log10 L = 1.717081e+25
+   [Thm1.2-optimal] mg-f218 eps: log10 eps = -1.717081e+25
+   [Thm1.2-optimal] paper Thm 1.3: log10 log10(1/eps) = 1.717081e+25
+   paper eq (1.5): eps = 3^-3^(1.6e19): log10 log10(1/eps) = 7.633940e+18
+   implied L from (1.5) via eta_D: log3 L ~ 1.600000e+19  (vs route: log3 L = 3.598835e+25 at K12)
+   width w needed for 0.7322 w^2 = 1.6e19 (Thm 2.6 floor alone): 4.67369e+09
+
+== 4. controls
+   (12) identity vs exact binomials, m<40,n<60: mismatches = 0  PASS
+   negative control (wrong (12)): mismatches = 2  FIRES
+   Lemma 4.4 K=(3B+1)(B+1): 59992 instances, violations = 0  PASS
+   negative control (K = B+1): violations = 122986  FIRES
+   Prop 2.3: max Var*q^2 over test families = 0.9990 (bound 294)  PASS
+   easy dir: min Var*q^2 (q<=1/4) = 0.0832 (bound 1/64=0.0156)  PASS
+   negative control (bimodal, not log-concave): Var*q^2 = 2.5e+09  FIRES
