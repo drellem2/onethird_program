@@ -192,6 +192,28 @@ Every use of the δ-hypothesis in Lemma 3.2's proof (pp. 11–12), read line by 
   The existence of w with g(y) < g(w) < g(x) is exactly w ∈ N (Lemma W(a)), so the hypothesis N ≠ ∅ of Lemma W(b) is met. ✔
 - **(3.8)–(3.9), (iv), (v)** Use only (3.7) and (ii). ✔
 
+### 4.1a Is Lemma W's event exactly the one eq (3.6) consumes? Yes
+
+This question came from pm-onethird, citing mg-2912: "Lemma 3.2(iii) would have to be redone too." It names the most likely failure point. Here is the printed chain on p. 11, symbol for symbol:
+
+> q₃ ≤ P[E] ≤ P[f(x) − f(y) ≥ 2] ≤ R, with E = {f(y) < f(w) < f(x)}, contradicting (3.6): R < q₃.
+
+The contradiction needs a lower bound on the **middle term** P[f(x) − f(y) ≥ 2] that exceeds the upper bound on R. q₃ enters only as a lower bound on P[E], and P[E] is itself only a lower bound on that middle term. Lemma W bounds the middle term **directly**, for the same ordered pair (x, y), the same orientation (the paper's p = P[f(y) < f(x)], p. 7, is Lemma W's p), and the same gap event f(x) − f(y) ≥ 2 that appears in (2.5).
+
+So Thm 1.3″ does not lower-bound q₃ or P[E] at all. It removes both from the chain:
+
+(C_BFT − θ)/(D+1) ≤ P[f(x) − f(y) ≥ 2] ≤ R ≤ (5+3√5)θ.
+
+This is the "redo" of (iii) that mg-2912 said was needed. (3.6) is replaced by R ≤ (5+3√5)θ, and the (5+3√5) factor now sits against a polynomial rather than against q₃.
+
+The precondition matches exactly. (iii) assumes some g with g(y) < g(w) < g(x), which by Lemma W(a) is exactly N(x,y) ≠ ∅, the hypothesis of Lemma W(b).
+
+The mirror pair uses the second summand of (2.5), P[f(y) − f(z) ≥ 2]. Lemma W applies to the ordered pair (z, y) there, with denominator p′ = P[f(z) < f(y)] ≥ C_BFT − θ.
+
+The only other consumer of (3.7) is (3.8)–(3.9), which is unchanged. **No event mismatch.** ✔
+
+**Sanity check against mg-2912** ("every poset found with δ < 0.35 has width 2"). The sharpness family P_k of §3 has width 3 and δ(P_k) ∈ {1/2, 7/15, 4/9, 3/7, 1/2, 4/9} for k = 0..5 (exact, computed with `family_e60e.py`'s DP). It is far outside any window, as expected, since it has p = 1/3. It sharpens Lemma W, not Thm 1.3″, and it does not conflict with mg-2912.
+
 ### 4.2 θ₀
 
 θ₀ = 0.2764 − (5 − √5)/10 = (√5 − 2.236)/10 = 6.797750·10⁻⁶. The cap enters from Lemma 2.3, from Cor 2.2 (via Lemma 2.4), and from (F-a):
