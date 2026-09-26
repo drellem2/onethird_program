@@ -1,0 +1,44 @@
+== fib: exact P[x2<x1] in the Fibonacci poset F_M must equal f(M-1)/f(M+1)
+fib M=1 e=1 (f(M+1)=1)  #(x2 before x1)=0 (f(M-1)=0)  p=0.000000  MATCH
+fib M=2 e=2 (f(M+1)=2)  #(x2 before x1)=1 (f(M-1)=1)  p=0.500000  MATCH
+fib M=3 e=3 (f(M+1)=3)  #(x2 before x1)=1 (f(M-1)=1)  p=0.333333  MATCH
+fib M=4 e=5 (f(M+1)=5)  #(x2 before x1)=2 (f(M-1)=2)  p=0.400000  MATCH
+fib M=5 e=8 (f(M+1)=8)  #(x2 before x1)=3 (f(M-1)=3)  p=0.375000  MATCH
+fib M=6 e=13 (f(M+1)=13)  #(x2 before x1)=5 (f(M-1)=5)  p=0.384615  MATCH
+fib M=7 e=21 (f(M+1)=21)  #(x2 before x1)=8 (f(M-1)=8)  p=0.380952  MATCH
+fib M=8 e=34 (f(M+1)=34)  #(x2 before x1)=13 (f(M-1)=13)  p=0.382353  MATCH
+fib M=10 e=89 (f(M+1)=89)  #(x2 before x1)=34 (f(M-1)=34)  p=0.382022  MATCH
+fib M=15 e=987 (f(M+1)=987)  #(x2 before x1)=377 (f(M-1)=377)  p=0.381966  MATCH
+fib M=20 e=10946 (f(M+1)=10946)  #(x2 before x1)=4181 (f(M-1)=4181)  p=0.381966  MATCH
+== brute: ideal-DP counts vs brute-force permutation counts, P and every P-v
+brute N=6 samples=300 (each with all 6 deletions): mismatches=0 MATCH
+brute N=7 samples=100 (each with all 7 deletions): mismatches=0 MATCH
+brute N=8 samples=20 (each with all 8 deletions): mismatches=0 MATCH
+== W*(4,4,2) of mg-3af9/mg-b447 (c1<c2<{x,y}; b1<..<b4; A<B except x<b1,x<b2), labels c1 c2 x y b1 b2 b3 b4 = bits 0..7
+   expected: every-v FAILS, and the failing v are exactly bits 2 (x) and 4 (b1): W = eb
+FAIL[every v (CONTROL, expected to fail)] pi=3 P=8 0 1 3 3 b 1b 3f 7f W=eb Min=1 Max=80 Hlo=1 Hhi=80
+FAIL[some v of maximal range pi(v)] pi=3 P=8 0 1 3 3 b 1b 3f 7f W=eb Min=1 Max=80 Hlo=1 Hhi=80
+FAIL[some v with P-v indecomposable] pi=3 P=8 0 1 3 3 b 1b 3f 7f W=eb Min=1 Max=80 Hlo=1 Hhi=80
+== scan wstar.txt start=0 stride=1 all: classes read=1 analysed=1  interval [1/3, 1-1/3]
+pi=3 non-chains=1
+  fails exists v (ONE-PT)                                              0
+  fails every v (CONTROL, expected to fail)                            1
+  fails some minimal v                                                 0
+  fails some maximal v                                                 0
+  fails some extremal (min or max) v                                   0
+  fails every extremal v                                               0
+  fails some v of min h (h-first, any tie)                             0
+  fails some v of max h (h-last, any tie)                              0
+  fails some h-endpoint v                                              0
+  fails some v of minimal range pi(v)                                  0
+  fails some v of maximal range pi(v)                                  1
+  fails some v comparable to both x,y (with its pair)                  0
+  fails some v and a delta-attaining pair of P                         0
+  fails exists v: EVERY balanced pair of P-v balanced in P (and >=1)   0
+  fails some v with P-v indecomposable                                 1
+  fails every minimal v                                                0
+  fails every v with P-v indecomposable                                0
+  fails every v of minimal range pi(v)                                 0
+  worst margin (min over P of max over v,pair of min dist in P,P-v) = 0.166667 = 2/12  at P=8 0 1 3 3 b 1b 3f 7f
+working-v count histogram (#v that work, over analysed non-chains): 6:1
+eps-transport: max over P of min over (v, pair balanced in P-v) of dist(p_P,[lo,1-lo]) = 0.000000

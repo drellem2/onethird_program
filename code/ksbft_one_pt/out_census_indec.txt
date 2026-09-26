@@ -1,0 +1,383 @@
+######## n=3, INDECOMPOSABLE non-chains (incomparability graph connected)
+non-chains analysed, by range pi: pi=2:2  total 2
+failures of                                                      pi=2      TOTAL
+exists v (ONE-PT)                                                0         0
+every v (CONTROL, expected to fail)                              1         1
+some minimal v                                                   0         0
+some maximal v                                                   0         0
+some extremal (min or max) v                                     0         0
+every extremal v                                                 1         1
+some v of min h (h-first, any tie)                               0         0
+some v of max h (h-last, any tie)                                0         0
+some h-endpoint v                                                0         0
+some v of minimal range pi(v)                                    0         0
+some v of maximal range pi(v)                                    1         1
+some v comparable to both x,y (with its pair)                    2         2
+some v and a delta-attaining pair of P                           0         0
+exists v: EVERY balanced pair of P-v balanced in P (and >=1)     0         0
+some v with P-v indecomposable                                   0         0
+every minimal v                                                  1         1
+every v with P-v indecomposable                                  0         0
+every v of minimal range pi(v)                                   0         0
+worst margin by pi (min over P of max over v,pair of min(dist_P, dist_P-v)), exact:
+  pi=2: 0 = 0.000000   at P = 3 0 0 2
+worst margin of the canonical rule, by pi (min over P, over EVERY v of minimal range pi(v), of that v's best pair margin):
+  pi=2: 0 = 0.000000
+number of working v, histogram: 2:1 3:1
+eps-transport (max over P of min over v, pair balanced in P-v, of dist(p_P, interval)): 0
+reweighting lemma R: checks=5 violations=0 (expected 0); control with r=pi(v): violations=2 FIRES
+  max |p_P - p_(P-v)| over v with pi(v)=1: 1/6 = 0.166667   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.171573
+  max |p_P - p_(P-v)| over v with pi(v)=2: 0 = 0.000000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.267949
+FAIL[some v comparable to both x,y (with its pair)] pi=2 P=3 0 0 0 W=7 Min=7 Max=7 Hlo=7 Hhi=7
+FAIL[some v of maximal range pi(v)] pi=2 P=3 0 0 2 W=6 Min=3 Max=5 Hlo=2 Hhi=4
+FAIL[some v comparable to both x,y (with its pair)] pi=2 P=3 0 0 2 W=6 Min=3 Max=5 Hlo=2 Hhi=4
+######## n=4, INDECOMPOSABLE non-chains (incomparability graph connected)
+non-chains analysed, by range pi: pi=2:2 pi=3:5  total 7
+failures of                                                      pi=2     pi=3      TOTAL
+exists v (ONE-PT)                                                0        0         0
+every v (CONTROL, expected to fail)                              0        1         1
+some minimal v                                                   0        0         0
+some maximal v                                                   0        0         0
+some extremal (min or max) v                                     0        0         0
+every extremal v                                                 0        1         1
+some v of min h (h-first, any tie)                               0        0         0
+some v of max h (h-last, any tie)                                0        0         0
+some h-endpoint v                                                0        0         0
+some v of minimal range pi(v)                                    0        0         0
+some v of maximal range pi(v)                                    0        1         1
+some v comparable to both x,y (with its pair)                    1        3         4
+some v and a delta-attaining pair of P                           0        0         0
+exists v: EVERY balanced pair of P-v balanced in P (and >=1)     1        1         2
+some v with P-v indecomposable                                   0        0         0
+every minimal v                                                  0        1         1
+every v with P-v indecomposable                                  0        1         1
+every v of minimal range pi(v)                                   0        1         1
+worst margin by pi (min over P of max over v,pair of min(dist_P, dist_P-v)), exact:
+  pi=2: 0 = 0.000000   at P = 4 0 0 2 1
+  pi=3: 0 = 0.000000   at P = 4 0 0 2 6
+worst margin of the canonical rule, by pi (min over P, over EVERY v of minimal range pi(v), of that v's best pair margin):
+  pi=2: 0 = 0.000000
+  pi=3: -1/12 = -0.083333   <-- NEGATIVE: some minimal-range v fails
+number of working v, histogram: 2:1 4:6
+eps-transport (max over P of min over v, pair balanced in P-v, of dist(p_P, interval)): 0
+reweighting lemma R: checks=58 violations=0 (expected 0); control with r=pi(v): violations=18 FIRES
+  max |p_P - p_(P-v)| over v with pi(v)=1: 1/6 = 0.166667   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.171573
+  max |p_P - p_(P-v)| over v with pi(v)=2: 1/6 = 0.166667   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.267949
+  max |p_P - p_(P-v)| over v with pi(v)=3: 0 = 0.000000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.333333
+FAIL[some v comparable to both x,y (with its pair)] pi=3 P=4 0 0 0 0 W=f Min=f Max=f Hlo=f Hhi=f
+FAIL[some v comparable to both x,y (with its pair)] pi=3 P=4 0 0 0 4 W=f Min=7 Max=b Hlo=4 Hhi=8
+FAIL[some v comparable to both x,y (with its pair)] pi=2 P=4 0 0 2 1 W=f Min=3 Max=c Hlo=3 Hhi=c
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=2 P=4 0 0 2 1 W=f Min=3 Max=c Hlo=3 Hhi=c
+FAIL[some v of maximal range pi(v)] pi=3 P=4 0 0 2 6 W=a Min=3 Max=9 Hlo=2 Hhi=8
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=3 P=4 0 0 2 6 W=a Min=3 Max=9 Hlo=2 Hhi=8
+######## n=5, INDECOMPOSABLE non-chains (incomparability graph connected)
+non-chains analysed, by range pi: pi=2:1 pi=3:14 pi=4:16  total 31
+failures of                                                      pi=2     pi=3     pi=4      TOTAL
+exists v (ONE-PT)                                                0        0        0         0
+every v (CONTROL, expected to fail)                              0        2        1         3
+some minimal v                                                   0        0        0         0
+some maximal v                                                   0        0        0         0
+some extremal (min or max) v                                     0        0        0         0
+every extremal v                                                 0        1        1         2
+some v of min h (h-first, any tie)                               0        0        0         0
+some v of max h (h-last, any tie)                                0        0        0         0
+some h-endpoint v                                                0        0        0         0
+some v of minimal range pi(v)                                    0        0        0         0
+some v of maximal range pi(v)                                    0        1        1         2
+some v comparable to both x,y (with its pair)                    0        1        5         6
+some v and a delta-attaining pair of P                           0        0        0         0
+exists v: EVERY balanced pair of P-v balanced in P (and >=1)     0        1        0         1
+some v with P-v indecomposable                                   0        0        0         0
+every minimal v                                                  0        1        1         2
+every v with P-v indecomposable                                  0        2        0         2
+every v of minimal range pi(v)                                   0        0        0         0
+worst margin by pi (min over P of max over v,pair of min(dist_P, dist_P-v)), exact:
+  pi=2: 1/24 = 0.041667   at P = 5 0 0 2 3 7
+  pi=3: 1/33 = 0.030303   at P = 5 0 0 2 2 b
+  pi=4: 1/15 = 0.066667   at P = 5 0 0 0 4 6
+worst margin of the canonical rule, by pi (min over P, over EVERY v of minimal range pi(v), of that v's best pair margin):
+  pi=2: 1/24 = 0.041667
+  pi=3: 1/33 = 0.030303
+  pi=4: 0 = 0.000000
+number of working v, histogram: 3:1 4:2 5:28
+eps-transport (max over P of min over v, pair balanced in P-v, of dist(p_P, interval)): 0
+reweighting lemma R: checks=567 violations=0 (expected 0); control with r=pi(v): violations=112 FIRES
+  max |p_P - p_(P-v)| over v with pi(v)=1: 6/35 = 0.171429   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.171573
+  max |p_P - p_(P-v)| over v with pi(v)=2: 1/5 = 0.200000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.267949
+  max |p_P - p_(P-v)| over v with pi(v)=3: 1/5 = 0.200000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.333333
+  max |p_P - p_(P-v)| over v with pi(v)=4: 0 = 0.000000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.381966
+FAIL[some v comparable to both x,y (with its pair)] pi=4 P=5 0 0 0 0 0 W=1f Min=1f Max=1f Hlo=1f Hhi=1f
+FAIL[some v comparable to both x,y (with its pair)] pi=4 P=5 0 0 0 0 8 W=1f Min=f Max=17 Hlo=8 Hhi=10
+FAIL[some v comparable to both x,y (with its pair)] pi=4 P=5 0 0 0 4 c W=1f Min=7 Max=13 Hlo=4 Hhi=10
+FAIL[some v of maximal range pi(v)] pi=3 P=5 0 0 1 2 a W=1a Min=3 Max=14 Hlo=2 Hhi=10
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=3 P=5 0 0 2 2 b W=17 Min=3 Max=14 Hlo=2 Hhi=10
+FAIL[some v of maximal range pi(v)] pi=4 P=5 0 0 2 6 e W=1e Min=3 Max=11 Hlo=2 Hhi=10
+######## n=6, INDECOMPOSABLE non-chains (incomparability graph connected)
+non-chains analysed, by range pi: pi=2:1 pi=3:31 pi=4:89 pi=5:63  total 184
+failures of                                                      pi=2     pi=3     pi=4     pi=5      TOTAL
+exists v (ONE-PT)                                                0        0        0        0         0
+every v (CONTROL, expected to fail)                              0        2        0        1         3
+some minimal v                                                   0        0        0        0         0
+some maximal v                                                   0        0        0        0         0
+some extremal (min or max) v                                     0        0        0        0         0
+every extremal v                                                 0        0        0        1         1
+some v of min h (h-first, any tie)                               0        0        0        0         0
+some v of max h (h-last, any tie)                                0        0        0        0         0
+some h-endpoint v                                                0        0        0        0         0
+some v of minimal range pi(v)                                    0        0        0        0         0
+some v of maximal range pi(v)                                    0        0        0        1         1
+some v comparable to both x,y (with its pair)                    0        1        2        7         10
+some v and a delta-attaining pair of P                           0        0        0        0         0
+exists v: EVERY balanced pair of P-v balanced in P (and >=1)     1        3        10       0         14
+some v with P-v indecomposable                                   0        0        0        0         0
+every minimal v                                                  0        0        0        1         1
+every v with P-v indecomposable                                  0        2        0        0         2
+every v of minimal range pi(v)                                   0        0        0        0         0
+worst margin by pi (min over P of max over v,pair of min(dist_P, dist_P-v)), exact:
+  pi=2: 2/39 = 0.051282   at P = 6 0 0 2 3 7 f
+  pi=3: 1/42 = 0.023810   at P = 6 0 0 2 6 3 17
+  pi=4: 1/15 = 0.066667   at P = 6 0 0 1 2 a 1a
+  pi=5: 1/15 = 0.066667   at P = 6 0 0 2 6 e 1e
+worst margin of the canonical rule, by pi (min over P, over EVERY v of minimal range pi(v), of that v's best pair margin):
+  pi=2: 1/24 = 0.041667
+  pi=3: 0 = 0.000000
+  pi=4: 0 = 0.000000
+  pi=5: 0 = 0.000000
+number of working v, histogram: 4:2 5:1 6:181
+eps-transport (max over P of min over v, pair balanced in P-v, of dist(p_P, interval)): 0
+reweighting lemma R: checks=6224 violations=0 (expected 0); control with r=pi(v): violations=848 FIRES
+  max |p_P - p_(P-v)| over v with pi(v)=1: 6/35 = 0.171429   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.171573
+  max |p_P - p_(P-v)| over v with pi(v)=2: 1/5 = 0.200000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.267949
+  max |p_P - p_(P-v)| over v with pi(v)=3: 1/5 = 0.200000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.333333
+  max |p_P - p_(P-v)| over v with pi(v)=4: 1/5 = 0.200000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.381966
+  max |p_P - p_(P-v)| over v with pi(v)=5: 0 = 0.000000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.420204
+FAIL[some v comparable to both x,y (with its pair)] pi=5 P=6 0 0 0 0 0 0 W=3f Min=3f Max=3f Hlo=3f Hhi=3f
+FAIL[some v comparable to both x,y (with its pair)] pi=5 P=6 0 0 0 0 8 4 W=3f Min=f Max=33 Hlo=c Hhi=30
+FAIL[some v comparable to both x,y (with its pair)] pi=4 P=6 0 0 0 4 2 1 W=3f Min=7 Max=38 Hlo=7 Hhi=38
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=4 P=6 0 0 0 4 2 1 W=3f Min=7 Max=38 Hlo=7 Hhi=38
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=4 P=6 0 0 0 4 6 f W=3f Min=7 Max=30 Hlo=4 Hhi=20
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=4 P=6 0 0 2 2 3 e W=3f Min=3 Max=30 Hlo=2 Hhi=20
+FAIL[some v of maximal range pi(v)] pi=5 P=6 0 0 2 6 e 1e W=3e Min=3 Max=21 Hlo=2 Hhi=20
+######## n=7, INDECOMPOSABLE non-chains (incomparability graph connected)
+non-chains analysed, by range pi: pi=2:1 pi=3:58 pi=4:358 pi=5:616 pi=6:318  total 1351
+failures of                                                      pi=2     pi=3     pi=4     pi=5     pi=6      TOTAL
+exists v (ONE-PT)                                                0        0        0        0        0         0
+every v (CONTROL, expected to fail)                              0        3        9        0        1         13
+some minimal v                                                   0        0        0        0        0         0
+some maximal v                                                   0        0        0        0        0         0
+some extremal (min or max) v                                     0        0        0        0        0         0
+every extremal v                                                 0        0        2        0        1         3
+some v of min h (h-first, any tie)                               0        0        0        0        0         0
+some v of max h (h-last, any tie)                                0        0        0        0        0         0
+some h-endpoint v                                                0        0        0        0        0         0
+some v of minimal range pi(v)                                    0        0        0        0        0         0
+some v of maximal range pi(v)                                    0        0        4        0        1         5
+some v comparable to both x,y (with its pair)                    0        0        1        2        11        14
+some v and a delta-attaining pair of P                           0        0        0        0        0         0
+exists v: EVERY balanced pair of P-v balanced in P (and >=1)     1        1        20       58       1         81
+some v with P-v indecomposable                                   0        0        0        0        0         0
+every minimal v                                                  0        0        1        0        1         2
+every v with P-v indecomposable                                  0        3        9        0        0         12
+every v of minimal range pi(v)                                   0        0        0        0        0         0
+worst margin by pi (min over P of max over v,pair of min(dist_P, dist_P-v)), exact:
+  pi=2: 1/21 = 0.047619   at P = 7 0 0 2 3 7 f 1f
+  pi=3: 2/75 = 0.026667   at P = 7 0 0 2 6 3 13 1f
+  pi=4: 1/39 = 0.025641   at P = 7 0 0 2 2 b b 2f
+  pi=5: 5/84 = 0.059524   at P = 7 0 0 2 6 6 16 1f
+  pi=6: 1/21 = 0.047619   at P = 7 0 0 0 4 e e 2e
+worst margin of the canonical rule, by pi (min over P, over EVERY v of minimal range pi(v), of that v's best pair margin):
+  pi=2: 1/21 = 0.047619
+  pi=3: 1/69 = 0.014493
+  pi=4: 1/42 = 0.023810
+  pi=5: 1/60 = 0.016667
+  pi=6: 1/21 = 0.047619
+number of working v, histogram: 6:13 7:1338
+eps-transport (max over P of min over v, pair balanced in P-v, of dist(p_P, interval)): 0
+reweighting lemma R: checks=76260 violations=0 (expected 0); control with r=pi(v): violations=7368 FIRES
+  max |p_P - p_(P-v)| over v with pi(v)=1: 35/204 = 0.171569   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.171573
+  max |p_P - p_(P-v)| over v with pi(v)=2: 7/34 = 0.205882   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.267949
+  max |p_P - p_(P-v)| over v with pi(v)=3: 37/170 = 0.217647   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.333333
+  max |p_P - p_(P-v)| over v with pi(v)=4: 8/35 = 0.228571   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.381966
+  max |p_P - p_(P-v)| over v with pi(v)=5: 3/14 = 0.214286   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.420204
+  max |p_P - p_(P-v)| over v with pi(v)=6: 0 = 0.000000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.451416
+FAIL[some v comparable to both x,y (with its pair)] pi=6 P=7 0 0 0 0 0 0 0 W=7f Min=7f Max=7f Hlo=7f Hhi=7f
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=5 P=7 0 0 0 0 4 8 2b W=7f Min=f Max=50 Hlo=8 Hhi=40
+FAIL[some v comparable to both x,y (with its pair)] pi=6 P=7 0 0 0 0 8 18 38 W=7f Min=f Max=47 Hlo=8 Hhi=40
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=5 P=7 0 0 0 2 4 4 35 W=7f Min=7 Max=48 Hlo=4 Hhi=40
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=5 P=7 0 0 0 2 4 5 17 W=7f Min=7 Max=68 Hlo=4 Hhi=40
+FAIL[some v comparable to both x,y (with its pair)] pi=4 P=7 0 0 1 2 5 a 2a W=7f Min=3 Max=50 Hlo=2 Hhi=40
+FAIL[some v of maximal range pi(v)] pi=4 P=7 0 0 1 2 a 7 1b W=7b Min=3 Max=60 Hlo=2 Hhi=40
+FAIL[some v of maximal range pi(v)] pi=4 P=7 0 0 1 2 a b 1f W=7b Min=3 Max=60 Hlo=2 Hhi=40
+FAIL[some v of maximal range pi(v)] pi=4 P=7 0 0 2 2 7 b 2b W=7b Min=3 Max=50 Hlo=2 Hhi=40
+######## n=8, INDECOMPOSABLE non-chains (incomparability graph connected)
+non-chains analysed, by range pi: pi=2:1 pi=3:130 pi=4:1212 pi=5:4035 pi=6:5101 pi=7:2045  total 12524
+failures of                                                      pi=2     pi=3     pi=4     pi=5     pi=6     pi=7      TOTAL
+exists v (ONE-PT)                                                0        0        0        0        0        0         0
+every v (CONTROL, expected to fail)                              0        1        3        5        0        1         10
+some minimal v                                                   0        0        0        0        0        0         0
+some maximal v                                                   0        0        0        0        0        0         0
+some extremal (min or max) v                                     0        0        0        0        0        0         0
+every extremal v                                                 0        0        0        0        0        1         1
+some v of min h (h-first, any tie)                               0        0        0        0        0        0         0
+some v of max h (h-last, any tie)                                0        0        0        0        0        0         0
+some h-endpoint v                                                0        0        0        0        0        0         0
+some v of minimal range pi(v)                                    0        0        0        0        0        0         0
+some v of maximal range pi(v)                                    0        0        0        1        0        1         2
+some v comparable to both x,y (with its pair)                    0        0        1        1        4        15        21
+some v and a delta-attaining pair of P                           0        0        0        0        0        0         0
+exists v: EVERY balanced pair of P-v balanced in P (and >=1)     1        8        70       363      475      0         917
+some v with P-v indecomposable                                   0        0        0        0        0        0         0
+every minimal v                                                  0        0        0        0        0        1         1
+every v with P-v indecomposable                                  0        1        3        5        0        0         9
+every v of minimal range pi(v)                                   0        0        0        0        0        0         0
+worst margin by pi (min over P of max over v,pair of min(dist_P, dist_P-v)), exact:
+  pi=2: 5/102 = 0.049020   at P = 8 0 0 2 3 7 f 1f 3f
+  pi=3: 1/45 = 0.022222   at P = 8 0 0 2 6 3 13 f 3f
+  pi=4: 5/138 = 0.036232   at P = 8 0 0 2 6 3 e 13 5f
+  pi=5: 1/24 = 0.041667   at P = 8 0 0 1 2 5 a 2a 6a
+  pi=6: 1/15 = 0.066667   at P = 8 0 0 0 4 e 1e 1e 5f
+  pi=7: 19/204 = 0.093137   at P = 8 0 0 0 0 8 e 1c 5c
+worst margin of the canonical rule, by pi (min over P, over EVERY v of minimal range pi(v), of that v's best pair margin):
+  pi=2: 1/21 = 0.047619
+  pi=3: 1/69 = 0.014493
+  pi=4: 1/51 = 0.019608
+  pi=5: 1/51 = 0.019608
+  pi=6: 13/321 = 0.040498
+  pi=7: 0 = 0.000000
+number of working v, histogram: 5:1 6:2 7:7 8:12514
+eps-transport (max over P of min over v, pair balanced in P-v, of dist(p_P, interval)): 0
+reweighting lemma R: checks=1104024 violations=0 (expected 0); control with r=pi(v): violations=77424 FIRES
+  max |p_P - p_(P-v)| over v with pi(v)=1: 513/2990 = 0.171572   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.171573
+  max |p_P - p_(P-v)| over v with pi(v)=2: 16/77 = 0.207792   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.267949
+  max |p_P - p_(P-v)| over v with pi(v)=3: 13/60 = 0.216667   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.333333
+  max |p_P - p_(P-v)| over v with pi(v)=4: 269/1155 = 0.232900   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.381966
+  max |p_P - p_(P-v)| over v with pi(v)=5: 5/21 = 0.238095   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.420204
+  max |p_P - p_(P-v)| over v with pi(v)=6: 3/14 = 0.214286   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.451416
+  max |p_P - p_(P-v)| over v with pi(v)=7: 0 = 0.000000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.477592
+FAIL[some v comparable to both x,y (with its pair)] pi=7 P=8 0 0 0 0 0 0 0 0 W=ff Min=ff Max=ff Hlo=ff Hhi=ff
+FAIL[some v comparable to both x,y (with its pair)] pi=7 P=8 0 0 0 0 0 10 8 4 W=ff Min=1f Max=e3 Hlo=1c Hhi=e0
+FAIL[some v comparable to both x,y (with its pair)] pi=6 P=8 0 0 0 0 8 4 2 1 W=ff Min=f Max=f0 Hlo=f Hhi=f0
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=6 P=8 0 0 0 0 8 4 2 1 W=ff Min=f Max=f0 Hlo=f Hhi=f0
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=6 P=8 0 0 0 0 8 4 3 2e W=ff Min=f Max=d0 Hlo=4 Hhi=80
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=6 P=8 0 0 0 0 8 4 3 3e W=ff Min=f Max=c0 Hlo=c Hhi=80
+FAIL[some v of maximal range pi(v)] pi=5 P=8 0 0 2 2 a 3 23 3f W=fb Min=3 Max=c0 Hlo=2 Hhi=80
+FAIL[some v of maximal range pi(v)] pi=7 P=8 0 0 2 6 e 1e 3e 7e W=fe Min=3 Max=81 Hlo=2 Hhi=80
+######## n=9, INDECOMPOSABLE non-chains (incomparability graph connected)
+non-chains analysed, by range pi: pi=2:1 pi=3:288 pi=4:4038 pi=5:21213 pi=6:51997 pi=7:51932 pi=8:16999  total 146468
+failures of                                                      pi=2     pi=3     pi=4     pi=5     pi=6     pi=7     pi=8      TOTAL
+exists v (ONE-PT)                                                0        0        0        0        0        0        0         0
+every v (CONTROL, expected to fail)                              0        0        2        26       17       0        1         46
+some minimal v                                                   0        0        0        0        0        0        0         0
+some maximal v                                                   0        0        0        0        0        0        0         0
+some extremal (min or max) v                                     0        0        0        0        0        0        0         0
+every extremal v                                                 0        0        0        2        0        0        1         3
+some v of min h (h-first, any tie)                               0        0        0        1        0        0        0         1
+some v of max h (h-last, any tie)                                0        0        0        1        0        0        0         1
+some h-endpoint v                                                0        0        0        0        0        0        0         0
+some v of minimal range pi(v)                                    0        0        0        0        0        0        0         0
+some v of maximal range pi(v)                                    0        0        0        5        4        0        1         10
+some v comparable to both x,y (with its pair)                    0        0        0        1        2        4        22        29
+some v and a delta-attaining pair of P                           0        0        0        0        0        0        0         0
+exists v: EVERY balanced pair of P-v balanced in P (and >=1)     1        1        130      1190     4973     4766     0         11061
+some v with P-v indecomposable                                   0        0        0        0        0        0        0         0
+every minimal v                                                  0        0        0        1        0        0        1         2
+every v with P-v indecomposable                                  0        0        2        26       17       0        0         45
+every v of minimal range pi(v)                                   0        0        0        0        0        0        0         0
+worst margin by pi (min over P of max over v,pair of min(dist_P, dist_P-v)), exact:
+  pi=2: 8/165 = 0.048485   at P = 9 0 0 2 3 7 f 1f 3f 7f
+  pi=3: 1/22 = 0.045455   at P = 9 0 0 2 3 7 17 f 4f 7f
+  pi=4: 1/51 = 0.019608   at P = 9 0 0 2 6 3 e 13 53 7f
+  pi=5: 41/930 = 0.044086   at P = 9 0 0 2 2 a 3 2b f bf
+  pi=6: 1/24 = 0.041667   at P = 9 0 0 1 2 a 1b 1f 3b bb
+  pi=7: 7/120 = 0.058333   at P = 9 0 0 0 4 c e 2e 2f 7e
+  pi=8: 1/15 = 0.066667   at P = 9 0 0 0 4 6 1e 1e 5e 7e
+worst margin of the canonical rule, by pi (min over P, over EVERY v of minimal range pi(v), of that v's best pair margin):
+  pi=2: 8/165 = 0.048485
+  pi=3: 1/60 = 0.016667
+  pi=4: 1/69 = 0.014493
+  pi=5: 1/159 = 0.006289
+  pi=6: 4/177 = 0.022599
+  pi=7: 1/69 = 0.014493
+  pi=8: 2/39 = 0.051282
+number of working v, histogram: 7:2 8:44 9:146422
+eps-transport (max over P of min over v, pair balanced in P-v, of dist(p_P, interval)): 0
+reweighting lemma R: checks=19192257 violations=0 (expected 0); control with r=pi(v): violations=990904 FIRES
+  max |p_P - p_(P-v)| over v with pi(v)=1: 1189/6930 = 0.171573   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.171573
+  max |p_P - p_(P-v)| over v with pi(v)=2: 97/465 = 0.208602   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.267949
+  max |p_P - p_(P-v)| over v with pi(v)=3: 375/1694 = 0.221370   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.333333
+  max |p_P - p_(P-v)| over v with pi(v)=4: 411/1750 = 0.234857   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.381966
+  max |p_P - p_(P-v)| over v with pi(v)=5: 5/21 = 0.238095   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.420204
+  max |p_P - p_(P-v)| over v with pi(v)=6: 5/21 = 0.238095   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.451416
+  max |p_P - p_(P-v)| over v with pi(v)=7: 2/9 = 0.222222   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.477592
+  max |p_P - p_(P-v)| over v with pi(v)=8: 0 = 0.000000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.500000
+FAIL[some v comparable to both x,y (with its pair)] pi=8 P=9 0 0 0 0 0 0 0 0 0 W=1ff Min=1ff Max=1ff Hlo=1ff Hhi=1ff
+FAIL[some v comparable to both x,y (with its pair)] pi=8 P=9 0 0 0 0 0 0 0 40 20 W=1ff Min=7f Max=19f Hlo=60 Hhi=180
+FAIL[some v comparable to both x,y (with its pair)] pi=8 P=9 0 0 0 0 0 0 20 10 8 W=1ff Min=3f Max=1c7 Hlo=38 Hhi=1c0
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=7 P=9 0 0 0 0 0 0 20 10 f W=1ff Min=3f Max=1c0 Hlo=30 Hhi=100
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=7 P=9 0 0 0 0 0 0 20 18 77 W=1ff Min=3f Max=180 Hlo=20 Hhi=100
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=7 P=9 0 0 0 0 0 4 10 a 59 W=1ff Min=1f Max=1a0 Hlo=10 Hhi=100
+FAIL[some v of maximal range pi(v)] pi=6 P=9 0 0 1 2 2 13 f 33 bb W=1fb Min=3 Max=140 Hlo=2 Hhi=100
+FAIL[some v of maximal range pi(v)] pi=5 P=9 0 0 2 2 3 b 2b 17 bf W=1fb Min=3 Max=140 Hlo=2 Hhi=100
+FAIL[some v of maximal range pi(v)] pi=6 P=9 0 0 1 2 2 13 33 1f 7b W=1fb Min=3 Max=180 Hlo=2 Hhi=100
+FAIL[some v of min h (h-first, any tie)] pi=5 P=9 0 0 2 1 6 9 16 2b bf W=1fe Min=3 Max=140 Hlo=1 Hhi=100
+FAIL[some v of max h (h-last, any tie)] pi=5 P=9 0 0 2 6 3 e 13 2e 57 W=17f Min=3 Max=180 Hlo=2 Hhi=80
+######## n=10, INDECOMPOSABLE non-chains (incomparability graph connected)
+non-chains analysed, by range pi: pi=2:1 pi=3:642 pi=4:14076 pi=5:102206 pi=6:407328 pi=7:807911 pi=8:662175 pi=9:183231  total 2177570
+failures of                                                      pi=2     pi=3     pi=4     pi=5     pi=6     pi=7     pi=8     pi=9      TOTAL
+exists v (ONE-PT)                                                0        0        0        0        0        0        0        0         0
+every v (CONTROL, expected to fail)                              0        0        5        26       20       4        0        1         56
+some minimal v                                                   0        0        0        0        0        0        0        0         0
+some maximal v                                                   0        0        0        0        0        0        0        0         0
+some extremal (min or max) v                                     0        0        0        0        0        0        0        0         0
+every extremal v                                                 0        0        0        2        2        0        0        1         5
+some v of min h (h-first, any tie)                               0        0        0        0        0        0        0        0         0
+some v of max h (h-last, any tie)                                0        0        0        0        0        0        0        0         0
+some h-endpoint v                                                0        0        0        0        0        0        0        0         0
+some v of minimal range pi(v)                                    0        0        0        0        0        0        0        0         0
+some v of maximal range pi(v)                                    0        0        0        5        10       2        0        1         18
+some v comparable to both x,y (with its pair)                    0        0        0        1        1        2        7        30        41
+some v and a delta-attaining pair of P                           0        0        0        0        0        0        0        0         0
+exists v: EVERY balanced pair of P-v balanced in P (and >=1)     1        16       274      4644     32411    81240    62537    1         181124
+some v with P-v indecomposable                                   0        0        0        0        0        0        0        0         0
+every minimal v                                                  0        0        0        1        1        0        0        1         3
+every v with P-v indecomposable                                  0        0        5        26       20       4        0        0         55
+every v of minimal range pi(v)                                   0        0        0        0        0        0        0        0         0
+worst margin by pi (min over P of max over v,pair of min(dist_P, dist_P-v)), exact:
+  pi=2: 13/267 = 0.048689   at P = 10 0 0 2 3 7 f 1f 3f 7f ff
+  pi=3: 5/318 = 0.015723   at P = 10 0 0 2 6 3 17 1f 5f 3f 17f
+  pi=4: 5/219 = 0.022831   at P = 10 0 0 2 6 3 13 f 37 5f ff
+  pi=5: 1/51 = 0.019608   at P = 10 0 0 2 2 7 b 2b 6b 6f ff
+  pi=6: 23/633 = 0.036335   at P = 10 0 0 2 2 6 b 2b 6b 6b 17f
+  pi=7: 1/21 = 0.047619   at P = 10 0 0 0 4 e e 2e 6e 3f 17f
+  pi=8: 4/69 = 0.057971   at P = 10 0 0 0 2 4 14 16 35 76 176
+  pi=9: 67/735 = 0.091156   at P = 10 0 0 0 4 4 14 34 3e 3e 17e
+worst margin of the canonical rule, by pi (min over P, over EVERY v of minimal range pi(v), of that v's best pair margin):
+  pi=2: 8/165 = 0.048485
+  pi=3: 1/69 = 0.014493
+  pi=4: 4/249 = 0.016064
+  pi=5: 1/51 = 0.019608
+  pi=6: 5/282 = 0.017730
+  pi=7: 1/69 = 0.014493
+  pi=8: 1/81 = 0.012346
+  pi=9: 1/30 = 0.033333
+number of working v, histogram: 8:3 9:53 10:2177514
+eps-transport (max over P of min over v, pair balanced in P-v, of dist(p_P, interval)): 0
+reweighting lemma R: checks=407890520 violations=0 (expected 0); control with r=pi(v): violations=15642522 FIRES
+  max |p_P - p_(P-v)| over v with pi(v)=1: 6930/40391 = 0.171573   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.171573
+  max |p_P - p_(P-v)| over v with pi(v)=2: 55/261 = 0.210728   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.267949
+  max |p_P - p_(P-v)| over v with pi(v)=3: 35/156 = 0.224359   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.333333
+  max |p_P - p_(P-v)| over v with pi(v)=4: 119/492 = 0.241870   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.381966
+  max |p_P - p_(P-v)| over v with pi(v)=5: 623/2508 = 0.248405   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.420204
+  max |p_P - p_(P-v)| over v with pi(v)=6: 1/4 = 0.250000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.451416
+  max |p_P - p_(P-v)| over v with pi(v)=7: 1/4 = 0.250000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.477592
+  max |p_P - p_(P-v)| over v with pi(v)=8: 2/9 = 0.222222   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.500000
+  max |p_P - p_(P-v)| over v with pi(v)=9: 0 = 0.000000   bound (sqrt(r)-1)/(sqrt(r)+1) = 0.519494
+FAIL[some v comparable to both x,y (with its pair)] pi=9 P=10 0 0 0 0 0 0 0 0 0 0 W=3ff Min=3ff Max=3ff Hlo=3ff Hhi=3ff
+FAIL[some v comparable to both x,y (with its pair)] pi=9 P=10 0 0 0 0 0 0 0 40 20 10 W=3ff Min=7f Max=38f Hlo=70 Hhi=380
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=8 P=10 0 0 0 0 0 0 0 40 30 cf W=3ff Min=7f Max=300 Hlo=40 Hhi=200
+FAIL[some v comparable to both x,y (with its pair)] pi=9 P=10 0 0 0 0 0 0 0 40 c0 1c0 W=3ff Min=7f Max=23f Hlo=40 Hhi=200
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=8 P=10 0 0 0 0 0 0 10 20 a0 f W=3ff Min=3f Max=340 Hlo=20 Hhi=200
+FAIL[exists v: EVERY balanced pair of P-v balanced in P (and >=1)] pi=8 P=10 0 0 0 0 0 0 20 10 28 97 W=3ff Min=3f Max=340 Hlo=20 Hhi=200
+FAIL[some v of maximal range pi(v)] pi=6 P=10 0 0 1 2 2 12 13 3a 1f 17f W=3fb Min=3 Max=280 Hlo=2 Hhi=200
+FAIL[some v of maximal range pi(v)] pi=7 P=10 0 0 1 2 2 13 13 5b 5f fb W=3fb Min=3 Max=300 Hlo=2 Hhi=200
+FAIL[some v of maximal range pi(v)] pi=6 P=10 0 0 1 2 a 7 b 1b 5b ff W=3fb Min=3 Max=300 Hlo=2 Hhi=200
