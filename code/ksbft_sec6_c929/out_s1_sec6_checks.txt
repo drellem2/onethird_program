@@ -1,0 +1,25 @@
+PC d-formula: 2-antichain d^2 = 1.500000000000  (hand value 1.5)
+CINV1: E[inv_h] <= sum_pairs min(1, exp(1 - eps sqrt(Delta/gap)))
+CINV2: that sum <= 2 sqrt3 e gap n / eps^3   (the closed form of the doc's Prop. B)
+posets checked (naturally labelled, n=2..6): 5230
+  of which delta(P) < 1/e (section-6 population): 86 ; of those delta <= 1/3: 39
+  delta values in that population: [0.333333, 0.357143, 0.363636]
+C51   worst slack +0.132121  ok
+C52   worst slack +0.0310506  ok
+C53a  worst slack +0  ok
+C53b  worst slack +0.0707248  ok
+C53c  worst slack +0  ok
+C54   worst slack +0.125  ok
+C55   worst slack +0  ok
+CW    worst slack -1.77636e-15  ok
+C611  worst slack +2.31935  ok
+C64   worst slack +0.633914  ok
+CINV1 worst slack +2.33333  ok
+CINV2 worst slack +913579  ok
+VERDICT: ALL HOLD
+NEGATIVE CONTROLS (each must print FIRES):
+  N1 (5.1) with 0.51 in place of 1/e, worst slack -0.01  FIRES
+  N2 (5.3b) with the discrete d (continuous term dropped), worst slack -0.57735  FIRES
+  largest c with min(P) >= c - Delta/d over ALL pairs checked: c* = 0.500000 (1/e = 0.367879)
+  NOTE: c* = 1/2 here is a SMALL-n fact.  AK25a Example 11.2 (cited, not re-derived) gives
+  pairs with Delta = 0 and delta <= 1/e + eps at large n, so 1/e is sharp for (5.1)'s form.
