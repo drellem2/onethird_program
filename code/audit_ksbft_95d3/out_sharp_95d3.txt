@@ -1,0 +1,18 @@
+a= 1 b= 1 n= 3: p'=1/2 p=2/3 |p-p'|=1/6 = 0.166666667  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a= 2 b= 1 n= 4: p'=1/3 p=1/2 |p-p'|=1/6 = 0.166666667  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a= 3 b= 2 n= 6: p'=2/5 p=4/7 |p-p'|=6/35 = 0.171428571  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a= 4 b= 3 n= 8: p'=3/7 p=3/5 |p-p'|=6/35 = 0.171428571  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a= 5 b= 3 n= 9: p'=3/8 p=6/11 |p-p'|=15/88 = 0.170454545  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a= 7 b= 5 n=13: p'=5/12 p=10/17 |p-p'|=35/204 = 0.171568627  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a=10 b= 7 n=18: p'=7/17 p=7/12 |p-p'|=35/204 = 0.171568627  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a=12 b= 8 n=21: p'=2/5 p=4/7 |p-p'|=6/35 = 0.171428571  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a=12 b= 9 n=22: p'=3/7 p=3/5 |p-p'|=6/35 = 0.171428571  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+a=17 b=12 n=30: p'=12/29 p=24/41 |p-p'|=204/1189 = 0.171572750  formula OK;  control (v above z too): |p-p'|=0 (0: control behaves)
+formula mismatches: 0; bound 3-2sqrt2 = 0.171572875; with b/(a+b) -> sqrt2-1 the gap -> bound (PROVEN in the audit)
+  p'=1/2 (a=1, b=1): |p-p'|=1/6 = 0.166666666667, bound-gap=4.91e-03
+  p'=2/5 (a=3, b=2): |p-p'|=6/35 = 0.171428571429, bound-gap=1.44e-04
+  p'=5/12 (a=7, b=5): |p-p'|=35/204 = 0.171568627451, bound-gap=4.25e-06
+  p'=12/29 (a=17, b=12): |p-p'|=204/1189 = 0.171572750210, bound-gap=1.25e-07
+  p'=29/70 (a=41, b=29): |p-p'|=1189/6930 = 0.171572871573, bound-gap=3.68e-09
+  p'=70/169 (a=99, b=70): |p-p'|=6930/40391 = 0.171572875145, bound-gap=1.08e-10
+  p'=169/408 (a=239, b=169): |p-p'|=40391/235416 = 0.171572875251, bound-gap=3.19e-12

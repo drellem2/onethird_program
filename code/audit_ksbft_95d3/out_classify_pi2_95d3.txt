@@ -1,0 +1,20 @@
+range<=2 n=3: indecomposable classes by type {'A3': 1, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=4: indecomposable classes by type {'A3': 0, '2+2': 1, 'F_n': 1, 'other': 0}
+range<=2 n=5: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=6: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=7: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=8: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=9: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=10: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=11: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=12: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=13: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2 n=14: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 0}
+range<=2: posets that are none of A3, 2+2, F_n: 0 (Lemma 4.2 predicts 0)
+CONTROL range<=3 n=3: indecomposable classes by type {'A3': 1, '2+2': 0, 'F_n': 1, 'other': 0}
+CONTROL range<=3 n=4: indecomposable classes by type {'A3': 0, '2+2': 1, 'F_n': 1, 'other': 5}
+CONTROL range<=3 n=5: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 14}
+CONTROL range<=3 n=6: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 31}
+CONTROL range<=3 n=7: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 58}
+CONTROL range<=3 n=8: indecomposable classes by type {'A3': 0, '2+2': 0, 'F_n': 1, 'other': 130}
+CONTROL range<=3: 'other' count 238 -> FIRES

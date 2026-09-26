@@ -1,0 +1,152 @@
+#### n=3 ALL non-chains
+  indec_only=0 interval_lo=1/3
+  posets=4  exists_v_fail=0  every_v_fail=3  every_minrange_fail=0  some_minrange_fail=0  decomposable=2  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=7  lemmaR_viol=0  lemmaR_ctrl_viol=4
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 3 2 0 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1666666667  witness 1/6 v=1 x=0 y=2 P=3 2 0 0
+#### n=4 ALL non-chains
+  indec_only=0 interval_lo=1/3
+  posets=15  exists_v_fail=0  every_v_fail=6  every_minrange_fail=1  some_minrange_fail=0  decomposable=8  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=88  lemmaR_viol=0  lemmaR_ctrl_viol=38
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 4 6 4 0 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 1
+  Lemma R: max |p-p'| at pi(v)=1: 0.1666666667  witness 1/6 v=0 x=1 y=3 P=4 6 4 0 0
+  FAIL every-min-range-v: 4 6 4 0 0
+#### n=5 ALL non-chains
+  indec_only=0 interval_lo=1/3
+  posets=62  exists_v_fail=0  every_v_fail=12  every_minrange_fail=0  some_minrange_fail=0  decomposable=31  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=858  lemmaR_viol=0  lemmaR_ctrl_viol=264
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 5 1e 14 10 10 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1714285714  witness 6/35 v=0 x=1 y=3 P=5 16 14 0 10 0
+#### n=6 ALL non-chains
+  indec_only=0 interval_lo=1/3
+  posets=317  exists_v_fail=0  every_v_fail=21  every_minrange_fail=0  some_minrange_fail=0  decomposable=133  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=8780  lemmaR_viol=0  lemmaR_ctrl_viol=1888
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 6 3a 38 38 10 0 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1714285714  witness 6/35 v=1 x=2 y=4 P=6 3e 2c 28 0 20 0
+#### n=7 ALL non-chains
+  indec_only=0 interval_lo=1/3
+  posets=2044  exists_v_fail=0  every_v_fail=43  every_minrange_fail=0  some_minrange_fail=0  decomposable=693  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=100615  lemmaR_viol=0  lemmaR_ctrl_viol=15208
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 7 7e 74 70 70 20 0 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715686275  witness 35/204 v=5 x=3 y=6 P=7 6e 6c 28 20 60 0 0
+#### n=8 ALL non-chains
+  indec_only=0 interval_lo=1/3
+  posets=16998  exists_v_fail=0  every_v_fail=75  every_minrange_fail=0  some_minrange_fail=0  decomposable=4474  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=1368054  lemmaR_viol=0  lemmaR_ctrl_viol=145722
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 8 fe fc f8 f0 a0 80 80 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715719064  witness 513/2990 v=0 x=1 y=4 P=8 ee cc c0 40 e0 c0 0 0
+#### n=9 ALL non-chains
+  indec_only=0 interval_lo=1/3
+  posets=183230  exists_v_fail=0  every_v_fail=153  every_minrange_fail=0  some_minrange_fail=0  decomposable=36762  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=22617364  lemmaR_viol=0  lemmaR_ctrl_viol=1715352
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 9 1fe 1fc 1f8 1d0 1c0 1c0 180 100 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728716  witness 1189/6930 v=0 x=1 y=3 P=9 1f6 174 170 1f0 120 0 0 100 0
+#### n=10 ALL non-chains
+  indec_only=0 interval_lo=1/3
+  posets=2567283  exists_v_fail=0  every_v_fail=287  every_minrange_fail=0  some_minrange_fail=0  decomposable=389713  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=462393584  lemmaR_viol=0  lemmaR_ctrl_viol=25242942
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 10 3fe 3fc 3f8 3f0 3a0 380 380 300 200 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728751  witness 6930/40391 v=8 x=7 y=9 P=10 3be 38c 388 380 1a0 180 380 100 0 0
+#### n=3 INDECOMPOSABLE non-chains
+  indec_only=1 interval_lo=1/3
+  posets=2  exists_v_fail=0  every_v_fail=1  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=5  lemmaR_viol=0  lemmaR_ctrl_viol=2
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 3 2 0 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1666666667  witness 1/6 v=1 x=0 y=2 P=3 2 0 0
+#### n=4 INDECOMPOSABLE non-chains
+  indec_only=1 interval_lo=1/3
+  posets=7  exists_v_fail=0  every_v_fail=1  every_minrange_fail=1  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=58  lemmaR_viol=0  lemmaR_ctrl_viol=18
+  worst margin (min over P of max over v,pair) = 0 = 0.000000 at 4 6 4 0 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 1
+  Lemma R: max |p-p'| at pi(v)=1: 0.1666666667  witness 1/6 v=0 x=1 y=3 P=4 6 4 0 0
+  FAIL every-min-range-v: 4 6 4 0 0
+#### n=5 INDECOMPOSABLE non-chains
+  indec_only=1 interval_lo=1/3
+  posets=31  exists_v_fail=0  every_v_fail=3  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=567  lemmaR_viol=0  lemmaR_ctrl_viol=112
+  worst margin (min over P of max over v,pair) = 1/33 = 0.030303 at 5 16 10 0 10 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1714285714  witness 6/35 v=0 x=1 y=3 P=5 16 14 0 10 0
+#### n=6 INDECOMPOSABLE non-chains
+  indec_only=1 interval_lo=1/3
+  posets=184  exists_v_fail=0  every_v_fail=3  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=6224  lemmaR_viol=0  lemmaR_ctrl_viol=848
+  worst margin (min over P of max over v,pair) = 1/42 = 0.023810 at 6 36 24 0 30 20 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1714285714  witness 6/35 v=4 x=2 y=5 P=6 16 14 10 30 0 0
+#### n=7 INDECOMPOSABLE non-chains
+  indec_only=1 interval_lo=1/3
+  posets=1351  exists_v_fail=0  every_v_fail=13  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=76260  lemmaR_viol=0  lemmaR_ctrl_viol=7368
+  worst margin (min over P of max over v,pair) = 1/39 = 0.025641 at 7 76 70 20 70 20 0 0
+  worst canonical margin (every min-range v works) = 1/69 = 0.014493; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715686275  witness 35/204 v=5 x=3 y=6 P=7 6e 6c 28 20 60 0 0
+#### n=8 INDECOMPOSABLE non-chains
+  indec_only=1 interval_lo=1/3
+  posets=12524  exists_v_fail=0  every_v_fail=10  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=1104024  lemmaR_viol=0  lemmaR_ctrl_viol=77424
+  worst margin (min over P of max over v,pair) = 1/45 = 0.022222 at 8 f6 94 90 f0 0 c0 80 0
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715719064  witness 513/2990 v=0 x=1 y=4 P=8 ee cc c0 40 e0 c0 0 0
+#### n=9 INDECOMPOSABLE non-chains
+  indec_only=1 interval_lo=1/3
+  posets=146468  exists_v_fail=0  every_v_fail=46  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=19192257  lemmaR_viol=0  lemmaR_ctrl_viol=990904
+  worst margin (min over P of max over v,pair) = 1/51 = 0.019608 at 9 1ee 8c 88 80 1e0 1c0 180 0 0
+  worst canonical margin (every min-range v works) = 1/159 = 0.006289; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728716  witness 1189/6930 v=0 x=1 y=3 P=9 1f6 174 170 1f0 120 0 0 100 0
+#### n=10 INDECOMPOSABLE non-chains
+  indec_only=1 interval_lo=1/3
+  posets=2177570  exists_v_fail=0  every_v_fail=56  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=407890520  lemmaR_viol=0  lemmaR_ctrl_viol=15642522
+  worst margin (min over P of max over v,pair) = 5/318 = 0.015723 at 10 3f6 3e4 360 3f0 3e0 240 0 300 200 0
+  worst canonical margin (every min-range v works) = 1/81 = 0.012346; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728751  witness 6930/40391 v=8 x=7 y=9 P=10 3be 38c 388 380 1a0 180 380 100 0 0
+#### n=11 range<=3 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=1404  exists_v_fail=0  every_v_fail=0  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=158517  lemmaR_viol=0  lemmaR_ctrl_viol=28818
+  worst margin (min over P of max over v,pair) = 1/57 = 0.017544 at 11 7f6 7e4 7a0 7f0 7e0 280 780 200 600 0 0
+  worst canonical margin (every min-range v works) = 8/525 = 0.015238; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728716  witness 1189/6930 v=9 x=8 y=10 P=11 7fa 7b0 7f8 7f0 7a0 300 780 700 200 0 0
+#### n=12 range<=3 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=3076  exists_v_fail=0  every_v_fail=1  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=423500  lemmaR_viol=0  lemmaR_ctrl_viol=72994
+  worst margin (min over P of max over v,pair) = 14/831 = 0.016847 at 12 ff6 fe4 fa0 ff0 fe0 d80 f80 900 0 c00 800 0
+  worst canonical margin (every min-range v works) = 1/84 = 0.011905; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728716  witness 1189/6930 v=10 x=9 y=11 P=12 ff4 ff4 f60 ff0 fe0 f40 600 f00 e00 400 0 0
+#### n=13 range<=3 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=6736  exists_v_fail=0  every_v_fail=0  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=1111000  lemmaR_viol=0  lemmaR_ctrl_viol=181794
+  worst margin (min over P of max over v,pair) = 23/1344 = 0.017113 at 13 1ff6 1fe4 1fa0 1ff0 1fe0 1e80 1f80 a00 1e00 800 1800 0 0
+  worst canonical margin (every min-range v works) = 2/129 = 0.015504; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728751  witness 6930/40391 v=0 x=1 y=3 P=13 1ff6 1ff4 1f60 1ff0 1fe0 1f40 1600 1f00 1e00 1400 0 1000 0
+#### n=14 range<=3 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=14792  exists_v_fail=0  every_v_fail=0  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=2880216  lemmaR_viol=0  lemmaR_ctrl_viol=449534
+  worst margin (min over P of max over v,pair) = 37/2175 = 0.017011 at 14 3ff6 3fe4 3fa0 3ff0 3fe0 3e80 3f80 3600 3e00 2400 0 3000 2000 0
+  worst canonical margin (every min-range v works) = 11/687 = 0.016012; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728751  witness 6930/40391 v=0 x=1 y=3 P=14 3ff6 3ff4 3f60 3ff0 3fe0 3f40 3600 3f00 3e00 3400 0 3000 2000 0
+#### n=15 range<=3 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=32455  exists_v_fail=0  every_v_fail=0  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=7365449  lemmaR_viol=0  lemmaR_ctrl_viol=1101040
+  worst margin (min over P of max over v,pair) = 23/1425 = 0.016140 at 15 7ff6 7fe4 7f60 7ff0 7fe0 7a40 7a00 7f00 7e00 2800 7800 2000 6000 0 0
+  worst canonical margin (every min-range v works) = 7/435 = 0.016092; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728753  witness 40391/235416 v=0 x=1 y=3 P=15 7ff6 7ff4 7f60 7ff0 7fe0 7f40 7600 7f00 7e00 7400 2000 7000 6000 0 0
+#### n=16 range<=3 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=71220  exists_v_fail=0  every_v_fail=0  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=18633174  lemmaR_viol=0  lemmaR_ctrl_viol=2680352
+  worst margin (min over P of max over v,pair) = 97/5694 = 0.017035 at 16 fff6 ffe4 ffa0 fff0 ffe0 fe80 ff80 fa00 fe00 d800 f800 9000 0 c000 8000 0
+  worst canonical margin (every min-range v works) = 4/249 = 0.016064; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728753  witness 40391/235416 v=0 x=1 y=3 P=16 fff6 fff4 ff60 fff0 ffe0 ff40 f600 ff00 fe00 f400 6000 f000 e000 4000 0 0
+#### n=11 range<=4 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=50910  exists_v_fail=0  every_v_fail=1  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=6982821  lemmaR_viol=0  lemmaR_ctrl_viol=940612
+  worst margin (min over P of max over v,pair) = 1/57 = 0.017544 at 11 7f6 7e4 7a0 7f0 7e0 280 780 200 600 0 0
+  worst canonical margin (every min-range v works) = 8/525 = 0.015238; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728751  witness 6930/40391 v=9 x=7 y=10 P=11 7f6 7d4 6c0 7f0 2c0 7c0 280 200 600 0 0
+#### n=12 range<=4 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=176766  exists_v_fail=0  every_v_fail=1  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=29714980  lemmaR_viol=0  lemmaR_ctrl_viol=3712176
+  worst margin (min over P of max over v,pair) = 14/831 = 0.016847 at 12 ff6 fe4 fa0 ff0 fe0 d80 f80 900 0 c00 800 0
+  worst canonical margin (every min-range v works) = 1/84 = 0.011905; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728751  witness 6930/40391 v=0 x=1 y=3 P=12 ff6 ff4 d90 ff0 c80 f80 f80 400 c00 c00 0 0
+#### n=13 range<=4 INDECOMPOSABLE
+  indec_only=1 interval_lo=1/3
+  posets=612003  exists_v_fail=0  every_v_fail=0  every_minrange_fail=0  some_minrange_fail=0  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=123660152  lemmaR_viol=0  lemmaR_ctrl_viol=14564566
+  worst margin (min over P of max over v,pair) = 23/1344 = 0.017113 at 13 1ff6 1fe4 1fa0 1ff0 1fe0 1e80 1f80 a00 1e00 800 1800 0 0
+  worst canonical margin (every min-range v works) = 29/1893 = 0.015320; posets where some min-range v fails = 0
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715728753  witness 40391/235416 v=0 x=1 y=3 P=13 1ff6 1ff4 1d90 1ff0 1c80 1f80 1f80 1400 1800 1c00 0 1000 0

@@ -1,0 +1,54 @@
+gen D=-1 n=1 classes=1
+gen D=-1 n=2 from=1 candidates=2 isotests=0 classes=2
+gen D=-1 n=3 from=2 candidates=7 isotests=2 classes=5
+gen D=-1 n=4 from=5 candidates=28 isotests=12 classes=16
+gen D=-1 n=5 from=16 candidates=135 isotests=72 classes=63
+gen D=-1 n=6 from=63 candidates=766 isotests=448 classes=318
+gen D=-1 n=7 from=318 candidates=5439 isotests=3394 classes=2045
+gen D=-1 n=8 from=2045 candidates=48346 isotests=31349 classes=16999
+gen D=-1 n=9 from=16999 candidates=550338 isotests=367126 classes=183231
+gen D=-1 n=10 from=183231 candidates=8070524 isotests=5503497 classes=2567284
+A000112 n=1..10: 1 2 5 16 63 318 2045 16999 183231 2567284
+gen D=2 n=1 classes=1
+gen D=2 n=2 from=1 candidates=2 isotests=0 classes=2
+gen D=2 n=3 from=2 candidates=7 isotests=2 classes=5
+gen D=2 n=4 from=5 candidates=15 isotests=4 classes=11
+gen D=2 n=5 from=11 candidates=30 isotests=7 classes=23
+gen D=2 n=6 from=23 candidates=66 isotests=16 classes=50
+gen D=2 n=7 from=50 candidates=145 isotests=36 classes=109
+gen D=2 n=8 from=109 candidates=313 isotests=77 classes=236
+gen D=2 n=9 from=236 candidates=677 isotests=166 classes=511
+gen D=2 n=10 from=511 candidates=1469 isotests=361 classes=1108
+gen D=2 n=11 from=1108 candidates=3185 isotests=783 classes=2402
+gen D=2 n=12 from=2402 candidates=6902 isotests=1696 classes=5206
+gen D=2 n=13 from=5206 candidates=14960 isotests=3676 classes=11284
+gen D=2 n=14 from=11284 candidates=32428 isotests=7969 classes=24459
+gen D=3 n=1 classes=1
+gen D=3 n=2 from=1 candidates=2 isotests=0 classes=2
+gen D=3 n=3 from=2 candidates=7 isotests=2 classes=5
+gen D=3 n=4 from=5 candidates=28 isotests=12 classes=16
+gen D=3 n=5 from=16 candidates=86 isotests=39 classes=47
+gen D=3 n=6 from=47 candidates=229 isotests=95 classes=134
+gen D=3 n=7 from=134 candidates=610 isotests=241 classes=369
+gen D=3 n=8 from=369 candidates=1714 isotests=676 classes=1038
+gen D=3 n=9 from=1038 candidates=4896 isotests=1954 classes=2942
+gen D=3 n=10 from=2942 candidates=13955 isotests=5593 classes=8362
+gen D=3 n=11 from=8362 candidates=39528 isotests=15827 classes=23701
+gen D=3 n=12 from=23701 candidates=111771 isotests=44655 classes=67116
+gen D=3 n=13 from=67116 candidates=316348 isotests=126313 classes=190035
+gen D=3 n=14 from=190035 candidates=896281 isotests=357952 classes=538329
+gen D=3 n=15 from=538329 candidates=2539772 isotests=1014604 classes=1525168
+gen D=3 n=16 from=1525168 candidates=7195646 isotests=2874666 classes=4320980
+gen D=4 n=1 classes=1
+gen D=4 n=2 from=1 candidates=2 isotests=0 classes=2
+gen D=4 n=3 from=2 candidates=7 isotests=2 classes=5
+gen D=4 n=4 from=5 candidates=28 isotests=12 classes=16
+gen D=4 n=5 from=16 candidates=135 isotests=72 classes=63
+gen D=4 n=6 from=63 candidates=546 isotests=291 classes=255
+gen D=4 n=7 from=255 candidates=2021 isotests=1036 classes=985
+gen D=4 n=8 from=985 candidates=7117 isotests=3482 classes=3635
+gen D=4 n=9 from=3635 candidates=25121 isotests=11945 classes=13176
+gen D=4 n=10 from=13176 candidates=91752 isotests=43480 classes=48272
+gen D=4 n=11 from=48272 candidates=341326 isotests=162515 classes=178811
+gen D=4 n=12 from=178811 candidates=1277970 isotests=611192 classes=666778
+gen D=4 n=13 from=666778 candidates=4781269 isotests=2290674 classes=2490595

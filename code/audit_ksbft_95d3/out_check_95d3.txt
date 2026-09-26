@@ -1,0 +1,36 @@
+ok    all classes n=2..10 = OEIS A000112
+ok    range<=3 counts n=9..16 = mg-eedd out_gen_range.txt
+ok    range<=4 counts n=11..13 = mg-eedd out_gen_range.txt
+ok    counter = brute force (P and every P-v)
+ok    brute-force comparison control FIRES
+ok    Pi_2 classification: 0 others to n=14; control FIRES
+ok    Lemma R sharpness family: closed form exact
+ok    n=3 ALL non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=4 ALL non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=5 ALL non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=6 ALL non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=7 ALL non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=8 ALL non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=9 ALL non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=10 ALL non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=3 INDECOMPOSABLE non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=4 INDECOMPOSABLE non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=5 INDECOMPOSABLE non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=6 INDECOMPOSABLE non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=7 INDECOMPOSABLE non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=8 INDECOMPOSABLE non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=9 INDECOMPOSABLE non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=10 INDECOMPOSABLE non-chains: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=11 range<=3 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=12 range<=3 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=13 range<=3 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=14 range<=3 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=15 range<=3 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=16 range<=3 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=11 range<=4 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=12 range<=4 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    n=13 range<=4 INDECOMPOSABLE: exists-v 0 failures, Lemma R 0 violations (control fires), Prop 1.2 equivalence 0 mismatches
+ok    narrow [2/5,3/5] control: exists-v FIRES
+ok    narrow control: equivalence test FIRES on indecomposable P
+ok    narrow control: Prop 1.2 still exact on decomposable P (interval-free)
+RESULT: GREEN

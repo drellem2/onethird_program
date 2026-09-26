@@ -1,0 +1,187 @@
+#### n=3 ALL non-chains, interval [2/5,3/5]
+  indec_only=0 interval_lo=2/5
+  posets=4  exists_v_fail=1  every_v_fail=3  every_minrange_fail=1  some_minrange_fail=1  decomposable=2  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=7  lemmaR_viol=0  lemmaR_ctrl_viol=4
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 4
+  Lemma R: max |p-p'| at pi(v)=1: 0.1666666667  witness 1/6 v=1 x=0 y=2 P=3 2 0 0
+  FAIL exists-v: 2 0 0
+  FAIL every-min-range-v: 3 2 0 0
+#### n=4 ALL non-chains, interval [2/5,3/5]
+  indec_only=0 interval_lo=2/5
+  posets=15  exists_v_fail=4  every_v_fail=11  every_minrange_fail=5  some_minrange_fail=5  decomposable=8  decomp_equiv_mismatch=0  indec_equiv_mismatch=2  lemmaR_checks=88  lemmaR_viol=0  lemmaR_ctrl_viol=38
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 15
+  Lemma R: max |p-p'| at pi(v)=1: 0.1666666667  witness 1/6 v=0 x=1 y=3 P=4 6 4 0 0
+  FAIL exists-v: 6 4 0 0
+  FAIL every-min-range-v: 4 6 4 0 0
+  FAIL exists-v: 2 0 8 0
+  FAIL every-min-range-v: 4 2 0 8 0
+  FAIL exists-v: a 8 8 0
+  FAIL every-min-range-v: 4 a 8 8 0
+  FAIL exists-v: e 4 0 0
+  FAIL every-min-range-v: 4 e 4 0 0
+  FAIL every-min-range-v: 4 a 0 8 0
+#### n=5 ALL non-chains, interval [2/5,3/5]
+  indec_only=0 interval_lo=2/5
+  posets=62  exists_v_fail=5  every_v_fail=35  every_minrange_fail=9  some_minrange_fail=7  decomposable=31  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=858  lemmaR_viol=0  lemmaR_ctrl_viol=264
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 62
+  Lemma R: max |p-p'| at pi(v)=1: 0.1714285714  witness 6/35 v=0 x=1 y=3 P=5 16 14 0 10 0
+  FAIL exists-v: 1e 14 10 10 0
+  FAIL every-min-range-v: 5 1e 14 10 10 0
+  FAIL exists-v: 16 10 0 10 0
+  FAIL every-min-range-v: 5 16 10 0 10 0
+  FAIL exists-v: 1a 8 18 0 0
+  FAIL every-min-range-v: 5 1a 8 18 0 0
+  FAIL every-min-range-v: 5 2 0 8 0 0
+  FAIL exists-v: 1a 18 18 10 0
+  FAIL every-min-range-v: 5 1a 18 18 10 0
+  FAIL every-min-range-v: 5 a 0 8 0 0
+  FAIL every-min-range-v: 5 1c 1c 8 0 0
+  FAIL exists-v: 1e 1c 8 0 0
+  ... 2 more FAIL lines
+#### n=6 ALL non-chains, interval [2/5,3/5]
+  indec_only=0 interval_lo=2/5
+  posets=317  exists_v_fail=12  every_v_fail=133  every_minrange_fail=29  some_minrange_fail=16  decomposable=133  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=8780  lemmaR_viol=0  lemmaR_ctrl_viol=1888
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 317
+  Lemma R: max |p-p'| at pi(v)=1: 0.1714285714  witness 6/35 v=1 x=2 y=4 P=6 3e 2c 28 0 20 0
+  FAIL every-min-range-v: 6 e c 8 0 20 0
+  FAIL exists-v: 3e 2c 20 0 20 0
+  FAIL every-min-range-v: 6 3e 2c 20 0 20 0
+  FAIL every-min-range-v: 6 2e 2c 20 0 20 0
+  FAIL every-min-range-v: 6 2e 24 0 20 20 0
+  FAIL exists-v: 36 14 10 30 0 0
+  FAIL every-min-range-v: 6 36 14 10 30 0 0
+  FAIL every-min-range-v: 6 36 10 0 30 0 0
+  FAIL exists-v: 3a 38 38 10 0 0
+  FAIL every-min-range-v: 6 3a 38 38 10 0 0
+  FAIL exists-v: 3a 28 38 20 20 0
+  FAIL every-min-range-v: 6 3a 28 38 20 20 0
+  ... 29 more FAIL lines
+#### n=7 ALL non-chains, interval [2/5,3/5]
+  indec_only=0 interval_lo=2/5
+  posets=2044  exists_v_fail=30  every_v_fail=612  every_minrange_fail=85  some_minrange_fail=41  decomposable=693  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=100615  lemmaR_viol=0  lemmaR_ctrl_viol=15208
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 2044
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715686275  witness 35/204 v=5 x=3 y=6 P=7 6e 6c 28 20 60 0 0
+  FAIL exists-v: 7e 7c 68 20 60 0 0
+  FAIL every-min-range-v: 7 7e 7c 68 20 60 0 0
+  FAIL exists-v: 5e 5c 48 0 40 40 0
+  FAIL every-min-range-v: 7 5e 5c 48 0 40 40 0
+  FAIL every-min-range-v: 7 6e 6c 28 20 60 0 0
+  FAIL every-min-range-v: 7 6e 6c 48 0 60 40 0
+  FAIL exists-v: 7e 6c 60 40 60 40 0
+  FAIL every-min-range-v: 7 7e 6c 60 40 60 40 0
+  FAIL exists-v: 7e 74 70 70 20 0 0
+  FAIL every-min-range-v: 7 7e 74 70 70 20 0 0
+  FAIL exists-v: 7e 74 50 70 0 40 0
+  FAIL every-min-range-v: 7 7e 74 50 70 0 40 0
+  ... 103 more FAIL lines
+#### n=8 ALL non-chains, interval [2/5,3/5]
+  indec_only=0 interval_lo=2/5
+  posets=16998  exists_v_fail=99  every_v_fail=3222  every_minrange_fail=365  some_minrange_fail=163  decomposable=4474  decomp_equiv_mismatch=0  indec_equiv_mismatch=4  lemmaR_checks=1368054  lemmaR_viol=0  lemmaR_ctrl_viol=145722
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 16998
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715719064  witness 513/2990 v=0 x=1 y=4 P=8 ee cc c0 40 e0 c0 0 0
+  FAIL exists-v: fe fc f8 f0 a0 80 80 0
+  FAIL every-min-range-v: 8 fe fc f8 f0 a0 80 80 0
+  FAIL exists-v: fe fc f8 b0 80 0 80 0
+  FAIL every-min-range-v: 8 fe fc f8 b0 80 0 80 0
+  FAIL exists-v: fe fc f8 d0 40 c0 0 0
+  FAIL every-min-range-v: 8 fe fc f8 d0 40 c0 0 0
+  FAIL every-min-range-v: 8 be bc b8 90 0 80 80 0
+  FAIL every-min-range-v: 8 5e 5c 58 10 0 c0 0 0
+  FAIL every-min-range-v: 8 5e 5c 18 10 0 40 0 0
+  FAIL exists-v: fe fc d8 c0 80 c0 80 0
+  FAIL every-min-range-v: 8 fe fc d8 c0 80 c0 80 0
+  FAIL exists-v: fe fc e8 e0 e0 40 0 0
+  ... 452 more FAIL lines
+#### n=3 INDECOMPOSABLE, interval [2/5,3/5]
+  indec_only=1 interval_lo=2/5
+  posets=2  exists_v_fail=1  every_v_fail=1  every_minrange_fail=1  some_minrange_fail=1  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=5  lemmaR_viol=0  lemmaR_ctrl_viol=2
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 2
+  Lemma R: max |p-p'| at pi(v)=1: 0.1666666667  witness 1/6 v=1 x=0 y=2 P=3 2 0 0
+  FAIL exists-v: 2 0 0
+  FAIL every-min-range-v: 3 2 0 0
+#### n=4 INDECOMPOSABLE, interval [2/5,3/5]
+  indec_only=1 interval_lo=2/5
+  posets=7  exists_v_fail=2  every_v_fail=6  every_minrange_fail=3  some_minrange_fail=3  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=2  lemmaR_checks=58  lemmaR_viol=0  lemmaR_ctrl_viol=18
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 7
+  Lemma R: max |p-p'| at pi(v)=1: 0.1666666667  witness 1/6 v=0 x=1 y=3 P=4 6 4 0 0
+  FAIL exists-v: 6 4 0 0
+  FAIL every-min-range-v: 4 6 4 0 0
+  FAIL exists-v: 2 0 8 0
+  FAIL every-min-range-v: 4 2 0 8 0
+  FAIL every-min-range-v: 4 a 0 8 0
+#### n=5 INDECOMPOSABLE, interval [2/5,3/5]
+  indec_only=1 interval_lo=2/5
+  posets=31  exists_v_fail=2  every_v_fail=14  every_minrange_fail=4  some_minrange_fail=4  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=567  lemmaR_viol=0  lemmaR_ctrl_viol=112
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 31
+  Lemma R: max |p-p'| at pi(v)=1: 0.1714285714  witness 6/35 v=0 x=1 y=3 P=5 16 14 0 10 0
+  FAIL exists-v: 16 10 0 10 0
+  FAIL every-min-range-v: 5 16 10 0 10 0
+  FAIL exists-v: 1a 8 18 0 0
+  FAIL every-min-range-v: 5 1a 8 18 0 0
+  FAIL every-min-range-v: 5 2 0 8 0 0
+  FAIL every-min-range-v: 5 a 0 8 0 0
+#### n=6 INDECOMPOSABLE, interval [2/5,3/5]
+  indec_only=1 interval_lo=2/5
+  posets=184  exists_v_fail=3  every_v_fail=71  every_minrange_fail=20  some_minrange_fail=7  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=6224  lemmaR_viol=0  lemmaR_ctrl_viol=848
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 184
+  Lemma R: max |p-p'| at pi(v)=1: 0.1714285714  witness 6/35 v=4 x=2 y=5 P=6 16 14 10 30 0 0
+  FAIL every-min-range-v: 6 e c 8 0 20 0
+  FAIL every-min-range-v: 6 2e 2c 20 0 20 0
+  FAIL every-min-range-v: 6 2e 24 0 20 20 0
+  FAIL exists-v: 36 14 10 30 0 0
+  FAIL every-min-range-v: 6 36 14 10 30 0 0
+  FAIL every-min-range-v: 6 36 10 0 30 0 0
+  FAIL every-min-range-v: 6 2a 8 8 0 20 0
+  FAIL every-min-range-v: 6 3a 10 38 10 0 0
+  FAIL every-min-range-v: 6 2a 20 28 0 20 0
+  FAIL exists-v: 36 24 0 30 20 0
+  FAIL every-min-range-v: 6 36 24 0 30 20 0
+  FAIL every-min-range-v: 6 36 30 10 30 0 0
+  ... 11 more FAIL lines
+#### n=7 INDECOMPOSABLE, interval [2/5,3/5]
+  indec_only=1 interval_lo=2/5
+  posets=1351  exists_v_fail=10  every_v_fail=362  every_minrange_fail=57  some_minrange_fail=21  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=0  lemmaR_checks=76260  lemmaR_viol=0  lemmaR_ctrl_viol=7368
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 1351
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715686275  witness 35/204 v=5 x=3 y=6 P=7 6e 6c 28 20 60 0 0
+  FAIL exists-v: 5e 5c 48 0 40 40 0
+  FAIL every-min-range-v: 7 5e 5c 48 0 40 40 0
+  FAIL every-min-range-v: 7 6e 6c 28 20 60 0 0
+  FAIL every-min-range-v: 7 6e 6c 48 0 60 40 0
+  FAIL every-min-range-v: 7 6e 64 20 20 60 0 0
+  FAIL exists-v: 6e 44 0 40 60 40 0
+  FAIL every-min-range-v: 7 6e 44 0 40 60 40 0
+  FAIL every-min-range-v: 7 76 54 50 70 0 40 0
+  FAIL exists-v: 76 24 20 70 60 0 0
+  FAIL every-min-range-v: 7 76 24 20 70 60 0 0
+  FAIL every-min-range-v: 7 36 24 0 70 20 0 0
+  FAIL every-min-range-v: 7 76 44 0 70 60 40 0
+  ... 55 more FAIL lines
+#### n=8 INDECOMPOSABLE, interval [2/5,3/5]
+  indec_only=1 interval_lo=2/5
+  posets=12524  exists_v_fail=46  every_v_fail=2075  every_minrange_fail=303  some_minrange_fail=110  decomposable=0  decomp_equiv_mismatch=0  indec_equiv_mismatch=4  lemmaR_checks=1104024  lemmaR_viol=0  lemmaR_ctrl_viol=77424
+  worst margin: none
+  worst canonical margin (every min-range v works) = 0 = 0.000000; posets where some min-range v fails = 12524
+  Lemma R: max |p-p'| at pi(v)=1: 0.1715719064  witness 513/2990 v=0 x=1 y=4 P=8 ee cc c0 40 e0 c0 0 0
+  FAIL every-min-range-v: 8 be bc b8 90 0 80 80 0
+  FAIL every-min-range-v: 8 5e 5c 58 10 0 c0 0 0
+  FAIL every-min-range-v: 8 5e 5c 18 10 0 40 0 0
+  FAIL every-min-range-v: 8 de dc 88 0 80 c0 80 0
+  FAIL every-min-range-v: 8 de 9c 88 0 0 c0 80 0
+  FAIL every-min-range-v: 8 de cc 48 40 0 c0 0 0
+  FAIL every-min-range-v: 8 ee 2c 28 20 e0 0 80 0
+  FAIL exists-v: 2e 2c 28 20 e0 0 80 0
+  FAIL every-min-range-v: 8 2e 2c 28 20 e0 0 80 0
+  FAIL every-min-range-v: 8 6e 6c 68 0 60 40 0 0
+  FAIL every-min-range-v: 8 ee ac a8 80 e0 0 80 0
+  FAIL exists-v: ee 8c 88 0 e0 c0 80 0
+  ... 337 more FAIL lines

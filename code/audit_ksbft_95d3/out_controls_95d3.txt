@@ -1,0 +1,5 @@
+== counter vs brute-force permutations (random posets, P and every P-v)
+brute m=6: 1400 posets (P and every P-v) compared, mismatches=0
+brute m=7: 480 posets (P and every P-v) compared, mismatches=0
+brute m=8: 90 posets (P and every P-v) compared, mismatches=0
+brute CONTROL (brute runs on a modified poset) m=7: 480 posets (P and every P-v) compared, mismatches=470 FIRES
