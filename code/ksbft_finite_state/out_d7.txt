@@ -1,0 +1,28 @@
+# D=7: 120 slice transcripts, split 120 ways at depth 9
+# depth        nodes    certified       lpcert    cutpruned  frontier
+depth  0            1            0            0            0         0
+depth  1            1            0            0            0         0
+depth  2            1            0            0            1         0
+depth  3            3            0            0            1         0
+depth  4           14            0            0            3         0
+depth  5           89           12            0           14         0
+depth  6          695          135            4           77         0
+depth  7         7000         1780           40          556         0
+depth  8        90538        26713         1563         5180         0
+depth  9      1089299       392314        40276        62262         0
+depth 10     10218035      4905370       690439       656709         0
+depth 11     64056650     40281521      5452677      4622226         0
+depth 12    240944238    181304101     20184247     18322452         0
+depth 13    515213149    428623005     39169679     39455890         0
+depth 14    619416254    542038594     41216983     47420465         0
+depth 15    462274800    418372584     26615696     36160677         0
+depth 16    209568420    195181726      9916737     17286520         0
+depth 17     47920589     45022801      1975566      4469957         0
+depth 18     10168898      9768886       279850       922222         0
+depth 19       799926       787550         9648       120162         0
+depth 20        11466        11386           64         2728         0
+depth 21          270          262            8           16         0
+# total nodes 2181780336; deepest node depth 21; LP attempts 351706960; max layer 70 states; max tracked pairs 51
+# counterexamples-to-threshold (complete posets with no pair in [1/3,2/3]): 0
+# slices present exactly once: True; all slices TERMINATED-CLEAN: True
+VERDICT D=7: TERMINATED-CLEAN (no counterexample of range <= D)

@@ -1,0 +1,28 @@
+# D=7 MAXDEPTH=58 threshold=[1/3, 1-1/3] split
+# split 47/120 at depth 9
+# depth nodes certified cutpruned frontier
+depth  0  nodes            1  certified            0  lpcert          0  cutpruned          0  frontier 0
+depth  1  nodes            1  certified            0  lpcert          0  cutpruned          0  frontier 0
+depth  2  nodes            1  certified            0  lpcert          0  cutpruned          1  frontier 0
+depth  3  nodes            3  certified            0  lpcert          0  cutpruned          1  frontier 0
+depth  4  nodes           14  certified            0  lpcert          0  cutpruned          3  frontier 0
+depth  5  nodes           89  certified           12  lpcert          0  cutpruned         14  frontier 0
+depth  6  nodes          695  certified          135  lpcert          4  cutpruned         77  frontier 0
+depth  7  nodes         7000  certified         1780  lpcert         40  cutpruned        556  frontier 0
+depth  8  nodes        90538  certified        26713  lpcert       1563  cutpruned       5180  frontier 0
+depth  9  nodes      1089299  certified       392314  lpcert      40276  cutpruned      62262  frontier 0
+depth 10  nodes        85181  certified        40673  lpcert       5812  cutpruned       5442  frontier 0
+depth 11  nodes       534673  certified       337114  lpcert      45614  cutpruned      38696  frontier 0
+depth 12  nodes      1999816  certified      1506682  lpcert     168121  cutpruned     151945  frontier 0
+depth 13  nodes      4271979  certified      3554386  lpcert     325046  cutpruned     325013  frontier 0
+depth 14  nodes      5095147  certified      4474562  lpcert     333890  cutpruned     392547  frontier 0
+depth 15  nodes      3649789  certified      3328449  lpcert     194107  cutpruned     286695  frontier 0
+depth 16  nodes      1553748  certified      1454646  lpcert      69355  cutpruned     127233  frontier 0
+depth 17  nodes       320892  certified       303134  lpcert      13603  cutpruned      29747  frontier 0
+depth 18  nodes        37734  certified        35948  lpcert       1462  cutpruned       4155  frontier 0
+depth 19  nodes         2959  certified         2789  lpcert        145  cutpruned        324  frontier 0
+depth 20  nodes          143  certified          140  lpcert          3  cutpruned         25  frontier 0
+# LP attempts 2828951
+# total nodes 18739702, max layer 70 states, max tracked pairs 50
+# counterexamples-to-threshold found: 0
+RESULT TERMINATED-CLEAN D=7

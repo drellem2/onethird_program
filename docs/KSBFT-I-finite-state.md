@@ -14,12 +14,17 @@ Nothing here consumes KSBFT Lemma 4.2, its constant 441, or eq. (1.5). The only 
 
 ## 0. Verdict
 
-1. **Yes, at every fixed D, "no counterexample of range ≤ D" can be *proved* by a finite computation, and n-uniformity costs nothing (PROVEN).** The computation searches the finite tree of bottom configurations. It is sound because of an exact convexity identity (Lemma 3): P_P[a<b] is a convex combination of P_J[a<b] over the size-k down-sets J. Those down-sets are all visible in a bounded bottom window, whatever the rest of the poset is, and however long it is. **No decay-of-correlations rate is needed for soundness.** Decay (Lemma 6) only explains *why* the tree terminates. The certificate covers every continuation at once, including infinitely many of arbitrary length.
-2. **The computation terminates for D = 1, …, 7 (PROVEN by computation).** Every finite non-chain poset of range π(P) ≤ 7 has a pair x ∥ y with 1/3 ≤ P[x<y] ≤ 2/3. **The 1/3–2/3 conjecture holds for 7-thin posets.** That is the first range not covered by Brightwell–Wright (D ≤ 5) and Peczarski (D ≤ 6). D = 7 took ≈ 2.2·10⁹ tree nodes and ≈ 2 h on 3 cores. The positive controls reproduce D ≤ 5 in 0.75 s and D ≤ 6 in 46 s. *This needs an independent audit before anyone relies on it (§5, §7).* Consequence: **a counterexample to the 1/3–2/3 conjecture has range ≥ 8.**
+1. **Yes, at every fixed D, "no counterexample of range ≤ D" can be *proved* by a finite computation, and n-uniformity costs nothing (PROVEN).** The computation searches the finite tree of bottom configurations. It is sound because of an exact convexity identity (Lemma 3): P_P[a<b] is a convex combination of P_J[a<b] over the size-k down-sets J. Those down-sets are all visible in a bounded bottom window, whatever the rest of the poset is, and however long it is. **No decay-of-correlations rate is needed for soundness.** Decay (Lemma 6) is only part of *why* the tree can terminate: it also needs strict margins, and no a-priori argument supplies those (§3.5). The certificate covers every continuation at once, including infinitely many of arbitrary length.
+2. **The computation terminates for D = 1, …, 7 (PROVEN by computation).** Every finite non-chain poset of range π(P) ≤ 7 has a pair x ∥ y with 1/3 ≤ P[x<y] ≤ 2/3. **The 1/3–2/3 conjecture holds for 7-thin posets.** That is the first range not covered by Brightwell–Wright (D ≤ 5) and Peczarski (D ≤ 6). D = 7 took 2 181 780 336 tree nodes (deepest 21) and 1 h 49 min on 3 cores, split into 120 slices, all clean. The positive controls reproduce D ≤ 5 in 0.75 s and D ≤ 6 in 46 s. *This needs an independent audit before anyone relies on it (§5, §7).* Consequence: **a counterexample to the 1/3–2/3 conjecture has range ≥ 8.**
 3. **Q1, the state space (PROVEN).** For range ≤ D, the uniform linear extension is a non-homogeneous Markov chain on the down-sets of size k, k = 0..n. Each state is determined by a D-subset of a 2D-slot window, so there are at most C(2D, D) states per cut (3432 at D = 7). The transfer matrix at cut k depends only on the comparabilities inside a window of 2D+1 consecutive elements. **The observed maximum is far smaller: exactly C(D+1, ⌊(D+1)/2⌋) = 3, 6, 10, 20, 35, 70 for D = 2..7** (EMPIRICAL over every node of every search). I CONJECTURE that this is the true maximum, attained by the (D+1)-antichain.
-4. **Q2, local data (PROVEN by computation, D ≤ 7).** δ(P) is *not* determined by local data: the Fibonacci middle pairs are the counterexample to that. But **"δ(P) ≥ 1/3" is always witnessed by local data at the bottom.** For D ≤ 7, every ordinal-indecomposable poset of range ≤ D has a 1/3-balanced pair among the first N_D elements of its canonical order, with N_D = 5, 8?, 12?, 15?, 18, 21? for D = 2..7 (§4.3; exact values in the transcripts). This is **one-sided**, which is stronger than mg-d707's two-sided boundary windows B_K (EMPIRICAL there, K = 4, 5, 6 for D ≤ 4, 6, 9). It is proved uniformly in n by the finite check.
-5. **Q3, decay (PROVEN, with a useless constant, and EMPIRICAL, with a good one).** The width of the certification hull shrinks by a factor ≤ 1 − (D+1)^(−2D) every 2D cuts, uniformly over all posets of range ≤ D (Lemma 6, a Dobrushin bound). That is 1 − 2.3·10⁻¹³ per block at D = 7, which is useless as an a-priori depth bound. Measured, it is 0.2–0.7 per *single* cut, and exactly φ⁻² = 0.382 per cut on the Fibonacci poset (`out_decay.txt`). **The Fibonacci C_BFT limit is harmless to this route.** It lives in the two-sided *middle* of the poset, and the route never looks there: every bottom is certified by pairs whose limits sit strictly inside (1/3, 2/3), e.g. Fibonacci's bottom pair at 1/φ² ≈ 0.382.
-6. **Q4, D = 8 (EMPIRICAL projection).** Node counts grow ×51, ×77, ×~120 from D = 4→5→6→7. The projected D = 8 cost is ~3·10¹¹ nodes, about 700–900 core-hours: ~10 days on this host's 3-core budget, or about an hour on a 1000-core cluster. **Feasible, but not here; not attempted.** §6 lists pruning ideas that could bring it down.
+4. **Q2, local data (PROVEN by computation, D ≤ 7).** δ(P) is *not* determined by local data: the Fibonacci middle pairs are the counterexample to that. But **"δ(P) ≥ 1/3" is always witnessed by local data at the bottom.** For D ≤ 7, every ordinal-indecomposable poset of range ≤ D has a 1/3-balanced pair among the first N_D elements of its canonical order, with N_D = 2, 5, 9, 13, 15, 18, 21 for D = 1..7 (§4.3). This is **one-sided**, and it is proved uniformly in n by the finite check. Compare mg-d707's two-sided h-order boundary windows B_K, which were EMPIRICAL (K = 4, 5, 6 for D ≤ 4, 6, 9). The two windows are not directly comparable (§4.3).
+5. **Q3, decay (PROVEN, with a useless constant, and EMPIRICAL, with a good one).** The width of the certification hull shrinks by a factor ≤ 1 − (D+1)^(−2D) every 2D cuts, uniformly over all posets of range ≤ D (Lemma 6, a Dobrushin bound). That is 1 − 2.3·10⁻¹³ per block at D = 7, which is useless as an a-priori depth bound. Measured, it is 0.2–0.7 per *single* cut, and exactly φ⁻² = 0.382 per cut on the Fibonacci poset (`out_decay.txt`). **The Fibonacci C_BFT limit is harmless to this route.** It lives in the two-sided *middle* of the poset, and the route never looks there. For D ≤ 7 the computation shows every bottom is certified by pairs robustly inside [1/3, 2/3]. Example: Fibonacci's bottom pair has P → 1/φ ≈ 0.618, i.e. balance 1/φ² ≈ 0.382.
+6. **Relation to mg-6b81 (KSBFT-M, merged while this ran; pm-onethird asked for a comparison; §4.4).**
+   - **The certificate lemma is the same.** My Lemma 3 with Proposition 1 is mg-6b81's Lemma 2.3 with Lemmas 2.2/2.4 (the "prefix certificate"), found independently. mg-6b81 is first on main.
+   - **The route is much cheaper.** mg-6b81 certifies *every* non-CUT isomorphism class of a fixed size t, costing t(D) = 4D−1 and ~10¹¹ classes at D = 5. This route closes each branch as soon as it certifies (an adaptive tree), and adds three things: a deeper complete cut, from the canonical order (Lemma 2b); an early ordinal-cut prune (Lemma 2c); and a joint Gordan/LP certificate (Lemma 4).
+   - **Measured at D = 4:** 4 758 tree nodes, deepest 13, against mg-6b81's 14 298 595 classes at t = 15. At D = 5: 235 851 nodes, against "infeasible (~10¹¹)".
+   - **The state space beats t(D) = 4D−1.** The deepest node is ≈ 3D rather than 4D−1, and the number of nodes per depth is far below the number of classes of that size.
+7. **Q4, D = 8 (EMPIRICAL projection).** Node counts grow ×49.6, ×77.0, ×120.1 from D = 4→5→6→7. The projected D = 8 cost is ~4·10¹¹ nodes, about 1 000–1 500 core-hours: ~2–3 weeks on this host's 3-core budget, or 1–2 hours on a 1000-core cluster. **Feasible, but not here; not attempted.** §6 lists pruning ideas that could bring it down.
 
 ---
 
@@ -150,7 +155,7 @@ Let π(P) ≤ D and let a, b be in every J ∈ V_k. Write W_k := max_{V_k} ρ_J 
 - A child's layer is computed from the parent's by stepping the cut forward. Layers below the parent's cut are unchanged, because no down-set of size ≤ k_parent contains the new element (Lemma 2b / Proposition 1).
 - Closure is decided in this order: (cert) exact rational comparisons; (lp) Lemma 4 with exact verification; (cut) Lemma 2c or a permanent cut.
 - The complete check runs the layers forward to the full set.
-- `split:I/M@S` deterministically hands out the children of depth-S nodes round-robin to M slices. That the slices partition the tree exactly was checked at D = 5: 580,356 nodes below depth 8 either way.
+- `split:I/M@S` deterministically hands out the children of depth-S nodes round-robin to M slices. That the slices partition the tree exactly was checked at D = 5: 580,356 nodes below depth 8 either way. This was a development check, not in the transcripts; `aggregate.py` also refuses a verdict unless every slice index 0..M−1 is present exactly once.
 
 The source used for the D = 7 run is exactly the committed `tree.c`, sha256 `3e1b9424a352b86bc50257cb10eeef82b3a1ac1689b26e9dedb9a0ade2a41827`. Its header comment says the certifying cut is "k = N−D". The code uses `cut_of()` = max(N−D, d(e_N)), which is Lemma 2b and has its own comment. The header was left unedited so that the audited source is byte-identical to the one that ran.
 
@@ -160,13 +165,17 @@ The source used for the D = 7 run is exactly the committed `tree.c`, sha256 `3e1
 |---|---|---|---|---|---|---|
 | 1 | 3 | 2 | 0 s | TERMINATED-CLEAN | | |
 | 2 | 11 | 5 | 0 s | TERMINATED-CLEAN | | |
-| 3 | 152 | ? | 0 s | TERMINATED-CLEAN | | |
-| 4 | 4 758 | ? | 0.01 s | TERMINATED-CLEAN | 7 101 | ? |
-| 5 | 235 851 | ? | 0.75 s | TERMINATED-CLEAN (= BW92) | 603 659 | ? |
-| 6 | 18 169 307 | 18 | 46 s | TERMINATED-CLEAN (= Pec08) | 89 834 748 + top (no-LP build) | |
-| 7 | ? | ? | ? | ? | — | — |
+| 3 | 152 | 9 | 0 s | TERMINATED-CLEAN | | |
+| 4 | 4 758 | 13 | 0.01 s | TERMINATED-CLEAN | 7 101 | 29 107 |
+| 5 | 235 851 | 15 | 0.75 s | TERMINATED-CLEAN (= BW92) | 603 659 | 6 871 716 |
+| 6 | 18 169 307 | 18 | 46 s | TERMINATED-CLEAN (= Pec08) | ≈ 9.0·10⁷ (†) | |
+| 7 | **2 181 780 336** | **21** | **1 h 49 min** | **TERMINATED-CLEAN (new)** | — | — |
 
-(The "?" cells are filled from the transcripts by the final commit; see §8.)
+D = 1..5 come from `out_d1to5.txt`, D = 6 from `out_d6.txt` (30 slices), and D = 7 from `out_d7.txt` (120 slices; the per-slice transcripts are in `out_d7/`). Wall times are on this host.
+
+(†) This is the only number in the table not in a committed transcript. It came from a pre-LP build with otherwise identical rules, run once at 30 slices while developing: 89 834 748 nodes below depth 8, all slices clean. The no-LP D = 4/5 rows are reproducible (`tree D 58 1 3 nolp`).
+
+The last two columns measure the two prunings. The LP (Lemma 4) saves ×1.5 at D = 4, ×2.6 at D = 5 and ≈ ×5 at D = 6. The d(e_N)-cut (Lemma 2b) saves ×4.1 at D = 4 and ×11.4 at D = 5.
 
 "TERMINATED-CLEAN" means three things: the tree is finite (no node reached the depth cap of 58); no complete node has δ < 1/3; and for split runs, all M slices are present and clean (`aggregate.py` refuses otherwise).
 
@@ -176,11 +185,39 @@ The source used for the D = 7 run is exactly the committed `tree.c`, sha256 `3e1
 
 ### 4.3 The one-sided window (answers Q2's "boundary-window balance")
 
-On the path of any indecomposable P of range ≤ D, closure happens at depth ≤ the deepest node. The certified pair (or LP set) lies among the first *depth* elements of P's canonical order. **So: every ordinal-indecomposable poset of range ≤ D has a 1/3-balanced pair among its first N_D elements in canonical order, where N_D is the deepest node** (PROVEN by computation; N_6 = 18, N_7 = ?). mg-d707's B_K used the h-order and both ends, and was EMPIRICAL (annealing, n ≤ 20). The statement here uses the canonical order and the bottom end only, and it holds for all n. The two windows are not comparable element-for-element, because canonical order ≠ h-order. That the bottom alone suffices is the new fact.
+On the path of any indecomposable P of range ≤ D, closure happens at depth ≤ the deepest node. The certified pair (or LP set) lies among the first *depth* elements of P's canonical order. **So: every ordinal-indecomposable poset of range ≤ D has a 1/3-balanced pair among its first N_D elements in canonical order, where N_D is the deepest node** (PROVEN by computation; N_1..N_7 = 2, 5, 9, 13, 15, 18, 21). mg-d707's B_K used the h-order and both ends, and was EMPIRICAL (annealing, n ≤ 20). The statement here uses the canonical order and the bottom end only, and it holds for all n. The two windows are not comparable element-for-element, because canonical order ≠ h-order. That the bottom alone suffices is the new fact.
 
-### 4.4 D = 8 (EMPIRICAL projection; not run)
+### 4.4 Relation to mg-6b81 (KSBFT-M prefix certificate)
 
-The growth factors in nodes are ×49.6 (4→5), ×77 (5→6) and ×? (6→7). Extrapolating the factor's increase gives about ×150–200 for 7→8, i.e. roughly 3–4·10¹¹ nodes. At the measured ≈ 5–9 µs per node, that is 500–900 core-hours. **Feasible on a cluster (the split is embarrassingly parallel), infeasible within one polecat's 3-core budget (~10 days).** Memory is not a constraint: under 100 MB per process.
+`docs/KSBFT-M-margin-induction.md` (mg-6b81, merged on main at 2026-09-26 while this ran; unaudited) proves the same exact reduction. Its Lemma 2.2 (ideal window) is my Proposition 1, and its Lemma 2.3 / Theorem 2.4 (ideal mixture and prefix certificate) are my Lemma 3 and its consequence. I found them independently and did not read mg-6b81 before §3 was written. **Priority on main is mg-6b81's.** Its Lemma 2.5 (CUT) plays the role of my Lemma 2c/2d plus the permanent-cut rule.
+
+Where the two differ, and what each difference costs:
+
+| | mg-6b81 | this file |
+|---|---|---|
+| what is checked | every non-CUT isomorphism class of size t, at one fixed t | the prefixes of canonical orders, closed adaptively as soon as certified |
+| certifying cut for a prefix of size t | s ≤ t − D | k = max(t − D, d(e_t)) in canonical order (Lemma 2b): typically D/2 deeper |
+| certificate | one pair, robust over all size-s ideals | one pair (Lemma 3), **or** a Gordan/LP combination of pairs sharing the unknown weights (Lemma 4) |
+| decomposable prefixes | CUT: strong cut with \|I\| ≤ t − 2D + 1 | plus Lemma 2c: an element above everything earlier kills the branch at once |
+| D = 3 | t = 11, 4 224 classes | 152 nodes, deepest 9 |
+| D = 4 | t = 15, 14 298 595 classes | 4 758 nodes, deepest 13 |
+| D = 5 | not reached (t = 13 leaves 141 882 of 17 890 772 uncertified; ~10¹¹ classes projected) | 235 851 nodes, 0.75 s |
+| D = 6, 7 | not reached (t(7) ≈ 27 projected) | 1.8·10⁷ and 2.18·10⁹ nodes, deepest 18 and 21 |
+| margin | yes: robust margin rm (1/96 at D = 3, 1/150 at D = 4) | not computed; the certificate is qualitative (≥ 1/3) |
+
+**Answers to pm-onethird's three questions:**
+
+1. **Same, weaker, or cheaper? Same reduction, much cheaper verification.** Neither is weaker: both prove "no counterexample of range ≤ D" outright from a terminating finite check.
+2. **Does the state space beat t(D) = 4D−1? Yes, on both axes.**
+   - Depth: the deepest node is 5, 9, 13, 15, 18, 21 for D = 2..7. That is about 3D, not 4D−1 (7, 11, 15, 19, 23, 27). The reasons are the d(e_t) cut and the fact that most branches close long before the worst one.
+   - Count: the tree visits only prefixes not already certified, not all classes of the final size. At D = 4 that is a factor of ≈ 3 000 (4 758 against 14.3 M).
+3. **mg-6b81 did not have** Lemma 2b (the canonical-order cut), Lemma 4 (the joint certificate), or the adaptive closure. Those three are what move D from 4 to 7.
+
+The two routes also agree on the decay rate: mg-6b81 §4 measures ≈ 0.38–0.41 per G-distance step, and this file measures exactly φ⁻² per cut on Fibonacci. A proof of decay is suggested there via Birkhoff contraction and not attempted. Lemma 6 here is that proof, as a Dobrushin bound, with the useless constant stated.
+
+### 4.5 D = 8 (EMPIRICAL projection; not run)
+
+The growth factors in nodes are ×49.6 (4→5), ×77.0 (5→6) and ×120.1 (6→7). Each factor is about 1.55× the previous one, which gives about ×185 for 7→8, i.e. roughly 4·10¹¹ nodes. The per-node cost was 9.0 µs at D = 7 (1 h 49 min × 3 cores over 2.18·10⁹ nodes) and rises slowly with D. So D = 8 is about 1 000–1 500 core-hours. **Feasible on a cluster (the split is embarrassingly parallel), infeasible within one polecat's 3-core budget (~2–3 weeks).** Memory is not a constraint: under 100 MB per process. The deepest node would be ≈ 24.
 
 ---
 
@@ -220,7 +257,7 @@ The tree peaks at depth ≈ 2D − 1 to 2D + 1. A pair can be certified only onc
   - re-run D = 7 from source with `RUN_D7=1`.
 - **The state-count conjecture C(D+1, ⌊(D+1)/2⌋) is not proved.** Candidate tried: the symmetric-difference structure of equal-size down-sets (mutually incomparable across). It did not close.
 - **No a-priori bound on the tree depth.** Lemma 6's rate is too weak, and there is no proof that the tree terminates for every D. It might fail at some D, if a one-sided infinite range-D poset has all bottom pairs with limits outside (1/3, 2/3) or exactly at 1/3. CONJECTURED: it terminates for every D, since a one-sided counterexample would be a one-sided analogue of the conjecture failing.
-- **D = 8 was not run.** §4.4 gives the projection only.
+- **D = 8 was not run.** §4.5 gives the projection only.
 - **Nothing here touches the regime 8 ≤ π ≤ L*** beyond the corollary. Nothing here is uniform in D.
 - **Lemma 4's LP drops two-sided pairs.** That is sound (fewer constraints) but weaker than possible (§6 ii).
 

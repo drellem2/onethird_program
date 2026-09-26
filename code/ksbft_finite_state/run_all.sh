@@ -15,7 +15,7 @@ w(){ out=$1; shift; "$@" > "$out.tmp" && mv "$out.tmp" "$out"; }
 # --- generation control: tree (certification off) == brute force, n <= 7, all D
 w out_gen_control.txt python3 gen_control.py "$BIN" 7
 # --- implementation control: independent Python re-implementation, same rules, D <= 4
-w out_indep_tree.txt sh -c "for D in 2 3 4; do echo \"== D=\$D python\"; python3 indep_tree.py \$D 40; echo \"== D=\$D C (nolp)\"; $BIN \$D 40 1 3 nolp | grep -E '^depth|RESULT'; done"
+w out_indep_tree.txt sh -c "for D in 2 3 4; do python3 indep_tree.py \$D 40 | grep ^depth | awk '{print \$2,\$4,\$6,\$8}' > $TMP/py_\$D; $BIN \$D 40 1 3 nolp | grep ^depth | awk '{print \$2,\$4,\$6,\$10}' > $TMP/c_\$D; echo \"== D=\$D  (depth nodes certified cutpruned): python vs C nolp\"; paste $TMP/py_\$D $TMP/c_\$D; if [ -s $TMP/py_\$D ] && cmp -s $TMP/py_\$D $TMP/c_\$D; then echo \"D=\$D IDENTICAL\"; else echo \"D=\$D DIFFER\"; fi; done"
 # --- firing controls: each MUST print a failure / violation line
 w out_controls.txt sh -c "
 echo '== badcert (certify from one state only; UNSOUND on purpose) -> expect CHECK FAILED'; $BIN 4 45 1 3 check badcert | grep -m1 -E 'CHECK|RESULT';

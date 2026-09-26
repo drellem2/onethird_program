@@ -1,0 +1,25 @@
+# D=6: 30 slice transcripts, split 30 ways at depth 8
+# depth        nodes    certified       lpcert    cutpruned  frontier
+depth  0            1            0            0            0         0
+depth  1            1            0            0            0         0
+depth  2            1            0            0            1         0
+depth  3            3            0            0            1         0
+depth  4           14            0            0            3         0
+depth  5           89           12            0           14         0
+depth  6          695          135            4           77         0
+depth  7         7000         1780           40          556         0
+depth  8        60436        20645         1389         5180         0
+depth  9       389353       190556        20094        38402         0
+depth 10      1628365      1053389       116856       178703         0
+depth 11      4008536      3055541       323714       458120         0
+depth 12      5386065      4429673       459447       629281         0
+depth 13      4128437      3544134       325392       496945         0
+depth 14      2078261      1889332       120756       258911         0
+depth 15       429668       399586        21910        68173         0
+depth 16        48264        45042         2340         8172         0
+depth 17         4052         3978           48          882         0
+depth 18           66           66            0           26         0
+# total nodes 18169307; deepest node depth 18; LP attempts 3958096; max layer 35 states; max tracked pairs 38
+# counterexamples-to-threshold (complete posets with no pair in [1/3,2/3]): 0
+# slices present exactly once: True; all slices TERMINATED-CLEAN: True
+VERDICT D=6: TERMINATED-CLEAN (no counterexample of range <= D)

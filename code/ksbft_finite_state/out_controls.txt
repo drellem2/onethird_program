@@ -1,0 +1,17 @@
+== badcert (certify from one state only; UNSOUND on purpose) -> expect CHECK FAILED
+CHECK FAILED: certified pair not in range in own completion N=4 [0,0,2,6]
+== badlp (accept LP value > -0.02 unverified; UNSOUND on purpose) -> expect CHECK FAILED
+CHECK FAILED: LP-certified set not in range in own completion N=7 [0,0,2,3,6,22,54]
+== threshold 0.39 (> 1/3), depth cap 12 -> expect COUNTEREXAMPLE-TO-THRESHOLD lines
+140
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,2]
+COUNTEREXAMPLE-TO-THRESHOLD N=5 [0,0,2,3,7]
+== soundness checks (own completion + 4 random canonical continuations per certified node), D<=5 -> expect clean
+# check mode: 2 certified nodes re-verified on their own completion
+RESULT TERMINATED-CLEAN D=2
+# check mode: 73 certified nodes re-verified on their own completion
+RESULT TERMINATED-CLEAN D=3
+# check mode: 3324 certified nodes re-verified on their own completion
+RESULT TERMINATED-CLEAN D=4
+# check mode: 192191 certified nodes re-verified on their own completion
+RESULT TERMINATED-CLEAN D=5

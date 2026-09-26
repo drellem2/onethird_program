@@ -1,0 +1,39 @@
+A006455 control: natural-labelling counts [1, 2, 7, 40, 357, 4824, 96428] match OEIS
+D=1 n=2: brute-force classes     1  tree classes     1  EQUAL
+D=1 n=3: brute-force classes     0  tree classes     0  EQUAL
+D=1 n=4: brute-force classes     0  tree classes     0  EQUAL
+D=1 n=5: brute-force classes     0  tree classes     0  EQUAL
+D=1 n=6: brute-force classes     0  tree classes     0  EQUAL
+D=1 n=7: brute-force classes     0  tree classes     0  EQUAL
+D=2 n=2: brute-force classes     1  tree classes     1  EQUAL
+D=2 n=3: brute-force classes     2  tree classes     2  EQUAL
+D=2 n=4: brute-force classes     2  tree classes     2  EQUAL
+D=2 n=5: brute-force classes     1  tree classes     1  EQUAL
+D=2 n=6: brute-force classes     1  tree classes     1  EQUAL
+D=2 n=7: brute-force classes     1  tree classes     1  EQUAL
+D=3 n=2: brute-force classes     1  tree classes     1  EQUAL
+D=3 n=3: brute-force classes     2  tree classes     2  EQUAL
+D=3 n=4: brute-force classes     7  tree classes     7  EQUAL
+D=3 n=5: brute-force classes    15  tree classes    15  EQUAL
+D=3 n=6: brute-force classes    32  tree classes    32  EQUAL
+D=3 n=7: brute-force classes    59  tree classes    59  EQUAL
+D=4 n=2: brute-force classes     1  tree classes     1  EQUAL
+D=4 n=3: brute-force classes     2  tree classes     2  EQUAL
+D=4 n=4: brute-force classes     7  tree classes     7  EQUAL
+D=4 n=5: brute-force classes    31  tree classes    31  EQUAL
+D=4 n=6: brute-force classes   121  tree classes   121  EQUAL
+D=4 n=7: brute-force classes   417  tree classes   417  EQUAL
+D=5 n=2: brute-force classes     1  tree classes     1  EQUAL
+D=5 n=3: brute-force classes     2  tree classes     2  EQUAL
+D=5 n=4: brute-force classes     7  tree classes     7  EQUAL
+D=5 n=5: brute-force classes    31  tree classes    31  EQUAL
+D=5 n=6: brute-force classes   184  tree classes   184  EQUAL
+D=5 n=7: brute-force classes  1033  tree classes  1033  EQUAL
+D=6 n=2: brute-force classes     1  tree classes     1  EQUAL
+D=6 n=3: brute-force classes     2  tree classes     2  EQUAL
+D=6 n=4: brute-force classes     7  tree classes     7  EQUAL
+D=6 n=5: brute-force classes    31  tree classes    31  EQUAL
+D=6 n=6: brute-force classes   184  tree classes   184  EQUAL
+D=6 n=7: brute-force classes  1351  tree classes  1351  EQUAL
+brute-force delta over 1576 indecomposable iso-classes, n<=7: min delta = 1/3
+GEN-CONTROL PASS
