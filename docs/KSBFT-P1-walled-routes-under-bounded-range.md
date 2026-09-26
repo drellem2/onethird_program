@@ -18,14 +18,26 @@ Marks:
 instead of guessing it, and as one counterexample probe in §5. Nothing was extended. Instrument:
 `code/ksbft_p1_walled_0b78/` (`sh run_all.sh`, about 15 s, one process, exact arithmetic, seeded).
 
+**Errata (mg-a468, per audit mg-af00, `docs/AUDIT-mg-0b78.md`).** The net verdict is unchanged, and every
+§5 result HOLDS. Corrected:
+- Row B2 is plain **SURVIVES**, not "TRANSFORMED, then SURVIVES". γ is the deficit below 1/3, so
+  Lemma 2.3's `c(D)` caps γ from **above** and does not empty the small-γ tail. The tally is now
+  **14 / 7 / 25**.
+- Prop 3.1(6)'s proof step "log-concave ⟹ no internal zeros" is false for Stanley's inequality, as
+  `(1,0,0,1)` shows. It is replaced by Lemma 5.1.
+- Lemma 5.2 sharpens to `[1, π(z)]`. With that bound, Example 5.7 is restated at `D = 3`.
+- The audit's eight minor overstatements are corrected. They are: the "Θ(n)" headline, A28's
+  `D ≥ 5`, the KSBFT-A PROVEN relabel, "δ-routes died thin" against A11/A12, "all but three",
+  "each is an injection", §5.5(b)'s "cannot act", and the §0 paraphrase of Ex. 5.7.
+
 ---
 
 ## 0. Verdict
 
 > **1. The triage (§2: 48 table rows, split into 54 verdict entries).** Of the obstructions that killed walled routes:
-> **14 DISSOLVE**, **8 are TRANSFORMED**, and **24 SURVIVE**. Of the remaining entries, 6 are not
+> **14 DISSOLVE**, **7 are TRANSFORMED**, and **25 SURVIVE** (corrected from 14/8/24 per audit mg-af00: row B2 is SURVIVES). Of the remaining entries, 6 are not
 > obstructions (corrections, a GREEN dictionary, an operational DROP) and 2 were not examined.
-> - Every **DISSOLVES** is an obstruction whose witness has range `Θ(n)`. It lives in the wide,
+> - Every **DISSOLVES** is an obstruction whose witness has unbounded range (`Θ(n)` except `C_2 ⊕ A_k ⊕ C_2` at `k = √n`, range `Θ(√n)`), or whose target became true (A4, no witness). It lives in the wide,
 >   dense, large-antichain or `Θ(n)`-mobility regime, exactly as the ticket predicted. The witnesses
 >   are `C_n ⊔ C_n` (range `n`), `C_m ⊔ C_1` (range `m`), `C_p ⊔ A_q`, the antichain, the staircase
 >   (range `n/2`), `D_k` (range `2k−2`), `C_2 ⊕ A_k ⊕ C_2` with `k = √n`, and the abstract two-atom
@@ -43,16 +55,22 @@ instead of guessing it, and as one counterexample probe in §5. Nothing was exte
 > PROVEN). So every DISSOLVED route's own target is **supplied by the standing facts** in existence
 > form, at a constant `f(D)`. It stays exactly as open as before at the D-free constants the route
 > needed (`ε_dem ≈ 1/50`, mg-5987's `C < 0.30`). **The routes aimed at δ itself died on thin
-> witnesses (range ≤ 3) or on structural failures. Bounded range cannot touch either.** The reason
+> witnesses (range ≤ 3) or on structural failures, and bounded range cannot touch either. The one exception
+> is A11/A12** (δ-direct via mg-48ab Thm 5.2), which died on `C_n ⊔ C_n`, range `n`. It is the subject of §5. The reason
 > is that H and the δ-extremal family point at the same thin region (§3.2). Put in one line:
 > **H removes the part of poset space where the programme's intermediate quantities were hard, and
 > the hard cases for δ were never there.**
 >
-> **3. What the revived routes now need (§4).** For each of the 22 DISSOLVES / TRANSFORMED rows, one
-> proposition. **The standing facts F1–F7, Lemma 2.3 and Lemma W supply all but three of them in
-> existence form, and none at the constant the route needed.** The three that are not supplied are:
-> (a) QD_D (§5; rows A11/A12); (b) the width-3 Route-B Hyp-A inequality, which fails at every γ
-> anyway; (c) the (MC_D)-equivalent forms (T)/(IB). mg-c3ca's two-element lemma (D2) was not examined.
+> **3. What the routes now need (§4).** §4 gives one proposition for each DISSOLVES / TRANSFORMED row,
+> plus B2 for completeness. **The standing facts F1–F7, Lemma 2.3 and Lemma W supply them in existence
+> form, with four exceptions, and none at the constant the route needed.** The needs not supplied are:
+> - (a) QD_D (§5; rows A11/A12);
+> - (b) the (MC_D)-equivalent forms (T)/(IB);
+> - (c) the width-3 Route-B Hyp-A inequality (B2). It fails at every admissible γ anyway, and B2 is
+>   SURVIVES, not revived;
+> - (d) A5 at 1/3. That half of A5 SURVIVES.
+>
+> mg-c3ca's two-element lemma (D2) was not examined.
 >
 > **4. Deep dive (§5): the Stanley-stability route (mg-a1ec → mg-48ab → mg-dcae), chosen by
 > elimination.** It is the only DISSOLVED route that has a **δ-direct consumer**: mg-48ab's Theorem
@@ -63,7 +81,7 @@ instead of guessing it, and as one counterexample probe in §5. Nothing was exte
 > > `N_i² ≥ (1+κ(D))·N_{i−1}N_{i+1}`.
 >
 > - **(QD_D) ⟹ (FLAT_D)** (Prop 5.4, PROVEN given Ma–Shenfeld k = 1 and mg-48ab Thm 5.2): no counterexample in `Π_D` has an
->   element whose position law, over a window of ≥ 3 slots, is within factor `1+κ(D)` of log-linear.
+>   element whose position law, over its **full support** (`≥ 3` slots), is within factor `1+κ(D)` of log-linear. A sub-window reading would be false.
 > - **Sharpness (PROVEN, closed form):** `κ(D) ≤ 1/(D²−1)`, from `C_2 ⊔ C_D`. An exhibited
 >   range-4 poset gives `κ(4) ≤ 1/18`. So no D-uniform constant exists.
 > - **Evidence (EMPIRICAL):** at fixed `D ∈ {2,3,4}` the least strict deficit is flat in `n` up to
@@ -73,9 +91,11 @@ instead of guessing it, and as one counterexample probe in §5. Nothing was exte
 >   (Prop 5.6).
 > - **It stops at a precise obstruction (§5.5):** the closure of the realised boundary weights.
 >   Strictness at *limit* points needs a Ma–Shenfeld theorem for posets with a boundary measure.
->   Positive reweighting does not preserve Stanley's inequality (Ex. 5.7, PROVEN). The one mechanism
->   by which bounded range quantises, an injection counting a positive event, does not apply to the
->   Stanley defect, which is a difference of products.
+>   Membership in the Lemma 5.2 weight box does not imply Stanley's inequality (Ex. 5.7, PROVEN).
+>   Ex. 5.7 is an unrealised box point, not a reweighting of a realised poset. Bounded range's
+>   quantiser is **not** blocked by the defect being a difference: (QD_D) is a ratio of two set sizes,
+>   and on a sub-family the quantiser does control it (§5.5(b), corrected per audit mg-af00). No general
+>   injection is known.
 > - **Even proven, (FLAT_D) is a necessary condition on counterexamples, not (MC_D)** (§5.6).
 >
 > **Net.** Bounded range does not make any previously walled route work. It moves no link of the
@@ -166,14 +186,14 @@ means the target dropped off the route (KSBFT-F §8).
 | A25 | mg-200d/131e/00a1, per-slot adjacency LP | `ε_spec = 2/(n+1)` false at `n = 6`. LP value `Θ(n²)` | `n = 6` LP poset: **range 3**† (measure abstract; the poset has δ = 5/14†). **Staircase: range `n/2`**† | **Var** (staircase) | `n = 6` refutation **SURVIVES** (finite). **Θ(n²) DISSOLVES**: value `≤ nD/6` (KSBFT-C row 13″) | auto |
 | A26 | mg-ba78, correction | — | — | — | *not a route* | — |
 | A27 | mg-76b2, `C₃` → L2 | reduces to L2's first disjunct, which is false (2/126 at `n = 6`) | finite, range `≤ 5` (KSBFT-F §6) | — | **SURVIVES** | moot (L2 drops out, KSBFT-F §6) |
-| A28 | mg-51f4 → c50b → 789d, `(L*)`, `(F)`, `(M♯)` | `(L*)` false at `n = 9`. `(F)` and `(M♯)` fail together from `n = 10` | **`(L*)`: n=9 ranges 8, 8; n=10: 6; n=11: 9.† `(F)&(M♯)`: n=10: 5, 5; n=11: 6; n=12: 7, 7†** (widths 3–6; all have δ ≥ 13/28†) | — | **SURVIVES** on `Π_D` for `D ≥ 5`. Window `[7,D]` NOT EXAMINED | moot (`C₃` feeds L2 and L1b's consumed content) |
+| A28 | mg-51f4 → c50b → 789d, `(L*)`, `(F)`, `(M♯)` | `(L*)` false at `n = 9`. `(F)` and `(M♯)` fail together from `n = 10` | **`(L*)`: n=9 ranges 8, 8; n=10: 6; n=11: 9.† `(F)&(M♯)`: n=10: 5, 5; n=11: 6; n=12: 7, 7†** (widths 3–6; all have δ ≥ 13/28†) | — | **SURVIVES** on `Π_D`: for `D ≥ 5` for `(F)&(M♯)` (ranges ≥ 5), and for `D ≥ 6` for `(L*)` (ranges ≥ 6). Window `[7,D]` NOT EXAMINED | moot (`C₃` feeds L2 and L1b's consumed content) |
 
 ### 2B. The F-series and Route B (sibling repo `one_third_width_three`)
 
 | # | route | obstruction | witness | flag | verdict |
 |---|---|---|---|---|---|
 | B1 | Route A, chamber-Morse (F23/F24) | no `n`-uniform rule for the critical cells `c*_n` of `Δ(PPF_n)`: "HPC-per-n" (F23:154) | none: cells of the complex of **all** posets on `[n]` | — | **SURVIVES** (structural). *Observation, PROVEN:* `{π ≤ D} ∩ PPF_n` is an **up-set** under refinement, because adding relations cannot increase any `π(x)`. A Π_D-restricted Route A would need the sphere theorem on that up-set's order complex. **NOT EXAMINED** |
-| B2 | Route B, Hyp A (F25/F27) | `(c₅*)²γ³ ≥ 512w²/c₆` fails on the **whole** window: `γ_crit ≈ 27–936 ≫ 1/3` (F25:222–238). The `1/γ` comes from the window-removal perturbation `2|W|/(|X|−|W|+1) < γ/2` | none. Hypothetical deep layered width-3 γ-counterexamples | — | **TRANSFORMED, then SURVIVES.** On `Π_D`, every incomparable pair has `min(p,1−p) ≥ c(D)` (KSBFT-F Lemma 2.3), so the small-γ tail `γ < c(D)` is **empty**. But Hyp A fails at every `γ ≤ 1/2` on its constants alone, so emptying the tail changes nothing |
+| B2 | Route B, Hyp A (F25/F27) | `(c₅*)²γ³ ≥ 512w²/c₆` fails on the **whole** window `γ ∈ (0, 1/3 − δ_KL)`: `γ_crit ≈ 27–936 ≫ 1/3` (F25:222–238). The `1/γ` comes from the window-removal perturbation `2|W|/(|X|−|W|+1) < γ/2` | none. Hypothetical deep layered width-3 γ-counterexamples | — | **SURVIVES** (structural: F25's `1/γ` is a proof-architecture fact). *Erratum (audit mg-af00):* an earlier version said "TRANSFORMED: `c(D)` empties the small-γ tail". That is wrong. γ is the **deficit below 1/3**: a γ-counterexample has `δ ≤ 1/3 − γ`. KSBFT-F Lemma 2.3's `δ ≥ c(D)` therefore caps γ from **above**, at `γ ≤ 1/3 − c(D)`, an end Kahn–Linial already excludes. It does not touch small γ (δ near 1/3). Hyp A fails on the whole window on its constants alone |
 | B3 | hybrid spectral → cohomology (F27) | no comparison map between the links of `Δ(PPF_n)` and `G_BK(P)`: "different complexes on different vertex sets" | none | — | **SURVIVES** (structural) |
 | B4 | sheaf cohomology on POSET (F28) | no candidate `F_BK` is both functorial under refinement and has a canonical map to `F_ℓ` | none | — | **SURVIVES** (structural; see B1's up-set remark) |
 | B5 | Čech-bias F29 → F30 → F31 | `K_chain-loc ⊆ ker Φ_*`, so `c_BC(P) = 0` **for every P** for formal reasons (sgn-orbit sum + `H^{n−2}_triv = 0`) | none. F30 §3.5's "generic `n = 4` example" is vacuous, and its "≤ 3 incomparable pairs" is false (sub-agent report, not re-checked) | — | **SURVIVES** (structural, uniform in `P`) |
@@ -213,13 +233,15 @@ means the target dropped off the route (KSBFT-F §8).
 | verdict | rows |
 |---|---|
 | **DISSOLVES** (14) | A4, A7, A10 (fatal-law half), A12, A17, A18, A22, A25 (`Θ(n²)` half), C3, C6 (use half), D1, D3, E2 (surrogate), E3 (81ff) |
-| **TRANSFORMED** (8) | A5 (below 1/3), A6, A11, A13, B2, C1 (vacuity), C4, E4 (3da1/c776) |
-| **SURVIVES** (24) | A5 (at 1/3), A8, A9, A14, A15, A16, A19, A20, A21, A24, A25 (`n = 6`), A27, A28, B1, B3, B4, B5, C1 (blindness), C2, C5, C6 ("no consumer"), E1 (Step 6), E3 (f5be/9b6b/5987/6ff4), E4 (8748/8b32/7c32/7c78/9461) |
+| **TRANSFORMED** (7) | A5 (below 1/3), A6, A11, A13, C1 (vacuity), C4, E4 (3da1/c776) |
+| **SURVIVES** (25) | A5 (at 1/3), A8, A9, A14, A15, A16, A19, A20, A21, A24, A25 (`n = 6`), A27, A28, B1, B2, B3, B4, B5, C1 (blindness), C2, C5, C6 ("no consumer"), E1 (Step 6), E3 (f5be/9b6b/5987/6ff4), E4 (8748/8b32/7c32/7c78/9461) |
 | not obstructions (6) | A1, A2, A3, A23, A26, C7 |
 | not examined (2) | B6, D2 |
 
 Rows are split where one row carried two obstructions, so the counts are counts of obstructions, not
-of table lines.
+of table lines. They are loose at the edges: E1 carries L1b/L2/L3 "auto" and E3 carries 0b96, and neither is
+tallied. C6 "no consumer" survives only if read as structural (the numerator's sign-blindness), not via its
+antichain witness.
 
 ---
 
@@ -244,8 +266,13 @@ supported on an interval of length `L = π(x)` has variance `≤ L²/4`.
 
 **Item 6.** Support within the window is F1. Now show the support is the whole window.
 
-- By F1's attainment argument, both endpoints `d(x)+1` and `d(x)+1+π(x)` occur.
-- `N_i(x)` is log-concave (Stanley). A log-concave sequence has no internal zeros.
+- `P[I(x)]` has a down-set `J` of every size `j = 0..π(x)`: take the prefixes of any linear extension
+  of it.
+- Lemma 5.1 (§5.4) gives `N_{d+1+j}(x) ≥ L(J)R(J) > 0` for each such `J`.
+
+*(Erratum, audit mg-af00: an earlier proof read "`N_i(x)` is log-concave (Stanley), and a log-concave
+sequence has no internal zeros". Stanley's inequality `N_i² ≥ N_{i−1}N_{i+1}` allows internal zeros:
+`(1,0,0,1)` satisfies it. The statement stands with the proof above.)*
 
 □
 
@@ -268,13 +295,16 @@ The quantifier matters. The routes needed these quantities small **at a D-free c
 - `C < 37/123` for `(EQ)` (mg-5987);
 - `c < 1` for shape-B at computable `n`.
 
-Prop 3.1 gives constants `D`, `D²/4`, `D/6`, `log₂(D+1)`. Every one is on the useless side once
-`D ≥ 7`, where a counterexample must live (Pec08). **Revival here means "the target is true and
+Prop 3.1 gives constants `D`, `D²/4`, `D/6`, `log₂(D+1)`. Every one is on the useless side at
+computable `n` once `D ≥ 7`, where a counterexample must live (Pec08). The density items 3–4 are
+`n`-dependent: for example `d ≤ D/(n−1)` beats `ε_dem ≈ 1/50` once `n ≥ 50D`. **Revival here means "the target is true and
 useless", the same state KSBFT-C found for L1b and KSBFT-F found for L4.**
 
 ### 3.2 Why the δ-direct routes are untouched
 
-The routes aimed at δ itself (A5, A13–A16, A24, B1–B5, C1-blindness, C5, E3) died on:
+The routes aimed at δ itself (A5, A13–A16, A24, B1–B5, C1-blindness, C5, E3) died on the three kinds
+below. The exception is A11/A12, which is δ-direct via mg-48ab Thm 5.2 and died on `C_n ⊔ C_n`, range
+`n`; that is §5's subject. D2 (δ-direct) is unexamined.
 
 - **thin witnesses:** `Z_n`, `(2+1)` and `V^{⊕k}`, `C_2 ⊔ C_2`, the fence, all range 2; `W*` and
   the `n = 6` LP poset, range 3;
@@ -284,8 +314,9 @@ The routes aimed at δ itself (A5, A13–A16, A24, B1–B5, C1-blindness, C5, E3
 **This is not an accident, and it is the conceptual content of the triage.** δ's extremal landscape
 is thin:
 
-- The only posets at δ = 1/3 are `(2+1)` and its ordinal sums (range 2). That is PROVEN for
-  `n ≤ 11` by exhaustion (KSBFT-A).
+- The only posets at δ = 1/3 are `(2+1)` and its ordinal sums with chains (range 2). That is
+  EMPIRICAL (KSBFT-A), computer-exhaustive for `n ≤ 11` (46 749 427 = A000112). Gup26 extends it to
+  `n ≤ 14`.
 - Every poset found with δ < 0.35 has width 2 (EMPIRICAL, KSBFT-A §6).
 - The KS/KL barrier `C_BFT` is the limit of the Fibonacci centre pair (range 2).
 
@@ -311,8 +342,10 @@ Six results on the record use range as more than a spread bound:
 - KSBFT-J Lemma R (reweighting by `w_v ∈ [1, π(v)+1]`);
 - KSBFT-M's prefix certificate.
 
-**Each is an injection whose fibres are bounded by the number of positions an element can hop.** That
-number is bounded because a hop crosses only incomparables (F1). The common form:
+**The first five are injections whose fibres are bounded by the number of positions an element can
+hop.** That number is bounded because a hop crosses only incomparables (F1). KSBFT-M's prefix certificate
+is **not** an injection. It is a window containment ("every size-`s` ideal lies inside any size-`(s+D)`
+ideal") plus an exact convex combination. The common form of the conclusions is:
 
 > **(Q)** *a local event that is possible has probability `≥ c(D)`*, or *two local events' probabilities
 > are within a factor `C(D)`*.
@@ -323,9 +356,9 @@ Quantisation is the only mechanism on the record that turns "approximately" into
 - KSBFT-F §8's last bullet says any locality proof of (MC_D) needs **exact** transport. Quantisation
   is how bounded range could supply exactness.
 
-**The limit of (Q):** it quantises **probabilities of events**, i.e. positive counts. A quantity
-that is a **difference** of counts is not quantised by an injection. That limit is exactly where the
-deep dive stops (§5.5).
+**Where (Q) has been applied:** so far only to **probabilities of events**, i.e. ratios of positive
+counts. A quantity stated as a **difference** of counts needs an injection with a surplus. §5.5(b) says
+why that is not blocked in principle, and where the deep dive stops.
 
 ---
 
@@ -348,7 +381,7 @@ supplied at the constant the route needed.
 | A18 | `max_x Σ_{y∥x} P[{x,y} inverts] = O(1)` | exist. (`< D/3` frozen). useful: no |
 | A22, D3, E4 (3da1/c776) | a realizability fact excluding the two-atom law | exist. (H is one: `d ≤ D/(n−1)`). Useful (`ε_spec ≤ ε_dem`) only at `n ≥ 50D` |
 | A25 | per-slot LP value `O(n)` | exist. (`≤ nD/6`). useful: no |
-| B2 | Hyp A: `(c₅*)²γ³c₆ ≥ 512w²` at some admissible γ | **no**. It fails for every `γ ≤ 1/2` on the constants alone; the γ-floor `c(D)` does not reach `γ_crit` |
+| B2 | Hyp A: `(c₅*)²γ³c₆ ≥ 512w²` at some admissible γ (listed for completeness; B2 SURVIVES, not revived) | **no**. It fails on the whole window `γ ∈ (0, 1/3 − δ_KL)` on the constants alone. Bounded range does not act on small γ (§2B row B2) |
 | C1, C3, C4 | `log₂ e(P) ≤ c·n log₂ n` with `c < 1` / `Θ(n)` from hypothesis (1) | exist. (`n log₂(D+1)`). Non-vacuous only at `n ≳ (D+1)^{1/c}` |
 | C6 | certify `d ≤ D' < 1` | exist. (F3) |
 | D1 | a rate for LIB-weak | exist. (`E inv_e < nD/6`) |
@@ -356,9 +389,13 @@ supplied at the constant the route needed.
 | E2 | (T) = (IB) on `Π_D` | **it is (MC_D)** (KSBFT-F Prop 4.2). Not supplied |
 | E3 (0b96, 81ff) | frozen density ceiling / chain-IV capture | exist. (F3) |
 
-**Summary.** Every need in the table is supplied in existence form except three: (QD_D) (rows A11
-and A12), B2's constant inequality, and (MC_D) itself (E2). None is supplied at the constant the
-route needed. D2 is unexamined.
+**Summary.** Every need in the table is supplied in existence form except four:
+- (QD_D) (rows A11 and A12);
+- (MC_D) itself (E2);
+- B2's constant inequality (B2 SURVIVES);
+- A5 at 1/3 (that half SURVIVES).
+
+None is supplied at the constant the route needed. D2 is unexamined.
 
 ---
 
@@ -367,8 +404,9 @@ route needed. D2 is unexamined.
 ### 5.1 Why this route, by elimination
 
 Take the DISSOLVES and TRANSFORMED rows. Remove those whose target is **auto** or **moot** (§2). Those
-targets are true and useless, and reviving their routes proves nothing new. Remove the rows whose
-revived need is (MC_D) itself (E2) or a constant inequality that fails outright (B2).
+targets are true and useless, and reviving their routes proves nothing new. Remove the row whose
+revived need is (MC_D) itself (E2). (B2, whose need is a constant inequality that fails outright, is
+SURVIVES and not in this set; see its erratum.)
 
 **What remains is exactly A11/A12.** This is the line mg-a1ec → mg-48ab → mg-dcae. It is the only
 revived route with a **δ-direct** theorem already attached: mg-48ab Theorem 5.2 (read at
@@ -474,15 +512,19 @@ complement: its elements are `up(x) ∪ (I(x) ∖ J)`, none of them below `x`, a
 one of them either lies in `K`, is `x`, or is itself in the complement. □
 
 > **Lemma 5.2 (weight quantisation) — PROVEN.** For down-sets `J ⊂ J ∪ {z}` of `P[I(x)]`:
-> `1 ≤ L(J ∪ {z})/L(J) ≤ π(z)+1 ≤ D+1`. The same holds for `R`, reversed. Hence for any two
-> admissible `J, J'`: `(D+1)^{−D} ≤ L(J)/L(J') ≤ (D+1)^{D}`, and likewise for `R`.
+> `1 ≤ L(J ∪ {z})/L(J) ≤ π(z) ≤ D`. The same holds for `R`, reversed. Hence for any two
+> admissible `J, J'`: `D^{−D} ≤ L(J)/L(J') ≤ D^{D}`, and likewise for `R`. (A weaker earlier form
+> had `π(z)+1` and `(D+1)^{±D}`. The sharpening is from audit mg-af00, whose instrument finds 0
+> exceedances of `π(z)`.)
 
 *Proof.* `z` is maximal in the ideal `K ∪ {z}` (`K = D↓ ∪ J`). An extension of `K ∪ {z}` is an
 extension of `K` with `z` inserted after the last predecessor of `z`. The elements it may pass are in
 `K`, not below `z` (they come after its last predecessor) and not above `z` (maximality). So they
-are incomparable to `z`, and there are at most `π(z)` of them. That gives between 1 and `π(z)+1`
-slots, and at least one, at the end. So `e(K∪{z})/e(K) ∈ [1, π(z)+1]`. Chain down to `J = ∅` and
-back up. The chain has length `≤ |I(x)| ≤ D`. □
+are incomparable to `z`. `x` is incomparable to `z` but is not in `K`, so there are at most `π(z)−1`
+of them. That gives between 1 and `π(z)` slots, and at least one, at the end. So
+`e(K∪{z})/e(K) ∈ [1, π(z)]`. For `R`, dually, `z` is minimal in the complement, and `x` is not in it.
+For two admissible `J, J'`, go down from `J` to `∅` and back up to `J'`. Each leg has length
+`≤ |I(x)| ≤ D`. □
 
 **Local type.** Call `τ(x)` the isomorphism type of `P[I(x)]`, together with, for each minimal
 element `u` of `up(x)`, the set `pred(u) ∩ I(x)`, and dually for each maximal element of `D↓`.
@@ -498,7 +540,7 @@ element `u` of `up(x)`, the set `pred(u) ∩ I(x)`, and dually for each maximal 
 > **Proposition 5.6 (compact reduction) — PROVEN.** Fix `D`. Write the deficit ratio at index
 > `j` as `F_{τ,j}(L,R) = (Σ_{|J|=j} LR)² / ((Σ_{|J|=j−1} LR)(Σ_{|J|=j+1} LR))`. This is a
 > continuous function of the normalised weight vector `(L,R)`. By Lemma 5.2 the vector lies in the
-> compact box `B_D = [(D+1)^{−D}, (D+1)^{D}]^{2·#J}`. Let `S_τ ⊆ B_D` be the set of weight vectors
+> compact box `B_D = [(D+1)^{−D}, (D+1)^{D}]^{2·#J}` (Lemma 5.2's sharpened form gives the smaller box `[D^{−D}, D^{D}]^{2·#J}`; either works here). Let `S_τ ⊆ B_D` be the set of weight vectors
 > realised by finite posets in `Π_D` of type `τ`. Then **(QD_D) ⟺ for each of the finitely many
 > non-equality pairs `(τ, j)`, `inf_{S_τ} F_{τ,j} > 1`**. This holds **if** `F_{τ,j} > 1` on the
 > closure `S̄_τ`.
@@ -523,8 +565,15 @@ two independent reasons the standing facts do not supply it.
 > For arbitrary positive weights, `N_0 = L_∅R_∅`, `N_1 = L_aR_a + L_bR_b`, `N_2 = L_{ab}R_{ab}`, and
 > `N_1² ≥ N_0N_2` fails whenever `(L_aR_a + L_bR_b)² < L_∅R_∅L_{ab}R_{ab}`. For instance, take all
 > weights 1 except `L_{ab} = 3` and `R_∅ = 3`: then `(N_0,N_1,N_2) = (3,2,3)` and `4 < 9`. These
-> weights satisfy **every** constraint of Lemma 5.2 at `D = 2`: `L` is non-decreasing and `R`
-> non-increasing as `J` grows, with every one-step factor in `[1, 3] = [1, D+1]`.
+> weights satisfy **every** constraint of Lemma 5.2 at `D = 3`: `L` is non-decreasing and `R`
+> non-increasing as `J` grows, with every one-step factor in `[1, 3] = [1, D]`.
+>
+> *(Erratum, mg-a468.)* An earlier version said `D = 2`, which was right for the unsharpened
+> bound `[1, D+1]`. Under the sharpened bound `[1, D] = [1, 2]`, this type cannot violate Stanley.
+> In general, if every one-step factor is at most `F`, then
+> `N_0N_2 ≤ F²·min(L_a,L_b)²·min(R_a,R_b)² ≤ F²·L_aR_aL_bR_b ≤ (F²/4)·N_1²`,
+> and `F = 2` gives `N_1² ≥ N_0N_2`. The example's point, that box membership does not imply
+> Stanley, stands at `D = 3`.
 
 So `F_{τ,j} > 1` is **not** implied by membership in `B_D`. It depends on the realised weights
 satisfying further constraints: mixed-volume structure, and the log-concavity of the parts'
@@ -545,8 +594,25 @@ linear extensions**. It therefore bounds a **ratio of counts** from below. The S
 `N_i² − N_{i−1}N_{i+1}` is a **difference of products of counts**, and mg-dcae records that it is
 not expected to have a combinatorial (#P) interpretation. mg-dcae's own caveat also holds: that
 forbids an exact interpretation, not an inequality. So there is no set of objects whose fibres
-Lemma 3.1-style hopping could bound. **(QD_D) needs a lower bound on a signed quantity, and bounded
-range's only quantiser works on unsigned ones.**
+Lemma 3.1-style hopping could bound.
+
+*Erratum (audit mg-af00, §2.4).* The paragraph above overstates the obstruction. (QD_D) is
+`|L_i × L_i| ≥ (1+κ)|L_{i−1} × L_{i+1}|`, a **ratio of two set sizes**. An injection
+`L_{i−1}×L_{i+1} → L_i×L_i` with a `κ`-fraction surplus would prove exactly that. The "defect ∉ #P"
+results forbid an exact combinatorial interpretation of the difference. They do not forbid the
+inequality, and mg-dcae says so itself ("injective route **not** blocked").
+
+The quantiser does act on a sub-family (PROVEN in the audit, `code/audit_ksbft_af00/out_subfamily_af00.txt`).
+Take the configuration:
+- `I(x) = {a < b}`;
+- `a` is above all of `D↓`;
+- `b`'s successors in `up(x)` are all of `up(x)` except one minimal `d ∥ a, b`.
+
+There the deficit is `q²/(1+2q)` with `q = P[d first] ≥ 1/(D+1)`, so `κ ≥ 1/(3(D+1)²)`. For
+`up(x) = {d} ⊔ C_k` it equals `1/(D²−1)` at range `D = k+2`, which attains Prop 5.5's bound.
+
+This does not prove (QD_D). **(b) is therefore not an obstruction in principle: no general injection
+is known.** (a) remains the genuine obstruction.
 
 **Precise statement of what would finish (QD_D):**
 
@@ -603,8 +669,9 @@ tool (WMS_D), and even with that tool it yields a structural constraint, not the
 
 **Candidates tried and ruled out for the deep dive:**
 
-1. *Route B's `1/γ` perturbation via Dobrushin decay* (B2). Ruled out: Hyp A fails at every `γ ≤ 1/2`
-   on its constants (`γ_crit ≈ 27–936`), so no γ-side improvement can save it.
+1. *Route B's `1/γ` perturbation via Dobrushin decay* (B2). Ruled out: Hyp A fails on the whole window
+   `γ ∈ (0, 1/3 − δ_KL)` on its constants (`γ_crit ≈ 27–936`), so no γ-side improvement can save it.
+   Bounded range does not act on small γ at all (§2B row B2).
 2. *Probe D with co-degree `≤ D−1`* (A16). Ruled out: the local bound is already 1/6 at co-degree 2,
    range 2.
 3. *Probe B with spread `≤ D+1`* (A14). Ruled out: death at spread 4 needs only range 3.
@@ -618,9 +685,10 @@ tool (WMS_D), and even with that tool it yields a structural constraint, not the
 
 1. Carry §3's pattern as the answer to Daniel's question. **No walled route is revived into a proof.**
    The routes that dissolve are the ones whose targets H already makes true and useless. The routes
-   aimed at δ died on thin or structural obstructions, which H cannot touch.
+   aimed at δ died on thin or structural obstructions, which H cannot touch. The one exception is
+   A11/A12, whose range-`n` witness §5 takes up.
 2. If a δ-level tool is wanted from bounded range, it is **quantisation** (§3.3). Its known limit is
-   signed quantities. (WMS_D) is the cleanest open instance of that limit and is worth a scoping
+   signed quantities, stated as differences. §5.5(b) says this limit is not a proof of impossibility. (WMS_D) is the cleanest open instance of that limit and is worth a scoping
    ticket only if someone has a handle on equality cases for posets with boundary measures. That is
    a literature question: weighted/"multivariate" Stanley inequalities. It was not surveyed here.
 3. Audit targets: Prop 3.1(2),(6); Lemma 5.1's down-set claim; Lemma 5.2's slot count; Prop 5.5's

@@ -1,6 +1,8 @@
-# KSBFT-Q: localizing Linial's width-2 proof. It localizes exactly: a counterexample must be locally width ≥ 3 at BOTH ends, below the Linial crossing (PROVEN). The complementary "end balanced for another reason" fails for the local configurations {x} ∪ Inc(x) at both ends: an exact range-5 poset on 9 elements has its only balanced pairs in the middle (mg-5f14)
+# KSBFT-Q: localizing Linial's width-2 proof. It localizes exactly: a counterexample must be locally width ≥ 3 at BOTH ends, below the Linial crossing (PROVEN). The complementary "end balanced for another reason" fails for the local configurations {x} ∪ Inc(x) at both ends: an exact range-5 poset on 9 elements has no balanced pair inside either end window; its balanced pairs straddle the two end gadgets (mg-5f14)
 
 Instrument: `code/ksbft_q_local_width2_5f14/` (Python, exact integers/Fractions). `sh code/ksbft_q_local_width2_5f14/run_all.sh` regenerates every transcript (~1 h wall at 3 processes). The census files come from mg-eedd's generator (`code/ksbft_one_pt/onept.c`, reached through `code/ksbft_m_margin_6b81/pcert.c onept gen`). Its positive control is OEIS A000112 (1, 2, 5, 16, 63, 318, 2045, 16999, 183231 for n = 1..9, reproduced in `out_gen.txt`). The indecomposable counts also match earlier censuses: Π_3 gives 289 / 6 736 at n = 9 / 13 (mg-6b81 §1), and Π_4 gives 50 910 / 176 766 at n = 11 / 12 (mg-eedd).
+
+**Errata (mg-a468, per audit mg-3345, `docs/AUDIT-mg-3345.md` §4).** No theorem changes. Thm 2.1, Cors 2.2–2.4, Prop 2.5, Thm 3.1 and Lemmas 1.1/3.2/3.3 HOLD. Corrected: the §3.2 inclusion (it runs the other way; equality only at `j = k`), so verdict 5's "intersection" holds only at `j* = k`; verdict 6(a) "touching" → "inside"; the WIN-failure counts at range ≤ 6 are 2 / 18, not 4 / 29 (those are the BR counts); `P_9` has no middle — its balanced pairs straddle the two end gadgets, and the `n = 11` record is the genuinely interior example; Remark 2.6's labelling `(v_1, v_2) = (y, x)` is EMPIRICAL, not implied; "all posets" → "indecomposable posets"; Thm 3.1 needs "not a chain"; "5–15 points" → 4.1–14.9; "as it must" qualified.
 
 Labels, as in the other KSBFT files:
 - **PROVEN**: the proof is in this file.
@@ -39,18 +41,18 @@ Conventions: `Inc(x)` is the set of elements incomparable to `x`, so `π(x) = |I
 
 4. **The data is explained (§2.6, PROVEN + EMPIRICAL).**
    - On every one of mg-2912's 44 distinct δ < 0.35 records (`n` up to 24), Local Linial fires at one end, the crossing is at `j* = 0`, and the Linial pair attains δ. It fires at the bottom for 41 records and at the top for 3. The pair is the two minimal (resp. maximal) elements, with value `P[x first]`.
-   - PROVEN: if a minimal `y` has `Inc(y) = {x}`, then `P[x before y] = h(y) − 1`. With `y = v_1` this is **exactly** mg-2912's "δ = M = d_1, extreme element with one incomparable".
+   - PROVEN: if a minimal `y` has `Inc(y) = {x}`, then `P[x before y] = h(y) − 1` (the special case `W = {w}` of KSBFT-A §6's `δ(v_1, w) = d_1`; not new). With `y = v_1` this gives mg-2912's "δ = M = d_1, extreme element with one incomparable"; that the pair is then `(v_1, v_2)` is EMPIRICAL (44/44 records), not implied.
    - Near-extremal posets are the ones where Linial's ladder stops at its first rung.
 
 5. **The obstruction: Linial does not extend past a local 3-antichain (§3, PROVEN by exact witnesses).**
-   - At the branch, the threshold event `{f(x) ≤ j*+1}` is still balanced (Lemma 3.2, PROVEN, every poset). But it is an *intersection* `{x before u} ∩ {x before v}` of pair events, and nothing forces any one pair to be balanced.
+   - At the branch, the threshold event `{f(x) ≤ j*+1}` is still balanced (Lemma 3.2, PROVEN, every poset). When `j* = k` it is an *intersection* `{x before u} ∩ {x before v}` of pair events, and nothing forces any one pair to be balanced. (For `j* > k` it is not an intersection: `∩_U {x before u} = {f(x) ≤ k+1}` is strictly smaller. In a counterexample `j* ≥ k`; e.g. `W8`'s bottom has `k = 0`, `j* = 2`.)
    - The only constraints are `P[x<u], P[x<v] ≥ S_k` and `P[x<u] + P[x<v] ≤ 1 + S_k` (Lemma 3.3).
    - Witness `6 0 0 2 2 3 f`: both `(x,u)` and `(x,v)` are at `19/26`. The balance moves to `(u, v)`, at 1/2.
 
 6. **The step-3 question: every bottom end locally width 2 or balanced for another reason? No, in every bounded-configuration form I could state.**
-   - (a) **Balance inside `{x} ∪ Inc(x)` for some extreme `x`, at either end (WIN), is FALSE at range 5.** Exact witness `P_9 = 9 0 0 2 2 3 b 2b 2f 7f` (hex down-masks; range 5, width 3, self-dual, a Y-gadget at each end). Its only balanced pairs are `(2,4), (2,5), (4,5)`, in the middle. Every pair touching `{x} ∪ Inc(x)` for an extreme `x` is outside `[1/3, 2/3]` (§3.4). Census: 1 / 4 / 0 such posets at range ≤ 5 for `n = 9 / 10 / 11`, and 4 / 29 at range ≤ 6 for `n = 9 / 10`, plus the `n = 11` record below. Whether they persist for large `n` at fixed D is OPEN (§5).
-   - (b) The narrower "branch lemma" BR (some pair in `{x} ∪ C ∪ U` is balanced) fails there too. It also fails at range 6, `n = 11`: this is mg-2912's own `min δ` record at π = 6, δ = 134/375.
-   - (c) **A local 3-antichain gives balance by no known argument, and by no true one in the naive form.** "`≥ 3` minimal elements ⇒ some pair of minimal elements balanced" is FALSE: exact range-6 witness on 8 elements with no isolated element; 2 622 counterexamples among all posets with `n = 9` (1 762 of them have an element comparable to nothing). EMPIRICAL: it holds for range `≤ 5` in the whole census here (`n ≤ 11` at D=5, `n ≤ 12` at D=4, `n ≤ 13` at D=3).
+   - (a) **Balance inside `{x} ∪ Inc(x)` for some extreme `x`, at either end (WIN), is FALSE at range 5.** Exact witness `P_9 = 9 0 0 2 2 3 b 2b 2f 7f` (hex down-masks; range 5, width 3, self-dual, a Y-gadget at each end). Its only balanced pairs are `(2,4), (2,5), (4,5)`. No pair lying **inside** `{x} ∪ Inc(x)` for an extreme `x` is balanced (§3.4). All three balanced pairs do *touch* an end window: `P_9` has no middle (the windows `{0,1,2,3}`, `{4,6,7,8}` and the element `5` are all of it), and its balanced pairs straddle the two gadgets — `(2,4)` joins the bottom gadget's `u` to the top gadget's `u`. The genuinely interior example is the `n = 11` range-6 record below. Census: 1 / 4 / 0 such posets at range ≤ 5 for `n = 9 / 10 / 11`, and 2 / 18 at range ≤ 6 for `n = 9 / 10` (the BR counts there are 4 / 29), plus the `n = 11` record below. Whether they persist for large `n` at fixed D is OPEN (§5).
+   - (b) The narrower "branch lemma" BR (some pair in `{x} ∪ C ∪ U` is balanced) fails there too. It also fails at range 6, `n = 11`: this is mg-2912's own `min δ` record at π = 6, δ = 134/375, whose balanced pairs `(4,5)` and `(4,7)` touch no end window.
+   - (c) **A local 3-antichain gives balance by no known argument, and by no true one in the naive form.** "`≥ 3` minimal elements ⇒ some pair of minimal elements balanced" is FALSE: exact range-6 witness on 8 elements with no isolated element; 2 622 counterexamples among the indecomposable posets with `n = 9` (1 762 of them have an element comparable to nothing). EMPIRICAL: it holds for range `≤ 5` in the whole census here (`n ≤ 11` at D=5, `n ≤ 12` at D=4, `n ≤ 13` at D=3).
    - What survives is mg-e8b4's **computer-proven** bottom window of N_D canonical elements (D ≤ 7; `N_5 = 15 ≥ 9`, so no conflict). It is a finite check, not a mechanism.
 
 7. **Coverage (EMPIRICAL, §4).** Local Linial at either end (quantitative form) fires on:
@@ -58,11 +60,11 @@ Conventions: `Inc(x)` is the set of elements incomparable to `x`, so `π(x) = |I
    - 73% at range ≤ 4 (`n = 12`);
    - 63% at range ≤ 5 (`n = 11`);
    - 49% at range ≤ 6 (`n = 10`);
-   - 34% of all posets at `n = 9`.
+   - 34% of the indecomposable posets at `n = 9` (any range).
 
-   Zero violations of Thm 2.1 or Lemma 1.1 anywhere; both checks fire under their controls. Everything Linial does not cover is O1 or O2, as Thm 3.1 says it must be.
+   Zero violations of Thm 2.1 or Lemma 1.1 anywhere; both checks fire under their controls. Everything Linial does not cover is O1 or O2: the proof of Thm 3.1 (ii)–(iii) uses only "LL does not fire at that end".
 
-**Bottom line.** The localization works, and it gives a clean necessary condition on counterexamples: a low 3-antichain at both ends. That condition is not closed by any local argument at the ends. The range-5 witness shows the balance can be forced off both ends into the middle even at `n = 9`. Whether that persists for long posets at fixed D is open: at range 5 the census has such posets at `n = 9, 10` and none at `n = 11`. The next conceptual object is the Y-gadget/3-antichain transfer, i.e. how balance propagates inward. That is the 1/3–2/3 problem proper, not a width-2 problem.
+**Bottom line.** The localization works, and it gives a clean necessary condition on counterexamples: a low 3-antichain at both ends. That condition is not closed by any local argument at the ends. The range-5 witness shows that no end window need contain a balanced pair even at `n = 9`: its balanced pairs straddle the two end gadgets (it has no middle). The `n = 11` range-6 record has genuinely interior balanced pairs. Whether that persists for long posets at fixed D is open: at range 5 the census has such posets at `n = 9, 10` and none at `n = 11`. The next conceptual object is the Y-gadget/3-antichain transfer, i.e. how balance propagates inward. That is the 1/3–2/3 problem proper, not a width-2 problem.
 
 ---
 
@@ -146,14 +148,14 @@ Thm 2.1 gives no margin above 1/3. `S_{j*}` can sit at exactly 1/3: in `2+1` (`3
 
 **Remark 2.6 (PROVEN).** Let `y` be minimal with `Inc(y) = {x}`. Then `x` is minimal too: `w < x` would force `w > y`, which is impossible since `x ∥ y`. And `P[x before y] = P[x first] = P[f(y) = 2] = E f(y) − 1 = h(y) − 1`.
 
-So if `y = v_1` in h-order, the end pair `(v_1, v_2) = (y, x)` has `min(p, 1−p) = d_1` whenever `d_1 ≤ 1/2`. This is Thm 2.1 at `j* = 0`, with `x` the poorer minimal element and `c_1 = y`. It is **exactly** mg-2912's pattern: "δ attained at an END pair, δ = M = d_1, the extreme element has exactly one incomparable" (`docs/KSBFT-A-range-probe.md` §6).
+So if `y = v_1` in h-order, the pair `(y, x)` has `min(p, 1−p) = d_1` whenever `d_1 ≤ 1/2`. This is Thm 2.1 at `j* = 0`, with `x` the poorer minimal element and `c_1 = y`. The value identity is not new: it is the special case `W = {w}` of `δ(v_1, w) = d_1` in `docs/KSBFT-A-range-probe.md` §6, which is mg-2912's pattern "δ attained at an END pair, δ = M = d_1, the extreme element has exactly one incomparable". That `x = v_2`, i.e. the pair is `(v_1, v_2)`, is **not** implied (`y < a < b < c` plus an isolated `x` has h-order `y, a, x, …`; audit mg-3345 `out_remark26.txt`). It holds on all 44 δ < 0.35 records (EMPIRICAL, audit `out_rec44.txt`).
 
 **EMPIRICAL (`out_records.txt`).** mg-2912 kept 2 534 distinct records with `n ≥ 3` (exhaustive extremes and annealing witnesses, `n` up to 24), deduplicated here by down-mask list. 44 of them have δ < 0.35. For every one of the 44:
 - Thm 2.1 fires at one end (the bottom for 41, the top for 3);
 - the crossing is at `j* = 0`;
 - the Linial pair attains δ.
 
-Over all 2 534 records, Thm 2.1 fires at some end for every width-2 record (528 of 528), as it must. For width 3 it fires on 661 of 940, for width 4 on 410 of 662, and for widths 10 and 11 on 0 of 10.
+Over all 2 534 records, Thm 2.1 fires at some end for every width-2 record (528 of 528). That is forced only for width-2 posets with `≥ 2` minimal or `≥ 2` maximal elements: LL is applied to `P`, not to its components, and on the width-2 diamond it fires at neither end. For width 3 it fires on 661 of 940, for width 4 on 410 of 662, and for widths 10 and 11 on 0 of 10.
 
 Reading: small δ occurs exactly when the ladder stops at its first rung with `P[x first]` just above 1/3. The width-2 shape is what makes the first rung a single pair.
 
@@ -163,7 +165,7 @@ Reading: small δ occurs exactly when the ladder stops at its first rung with `P
 
 ### 3.1 Necessary structure of a counterexample
 
-**Theorem 3.1 (PROVEN).** Let `P` be finite with no balanced pair. Pass to a component of `G(P)` that is not a single point, so `P` is indecomposable and `n ≥ 2`; an indecomposable `P` has `≥ 2` minimal elements. Then for **every** minimal `x` with `P[x first] ≤ 2/3`, and there is at least one:
+**Theorem 3.1 (PROVEN).** Let `P` be finite, not a chain, with no balanced pair. Pass to a component of `G(P)` that is not a single point, so `P` is indecomposable and `n ≥ 2`; an indecomposable `P` has `≥ 2` minimal elements. Then for **every** minimal `x` with `P[x first] ≤ 2/3`, and there is at least one:
 - (i) `S_{k−1} < 1/3`, where `k` is the chain-bottom length of `Inc(x)`;
 - (ii) `3k < π(x) + 1`;
 - (iii) `Inc(x) ≠ C`, and `U = min(Inc(x) ∖ C)` has `≥ 2` elements. Each `u ∈ U` is above all of `C`, and `{x} ∪ U` is an antichain.
@@ -184,7 +186,7 @@ For the last two sentences: `y` is minimal and `≠ x`, so `y ∈ Inc(x)`. If th
 
 *Proof.* The argument of Thm 2.1 without (L2). □
 
-So a balanced **event** always exists at the bottom. Linial's structure is exactly what makes it a **pair** event. Beyond the branch rank `k`, `{f(x) ≤ j+1} ⊆ ∩_{u ∈ U} {x before u}` is strictly smaller than each pair event.
+So a balanced **event** always exists at the bottom. Linial's structure is exactly what makes it a **pair** event. At the branch, with `U = min(Inc(x) ∖ C)`, `∩_{u ∈ U} {x before u} = {|J| ≤ k} = {f(x) ≤ k+1}`, which is strictly smaller than each pair event. For `j > k` the threshold event `{f(x) ≤ j+1}` contains this intersection (strictly, unless `q_{k+1} = … = q_j = 0`) and is not itself an intersection of pair events `{x before u}`, `u ∈ U`. *(Erratum, mg-3345: an earlier version stated the inclusion the other way round for `j > k`; that is false, e.g. on the Y-gadget plus an isolated `x`.)*
 
 **Lemma 3.3 (PROVEN).** At a branch with `U = {u, v}` exactly:
 - `P[x before u] ≥ S_k` and `P[x before v] ≥ S_k`;
@@ -203,21 +205,21 @@ The balance moves to `(u, v) = (2, 3)` at 1/2, by the automorphism swapping them
 
 `5 0 0 2 2 b`: Thm 2.1 fails at both ends. At the bottom, `x = 0` has `k = 1 < (3+1)/3` and `S_0 = 3/11`. At the top, the poorer maximal element has `k = 1`, `m = 3`, and `S_0 = 3/11`. The balanced pairs are `(0,3)` at `7/11` and `(2,3)` at `4/11`. Both still touch the gadget.
 
-### 3.4 Balance forced off both ends: the range-5 witness
+### 3.4 No balanced pair inside either end window: the range-5 witness
 
 `P_9 = 9 0 0 2 2 3 b 2b 2f 7f` (hex strict down-masks). It has range 5, width 3, and `e = 197`, and it is self-dual (isomorphic to its dual; checked by brute force over `9!` relabellings). Covers: `1<2, 1<3, 0<4, 1<4, 0<5, 3<5, 5<6, 2<7, 5<7, 2<8, 4<8, 6<8`.
 
 - Bottom Y-gadget: `x = 0 ∥ {1, 2, 3}`, `1 < 2`, `1 < 3`, `2 ∥ 3`. `P[0 first] = 62/197 ≈ 0.315 < 1/3`. The ladder crosses at `j = 1` (`S_1 = 124/197`). The two pair events it is the intersection of are both unbalanced: `P[0<2] = 161/197` and `P[0<3] = 138/197`. Also `P[2<3] = 59/197`.
 - Top: the mirror image.
-- **Every balanced pair:** `(2,4)` at 130/197, `(2,5)` at 118/197, `(4,5)` at 79/197. None of them lies inside `{x} ∪ Inc(x)` for an extreme element `x` at either end (WIN fails), so none lies in `{x} ∪ C ∪ U` either (BR fails).
+- **Every balanced pair:** `(2,4)` at 130/197, `(2,5)` at 118/197, `(4,5)` at 79/197. None of them lies inside `{x} ∪ Inc(x)` for an extreme element `x` at either end (WIN fails), so none lies in `{x} ∪ C ∪ U` either (BR fails). They are not "in the middle": the end windows `{0,1,2,3}` and `{4,6,7,8}` together with `5` are all of `P_9`, and every balanced pair touches an end window. They **straddle the two gadgets**: `(2,4)` joins the bottom gadget's `u = 2` to the top gadget's `u = 4`, `(2,5)` touches the bottom window, `(4,5)` the top.
 
-It is a proven instance: the numbers are exact, and `show.py` reproduces them. So **the proposition "the bottom end contains a balanced pair directly, or has local width-2 structure to which Linial applies" is FALSE** whenever "bottom end" means the local configuration at a minimal element: `{x} ∪ Inc(x)`, of size `≤ D + 1`, even at both ends together. By the census, the first failures occur at range 5: 1 poset at `n = 9`, 4 at `n = 10`, and **none at `n = 11`**. At range ≤ 6 there are 4 at `n = 9` and 29 at `n = 10`. None occurs at range ≤ 4 for `n ≤ 12`, or at range ≤ 3 for `n ≤ 13`. So these witnesses are short posets, with a gadget at each end and a small middle. The census does not show whether the phenomenon persists as `n → ∞` at fixed D; the range-5 count going to 0 at `n = 11` suggests it may not. That question is open (§5). The same gadget closed at `n = 11` is mg-2912's range-6 `min δ` record (`11 0 0 2 2 3 b 2b 2f af bf 1ff`, δ = 134/375). There too, the only balanced pairs are interior: `(2,5), (4,5), (4,7), (6,7)`. WIN and BR fail at both ends of it as well (checked with `probe.window_tests`). So at range 6 the phenomenon reaches at least `n = 11`, which is the range-≤6 census limit of mg-2912.
+It is a proven instance: the numbers are exact, and `show.py` reproduces them. So **the proposition "the bottom end contains a balanced pair directly, or has local width-2 structure to which Linial applies" is FALSE** whenever "bottom end" means the local configuration at a minimal element: `{x} ∪ Inc(x)`, of size `≤ D + 1`, even at both ends together. By the census, the first failures occur at range 5: 1 poset at `n = 9`, 4 at `n = 10`, and **none at `n = 11`**. At range ≤ 6, WIN fails at both ends in 2 posets at `n = 9` and 18 at `n = 10` (BR, the narrower window, fails in 4 and 29). None occurs at range ≤ 4 for `n ≤ 12`, or at range ≤ 3 for `n ≤ 13`. So these witnesses are short posets, with a gadget at each end and a small middle. The census does not show whether the phenomenon persists as `n → ∞` at fixed D; the range-5 count going to 0 at `n = 11` suggests it may not. That question is open (§5). The same gadget closed at `n = 11` is mg-2912's range-6 `min δ` record (`11 0 0 2 2 3 b 2b 2f af bf 1ff`, δ = 134/375). Its balanced pairs are `(2,5), (4,5), (4,7), (6,7)`; `(4,5)` and `(4,7)` touch no end window, so this record, not `P_9`, is the genuinely interior example. WIN and BR fail at both ends of it as well (checked with `probe.window_tests`). So at range 6 the phenomenon reaches at least `n = 11`, which is the range-≤6 census limit of mg-2912 (that limit is not re-checked by audit mg-3345).
 
 ### 3.5 Local 3-antichains do not give balance by themselves
 
 The ticket asks whether "a local antichain of size 3 gives balance by a known argument". I know of none: no result in the literature I am aware of derives balance from a 3-antichain. The natural candidate is refuted:
 
-- **FALSE:** "`≥ 3` minimal elements ⇒ some pair of minimal elements is balanced." Exact witness `8 0 0 0 4 4 6 16 2f` (range 6, no element comparable to nothing). Its minimal elements are `0, 1, 2`, with `P[0<1] = 9/28` and the other two pairs outside `[1/3, 2/3]` as well. Counts (`out_min3.txt`): 8 / 155 / 2 622 counterexamples at `n = 7 / 8 / 9` (all posets). They have range `≥ 6`. Most, but not all, have an element comparable to nothing: 142 of 155 at `n = 8`, 1 762 of 2 622 at `n = 9`.
+- **FALSE:** "`≥ 3` minimal elements ⇒ some pair of minimal elements is balanced." Exact witness `8 0 0 0 4 4 6 16 2f` (range 6, no element comparable to nothing). Its minimal elements are `0, 1, 2`, with `P[0<1] = 9/28` and the other two pairs outside `[1/3, 2/3]` as well. Counts (`out_min3.txt`): 8 / 155 / 2 622 counterexamples at `n = 7 / 8 / 9` (indecomposable posets with `≥ 3` minimal elements; `min3.py` skips disconnected `G(P)`). They have range `≥ 6`. Most, but not all, have an element comparable to nothing: 142 of 155 at `n = 8`, 1 762 of 2 622 at `n = 9`.
 - **EMPIRICAL:** at range `≤ 5` it holds on the whole census (D=3 `n ≤ 13`, D=4 `n ≤ 12`, D=5 `n ≤ 11`; last column of §4). I do not conjecture it for all `n` at `D ≤ 5`: the census reaches only `n ≈ 2D`.
 
 ---
@@ -263,7 +265,7 @@ Checks (`summary.py` exits 1 otherwise):
 Readings:
 - At fixed D the LL share is flat in `n`: 86–87% at D=3, 73–75% at D=4, 61–63% at D=5, 48–49% at D=6.
 - It falls with D, and the share at the bottom alone is lower: 64%, 48%, 39%, 28–29%.
-- At D = 3, structural LL (Cor 2.3) equals quantitative LL on every row. At D ≥ 4 the quantitative form adds 5–15 points.
+- At D = 3, structural LL (Cor 2.3) equals quantitative LL on every row. At D ≥ 4 the quantitative form adds 4.1–14.9 points (4.1–5.0 at D = 4, 8.1–8.9 at D = 5, 13.9–14.9 at D = 6).
 - The complement is O1 ∪ O2 (Thm 3.1). So at range 3, about 13% of indecomposable posets have a low 3-antichain at both ends.
 
 ---
