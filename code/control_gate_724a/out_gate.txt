@@ -4,9 +4,9 @@ mg-724a — MERGE GATE over the two control suites mg-9876 audited
 
 §1  THE SUITES, RUN — and what each one costs on the merge critical path
 --------------------------------------------------------------------------------------------
-  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   4.5s  11818 bytes
-  audit  code/control_audit_9876/run_all.sh         exit 0   44.3s  55017 bytes
-         (both suites)                                   48.8s total
+  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0   6.4s  11818 bytes
+  audit  code/control_audit_9876/run_all.sh         exit 0   54.9s  55053 bytes
+         (both suites)                                   61.2s total
 
 §2  OBSERVED vs BASELINE.json
 --------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ audit.runner_exit                  gated     MATCH                       baselin
 audit.selftest_scored              gated     MATCH                       baseline=6  observed=6
 audit.selftest_total               gated     MATCH                       baseline=6  observed=6
 audit.sites                        gated     MATCH                       baseline=86  observed=86
-audit.sweep_dirs_without_evidence  recorded  MOVED (recorded, not gated)  baseline=25  observed=34
+audit.sweep_dirs_without_evidence  recorded  MOVED (recorded, not gated)  baseline=25  observed=35
 audit.sweep_grade                  gated     MATCH                       baseline="OK"  observed="OK"
 audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseline=207  observed=222
 audit.sweep_tee_sites              recorded  MOVED (recorded, not gated)  baseline=19  observed=27
@@ -116,5 +116,5 @@ twin.worklist                      gated     MATCH                       baselin
 ============================================================================================
 GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
 shown able to fail on 16 probes and to refuse in 8 worlds, on this run, against
-these bytes.  Total 48.9s.
+these bytes.  Total 61.3s.
 ============================================================================================
