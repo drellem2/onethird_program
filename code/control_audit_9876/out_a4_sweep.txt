@@ -14,7 +14,7 @@ which §3 reads including this very file.  Both exclusions are fixed points: a p
 moved on every gate run would make the same-pin clause unreachable, and a change made
 here must never buy the exemption.  a4_sweep.py names the one dependency left out.
 
-corpus pin: e300c91bf8ee  (278 directories, 3667 files, excluding code/control_audit_9876/)
+corpus pin: 02deae30a511  (278 directories, 3701 files, excluding code/control_audit_9876/)
 producer pin: 2b1b86a662fc  (the .py and .sh of code/control_audit_9876/, which the corpus pin excludes — a moved one is this instrument's owner's to refresh)
 
 population: 278 directories under code/
@@ -127,7 +127,7 @@ failure.  A directory with neither has no evidence its instrument can fail; that
 weaker than saying it cannot.
 
   ships a file named for negative/self/positive-control : 167 of 278
-  a committed transcript records a demonstrated failure  : 174 of 278
+  a committed transcript records a demonstrated failure  : 175 of 278
   NEITHER, though the directory ships code               : 49 of 278
 
   directories with code and no evidence of a falsification attempt:
