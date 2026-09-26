@@ -1,0 +1,64 @@
+B7_0: 7 0 0 2 2 3 b 2b
+   n=7 e=62 range=5 connected; cross-check: enumeration AGREES
+   bottom-window P[0<1] = 10/31 = 0.32258
+   bottom-window P[0<2] = 26/31 = 0.83871
+   bottom-window P[0<3] = 22/31 = 0.70968
+   bottom-window P[2<3] = 17/62 = 0.27419
+   balanced P[2<4] = 18/31 = 0.58065
+   balanced P[2<5] = 17/31 = 0.54839
+   balanced P[4<5] = 14/31 = 0.45161
+B7_3: 10 0 0 2 2 3 b 2b 3f 7f ff
+   n=10 e=260 range=5 connected; cross-check: enumeration AGREES
+   bottom-window P[0<1] = 21/65 = 0.32308
+   bottom-window P[0<2] = 54/65 = 0.83077
+   bottom-window P[0<3] = 93/130 = 0.71538
+   bottom-window P[2<3] = 77/260 = 0.29615
+   balanced P[2<4] = 38/65 = 0.58462
+   balanced P[2<5] = 77/130 = 0.59231
+   balanced P[4<5] = 1/2 = 0.50000
+   balanced P[8<9] = 161/260 = 0.61923
+B7_6: 13 0 0 2 2 3 b 2b 3f 7f ff 1ff 3ff 7ff
+   n=13 e=1102 range=5 connected; cross-check: enumeration AGREES
+   bottom-window P[0<1] = 178/551 = 0.32305
+   bottom-window P[0<2] = 458/551 = 0.83122
+   bottom-window P[0<3] = 394/551 = 0.71506
+   bottom-window P[2<3] = 325/1102 = 0.29492
+   balanced P[2<4] = 322/551 = 0.58439
+   balanced P[2<5] = 325/551 = 0.58984
+   balanced P[4<5] = 274/551 = 0.49728
+   balanced P[11<12] = 681/1102 = 0.61797
+B7_20: 27 0 0 2 2 3 b 2b 3f 7f ff 1ff 3ff 7ff fff 1fff 3fff 7fff ffff 1ffff 3ffff 7ffff fffff 1fffff 3fffff 7fffff ffffff 1ffffff
+   n=27 e=928957 range=5 connected; cross-check: skipped (e too large)
+   bottom-window P[0<1] = 300100/928957 = 0.32305
+   bottom-window P[0<2] = 772142/928957 = 0.83119
+   bottom-window P[0<3] = 664279/928957 = 0.71508
+   bottom-window P[2<3] = 274027/928957 = 0.29498
+   balanced P[2<4] = 542886/928957 = 0.58440
+   balanced P[2<5] = 548054/928957 = 0.58997
+   balanced P[4<5] = 462083/928957 = 0.49742
+   balanced P[25<26] = 574127/928957 = 0.61803
+Q_0: 18 0 0 2 2 3 b 2b 2f 7f ff 1ff 3ff fff 3ff 1fff 7ff ffff 3fff
+   n=18 e=57034 range=5 connected; cross-check: skipped (e too large)
+   bottom-window P[0<1] = 8942/28517 = 0.31357
+   bottom-window P[0<2] = 23216/28517 = 0.81411
+   bottom-window P[0<3] = 19938/28517 = 0.69916
+   bottom-window P[2<3] = 17293/57034 = 0.30321
+   balanced P[2<5] = 17293/28517 = 0.60641
+   balanced P[4<5] = 11224/28517 = 0.39359
+   balanced P[6<7] = 18723/28517 = 0.65656
+   balanced P[10<11] = 18723/28517 = 0.65656
+   balanced P[12<13] = 11224/28517 = 0.39359
+   balanced P[12<15] = 17293/28517 = 0.60641
+Q_14: 46 0 0 2 2 3 b 2b 2f 7f ff 1ff 3ff 7ff fff 1fff 3fff 7fff ffff 1ffff 3ffff 7ffff fffff 1fffff 3fffff 7fffff ffffff 1ffffff 3ffffff 7ffffff fffffff 1fffffff 3fffffff 7fffffff ffffffff 1ffffffff 3ffffffff 7ffffffff fffffffff 1fffffffff 3fffffffff ffffffffff 3fffffffff 1ffffffffff 7fffffffff fffffffffff 3ffffffffff
+   n=46 e=40440798401 range=5 connected; cross-check: skipped (e too large)
+   bottom-window P[0<1] = 12684129350/40440798401 = 0.31365
+   bottom-window P[0<2] = 32932069751/40440798401 = 0.81433
+   bottom-window P[0<3] = 28278417042/40440798401 = 0.69925
+   bottom-window P[2<3] = 12251506556/40440798401 = 0.30295
+   balanced P[2<5] = 24503013112/40440798401 = 0.60590
+   balanced P[4<5] = 15937785289/40440798401 = 0.39410
+   balanced P[6<7] = 26674163496/40440798401 = 0.65959
+   balanced P[38<39] = 26674163496/40440798401 = 0.65959
+   balanced P[40<41] = 15937785289/40440798401 = 0.39410
+   balanced P[40<43] = 24503013112/40440798401 = 0.60590
+RESULT cross-checks agree

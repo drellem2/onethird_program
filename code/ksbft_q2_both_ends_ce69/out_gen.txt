@@ -1,0 +1,16 @@
+gen n=1 D=-1 from 1 classes: candidates=1 leaves=1 classes=1
+gen n=2 D=-1 from 1 classes: candidates=2 leaves=3 classes=2
+gen n=3 D=-1 from 2 classes: candidates=7 leaves=14 classes=5
+gen n=4 D=-1 from 5 classes: candidates=28 leaves=78 classes=16
+gen n=5 D=-1 from 16 classes: candidates=135 leaves=495 classes=63
+gen n=6 D=-1 from 63 classes: candidates=766 leaves=3475 classes=318
+gen n=7 D=-1 from 318 classes: candidates=5439 leaves=27318 classes=2045
+gen n=8 D=-1 from 2045 classes: candidates=48346 leaves=239836 classes=16999
+gen n=9 D=-1 from 16999 classes: candidates=550338 leaves=2408347 classes=183231
+gen n=9 D=3 from 16999 classes: candidates=550338 leaves=30872 classes=2942
+gen n=10 D=3 from 2942 classes: candidates=55020 leaves=105297 classes=8362
+gen n=11 D=3 from 8362 classes: candidates=174068 leaves=363001 classes=23701
+gen n=12 D=3 from 23701 classes: candidates=542884 leaves=1259984 classes=67116
+gen n=9 D=4 from 16999 classes: candidates=550338 leaves=110862 classes=13176
+gen n=10 D=4 from 13176 classes: candidates=302982 leaves=477918 classes=48272
+gen n=11 D=4 from 48272 classes: candidates=1236740 leaves=1959465 classes=178811

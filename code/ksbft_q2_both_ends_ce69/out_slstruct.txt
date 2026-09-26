@@ -1,0 +1,38 @@
+file p3.txt posets=2 struct=2 nested_bal=2
+file p4.txt posets=7 struct=7 nested_bal=7
+file p5.txt posets=31 struct=31 nested_bal=31
+file p6.txt posets=184 struct=184 nested_bal=184
+file p7.txt posets=1351 struct=1351 nested_bal=1351
+STRUCT_FAILS 8 0 0 0 4 5 6 e 2f range 5
+STRUCT_FAILS 8 0 0 2 1 2 13 1b 37 range 5
+STRUCT_FAILS 8 0 0 2 1 2 13 1b 3f range 5
+STRUCT_FAILS 8 0 0 2 2 3 b 1b 2f range 5
+STRUCT_FAILS 8 0 0 2 2 a b 7 5f range 4
+file p8.txt posets=12524 struct=12519 nested_bal=12524 wit=5
+STRUCT_FAILS 9 0 0 0 0 4 8 a d 2e range 7
+STRUCT_FAILS 9 0 0 0 0 8 a c 1c 5e range 8
+STRUCT_FAILS 9 0 0 0 4 2 1 16 23 d range 6
+STRUCT_FAILS 9 0 0 0 4 2 4 26 7 b7 range 7
+STRUCT_FAILS 9 0 0 0 4 2 4 26 d 37 range 6
+STRUCT_FAILS 9 0 0 0 4 2 4 26 f 37 range 6
+STRUCT_FAILS 9 0 0 0 4 2 4 26 36 67 range 7
+STRUCT_FAILS 9 0 0 0 4 2 6 5 d 57 range 6
+file p9part_aa posets=56106 struct=56078 nested_bal=56106 wit=8
+STRUCT_FAILS 9 0 0 0 4 4 14 6 1e 57 range 7
+STRUCT_FAILS 9 0 0 0 4 4 6 16 d 37 range 6
+STRUCT_FAILS 9 0 0 0 4 4 6 16 f 37 range 6
+STRUCT_FAILS 9 0 0 0 4 4 6 16 36 77 range 7
+STRUCT_FAILS 9 0 0 0 4 5 c 6 2e 4f range 6
+STRUCT_FAILS 9 0 0 0 4 5 6 c 4e 6f range 6
+STRUCT_FAILS 9 0 0 0 4 5 6 e 26 af range 6
+STRUCT_FAILS 9 0 0 0 4 6 5 16 e af range 6
+file p9part_ab posets=54219 struct=54150 nested_bal=54219 wit=8
+STRUCT_FAILS 9 0 0 1 2 a a 2b 2f 7b range 6
+STRUCT_FAILS 9 0 0 1 2 a a 2b 2f 7f range 5
+STRUCT_FAILS 9 0 0 2 2 2 12 1a 17 3b range 6
+STRUCT_FAILS 9 0 0 2 2 6 a 3 4b 2f range 6
+STRUCT_FAILS 9 0 0 2 2 6 a 3 4b 6f range 6
+STRUCT_FAILS 9 0 0 2 2 6 3 b 2b 4f range 6
+STRUCT_FAILS 9 0 0 2 2 6 3 b 2b 5f range 5
+STRUCT_FAILS 9 0 0 2 2 6 3 b 2b 6f range 6
+file p9part_ac posets=36143 struct=36102 nested_bal=36143 wit=8

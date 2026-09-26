@@ -1,0 +1,70 @@
+== W6: 6 0 0 2 2 3 f  e=26
+   P pivot 2; chain [3] (full); rungs ['1/2']; steps ['1/2', '1/2']; balanced rung (2,3) = 1/2
+   P pivot 3; chain [2] (full); rungs ['1/2']; steps ['1/2', '1/2']; balanced rung (3,2) = 1/2
+   D pivot 2; chain [3] (full); rungs ['1/2']; steps ['1/2', '1/2']; balanced rung (2,3) = 1/2
+   D pivot 3; chain [2] (full); rungs ['1/2']; steps ['1/2', '1/2']; balanced rung (3,2) = 1/2
+== P9: 9 0 0 2 2 3 b 2b 2f 7f  e=197
+   P pivot 2; chain [3, 5, 6] (full); rungs ['59/197', '118/197', '166/197']; steps ['59/197', '59/197', '48/197', '31/197']; balanced rung (2,5) = 118/197
+   P pivot 2; chain [4] (full); rungs ['130/197']; steps ['130/197', '67/197']; balanced rung (2,4) = 130/197
+   P pivot 2; chain [5, 6] (full); rungs ['118/197', '166/197']; steps ['118/197', '48/197', '31/197']; balanced rung (2,5) = 118/197
+   P pivot 4; chain [5]; rungs ['79/197']; steps ['79/197']; balanced rung (4,5) = 79/197
+   D pivot 2; chain [5]; rungs ['79/197']; steps ['79/197']; balanced rung (2,5) = 79/197
+   D pivot 4; chain [2] (full); rungs ['130/197']; steps ['130/197', '67/197']; balanced rung (4,2) = 130/197
+   D pivot 4; chain [5, 3] (full); rungs ['118/197', '166/197']; steps ['118/197', '48/197', '31/197']; balanced rung (4,5) = 118/197
+   D pivot 4; chain [6, 5, 3] (full); rungs ['59/197', '118/197', '166/197']; steps ['59/197', '59/197', '48/197', '31/197']; balanced rung (4,5) = 118/197
+== B7: 7 0 0 2 2 3 b 2b  e=62
+   P pivot 2; chain [3, 5, 6] (full); rungs ['17/62', '17/31', '24/31']; steps ['17/62', '17/62', '7/31', '7/31']; balanced rung (2,5) = 17/31
+   P pivot 2; chain [4] (full); rungs ['18/31']; steps ['18/31', '13/31']; balanced rung (2,4) = 18/31
+   P pivot 2; chain [5, 6] (full); rungs ['17/31', '24/31']; steps ['17/31', '7/31', '7/31']; balanced rung (2,5) = 17/31
+   P pivot 4; chain [5, 6] (full); rungs ['14/31', '45/62']; steps ['14/31', '17/62', '17/62']; balanced rung (4,5) = 14/31
+   D pivot 2; chain [4, 0] (full); rungs ['13/31', '26/31']; steps ['13/31', '13/31', '5/31']; balanced rung (2,4) = 13/31
+   D pivot 2; chain [5]; rungs ['14/31']; steps ['14/31']; balanced rung (2,5) = 14/31
+   D pivot 2; chain [6, 5]; rungs ['7/31', '14/31']; steps ['7/31', '7/31']; balanced rung (2,5) = 14/31
+   D pivot 4; chain [2] (full); rungs ['18/31']; steps ['18/31', '13/31']; balanced rung (4,2) = 18/31
+   D pivot 4; chain [5, 3] (full); rungs ['17/31', '51/62']; steps ['17/31', '17/62', '11/62']; balanced rung (4,5) = 17/31
+   D pivot 4; chain [6, 5, 3] (full); rungs ['17/62', '17/31', '51/62']; steps ['17/62', '17/62', '17/62', '11/62']; balanced rung (4,5) = 17/31
+== rec11: 11 0 0 2 2 3 b 2b 2f af bf 1ff  e=750
+   P pivot 2; chain [3, 5, 6] (full); rungs ['247/750', '247/375', '231/250']; steps ['247/750', '247/750', '199/750', '19/250']; balanced rung (2,5) = 247/375
+   P pivot 2; chain [5, 6] (full); rungs ['247/375', '231/250']; steps ['247/375', '199/750', '19/250']; balanced rung (2,5) = 247/375
+   P pivot 4; chain [5]; rungs ['134/375']; steps ['134/375']; balanced rung (4,5) = 134/375
+   P pivot 4; chain [7, 8] (full); rungs ['241/375', '43/50']; steps ['241/375', '163/750', '7/50']; balanced rung (4,7) = 241/375
+   P pivot 6; chain [7]; rungs ['128/375']; steps ['128/375']; balanced rung (6,7) = 128/375
+   D pivot 2; chain [5]; rungs ['128/375']; steps ['128/375']; balanced rung (2,5) = 128/375
+   D pivot 4; chain [5, 3] (full); rungs ['241/375', '43/50']; steps ['241/375', '163/750', '7/50']; balanced rung (4,5) = 241/375
+   D pivot 4; chain [7]; rungs ['134/375']; steps ['134/375']; balanced rung (4,7) = 134/375
+   D pivot 6; chain [7, 2] (full); rungs ['247/375', '231/250']; steps ['247/375', '199/750', '19/250']; balanced rung (6,7) = 247/375
+   D pivot 6; chain [8, 7, 2] (full); rungs ['247/750', '247/375', '231/250']; steps ['247/750', '247/750', '199/750', '19/250']; balanced rung (6,7) = 247/375
+== W8: 8 0 0 0 4 4 6 16 2f  e=392
+   P pivot 0; chain [3] (full); rungs ['59/98']; steps ['59/98', '39/98']; balanced rung (0,3) = 59/98
+   P pivot 0; chain [4, 6] (full); rungs ['107/196', '165/196']; steps ['107/196', '29/98', '31/196']; balanced rung (0,4) = 107/196
+   P pivot 3; chain [4, 6] (full); rungs ['85/196', '45/56']; steps ['85/196', '145/392', '11/56']; balanced rung (3,4) = 85/196
+   P pivot 3; chain [5] (full); rungs ['235/392']; steps ['235/392', '157/392']; balanced rung (3,5) = 235/392
+   P pivot 4; chain [3, 7] (full); rungs ['111/196', '367/392']; steps ['111/196', '145/392', '25/392']; balanced rung (4,3) = 111/196
+   D pivot 0; chain [3, 2] (full); rungs ['39/98', '39/49']; steps ['39/98', '39/98', '10/49']; balanced rung (0,3) = 39/98
+   D pivot 3; chain [0] (full); rungs ['59/98']; steps ['59/98', '39/98']; balanced rung (3,0) = 59/98
+   D pivot 3; chain [5, 1] (full); rungs ['157/392', '157/196']; steps ['157/392', '157/392', '39/196']; balanced rung (3,5) = 157/392
+   D pivot 5; chain [3] (full); rungs ['235/392']; steps ['235/392', '157/392']; balanced rung (5,3) = 235/392
+   D pivot 6; chain [7]; rungs ['19/56']; steps ['19/56']; balanced rung (6,7) = 19/56
+   D pivot 7; chain [6, 4] (full); rungs ['37/56', '367/392']; steps ['37/56', '27/98', '25/392']; balanced rung (7,6) = 37/56
+== Y8_nostruct: 8 0 0 2 2 3 b 1b 2f  e=121
+   P pivot 2; chain [4, 6] (full); rungs ['6/11', '103/121']; steps ['6/11', '37/121', '18/121']; balanced rung (2,4) = 6/11
+   P pivot 4; chain [5, 7] (full); rungs ['79/121', '10/11']; steps ['79/121', '31/121', '1/11']; balanced rung (4,5) = 79/121
+   D pivot 6; chain [7]; rungs ['48/121']; steps ['48/121']; balanced rung (6,7) = 48/121
+   D pivot 7; chain [6, 4] (full); rungs ['73/121', '10/11']; steps ['73/121', '37/121', '1/11']; balanced rung (7,6) = 73/121
+== Q_4: 26 0 0 2 2 3 b 2b 2f 7f ff 1ff 3ff 7ff fff 1fff 3fff 7fff ffff 1ffff 3ffff fffff 3ffff 1fffff 7ffff ffffff 3fffff  e=2673421
+   P pivot 2; chain [3, 5, 6] (full); rungs ['809911/2673421', '1619822/2673421', '2277734/2673421']; steps ['809911/2673421', '809911/2673421', '657912/2673421', '395687/2673421']; balanced rung (2,5) = 1619822/2673421
+   P pivot 2; chain [5, 6] (full); rungs ['1619822/2673421', '2277734/2673421']; steps ['1619822/2673421', '657912/2673421', '395687/2673421']; balanced rung (2,5) = 1619822/2673421
+   P pivot 4; chain [5]; rungs ['1053599/2673421']; steps ['1053599/2673421']; balanced rung (4,5) = 1053599/2673421
+   P pivot 6; chain [7] (full); rungs ['1763346/2673421']; steps ['1763346/2673421', '910075/2673421']; balanced rung (6,7) = 1763346/2673421
+   P pivot 18; chain [19] (full); rungs ['1763346/2673421']; steps ['1763346/2673421', '910075/2673421']; balanced rung (18,19) = 1763346/2673421
+   P pivot 21; chain [19, 20, 22] (full); rungs ['809911/2673421', '1619822/2673421', '2260058/2673421']; steps ['809911/2673421', '809911/2673421', '640236/2673421', '413363/2673421']; balanced rung (21,20) = 1619822/2673421
+   P pivot 21; chain [20, 22] (full); rungs ['1619822/2673421', '2260058/2673421']; steps ['1619822/2673421', '640236/2673421', '413363/2673421']; balanced rung (21,20) = 1619822/2673421
+   P pivot 23; chain [20]; rungs ['1053599/2673421']; steps ['1053599/2673421']; balanced rung (23,20) = 1053599/2673421
+   D pivot 2; chain [5]; rungs ['1053599/2673421']; steps ['1053599/2673421']; balanced rung (2,5) = 1053599/2673421
+   D pivot 4; chain [5, 3] (full); rungs ['1619822/2673421', '2260058/2673421']; steps ['1619822/2673421', '640236/2673421', '413363/2673421']; balanced rung (4,5) = 1619822/2673421
+   D pivot 4; chain [6, 5, 3] (full); rungs ['809911/2673421', '1619822/2673421', '2260058/2673421']; steps ['809911/2673421', '809911/2673421', '640236/2673421', '413363/2673421']; balanced rung (4,5) = 1619822/2673421
+   D pivot 7; chain [6] (full); rungs ['1763346/2673421']; steps ['1763346/2673421', '910075/2673421']; balanced rung (7,6) = 1763346/2673421
+   D pivot 19; chain [18] (full); rungs ['1763346/2673421']; steps ['1763346/2673421', '910075/2673421']; balanced rung (19,18) = 1763346/2673421
+   D pivot 21; chain [20]; rungs ['1053599/2673421']; steps ['1053599/2673421']; balanced rung (21,20) = 1053599/2673421
+   D pivot 23; chain [20, 19] (full); rungs ['1619822/2673421', '2277734/2673421']; steps ['1619822/2673421', '657912/2673421', '395687/2673421']; balanced rung (23,20) = 1619822/2673421
+   D pivot 23; chain [22, 20, 19] (full); rungs ['809911/2673421', '1619822/2673421', '2277734/2673421']; steps ['809911/2673421', '809911/2673421', '657912/2673421', '395687/2673421']; balanced rung (23,20) = 1619822/2673421

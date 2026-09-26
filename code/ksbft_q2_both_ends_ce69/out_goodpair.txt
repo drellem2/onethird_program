@@ -1,0 +1,29 @@
+file p3.txt posets=2 good=2 sl=2 sl_not_good=0
+file p4.txt posets=7 good=7 sl=7 sl_not_good=0
+file p5.txt posets=31 good=31 sl=31 sl_not_good=0
+file p6.txt posets=184 good=184 sl=184 sl_not_good=0
+file p7.txt posets=1351 good=1351 sl=1351 sl_not_good=0
+NO_GOOD_PAIR range 5 | 8 0 0 0 4 5 6 e 2f | SL fires
+NO_GOOD_PAIR range 5 | 8 0 0 2 1 2 13 1b 37 | SL fires
+NO_GOOD_PAIR range 5 | 8 0 0 2 1 2 13 1b 3f | SL fires
+NO_GOOD_PAIR range 5 | 8 0 0 2 2 3 b 1b 2f | SL fires
+NO_GOOD_PAIR range 4 | 8 0 0 2 2 a b 7 5f | SL fires
+file p8.txt posets=12524 good=12519 sl=12524 sl_not_good=5
+NO_GOOD_PAIR range 7 | 9 0 0 0 0 4 8 a d 2e | SL fires
+NO_GOOD_PAIR range 8 | 9 0 0 0 0 8 a c 1c 5e | SL fires
+NO_GOOD_PAIR range 6 | 9 0 0 0 4 2 1 16 23 d | SL fires
+NO_GOOD_PAIR range 7 | 9 0 0 0 4 2 4 26 7 b7 | SL fires
+NO_GOOD_PAIR range 6 | 9 0 0 0 4 2 4 26 d 37 | SL fires
+file p9part_aa posets=56106 good=56081 sl=56106 sl_not_good=25
+NO_GOOD_PAIR range 7 | 9 0 0 0 4 4 14 6 1e 57 | SL fires
+NO_GOOD_PAIR range 6 | 9 0 0 0 4 4 6 16 d 37 | SL fires
+NO_GOOD_PAIR range 6 | 9 0 0 0 4 4 6 16 f 37 | SL fires
+NO_GOOD_PAIR range 7 | 9 0 0 0 4 4 6 16 36 77 | SL fires
+NO_GOOD_PAIR range 6 | 9 0 0 0 4 5 c 6 2e 4f | SL fires
+file p9part_ab posets=54219 good=54162 sl=54219 sl_not_good=57
+NO_GOOD_PAIR range 6 | 9 0 0 1 2 a a 2b 2f 7b | SL fires
+NO_GOOD_PAIR range 5 | 9 0 0 1 2 a a 2b 2f 7f | SL fires
+NO_GOOD_PAIR range 6 | 9 0 0 2 2 2 12 1a 17 3b | SL fires
+NO_GOOD_PAIR range 6 | 9 0 0 2 2 6 a 3 4b 2f | SL fires
+NO_GOOD_PAIR range 6 | 9 0 0 2 2 6 a 3 4b 6f | SL fires
+file p9part_ac posets=36143 good=36111 sl=36143 sl_not_good=32

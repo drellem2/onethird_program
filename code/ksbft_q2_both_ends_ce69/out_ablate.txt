@@ -1,0 +1,18 @@
+== P9: balanced pairs of P: (2,4)=130/197, (2,5)=118/197, (4,5)=79/197
+   bottom gadget x=0 C=[1] U=[2, 3] S_(k-1)=62/197 S_k=124/197 P[x<u]={2: '161/197', 3: '138/197'} XYZ: S_k >= prod ? True
+   I=first  4 + tail20: n=24 range=3 conn WIN_bot=holds balanced pairs of Q within first 12: [(0, 2), (2, 3)]  P-pairs: 
+   I=first  5 + tail20: n=25 range=3 conn WIN_bot=holds balanced pairs of Q within first 12: [(2, 3)]  P-pairs: (2,4)=0.6949
+   I=first  6 + tail20: n=26 range=4 conn WIN_bot=holds balanced pairs of Q within first 12: [(2, 3), (2, 4)]  P-pairs: (2,4)=0.5984* (2,5)=0.7714 (4,5)=0.7091
+   I=first  7 + tail20: n=27 range=5 conn WIN_bot=FAILS balanced pairs of Q within first 12: [(2, 4), (2, 5), (4, 5)]  P-pairs: (2,4)=0.5844* (2,5)=0.5900* (4,5)=0.4974*
+   I=first  8 + tail20: n=28 range=5 conn WIN_bot=FAILS balanced pairs of Q within first 12: [(2, 5), (4, 5), (6, 7)]  P-pairs: (2,4)=0.6707 (2,5)=0.6059* (4,5)=0.3941*
+   I=first  9 + tail20: n=29 range=5 conn WIN_bot=FAILS balanced pairs of Q within first 12: [(2, 5), (4, 5), (6, 7)]  P-pairs: (2,4)=0.6707 (2,5)=0.6059* (4,5)=0.3941*
+== rec11: balanced pairs of P: (2,5)=247/375, (4,5)=134/375, (4,7)=241/375, (6,7)=128/375
+   bottom gadget x=0 C=[1] U=[2, 3] S_(k-1)=23/75 S_k=46/75 P[x<u]={2: '119/150', 3: '173/250'} XYZ: S_k >= prod ? True
+   I=first  4 + tail20: n=24 range=3 conn WIN_bot=holds balanced pairs of Q within first 12: [(0, 2), (2, 3)]  P-pairs: 
+   I=first  5 + tail20: n=25 range=3 conn WIN_bot=holds balanced pairs of Q within first 12: [(2, 3)]  P-pairs: 
+   I=first  6 + tail20: n=26 range=4 conn WIN_bot=holds balanced pairs of Q within first 12: [(2, 3), (2, 4)]  P-pairs: (2,5)=0.7714 (4,5)=0.7091
+   I=first  7 + tail20: n=27 range=5 conn WIN_bot=FAILS balanced pairs of Q within first 12: [(2, 4), (2, 5), (4, 5)]  P-pairs: (2,5)=0.5900* (4,5)=0.4974*
+   I=first  8 + tail20: n=28 range=5 conn WIN_bot=FAILS balanced pairs of Q within first 12: [(2, 5), (4, 5), (6, 7)]  P-pairs: (2,5)=0.6059* (4,5)=0.3941* (4,7)=0.7923 (6,7)=0.6596*
+   I=first  9 + tail20: n=29 range=6 conn WIN_bot=FAILS balanced pairs of Q within first 12: [(2, 5), (4, 5), (4, 7), (6, 7)]  P-pairs: (2,5)=0.6442* (4,5)=0.3367* (4,7)=0.6291* (6,7)=0.4370*
+   I=first 10 + tail20: n=30 range=6 conn WIN_bot=FAILS balanced pairs of Q within first 12: [(2, 5), (4, 5), (4, 7), (6, 7), (8, 9)]  P-pairs: (2,5)=0.6595* (4,5)=0.3621* (4,7)=0.6495* (6,7)=0.3347*
+   I=first 11 + tail20: n=31 range=6 conn WIN_bot=FAILS balanced pairs of Q within first 12: [(2, 5), (4, 5), (4, 7), (6, 7), (8, 9)]  P-pairs: (2,5)=0.6595* (4,5)=0.3621* (4,7)=0.6495* (6,7)=0.3347*
