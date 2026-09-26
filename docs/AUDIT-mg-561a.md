@@ -205,4 +205,4 @@ The ticket treats any two-separator lemma, combined with Thm 2.1, as a claimed p
 | `lemmac_census.py`, `lemmac.py` | `out_lemmac_census.txt`, `out_lemmac.txt` | Lemma C as a rule |
 | `rand_badl.py` | `out_rand_badl.txt` | the certificate pipeline on random interval orders and on my own staircase family |
 | `lpprobe.py`, `lpprobe2.py` | `out_lpprobe.txt`, `out_lpprobe2.txt` | Q12 with the author's LP (read-only), plus 3-cycle rows and explicit Thm 3.1 rows |
-| `check.py`, `run_all.sh` | — | regenerates and asserts everything (31 checks) |
+| `check.py`, `run_all.sh` | `out_check.txt` | regenerates and asserts everything (31 checks); records each negative control as CAUGHT |

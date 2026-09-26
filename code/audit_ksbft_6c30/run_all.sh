@@ -13,4 +13,5 @@ python3 rand_badl.py 3 3000 3000 > out_rand_badl.txt
 python3 lemmac.py 3 3000 > out_lemmac.txt
 python3 lpprobe.py Q12 > out_lpprobe.txt
 python3 lpprobe2.py Q12 > out_lpprobe2.txt
-python3 check.py
+python3 check.py > out_check.txt || { cat out_check.txt; exit 1; }
+cat out_check.txt

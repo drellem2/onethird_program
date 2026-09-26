@@ -1,0 +1,35 @@
+OK   generator counts == OEIS A022493, n<=9, all distinct
+OK   n=4: no K-bad dominance L
+OK   n=5: no K-bad dominance L
+OK   n=6: no K-bad dominance L
+OK   n=7: no K-bad dominance L
+OK   n=8: no K-bad dominance L
+OK   O9a/O9b: 2 bad L, both killed by Thm 3.1
+OK   O9a/O9b witness L contains the triple [3,4] [2,6] [4,5]
+OK   n=10: 24 posets / 29 L, 28 TS + 1 3.1*, 0 survivors
+OK   Thm 1.1 exact, control fires
+OK   Thm 3.1 inequality, control fires
+OK   Prop 2.2, control (Z != S) fires
+OK   Prop 2.4, control (non-unique maximal) fires
+OK   P5: e=11, three laws 8/11, L1/L2/L3 = 3/5/3
+OK   AA dominance LCC witness n=7
+OK   T11 values and Prop 2.4 equality
+OK   sec 5 general n=9 survivor survives
+OK   LCC row ('AB', 'DOM'): [12, 12, 1, 0, 0, 0]
+OK   LCC row ('AA', 'DOM'): [660, 524, 5, 2, 0, 0]
+OK   LCC row ('AB', 'DOM'): [44873, 40469, 12038, 186, 8, 0]
+OK   LCC row ('AA', 'CONT'): [20429, 2689, 0, 0, 0, 0]
+OK   LCC row ('AA', 'DOM'): [36436, 26581, 1002, 135, 0, 0]
+OK   LCC on all of P is 0 everywhere (sanity control)
+OK   Lemma C rule kills all census obstructions
+OK   own staircase family has Thm-3.1 survivors (positive control); uniform random has no bad L
+OK   no survivor below n=12 in own staircase sample
+OK   Lemma C fires on every own-family survivor
+OK   Q12: author LP 1/21, 1/48; 3-cycle rows do not move it
+OK   Q12 centre triples k = 3
+OK   Q12: explicit Thm 3.1 rows do not move eps*
+NEGATIVE CONTROL CAUGHT: above-separators-only Swap Identity fails on 10816 IO / 12086 general pairs
+NEGATIVE CONTROL CAUGHT: over-cancelled Thm 3.1 fails on 23064 IO / 22847 general triples
+NEGATIVE CONTROL CAUGHT: Prop 2.2 without Z = S fails on 151 of 194 pairs
+NEGATIVE CONTROL CAUGHT: Prop 2.4 without uniqueness fails on 3177 of 3688 pairs
+ALL OK
