@@ -1,0 +1,7 @@
+interval orders n=3: {'v1': 14, 'v1bad': 0, 'v1ctrl': 2, 'v2': 12, 'v2bad': 0, 'v3': 0, 'v3bad': 0, 'v3z': 0, 'v3zbad': 0}
+interval orders n=4: {'v1': 80, 'v1bad': 0, 'v1ctrl': 22, 'v2': 59, 'v2bad': 0, 'v3': 0, 'v3bad': 0, 'v3z': 0, 'v3zbad': 0}
+interval orders n=5: {'v1': 456, 'v1bad': 0, 'v1ctrl': 176, 'v2': 294, 'v2bad': 0, 'v3': 1, 'v3bad': 0, 'v3z': 0, 'v3zbad': 0}
+interval orders n=6: {'v1': 2742, 'v1bad': 0, 'v1ctrl': 1300, 'v2': 1579, 'v2bad': 0, 'v3': 15, 'v3bad': 0, 'v3z': 2, 'v3zbad': 2}
+interval orders n=7: {'v1': 17694, 'v1bad': 0, 'v1ctrl': 9604, 'v2': 9292, 'v2bad': 0, 'v3': 158, 'v3bad': 0, 'v3z': 42, 'v3zbad': 42}
+interval orders n=8: {'v1': 123002, 'v1bad': 0, 'v1ctrl': 73374, 'v2': 59937, 'v2bad': 0, 'v3': 1490, 'v3bad': 0, 'v3z': 577, 'v3zbad': 537}
+random general posets n=5..8 (3000): {'v1': 64600, 'v1bad': 0, 'v1ctrl': 36782, 'v2': 28033, 'v2bad': 0, 'v3': 0, 'v3bad': 0, 'v3z': 0, 'v3zbad': 0}

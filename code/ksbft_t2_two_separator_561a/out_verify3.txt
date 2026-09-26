@@ -1,0 +1,7 @@
+interval orders n=3: triples 8; Thm 3.1 inequality violations 0; CONTROL (over-cancellation) violations 1; min slack 0
+interval orders n=4: triples 86; Thm 3.1 inequality violations 0; CONTROL (over-cancellation) violations 11; min slack 0
+interval orders n=5: triples 706; Thm 3.1 inequality violations 0; CONTROL (over-cancellation) violations 112; min slack 0
+interval orders n=6: triples 5522; Thm 3.1 inequality violations 0; CONTROL (over-cancellation) violations 935; min slack 0
+interval orders n=7: triples 43908; Thm 3.1 inequality violations 0; CONTROL (over-cancellation) violations 7568; min slack 0
+interval orders n=8: triples 363324; Thm 3.1 inequality violations 0; CONTROL (over-cancellation) violations 62033; min slack 0
+random general posets n=5..8 (2000): triples 143252; Thm 3.1 inequality violations 0; CONTROL (over-cancellation) violations 22553; min slack 0
