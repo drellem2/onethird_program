@@ -1,0 +1,32 @@
+== D=2 memo
+# memo (min depth 5): lookups 0, hits 0, stored 0, words 0, tree nodes replayed not visited 0
+RESULT TERMINATED-CLEAN D=2
+D=2 memo IDENTICAL to tree
+== D=2 memo:0
+# memo (min depth 0): lookups 9, hits 0, stored 9, words 371, tree nodes replayed not visited 0
+RESULT TERMINATED-CLEAN D=2
+D=2 memo:0 IDENTICAL to tree
+== D=3 memo
+# memo (min depth 7): lookups 10, hits 0, stored 10, words 928, tree nodes replayed not visited 0
+RESULT TERMINATED-CLEAN D=3
+D=3 memo IDENTICAL to tree
+== D=3 memo:0
+# memo (min depth 0): lookups 79, hits 0, stored 79, words 6326, tree nodes replayed not visited 0
+RESULT TERMINATED-CLEAN D=3
+D=3 memo:0 IDENTICAL to tree
+== D=4 memo
+# memo (min depth 9): lookups 264, hits 1, stored 263, words 41479, tree nodes replayed not visited 3
+RESULT TERMINATED-CLEAN D=4
+D=4 memo IDENTICAL to tree
+== D=4 memo:0
+# memo (min depth 0): lookups 1434, hits 1, stored 1433, words 202952, tree nodes replayed not visited 3
+RESULT TERMINATED-CLEAN D=4
+D=4 memo:0 IDENTICAL to tree
+== D=5 memo
+# memo (min depth 11): lookups 7789, hits 112, stored 7677, words 2006389, tree nodes replayed not visited 691
+RESULT TERMINATED-CLEAN D=5
+D=5 memo IDENTICAL to tree
+== D=5 memo:0
+# memo (min depth 0): lookups 43659, hits 112, stored 43547, words 10546993, tree nodes replayed not visited 691
+RESULT TERMINATED-CLEAN D=5
+D=5 memo:0 IDENTICAL to tree

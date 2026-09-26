@@ -1,0 +1,33 @@
+== D=3 memocheck (exact key)
+# memocheck: 0 hits re-explored, 0 mismatches
+RESULT TERMINATED-CLEAN D=3
+== D=3 memocheck badmemo (structural key only; UNSOUND on purpose) -> expect mismatches
+# memocheck (BADMEMO control key): 1 hits re-explored, 0 mismatches
+RESULT TERMINATED-CLEAN D=3
+== D=4 memocheck (exact key)
+# memocheck: 1 hits re-explored, 0 mismatches
+RESULT TERMINATED-CLEAN D=4
+== D=4 memocheck badmemo (structural key only; UNSOUND on purpose) -> expect mismatches
+MEMOCHECK MISMATCH N=10 [0,0,2,2,7,11,23,43,95,175]
+MEMOCHECK MISMATCH N=10 [0,0,1,1,7,11,23,43,95,175]
+# memocheck (BADMEMO control key): 44 hits re-explored, 2 mismatches
+RESULT TERMINATED-CLEAN D=4
+== D=5 memocheck (exact key)
+# memocheck: 113 hits re-explored, 0 mismatches
+RESULT TERMINATED-CLEAN D=5
+== D=5 memocheck badmemo (structural key only; UNSOUND on purpose) -> expect mismatches
+MEMOCHECK MISMATCH N=12 [0,0,2,2,7,11,23,43,95,175,351,687]
+MEMOCHECK MISMATCH N=12 [0,0,2,2,7,11,23,43,95,175,191,351]
+MEMOCHECK MISMATCH N=12 [0,0,2,2,7,11,23,43,95,175,127,687]
+# memocheck (BADMEMO control key): 1098 hits re-explored, 15 mismatches
+RESULT TERMINATED-CLEAN D=5
+== D=5 badmemo without check: per-depth counts vs tree
+badmemo DIFFERS from tree (control fires)
+13,14c13,14
+< depth 12  nodes        28164  certified        23859  lpcert       2474  cutpruned       5693  frontier 0
+< depth 13  nodes         7875  certified         6943  lpcert        688  cutpruned       1831  frontier 0
+---
+> depth 12  nodes        28164  certified        23858  lpcert       2475  cutpruned       5693  frontier 0
+> depth 13  nodes         7875  certified         6925  lpcert        706  cutpruned       1831  frontier 0
+D=6 # memocheck: 9929 hits re-explored, 0 mismatches
+D=6 RESULT TERMINATED-CLEAN D=6

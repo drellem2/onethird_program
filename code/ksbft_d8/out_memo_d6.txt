@@ -1,0 +1,24 @@
+# memo (min depth 13): lookups 335538, hits 9303, stored 326235, words 140065609, tree nodes replayed not visited 69902
+depth  0  nodes            1  certified            0  lpcert          0  cutpruned          0  frontier 0
+depth  1  nodes            1  certified            0  lpcert          0  cutpruned          0  frontier 0
+depth  2  nodes            1  certified            0  lpcert          0  cutpruned          1  frontier 0
+depth  3  nodes            3  certified            0  lpcert          0  cutpruned          1  frontier 0
+depth  4  nodes           14  certified            0  lpcert          0  cutpruned          3  frontier 0
+depth  5  nodes           89  certified           12  lpcert          0  cutpruned         14  frontier 0
+depth  6  nodes          695  certified          135  lpcert          4  cutpruned         77  frontier 0
+depth  7  nodes         7000  certified         1780  lpcert         40  cutpruned        556  frontier 0
+depth  8  nodes        60436  certified        20645  lpcert       1389  cutpruned       5180  frontier 0
+depth  9  nodes       389353  certified       190556  lpcert      20094  cutpruned      38402  frontier 0
+depth 10  nodes      1628365  certified      1053389  lpcert     116856  cutpruned     178703  frontier 0
+depth 11  nodes      4008536  certified      3055541  lpcert     323714  cutpruned     458120  frontier 0
+depth 12  nodes      5386065  certified      4429673  lpcert     459447  cutpruned     629281  frontier 0
+depth 13  nodes      4128437  certified      3544134  lpcert     325392  cutpruned     496945  frontier 0
+depth 14  nodes      2078261  certified      1889332  lpcert     120756  cutpruned     258911  frontier 0
+depth 15  nodes       429668  certified       399586  lpcert      21910  cutpruned      68173  frontier 0
+depth 16  nodes        48264  certified        45042  lpcert       2340  cutpruned       8172  frontier 0
+depth 17  nodes         4052  certified         3978  lpcert         48  cutpruned        882  frontier 0
+depth 18  nodes           66  certified           66  lpcert          0  cutpruned         26  frontier 0
+# total nodes 18169307, max layer 35 states, max tracked pairs 38
+# counterexamples-to-threshold found: 0
+RESULT TERMINATED-CLEAN D=6
+D=6 memo IDENTICAL to tree

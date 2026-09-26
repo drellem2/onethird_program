@@ -1,0 +1,19 @@
+== D=3 cap 12 threshold 0.39 mode run
+# counterexamples-to-threshold found: 140
+RESULT FOUND-VIOLATION D=3
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,2]
+COUNTEREXAMPLE-TO-THRESHOLD N=5 [0,0,2,3,7]
+== D=3 cap 12 threshold 0.39 mode memo
+# memo (min depth 7): lookups 715, hits 82, stored 279, words 21418, tree nodes replayed not visited 346
+# counterexamples-to-threshold found: 140
+RESULT FOUND-VIOLATION D=3
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,2]
+COUNTEREXAMPLE-TO-THRESHOLD N=5 [0,0,2,3,7]
+== D=3 cap 12 threshold 0.39 mode memo:0
+# memo (min depth 0): lookups 813, hits 82, stored 358, words 27517, tree nodes replayed not visited 346
+# counterexamples-to-threshold found: 140
+RESULT FOUND-VIOLATION D=3
+COUNTEREXAMPLE-TO-THRESHOLD N=3 [0,0,2]
+COUNTEREXAMPLE-TO-THRESHOLD N=5 [0,0,2,3,7]
+control memo IDENTICAL to tree (and FAILS)
+control memo:0 IDENTICAL to tree (and FAILS)
