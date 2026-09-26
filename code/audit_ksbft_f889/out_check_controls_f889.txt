@@ -1,0 +1,19 @@
+OK   A000112 n=1..8
+NEGATIVE CONTROL broken canonical form overcounts A000112: CAUGHT
+OK   unpruned census minus CUT == pruned generator, D=3, t<=12
+OK   D=3 counts == pcert (938,2001,4224,9307,20459)
+OK   D=4 counts == pcert (29491,103198,357363,1224360)
+OK   D=3 uncertified 13/4/0/0 at t=9..12
+OK   D=3 t=11 worst rm 1/96, s=8 certifies all 4224
+OK   D=4 uncertified 990/943/496/192 at t=10..13
+NEGATIVE CONTROL interval [2/5,3/5] must leave classes uncertified at D=3 t=11: CAUGHT
+OK   D=3 base: only zero is 2+1, no negative, min pi=3 5/318, 2583 indecomposable n=2..11
+OK   all posets n<=8: only zero is 2+1
+OK   mg-2912 witness: range 4, indecomposable, delta-1/3=721/46455 < 5/318
+OK   e2e Theorem 2.4: 0 bracket violations, 0 bad certificates
+NEGATIVE CONTROL e2e s=t-D+1 (violates Lemma 2.2) must break the bracket: CAUGHT
+OK   pcert re-run: AGG CT 15 14298595 0 0 0 and AGG CT 14 4177332 0 14 0
+OK   my certifier: the 14 t=14 failures fail
+OK   my certifier: t=15 worst class rm = 1/150
+OK   my certifier: 1% sample of t=15 all certified, distinct, non-CUT, range<=4
+VERDICT: GREEN

@@ -1,0 +1,55 @@
+== author's pcert, re-run (NOT independent)
+gencut n=1 D=4 from 1 classes: candidates=1 nonCUT-classes=1
+gencut n=2 D=4 from 1 classes: candidates=2 nonCUT-classes=2
+gencut n=3 D=4 from 2 classes: candidates=7 nonCUT-classes=5
+gencut n=4 D=4 from 5 classes: candidates=28 nonCUT-classes=16
+gencut n=5 D=4 from 16 classes: candidates=135 nonCUT-classes=63
+gencut n=6 D=4 from 63 classes: candidates=766 nonCUT-classes=255
+gencut n=7 D=4 from 255 classes: candidates=3907 nonCUT-classes=985
+gencut n=8 D=4 from 985 classes: candidates=17754 nonCUT-classes=2650
+gencut n=9 D=4 from 2650 classes: candidates=55823 nonCUT-classes=8556
+gencut n=10 D=4 from 8556 classes: candidates=204076 nonCUT-classes=29491
+gencut n=11 D=4 from 29491 classes: candidates=787787 nonCUT-classes=103198
+gencut n=12 D=4 from 103198 classes: candidates=3058772 nonCUT-classes=357363
+gencut n=13 D=4 from 357363 classes: candidates=11617760 nonCUT-classes=1224360
+gencut n=14 D=4 from 1224360 classes: candidates=43298992 nonCUT-classes=4177332
+gencut n=15 D=4 from 4177332 classes: candidates=159628195 nonCUT-classes=14298595
+AGG CT 14 4177332 0 14 0
+AGG CW 14 -1 417 14 0 0 2 6 3 17 f 37 5f 15f bf ff 7ff fff
+AGG CS 14 3 1268147 0 9
+AGG CS 14 4 2403240 -2 24
+AGG CS 14 5 3614899 -4 30
+AGG CS 14 6 4020673 -2 15
+AGG CS 14 7 4134819 -4 57
+AGG CS 14 8 4171630 -2 51
+AGG CS 14 9 4176704 -4 183
+AGG CS 14 10 4177318 -1 417
+AGG CB 14 10 4177318
+AGG CT 15 14298595 0 0 0
+AGG CW 15 4 600 15 0 0 2 6 3 f 17 57 df 7f 7f 1ff 6ff 7ff fff
+AGG CS 15 3 4366388 0 9
+AGG CS 15 4 8285253 -2 24
+AGG CS 15 5 12423157 -4 30
+AGG CS 15 6 13779234 -2 15
+AGG CS 15 7 14148746 -4 57
+AGG CS 15 8 14276751 -2 51
+AGG CS 15 9 14296290 -4 183
+AGG CS 15 10 14298554 -1 417
+AGG CS 15 11 14298595 4 600
+AGG CB 15 11 14298595
+## D=4 n=12
+AGG LT 2 1 0 34 699 12 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff
+AGG LT 3 3075 0 14 831 12 0 0 2 6 3 17 1f 3f 7f 17f ff 5ff
+AGG LT 4 173690 0 19 906 12 0 0 2 6 3 17 37 1f bf 1bf ff 5ff
+## D=4 n=13
+AGG LT 2 1 0 55 1131 13 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff 7ff
+AGG LT 3 6735 0 23 1344 13 0 0 2 6 3 17 1f 3f 7f ff 2ff 1ff bff
+AGG LT 4 605267 0 32 1614 13 0 0 2 6 3 17 37 1f 9f ff 2ff 1ff bff
+## D=4 n=14
+AGG LT 2 1 0 89 1830 14 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff 7ff fff
+AGG LT 3 14791 0 37 2175 14 0 0 2 6 3 17 1f 3f 7f ff 1ff 5ff 3ff 17ff
+AGG LT 4 2091885 0 51 2628 14 0 0 2 6 3 17 37 1f 9f ff 1ff 5ff 3ff 17ff
+## D=4 n=15
+AGG LT 2 1 0 144 2961 15 0 0 2 3 7 f 1f 3f 7f ff 1ff 3ff 7ff fff 1fff
+AGG LT 3 32454 0 69 4275 15 0 0 2 6 3 17 1f 5f 3f 13f 1ff 3ff bff 7ff 2fff
+AGG LT 4 7206385 0 83 4242 15 0 0 2 6 3 17 37 1f 9f ff 1ff 3ff bff 7ff 2fff

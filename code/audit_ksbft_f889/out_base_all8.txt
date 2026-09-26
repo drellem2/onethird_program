@@ -1,0 +1,9 @@
+base D=8 n=2 indec=1 pi=1:1 min=1/6
+  ZERO margin: n=3 P=0 0 1
+base D=8 n=3 indec=2 pi=2:2 min=0
+base D=8 n=4 indec=7 pi=2:2 min=1/15  pi=3:5 min=1/6
+base D=8 n=5 indec=31 pi=2:1 min=1/24  pi=3:14 min=1/33  pi=4:16 min=1/15
+base D=8 n=6 indec=184 pi=2:1 min=2/39  pi=3:31 min=1/42  pi=4:89 min=1/15  pi=5:63 min=2/21
+base D=8 n=7 indec=1351 pi=2:1 min=1/21  pi=3:58 min=2/75  pi=4:358 min=1/39  pi=5:616 min=5/84  pi=6:318 min=1/21
+base D=8 n=8 indec=12524 pi=2:1 min=5/102  pi=3:130 min=1/45  pi=4:1212 min=5/138  pi=5:4035 min=7/150  pi=6:5101 min=1/15  pi=7:2045 min=19/204
+base D=8 total indecomposable n=2..8: 14100
