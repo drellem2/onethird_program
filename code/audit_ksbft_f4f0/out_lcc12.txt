@@ -1,0 +1,8 @@
+X12: LCC on X               (|U|=4): True  [(3, 4), (2, 6), (5, 6), (6, 6)]
+X12: LCC on X u Y           (|U|=7): False  balanced pair (2, 6) (3, 5) P=86/207
+X12: LCC on X u Y u Inc(S)  (|U|=7): False  balanced pair (2, 6) (3, 5) P=86/207
+X12: LCC on all of P        (|U|=12): False  balanced pair (1, 1) (1, 1) P=1/2
+X14: LCC on X               (|U|=4): True  [(3, 3), (2, 6), (5, 5), (4, 7)]
+X14: LCC on X u Y           (|U|=7): False  balanced pair (2, 6) (3, 4) P=329/905
+X14: LCC on X u Y u Inc(S)  (|U|=11): False  balanced pair (2, 6) (3, 4) P=329/905
+X14: LCC on all of P        (|U|=14): False  balanced pair (1, 1) (1, 1) P=1/2

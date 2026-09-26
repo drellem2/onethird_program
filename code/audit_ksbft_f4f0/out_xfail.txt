@@ -1,0 +1,34 @@
+----------------------------------------------------------------------
+P = [(1, 1), (1, 1), (1, 1), (1, 1), (1, 2), (1, 3), (2, 6), (3, 4), (3, 5), (4, 5), (5, 6), (6, 6)]
+ a = (3, 4), a' = (2, 6), S = A(a,a') = [(5, 6), (6, 6)] (= min Z, B empty); strict containment: True
+ e(P) = 99360; (A) and (B) agree exactly
+ (C) brute-force enumeration agrees exactly
+ q = P[a'<a] = 91/276 = 0.32971
+ u_s = P[s<a'] = 269/828 = 0.32488
+ u_t = P[t<a'] = 169/828 = 0.20411
+ P[s<t] = 77/115 = 0.66957  ->  min(P[s<t],P[t<s]) = 0.33043
+ q, u_s, u_t < 1/3 and (s,t) UNBALANCED: True  -> X-local form of Lemma C FAILS here; slack = 0.002899
+==> 12 elements: X-local failures 1
+----------------------------------------------------------------------
+P = [(1, 1), (1, 1), (1, 2), (2, 6), (3, 3), (3, 4), (3, 4), (3, 5), (4, 7), (5, 5), (6, 6), (7, 7), (7, 7), (7, 7)]
+ a = (3, 3), a' = (2, 6), S = A(a,a') = [(4, 7), (5, 5)] (= min Z, B empty); strict containment: True
+ e(P) = 65160; (A) and (B) agree exactly
+ (C) brute-force enumeration agrees exactly
+ q = P[a'<a] = 294/905 = 0.32486
+ u_s = P[s<a'] = 202/905 = 0.22320
+ u_t = P[t<a'] = 57/181 = 0.31492
+ P[s<t] = 60/181 = 0.33149  ->  min(P[s<t],P[t<s]) = 0.33149
+ q, u_s, u_t < 1/3 and (s,t) UNBALANCED: True  -> X-local form of Lemma C FAILS here; slack = 0.001842
+==> 14 elements: X-local failures 1
+---------------------------------------------------------------------- 
+control (n=10, doc sec 4.1 tightest case; must hold):
+P = [(1, 1), (1, 1), (1, 1), (1, 2), (1, 3), (2, 6), (3, 4), (4, 5), (5, 6), (6, 6)]
+ a = (3, 4), a' = (2, 6), S = A(a,a') = [(5, 6), (6, 6)] (= min Z, B empty); strict containment: True
+ e(P) = 3750; (A) and (B) agree exactly
+ (C) brute-force enumeration agrees exactly
+ q = P[a'<a] = 41/125 = 0.32800
+ u_s = P[s<a'] = 204/625 = 0.32640
+ u_t = P[t<a'] = 156/625 = 0.24960
+ P[s<t] = 76/125 = 0.60800  ->  min(P[s<t],P[t<s]) = 0.39200
+ q, u_s, u_t < 1/3 and (s,t) UNBALANCED: False  -> X-local form of Lemma C holds here; slack = -0.058667
+control CAUGHT

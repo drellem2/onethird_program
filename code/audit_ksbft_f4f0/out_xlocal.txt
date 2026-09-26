@@ -1,0 +1,11 @@
+n=5 shard 0/1: posets 53 (A022493: 53), with a containment 2-sep pair 1; such pairs 1; in region q,u_s,u_t<1/3: 0; twins 0; non-twin 0; min w non-twin = None; unbalanced (w<1/3) in region: 0  [0s]
+n=6 shard 0/1: posets 217 (A022493: 217), with a containment 2-sep pair 15; such pairs 17; in region q,u_s,u_t<1/3: 0; twins 0; non-twin 0; min w non-twin = None; unbalanced (w<1/3) in region: 0  [0s]
+n=7 shard 0/1: posets 1014 (A022493: 1014), with a containment 2-sep pair 157; such pairs 200; in region q,u_s,u_t<1/3: 0; twins 0; non-twin 0; min w non-twin = None; unbalanced (w<1/3) in region: 0  [0s]
+n=8 shard 0/1: posets 5335 (A022493: 5335), with a containment 2-sep pair 1430; such pairs 2067; in region q,u_s,u_t<1/3: 0; twins 0; non-twin 0; min w non-twin = None; unbalanced (w<1/3) in region: 0  [0s]
+n=9 shard 0/1: posets 31240 (A022493: 31240), with a containment 2-sep pair 12310; such pairs 20429; in region q,u_s,u_t<1/3: 20; twins 20; non-twin 0; min w non-twin = None; unbalanced (w<1/3) in region: 0  [3s]
+n=10 shard 0/1: posets 201608 (A022493: 201608), with a containment 2-sep pair 104517; such pairs 200975; in region q,u_s,u_t<1/3: 362; twins 333; non-twin 29; min w non-twin = 49/125; unbalanced (w<1/3) in region: 0  [31s]
+    [(1, 1), (1, 1), (1, 1), (1, 2), (1, 3), (2, 6), (3, 4), (4, 5), (5, 6), (6, 6)] a (3, 4) a' (2, 6) s (5, 6) t (6, 6) q,us,ut,w = 0.3280 0.3264 0.2496 0.3920 w = 49/125
+    [(1, 1), (1, 1), (1, 3), (1, 4), (2, 2), (3, 7), (4, 5), (5, 6), (6, 7), (7, 7)] a (4, 5) a' (3, 7) s (6, 7) t (7, 7) q,us,ut,w = 0.3280 0.3264 0.2496 0.3920 w = 49/125
+    [(1, 1), (1, 2), (1, 3), (1, 4), (2, 2), (3, 7), (4, 5), (5, 6), (6, 7), (7, 7)] a (4, 5) a' (3, 7) s (6, 7) t (7, 7) q,us,ut,w = 0.3280 0.3264 0.2496 0.3920 w = 49/125
+    [(1, 1), (1, 3), (1, 4), (2, 2), (2, 2), (3, 7), (4, 5), (5, 6), (6, 7), (7, 7)] a (4, 5) a' (3, 7) s (6, 7) t (7, 7) q,us,ut,w = 0.3280 0.3264 0.2496 0.3920 w = 49/125
+    [(1, 1), (1, 4), (1, 5), (2, 2), (3, 3), (4, 8), (5, 6), (6, 7), (7, 8), (8, 8)] a (5, 6) a' (4, 8) s (7, 8) t (8, 8) q,us,ut,w = 0.3280 0.3264 0.2496 0.3920 w = 49/125

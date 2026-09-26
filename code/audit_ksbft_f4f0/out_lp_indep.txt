@@ -1,0 +1,15 @@
+Q12 rows=S0         (  20) charged=all pairs                    min sum lambda = 3.1250  not refuted
+Q12 rows=S0         (  20) charged=containment step only [3,4]  min sum lambda = INFEASIBLE (no certificate at any ratio)  not refuted
+Q12 rows=S0         (  20) charged=window [2,5]                 min sum lambda = 3.2500  not refuted
+Q12 rows=S0         (  20) charged=window [0,5]                 min sum lambda = 3.1250  not refuted
+Q12 rows=S0         (  20) charged=window [1,7]                 min sum lambda = 3.2500  not refuted
+Q12 rows=S0+SW2st   ( 668) charged=all pairs                    min sum lambda = 2.9830  REFUTED (<3)
+Q12 rows=S0+SW2st   ( 668) charged=containment step only [3,4]  min sum lambda = 5.4034  not refuted
+Q12 rows=S0+SW2st   ( 668) charged=window [2,5]                 min sum lambda = 3.1667  not refuted
+Q12 rows=S0+SW2st   ( 668) charged=window [0,5]                 min sum lambda = 2.9895  REFUTED (<3)
+Q12 rows=S0+SW2st   ( 668) charged=window [1,7]                 min sum lambda = 3.1667  not refuted
+Q12 rows=S0+SW2all  (1180) charged=all pairs                    min sum lambda = 2.9031  REFUTED (<3)
+Q12 rows=S0+SW2all  (1180) charged=containment step only [3,4]  min sum lambda = 3.4201  not refuted
+Q12 rows=S0+SW2all  (1180) charged=window [2,5]                 min sum lambda = 2.9871  REFUTED (<3)
+Q12 rows=S0+SW2all  (1180) charged=window [0,5]                 min sum lambda = 2.9064  REFUTED (<3)
+Q12 rows=S0+SW2all  (1180) charged=window [1,7]                 min sum lambda = 2.9870  REFUTED (<3)

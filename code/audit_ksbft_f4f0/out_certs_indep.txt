@@ -1,0 +1,27 @@
+VALID S0         win=None e= 19837 rows=   29 used=  9 charged=4 ratio=2.875003 P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 7], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 8]]
+VALID S0+SW2st   win=None e=  2765 rows=  668 used=166 charged=6 ratio=2.983026 P=[[1, 1], [1, 2], [2, 3], [2, 5], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+      conditioned rows used: 157
+VALID S0         win=None e= 40778 rows=   32 used=  7 charged=4 ratio=2.791667 P=[[1, 1], [1, 2], [1, 4], [2, 3], [2, 8], [3, 4], [4, 5], [4, 9], [5, 6], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID S0         win=None e= 30911 rows=   30 used=  9 charged=4 ratio=2.875003 P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 7], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID S0         win=None e= 34512 rows=   31 used=  8 charged=4 ratio=2.875000 P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 8], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID S0         win=None e= 41855 rows=   32 used=  6 charged=4 ratio=2.875000 P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 8], [3, 4], [4, 5], [5, 6], [5, 9], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID S0         win=None e= 39111 rows=   32 used=  9 charged=4 ratio=2.875003 P=[[1, 1], [1, 2], [1, 5], [2, 3], [2, 9], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID S0         win=None e= 48620 rows=   33 used=  6 charged=2 ratio=2.750000 P=[[1, 1], [1, 2], [1, 6], [2, 3], [2, 8], [3, 4], [4, 5], [5, 6], [5, 9], [6, 7], [7, 8], [8, 9], [9, 9]]
+VALID S0         win=None e= 40778 rows=   32 used=  7 charged=4 ratio=2.791667 P=[[1, 1], [1, 2], [1, 6], [2, 3], [2, 8], [3, 4], [4, 5], [5, 6], [6, 7], [6, 9], [7, 8], [8, 9], [9, 9]]
+VALID S0         win=None e= 31024 rows=   30 used=  6 charged=4 ratio=2.875000 P=[[1, 1], [1, 2], [2, 3], [2, 6], [3, 4], [3, 8], [4, 5], [5, 6], [6, 7], [6, 9], [7, 8], [8, 9], [9, 9]]
+VALID S0+SW2st   win=None e=  5237 rows=  872 used=202 charged=6 ratio=2.984783 P=[[1, 1], [1, 2], [2, 3], [2, 5], [3, 4], [4, 5], [5, 6], [5, 9], [6, 7], [7, 8], [8, 9], [9, 10], [10, 10]]
+      conditioned rows used: 191
+VALID S0+SW2st   win=None e=  6294 rows=  881 used=214 charged=6 ratio=2.786574 P=[[1, 1], [1, 2], [2, 3], [2, 6], [3, 4], [4, 5], [5, 6], [5, 9], [6, 7], [7, 8], [8, 9], [9, 10], [10, 10]]
+      conditioned rows used: 203
+VALID S0+SW2st   win=None e=  5237 rows=  872 used=204 charged=6 ratio=2.984783 P=[[1, 1], [1, 2], [2, 3], [2, 6], [3, 4], [4, 5], [5, 6], [6, 7], [6, 9], [7, 8], [8, 9], [9, 10], [10, 10]]
+      conditioned rows used: 194
+VALID S0+SW2all  win=[2, 5] e=  2765 rows= 1180 used=271 charged=2 ratio=2.987071 P=[[1, 1], [1, 2], [2, 3], [2, 5], [3, 4], [4, 5], [5, 6], [5, 8], [6, 7], [7, 8], [8, 9], [9, 9]]
+      conditioned rows used: 269
+sec 3.2 prose certificate: e=48620; with rows oriented (c,d): min G = 0; best over the 64 orientations: min G = 1 at signs (-1, -1, 1, 1, 1, 1), sum lambda = 11/4; valid(ratio<3): True
+control Q12 lambda x 9/10: CAUGHT
+control Q12 largest row weight sign-flipped: CAUGHT
+control wrong L (charged pair not L-ordered): CAUGHT
+control no rows: CAUGHT
+control A-only rows nonzero sum on 34 ordered pairs: CAUGHT
+control F = {pos(a)=k} (not tau-invariant): identity fails for 4 values of k: CAUGHT
+certificates: 14 valid, 0 invalid
