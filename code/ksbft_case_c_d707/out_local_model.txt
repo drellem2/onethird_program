@@ -1,0 +1,36 @@
+feasible samples: 152623  (eps<=1e-5: 45268)
+C1 min a - C_BFT = 4.378e-10   (must be >= -1e-12)
+C2 violations of max|d| <= a: 0 ; max over samples of max|d| = 0.427952 (Prop A => <= 1/2)
+C3 violations of max|d| <= 21 sqrt(eps) on eps<=1e-5: 0
+   empirical sup max|d|/sqrt(eps) on eps<=1e-5: 0.0154   (paper uses 21)
+C4 empirical sup max|d|/eps over the model: 5.8541   (Prop C proves <= 24.5)
+C5 g(mu) = min a subject to max|d| >= mu (grid 201x201x5x5):
+     mu=0.000  g=0.276786  g-C_BFT=0.000393  <1/3
+     mu=0.025  g=0.281659  g-C_BFT=0.005266  <1/3
+     mu=0.050  g=0.286325  g-C_BFT=0.009932  <1/3
+     mu=0.075  g=0.291405  g-C_BFT=0.015011  <1/3
+     mu=0.100  g=0.295918  g-C_BFT=0.019525  <1/3
+     mu=0.125  g=0.300000  g-C_BFT=0.023607  <1/3
+     mu=0.150  g=0.304688  g-C_BFT=0.028294  <1/3
+     mu=0.175  g=0.309160  g-C_BFT=0.032767  <1/3
+     mu=0.200  g=0.313321  g-C_BFT=0.036928  <1/3
+     mu=0.225  g=0.317431  g-C_BFT=0.041038  <1/3
+     mu=0.250  g=0.321364  g-C_BFT=0.044971  <1/3
+     mu=0.275  g=0.325175  g-C_BFT=0.048782  <1/3
+     mu=0.300  g=0.328767  g-C_BFT=0.052374  <1/3
+     mu=0.325  g=0.332215  g-C_BFT=0.055822  <1/3
+     mu=0.350  g=0.350263  g-C_BFT=0.073869  >=1/3
+     mu=0.375  g=0.375235  g-C_BFT=0.098841  >=1/3
+     mu=0.400  g=0.400000  g-C_BFT=0.123607  >=1/3
+     mu=0.425  g=0.425532  g-C_BFT=0.149139  >=1/3
+     mu=0.450  infeasible (no point of the model has max|d| >= mu)
+     mu=0.475  infeasible (no point of the model has max|d| >= mu)
+     mu=0.500  infeasible (no point of the model has max|d| >= mu)
+     mu=0.525  infeasible (no point of the model has max|d| >= mu)
+     mu=0.550  infeasible (no point of the model has max|d| >= mu)
+     mu=0.575  infeasible (no point of the model has max|d| >= mu)
+     mu=0.600  infeasible (no point of the model has max|d| >= mu)
+     mu=0.625  infeasible (no point of the model has max|d| >= mu)
+     mu=0.650  infeasible (no point of the model has max|d| >= mu)
+     mu=0.675  infeasible (no point of the model has max|d| >= mu)
+   2+1 (L'={x}, U'={z}): a=0.333333 M_loc=0.333333

@@ -1,0 +1,95 @@
+all n=2 posets=2 connected=1
+pi=1 count=1 minM=0.500000 minDelta=0.500000 min[d1*(pi+1)]=1.000000 minB2=0.500000 minB3=0.500000 minB4=0.500000 minB5=0.500000 minB6=0.500000 minB7=0.500000 minB8=0.500000
+   minP[u<v] over incomparable pairs=0.500000  min positive P[f(x)-f(y)>=2]=1000000000.000000 argmin=[0,0]
+   argminM(delta=0.500000)=[0,0]
+   argminB4(delta=0.500000)=[0,0]
+all n=3 posets=7 connected=4
+pi=2 count=4 minM=0.333333 minDelta=0.333333 min[d1*(pi+1)]=1.000000 minB2=0.333333 minB3=0.333333 minB4=0.333333 minB5=0.333333 minB6=0.333333 minB7=0.333333 minB8=0.333333
+   minP[u<v] over incomparable pairs=0.333333  min positive P[f(x)-f(y)>=2]=0.166667 argmin=[0,0,0]
+   argminM(delta=0.333333)=[0,0,1]
+   argminB4(delta=0.333333)=[0,0,1]
+all n=4 posets=40 connected=27
+pi=2 count=8 minM=0.400000 minDelta=0.400000 min[d1*(pi+1)]=1.200000 minB2=0.400000 minB3=0.400000 minB4=0.400000 minB5=0.400000 minB6=0.400000 minB7=0.400000 minB8=0.400000
+   minP[u<v] over incomparable pairs=0.166667  min positive P[f(x)-f(y)>=2]=0.166667 argmin=[0,0,1,2]
+   argminM(delta=0.400000)=[0,0,1,3]
+   argminB4(delta=0.400000)=[0,0,1,3]
+pi=3 count=19 minM=0.500000 minDelta=0.500000 min[d1*(pi+1)]=1.000000 minB2=0.250000 minB3=0.500000 minB4=0.500000 minB5=0.500000 minB6=0.500000 minB7=0.500000 minB8=0.500000
+   minP[u<v] over incomparable pairs=0.250000  min positive P[f(x)-f(y)>=2]=0.083333 argmin=[0,0,0,1]
+   argminM(delta=0.500000)=[0,0,1,5]
+   argminB4(delta=0.500000)=[0,0,0,0]
+all n=5 posets=357 connected=275
+pi=2 count=8 minM=0.375000 minDelta=0.375000 min[d1*(pi+1)]=1.125000 minB2=0.375000 minB3=0.375000 minB4=0.375000 minB5=0.375000 minB6=0.375000 minB7=0.375000 minB8=0.375000
+   minP[u<v] over incomparable pairs=0.250000  min positive P[f(x)-f(y)>=2]=0.250000 argmin=[0,0,1,3,7]
+   argminM(delta=0.375000)=[0,0,1,3,7]
+   argminB4(delta=0.375000)=[0,0,1,3,7]
+pi=3 count=121 minM=0.363636 minDelta=0.363636 min[d1*(pi+1)]=1.090909 minB2=0.272727 minB3=0.363636 minB4=0.363636 minB5=0.363636 minB6=0.363636 minB7=0.363636 minB8=0.363636
+   minP[u<v] over incomparable pairs=0.100000  min positive P[f(x)-f(y)>=2]=0.050000 argmin=[0,0,0,1,6]
+   argminM(delta=0.363636)=[0,0,1,1,7]
+   argminB4(delta=0.363636)=[0,0,1,1,7]
+pi=4 count=146 minM=0.400000 minDelta=0.400000 min[d1*(pi+1)]=1.000000 minB2=0.000000 minB3=0.400000 minB4=0.400000 minB5=0.400000 minB6=0.400000 minB7=0.400000 minB8=0.400000
+   minP[u<v] over incomparable pairs=0.166667  min positive P[f(x)-f(y)>=2]=0.033333 argmin=[0,0,0,1,2]
+   argminM(delta=0.400000)=[0,0,1,5,13]
+   argminB4(delta=0.400000)=[0,0,0,1,3]
+all n=6 posets=4824 connected=4070
+pi=2 count=13 minM=0.384615 minDelta=0.384615 min[d1*(pi+1)]=1.153846 minB2=0.384615 minB3=0.384615 minB4=0.384615 minB5=0.384615 minB6=0.384615 minB7=0.384615 minB8=0.384615
+   minP[u<v] over incomparable pairs=0.230769  min positive P[f(x)-f(y)>=2]=0.230769 argmin=[0,0,1,3,7,15]
+   argminM(delta=0.384615)=[0,0,1,3,7,15]
+   argminB4(delta=0.384615)=[0,0,1,3,7,15]
+pi=3 count=436 minM=0.307692 minDelta=0.357143 min[d1*(pi+1)]=1.052632 minB2=0.300000 minB3=0.307692 minB4=0.357143 minB5=0.357143 minB6=0.357143 minB7=0.357143 minB8=0.357143
+   minP[u<v] over incomparable pairs=0.050000  min positive P[f(x)-f(y)>=2]=0.050000 argmin=[0,0,1,2,5,10]
+   argminM(delta=0.384615)=[0,0,1,3,5,23]
+   argminB4(delta=0.357143)=[0,0,1,3,5,15]
+pi=4 count=1964 minM=0.400000 minDelta=0.400000 min[d1*(pi+1)]=1.052632 minB2=0.000000 minB3=0.333333 minB4=0.400000 minB5=0.400000 minB6=0.400000 minB7=0.400000 minB8=0.400000
+   minP[u<v] over incomparable pairs=0.050000  min positive P[f(x)-f(y)>=2]=0.022222 argmin=[0,0,0,1,2,13]
+   argminM(delta=0.400000)=[0,0,1,2,5,21]
+   argminB4(delta=0.400000)=[0,0,1,2,5,21]
+pi=5 count=1657 minM=0.500000 minDelta=0.428571 min[d1*(pi+1)]=1.000000 minB2=0.000000 minB3=0.333333 minB4=0.428571 minB5=0.428571 minB6=0.428571 minB7=0.428571 minB8=0.428571
+   minP[u<v] over incomparable pairs=0.100000  min positive P[f(x)-f(y)>=2]=0.016667 argmin=[0,0,0,0,1,6]
+   argminM(delta=0.500000)=[0,0,1,5,13,29]
+   argminB4(delta=0.428571)=[0,0,0,1,3,19]
+all n=7 posets=96428 connected=86278
+pi=2 count=21 minM=0.380952 minDelta=0.380952 min[d1*(pi+1)]=1.142857 minB2=0.380952 minB3=0.380952 minB4=0.380952 minB5=0.380952 minB6=0.380952 minB7=0.380952 minB8=0.380952
+   minP[u<v] over incomparable pairs=0.238095  min positive P[f(x)-f(y)>=2]=0.238095 argmin=[0,0,1,3,7,15,31]
+   argminM(delta=0.380952)=[0,0,1,3,7,15,31]
+   argminB4(delta=0.380952)=[0,0,1,3,7,15,31]
+pi=3 count=1370 minM=0.360000 minDelta=0.360000 min[d1*(pi+1)]=1.037037 minB2=0.266667 minB3=0.333333 minB4=0.360000 minB5=0.360000 minB6=0.360000 minB7=0.360000 minB8=0.360000
+   minP[u<v] over incomparable pairs=0.068966  min positive P[f(x)-f(y)>=2]=0.057692 argmin=[0,0,0,1,6,15,31]
+   argminM(delta=0.360000)=[0,0,1,3,5,11,31]
+   argminB4(delta=0.360000)=[0,0,1,3,5,11,31]
+pi=4 count=14396 minM=0.307692 minDelta=0.358974 min[d1*(pi+1)]=1.029412 minB2=0.000000 minB3=0.280702 minB4=0.358974 minB5=0.358974 minB6=0.358974 minB7=0.358974 minB8=0.358974
+   minP[u<v] over incomparable pairs=0.028571  min positive P[f(x)-f(y)>=2]=0.014085 argmin=[0,0,1,1,2,5,27]
+   argminM(delta=0.358974)=[0,0,1,1,7,7,31]
+   argminB4(delta=0.358974)=[0,0,1,1,7,7,31]
+pi=5 count=43029 minM=0.444444 minDelta=0.392857 min[d1*(pi+1)]=1.034483 minB2=0.000000 minB3=0.301587 minB4=0.392857 minB5=0.392857 minB6=0.392857 minB7=0.392857 minB8=0.392857
+   minP[u<v] over incomparable pairs=0.028571  min positive P[f(x)-f(y)>=2]=0.009524 argmin=[0,0,0,0,1,6,25]
+   argminM(delta=0.444444)=[0,0,1,2,5,23,55]
+   argminB4(delta=0.392857)=[0,0,1,1,3,23,55]
+pi=6 count=27462 minM=0.428571 minDelta=0.380952 min[d1*(pi+1)]=1.000000 minB2=0.000000 minB3=0.000000 minB4=0.380952 minB5=0.380952 minB6=0.380952 minB7=0.380952 minB8=0.380952
+   minP[u<v] over incomparable pairs=0.050000  min positive P[f(x)-f(y)>=2]=0.007143 argmin=[0,0,0,0,1,1,6]
+   argminM(delta=0.428571)=[0,0,1,5,13,29,61]
+   argminB4(delta=0.380952)=[0,0,0,1,11,11,27]
+all n=8 posets=2800472 connected=2600369
+pi=2 count=34 minM=0.382353 minDelta=0.382353 min[d1*(pi+1)]=1.147059 minB2=0.382353 minB3=0.382353 minB4=0.382353 minB5=0.382353 minB6=0.382353 minB7=0.382353 minB8=0.382353
+   minP[u<v] over incomparable pairs=0.235294  min positive P[f(x)-f(y)>=2]=0.235294 argmin=[0,0,1,3,7,15,31,63]
+   argminM(delta=0.382353)=[0,0,1,3,7,15,31,63]
+   argminB4(delta=0.382353)=[0,0,1,3,7,15,31,63]
+pi=3 count=5078 minM=0.341463 minDelta=0.355556 min[d1*(pi+1)]=1.041096 minB2=0.260274 minB3=0.329268 minB4=0.341463 minB5=0.355556 minB6=0.355556 minB7=0.355556 minB8=0.355556
+   minP[u<v] over incomparable pairs=0.062500  min positive P[f(x)-f(y)>=2]=0.055556 argmin=[0,0,0,1,6,15,31,31]
+   argminM(delta=0.390244)=[0,0,1,3,5,15,23,63]
+   argminB4(delta=0.390244)=[0,0,1,3,5,15,23,63]
+pi=4 count=84918 minM=0.300813 minDelta=0.369565 min[d1*(pi+1)]=1.020408 minB2=0.000000 minB3=0.308943 minB4=0.333333 minB5=0.369565 minB6=0.369565 minB7=0.369565 minB8=0.369565
+   minP[u<v] over incomparable pairs=0.014286  min positive P[f(x)-f(y)>=2]=0.014286 argmin=[0,0,1,2,5,10,21,42]
+   argminM(delta=0.398374)=[0,0,1,1,3,7,13,63]
+   argminB4(delta=0.404762)=[0,0,1,3,5,15,21,63]
+pi=5 count=568981 minM=0.357143 minDelta=0.380000 min[d1*(pi+1)]=1.018868 minB2=0.000000 minB3=0.285714 minB4=0.333333 minB5=0.380000 minB6=0.380000 minB7=0.380000 minB8=0.380000
+   minP[u<v] over incomparable pairs=0.014286  min positive P[f(x)-f(y)>=2]=0.005952 argmin=[0,0,0,1,2,9,22,22]
+   argminM(delta=0.428571)=[0,0,1,5,5,13,47,111]
+   argminB4(delta=0.500000)=[0,0,1,1,3,5,19,63]
+pi=6 count=1287471 minM=0.419355 minDelta=0.400000 min[d1*(pi+1)]=1.024390 minB2=0.000000 minB3=0.000000 minB4=0.382716 minB5=0.400000 minB6=0.400000 minB7=0.400000 minB8=0.400000
+   minP[u<v] over incomparable pairs=0.014286  min positive P[f(x)-f(y)>=2]=0.004464 argmin=[0,0,0,0,1,1,6,57]
+   argminM(delta=0.419355)=[0,0,1,1,2,7,47,111]
+   argminB4(delta=0.500000)=[0,0,0,1,1,2,7,27]
+pi=7 count=653887 minM=0.500000 minDelta=0.426471 min[d1*(pi+1)]=1.000000 minB2=0.000000 minB3=0.000000 minB4=0.333333 minB5=0.426471 minB6=0.426471 minB7=0.426471 minB8=0.426471
+   minP[u<v] over incomparable pairs=0.028571  min positive P[f(x)-f(y)>=2]=0.003571 argmin=[0,0,0,0,0,1,1,14]
+   argminM(delta=0.500000)=[0,0,0,1,11,27,27,59]
+   argminB4(delta=0.458333)=[0,0,0,1,11,11,27,123]
