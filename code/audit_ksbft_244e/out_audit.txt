@@ -1,0 +1,58 @@
+§A  Thm 2.1 closed form vs exact count, every admissible i (not only the centre)
+  ok    attach_low(F_12,4): closed form EXACT at all 6 admissible i, bound (3) holds, range=4, both graphs connected
+  ok    attach_low(F_14,5): closed form EXACT at all 7 admissible i, bound (3) holds, range=5, both graphs connected
+  ok    attach_low(F_20,8): closed form EXACT at all 10 admissible i, bound (3) holds, range=8, both graphs connected
+  ok    attach_low(F_26,8): closed form EXACT at all 16 admissible i, bound (3) holds, range=8, both graphs connected
+  ok    attach_low(F_30,11): closed form EXACT at all 17 admissible i, bound (3) holds, range=11, both graphs connected
+
+§A' primality of attach_low(F_N,R): the audit's hand proof says prime iff R>=4 (N>=R+2, N>=4)
+  ok    attach_low(F_N,R) prime for all R>=4, and has a module for R=3, N=6..40 even, R<=14  []
+   R=3 module (control): ('nonchain', [1, 12])
+
+§B  probe B on attach_both(F_N,R), built from the doc's words
+   attach_low(F_16,8)   n=17 range=8 prime=True Gconn=True Cconn=True delta=0.4561 maxcert=887/2322=0.3820 at (14, 15, 15)  #min=3 #max=2
+   attach_both(F_20,8)  n=22 range=8 prime=True Gconn=True Cconn=True delta=0.4561 maxcert=13627/46282=0.2944 at (0, 1, 0)  #min=3 #max=3
+  ok    attach_both(F_20,8): max certificate 13627/46282 < 1/3 reproduced; prime; range 8
+  ok    attach_both(F_20,8) also has >=3 minimal and >=3 maximal elements (KSBFT-Q O1 at BOTH ends; (M4) satisfied)
+   attach_both(F_26,8)  n=28 range=8 prime=True Gconn=True Cconn=True delta=0.4561 maxcert=29341/99654=0.2944 at (0, 1, 0)  #min=3 #max=3
+   attach_both(F_20,10) n=22 range=11 prime=True Gconn=True Cconn=True delta=0.4633 maxcert=197500/634431=0.3113 at (0, 1, 0)  #min=3 #max=3
+
+§C  probe D double hub, built from Lemma 1.3's words; W = 2+2 with a1<b1, a2<b2 (a's bottoms)
+  ok    2+2: P[b2 before a1] = 1/6
+   k=8 n=20 range=18 Gconn=True Cconn=True module=('chain', [17, 18]) P[b2<a1]=5336/27441=0.19445 sep=2 #min=4 #max=3 delta=0.4937
+  ok    double hub k=8 reproduced: 5336/27441, range 18, sep 2, only chain modules
+   k=16 n=36 range=34 Gconn=True Cconn=True module=('chain', [33, 34]) P[b2<a1]=9236/50429=0.18315 sep=2 #min=4 #max=3 delta=0.4982
+  ok    Lemma 1.3(1): ext(tau) = C(m+k,k) - C(p_tau-1+k,k) exactly for all 6 tau (single hub, k=8)
+   single hub: P[b2<a1] = 5/26  module: ('nonchain', [2, 3, 4, 5, 6, 7, 8, 9, 10])
+  ok    Lemma 1.3(2) FAILS for U = W: hub with U = all of 2+2 has DISCONNECTED incomparability graph (c_k isolated)
+
+§D  Step 6: W*_t from mg-b447 Thm 4.1's text, and insulated W* from the doc's text
+  ok    W*_2(4,4) = C_2 ⊕ ({x}+C_3) ⊕ C_2, p_xy=1/4
+  ok       sides have exactly one incomparable pair {x,y}: W* refutes the EXISTENTIAL (T), not only a modulus form
+  ok    W*_3(4,8) = C_2 ⊕ ({x}+C_4) ⊕ C_5, p_xy=1/5
+  ok       sides have exactly one incomparable pair {x,y}: W* refutes the EXISTENTIAL (T), not only a modulus form
+  ok    W*_7(9,9) = C_7 ⊕ ({x}+C_8) ⊕ C_2, p_xy=1/9
+  ok       sides have exactly one incomparable pair {x,y}: W* refutes the EXISTENTIAL (T), not only a modulus form
+   (M,t,s)=(8,2,8) n=18 range=5 module=None Gconn=True Cconn=True Delta1=0.0618 p_xy: 1/2 -> 0.2526 ; bal(P[A])=[(0, 1), (7, 8), (7, 9), (8, 9)] surviving=[(0, 1), (7, 9)]
+   (M,t,s)=(16,6,16) n=34 range=9 module=None Gconn=True Cconn=True Delta1=0.0443 p_xy: 1/2 -> 0.1457 ; bal(P[A])=[(0, 1), (15, 16), (15, 17), (16, 17)] surviving=[(0, 1), (15, 17)]
+  ok    insulated W* (16,6,16) reproduced: p_xy 5702887/39150182, range 9, Delta1 0.0443, (T∃) holds
+   (M,t,s)=(20,6,20) n=42 range=9 module=skip Gconn=True Cconn=True Delta1=0.0354 p_xy: 1/2 -> 0.1457 ; bal(P[A])=[(0, 1), (19, 20), (19, 21), (20, 21)] surviving=[(0, 1), (19, 21)]
+   (M,t,s)=(24,6,24) n=50 range=9 module=skip Gconn=True Cconn=True Delta1=0.0295 p_xy: 1/2 -> 0.1457 ; bal(P[A])=[(0, 1), (23, 24), (23, 25), (24, 25)] surviving=[(0, 1), (23, 25)]
+   (M,t,s)=(30,6,30) n=62 range=9 module=skip Gconn=True Cconn=True Delta1=0.0236 p_xy: 1/2 -> 0.1457 ; bal(P[A])=[(0, 1), (29, 30), (29, 31), (30, 31)] surviving=[(0, 1), (29, 31)]
+
+§E  'exactly three exact paddings': a NON-module embedding with exactly uniform law in a PRIME host
+  ok    prime 5-poset, W={u,v} is not a module, yet P[u<v]=1/2 = W's law exactly
+   uniform-law 2+2 in a prime host: none found in 4000 random prime hosts, n<=8 (EMPIRICAL negative)
+
+§F  A28 finite witnesses (bitmasks as quoted by mg-0b78 ranges2.py)
+   n=9 #1 range=8 Gconn=True Cconn=False module=('nonchain', [0, 1, 2, 3])
+   n=9 #2 range=8 Gconn=True Cconn=False module=('nonchain', [0, 1])
+   n=11 range=9 Gconn=True Cconn=True module=('nonchain', [1, 2, 3, 8, 9, 10])
+
+§G  CONTROLS (each must FIRE)
+  ok    NEGATIVE CONTROL: closed form with P(A∩B) replaced by P(A)P(B) is REJECTED by the exact count -> CAUGHT
+  ok    CONTROL: probe-B certificate on bare F_12 CERTIFIES (89/233) -> the no-certificate negative is not an instrument artefact
+  ok    CONTROL: the uniform-law detector FIRES on 2+2 inside 2+2+C_2 (module embedding)
+  ok    CONTROL: module detector finds the single hub's non-chain module
+
+SUMMARY: 0 failed checks []

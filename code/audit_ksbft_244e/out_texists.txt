@@ -1,0 +1,4 @@
+control F_8: True
+prime both-connected hosts: (ideal-only holds, ideal-or-filter holds) -> count: {(True, True): 158}
+first ideal-only failure: None
+POSITIVE CONTROL: detector returns False on (3, [(2, 0), (2, 1)], ('nonchain', [0, 1])) after 6 non-chains -> FIRES
