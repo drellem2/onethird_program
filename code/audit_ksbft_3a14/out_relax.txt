@@ -1,0 +1,4 @@
+feasible points=1029268
+Prop A: max(|d| - a) = -6.667e-12  (<= 0 means no violation)
+Prop C: sup |d|/eps sampled = 5.8541 at (r,s,t,u)=(1.0, 1.0, 0.0, 0.0)  (claim: < 24.5; doc's C4 says ~5.85)
+threshold: sup max|d| over a<1/3 = 0.33333333  (doc: 1/3, approached at r=s->1)
