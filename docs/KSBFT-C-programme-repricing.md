@@ -6,6 +6,10 @@ Paper: Aires, Chan, Pak, Panova, *Breaking the Infinite Barrier in the 1/3–2/3
 the printed ones. **Nothing in `STATE.md` was edited and no ticket was closed. Every verdict below is
 a recommendation to pm-onethird.**
 
+*Errata (mg-6fdb, 2026-09-26):* prose defects D1–D7 of the independent audit mg-2ec1
+(`docs/AUDIT-mg-1911.md` §3) are applied in place. Each edit carries a pointer to its D-item. The
+audit found the mathematics holds, and no PROVEN claim changed. STATE.md is unaffected.
+
 Every claim carries a mark:
 
 - **PROVEN** — the proof is in this document, and it is elementary enough to check line by line.
@@ -38,13 +42,17 @@ Every claim carries a mark:
 > 2. **(PROVEN cond.)** For `n ≥ 3L*/ε + 1` that conclusion holds for **every** poset of range
 >    `≤ L*`, frozen or not, measured against any reference linear extension. **So L1b carries no
 >    information that separates counterexamples from non-counterexamples in the regime where
->    counterexamples live.** Past `N₁`, the programme's whole remaining content is the downstream
->    links L3 (row 10), L4 (row 11) and the Step-6 hole, restricted to range `≤ L*`.
+>    counterexamples live.** Past `N₁`, what remains of the programme lies outside L1b: the downstream
+>    links L3 (row 10), L4 (row 11) and the Step-6 hole, and also row 9 (L2 as a disjunction, OPEN)
+>    and row 3b, all restricted to range `≤ L*`. Row 3b's conditional form is L1b as a *universal*,
+>    so it does not transfer per `n`. Neither row 9 nor row 3b is priced in this document. Whether
+>    row 9 drops out under H is routed to mg-b447. [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D2].
 > 3. **(PROVEN cond.)** The programme's standing premise is *"the open region is the DENSE one"*
 >    (row 8, mg-0e8c), with the corollary *"dense means wide"* (mg-9d9e §5.3). **H inverts it.**
 >    A counterexample has `d ≤ L*/(n−1) → 0` and width `≤ K` (Thm 1.4 alone). So the programme's
->    open region contains no counterexample once `n > 50L* + 1`. KSBFT's residual region is
->    exactly the region where the programme's wall is already down. The two attacks are
+>    open region contains no counterexample once `n > 50L* + 1`. KSBFT's residual region
+>    `{π ≤ L*}` meets the region where the programme's wall is already down wherever `n ≥ N₁`; it is
+>    not *exactly* that region, because at `n < N₁` it lies where the wall is still up [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D5]. The two attacks are
 >    complementary, and the overlap where both are open is `{π ≤ L*, n ≤ 50L*}`.
 > 4. **(CONJECTURED — the one route this document proposes.)** Bounded range makes the uniform
 >    measure on `L(P)` a **finite-state transfer-matrix object** (§1 F2, which is PROVEN: bandwidth
@@ -65,8 +73,8 @@ Every claim carries a mark:
 | 8 | `(B-cov)` | **MOOT as a route to `(B)`'s existence form. UNCHANGED at a useful constant** (`C < 0.32`, mg-5987). | PROVEN (cond.) for the moot half |
 | 9 | `(R)` density ceiling, `(1_D)` (mg-0b96, mg-9b6b) | **AUTOMATIC for `n ≥ L*/D + 1`.** "No `D` both provable and worth an unreached order" **still holds at computable `n`**. | PROVEN (cond.) |
 | 10 | code-length line: mg-872c's one object; mg-cace (PARKED) | **REPRICED.** `log₂ e(P) ≤ n·log₂ min(K, L*+1)` is `Θ(n)` from H. The existence question is answered. Only a *useful constant* is open. **Recommend: leave mg-cace parked, and re-scope it on unpark** (§2.8). | PROVEN (cond.) |
-| 11 | "dense means wide", so `n log₂ w` is vacuous where needed (mg-9d9e §5.3) | **REFUTED under H.** Counterexamples have `w ≤ K`. | PROVEN (cond.) |
-| 12 | width-3 (milestone-1; the sibling repo) | **REPRICED, not settled.** Modulo **AK25b alone**, a width-≤3 counterexample has `7 ≤ π ≤ L₃ := L(4, 1/6)`. That is **not finite**: `n` is unbounded. What remains is stated in §2.9. | PROVEN (cond. on AK25b) |
+| 11 | "dense means wide", so `n log₂ w` is vacuous where needed (mg-9d9e §5.3) | **"Dense means wide" is REFUTED unconditionally** (two chains: `w = 2`, `d → 1/2`). **Under H, counterexamples are narrow** (`w ≤ K`). `n log₂ w` is still vacuous at every reachable `n`; it beats `log₂ n!` only for `n ≳ e·min(K, L*+1)` [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D3]. | PROVEN (the refutation); PROVEN (cond.) (narrowness) |
+| 12 | width-3 (milestone-1; the sibling repo) | **REPRICED, not settled.** Modulo **KSBFT's Thm 1.5 only** (AK25b; AK25b's own dependencies unread [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D7]), a width-≤3 counterexample has `7 ≤ π ≤ L₃ := L(4, 1/6)`. That is **not finite**: `n` is unbounded. What remains is stated in §2.9. | PROVEN (cond. on AK25b) |
 | 13 | Theorem E (row 6), L3 (row 10), Step-6 hole (mg-3af9), literature `n`-bounds | **UNCHANGED.** | — |
 | 13′ | the absent Step `(T)` (mg-7ae5) | **UNCHANGED as far as I can tell.** H's density scaling `Θ(L*/n)` is the one mg-7ae5 §4 already priced as *not* filling the hole (§4). | CONJECTURED |
 | 13″ | per-slot LP value `Θ(n²)`, *"Daniel's route is dead"* (mg-00a1) | **REPRICED.** On range `≤ L*` the value is `≤ nL*/6`: re-based at a useless constant (§4). | PROVEN (cond.) |
@@ -200,7 +208,10 @@ above used no frozenness. So for `n ≥ 3L*/ε + 1`, **every** poset of range `�
 conclusion against **every** reference linear extension. That includes non-counterexamples such as
 `Z_n`. In the regime where H says counterexamples live, L1b's conclusion is a consequence of range
 alone. It cannot be the step that finds the contradiction. **Past `N₁`, the programme's contradiction
-has to come entirely from rows 10 and 11 and the Step-6 hole**, all restricted to `π ≤ L*`. That is
+has to come from outside L1b: rows 10 and 11 and the Step-6 hole, and also row 9 (L2 as a
+disjunction, OPEN) and row 3b**, all restricted to `π ≤ L*`. Row 3b's conditional form is L1b as a
+*universal*, which does not transfer per `n`. Neither row 9 nor row 3b is priced here, and whether
+row 9 drops out under H is routed to mg-b447 [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D2]. That is
 the sense in which "the wall is not where the difficulty lives any more". It is a re-pricing of the
 *chain*, not a closure of it.
 
@@ -210,8 +221,8 @@ Row 8 says `ε_sup = d·n/(n+1)` is linear in density. So the wall is proven for
 open in the dense regime. **Under H, a counterexample has `d ≤ L*/(n−1)` (F3)**, so the dense
 regime contains **no counterexample** once `n > 50L* + 1`. **(PROVEN cond.)**
 
-The ~50× gap therefore survives only at `n ≤ 50L*`. There it is a finite question, and not a
-computable one.
+The ~50× gap therefore survives only at `n ≤ 50L*`. There it is a finite question: decidable once
+`L*` is known, but *infeasible*, and not even stated while `L*` is inexplicit [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D4].
 
 ### 2.3 mg-6bc2 Claim 3.1 (pair-bias ceiling is an equality) — **UNCHANGED as a theorem; H is the missing realizability fact**
 
@@ -285,9 +296,11 @@ different road.
 hypothesis-free"*. What changes is that at astronomical `n` the "hypothesis-need" half is now supplied
 by H.
 
-**mg-9d9e §5.3's "vacuous exactly where the programme needs it — dense means wide" is REFUTED
-under H (PROVEN cond.).** mg-9d9e itself flagged that sentence as not measured. Counterexamples have
-`w ≤ K`, so `n log₂ w` is **not** vacuous on them.
+**mg-9d9e §5.3's "dense means wide" is REFUTED unconditionally (PROVEN).** Two disjoint chains
+have `w = 2` and `d → 1/2`. mg-9d9e itself flagged that sentence as not measured. What H adds is
+that counterexamples are narrow: `w ≤ K` (PROVEN cond.). That does **not** make `n log₂ w`
+non-vacuous at any reachable `n`. The bound `n log₂ w ≤ n log₂ min(K, L*+1)` beats the trivial
+`log₂ n!` only for `n ≳ e·min(K, L*+1)`, which is astronomical [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D3].
 
 **On mg-cace (recommendation, not a decision):**
 
@@ -311,7 +324,8 @@ under H (PROVEN cond.).** mg-9d9e itself flagged that sentence as not measured. 
 `π = 2` and width 2 at every `n`, and range-`≤ D` posets of width 3 exist at every `n`. A check at
 small range is a check over infinitely many posets.
 
-**What KSBFT does give for width 3 (PROVEN cond. on AK25b ALONE).** Thm 1.4 is not needed for width
+**What KSBFT does give for width 3 (PROVEN cond. on KSBFT's Thm 1.5 only, i.e. AK25b; AK25b's own
+dependencies, e.g. on AK25a, were not read [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D7]).** Thm 1.4 is not needed for width
 3, and neither are AK25a and Haq26. Take `K = 4, ε = 1/6` in Thm 1.5: a width-`≤ 3` counterexample
 has `π ≤ L₃ := L(4, 1/6)`. With BW92 (`π ≤ 5`) and Peczarski 2008 (`π ≤ 6`), both refereed and cited
 on p.3:
@@ -349,8 +363,10 @@ Thm 1.3 does **not** help here: `C_BFT + η_D < 1/3`.
 - **Row 11, L4** — still OPEN. Under H it needs to hold only on `{frozen, π ≤ L*}`. **This is now
   where the programme's contradiction must come from past `N₁`** (§2.1). REPRICED in scope only.
 - **Step-6 hole (mg-3af9)** — "independent of L1b", so independent of H. UNCHANGED.
-- **Literature `n`-bounds** (`n ≥ 12` Pec06, `n ≥ 15` Gup26, `n ≥ 100` primitive, `n ≈ 900C`
-  mg-33f5) — each is `≪ N₁`. UNCHANGED, and still not a discharge of anything here.
+- **Literature `n`-bounds** (`n ≥ 12` Pec06, `n ≥ 15` Gup26, `n ≥ 100` primitive) — each is
+  `≪ N₁` for `L* ≥ 2`. UNCHANGED, and still not a discharge of anything here. **The `n ≈ 900C`
+  threshold (mg-33f5) is NOT `≪ N₁`.** Under H, `C/γ = L*/6`, so at `γ = 1/3` we get
+  `900C = 50L* ≈ N₁`. That is the same crossover, not an earlier one [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D1].
 
 ### 2.11 The repo-wide sweep for "wide"/"dense" premises
 
@@ -427,7 +443,7 @@ The table has **one row per claim**, not one per phrase. *Read* means I read the
 | `STATE.md:136-137` (single lemma); mg-c3ca `:164-172`; `proof-chain-riders.md:43`; `CONCEPTS.md:174`; attempt-mg-a58f `:26`, `:70`; `FACTS.md` F3 `:191`, `:195` (`Var(pos_x)` unbounded) | `(B)` fails via block-crossers of `Θ(n)` mobility, e.g. `C_m ⊔ C_1` | **AUTOMATIC** (§2.4). Every witness named there has range `Θ(n)`. Under H, `Var(pos_x) ≤ (L*+1)²/4` by F1. | PROVEN (cond.) | read (STATE); agent (rest) |
 | attempt-index `:24`; threads-chronology `:19` | slot probabilities must decay, *"prove that, and the wall falls"* | **AUTOMATIC.** The slot law of `x` is supported on `π(x)+1 ≤ L*+1` slots (F1). | PROVEN (cond.) | agent |
 | `STATE.md:123`; `CONCEPTS.md:173`; ledger-row-8 `:132`, `:156` | no `N₀` works for the class; *"only a rate would give one"* | **UNCHANGED as logic. H supplies the rate**, so `N₀ = ⌈L*/ε⌉+1` (§2.5) | PROVEN (cond.) | read |
-| Op-Form `:618-631`, `:634-645` (§7.4) | the master bound cannot deliver below `~100` elements, and above that it needs near-chain density; the `(LIB)` constant `C` is unknown, with crossover at `n ≈ 900C` | **REPRICED:** `C = L*/6`, and the crossover is at `n ≈ 50L*` | PROVEN (cond.) | agent |
+| Op-Form `:618-631`, `:634-645` (§7.4) | the master bound cannot deliver below `~100` elements, and above that it needs near-chain density; the `(LIB)` constant `C` is unknown, with crossover at `n ≈ 900C` | **REPRICED:** `C/γ = L*/6` (not `C = L*/6`), and the crossover is at `n ≈ 50L*` [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D1] | PROVEN (cond.) | agent |
 | mg-33f5 `:121-125`, `:134-135`; `BASIC-FACTS.md:24`; `why-one-third…:18` | literature thresholds. **Peczarski 2008 proves 6-thin, i.e. range `≤ 6`.** | **UNCHANGED.** Consistent with H and sharpens it: a counterexample has `7 ≤ π ≤ L*`. `n ≥ 15` is still `≪ N₁`. | PROVEN | agent (33f5 quote) + read (KSBFT p.3 cites Pec08) |
 | mg-c3ca `:198-209` | `(LIB-weak) ⟹ log(n!/e(P)) = ω(n)`, discharged via `w = o(n)` from the large-width result | **REPRICED:** `w ≤ K` (H_w) | PROVEN (cond.) | agent |
 | mg-9d9e `:219-225` (*"dense means wide"*), `:13-24`, `:151`, `:204`, `:252`; mg-0fc6 `:31-33`, `:109-113`; mg-99f4 `:88-92`, `:104-106` | `n log₂ w` is vacuous where needed; the shape-A frontier is at `16,777,063` | **REFUTED / REPRICED** (§2.8) | PROVEN (cond.) | read (9d9e); agent (0fc6, 99f4) |
@@ -480,8 +496,11 @@ The table has **one row per claim**, not one per phrase. *Read* means I read the
 - *Does bounded range bound `n`?* **No.** Candidate: `Z_n`, with `π = 2` at every `n` (§2.7).
 - *Does the width-3 Case-3 axiom's regime force large range, so that AK25b discharges it?*
   **Not by itself.** A large `w` is compatible with small `π` (§2.9).
-- *Does H lower `(EQ)` or `(B-cov)` to the constants mg-5987 needs?* **No.** F1 gives `L*`, and I
-  found no sub-`L*` bound.
+- *Does H lower `(EQ)` or `(B-cov)` to the constants mg-5987 needs?* **Split, not a flat No**
+  [audit mg-2ec1, `docs/AUDIT-mg-1911.md` §3 D6]. **Range alone cannot do it (PROVEN).** The 2-antichain has `π = 1 ≤ L*` and
+  `max|h − rank_e| = 1/2 ≥ 2/5`. **Range plus frozenness is UNEXAMINED.** Only one candidate (F1,
+  which gives `L*`) was tried, and I found no sub-`L*` bound. The frozen class is empty wherever
+  anyone has looked, so no witness exists either way.
 - *Does H give anything at `n ≤ 98`, the primitive-floor regime?* **No** (§2.7).
 - *Is `L* ≥ K` forced?* **I found no argument either way**, and I claim neither.
 
