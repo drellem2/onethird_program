@@ -9,12 +9,26 @@ its one statement is consumed through KSBFT Lemma 5.5.
 Instrument: [`code/ksbft_sec6_c929/`](../code/ksbft_sec6_c929/). **`STATE.md` was not edited, and
 no ticket was closed. Every verdict is a recommendation to pm-onethird.**
 
+**Errata (mg-de4e, per audit mg-e015, `docs/AUDIT-mg-c929.md`).** No math is retracted. Props A, B, C
+and D all HOLD, and Prop B HOLDS end to end (audit §2). Four prose fixes:
+(1) §1's remark that (6.12)'s `/ε³` "could be `/ε²`" was **wrong**. KSBFT p. 24 prints
+`Σ ≤ (5/ε²)e^{−ε√j₀/2}`, and the prefactor `2e(1+√3·gap/ε)` then gives `/ε³`, so `/ε³` is needed.
+(2) "No inequality `E[inv] ≤ C·Σ win` holds for all posets" (§3, §7 negative 3) was stated as fact
+but sourced as EMPIRICAL (`m ≤ 11`) plus CONJECTURED growth. It is now **PROVEN** by the audit
+(§4 there: two parallel chains have `I* ≥ m^{1.5}/28`).
+(3) Wording: §6's constants are `poly(1/ε)·log²(1/ε)` times absolute numbers, not "powers of the
+deficit"; `c* = 1/2` was seen only at `n ≤ 6`; the boundary-class slack is 18 orders of magnitude
+against `C` (about 6 against the closed form at the actual gap), not "five".
+(4) Prop B's dependency list is now stated exactly (§4): AK25a Cor 5.1(a), AK25a Thm 2.9,
+Haq26 Thm 4.1 and LV07 Lemmas 5.4, 5.5(a), 5.7. No AK25b, and no width hypothesis.
+
 Marks:
 
 - **PROVEN** — the proof is in this document.
 - **PROVEN (cond. §6)** — proven here *from* KSBFT's §6 gap bound (Step 4 below). That bound rests
-  on AK25a Cor. 5.1(a), AK25a Thm 2.9 and Haq26 Thm 4.1. That is exactly the set of preprints
-  Thm 1.4 needs. **AK25b is not used.**
+  on AK25a Cor. 5.1(a), AK25a Thm 2.9 and Haq26 Thm 4.1, plus the published LV07 Lemmas 5.4,
+  5.5(a) and 5.7. That is exactly the set of preprints Thm 1.4 needs. **AK25b is not used, and no
+  width hypothesis is used.**
 - **CITED** — a statement read in a paper and not re-derived.
 - **EMPIRICAL** — the instrument and range are named. Nothing marked this way is a proof.
 - **CONJECTURED** — a belief, not established.
@@ -35,8 +49,9 @@ Marks:
 >    (s3).
 > 2. **Where `1/e` enters (PROVEN by reading, §1).** It enters in exactly one place: Lemma 5.2,
 >    eq. (5.1), a one-dimensional Grünbaum bound for log-concave laws. That bound is consumed once,
->    in Lemma 6.1. Every other constant in §6 is a power of the **deficit**
->    `ε = 1/e − δ(P)`. For the 1/3–2/3 class the deficit is
+>    in Lemma 6.1. Every other constant in §6 is a function of the **deficit**
+>    `ε = 1/e − δ(P)`, of the form `poly(1/ε)·log²(1/ε)` times absolute numbers (`288`, `18432`,
+>    `√3`, `e`). For the 1/3–2/3 class the deficit is
 >    `ε₀ = 1/e − 1/3 ≈ 0.0345 ≈ 1/29`. That tiny deficit is why every constant is astronomical.
 >    AK25a Example 11.2 (CITED) makes `1/e` **sharp for this per-pair form of the input**. So
 >    "1/e is an artifact" means an artifact of using a per-pair input at all. It does not mean a
@@ -56,7 +71,8 @@ Marks:
 >    `(1/e−ε)`-balanced pair has `Σ_{x∈X} win(x) ≤ 4√3·H(X)/ε`. The window sum is exactly an
 >    expected count of incomparable pairs that sit in a window (PROVEN, Prop. D). **It does not
 >    convert to `E[inv_e]` in general.** Two parallel chains have `Σ(a_x−1) = 2m²/(m+1) < n`
->    (PROVEN) but `E[inv] ≈ 0.158·n^{1.5}` (EMPIRICAL, `m ≤ 11`). Under the no-balanced-pair
+>    (PROVEN) but `E[inv] ≥ I* ≥ m^{1.5}/28` (PROVEN, audit mg-e015 §4; exactly `≈ 0.157·n^{1.5}`,
+>    EMPIRICAL). Under the no-balanced-pair
 >    hypothesis both quantities are `O(n)`. The inversion bound goes through the **gap**
 >    (Prop. B), not through windows directly.
 >
@@ -108,8 +124,8 @@ every `ε, k`, a poset with `k` elements of equal average height, so `Δ = 0`, a
 `δ_xy ≤ 1/e + ε`. Its proof "skips a few routine verifications", so it is CITED and not
 re-derived. At small `n` the opposite happens, and it is only a small-`n` artefact. Over all 5230
 naturally labelled posets with `n ≤ 6`, the largest `c` with `min(p,1−p) ≥ c − Δ/d` for every pair
-is exactly **`c* = 1/2`** (s1, EMPIRICAL). So `1/e` cannot be seen failing at any `n` we can
-enumerate. The authors' remark that "`1/e` is an artifact of the Grünbaum input" is consistent
+is exactly **`c* = 1/2`** (s1, EMPIRICAL). So `1/e` cannot be seen failing at `n ≤ 6`, the
+range enumerated here. The authors' remark that "`1/e` is an artifact of the Grünbaum input" is consistent
 with this. Beating `1/e` needs a **selection** step that chooses which pair to use, as in Komlós
 selection and Air26. It cannot come from a better per-pair inequality. (That last sentence is my
 reading of p.4 and AK25a §5, and it is CONJECTURED as a statement about Air26, which I did not read.)
@@ -120,8 +136,10 @@ Two negative controls fire: (5.1) with `0.51` in place of `1/e`, and (5.3b) with
 dropped from `d`. **This is weak evidence for §6 specifically.** Only 86 posets at `n ≤ 6` satisfy
 `δ < 1/e`, with `δ ∈ {1/3, 0.357, 0.364}`, and their gaps are tiny. So Lemmas 6.3, 6.4 and §6.4 are
 **not** exercised in any interesting regime. I read those three proofs line by line and recomputed
-their algebra, including the `g ≤ A log² g ⟹ g ≤ 4A log² A` step (s3). I found no error. One
-inequality chain is loose but valid: (6.12)'s `/ε³` where `/ε²` would do.
+their algebra, including the `g ≤ A log² g ⟹ g ≤ 4A log² A` step (s3). I found no error.
+(*Erratum, mg-de4e:* an earlier version said (6.12)'s `/ε³` was loose and `/ε²` would do. That was
+wrong. p. 24 prints `Σ_{j≥j₀} e^{−ε√j} ≤ (5/ε²)e^{−ε√j₀/2}`; times the element-count prefactor
+`2e(1+√3·gap/ε)` this is `≈ 10e√3·gap/ε³`, so `/ε³` is needed. Audit mg-e015 row 11.)
 
 ---
 
@@ -193,7 +211,7 @@ in `X`, and to the last element and its predecessor. Only the pairs inside `X` n
 Summing gives at most `(√3/ε)(H + last gap) ≤ 2√3H/ε`. This is the middle line of KSBFT's proof of
 (6.7). □ For the frozen class this gives `E[W] ≤ (2√3/ε₀)(n+1) ≈ 100(n+1)`.
 
-**No general conversion (PROVEN + EMPIRICAL).** Take two disjoint chains of length `m`, so `n = 2m`.
+**No general conversion (PROVEN).** Take two disjoint chains of length `m`, so `n = 2m`.
 The window of `a_i` holds only `b`'s. So `Σ(a_x−1) = 2·E[#b before a_m] = 2m²/(m+1) < n`
 (PROVEN; checked exactly in s2). *Proof:* the windows of `a_1,…,a_m` telescope, so their
 occupancy is the number of `b`'s before `a_m`. That number is `m − T`, where `T` is the number of
@@ -202,9 +220,14 @@ trailing `b`'s. `P[T ≥ k] = C(2m−k, m)/C(2m, m)`, and the hockey-stick ident
 reference order can have, equals `16.35` at `m = 11`, and the ratio `I*/n^{1.5}` is
 `0.1768 → 0.1585` for `m = 1…11` (s2, EMPIRICAL, exact enumeration). So
 `I*/Σ(a_x−1)` climbs from `0.50` to `0.81` and shows no sign of levelling off. **No inequality
-`E[inv] ≤ C·Σ win` holds for all posets.** That the growth is `Θ(n^{1.5})` for all `m` is the
-standard lattice-path CLT picture: pairs `(a_i, b_j)` with `|i−j| ≲ √m` are balanced. This is
-CONJECTURED here, not proven. The witness has balanced pairs (`p(a_i,b_i) = 1/2`), so it says
+`E[inv] ≤ C·Σ win` holds for all posets (PROVEN, audit mg-e015 §4).** *Proof sketch (the audit's).*
+Let `S_N` be (#a − #b) among the first `N` positions, a without-replacement sample. `a_i` precedes
+`b_j` iff `S_{i+j−1} ≥ i−j+1`, and for `N ≤ m` every threshold of the right parity is realised, so
+`I* ≥ Σ_{N≤m} E|S_N|/2`. Here `Var S_N ≥ N/2`, and `E S_N⁴ ≤ 3N²` (Hoeffding 1963 Thm 4), so Hölder
+gives `E|S_N| ≥ √N/(2√6)`. Summing over `m/2 ≤ N ≤ m` gives `I* ≥ m^{1.5}/(8√12) > m^{1.5}/28`, so
+`I*/Σ(a_x−1) ≥ √m/56 → ∞`. Since `E[inv]` against any fixed order is `≥ I*`, and the footrule is
+`≥ inv`, neither is `O(Σ win)` in general. □ The audit's exact computation to `m = 3000` gives
+`I*/n^{1.5} → 0.15667 ≈ √(2π)/16` (EMPIRICAL for the constant). The witness has balanced pairs (`p(a_i,b_i) = 1/2`), so it says
 nothing about the no-balanced-pair class.
 
 **Under no balanced pair: what converts, and how (PROVEN cond. §6).** Thm 2.10 does not convert to
@@ -226,6 +249,12 @@ bound displacement.
 height order (heights are distinct by Step 1). Then
 
 > `E[inv_h] ≤ C(ε)·n`, where `C(ε) = 2√3·e·G(ε)/ε³`, `G(ε) = max(10e(1+√3)/ε³, 4A(log A)²)`, `A = 18432√3/ε³`.
+
+**Dependencies (exact list; audit mg-e015 §2 re-derived every step against it).** AK25a Cor 5.1(a)
+(log-concavity, L5.1); AK25a Thm 2.9 (through (5.3c) and (6.7)); Haq26 Thm 4.1 (through L5.5); and
+LV07 Lemmas 5.4, 5.5(a), 5.7 (published; through (5.1), (5.2)). Nothing else. **No AK25b, and no
+width hypothesis:** §6 assumes only (6.1), and (6.8) is a case split, not an assumption. The
+statement holds for **every** finite `P` with `δ(P) ≤ 1/e − ε`.
 
 Consequently `Σ_{x∥y} min(p,1−p) ≤ C(ε)n`. The weak-majority order `e` of F21 therefore has
 `E[inv_e] ≤ C(ε)n` wherever F21 applies, and `ε_spec ≤ 6C(ε)n/(n²−1)`. For `δ(P) ≤ 1/3` (frozen or
@@ -272,8 +301,9 @@ preprints, and its constant is a number: `ε_spec ≤ ε_dem` for `n ≥ 8.9×10
 make L1b automatic for large `n`. Neither buys anything at computable `n`. Prop. B also has content
 on a **nonempty** class. The boundary class `δ = 1/3` is inhabited: the 3-element poset `{a<b} ∪ {c}`
 and ordinal sums of copies of it. 39 of the 5230 posets with `n ≤ 6` are in it, and s1 checks
-Steps 1, 3 and 5 on all of them (CINV1, CINV2). On those examples the bound is loose by five orders
-of magnitude.
+Steps 1, 3 and 5 on all of them (CINV1, CINV2). On those examples the bound `C·n` is loose by
+**18 orders of magnitude** (`max E[inv_h]/n = 0.222` against `C ≈ 3×10¹⁷`). Against the closed form
+`2√3·e·gap/ε³` evaluated at the actual gap, the slack is `≈ 9.1×10⁵` (audit mg-e015 row 32).
 
 ---
 
@@ -327,7 +357,9 @@ near a threshold.
   heavy AI use on technical lemmas. Step 4 of Prop. B inherits whatever is wrong there.
 - I did **not** try to tighten §6's constants: `R = 288/ε²`, the `gap⁻⁴` target, and the
   `4A log²A` step. Doing so would move `C` by powers of ten, not change the verdict.
-- I did **not** prove the `Θ(n^{1.5})` growth for parallel chains (CONJECTURED, standard).
+- I did **not** prove the `Θ(n^{1.5})` growth for parallel chains. The lower bound
+  `I* ≥ m^{1.5}/28`, which is all the negative needs, is now PROVEN by audit mg-e015 §4. The
+  matching upper bound and the constant `√(2π)/16` remain heuristic (EMPIRICAL to `m = 3000`).
 - I did **not** decide whether `E[inv] ≤ C'·E[W]` holds on the no-balanced-pair class with a better
   `C'`. It is open, and it would give a much smaller constant than Prop. B, about `100/ε₀`.
 - I did **not** check that the architecture's distinguished order is F21's weak-majority order at
@@ -340,8 +372,9 @@ near a threshold.
 2. Replacing `1/e` in (5.1) by a larger per-pair constant: **impossible in general** (AK25a Ex 11.2,
    CITED). It holds with `1/2` at `n ≤ 6` (EMPIRICAL), and that is a small-`n` artefact.
 3. Converting windows to inversions directly (`E[inv] ≤ C·Σ win`): **false in general**
-   (parallel chains).
-4. Windows ⟹ footrule without the gap: **no route found.** Windows lower-bound the spread `d` and
+   (parallel chains; PROVEN, audit mg-e015 §4: `I* ≥ m^{1.5}/28` while `Σ(a_x−1) < n`).
+4. Windows ⟹ footrule without the gap: **no route found**, and in general it is **refuted** by
+   negative 3, since footrule `≥` inv `≥ I*` (audit mg-e015 §5). Open on the no-balanced-pair class. Windows lower-bound the spread `d` and
    cannot upper-bound displacement.
 5. A `1/6` anywhere in §6's mechanism: **none**. The nearest is the δ-margin `1/2 − 1/3`, which is
    the wrong units.
