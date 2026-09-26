@@ -14,10 +14,10 @@ which §3 reads including this very file.  Both exclusions are fixed points: a p
 moved on every gate run would make the same-pin clause unreachable, and a change made
 here must never buy the exemption.  a4_sweep.py names the one dependency left out.
 
-corpus pin: 50ae2fde451c  (243 directories, 3023 files, excluding code/control_audit_9876/)
+corpus pin: dc05d94666b6  (254 directories, 3092 files, excluding code/control_audit_9876/)
 producer pin: 2b1b86a662fc  (the .py and .sh of code/control_audit_9876/, which the corpus pin excludes — a moved one is this instrument's owner's to refresh)
 
-population: 243 directories under code/
+population: 254 directories under code/
 
 §1  MEMBERSHIP TESTS AGAINST A WHOLE CAPTURED OUTPUT
 --------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ The shape of instance 3: `"8 9" in out` where `out` is the entire report, so a
 line printed unconditionally elsewhere satisfies it forever.  A candidate is not a
 defect — only running it two ways decides that.
 
-  222 candidate site(s) in 77 of 243 directories
+  222 candidate site(s) in 77 of 254 directories
 
     species_gate_audit_d53d  (20)
         code/species_gate_audit_d53d/g1_population.py:116  clean[rn] = (rc, E2_SAYS in out)
@@ -125,16 +125,19 @@ control at all, and whether any committed transcript records a demonstrated
 failure.  A directory with neither has no evidence its instrument can fail; that is
 weaker than saying it cannot.
 
-  ships a file named for negative/self/positive-control : 160 of 243
-  a committed transcript records a demonstrated failure  : 161 of 243
-  NEITHER, though the directory ships code               : 30 of 243
+  ships a file named for negative/self/positive-control : 160 of 254
+  a committed transcript records a demonstrated failure  : 163 of 254
+  NEITHER, though the directory ships code               : 39 of 254
 
   directories with code and no evidence of a falsification attempt:
-      audit_ksbft_3a14                    audit_successor_consolidation_9134  compression_novelty_623a          
-      counterexample_audit_0a11           counterexample_audit_a7b4           eps0_threshold_3969               
-      face_geometry_audit_5630            face_geometry_audit_d0e2            face_geometry_audit_e0ce          
-      face_geometry_audit_f7bc            hodge_leverage_audit_3c24           hodge_leverage_audit_d39d         
-      hodge_leverage_join                 ksbft_case_c_d707                   ksbft_sec6_c929                   
+      audit_ksbft_3a14                    audit_ksbft_5562                    audit_ksbft_7d8e                  
+      audit_ksbft_de37                    audit_ksbft_e60e                    audit_successor_consolidation_9134
+      compression_novelty_623a            counterexample_audit_0a11           counterexample_audit_a7b4         
+      eps0_threshold_3969                 face_geometry_audit_5630            face_geometry_audit_d0e2          
+      face_geometry_audit_e0ce            face_geometry_audit_f7bc            hodge_leverage_audit_3c24         
+      hodge_leverage_audit_d39d           hodge_leverage_join                 ksbft_case_c_d707                 
+      ksbft_f_b447                        ksbft_g_constants_b852              ksbft_h_lemma_w_f218              
+      ksbft_k_3c5b                        ksbft_one_pt                        ksbft_sec6_c929                   
       l2_underclaim_audit_3bb9            landscape_audit_d673                landscape_ebd8                    
       lstar_landing_8d63                  semigroup_note                      semigroup_note_audit_66a6         
       sibling_sweep_7085                  state_audit_2eed                    state_delegation_audit_16eb       
@@ -173,5 +176,5 @@ unreachable.  Planted here so it cannot come back quietly.
     [PASS]  pin: MUST move when a DIRECTORY is added — the ticket's own case
 
 ============================================================================================
-SWEEP OK — 222 membership candidates, 27 tee sites, 30 directories with no falsification evidence.  All CANDIDATES.
+SWEEP OK — 222 membership candidates, 27 tee sites, 39 directories with no falsification evidence.  All CANDIDATES.
 ============================================================================================
