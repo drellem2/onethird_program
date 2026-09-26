@@ -14,7 +14,7 @@ which §3 reads including this very file.  Both exclusions are fixed points: a p
 moved on every gate run would make the same-pin clause unreachable, and a change made
 here must never buy the exemption.  a4_sweep.py names the one dependency left out.
 
-corpus pin: 5c3e8a2f9caa  (256 directories, 3104 files, excluding code/control_audit_9876/)
+corpus pin: 901fedb57beb  (256 directories, 3116 files, excluding code/control_audit_9876/)
 producer pin: 2b1b86a662fc  (the .py and .sh of code/control_audit_9876/, which the corpus pin excludes — a moved one is this instrument's owner's to refresh)
 
 population: 256 directories under code/
@@ -127,7 +127,7 @@ weaker than saying it cannot.
 
   ships a file named for negative/self/positive-control : 160 of 256
   a committed transcript records a demonstrated failure  : 163 of 256
-  NEITHER, though the directory ships code               : 40 of 256
+  NEITHER, though the directory ships code               : 41 of 256
 
   directories with code and no evidence of a falsification attempt:
       audit_ksbft_3a14                    audit_ksbft_5562                    audit_ksbft_7d8e                  
@@ -137,13 +137,13 @@ weaker than saying it cannot.
       face_geometry_audit_d0e2            face_geometry_audit_e0ce            face_geometry_audit_f7bc          
       hodge_leverage_audit_3c24           hodge_leverage_audit_d39d           hodge_leverage_join               
       ksbft_case_c_d707                   ksbft_f_b447                        ksbft_g_constants_b852            
-      ksbft_h_lemma_w_f218                ksbft_k_3c5b                        ksbft_one_pt                      
-      ksbft_sec6_c929                     l2_underclaim_audit_3bb9            landscape_audit_d673              
-      landscape_ebd8                      lstar_landing_8d63                  semigroup_note                    
-      semigroup_note_audit_66a6           sibling_sweep_7085                  state_audit_2eed                  
-      state_delegation_audit_16eb         state_delegation_audit_5644         state_delegation_repair_0049      
-      state_restructure_34bf              unified_gate_8fd1                   unified_gate_audit_446b           
-      unitmap_audit_9f91                
+      ksbft_h_lemma_w_f218                ksbft_k_3c5b                        ksbft_l_heavy_atom_5371           
+      ksbft_one_pt                        ksbft_sec6_c929                     l2_underclaim_audit_3bb9          
+      landscape_audit_d673                landscape_ebd8                      lstar_landing_8d63                
+      semigroup_note                      semigroup_note_audit_66a6           sibling_sweep_7085                
+      state_audit_2eed                    state_delegation_audit_16eb         state_delegation_audit_5644       
+      state_delegation_repair_0049        state_restructure_34bf              unified_gate_8fd1                 
+      unified_gate_audit_446b             unitmap_audit_9f91                
 
 §4  THE SWEEP'S OWN TWO-SIDED CONTROL
 --------------------------------------------------------------------------------------------
@@ -177,5 +177,5 @@ unreachable.  Planted here so it cannot come back quietly.
     [PASS]  pin: MUST move when a DIRECTORY is added — the ticket's own case
 
 ============================================================================================
-SWEEP OK — 222 membership candidates, 27 tee sites, 40 directories with no falsification evidence.  All CANDIDATES.
+SWEEP OK — 222 membership candidates, 27 tee sites, 41 directories with no falsification evidence.  All CANDIDATES.
 ============================================================================================
