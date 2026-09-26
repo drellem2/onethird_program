@@ -208,6 +208,11 @@ Heuristic reduction: take a sequence of counterexamples P_n with range ≤ D and
 
 This turns case (c) at fixed D into a statement about one-sided infinite range-D posets **only if** boundary probabilities converge uniformly in the far end, i.e. a D-dependent decay-of-correlations bound. In F_m the correction is exponential (|d| ∝ φ^(−2·distance), `out_fib.txt`), but I have no uniform-in-class decay estimate. Such a compactness argument would give K(D) and a finite check per D, but no explicit K(D) unless the decay rate is effective. **What grows with D** is the number of frontier types, up to about 2^(D+1) antichain patterns times their comparabilities, and the mixing length, for which I have no bound.
 
+**Relation to mg-1911.** `docs/KSBFT-C-programme-repricing.md` §3.2 (mg-1911, merged at 381273a while this branch was open) conjectures the same transfer-matrix / decay-of-correlations route. **This file neither proves nor refutes that conjecture.** It adds three things:
+- one data point: exponential decay of boundary displacement in F_m, rate φ⁻² per step (`out_fib.txt`);
+- the EMPIRICAL window growth K(D) ≈ 4, 5, 6 for D ≤ 4, 6, 9 (§4.2), which is what a finite check per D would have to reach;
+- the location of the difficulty: the conjecture needs a decay rate that is *uniform over the class* at fixed D, not per poset.
+
 I did not read Brightwell–Wright 1992 or Peczarski 2008, so I cannot say whether their D ≤ 5 and D ≤ 6 proofs are of this finite-check form.
 
 ## 6. What I did not do (negatives and gaps)
